@@ -1,0 +1,18 @@
+﻿# Development adapter boundary. Reject BEFORE any native call or cash mutation.
+# See docs/native_capabilities.md and the executable reference model.
+bfl_purchase_native_inventory = {
+set_variable = { name = bfl_blocked_probe value = flag:P09 }
+set_variable = { name = bfl_facility_blocked value = 1 }
+}
+bfl_sell_native_inventory = {
+set_variable = { name = bfl_blocked_probe value = flag:P09 }
+set_variable = { name = bfl_facility_blocked value = 1 }
+}
+bfl_settle_warehouse_receipt = {
+set_variable = { name = bfl_blocked_probe value = flag:P09 }
+set_variable = { name = bfl_facility_blocked value = 1 }
+}
+bfl_settle_commodity_forward = {
+set_variable = { name = bfl_blocked_probe value = flag:P09 }
+set_variable = { name = bfl_facility_blocked value = 1 }
+}

@@ -1,0 +1,15 @@
+﻿on_game_started_after_lobby = { on_actions = { bfl_start_discovery } }
+on_game_load_after_lobby = { on_actions = { bfl_load_discovery } }
+bfl_start_discovery = { effect = { bfl_discover_institutions = yes } }
+bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
+monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
+bfl_monthly_accounts = {
+    effect = {
+        if = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes bfl_offer_profile = yes }
+        if = { limit = { bfl_has_accounts = yes } bfl_process_accounts = yes }
+        if = { limit = { bfl_is_company = yes } bfl_process_company = yes }
+        if = { limit = { country_type = location has_reform = government_reform:bfl_state_chartered_bank NOT = { any_subject = { is_subject_type = bfl_chartered_bank } } }
+            remove_reform = government_reform:bfl_state_chartered_bank remove_variable = bfl_bank
+        }
+    }
+}

@@ -1,0 +1,30 @@
+﻿bfl_apply_royalty_modifiers = {
+save_scope_as = bfl_bank
+remove_country_modifier = bfl_royalty_bank_1
+remove_country_modifier = bfl_royalty_bank_2
+remove_country_modifier = bfl_royalty_bank_3
+remove_country_modifier = bfl_royalty_bank_4
+if = { limit = { bfl_has_valid_controller = yes } overlord = {
+remove_country_modifier = bfl_royalty_sovereign_1
+remove_country_modifier = bfl_royalty_sovereign_2
+remove_country_modifier = bfl_royalty_sovereign_3
+remove_country_modifier = bfl_royalty_sovereign_4
+}
+if = { limit = { var:bfl_royalty_tier = 1 }
+            add_country_modifier = { modifier = bfl_royalty_bank_1 mode = replace years = -1 }
+            overlord = { add_country_modifier = { modifier = bfl_royalty_sovereign_1 mode = replace years = -1 } }
+        }
+if = { limit = { var:bfl_royalty_tier = 2 }
+            add_country_modifier = { modifier = bfl_royalty_bank_2 mode = replace years = -1 }
+            overlord = { add_country_modifier = { modifier = bfl_royalty_sovereign_2 mode = replace years = -1 } }
+        }
+if = { limit = { var:bfl_royalty_tier = 3 }
+            add_country_modifier = { modifier = bfl_royalty_bank_3 mode = replace years = -1 }
+            overlord = { add_country_modifier = { modifier = bfl_royalty_sovereign_3 mode = replace years = -1 } }
+        }
+if = { limit = { var:bfl_royalty_tier = 4 }
+            add_country_modifier = { modifier = bfl_royalty_bank_4 mode = replace years = -1 }
+            overlord = { add_country_modifier = { modifier = bfl_royalty_sovereign_4 mode = replace years = -1 } }
+        }
+}
+}

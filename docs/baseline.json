@@ -1,0 +1,33 @@
+{
+  "recorded": "2026-10-14",
+  "game_version": "1.4.1",
+  "version_evidence": "Main menu observed on 2026-10-14: Europa Universalis V 1.4.1 (Rio Salado).",
+  "steam_build": "25905365",
+  "steam_branch": "1.4-open-beta",
+  "checksum_file": "f2abcc5053c43f1979de8910637063ec",
+  "displayed_checksum": "9788 (BFI_dev main-menu resource load; modded checksum, not a clean-vanilla checksum)",
+  "cmf_version": "2.5.0",
+  "runtime_probes": "User authorized Florence testing on 2026-10-14. Focused campaign evidence is recorded per runtime hash in tests/results; full P01-P12 acceptance remains incomplete.",
+  "game_sources": {
+    "in_game/gui/economy_lateralview.gui": "675763819de9c0f368761dec5d01541553c78d9a9e25ea68135a5667bb2d621d",
+    "in_game/common/subject_types/state_bank.txt": "b01beacfa1f78abdd61b35eb2c6a81087f260df6e839900ca30616149992c83f",
+    "in_game/common/country_interactions/take_over_loan.txt": "710176339e75cde1b0caecee499b28b6435c29997889707c0153da08e4f3b6fe",
+    "in_game/common/country_interactions/request_loan.txt": "49c960f1f055ed0739128fdd99706ff0dd25bc72c3c230bfa03bfa7253bdefb2",
+    "in_game/common/country_interactions/siphon_income.txt": "2527ac28a5709b1d125a6e5f8314f173ad72e7abffb6c992f4aebb86b02141fd",
+    "in_game/common/script_values/bank_loan_takeover.txt": "8ccfe278654e7bc1f4a4c7c33172f045a0d04fb4f7105fef781934a229c88304",
+    "in_game/common/building_types/trade_company_buildings.txt": "30254d00521c9a4eb3b4a40aaab4526a83f8cd05bebe580ec31b3db53cb1859e",
+    "in_game/common/building_types/unique_buildings.txt": "fa91583339e04501c8c54fd151e8901b871e778f63985fc6ffa45299fc2199c1",
+    "in_game/common/advances/0_age_of_renaissance.txt": "b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705",
+    "in_game/common/scripted_guis/scripted_guis.info": "d890908b3e579243b00198ce84572ec9e812e6bc73314742b878cd391ee2257c",
+    "in_game/common/on_action/_hardcoded.txt": "8127ede6c32815e0cd9a2ac3d84dbfd1c0dc17dfe2ab55173d87c4ec3f0715c3",
+    "main_menu/common/modifier_type_definitions/00_modifier_types.txt": "85896b7a0f9cdda14ea6ca5c58e8f1e20d18f5ea4c79a664f3e2ca529db0f804"
+  },
+  "cmf_sources": {
+    ".metadata/metadata.json": "668c214d279f0daf827417d2e280e1f495f0776a8dfd027d889f0c8d6933a5f8",
+    "in_game/common/on_action/cmf_on_actions.txt": "3f14e4c92196fc440bca6d10cae4c73d86fe74ea7b0c46041e6a99063911440c",
+    "in_game/common/scripted_effects/cmf_alert_effects.txt": "79a7a97d0270802b3149877a66b8f6cd78ed2b27a27c51db23cbce710e8d085c",
+    "in_game/common/scripted_effects/cmf_log_effects.txt": "0092eb0cd8fc1da4a13f6eb24da53386d84fd9ff9d896c6447284735482094d4",
+    "in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt": "2305b100729c2238bd44f1f3a8f5a6bb3adaf7d273d188d6d69870b71bba85eb"
+  },
+  "graphics_reference_commit": "52fac49f3c189f50a04204b743f19335887f88ad"
+}

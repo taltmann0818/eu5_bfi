@@ -1,0 +1,85 @@
+param(
+    [string]$Game = $env:EU5_GAME_ROOT,
+    [string]$Cmf = $env:EU5_CMF_ROOT,
+    [string]$Output = 'tests/results/local',
+    [int]$TimeoutSeconds = 1200,
+    [switch]$Graphics
+)
+$ErrorActionPreference = 'Stop'
+$repo = Split-Path -Parent $PSScriptRoot
+if (-not $Game) { $Game = 'C:\Program Files (x86)\Steam\steamapps\common\Europa Universalis V' }
+if (-not $Cmf) { $Cmf = 'C:\Program Files (x86)\Steam\steamapps\workshop\content\3450310\3692202776' }
+$exe = Join-Path $Game 'binaries/eu5.exe'
+if (-not (Test-Path -LiteralPath $exe)) { throw "Licensed EUV installation missing: $exe" }
+if (-not (Test-Path -LiteralPath (Join-Path $Cmf '.metadata/metadata.json'))) { throw 'CMF installation missing' }
+if ($TimeoutSeconds -lt 30 -or $TimeoutSeconds -gt 7200) { throw 'Timeout must be 30–7200 seconds' }
+Push-Location -LiteralPath $repo
+try {
+    python tools/audit_native.py --game (Join-Path $Game 'game') --cmf $Cmf --compare
+    if ($LASTEXITCODE -ne 0) { throw 'Native/CMF version pin changed; review before running.' }
+    $runId = [guid]::NewGuid().ToString('N')
+    $runRoot = Join-Path $repo "dist/campaign-$runId"
+    $userDir = Join-Path $runRoot 'user'
+    New-Item -ItemType Directory -Path $userDir -Force | Out-Null
+    python tools/campaign_suite.py prepare --userdir $userDir --token $runId
+    if ($LASTEXITCODE -ne 0) { throw 'Fixture preparation failed' }
+    $bfi = Join-Path $userDir 'mod/bfi'
+    Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
+    $overlay = Join-Path $userDir 'mod/bfi_campaign_checks'
+    $mods = @($Cmf, $bfi, $overlay) | ForEach-Object {
+        @{path = ($_.Replace('\','/') + '/'); isEnabled = $true}
+    }
+    @{file_version = '1.0.0'; playsets = @(@{
+        name = 'BFI_CI_DISPOSABLE'; isActive = $true; isAutomaticallySorted = $false;
+        orderedListMods = $mods; DLC = @()
+    })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
+    $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
+    if (-not $Graphics) { $arguments += '-nographics' }
+    $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
+    New-Item -ItemType Directory -Path $outPath -Force | Out-Null
+    Copy-Item -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Destination (Join-Path $outPath 'manifest.json') -Force
+    $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
+    $debugPath = Join-Path $userDir 'logs/debug.log'
+    function Invoke-BfiEngine([string[]]$LaunchArguments, [string]$StopMarker) {
+        # Preserve old logs before launch so a retry cannot see a prior completion marker.
+        foreach ($logName in @('debug.log','error.log')) {
+            $oldLog = Join-Path $userDir "logs/$logName"
+            if (Test-Path -LiteralPath $oldLog) {
+                Move-Item -LiteralPath $oldLog -Destination (Join-Path $runRoot ("previous-$([guid]::NewGuid().ToString('N'))-$logName"))
+            }
+        }
+        $proc = Start-Process -FilePath $exe -ArgumentList $LaunchArguments -WorkingDirectory (Join-Path $Game 'binaries') -WindowStyle Hidden -PassThru
+        Write-Output "EUV campaign process $($proc.Id); isolated user directory: $userDir"
+        try {
+            while (-not $proc.HasExited -and [DateTime]::UtcNow -lt $deadline) {
+                if (Test-Path -LiteralPath $debugPath) {
+                    $tail = Get-Content -LiteralPath $debugPath -Tail 100 -ErrorAction SilentlyContinue
+                    if ($tail -match [regex]::Escape($StopMarker)) { break }
+                }
+                Start-Sleep -Seconds 5
+                $proc.Refresh()
+            }
+        } finally {
+            # Only terminate the exact process created here. Never stop a player's EUV process.
+            $proc.Refresh()
+            if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force; $proc.WaitForExit() }
+        }
+    }
+    Invoke-BfiEngine $arguments "BFI_TEST|$runId|END|"
+    if (-not (Test-Path -LiteralPath $debugPath)) { throw 'EUV did not create isolated logs; campaign did not run.' }
+    $priorLog = Join-Path $runRoot 'campaign-debug.log'
+    $priorErrors = Join-Path $runRoot 'campaign-errors.log'
+    Copy-Item -LiteralPath $debugPath -Destination $priorLog
+    Copy-Item -LiteralPath (Join-Path $userDir 'logs/error.log') -Destination $priorErrors
+    $save = Get-ChildItem -LiteralPath (Join-Path $userDir 'save games') -Filter '*.eu5' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $save) { throw 'Campaign produced no autosave for the persistence checks.' }
+    python tools/campaign_suite.py prepare-reload --userdir $userDir
+    if ($LASTEXITCODE -ne 0) { throw 'Reload fixture preparation failed' }
+    # EUV resolves this option under the isolated 'save games' directory and appends .eu5.
+    $reloadArgs = @('-debug_mode', "-loadsavehandsoff=$($save.BaseName)", '-timed_handsoff=3', "-userdir=`"$userDir`"")
+    if (-not $Graphics) { $reloadArgs += '-nographics' }
+    Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|"
+    python tools/campaign_suite.py report --userdir $userDir --output $outPath --prior-log $priorLog --prior-errors $priorErrors
+    if ($LASTEXITCODE -ne 0) { throw 'Campaign assertions failed or execution was incomplete; see campaign.json.' }
+    Write-Output "PASS: real Florence campaign; report $outPath"
+} finally { Pop-Location }

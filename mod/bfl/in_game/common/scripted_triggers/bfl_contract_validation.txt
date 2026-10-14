@@ -1,0 +1,9 @@
+﻿bfl_has_contract_capacity = {
+OR = { var:bfl_con_01_active = 0 var:bfl_con_02_active = 0 var:bfl_con_03_active = 0 var:bfl_con_04_active = 0 var:bfl_con_05_active = 0 var:bfl_con_06_active = 0 var:bfl_con_07_active = 0 var:bfl_con_08_active = 0 var:bfl_con_09_active = 0 var:bfl_con_10_active = 0 var:bfl_con_11_active = 0 var:bfl_con_12_active = 0 var:bfl_con_13_active = 0 var:bfl_con_14_active = 0 var:bfl_con_15_active = 0 var:bfl_con_16_active = 0 var:bfl_con_17_active = 0 var:bfl_con_18_active = 0 var:bfl_con_19_active = 0 var:bfl_con_20_active = 0 var:bfl_con_21_active = 0 var:bfl_con_22_active = 0 var:bfl_con_23_active = 0 var:bfl_con_24_active = 0 var:bfl_con_25_active = 0 var:bfl_con_26_active = 0 var:bfl_con_27_active = 0 var:bfl_con_28_active = 0 var:bfl_con_29_active = 0 var:bfl_con_30_active = 0 var:bfl_con_31_active = 0 var:bfl_con_32_active = 0 }
+}
+
+    bfl_valid_contract_parties = {
+        exists = scope:bfl_party
+        NOT = { this = scope:bfl_party }
+        NOT = { has_variable = bfl_operation_guard }
+    }

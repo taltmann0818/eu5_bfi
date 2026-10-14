@@ -1,0 +1,931 @@
+﻿bfl_pay_deposit_01 = {
+if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_withdrawal_requested > 0 exists = var:bfl_dep_01_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_01_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_01_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_01_interest_due } }
+    change_variable = { name = bfl_dep_01_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_01_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_01_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_01_principal <= 0 var:bfl_dep_01_interest_due <= 0 }
+        set_variable = { name = bfl_dep_01_active value = 0 } remove_variable = bfl_dep_01_party
+    }
+}
+}
+bfl_pay_deposit_02 = {
+if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_withdrawal_requested > 0 exists = var:bfl_dep_02_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_02_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_02_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_02_interest_due } }
+    change_variable = { name = bfl_dep_02_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_02_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_02_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_02_principal <= 0 var:bfl_dep_02_interest_due <= 0 }
+        set_variable = { name = bfl_dep_02_active value = 0 } remove_variable = bfl_dep_02_party
+    }
+}
+}
+bfl_pay_deposit_03 = {
+if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_withdrawal_requested > 0 exists = var:bfl_dep_03_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_03_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_03_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_03_interest_due } }
+    change_variable = { name = bfl_dep_03_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_03_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_03_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_03_principal <= 0 var:bfl_dep_03_interest_due <= 0 }
+        set_variable = { name = bfl_dep_03_active value = 0 } remove_variable = bfl_dep_03_party
+    }
+}
+}
+bfl_pay_deposit_04 = {
+if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_withdrawal_requested > 0 exists = var:bfl_dep_04_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_04_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_04_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_04_interest_due } }
+    change_variable = { name = bfl_dep_04_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_04_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_04_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_04_principal <= 0 var:bfl_dep_04_interest_due <= 0 }
+        set_variable = { name = bfl_dep_04_active value = 0 } remove_variable = bfl_dep_04_party
+    }
+}
+}
+bfl_pay_deposit_05 = {
+if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_withdrawal_requested > 0 exists = var:bfl_dep_05_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_05_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_05_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_05_interest_due } }
+    change_variable = { name = bfl_dep_05_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_05_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_05_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_05_principal <= 0 var:bfl_dep_05_interest_due <= 0 }
+        set_variable = { name = bfl_dep_05_active value = 0 } remove_variable = bfl_dep_05_party
+    }
+}
+}
+bfl_pay_deposit_06 = {
+if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_withdrawal_requested > 0 exists = var:bfl_dep_06_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_06_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_06_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_06_interest_due } }
+    change_variable = { name = bfl_dep_06_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_06_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_06_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_06_principal <= 0 var:bfl_dep_06_interest_due <= 0 }
+        set_variable = { name = bfl_dep_06_active value = 0 } remove_variable = bfl_dep_06_party
+    }
+}
+}
+bfl_pay_deposit_07 = {
+if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_withdrawal_requested > 0 exists = var:bfl_dep_07_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_07_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_07_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_07_interest_due } }
+    change_variable = { name = bfl_dep_07_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_07_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_07_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_07_principal <= 0 var:bfl_dep_07_interest_due <= 0 }
+        set_variable = { name = bfl_dep_07_active value = 0 } remove_variable = bfl_dep_07_party
+    }
+}
+}
+bfl_pay_deposit_08 = {
+if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_withdrawal_requested > 0 exists = var:bfl_dep_08_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_08_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_08_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_08_interest_due } }
+    change_variable = { name = bfl_dep_08_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_08_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_08_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_08_principal <= 0 var:bfl_dep_08_interest_due <= 0 }
+        set_variable = { name = bfl_dep_08_active value = 0 } remove_variable = bfl_dep_08_party
+    }
+}
+}
+bfl_pay_deposit_09 = {
+if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_withdrawal_requested > 0 exists = var:bfl_dep_09_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_09_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_09_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_09_interest_due } }
+    change_variable = { name = bfl_dep_09_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_09_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_09_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_09_principal <= 0 var:bfl_dep_09_interest_due <= 0 }
+        set_variable = { name = bfl_dep_09_active value = 0 } remove_variable = bfl_dep_09_party
+    }
+}
+}
+bfl_pay_deposit_10 = {
+if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_withdrawal_requested > 0 exists = var:bfl_dep_10_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_10_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_10_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_10_interest_due } }
+    change_variable = { name = bfl_dep_10_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_10_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_10_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_10_principal <= 0 var:bfl_dep_10_interest_due <= 0 }
+        set_variable = { name = bfl_dep_10_active value = 0 } remove_variable = bfl_dep_10_party
+    }
+}
+}
+bfl_pay_deposit_11 = {
+if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_withdrawal_requested > 0 exists = var:bfl_dep_11_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_11_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_11_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_11_interest_due } }
+    change_variable = { name = bfl_dep_11_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_11_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_11_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_11_principal <= 0 var:bfl_dep_11_interest_due <= 0 }
+        set_variable = { name = bfl_dep_11_active value = 0 } remove_variable = bfl_dep_11_party
+    }
+}
+}
+bfl_pay_deposit_12 = {
+if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_withdrawal_requested > 0 exists = var:bfl_dep_12_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_12_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_12_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_12_interest_due } }
+    change_variable = { name = bfl_dep_12_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_12_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_12_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_12_principal <= 0 var:bfl_dep_12_interest_due <= 0 }
+        set_variable = { name = bfl_dep_12_active value = 0 } remove_variable = bfl_dep_12_party
+    }
+}
+}
+bfl_pay_deposit_13 = {
+if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_withdrawal_requested > 0 exists = var:bfl_dep_13_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_13_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_13_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_13_interest_due } }
+    change_variable = { name = bfl_dep_13_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_13_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_13_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_13_principal <= 0 var:bfl_dep_13_interest_due <= 0 }
+        set_variable = { name = bfl_dep_13_active value = 0 } remove_variable = bfl_dep_13_party
+    }
+}
+}
+bfl_pay_deposit_14 = {
+if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_withdrawal_requested > 0 exists = var:bfl_dep_14_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_14_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_14_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_14_interest_due } }
+    change_variable = { name = bfl_dep_14_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_14_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_14_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_14_principal <= 0 var:bfl_dep_14_interest_due <= 0 }
+        set_variable = { name = bfl_dep_14_active value = 0 } remove_variable = bfl_dep_14_party
+    }
+}
+}
+bfl_pay_deposit_15 = {
+if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_withdrawal_requested > 0 exists = var:bfl_dep_15_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_15_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_15_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_15_interest_due } }
+    change_variable = { name = bfl_dep_15_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_15_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_15_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_15_principal <= 0 var:bfl_dep_15_interest_due <= 0 }
+        set_variable = { name = bfl_dep_15_active value = 0 } remove_variable = bfl_dep_15_party
+    }
+}
+}
+bfl_pay_deposit_16 = {
+if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_withdrawal_requested > 0 exists = var:bfl_dep_16_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_16_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_16_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_16_interest_due } }
+    change_variable = { name = bfl_dep_16_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_16_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_16_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_16_principal <= 0 var:bfl_dep_16_interest_due <= 0 }
+        set_variable = { name = bfl_dep_16_active value = 0 } remove_variable = bfl_dep_16_party
+    }
+}
+}
+bfl_pay_deposit_17 = {
+if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_withdrawal_requested > 0 exists = var:bfl_dep_17_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_17_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_17_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_17_interest_due } }
+    change_variable = { name = bfl_dep_17_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_17_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_17_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_17_principal <= 0 var:bfl_dep_17_interest_due <= 0 }
+        set_variable = { name = bfl_dep_17_active value = 0 } remove_variable = bfl_dep_17_party
+    }
+}
+}
+bfl_pay_deposit_18 = {
+if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_withdrawal_requested > 0 exists = var:bfl_dep_18_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_18_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_18_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_18_interest_due } }
+    change_variable = { name = bfl_dep_18_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_18_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_18_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_18_principal <= 0 var:bfl_dep_18_interest_due <= 0 }
+        set_variable = { name = bfl_dep_18_active value = 0 } remove_variable = bfl_dep_18_party
+    }
+}
+}
+bfl_pay_deposit_19 = {
+if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_withdrawal_requested > 0 exists = var:bfl_dep_19_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_19_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_19_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_19_interest_due } }
+    change_variable = { name = bfl_dep_19_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_19_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_19_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_19_principal <= 0 var:bfl_dep_19_interest_due <= 0 }
+        set_variable = { name = bfl_dep_19_active value = 0 } remove_variable = bfl_dep_19_party
+    }
+}
+}
+bfl_pay_deposit_20 = {
+if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_withdrawal_requested > 0 exists = var:bfl_dep_20_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_20_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_20_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_20_interest_due } }
+    change_variable = { name = bfl_dep_20_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_20_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_20_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_20_principal <= 0 var:bfl_dep_20_interest_due <= 0 }
+        set_variable = { name = bfl_dep_20_active value = 0 } remove_variable = bfl_dep_20_party
+    }
+}
+}
+bfl_pay_deposit_21 = {
+if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_withdrawal_requested > 0 exists = var:bfl_dep_21_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_21_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_21_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_21_interest_due } }
+    change_variable = { name = bfl_dep_21_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_21_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_21_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_21_principal <= 0 var:bfl_dep_21_interest_due <= 0 }
+        set_variable = { name = bfl_dep_21_active value = 0 } remove_variable = bfl_dep_21_party
+    }
+}
+}
+bfl_pay_deposit_22 = {
+if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_withdrawal_requested > 0 exists = var:bfl_dep_22_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_22_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_22_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_22_interest_due } }
+    change_variable = { name = bfl_dep_22_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_22_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_22_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_22_principal <= 0 var:bfl_dep_22_interest_due <= 0 }
+        set_variable = { name = bfl_dep_22_active value = 0 } remove_variable = bfl_dep_22_party
+    }
+}
+}
+bfl_pay_deposit_23 = {
+if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_withdrawal_requested > 0 exists = var:bfl_dep_23_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_23_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_23_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_23_interest_due } }
+    change_variable = { name = bfl_dep_23_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_23_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_23_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_23_principal <= 0 var:bfl_dep_23_interest_due <= 0 }
+        set_variable = { name = bfl_dep_23_active value = 0 } remove_variable = bfl_dep_23_party
+    }
+}
+}
+bfl_pay_deposit_24 = {
+if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_withdrawal_requested > 0 exists = var:bfl_dep_24_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_24_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_24_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_24_interest_due } }
+    change_variable = { name = bfl_dep_24_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_24_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_24_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_24_principal <= 0 var:bfl_dep_24_interest_due <= 0 }
+        set_variable = { name = bfl_dep_24_active value = 0 } remove_variable = bfl_dep_24_party
+    }
+}
+}
+bfl_pay_deposit_25 = {
+if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_withdrawal_requested > 0 exists = var:bfl_dep_25_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_25_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_25_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_25_interest_due } }
+    change_variable = { name = bfl_dep_25_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_25_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_25_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_25_principal <= 0 var:bfl_dep_25_interest_due <= 0 }
+        set_variable = { name = bfl_dep_25_active value = 0 } remove_variable = bfl_dep_25_party
+    }
+}
+}
+bfl_pay_deposit_26 = {
+if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_withdrawal_requested > 0 exists = var:bfl_dep_26_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_26_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_26_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_26_interest_due } }
+    change_variable = { name = bfl_dep_26_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_26_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_26_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_26_principal <= 0 var:bfl_dep_26_interest_due <= 0 }
+        set_variable = { name = bfl_dep_26_active value = 0 } remove_variable = bfl_dep_26_party
+    }
+}
+}
+bfl_pay_deposit_27 = {
+if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_withdrawal_requested > 0 exists = var:bfl_dep_27_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_27_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_27_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_27_interest_due } }
+    change_variable = { name = bfl_dep_27_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_27_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_27_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_27_principal <= 0 var:bfl_dep_27_interest_due <= 0 }
+        set_variable = { name = bfl_dep_27_active value = 0 } remove_variable = bfl_dep_27_party
+    }
+}
+}
+bfl_pay_deposit_28 = {
+if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_withdrawal_requested > 0 exists = var:bfl_dep_28_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_28_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_28_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_28_interest_due } }
+    change_variable = { name = bfl_dep_28_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_28_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_28_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_28_principal <= 0 var:bfl_dep_28_interest_due <= 0 }
+        set_variable = { name = bfl_dep_28_active value = 0 } remove_variable = bfl_dep_28_party
+    }
+}
+}
+bfl_pay_deposit_29 = {
+if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_withdrawal_requested > 0 exists = var:bfl_dep_29_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_29_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_29_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_29_interest_due } }
+    change_variable = { name = bfl_dep_29_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_29_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_29_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_29_principal <= 0 var:bfl_dep_29_interest_due <= 0 }
+        set_variable = { name = bfl_dep_29_active value = 0 } remove_variable = bfl_dep_29_party
+    }
+}
+}
+bfl_pay_deposit_30 = {
+if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_withdrawal_requested > 0 exists = var:bfl_dep_30_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_30_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_30_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_30_interest_due } }
+    change_variable = { name = bfl_dep_30_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_30_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_30_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_30_principal <= 0 var:bfl_dep_30_interest_due <= 0 }
+        set_variable = { name = bfl_dep_30_active value = 0 } remove_variable = bfl_dep_30_party
+    }
+}
+}
+bfl_pay_deposit_31 = {
+if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_withdrawal_requested > 0 exists = var:bfl_dep_31_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_31_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_31_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_31_interest_due } }
+    change_variable = { name = bfl_dep_31_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_31_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_31_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_31_principal <= 0 var:bfl_dep_31_interest_due <= 0 }
+        set_variable = { name = bfl_dep_31_active value = 0 } remove_variable = bfl_dep_31_party
+    }
+}
+}
+bfl_pay_deposit_32 = {
+if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_withdrawal_requested > 0 exists = var:bfl_dep_32_party }
+    save_scope_as = bfl_bank
+    var:bfl_dep_32_party = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_32_withdrawal_requested } }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
+    set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_32_interest_due } }
+    change_variable = { name = bfl_dep_32_interest_due subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_32_withdrawal_requested subtract = var:bfl_payment }
+    change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
+    change_variable = { name = bfl_dep_32_principal subtract = var:bfl_payment }
+    if = { limit = { var:bfl_dep_32_principal <= 0 var:bfl_dep_32_interest_due <= 0 }
+        set_variable = { name = bfl_dep_32_active value = 0 } remove_variable = bfl_dep_32_party
+    }
+}
+}
+bfl_accrue_deposits = {
+save_scope_as = bfl_bank
+if = { limit = { var:bfl_dep_01_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_01_principal multiply = var:bfl_dep_01_annual_rate add = var:bfl_dep_01_remainder } }
+            set_variable = { name = bfl_dep_01_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_01_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_01_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_01 = yes
+        }
+if = { limit = { var:bfl_dep_02_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_02_principal multiply = var:bfl_dep_02_annual_rate add = var:bfl_dep_02_remainder } }
+            set_variable = { name = bfl_dep_02_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_02_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_02_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_02 = yes
+        }
+if = { limit = { var:bfl_dep_03_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_03_principal multiply = var:bfl_dep_03_annual_rate add = var:bfl_dep_03_remainder } }
+            set_variable = { name = bfl_dep_03_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_03_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_03_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_03 = yes
+        }
+if = { limit = { var:bfl_dep_04_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_04_principal multiply = var:bfl_dep_04_annual_rate add = var:bfl_dep_04_remainder } }
+            set_variable = { name = bfl_dep_04_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_04_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_04_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_04 = yes
+        }
+if = { limit = { var:bfl_dep_05_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_05_principal multiply = var:bfl_dep_05_annual_rate add = var:bfl_dep_05_remainder } }
+            set_variable = { name = bfl_dep_05_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_05_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_05_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_05 = yes
+        }
+if = { limit = { var:bfl_dep_06_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_06_principal multiply = var:bfl_dep_06_annual_rate add = var:bfl_dep_06_remainder } }
+            set_variable = { name = bfl_dep_06_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_06_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_06_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_06 = yes
+        }
+if = { limit = { var:bfl_dep_07_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_07_principal multiply = var:bfl_dep_07_annual_rate add = var:bfl_dep_07_remainder } }
+            set_variable = { name = bfl_dep_07_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_07_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_07_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_07 = yes
+        }
+if = { limit = { var:bfl_dep_08_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_08_principal multiply = var:bfl_dep_08_annual_rate add = var:bfl_dep_08_remainder } }
+            set_variable = { name = bfl_dep_08_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_08_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_08_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_08 = yes
+        }
+if = { limit = { var:bfl_dep_09_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_09_principal multiply = var:bfl_dep_09_annual_rate add = var:bfl_dep_09_remainder } }
+            set_variable = { name = bfl_dep_09_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_09_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_09_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_09 = yes
+        }
+if = { limit = { var:bfl_dep_10_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_10_principal multiply = var:bfl_dep_10_annual_rate add = var:bfl_dep_10_remainder } }
+            set_variable = { name = bfl_dep_10_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_10_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_10_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_10 = yes
+        }
+if = { limit = { var:bfl_dep_11_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_11_principal multiply = var:bfl_dep_11_annual_rate add = var:bfl_dep_11_remainder } }
+            set_variable = { name = bfl_dep_11_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_11_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_11_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_11 = yes
+        }
+if = { limit = { var:bfl_dep_12_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_12_principal multiply = var:bfl_dep_12_annual_rate add = var:bfl_dep_12_remainder } }
+            set_variable = { name = bfl_dep_12_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_12_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_12_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_12 = yes
+        }
+if = { limit = { var:bfl_dep_13_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_13_principal multiply = var:bfl_dep_13_annual_rate add = var:bfl_dep_13_remainder } }
+            set_variable = { name = bfl_dep_13_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_13_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_13_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_13 = yes
+        }
+if = { limit = { var:bfl_dep_14_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_14_principal multiply = var:bfl_dep_14_annual_rate add = var:bfl_dep_14_remainder } }
+            set_variable = { name = bfl_dep_14_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_14_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_14_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_14 = yes
+        }
+if = { limit = { var:bfl_dep_15_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_15_principal multiply = var:bfl_dep_15_annual_rate add = var:bfl_dep_15_remainder } }
+            set_variable = { name = bfl_dep_15_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_15_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_15_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_15 = yes
+        }
+if = { limit = { var:bfl_dep_16_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_16_principal multiply = var:bfl_dep_16_annual_rate add = var:bfl_dep_16_remainder } }
+            set_variable = { name = bfl_dep_16_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_16_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_16_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_16 = yes
+        }
+if = { limit = { var:bfl_dep_17_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_17_principal multiply = var:bfl_dep_17_annual_rate add = var:bfl_dep_17_remainder } }
+            set_variable = { name = bfl_dep_17_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_17_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_17_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_17 = yes
+        }
+if = { limit = { var:bfl_dep_18_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_18_principal multiply = var:bfl_dep_18_annual_rate add = var:bfl_dep_18_remainder } }
+            set_variable = { name = bfl_dep_18_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_18_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_18_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_18 = yes
+        }
+if = { limit = { var:bfl_dep_19_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_19_principal multiply = var:bfl_dep_19_annual_rate add = var:bfl_dep_19_remainder } }
+            set_variable = { name = bfl_dep_19_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_19_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_19_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_19 = yes
+        }
+if = { limit = { var:bfl_dep_20_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_20_principal multiply = var:bfl_dep_20_annual_rate add = var:bfl_dep_20_remainder } }
+            set_variable = { name = bfl_dep_20_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_20_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_20_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_20 = yes
+        }
+if = { limit = { var:bfl_dep_21_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_21_principal multiply = var:bfl_dep_21_annual_rate add = var:bfl_dep_21_remainder } }
+            set_variable = { name = bfl_dep_21_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_21_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_21_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_21 = yes
+        }
+if = { limit = { var:bfl_dep_22_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_22_principal multiply = var:bfl_dep_22_annual_rate add = var:bfl_dep_22_remainder } }
+            set_variable = { name = bfl_dep_22_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_22_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_22_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_22 = yes
+        }
+if = { limit = { var:bfl_dep_23_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_23_principal multiply = var:bfl_dep_23_annual_rate add = var:bfl_dep_23_remainder } }
+            set_variable = { name = bfl_dep_23_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_23_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_23_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_23 = yes
+        }
+if = { limit = { var:bfl_dep_24_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_24_principal multiply = var:bfl_dep_24_annual_rate add = var:bfl_dep_24_remainder } }
+            set_variable = { name = bfl_dep_24_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_24_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_24_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_24 = yes
+        }
+if = { limit = { var:bfl_dep_25_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_25_principal multiply = var:bfl_dep_25_annual_rate add = var:bfl_dep_25_remainder } }
+            set_variable = { name = bfl_dep_25_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_25_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_25_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_25 = yes
+        }
+if = { limit = { var:bfl_dep_26_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_26_principal multiply = var:bfl_dep_26_annual_rate add = var:bfl_dep_26_remainder } }
+            set_variable = { name = bfl_dep_26_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_26_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_26_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_26 = yes
+        }
+if = { limit = { var:bfl_dep_27_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_27_principal multiply = var:bfl_dep_27_annual_rate add = var:bfl_dep_27_remainder } }
+            set_variable = { name = bfl_dep_27_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_27_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_27_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_27 = yes
+        }
+if = { limit = { var:bfl_dep_28_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_28_principal multiply = var:bfl_dep_28_annual_rate add = var:bfl_dep_28_remainder } }
+            set_variable = { name = bfl_dep_28_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_28_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_28_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_28 = yes
+        }
+if = { limit = { var:bfl_dep_29_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_29_principal multiply = var:bfl_dep_29_annual_rate add = var:bfl_dep_29_remainder } }
+            set_variable = { name = bfl_dep_29_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_29_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_29_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_29 = yes
+        }
+if = { limit = { var:bfl_dep_30_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_30_principal multiply = var:bfl_dep_30_annual_rate add = var:bfl_dep_30_remainder } }
+            set_variable = { name = bfl_dep_30_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_30_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_30_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_30 = yes
+        }
+if = { limit = { var:bfl_dep_31_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_31_principal multiply = var:bfl_dep_31_annual_rate add = var:bfl_dep_31_remainder } }
+            set_variable = { name = bfl_dep_31_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_31_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_31_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_31 = yes
+        }
+if = { limit = { var:bfl_dep_32_active = 1 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_dep_32_principal multiply = var:bfl_dep_32_annual_rate add = var:bfl_dep_32_remainder } }
+            set_variable = { name = bfl_dep_32_remainder value = var:bfl_payment }
+            # Carry the annual numerator to avoid recurring-decimal cent loss.
+            change_variable = { name = bfl_payment divide = 12 }
+            change_variable = { name = bfl_payment multiply = 100 }
+            set_variable = { name = bfl_payment value = { value = var:bfl_payment floor = yes divide = 100 } }
+            change_variable = { name = bfl_dep_32_remainder subtract = { value = var:bfl_payment multiply = 12 } }
+            change_variable = { name = bfl_dep_32_interest_due add = var:bfl_payment }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_deposit_32 = yes
+        }
+}

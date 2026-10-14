@@ -1,0 +1,17 @@
+# Run only in a disposable Florence campaign with BFI + CMF.
+debug_log = "BFI_PROBE|BEGIN"
+c:FLO = {
+    if = { limit = { is_ai = no } debug_log = "BFI_PROBE|PASS|florence_player" }
+    else = { debug_log = "BFI_PROBE|FAIL|florence_player" }
+    if = { limit = { bfl_can_begin_charter = yes } debug_log = "BFI_PROBE|PASS|charter_available" }
+    else = { debug_log = "BFI_PROBE|INFO|charter_unavailable_at_start" }
+}
+c:BRD = {
+    if = { limit = { bfl_is_independent_bank = yes } debug_log = "BFI_PROBE|PASS|bardi_independent_bank" }
+    else = { debug_log = "BFI_PROBE|FAIL|bardi_independent_bank" }
+    if = { limit = { bfl_has_accounts = yes } debug_log = "BFI_PROBE|PASS|bardi_initialized" }
+    else = { debug_log = "BFI_PROBE|FAIL|bardi_initialized" }
+    if = { limit = { bfl_period = 16048 } debug_log = "BFI_PROBE|PASS|april_period" }
+    else = { debug_log = "BFI_PROBE|FAIL|april_period" }
+}
+debug_log = "BFI_PROBE|END"

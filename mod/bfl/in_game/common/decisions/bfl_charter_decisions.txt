@@ -1,0 +1,21 @@
+﻿bfl_establish_chartered_bank = {
+    decision_category = economy_decisions
+    image = "gfx/interface/illustrations/bfl/charter.dds"
+    potential = {
+        country_type = location
+        any_subject = { is_subject_type = state_bank }
+        NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+    }
+    allow = { bfl_can_begin_charter = yes }
+    ai_will_do = { value = bfl_ai_charter_score }
+    option = {
+        name = bfl_establish_chartered_bank.a
+        ai_chance = { value = 100 }
+        effect = {
+            if = { limit = { bfl_can_begin_charter = yes }
+                bfl_prepare_charter_selector = yes
+                trigger_event_non_silently = bfl_finance.110
+            }
+        }
+    }
+}

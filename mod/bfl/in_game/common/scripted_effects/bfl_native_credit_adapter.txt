@@ -1,0 +1,54 @@
+﻿# Audited native request_loan and takeover definitions, EUV 1.4.1 build 25905365.
+# Native give_loan owns both wallets. P06 gate blocks until units/callbacks are measured.
+# Root bank; bfl_party is borrower. Never add a second principal transfer.
+bfl_originate_native_credit = {
+    if = { limit = { exists = scope:bfl_party bfl_free_cash >= 100
+        OR = {
+            AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location } }
+            AND = { bfl_can_originate_corporate_credit = yes scope:bfl_party = { bfl_is_company = yes } }
+        }
+    }
+        give_loan = { target = scope:bfl_party amount = 100 interest = 0.05 months = 60 }
+        bfl_reconcile_native_assets = yes
+    }
+}
+# Native regular-bank operation copied minimally; actor is ALWAYS paying bank.
+# Preserve native eligibility, ordering, price and estate compensation.
+bfl_native_takeover = {
+    if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party
+        scope:bfl_party = {
+            OR = { NOT = { bfl_is_company = yes } scope:bfl_bank = { bfl_can_originate_corporate_credit = yes } }
+        }
+    }
+        save_scope_as = bfl_bank save_scope_as = actor
+        scope:bfl_party = {
+            save_scope_as = recipient
+            ordered_loan = {
+                limit = {
+                    is_bond = no NOT = { exists = owner } months_left > 40
+                    loan_interest > scope:actor.modifier:bank_interest
+                    scope:actor.gold > remaining_debt
+                    scope:actor.bfl_free_cash >= bank_loan_takeover_cost
+                    scope:actor.bfl_capital_headroom > 0
+                }
+                order_by = remaining_debt max = 1
+                save_scope_as = bfl_claim
+                scope:actor = {
+                    set_variable = { name = bfl_payment value = scope:bfl_claim.bank_loan_takeover_cost }
+                    add_gold = bfl_negative_payment
+                }
+                scope:recipient = { distribute_gold_to_banking_estates = scope:actor.var:bfl_payment }
+                change_loan_owner = scope:actor
+            }
+        }
+        bfl_reconcile_native_assets = yes
+    }
+}
+bfl_reconcile_native_assets = {
+    set_variable = { name = bfl_native_credit_value value = 0 }
+    save_scope_as = bfl_bank
+    every_lent_loan = {
+        save_scope_as = bfl_claim
+        scope:bfl_bank = { change_variable = { name = bfl_native_credit_value add = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } } }
+    }
+}

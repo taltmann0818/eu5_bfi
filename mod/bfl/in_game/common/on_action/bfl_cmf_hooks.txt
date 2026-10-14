@@ -1,0 +1,6 @@
+﻿cmf_on_mod_registration = { on_actions = { bfl_on_cmf_registration } }
+bfl_on_cmf_registration = { effect = { bfl_register_cmf_presentation = yes } }
+cmf_monthly_human_country_pulse = { on_actions = { bfl_human_alerts } }
+bfl_human_alerts = { effect = { bfl_refresh_alerts = yes } }
+cmf_on_country_transfer = { on_actions = { bfl_transfer_refresh } }
+bfl_transfer_refresh = { effect = { bfl_refresh_alerts = yes } }
