@@ -31,6 +31,6 @@ The [acceptance checklist](docs/acceptance.md) defines the first tests. **No cam
 
 ## Artwork and provenance
 
-The build contains an original generated counting-house painting, a cover, and original editable geometric icon masters with BC3 DDS exports. The [asset register](docs/asset_register.csv) lists every export. [Prompts and production details](assets_source/README.md) document the built-in imagegen tool and deterministic graphics pipeline.
+The build contains an original generated counting-house painting, a cover, and original editable geometric icon masters with BC3 DDS exports. The [asset register](docs/asset_register.csv) lists every export. [Prompts and production details](assets_source/README.md) document the built-in imagegen tool and deterministic graphics pipeline. The local mod browser reads `.metadata/thumbnail.png`; the cover is also kept at the mod root for staging.
 
 The requested [community graphical-assets repository](https://github.com/Europa-Universalis-5-Modding-Co-op/graphical-assets) was inspected at commit `52fac49f3c189f50a04204b743f19335887f88ad`. Its seal, scroll, coin and frame assets informed the motif review. No reuse license was present, so none of those files is redistributed. Native UI motifs are referenced by path; only the deliberately overridden native script/GUI definitions are included for compatibility.

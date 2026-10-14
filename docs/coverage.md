@@ -25,7 +25,7 @@ This is the first development iteration. A file's presence or an offline arithme
 | Crises | Runtime liquidity restriction/insolvency checks and funded recapitalization; offline pro-rata recovery | Complete waterfalls, priorities, haircut consent, closure and contagion |
 | Economy/CMF | Runtime inline sections, shared settings/alerts/log, preserved native controls | P02/P12 engine UI, localization fit, CMM preference consumption, settings callbacks and responsive QA |
 | AI | Native AI preserved; charter score/profile weights; investment actions conservative | Bounded opportunity scoring, offer responses, deposit behavior and company investment controller |
-| Graphics/FX | 56 original exports with editable masters; static accessible interface | Distinct icons for every advance, six separate painted outcomes and verified animations |
+| Graphics/FX | 57 original exports with editable masters; static accessible interface | Distinct icons for every advance, six separate painted outcomes and verified animations |
 | Validation/release | Deterministic generators, source/asset checks, 22 arithmetic tests, CI, stage manifest | Engine parsing, P01–P12, persistence, multiplayer, performance and campaigns |
 
 The most substantial integration blocker is native bank-funded government bonds. Implementing ordinary loans with a bond label or adding an unexplained second bank debit would violate the plans' accounting requirements, so those actions remain visibly disabled in this build.

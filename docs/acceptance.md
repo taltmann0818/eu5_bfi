@@ -4,7 +4,7 @@ Authoring boundary: the user requested a complete write, PR, game launch and `BF
 
 Offline checks run before delivery:
 
-- Structural script/GUI checks: BOM, balanced delimiters, custom service references, texture existence, metadata, localization, advance DAG and native Economy ownership.
+- Structural script/GUI checks: BOM, balanced delimiters, custom service references, 57 texture/cover exports, metadata, localization, advance DAG and native Economy ownership.
 - 22 accounting fixtures: cash conservation, deposits versus equity, annual interest rounding, replayed months, term maturity, queued withdrawals, capacity exhaustion, age/profile gates, royalty funding, profit classification, dividends/current holders/rounding, subscriptions, same-claim resale/stale quotes, note-backing exclusion, receipt double backing, venture capital/profit/loss and unpaid resolution claims.
 - Read-only pinned native/CMF hash comparison and reversible Economy-source reconstruction.
 - Explicit runtime package allowlist, SHA-256 manifest and zip.

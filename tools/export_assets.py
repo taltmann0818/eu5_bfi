@@ -102,6 +102,7 @@ def main():
     small=ImageFont.truetype(str(font_path),30) if font_path.exists() else ImageFont.load_default()
     draw.text((45,770),'BANKING & FINANCE',font=title,fill=GOLD[:3]);draw.text((45,840),'AND TRADE COMPANIES',font=small,fill=PAPER[:3]);draw.text((45,930),'0.0.1_DEV',font=small,fill=GOLD[:3])
     export(thumb,MOD/'thumbnail.png','PNG thumbnail',ART.relative_to(ROOT).as_posix())
+    export(thumb,MOD/'.metadata/thumbnail.png','PNG local-mod browser thumbnail',ART.relative_to(ROOT).as_posix())
     (ROOT/'docs').mkdir(exist_ok=True)
     with (ROOT/'docs/asset_register.csv').open('w',newline='') as f:
         writer=csv.writer(f);writer.writerow(['export','master','width','height','format','rights']);writer.writerows(REG)
