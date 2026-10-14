@@ -1,6 +1,8 @@
-# First testing pass — not commenced
+# Florence testing and remaining acceptance work
 
-Authoring boundary: the user requested a complete write, PR, game launch and `BFI_dev` setup, then a stop **before in-game testing**. No new campaign, existing save, console event, time advance or P01–P12 probe is authorized by the setup step alone.
+The original setup stopped before gameplay as requested. The user subsequently authorized Florence campaign testing and repeatable PR checks on 14 October 2026. The focused engine suite is documented in [campaign_checks.md](campaign_checks.md); its deliberately limited coverage does not certify all P01–P12 probes or the full design plan.
+
+The final local run passed all **47 native-engine assertions**, twelve monthly periods and autosave reload, with no BFI-attributed errors under the suite's diagnostic scan. The [sanitized evidence](../tests/results/2026-10-14-florence-0.0.1_DEV.json) records the runtime SHA-256. Finance visibility and preserved native Credit were observed at 2560×1440. The selector, later-age positive paths and wider UI/multiplayer matrix below still require testing.
 
 Offline checks run before delivery:
 
@@ -11,7 +13,7 @@ Offline checks run before delivery:
 
 These are not native parser or campaign tests. Record engine load diagnostics separately from gameplay acceptance.
 
-After the user authorizes testing:
+Remaining broader acceptance checklist:
 
 1. Record displayed version/checksum, current build and CMF release. Freeze updates for the probe cycle.
 2. Start a disposable debug fixture, not a personal campaign. Establish a landed sovereign controlling its capital market, one native State Bank, a second independent bank and a native company when age permits.

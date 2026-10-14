@@ -1,6 +1,6 @@
 ﻿types BFLFinanceTypes {
-        type bfl_statement = widget { layoutpolicy_horizontal = expanding
-            vbox = { layoutpolicy_horizontal = expanding spacing = 3 text_single = { raw_text = "[Country.GetName]" autoresize = yes }
+        type bfl_statement = vbox { layoutpolicy_horizontal = expanding
+            spacing = 3 text_single = { raw_text = "[Country.GetName]" autoresize = yes }
 text_single = { raw_text = "Specialization (1 Merchant / 2 Overseas): [Country.MakeScope.GetVariable('bfl_profile').GetValue|2]" autoresize = yes }
 text_single = { raw_text = "Operating state (0–5): [Country.MakeScope.GetVariable('bfl_state').GetValue|2]" autoresize = yes }
 text_single = { raw_text = "Last processed month: [Country.MakeScope.GetVariable('bfl_last_period').GetValue|2]" autoresize = yes }
@@ -14,12 +14,12 @@ text_single = { raw_text = "Liabilities: [GuiScope.SetRoot(Country.MakeScope).Sc
 text_single = { raw_text = "Equity: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity')|2]" autoresize = yes }
 text_single = { raw_text = "Protected cash: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_protected_cash')|2]" autoresize = yes }
 text_single = { raw_text = "Free cash: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_free_cash')|2]" autoresize = yes }
- }
+
         }
-        type bfl_finance_section = widget {
+        type bfl_finance_section = vbox {
             layoutpolicy_horizontal = expanding
-            vbox = { spacing = 5 layoutpolicy_horizontal = expanding
-                button_regular = { size = { 100% 36 } text = "bfl_finance_title"
+            spacing = 5
+                button_regular = { size = { -1 36 } layoutpolicy_horizontal = expanding text = "bfl_finance_title" tooltip = "bfl_finance_title"
                     onclick = "[LateralView.Vars.Toggle('bfl_finance_expanded')]"
                 }
                 vbox = { layoutpolicy_horizontal = expanding spacing = 5
@@ -27,10 +27,12 @@ text_single = { raw_text = "Free cash: [GuiScope.SetRoot(Country.MakeScope).Scri
                     text_multi = { text = "bfl_no_bank" autoresize = yes layoutpolicy_horizontal = expanding
                         visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                     }
-                    scrollarea = { size = { 100% 320 }
+                    scrollarea = { size = { -1 320 } layoutpolicy_horizontal = expanding
+                        scrollbarpolicy_horizontal = always_off
+                        scrollbar_vertical = { using = Scrollbar_Vertical }
                         visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         scrollwidget = {
-                            vbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { text = "bfl_overview" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_overview_expanded')]" }
+                            vbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { text = "bfl_overview" tooltip = "bfl_overview" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_overview_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_overview_expanded')]"
         bfl_statement = { datacontext = "[GetPlayer]"
             visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -39,34 +41,34 @@ text_single = { raw_text = "Free cash: [GuiScope.SetRoot(Country.MakeScope).Scri
             visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
     text_multi = { text = "bfl_accounts_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
-button_regular = { size = { 100% 28 } text = "bfl_select_profile"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_select_profile" tooltip = "bfl_select_profile"
             enabled = "[GetScriptedGui('bfl_select_profile').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_select_profile').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
  }
-button_regular = { text = "bfl_deposits" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_deposits_expanded')]" }
+button_regular = { text = "bfl_deposits" tooltip = "bfl_deposits" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_deposits_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_deposits_expanded')]" text_multi = { text = "bfl_deposit_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
-button_regular = { size = { 100% 28 } text = "bfl_deposit_1"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_deposit_1" tooltip = "bfl_deposit_1"
             enabled = "[GetScriptedGui('bfl_deposit_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_deposit_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_deposit_2"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_deposit_2" tooltip = "bfl_deposit_2"
             enabled = "[GetScriptedGui('bfl_deposit_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_deposit_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_withdraw"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_withdraw" tooltip = "bfl_withdraw"
             enabled = "[GetScriptedGui('bfl_withdraw').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_withdraw').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_rate_0"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_rate_0" tooltip = "bfl_rate_0"
             enabled = "[GetScriptedGui('bfl_rate_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_rate_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_rate_1"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_rate_1" tooltip = "bfl_rate_1"
             enabled = "[GetScriptedGui('bfl_rate_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_rate_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_rate_2"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_rate_2" tooltip = "bfl_rate_2"
             enabled = "[GetScriptedGui('bfl_rate_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_rate_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
@@ -75,50 +77,50 @@ hbox = { spacing = 5
             text_single = { text = "bfl_term_deposit" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_treasury" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_treasury_expanded')]" }
+button_regular = { text = "bfl_treasury" tooltip = "bfl_treasury" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_treasury_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_treasury_expanded')]" text_multi = { text = "bfl_royalty_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
-button_regular = { size = { 100% 28 } text = "bfl_set_royalty_0"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_set_royalty_0" tooltip = "bfl_set_royalty_0"
             enabled = "[GetScriptedGui('bfl_set_royalty_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_set_royalty_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_set_royalty_1"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_set_royalty_1" tooltip = "bfl_set_royalty_1"
             enabled = "[GetScriptedGui('bfl_set_royalty_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_set_royalty_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_set_royalty_2"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_set_royalty_2" tooltip = "bfl_set_royalty_2"
             enabled = "[GetScriptedGui('bfl_set_royalty_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_set_royalty_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_set_royalty_3"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_set_royalty_3" tooltip = "bfl_set_royalty_3"
             enabled = "[GetScriptedGui('bfl_set_royalty_3').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_set_royalty_3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_set_royalty_4"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_set_royalty_4" tooltip = "bfl_set_royalty_4"
             enabled = "[GetScriptedGui('bfl_set_royalty_4').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_set_royalty_4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
 text_multi = { text = "bfl_dividend_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
-button_regular = { size = { 100% 28 } text = "bfl_payout_0"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_payout_0" tooltip = "bfl_payout_0"
             enabled = "[GetScriptedGui('bfl_payout_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_payout_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_payout_25"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_payout_25" tooltip = "bfl_payout_25"
             enabled = "[GetScriptedGui('bfl_payout_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_payout_25').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_payout_50"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_payout_50" tooltip = "bfl_payout_50"
             enabled = "[GetScriptedGui('bfl_payout_50').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_payout_50').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_facility_0"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_facility_0" tooltip = "bfl_facility_0"
             enabled = "[GetScriptedGui('bfl_facility_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_facility_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_facility_1"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_facility_1" tooltip = "bfl_facility_1"
             enabled = "[GetScriptedGui('bfl_facility_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_facility_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_facility_2"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_facility_2" tooltip = "bfl_facility_2"
             enabled = "[GetScriptedGui('bfl_facility_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_facility_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
@@ -127,7 +129,7 @@ hbox = { spacing = 5
             text_single = { text = "bfl_bond_underwriting" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_debt" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_debt_expanded')]" }
+button_regular = { text = "bfl_debt" tooltip = "bfl_debt" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_debt_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_debt_expanded')]" text_multi = { text = "bfl_debt_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
 hbox = { spacing = 5
             icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_sovereign_credit').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
@@ -150,7 +152,7 @@ hbox = { spacing = 5
             text_single = { text = "bfl_corporate_credit" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_goods" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_goods_expanded')]" }
+button_regular = { text = "bfl_goods" tooltip = "bfl_goods" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_goods_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_goods_expanded')]" text_multi = { text = "bfl_goods_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
 hbox = { spacing = 5
             icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commodity_inventory').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
@@ -169,7 +171,7 @@ hbox = { spacing = 5
             text_single = { text = "bfl_margining" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_ventures" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_ventures_expanded')]" }
+button_regular = { text = "bfl_ventures" tooltip = "bfl_ventures" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_ventures_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_ventures_expanded')]" text_multi = { text = "bfl_ventures_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
 hbox = { spacing = 5
             icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commenda').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
@@ -192,7 +194,7 @@ hbox = { spacing = 5
             text_single = { text = "bfl_bank_share_transfer" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_monetary" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_monetary_expanded')]" }
+button_regular = { text = "bfl_monetary" tooltip = "bfl_monetary" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_monetary_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_monetary_expanded')]" text_multi = { text = "bfl_monetary_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
 hbox = { spacing = 5
             icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commercial_bill').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
@@ -215,13 +217,13 @@ hbox = { spacing = 5
             text_single = { text = "bfl_public_backstop" autoresize = yes }
         }
  }
-button_regular = { text = "bfl_distress" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_distress_expanded')]" }
+button_regular = { text = "bfl_distress" tooltip = "bfl_distress" size = { -1 30 } layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('bfl_distress_expanded')]" }
         vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_distress_expanded')]" text_multi = { text = "bfl_dev_notice" autoresize = yes layoutpolicy_horizontal = expanding }
-button_regular = { size = { 100% 28 } text = "bfl_recapitalize_command"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_recapitalize_command" tooltip = "bfl_recapitalize_command"
             enabled = "[GetScriptedGui('bfl_recapitalize_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_recapitalize_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
-button_regular = { size = { 100% 28 } text = "bfl_suspend_command"
+button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_suspend_command" tooltip = "bfl_suspend_command"
             enabled = "[GetScriptedGui('bfl_suspend_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_suspend_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
@@ -230,6 +232,5 @@ button_regular = { size = { 100% 28 } text = "bfl_suspend_command"
                         }
                     }
                 }
-            }
         }
     }

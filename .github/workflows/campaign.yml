@@ -1,0 +1,43 @@
+name: Florence campaign functionality
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: euv-campaign-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  eligibility:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require a trusted branch for the licensed runner
+        env:
+          IS_FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        run: |
+          if [ "$IS_FORK" = "true" ]; then
+            echo '::error::Fork campaign runs require a maintainer to review the changes and run them from a trusted branch. No campaign pass has been issued.'
+            exit 1
+          fi
+  campaign:
+    needs: eligibility
+    runs-on: [self-hosted, Windows, X64, euv-1.4.1, cmf-2.5.0]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run real Florence campaign in an isolated user directory
+        shell: pwsh
+        run: ./tools/run_campaign.ps1 -Output tests/results/local -TimeoutSeconds 1200
+      - name: Upload sanitized assertion results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: florence-campaign-${{ github.run_id }}
+          path: |
+            tests/results/local/campaign.json
+            tests/results/local/campaign.xml
+            tests/results/local/manifest.json
+          if-no-files-found: error

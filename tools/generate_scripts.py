@@ -881,7 +881,7 @@ def gui_and_localization():
     loc('bfl_dividend_explanation','Only verified realized net earnings enter the dividend reserve. Losses and royalty costs are offset first. The sovereign receives its actual ownership share; principal and fresh funding never enter profits.')
     loc('bfl_deposit_explanation','Each account stores its accepted fixed annual rate. Changing the rate affects new accounts. Term accounts mature after 12 months. Withdrawal shortages remain liabilities and suspend new commitments.')
     def button(key):
-        return f'''button_regular = {{ size = {{ 100% 28 }} text = "{key}"
+        return f'''button_regular = {{ size = {{ -1 28 }} layoutpolicy_horizontal = expanding text = "{key}" tooltip = "{key}"
             enabled = "[GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('{key}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }}\n'''
@@ -893,7 +893,7 @@ def gui_and_localization():
             text_single = {{ text = "bfl_{instrument}" autoresize = yes }}
         }}\n'''
     def section(key,content):
-        return f'''button_regular = {{ text = "{key}" size = {{ 100% 30 }} onclick = "[LateralView.Vars.Toggle('{key}_expanded')]" }}
+        return f'''button_regular = {{ text = "{key}" tooltip = "{key}" size = {{ -1 30 }} layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('{key}_expanded')]" }}
         vbox = {{ spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('{key}_expanded')]" {content} }}\n'''
     bank_statement = '''
         bfl_statement = { datacontext = "[GetPlayer]"
@@ -919,13 +919,13 @@ def gui_and_localization():
         statement_rows += f'text_single = {{ raw_text = "{label}: [GuiScope.SetRoot(Country.MakeScope).ScriptValue(\'{value}\')|2]" autoresize = yes }}\n'
     write('in_game/gui/bfl_economy_finance.gui',f'''
     types BFLFinanceTypes {{
-        type bfl_statement = widget {{ layoutpolicy_horizontal = expanding
-            vbox = {{ layoutpolicy_horizontal = expanding spacing = 3 {statement_rows} }}
+        type bfl_statement = vbox {{ layoutpolicy_horizontal = expanding
+            spacing = 3 {statement_rows}
         }}
-        type bfl_finance_section = widget {{
+        type bfl_finance_section = vbox {{
             layoutpolicy_horizontal = expanding
-            vbox = {{ spacing = 5 layoutpolicy_horizontal = expanding
-                button_regular = {{ size = {{ 100% 36 }} text = "bfl_finance_title"
+            spacing = 5
+                button_regular = {{ size = {{ -1 36 }} layoutpolicy_horizontal = expanding text = "bfl_finance_title" tooltip = "bfl_finance_title"
                     onclick = "[LateralView.Vars.Toggle('bfl_finance_expanded')]"
                 }}
                 vbox = {{ layoutpolicy_horizontal = expanding spacing = 5
@@ -933,14 +933,15 @@ def gui_and_localization():
                     text_multi = {{ text = "bfl_no_bank" autoresize = yes layoutpolicy_horizontal = expanding
                         visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
                     }}
-                    scrollarea = {{ size = {{ 100% 320 }}
+                    scrollarea = {{ size = {{ -1 320 }} layoutpolicy_horizontal = expanding
+                        scrollbarpolicy_horizontal = always_off
+                        scrollbar_vertical = {{ using = Scrollbar_Vertical }}
                         visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         scrollwidget = {{
                             vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 {content} }}
                         }}
                     }}
                 }}
-            }}
         }}
     }}
     ''')
@@ -951,6 +952,8 @@ def gui_and_localization():
     for i,label in enumerate(['Light','Standard','Heavy','Exceptional'],1):
         loc(f'bfl_royalty_sovereign_{i}',label+' charter royalty')
         loc(f'bfl_royalty_bank_{i}',label+' charter royalty')
+        loc(f'STATIC_MODIFIER_NAME_bfl_royalty_sovereign_{i}',label+' charter royalty')
+        loc(f'STATIC_MODIFIER_NAME_bfl_royalty_bank_{i}',label+' charter royalty')
     cmm={
         'bfl_banking_finance_companies':'Banking, Finance and Trade Companies',
         'bfl_banking_finance_companies_desc':'Presentation settings only. Institution policy is managed in Economy.',

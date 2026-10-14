@@ -27,7 +27,7 @@ Only `.metadata`, `in_game`, `main_menu` and `thumbnail.png` are packaged. Sourc
 
 Use EUV's current Mod Tools / local-mod directory selection to register the repository's `mod/bfl` folder (or a staged copy). Create `BFI_dev`, enable **Community Mod Framework 2.5.0** followed by **Banking, Finance and Trade Companies — 0.0.1_DEV**, and disable every other mod in that playset. Existing playsets and saves should remain available. Do not install into the game's content or Workshop cache.
 
-The [acceptance checklist](docs/acceptance.md) defines the first tests. **No campaign has been started, loaded or advanced as part of authoring this version.** Game launch and playset setup are separate from authorizing those tests.
+The user subsequently authorized a disposable Florence campaign. The [campaign suite](docs/campaign_checks.md) runs real engine assertions and twelve monthly settlements, then reloads its own autosave. A separate PR workflow requires a licensed Windows EUV/CMF runner; offline CI continues on GitHub-hosted runners. The [acceptance checklist](docs/acceptance.md) distinguishes this focused banking regression pass from the remaining full-plan probes.
 
 ## Artwork and provenance
 
