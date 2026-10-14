@@ -265,6 +265,13 @@ def charter():
     ''')
     loc('bfl_no_automatic_tribute','No automatic charter tribute')
     loc('bfl_no_automatic_tribute_cost_modifier','Automatic charter tribute cost')
+    loc('MODIFIER_TYPE_NAME_bfl_no_automatic_tribute_cost_modifier','Automatic charter tribute cost')
+    loc('MODIFIER_TYPE_DESC_bfl_no_automatic_tribute_cost_modifier','Adjusts the charter relationship’s automatic payment price. The charter price is zero; the bank’s separately funded royalty is processed in its own accounts.')
+    write('main_menu/common/modifier_icons/bfl_price_icons.txt','''
+    bfl_no_automatic_tribute_cost_modifier = {
+        positive = "gfx/interface/icons/bfl/royalty.dds"
+    }
+    ''')
     common('government_reforms','charter_reform','''
     bfl_state_chartered_bank = {
         major = no
