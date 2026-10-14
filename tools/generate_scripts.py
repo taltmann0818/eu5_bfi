@@ -257,6 +257,14 @@ def permissions():
 
 def charter():
     common('prices','prices','bfl_no_automatic_tribute = { gold = 0 }')
+    write('main_menu/common/modifier_type_definitions/bfl_price_modifiers.txt','''
+    bfl_no_automatic_tribute_cost_modifier = {
+        percent = yes
+        game_data = { category = country }
+    }
+    ''')
+    loc('bfl_no_automatic_tribute','No automatic charter tribute')
+    loc('bfl_no_automatic_tribute_cost_modifier','Automatic charter tribute cost')
     common('government_reforms','charter_reform','''
     bfl_state_chartered_bank = {
         major = no
@@ -361,7 +369,7 @@ def charter():
     for p,label in [(1,'merchant'),(2,'overseas')]:
         events += f'''option = {{
             name = bfl_finance.100.{label}
-            ai_chance = {{ value = 50 }}
+            ai_chance = {{ base = 50 }}
             if = {{
                 limit = {{ exists = scope:bfl_bank scope:bfl_bank = {{ var:bfl_profile = 0 OR = {{ this = root is_subject_of = root }} }} }}
                 scope:bfl_bank = {{ set_variable = {{ name = bfl_profile value = {p} }} set_variable = bfl_choice_complete set_variable = {{ name = bfl_accept_deposits value = 1 }} }}
@@ -375,12 +383,12 @@ def charter():
     for i in range(1,9):
         events += f'''option = {{ name = bfl_finance.110.bank_{i:02}
             trigger = {{ exists = var:bfl_candidate_{i:02} }}
-            ai_chance = {{ value = 10 }}
+            ai_chance = {{ base = 10 }}
             var:bfl_candidate_{i:02} = {{ save_scope_as = bfl_bank }}
             bfl_commit_charter = yes
         }}\n'''
         loc(f'bfl_finance.110.bank_{i:02}',f"[ROOT.GetCountry.MakeScope.GetVariable('bfl_candidate_{i:02}').GetCountry.GetName]")
-    events += 'option = { name = bfl_cancel ai_chance = { value = 0 } }\n}\n'
+    events += 'option = { name = bfl_cancel ai_chance = { base = 0 } }\n}\n'
     write('in_game/events/bfl_finance/bfl_specialization.txt', events)
     loc('bfl_establish_chartered_bank','Establish a State Chartered Bank')
     loc('bfl_establish_chartered_bank_desc','Convert one existing State Bank in place. The current-age investment of 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold is transferred to its treasury as state equity. You must own your capital market. Select a bank before any payment occurs.')
