@@ -3,9 +3,13 @@
 
 Prepared 14 October 2026. Namespace: `bfl_`; event namespace: `bfl_finance`.
 
+Revised 14 October 2026: Community Mod Framework (CMF) is a required dependency. Banking and finance management is embedded in the existing Economy panel; the mod adds no action bar or separate finance launcher.
+
 This is the engineering companion to the supplied [feature and implementation plan](<C:/Users/Thomas Altmann/Downloads/EUV_Banking_Finance_Trade_Companies_Implementation_Plan.md>). It describes the files to author, persistent records, transaction services, native integrations, interface, graphics, FX, and verification required to build the complete mod. It is a specification, not an executable mod or a claim of campaign validation.
 
 The attachment is the source of feature requirements. Its illustrative script and references are design material to evaluate against the installed game. This document preserves the one-bank charter architecture, two exclusive profiles, all three treasury channels, native debt, native companies, and the stated research gates.
+
+The later interface requirement supersedes the attachment's optional-framework recommendation: use CMF's shared services and keep the native economy interface as the player's management surface. CMF's Community Mod Menu (CMM) holds presentation preferences; institution accounts and financial commands remain in the Economy panel and the mod's accounting services.
 
 **Evidence labels used below:** **Local** means inspected in this installation; **Published** means described in public documentation; **Design** means a proposed mod implementation; **Probe** means engine behavior still requiring an experiment. Code marked **skeleton** combines native patterns with mod services that must be written; it must not be copied into a release as a complete implementation.
 
@@ -44,6 +48,8 @@ The attachment is the source of feature requirements. Its illustrative script an
 | Workshop subscription cache, read only | `C:\Program Files (x86)\Steam\steamapps\workshop\content\3450310` |
 | User data and existing logs | `C:\Users\Thomas Altmann\Documents\Paradox Interactive\Europa Universalis V` |
 | Installed uploader | `C:\Users\Thomas Altmann\Downloads\release-windows-gui-amd64` |
+| Installed CMF, read only | `C:\Program Files (x86)\Steam\steamapps\workshop\content\3450310\3692202776` |
+| CMF baseline | Release `2.5.0`; metadata targets `1.4.*` and records `cmf_last_updated_game_version = 1.4.0` |
 | Steam application | `3450310` |
 | Steam manifest at inspection | `buildid = 25606497`; `BetaKey = 1.4-open-beta` |
 
@@ -72,6 +78,8 @@ All paths in this table are relative to `GAME`.
 | `in_game/common/scripted_guis/scripted_guis.info` | Scripted GUI supports `saved_scopes`, availability checks, effects, and AI fields. Native economy GUI demonstrates `GetScriptedGui(...).Execute(GuiScope...)`. |
 | `main_menu/gui/scripted_widgets/_scripted_widgets.info` | A text registry can mount an external GUI widget without replacing a large native window. Registered widget visibility must evaluate a function. |
 | `main_menu/common/modifier_type_definitions/00_modifier_types.txt` | Burgher target satisfaction is a percentage field. Subject loyalty is numeric. `bond_interest` is a percentage with a declared minimum of `0.01`. Test actual coupon units and clamping before specifying a low rate. |
+| Installed CMF `.metadata/metadata.json`, `in_game/common/on_action/cmf_on_actions.txt` | CMF 2.5.0 supplies registration, load/transfer, and human-player lifecycle hooks. These supplement the all-institution accounting scheduler. |
+| Installed CMF `in_game/gui/vanilla/` and published extraction coverage | No extracted economy GUI or economy injection slot was found. An explicit, versioned `economy_lateralview.gui` override is required; CMF does not make same-widget overrides automatically composable. |
 
 ### 1.3 Native behavior that must be proved
 
@@ -92,6 +100,7 @@ Create a small development-only probe mod before the production adapters. Use tw
 | P09 goods | Can a bank purchase/sell at its capital and permitted branch custody? Does requested amount equal executed amount? | Stockpile, cash, price, and capital/access semantics measured. |
 | P10 scheduling | Where are native budget and coupon processing relative to monthly country pulses? | One documented cutoff and one owner for pair settlement; no double monthly execution. |
 | P11 native commands | Can native loan takeover, bonds, trade creation, and exploration be dispatched by the subject actor? | Subject, rather than controller, owns the financial action and pays its cost. |
+| P12 CMF/economy integration | Do CMF 2.5.0 registration/load hooks and the economy override preserve native controls, data contexts, templates, and multiplayer authority? | Finance is usable inside the existing Economy view; native tabs/budgets still work; no BFL action-bar element, launcher, or duplicate settlement. |
 
 If genuine bank-funded native bonds or current-holder payment routing cannot be achieved with exposed scripting, that required integration remains blocked. Do not implement an ordinary loan under a bond label, synthetic duplicate coupons, or an outside-funded bond plus an unexplained bank debit. Document the engine limitation and keep its adapter disabled until resolved. This is a development feasibility gate, not a request for further design approval.
 
@@ -107,9 +116,10 @@ EU5_BFI/
   README.md
   docs/
     baseline.json                    # branch/build/version/checksum and source hashes
-    native_capabilities.md           # P01-P11 results and measured signatures
+    native_capabilities.md           # P01-P12 results and measured signatures
     ledger_schema.md                 # enums, fields, owners, units and migrations
     overrides.csv                    # native keys touched, reasons, hashes, patch
+    cmf_integration.md               # tested CMF release, hooks, settings and GUI ownership
     acceptance.md                    # fixtures, evidence, pass/fail
     balance.md                       # tuning scenarios and results
     asset_register.csv               # artwork, source, license, export and consumer
@@ -125,6 +135,7 @@ EU5_BFI/
     ledger_reference.py              # offline transaction arithmetic model
     stage_release.ps1                # copies explicit allowlist to dist/
     compare_native.ps1               # read-only hashes/diffs against pinned build
+    build_economy_gui.py              # pinned economy definitions + minimal panel insertion
   tests/
     accounting/                      # offline sequences and rounding fixtures
     fixtures/                        # age/profile/scenario setup descriptions
@@ -193,6 +204,8 @@ EU5_BFI/
           bfl_resolution.txt
           bfl_migrations.txt
           bfl_generated_slots.txt
+          bfl_cmf_registration.txt
+          bfl_cmf_alerts_and_log.txt
         scripted_guis/
           bfl_navigation.txt
           bfl_account_commands.txt
@@ -200,7 +213,9 @@ EU5_BFI/
           bfl_investment_commands.txt
           bfl_company_commands.txt
           bfl_resolution_commands.txt
-        on_action/bfl_hooks.txt
+        on_action/
+          bfl_hooks.txt                # all-institution/native financial callbacks
+          bfl_cmf_hooks.txt            # CMF registration, load, player transfer and UI refresh
         customizable_localization/bfl_finance_text.txt
       events/bfl_finance/
         bfl_specialization.txt
@@ -209,17 +224,18 @@ EU5_BFI/
         bfl_notifications.txt
         bfl_migration_choices.txt
       gui/
-        bfl_finance_window.gui
+        economy_lateralview.gui        # explicit native-path override; finance stays inside
+        bfl_economy_finance.gui         # finance section types/templates, no top-level window
         bfl_finance_components.gui
-        bfl_finance_launcher.gui
-        bfl_company_window.gui
+        bfl_company_sections.gui       # company detail content hosted by economy section
+        vanilla/bfl_economy_vanilla_types.gui  # only while CMF lacks economy extraction
     main_menu/
       common/
         static_modifiers/bfl_financial_modifiers.txt
         game_concepts/bfl_finance_concepts.txt
         modifier_icons/bfl_finance_icons.txt
         named_colors/bfl_finance_colors.txt
-      gui/scripted_widgets/bfl_finance_widgets.txt
+      gui/cmf_dependency_check.gui      # release-matched CMF dependency popup template
       gui_animations/bfl_finance_animations.json
       localization/english/
         bfl_core_l_english.yml
@@ -228,6 +244,7 @@ EU5_BFI/
         bfl_events_l_english.yml
         bfl_gui_l_english.yml
         bfl_tooltips_l_english.yml
+        bfl_cmf_l_english.yml           # CMM preferences, CMF alerts and log entries
       gfx/interface/
         icons/bfl/                    # directly referenced GUI textures
         icons/subject_types/bfl_chartered_bank.dds
@@ -244,6 +261,8 @@ Folder assignment follows the inspected load stages: gameplay in `in_game`, reus
 
 The warehouse is the only proposed new gameplay building. Omit its definition and production-method files if existing native warehouse custody is sufficient after P09. Optional model/particle directories ship only when their verified consumers exist. No setup/history override is required to initialize existing banking countries and companies dynamically.
 
+The economy override keeps the native filename and widget identity deliberately. Its extracted vanilla definitions preserve native identifiers; new finance types use `bfl_` identifiers. There is no finance scripted-widget launcher registry. See section 17 for the CMF coverage boundary and the build rule that prevents duplicate extracted definitions.
+
 ### 2.2 Metadata and file writing
 
 Metadata follows the [community toolkit's EU5 example](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-toolkit/blob/main/.metadata/metadata.json). This is a template; replace the version placeholder after testing.
@@ -257,7 +276,15 @@ Metadata follows the [community toolkit's EU5 example](https://github.com/Europa
   "supported_game_version": "<tested semantic version>",
   "short_description": "Banks, chartered sovereign finance and native trade-company investment.",
   "tags": ["Trade and Economics", "Government and Estates", "Gameplay"],
-  "relationships": [],
+  "relationships": [
+    {
+      "rel_type": "dependency",
+      "id": "community_mod_framework",
+      "display_name": "Community Mod Framework",
+      "resource_type": "mod",
+      "version": "2.*"
+    }
+  ],
   "game_custom_data": {}
 }
 ```
@@ -266,11 +293,31 @@ Use UTF-8 with BOM for game script/GUI/localization files where required by the 
 
 Do not put `.metadata` below `in_game`, add an EU4 `descriptor.mod` as the assumed discovery mechanism, or copy the whole game folder. Package new keys and narrowly required compatibility edits only. Generator output is committed or reproducibly built before packaging; Python is never needed by the running game.
 
+### 2.3 CMF dependency and integration contract
+
+Declare CMF using the [framework's dependency metadata](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework#getting-started), and add [CMF Workshop item 3692202776](https://steamcommunity.com/sharedfiles/filedetails/?id=3692202776) as a required item on the eventual mod page. The declared `2.*` relationship identifies the framework API family; the initial audit baseline and in-game test target is **2.5.0**, not an assertion that every 2.x release works. Verify resolved playset order with CMF active and BFL's native-path economy override winning its intended file. Successful runtime compatibility remains a P12 acceptance requirement.
+
+Pin the installed release's metadata and relevant source hashes alongside the game baseline. At this audit, GitHub `main` at commit `38fe85623ada459207adc73fe8acffcd039e71ba` described a `2.4.1` development package for `1.3.*` with ID `community_mod_framework.dev`, while the installed Workshop release was `2.5.0` with ID `community_mod_framework`. Do not install that development package as though it were the target dependency or use mutable wiki examples to override inspected 1.4 hook definitions.
+
+Use CMF concretely for:
+
+- Idempotent registration through `cmf_on_mod_registration` and public CMM setting effects for presentation preferences.
+- Verified post-lobby/load/player-transfer hooks to rebuild navigation and UI-derived state.
+- Existing alert-bar notifications that open the native `economy` view.
+- Shared action-log entries for meaningful completed financial/policy actions.
+- Its established vanilla-definition extraction approach when maintaining the economy override, subject to the missing-coverage rule in section 17.
+
+Do not call `cmf_add_action_bar_element`, register a BFL action-bar button, replace the topbar, or expose a separate finance launcher/window. Optional CMF features used by other mods do not change BFL's entry point. CMM settings must not hold deposits, portfolios, profile choice, royalty policy, or bank-facility state.
+
+Include the release-matched, self-contained `main_menu/gui/cmf_dependency_check.gui` template described by the [CMF dependency-popup documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup); retain its required identifiers/license and audit any front-end conflict. Missing CMF is an unsupported dependency state, not permission to create a fallback action bar. Do not bundle CMF's full runtime or edit its subscribed installation; distribute the declared dependency and only the documented helper template.
+
 ## 3. Script conventions and native adapters
 
 ### 3.1 Naming and service boundaries
 
 Every mod database key, variable, effect, trigger, script value, widget, and localization key starts with `bfl_`. Use event IDs such as `bfl_finance.100` with `namespace = bfl_finance`. Refer to native objects through their existing identifiers: `subject_type:state_bank`, `government_reform:banking_country`, native good keys, ages, buildings, and companies.
+
+Preserved native economy definitions and the official CMF dependency-helper identifiers are explicit exceptions to renaming: retain their required keys to preserve framework/native consumers. Do not replace CMF core effects, CMM storage, or private `_cmf_`/`_cmm_` implementations. Extend documented hooks only by appending BFL child hooks.
 
 Write `bfl_roles.txt` with an explicit classification order: native trade company first; valid chartered bank second; unchartered native State Bank third; independent banking country last. Independent banking requires building-country identity, the native banking reform, and **no subject relationship**, not merely absence of the two bank subject types. Unchartered State Banks keep native operations and obligation servicing; they do not receive expanded charter authorization before the decision. Other bank arrangements require a separately audited eligibility rule.
 
@@ -393,7 +440,7 @@ Net treasury change is not profit: it includes construction, wars, borrowing, na
 
 ### 5.1 Bootstrap and migration
 
-`bfl_bootstrap.txt` performs a guarded discovery pass at a verified game-start/load hook, with bounded country-pulse registration as fallback. Register an eligible existing bank or native company once; derive opening capital from real cash/assets/liabilities without granting money. Newly spawned native Fugger/Welser-style banks are detected through their banking role. Do not modify their founding events solely to add duplicate startup cash.
+`bfl_bootstrap.txt` performs a guarded discovery pass on the installed 1.4 native `on_game_started_after_lobby` hook and the CMF `on_game_load_after_lobby` hook, both no-scope entry points. Attach BFL child hooks in `bfl_cmf_hooks.txt`; use bounded country-pulse registration for later-created institutions. Register an eligible existing bank or native company once; derive opening capital from real cash/assets/liabilities without granting money. Newly spawned native Fugger/Welser-style banks are detected through their banking role. Do not modify their founding events solely to add duplicate startup cash. Exclude CMF's storage country `c:CMF`; no financial ledger belongs on that framework country.
 
 Use `bfl_schema` migrations in ascending order. Migrate an obsolete Sovereign Finance profile to one pending choice between Merchant and Overseas, preserving debts, balances, research, and capital. Existing valid choices persist. Mark completion so reload cannot offer a repeatable respecialization.
 
@@ -402,6 +449,19 @@ On charter conversion retain the original bank's records. On inherited out-of-pr
 ### 5.2 Hooks and scheduler
 
 `in_game/common/on_action/bfl_hooks.txt` attaches mod child hooks to native callbacks. Verify additive merge behavior before release; if a native hook requires explicit replacement, preserve all native children and list the override. Native `.info` warns that an on-action effect and its event list are separate chains; do not rely on one to initialize data used concurrently by the other.
+
+`bfl_cmf_hooks.txt` handles CMF integration separately. Registration can run repeatedly and on CMF's storage country: it registers presentation settings, never grants charter investment, selects a profile, accrues interest, or pays money. Use the installed 2.5.0 hooks as authoritative; its comments deprecate `on_game_start_after_lobby` in favor of native `on_game_started_after_lobby` on EU5 1.4. The similarly named hooks are not interchangeable.
+
+| Hook | BFL responsibility | Scope/boundary |
+| --- | --- | --- |
+| `cmf_on_mod_registration` | Re-register CMM presentation preferences; configure available notification routes idempotently | Country; may be framework storage country. No finance initialization/settlement. |
+| `on_game_started_after_lobby` | Once-per-new-game institutional discovery and schema setup | Native 1.4 no-scope hook used by CMF; preserve its existing child chain. |
+| `on_game_load_after_lobby` | Existing-save migration/reconciliation and safe navigation rebuild | CMF no-scope hook; loading does not pay a period twice. |
+| `cmf_on_country_transfer` | Clear/re-resolve the active player's economy-panel bank selection | New player country, with `scope:old_country`/`scope:new_country`; do not move institutions' ledgers with the player. |
+| `cmf_monthly_human_country_pulse` | Human-facing alert eligibility and derived summary refresh | Human countries only; never the authoritative AI/subject-bank settlement scheduler. |
+| `cmf_on_callback` | Handle changed presentation settings or notification callbacks | Filter the exact BFL callback key and repeat authority checks for any command. |
+
+CMF transfers CMM preferences when a player changes country. It must not transfer bank portfolios, deposits, notes, profile, or company ownership to that player's new country. Native annexation/overlord-change callbacks remain necessary; a player-country transfer hook is not a universal subject-relationship callback.
 
 **Native-pattern skeleton:**
 
@@ -412,6 +472,17 @@ monthly_country_pulse = {
 bfl_monthly_accounts = {
     trigger = { bfl_has_servicing_accounts = yes }
     effect = { bfl_process_accounts = yes }
+}
+
+# Separate file: bfl_cmf_hooks.txt
+cmf_on_mod_registration = {
+    on_actions = { bfl_on_cmf_registration }
+}
+bfl_on_cmf_registration = {
+    effect = { bfl_register_cmf_presentation = yes }
+}
+cmf_monthly_human_country_pulse = {
+    on_actions = { bfl_refresh_human_finance_alerts }
 }
 ```
 
@@ -466,7 +537,7 @@ Investment script value: base 500 gold multiplied by the **current native age**:
 
 `bfl_commit_charter` validates everything first, debits sovereign and credits bank once, records equity at an explicit subscription valuation, changes the same bank's subject type, binds controller/bank, grants reform, initializes treasury policy, and requests specialization only if absent. Native existing assets and minority ownership must be valued rather than overwritten to give the sovereign a fictitious 100% stake.
 
-There is no second decision `price` debit, reform activation cost, or new bank creation. If the current framework requires a price mechanism, use exactly one measured debit authority and a matching bank credit; demonstrate full-transfer accounting in P01.
+There is no second decision `price` debit, reform activation cost, or new bank creation. If the native decision loader requires a price mechanism, use exactly one measured debit authority and a matching bank credit; demonstrate full-transfer accounting in P01. CMF registration/settings never charge the investment.
 
 ### 6.2 Chartered subject and reform
 
@@ -955,18 +1026,37 @@ Model contagion through real exposures: defaulted company assets reduce bank equ
 
 ## 17. GUI, interactions, localization, and AI
 
-### 17.1 Mounting and authority
+### 17.1 Existing Economy panel integration and authority
 
-Use the inspected scripted-widget registry for a small finance launcher and the mod windows. Registry example, subject to the cross-stage mount probe:
+The primary flow is **open the existing Economy panel → expand Banking & Finance → use its inline sections**. Keep the native `economy` lateral-view route, `economy_lateralview` widget/name, header, economic summary, graph, and Balance/Credit/Markets/Trade Policies/Trades navigation. Add a compact bank/treasury summary and expandable finance content within the existing economy body. This is a section of that panel, not a new lateral-view route, standalone window, global navigation row, or CMF action-bar element.
+
+Place the `bfl_finance_section` instance inside the native `blockoverride "panel_content"` inner layout, after the native overview/graph and before the native `balance_subheader` budget region. Keep its default collapsed height small; expanded details use bounded internal scrolling and accordion rows so taxes, minting, expenses, native loans, and existing economy navigation remain usable. Bank/company selectors live inside the section. Company details render there through `bfl_company_sections.gui`.
+
+**The inspected CMF release does not provide an economy-tab registration effect or an economy injection slot.** The [CMF override guide](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Improved-Vanilla-Top-Level-Widget-Overrides) explains its extracted-definition approach; economy is absent from the inspected coverage. Implement this concrete ownership arrangement:
+
+1. `mod/bfl/in_game/gui/economy_lateralview.gui` replaces the native file at the same path. Preserve the complete native top-level lateralview and make only the finance-section insertion. Record this explicit override and its baseline hash.
+2. `in_game/gui/vanilla/bfl_economy_vanilla_types.gui` contains the pinned native `EconomyLateralviewTypes` types and native templates extracted from the original file. Keep `economy_main_tabs`, `EstateIncomeBreakdownTooltip`, and other native definitions unchanged so Credit and other consumers still resolve them. Remove those definitions from the replacement file to avoid two copies.
+3. `in_game/gui/bfl_economy_finance.gui` defines the new `bfl_` section/row types and local layout; instantiate those types directly from the economy override. It contains no separately mounted top-level finance window.
+4. Preserve file-scoped `@` constants wherever each generated file needs them. Do not assume moving a constant into the helper makes it visible inside the replacement lateralview file.
+5. `tools/build_economy_gui.py` generates the split deterministically from the pinned native file, verifies the insertion anchor and native definition manifest, and refuses an unknown/changed upstream structure. It does not edit the installed game or CMF Workshop files.
+
+If a future tested CMF release adds economy extraction, use that release's matching definitions and omit the BFL vanilla helper. The build must select exactly one owner of each native type/template; shipping both extraction sets causes duplicate definitions. Follow the upstream coverage process only as a later compatibility improvement, not an unfulfilled prerequisite for the initial design.
+
+This arrangement uses CMF services and its extraction pattern while owning a real economy-file override. It does not solve conflicts with another mod replacing the same economy widget: use one reviewed combined override/compatibility patch that includes both changes. Do not claim that merely requiring CMF enables automatic merging.
+
+**Layout skeleton; native surrounding content must be retained:**
 
 ```text
-# main_menu/gui/scripted_widgets/bfl_finance_widgets.txt
-gui/bfl_finance_launcher.gui = bfl_finance_launcher
+# The finance section instance goes within the existing economy body.
+# All bfl_* types are authored in bfl_economy_finance.gui.
+bfl_finance_section = {
+    name = "bfl_finance_section"
+}
 ```
 
-Define that named widget in `in_game/gui/bfl_finance_launcher.gui`. Its `visible` expression must return a function result, per the installed `_scripted_widgets.info`; literal `visible = yes` is not sufficient for this mounting path. Bind visibility to tested role/reform GUI accessors. A core gameplay mod must not depend on an unexamined third-party menu framework. If an optional framework integration is later offered, make it a separate compatibility component.
+Use local presentation variables following the native graph control's pattern, for example `LateralView.Vars.Toggle('bfl_finance_expanded')` and `LateralView.Vars.Exists('bfl_finance_expanded')`. The existing native `OpenLateralView('economy')` route remains the entry point. Do not invent a new engine tab enum or `cmf_register_economy_tab` call. Never globally override `economy_main_tabs` merely to add finance; it is shared by other native economy views.
 
-Independent mode resolves root/player as the bank. Charter mode resolves player/controller → live designated direct charter bank. Window title always shows financial actor and controller. Every command re-resolves the institution and validates direct relationship/reform/profile/research/state/funds. Financial mutation belongs to the bank; controller commands authorize policy, guarantees, and sovereign monetary actions.
+Independent mode resolves player as bank. Charter mode resolves player/controller → live designated direct charter bank. The inline header always identifies the financial actor, controller, specialization, state, and cash/reserve basis. Keep native `Player`/`EconomyView` context on all vanilla content; scope bank data only inside finance child widgets. The government's native budget must not change its displayed actor to the bank. Every command re-resolves authority, relationship/reform/profile/research/state/funds. Financial mutation belongs to the bank; controller commands authorize policy, guarantees, and sovereign monetary actions.
 
 **Scripted-GUI skeleton for a controller policy preset:**
 
@@ -989,9 +1079,9 @@ This uses the locally observed `Execute/GuiScope.SetRoot(...).End` pattern. The 
 
 GUI selection, sorting, pagination, expansion, and hover are presentation state. Read-only widgets and tooltips cannot initialize accounts, settle money, or repeatedly execute effects through animation callbacks. Synchronized commands handle game-state changes; multiplayer testing verifies the command actor and any selected targets.
 
-### 17.2 Required screens
+### 17.2 Required in-panel sections
 
-| Screen/file consumer | Display and actions |
+| Embedded section/file consumer | Display and actions |
 | --- | --- |
 | Overview/accounts | Native cash; protected/free cash; asset carrying values; deposits/notes; capital; profile; state; last accounting cutoff; deposits/withdrawal queue; bank rates. |
 | Treasury Funding | Tier, political costs, royalty due/paid/deferred; activity reserves/payout ratios; holder share; facility modes/targets/limits; actual bond draws; coupon forecast; redemptions; native/outside-held debt. |
@@ -1004,7 +1094,7 @@ GUI selection, sorting, pagination, expansion, and hover are presentation state.
 
 Use shared row types in `bfl_finance_components.gui`; keep display calculations in pure script values/accessors. Cache only read-only statement snapshots at the accounting cutoff. Native data remains current for command validation. Display a “stale quote” reason when a row's revision differs.
 
-Initial window design: resizable/scaled panel with scrollable tab body, persistent actor/profile/state header, and fixed cash/reserve summary. Use the game's existing layout widgets/fonts, not baked text inside art. Support 1280×720 minimum fixture, 1920×1080, 2560×1440, ultrawide, and UI-scale extremes; long tooltips and translated labels must wrap without hiding execution buttons.
+Use the native Economy panel's width, scaling, open/close controls, layout widgets, and fonts. Expand a local section or select an inline detail page rather than adding another row of global navigation buttons. The finance summary remains visible when details collapse; closing Economy closes its finance content. Do not persist a screen selection as sovereign policy or move it into a shared/global simulation variable. Support 1280×720 minimum fixture, 1920×1080, 2560×1440, ultrawide, and UI-scale extremes; long tooltips and translated labels must wrap without hiding native or financial controls.
 
 ### 17.3 Interaction and event writing
 
@@ -1041,6 +1131,42 @@ Controller AI selects royalty tier against loyalty/capital costs and debt-servic
 
 Review a bounded number of candidates per institution per period, stagger heavier reviews across periods, and retain cooldowns. Avoid all-banks × all-countries or global order-book searches each month. Stable tie-breaking and synchronized randomness preserve deterministic multiplayer behavior.
 
+### 17.6 CMF settings, alerts, and action log
+
+`bfl_cmf_registration.txt` registers CMM **presentation preferences** through public CMF/CMM effects. A reduced-motion toggle, expanded activity-detail preference, and finance-notification preference are appropriate. Royalty tiers, payout ratios, bond policy, bank rates, contract acceptance, and monetary authority remain Economy-panel financial commands and canonical `bfl_` records, never CMM settings or resettable preferences.
+
+**Installed 2.5.0 registration-call skeleton:**
+
+```text
+bfl_register_cmf_presentation = {
+    cmm_register_bool_setting = {
+        mod_id = bfl_banking_finance_companies
+        setting_id = reduced_motion
+        tab_id = presentation
+        group_id = interface
+        default_value = 0
+    }
+}
+```
+
+The inspected public setting effect registers its containing group/tab/mod implicitly. Supply the required generated CMM localization keys, including the mod name/description, presentation tab/group, and setting label/description; use the release-matched CMM schema for exact key composition. Registration is safe to repeat and must not reset existing choices. Read setting values through the tested CMM accessor contract and convert them into presentation behavior; do not call private `_cmm_` internals or assume player-country preferences describe subject-bank policy. CMF's `is_host` helper is relevant to any later global debug settings, not a substitute for landed-controller authorization.
+
+`bfl_cmf_alerts_and_log.txt` exposes wrappers around installed CMF alert and log APIs. Show a finance alert only for a human with current authority over the affected institution; update on a meaningful new/changed condition and remove when the condition clears. Suitable cases: deposit withdrawal restriction, facility blocked by cash/capacity, imminent contractual settlement, guarantee call, and resolution requiring player action. Reconcile stale alerts after load/controller change. Respect CMF dismiss/mute behavior; a notification preference does not cancel the underlying obligation.
+
+**Installed alert routing example, in the authorized human country scope:**
+
+```text
+cmf_set_alert_open_view = {
+    alert = bfl_liquidity_warning
+    view = economy
+}
+cmf_show_alert = { alert = bfl_liquidity_warning }
+```
+
+Gate repeated show calls by the wrapper's condition/state transition or verified active-alert membership. Clicking opens the existing Economy view, whose finance summary shows the problem; inline expansion is presentation-only. Do not route to a separate finance window or register an action-bar shortcut. Selecting a precise local subsection from an alert requires a separately proven UI callback; opening Economy itself is the source-backed route to validate in P12.
+
+After a successful transaction/policy change, call `cmf_log`, `cmf_log_with_scope_args`, or the installed `cmf_log_decimal_value` from the appropriate actor country scope, with localized BFL action keys. Log charter commitment, accepted debt resale, significant policy changes, and rescue/resolution decisions; avoid flooding the shared log with every accrual or GUI refresh. Log only committed facts and use transaction stamps to prevent duplicates. CMF's log is an inspectable history, not the financial ledger or the authority for native payments.
+
 ## 18. Graphics and FX production
 
 ### 18.1 Visual direction and verified native sizes
@@ -1068,7 +1194,8 @@ Create editable masters under `assets_source`, export only runtime textures into
 | --- | --- | --- |
 | Charter identity | `bfl_chartered_bank.dds`, 128×128 subject icon; `bfl_state_chartered_bank.dds`, 64×90 reform illustration | Banking seal/institution facade; readable silhouette; match consumer alpha/format. |
 | Profile identity | `merchant_finance.dds`, `overseas_investment.dds` under `icons/bfl/` | 128×128 transparent masters/exports, legible at small header size. |
-| Navigation | About eight icons: accounts, treasury, debt, custody, ventures, companies, monetary, distress/research | 128×128 BC3 proposed exports, usually displayed at 20–32 px. Reuse native motifs by reference where adequate. |
+| Inline section labels | About eight icons: accounts, treasury, debt, custody, ventures, companies, monetary, distress/research | 128×128 BC3 proposed exports, usually displayed at 20–32 px beside accordion/section labels inside Economy. These are not action-bar or topbar icons. Reuse native motifs by reference where adequate. |
+| CMF finance alerts | Liquidity, blocked funding, settlement, guarantee, resolution symbols as needed | Follow CMF 2.5.0 alert localization/texture contract; reuse suitable native/BFL status art and the framework's alert rendering. Alert clicks open Economy. |
 | Actions/instruments | Deposit, withdraw, subscribe, share transfer, loan, bond, takeover, resale, redeem, royalty, dividend, receipt, forward, commenda, note, collateral/liquidity | About 16 reusable symbols under `icons/bfl/`; consistent outlines, transparent padding, no embedded text/numbers. |
 | Operating states | Six icons for operating/stressed/restricted/insolvent/resolving/closed; plus locks/security badges as needed | Distinct silhouettes and labels, visible on parchment in grayscale. |
 | Advances | 18 custom advance icons in `gfx/interface/advance/` | 256×256 BC3 matching the local advance reference. Filename equals `icon` value plus `.dds`, e.g. `bfl_commenda.dds`; no doubled namespace. |
@@ -1106,7 +1233,7 @@ For illustrations, preserve focal characters/objects outside the text overlay an
 | Company/venture pays | Route/project marker highlight and receipt row | Actual receipt only; exploration discovery alone has no profit animation. |
 | Resolution closes | Stamp/crossfade to final recoveries, 0.4–0.8 s | Show residual losses and closed state; no celebratory payout for unpaid claims. |
 
-Use existing `.gui` state/animation patterns for opacity, position, and highlight transitions. The local `main_menu/gui_animations/test_asset.json` demonstrates timeline `animationSets`, paths, durations, and keyframes; it is an example, not proof of automatic binding to a finance window. Write `bfl_finance_animations.json` only after its binding/consumer is demonstrated; otherwise embed the required states in the mod GUI files.
+Use existing `.gui` state/animation patterns for opacity, position, and highlight transitions. The local `main_menu/gui_animations/test_asset.json` demonstrates timeline `animationSets`, paths, durations, and keyframes; it is an example, not proof of automatic binding to the embedded finance section. Write `bfl_finance_animations.json` only after its binding/consumer is demonstrated; otherwise embed the required states in the mod GUI files. Respect the CMM reduced-motion preference and confine finance animation to its Economy-panel content or appropriate event/alert notification.
 
 Respect pause/UI state, avoid infinite notification loops, and provide a reduced-motion option or static equivalent. FX read already committed facts and never modify accounting, scopes, or random gameplay outcomes. Optional sound can reuse verified native UI sounds; inspect the installed sound-event interface before adding assets. No new audio bank is necessary for the core specification.
 
@@ -1124,8 +1251,8 @@ Keep optional runtime model/particle files under `main_menu/gfx/models/bfl/` and
 
 | Stage | Concrete output | Gate to proceed |
 | --- | --- | --- |
-| M0 | Pinned baseline, probe mod, adapter capability report, native payment observations | Native bond funding/transfer/redemption and authorized subject GUI proved. |
-| M1 | Charter decision/selector, subject/reform, account schema, profile event/migration, GUI launcher/Treasury shell | Same bank tag; investment once; no tribute; one bank; correct authority/profile. |
+| M0 | Pinned game/CMF 2.5.0 baseline, P01–P12 probes, adapter capability report, native payment observations | Native bonds, subject authority, CMF hooks, and preserved native Economy panel proved. |
+| M1 | Charter decision/selector, subject/reform, account schema, profile event/migration, embedded Economy finance/Treasury shell, CMM preferences | Same bank tag; investment once; no tribute; one bank; correct authority/profile; no BFL action bar/launcher. |
 | M2 | Native company registration, routes/facilities/budgets, income classification | Real operating income and direct-overlord streams identified. |
 | M3 | Ordinary sovereign credit/takeover, native bonds/facility/resale/redemption, researched restructuring | Full native debt chain and both profiles pass. |
 | M4 | Royalty/loyalty, activity reserves/founder dividends, deposits/withdrawals | All three funding channels conserve cash and protect obligations. |
@@ -1141,6 +1268,8 @@ Build player GUI and AI alongside each feature. Implement shared resolution guar
 ### 19.2 Offline build checks
 
 Generators read the JSON design inputs and write only known generated script/localization files. Emit a deterministic file manifest and generated-content hashes. Validate unique identifiers, references, prerequisite ordering/cycles, bounds/generation fields, localization coverage, BOM/UTF-8, metadata schema, texture paths/sizes, and override declarations. Brace balancing is a useful preliminary check, not an EU5 parser or proof of script validity.
+
+Validate the CMF relationship and release baseline, all CMF public-effect/hook references, CMM localization, alert routes, and the economy-definition ownership manifest. Check that the generated economy override contains exactly one native `economy_lateralview`, preserves the native navigation/controls, and instantiates the inline finance section. Reject a BFL `cmf_add_action_bar_element` call, finance launcher registry, or separately mounted finance window. When CMF adds economy extraction in a later release, fail builds that retain the redundant BFL extraction helper.
 
 `ledger_reference.py` models transaction arithmetic independently of engine adapters. Test mixed sequences and edge amounts: deposits, subscriptions/dilution, royalties, institution-wide loss offsets, activity payouts, basis recovery/resale, collateral, margin, note caps, guarantees, and rounding. A reference model cannot prove native effects, loader behavior, GUI authority, or coupon routing; those require game tests.
 
@@ -1158,6 +1287,12 @@ Build release staging from an explicit allowlist of `.metadata`, runtime stage f
 | Reform manual adoption / orphaned reform | No free charter/recharge; authority follows valid live institution. |
 | Treasury separation / native siphoning | Overlord spending cannot consume bank reserves; no fourth extraction path. |
 | Independent and charter GUI / hostile stale target | Correct actor pays; unauthorized command fails; UI refresh changes no finance. |
+| Economy integration / CMF alone and CMF+BFL | CMF alone preserves the native baseline; CMF+BFL adds inline Banking & Finance. Native Balance/Credit/Markets/Trade Policies/Trades, graph, minting, taxes, expenses, native loan controls, and hotkeys remain functional. |
+| No added action bar / repeated panel opens | No BFL action-bar element, topbar button, finance launcher, standalone finance window, or duplicate native widget. Reopening does not mutate finance. |
+| Missing CMF / wrong release / future extraction coverage | Dependency is explicit and diagnosed; target release is enforced by release testing; native types/templates have exactly one owner. |
+| CMM register/reset/preferences and player tag switch | Presentation choices re-register safely; reset/tag switch does not reset or transfer bank/company ledgers, profile, or policy. |
+| CMF alert/log load, mute, click, and clearance | Authorized player sees current condition; click opens Economy; no duplicate log/settlement; obsolete alerts clear. |
+| Another mod replaces economy_lateralview.gui | Conflict is detected/documented; one combined compatibility override preserves both intended contributions. |
 | Profile choice/reload/legacy Sovereign save | Exactly one persistent choice; one migration choice; no repeat respec. |
 | Every instrument one age before/at/later, unresearched/researched | Full profile+age+research+native gates through GUI/diplomacy/events/AI. |
 | Term/demand/estate deposits | Cash/claims/interest/queues and real estate funding reconcile through reload. |
@@ -1191,9 +1326,11 @@ Run controlled fixtures before full campaigns for each playable role. Include Di
 
 Create `overrides.csv` columns: native path/key, baseline hash/build, entry mode, reason, affected mods, preserved fields, probe/test, and reviewer result. Prefer new objects, native action wrappers, and appended child hooks. Do not assume all scalar/nested fields merge safely or apply `REPLACE:` indiscriminately; verify entry modes for each database type.
 
-Expected compatibility touchpoints: native on-actions, charter subject extraction/siphoning eligibility, GUI mount, bank takeover dispatch, bond operations, branch ownership, native company income/creation, and research synchronization. New `bfl_` subject/reform keys should minimize changes to `state_bank` itself. Never globally change tribute prices or replace all native company buildings merely to add registration.
+Expected compatibility touchpoints: native and CMF on-actions, charter subject extraction/siphoning eligibility, the explicit economy GUI override/extracted-definition owner, CMF dependency-popup helper, CMM preferences and alert/log callbacks, bank takeover dispatch, bond operations, branch ownership, native company income/creation, and research synchronization. New `bfl_` subject/reform keys should minimize changes to `state_bank` itself. Never globally change tribute prices or replace all native company buildings merely to add registration.
 
-For each patch, compare pinned source hashes, regenerate docs, re-run P01–P11, verify overrides, then repeat affected fixtures and campaign/multiplayer checks. Update `supported_game_version` only after passing on the new semantic version. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
+List `in_game/gui/economy_lateralview.gui` as a required override, with baseline native SHA-256 `675763819DE9C0F368761DEC5D01541553C78D9A9E25EA68135A5667BB2D621D`, the inserted finance section, preserved native definitions, and expected CMF 2.5.0 coverage. Other mods replacing this same file require a combined patch. CMF dependency alone does not resolve that collision. Carry any necessary file-scoped constants and ensure other native views still resolve the shared economy templates.
+
+For each game or CMF update, compare both pinned source sets, regenerate docs, re-run P01–P12, verify overrides and economy extraction coverage, then repeat affected fixtures and campaign/multiplayer checks. Update `supported_game_version` and the supported CMF matrix only after passing. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
 
 ### 19.5 Workshop staging and uploader
 
@@ -1223,6 +1360,8 @@ Proposed configuration for release staging (not executed by this specification):
 
 Use one configured mod entry; remove empty sample rows. Preserve the assigned Workshop ID after first creation to update that item. Save configuration, review staged contents, and upload from the GUI only when release publication is requested. The source task authorizes this document, not a Workshop upload. The installed executable/configuration was inspected, not launched or changed.
 
+The eventual Workshop page must list CMF item `3692202776` under Required Items and identify the tested game/CMF combination, Economy-panel entry point, and economy-override conflicts. Do not assume uploader metadata alone establishes Steam's required-item relationship. Package BFL's runtime files and the documented dependency helper, not the framework's full runtime or development package.
+
 ## 20. Requirement coverage and evidence register
 
 ### 20.1 Feature-to-file coverage
@@ -1231,7 +1370,7 @@ Paths in this table are relative to the proposed `mod/bfl/` tree; short filename
 
 | Feature from supplied plan | Implementation service and principal files | Detailed section |
 | --- | --- | --- |
-| Independent banks and charter management | `bfl_roles.txt`, bootstrap, GUI launcher/account commands | 5, 6, 17 |
+| Independent banks and charter management | `bfl_roles.txt`, bootstrap, embedded Economy finance/account commands | 5, 6, 17 |
 | Decision conversion, full age investment, reform, one-bank cap | `bfl_charter_decisions.txt`, `bfl_charter.txt`, charter subject/reform, reconciliation | 6 |
 | Capital/reserves and separate treasury | transaction core, schema/slots, capital/liquidity values | 3–5 |
 | Monthly royalty and political costs | treasury payments/policy, financial static modifiers, Treasury GUI | 10 |
@@ -1254,6 +1393,7 @@ Paths in this table are relative to the proposed `mod/bfl/` tree; short filename
 | Exactly two profiles and age/advance progression | specialization event, permission generator, financial advances | 6, 7 |
 | Native company registration/operations/profits/failure | company operations, trade/receipt adapters, company GUI | 14 |
 | Player controls, diplomacy, AI, synchronization | scripted GUIs, interactions, AI scores, transaction services | 17 |
+| Required CMF integration without a new action bar | CMF metadata, `bfl_cmf_hooks.txt`, registration/alerts/log, native economy override and inline finance types | 2.3, 5, 17 |
 | Graphics and FX | texture manifest, GUI states/timelines, optional map assets | 18 |
 | Persistence, migration, compatibility, release | schema/migrations, hooks/stamps, manifests, tests/uploader | 5, 19 |
 
@@ -1269,6 +1409,8 @@ The exact files were inspected read-only. These links open the installed referen
 - [Scripted GUI schema](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/in_game/common/scripted_guis/scripted_guis.info>), [native economy GUI](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/in_game/gui/economy_lateralview.gui>), [scripted-widget registration](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/gui/scripted_widgets/_scripted_widgets.info>), and [animation example](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/gui_animations/test_asset.json>).
 - [On-action schema](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/in_game/common/on_action/on_actions.info>), [native callback comments](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/in_game/common/on_action/_hardcoded.txt>), and [modifier type definitions](<C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/common/modifier_type_definitions/00_modifier_types.txt>).
 - [Steam build manifest](<C:/Program Files (x86)/Steam/steamapps/appmanifest_3450310.acf>) and [installed uploader sample](<C:/Users/Thomas Altmann/Downloads/release-windows-gui-amd64/manager-config.json>).
+- [Installed CMF 2.5.0 metadata](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/.metadata/metadata.json>), [CMF lifecycle/registration hooks](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/common/on_action/cmf_on_actions.txt>), and [extracted government GUI example](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/gui/vanilla/cmf_government_lateralview_vanilla_types.gui>).
+- [CMF alert effects](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/common/scripted_effects/cmf_alert_effects.txt>), [CMF log effects](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/common/scripted_effects/cmf_log_effects.txt>), [CMM boolean setting API](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt>), and [CMF core triggers](<C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776/in_game/common/scripted_triggers/cmf_core_triggers.txt>).
 
 ### 20.3 Reproducible audit hashes
 
@@ -1282,6 +1424,13 @@ SHA-256 hashes recorded on 14 October 2026. Relative native paths are below `GAM
 | `in_game/common/building_types/trade_company_buildings.txt` | `30254D00521C9A4EB3B4A40AAAB4526A83F8CD05BEBE580EC31B3DB53CB1859E` |
 | `in_game/common/advances/0_age_of_renaissance.txt` | `B2CAE08AFB4AA380BFC0275C9AC46550A0FCC7E6C5DB2857F27A3EACA938B705` |
 | `in_game/common/scripted_guis/scripted_guis.info` | `D890908B3E579243B00198CE84572EC9E812E6BC73314742B878CD391EE2257C` |
+| Native `in_game/gui/economy_lateralview.gui` | `675763819DE9C0F368761DEC5D01541553C78D9A9E25EA68135A5667BB2D621D` |
+| CMF `.metadata/metadata.json` | `668C214D279F0DAF827417D2E280E1F495F0776A8DFD027D889F0C8D6933A5F8` |
+| CMF `in_game/common/on_action/cmf_on_actions.txt` | `3F14E4C92196FC440BCA6D10CAE4C73D86FE74EA7B0C46041E6A99063911440C` |
+| CMF `in_game/common/scripted_effects/cmf_alert_effects.txt` | `79A7A97D0270802B3149877A66B8F6CD78ED2B27A27C51DB23CBCE710E8D085C` |
+| CMF `in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt` | `2305B100729C2238BD44F1F3A8F5A6BB3ADAF7D273D188D6D69870B71BBA85EB` |
+
+CMF paths in this table are relative to the installed Workshop framework root from section 1, not `GAME`. These hashes record source inspection, not successful P12 runtime execution.
 
 ### 20.4 Public references and evidence limits
 
@@ -1289,7 +1438,11 @@ SHA-256 hashes recorded on 14 October 2026. Relative native paths are below `GAM
 - [Engine-generated effects mirror](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/effects.log): checked bond/loan/goods operation summaries. Mutable documentation is corroboration, not a substitute for this build's generated docs or cash-flow probes.
 - [Engine scope-link mirror](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/event_targets.log): checked the loan-to-borrower scope link; regenerate for the selected build before coding.
 - [Community mod toolkit metadata](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-toolkit/blob/main/.metadata/metadata.json): structural metadata example; its sample compatibility version is not this mod's supported version.
+- [Community Mod Framework](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework): required dependency and public integration entry point. [Metadata at audited GitHub commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/.metadata/metadata.json) identifies the development package and explains why it is not the installed 2.5.0 release baseline.
+- [CMF vanilla-widget override documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Improved-Vanilla-Top-Level-Widget-Overrides) and [extraction tool at audited commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/tools/cmf_extract_vanilla_types.py): definition extraction and file-scoped constants; the inspected coverage omits economy. BFL's explicit replacement/definition ownership is specified in section 17.
+- [CMF basic registration](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Basic-Setup), [CMM setup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/CMM-Basic-Setup), and [on-action documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/On-Action-Hooks): public integration conventions, checked against installed 2.5.0 sources; older post-lobby hook names must not override local deprecation comments.
+- [CMF custom alerts](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Custom-Alerts), [action log](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Mod-Action-Log), and [dependency popup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup): framework notification/history/dependency services; exact release-matched calls and GUI template remain part of P12 verification.
 - [Graphical assets](https://github.com/Europa-Universalis-5-Modding-Co-op/graphical-assets): template reference with no promised banking pack; inspect actual future assets/licenses individually.
 - [pdx-workshop-manager](https://github.com/kaiser-chris/pdx-workshop-manager): publishing workflow reference; installed sample informs the proposed configuration schema.
 
-Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned build, and both player roles pass persistence, multiplayer, performance, and campaign tests. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.
+Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned game/CMF combination, and both player roles pass persistence, multiplayer, performance, and campaign tests. Banking and finance management must work inside the existing Economy panel with native controls preserved and no added BFL action bar or separate finance launcher. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.
