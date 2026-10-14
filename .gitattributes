@@ -6,4 +6,8 @@
 *.json text eol=lf
 *.dds binary
 *.png binary
-
+# Retain pinned native whitespace to keep source reconstruction exact.
+mod/bfl/in_game/gui/economy_lateralview.gui whitespace=-trailing-space
+mod/bfl/in_game/gui/vanilla/bfl_economy_vanilla_types.gui whitespace=-trailing-space
+mod/bfl/in_game/common/country_interactions/siphon_income.txt whitespace=-trailing-space
+mod/bfl/in_game/common/subject_types/bfl_chartered_bank.txt whitespace=-trailing-space

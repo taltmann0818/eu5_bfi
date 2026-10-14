@@ -31,7 +31,7 @@ text_single = { raw_text = "Free cash: [GuiScope.SetRoot(Country.MakeScope).Scri
                         visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
                         scrollwidget = {
                             vbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { text = "bfl_overview" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_overview_expanded')]" }
-        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_overview_expanded')]" 
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_overview_expanded')]"
         bfl_statement = { datacontext = "[GetPlayer]"
             visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }

@@ -20,7 +20,8 @@ LOC = {}
 def write(path, content):
     target = MOD / path
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(('\ufeff' + dedent(content).strip() + '\n').replace('\r\n','\n').replace('\n','\r\n').encode('utf-8'))
+    clean = '\n'.join(line.rstrip() for line in dedent(content).strip().splitlines())
+    target.write_bytes(('\ufeff' + clean + '\n').replace('\r\n','\n').replace('\n','\r\n').encode('utf-8'))
 
 
 def common(folder, name, content):
