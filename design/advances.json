@@ -1,0 +1,20 @@
+[
+  {"id":"term_deposits","age":2,"profile":0,"requires":[]},
+  {"id":"bank_capital_subscriptions","age":2,"profile":0,"requires":[]},
+  {"id":"debt_restructuring","age":2,"profile":0,"requires":[]},
+  {"id":"commercial_bills","age":2,"profile":0,"requires":["term_deposits"]},
+  {"id":"commodity_investments","age":3,"profile":1,"requires":[]},
+  {"id":"commenda","age":3,"profile":2,"requires":[]},
+  {"id":"corporate_credit","age":4,"profile":1,"requires":["debt_restructuring"]},
+  {"id":"company_equity","age":4,"profile":2,"requires":["commenda"]},
+  {"id":"bank_share_dealing","age":4,"profile":0,"requires":["bank_capital_subscriptions"]},
+  {"id":"collateralization","age":5,"profile":0,"requires":["debt_restructuring"]},
+  {"id":"warehouse_receipts","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},
+  {"id":"commodity_forwards","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},
+  {"id":"project_security","age":5,"profile":2,"requires":["commenda","collateralization"]},
+  {"id":"sovereign_banknotes","age":5,"profile":0,"charter":true,"requires":["commercial_bills"]},
+  {"id":"liquidity_facilities","age":5,"profile":0,"requires":["collateralization"]},
+  {"id":"advanced_clearing","age":6,"profile":0,"requires":["liquidity_facilities"]},
+  {"id":"margining_and_risk_management","age":6,"profile":1,"requires":["commodity_forwards"]},
+  {"id":"public_financial_backstops","age":6,"profile":0,"charter":true,"requires":["sovereign_banknotes","liquidity_facilities"]}
+]

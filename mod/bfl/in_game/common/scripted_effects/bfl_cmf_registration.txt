@@ -1,0 +1,20 @@
+﻿bfl_register_cmf_presentation = {
+cmm_register_bool_setting = { mod_id = bfl_banking_finance_companies setting_id = reduced_motion tab_id = presentation group_id = interface default_value = 1 }
+cmm_register_bool_setting = { mod_id = bfl_banking_finance_companies setting_id = expanded_details tab_id = presentation group_id = interface default_value = 0 }
+cmm_register_bool_setting = { mod_id = bfl_banking_finance_companies setting_id = finance_notifications tab_id = presentation group_id = interface default_value = 1 }
+}
+
+    bfl_refresh_alerts = {
+        if = { limit = { is_ai = no bfl_has_management = yes has_global_variable = cmf_active }
+            bfl_resolve_command_bank = yes
+            if = { limit = { scope:bfl_bank = { var:bfl_state >= 2 } NOT = { has_variable = bfl_alert_active } }
+                cmf_set_alert_open_view = { alert = bfl_liquidity_warning view = economy }
+                cmf_show_alert = { alert = bfl_liquidity_warning }
+                set_variable = bfl_alert_active
+            }
+            else_if = { limit = { scope:bfl_bank = { var:bfl_state < 2 } has_variable = bfl_alert_active }
+                cmf_remove_alert = { alert = bfl_liquidity_warning }
+                remove_variable = bfl_alert_active
+            }
+        }
+    }

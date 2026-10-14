@@ -1,0 +1,76 @@
+﻿bfl_prepare_charter_selector = {
+save_scope_as = bfl_controller
+set_variable = { name = bfl_candidate_count value = 0 }
+remove_variable = bfl_candidate_01
+remove_variable = bfl_candidate_02
+remove_variable = bfl_candidate_03
+remove_variable = bfl_candidate_04
+remove_variable = bfl_candidate_05
+remove_variable = bfl_candidate_06
+remove_variable = bfl_candidate_07
+remove_variable = bfl_candidate_08
+every_subject = {
+        limit = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
+        if = { limit = { scope:bfl_controller.var:bfl_candidate_count < 8 }
+            save_scope_as = bfl_candidate
+            scope:bfl_controller = {
+                change_variable = { name = bfl_candidate_count add = 1 }
+    if = { limit = { var:bfl_candidate_count = 1 } set_variable = { name = bfl_candidate_01 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 2 } set_variable = { name = bfl_candidate_02 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 3 } set_variable = { name = bfl_candidate_03 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 4 } set_variable = { name = bfl_candidate_04 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 5 } set_variable = { name = bfl_candidate_05 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 6 } set_variable = { name = bfl_candidate_06 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 7 } set_variable = { name = bfl_candidate_07 value = scope:bfl_candidate } }
+if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candidate_08 value = scope:bfl_candidate } }
+} } }
+}
+
+    # Root is landed controller; saved bfl_bank came from the live subject selector.
+    bfl_commit_charter = {
+        if = {
+            limit = {
+                bfl_can_begin_charter = yes exists = scope:bfl_bank
+                scope:bfl_bank = { is_subject_type = state_bank is_subject_of = root }
+            }
+            save_scope_as = bfl_controller
+            set_variable = bfl_operation_guard
+            set_variable = { name = bfl_payment value = bfl_charter_investment }
+            scope:bfl_bank = {
+                bfl_initialize_bank = yes
+                set_variable = { name = bfl_opening_equity value = bfl_equity }
+                # Units priced at opening equity: existing founders are not confiscated.
+                set_variable = { name = bfl_total_units value = var:bfl_opening_equity }
+                set_variable = { name = bfl_state_units value = scope:bfl_controller.var:bfl_payment }
+                change_variable = { name = bfl_total_units add = var:bfl_state_units }
+                add_gold = scope:bfl_controller.var:bfl_payment
+                change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
+                change_subject_type = subject_type:bfl_chartered_bank
+                set_variable = { name = bfl_controller value = scope:bfl_controller }
+                remove_variable = bfl_profile_offered
+            }
+            add_gold = bfl_negative_payment
+            set_variable = { name = bfl_bank value = scope:bfl_bank }
+            add_reform = government_reform:bfl_state_chartered_bank
+            remove_variable = bfl_operation_guard
+            cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
+            scope:bfl_bank = { bfl_apply_royalty_modifiers = yes bfl_offer_profile = yes }
+        }
+    }
+    bfl_reconcile_charter = {
+        # Bank owns lifecycle cleanup. A changed overlord cannot inherit cached authority.
+        if = {
+            limit = { bfl_is_chartered_bank = yes exists = overlord }
+            save_scope_as = bfl_bank
+            overlord = {
+                if = {
+                    limit = { exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev } NOT = { var:bfl_bank = scope:bfl_bank } }
+                    scope:bfl_bank = { change_subject_type = subject_type:state_bank set_variable = { name = bfl_state value = 2 } }
+                }
+                else = {
+                    set_variable = { name = bfl_bank value = scope:bfl_bank }
+                    if = { limit = { country_type = location } add_reform = government_reform:bfl_state_chartered_bank }
+                }
+            }
+        }
+    }

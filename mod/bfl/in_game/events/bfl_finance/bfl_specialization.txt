@@ -1,0 +1,74 @@
+﻿namespace = bfl_finance
+    bfl_finance.100 = {
+        type = country_event title = bfl_finance.100.title desc = bfl_finance.100.desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = {
+            name = bfl_finance.100.merchant
+            ai_chance = { value = 50 }
+            if = {
+                limit = { exists = scope:bfl_bank scope:bfl_bank = { var:bfl_profile = 0 OR = { this = root is_subject_of = root } } }
+                scope:bfl_bank = { set_variable = { name = bfl_profile value = 1 } set_variable = bfl_choice_complete set_variable = { name = bfl_accept_deposits value = 1 } }
+            }
+        }
+option = {
+            name = bfl_finance.100.overseas
+            ai_chance = { value = 50 }
+            if = {
+                limit = { exists = scope:bfl_bank scope:bfl_bank = { var:bfl_profile = 0 OR = { this = root is_subject_of = root } } }
+                scope:bfl_bank = { set_variable = { name = bfl_profile value = 2 } set_variable = bfl_choice_complete set_variable = { name = bfl_accept_deposits value = 1 } }
+            }
+        }
+}
+    bfl_finance.110 = {
+        type = country_event title = bfl_finance.110.title desc = bfl_finance.110.desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_finance.110.bank_01
+            trigger = { exists = var:bfl_candidate_01 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_01 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_02
+            trigger = { exists = var:bfl_candidate_02 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_02 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_03
+            trigger = { exists = var:bfl_candidate_03 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_03 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_04
+            trigger = { exists = var:bfl_candidate_04 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_04 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_05
+            trigger = { exists = var:bfl_candidate_05 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_05 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_06
+            trigger = { exists = var:bfl_candidate_06 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_06 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_07
+            trigger = { exists = var:bfl_candidate_07 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_07 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_finance.110.bank_08
+            trigger = { exists = var:bfl_candidate_08 }
+            ai_chance = { value = 10 }
+            var:bfl_candidate_08 = { save_scope_as = bfl_bank }
+            bfl_commit_charter = yes
+        }
+option = { name = bfl_cancel ai_chance = { value = 0 } }
+}

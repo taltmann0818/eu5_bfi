@@ -1,0 +1,12 @@
+{
+  "schema":1,
+  "bounds":{"deposit":32,"contract":32,"inventory":16,"shareholder":16,"offer":16,"branch":16,"charter_candidate":8},
+  "profile":{"pending":0,"merchant":1,"overseas":2},
+  "state":{"operating":0,"stressed":1,"restricted":2,"insolvent":3,"resolving":4,"closed":5},
+  "deposit_fields":["active","generation","party","principal","interest_due","annual_rate","maturity_period","withdrawal_requested","state","remainder"],
+  "contract_fields":["active","generation","party","kind","basis","claim","collateral","maturity_period","state","last_settlement"],
+  "inventory_fields":["active","generation","goods","market","location","quantity","encumbered","basis"],
+  "offer_fields":["active","generation","party","claim","price","basis","expiry","revision"],
+  "branch_fields":["active","generation","host","location","market","fee","expiry","state"],
+  "shareholder_fields":["active","generation","party","units","basis","last_payment"]
+}

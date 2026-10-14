@@ -1,0 +1,143 @@
+﻿bfl_term_deposits = {
+age = age_2_renaissance
+icon = bfl_term_deposits
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_bank_capital_subscriptions = {
+age = age_2_renaissance
+icon = bfl_bank_capital_subscriptions
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_debt_restructuring = {
+age = age_2_renaissance
+icon = bfl_debt_restructuring
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_commercial_bills = {
+age = age_2_renaissance
+icon = bfl_commercial_bills
+requires = bfl_term_deposits
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_commodity_investments = {
+age = age_3_discovery
+icon = bfl_commodity_investments
+potential = { bfl_research_merchant = yes }
+allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_commenda = {
+age = age_3_discovery
+icon = bfl_commenda
+potential = { bfl_research_overseas = yes }
+allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_corporate_credit = {
+age = age_4_reformation
+icon = bfl_corporate_credit
+requires = bfl_debt_restructuring
+potential = { bfl_research_merchant = yes }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_company_equity = {
+age = age_4_reformation
+icon = bfl_company_equity
+requires = bfl_commenda
+potential = { bfl_research_overseas = yes }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_bank_share_dealing = {
+age = age_4_reformation
+icon = bfl_bank_share_dealing
+requires = bfl_bank_capital_subscriptions
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_collateralization = {
+age = age_5_absolutism
+icon = bfl_collateralization
+requires = bfl_debt_restructuring
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_warehouse_receipts = {
+age = age_5_absolutism
+icon = bfl_warehouse_receipts
+requires = bfl_commodity_investments
+requires = bfl_collateralization
+potential = { bfl_research_merchant = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_commodity_forwards = {
+age = age_5_absolutism
+icon = bfl_commodity_forwards
+requires = bfl_commodity_investments
+requires = bfl_collateralization
+potential = { bfl_research_merchant = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_project_security = {
+age = age_5_absolutism
+icon = bfl_project_security
+requires = bfl_commenda
+requires = bfl_collateralization
+potential = { bfl_research_overseas = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_sovereign_banknotes = {
+age = age_5_absolutism
+icon = bfl_sovereign_banknotes
+requires = bfl_commercial_bills
+potential = { bfl_is_research_owner = yes country_type = location has_reform = government_reform:bfl_state_chartered_bank }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_liquidity_facilities = {
+age = age_5_absolutism
+icon = bfl_liquidity_facilities
+requires = bfl_collateralization
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_advanced_clearing = {
+age = age_6_revolutions
+icon = bfl_advanced_clearing
+requires = bfl_liquidity_facilities
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_margining_and_risk_management = {
+age = age_6_revolutions
+icon = bfl_margining_and_risk_management
+requires = bfl_commodity_forwards
+potential = { bfl_research_merchant = yes }
+allow = { OR = { current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}
+bfl_public_financial_backstops = {
+age = age_6_revolutions
+icon = bfl_public_financial_backstops
+requires = bfl_sovereign_banknotes
+requires = bfl_liquidity_facilities
+potential = { bfl_is_research_owner = yes country_type = location has_reform = government_reform:bfl_state_chartered_bank }
+allow = { OR = { current_age = age_6_revolutions } }
+ai_weight = { add = 1 }
+}

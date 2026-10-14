@@ -1,0 +1,235 @@
+﻿types BFLFinanceTypes {
+        type bfl_statement = widget { layoutpolicy_horizontal = expanding
+            vbox = { layoutpolicy_horizontal = expanding spacing = 3 text_single = { raw_text = "[Country.GetName]" autoresize = yes }
+text_single = { raw_text = "Specialization (1 Merchant / 2 Overseas): [Country.MakeScope.GetVariable('bfl_profile').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Operating state (0–5): [Country.MakeScope.GetVariable('bfl_state').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Last processed month: [Country.MakeScope.GetVariable('bfl_last_period').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Royalty paid: [Country.MakeScope.GetVariable('bfl_royalty_paid').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Royalty assessment deferred: [Country.MakeScope.GetVariable('bfl_royalty_deferred').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "State dividends paid: [Country.MakeScope.GetVariable('bfl_dividend_paid').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "State equity units: [Country.MakeScope.GetVariable('bfl_state_units').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Total equity units: [Country.MakeScope.GetVariable('bfl_total_units').GetValue|2]" autoresize = yes }
+text_single = { raw_text = "Cash: [Country.GetCurrencyBalance('gold')|2]" autoresize = yes }
+text_single = { raw_text = "Liabilities: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_liabilities')|2]" autoresize = yes }
+text_single = { raw_text = "Equity: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity')|2]" autoresize = yes }
+text_single = { raw_text = "Protected cash: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_protected_cash')|2]" autoresize = yes }
+text_single = { raw_text = "Free cash: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_free_cash')|2]" autoresize = yes }
+ }
+        }
+        type bfl_finance_section = widget {
+            layoutpolicy_horizontal = expanding
+            vbox = { spacing = 5 layoutpolicy_horizontal = expanding
+                button_regular = { size = { 100% 36 } text = "bfl_finance_title"
+                    onclick = "[LateralView.Vars.Toggle('bfl_finance_expanded')]"
+                }
+                vbox = { layoutpolicy_horizontal = expanding spacing = 5
+                    visible = "[LateralView.Vars.Exists('bfl_finance_expanded')]"
+                    text_multi = { text = "bfl_no_bank" autoresize = yes layoutpolicy_horizontal = expanding
+                        visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+                    }
+                    scrollarea = { size = { 100% 320 }
+                        visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+                        scrollwidget = {
+                            vbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { text = "bfl_overview" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_overview_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_overview_expanded')]" 
+        bfl_statement = { datacontext = "[GetPlayer]"
+            visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+        bfl_statement = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+            visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+    text_multi = { text = "bfl_accounts_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+button_regular = { size = { 100% 28 } text = "bfl_select_profile"
+            enabled = "[GetScriptedGui('bfl_select_profile').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_select_profile').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+ }
+button_regular = { text = "bfl_deposits" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_deposits_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_deposits_expanded')]" text_multi = { text = "bfl_deposit_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+button_regular = { size = { 100% 28 } text = "bfl_deposit_1"
+            enabled = "[GetScriptedGui('bfl_deposit_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_deposit_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_deposit_2"
+            enabled = "[GetScriptedGui('bfl_deposit_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_deposit_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_withdraw"
+            enabled = "[GetScriptedGui('bfl_withdraw').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_withdraw').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_rate_0"
+            enabled = "[GetScriptedGui('bfl_rate_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_rate_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_rate_1"
+            enabled = "[GetScriptedGui('bfl_rate_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_rate_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_rate_2"
+            enabled = "[GetScriptedGui('bfl_rate_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_rate_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_term_deposit').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_term_deposit" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_treasury" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_treasury_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_treasury_expanded')]" text_multi = { text = "bfl_royalty_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+button_regular = { size = { 100% 28 } text = "bfl_set_royalty_0"
+            enabled = "[GetScriptedGui('bfl_set_royalty_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_set_royalty_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_set_royalty_1"
+            enabled = "[GetScriptedGui('bfl_set_royalty_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_set_royalty_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_set_royalty_2"
+            enabled = "[GetScriptedGui('bfl_set_royalty_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_set_royalty_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_set_royalty_3"
+            enabled = "[GetScriptedGui('bfl_set_royalty_3').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_set_royalty_3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_set_royalty_4"
+            enabled = "[GetScriptedGui('bfl_set_royalty_4').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_set_royalty_4').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+text_multi = { text = "bfl_dividend_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+button_regular = { size = { 100% 28 } text = "bfl_payout_0"
+            enabled = "[GetScriptedGui('bfl_payout_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_payout_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_payout_25"
+            enabled = "[GetScriptedGui('bfl_payout_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_payout_25').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_payout_50"
+            enabled = "[GetScriptedGui('bfl_payout_50').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_payout_50').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_facility_0"
+            enabled = "[GetScriptedGui('bfl_facility_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_facility_0').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_facility_1"
+            enabled = "[GetScriptedGui('bfl_facility_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_facility_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_facility_2"
+            enabled = "[GetScriptedGui('bfl_facility_2').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_facility_2').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_bond_underwriting').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_bond_underwriting" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_debt" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_debt_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_debt_expanded')]" text_multi = { text = "bfl_debt_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_sovereign_credit').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_sovereign_credit" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_native_takeover').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_native_takeover" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_debt_resale').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_debt_resale" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_sovereign_restructuring').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_sovereign_restructuring" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_corporate_credit').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_corporate_credit" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_goods" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_goods_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_goods_expanded')]" text_multi = { text = "bfl_goods_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commodity_inventory').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_commodity_inventory" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_warehouse_receipt').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_warehouse_receipt" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commodity_forward').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_commodity_forward" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_margining').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_margining" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_ventures" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_ventures_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_ventures_expanded')]" text_multi = { text = "bfl_ventures_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commenda').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_commenda" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_company_equity').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_company_equity" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_project_security').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_project_security" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_bank_subscription').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_bank_subscription" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_bank_share_transfer').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_bank_share_transfer" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_monetary" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_monetary_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_monetary_expanded')]" text_multi = { text = "bfl_monetary_explanation" autoresize = yes layoutpolicy_horizontal = expanding }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_commercial_bill').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_commercial_bill" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_sovereign_note').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_sovereign_note" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_secured_liquidity').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_secured_liquidity" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_clearing').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_clearing" autoresize = yes }
+        }
+hbox = { spacing = 5
+            icon = { size = { 18 18 } texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_public_backstop').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
+            text_single = { text = "bfl_public_backstop" autoresize = yes }
+        }
+ }
+button_regular = { text = "bfl_distress" size = { 100% 30 } onclick = "[LateralView.Vars.Toggle('bfl_distress_expanded')]" }
+        vbox = { spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('bfl_distress_expanded')]" text_multi = { text = "bfl_dev_notice" autoresize = yes layoutpolicy_horizontal = expanding }
+button_regular = { size = { 100% 28 } text = "bfl_recapitalize_command"
+            enabled = "[GetScriptedGui('bfl_recapitalize_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_recapitalize_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+button_regular = { size = { 100% 28 } text = "bfl_suspend_command"
+            enabled = "[GetScriptedGui('bfl_suspend_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_suspend_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        }
+ }
+ }
+                        }
+                    }
+                }
+            }
+        }
+    }

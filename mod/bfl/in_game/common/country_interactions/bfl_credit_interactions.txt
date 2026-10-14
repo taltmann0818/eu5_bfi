@@ -1,0 +1,16 @@
+﻿bfl_purchase_native_loan = {
+    type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+    potential = { scope:actor = { bfl_has_management = yes } }
+    allow = { scope:actor = { bfl_has_management = yes } }
+    select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+        column = { data = country_diplomacy_info_loan }
+        visible = { num_loans > 0 }
+        enabled = { any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 } }
+    }
+    effect = {
+        scope:recipient = { save_scope_as = bfl_party }
+        scope:actor = { bfl_resolve_command_bank = yes }
+        scope:bfl_bank = { bfl_native_takeover = yes }
+    }
+    ai_will_do = { value = 0 }
+}

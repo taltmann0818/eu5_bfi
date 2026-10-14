@@ -1,0 +1,46 @@
+﻿bfl_offset_losses = {
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_services } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_services subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_credit } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_credit subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_controller } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_controller subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_trading } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_trading subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_goods } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_goods subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_ventures } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_ventures subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_loss_carryforward max = var:bfl_profit_company } }
+        change_variable = { name = bfl_loss_carryforward subtract = var:bfl_offset }
+        change_variable = { name = bfl_profit_company subtract = var:bfl_offset }
+}
+bfl_consume_profit_reserves = {
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_services } }
+        change_variable = { name = bfl_profit_services subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_credit } }
+        change_variable = { name = bfl_profit_credit subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_controller } }
+        change_variable = { name = bfl_profit_controller subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_trading } }
+        change_variable = { name = bfl_profit_trading subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_goods } }
+        change_variable = { name = bfl_profit_goods subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_ventures } }
+        change_variable = { name = bfl_profit_ventures subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+set_variable = { name = bfl_offset value = { value = var:bfl_payment max = var:bfl_profit_company } }
+        change_variable = { name = bfl_profit_company subtract = var:bfl_offset }
+        change_variable = { name = bfl_payment subtract = var:bfl_offset }
+}

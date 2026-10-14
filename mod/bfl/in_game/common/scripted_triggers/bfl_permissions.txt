@@ -1,0 +1,273 @@
+﻿bfl_can_originate_demand_deposit = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+}
+bfl_can_service_demand_deposit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_demand_deposit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_term_deposit = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_term_deposits } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_term_deposits } } }
+}
+bfl_can_service_term_deposit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_term_deposit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_sovereign_credit = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+custom_tooltip = { text = bfl_probe_P06 always = no }
+}
+bfl_can_service_sovereign_credit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_sovereign_credit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_native_takeover = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+}
+bfl_can_service_native_takeover = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_native_takeover = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_bond_underwriting = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+custom_tooltip = { text = bfl_probe_P03 always = no }
+}
+bfl_can_service_bond_underwriting = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_bond_underwriting = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_debt_resale = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+custom_tooltip = { text = bfl_probe_P04 always = no }
+}
+bfl_can_service_debt_resale = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_debt_resale = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_sovereign_restructuring = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_debt_restructuring } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_debt_restructuring } } }
+custom_tooltip = { text = bfl_probe_P06 always = no }
+}
+bfl_can_service_sovereign_restructuring = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_sovereign_restructuring = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_commercial_bill = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_commercial_bills } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_commercial_bills } } }
+}
+bfl_can_service_commercial_bill = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_commercial_bill = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_commodity_inventory = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 1
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_commodity_investments } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_commodity_investments } } }
+custom_tooltip = { text = bfl_probe_P09 always = no }
+}
+bfl_can_service_commodity_inventory = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_commodity_inventory = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_commenda = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 2
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_commenda } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_commenda } } }
+custom_tooltip = { text = bfl_probe_P11 always = no }
+}
+bfl_can_service_commenda = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_commenda = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_corporate_credit = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 1
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_corporate_credit } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_corporate_credit } } }
+custom_tooltip = { text = bfl_probe_P06 always = no }
+}
+bfl_can_service_corporate_credit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_corporate_credit = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_company_equity = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 2
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_company_equity } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_company_equity } } }
+custom_tooltip = { text = bfl_probe_P07 always = no }
+}
+bfl_can_service_company_equity = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_company_equity = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_bank_subscription = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_bank_capital_subscriptions } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_bank_capital_subscriptions } } }
+}
+bfl_can_service_bank_subscription = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_bank_subscription = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_bank_share_transfer = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_bank_share_dealing } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_bank_share_dealing } } }
+}
+bfl_can_service_bank_share_transfer = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_bank_share_transfer = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_collateral = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_collateralization } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_collateralization } } }
+}
+bfl_can_service_collateral = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_collateral = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_warehouse_receipt = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 1
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_warehouse_receipts } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_warehouse_receipts } } }
+custom_tooltip = { text = bfl_probe_P09 always = no }
+}
+bfl_can_service_warehouse_receipt = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_warehouse_receipt = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_commodity_forward = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 1
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_commodity_forwards } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_commodity_forwards } } }
+custom_tooltip = { text = bfl_probe_P09 always = no }
+}
+bfl_can_service_commodity_forward = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_commodity_forward = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_project_security = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+var:bfl_profile = 2
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_project_security } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_project_security } } }
+custom_tooltip = { text = bfl_probe_P11 always = no }
+}
+bfl_can_service_project_security = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_project_security = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_sovereign_note = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+bfl_has_valid_controller = yes
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_sovereign_banknotes } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_sovereign_banknotes } } }
+custom_tooltip = { text = bfl_probe_P05 always = no }
+}
+bfl_can_service_sovereign_note = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_sovereign_note = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_secured_liquidity = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_liquidity_facilities } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_liquidity_facilities } } }
+custom_tooltip = { text = bfl_probe_P04 always = no }
+}
+bfl_can_service_secured_liquidity = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_secured_liquidity = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_clearing = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_6_revolutions }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_advanced_clearing } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_advanced_clearing } } }
+custom_tooltip = { text = bfl_probe_P10 always = no }
+}
+bfl_can_service_clearing = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_clearing = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_margining = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_6_revolutions }
+var:bfl_profile = 1
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_margining_and_risk_management } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_margining_and_risk_management } } }
+custom_tooltip = { text = bfl_probe_P09 always = no }
+}
+bfl_can_service_margining = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_margining = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_originate_public_backstop = {
+bfl_can_conduct_business = yes
+OR = { current_age = age_6_revolutions }
+bfl_has_valid_controller = yes
+OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_public_financial_backstops } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_public_financial_backstops } } }
+}
+bfl_can_service_public_backstop = {
+bfl_has_accounts = yes var:bfl_state < 5
+}
+bfl_can_resolve_public_backstop = {
+bfl_has_accounts = yes var:bfl_state < 5
+}

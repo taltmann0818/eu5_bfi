@@ -1,0 +1,336 @@
+﻿bfl_issue_receipt_lot_01 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_01_active = 1
+    var:bfl_inv_01_quantity >= { value = var:bfl_inv_01_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 1 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_01_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_02 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_02_active = 1
+    var:bfl_inv_02_quantity >= { value = var:bfl_inv_02_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 2 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_02_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_03 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_03_active = 1
+    var:bfl_inv_03_quantity >= { value = var:bfl_inv_03_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 3 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_03_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_04 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_04_active = 1
+    var:bfl_inv_04_quantity >= { value = var:bfl_inv_04_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 4 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_04_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_05 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_05_active = 1
+    var:bfl_inv_05_quantity >= { value = var:bfl_inv_05_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 5 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_05_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_06 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_06_active = 1
+    var:bfl_inv_06_quantity >= { value = var:bfl_inv_06_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 6 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_06_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_07 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_07_active = 1
+    var:bfl_inv_07_quantity >= { value = var:bfl_inv_07_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 7 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_07_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_08 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_08_active = 1
+    var:bfl_inv_08_quantity >= { value = var:bfl_inv_08_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 8 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_08_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_09 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_09_active = 1
+    var:bfl_inv_09_quantity >= { value = var:bfl_inv_09_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 9 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_09_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_10 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_10_active = 1
+    var:bfl_inv_10_quantity >= { value = var:bfl_inv_10_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 10 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_10_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_11 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_11_active = 1
+    var:bfl_inv_11_quantity >= { value = var:bfl_inv_11_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 11 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_11_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_12 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_12_active = 1
+    var:bfl_inv_12_quantity >= { value = var:bfl_inv_12_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 12 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_12_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_13 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_13_active = 1
+    var:bfl_inv_13_quantity >= { value = var:bfl_inv_13_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 13 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_13_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_14 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_14_active = 1
+    var:bfl_inv_14_quantity >= { value = var:bfl_inv_14_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 14 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_14_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_15 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_15_active = 1
+    var:bfl_inv_15_quantity >= { value = var:bfl_inv_15_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 15 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_15_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}
+bfl_issue_receipt_lot_16 = {
+if = { limit = {
+    bfl_can_originate_warehouse_receipt = yes bfl_valid_contract_parties = yes bfl_has_contract_capacity = yes
+    var:bfl_inv_16_active = 1
+    var:bfl_inv_16_quantity >= { value = var:bfl_inv_16_encumbered add = 10 }
+    scope:bfl_party = { gold >= 1 }
+}
+    save_scope_as = bfl_bank
+    set_variable = bfl_operation_guard
+    set_variable = { name = bfl_contract_kind value = 2 }
+    set_variable = { name = bfl_contract_backing value = 16 }
+    set_variable = { name = bfl_contract_amount value = 10 }
+    set_variable = { name = bfl_contract_months value = 1 }
+    bfl_allocate_contract = yes
+    change_variable = { name = bfl_inv_16_encumbered add = 10 }
+    scope:bfl_party = { add_gold = -1 } add_gold = 1
+    # Cash-paid custody fee is an identified service receipt, unlike principal.
+    change_variable = { name = bfl_profit_services add = 1 }
+    remove_variable = bfl_operation_guard
+}
+}

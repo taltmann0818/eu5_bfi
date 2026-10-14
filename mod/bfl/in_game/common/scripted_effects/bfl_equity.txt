@@ -1,0 +1,194 @@
+﻿bfl_allocate_subscription = {
+set_variable = { name = bfl_subscription_allocated value = 0 }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_01_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_01_active value = 1 }
+            change_variable = { name = bfl_shr_01_generation add = 1 }
+            set_variable = { name = bfl_shr_01_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_01_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_01_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_02_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_02_active value = 1 }
+            change_variable = { name = bfl_shr_02_generation add = 1 }
+            set_variable = { name = bfl_shr_02_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_02_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_02_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_03_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_03_active value = 1 }
+            change_variable = { name = bfl_shr_03_generation add = 1 }
+            set_variable = { name = bfl_shr_03_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_03_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_03_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_04_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_04_active value = 1 }
+            change_variable = { name = bfl_shr_04_generation add = 1 }
+            set_variable = { name = bfl_shr_04_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_04_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_04_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_05_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_05_active value = 1 }
+            change_variable = { name = bfl_shr_05_generation add = 1 }
+            set_variable = { name = bfl_shr_05_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_05_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_05_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_06_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_06_active value = 1 }
+            change_variable = { name = bfl_shr_06_generation add = 1 }
+            set_variable = { name = bfl_shr_06_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_06_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_06_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_07_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_07_active value = 1 }
+            change_variable = { name = bfl_shr_07_generation add = 1 }
+            set_variable = { name = bfl_shr_07_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_07_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_07_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_08_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_08_active value = 1 }
+            change_variable = { name = bfl_shr_08_generation add = 1 }
+            set_variable = { name = bfl_shr_08_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_08_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_08_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_09_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_09_active value = 1 }
+            change_variable = { name = bfl_shr_09_generation add = 1 }
+            set_variable = { name = bfl_shr_09_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_09_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_09_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_10_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_10_active value = 1 }
+            change_variable = { name = bfl_shr_10_generation add = 1 }
+            set_variable = { name = bfl_shr_10_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_10_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_10_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_11_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_11_active value = 1 }
+            change_variable = { name = bfl_shr_11_generation add = 1 }
+            set_variable = { name = bfl_shr_11_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_11_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_11_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_12_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_12_active value = 1 }
+            change_variable = { name = bfl_shr_12_generation add = 1 }
+            set_variable = { name = bfl_shr_12_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_12_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_12_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_13_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_13_active value = 1 }
+            change_variable = { name = bfl_shr_13_generation add = 1 }
+            set_variable = { name = bfl_shr_13_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_13_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_13_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_14_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_14_active value = 1 }
+            change_variable = { name = bfl_shr_14_generation add = 1 }
+            set_variable = { name = bfl_shr_14_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_14_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_14_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_15_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_15_active value = 1 }
+            change_variable = { name = bfl_shr_15_generation add = 1 }
+            set_variable = { name = bfl_shr_15_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_15_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_15_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+if = { limit = { var:bfl_subscription_allocated = 0 var:bfl_shr_16_active = 0 }
+            set_variable = { name = bfl_subscription_allocated value = 1 }
+            set_variable = { name = bfl_shr_16_active value = 1 }
+            change_variable = { name = bfl_shr_16_generation add = 1 }
+            set_variable = { name = bfl_shr_16_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_16_units value = var:bfl_new_units }
+            set_variable = { name = bfl_shr_16_basis value = 100 }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_paid_in_capital add = 100 }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+        }
+}
+
+    bfl_subscribe_bank_capital = {
+        if = { limit = {
+            bfl_can_originate_bank_subscription = yes bfl_valid_contract_parties = yes
+            bfl_has_shareholder_capacity = yes bfl_equity > 0 var:bfl_total_units > 0
+            scope:bfl_party = { gold >= 100 }
+        }
+            save_scope_as = bfl_bank
+            # Pre-transaction NAV fixes the subscription price, preventing equity creation.
+            set_variable = { name = bfl_new_units value = { value = 100 multiply = var:bfl_total_units divide = bfl_equity } }
+            set_variable = bfl_operation_guard
+            bfl_allocate_subscription = yes
+            remove_variable = bfl_operation_guard
+        }
+    }

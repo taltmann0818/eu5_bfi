@@ -1,0 +1,67 @@
+﻿# Country scope. Classify companies first, then chartered and independent banks.
+bfl_is_company = { is_subject_type = trade_company }
+bfl_is_chartered_bank = {
+    NOT = { bfl_is_company = yes }
+    country_type = building
+    has_reform = government_reform:banking_country
+    is_subject_type = bfl_chartered_bank
+}
+bfl_is_independent_bank = {
+    NOT = { bfl_is_company = yes }
+    country_type = building
+    has_reform = government_reform:banking_country
+    is_subject = no
+}
+bfl_is_bank = { OR = { bfl_is_chartered_bank = yes bfl_is_independent_bank = yes } }
+bfl_has_accounts = { has_variable = bfl_schema }
+bfl_can_conduct_business = {
+    bfl_is_bank = yes
+    has_variable = bfl_schema
+    OR = { var:bfl_profile = 1 var:bfl_profile = 2 }
+    var:bfl_state < 2
+    NOT = { has_variable = bfl_operation_guard }
+}
+bfl_has_management = {
+    OR = {
+        bfl_is_independent_bank = yes
+        AND = {
+            country_type = location
+            has_reform = government_reform:bfl_state_chartered_bank
+            exists = var:bfl_bank
+            var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = root }
+        }
+    }
+}
+bfl_is_research_owner = { bfl_has_management = yes }
+bfl_research_merchant = {
+    OR = {
+        AND = { bfl_is_independent_bank = yes var:bfl_profile = 1 }
+        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile = 1 } }
+    }
+}
+bfl_research_overseas = {
+    OR = {
+        AND = { bfl_is_independent_bank = yes var:bfl_profile = 2 }
+        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile = 2 } }
+    }
+}
+bfl_can_begin_charter = {
+    country_type = location
+    exists = capital
+    capital = { market = { owner = root } }
+    NOT = { has_variable = bfl_operation_guard }
+    NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+    any_subject = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
+    gold >= bfl_charter_investment
+}
+# Used inside bank scope with controller selected from the LIVE relationship.
+bfl_has_valid_controller = {
+    bfl_is_chartered_bank = yes
+    exists = overlord
+    overlord = {
+        country_type = location
+        has_reform = government_reform:bfl_state_chartered_bank
+        exists = var:bfl_bank
+        var:bfl_bank = prev
+    }
+}

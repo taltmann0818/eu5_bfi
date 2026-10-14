@@ -1,0 +1,96 @@
+﻿bfl_period = { value = current_year multiply = 12 add = current_month }
+    bfl_charter_investment = {
+        value = 500
+    if = { limit = { current_age = age_2_renaissance } value = 750 }
+if = { limit = { current_age = age_3_discovery } value = 1000 }
+if = { limit = { current_age = age_4_reformation } value = 1500 }
+if = { limit = { current_age = age_5_absolutism } value = 2000 }
+if = { limit = { current_age = age_6_revolutions } value = 3000 }
+}
+
+    bfl_deposit_liabilities = { value = 0
+    if = { limit = { var:bfl_dep_01_active = 1 } add = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due }
+if = { limit = { var:bfl_dep_02_active = 1 } add = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due }
+if = { limit = { var:bfl_dep_03_active = 1 } add = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due }
+if = { limit = { var:bfl_dep_04_active = 1 } add = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due }
+if = { limit = { var:bfl_dep_05_active = 1 } add = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due }
+if = { limit = { var:bfl_dep_06_active = 1 } add = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due }
+if = { limit = { var:bfl_dep_07_active = 1 } add = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due }
+if = { limit = { var:bfl_dep_08_active = 1 } add = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due }
+if = { limit = { var:bfl_dep_09_active = 1 } add = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due }
+if = { limit = { var:bfl_dep_10_active = 1 } add = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due }
+if = { limit = { var:bfl_dep_11_active = 1 } add = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due }
+if = { limit = { var:bfl_dep_12_active = 1 } add = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due }
+if = { limit = { var:bfl_dep_13_active = 1 } add = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due }
+if = { limit = { var:bfl_dep_14_active = 1 } add = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due }
+if = { limit = { var:bfl_dep_15_active = 1 } add = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due }
+if = { limit = { var:bfl_dep_16_active = 1 } add = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due }
+if = { limit = { var:bfl_dep_17_active = 1 } add = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due }
+if = { limit = { var:bfl_dep_18_active = 1 } add = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due }
+if = { limit = { var:bfl_dep_19_active = 1 } add = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due }
+if = { limit = { var:bfl_dep_20_active = 1 } add = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due }
+if = { limit = { var:bfl_dep_21_active = 1 } add = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due }
+if = { limit = { var:bfl_dep_22_active = 1 } add = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due }
+if = { limit = { var:bfl_dep_23_active = 1 } add = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due }
+if = { limit = { var:bfl_dep_24_active = 1 } add = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due }
+if = { limit = { var:bfl_dep_25_active = 1 } add = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due }
+if = { limit = { var:bfl_dep_26_active = 1 } add = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due }
+if = { limit = { var:bfl_dep_27_active = 1 } add = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due }
+if = { limit = { var:bfl_dep_28_active = 1 } add = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due }
+if = { limit = { var:bfl_dep_29_active = 1 } add = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due }
+if = { limit = { var:bfl_dep_30_active = 1 } add = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due }
+if = { limit = { var:bfl_dep_31_active = 1 } add = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due }
+if = { limit = { var:bfl_dep_32_active = 1 } add = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due }
+}
+bfl_withdrawals_due = { value = 0
+if = { limit = { var:bfl_dep_01_active = 1 } add = var:bfl_dep_01_withdrawal_requested }
+if = { limit = { var:bfl_dep_02_active = 1 } add = var:bfl_dep_02_withdrawal_requested }
+if = { limit = { var:bfl_dep_03_active = 1 } add = var:bfl_dep_03_withdrawal_requested }
+if = { limit = { var:bfl_dep_04_active = 1 } add = var:bfl_dep_04_withdrawal_requested }
+if = { limit = { var:bfl_dep_05_active = 1 } add = var:bfl_dep_05_withdrawal_requested }
+if = { limit = { var:bfl_dep_06_active = 1 } add = var:bfl_dep_06_withdrawal_requested }
+if = { limit = { var:bfl_dep_07_active = 1 } add = var:bfl_dep_07_withdrawal_requested }
+if = { limit = { var:bfl_dep_08_active = 1 } add = var:bfl_dep_08_withdrawal_requested }
+if = { limit = { var:bfl_dep_09_active = 1 } add = var:bfl_dep_09_withdrawal_requested }
+if = { limit = { var:bfl_dep_10_active = 1 } add = var:bfl_dep_10_withdrawal_requested }
+if = { limit = { var:bfl_dep_11_active = 1 } add = var:bfl_dep_11_withdrawal_requested }
+if = { limit = { var:bfl_dep_12_active = 1 } add = var:bfl_dep_12_withdrawal_requested }
+if = { limit = { var:bfl_dep_13_active = 1 } add = var:bfl_dep_13_withdrawal_requested }
+if = { limit = { var:bfl_dep_14_active = 1 } add = var:bfl_dep_14_withdrawal_requested }
+if = { limit = { var:bfl_dep_15_active = 1 } add = var:bfl_dep_15_withdrawal_requested }
+if = { limit = { var:bfl_dep_16_active = 1 } add = var:bfl_dep_16_withdrawal_requested }
+if = { limit = { var:bfl_dep_17_active = 1 } add = var:bfl_dep_17_withdrawal_requested }
+if = { limit = { var:bfl_dep_18_active = 1 } add = var:bfl_dep_18_withdrawal_requested }
+if = { limit = { var:bfl_dep_19_active = 1 } add = var:bfl_dep_19_withdrawal_requested }
+if = { limit = { var:bfl_dep_20_active = 1 } add = var:bfl_dep_20_withdrawal_requested }
+if = { limit = { var:bfl_dep_21_active = 1 } add = var:bfl_dep_21_withdrawal_requested }
+if = { limit = { var:bfl_dep_22_active = 1 } add = var:bfl_dep_22_withdrawal_requested }
+if = { limit = { var:bfl_dep_23_active = 1 } add = var:bfl_dep_23_withdrawal_requested }
+if = { limit = { var:bfl_dep_24_active = 1 } add = var:bfl_dep_24_withdrawal_requested }
+if = { limit = { var:bfl_dep_25_active = 1 } add = var:bfl_dep_25_withdrawal_requested }
+if = { limit = { var:bfl_dep_26_active = 1 } add = var:bfl_dep_26_withdrawal_requested }
+if = { limit = { var:bfl_dep_27_active = 1 } add = var:bfl_dep_27_withdrawal_requested }
+if = { limit = { var:bfl_dep_28_active = 1 } add = var:bfl_dep_28_withdrawal_requested }
+if = { limit = { var:bfl_dep_29_active = 1 } add = var:bfl_dep_29_withdrawal_requested }
+if = { limit = { var:bfl_dep_30_active = 1 } add = var:bfl_dep_30_withdrawal_requested }
+if = { limit = { var:bfl_dep_31_active = 1 } add = var:bfl_dep_31_withdrawal_requested }
+if = { limit = { var:bfl_dep_32_active = 1 } add = var:bfl_dep_32_withdrawal_requested }
+}
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables }
+    bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
+    bfl_protected_cash = {
+        value = bfl_liabilities subtract = bfl_withdrawals_due min = 0
+        multiply = 0.25 add = bfl_withdrawals_due add = 25 add = var:bfl_cash_committed
+    }
+    bfl_free_cash = { value = gold subtract = bfl_protected_cash min = 0 }
+    bfl_capital_headroom = { value = bfl_assets multiply = -0.10 add = bfl_equity min = 0 }
+    bfl_negative_payment = { value = var:bfl_payment multiply = -1 }
+    bfl_royalty_rate = {
+        value = 0
+        if = { limit = { var:bfl_royalty_tier = 1 } value = 0.0025 }
+        if = { limit = { var:bfl_royalty_tier = 2 } value = 0.005 }
+        if = { limit = { var:bfl_royalty_tier = 3 } value = 0.01 }
+        if = { limit = { var:bfl_royalty_tier = 4 } value = 0.02 }
+    }
+    bfl_ai_charter_score = { value = 0 if = { limit = { gold > 1500 } add = 10 } }

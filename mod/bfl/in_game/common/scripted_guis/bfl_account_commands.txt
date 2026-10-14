@@ -1,0 +1,150 @@
+﻿bfl_set_royalty_0 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 0 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
+        cmf_log = { action = bfl_log_royalty_0 } } }
+        }
+bfl_set_royalty_1 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 1 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
+        cmf_log = { action = bfl_log_royalty_1 } } }
+        }
+bfl_set_royalty_2 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 2 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
+        cmf_log = { action = bfl_log_royalty_2 } } }
+        }
+bfl_set_royalty_3 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 3 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
+        cmf_log = { action = bfl_log_royalty_3 } } }
+        }
+bfl_set_royalty_4 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 4 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
+        cmf_log = { action = bfl_log_royalty_4 } } }
+        }
+bfl_payout_0 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0 } } } }
+        }
+bfl_payout_25 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.25 } } } }
+        }
+bfl_payout_50 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.5 } } } }
+        }
+bfl_deposit_1 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes } } }
+        }
+bfl_deposit_2 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 2 } bfl_open_deposit = yes } } }
+        }
+bfl_withdraw = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { bfl_request_all_withdrawals = yes } } }
+        }
+bfl_recapitalize_command = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_recapitalize = yes } } }
+        }
+bfl_suspend_command = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_suspend_new_business = yes } } }
+        }
+bfl_facility_0 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_facility_mode value = 0 } } } }
+        }
+bfl_facility_1 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_facility_mode value = 1 } } } }
+        }
+bfl_facility_2 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_facility_mode value = 2 } } } }
+        }
+bfl_rate_0 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_demand_rate value = 0 } } } }
+        }
+bfl_rate_1 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_demand_rate value = 0.01 } } } }
+        }
+bfl_rate_2 = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_demand_rate value = 0.02 } } } }
+        }
+bfl_select_profile = {
+            scope = country
+            is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { remove_variable = bfl_profile_offered bfl_offer_profile = yes } } }
+        }
+bfl_independent_view = { scope = country is_shown = { bfl_is_independent_bank = yes } }
+bfl_charter_view = { scope = country is_shown = { bfl_has_management = yes country_type = location } }
+bfl_permission_demand_deposit = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_demand_deposit = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_demand_deposit = yes } } } } }
+bfl_permission_term_deposit = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_term_deposit = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_term_deposit = yes } } } } }
+bfl_permission_sovereign_credit = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_sovereign_credit = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_sovereign_credit = yes } } } } }
+bfl_permission_native_takeover = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_native_takeover = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_native_takeover = yes } } } } }
+bfl_permission_bond_underwriting = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_bond_underwriting = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_bond_underwriting = yes } } } } }
+bfl_permission_debt_resale = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_debt_resale = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_debt_resale = yes } } } } }
+bfl_permission_sovereign_restructuring = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_sovereign_restructuring = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_sovereign_restructuring = yes } } } } }
+bfl_permission_commercial_bill = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commercial_bill = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commercial_bill = yes } } } } }
+bfl_permission_commodity_inventory = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commodity_inventory = yes } } } } }
+bfl_permission_commenda = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commenda = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commenda = yes } } } } }
+bfl_permission_corporate_credit = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_corporate_credit = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_corporate_credit = yes } } } } }
+bfl_permission_company_equity = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_company_equity = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_company_equity = yes } } } } }
+bfl_permission_bank_subscription = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_bank_subscription = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_bank_subscription = yes } } } } }
+bfl_permission_bank_share_transfer = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_bank_share_transfer = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_bank_share_transfer = yes } } } } }
+bfl_permission_collateral = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_collateral = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_collateral = yes } } } } }
+bfl_permission_warehouse_receipt = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_warehouse_receipt = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_warehouse_receipt = yes } } } } }
+bfl_permission_commodity_forward = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_forward = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commodity_forward = yes } } } } }
+bfl_permission_project_security = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_project_security = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_project_security = yes } } } } }
+bfl_permission_sovereign_note = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_sovereign_note = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_sovereign_note = yes } } } } }
+bfl_permission_secured_liquidity = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_secured_liquidity = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_secured_liquidity = yes } } } } }
+bfl_permission_clearing = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes } } } } }
+bfl_permission_margining = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_margining = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_margining = yes } } } } }
+bfl_permission_public_backstop = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_public_backstop = yes } AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_public_backstop = yes } } } } }

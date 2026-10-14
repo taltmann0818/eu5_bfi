@@ -1,0 +1,17 @@
+﻿bfl_register_company = {
+    if = { limit = { bfl_is_company = yes NOT = { has_variable = bfl_company_schema } }
+        set_variable = { name = bfl_company_schema value = 1 }
+        set_variable = { name = bfl_company_buffer value = 100 }
+        set_variable = { name = bfl_company_mandate value = 0 }
+        set_variable = { name = bfl_company_verified_profit value = 0 }
+        set_variable = { name = bfl_company_last_period value = 0 }
+    }
+}
+# Native operating identity, trade routes and native income hooks remain authoritative.
+bfl_process_company = {
+    bfl_register_company = yes
+    if = { limit = { bfl_period > var:bfl_company_last_period }
+        # No unexplained treasury delta is treated as company earnings.
+        set_variable = { name = bfl_company_last_period value = bfl_period }
+    }
+}

@@ -1,0 +1,19 @@
+# Ledger schema 1
+
+Native country `gold` is the only cash balance. All values are gold unless explicitly units, annual fractions, periods, quantities or enums. `bfl_schema = 1` is idempotent; startup and load discovery do not grant money, pay a coupon or accrue a month.
+
+`design/slots.json` is the field/bounds authority: 32 deposit accounts, 32 custom contracts, 16 inventory lots, 16 shareholder pools, 16 offers and 16 branches per institution. No contract uses a proxy country. Slots have active/generation fields. Scope-valued party references remain absent until a real party is assigned; missing parties retain claims and require repair rather than retargeting a human player.
+
+Profiles: 0 pending, 1 Merchant, 2 Overseas. States: 0 operating, 1 stressed, 2 restricted, 3 insolvent, 4 resolving, 5 closed. Current runtime transitions cover 0–3; full resolution/closure remains acceptance and development work. Servicing permissions are independent of new-business research/profile gates.
+
+Balance sheet: cash + conservative native credit snapshot + funded inventory/project value − deposits/credited interest − notes − other payables. Native credit is conservatively snapshotted at the lower of native face and remaining debt; it is provisional opening exposure, **not** a realized receipt or fully tracked acquisition-basis ledger. P06–P08 must establish persistent per-claim cost, default and recovery metadata before advanced credit accounting is enabled.
+
+Demand and term accounts store principal and accepted annual rate. Monthly credited interest changes the liability and bank loss carryforward, never cash. The carried remainder stores the **annual-gold numerator**: `numerator = principal * annual_rate + remainder; credited = floor(numerator / 12 * 100) / 100; remainder = numerator - credited * 12`. This prevents recurring-decimal cent loss. Engine fixed-point precision still needs P08 measurement.
+
+Withdrawals pay interest claims first, then principal, from actual cash after the operating buffer and separately committed funds. An unpaid request stays queued. Repeating an already completed request cannot recreate its claim. Deposits do not add equity; subscriptions do not add profits. Term withdrawals are unavailable before the recorded maturity period.
+
+Custom funded bills are one-month payment claims backed by the payer's actual 100 gold transfer. The bank books a payable and committed cash; redemption removes both exactly once. Bank capital subscriptions buy units using pre-transfer NAV, and identified holders receive their actual fraction of funded dividends. Unidentified opening founder entitlements stay retained rather than being assigned to the sovereign. Secondary trading and a complete legacy ownership migration are outstanding.
+
+The bank owns the once-per-period sequence: reconcile roles/assets → opening productive-asset snapshot → deposits/withdrawals → distress → royalty → loss offsets/dividends → facility adapter → modifiers → completion stamp. Load/GUI refresh never runs this sequence. All financial GUI mutations re-resolve the live subject relationship; view expansion is local presentation state.
+
+Native bank income and coupon receipts are not read from unexplained treasury changes. P07-gated receipt registers default to zero. Losses are offset before dividends. Actual holder payments consume the same realized reserve once; undistributed rounding and unknown-founder shares remain retained. Royalty deferrals are administrative records, not accrued native debt. All unknown bond adapters reject before cash mutation.

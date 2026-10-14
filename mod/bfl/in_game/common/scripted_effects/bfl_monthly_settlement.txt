@@ -1,0 +1,17 @@
+﻿bfl_process_accounts = {
+    if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+        save_scope_as = bfl_bank
+        bfl_reconcile_charter = yes
+        bfl_reconcile_native_assets = yes
+        set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
+        bfl_accrue_deposits = yes
+        bfl_evaluate_distress = yes
+        bfl_settle_royalty = yes
+        bfl_settle_dividends = yes
+        if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
+            bfl_run_controller_bond_facility = yes
+        }
+        bfl_apply_royalty_modifiers = yes
+        set_variable = { name = bfl_last_period value = bfl_period }
+    }
+}

@@ -1,0 +1,30 @@
+﻿bfl_purchase_funded_bill = {
+            type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { gold >= 100 } } allow = { scope:actor = { gold >= 100 } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_is_bank = yes }
+                enabled = { bfl_can_originate_commercial_bill = yes var:bfl_accept_deposits = 1 NOT = { this = scope:actor } }
+            }
+            effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { bfl_issue_funded_bill = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_subscribe_bank = {
+            type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { gold >= 100 } } allow = { scope:actor = { gold >= 100 } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_is_bank = yes }
+                enabled = { bfl_can_originate_bank_subscription = yes var:bfl_accept_deposits = 1 NOT = { this = scope:actor } }
+            }
+            effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { bfl_subscribe_bank_capital = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_redeem_funded_bills = {
+        type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never potential = { } allow = { }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+            column = { data = country_diplomacy_info_loan } visible = { bfl_has_accounts = yes } enabled = { bfl_has_accounts = yes }
+        }
+        effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { bfl_redeem_matured_bills = yes } }
+        ai_will_do = { value = 0 }
+    }
