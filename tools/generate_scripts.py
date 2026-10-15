@@ -43,7 +43,7 @@ def age_gate(age):
 
 def initialize():
     metadata = {
-        'name':'Banking, Finance and Trade Companies — 0.0.1_DEV',
+        'name':'Banking, Finance and Trade Companies — 0.0.2_dev',
         'id':'bfl_banking_finance_companies','version':TUNE['version'],'game_id':'eu5',
         'supported_game_version':'1.4.1',
         'short_description':'Development banking, chartered sovereign finance and native trade-company investment. Requires CMF 2.5.0.',
@@ -92,14 +92,14 @@ def initialize():
     bfl_is_research_owner = { bfl_has_management = yes }
     bfl_research_merchant = {
         OR = {
-            AND = { bfl_is_independent_bank = yes var:bfl_profile = 1 }
-            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile = 1 } }
+            AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 1 }
+            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 1 } }
         }
     }
     bfl_research_overseas = {
         OR = {
-            AND = { bfl_is_independent_bank = yes var:bfl_profile = 2 }
-            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile = 2 } }
+            AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 2 }
+            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 2 } }
         }
     }
     bfl_can_begin_charter = {
@@ -161,7 +161,7 @@ def initialize():
     bfl_ai_charter_score = { value = 0 if = { limit = { gold > 1500 } add = 10 } }
     '''
     common('script_values','accounting',values)
-    defaults = {'profile':0,'state':0,'native_credit_value':0,'inventory_value':0,'project_value':0,'notes_outstanding':0,'other_payables':0,'cash_committed':0,'loss_carryforward':0,'profit_services':0,'profit_credit':0,'profit_controller':0,'profit_trading':0,'profit_goods':0,'profit_ventures':0,'profit_company':0,'last_period':0,'royalty_tier':1,'royalty_paid':0,'royalty_deferred':0,'dividend_paid':0,'facility_mode':0,'facility_requested':0,'facility_paid':0,'facility_blocked':0,'demand_rate':0.01,'term_rate':0.02,'payout_ratio':0.25,'state_units':0,'total_units':0,'accept_deposits':0,'policy_revision':1}
+    defaults = {'profile':0,'state':0,'native_credit_value':0,'inventory_value':0,'project_value':0,'notes_outstanding':0,'other_payables':0,'cash_committed':0,'loss_carryforward':0,'profit_services':0,'profit_credit':0,'profit_controller':0,'profit_trading':0,'profit_goods':0,'profit_ventures':0,'profit_company':0,'last_period':0,'royalty_tier':1,'royalty_paid':0,'royalty_deferred':0,'dividend_paid':0,'state_dividend_paid':0,'facility_mode':0,'facility_requested':0,'facility_paid':0,'facility_blocked':0,'demand_rate':0.01,'term_rate':0.02,'payout_ratio':0.25,'state_units':0,'total_units':0,'accept_deposits':0,'policy_revision':1}
     body = 'if = { limit = { NOT = { has_variable = bfl_schema } }\nset_variable = { name = bfl_schema value = 1 }\n'
     for k,v in defaults.items():
         body += f'set_variable = {{ name = bfl_{k} value = {v} }}\n'
@@ -177,7 +177,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_initialize_history = yes\nbfl_reconcile_native_assets = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = {
@@ -247,6 +247,7 @@ def permissions():
         if a.get('charter'):
             potential += ' country_type = location has_reform = government_reform:bfl_state_chartered_bank'
         definitions += f'{key} = {{\nage = {AGES[a["age"]-1]}\nicon = {key}\n'
+        definitions += f'bfl_enable_{a["id"]} = yes\n'
         for req in a['requires']:
             definitions += f'requires = bfl_{req}\n'
         definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])} }}\nai_weight = {{ add = 1 }}\n}}\n'
@@ -585,6 +586,7 @@ def treasury_and_resolution():
     # entitlements stay retained rather than being assigned to the sovereign.
     dividends='''
     set_variable = { name = bfl_dividend_paid value = 0 }
+    set_variable = { name = bfl_state_dividend_paid value = 0 }
     if = { limit = { bfl_is_bank = yes var:bfl_state < 2 var:bfl_total_units > 0 }
         save_scope_as = bfl_bank
         bfl_offset_losses = yes
@@ -598,6 +600,7 @@ def treasury_and_resolution():
             add_gold = bfl_negative_payment
             overlord = { add_gold = scope:bfl_bank.var:bfl_payment }
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
+            set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }
     '''
     for i in range(1,17):
@@ -685,6 +688,7 @@ def treasury_and_resolution():
                 bfl_run_controller_bond_facility = yes
             }
             bfl_apply_royalty_modifiers = yes
+            bfl_record_history = yes
             set_variable = { name = bfl_last_period value = bfl_period }
         }
     }
@@ -861,7 +865,7 @@ def hooks_and_commands():
 
 
 def gui_and_localization():
-    loc('bfl_finance_title','Banking & Finance · 0.0.1_DEV')
+    loc('bfl_finance_title','Banking & Finance · 0.0.2_dev')
     loc('bfl_overview','Accounts and specialization')
     loc('bfl_treasury','Treasury funding')
     loc('bfl_deposits','Deposits and rates')
@@ -880,71 +884,6 @@ def gui_and_localization():
     loc('bfl_royalty_explanation','Annual asset tiers: waived / 0.25% / 0.50% / 1% / 2%. Monthly assessment excludes cash and new principal. Higher tiers reduce burgher satisfaction and subject loyalty. Unpaid royalty is a waivable assessment, not a loan.')
     loc('bfl_dividend_explanation','Only verified realized net earnings enter the dividend reserve. Losses and royalty costs are offset first. The sovereign receives its actual ownership share; principal and fresh funding never enter profits.')
     loc('bfl_deposit_explanation','Each account stores its accepted fixed annual rate. Changing the rate affects new accounts. Term accounts mature after 12 months. Withdrawal shortages remain liabilities and suspend new commitments.')
-    def button(key):
-        return f'''button_regular = {{ size = {{ -1 28 }} layoutpolicy_horizontal = expanding text = "{key}" tooltip = "{key}"
-            enabled = "[GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            onclick = "[GetScriptedGui('{key}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        }}\n'''
-    def text(key):
-        return f'text_multi = {{ text = "{key}" autoresize = yes layoutpolicy_horizontal = expanding }}\n'
-    def permission_row(instrument):
-        return f'''hbox = {{ spacing = 5
-            icon = {{ size = {{ 18 18 }} texture = "gfx/interface/icons/bfl/lock.dds" visible = "[Not(GetScriptedGui('bfl_permission_{instrument}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }}
-            text_single = {{ text = "bfl_{instrument}" autoresize = yes }}
-        }}\n'''
-    def section(key,content):
-        return f'''button_regular = {{ text = "{key}" tooltip = "{key}" size = {{ -1 30 }} layoutpolicy_horizontal = expanding onclick = "[LateralView.Vars.Toggle('{key}_expanded')]" }}
-        vbox = {{ spacing = 4 layoutpolicy_horizontal = expanding visible = "[LateralView.Vars.Exists('{key}_expanded')]" {content} }}\n'''
-    bank_statement = '''
-        bfl_statement = { datacontext = "[GetPlayer]"
-            visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        }
-        bfl_statement = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
-            visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        }
-    '''
-    content = section('bfl_overview',bank_statement+text('bfl_accounts_explanation')+button('bfl_select_profile'))
-    content += section('bfl_deposits',text('bfl_deposit_explanation')+''.join(button(k) for k in ['bfl_deposit_1','bfl_deposit_2','bfl_withdraw','bfl_rate_0','bfl_rate_1','bfl_rate_2'])+permission_row('term_deposit'))
-    content += section('bfl_treasury',text('bfl_royalty_explanation')+''.join(button(f'bfl_set_royalty_{i}') for i in range(5))+text('bfl_dividend_explanation')+''.join(button(f'bfl_payout_{i}') for i in [0,25,50])+''.join(button(f'bfl_facility_{i}') for i in range(3))+permission_row('bond_underwriting'))
-    content += section('bfl_debt',text('bfl_debt_explanation')+''.join(permission_row(k) for k in ['sovereign_credit','native_takeover','debt_resale','sovereign_restructuring','corporate_credit']))
-    content += section('bfl_goods',text('bfl_goods_explanation')+''.join(permission_row(k) for k in ['commodity_inventory','warehouse_receipt','commodity_forward','margining']))
-    content += section('bfl_ventures',text('bfl_ventures_explanation')+''.join(permission_row(k) for k in ['commenda','company_equity','project_security','bank_subscription','bank_share_transfer']))
-    content += section('bfl_monetary',text('bfl_monetary_explanation')+''.join(permission_row(k) for k in ['commercial_bill','sovereign_note','secured_liquidity','clearing','public_backstop']))
-    content += section('bfl_distress',text('bfl_dev_notice')+button('bfl_recapitalize_command')+button('bfl_suspend_command'))
-    statement_rows = 'text_single = { raw_text = "[Country.GetName]" autoresize = yes }\n'
-    for label,var in [('Specialization (1 Merchant / 2 Overseas)','bfl_profile'),('Operating state (0–5)','bfl_state'),('Last processed month','bfl_last_period'),('Royalty paid','bfl_royalty_paid'),('Royalty assessment deferred','bfl_royalty_deferred'),('State dividends paid','bfl_dividend_paid'),('State equity units','bfl_state_units'),('Total equity units','bfl_total_units')]:
-        statement_rows += f'text_single = {{ raw_text = "{label}: [Country.MakeScope.GetVariable(\'{var}\').GetValue|2]" autoresize = yes }}\n'
-    statement_rows += 'text_single = { raw_text = "Cash: [Country.GetCurrencyBalance(\'gold\')|2]" autoresize = yes }\n'
-    for label,value in [('Liabilities','bfl_liabilities'),('Equity','bfl_equity'),('Protected cash','bfl_protected_cash'),('Free cash','bfl_free_cash')]:
-        statement_rows += f'text_single = {{ raw_text = "{label}: [GuiScope.SetRoot(Country.MakeScope).ScriptValue(\'{value}\')|2]" autoresize = yes }}\n'
-    write('in_game/gui/bfl_economy_finance.gui',f'''
-    types BFLFinanceTypes {{
-        type bfl_statement = vbox {{ layoutpolicy_horizontal = expanding
-            spacing = 3 {statement_rows}
-        }}
-        type bfl_finance_section = vbox {{
-            layoutpolicy_horizontal = expanding
-            spacing = 5
-                button_regular = {{ size = {{ -1 36 }} layoutpolicy_horizontal = expanding text = "bfl_finance_title" tooltip = "bfl_finance_title"
-                    onclick = "[LateralView.Vars.Toggle('bfl_finance_expanded')]"
-                }}
-                vbox = {{ layoutpolicy_horizontal = expanding spacing = 5
-                    visible = "[LateralView.Vars.Exists('bfl_finance_expanded')]"
-                    text_multi = {{ text = "bfl_no_bank" autoresize = yes layoutpolicy_horizontal = expanding
-                        visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
-                    }}
-                    scrollarea = {{ size = {{ -1 320 }} layoutpolicy_horizontal = expanding
-                        scrollbarpolicy_horizontal = always_off
-                        scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-                        visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                        scrollwidget = {{
-                            vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 {content} }}
-                        }}
-                    }}
-                }}
-        }}
-    }}
-    ''')
     # Numeric statement snapshots are stored on each institution; this view reads the live actor.
     # Scope.GetVariable / GetCountry is native CMF's demonstrated public GUI scope API.
     loc('bfl_liquidity_warning','Bank liquidity requires attention')
@@ -972,6 +911,8 @@ def gui_and_localization():
         if not key.endswith('_desc'):
             LOC[key+'_name'] = value
     loc('bfl_banking_finance_companies__presentation__interface_name','Interface')
+    from generate_interface import generate as generate_interface
+    generate_interface(common, effect, loc, write, TUNE, ADV, INST)
     localization='l_english:\n'
     for key,value in sorted(LOC.items()):
         localization += f' {key}: "{value.replace(chr(34),chr(39))}"\n'

@@ -1,0 +1,74 @@
+{
+  "term_deposits": {
+    "history": "Merchants cannot always employ their money at once. By entrusting it to a banking house for an agreed term, they give the banker a steadier source of capital and receive compensation for surrendering immediate access to their funds.",
+    "technical": "Allows fixed-rate deposits of 100 gold with a twelve-month maturity. Interest accrues monthly at the rate accepted when the account opens; immature principal cannot be withdrawn. Deposits remain liabilities of the bank."
+  },
+  "bank_capital_subscriptions": {
+    "history": "A banking house need not rely entirely on the fortune of its founding family. Subscriptions bring additional partners into the enterprise, pooling their capital while recording each investor's claim upon its future prosperity.",
+    "technical": "Allows primary subscriptions of 100 gold into a bank. New ownership units are priced at current net asset value. Subscription proceeds increase paid-in capital rather than realized profit and buy a proportional claim on subsequent distributions."
+  },
+  "debt_restructuring": {
+    "history": "A debt that cannot be collected on its appointed day need not be worthless. Creditors may preserve more of their claims by agreeing to new terms than by pressing a distressed debtor into outright default.",
+    "technical": "Unlocks the sovereign restructuring mandate. Revised maturity, interest and principal must attach to the existing claim, with the debtor's agreement. Execution remains unavailable until native debt reconciliation is supported."
+  },
+  "commercial_bills": {
+    "history": "Carrying coin between commercial centers is costly and dangerous. Written bills allow merchants to settle obligations through trusted banking houses, making the reputation of the issuer an instrument of trade.",
+    "technical": "Allows fully funded payment bills. The purchaser pays 100 gold before issuance; the bank records an equal payable and cash commitment. The named holder may redeem the bill after one month, once only. Issuance is not profit."
+  },
+  "commodity_investments": {
+    "history": "Bankers who finance trade can also hold the goods themselves. Grain, wool and other merchandise become investments whose value depends upon storage, transport and the changing needs of distant markets.",
+    "technical": "Unlocks the Merchant Finance inventory mandate. Commodity positions must represent funded native goods holdings and preserve acquisition cost, quantity and custody. Trading execution remains unavailable in this development build."
+  },
+  "commenda": {
+    "history": "A merchant undertaking a voyage may possess the skill to trade without the capital to fill a ship. The commenda joins a financier's money to a traveling partner's labor, sharing the venture's proceeds according to their agreement.",
+    "technical": "Unlocks the Overseas Investment voyage-partnership mandate. Each venture requires an identified partner, funded capital, a recorded profit-sharing agreement and settlement of realized proceeds. Project execution remains unavailable in this development build."
+  },
+  "corporate_credit": {
+    "history": "As commercial enterprises outgrow a single voyage or season, their need for credit becomes more enduring. Banking houses learn to judge the resources and prospects of an enterprise as well as the standing of its individual merchants.",
+    "technical": "Unlocks the Merchant Finance corporate credit mandate. Loans must transfer bank cash to an identified enterprise and create an equal recoverable claim; principal repayments do not enter profits. Native execution remains unavailable."
+  },
+  "company_equity": {
+    "history": "Large trading enterprises require fortunes that few merchants can supply alone. Dividing ownership among investors allows a company to assemble lasting capital while distributing the risks and rewards of its undertakings.",
+    "technical": "Unlocks the Overseas Investment company-equity mandate. Financial shares are recorded separately from political subject control. Only verified company distributions may become bank income; subscriptions and return of capital are excluded. Native execution remains unavailable."
+  },
+  "bank_share_dealing": {
+    "history": "A partner's fortune need not remain tied to the same banking house forever. Recognized transfers of ownership let investors sell their interests to others while the institution continues its business without withdrawing its capital.",
+    "technical": "Permits the bank-share transfer service to move existing registered units between identified holders. A transfer changes ownership without issuing new units or creating bank profit. The registry must have capacity and preserve each holder's entitlement."
+  },
+  "collateralization": {
+    "history": "Trust is strengthened when a promise is supported by property. By recording a pledge and the creditor's rights over it, bankers can lend against assets that may be recovered if the debtor fails to honor the agreement.",
+    "technical": "Unlocks recorded collateral pledges and their eligibility checks. Encumbered assets cannot secure a second claim, and recovery must preserve the original debt relationship. Native collateral execution remains unavailable."
+  },
+  "warehouse_receipts": {
+    "history": "Goods kept in a reputable warehouse can support commerce without being moved at every sale. A receipt establishes a claim to the stored merchandise, allowing its owner to obtain finance while the goods remain in custody.",
+    "technical": "Unlocks Merchant Finance receipts backed by identified inventory lots. Each receipt reserves ten unencumbered units and charges a funded custody fee. Native goods custody must be supported before new receipts can be issued."
+  },
+  "commodity_forwards": {
+    "history": "A harvest, shipment or workshop order may be sold before its delivery. Agreements that fix a future price help merchants arrange their affairs despite the uncertainty of distant markets and changing seasons.",
+    "technical": "Unlocks Merchant Finance forward-delivery contracts. Each agreement must record its counterparty, goods, quantity, delivery date and backing without reusing encumbered inventory. Native trading execution remains unavailable."
+  },
+  "project_security": {
+    "history": "Distant enterprises are difficult for their financiers to oversee. Claims upon their assets and proceeds, set down before capital is advanced, give investors a means of protecting their interests when a venture goes astray.",
+    "technical": "Unlocks security for Overseas Investment projects. Identified project assets and proceeds must be pledged to a single recorded obligation, with priority preserved through settlement or recovery. Native project execution remains unavailable."
+  },
+  "sovereign_banknotes": {
+    "history": "A bank supported by public authority may circulate written promises to pay in place of heavy coin. Their acceptance rests upon confidence that the institution will redeem them and that the issuing authority will uphold its obligations.",
+    "technical": "Unlocks sovereign note issuance for an authorized chartered bank. Notes are redeemable liabilities; backing excludes cash raised by selling the notes themselves. Native issuance and holder-payment routing remain unavailable."
+  },
+  "liquidity_facilities": {
+    "history": "Even a solvent banking house may be unable to meet every demand for coin at once. Temporary advances against sound assets can bridge this shortage, provided that assistance does not conceal losses that the institution cannot bear.",
+    "technical": "Unlocks secured temporary liquidity. Funding must come from a real counterparty, remain within cash and capital limits and carry recorded collateral. Queued withdrawals retain priority. Native facility execution remains unavailable."
+  },
+  "advanced_clearing": {
+    "history": "Banking houses that owe one another many payments need not settle every obligation separately in coin. Clearing accounts reconcile their claims and transfer only the remaining balance, reducing the money required to sustain commerce.",
+    "technical": "Unlocks net settlement of verified reciprocal obligations between participating institutions. Clearing must preserve every holder's entitlement and settle the funded net balance without creating money. Native interbank settlement remains unavailable."
+  },
+  "margining_and_risk_management": {
+    "history": "Merchants who promise future deliveries face changing prices long before their contracts mature. Requiring additional security as exposures grow gives bankers a means of containing losses before an unfavorable market becomes a default.",
+    "technical": "Unlocks margin requirements for Merchant Finance forward positions. Exposure must be measured against available collateral and cash, with additional funding required before commitments increase. Native trading and margin execution remain unavailable."
+  },
+  "public_financial_backstops": {
+    "history": "When the failure of a great banking house threatens public credit and commerce, the government may intervene. Such support binds the resources of the treasury to the bank's recovery and makes the terms of assistance a matter of public policy.",
+    "technical": "Unlocks the public backstop mandate for an authorized chartered bank. Assistance requires a real treasury contribution and recorded claims or ownership units; guarantees cannot mint cash or erase losses. Standing backstop execution is not yet implemented."
+  }
+}

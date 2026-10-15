@@ -22,6 +22,7 @@ set_variable = { name = bfl_royalty_tier value = 1 }
 set_variable = { name = bfl_royalty_paid value = 0 }
 set_variable = { name = bfl_royalty_deferred value = 0 }
 set_variable = { name = bfl_dividend_paid value = 0 }
+set_variable = { name = bfl_state_dividend_paid value = 0 }
 set_variable = { name = bfl_facility_mode value = 0 }
 set_variable = { name = bfl_facility_requested value = 0 }
 set_variable = { name = bfl_facility_paid value = 0 }
@@ -916,6 +917,7 @@ set_variable = { name = bfl_branch_16_fee value = 0 }
 set_variable = { name = bfl_branch_16_expiry value = 0 }
 set_variable = { name = bfl_branch_16_state value = 0 }
 }
+bfl_initialize_history = yes
 bfl_reconcile_native_assets = yes
 }
 

@@ -42,7 +42,7 @@ def check_script(path):
 
 def main():
     metadata=json.loads((MOD/'.metadata/metadata.json').read_text())
-    check(metadata['version']=='0.0.1_DEV','Metadata version must match requested version')
+    check(metadata['version']=='0.0.2_dev','Metadata version must match requested version')
     check(metadata['game_id']=='eu5','Wrong game id')
     check(metadata['supported_game_version']=='1.4.1','Game pin changed')
     check(metadata['relationships'][0]['id']=='community_mod_framework','CMF dependency missing')
@@ -93,7 +93,18 @@ def main():
             check(data[84:88]==b'DXT5',f'Expected BC3/DXT5 texture: {path}')
     economy=(MOD/'in_game/gui/economy_lateralview.gui').read_text(encoding='utf-8-sig')
     types=(MOD/'in_game/gui/vanilla/bfl_economy_vanilla_types.gui').read_text(encoding='utf-8-sig')
-    check(economy.count('name = "bfl_finance_section"')==1,'Finance insertion must occur exactly once')
+    for kind in ('dividends','royalties','facility'):
+        check(economy.count(f'name = "bfl_income_{kind}"')==1,f'Bank {kind} row must occur exactly once')
+    check('layoutpolicy_horizontal = fixed\n\t\t\t\t\t\t\t\t\t\t\tsize = { 49%' not in economy,'Native budget columns must retain their layout')
+    credit=(MOD/'in_game/gui/credit.gui').read_text(encoding='utf-8-sig')
+    check('bfl_native_credit' not in credit,'Credit must be unified')
+    technology=(MOD/'in_game/gui/technology_lateralview.gui').read_text(encoding='utf-8-sig')
+    check(technology.count('template unlock_icon {')==1,'Advance badge override duplicated a native template')
+    for panel in ('funding','investment'):
+        check(credit.count(f'name = "bfl_credit_{panel}"')==1,f'Unified Credit {panel} panel must occur once')
+    for provider in ('GetLoansTaken','GetLoansGiven'):
+        check(provider in credit,f'Native loan list missing: {provider}')
+    check('bfl_finance_section' not in economy,'Balance must not contain the old finance accordion')
     check('name = "balance_subheader"' in economy,'Native budget controls missing')
     check(types.count('template economy_main_tabs')==1,'Shared native economy tab template must have one owner')
     check('types EconomyLateralviewTypes' not in economy,'Native types duplicated in replacement')

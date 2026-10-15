@@ -1,0 +1,4 @@
+﻿bfl_can_set_royalty = {
+country_type = location has_reform = government_reform:bfl_state_chartered_bank
+        exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev }
+}

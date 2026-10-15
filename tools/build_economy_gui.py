@@ -36,12 +36,13 @@ def build(game, pin=False):
     types, view = text[:pos], text[pos:]
     if 'template economy_main_tabs' not in types or 'template EstateIncomeBreakdownTooltip' not in types:
         raise ValueError('Native template manifest changed')
-    anchor = '\t\t\twidget = {\n\t\t\t\tusing = layoutpolicy_expanding\n\n\t\t\t\tvbox = {\n\t\t\t\t\twidget = {'
-    name_pos = view.index('name = "balance_subheader"')
-    insert_pos = view.rfind(anchor,0,name_pos)
-    if insert_pos < 0 or name_pos - insert_pos > 700:
-        raise ValueError('Economy insertion anchor changed')
-    insertion = '\t\t\tbfl_finance_section = { name = "bfl_finance_section" }\n\n'
+    anchor = '\t\t\t\t\t\t\t\t\t\t\t#tariff income'
+    insert_pos = view.index(anchor)
+    insertion = '\n'.join(f'''\t\t\t\t\t\t\t\t\t\t\tbfl_income_{kind} = {{
+        name = "bfl_income_{kind}"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }}''' for kind in ('dividends','royalties','facility'))+'\n\n'
     view = view[:insert_pos] + insertion + view[insert_pos:]
     # File-scoped constants must accompany each extracted consumer.
     constants = '\n'.join(re.findall(r'^@[^\n]+', text, re.M))
@@ -52,8 +53,11 @@ def build(game, pin=False):
         baseline_path.parent.mkdir(parents=True,exist_ok=True)
         baseline_path.write_text(json.dumps(baseline,indent=2)+'\n')
     # Prove the sole logical change by reversing the extraction and injection.
-    assert types + view.replace(insertion,'',1) == text
-    print('Economy generated: native types/templates preserved once; one inline finance insertion.')
+    restored=view.replace(insertion,'',1)
+    assert types + restored == text
+    from generate_interface import build_credit
+    build_credit(game, baseline, pin)
+    print('Economy generated: Balance income rows and Credit homepage; native templates owned once.')
 
 
 if __name__ == '__main__':

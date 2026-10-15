@@ -610,8 +610,6 @@
 				}
 			}
 
-			bfl_finance_section = { name = "bfl_finance_section" }
-
 			widget = {
 				using = layoutpolicy_expanding
 
@@ -1646,6 +1644,22 @@
 													raw_text = "[EconomyView.GetIncome('trade')|2+=]@income!"
 												}
 											}
+
+											bfl_income_dividends = {
+        name = "bfl_income_dividends"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }
+											bfl_income_royalties = {
+        name = "bfl_income_royalties"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }
+											bfl_income_facility = {
+        name = "bfl_income_facility"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }
 
 											#tariff income
 											budget_card = {

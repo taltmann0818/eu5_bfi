@@ -1,4 +1,4 @@
-param([string]$Destination = (Join-Path $PSScriptRoot '..\dist\bfl-0.0.1_DEV'))
+param([string]$Destination = (Join-Path $PSScriptRoot '..\dist\bfl-0.0.2_dev'))
 $ErrorActionPreference = 'Stop'
 $source = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\mod\bfl'))
 $target = [IO.Path]::GetFullPath($Destination)
