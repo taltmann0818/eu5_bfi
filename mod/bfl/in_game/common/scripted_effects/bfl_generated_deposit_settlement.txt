@@ -6,6 +6,7 @@ if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_01_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_01_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_01_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -23,6 +24,7 @@ if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_02_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_02_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_02_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -40,6 +42,7 @@ if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_03_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_03_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_03_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -57,6 +60,7 @@ if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_04_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_04_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_04_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -74,6 +78,7 @@ if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_05_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_05_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_05_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -91,6 +96,7 @@ if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_06_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_06_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_06_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -108,6 +114,7 @@ if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_07_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_07_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_07_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -125,6 +132,7 @@ if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_08_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_08_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_08_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -142,6 +150,7 @@ if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_09_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_09_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_09_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -159,6 +168,7 @@ if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_10_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_10_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_10_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -176,6 +186,7 @@ if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_11_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_11_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_11_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -193,6 +204,7 @@ if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_12_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_12_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_12_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -210,6 +222,7 @@ if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_13_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_13_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_13_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -227,6 +240,7 @@ if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_14_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_14_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_14_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -244,6 +258,7 @@ if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_15_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_15_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_15_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -261,6 +276,7 @@ if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_16_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_16_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_16_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -278,6 +294,7 @@ if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_17_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_17_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_17_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -295,6 +312,7 @@ if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_18_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_18_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_18_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -312,6 +330,7 @@ if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_19_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_19_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_19_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -329,6 +348,7 @@ if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_20_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_20_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_20_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -346,6 +366,7 @@ if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_21_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_21_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_21_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -363,6 +384,7 @@ if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_22_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_22_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_22_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -380,6 +402,7 @@ if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_23_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_23_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_23_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -397,6 +420,7 @@ if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_24_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_24_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_24_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -414,6 +438,7 @@ if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_25_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_25_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_25_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -431,6 +456,7 @@ if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_26_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_26_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_26_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -448,6 +474,7 @@ if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_27_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_27_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_27_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -465,6 +492,7 @@ if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_28_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_28_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_28_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -482,6 +510,7 @@ if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_29_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_29_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_29_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -499,6 +528,7 @@ if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_30_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_30_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_30_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -516,6 +546,7 @@ if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_31_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_31_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_31_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -533,6 +564,7 @@ if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_withdrawal_requested >
     add_gold = bfl_negative_payment
     scope:bfl_party = { add_gold = scope:bfl_bank.var:bfl_payment }
     set_variable = { name = bfl_interest_paid value = { value = var:bfl_payment max = var:bfl_dep_32_interest_due } }
+    scope:bfl_party = { bfl_record_withdrawn_interest = yes }
     change_variable = { name = bfl_dep_32_interest_due subtract = var:bfl_interest_paid }
     change_variable = { name = bfl_dep_32_withdrawal_requested subtract = var:bfl_payment }
     change_variable = { name = bfl_payment subtract = var:bfl_interest_paid }
@@ -554,6 +586,7 @@ if = { limit = { var:bfl_dep_01_active = 1 }
             change_variable = { name = bfl_dep_01_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_01_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_01 = yes
             bfl_pay_deposit_01 = yes
         }
 if = { limit = { var:bfl_dep_02_active = 1 }
@@ -566,6 +599,7 @@ if = { limit = { var:bfl_dep_02_active = 1 }
             change_variable = { name = bfl_dep_02_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_02_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_02 = yes
             bfl_pay_deposit_02 = yes
         }
 if = { limit = { var:bfl_dep_03_active = 1 }
@@ -578,6 +612,7 @@ if = { limit = { var:bfl_dep_03_active = 1 }
             change_variable = { name = bfl_dep_03_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_03_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_03 = yes
             bfl_pay_deposit_03 = yes
         }
 if = { limit = { var:bfl_dep_04_active = 1 }
@@ -590,6 +625,7 @@ if = { limit = { var:bfl_dep_04_active = 1 }
             change_variable = { name = bfl_dep_04_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_04_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_04 = yes
             bfl_pay_deposit_04 = yes
         }
 if = { limit = { var:bfl_dep_05_active = 1 }
@@ -602,6 +638,7 @@ if = { limit = { var:bfl_dep_05_active = 1 }
             change_variable = { name = bfl_dep_05_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_05_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_05 = yes
             bfl_pay_deposit_05 = yes
         }
 if = { limit = { var:bfl_dep_06_active = 1 }
@@ -614,6 +651,7 @@ if = { limit = { var:bfl_dep_06_active = 1 }
             change_variable = { name = bfl_dep_06_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_06_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_06 = yes
             bfl_pay_deposit_06 = yes
         }
 if = { limit = { var:bfl_dep_07_active = 1 }
@@ -626,6 +664,7 @@ if = { limit = { var:bfl_dep_07_active = 1 }
             change_variable = { name = bfl_dep_07_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_07_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_07 = yes
             bfl_pay_deposit_07 = yes
         }
 if = { limit = { var:bfl_dep_08_active = 1 }
@@ -638,6 +677,7 @@ if = { limit = { var:bfl_dep_08_active = 1 }
             change_variable = { name = bfl_dep_08_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_08_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_08 = yes
             bfl_pay_deposit_08 = yes
         }
 if = { limit = { var:bfl_dep_09_active = 1 }
@@ -650,6 +690,7 @@ if = { limit = { var:bfl_dep_09_active = 1 }
             change_variable = { name = bfl_dep_09_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_09_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_09 = yes
             bfl_pay_deposit_09 = yes
         }
 if = { limit = { var:bfl_dep_10_active = 1 }
@@ -662,6 +703,7 @@ if = { limit = { var:bfl_dep_10_active = 1 }
             change_variable = { name = bfl_dep_10_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_10_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_10 = yes
             bfl_pay_deposit_10 = yes
         }
 if = { limit = { var:bfl_dep_11_active = 1 }
@@ -674,6 +716,7 @@ if = { limit = { var:bfl_dep_11_active = 1 }
             change_variable = { name = bfl_dep_11_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_11_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_11 = yes
             bfl_pay_deposit_11 = yes
         }
 if = { limit = { var:bfl_dep_12_active = 1 }
@@ -686,6 +729,7 @@ if = { limit = { var:bfl_dep_12_active = 1 }
             change_variable = { name = bfl_dep_12_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_12_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_12 = yes
             bfl_pay_deposit_12 = yes
         }
 if = { limit = { var:bfl_dep_13_active = 1 }
@@ -698,6 +742,7 @@ if = { limit = { var:bfl_dep_13_active = 1 }
             change_variable = { name = bfl_dep_13_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_13_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_13 = yes
             bfl_pay_deposit_13 = yes
         }
 if = { limit = { var:bfl_dep_14_active = 1 }
@@ -710,6 +755,7 @@ if = { limit = { var:bfl_dep_14_active = 1 }
             change_variable = { name = bfl_dep_14_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_14_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_14 = yes
             bfl_pay_deposit_14 = yes
         }
 if = { limit = { var:bfl_dep_15_active = 1 }
@@ -722,6 +768,7 @@ if = { limit = { var:bfl_dep_15_active = 1 }
             change_variable = { name = bfl_dep_15_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_15_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_15 = yes
             bfl_pay_deposit_15 = yes
         }
 if = { limit = { var:bfl_dep_16_active = 1 }
@@ -734,6 +781,7 @@ if = { limit = { var:bfl_dep_16_active = 1 }
             change_variable = { name = bfl_dep_16_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_16_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_16 = yes
             bfl_pay_deposit_16 = yes
         }
 if = { limit = { var:bfl_dep_17_active = 1 }
@@ -746,6 +794,7 @@ if = { limit = { var:bfl_dep_17_active = 1 }
             change_variable = { name = bfl_dep_17_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_17_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_17 = yes
             bfl_pay_deposit_17 = yes
         }
 if = { limit = { var:bfl_dep_18_active = 1 }
@@ -758,6 +807,7 @@ if = { limit = { var:bfl_dep_18_active = 1 }
             change_variable = { name = bfl_dep_18_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_18_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_18 = yes
             bfl_pay_deposit_18 = yes
         }
 if = { limit = { var:bfl_dep_19_active = 1 }
@@ -770,6 +820,7 @@ if = { limit = { var:bfl_dep_19_active = 1 }
             change_variable = { name = bfl_dep_19_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_19_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_19 = yes
             bfl_pay_deposit_19 = yes
         }
 if = { limit = { var:bfl_dep_20_active = 1 }
@@ -782,6 +833,7 @@ if = { limit = { var:bfl_dep_20_active = 1 }
             change_variable = { name = bfl_dep_20_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_20_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_20 = yes
             bfl_pay_deposit_20 = yes
         }
 if = { limit = { var:bfl_dep_21_active = 1 }
@@ -794,6 +846,7 @@ if = { limit = { var:bfl_dep_21_active = 1 }
             change_variable = { name = bfl_dep_21_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_21_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_21 = yes
             bfl_pay_deposit_21 = yes
         }
 if = { limit = { var:bfl_dep_22_active = 1 }
@@ -806,6 +859,7 @@ if = { limit = { var:bfl_dep_22_active = 1 }
             change_variable = { name = bfl_dep_22_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_22_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_22 = yes
             bfl_pay_deposit_22 = yes
         }
 if = { limit = { var:bfl_dep_23_active = 1 }
@@ -818,6 +872,7 @@ if = { limit = { var:bfl_dep_23_active = 1 }
             change_variable = { name = bfl_dep_23_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_23_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_23 = yes
             bfl_pay_deposit_23 = yes
         }
 if = { limit = { var:bfl_dep_24_active = 1 }
@@ -830,6 +885,7 @@ if = { limit = { var:bfl_dep_24_active = 1 }
             change_variable = { name = bfl_dep_24_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_24_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_24 = yes
             bfl_pay_deposit_24 = yes
         }
 if = { limit = { var:bfl_dep_25_active = 1 }
@@ -842,6 +898,7 @@ if = { limit = { var:bfl_dep_25_active = 1 }
             change_variable = { name = bfl_dep_25_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_25_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_25 = yes
             bfl_pay_deposit_25 = yes
         }
 if = { limit = { var:bfl_dep_26_active = 1 }
@@ -854,6 +911,7 @@ if = { limit = { var:bfl_dep_26_active = 1 }
             change_variable = { name = bfl_dep_26_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_26_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_26 = yes
             bfl_pay_deposit_26 = yes
         }
 if = { limit = { var:bfl_dep_27_active = 1 }
@@ -866,6 +924,7 @@ if = { limit = { var:bfl_dep_27_active = 1 }
             change_variable = { name = bfl_dep_27_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_27_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_27 = yes
             bfl_pay_deposit_27 = yes
         }
 if = { limit = { var:bfl_dep_28_active = 1 }
@@ -878,6 +937,7 @@ if = { limit = { var:bfl_dep_28_active = 1 }
             change_variable = { name = bfl_dep_28_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_28_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_28 = yes
             bfl_pay_deposit_28 = yes
         }
 if = { limit = { var:bfl_dep_29_active = 1 }
@@ -890,6 +950,7 @@ if = { limit = { var:bfl_dep_29_active = 1 }
             change_variable = { name = bfl_dep_29_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_29_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_29 = yes
             bfl_pay_deposit_29 = yes
         }
 if = { limit = { var:bfl_dep_30_active = 1 }
@@ -902,6 +963,7 @@ if = { limit = { var:bfl_dep_30_active = 1 }
             change_variable = { name = bfl_dep_30_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_30_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_30 = yes
             bfl_pay_deposit_30 = yes
         }
 if = { limit = { var:bfl_dep_31_active = 1 }
@@ -914,6 +976,7 @@ if = { limit = { var:bfl_dep_31_active = 1 }
             change_variable = { name = bfl_dep_31_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_31_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_31 = yes
             bfl_pay_deposit_31 = yes
         }
 if = { limit = { var:bfl_dep_32_active = 1 }
@@ -926,6 +989,7 @@ if = { limit = { var:bfl_dep_32_active = 1 }
             change_variable = { name = bfl_dep_32_remainder subtract = { value = var:bfl_payment multiply = 12 } }
             change_variable = { name = bfl_dep_32_interest_due add = var:bfl_payment }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
+            bfl_pay_demand_interest_32 = yes
             bfl_pay_deposit_32 = yes
         }
 }

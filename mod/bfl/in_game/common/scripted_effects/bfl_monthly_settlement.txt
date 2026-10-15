@@ -4,14 +4,15 @@
         bfl_reconcile_charter = yes
         bfl_reconcile_native_assets = yes
         set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
+        bfl_observe_bank_income = yes
         bfl_accrue_deposits = yes
+        bfl_settle_operating_expenses = yes
         bfl_evaluate_distress = yes
-        bfl_settle_royalty = yes
         bfl_settle_dividends = yes
         if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
             bfl_run_controller_bond_facility = yes
         }
-        bfl_apply_royalty_modifiers = yes
+        bfl_autonomous_takeover = yes
         bfl_record_history = yes
         set_variable = { name = bfl_last_period value = bfl_period }
     }

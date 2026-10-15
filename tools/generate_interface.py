@@ -101,7 +101,7 @@ def graph():
 def generate(common, effect, loc, write, tune, advances, instruments):
     loc('bfl_finance_title','Banking & Finance')
     labels = {
-        'bank_dividends':'Bank Dividends','bank_royalties':'Bank Royalties','debt_facility':'Debt Facility',
+        'bank_dividends':'Bank Dividends','deposit_interest':'Deposit Interest','debt_facility':'Debt Facility',
         'equity_debt':'Bank equity & debt','twelve_months':'12 monthly settlements · oldest → latest',
         'history_empty':'History begins at the next monthly settlement.',
         'cash':'Treasury cash','free_cash_label':'Available cash','assets_label':'Total assets',
@@ -113,19 +113,17 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         'facility_title':'Debt facility mandate','investment_title':'Credit & investments',
         'safeguards_title':'Liquidity & safeguards','specialization_title':'Bank specialization',
         'funded_bill_button':'Funded payment bill · 100 gold','capital_button':'Subscribe capital · 100 gold',
-        'loan_button':'Purchase an estate loan','status_0':'Operating','status_1':'Cash under pressure',
+        'loan_button':'Take over loan','status_0':'Operating','status_1':'Cash under pressure',
         'status_2':'Withdrawals queued','status_3':'Insolvent','status_4':'In resolution','status_5':'Closed',
         'profile_0':'Choose a specialization','profile_1':'Merchant Finance','profile_2':'Overseas Investment',
         'balance_paid_tip':'Funded payment received at the last monthly settlement. These transfers are already in your treasury and must not be added again to the native income total.',
         'facility_tip':'Monthly funding actually received. Native bond execution remains unavailable in this development build; an unfunded mandate pays zero.',
-        'royalty_tip':'Set the annual royalty on productive bank assets: 0%, 0.25%, 0.5%, 1%, 2%. Drag the slider or use − / +. The displayed amount is the last funded monthly payment; the preview is the next assessment before cash limits.',
-        'royalty_impact':'Burgher target satisfaction',
+        'deposit_income_tip':'Demand interest actually paid this month by your chartered bank and independent banks. Unpaid interest remains owed. Principal withdrawals and capital contributions are excluded.',
         'advanced_tip':'Research unlocks the mandate. The bank must also meet its specialization, liquidity and operating requirements. Unavailable execution remains disabled.',
     }
     for k,v in labels.items(): loc('bfl_'+k,v)
     tooltip_texts = json.loads((ROOT/'design/credit_tooltips.json').read_text(encoding='utf-8'))
     for k,v in tooltip_texts.items(): loc(k,v.replace('\n', '\\n'))
-    loc('bfl_royalty_tip', "Annual royalty: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_royalty_rate')|%2]\\nExpected monthly assessment: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_royalty_preview')|2]@gold!\\nBurgher target satisfaction: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_royalty_happiness')|%0]\\nLast funded payment: [Country.MakeScope.GetVariable('bfl_royalty_paid').GetValue|2]@gold!\\n"+labels['royalty_tip'])
     advance_texts=json.loads((ROOT/'design/advance_texts.json').read_text(encoding='utf-8'))
     # All advance cards get native boolean modifier rows and their own painted icon.
     # The corresponding service permission still enforces has_advance on the research owner.
@@ -157,27 +155,6 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             is_valid = {{ {valid} }} effect = {{ if = {{ limit = {{ {valid} }}
             save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = {{ {service} = yes }} }} }} }}\n'''
         loc(key,labels['funded_bill_button' if gate=='commercial_bill' else 'capital_button'])
-    for direction,delta,limit in [('down',-1,'> 0'),('up',1,'< 4')]:
-        valid=f'bfl_has_management = yes country_type = location var:bfl_bank = {{ var:bfl_royalty_tier {limit} }}'
-        cmds+=f'''bfl_royalty_{direction} = {{ scope = country is_shown = {{ bfl_has_management = yes country_type = location }}
-            is_valid = {{ {valid} }} effect = {{ if = {{ limit = {{ {valid} }} bfl_resolve_command_bank = yes
-            scope:bfl_bank = {{ change_variable = {{ name = bfl_royalty_tier add = {delta} }}
-            change_variable = {{ name = bfl_policy_revision add = 1 }} bfl_apply_royalty_modifiers = yes }} }} }} }}\n'''
-    royalty_authority='''country_type = location has_reform = government_reform:bfl_state_chartered_bank
-        exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev }'''
-    common('scripted_triggers','royalty_authority',effect('bfl_can_set_royalty',royalty_authority))
-    royalty_input='''if = { limit = { bfl_can_set_royalty = yes exists = scope:bfl_royalty_input }
-        save_scope_as = bfl_actor var:bfl_bank = { save_scope_as = bfl_bank
-            set_variable = { name = bfl_royalty_tier value = { value = scope:bfl_royalty_input max = 4 min = 0 round = yes } }
-            change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes
-        }
-    }'''
-    common('scripted_effects','royalty_input',effect('bfl_apply_royalty_input',royalty_input))
-    cmds+='''bfl_apply_royalty_slider = { scope = country saved_scopes = { bfl_royalty_input }
-        is_shown = { bfl_has_management = yes country_type = location }
-        is_valid = { bfl_has_management = yes country_type = location exists = scope:bfl_royalty_input }
-        effect = { bfl_apply_royalty_input = yes }
-    }\n'''
     common('scripted_guis','homepage_commands',cmds)
     # Rolling history is sampled exactly once by the existing monthly settlement guard.
     history='bfl_initialize_history = yes\n'
@@ -208,9 +185,6 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             if i<12:
                 sv+=effect(f'bfl_chart_{series}_top_{i:02}',f'value = bfl_chart_{series}_y_{i:02} max = bfl_chart_{series}_y_{i+1:02}')
                 sv+=effect(f'bfl_chart_{series}_height_{i:02}',f'value = bfl_chart_{series}_y_{i:02} min = bfl_chart_{series}_y_{i+1:02} subtract = bfl_chart_{series}_top_{i:02} min = 2')
-    sv+=effect('bfl_royalty_happiness','value = 0\n'+''.join(f'if = {{ limit = {{ var:bfl_royalty_tier = {i} }} value = {v} }}\n' for i,v in enumerate(tune['royalty_burgher_penalties'])))
-    sv+=effect('bfl_royalty_preview','value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value multiply = bfl_royalty_rate divide = 12')
-    sv+=effect('bfl_royalty_fill','value = var:bfl_royalty_tier multiply = 18 add = 9')
     # Read-only breakdowns use the same live deposit slots as the balance sheet.
     for field,slot_field in [('deposit_principal','principal'),('deposit_interest','interest_due')]:
         body = 'value = 0\n'
@@ -218,77 +192,15 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             body += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_{slot_field} }}\n'
         sv += effect('bfl_'+field,body)
     common('script_values','interface_values',sv)
-    # The public GUI API has no numeric slider getter. Its native highlight width
-    # tracks the current value; compare it with the native range's full width.
-    # Both dragging and native +/- changes pass through the same guarded scripted GUI.
-    slider_widget="PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider')"
-    fraction=f"Divide_float({slider_widget}.FindChild('bfl_royalty_fill').GetSizeX, Max_float('(float)1', {slider_widget}.FindChild('bfl_royalty_range').GetSizeX))"
-    tier="'(CFixedPoint)4'"
-    for i,bound in reversed(list(enumerate((0.125,0.375,0.625,0.875)))):
-        tier=f"Select_CFixedPoint(LessThan_float({fraction}, '(float){bound}'), '(CFixedPoint){i}', {tier})"
-    commit=f"GetScriptedGui('bfl_apply_royalty_slider').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('bfl_royalty_input', MakeScopeValue({tier})).End)"
-    slider=f'''ranged_slider = {{
-        name = "bfl_royalty_slider" size = {{ 110 10 }}
-        direction = horizontal allow_outside = yes
-        value = "[FixedPointToFloat({var('royalty_tier')})]"
-        min = 0 max = 4 mincap = 0 maxcap = 4 step = 1 wheelstep = 1
-        enabled = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        tooltip = "bfl_royalty_tip"
-        track = {{ using = economy_slider_track }}
-        track_range = {{ EconomySlider_TrackRange = {{ name = "bfl_royalty_range" }} }}
-        track_highlight = {{ EconomySlider_TrackHighlight = {{ name = "bfl_royalty_fill" }} }}
-        slider = {{ EconomySlider_Slider = {{ name = "bfl_royalty_thumb" }} }}
-        dec_button = {{ using = economy_slider_dec_button }}
-        inc_button = {{ using = economy_slider_inc_button }}
-        onchangefinish = "[PdxGuiWidget.TriggerAnimation('bfl_commit_royalty')]"
-        state = {{ name = bfl_commit_royalty duration = 0.05 on_finish = "[{commit}]" }}
-    }}'''
     balance_types=''
-    burghers="GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate')"
-    satisfaction=f'{burghers}.GetSatisfaction'
-    target=f'{burghers}.GetTargetSatisfaction'
-    def face(expr):
-        return ''.join(f'''icon = {{ size = {{ 14 14 }} texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/{art}.dds" visible = "[{test}]" }}'''
-            for art,test in [('sad',f"LessThanOrEqualTo_CFixedPoint({expr}, '(CFixedPoint)0.25')"),
-                ('neutral',f"BetweenInclusiveOfMax_CFixedPoint({expr}, '(CFixedPoint)0.25', '(CFixedPoint)0.5')"),
-                ('happy',f"GreaterThan_CFixedPoint({expr}, '(CFixedPoint)0.5')")])
-    def happiness(expr,width,precision):
-        return ''.join(f'''text_single = {{ size = {{ {width} 20 }}
-            {'layoutpolicy_horizontal = expanding' if width == -1 else ''}
-            autoresize = no align = right|nobaseline using = Font_Size_Very_Small
-            raw_text = "[{expr}|{color}{precision}%]" tooltip = "bfl_royalty_tip"
-            visible = "[{test}]" }}'''
-            for color,test in [('R',f"LessThan_CFixedPoint({expr}, '(CFixedPoint)0.5')"),
-                ('G',f"GreaterThanOrEqualTo_CFixedPoint({expr}, '(CFixedPoint)0.5')")])
-    for title,field,art,tip in [('bank_dividends','state_dividend_paid','dividend','balance_paid_tip'),('bank_royalties','royalty_paid','royalty','royalty_tip'),('debt_facility','facility_paid','debt','facility_tip')]:
-        if field=='royalty_paid':
-            balance_types+=f'''type bfl_income_royalties = adjustable_budget_card {{
-                layoutpolicy_horizontal = expanding size = {{ -1 55 }}
-                blockoverride "top_widget" {{ hbox = {{ margin = {{ 5 0 }} spacing = 5
-                    {icon('royalty',31)}
-                    text_single = {{ using = layoutpolicy_expanding maximumsize = {{ 175 -1 }} autoresize = no align = left|nobaseline text = "bfl_bank_royalties" }}
-                    text_single = {{ autoresize = yes align = right|nobaseline raw_text = "[{var(field)}|2+=]@income!" }} }} }}
-                blockoverride "bottom_widget" {{ hbox = {{ margin = {{ 5 0 }}
-                    hbox = {{ size = {{ 145 20 }} layoutpolicy_horizontal = fixed {slider}
-                        icon = {{ size = {{ 20 20 }} texture_density = 2 texture = "gfx/interface/buttons/checkbox_auto.dds" frame_grid = {{ 2 1 }} frame = 1 tooltip = "bfl_royalty_tip"
-                            background = {{ texture = "gfx/interface/buttons/checkbox_auto_bg.dds" texture_density = 2 using = color_dark_blue }} }} expand = {{ }} }}
-                    hbox = {{ size = {{ 39 20 }} layoutpolicy_horizontal = fixed
-                        {happiness(satisfaction,25,0)} {face(satisfaction)} }}
-                    widget = {{ size = {{ 14 14 }} icon = {{ parentanchor = center position = {{ -1 0 }} allow_outside = yes size = {{ 20 20 }} texture = "gfx/interface/buttons/flats/button_simple.dds"
-                        modify_texture = {{ using = color_bone_texture blend_mode = normal }} }} }}
-                    hbox = {{ using = layoutpolicy_expanding spacing = 1
-                        {happiness(target,-1,2)} {face(target)} }}
-                }} }} tooltip = "bfl_royalty_tip"
-            }}'''
-        else:
-            kind = "dividends" if field=="state_dividend_paid" else "facility"
-            balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding tooltip = "bfl_{tip}"
-                blockoverride "icon_texture" {{ texture = "gfx/interface/icons/bfl/{art}.dds" }}
-                blockoverride "label" {{ text = "bfl_{title}" }}
-                blockoverride "income_text" {{ raw_text = "[{var(field)}|2+=]@income!" }} }}'''
+    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',var('facility_paid'),'debt','facility_tip')]:
+        balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding tooltip = "bfl_{tip}"
+            blockoverride "icon_texture" {{ texture = "gfx/interface/icons/bfl/{art}.dds" }}
+            blockoverride "label" {{ text = "bfl_{title}" }}
+            blockoverride "income_text" {{ raw_text = "[{expression}|2+=]@income!" }} }}'''
     status=''.join(f'text_single = {{ text = "bfl_status_{i}" autoresize = yes visible = "[EqualTo_CFixedPoint({var("state")}, \'(CFixedPoint){i}\')]" }}' for i in range(6))
     profile=''.join(f'text_single = {{ text = "bfl_profile_{i}" autoresize = yes visible = "[EqualTo_CFixedPoint({var("profile")}, \'(CFixedPoint){i}\')]" }}' for i in range(3))
+    from generate_bank_charts import charts
     overview=f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 8 margin = {{ 10 6 }}
         hbox = {{ spacing = 8 {icon('accounts',32)} vbox = {{ layoutpolicy_horizontal = expanding tooltip = "bfl_bank_identity_tip" {label('[Country.GetName]')} {profile} }}
             vbox = {{ tooltip = "bfl_bank_status_tip" {status} }} }}
@@ -300,7 +212,10 @@ def generate(common, effect, loc, write, tune, advances, instruments):
                     vbox = {{ layoutpolicy_horizontal = expanding {metric('bfl_assets_label',value('assets'),'accounts')}
                         {metric('bfl_equity_label',value('equity'),'subscribe')} }} }}
                 text_multi = {{ text = "bfl_overview_hint" size = {{ -1 35 }} layoutpolicy_horizontal = expanding fontsize = 11 }} }}
-            {graph()} }} }}'''
+            {charts(var,value)} }}
+        hbox = {{ spacing = 8 tooltip = "bfl_operating_costs_tip"
+            text_single = {{ text = "bfl_operating_costs" autoresize = yes fontsize = 12 }}
+            text_single = {{ raw_text = "[{value('operating_expense')}|2]@gold!" autoresize = yes fontsize = 12 }} }} }}'''
     loc('bfl_funding_tab','Funding & Debt')
     loc('bfl_investment_tab','Lending & Investments')
     loc('bfl_financial_advance','Banking advance')
@@ -320,10 +235,12 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         +pair(action('bfl_withdraw','withdraw'),action('bfl_buy_capital','subscribe')))
     funding+=policies('bfl_deposit_policy_title',[f'bfl_rate_{i}' for i in (0,1,2)],'deposit')
     funding+=policies('bfl_distribution_title',[f'bfl_payout_{i}' for i in (0,25,50)],'dividend')
+    funding+=pair(action('bfl_offer_bank_shares','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)1')"),action('bfl_close_bank_offering','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)0')"))
     funding+=policies('bfl_facility_title',[f'bfl_facility_{i}' for i in range(3)],'bond')
     funding+=section('bfl_safeguards_title',pair(action('bfl_recapitalize_command','liquidity'),action('bfl_suspend_command','lock')))
+    funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
-    investments=pair(interaction('bfl_purchase_native_loan','takeover','bfl_loan_button'),action('bfl_buy_bill','note'))
+    investments=action('bfl_buy_bill','note')
     for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_goods',['commodity_inventory','warehouse_receipt','commodity_forward','margining']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:
         cards=[]
         for k in keys:
@@ -355,7 +272,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
         {balance_types}
         type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} }}
-        type bfl_credit_overview = widget {{ size = {{ -1 270 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
+        type bfl_credit_overview = widget {{ size = {{ -1 300 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
             background = {{ texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }}
             {contexts('bfl_bank_overview')}
         }}
@@ -390,6 +307,22 @@ def build_credit(game, baseline, pin=False):
         insertion=f'\n bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}\n'
         view=view[:end]+insertion+view[end:]
         changes.append(('',insertion))
+    search_at=0
+    while True:
+        action_at=view.find('action_name = "take_over_loan"',search_at)
+        if action_at < 0:
+            break
+        button_at=max(view.rfind(widget+' = {',0,action_at) for widget in ('button_regular','header_button_left'))
+        button_end=balanced_block(view,view.index('{',button_at))
+        original=view[button_at:button_end]
+        if 'action_name = "take_over_loan"' not in original:
+            raise ValueError('Takeover action must be inside its expected native button')
+        opening=original.index('{')+1
+        replacement=original[:opening]+f' visible = "[Not({MANAGED})]"'+original[opening:]
+        replacement+=f'\n vbox = {{ layoutpolicy_horizontal = expanding visible = "[{MANAGED}]" {interaction("bfl_purchase_native_loan","takeover","bfl_loan_button")} }}'
+        view=view[:button_at]+replacement+view[button_end:]
+        changes.append((original,replacement))
+        search_at=button_at+len(replacement)
     # Rename the existing two tabs: each now contains state and institution controls.
     at=view.index('header_secondary_tabs = {')
     header_end=balanced_block(view,view.index('{',at))

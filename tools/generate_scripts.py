@@ -141,8 +141,8 @@ def initialize():
     for i in range(1,33):
         values += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_withdrawal_requested }}\n'
     values += '''}
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
-    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
         value = bfl_liabilities subtract = bfl_withdrawals_due min = 0
@@ -151,17 +151,10 @@ def initialize():
     bfl_free_cash = { value = gold subtract = bfl_protected_cash min = 0 }
     bfl_capital_headroom = { value = bfl_assets multiply = -0.10 add = bfl_equity min = 0 }
     bfl_negative_payment = { value = var:bfl_payment multiply = -1 }
-    bfl_royalty_rate = {
-        value = 0
-        if = { limit = { var:bfl_royalty_tier = 1 } value = 0.0025 }
-        if = { limit = { var:bfl_royalty_tier = 2 } value = 0.005 }
-        if = { limit = { var:bfl_royalty_tier = 3 } value = 0.01 }
-        if = { limit = { var:bfl_royalty_tier = 4 } value = 0.02 }
-    }
     bfl_ai_charter_score = { value = 0 if = { limit = { gold > 1500 } add = 10 } }
     '''
     common('script_values','accounting',values)
-    defaults = {'profile':0,'state':0,'native_credit_value':0,'inventory_value':0,'project_value':0,'notes_outstanding':0,'other_payables':0,'cash_committed':0,'loss_carryforward':0,'profit_services':0,'profit_credit':0,'profit_controller':0,'profit_trading':0,'profit_goods':0,'profit_ventures':0,'profit_company':0,'last_period':0,'royalty_tier':1,'royalty_paid':0,'royalty_deferred':0,'dividend_paid':0,'state_dividend_paid':0,'facility_mode':0,'facility_requested':0,'facility_paid':0,'facility_blocked':0,'demand_rate':0.01,'term_rate':0.02,'payout_ratio':0.25,'state_units':0,'total_units':0,'accept_deposits':0,'policy_revision':1}
+    defaults = {'profile':0,'state':0,'native_credit_value':0,'inventory_value':0,'project_value':0,'notes_outstanding':0,'other_payables':0,'cash_committed':0,'loss_carryforward':0,'profit_services':0,'profit_credit':0,'profit_controller':0,'profit_trading':0,'profit_goods':0,'profit_ventures':0,'profit_company':0,'profit_native':0,'last_period':0,'dividend_paid':0,'state_dividend_paid':0,'facility_mode':0,'facility_requested':0,'facility_paid':0,'facility_blocked':0,'demand_rate':0.01,'term_rate':0.02,'payout_ratio':0.25,'state_units':0,'total_units':0,'accept_deposits':0,'policy_revision':1}
     body = 'if = { limit = { NOT = { has_variable = bfl_schema } }\nset_variable = { name = bfl_schema value = 1 }\n'
     for k,v in defaults.items():
         body += f'set_variable = {{ name = bfl_{k} value = {v} }}\n'
@@ -177,7 +170,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_initialize_history = yes\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_reconcile_native_assets = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = {
@@ -276,10 +269,10 @@ def charter():
     loc('bfl_no_automatic_tribute','No automatic charter tribute')
     loc('bfl_no_automatic_tribute_cost_modifier','Automatic charter tribute cost')
     loc('MODIFIER_TYPE_NAME_bfl_no_automatic_tribute_cost_modifier','Automatic charter tribute cost')
-    loc('MODIFIER_TYPE_DESC_bfl_no_automatic_tribute_cost_modifier','Adjusts the charter relationship’s automatic payment price. The charter price is zero; the bank’s separately funded royalty is processed in its own accounts.')
+    loc('MODIFIER_TYPE_DESC_bfl_no_automatic_tribute_cost_modifier','The charter relationship has no automatic tribute. State income comes from deposit interest and dividends on owned bank shares.')
     write('main_menu/common/modifier_icons/bfl_price_icons.txt','''
     bfl_no_automatic_tribute_cost_modifier = {
-        positive = "gfx/interface/icons/bfl/royalty.dds"
+        positive = "gfx/interface/icons/bfl/deposit.dds"
     }
     ''')
     common('government_reforms','charter_reform','''
@@ -350,10 +343,7 @@ def charter():
             scope:bfl_bank = {
                 bfl_initialize_bank = yes
                 set_variable = { name = bfl_opening_equity value = bfl_equity }
-                # Units priced at opening equity: existing founders are not confiscated.
-                set_variable = { name = bfl_total_units value = var:bfl_opening_equity }
-                set_variable = { name = bfl_state_units value = scope:bfl_controller.var:bfl_payment }
-                change_variable = { name = bfl_total_units add = var:bfl_state_units }
+                bfl_assign_charter_ownership = yes
                 add_gold = scope:bfl_controller.var:bfl_payment
                 change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
                 change_subject_type = subject_type:bfl_chartered_bank
@@ -366,7 +356,7 @@ def charter():
             bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
-            scope:bfl_bank = { bfl_apply_royalty_modifiers = yes bfl_offer_profile = yes }
+            scope:bfl_bank = { bfl_offer_profile = yes }
         }
     }
     bfl_reconcile_charter = {
@@ -420,7 +410,7 @@ def charter():
     loc('bfl_establish_chartered_bank_desc','Convert one existing State Bank in place and gain Banking Traditions when the charter is completed. The current-age investment of 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold is transferred to its treasury as state equity. You must own your capital market. Select a bank before any payment or research occurs.')
     loc('bfl_establish_chartered_bank.a','Select the existing State Bank')
     loc('bfl_state_chartered_bank','State Chartered Bank')
-    loc('bfl_state_chartered_bank_desc','A separately funded native bank subject, managed within Economy. Royalties, realized dividends and bank-funded native bonds have separate accounts. Native bond integration is gated pending P03–P05.')
+    loc('bfl_state_chartered_bank_desc','A separately funded native bank subject. The sovereign initially owns all shares and sets the monthly dividend payout in Credit. New bank subscriptions raise capital and dilute existing ownership. State deposits earn preferential interest.')
     loc('bfl_chartered_bank','Chartered Bank')
     loc('bfl_chartered_bank_desc','A building-based State Bank chartered in place. Its cash and obligations remain separate from its sovereign. No automatic tribute is collected.')
     loc('bfl_finance.100.title','The Bank’s Specialization')
@@ -455,6 +445,7 @@ def deposits():
                 change_variable = {{ name = {n}_maturity_period add = 12 }}
                 set_variable = {{ name = {n}_state value = 2 }}
             }}
+            bfl_apply_deposit_bonus_{i:02} = yes
             scope:bfl_party = {{ add_gold = -100 }} add_gold = 100
         }}\n'''
     free = 'OR = { '+' '.join(f'var:bfl_dep_{i:02}_active = 0' for i in range(1,33))+' }'
@@ -463,7 +454,7 @@ def deposits():
     # Root bank, saved depositor bfl_party. Both wallets and slot capacity checked before mutation.
     bfl_open_deposit = {
         if = { limit = {
-            bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes
+            bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes bfl_depositor_access = yes
             var:bfl_accept_deposits = 1 exists = scope:bfl_party
             scope:bfl_party = { gold >= 100 NOT = { this = prev } }
             OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } }
@@ -493,6 +484,7 @@ def deposits():
             change_variable = {{ name = {n}_remainder subtract = {{ value = var:bfl_payment multiply = 12 }} }}
             change_variable = {{ name = {n}_interest_due add = var:bfl_payment }}
             change_variable = {{ name = bfl_loss_carryforward add = var:bfl_payment }}
+            bfl_pay_demand_interest_{i:02} = yes
             bfl_pay_deposit_{i:02} = yes
         }}\n'''
         settlement += effect(f'bfl_pay_deposit_{i:02}',f'''
@@ -503,6 +495,7 @@ def deposits():
             add_gold = bfl_negative_payment
             scope:bfl_party = {{ add_gold = scope:bfl_bank.var:bfl_payment }}
             set_variable = {{ name = bfl_interest_paid value = {{ value = var:bfl_payment max = var:{n}_interest_due }} }}
+            scope:bfl_party = {{ bfl_record_withdrawn_interest = yes }}
             change_variable = {{ name = {n}_interest_due subtract = var:bfl_interest_paid }}
             change_variable = {{ name = {n}_withdrawal_requested subtract = var:bfl_payment }}
             change_variable = {{ name = bfl_payment subtract = var:bfl_interest_paid }}
@@ -535,6 +528,7 @@ def native_adapters():
     # Preserve native eligibility, ordering, price and estate compensation.
     bfl_native_takeover = {
         if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party
+            NOT = { this = scope:bfl_party }
             scope:bfl_party = {
                 OR = { NOT = { bfl_is_company = yes } scope:bfl_bank = { bfl_can_originate_corporate_credit = yes } }
             }
@@ -558,6 +552,7 @@ def native_adapters():
                     }
                     scope:recipient = { distribute_gold_to_banking_estates = scope:actor.var:bfl_payment }
                     change_loan_owner = scope:actor
+                    scope:actor = { set_variable = { name = bfl_takeover_done value = 1 } }
                 }
             }
             bfl_reconcile_native_assets = yes
@@ -570,6 +565,7 @@ def native_adapters():
             save_scope_as = bfl_claim
             scope:bfl_bank = { change_variable = { name = bfl_native_credit_value add = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } } }
         }
+        bfl_refresh_asset_statement = yes
     }
     ''')
     # These are executable fail-closed commands, not guessed engine signatures.
@@ -589,7 +585,7 @@ def native_adapters():
 
 
 def treasury_and_resolution():
-    buckets=['services','credit','controller','trading','goods','ventures','company']
+    buckets=['services','credit','controller','trading','goods','ventures','company','native']
     offset=''
     consume=''
     for b in buckets:
@@ -603,20 +599,23 @@ def treasury_and_resolution():
     # Pay all identified holders from one funded total; unknown opening founder
     # entitlements stay retained rather than being assigned to the sovereign.
     dividends='''
+    if = { limit = { bfl_is_bank = yes bfl_period > var:bfl_last_dividend_period }
     set_variable = { name = bfl_dividend_paid value = 0 }
     set_variable = { name = bfl_state_dividend_paid value = 0 }
-    if = { limit = { bfl_is_bank = yes var:bfl_state < 2 var:bfl_total_units > 0 }
         save_scope_as = bfl_bank
+        set_variable = { name = bfl_last_dividend_period value = bfl_period }
+        set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_offset_losses = yes
+    if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 }
         set_variable = { name = bfl_funded_dividend value = {
             value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller
-            add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company
+            add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native
             multiply = var:bfl_payout_ratio max = bfl_free_cash max = bfl_capital_headroom
         } }
         if = { limit = { bfl_has_valid_controller = yes var:bfl_state_units > 0 }
             set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_state_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
-            overlord = { add_gold = scope:bfl_bank.var:bfl_payment }
+            overlord = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
             set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }
@@ -626,7 +625,7 @@ def treasury_and_resolution():
         dividends+=f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_party }}
             set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = var:{n}_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
             add_gold = bfl_negative_payment
-            var:{n}_party = {{ add_gold = scope:bfl_bank.var:bfl_payment }}
+            var:{n}_party = {{ add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }}
             change_variable = {{ name = bfl_dividend_paid add = var:bfl_payment }}
             set_variable = {{ name = {n}_last_payment value = bfl_period }}
         }}\n'''
@@ -635,45 +634,15 @@ def treasury_and_resolution():
         bfl_consume_profit_reserves = yes
     }
     '''
-    common('scripted_effects','treasury_payments','''
-    # Root bank; a monthly assessment is administrative, not an accrued loan.
-    bfl_settle_royalty = {
-        set_variable = { name = bfl_royalty_paid value = 0 }
-        if = { limit = { bfl_has_valid_controller = yes var:bfl_state < 3 }
-            save_scope_as = bfl_bank
-            set_variable = { name = bfl_royalty_due value = { value = var:bfl_opening_productive_assets multiply = bfl_royalty_rate divide = 12 } }
-            set_variable = { name = bfl_payment value = { value = var:bfl_royalty_due max = bfl_free_cash } }
-            set_variable = { name = bfl_royalty_paid value = var:bfl_payment }
-            change_variable = { name = bfl_royalty_deferred add = { value = var:bfl_royalty_due subtract = var:bfl_payment } }
-            add_gold = bfl_negative_payment
-            overlord = { add_gold = scope:bfl_bank.var:bfl_payment }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_payment }
-        }
-    }
-    '''+effect('bfl_settle_dividends',dividends))
-    modifiers=''
-    apply='save_scope_as = bfl_bank\n'
-    for i in range(1,5):
-        modifiers += f'bfl_royalty_sovereign_{i} = {{ burghers_estate_target_satisfaction = {TUNE["royalty_burgher_penalties"][i]} }}\n'
-        modifiers += f'bfl_royalty_bank_{i} = {{ subject_loyalty = {TUNE["royalty_loyalty_penalties"][i]} }}\n'
-        apply += f'remove_country_modifier = bfl_royalty_bank_{i}\n'
-    apply += 'if = { limit = { bfl_has_valid_controller = yes } overlord = {\n'
-    for i in range(1,5):
-        apply += f'remove_country_modifier = bfl_royalty_sovereign_{i}\n'
-    apply += '}\n'
-    for i in range(1,5):
-        apply += f'''if = {{ limit = {{ var:bfl_royalty_tier = {i} }}
-            add_country_modifier = {{ modifier = bfl_royalty_bank_{i} mode = replace years = -1 }}
-            overlord = {{ add_country_modifier = {{ modifier = bfl_royalty_sovereign_{i} mode = replace years = -1 }} }}
-        }}\n'''
-    apply += '}'
-    write('main_menu/common/static_modifiers/bfl_financial_modifiers.txt',modifiers)
-    common('scripted_effects','royalty_modifiers',effect('bfl_apply_royalty_modifiers',apply))
+    dividends+='\n'+''.join(f'set_variable = {{ name = bfl_profit_{bucket} value = 0 }}\n' for bucket in buckets)
+    dividends+='}\n'
+    common('scripted_effects','treasury_payments',effect('bfl_settle_dividends',dividends))
     common('scripted_effects','resolution','''
     bfl_evaluate_distress = {
         set_variable = { name = bfl_state value = 0 }
         if = { limit = { bfl_free_cash <= 0 } set_variable = { name = bfl_state value = 1 } }
         if = { limit = { bfl_withdrawals_due > 0 } set_variable = { name = bfl_state value = 2 } }
+        if = { limit = { var:bfl_expense_arrears > 0 } set_variable = { name = bfl_state value = 2 } }
         if = { limit = { bfl_equity < 0 } set_variable = { name = bfl_state value = 3 } }
     }
     # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
@@ -698,14 +667,15 @@ def treasury_and_resolution():
             bfl_reconcile_charter = yes
             bfl_reconcile_native_assets = yes
             set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
+            bfl_observe_bank_income = yes
             bfl_accrue_deposits = yes
+            bfl_settle_operating_expenses = yes
             bfl_evaluate_distress = yes
-            bfl_settle_royalty = yes
             bfl_settle_dividends = yes
             if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
                 bfl_run_controller_bond_facility = yes
             }
-            bfl_apply_royalty_modifiers = yes
+            bfl_autonomous_takeover = yes
             bfl_record_history = yes
             set_variable = { name = bfl_last_period value = bfl_period }
         }
@@ -785,14 +755,6 @@ def hooks_and_commands():
             is_valid = {{ {valid} }}
             effect = {{ if = {{ limit = {{ {valid} }} bfl_resolve_command_bank = yes {body} }} }}
         }}\n'''
-    for tier,label in enumerate(['Waived','Light','Standard','Heavy','Exceptional']):
-        name=f'bfl_set_royalty_{tier}'
-        valid='bfl_has_management = yes country_type = location'
-        body=f'''scope:bfl_bank = {{ set_variable = {{ name = bfl_royalty_tier value = {tier} }} change_variable = {{ name = bfl_policy_revision add = 1 }} bfl_apply_royalty_modifiers = yes }}
-        cmf_log = {{ action = bfl_log_royalty_{tier} }}'''
-        commands += command(name,valid,body)
-        loc(name,label+' royalty')
-        loc(f'bfl_log_royalty_{tier}',f'Changed charter royalty to {label.lower()}')
     for ratio,label in [(0,'Retain profits'),(0.25,'25% payout'),(0.5,'50% payout')]:
         key=f'bfl_payout_{int(ratio*100)}'
         commands += command(key,'bfl_has_management = yes',f'scope:bfl_bank = {{ set_variable = {{ name = bfl_payout_ratio value = {ratio} }} }}')
@@ -838,12 +800,14 @@ def hooks_and_commands():
             select_trigger = {{ looking_for_a = country target_flag = recipient name = choose_country default_sort = will
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ bfl_is_bank = yes }}
-                enabled = {{ bfl_can_originate_{instrument} = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 NOT = {{ this = scope:actor }} }}
+                enabled = {{ bfl_can_originate_{instrument} = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1
+                    OR = {{ AND = {{ bfl_is_independent_bank = yes opinion = {{ target = scope:actor value >= 50 }} }} AND = {{ bfl_has_valid_controller = yes overlord = scope:actor }} }}
+                    NOT = {{ this = scope:actor }} }}
             }}
             effect = {{ scope:actor = {{ save_scope_as = bfl_party }} scope:recipient = {{ set_variable = {{ name = bfl_product value = {product} }} bfl_open_deposit = yes }} }}
             ai_will_do = {{ value = 0 }}
         }}\n'''
-        loc(key,label);loc(key+'_desc','The bank must opt in to accepting deposits. Interest increases its liability, and only the depositor may withdraw its claim. Each accepted account consumes one of 32 slots.')
+        loc(key,label);loc(key+'_desc','Independent banks require an opinion of at least +50 toward you to open an account. Your chartered bank offers an extra 1% annual interest. Demand interest is paid monthly when funded; unpaid interest stays owed. Falling relations never prevent withdrawal of your own matured claims.')
     interactions += '''
     bfl_request_deposit_withdrawal = {
         type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
@@ -868,7 +832,10 @@ def hooks_and_commands():
         select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
             column = { data = country_diplomacy_info_loan }
             visible = { num_loans > 0 }
-            enabled = { any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 } }
+            enabled = {
+                scope:actor = { OR = { bfl_is_independent_bank = yes var:bfl_bank ?= { bfl_can_originate_native_takeover = yes } } }
+                any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 }
+            }
         }
         effect = {
             scope:recipient = { save_scope_as = bfl_party }
@@ -899,18 +866,12 @@ def gui_and_localization():
     loc('bfl_goods_explanation','Funded native inventory, backed receipts and forwards require Merchant Finance, their advances and P09 execution/custody verification. Encumbered goods cannot back a second claim.')
     loc('bfl_ventures_explanation','Commenda starts in Discovery; native companies and company equity require Reformation. Political overlord control and financial ownership stay separate. Project capital is not a dividend.')
     loc('bfl_monetary_explanation','Bills precede sovereign notes. Notes require an authorized charter, Absolutism research and backing that excludes note-sale cash. Secured liquidity and clearing have later research and adapter gates.')
-    loc('bfl_royalty_explanation','Annual asset tiers: waived / 0.25% / 0.50% / 1% / 2%. Monthly assessment excludes cash and new principal. Higher tiers reduce burgher satisfaction and subject loyalty. Unpaid royalty is a waivable assessment, not a loan.')
-    loc('bfl_dividend_explanation','Only verified realized net earnings enter the dividend reserve. Losses and royalty costs are offset first. The sovereign receives its actual ownership share; principal and fresh funding never enter profits.')
+    loc('bfl_dividend_explanation','Monthly net income after deposit interest, operating expenses and carried losses funds dividends. Each owner receives owned shares multiplied by the funded payout per outstanding share. Retained earnings are not distributed again next month.')
     loc('bfl_deposit_explanation','Each account stores its accepted fixed annual rate. Changing the rate affects new accounts. Term accounts mature after 12 months. Withdrawal shortages remain liabilities and suspend new commitments.')
     # Numeric statement snapshots are stored on each institution; this view reads the live actor.
     # Scope.GetVariable / GetCountry is native CMF's demonstrated public GUI scope API.
     loc('bfl_liquidity_warning','Bank liquidity requires attention')
     loc('bfl_liquidity_warning_desc','Your bank has queued withdrawals or inadequate capital. Open Economy → Banking & Finance to review deposits and recapitalization.')
-    for i,label in enumerate(['Light','Standard','Heavy','Exceptional'],1):
-        loc(f'bfl_royalty_sovereign_{i}',label+' charter royalty')
-        loc(f'bfl_royalty_bank_{i}',label+' charter royalty')
-        loc(f'STATIC_MODIFIER_NAME_bfl_royalty_sovereign_{i}',label+' charter royalty')
-        loc(f'STATIC_MODIFIER_NAME_bfl_royalty_bank_{i}',label+' charter royalty')
     cmm={
         'bfl_banking_finance_companies':'Banking, Finance and Trade Companies',
         'bfl_banking_finance_companies_desc':'Presentation settings only. Institution policy is managed in Economy.',
@@ -947,6 +908,10 @@ def main():
     hooks_and_commands()
     from generate_contracts import generate
     generate(common,effect,loc)
+    from generate_bank_accounts import generate as generate_bank_accounts
+    generate_bank_accounts(common,effect,loc,write,TUNE)
+    from generate_bank_charts import generate as generate_bank_charts
+    generate_bank_charts(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

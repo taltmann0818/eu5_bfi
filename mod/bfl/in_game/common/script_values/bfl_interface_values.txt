@@ -211,20 +211,6 @@ value = bfl_chart_debt_y_11 min = bfl_chart_debt_y_12 subtract = bfl_chart_debt_
 bfl_chart_debt_y_12 = {
 value = bfl_chart_max subtract = var:bfl_history_debt_12 divide = bfl_chart_range multiply = 160
 }
-bfl_royalty_happiness = {
-value = 0
-if = { limit = { var:bfl_royalty_tier = 0 } value = 0 }
-if = { limit = { var:bfl_royalty_tier = 1 } value = -0.02 }
-if = { limit = { var:bfl_royalty_tier = 2 } value = -0.05 }
-if = { limit = { var:bfl_royalty_tier = 3 } value = -0.1 }
-if = { limit = { var:bfl_royalty_tier = 4 } value = -0.2 }
-}
-bfl_royalty_preview = {
-value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value multiply = bfl_royalty_rate divide = 12
-}
-bfl_royalty_fill = {
-value = var:bfl_royalty_tier multiply = 18 add = 9
-}
 bfl_deposit_principal = {
 value = 0
 if = { limit = { var:bfl_dep_01_active = 1 } add = var:bfl_dep_01_principal }

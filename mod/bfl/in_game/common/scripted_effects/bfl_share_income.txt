@@ -1,0 +1,8 @@
+﻿bfl_record_share_income = {
+if = { limit = { NOT = { has_variable = bfl_share_income_period } } set_variable = { name = bfl_share_income_period value = 0 } }
+        if = { limit = { bfl_period > var:bfl_share_income_period }
+            set_variable = { name = bfl_share_income value = 0 }
+            set_variable = { name = bfl_share_income_period value = bfl_period } }
+        change_variable = { name = bfl_share_income add = scope:bfl_bank.var:bfl_payment }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment } }
+}

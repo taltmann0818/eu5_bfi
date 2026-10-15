@@ -33,18 +33,20 @@ def fixture(token, fingerprint):
                 f'else = {{ debug_log = "BFI_TEST|{token}|FAIL|{name}" }}\n')
 
     def reset():
-        return '''remove_variable = bfl_schema
+        return '''every_lent_loan = { cancel_loan = this }
+            remove_variable = bfl_schema remove_variable = bfl_accounts_revision
             bfl_initialize_bank = yes
             set_variable = { name = bfl_profile value = 1 }
             set_variable = { name = bfl_accept_deposits value = 1 }
             set_variable = { name = bfl_total_units value = 1000 }
+            set_variable = { name = bfl_last_takeover_period value = { value = bfl_period add = 100 } }
             set_gold = 1000
         '''
 
     start = f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
     start += check('florence_exists', 'exists = c:FLO')
     start += 'c:FLO = { save_scope_as = bfl_party set_gold = 1000 }\n'
-    start += 'c:BRD = {\n'
+    start += 'c:BRD = { add_opinion = { target = c:FLO modifier = bfi_deposit_test_opinion }\n'
     start += check('native_bardi_bank', 'country_type = building has_reform = government_reform:banking_country')
     start += check('startup_discovery', 'bfl_has_accounts = yes')
     start += reset()
@@ -57,6 +59,11 @@ def fixture(token, fingerprint):
     start += check('term_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes }')
     start += check('bill_age_gate', 'NOT = { bfl_can_originate_commercial_bill = yes }')
     start += check('subscription_age_gate', 'NOT = { bfl_can_originate_bank_subscription = yes }')
+    start += '''add_opinion = { target = c:FLO modifier = bfi_deposit_test_bad_opinion }
+        set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes
+    '''
+    start += check('foreign_deposit_low_opinion_rejected','gold = 1000 c:FLO = { gold = 1000 } var:bfl_dep_01_active = 0')
+    start += 'remove_opinion = { target = c:FLO modifier = bfi_deposit_test_bad_opinion }\n'
     start += 'set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes\n'
     start += check('deposit_cash_conserved', 'gold = 1100 c:FLO = { gold = 900 }')
     start += check('deposit_ledger', 'var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:FLO bfl_liabilities = 100 bfl_equity = 1000')
@@ -64,20 +71,22 @@ def fixture(token, fingerprint):
     start += 'c:PRZ = { save_scope_as = bfl_party } bfl_request_all_withdrawals = yes\n'
     start += check('foreign_withdrawal_rejected', 'gold = 1100 var:bfl_dep_01_principal = 100')
     start += 'c:FLO = { save_scope_as = bfl_party } bfl_process_accounts = yes\n'
-    start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0.08 var:bfl_dep_01_remainder = 0.04')
-    start += check('deposit_tooltip_interest_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0.08 bfl_deposit_liabilities = 100.08')
+    start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0 var:bfl_dep_01_remainder = 0.04 c:FLO = { var:bfl_deposit_income = 0.08 gold = 900.08 }')
+    start += check('deposit_tooltip_interest_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0 bfl_deposit_liabilities = 100')
     start += check('history_records_actual_accounts', 'var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities var:bfl_history_period_12 = bfl_period')
     start += 'set_variable = { name = bfi_test_history_before value = var:bfl_history_count }\n'
     start += 'bfl_process_accounts = yes\n'
-    start += check('monthly_idempotent', 'var:bfl_dep_01_interest_due = 0.08')
+    start += check('monthly_idempotent', 'var:bfl_dep_01_interest_due = 0 c:FLO = { gold = 900.08 }')
     start += check('history_same_month_idempotent', 'var:bfl_history_count = var:bfi_test_history_before')
     start += 'set_variable = { name = bfl_demand_rate value = 0.02 } bfl_open_deposit = yes\n'
     start += check('accepted_rate_fixed', 'var:bfl_dep_01_annual_rate = 0.01 var:bfl_dep_02_annual_rate = 0.02')
+    start += 'add_opinion = { target = c:FLO modifier = bfi_deposit_test_bad_opinion }\n'
     start += 'bfl_request_all_withdrawals = yes\n'
-    start += check('withdrawal_cash_conserved', 'gold = 999.92 c:FLO = { gold = 1000.08 }')
+    start += check('withdrawal_cash_conserved', 'gold = 998.87 c:FLO = { gold = 1000.08 }')
     start += check('withdrawal_closes_slots', 'var:bfl_dep_01_active = 0 var:bfl_dep_02_active = 0 bfl_liabilities = 0')
     start += 'bfl_request_all_withdrawals = yes\n'
-    start += check('withdrawal_no_double_payment', 'gold = 999.92 c:FLO = { gold = 1000.08 }')
+    start += check('withdrawal_no_double_payment', 'gold = 998.87 c:FLO = { gold = 1000.08 }')
+    start += 'remove_opinion = { target = c:FLO modifier = bfi_deposit_test_bad_opinion }\n'
     start += reset() + 'c:FLO = { set_gold = 1000 } bfl_open_deposit = yes set_gold = 50 bfl_request_all_withdrawals = yes bfl_evaluate_distress = yes\n'
     start += check('partial_withdrawal_keeps_claim', 'gold = 25 c:FLO = { gold = 925 } var:bfl_dep_01_principal = 75 var:bfl_dep_01_withdrawal_requested = 75')
     start += check('queue_suspends_originations', 'var:bfl_state >= 2 NOT = { bfl_can_originate_demand_deposit = yes }')
@@ -119,33 +128,66 @@ def fixture(token, fingerprint):
     start += 'c:FLO = { bfl_grant_charter_traditions = yes }\n'
     start += check('charter_research_repeat_no_payment', 'gold = 1000 c:FLO = { gold = 1000 has_advance = banking_country_traditions }')
     start += check('live_charter_authority', 'bfl_has_valid_controller = yes')
-    for input_value, expected in [(-10,0),(2,2),(99,4)]:
-        start += f'c:FLO = {{ save_scope_value_as = {{ name = bfl_royalty_input value = {input_value} }} bfl_apply_royalty_input = yes }}\n'
-        start += check(f'royalty_input_{expected}', f'var:bfl_royalty_tier = {expected}')
-        if expected:
-            start += check(f'royalty_input_political_cost_{expected}',f'c:FLO = {{ has_country_modifier = bfl_royalty_sovereign_{expected} }} has_country_modifier = bfl_royalty_bank_{expected}')
-    start += 'c:PRZ = { save_scope_value_as = { name = bfl_royalty_input value = 0 } bfl_apply_royalty_input = yes }\n'
-    start += check('royalty_input_foreign_country_rejected','var:bfl_royalty_tier = 4')
-    start += '''set_variable = { name = bfl_state_units value = 500 }
-        set_variable = { name = bfl_opening_productive_assets value = 1200 }
-        set_variable = { name = bfl_royalty_tier value = 3 }
-        bfl_settle_royalty = yes
+    start += '''set_variable = { name = bfl_last_income_period value = 0 }
+        set_variable = { name = bfi_income_bank_cash value = gold }
+        bfl_observe_bank_income = yes
     '''
-    start += check('royalty_funded_transfer', 'var:bfl_royalty_paid = 1 gold = 999 c:FLO = { gold = 1001 } var:bfl_loss_carryforward = 1')
-    start += 'set_variable = { name = bfl_profit_services value = 101 } bfl_settle_dividends = yes\n'
-    start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.5 c:FLO = { gold = 1013.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 87.5')
+    start += check('native_net_budget_sample_no_cash_mutation','var:bfl_native_monthly_net = monthly_balance gold = var:bfi_income_bank_cash')
+    start += '''set_variable = { name = bfi_native_profit_before value = var:bfl_profit_native }
+        bfl_observe_bank_income = yes
+    '''
+    start += check('native_budget_income_period_idempotent','var:bfl_profit_native = var:bfi_native_profit_before')
+    start += 'set_variable = { name = bfl_profit_native value = 0 } set_variable = { name = bfl_loss_carryforward value = 0 }\n'
+    start += '''set_variable = { name = bfl_state_units value = 500 }
+        bfl_settle_operating_expenses = yes
+    '''
+    start += check('fixed_operating_cost_funded', 'var:bfl_expense_paid = 0.95 gold = 999.05 c:FLO = { gold = 1000 } var:bfl_loss_carryforward = 0.95')
+    start += 'bfl_settle_operating_expenses = yes\n'
+    start += check('fixed_operating_cost_idempotent','gold = 999.05 var:bfl_loss_carryforward = 0.95')
+    start += 'set_variable = { name = bfl_profit_services value = 100.95 } bfl_settle_dividends = yes\n'
+    start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
     start += 'bfl_recapitalize = yes\n'
-    start += check('recapitalization_funded', 'gold = 1086.5 c:FLO = { gold = 913.5 } var:bfl_state_units = 600 var:bfl_total_units = 1100 var:bfl_profit_services = 87.5')
+    start += check('recapitalization_funded', 'gold = 1086.55 c:FLO = { gold = 912.5 } var:bfl_state_units = 600 var:bfl_total_units = 1100 var:bfl_profit_services = 0')
     start += '''set_variable = { name = bfl_total_units value = 1000 }
         set_variable = { name = bfl_state_units value = 500 }
         set_variable = { name = bfl_shr_01_active value = 1 }
         set_variable = { name = bfl_shr_01_party value = c:PRZ }
         set_variable = { name = bfl_shr_01_units value = 250 }
         set_variable = { name = bfl_profit_services value = 100 }
+        set_variable = { name = bfl_last_dividend_period value = 0 }
         bfl_settle_dividends = yes
     '''
     start += check('balance_dividend_excludes_other_holders', 'var:bfl_state_dividend_paid = 12.5 var:bfl_dividend_paid = 18.75')
+    start += 'bfl_settle_dividends = yes\n'
+    start += check('dividend_same_month_preserves_display','var:bfl_state_dividend_paid = 12.5 var:bfl_dividend_paid = 18.75')
+    start += reset() + '''c:FLO = { save_scope_as = bfl_controller set_variable = { name = bfl_payment value = 500 } }
+        bfl_assign_charter_ownership = yes
+    '''
+    start += check('new_charter_wholly_sovereign_owned', 'var:bfl_state_units = 1500 var:bfl_total_units = 1500 bfl_state_share_fraction = 1')
+    start += '''c:PRZ = { set_gold = 1000 save_scope_as = bfl_party }
+        set_variable = { name = bfl_new_units value = 100 } bfl_allocate_subscription = yes
+    '''
+    start += check('external_bank_subscription_dilutes', 'var:bfl_total_units = 1600 var:bfl_state_units = 1500 var:bfl_shr_01_party = c:PRZ var:bfl_shr_01_units = 100 gold = 1100 c:PRZ = { gold = 900 }')
+    start += 'bfl_allocate_subscription = yes\n'
+    start += check('repeat_subscriber_aggregated','var:bfl_shr_01_units = 200 var:bfl_shr_02_active = 0 var:bfl_total_units = 1700')
+    start += reset() + '''set_gold = 10000
+        c:VEN = { create_estate_loan = { amount = 100 interest = 0.25 months = 60 }
+            ordered_loan = { order_by = loan_interest max = 1 save_scope_as = bfi_takeover_claim }
+            save_scope_as = bfl_party }
+        c:FLO = { set_variable = { name = bfi_takeover_state_cash value = gold } }
+        bfl_native_takeover = yes
+    '''
+    start += check('manual_takeover_bank_owns_same_loan', 'scope:bfi_takeover_claim = { owner = c:BRD borrower = c:VEN } c:FLO = { gold = var:bfi_takeover_state_cash } var:bfl_native_credit_value >= 100 var:bfl_asset_unsecured >= 100')
+    start += check('asset_tooltip_counterparty_is_borrower','var:bfl_asset_01_party = c:VEN var:bfl_asset_01_unsecured >= 100')
+    start += '''set_variable = { name = bfl_last_takeover_period value = 0 }
+        c:GEN = { create_estate_loan = { amount = 100 interest = 0.25 months = 60 } }
+        bfl_autonomous_takeover = yes
+    '''
+    start += check('bank_autonomous_takeover_funded','var:bfl_takeover_done = 1 var:bfl_last_takeover_period = bfl_period')
+    start += 'set_variable = { name = bfi_takeover_bank_cash value = gold } bfl_autonomous_takeover = yes\n'
+    start += check('autonomous_takeover_monthly_limit','gold = var:bfi_takeover_bank_cash')
+    start += 'every_lent_loan = { cancel_loan = this }\n'
     start += reset() + '''set_gold = 50 set_variable = { name = bfl_notes_outstanding value = 200 }
         remove_variable = bfl_history_count bfl_initialize_history = yes bfl_record_history = yes
     '''
@@ -165,12 +207,12 @@ def fixture(token, fingerprint):
         set_variable = { name = bfi_test_pending value = 1 }
         set_variable = { name = bfi_test_sentinel value = 731 }
     '''
-    start += check('campaign_fixture_ready', 'var:bfl_dep_01_principal = 100 var:bfl_dep_01_interest_due = 0')
+    start += check('campaign_fixture_ready', 'var:bfl_dep_01_principal = 100 var:bfl_dep_01_interest_due = 0 var:bfl_dep_01_annual_rate = 0.02')
     start += '}\n' + f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
     instant_cases = list(cases)
     finish = 'c:BRD = {\n bfl_process_accounts = yes\n'
     finish += check('twelve_calendar_months', 'bfl_period = var:bfi_test_target_period')
-    finish += check('natural_monthly_hook', 'var:bfl_last_period = bfl_period var:bfl_dep_01_interest_due = 1 var:bfl_dep_01_remainder = 0')
+    finish += check('natural_monthly_hook', 'var:bfl_last_period = bfl_period var:bfl_dep_01_interest_due = 0 var:bfl_dep_01_remainder = 0')
     # Research ownership is immediate; native modifier caches update after the tick.
     finish += check('native_banking_includes_term_and_capital', 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }')
     finish += check('banking_injection_preserves_native_bonds', 'c:FLO = { modifier:can_sell_bonds = yes }')
@@ -178,9 +220,9 @@ def fixture(token, fingerprint):
     finish += check('persistent_schema_and_owner', 'var:bfl_schema = 1 var:bfi_test_sentinel = 731 var:bfl_dep_01_party = c:FLO bfl_has_valid_controller = yes')
     finish += 'set_variable = { name = bfi_test_interest_before value = var:bfl_dep_01_interest_due } bfl_process_accounts = yes\n'
     finish += check('same_month_after_campaign_no_double_charge', 'var:bfl_dep_01_interest_due = var:bfi_test_interest_before')
-    finish += '''c:FLO = { save_scope_as = bfl_party set_variable = { name = bfi_test_expected_cash value = gold } change_variable = { name = bfi_test_expected_cash add = 101 } }
+    finish += '''c:FLO = { save_scope_as = bfl_party set_variable = { name = bfi_test_expected_cash value = gold } change_variable = { name = bfi_test_expected_cash add = 100 } }
         set_variable = { name = bfi_test_expected_cash value = gold }
-        change_variable = { name = bfi_test_expected_cash subtract = 101 }
+        change_variable = { name = bfi_test_expected_cash subtract = 100 }
         bfl_request_all_withdrawals = yes
     '''
     finish += check('mature_claim_paid', 'var:bfl_dep_01_active = 0 var:bfl_dep_01_principal = 0 var:bfl_dep_01_interest_due = 0')
@@ -200,7 +242,7 @@ def reload_fixture(token, fingerprint):
         'reload_sentinel': 'var:bfi_test_sentinel = 731 has_variable = bfi_test_started',
         'reload_schema': 'var:bfl_schema = 1',
         'reload_claim_owner': 'var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:FLO var:bfl_dep_01_generation = 1',
-        'reload_profile_and_rate': 'var:bfl_profile = 1 var:bfl_dep_01_annual_rate = 0.01',
+        'reload_profile_and_rate': 'var:bfl_profile = 1 var:bfl_dep_01_annual_rate = 0.02',
         'reload_live_controller': 'bfl_has_valid_controller = yes',
         'reload_native_banking_unlocks': 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }',
     }
@@ -245,6 +287,7 @@ def prepare(directory, token=None):
     # Test-only overlay: independent of production package and excluded by release allowlist.
     overlay = directory / 'mod/bfi_campaign_checks'
     meta = overlay / '.metadata/metadata.json'
+    write_script(overlay / 'in_game/common/biases/bfi_test_opinion.txt', 'bfi_deposit_test_opinion = { value = 100 yearly_decay = 0 }\nbfi_deposit_test_bad_opinion = { value = -400 yearly_decay = 0 }')
     meta.parent.mkdir(parents=True, exist_ok=True)
     meta.write_text(json.dumps({'name': 'BFI campaign checks (DISPOSABLE)', 'id': 'bfi_campaign_checks',
         'version': '0.0.1', 'game_id': 'eu5', 'supported_game_version': '1.4.1',

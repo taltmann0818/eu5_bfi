@@ -5,7 +5,10 @@
     select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
         column = { data = country_diplomacy_info_loan }
         visible = { num_loans > 0 }
-        enabled = { any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 } }
+        enabled = {
+            scope:actor = { OR = { bfl_is_independent_bank = yes var:bfl_bank ?= { bfl_can_originate_native_takeover = yes } } }
+            any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 }
+        }
     }
     effect = {
         scope:recipient = { save_scope_as = bfl_party }

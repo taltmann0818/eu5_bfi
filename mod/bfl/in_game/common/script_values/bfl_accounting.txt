@@ -76,8 +76,8 @@ if = { limit = { var:bfl_dep_30_active = 1 } add = var:bfl_dep_30_withdrawal_req
 if = { limit = { var:bfl_dep_31_active = 1 } add = var:bfl_dep_31_withdrawal_requested }
 if = { limit = { var:bfl_dep_32_active = 1 } add = var:bfl_dep_32_withdrawal_requested }
 }
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
-    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
         value = bfl_liabilities subtract = bfl_withdrawals_due min = 0
@@ -86,11 +86,4 @@ if = { limit = { var:bfl_dep_32_active = 1 } add = var:bfl_dep_32_withdrawal_req
     bfl_free_cash = { value = gold subtract = bfl_protected_cash min = 0 }
     bfl_capital_headroom = { value = bfl_assets multiply = -0.10 add = bfl_equity min = 0 }
     bfl_negative_payment = { value = var:bfl_payment multiply = -1 }
-    bfl_royalty_rate = {
-        value = 0
-        if = { limit = { var:bfl_royalty_tier = 1 } value = 0.0025 }
-        if = { limit = { var:bfl_royalty_tier = 2 } value = 0.005 }
-        if = { limit = { var:bfl_royalty_tier = 3 } value = 0.01 }
-        if = { limit = { var:bfl_royalty_tier = 4 } value = 0.02 }
-    }
     bfl_ai_charter_score = { value = 0 if = { limit = { gold > 1500 } add = 10 } }

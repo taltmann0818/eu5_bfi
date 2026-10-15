@@ -13,8 +13,8 @@ This is the first development iteration. A file's presence or an offline arithme
 | Regular bank loan takeover | Runtime minimal native operation preserving price, estates and same loan | P06/P08 wallet, identity and default fixture |
 | Native bonds, recurring draw, resale, redemption | Visible policy and explicit rejecting native adapters; offline same-claim resale test | P03–P05 source allocation, native ownership/payment routing, actual adapter implementation |
 | Restructuring | Research/permissions; native adapter gate | Accepted terms, principal/interest mutation and impairment accounting |
-| Monthly royalty | Runtime funded assessment, five tiers, political modifiers and deferral | Exact engine units; administrative waiver/collection UI; tier balance |
-| Activity dividends | Runtime real-fee reserves, loss offset, funded holder distributions | P07 native receipt attribution; activity-weighted common expense allocation and detailed statement |
+| Deposit income and operating expenses | Monthly funded demand interest; +50 foreign deposit gate; charter premium; fixed complexity costs, reductions and arrears | Broader campaign balance, estate pools and full resolution |
+| Share dividends | Native net-budget result plus custom earnings, expense/loss offset, monthly payout by current units, 100% initial sovereign ownership | Company-specific P07 attribution and full per-activity statements |
 | Equity | Runtime primary bank subscriptions and state/founder units; offline dilution model | Secondary share offers/transfers, company equity execution and complete legacy holders |
 | Commercial bills | Runtime funded one-month bills and idempotent redemption | Holder transfer, beneficiary selection and broader settlement |
 | Inventory, receipts, forwards | Inventory/contract schema; guarded receipt encumbrance service; offline double-backing tests | P09 physical purchases/sales, delivery/margining/forwards, transport/storage and complete UX |

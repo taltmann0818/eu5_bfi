@@ -17,10 +17,8 @@ set_variable = { name = bfl_profit_trading value = 0 }
 set_variable = { name = bfl_profit_goods value = 0 }
 set_variable = { name = bfl_profit_ventures value = 0 }
 set_variable = { name = bfl_profit_company value = 0 }
+set_variable = { name = bfl_profit_native value = 0 }
 set_variable = { name = bfl_last_period value = 0 }
-set_variable = { name = bfl_royalty_tier value = 1 }
-set_variable = { name = bfl_royalty_paid value = 0 }
-set_variable = { name = bfl_royalty_deferred value = 0 }
 set_variable = { name = bfl_dividend_paid value = 0 }
 set_variable = { name = bfl_state_dividend_paid value = 0 }
 set_variable = { name = bfl_facility_mode value = 0 }
@@ -917,6 +915,7 @@ set_variable = { name = bfl_branch_16_fee value = 0 }
 set_variable = { name = bfl_branch_16_expiry value = 0 }
 set_variable = { name = bfl_branch_16_state value = 0 }
 }
+bfl_migrate_accounts = yes
 bfl_initialize_history = yes
 bfl_reconcile_native_assets = yes
 }

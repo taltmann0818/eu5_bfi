@@ -1,65 +1,14 @@
 ﻿types BFLFinanceTypes {
         type bfl_income_dividends = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_balance_paid_tip"
-                blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/dividend.dds" }
-                blockoverride "label" { text = "bfl_bank_dividends" }
-                blockoverride "income_text" { raw_text = "[Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2+=]@income!" } }type bfl_income_royalties = adjustable_budget_card {
-                layoutpolicy_horizontal = expanding size = { -1 55 }
-                blockoverride "top_widget" { hbox = { margin = { 5 0 } spacing = 5
-                    icon = { texture = "gfx/interface/icons/bfl/royalty.dds" size = { 31 31 } }
-                    text_single = { using = layoutpolicy_expanding maximumsize = { 175 -1 } autoresize = no align = left|nobaseline text = "bfl_bank_royalties" }
-                    text_single = { autoresize = yes align = right|nobaseline raw_text = "[Country.MakeScope.GetVariable('bfl_royalty_paid').GetValue|2+=]@income!" } } }
-                blockoverride "bottom_widget" { hbox = { margin = { 5 0 }
-                    hbox = { size = { 145 20 } layoutpolicy_horizontal = fixed ranged_slider = {
-        name = "bfl_royalty_slider" size = { 110 10 }
-        direction = horizontal allow_outside = yes
-        value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_royalty_tier').GetValue)]"
-        min = 0 max = 4 mincap = 0 maxcap = 4 step = 1 wheelstep = 1
-        enabled = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        tooltip = "bfl_royalty_tip"
-        track = { using = economy_slider_track }
-        track_range = { EconomySlider_TrackRange = { name = "bfl_royalty_range" } }
-        track_highlight = { EconomySlider_TrackHighlight = { name = "bfl_royalty_fill" } }
-        slider = { EconomySlider_Slider = { name = "bfl_royalty_thumb" } }
-        dec_button = { using = economy_slider_dec_button }
-        inc_button = { using = economy_slider_inc_button }
-        onchangefinish = "[PdxGuiWidget.TriggerAnimation('bfl_commit_royalty')]"
-        state = { name = bfl_commit_royalty duration = 0.05 on_finish = "[GetScriptedGui('bfl_apply_royalty_slider').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('bfl_royalty_input', MakeScopeValue(Select_CFixedPoint(LessThan_float(Divide_float(PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_fill').GetSizeX, Max_float('(float)1', PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_range').GetSizeX)), '(float)0.125'), '(CFixedPoint)0', Select_CFixedPoint(LessThan_float(Divide_float(PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_fill').GetSizeX, Max_float('(float)1', PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_range').GetSizeX)), '(float)0.375'), '(CFixedPoint)1', Select_CFixedPoint(LessThan_float(Divide_float(PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_fill').GetSizeX, Max_float('(float)1', PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_range').GetSizeX)), '(float)0.625'), '(CFixedPoint)2', Select_CFixedPoint(LessThan_float(Divide_float(PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_fill').GetSizeX, Max_float('(float)1', PdxGuiWidget.AccessParent.FindChild('bfl_royalty_slider').FindChild('bfl_royalty_range').GetSizeX)), '(float)0.875'), '(CFixedPoint)3', '(CFixedPoint)4')))))).End)]" }
-    }
-                        icon = { size = { 20 20 } texture_density = 2 texture = "gfx/interface/buttons/checkbox_auto.dds" frame_grid = { 2 1 } frame = 1 tooltip = "bfl_royalty_tip"
-                            background = { texture = "gfx/interface/buttons/checkbox_auto_bg.dds" texture_density = 2 using = color_dark_blue } } expand = { } }
-                    hbox = { size = { 39 20 } layoutpolicy_horizontal = fixed
-                        text_single = { size = { 25 20 }
-
-            autoresize = no align = right|nobaseline using = Font_Size_Very_Small
-            raw_text = "[GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction|R0%]" tooltip = "bfl_royalty_tip"
-            visible = "[LessThan_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction, '(CFixedPoint)0.5')]" }text_single = { size = { 25 20 }
-
-            autoresize = no align = right|nobaseline using = Font_Size_Very_Small
-            raw_text = "[GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction|G0%]" tooltip = "bfl_royalty_tip"
-            visible = "[GreaterThanOrEqualTo_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction, '(CFixedPoint)0.5')]" } icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/sad.dds" visible = "[LessThanOrEqualTo_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction, '(CFixedPoint)0.25')]" }icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/neutral.dds" visible = "[BetweenInclusiveOfMax_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction, '(CFixedPoint)0.25', '(CFixedPoint)0.5')]" }icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/happy.dds" visible = "[GreaterThan_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetSatisfaction, '(CFixedPoint)0.5')]" } }
-                    widget = { size = { 14 14 } icon = { parentanchor = center position = { -1 0 } allow_outside = yes size = { 20 20 } texture = "gfx/interface/buttons/flats/button_simple.dds"
-                        modify_texture = { using = color_bone_texture blend_mode = normal } } }
-                    hbox = { using = layoutpolicy_expanding spacing = 1
-                        text_single = { size = { -1 20 }
-            layoutpolicy_horizontal = expanding
-            autoresize = no align = right|nobaseline using = Font_Size_Very_Small
-            raw_text = "[GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction|R2%]" tooltip = "bfl_royalty_tip"
-            visible = "[LessThan_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction, '(CFixedPoint)0.5')]" }text_single = { size = { -1 20 }
-            layoutpolicy_horizontal = expanding
-            autoresize = no align = right|nobaseline using = Font_Size_Very_Small
-            raw_text = "[GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction|G2%]" tooltip = "bfl_royalty_tip"
-            visible = "[GreaterThanOrEqualTo_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction, '(CFixedPoint)0.5')]" } icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/sad.dds" visible = "[LessThanOrEqualTo_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction, '(CFixedPoint)0.25')]" }icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/neutral.dds" visible = "[BetweenInclusiveOfMax_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction, '(CFixedPoint)0.25', '(CFixedPoint)0.5')]" }icon = { size = { 14 14 } texture_density = 2
-            texture = "gfx/interface/icons/flat_icons/happy.dds" visible = "[GreaterThan_CFixedPoint(GetPlayer.GetGovernment.GetEstateFromKey('burghers_estate').GetTargetSatisfaction, '(CFixedPoint)0.5')]" } }
-                } } tooltip = "bfl_royalty_tip"
-            }type bfl_income_facility = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_facility_tip"
-                blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/debt.dds" }
-                blockoverride "label" { text = "bfl_debt_facility" }
-                blockoverride "income_text" { raw_text = "[Country.MakeScope.GetVariable('bfl_facility_paid').GetValue|2+=]@income!" } }
+            blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/dividend.dds" }
+            blockoverride "label" { text = "bfl_bank_dividends" }
+            blockoverride "income_text" { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_income_display')|2+=]@income!" } }type bfl_income_interest = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_deposit_income_tip"
+            blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/deposit.dds" }
+            blockoverride "label" { text = "bfl_deposit_interest" }
+            blockoverride "income_text" { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_deposit_income_display')|2+=]@income!" } }type bfl_income_facility = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_facility_tip"
+            blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/debt.dds" }
+            blockoverride "label" { text = "bfl_debt_facility" }
+            blockoverride "income_text" { raw_text = "[Country.MakeScope.GetVariable('bfl_facility_paid').GetValue|2+=]@income!" } }
         type bfl_bank_overview = vbox { layoutpolicy_horizontal = expanding spacing = 4 vbox = { layoutpolicy_horizontal = expanding spacing = 8 margin = { 10 6 }
         hbox = { spacing = 8 icon = { texture = "gfx/interface/icons/bfl/accounts.dds" size = { 32 32 } } vbox = { layoutpolicy_horizontal = expanding tooltip = "bfl_bank_identity_tip" text_single = { raw_text = "[Country.GetName]" size = { -1 22 } layoutpolicy_horizontal = expanding } text_single = { text = "bfl_profile_0" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)0')]" }text_single = { text = "bfl_profile_1" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)1')]" }text_single = { text = "bfl_profile_2" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)2')]" } }
             vbox = { tooltip = "bfl_bank_status_tip" text_single = { text = "bfl_status_0" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)0')]" }text_single = { text = "bfl_status_1" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)1')]" }text_single = { text = "bfl_status_2" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)2')]" }text_single = { text = "bfl_status_3" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)3')]" }text_single = { text = "bfl_status_4" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)4')]" }text_single = { text = "bfl_status_5" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)5')]" } } }
@@ -79,181 +28,80 @@
         hbox = { spacing = 4 icon = { texture = "gfx/interface/icons/bfl/subscribe.dds" size = { 18 18 } } text_single = { text = "bfl_equity_label" autoresize = yes fontsize = 12 } }
         text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity')|2]@gold!" autoresize = yes fontsize = 17 } } } }
                 text_multi = { text = "bfl_overview_hint" size = { -1 35 } layoutpolicy_horizontal = expanding fontsize = 11 } }
-            vbox = { size = { 240 180 } spacing = 4 tooltip = "bfl_equity_debt_tip"
-        text_single = { text = "bfl_equity_debt" autoresize = yes fontsize = 14 }
-        text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_max')|2]@gold!" autoresize = yes }
-        widget = { size = { 240 100 } using = bg_text_mask_container_dark_brown widget = { position = { 0 0 } size = { 240 1 } background = { texture = "gfx/interface/colors/white.dds" alpha = 0.12 } }
-widget = { position = { 0 24 } size = { 240 1 } background = { texture = "gfx/interface/colors/white.dds" alpha = 0.12 } }
-widget = { position = { 0 48 } size = { 240 1 } background = { texture = "gfx/interface/colors/white.dds" alpha = 0.12 } }
-widget = { position = { 0 72 } size = { 240 1 } background = { texture = "gfx/interface/colors/white.dds" alpha = 0.12 } }
-widget = { position = { 0 96 } size = { 240 1 } background = { texture = "gfx/interface/colors/white.dds" alpha = 0.12 } }
-widget = { name = "bfl_equity_sample_01"
-                position = "[ToVector2f('(float)0', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_01')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)12')]" tooltip = "bfl_chart_equity_01"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)20', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_01')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_01')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)12')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_02"
-                position = "[ToVector2f('(float)20', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_02')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)11')]" tooltip = "bfl_chart_equity_02"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)40', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_02')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_02')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)11')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_03"
-                position = "[ToVector2f('(float)40', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_03')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)10')]" tooltip = "bfl_chart_equity_03"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)60', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_03')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_03')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)10')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_04"
-                position = "[ToVector2f('(float)60', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_04')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)9')]" tooltip = "bfl_chart_equity_04"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)80', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_04')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_04')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)9')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_05"
-                position = "[ToVector2f('(float)80', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_05')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)8')]" tooltip = "bfl_chart_equity_05"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)100', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_05')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_05')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)8')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_06"
-                position = "[ToVector2f('(float)100', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_06')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)7')]" tooltip = "bfl_chart_equity_06"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)120', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_06')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_06')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)7')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_07"
-                position = "[ToVector2f('(float)120', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_07')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)6')]" tooltip = "bfl_chart_equity_07"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)140', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_07')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_07')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)6')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_08"
-                position = "[ToVector2f('(float)140', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_08')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)5')]" tooltip = "bfl_chart_equity_08"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)160', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_08')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_08')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)5')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_09"
-                position = "[ToVector2f('(float)160', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_09')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)4')]" tooltip = "bfl_chart_equity_09"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)180', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_09')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_09')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)4')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_10"
-                position = "[ToVector2f('(float)180', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_10')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)3')]" tooltip = "bfl_chart_equity_10"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)200', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_10')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_10')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)3')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_11"
-                position = "[ToVector2f('(float)200', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_11')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)2')]" tooltip = "bfl_chart_equity_11"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { position = "[ToVector2f('(float)220', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_top_11')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_height_11')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)2')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_equity_sample_12"
-                position = "[ToVector2f('(float)220', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_equity_y_12')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_chart_equity_12"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.35 0.75 0.55 1 } } }
-widget = { name = "bfl_debt_sample_01"
-                position = "[ToVector2f('(float)0', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_01')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)12')]" tooltip = "bfl_chart_debt_01"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)20', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_01')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_01')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)12')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_02"
-                position = "[ToVector2f('(float)20', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_02')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)11')]" tooltip = "bfl_chart_debt_02"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)40', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_02')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_02')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)11')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_03"
-                position = "[ToVector2f('(float)40', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_03')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)10')]" tooltip = "bfl_chart_debt_03"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)60', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_03')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_03')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)10')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_04"
-                position = "[ToVector2f('(float)60', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_04')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)9')]" tooltip = "bfl_chart_debt_04"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)80', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_04')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_04')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)9')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_05"
-                position = "[ToVector2f('(float)80', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_05')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)8')]" tooltip = "bfl_chart_debt_05"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)100', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_05')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_05')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)8')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_06"
-                position = "[ToVector2f('(float)100', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_06')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)7')]" tooltip = "bfl_chart_debt_06"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)120', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_06')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_06')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)7')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_07"
-                position = "[ToVector2f('(float)120', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_07')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)6')]" tooltip = "bfl_chart_debt_07"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)140', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_07')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_07')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)6')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_08"
-                position = "[ToVector2f('(float)140', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_08')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)5')]" tooltip = "bfl_chart_debt_08"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)160', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_08')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_08')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)5')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_09"
-                position = "[ToVector2f('(float)160', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_09')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)4')]" tooltip = "bfl_chart_debt_09"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)180', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_09')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_09')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)4')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_10"
-                position = "[ToVector2f('(float)180', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_10')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)3')]" tooltip = "bfl_chart_debt_10"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)200', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_10')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_10')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)3')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_11"
-                position = "[ToVector2f('(float)200', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_11')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)2')]" tooltip = "bfl_chart_debt_11"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { position = "[ToVector2f('(float)220', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_top_11')), '(float)0.6'))]"
-                    size = "[ToVector2f('(float)2', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_height_11')), '(float)0.6'))]" visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)2')]"
-                    background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-widget = { name = "bfl_debt_sample_12"
-                position = "[ToVector2f('(float)220', Multiply_float(FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_debt_y_12')), '(float)0.6'))]" size = { 20 2 }
-                visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_chart_debt_12"
-                background = { texture = "gfx/interface/colors/white.dds" color = { 0.85 0.43 0.35 1 } } }
-
-            text_multi = { parentanchor = center size = { 220 50 } text = "bfl_history_empty" fontsize = 12
-                visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_history_count').GetValue, '(CFixedPoint)0')]" } }
-        text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_chart_min')|2]@gold!      #g Equity#!   #r Debt#!" autoresize = yes fontsize = 12 }
-        text_single = { text = "bfl_twelve_months" autoresize = yes fontsize = 11 } } } } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
+            hbox = { spacing = 6 vbox = { size = { 114 145 } spacing = 5
+            text_single = { text = "bfl_share_ownership" autoresize = yes fontsize = 13 }
+            piechart = { name = "bfl_share_ownership_donut" size = { 100 100 } using = piechart_angles using = bg_circle_piechart_big
+                pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_state_units').GetValue)]" color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]"
+        visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" tooltip = "bfl_share_state_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_01_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_01_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_02_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_02_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_02_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_02_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_03_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_03_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_03_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_03_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_04_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_04_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_04_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_04_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_05_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_05_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_05_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_05_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_06_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_06_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_06_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_06_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_07_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_07_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_07_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_07_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_08_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_08_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_08_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_08_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_09_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_09_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_09_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_09_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_10_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_10_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_10_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_10_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_11_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_11_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_11_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_11_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_12_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_12_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_12_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_12_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_13_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_13_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_13_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_13_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_14_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_14_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_14_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_14_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_15_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_15_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_15_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_15_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_16_units').GetValue)]"
+            color = "[Country.MakeScope.GetVariable('bfl_shr_16_party').GetCountry.GetMapColor]"
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_16_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_16_tip" }
+                icon = { size = { 38 38 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/subscribe.dds" } } } vbox = { size = { 114 145 } spacing = 5
+            text_single = { text = "bfl_asset_mix" autoresize = yes fontsize = 13 }
+            piechart = { name = "bfl_asset_mix_donut" size = { 100 100 } using = piechart_angles using = bg_circle_piechart_big
+                pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.GetFixedPointCurrencyValue('gold'))]" color = { 0.80 0.68 0.35 1 }
+            tooltipwidget = { bfl_asset_cash_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_bonds').GetValue)]" color = { 0.39 0.61 0.79 1 }
+            tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_unsecured').GetValue)]" color = { 0.72 0.40 0.33 1 }
+            tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_secured').GetValue)]" color = { 0.40 0.67 0.52 1 }
+            tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_commodities').GetValue)]" color = { 0.76 0.56 0.32 1 }
+            tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_investments').GetValue)]" color = { 0.61 0.48 0.72 1 }
+            tooltipwidget = { bfl_asset_investments_tooltip = { } } }
+                icon = { size = { 38 38 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/accounts.dds" } } } } }
+        hbox = { spacing = 8 tooltip = "bfl_operating_costs_tip"
+            text_single = { text = "bfl_operating_costs" autoresize = yes fontsize = 12 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_expense')|2]@gold!" autoresize = yes fontsize = 12 } } } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
         hbox = { spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = { using = CreditworthinessTooltip }
             icon = { texture = "gfx/interface/icons/bfl/collateral.dds" size = { 18 18 } } text_single = { text = "bfl_state_credit_value" autoresize = yes fontsize = 12 } }
         hbox = { spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = { using = BankInterest_tooltip }
@@ -262,7 +110,7 @@ widget = { name = "bfl_debt_sample_12"
         hbox = { spacing = 4 tooltip = "bfl_state_bonds_tip" icon = { texture = "gfx/interface/icons/bfl/bond.dds" size = { 18 18 } }
             text_single = { text = "bfl_state_bonds_value" autoresize = yes fontsize = 12 } }
     } }
-        type bfl_credit_overview = widget { size = { -1 270 } layoutpolicy_horizontal = expanding using = bg_age_event_frame
+        type bfl_credit_overview = widget { size = { -1 300 } layoutpolicy_horizontal = expanding using = bg_age_event_frame
             background = { texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }
             bfl_bank_overview = { datacontext = "[GetPlayer]"
         visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
@@ -316,7 +164,15 @@ widget = { name = "bfl_debt_sample_12"
         tooltip = "bfl_payout_50_tip" text = "bfl_payout_50_short" down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_payout_ratio').GetValue, '(CFixedPoint)0.5')]"
         enabled = "[GetScriptedGui('bfl_payout_50').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_payout_50').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } }hbox = { layoutpolicy_horizontal = expanding spacing = 8 tooltip = "bfl_facility_title_tip"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_bank_shares_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_offer_bank_shares_tip" text = "bfl_offer_bank_shares" down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_equity').GetValue, '(CFixedPoint)1')]"
+        enabled = "[GetScriptedGui('bfl_offer_bank_shares').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_offer_bank_shares').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_close_bank_offering_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_close_bank_offering_tip" text = "bfl_close_bank_offering" down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_equity').GetValue, '(CFixedPoint)0')]"
+        enabled = "[GetScriptedGui('bfl_close_bank_offering').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_close_bank_offering').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } }hbox = { layoutpolicy_horizontal = expanding spacing = 8 tooltip = "bfl_facility_title_tip"
             text_single = { text = "bfl_facility_title" size = { 155 30 } autoresize = no fontsize = 13 } button_regular = { name = "bfl_facility_0_button" size = { -1 30 } layoutpolicy_horizontal = expanding
         tooltip = "bfl_facility_0_tip" text = "bfl_facility_0_short" down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_facility_mode').GetValue, '(CFixedPoint)0')]"
         enabled = "[GetScriptedGui('bfl_facility_0').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -339,7 +195,11 @@ widget = { name = "bfl_debt_sample_12"
         tooltip = "bfl_suspend_command_tip" text = "bfl_suspend_command"
         enabled = "[GetScriptedGui('bfl_suspend_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_suspend_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } } } }button_regular = { name = "bfl_select_profile_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+    } } } }button_regular = { name = "bfl_streamline_bank_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_streamline_bank_tip" text = "bfl_streamline_bank"
+        enabled = "[GetScriptedGui('bfl_streamline_bank').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_streamline_bank').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }button_regular = { name = "bfl_select_profile_button" size = { -1 32 } layoutpolicy_horizontal = expanding
         tooltip = "bfl_select_profile_tip" text = "bfl_select_profile"
         enabled = "[GetScriptedGui('bfl_select_profile').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_select_profile').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -355,16 +215,11 @@ widget = { name = "bfl_debt_sample_12"
         type bfl_credit_investment_body = scrollarea {
             size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
-            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_purchase_native_loan_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_loan_button"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_purchase_native_loan_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_purchase_native_loan" action_direction = "offer" actor = "[GetPlayer]" }
-        } } vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_buy_bill_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 button_regular = { name = "bfl_buy_bill_button" size = { -1 32 } layoutpolicy_horizontal = expanding
         tooltip = "bfl_buy_bill_tip" text = "bfl_buy_bill"
         enabled = "[GetScriptedGui('bfl_buy_bill').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_buy_bill').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } } }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_debt_tip"
+    }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_debt_tip"
         widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             text_single = { parentanchor = center text = "bfl_debt" autoresize = yes } } hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_sovereign_credit_tip" icon = { texture = "gfx/interface/icons/bfl/loan.dds" size = { 24 24 } }
                 text_single = { text = "bfl_sovereign_credit" autoresize = yes fontsize = 13 } expand = { }

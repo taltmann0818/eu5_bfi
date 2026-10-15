@@ -47,10 +47,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
             scope:bfl_bank = {
                 bfl_initialize_bank = yes
                 set_variable = { name = bfl_opening_equity value = bfl_equity }
-                # Units priced at opening equity: existing founders are not confiscated.
-                set_variable = { name = bfl_total_units value = var:bfl_opening_equity }
-                set_variable = { name = bfl_state_units value = scope:bfl_controller.var:bfl_payment }
-                change_variable = { name = bfl_total_units add = var:bfl_state_units }
+                bfl_assign_charter_ownership = yes
                 add_gold = scope:bfl_controller.var:bfl_payment
                 change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
                 change_subject_type = subject_type:bfl_chartered_bank
@@ -63,7 +60,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
             bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
-            scope:bfl_bank = { bfl_apply_royalty_modifiers = yes bfl_offer_profile = yes }
+            scope:bfl_bank = { bfl_offer_profile = yes }
         }
     }
     bfl_reconcile_charter = {

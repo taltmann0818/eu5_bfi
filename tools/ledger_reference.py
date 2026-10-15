@@ -3,7 +3,7 @@
 This model tests money/claims, never pretends to simulate the EUV engine.
 """
 from dataclasses import dataclass, field
-from decimal import Decimal, ROUND_DOWN
+from decimal import Decimal, ROUND_DOWN, ROUND_HALF_UP
 import json
 from pathlib import Path
 
@@ -109,10 +109,12 @@ class Bank(Wallet):
     excluded_issuance: Decimal = D(0)
     inventory: dict = field(default_factory=dict)
     contracts: dict = field(default_factory=dict)
+    retained: Decimal = D(0)
+    expense_arrears: Decimal = D(0)
 
     @property
     def liabilities(self):
-        return sum((x.claim for x in self.deposits.values()), D(0)) + self.notes + self.liabilities_other
+        return sum((x.claim for x in self.deposits.values()), D(0)) + self.notes + self.liabilities_other + self.expense_arrears
 
     @property
     def assets(self):
@@ -139,15 +141,16 @@ class Bank(Wallet):
                 and ('native_advance' not in rule or rule['native_advance'] in self.advances)
                 and (not rule.get('charter') or self.charter))
 
-    def deposit(self, key, depositor, amount, period=0, term=False):
+    def deposit(self, key, depositor, amount, period=0, term=False, relation=50, own_charter=False):
         instrument = 'term_deposit' if term else 'demand_deposit'
-        if not self.permitted(instrument) or key in self.deposits or len(self.deposits) >= 32:
+        if not self.permitted(instrument) or key in self.deposits or len(self.deposits) >= 32 or (not own_charter and relation < 50):
             raise Rejected('deposit permission/capacity')
         amount = money(amount)
         if amount <= 0:
             raise Rejected('positive amount required')
         transfer(depositor, self, amount)
-        self.deposits[key] = Deposit(key, amount, D('.02') if term else D('.01'), period + 12 if term else 0)
+        rate = (D('.02') if term else D('.01')) + (D('.01') if own_charter else D(0))
+        self.deposits[key] = Deposit(key, amount, rate, period + 12 if term else 0)
 
     def withdraw(self, key, party, amount, period):
         dep = self.deposits[key]
@@ -170,15 +173,34 @@ class Bank(Wallet):
         self.loss += expense
         return expense
 
-    def royalty(self, sovereign, assets_opening, annual_rate, period):
-        if not self.charter or self.state >= 3 or self.periods.get('royalty', -1) >= period:
-            return D(0)
-        due = money(max(D(0), D(assets_opening)) * D(annual_rate) / 12)
-        paid = min(due, money(self.free_cash))
-        transfer(self, sovereign, paid)
-        self.loss += paid
-        self.periods['royalty'] = period
+    def pay_demand_interest(self, wallets):
+        paid = D(0)
+        for key, deposit in self.deposits.items():
+            if deposit.maturity or deposit.requested or key not in wallets:
+                continue
+            amount = min(deposit.interest, money(self.free_cash))
+            transfer(self, wallets[key], amount)
+            deposit.interest -= amount
+            paid += amount
         return paid
+
+    def operating_cost(self, period, accounts=0, contracts=0, branches=0, asset_types=0, streamlined=False):
+        if self.periods.get('operating', -1) >= period:
+            return D(0)
+        multiplier = D(1) - D('.05') * self.charter - D('.10') * streamlined
+        multiplier -= D('.10') * ('banking_advance' in self.advances)
+        multiplier -= D('.15') * ('advanced_clearing' in self.advances)
+        due = ((D(1) + D('.05') * accounts + D('.10') * contracts + D('.50') * branches + D('.25') * asset_types) * multiplier).quantize(CENT, rounding=ROUND_HALF_UP)
+        self.loss += due
+        self.expense_arrears += due
+        paid = min(self.expense_arrears, money(self.free_cash))
+        self.cash -= paid
+        self.expense_arrears -= paid
+        self.periods['operating'] = period
+        return paid
+
+    def charter_ownership(self, sovereign):
+        self.holders = {sovereign: max(D(1), self.equity)}
 
     def recognize(self, bucket, amount, classification):
         if classification not in ('realized_profit', 'realized_loss'):
@@ -203,24 +225,22 @@ class Bank(Wallet):
         units = sum(self.holders.values(), D(0))
         if not units or not funded:
             self.periods['dividend'] = period
+            self.retained += sum(self.reserves.values(), D(0))
+            self.reserves.clear()
             return D(0)
         # All payable holders must resolve before any mutation.
         if any(k not in wallets for k in self.holders):
             raise Rejected('unresolved shareholder')
-        remainder = funded
         keys = sorted(self.holders)
+        paid_total = D(0)
         for key in keys:
-            amount = remainder if key == keys[-1] else money(funded * self.holders[key] / units)
+            amount = money(funded * self.holders[key] / units)
             transfer(self, wallets[key], amount)
-            remainder -= amount
-        remaining = funded
-        buckets = sorted(requested)
-        for bucket in buckets:
-            consume = remaining if bucket == buckets[-1] else money(funded * requested[bucket] / total)
-            self.reserves[bucket] -= consume
-            remaining -= consume
+            paid_total += amount
         self.periods['dividend'] = period
-        return funded
+        self.retained += sum(self.reserves.values(), D(0)) - paid_total
+        self.reserves.clear()
+        return paid_total
 
     def subscribe(self, holder, wallet, amount):
         if not self.permitted('bank_subscription') or self.equity <= 0:

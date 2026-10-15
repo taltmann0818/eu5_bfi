@@ -115,7 +115,7 @@ def main():
             check(data[84:88]==b'DXT5',f'Expected BC3/DXT5 texture: {path}')
     economy=(MOD/'in_game/gui/economy_lateralview.gui').read_text(encoding='utf-8-sig')
     types=(MOD/'in_game/gui/vanilla/bfl_economy_vanilla_types.gui').read_text(encoding='utf-8-sig')
-    for kind in ('dividends','royalties','facility'):
+    for kind in ('dividends','interest','facility'):
         check(economy.count(f'name = "bfl_income_{kind}"')==1,f'Bank {kind} row must occur exactly once')
     check('layoutpolicy_horizontal = fixed\n\t\t\t\t\t\t\t\t\t\t\tsize = { 49%' not in economy,'Native budget columns must retain their layout')
     credit=(MOD/'in_game/gui/credit.gui').read_text(encoding='utf-8-sig')
@@ -128,6 +128,9 @@ def main():
         check(provider in credit,f'Native loan list missing: {provider}')
     check('bfl_finance_section' not in economy,'Balance must not contain the old finance accordion')
     check('name = "balance_subheader"' in economy,'Native budget controls missing')
+    check('bfl_income_royalties' not in economy,'Retired income control remains')
+    for name in ('bfl_share_ownership_donut','bfl_asset_mix_donut'):
+        check(name in interface,f'Missing native donut: {name}')
     check(types.count('template economy_main_tabs')==1,'Shared native economy tab template must have one owner')
     check('types EconomyLateralviewTypes' not in economy,'Native types duplicated in replacement')
     joined='\n'.join(text for _,text in all_text)

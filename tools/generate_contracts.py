@@ -78,6 +78,16 @@ def generate(common,effect,loc):
     shareholder_capacity='OR = { '+' '.join(f'var:bfl_shr_{i:02}_active = 0' for i in range(1,17))+' }'
     common('scripted_triggers','equity_validation',effect('bfl_has_shareholder_capacity',shareholder_capacity))
     subscribe='set_variable = { name = bfl_subscription_allocated value = 0 }\n'
+    subscribe+='''if = { limit = { bfl_has_valid_controller = yes overlord = scope:bfl_party }
+        set_variable = { name = bfl_subscription_allocated value = 1 }
+        change_variable = { name = bfl_state_units add = var:bfl_new_units }
+    }\n'''
+    for i in range(1,17):
+        n=f'bfl_shr_{i:02}'
+        subscribe+=f'''if = {{ limit = {{ var:bfl_subscription_allocated = 0 var:{n}_active = 1 var:{n}_party = scope:bfl_party }}
+            set_variable = {{ name = bfl_subscription_allocated value = 1 }}
+            change_variable = {{ name = {n}_units add = var:bfl_new_units }}
+            change_variable = {{ name = {n}_basis add = 100 }} }}\n'''
     for i in range(1,17):
         n=f'bfl_shr_{i:02}'
         subscribe+=f'''if = {{ limit = {{ var:bfl_subscription_allocated = 0 var:{n}_active = 0 }}
@@ -87,14 +97,17 @@ def generate(common,effect,loc):
             set_variable = {{ name = {n}_party value = scope:bfl_party }}
             set_variable = {{ name = {n}_units value = var:bfl_new_units }}
             set_variable = {{ name = {n}_basis value = 100 }}
-            change_variable = {{ name = bfl_total_units add = var:bfl_new_units }}
-            change_variable = {{ name = bfl_paid_in_capital add = 100 }}
-            scope:bfl_party = {{ add_gold = -100 }} add_gold = 100
         }}\n'''
+    subscribe+='''if = { limit = { var:bfl_subscription_allocated = 1 }
+        change_variable = { name = bfl_total_units add = var:bfl_new_units }
+        change_variable = { name = bfl_paid_in_capital add = 100 }
+        scope:bfl_party = { add_gold = -100 } add_gold = 100
+    }'''
     common('scripted_effects','equity',effect('bfl_allocate_subscription',subscribe)+'''
     bfl_subscribe_bank_capital = {
         if = { limit = {
             bfl_can_originate_bank_subscription = yes bfl_valid_contract_parties = yes
+            OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
             bfl_has_shareholder_capacity = yes bfl_equity > 0 var:bfl_total_units > 0
             scope:bfl_party = { gold >= 100 }
         }
@@ -140,16 +153,19 @@ def generate(common,effect,loc):
     for key,gate,service,title in [
         ('bfl_purchase_funded_bill','commercial_bill','bfl_issue_funded_bill','Purchase a funded payment bill'),
         ('bfl_subscribe_bank','bank_subscription','bfl_subscribe_bank_capital','Subscribe 100 gold of bank capital')]:
+        cadence = 'ai_tick = monthly ai_tick_frequency = 6' if gate == 'bank_subscription' else 'ai_tick = never'
+        offering = 'var:bfl_accept_equity = 1' if gate == 'bank_subscription' else ''
+        score = 'value = 0 if = { limit = { scope:actor = { bfl_is_bank = yes bfl_free_cash > 500 } scope:recipient = { bfl_equity > 0 var:bfl_accept_equity = 1 } } add = 10 }' if gate == 'bank_subscription' else 'value = 0'
         interactions+=f'''{key} = {{
-            type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            type = diplomacy category = CATEGORY_ECONOMY_ACTIONS {cadence}
             potential = {{ scope:actor = {{ gold >= 100 }} }} allow = {{ scope:actor = {{ gold >= 100 }} }}
             select_trigger = {{ looking_for_a = country target_flag = recipient name = choose_country default_sort = will
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ bfl_is_bank = yes }}
-                enabled = {{ bfl_can_originate_{gate} = yes var:bfl_accept_deposits = 1 NOT = {{ this = scope:actor }} }}
+                enabled = {{ bfl_can_originate_{gate} = yes var:bfl_accept_deposits = 1 {offering} NOT = {{ this = scope:actor }} }}
             }}
             effect = {{ scope:actor = {{ save_scope_as = bfl_party }} scope:recipient = {{ {service} = yes }} }}
-            ai_will_do = {{ value = 0 }}
+            ai_will_do = {{ {score} }}
         }}\n'''
         loc(key,title);loc(key+'_desc','Funded from your own treasury after profile, age, research and registry checks. Principal is not bank profit. A bank capital subscription buys units at its current net asset value.')
     interactions+='''bfl_redeem_funded_bills = {

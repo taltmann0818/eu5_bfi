@@ -1,0 +1,1931 @@
+﻿bfl_allocate_asset_row = {
+set_variable = { name = bfl_asset_allocated value = 0 }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_01_party var:bfl_asset_01_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_02_party var:bfl_asset_02_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 2 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_03_party var:bfl_asset_03_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 3 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_04_party var:bfl_asset_04_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 4 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_05_party var:bfl_asset_05_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 5 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_06_party var:bfl_asset_06_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 6 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_07_party var:bfl_asset_07_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 7 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_08_party var:bfl_asset_08_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 8 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_09_party var:bfl_asset_09_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 9 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_10_party var:bfl_asset_10_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 10 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_11_party var:bfl_asset_11_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 11 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_12_party var:bfl_asset_12_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 12 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_13_party var:bfl_asset_13_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 13 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_14_party var:bfl_asset_14_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 14 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_15_party var:bfl_asset_15_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 15 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_16_party var:bfl_asset_16_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 16 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_17_party var:bfl_asset_17_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 17 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_18_party var:bfl_asset_18_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 18 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_19_party var:bfl_asset_19_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 19 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_20_party var:bfl_asset_20_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 20 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_21_party var:bfl_asset_21_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 21 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_22_party var:bfl_asset_22_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 22 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_23_party var:bfl_asset_23_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 23 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_24_party var:bfl_asset_24_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 24 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_25_party var:bfl_asset_25_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 25 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_26_party var:bfl_asset_26_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 26 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_27_party var:bfl_asset_27_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 27 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_28_party var:bfl_asset_28_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 28 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_29_party var:bfl_asset_29_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 29 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_30_party var:bfl_asset_30_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 30 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_31_party var:bfl_asset_31_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 31 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_32_party var:bfl_asset_32_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 32 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_33_party var:bfl_asset_33_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 33 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_34_party var:bfl_asset_34_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 34 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_35_party var:bfl_asset_35_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 35 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_36_party var:bfl_asset_36_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 36 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_37_party var:bfl_asset_37_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 37 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_38_party var:bfl_asset_38_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 38 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_39_party var:bfl_asset_39_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 39 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_40_party var:bfl_asset_40_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 40 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_41_party var:bfl_asset_41_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 41 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_42_party var:bfl_asset_42_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 42 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_43_party var:bfl_asset_43_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 43 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_44_party var:bfl_asset_44_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 44 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_45_party var:bfl_asset_45_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 45 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_46_party var:bfl_asset_46_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 46 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_47_party var:bfl_asset_47_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 47 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_48_party var:bfl_asset_48_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 48 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_49_party var:bfl_asset_49_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 49 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_50_party var:bfl_asset_50_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 50 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_51_party var:bfl_asset_51_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 51 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_52_party var:bfl_asset_52_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 52 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_53_party var:bfl_asset_53_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 53 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_54_party var:bfl_asset_54_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 54 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_55_party var:bfl_asset_55_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 55 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_56_party var:bfl_asset_56_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 56 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_57_party var:bfl_asset_57_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 57 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_58_party var:bfl_asset_58_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 58 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_59_party var:bfl_asset_59_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 59 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_60_party var:bfl_asset_60_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 60 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_61_party var:bfl_asset_61_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 61 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_62_party var:bfl_asset_62_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 62 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_63_party var:bfl_asset_63_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 63 } }
+if = { limit = { var:bfl_asset_allocated = 0 exists = var:bfl_asset_64_party var:bfl_asset_64_party = scope:bfl_asset_party }
+            set_variable = { name = bfl_asset_allocated value = 64 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_01_party } }
+            set_variable = { name = bfl_asset_allocated value = 1 }
+            set_variable = { name = bfl_asset_01_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_02_party } }
+            set_variable = { name = bfl_asset_allocated value = 2 }
+            set_variable = { name = bfl_asset_02_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_03_party } }
+            set_variable = { name = bfl_asset_allocated value = 3 }
+            set_variable = { name = bfl_asset_03_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_04_party } }
+            set_variable = { name = bfl_asset_allocated value = 4 }
+            set_variable = { name = bfl_asset_04_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_05_party } }
+            set_variable = { name = bfl_asset_allocated value = 5 }
+            set_variable = { name = bfl_asset_05_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_06_party } }
+            set_variable = { name = bfl_asset_allocated value = 6 }
+            set_variable = { name = bfl_asset_06_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_07_party } }
+            set_variable = { name = bfl_asset_allocated value = 7 }
+            set_variable = { name = bfl_asset_07_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_08_party } }
+            set_variable = { name = bfl_asset_allocated value = 8 }
+            set_variable = { name = bfl_asset_08_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_09_party } }
+            set_variable = { name = bfl_asset_allocated value = 9 }
+            set_variable = { name = bfl_asset_09_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_10_party } }
+            set_variable = { name = bfl_asset_allocated value = 10 }
+            set_variable = { name = bfl_asset_10_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_11_party } }
+            set_variable = { name = bfl_asset_allocated value = 11 }
+            set_variable = { name = bfl_asset_11_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_12_party } }
+            set_variable = { name = bfl_asset_allocated value = 12 }
+            set_variable = { name = bfl_asset_12_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_13_party } }
+            set_variable = { name = bfl_asset_allocated value = 13 }
+            set_variable = { name = bfl_asset_13_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_14_party } }
+            set_variable = { name = bfl_asset_allocated value = 14 }
+            set_variable = { name = bfl_asset_14_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_15_party } }
+            set_variable = { name = bfl_asset_allocated value = 15 }
+            set_variable = { name = bfl_asset_15_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_16_party } }
+            set_variable = { name = bfl_asset_allocated value = 16 }
+            set_variable = { name = bfl_asset_16_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_17_party } }
+            set_variable = { name = bfl_asset_allocated value = 17 }
+            set_variable = { name = bfl_asset_17_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_18_party } }
+            set_variable = { name = bfl_asset_allocated value = 18 }
+            set_variable = { name = bfl_asset_18_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_19_party } }
+            set_variable = { name = bfl_asset_allocated value = 19 }
+            set_variable = { name = bfl_asset_19_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_20_party } }
+            set_variable = { name = bfl_asset_allocated value = 20 }
+            set_variable = { name = bfl_asset_20_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_21_party } }
+            set_variable = { name = bfl_asset_allocated value = 21 }
+            set_variable = { name = bfl_asset_21_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_22_party } }
+            set_variable = { name = bfl_asset_allocated value = 22 }
+            set_variable = { name = bfl_asset_22_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_23_party } }
+            set_variable = { name = bfl_asset_allocated value = 23 }
+            set_variable = { name = bfl_asset_23_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_24_party } }
+            set_variable = { name = bfl_asset_allocated value = 24 }
+            set_variable = { name = bfl_asset_24_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_25_party } }
+            set_variable = { name = bfl_asset_allocated value = 25 }
+            set_variable = { name = bfl_asset_25_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_26_party } }
+            set_variable = { name = bfl_asset_allocated value = 26 }
+            set_variable = { name = bfl_asset_26_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_27_party } }
+            set_variable = { name = bfl_asset_allocated value = 27 }
+            set_variable = { name = bfl_asset_27_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_28_party } }
+            set_variable = { name = bfl_asset_allocated value = 28 }
+            set_variable = { name = bfl_asset_28_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_29_party } }
+            set_variable = { name = bfl_asset_allocated value = 29 }
+            set_variable = { name = bfl_asset_29_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_30_party } }
+            set_variable = { name = bfl_asset_allocated value = 30 }
+            set_variable = { name = bfl_asset_30_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_31_party } }
+            set_variable = { name = bfl_asset_allocated value = 31 }
+            set_variable = { name = bfl_asset_31_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_32_party } }
+            set_variable = { name = bfl_asset_allocated value = 32 }
+            set_variable = { name = bfl_asset_32_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_33_party } }
+            set_variable = { name = bfl_asset_allocated value = 33 }
+            set_variable = { name = bfl_asset_33_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_34_party } }
+            set_variable = { name = bfl_asset_allocated value = 34 }
+            set_variable = { name = bfl_asset_34_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_35_party } }
+            set_variable = { name = bfl_asset_allocated value = 35 }
+            set_variable = { name = bfl_asset_35_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_36_party } }
+            set_variable = { name = bfl_asset_allocated value = 36 }
+            set_variable = { name = bfl_asset_36_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_37_party } }
+            set_variable = { name = bfl_asset_allocated value = 37 }
+            set_variable = { name = bfl_asset_37_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_38_party } }
+            set_variable = { name = bfl_asset_allocated value = 38 }
+            set_variable = { name = bfl_asset_38_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_39_party } }
+            set_variable = { name = bfl_asset_allocated value = 39 }
+            set_variable = { name = bfl_asset_39_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_40_party } }
+            set_variable = { name = bfl_asset_allocated value = 40 }
+            set_variable = { name = bfl_asset_40_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_41_party } }
+            set_variable = { name = bfl_asset_allocated value = 41 }
+            set_variable = { name = bfl_asset_41_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_42_party } }
+            set_variable = { name = bfl_asset_allocated value = 42 }
+            set_variable = { name = bfl_asset_42_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_43_party } }
+            set_variable = { name = bfl_asset_allocated value = 43 }
+            set_variable = { name = bfl_asset_43_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_44_party } }
+            set_variable = { name = bfl_asset_allocated value = 44 }
+            set_variable = { name = bfl_asset_44_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_45_party } }
+            set_variable = { name = bfl_asset_allocated value = 45 }
+            set_variable = { name = bfl_asset_45_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_46_party } }
+            set_variable = { name = bfl_asset_allocated value = 46 }
+            set_variable = { name = bfl_asset_46_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_47_party } }
+            set_variable = { name = bfl_asset_allocated value = 47 }
+            set_variable = { name = bfl_asset_47_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_48_party } }
+            set_variable = { name = bfl_asset_allocated value = 48 }
+            set_variable = { name = bfl_asset_48_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_49_party } }
+            set_variable = { name = bfl_asset_allocated value = 49 }
+            set_variable = { name = bfl_asset_49_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_50_party } }
+            set_variable = { name = bfl_asset_allocated value = 50 }
+            set_variable = { name = bfl_asset_50_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_51_party } }
+            set_variable = { name = bfl_asset_allocated value = 51 }
+            set_variable = { name = bfl_asset_51_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_52_party } }
+            set_variable = { name = bfl_asset_allocated value = 52 }
+            set_variable = { name = bfl_asset_52_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_53_party } }
+            set_variable = { name = bfl_asset_allocated value = 53 }
+            set_variable = { name = bfl_asset_53_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_54_party } }
+            set_variable = { name = bfl_asset_allocated value = 54 }
+            set_variable = { name = bfl_asset_54_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_55_party } }
+            set_variable = { name = bfl_asset_allocated value = 55 }
+            set_variable = { name = bfl_asset_55_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_56_party } }
+            set_variable = { name = bfl_asset_allocated value = 56 }
+            set_variable = { name = bfl_asset_56_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_57_party } }
+            set_variable = { name = bfl_asset_allocated value = 57 }
+            set_variable = { name = bfl_asset_57_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_58_party } }
+            set_variable = { name = bfl_asset_allocated value = 58 }
+            set_variable = { name = bfl_asset_58_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_59_party } }
+            set_variable = { name = bfl_asset_allocated value = 59 }
+            set_variable = { name = bfl_asset_59_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_60_party } }
+            set_variable = { name = bfl_asset_allocated value = 60 }
+            set_variable = { name = bfl_asset_60_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_61_party } }
+            set_variable = { name = bfl_asset_allocated value = 61 }
+            set_variable = { name = bfl_asset_61_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_62_party } }
+            set_variable = { name = bfl_asset_allocated value = 62 }
+            set_variable = { name = bfl_asset_62_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_63_party } }
+            set_variable = { name = bfl_asset_allocated value = 63 }
+            set_variable = { name = bfl_asset_63_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 0 NOT = { exists = var:bfl_asset_64_party } }
+            set_variable = { name = bfl_asset_allocated value = 64 }
+            set_variable = { name = bfl_asset_64_party value = scope:bfl_asset_party }
+            change_variable = { name = bfl_asset_rows add = 1 } }
+if = { limit = { var:bfl_asset_allocated = 1 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_01_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 1 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_01_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 1 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_01_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 1 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_01_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 1 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_01_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 2 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_02_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 2 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_02_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 2 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_02_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 2 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_02_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 2 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_02_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 3 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_03_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 3 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_03_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 3 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_03_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 3 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_03_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 3 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_03_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 4 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_04_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 4 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_04_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 4 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_04_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 4 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_04_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 4 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_04_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 5 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_05_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 5 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_05_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 5 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_05_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 5 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_05_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 5 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_05_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 6 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_06_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 6 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_06_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 6 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_06_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 6 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_06_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 6 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_06_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 7 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_07_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 7 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_07_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 7 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_07_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 7 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_07_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 7 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_07_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 8 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_08_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 8 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_08_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 8 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_08_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 8 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_08_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 8 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_08_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 9 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_09_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 9 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_09_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 9 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_09_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 9 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_09_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 9 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_09_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 10 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_10_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 10 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_10_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 10 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_10_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 10 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_10_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 10 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_10_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 11 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_11_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 11 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_11_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 11 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_11_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 11 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_11_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 11 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_11_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 12 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_12_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 12 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_12_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 12 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_12_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 12 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_12_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 12 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_12_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 13 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_13_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 13 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_13_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 13 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_13_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 13 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_13_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 13 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_13_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 14 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_14_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 14 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_14_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 14 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_14_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 14 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_14_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 14 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_14_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 15 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_15_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 15 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_15_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 15 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_15_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 15 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_15_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 15 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_15_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 16 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_16_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 16 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_16_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 16 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_16_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 16 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_16_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 16 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_16_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 17 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_17_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 17 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_17_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 17 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_17_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 17 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_17_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 17 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_17_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 18 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_18_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 18 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_18_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 18 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_18_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 18 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_18_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 18 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_18_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 19 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_19_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 19 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_19_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 19 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_19_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 19 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_19_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 19 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_19_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 20 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_20_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 20 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_20_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 20 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_20_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 20 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_20_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 20 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_20_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 21 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_21_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 21 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_21_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 21 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_21_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 21 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_21_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 21 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_21_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 22 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_22_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 22 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_22_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 22 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_22_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 22 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_22_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 22 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_22_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 23 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_23_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 23 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_23_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 23 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_23_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 23 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_23_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 23 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_23_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 24 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_24_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 24 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_24_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 24 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_24_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 24 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_24_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 24 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_24_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 25 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_25_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 25 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_25_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 25 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_25_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 25 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_25_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 25 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_25_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 26 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_26_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 26 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_26_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 26 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_26_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 26 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_26_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 26 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_26_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 27 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_27_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 27 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_27_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 27 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_27_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 27 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_27_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 27 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_27_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 28 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_28_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 28 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_28_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 28 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_28_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 28 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_28_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 28 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_28_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 29 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_29_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 29 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_29_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 29 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_29_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 29 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_29_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 29 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_29_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 30 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_30_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 30 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_30_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 30 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_30_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 30 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_30_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 30 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_30_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 31 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_31_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 31 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_31_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 31 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_31_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 31 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_31_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 31 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_31_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 32 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_32_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 32 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_32_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 32 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_32_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 32 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_32_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 32 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_32_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 33 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_33_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 33 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_33_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 33 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_33_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 33 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_33_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 33 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_33_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 34 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_34_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 34 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_34_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 34 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_34_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 34 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_34_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 34 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_34_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 35 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_35_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 35 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_35_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 35 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_35_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 35 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_35_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 35 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_35_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 36 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_36_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 36 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_36_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 36 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_36_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 36 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_36_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 36 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_36_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 37 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_37_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 37 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_37_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 37 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_37_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 37 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_37_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 37 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_37_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 38 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_38_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 38 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_38_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 38 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_38_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 38 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_38_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 38 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_38_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 39 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_39_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 39 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_39_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 39 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_39_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 39 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_39_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 39 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_39_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 40 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_40_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 40 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_40_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 40 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_40_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 40 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_40_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 40 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_40_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 41 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_41_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 41 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_41_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 41 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_41_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 41 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_41_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 41 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_41_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 42 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_42_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 42 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_42_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 42 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_42_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 42 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_42_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 42 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_42_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 43 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_43_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 43 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_43_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 43 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_43_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 43 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_43_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 43 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_43_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 44 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_44_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 44 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_44_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 44 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_44_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 44 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_44_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 44 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_44_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 45 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_45_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 45 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_45_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 45 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_45_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 45 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_45_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 45 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_45_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 46 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_46_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 46 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_46_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 46 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_46_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 46 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_46_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 46 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_46_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 47 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_47_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 47 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_47_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 47 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_47_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 47 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_47_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 47 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_47_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 48 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_48_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 48 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_48_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 48 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_48_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 48 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_48_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 48 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_48_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 49 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_49_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 49 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_49_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 49 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_49_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 49 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_49_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 49 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_49_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 50 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_50_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 50 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_50_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 50 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_50_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 50 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_50_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 50 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_50_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 51 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_51_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 51 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_51_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 51 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_51_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 51 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_51_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 51 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_51_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 52 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_52_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 52 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_52_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 52 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_52_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 52 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_52_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 52 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_52_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 53 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_53_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 53 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_53_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 53 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_53_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 53 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_53_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 53 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_53_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 54 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_54_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 54 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_54_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 54 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_54_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 54 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_54_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 54 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_54_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 55 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_55_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 55 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_55_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 55 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_55_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 55 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_55_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 55 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_55_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 56 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_56_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 56 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_56_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 56 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_56_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 56 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_56_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 56 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_56_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 57 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_57_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 57 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_57_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 57 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_57_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 57 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_57_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 57 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_57_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 58 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_58_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 58 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_58_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 58 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_58_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 58 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_58_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 58 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_58_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 59 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_59_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 59 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_59_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 59 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_59_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 59 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_59_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 59 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_59_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 60 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_60_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 60 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_60_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 60 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_60_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 60 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_60_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 60 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_60_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 61 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_61_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 61 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_61_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 61 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_61_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 61 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_61_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 61 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_61_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 62 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_62_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 62 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_62_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 62 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_62_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 62 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_62_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 62 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_62_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 63 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_63_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 63 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_63_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 63 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_63_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 63 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_63_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 63 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_63_investments add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 64 var:bfl_asset_kind = 1 }
+                change_variable = { name = bfl_asset_64_bonds add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 64 var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_64_unsecured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 64 var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_64_secured add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 64 var:bfl_asset_kind = 4 }
+                change_variable = { name = bfl_asset_64_commodities add = var:bfl_asset_amount } }
+if = { limit = { var:bfl_asset_allocated = 64 var:bfl_asset_kind = 5 }
+                change_variable = { name = bfl_asset_64_investments add = var:bfl_asset_amount } }
+}
+bfl_refresh_asset_statement = {
+set_variable = { name = bfl_asset_bonds value = 0 }
+set_variable = { name = bfl_asset_unsecured value = 0 }
+set_variable = { name = bfl_asset_secured value = 0 }
+set_variable = { name = bfl_asset_commodities value = 0 }
+set_variable = { name = bfl_asset_investments value = 0 }
+set_variable = { name = bfl_asset_rows value = 0 }
+set_variable = { name = bfl_custom_credit_value value = 0 }
+remove_variable = bfl_asset_01_party
+set_variable = { name = bfl_asset_01_bonds value = 0 }
+set_variable = { name = bfl_asset_01_unsecured value = 0 }
+set_variable = { name = bfl_asset_01_secured value = 0 }
+set_variable = { name = bfl_asset_01_commodities value = 0 }
+set_variable = { name = bfl_asset_01_investments value = 0 }
+remove_variable = bfl_asset_02_party
+set_variable = { name = bfl_asset_02_bonds value = 0 }
+set_variable = { name = bfl_asset_02_unsecured value = 0 }
+set_variable = { name = bfl_asset_02_secured value = 0 }
+set_variable = { name = bfl_asset_02_commodities value = 0 }
+set_variable = { name = bfl_asset_02_investments value = 0 }
+remove_variable = bfl_asset_03_party
+set_variable = { name = bfl_asset_03_bonds value = 0 }
+set_variable = { name = bfl_asset_03_unsecured value = 0 }
+set_variable = { name = bfl_asset_03_secured value = 0 }
+set_variable = { name = bfl_asset_03_commodities value = 0 }
+set_variable = { name = bfl_asset_03_investments value = 0 }
+remove_variable = bfl_asset_04_party
+set_variable = { name = bfl_asset_04_bonds value = 0 }
+set_variable = { name = bfl_asset_04_unsecured value = 0 }
+set_variable = { name = bfl_asset_04_secured value = 0 }
+set_variable = { name = bfl_asset_04_commodities value = 0 }
+set_variable = { name = bfl_asset_04_investments value = 0 }
+remove_variable = bfl_asset_05_party
+set_variable = { name = bfl_asset_05_bonds value = 0 }
+set_variable = { name = bfl_asset_05_unsecured value = 0 }
+set_variable = { name = bfl_asset_05_secured value = 0 }
+set_variable = { name = bfl_asset_05_commodities value = 0 }
+set_variable = { name = bfl_asset_05_investments value = 0 }
+remove_variable = bfl_asset_06_party
+set_variable = { name = bfl_asset_06_bonds value = 0 }
+set_variable = { name = bfl_asset_06_unsecured value = 0 }
+set_variable = { name = bfl_asset_06_secured value = 0 }
+set_variable = { name = bfl_asset_06_commodities value = 0 }
+set_variable = { name = bfl_asset_06_investments value = 0 }
+remove_variable = bfl_asset_07_party
+set_variable = { name = bfl_asset_07_bonds value = 0 }
+set_variable = { name = bfl_asset_07_unsecured value = 0 }
+set_variable = { name = bfl_asset_07_secured value = 0 }
+set_variable = { name = bfl_asset_07_commodities value = 0 }
+set_variable = { name = bfl_asset_07_investments value = 0 }
+remove_variable = bfl_asset_08_party
+set_variable = { name = bfl_asset_08_bonds value = 0 }
+set_variable = { name = bfl_asset_08_unsecured value = 0 }
+set_variable = { name = bfl_asset_08_secured value = 0 }
+set_variable = { name = bfl_asset_08_commodities value = 0 }
+set_variable = { name = bfl_asset_08_investments value = 0 }
+remove_variable = bfl_asset_09_party
+set_variable = { name = bfl_asset_09_bonds value = 0 }
+set_variable = { name = bfl_asset_09_unsecured value = 0 }
+set_variable = { name = bfl_asset_09_secured value = 0 }
+set_variable = { name = bfl_asset_09_commodities value = 0 }
+set_variable = { name = bfl_asset_09_investments value = 0 }
+remove_variable = bfl_asset_10_party
+set_variable = { name = bfl_asset_10_bonds value = 0 }
+set_variable = { name = bfl_asset_10_unsecured value = 0 }
+set_variable = { name = bfl_asset_10_secured value = 0 }
+set_variable = { name = bfl_asset_10_commodities value = 0 }
+set_variable = { name = bfl_asset_10_investments value = 0 }
+remove_variable = bfl_asset_11_party
+set_variable = { name = bfl_asset_11_bonds value = 0 }
+set_variable = { name = bfl_asset_11_unsecured value = 0 }
+set_variable = { name = bfl_asset_11_secured value = 0 }
+set_variable = { name = bfl_asset_11_commodities value = 0 }
+set_variable = { name = bfl_asset_11_investments value = 0 }
+remove_variable = bfl_asset_12_party
+set_variable = { name = bfl_asset_12_bonds value = 0 }
+set_variable = { name = bfl_asset_12_unsecured value = 0 }
+set_variable = { name = bfl_asset_12_secured value = 0 }
+set_variable = { name = bfl_asset_12_commodities value = 0 }
+set_variable = { name = bfl_asset_12_investments value = 0 }
+remove_variable = bfl_asset_13_party
+set_variable = { name = bfl_asset_13_bonds value = 0 }
+set_variable = { name = bfl_asset_13_unsecured value = 0 }
+set_variable = { name = bfl_asset_13_secured value = 0 }
+set_variable = { name = bfl_asset_13_commodities value = 0 }
+set_variable = { name = bfl_asset_13_investments value = 0 }
+remove_variable = bfl_asset_14_party
+set_variable = { name = bfl_asset_14_bonds value = 0 }
+set_variable = { name = bfl_asset_14_unsecured value = 0 }
+set_variable = { name = bfl_asset_14_secured value = 0 }
+set_variable = { name = bfl_asset_14_commodities value = 0 }
+set_variable = { name = bfl_asset_14_investments value = 0 }
+remove_variable = bfl_asset_15_party
+set_variable = { name = bfl_asset_15_bonds value = 0 }
+set_variable = { name = bfl_asset_15_unsecured value = 0 }
+set_variable = { name = bfl_asset_15_secured value = 0 }
+set_variable = { name = bfl_asset_15_commodities value = 0 }
+set_variable = { name = bfl_asset_15_investments value = 0 }
+remove_variable = bfl_asset_16_party
+set_variable = { name = bfl_asset_16_bonds value = 0 }
+set_variable = { name = bfl_asset_16_unsecured value = 0 }
+set_variable = { name = bfl_asset_16_secured value = 0 }
+set_variable = { name = bfl_asset_16_commodities value = 0 }
+set_variable = { name = bfl_asset_16_investments value = 0 }
+remove_variable = bfl_asset_17_party
+set_variable = { name = bfl_asset_17_bonds value = 0 }
+set_variable = { name = bfl_asset_17_unsecured value = 0 }
+set_variable = { name = bfl_asset_17_secured value = 0 }
+set_variable = { name = bfl_asset_17_commodities value = 0 }
+set_variable = { name = bfl_asset_17_investments value = 0 }
+remove_variable = bfl_asset_18_party
+set_variable = { name = bfl_asset_18_bonds value = 0 }
+set_variable = { name = bfl_asset_18_unsecured value = 0 }
+set_variable = { name = bfl_asset_18_secured value = 0 }
+set_variable = { name = bfl_asset_18_commodities value = 0 }
+set_variable = { name = bfl_asset_18_investments value = 0 }
+remove_variable = bfl_asset_19_party
+set_variable = { name = bfl_asset_19_bonds value = 0 }
+set_variable = { name = bfl_asset_19_unsecured value = 0 }
+set_variable = { name = bfl_asset_19_secured value = 0 }
+set_variable = { name = bfl_asset_19_commodities value = 0 }
+set_variable = { name = bfl_asset_19_investments value = 0 }
+remove_variable = bfl_asset_20_party
+set_variable = { name = bfl_asset_20_bonds value = 0 }
+set_variable = { name = bfl_asset_20_unsecured value = 0 }
+set_variable = { name = bfl_asset_20_secured value = 0 }
+set_variable = { name = bfl_asset_20_commodities value = 0 }
+set_variable = { name = bfl_asset_20_investments value = 0 }
+remove_variable = bfl_asset_21_party
+set_variable = { name = bfl_asset_21_bonds value = 0 }
+set_variable = { name = bfl_asset_21_unsecured value = 0 }
+set_variable = { name = bfl_asset_21_secured value = 0 }
+set_variable = { name = bfl_asset_21_commodities value = 0 }
+set_variable = { name = bfl_asset_21_investments value = 0 }
+remove_variable = bfl_asset_22_party
+set_variable = { name = bfl_asset_22_bonds value = 0 }
+set_variable = { name = bfl_asset_22_unsecured value = 0 }
+set_variable = { name = bfl_asset_22_secured value = 0 }
+set_variable = { name = bfl_asset_22_commodities value = 0 }
+set_variable = { name = bfl_asset_22_investments value = 0 }
+remove_variable = bfl_asset_23_party
+set_variable = { name = bfl_asset_23_bonds value = 0 }
+set_variable = { name = bfl_asset_23_unsecured value = 0 }
+set_variable = { name = bfl_asset_23_secured value = 0 }
+set_variable = { name = bfl_asset_23_commodities value = 0 }
+set_variable = { name = bfl_asset_23_investments value = 0 }
+remove_variable = bfl_asset_24_party
+set_variable = { name = bfl_asset_24_bonds value = 0 }
+set_variable = { name = bfl_asset_24_unsecured value = 0 }
+set_variable = { name = bfl_asset_24_secured value = 0 }
+set_variable = { name = bfl_asset_24_commodities value = 0 }
+set_variable = { name = bfl_asset_24_investments value = 0 }
+remove_variable = bfl_asset_25_party
+set_variable = { name = bfl_asset_25_bonds value = 0 }
+set_variable = { name = bfl_asset_25_unsecured value = 0 }
+set_variable = { name = bfl_asset_25_secured value = 0 }
+set_variable = { name = bfl_asset_25_commodities value = 0 }
+set_variable = { name = bfl_asset_25_investments value = 0 }
+remove_variable = bfl_asset_26_party
+set_variable = { name = bfl_asset_26_bonds value = 0 }
+set_variable = { name = bfl_asset_26_unsecured value = 0 }
+set_variable = { name = bfl_asset_26_secured value = 0 }
+set_variable = { name = bfl_asset_26_commodities value = 0 }
+set_variable = { name = bfl_asset_26_investments value = 0 }
+remove_variable = bfl_asset_27_party
+set_variable = { name = bfl_asset_27_bonds value = 0 }
+set_variable = { name = bfl_asset_27_unsecured value = 0 }
+set_variable = { name = bfl_asset_27_secured value = 0 }
+set_variable = { name = bfl_asset_27_commodities value = 0 }
+set_variable = { name = bfl_asset_27_investments value = 0 }
+remove_variable = bfl_asset_28_party
+set_variable = { name = bfl_asset_28_bonds value = 0 }
+set_variable = { name = bfl_asset_28_unsecured value = 0 }
+set_variable = { name = bfl_asset_28_secured value = 0 }
+set_variable = { name = bfl_asset_28_commodities value = 0 }
+set_variable = { name = bfl_asset_28_investments value = 0 }
+remove_variable = bfl_asset_29_party
+set_variable = { name = bfl_asset_29_bonds value = 0 }
+set_variable = { name = bfl_asset_29_unsecured value = 0 }
+set_variable = { name = bfl_asset_29_secured value = 0 }
+set_variable = { name = bfl_asset_29_commodities value = 0 }
+set_variable = { name = bfl_asset_29_investments value = 0 }
+remove_variable = bfl_asset_30_party
+set_variable = { name = bfl_asset_30_bonds value = 0 }
+set_variable = { name = bfl_asset_30_unsecured value = 0 }
+set_variable = { name = bfl_asset_30_secured value = 0 }
+set_variable = { name = bfl_asset_30_commodities value = 0 }
+set_variable = { name = bfl_asset_30_investments value = 0 }
+remove_variable = bfl_asset_31_party
+set_variable = { name = bfl_asset_31_bonds value = 0 }
+set_variable = { name = bfl_asset_31_unsecured value = 0 }
+set_variable = { name = bfl_asset_31_secured value = 0 }
+set_variable = { name = bfl_asset_31_commodities value = 0 }
+set_variable = { name = bfl_asset_31_investments value = 0 }
+remove_variable = bfl_asset_32_party
+set_variable = { name = bfl_asset_32_bonds value = 0 }
+set_variable = { name = bfl_asset_32_unsecured value = 0 }
+set_variable = { name = bfl_asset_32_secured value = 0 }
+set_variable = { name = bfl_asset_32_commodities value = 0 }
+set_variable = { name = bfl_asset_32_investments value = 0 }
+remove_variable = bfl_asset_33_party
+set_variable = { name = bfl_asset_33_bonds value = 0 }
+set_variable = { name = bfl_asset_33_unsecured value = 0 }
+set_variable = { name = bfl_asset_33_secured value = 0 }
+set_variable = { name = bfl_asset_33_commodities value = 0 }
+set_variable = { name = bfl_asset_33_investments value = 0 }
+remove_variable = bfl_asset_34_party
+set_variable = { name = bfl_asset_34_bonds value = 0 }
+set_variable = { name = bfl_asset_34_unsecured value = 0 }
+set_variable = { name = bfl_asset_34_secured value = 0 }
+set_variable = { name = bfl_asset_34_commodities value = 0 }
+set_variable = { name = bfl_asset_34_investments value = 0 }
+remove_variable = bfl_asset_35_party
+set_variable = { name = bfl_asset_35_bonds value = 0 }
+set_variable = { name = bfl_asset_35_unsecured value = 0 }
+set_variable = { name = bfl_asset_35_secured value = 0 }
+set_variable = { name = bfl_asset_35_commodities value = 0 }
+set_variable = { name = bfl_asset_35_investments value = 0 }
+remove_variable = bfl_asset_36_party
+set_variable = { name = bfl_asset_36_bonds value = 0 }
+set_variable = { name = bfl_asset_36_unsecured value = 0 }
+set_variable = { name = bfl_asset_36_secured value = 0 }
+set_variable = { name = bfl_asset_36_commodities value = 0 }
+set_variable = { name = bfl_asset_36_investments value = 0 }
+remove_variable = bfl_asset_37_party
+set_variable = { name = bfl_asset_37_bonds value = 0 }
+set_variable = { name = bfl_asset_37_unsecured value = 0 }
+set_variable = { name = bfl_asset_37_secured value = 0 }
+set_variable = { name = bfl_asset_37_commodities value = 0 }
+set_variable = { name = bfl_asset_37_investments value = 0 }
+remove_variable = bfl_asset_38_party
+set_variable = { name = bfl_asset_38_bonds value = 0 }
+set_variable = { name = bfl_asset_38_unsecured value = 0 }
+set_variable = { name = bfl_asset_38_secured value = 0 }
+set_variable = { name = bfl_asset_38_commodities value = 0 }
+set_variable = { name = bfl_asset_38_investments value = 0 }
+remove_variable = bfl_asset_39_party
+set_variable = { name = bfl_asset_39_bonds value = 0 }
+set_variable = { name = bfl_asset_39_unsecured value = 0 }
+set_variable = { name = bfl_asset_39_secured value = 0 }
+set_variable = { name = bfl_asset_39_commodities value = 0 }
+set_variable = { name = bfl_asset_39_investments value = 0 }
+remove_variable = bfl_asset_40_party
+set_variable = { name = bfl_asset_40_bonds value = 0 }
+set_variable = { name = bfl_asset_40_unsecured value = 0 }
+set_variable = { name = bfl_asset_40_secured value = 0 }
+set_variable = { name = bfl_asset_40_commodities value = 0 }
+set_variable = { name = bfl_asset_40_investments value = 0 }
+remove_variable = bfl_asset_41_party
+set_variable = { name = bfl_asset_41_bonds value = 0 }
+set_variable = { name = bfl_asset_41_unsecured value = 0 }
+set_variable = { name = bfl_asset_41_secured value = 0 }
+set_variable = { name = bfl_asset_41_commodities value = 0 }
+set_variable = { name = bfl_asset_41_investments value = 0 }
+remove_variable = bfl_asset_42_party
+set_variable = { name = bfl_asset_42_bonds value = 0 }
+set_variable = { name = bfl_asset_42_unsecured value = 0 }
+set_variable = { name = bfl_asset_42_secured value = 0 }
+set_variable = { name = bfl_asset_42_commodities value = 0 }
+set_variable = { name = bfl_asset_42_investments value = 0 }
+remove_variable = bfl_asset_43_party
+set_variable = { name = bfl_asset_43_bonds value = 0 }
+set_variable = { name = bfl_asset_43_unsecured value = 0 }
+set_variable = { name = bfl_asset_43_secured value = 0 }
+set_variable = { name = bfl_asset_43_commodities value = 0 }
+set_variable = { name = bfl_asset_43_investments value = 0 }
+remove_variable = bfl_asset_44_party
+set_variable = { name = bfl_asset_44_bonds value = 0 }
+set_variable = { name = bfl_asset_44_unsecured value = 0 }
+set_variable = { name = bfl_asset_44_secured value = 0 }
+set_variable = { name = bfl_asset_44_commodities value = 0 }
+set_variable = { name = bfl_asset_44_investments value = 0 }
+remove_variable = bfl_asset_45_party
+set_variable = { name = bfl_asset_45_bonds value = 0 }
+set_variable = { name = bfl_asset_45_unsecured value = 0 }
+set_variable = { name = bfl_asset_45_secured value = 0 }
+set_variable = { name = bfl_asset_45_commodities value = 0 }
+set_variable = { name = bfl_asset_45_investments value = 0 }
+remove_variable = bfl_asset_46_party
+set_variable = { name = bfl_asset_46_bonds value = 0 }
+set_variable = { name = bfl_asset_46_unsecured value = 0 }
+set_variable = { name = bfl_asset_46_secured value = 0 }
+set_variable = { name = bfl_asset_46_commodities value = 0 }
+set_variable = { name = bfl_asset_46_investments value = 0 }
+remove_variable = bfl_asset_47_party
+set_variable = { name = bfl_asset_47_bonds value = 0 }
+set_variable = { name = bfl_asset_47_unsecured value = 0 }
+set_variable = { name = bfl_asset_47_secured value = 0 }
+set_variable = { name = bfl_asset_47_commodities value = 0 }
+set_variable = { name = bfl_asset_47_investments value = 0 }
+remove_variable = bfl_asset_48_party
+set_variable = { name = bfl_asset_48_bonds value = 0 }
+set_variable = { name = bfl_asset_48_unsecured value = 0 }
+set_variable = { name = bfl_asset_48_secured value = 0 }
+set_variable = { name = bfl_asset_48_commodities value = 0 }
+set_variable = { name = bfl_asset_48_investments value = 0 }
+remove_variable = bfl_asset_49_party
+set_variable = { name = bfl_asset_49_bonds value = 0 }
+set_variable = { name = bfl_asset_49_unsecured value = 0 }
+set_variable = { name = bfl_asset_49_secured value = 0 }
+set_variable = { name = bfl_asset_49_commodities value = 0 }
+set_variable = { name = bfl_asset_49_investments value = 0 }
+remove_variable = bfl_asset_50_party
+set_variable = { name = bfl_asset_50_bonds value = 0 }
+set_variable = { name = bfl_asset_50_unsecured value = 0 }
+set_variable = { name = bfl_asset_50_secured value = 0 }
+set_variable = { name = bfl_asset_50_commodities value = 0 }
+set_variable = { name = bfl_asset_50_investments value = 0 }
+remove_variable = bfl_asset_51_party
+set_variable = { name = bfl_asset_51_bonds value = 0 }
+set_variable = { name = bfl_asset_51_unsecured value = 0 }
+set_variable = { name = bfl_asset_51_secured value = 0 }
+set_variable = { name = bfl_asset_51_commodities value = 0 }
+set_variable = { name = bfl_asset_51_investments value = 0 }
+remove_variable = bfl_asset_52_party
+set_variable = { name = bfl_asset_52_bonds value = 0 }
+set_variable = { name = bfl_asset_52_unsecured value = 0 }
+set_variable = { name = bfl_asset_52_secured value = 0 }
+set_variable = { name = bfl_asset_52_commodities value = 0 }
+set_variable = { name = bfl_asset_52_investments value = 0 }
+remove_variable = bfl_asset_53_party
+set_variable = { name = bfl_asset_53_bonds value = 0 }
+set_variable = { name = bfl_asset_53_unsecured value = 0 }
+set_variable = { name = bfl_asset_53_secured value = 0 }
+set_variable = { name = bfl_asset_53_commodities value = 0 }
+set_variable = { name = bfl_asset_53_investments value = 0 }
+remove_variable = bfl_asset_54_party
+set_variable = { name = bfl_asset_54_bonds value = 0 }
+set_variable = { name = bfl_asset_54_unsecured value = 0 }
+set_variable = { name = bfl_asset_54_secured value = 0 }
+set_variable = { name = bfl_asset_54_commodities value = 0 }
+set_variable = { name = bfl_asset_54_investments value = 0 }
+remove_variable = bfl_asset_55_party
+set_variable = { name = bfl_asset_55_bonds value = 0 }
+set_variable = { name = bfl_asset_55_unsecured value = 0 }
+set_variable = { name = bfl_asset_55_secured value = 0 }
+set_variable = { name = bfl_asset_55_commodities value = 0 }
+set_variable = { name = bfl_asset_55_investments value = 0 }
+remove_variable = bfl_asset_56_party
+set_variable = { name = bfl_asset_56_bonds value = 0 }
+set_variable = { name = bfl_asset_56_unsecured value = 0 }
+set_variable = { name = bfl_asset_56_secured value = 0 }
+set_variable = { name = bfl_asset_56_commodities value = 0 }
+set_variable = { name = bfl_asset_56_investments value = 0 }
+remove_variable = bfl_asset_57_party
+set_variable = { name = bfl_asset_57_bonds value = 0 }
+set_variable = { name = bfl_asset_57_unsecured value = 0 }
+set_variable = { name = bfl_asset_57_secured value = 0 }
+set_variable = { name = bfl_asset_57_commodities value = 0 }
+set_variable = { name = bfl_asset_57_investments value = 0 }
+remove_variable = bfl_asset_58_party
+set_variable = { name = bfl_asset_58_bonds value = 0 }
+set_variable = { name = bfl_asset_58_unsecured value = 0 }
+set_variable = { name = bfl_asset_58_secured value = 0 }
+set_variable = { name = bfl_asset_58_commodities value = 0 }
+set_variable = { name = bfl_asset_58_investments value = 0 }
+remove_variable = bfl_asset_59_party
+set_variable = { name = bfl_asset_59_bonds value = 0 }
+set_variable = { name = bfl_asset_59_unsecured value = 0 }
+set_variable = { name = bfl_asset_59_secured value = 0 }
+set_variable = { name = bfl_asset_59_commodities value = 0 }
+set_variable = { name = bfl_asset_59_investments value = 0 }
+remove_variable = bfl_asset_60_party
+set_variable = { name = bfl_asset_60_bonds value = 0 }
+set_variable = { name = bfl_asset_60_unsecured value = 0 }
+set_variable = { name = bfl_asset_60_secured value = 0 }
+set_variable = { name = bfl_asset_60_commodities value = 0 }
+set_variable = { name = bfl_asset_60_investments value = 0 }
+remove_variable = bfl_asset_61_party
+set_variable = { name = bfl_asset_61_bonds value = 0 }
+set_variable = { name = bfl_asset_61_unsecured value = 0 }
+set_variable = { name = bfl_asset_61_secured value = 0 }
+set_variable = { name = bfl_asset_61_commodities value = 0 }
+set_variable = { name = bfl_asset_61_investments value = 0 }
+remove_variable = bfl_asset_62_party
+set_variable = { name = bfl_asset_62_bonds value = 0 }
+set_variable = { name = bfl_asset_62_unsecured value = 0 }
+set_variable = { name = bfl_asset_62_secured value = 0 }
+set_variable = { name = bfl_asset_62_commodities value = 0 }
+set_variable = { name = bfl_asset_62_investments value = 0 }
+remove_variable = bfl_asset_63_party
+set_variable = { name = bfl_asset_63_bonds value = 0 }
+set_variable = { name = bfl_asset_63_unsecured value = 0 }
+set_variable = { name = bfl_asset_63_secured value = 0 }
+set_variable = { name = bfl_asset_63_commodities value = 0 }
+set_variable = { name = bfl_asset_63_investments value = 0 }
+remove_variable = bfl_asset_64_party
+set_variable = { name = bfl_asset_64_bonds value = 0 }
+set_variable = { name = bfl_asset_64_unsecured value = 0 }
+set_variable = { name = bfl_asset_64_secured value = 0 }
+set_variable = { name = bfl_asset_64_commodities value = 0 }
+set_variable = { name = bfl_asset_64_investments value = 0 }
+save_scope_as = bfl_bank
+        every_lent_loan = {
+            save_scope_as = bfl_claim
+            borrower = { save_scope_as = bfl_asset_party }
+            scope:bfl_bank = {
+                set_variable = { name = bfl_asset_amount value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }
+                set_variable = { name = bfl_asset_kind value = 2 }
+                if = { limit = { scope:bfl_claim = { is_bond = yes } } set_variable = { name = bfl_asset_kind value = 1 } }
+                if = { limit = { var:bfl_asset_kind = 1 } change_variable = { name = bfl_asset_bonds add = var:bfl_asset_amount } }
+                else = { change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount } }
+                bfl_allocate_asset_row = yes
+            }
+        }
+        set_variable = { name = bfl_asset_commodities value = var:bfl_inventory_value }
+        set_variable = { name = bfl_asset_investments value = var:bfl_project_value }
+    if = { limit = { var:bfl_inv_01_active = 1 exists = var:bfl_inv_01_market }
+            var:bfl_inv_01_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_01_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_02_active = 1 exists = var:bfl_inv_02_market }
+            var:bfl_inv_02_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_02_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_03_active = 1 exists = var:bfl_inv_03_market }
+            var:bfl_inv_03_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_03_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_04_active = 1 exists = var:bfl_inv_04_market }
+            var:bfl_inv_04_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_04_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_05_active = 1 exists = var:bfl_inv_05_market }
+            var:bfl_inv_05_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_05_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_06_active = 1 exists = var:bfl_inv_06_market }
+            var:bfl_inv_06_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_06_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_07_active = 1 exists = var:bfl_inv_07_market }
+            var:bfl_inv_07_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_07_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_08_active = 1 exists = var:bfl_inv_08_market }
+            var:bfl_inv_08_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_08_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_09_active = 1 exists = var:bfl_inv_09_market }
+            var:bfl_inv_09_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_09_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_10_active = 1 exists = var:bfl_inv_10_market }
+            var:bfl_inv_10_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_10_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_11_active = 1 exists = var:bfl_inv_11_market }
+            var:bfl_inv_11_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_11_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_12_active = 1 exists = var:bfl_inv_12_market }
+            var:bfl_inv_12_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_12_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_13_active = 1 exists = var:bfl_inv_13_market }
+            var:bfl_inv_13_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_13_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_14_active = 1 exists = var:bfl_inv_14_market }
+            var:bfl_inv_14_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_14_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_15_active = 1 exists = var:bfl_inv_15_market }
+            var:bfl_inv_15_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_15_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_inv_16_active = 1 exists = var:bfl_inv_16_market }
+            var:bfl_inv_16_market = { owner = { save_scope_as = bfl_asset_party } }
+            set_variable = { name = bfl_asset_kind value = 4 }
+            set_variable = { name = bfl_asset_amount value = var:bfl_inv_16_basis }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind >= 3 exists = var:bfl_con_01_party }
+            var:bfl_con_01_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_01_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_01_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_01_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind >= 3 exists = var:bfl_con_02_party }
+            var:bfl_con_02_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_02_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_02_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_02_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind >= 3 exists = var:bfl_con_03_party }
+            var:bfl_con_03_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_03_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_03_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_03_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind >= 3 exists = var:bfl_con_04_party }
+            var:bfl_con_04_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_04_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_04_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_04_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind >= 3 exists = var:bfl_con_05_party }
+            var:bfl_con_05_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_05_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_05_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_05_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind >= 3 exists = var:bfl_con_06_party }
+            var:bfl_con_06_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_06_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_06_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_06_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind >= 3 exists = var:bfl_con_07_party }
+            var:bfl_con_07_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_07_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_07_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_07_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind >= 3 exists = var:bfl_con_08_party }
+            var:bfl_con_08_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_08_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_08_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_08_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind >= 3 exists = var:bfl_con_09_party }
+            var:bfl_con_09_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_09_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_09_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_09_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind >= 3 exists = var:bfl_con_10_party }
+            var:bfl_con_10_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_10_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_10_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_10_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind >= 3 exists = var:bfl_con_11_party }
+            var:bfl_con_11_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_11_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_11_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_11_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind >= 3 exists = var:bfl_con_12_party }
+            var:bfl_con_12_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_12_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_12_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_12_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind >= 3 exists = var:bfl_con_13_party }
+            var:bfl_con_13_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_13_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_13_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_13_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind >= 3 exists = var:bfl_con_14_party }
+            var:bfl_con_14_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_14_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_14_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_14_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind >= 3 exists = var:bfl_con_15_party }
+            var:bfl_con_15_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_15_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_15_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_15_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind >= 3 exists = var:bfl_con_16_party }
+            var:bfl_con_16_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_16_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_16_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_16_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind >= 3 exists = var:bfl_con_17_party }
+            var:bfl_con_17_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_17_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_17_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_17_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind >= 3 exists = var:bfl_con_18_party }
+            var:bfl_con_18_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_18_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_18_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_18_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind >= 3 exists = var:bfl_con_19_party }
+            var:bfl_con_19_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_19_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_19_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_19_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind >= 3 exists = var:bfl_con_20_party }
+            var:bfl_con_20_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_20_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_20_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_20_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind >= 3 exists = var:bfl_con_21_party }
+            var:bfl_con_21_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_21_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_21_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_21_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind >= 3 exists = var:bfl_con_22_party }
+            var:bfl_con_22_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_22_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_22_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_22_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind >= 3 exists = var:bfl_con_23_party }
+            var:bfl_con_23_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_23_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_23_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_23_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind >= 3 exists = var:bfl_con_24_party }
+            var:bfl_con_24_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_24_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_24_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_24_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind >= 3 exists = var:bfl_con_25_party }
+            var:bfl_con_25_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_25_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_25_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_25_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind >= 3 exists = var:bfl_con_26_party }
+            var:bfl_con_26_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_26_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_26_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_26_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind >= 3 exists = var:bfl_con_27_party }
+            var:bfl_con_27_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_27_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_27_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_27_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind >= 3 exists = var:bfl_con_28_party }
+            var:bfl_con_28_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_28_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_28_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_28_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind >= 3 exists = var:bfl_con_29_party }
+            var:bfl_con_29_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_29_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_29_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_29_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind >= 3 exists = var:bfl_con_30_party }
+            var:bfl_con_30_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_30_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_30_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_30_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind >= 3 exists = var:bfl_con_31_party }
+            var:bfl_con_31_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_31_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_31_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_31_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind >= 3 exists = var:bfl_con_32_party }
+            var:bfl_con_32_party = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_amount value = var:bfl_con_32_basis }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            if = { limit = { var:bfl_con_32_kind = 3 } set_variable = { name = bfl_asset_kind value = 2 } }
+            if = { limit = { var:bfl_con_32_kind = 4 } set_variable = { name = bfl_asset_kind value = 3 } }
+            if = { limit = { var:bfl_asset_kind = 2 }
+                change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            if = { limit = { var:bfl_asset_kind = 3 }
+                change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
+                change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
+            bfl_allocate_asset_row = yes }
+}

@@ -1,0 +1,164 @@
+﻿bfl_migrate_accounts = {
+if = { limit = { NOT = { has_variable = bfl_accounts_revision } }
+        set_variable = { name = bfl_accounts_revision value = 2 }
+        set_variable = { name = bfl_profit_native value = 0 }
+        set_variable = { name = bfl_last_dividend_period value = 0 }
+        set_variable = { name = bfl_last_expense_period value = 0 }
+        set_variable = { name = bfl_last_income_period value = bfl_period }
+        set_variable = { name = bfl_expense_due value = 0 }
+        set_variable = { name = bfl_expense_paid value = 0 }
+        set_variable = { name = bfl_expense_arrears value = 0 }
+        set_variable = { name = bfl_monthly_net_income value = 0 }
+        set_variable = { name = bfl_cost_program value = 0 }
+        set_variable = { name = bfl_accept_equity value = 0 }
+        set_variable = { name = bfl_last_takeover_period value = 0 }
+        set_variable = { name = bfl_known_units value = 0 }
+    if = { limit = { var:bfl_shr_01_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_01_units } }
+if = { limit = { var:bfl_shr_02_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_02_units } }
+if = { limit = { var:bfl_shr_03_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_03_units } }
+if = { limit = { var:bfl_shr_04_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_04_units } }
+if = { limit = { var:bfl_shr_05_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_05_units } }
+if = { limit = { var:bfl_shr_06_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_06_units } }
+if = { limit = { var:bfl_shr_07_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_07_units } }
+if = { limit = { var:bfl_shr_08_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_08_units } }
+if = { limit = { var:bfl_shr_09_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_09_units } }
+if = { limit = { var:bfl_shr_10_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_10_units } }
+if = { limit = { var:bfl_shr_11_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_11_units } }
+if = { limit = { var:bfl_shr_12_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_12_units } }
+if = { limit = { var:bfl_shr_13_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_13_units } }
+if = { limit = { var:bfl_shr_14_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_14_units } }
+if = { limit = { var:bfl_shr_15_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_15_units } }
+if = { limit = { var:bfl_shr_16_active = 1 }
+            change_variable = { name = bfl_known_units add = var:bfl_shr_16_units } }
+if = { limit = { bfl_has_valid_controller = yes }
+        set_variable = { name = bfl_state_units value = { value = var:bfl_total_units subtract = var:bfl_known_units min = 0 } }
+    }
+    if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_01_active = 1 var:bfl_shr_01_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_01_units }
+            set_variable = { name = bfl_shr_01_active value = 0 }
+            remove_variable = bfl_shr_01_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_02_active = 1 var:bfl_shr_02_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_02_units }
+            set_variable = { name = bfl_shr_02_active value = 0 }
+            remove_variable = bfl_shr_02_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_03_active = 1 var:bfl_shr_03_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_03_units }
+            set_variable = { name = bfl_shr_03_active value = 0 }
+            remove_variable = bfl_shr_03_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_04_active = 1 var:bfl_shr_04_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_04_units }
+            set_variable = { name = bfl_shr_04_active value = 0 }
+            remove_variable = bfl_shr_04_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_05_active = 1 var:bfl_shr_05_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_05_units }
+            set_variable = { name = bfl_shr_05_active value = 0 }
+            remove_variable = bfl_shr_05_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_06_active = 1 var:bfl_shr_06_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_06_units }
+            set_variable = { name = bfl_shr_06_active value = 0 }
+            remove_variable = bfl_shr_06_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_07_active = 1 var:bfl_shr_07_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_07_units }
+            set_variable = { name = bfl_shr_07_active value = 0 }
+            remove_variable = bfl_shr_07_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_08_active = 1 var:bfl_shr_08_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_08_units }
+            set_variable = { name = bfl_shr_08_active value = 0 }
+            remove_variable = bfl_shr_08_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_09_active = 1 var:bfl_shr_09_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_09_units }
+            set_variable = { name = bfl_shr_09_active value = 0 }
+            remove_variable = bfl_shr_09_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_10_active = 1 var:bfl_shr_10_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_10_units }
+            set_variable = { name = bfl_shr_10_active value = 0 }
+            remove_variable = bfl_shr_10_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_11_active = 1 var:bfl_shr_11_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_11_units }
+            set_variable = { name = bfl_shr_11_active value = 0 }
+            remove_variable = bfl_shr_11_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_12_active = 1 var:bfl_shr_12_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_12_units }
+            set_variable = { name = bfl_shr_12_active value = 0 }
+            remove_variable = bfl_shr_12_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_13_active = 1 var:bfl_shr_13_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_13_units }
+            set_variable = { name = bfl_shr_13_active value = 0 }
+            remove_variable = bfl_shr_13_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_14_active = 1 var:bfl_shr_14_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_14_units }
+            set_variable = { name = bfl_shr_14_active value = 0 }
+            remove_variable = bfl_shr_14_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_15_active = 1 var:bfl_shr_15_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_15_units }
+            set_variable = { name = bfl_shr_15_active value = 0 }
+            remove_variable = bfl_shr_15_party }
+if = { limit = { bfl_has_valid_controller = yes var:bfl_shr_16_active = 1 var:bfl_shr_16_party = overlord }
+            change_variable = { name = bfl_state_units add = var:bfl_shr_16_units }
+            set_variable = { name = bfl_shr_16_active value = 0 }
+            remove_variable = bfl_shr_16_party }
+remove_variable = bfl_royalty_tier
+remove_variable = bfl_royalty_paid
+remove_variable = bfl_royalty_deferred
+remove_variable = bfl_royalty_due
+remove_country_modifier = bfl_royalty_bank_1
+            if = { limit = { exists = overlord } overlord = { remove_country_modifier = bfl_royalty_sovereign_1 } }
+remove_country_modifier = bfl_royalty_bank_2
+            if = { limit = { exists = overlord } overlord = { remove_country_modifier = bfl_royalty_sovereign_2 } }
+remove_country_modifier = bfl_royalty_bank_3
+            if = { limit = { exists = overlord } overlord = { remove_country_modifier = bfl_royalty_sovereign_3 } }
+remove_country_modifier = bfl_royalty_bank_4
+            if = { limit = { exists = overlord } overlord = { remove_country_modifier = bfl_royalty_sovereign_4 } }
+}
+}
+bfl_assign_charter_ownership = {
+set_variable = { name = bfl_state_units value = { value = bfl_equity add = scope:bfl_controller.var:bfl_payment min = 1 } }
+        set_variable = { name = bfl_total_units value = var:bfl_state_units }
+    set_variable = { name = bfl_shr_01_active value = 0 }
+remove_variable = bfl_shr_01_party
+set_variable = { name = bfl_shr_02_active value = 0 }
+remove_variable = bfl_shr_02_party
+set_variable = { name = bfl_shr_03_active value = 0 }
+remove_variable = bfl_shr_03_party
+set_variable = { name = bfl_shr_04_active value = 0 }
+remove_variable = bfl_shr_04_party
+set_variable = { name = bfl_shr_05_active value = 0 }
+remove_variable = bfl_shr_05_party
+set_variable = { name = bfl_shr_06_active value = 0 }
+remove_variable = bfl_shr_06_party
+set_variable = { name = bfl_shr_07_active value = 0 }
+remove_variable = bfl_shr_07_party
+set_variable = { name = bfl_shr_08_active value = 0 }
+remove_variable = bfl_shr_08_party
+set_variable = { name = bfl_shr_09_active value = 0 }
+remove_variable = bfl_shr_09_party
+set_variable = { name = bfl_shr_10_active value = 0 }
+remove_variable = bfl_shr_10_party
+set_variable = { name = bfl_shr_11_active value = 0 }
+remove_variable = bfl_shr_11_party
+set_variable = { name = bfl_shr_12_active value = 0 }
+remove_variable = bfl_shr_12_party
+set_variable = { name = bfl_shr_13_active value = 0 }
+remove_variable = bfl_shr_13_party
+set_variable = { name = bfl_shr_14_active value = 0 }
+remove_variable = bfl_shr_14_party
+set_variable = { name = bfl_shr_15_active value = 0 }
+remove_variable = bfl_shr_15_party
+set_variable = { name = bfl_shr_16_active value = 0 }
+remove_variable = bfl_shr_16_party
+}

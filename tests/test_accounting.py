@@ -87,16 +87,30 @@ class Accounting(unittest.TestCase):
         self.assertFalse(b.permitted('demand_deposit'))
         self.assertTrue(b.permitted('demand_deposit',service=True))
 
-    def test_royalty_is_funded_expense_and_replay_safe(self):
-        b=self.bank(charter=True);s=Wallet(D(0));e=b.equity
-        paid=b.royalty(s,D(1200),D('.01'),1)
-        self.assertEqual(paid,D(1));self.assertEqual(b.equity,e-1)
-        self.assertEqual(b.royalty(s,D(1200),D('.01'),1),0)
-        self.assertEqual(s.cash,1)
+    def test_complexity_expenses_and_reductions_are_replay_safe(self):
+        b=self.bank(charter=True,advances={'banking_advance'});equity=b.equity
+        paid=b.operating_cost(1,accounts=10,contracts=5,branches=2,asset_types=4,streamlined=True)
+        self.assertEqual(paid,D(3))
+        self.assertEqual(b.equity,equity-3)
+        self.assertEqual(b.operating_cost(1),0)
 
-    def test_independent_bank_has_no_automatic_royalty(self):
-        b=self.bank();s=Wallet(D(0))
-        self.assertEqual(b.royalty(s,D(1200),D('.02'),1),0)
+    def test_unpaid_expenses_reduce_equity_and_survive(self):
+        b=self.bank();b.cash=D(25)
+        self.assertEqual(b.operating_cost(1),0)
+        self.assertEqual((b.expense_arrears,b.equity,b.loss),(D(1),D(24),D(1)))
+
+    def test_paying_expense_arrears_does_not_charge_profit_twice(self):
+        bank=self.bank();bank.cash=D(25);bank.operating_cost(1)
+        bank.cash=D(100)
+        self.assertEqual(bank.operating_cost(2),D(2))
+        self.assertEqual((bank.loss,bank.expense_arrears),(D(2),D(0)))
+
+    def test_retained_profit_is_not_next_months_dividend_base(self):
+        bank=self.bank();holder=Wallet(0);bank.holders={'owner':D(1000)}
+        bank.recognize('services',100,'realized_profit')
+        self.assertEqual(bank.dividends({'owner':holder},0,1),0)
+        self.assertEqual(bank.dividends({'owner':holder},D('.5'),2),0)
+        self.assertEqual((holder.cash,bank.retained),(D(0),D(100)))
 
     def test_funding_principal_cannot_be_recognized_as_profit(self):
         b=self.bank()
@@ -108,15 +122,35 @@ class Accounting(unittest.TestCase):
         b.holders={'s':D(60),'p':D(40)};b.recognize('services',100,'realized_profit');b.loss=D(20)
         total=b.dividends({'s':s,'p':p},D('.5'),1)
         self.assertEqual((total,s.cash,p.cash),(D(40),D(24),D(16)))
-        self.assertEqual(b.reserves['services'],40)
+        self.assertEqual((b.retained,b.reserves),(D(40),{}))
         self.assertEqual(b.dividends({'s':s,'p':p},D('.5'),1),0)
+        self.assertEqual(b.dividends({'s':s,'p':p},D('.5'),2),0)
 
-    def test_dividend_rounding_has_one_deterministic_residual(self):
+    def test_dividend_rounding_retains_fractional_cents(self):
         b=self.bank();b.holders={'a':D(1),'b':D(1),'c':D(1)};b.recognize('services',1,'realized_profit')
         holders={k:Wallet(0) for k in b.holders}
         total=b.dividends(holders,1,1)
         self.assertEqual(sum(w.cash for w in holders.values()),total)
-        self.assertEqual(total,D(1));self.assertEqual(b.reserves['services'],0)
+        self.assertEqual(total,D('.99'));self.assertEqual((b.retained,b.reserves),(D('.01'),{}))
+
+    def test_charter_starts_wholly_owned_and_bank_subscription_dilutes(self):
+        b=self.bank(charter=True,age=2,advances={'banking_advance'});b.charter_ownership('sovereign')
+        self.assertEqual(b.holders,{'sovereign':D(1000)})
+        other=self.bank();b.subscribe('other_bank',other,100)
+        sovereign=Wallet(0);b.recognize('native',110,'realized_profit')
+        b.dividends({'sovereign':sovereign,'other_bank':other},D('.5'),1)
+        self.assertEqual((sovereign.cash,other.cash),(D(50),D(905)))
+
+    def test_foreign_deposit_relation_gate_and_charter_premium(self):
+        foreign=self.bank();own=self.bank(charter=True);state=Wallet(200)
+        with self.assertRaises(Rejected):foreign.deposit('state',state,100,relation=49)
+        foreign.deposit('state',state,100,relation=50)
+        own.deposit('state',state,100,relation=0,own_charter=True)
+        self.assertEqual((foreign.deposits['state'].rate,own.deposits['state'].rate),(D('.01'),D('.02')))
+        foreign.accrue(1);own.accrue(1)
+        foreign.pay_demand_interest({'state':state});own.pay_demand_interest({'state':state})
+        self.assertEqual(state.cash,D('.24'))
+        self.assertEqual(foreign.withdraw('state',state,100,1),100)
 
     def test_unresolved_holder_prevents_partial_dividend(self):
         b=self.bank();b.holders={'a':D(1),'missing':D(1)};b.recognize('services',100,'realized_profit');p=Wallet(0);old=b.cash

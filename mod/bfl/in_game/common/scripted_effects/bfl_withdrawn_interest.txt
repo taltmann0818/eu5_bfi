@@ -1,0 +1,10 @@
+﻿bfl_record_withdrawn_interest = {
+if = { limit = { scope:bfl_bank.var:bfl_interest_paid > 0 }
+        if = { limit = { NOT = { has_variable = bfl_interest_period } } set_variable = { name = bfl_interest_period value = 0 } }
+        if = { limit = { bfl_period > var:bfl_interest_period }
+            set_variable = { name = bfl_deposit_income value = 0 }
+            set_variable = { name = bfl_interest_period value = bfl_period } }
+        change_variable = { name = bfl_deposit_income add = scope:bfl_bank.var:bfl_interest_paid }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid } }
+    }
+}

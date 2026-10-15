@@ -1,0 +1,20 @@
+﻿bfl_settle_operating_expenses = {
+if = { limit = { bfl_period > var:bfl_last_expense_period var:bfl_state < 5 }
+        set_variable = { name = bfl_last_expense_period value = bfl_period }
+        set_variable = { name = bfl_expense_due value = bfl_operating_expense }
+        change_variable = { name = bfl_loss_carryforward add = var:bfl_expense_due }
+        change_variable = { name = bfl_expense_arrears add = var:bfl_expense_due }
+        set_variable = { name = bfl_expense_paid value = { value = var:bfl_expense_arrears max = bfl_free_cash } }
+        add_gold = { value = var:bfl_expense_paid multiply = -1 }
+        change_variable = { name = bfl_expense_arrears subtract = var:bfl_expense_paid }
+    }
+}
+bfl_observe_bank_income = {
+if = { limit = { bfl_period > var:bfl_last_income_period }
+        set_variable = { name = bfl_last_income_period value = bfl_period }
+        set_variable = { name = bfl_native_monthly_net value = monthly_balance }
+        if = { limit = { var:bfl_native_monthly_net >= 0 }
+            change_variable = { name = bfl_profit_native add = var:bfl_native_monthly_net } }
+        else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_monthly_net } }
+    }
+}

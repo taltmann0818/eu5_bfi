@@ -1,0 +1,7 @@
+﻿bfl_depositor_access = {
+exists = scope:bfl_party
+        OR = {
+            AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party }
+            AND = { bfl_is_independent_bank = yes opinion = { target = scope:bfl_party value >= 50 } }
+        }
+}

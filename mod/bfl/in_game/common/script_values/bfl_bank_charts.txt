@@ -1,0 +1,69 @@
+﻿bfl_asset_fraction_cash = {
+value = 0 if = { limit = { bfl_assets > 0 } value = gold divide = bfl_assets }
+}
+bfl_asset_fraction_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_bonds divide = bfl_assets }
+}
+bfl_asset_fraction_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_unsecured divide = bfl_assets }
+}
+bfl_asset_fraction_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_secured divide = bfl_assets }
+}
+bfl_asset_fraction_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_commodities divide = bfl_assets }
+}
+bfl_asset_fraction_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_investments divide = bfl_assets }
+}
+bfl_state_share_fraction = {
+value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_state_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_01 = {
+value = 0 if = { limit = { var:bfl_shr_01_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_01_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_02 = {
+value = 0 if = { limit = { var:bfl_shr_02_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_02_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_03 = {
+value = 0 if = { limit = { var:bfl_shr_03_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_03_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_04 = {
+value = 0 if = { limit = { var:bfl_shr_04_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_04_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_05 = {
+value = 0 if = { limit = { var:bfl_shr_05_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_05_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_06 = {
+value = 0 if = { limit = { var:bfl_shr_06_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_06_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_07 = {
+value = 0 if = { limit = { var:bfl_shr_07_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_07_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_08 = {
+value = 0 if = { limit = { var:bfl_shr_08_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_08_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_09 = {
+value = 0 if = { limit = { var:bfl_shr_09_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_09_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_10 = {
+value = 0 if = { limit = { var:bfl_shr_10_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_10_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_11 = {
+value = 0 if = { limit = { var:bfl_shr_11_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_11_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_12 = {
+value = 0 if = { limit = { var:bfl_shr_12_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_12_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_13 = {
+value = 0 if = { limit = { var:bfl_shr_13_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_13_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_14 = {
+value = 0 if = { limit = { var:bfl_shr_14_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_14_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_15 = {
+value = 0 if = { limit = { var:bfl_shr_15_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_15_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_16 = {
+value = 0 if = { limit = { var:bfl_shr_16_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_16_units divide = var:bfl_total_units }
+}

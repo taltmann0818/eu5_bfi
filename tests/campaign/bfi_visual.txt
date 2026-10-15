@@ -1,0 +1,31 @@
+c:FLO = {
+    set_gold = 5000
+    add_reform = government_reform:bfl_state_chartered_bank
+    set_variable = { name = bfl_bank value = c:BRD }
+    save_scope_as = bfl_controller
+    set_variable = { name = bfl_payment value = 0 }
+}
+c:BRD = {
+    every_lent_loan = { cancel_loan = this }
+    remove_variable = bfl_schema
+    remove_variable = bfl_accounts_revision
+    make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
+    set_gold = 1000
+    bfl_initialize_bank = yes
+    set_variable = { name = bfl_profile value = 1 }
+    set_variable = { name = bfl_accept_deposits value = 1 }
+    set_variable = { name = bfl_payout_ratio value = 0.5 }
+    bfl_assign_charter_ownership = yes
+    c:PRZ = { set_gold = 1000 save_scope_as = bfl_party }
+    set_variable = { name = bfl_new_units value = 100 }
+    bfl_allocate_subscription = yes
+    give_loan = { target = c:VEN amount = 300 interest = 0.08 months = 60 }
+    give_loan = { target = c:GEN amount = 200 interest = 0.08 months = 60 }
+    c:FLO = { save_scope_as = bfl_party }
+    set_variable = { name = bfl_product value = 1 }
+    bfl_open_deposit = yes
+    set_variable = { name = bfl_last_period value = 0 }
+    set_variable = { name = bfl_last_takeover_period value = { value = bfl_period add = 100 } }
+    bfl_process_accounts = yes
+    bfl_reconcile_native_assets = yes
+}
