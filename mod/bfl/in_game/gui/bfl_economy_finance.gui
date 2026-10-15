@@ -9,6 +9,49 @@
             blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/debt.dds" }
             blockoverride "label" { text = "bfl_debt_facility" }
             blockoverride "income_text" { raw_text = "[Country.MakeScope.GetVariable('bfl_facility_paid').GetValue|2+=]@income!" } }
+        type bfl_sovereign_debt_tooltip = ContextualTooltipType {
+        blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
+            texture = "gfx/interface/icons/bfl/debt.dds" } }
+        blockoverride "title_text" { text = "bfl_sovereign_debt_heading" }
+        blockoverride "concept_link" { text = "bfl_sovereign_accounts_subtitle" }
+        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
+            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 icon_pie = {
+            visible = "[Not(IsDataModelEmpty(CreditLateralView.GetLoansTakenMerged))]"
+            blockoverride "PieSize" { size = { 80 80 } }
+            blockoverride "scrollarea_pie_size" { using = layoutpolicy_expanding size = { 300 -1 } maximumsize = { 300 250 } }
+            blockoverride "pie_datamodel" { datamodel = "[CreditLateralView.GetLoansTakenMerged]" }
+            blockoverride "Icon" { texture = "[GetConceptTexture('borrower')]" }
+            blockoverride "SliceValue" { value = "[LoanEntry.GetAmount]" }
+            blockoverride "SliceColor" { color = "[LoanEntry.GetColor]" }
+            blockoverride "SliceTooltip" { tooltip = "[LoanEntry.GetShortNameAsBorrower]" }
+            blockoverride "datamodel" { datamodel = "[CreditLateralView.GetLoansTakenMerged]" }
+            blockoverride "color" { color = "[LoanEntry.GetColor]" }
+            blockoverride "leftside_info" { text = "[LoanEntry.GetShortNameAsBorrower]" }
+            blockoverride "rightside_info" { raw_text = "[LoanEntry.GetAmountWithRemainingInterest]" } }
+            TooltipTextBlock = { visible = "[IsDataModelEmpty(CreditLateralView.GetLoansTakenMerged)]"
+                blockoverride "text" { text = "NO_LOANS_TAKEN" } } } }
+    }type bfl_sovereign_receivables_tooltip = ContextualTooltipType {
+        blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
+            texture = "gfx/interface/icons/bfl/debt.dds" } }
+        blockoverride "title_text" { text = "bfl_sovereign_receivables_heading" }
+        blockoverride "concept_link" { text = "bfl_sovereign_accounts_subtitle" }
+        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
+            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 icon_pie = {
+            visible = "[Not(IsDataModelEmpty(CreditLateralView.GetLoansGivenMerged))]"
+            blockoverride "PieSize" { size = { 80 80 } }
+            blockoverride "scrollarea_pie_size" { using = layoutpolicy_expanding size = { 300 -1 } maximumsize = { 300 250 } }
+            blockoverride "pie_datamodel" { datamodel = "[CreditLateralView.GetLoansGivenMerged]" }
+            blockoverride "Icon" { texture = "[GetConceptTexture('lender')]" }
+            blockoverride "SliceValue" { value = "[LoanEntry.GetAmount]" }
+            blockoverride "SliceColor" { color = "[LoanEntry.GetBorrowerColor]" }
+            blockoverride "SliceTooltip" { tooltip = "[LoanEntry.GetLoan.GetShortNameAsLender]" }
+            blockoverride "datamodel" { datamodel = "[CreditLateralView.GetLoansGivenMerged]" }
+            blockoverride "color" { color = "[LoanEntry.GetBorrowerColor]" }
+            blockoverride "leftside_info" { text = "[LoanEntry.GetLoan.GetShortNameAsLender]" }
+            blockoverride "rightside_info" { raw_text = "[LoanEntry.GetAmount|2]@gold!" } }
+            TooltipTextBlock = { visible = "[IsDataModelEmpty(CreditLateralView.GetLoansGivenMerged)]"
+                blockoverride "text" { text = "NO_LOANS_GIVEN" } } } }
+    }
         type bfl_bank_overview = vbox { layoutpolicy_horizontal = expanding spacing = 4 vbox = { layoutpolicy_horizontal = expanding spacing = 8 margin = { 10 6 }
         hbox = { spacing = 8 icon = { texture = "gfx/interface/icons/bfl/accounts.dds" size = { 32 32 } } vbox = { layoutpolicy_horizontal = expanding tooltip = "bfl_bank_identity_tip" text_single = { raw_text = "[Country.GetName]" size = { -1 22 } layoutpolicy_horizontal = expanding } text_single = { text = "bfl_profile_0" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)0')]" }text_single = { text = "bfl_profile_1" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)1')]" }text_single = { text = "bfl_profile_2" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_profile').GetValue, '(CFixedPoint)2')]" } }
             vbox = { tooltip = "bfl_bank_status_tip" text_single = { text = "bfl_status_0" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)0')]" }text_single = { text = "bfl_status_1" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)1')]" }text_single = { text = "bfl_status_2" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)2')]" }text_single = { text = "bfl_status_3" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)3')]" }text_single = { text = "bfl_status_4" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)4')]" }text_single = { text = "bfl_status_5" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_state').GetValue, '(CFixedPoint)5')]" } } }
@@ -33,56 +76,57 @@
             piechart = { name = "bfl_share_ownership_donut" size = { 100 100 } using = piechart_angles using = bg_circle_piechart_big
                 pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
         value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_state_units').GetValue)]" color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]"
-        visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" tooltip = "bfl_share_state_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_01_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_01_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_02_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_02_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_02_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_02_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_02_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_03_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_03_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_03_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_03_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_03_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_04_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_04_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_04_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_04_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_04_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_05_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_05_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_05_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_05_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_05_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_06_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_06_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_06_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_06_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_06_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_07_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_07_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_07_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_07_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_07_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_08_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_08_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_08_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_08_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_08_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_09_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_09_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_09_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_09_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_09_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_10_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_10_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_10_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_10_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_10_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_11_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_11_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_11_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_11_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_11_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_12_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_12_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_12_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_12_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_12_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_13_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_13_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_13_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_13_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_13_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_14_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_14_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_14_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_14_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_14_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_15_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_15_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_15_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_15_tip" }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_15_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_16_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_16_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_16_active').GetValue, '(CFixedPoint)1')]" tooltip = "bfl_share_16_tip" }
-                icon = { size = { 38 38 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/subscribe.dds" } } } vbox = { size = { 114 145 } spacing = 5
+            visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_16_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }
+
+                icon = { size = { 30 30 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/subscribe.dds" } } } vbox = { size = { 114 145 } spacing = 5
             text_single = { text = "bfl_asset_mix" autoresize = yes fontsize = 13 }
             piechart = { name = "bfl_asset_mix_donut" size = { 100 100 } using = piechart_angles using = bg_circle_piechart_big
                 pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
@@ -98,7 +142,1300 @@
             tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_investments').GetValue)]" color = { 0.61 0.48 0.72 1 }
             tooltipwidget = { bfl_asset_investments_tooltip = { } } }
-                icon = { size = { 38 38 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/accounts.dds" } } } } }
+                piechart = { name = "bfl_asset_counterparties_ring" size = { 70 70 } parentanchor = center using = piechart_angles pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(Country.GetFixedPointCurrencyValue('gold'))]" color = "[Country.GetMapColor]"
+                tooltipwidget = { bfl_asset_cash_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_01_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_02_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_02_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_02_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_03_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_03_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_03_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_04_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_04_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_04_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_05_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_05_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_05_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_06_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_06_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_06_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_07_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_07_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_07_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_08_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_08_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_08_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_09_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_09_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_09_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_10_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_10_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_10_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_11_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_11_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_11_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_12_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_12_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_12_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_13_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_13_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_13_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_14_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_14_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_14_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_15_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_15_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_15_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_16_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_16_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_16_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_17_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_17_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_17_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_18_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_18_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_18_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_19_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_19_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_19_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_20_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_20_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_20_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_21_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_21_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_21_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_22_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_22_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_22_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_23_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_23_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_23_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_24_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_24_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_24_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_25_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_25_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_25_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_26_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_26_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_26_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_27_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_27_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_27_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_28_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_28_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_28_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_29_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_29_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_29_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_30_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_30_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_30_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_31_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_31_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_31_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_32_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_32_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_32_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_33_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_33_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_33_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_34_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_34_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_34_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_35_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_35_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_35_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_36_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_36_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_36_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_37_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_37_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_37_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_38_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_38_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_38_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_39_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_39_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_39_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_40_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_40_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_40_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_41_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_41_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_41_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_42_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_42_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_42_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_43_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_43_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_43_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_44_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_44_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_44_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_45_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_45_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_45_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_46_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_46_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_46_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_47_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_47_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_47_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_48_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_48_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_48_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_49_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_49_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_49_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_50_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_50_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_50_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_51_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_51_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_51_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_52_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_52_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_52_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_53_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_53_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_53_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_54_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_54_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_54_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_55_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_55_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_55_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_56_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_56_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_56_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_57_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_57_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_57_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_58_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_58_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_58_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_59_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_59_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_59_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_60_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_60_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_60_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_61_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_61_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_61_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_62_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_62_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_62_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_63_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_63_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_63_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_64_bonds').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_64_bonds').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_64_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_bonds'))]" color = { 0.39 0.61 0.79 1 }
+                tooltipwidget = { bfl_asset_bonds_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_01_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_02_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_02_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_02_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_03_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_03_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_03_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_04_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_04_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_04_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_05_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_05_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_05_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_06_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_06_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_06_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_07_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_07_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_07_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_08_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_08_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_08_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_09_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_09_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_09_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_10_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_10_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_10_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_11_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_11_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_11_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_12_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_12_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_12_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_13_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_13_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_13_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_14_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_14_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_14_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_15_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_15_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_15_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_16_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_16_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_16_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_17_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_17_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_17_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_18_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_18_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_18_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_19_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_19_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_19_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_20_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_20_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_20_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_21_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_21_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_21_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_22_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_22_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_22_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_23_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_23_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_23_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_24_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_24_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_24_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_25_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_25_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_25_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_26_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_26_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_26_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_27_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_27_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_27_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_28_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_28_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_28_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_29_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_29_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_29_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_30_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_30_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_30_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_31_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_31_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_31_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_32_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_32_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_32_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_33_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_33_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_33_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_34_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_34_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_34_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_35_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_35_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_35_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_36_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_36_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_36_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_37_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_37_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_37_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_38_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_38_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_38_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_39_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_39_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_39_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_40_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_40_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_40_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_41_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_41_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_41_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_42_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_42_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_42_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_43_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_43_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_43_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_44_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_44_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_44_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_45_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_45_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_45_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_46_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_46_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_46_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_47_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_47_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_47_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_48_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_48_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_48_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_49_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_49_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_49_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_50_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_50_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_50_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_51_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_51_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_51_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_52_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_52_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_52_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_53_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_53_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_53_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_54_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_54_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_54_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_55_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_55_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_55_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_56_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_56_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_56_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_57_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_57_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_57_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_58_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_58_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_58_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_59_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_59_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_59_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_60_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_60_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_60_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_61_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_61_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_61_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_62_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_62_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_62_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_63_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_63_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_63_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_64_unsecured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_64_unsecured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_64_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_unsecured'))]" color = { 0.72 0.40 0.33 1 }
+                tooltipwidget = { bfl_asset_unsecured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_01_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_02_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_02_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_02_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_03_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_03_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_03_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_04_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_04_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_04_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_05_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_05_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_05_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_06_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_06_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_06_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_07_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_07_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_07_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_08_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_08_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_08_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_09_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_09_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_09_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_10_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_10_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_10_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_11_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_11_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_11_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_12_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_12_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_12_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_13_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_13_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_13_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_14_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_14_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_14_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_15_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_15_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_15_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_16_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_16_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_16_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_17_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_17_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_17_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_18_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_18_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_18_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_19_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_19_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_19_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_20_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_20_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_20_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_21_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_21_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_21_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_22_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_22_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_22_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_23_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_23_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_23_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_24_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_24_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_24_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_25_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_25_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_25_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_26_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_26_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_26_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_27_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_27_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_27_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_28_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_28_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_28_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_29_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_29_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_29_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_30_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_30_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_30_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_31_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_31_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_31_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_32_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_32_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_32_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_33_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_33_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_33_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_34_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_34_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_34_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_35_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_35_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_35_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_36_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_36_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_36_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_37_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_37_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_37_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_38_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_38_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_38_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_39_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_39_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_39_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_40_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_40_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_40_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_41_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_41_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_41_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_42_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_42_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_42_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_43_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_43_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_43_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_44_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_44_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_44_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_45_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_45_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_45_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_46_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_46_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_46_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_47_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_47_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_47_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_48_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_48_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_48_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_49_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_49_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_49_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_50_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_50_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_50_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_51_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_51_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_51_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_52_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_52_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_52_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_53_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_53_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_53_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_54_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_54_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_54_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_55_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_55_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_55_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_56_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_56_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_56_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_57_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_57_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_57_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_58_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_58_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_58_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_59_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_59_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_59_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_60_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_60_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_60_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_61_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_61_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_61_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_62_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_62_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_62_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_63_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_63_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_63_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_64_secured').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_64_secured').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_64_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_secured'))]" color = { 0.40 0.67 0.52 1 }
+                tooltipwidget = { bfl_asset_secured_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_01_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_02_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_02_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_02_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_03_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_03_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_03_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_04_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_04_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_04_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_05_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_05_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_05_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_06_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_06_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_06_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_07_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_07_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_07_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_08_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_08_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_08_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_09_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_09_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_09_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_10_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_10_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_10_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_11_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_11_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_11_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_12_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_12_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_12_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_13_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_13_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_13_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_14_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_14_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_14_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_15_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_15_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_15_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_16_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_16_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_16_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_17_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_17_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_17_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_18_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_18_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_18_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_19_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_19_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_19_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_20_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_20_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_20_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_21_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_21_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_21_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_22_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_22_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_22_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_23_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_23_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_23_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_24_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_24_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_24_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_25_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_25_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_25_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_26_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_26_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_26_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_27_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_27_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_27_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_28_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_28_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_28_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_29_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_29_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_29_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_30_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_30_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_30_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_31_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_31_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_31_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_32_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_32_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_32_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_33_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_33_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_33_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_34_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_34_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_34_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_35_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_35_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_35_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_36_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_36_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_36_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_37_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_37_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_37_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_38_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_38_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_38_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_39_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_39_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_39_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_40_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_40_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_40_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_41_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_41_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_41_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_42_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_42_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_42_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_43_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_43_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_43_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_44_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_44_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_44_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_45_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_45_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_45_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_46_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_46_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_46_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_47_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_47_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_47_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_48_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_48_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_48_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_49_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_49_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_49_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_50_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_50_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_50_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_51_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_51_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_51_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_52_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_52_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_52_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_53_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_53_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_53_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_54_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_54_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_54_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_55_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_55_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_55_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_56_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_56_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_56_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_57_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_57_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_57_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_58_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_58_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_58_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_59_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_59_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_59_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_60_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_60_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_60_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_61_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_61_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_61_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_62_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_62_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_62_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_63_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_63_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_63_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_64_commodities').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_64_commodities').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_64_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_commodities'))]" color = { 0.76 0.56 0.32 1 }
+                tooltipwidget = { bfl_asset_commodities_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_01_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_02_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_02_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_02_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_03_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_03_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_03_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_04_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_04_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_04_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_05_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_05_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_05_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_06_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_06_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_06_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_07_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_07_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_07_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_08_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_08_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_08_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_09_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_09_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_09_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_10_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_10_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_10_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_11_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_11_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_11_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_12_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_12_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_12_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_13_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_13_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_13_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_14_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_14_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_14_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_15_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_15_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_15_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_16_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_16_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_16_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_17_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_17_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_17_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_18_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_18_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_18_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_19_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_19_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_19_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_20_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_20_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_20_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_21_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_21_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_21_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_22_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_22_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_22_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_23_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_23_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_23_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_24_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_24_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_24_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_25_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_25_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_25_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_26_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_26_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_26_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_27_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_27_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_27_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_28_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_28_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_28_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_29_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_29_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_29_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_30_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_30_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_30_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_31_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_31_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_31_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_32_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_32_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_32_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_33_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_33_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_33_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_34_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_34_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_34_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_35_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_35_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_35_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_36_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_36_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_36_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_37_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_37_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_37_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_38_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_38_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_38_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_39_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_39_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_39_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_40_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_40_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_40_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_41_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_41_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_41_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_42_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_42_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_42_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_43_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_43_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_43_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_44_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_44_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_44_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_45_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_45_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_45_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_46_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_46_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_46_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_47_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_47_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_47_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_48_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_48_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_48_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_49_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_49_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_49_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_50_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_50_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_50_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_51_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_51_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_51_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_52_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_52_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_52_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_53_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_53_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_53_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_54_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_54_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_54_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_55_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_55_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_55_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_56_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_56_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_56_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_57_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_57_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_57_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_58_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_58_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_58_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_59_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_59_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_59_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_60_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_60_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_60_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_61_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_61_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_61_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_62_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_62_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_62_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_63_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_63_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_63_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_64_investments').GetValue, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_64_investments').GetValue)]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_64_party').GetCountry.GetMapColor]"
+                    tooltipwidget = { bfl_asset_investments_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_investments'))]" color = { 0.61 0.48 0.72 1 }
+                tooltipwidget = { bfl_asset_investments_tooltip = { } } } }
+                icon = { size = { 30 30 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/accounts.dds" } } } } }
         hbox = { spacing = 8 tooltipwidget = { bfl_operating_cost_tooltip = { } }
             text_single = { text = "bfl_operating_costs" autoresize = yes fontsize = 12 }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_expense')|2]@gold!" autoresize = yes fontsize = 12 } } } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
@@ -109,8 +1446,19 @@
             text_single = { text = "bfl_state_interest_value" autoresize = yes fontsize = 12 } }
         hbox = { spacing = 4 tooltip = "bfl_state_bonds_tip" icon = { texture = "gfx/interface/icons/bfl/bond.dds" size = { 18 18 } }
             text_single = { text = "bfl_state_bonds_value" autoresize = yes fontsize = 12 } }
-    } }
-        type bfl_credit_overview = widget { size = { -1 300 } layoutpolicy_horizontal = expanding using = bg_age_event_frame
+    } vbox = { spacing = 2 margin = { 10 0 } layoutpolicy_horizontal = expanding
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        tooltip = "bfl_sovereign_accounts_tip"
+        text_single = { text = "bfl_sovereign_accounts" autoresize = yes fontsize = 11 }
+        hbox = { layoutpolicy_horizontal = expanding spacing = 12
+            vbox = { spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = { bfl_sovereign_debt_tooltip = { } }
+                text_single = { text = "bfl_sovereign_debt" autoresize = yes fontsize = 12 }
+                text_single = { raw_text = "[GetPlayer.GetEconomy.GetTotalDebt|2]@gold! (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)" autoresize = yes fontsize = 12 } }
+            expand = { }
+            vbox = { spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = { bfl_sovereign_receivables_tooltip = { } }
+                text_single = { text = "bfl_sovereign_receivables" autoresize = yes fontsize = 12 }
+                text_single = { raw_text = "[CreditLateralView.GetTotalLoansGiven|2]@gold! ([CreditLateralView.GetTotalLoansGivenMonthlyCost|2+=]@income!)" autoresize = yes fontsize = 12 } } } } }
+        type bfl_credit_overview = widget { size = { -1 350 } layoutpolicy_horizontal = expanding using = bg_age_event_frame
             background = { texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }
             bfl_bank_overview = { datacontext = "[GetPlayer]"
         visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }

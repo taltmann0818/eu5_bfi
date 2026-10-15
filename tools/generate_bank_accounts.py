@@ -128,6 +128,7 @@ def generate(common, effect, loc, write, tune):
            + effect('bfl_operating_expense', 'value = bfl_operating_complexity multiply = bfl_operating_multiplier multiply = 100 round = yes divide = 100')
            + effect('bfl_deposit_income_display', 'value = 0 if = { limit = { has_variable = bfl_interest_period var:bfl_interest_period = bfl_period } value = var:bfl_deposit_income }')
            + effect('bfl_share_income_display', 'value = 0 if = { limit = { has_variable = bfl_share_income_period var:bfl_share_income_period = bfl_period } value = var:bfl_share_income }'))
+    generate_expense_history(common, effect, loc)
     operating = '''if = { limit = { bfl_period > var:bfl_last_expense_period var:bfl_state < 5 }
         set_variable = { name = bfl_last_expense_period value = bfl_period }
         set_variable = { name = bfl_expense_due value = bfl_operating_expense }
@@ -136,6 +137,7 @@ def generate(common, effect, loc, write, tune):
         set_variable = { name = bfl_expense_paid value = { value = var:bfl_expense_arrears max = bfl_free_cash } }
         add_gold = { value = var:bfl_expense_paid multiply = -1 }
         change_variable = { name = bfl_expense_arrears subtract = var:bfl_expense_paid }
+        bfl_record_expense_history = yes
     }'''
     income = '''if = { limit = { bfl_period > var:bfl_last_income_period }
         set_variable = { name = bfl_last_income_period value = bfl_period }
@@ -182,53 +184,111 @@ def generate(common, effect, loc, write, tune):
 
 
 def generate_operating_tooltip(loc, write, tune):
+    from generate_finance_widgets import list_block, row, tooltip_type
+
     def value(name):
         return f"GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_{name}')"
 
     def amount(name):
         return f'[{value(name)}|2]@gold!'
 
-    def row(key, title, expression, visible=''):
+    def cost_row(key, title, expression, index=0, visible='', art=None):
         loc(key, title)
-        return f'''hbox = {{ {visible} size = {{ -1 24 }} layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 12
-            text_single = {{ text = "{key}" autoresize = yes }} expand = {{ }}
-            text_single = {{ raw_text = "{expression}" autoresize = yes }} }}'''
+        return row(f'[Localize(\'{key}\')]', expression, index, visible, art=art)
 
-    body = row('bfl_cost_base', 'Base administration', amount('base_cost'))
-    for name, title, setting in [('accounts', 'Deposit accounts', 'operating_account'),
+    body = cost_row('bfl_cost_base', 'Base administration', amount('base_cost'), art='accounts')
+    for index, (name, title, setting) in enumerate([('accounts', 'Deposit accounts', 'operating_account'),
                                  ('contracts', 'Custom financial contracts', 'operating_contract'),
                                  ('branches', 'Branches', 'operating_branch'),
-                                 ('asset_types', 'Non-cash asset classes', 'operating_asset_type')]:
-        body += row(f'bfl_cost_{name}', f'{title}: [{value(name + "_count")}|0] × {tune[setting]:.2f}', amount(name + '_cost'))
-    loc('bfl_cost_asset_detail', 'Populated classes (included above)')
-    body += 'text_single = { text = "bfl_cost_asset_detail" autoresize = yes fontsize = 14 }'
-    for name, title in [('bonds', 'Bonds'), ('unsecured', 'Unsecured loans'), ('secured', 'Secured loans'),
-                        ('commodities', 'Commodities'), ('investments', 'Equity & ventures')]:
-        visible = f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_{name}').GetValue, '(CFixedPoint)0')]"'''
-        body += row(f'bfl_cost_class_{name}', title, f'{tune["operating_asset_type"]:.2f}@gold!', visible)
-    body += row('bfl_cost_gross', '#T Cost before reductions#!', amount('complexity'))
-    loc('bfl_cost_reductions', '#T Applicable reductions#!')
-    body += 'text_single = { text = "bfl_cost_reductions" autoresize = yes }'
-    for name, title in [('charter', 'State charter (5% if valid)'),
-                        ('banking', 'Banking (10% if researched)'),
-                        ('clearing', 'Advanced Clearing (15% if researched)'),
-                        ('administration', 'Streamlined administration (10% if adopted)')]:
-        body += row(f'bfl_cost_reduction_{name}', title, f'[{value("reduction_" + name)}|%0]')
-    body += row('bfl_cost_reduction_total', 'Combined reduction (additive)', f'[{value("total_reduction")}|%0]')
-    body += row('bfl_cost_net', '#T Monthly cost after reductions#!', amount('expense'))
-    loc('bfl_cost_rounding', 'Rounded to the nearest 0.01 gold. Research qualifies through the bank or its sovereign; each bonus applies once.')
-    body += 'text_multi = { text = "bfl_cost_rounding" size = { 480 48 } fontsize = 14 layoutpolicy_horizontal = expanding }'
-    for name, title in [('due', 'Last monthly expense assessed'),
-                        ('paid', 'Last cash payment (including old arrears)'),
-                        ('arrears', 'Unpaid operating-expense liability')]:
-        body += row(f'bfl_cost_settlement_{name}', title, f"[Country.MakeScope.GetVariable('bfl_expense_{name}').GetValue|2]@gold!")
-    loc('bfl_cost_payment_detail', 'Charged once per month from cash above protected reserves. Unpaid costs reduce earnings and restrict dividends. Deposit interest and native expenses are separate. Costs scale with complexity, not asset value.')
-    body += 'text_multi = { text = "bfl_cost_payment_detail" size = { 480 78 } fontsize = 14 layoutpolicy_horizontal = expanding }'
-    loc('bfl_cost_title', '#T Monthly operating expenses#!')
-    write('in_game/gui/bfl_operating_cost_tooltip.gui', f'''types BFLOperatingCostTooltip {{
-        type bfl_operating_cost_tooltip = ContextualTooltipTypeBase {{
-            vbox = {{ size = {{ 480 0 }} set_parent_size_to_minimum = yes ignoreinvisible = yes margin = {{ 16 12 }} spacing = 4
-                text_single = {{ text = "bfl_cost_title" autoresize = yes }} {body}
-            }}
-        }}
-    }}''')
+                                 ('asset_types', 'Non-cash asset classes', 'operating_asset_type')], 1):
+        visible = f'''visible = "[GreaterThan_CFixedPoint({value(name + '_count')}, '(CFixedPoint)0')]"'''
+        body += cost_row(f'bfl_cost_{name}', f'{title}: [{value(name + "_count")}|0] × {tune[setting]:.2f}', amount(name + '_cost'), index, visible, 'deposit' if name == 'accounts' else 'accounts')
+    loc('bfl_cost_current', f'Current monthly cost: #R {amount("expense")}#!')
+    content = list_block('bfl_cost_current', body)
+    reductions = ''
+    for index, (name, title, art) in enumerate([('charter', 'State Chartered Bank', 'accounts'),
+                                               ('banking', 'Banking', 'deposit'),
+                                               ('clearing', 'Advanced Clearing', 'accounts'),
+                                               ('administration', 'Streamlined administration', 'accounts')]):
+        visible = f'''visible = "[GreaterThan_CFixedPoint({value('reduction_' + name)}, '(CFixedPoint)0')]"'''
+        reductions += cost_row(f'bfl_cost_reduction_{name}', title, f'#G −[{value("reduction_" + name)}|%0]#!', index, visible, art)
+    loc('bfl_cost_reductions', f'Base cost {amount("complexity")} is reduced by #G −[{value("total_reduction")}|%0]#! due to:')
+    content += list_block('bfl_cost_reductions', reductions,
+                          f'''visible = "[GreaterThan_CFixedPoint({value('total_reduction')}, '(CFixedPoint)0')]"''')
+    settlement = ''
+    for index, (name, title) in enumerate([('due', 'Expense assessed'), ('paid', 'Cash paid (including arrears)'), ('arrears', 'Unpaid expenses')]):
+        settlement += cost_row(f'bfl_cost_settlement_{name}', title, f"[Country.MakeScope.GetVariable('bfl_expense_{name}').GetValue|2]@gold!", index)
+    loc('bfl_cost_settlement_title', 'Last monthly settlement')
+    content += list_block('bfl_cost_settlement_title', settlement)
+    loc('bfl_cost_payment_detail', 'Costs scale with complexity, not asset value. Charged once monthly above protected reserves; unpaid expenses restrict dividends. Deposit interest and native expenses are separate. Reductions add together; the total is rounded to cents.')
+    content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_cost_payment_detail" } }'
+    content += expense_graph()
+    loc('bfl_cost_title', "Operating expenses of [Country.GetName]")
+    loc('bfl_cost_subtitle', 'Monthly bank administration')
+    write('in_game/gui/bfl_operating_cost_tooltip.gui', 'types BFLOperatingCostTooltip {\n'
+          + tooltip_type('bfl_operating_cost_tooltip', 'bfl_cost_title', 'bfl_cost_subtitle', 'accounts', content) + '\n}')
+
+
+def generate_expense_history(common, effect, loc):
+    initialization = '''if = { limit = { NOT = { has_variable = bfl_expense_history_count } }
+        set_variable = { name = bfl_expense_history_count value = 0 }
+        set_variable = { name = bfl_expense_history_period value = 0 }
+    '''
+    for index in range(1, 13):
+        initialization += f'set_variable = {{ name = bfl_expense_history_{index:02} value = 0 }}\n'
+    initialization += '}\n'
+    record = '''bfl_initialize_expense_history = yes
+        if = { limit = { bfl_period > var:bfl_expense_history_period }
+            set_variable = { name = bfl_expense_history_period value = bfl_period }
+    '''
+    for index in range(1, 12):
+        record += f'set_variable = {{ name = bfl_expense_history_{index:02} value = var:bfl_expense_history_{index+1:02} }}\n'
+    record += '''set_variable = { name = bfl_expense_history_12 value = var:bfl_expense_due }
+        change_variable = { name = bfl_expense_history_count add = 1 }
+        if = { limit = { var:bfl_expense_history_count > 12 } set_variable = { name = bfl_expense_history_count value = 12 } }
+    }'''
+    common('scripted_effects', 'expense_history', effect('bfl_initialize_expense_history', initialization)
+           + effect('bfl_record_expense_history', record))
+    maximum = 'value = 1\n'
+    for index in range(1, 13):
+        maximum += f'min = var:bfl_expense_history_{index:02}\n'
+    values = effect('bfl_expense_chart_max', maximum + 'add = 0.25 multiply = 100 round = yes divide = 100')
+    for index in range(1, 13):
+        values += effect(f'bfl_expense_chart_y_{index:02}', f'value = var:bfl_expense_history_{index:02} divide = bfl_expense_chart_max multiply = -100 add = 100')
+        if index < 12:
+            values += effect(f'bfl_expense_chart_top_{index:02}', f'value = bfl_expense_chart_y_{index:02} max = bfl_expense_chart_y_{index+1:02}')
+            values += effect(f'bfl_expense_chart_height_{index:02}', f'value = bfl_expense_chart_y_{index:02} min = bfl_expense_chart_y_{index+1:02} subtract = bfl_expense_chart_top_{index:02} min = 2')
+        loc(f'bfl_expense_sample_{index:02}', f"Assessed operating expense: [Country.MakeScope.GetVariable('bfl_expense_history_{index:02}').GetValue|2]@gold! · {12-index} monthly settlements before latest.")
+    common('script_values', 'expense_history', values)
+    loc('bfl_expense_history_title', 'Recent operating expenses')
+    loc('bfl_expense_history_empty', 'History starts at the next monthly expense assessment.')
+    loc('bfl_expense_history_axis', 'Oldest → latest · up to 12 monthly settlements')
+
+
+def expense_graph():
+    from generate_finance_widgets import list_block
+
+    def value(name):
+        return f"GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_expense_chart_{name}')"
+
+    points = ''
+    for index in range(1, 13):
+        visible = f'''visible = "[GreaterThanOrEqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_expense_history_count').GetValue, '(CFixedPoint){13-index}')]"'''
+        position = f"ToVector2f('(float){(index-1)*30}', FixedPointToFloat({value(f'y_{index:02}')}))"
+        points += f'''widget = {{ position = "[{position}]" size = {{ 3 3 }} {visible}
+            tooltip = "bfl_expense_sample_{index:02}" background = {{ texture = "gfx/interface/colors/white.dds" color = {{ 0.70 0.65 1 1 }} }} }}'''
+        if index < 12:
+            points += f'''widget = {{ position = "[{position}]" size = {{ 30 2 }} {visible}
+                background = {{ texture = "gfx/interface/colors/white.dds" color = {{ 0.70 0.65 1 1 }} }} }}
+                widget = {{ {visible} position = "[ToVector2f('(float){index*30}', FixedPointToFloat({value(f'top_{index:02}')}))]"
+                    size = "[ToVector2f('(float)2', FixedPointToFloat({value(f'height_{index:02}')}))]"
+                    background = {{ texture = "gfx/interface/colors/white.dds" color = {{ 0.70 0.65 1 1 }} }} }}'''
+    graph = f'''vbox = {{ margin = {{ 8 5 }} spacing = 2
+        text_single = {{ raw_text = "[{value('max')}|2]@gold!" autoresize = yes fontsize = 12 }}
+        widget = {{ name = "bfl_operating_expense_history" size = {{ 400 110 }} using = bg_text_mask_container_dark_brown
+            widget = {{ position = {{ 35 3 }} size = {{ 335 100 }} {points} }}
+            text_multi = {{ parentanchor = center size = {{ 350 50 }} text = "bfl_expense_history_empty" fontsize = 14
+                visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_expense_history_count').GetValue, '(CFixedPoint)0')]" }} }}
+        text_single = {{ raw_text = "0.00@gold!" autoresize = yes fontsize = 12 }}
+        text_single = {{ text = "bfl_expense_history_axis" autoresize = yes fontsize = 12 }} }}'''
+    return list_block('bfl_expense_history_title', graph)

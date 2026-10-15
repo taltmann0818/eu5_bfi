@@ -1,0 +1,118 @@
+﻿bfl_expense_chart_max = {
+value = 1
+min = var:bfl_expense_history_01
+min = var:bfl_expense_history_02
+min = var:bfl_expense_history_03
+min = var:bfl_expense_history_04
+min = var:bfl_expense_history_05
+min = var:bfl_expense_history_06
+min = var:bfl_expense_history_07
+min = var:bfl_expense_history_08
+min = var:bfl_expense_history_09
+min = var:bfl_expense_history_10
+min = var:bfl_expense_history_11
+min = var:bfl_expense_history_12
+add = 0.25 multiply = 100 round = yes divide = 100
+}
+bfl_expense_chart_y_01 = {
+value = var:bfl_expense_history_01 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_01 = {
+value = bfl_expense_chart_y_01 max = bfl_expense_chart_y_02
+}
+bfl_expense_chart_height_01 = {
+value = bfl_expense_chart_y_01 min = bfl_expense_chart_y_02 subtract = bfl_expense_chart_top_01 min = 2
+}
+bfl_expense_chart_y_02 = {
+value = var:bfl_expense_history_02 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_02 = {
+value = bfl_expense_chart_y_02 max = bfl_expense_chart_y_03
+}
+bfl_expense_chart_height_02 = {
+value = bfl_expense_chart_y_02 min = bfl_expense_chart_y_03 subtract = bfl_expense_chart_top_02 min = 2
+}
+bfl_expense_chart_y_03 = {
+value = var:bfl_expense_history_03 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_03 = {
+value = bfl_expense_chart_y_03 max = bfl_expense_chart_y_04
+}
+bfl_expense_chart_height_03 = {
+value = bfl_expense_chart_y_03 min = bfl_expense_chart_y_04 subtract = bfl_expense_chart_top_03 min = 2
+}
+bfl_expense_chart_y_04 = {
+value = var:bfl_expense_history_04 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_04 = {
+value = bfl_expense_chart_y_04 max = bfl_expense_chart_y_05
+}
+bfl_expense_chart_height_04 = {
+value = bfl_expense_chart_y_04 min = bfl_expense_chart_y_05 subtract = bfl_expense_chart_top_04 min = 2
+}
+bfl_expense_chart_y_05 = {
+value = var:bfl_expense_history_05 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_05 = {
+value = bfl_expense_chart_y_05 max = bfl_expense_chart_y_06
+}
+bfl_expense_chart_height_05 = {
+value = bfl_expense_chart_y_05 min = bfl_expense_chart_y_06 subtract = bfl_expense_chart_top_05 min = 2
+}
+bfl_expense_chart_y_06 = {
+value = var:bfl_expense_history_06 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_06 = {
+value = bfl_expense_chart_y_06 max = bfl_expense_chart_y_07
+}
+bfl_expense_chart_height_06 = {
+value = bfl_expense_chart_y_06 min = bfl_expense_chart_y_07 subtract = bfl_expense_chart_top_06 min = 2
+}
+bfl_expense_chart_y_07 = {
+value = var:bfl_expense_history_07 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_07 = {
+value = bfl_expense_chart_y_07 max = bfl_expense_chart_y_08
+}
+bfl_expense_chart_height_07 = {
+value = bfl_expense_chart_y_07 min = bfl_expense_chart_y_08 subtract = bfl_expense_chart_top_07 min = 2
+}
+bfl_expense_chart_y_08 = {
+value = var:bfl_expense_history_08 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_08 = {
+value = bfl_expense_chart_y_08 max = bfl_expense_chart_y_09
+}
+bfl_expense_chart_height_08 = {
+value = bfl_expense_chart_y_08 min = bfl_expense_chart_y_09 subtract = bfl_expense_chart_top_08 min = 2
+}
+bfl_expense_chart_y_09 = {
+value = var:bfl_expense_history_09 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_09 = {
+value = bfl_expense_chart_y_09 max = bfl_expense_chart_y_10
+}
+bfl_expense_chart_height_09 = {
+value = bfl_expense_chart_y_09 min = bfl_expense_chart_y_10 subtract = bfl_expense_chart_top_09 min = 2
+}
+bfl_expense_chart_y_10 = {
+value = var:bfl_expense_history_10 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_10 = {
+value = bfl_expense_chart_y_10 max = bfl_expense_chart_y_11
+}
+bfl_expense_chart_height_10 = {
+value = bfl_expense_chart_y_10 min = bfl_expense_chart_y_11 subtract = bfl_expense_chart_top_10 min = 2
+}
+bfl_expense_chart_y_11 = {
+value = var:bfl_expense_history_11 divide = bfl_expense_chart_max multiply = -100 add = 100
+}
+bfl_expense_chart_top_11 = {
+value = bfl_expense_chart_y_11 max = bfl_expense_chart_y_12
+}
+bfl_expense_chart_height_11 = {
+value = bfl_expense_chart_y_11 min = bfl_expense_chart_y_12 subtract = bfl_expense_chart_top_11 min = 2
+}
+bfl_expense_chart_y_12 = {
+value = var:bfl_expense_history_12 divide = bfl_expense_chart_max multiply = -100 add = 100
+}

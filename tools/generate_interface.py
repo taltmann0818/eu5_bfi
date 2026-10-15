@@ -105,7 +105,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         'equity_debt':'Bank equity & debt','twelve_months':'12 monthly settlements · oldest → latest',
         'history_empty':'History begins at the next monthly settlement.',
         'cash':'Treasury cash','free_cash_label':'Available cash','assets_label':'Total assets',
-        'deposits_label':'Deposit claims','liabilities_label':'Total debt','equity_label':'Bank equity',
+        'deposits_label':'Deposit claims','liabilities_label':'Bank liabilities','equity_label':'Bank equity',
         'protected_label':'Protected cash','native_credit_label':'Loan portfolio',
         'funding_tab':'Deposits & Funding','investment_tab':'Lending & Investment',
         'native_tab':'State loans','back_to_bank':'Bank accounts','funding_title':'Deposits & capital',
@@ -260,6 +260,46 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             visible = "[{MANAGED}]" size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             {contexts(f'bfl_credit_{name}_body')}
         }}'''
+    loc('bfl_sovereign_accounts', 'Sovereign accounts — separate from bank assets')
+    loc('bfl_sovereign_debt', 'Sovereign debt')
+    loc('bfl_sovereign_receivables', 'Sovereign receivables')
+    loc('bfl_sovereign_accounts_tip', 'These native debts and receivables belong to the sovereign, not its bank. Bank-owned loans are included in the asset donut; bank liabilities include deposits and unpaid operating expenses. Native borrowing, repayment and loan lists keep the sovereign as actor.')
+    from generate_finance_widgets import tooltip_type
+    sovereign_tooltips = ''
+    for kind, model, color, name, amount in [
+            ('debt', 'GetLoansTakenMerged', 'GetColor', 'GetShortNameAsBorrower', 'GetAmountWithRemainingInterest'),
+            ('receivables', 'GetLoansGivenMerged', 'GetBorrowerColor', 'GetLoan.GetShortNameAsLender', 'GetAmount')]:
+        loc(f'bfl_sovereign_{kind}_heading', f'Sovereign {kind} of [Country.GetName]')
+        loc('bfl_sovereign_accounts_subtitle', 'Native sovereign loans — not bank assets')
+        amount_text = f'[LoanEntry.{amount}]' if kind == 'debt' else f'[LoanEntry.{amount}|2]@gold!'
+        content = f'''icon_pie = {{
+            visible = "[Not(IsDataModelEmpty(CreditLateralView.{model}))]"
+            blockoverride "PieSize" {{ size = {{ 80 80 }} }}
+            blockoverride "scrollarea_pie_size" {{ using = layoutpolicy_expanding size = {{ 300 -1 }} maximumsize = {{ 300 250 }} }}
+            blockoverride "pie_datamodel" {{ datamodel = "[CreditLateralView.{model}]" }}
+            blockoverride "Icon" {{ texture = "[GetConceptTexture('{"borrower" if kind == "debt" else "lender"}')]" }}
+            blockoverride "SliceValue" {{ value = "[LoanEntry.GetAmount]" }}
+            blockoverride "SliceColor" {{ color = "[LoanEntry.{color}]" }}
+            blockoverride "SliceTooltip" {{ tooltip = "[LoanEntry.{name}]" }}
+            blockoverride "datamodel" {{ datamodel = "[CreditLateralView.{model}]" }}
+            blockoverride "color" {{ color = "[LoanEntry.{color}]" }}
+            blockoverride "leftside_info" {{ text = "[LoanEntry.{name}]" }}
+            blockoverride "rightside_info" {{ raw_text = "{amount_text}" }} }}
+            TooltipTextBlock = {{ visible = "[IsDataModelEmpty(CreditLateralView.{model})]"
+                blockoverride "text" {{ text = "{"NO_LOANS_TAKEN" if kind == "debt" else "NO_LOANS_GIVEN"}" }} }}'''
+        sovereign_tooltips += tooltip_type(f'bfl_sovereign_{kind}_tooltip', f'bfl_sovereign_{kind}_heading', 'bfl_sovereign_accounts_subtitle', 'debt', content)
+    sovereign_accounts = f'''vbox = {{ spacing = 2 margin = {{ 10 0 }} layoutpolicy_horizontal = expanding
+        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        tooltip = "bfl_sovereign_accounts_tip"
+        text_single = {{ text = "bfl_sovereign_accounts" autoresize = yes fontsize = 11 }}
+        hbox = {{ layoutpolicy_horizontal = expanding spacing = 12
+            vbox = {{ spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = {{ bfl_sovereign_debt_tooltip = {{ }} }}
+                text_single = {{ text = "bfl_sovereign_debt" autoresize = yes fontsize = 12 }}
+                text_single = {{ raw_text = "[GetPlayer.GetEconomy.GetTotalDebt|2]@gold! (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)" autoresize = yes fontsize = 12 }} }}
+            expand = {{ }}
+            vbox = {{ spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = {{ bfl_sovereign_receivables_tooltip = {{ }} }}
+                text_single = {{ text = "bfl_sovereign_receivables" autoresize = yes fontsize = 12 }}
+                text_single = {{ raw_text = "[CreditLateralView.GetTotalLoansGiven|2]@gold! ([CreditLateralView.GetTotalLoansGivenMonthlyCost|2+=]@income!)" autoresize = yes fontsize = 12 }} }} }} }}'''
     native_stats=f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 14 margin = {{ 10 0 }}
         hbox = {{ spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = {{ using = CreditworthinessTooltip }}
             {icon('collateral',18)} text_single = {{ text = "bfl_state_credit_value" autoresize = yes fontsize = 12 }} }}
@@ -271,8 +311,9 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     }}'''
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
         {balance_types}
-        type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} }}
-        type bfl_credit_overview = widget {{ size = {{ -1 300 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
+        {sovereign_tooltips}
+        type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} {sovereign_accounts} }}
+        type bfl_credit_overview = widget {{ size = {{ -1 350 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
             background = {{ texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }}
             {contexts('bfl_bank_overview')}
         }}
@@ -292,6 +333,14 @@ def build_credit(game, baseline, pin=False):
     at=source.index('\nlateralview = {')+1
     templates,view=source[:at],source[at:]
     changes=[]
+    header_anchor = '\t\t\twidget = {\n\t\t\t\tlayoutpolicy_horizontal = expanding\n\t\t\t\tlayoutpolicy_vertical = fixed\n\t\t\t\tsize = { -1 50 }'
+    header_start = view.index(header_anchor)
+    header_end = balanced_block(view, view.index('{', header_start))
+    original = view[header_start:header_end]
+    charter_view = "GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)"
+    replacement = original.replace('size = { -1 50 }', f'size = {{ -1 50 }}\n visible = "[Not({charter_view})]"', 1)
+    changes.append((original, replacement))
+    view = view[:header_start] + replacement + view[header_end:]
     # Replace only the illustrated overview for managed banks. State debt totals,
     # borrowing actions, native loan lists and their original actor bindings remain.
     anchor='\t\t\twidget = {\n\t\t\t\tlayoutpolicy_horizontal = expanding\n\t\t\t\tlayoutpolicy_vertical = fixed\n\t\t\t\tsize = { -1 220 }'

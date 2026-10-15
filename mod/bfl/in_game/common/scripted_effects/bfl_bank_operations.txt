@@ -7,6 +7,7 @@ if = { limit = { bfl_period > var:bfl_last_expense_period var:bfl_state < 5 }
         set_variable = { name = bfl_expense_paid value = { value = var:bfl_expense_arrears max = bfl_free_cash } }
         add_gold = { value = var:bfl_expense_paid multiply = -1 }
         change_variable = { name = bfl_expense_arrears subtract = var:bfl_expense_paid }
+        bfl_record_expense_history = yes
     }
 }
 bfl_observe_bank_income = {

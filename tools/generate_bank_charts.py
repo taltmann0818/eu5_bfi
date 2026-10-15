@@ -73,6 +73,13 @@ def generate(common, effect, loc, write):
     for kind in ('cash',) + ASSET_TYPES:
         expression = 'gold' if kind == 'cash' else f'var:bfl_asset_{kind}'
         values += effect(f'bfl_asset_fraction_{kind}', f'value = 0 if = {{ limit = {{ bfl_assets > 0 }} value = {expression} divide = bfl_assets }}')
+    for kind in ASSET_TYPES:
+        listed = 'value = 0\n'
+        for index in range(1, 65):
+            listed += f'add = var:bfl_asset_{index:02}_{kind}\n'
+            values += effect(f'bfl_asset_row_fraction_{index:02}_{kind}', f'value = 0 if = {{ limit = {{ bfl_assets > 0 }} value = var:bfl_asset_{index:02}_{kind} divide = bfl_assets }}')
+        values += effect(f'bfl_asset_listed_{kind}', listed)
+        values += effect(f'bfl_asset_unlisted_{kind}', f'value = var:bfl_asset_{kind} subtract = bfl_asset_listed_{kind} min = 0')
     values += effect('bfl_state_share_fraction', 'value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_state_units divide = var:bfl_total_units }')
     for index in range(1, 17):
         values += effect(f'bfl_share_fraction_{index:02}', f'value = 0 if = {{ limit = {{ var:bfl_shr_{index:02}_active = 1 var:bfl_total_units > 0 }} value = var:bfl_shr_{index:02}_units divide = var:bfl_total_units }}')
@@ -83,46 +90,85 @@ def generate(common, effect, loc, write):
     loc('bfl_share_state_tip', "#T [Country.GetDiplomacy.GetOverlord.GetName]#!\\nOwned shares: [Country.MakeScope.GetVariable('bfl_state_units').GetValue|2] / [Country.MakeScope.GetVariable('bfl_total_units').GetValue|2]\\nOwnership: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2]\\nLast monthly dividend: [Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!")
     for index in range(1, 17):
         loc(f'bfl_share_{index:02}_tip', f"#T [Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetName]#!\\nShares: [Country.MakeScope.GetVariable('bfl_shr_{index:02}_units').GetValue|2]\\nOwnership: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_{index:02}')|%2]")
-    tooltips = ''
+    from generate_finance_widgets import list_block, row, scroll_rows, tooltip_type
+
+    loc('bfl_share_title', 'Share ownership of [Country.GetName]')
+    loc('bfl_share_subtitle', 'Outstanding bank equity')
+    loc('bfl_share_legend_title', "[Country.MakeScope.GetVariable('bfl_total_units').GetValue|2] shares outstanding")
+    share_rows = row('[Country.GetDiplomacy.GetOverlord.GetName]',
+                     "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_state_units').GetValue|2])", 0,
+                     '''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]"''',
+                     '"[Country.GetDiplomacy.GetOverlord.GetMapColor]"')
+    for index in range(1, 17):
+        share_rows += row(f"[Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetName]",
+                          f"[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_{index:02}')|%2] ([Country.MakeScope.GetVariable('bfl_shr_{index:02}_units').GetValue|2])", index,
+                          f'''visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_{index:02}_active').GetValue, '(CFixedPoint)1')]"''',
+                          f'''"[Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetMapColor]"''')
+    loc('bfl_share_legend_footer', "Ownership percentage (owned shares). Country colors match the ring. Last sovereign dividend: [Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!")
+    share_content = list_block('bfl_share_legend_title', scroll_rows(share_rows))
+    share_content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_share_legend_footer" } }'
+    tooltips = tooltip_type('bfl_share_ownership_tooltip', 'bfl_share_title', 'bfl_share_subtitle', 'subscribe', share_content)
+    loc('bfl_asset_subtitle', 'Asset type and counterparty')
+    loc('bfl_asset_legend_footer', 'Outer ring: asset types. Inner ring and colored keys: countries/banks. Percentages are shares of total bank assets; amounts are carrying values.')
+    loc('bfl_asset_unlisted', 'Other / unlisted counterparties')
     for kind in ('cash',) + ASSET_TYPES:
         title = {'cash': 'Treasury cash', 'bonds': 'Bonds', 'unsecured': 'Unsecured loans', 'secured': 'Secured loans', 'commodities': 'Commodities', 'investments': 'Equity & ventures'}[kind]
         loc(f'bfl_asset_{kind}_title', title)
         loc(f'bfl_asset_{kind}_summary', f"{title}: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_fraction_{kind}')|%2]")
+        loc(f'bfl_asset_{kind}_heading', f'{title} of [Country.GetName]')
         rows = ''
         if kind == 'cash':
-            rows = 'text_single = { raw_text = "[Country.GetName]: [Country.GetFixedPointCurrencyValue(\'gold\')|2]@gold!" autoresize = yes }'
+            rows = row('[Country.GetName]', "[Country.GetFixedPointCurrencyValue('gold')|2]@gold!", color='"[Country.GetMapColor]"')
         else:
             for index in range(1, 65):
-                rows += f'''hbox = {{ visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_{index:02}_{kind}').GetValue, '(CFixedPoint)0')]"
-                    size = {{ -1 24 }} layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 15
-                    text_single = {{ raw_text = "[Country.MakeScope.GetVariable('bfl_asset_{index:02}_party').GetCountry.GetName]" autoresize = yes }}
-                    expand = {{ }} text_single = {{ raw_text = "[Country.MakeScope.GetVariable('bfl_asset_{index:02}_{kind}').GetValue|2]@gold!" autoresize = yes }} }}\n'''
-        tooltips += f'''type bfl_asset_{kind}_tooltip = ContextualTooltipTypeBase {{ vbox = {{ set_parent_size_to_minimum = yes margin = {{ 12 10 }} spacing = 6
-            text_single = {{ text = "bfl_asset_{kind}_summary" autoresize = yes }}
-            scrollarea = {{ size = {{ 350 0 }} maximumsize = {{ 350 250 }} autoresizescrollarea = yes autoresizeviewport = yes scrollbarpolicy_horizontal = always_off
-                scrollbar_vertical = {{ using = Scrollbar_Vertical_Tooltips }} scrollwidget = {{ vbox = {{ set_parent_dimension_to_minimum = height ignoreinvisible = yes layoutpolicy_vertical = shrinking spacing = 4 {rows} }} }} }} }} }}\n'''
+                rows += row(f"[Country.MakeScope.GetVariable('bfl_asset_{index:02}_party').GetCountry.GetName]",
+                            f"[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_row_fraction_{index:02}_{kind}')|%2] ([Country.MakeScope.GetVariable('bfl_asset_{index:02}_{kind}').GetValue|2]@gold!)", index,
+                            f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_{index:02}_{kind}').GetValue, '(CFixedPoint)0')]"''',
+                            f'''"[Country.MakeScope.GetVariable('bfl_asset_{index:02}_party').GetCountry.GetMapColor]"''')
+            rows += row("[Localize('bfl_asset_unlisted')]", f"[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_{kind}')|2]@gold!", 0,
+                        f'''visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_{kind}'), '(CFixedPoint)0')]"''', '{ ' + COLORS[kind] + ' }')
+        content = list_block(f'bfl_asset_{kind}_summary', scroll_rows(rows))
+        content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_asset_legend_footer" } }'
+        tooltips += tooltip_type(f'bfl_asset_{kind}_tooltip', f'bfl_asset_{kind}_heading', 'bfl_asset_subtitle', 'accounts', content)
     write('in_game/gui/bfl_bank_chart_tooltips.gui', 'types BFLBankChartTooltips {\n' + tooltips + '}')
 
 
 def charts(var, value):
     shares = f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
         value = "[FixedPointToFloat({var('state_units')})]" color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]"
-        visible = "[GreaterThan_CFixedPoint({var('state_units')}, '(CFixedPoint)0')]" tooltip = "bfl_share_state_tip" }}'''
+        visible = "[GreaterThan_CFixedPoint({var('state_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
     for index in range(1, 17):
         shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat({var(f'shr_{index:02}_units')})]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetMapColor]"
-            visible = "[EqualTo_CFixedPoint({var(f'shr_{index:02}_active')}, '(CFixedPoint)1')]" tooltip = "bfl_share_{index:02}_tip" }}'''
+            visible = "[EqualTo_CFixedPoint({var(f'shr_{index:02}_active')}, '(CFixedPoint)1')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
     assets = ''
+    counterparties = ''
     for kind, color in COLORS.items():
         expression = "Country.GetFixedPointCurrencyValue('gold')" if kind == 'cash' else var('asset_' + kind)
         assets += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat({expression})]" color = {{ {color} }}
             tooltipwidget = {{ bfl_asset_{kind}_tooltip = {{ }} }} }}'''
-    def donut(title, slices, art):
+        if kind == 'cash':
+            counterparties += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat({expression})]" color = "[Country.GetMapColor]"
+                tooltipwidget = {{ bfl_asset_cash_tooltip = {{ }} }} }}'''
+        else:
+            for index in range(1, 65):
+                counterparties += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                    visible = "[GreaterThan_CFixedPoint({var(f'asset_{index:02}_{kind}')}, '(CFixedPoint)0')]"
+                    value = "[FixedPointToFloat({var(f'asset_{index:02}_{kind}')})]"
+                    color = "[Country.MakeScope.GetVariable('bfl_asset_{index:02}_party').GetCountry.GetMapColor]"
+                    tooltipwidget = {{ bfl_asset_{kind}_tooltip = {{ }} }} }}'''
+            counterparties += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+                value = "[FixedPointToFloat({value('asset_unlisted_' + kind)})]" color = {{ {color} }}
+                tooltipwidget = {{ bfl_asset_{kind}_tooltip = {{ }} }} }}'''
+    def donut(title, slices, art, inner=''):
         return f'''vbox = {{ size = {{ 114 145 }} spacing = 5
             text_single = {{ text = "{title}" autoresize = yes fontsize = 13 }}
             piechart = {{ name = "{title}_donut" size = {{ 100 100 }} using = piechart_angles using = bg_circle_piechart_big
                 {slices}
-                icon = {{ size = {{ 38 38 }} parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/{art}.dds" }} }} }}'''
-    return f'hbox = {{ spacing = 6 {donut("bfl_share_ownership", shares, "subscribe")} {donut("bfl_asset_mix", assets, "accounts")} }}'
+                {inner}
+                icon = {{ size = {{ 30 30 }} parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/{art}.dds" }} }} }}'''
+    inner = f'piechart = {{ name = "bfl_asset_counterparties_ring" size = {{ 70 70 }} parentanchor = center using = piechart_angles {counterparties} }}'
+    return f'hbox = {{ spacing = 6 {donut("bfl_share_ownership", shares, "subscribe")} {donut("bfl_asset_mix", assets, "accounts", inner)} }}'

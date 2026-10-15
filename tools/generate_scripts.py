@@ -170,7 +170,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = {
@@ -279,7 +279,7 @@ def charter():
     bfl_state_chartered_bank = {
         major = no
         potential = { country_type = location any_subject = { is_subject_type = bfl_chartered_bank } }
-        allow = { always = no }
+        allow = { has_reform = government_reform:bfl_state_chartered_bank }
         locked = { always = yes }
         country_modifier = { bank_interest = -0.005 max_bonds_modifier = 0.33 }
         years = 2

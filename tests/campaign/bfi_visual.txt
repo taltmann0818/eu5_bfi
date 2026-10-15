@@ -9,6 +9,7 @@ c:BRD = {
     every_lent_loan = { cancel_loan = this }
     remove_variable = bfl_schema
     remove_variable = bfl_accounts_revision
+    remove_variable = bfl_expense_history_count
     make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
     set_gold = 1000
     bfl_initialize_bank = yes

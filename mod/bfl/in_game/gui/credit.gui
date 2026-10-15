@@ -238,6 +238,7 @@ lateralview = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = fixed
 				size = { -1 50 }
+ visible = "[Not(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 				hbox = {
 					layoutpolicy_horizontal = expanding

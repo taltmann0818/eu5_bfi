@@ -35,6 +35,7 @@ def fixture(token, fingerprint):
     def reset():
         return '''every_lent_loan = { cancel_loan = this }
             remove_variable = bfl_schema remove_variable = bfl_accounts_revision
+            remove_variable = bfl_expense_history_count
             bfl_initialize_bank = yes
             set_variable = { name = bfl_profile value = 1 }
             set_variable = { name = bfl_accept_deposits value = 1 }
@@ -145,6 +146,9 @@ def fixture(token, fingerprint):
     start += 'bfl_settle_operating_expenses = yes\n'
     start += check('fixed_operating_cost_idempotent','gold = 999.05 var:bfl_loss_carryforward = 0.95')
     start += check('expense_tooltip_matches_assessment', 'bfl_operating_base_cost = 1 bfl_operating_accounts_count = 0 bfl_operating_accounts_cost = 0 bfl_operating_contracts_cost = 0 bfl_operating_branches_cost = 0 bfl_operating_asset_types_count = 0 bfl_operating_complexity = 1 bfl_operating_reduction_charter = 0.05 bfl_operating_total_reduction = 0.05 bfl_operating_expense = var:bfl_expense_due')
+    start += check('expense_history_records_actual_assessment', 'var:bfl_expense_history_count = 1 var:bfl_expense_history_12 = var:bfl_expense_due var:bfl_expense_history_period = bfl_period')
+    start += 'bfl_record_expense_history = yes bfl_initialize_expense_history = yes\n'
+    start += check('expense_history_replay_and_load_initialization_safe', 'var:bfl_expense_history_count = 1 var:bfl_expense_history_12 = 0.95')
     start += 'set_variable = { name = bfl_profit_services value = 100.95 } bfl_settle_dividends = yes\n'
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
@@ -213,11 +217,13 @@ def fixture(token, fingerprint):
     instant_cases = list(cases)
     finish = 'c:BRD = {\n bfl_process_accounts = yes\n'
     finish += check('twelve_calendar_months', 'bfl_period = var:bfi_test_target_period')
+    finish += check('charter_reform_preserves_credit_access', 'c:FLO = { has_reform = government_reform:bfl_state_chartered_bank bfl_has_management = yes }')
     finish += check('natural_monthly_hook', 'var:bfl_last_period = bfl_period var:bfl_dep_01_interest_due = 0 var:bfl_dep_01_remainder = 0')
     # Research ownership is immediate; native modifier caches update after the tick.
     finish += check('native_banking_includes_term_and_capital', 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }')
     finish += check('banking_injection_preserves_native_bonds', 'c:FLO = { modifier:can_sell_bonds = yes }')
     finish += check('history_twelve_settlements', 'var:bfl_history_count = 12 var:bfl_history_period_12 = bfl_period var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities')
+    finish += check('expense_history_twelve_actual_settlements', 'var:bfl_expense_history_count = 12 var:bfl_expense_history_period = bfl_period var:bfl_expense_history_12 = var:bfl_expense_due bfl_expense_chart_max > var:bfl_expense_history_12')
     finish += check('persistent_schema_and_owner', 'var:bfl_schema = 1 var:bfi_test_sentinel = 731 var:bfl_dep_01_party = c:FLO bfl_has_valid_controller = yes')
     finish += 'set_variable = { name = bfi_test_interest_before value = var:bfl_dep_01_interest_due } bfl_process_accounts = yes\n'
     finish += check('same_month_after_campaign_no_double_charge', 'var:bfl_dep_01_interest_due = var:bfi_test_interest_before')
@@ -246,6 +252,7 @@ def reload_fixture(token, fingerprint):
         'reload_profile_and_rate': 'var:bfl_profile = 1 var:bfl_dep_01_annual_rate = 0.02',
         'reload_live_controller': 'bfl_has_valid_controller = yes',
         'reload_native_banking_unlocks': 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }',
+        'reload_expense_history': 'var:bfl_expense_history_count > 0 var:bfl_expense_history_12 > 0 var:bfl_expense_history_period <= bfl_period',
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'
     for name, condition in checks.items():

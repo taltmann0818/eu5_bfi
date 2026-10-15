@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "token": "60b0e3e0d89643e7bb40e797bd757b64",
-  "runtime_sha256": "6355a50672e435c05b6265a3e503c6623aac7732e5cd575216a0d60ef5290d39",
+  "token": "215291752edf4f57885e85f38718f415",
+  "runtime_sha256": "f2b0d49b27c39a312bb2a163276bb1326990326383580435612df076452b16ca",
   "results": {
     "florence_exists": "PASS",
     "native_bardi_bank": "PASS",
@@ -48,6 +48,8 @@
     "fixed_operating_cost_funded": "PASS",
     "fixed_operating_cost_idempotent": "PASS",
     "expense_tooltip_matches_assessment": "PASS",
+    "expense_history_records_actual_assessment": "PASS",
+    "expense_history_replay_and_load_initialization_safe": "PASS",
     "dividend_offsets_loss_and_ownership": "PASS",
     "balance_state_dividend_is_funded": "PASS",
     "recapitalization_funded": "PASS",
@@ -65,10 +67,12 @@
     "banking_keeps_renaissance_age_gate": "PASS",
     "campaign_fixture_ready": "PASS",
     "twelve_calendar_months": "PASS",
+    "charter_reform_preserves_credit_access": "PASS",
     "natural_monthly_hook": "PASS",
     "native_banking_includes_term_and_capital": "PASS",
     "banking_injection_preserves_native_bonds": "PASS",
     "history_twelve_settlements": "PASS",
+    "expense_history_twelve_actual_settlements": "PASS",
     "persistent_schema_and_owner": "PASS",
     "same_month_after_campaign_no_double_charge": "PASS",
     "mature_claim_paid": "PASS",
@@ -79,6 +83,7 @@
     "reload_profile_and_rate": "PASS",
     "reload_live_controller": "PASS",
     "reload_native_banking_unlocks": "PASS",
+    "reload_expense_history": "PASS",
     "reload_month_idempotent": "PASS"
   },
   "errors": [],
@@ -87,8 +92,8 @@
   "steam_build": "25905365",
   "cmf_version": "2.5.0",
   "mode": "Fresh Florence campaign; twelve monthly settlements; second-process autosave reload",
-  "offline_tests_passed": 49,
-  "engine_assertions_passed": 77,
-  "visual_review": "Actual native Credit overview, ownership and asset hover tooltips, live operating expense breakdown, Balance income, and Take over loan tooltip/selector; disposable funded Florence fixture",
+  "offline_tests_passed": 53,
+  "engine_assertions_passed": 82,
+  "visual_review": "Actual native Credit overview with folded sovereign accounts; country-keyed ownership and asset legends; native expense tooltip with active green reductions and actual monthly history; Balance income and Take over loan tooltip; disposable funded Florence fixture",
   "screenshots": "docs/screenshots/README.md"
 }
