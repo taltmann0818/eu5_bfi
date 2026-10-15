@@ -7,6 +7,7 @@
 - Dividends earned by sovereign from shares are determined by monthly dividend payout ratio set by the sovereign in the Credit tab; monthly dividend payout to sovereign then gets calculated as number of shares owned by sovereign * ((total monthly chartered bank net income * payout ratio) / # shares outstanding)
 - The Bank should have fixed monthly operating expenses scaled by complexity of the bank; various reforms, advances, and decisions by sovereign can reduce this expense
 - Most automation shouldn't be needed because the bank will be taking actions as its own entity on its own like writing loans and building things to remain solvent.
+- Modify the functionality of the "Take over loan" button. The chartered bank should perform this action on their own to take over loans from other nations. But the player can also do this on their own by using this button. Once completed with another sovereign's loan, that loan should transfer the bank's balance sheet and interests payments as receivables to the bank not the sovereign. Make sure all the tooltips and information on the Credit screen reflect this.
 
 ## Future Content
 - Laws affecting the bank: usury, ...
