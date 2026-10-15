@@ -2,33 +2,37 @@
 age = age_2_renaissance
 icon = bfl_term_deposits
 bfl_enable_term_deposits = yes
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_bank_capital_subscriptions = {
 age = age_2_renaissance
 icon = bfl_bank_capital_subscriptions
 bfl_enable_bank_capital_subscriptions = yes
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_debt_restructuring = {
 age = age_2_renaissance
 icon = bfl_debt_restructuring
 bfl_enable_debt_restructuring = yes
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_commercial_bills = {
 age = age_2_renaissance
 icon = bfl_commercial_bills
 bfl_enable_commercial_bills = yes
+requires = banking_advance
 requires = bfl_term_deposits
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_commodity_investments = {
@@ -36,7 +40,7 @@ age = age_3_discovery
 icon = bfl_commodity_investments
 bfl_enable_commodity_investments = yes
 potential = { bfl_research_merchant = yes }
-allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_commenda = {
@@ -44,7 +48,7 @@ age = age_3_discovery
 icon = bfl_commenda
 bfl_enable_commenda = yes
 potential = { bfl_research_overseas = yes }
-allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_corporate_credit = {
@@ -53,7 +57,7 @@ icon = bfl_corporate_credit
 bfl_enable_corporate_credit = yes
 requires = bfl_debt_restructuring
 potential = { bfl_research_merchant = yes }
-allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_company_equity = {
@@ -62,7 +66,7 @@ icon = bfl_company_equity
 bfl_enable_company_equity = yes
 requires = bfl_commenda
 potential = { bfl_research_overseas = yes }
-allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_bank_share_dealing = {
@@ -71,7 +75,7 @@ icon = bfl_bank_share_dealing
 bfl_enable_bank_share_dealing = yes
 requires = bfl_bank_capital_subscriptions
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_collateralization = {
@@ -80,7 +84,7 @@ icon = bfl_collateralization
 bfl_enable_collateralization = yes
 requires = bfl_debt_restructuring
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_warehouse_receipts = {
@@ -90,7 +94,7 @@ bfl_enable_warehouse_receipts = yes
 requires = bfl_commodity_investments
 requires = bfl_collateralization
 potential = { bfl_research_merchant = yes }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_commodity_forwards = {
@@ -100,7 +104,7 @@ bfl_enable_commodity_forwards = yes
 requires = bfl_commodity_investments
 requires = bfl_collateralization
 potential = { bfl_research_merchant = yes }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_project_security = {
@@ -110,7 +114,7 @@ bfl_enable_project_security = yes
 requires = bfl_commenda
 requires = bfl_collateralization
 potential = { bfl_research_overseas = yes }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_sovereign_banknotes = {
@@ -119,7 +123,7 @@ icon = bfl_sovereign_banknotes
 bfl_enable_sovereign_banknotes = yes
 requires = bfl_commercial_bills
 potential = { bfl_is_research_owner = yes country_type = location has_reform = government_reform:bfl_state_chartered_bank }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_liquidity_facilities = {
@@ -128,7 +132,7 @@ icon = bfl_liquidity_facilities
 bfl_enable_liquidity_facilities = yes
 requires = bfl_collateralization
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_advanced_clearing = {
@@ -137,7 +141,7 @@ icon = bfl_advanced_clearing
 bfl_enable_advanced_clearing = yes
 requires = bfl_liquidity_facilities
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_margining_and_risk_management = {
@@ -146,7 +150,7 @@ icon = bfl_margining_and_risk_management
 bfl_enable_margining_and_risk_management = yes
 requires = bfl_commodity_forwards
 potential = { bfl_research_merchant = yes }
-allow = { OR = { current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
 bfl_public_financial_backstops = {
@@ -156,6 +160,6 @@ bfl_enable_public_financial_backstops = yes
 requires = bfl_sovereign_banknotes
 requires = bfl_liquidity_facilities
 potential = { bfl_is_research_owner = yes country_type = location has_reform = government_reform:bfl_state_chartered_bank }
-allow = { OR = { current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_6_revolutions }  }
 ai_weight = { add = 1 }
 }
