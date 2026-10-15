@@ -51,6 +51,8 @@ def fixture(token, fingerprint):
     start += check('schema_initialized', 'var:bfl_schema = 1 bfl_deposit_liabilities = 0')
     start += 'set_variable = { name = bfl_paid_in_capital value = 777 } bfl_initialize_bank = yes\n'
     start += check('initialization_idempotent', 'var:bfl_paid_in_capital = 777')
+    start += 'remove_variable = bfl_state_dividend_paid bfl_initialize_bank = yes\n'
+    start += check('legacy_bank_gets_state_dividend_field','var:bfl_state_dividend_paid = 0 var:bfl_paid_in_capital = 777')
     start += check('demand_permission', 'bfl_can_originate_demand_deposit = yes')
     start += check('term_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes }')
     start += check('bill_age_gate', 'NOT = { bfl_can_originate_commercial_bill = yes }')
@@ -62,8 +64,11 @@ def fixture(token, fingerprint):
     start += check('foreign_withdrawal_rejected', 'gold = 1100 var:bfl_dep_01_principal = 100')
     start += 'c:FLO = { save_scope_as = bfl_party } bfl_process_accounts = yes\n'
     start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0.08 var:bfl_dep_01_remainder = 0.04')
+    start += check('history_records_actual_accounts', 'var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities var:bfl_history_period_12 = bfl_period')
+    start += 'set_variable = { name = bfi_test_history_before value = var:bfl_history_count }\n'
     start += 'bfl_process_accounts = yes\n'
     start += check('monthly_idempotent', 'var:bfl_dep_01_interest_due = 0.08')
+    start += check('history_same_month_idempotent', 'var:bfl_history_count = var:bfi_test_history_before')
     start += 'set_variable = { name = bfl_demand_rate value = 0.02 } bfl_open_deposit = yes\n'
     start += check('accepted_rate_fixed', 'var:bfl_dep_01_annual_rate = 0.01 var:bfl_dep_02_annual_rate = 0.02')
     start += 'bfl_request_all_withdrawals = yes\n'
@@ -103,6 +108,13 @@ def fixture(token, fingerprint):
     make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
     '''
     start += check('live_charter_authority', 'bfl_has_valid_controller = yes')
+    for input_value, expected in [(-10,0),(2,2),(99,4)]:
+        start += f'c:FLO = {{ save_scope_value_as = {{ name = bfl_royalty_input value = {input_value} }} bfl_apply_royalty_input = yes }}\n'
+        start += check(f'royalty_input_{expected}', f'var:bfl_royalty_tier = {expected}')
+        if expected:
+            start += check(f'royalty_input_political_cost_{expected}',f'c:FLO = {{ has_country_modifier = bfl_royalty_sovereign_{expected} }} has_country_modifier = bfl_royalty_bank_{expected}')
+    start += 'c:PRZ = { save_scope_value_as = { name = bfl_royalty_input value = 0 } bfl_apply_royalty_input = yes }\n'
+    start += check('royalty_input_foreign_country_rejected','var:bfl_royalty_tier = 4')
     start += '''set_variable = { name = bfl_state_units value = 500 }
         set_variable = { name = bfl_opening_productive_assets value = 1200 }
         set_variable = { name = bfl_royalty_tier value = 3 }
@@ -111,8 +123,23 @@ def fixture(token, fingerprint):
     start += check('royalty_funded_transfer', 'var:bfl_royalty_paid = 1 gold = 999 c:FLO = { gold = 1001 } var:bfl_loss_carryforward = 1')
     start += 'set_variable = { name = bfl_profit_services value = 101 } bfl_settle_dividends = yes\n'
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.5 c:FLO = { gold = 1013.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 87.5')
+    start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
     start += 'bfl_recapitalize = yes\n'
     start += check('recapitalization_funded', 'gold = 1086.5 c:FLO = { gold = 913.5 } var:bfl_state_units = 600 var:bfl_total_units = 1100 var:bfl_profit_services = 87.5')
+    start += '''set_variable = { name = bfl_total_units value = 1000 }
+        set_variable = { name = bfl_state_units value = 500 }
+        set_variable = { name = bfl_shr_01_active value = 1 }
+        set_variable = { name = bfl_shr_01_party value = c:PRZ }
+        set_variable = { name = bfl_shr_01_units value = 250 }
+        set_variable = { name = bfl_profit_services value = 100 }
+        bfl_settle_dividends = yes
+    '''
+    start += check('balance_dividend_excludes_other_holders', 'var:bfl_state_dividend_paid = 12.5 var:bfl_dividend_paid = 18.75')
+    start += reset() + '''set_gold = 50 set_variable = { name = bfl_notes_outstanding value = 200 }
+        remove_variable = bfl_history_count bfl_initialize_history = yes bfl_record_history = yes
+    '''
+    start += check('history_negative_equity_domain', 'bfl_chart_min = -150 bfl_chart_max = 200 bfl_chart_range = 350 bfl_chart_equity_y_12 = 160 bfl_chart_debt_y_12 = 0')
+    start += reset() + 'remove_variable = bfl_history_count bfl_initialize_history = yes\n'
     # Keep the charter fixture for the natural monthly and persistence checks.
     start += reset() + '''c:FLO = { set_gold = 1000 save_scope_as = bfl_party }
         set_variable = { name = bfl_product value = 1 }
@@ -130,6 +157,7 @@ def fixture(token, fingerprint):
     finish = 'c:BRD = {\n bfl_process_accounts = yes\n'
     finish += check('twelve_calendar_months', 'bfl_period = var:bfi_test_target_period')
     finish += check('natural_monthly_hook', 'var:bfl_last_period = bfl_period var:bfl_dep_01_interest_due = 1 var:bfl_dep_01_remainder = 0')
+    finish += check('history_twelve_settlements', 'var:bfl_history_count = 12 var:bfl_history_period_12 = bfl_period var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities')
     finish += check('persistent_schema_and_owner', 'var:bfl_schema = 1 var:bfi_test_sentinel = 731 var:bfl_dep_01_party = c:FLO bfl_has_valid_controller = yes')
     finish += 'set_variable = { name = bfi_test_interest_before value = var:bfl_dep_01_interest_due } bfl_process_accounts = yes\n'
     finish += check('same_month_after_campaign_no_double_charge', 'var:bfl_dep_01_interest_due = var:bfi_test_interest_before')
@@ -271,7 +299,12 @@ def collect(log, manifest, error_log=''):
     # Native beta diagnostics are kept local. Fail on errors attributed to BFI or its overlay.
     # Unused-variable warnings are not runtime errors and do not match these expressions.
     for line in error_log.splitlines():
-        if re.search(r'(Error at|Unknown|Invalid|Failed|[Ee]rror:).*\b(?:bfl_|bfi_)', line):
+        # Missing optional notification settings do not prevent an interaction.
+        # Keep these diagnostics in the full local log, separately from logic errors.
+        if 'message_handler' in line and 'Failed to find message type:' in line:
+            continue
+        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|Error:|returned nullptr|already registered)', line, re.I)
+                and re.search(r'(?:bfl_|bfi_|gui/(?:credit|economy_lateralview|technology_lateralview)\.gui)',line)):
             errors.append(line.split(']: ', 1)[-1])
     for block in re.findall(r'Script system error![\s\S]*?(?=\n\[|\Z)', error_log):
         if re.search(r'(?:bfl_|bfi_)', block):

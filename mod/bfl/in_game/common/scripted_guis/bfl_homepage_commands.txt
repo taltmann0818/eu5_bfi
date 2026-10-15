@@ -1,0 +1,19 @@
+﻿bfl_buy_bill = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_commercial_bill = yes bfl_has_contract_capacity = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_commercial_bill = yes bfl_has_contract_capacity = yes var:bfl_accept_deposits = 1 } }
+            save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_issue_funded_bill = yes } } } }
+bfl_buy_capital = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_bank_subscription = yes bfl_has_shareholder_capacity = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_bank_subscription = yes bfl_has_shareholder_capacity = yes var:bfl_accept_deposits = 1 } }
+            save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_subscribe_bank_capital = yes } } } }
+bfl_royalty_down = { scope = country is_shown = { bfl_has_management = yes country_type = location }
+            is_valid = { bfl_has_management = yes country_type = location var:bfl_bank = { var:bfl_royalty_tier > 0 } } effect = { if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank = { var:bfl_royalty_tier > 0 } } bfl_resolve_command_bank = yes
+            scope:bfl_bank = { change_variable = { name = bfl_royalty_tier add = -1 }
+            change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes } } } }
+bfl_royalty_up = { scope = country is_shown = { bfl_has_management = yes country_type = location }
+            is_valid = { bfl_has_management = yes country_type = location var:bfl_bank = { var:bfl_royalty_tier < 4 } } effect = { if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank = { var:bfl_royalty_tier < 4 } } bfl_resolve_command_bank = yes
+            scope:bfl_bank = { change_variable = { name = bfl_royalty_tier add = 1 }
+            change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes } } } }
+bfl_apply_royalty_slider = { scope = country saved_scopes = { bfl_royalty_input }
+        is_shown = { bfl_has_management = yes country_type = location }
+        is_valid = { bfl_has_management = yes country_type = location exists = scope:bfl_royalty_input }
+        effect = { bfl_apply_royalty_input = yes }
+    }

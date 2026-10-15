@@ -14,6 +14,7 @@
     }
     bfl_settle_dividends = {
 set_variable = { name = bfl_dividend_paid value = 0 }
+    set_variable = { name = bfl_state_dividend_paid value = 0 }
     if = { limit = { bfl_is_bank = yes var:bfl_state < 2 var:bfl_total_units > 0 }
         save_scope_as = bfl_bank
         bfl_offset_losses = yes
@@ -27,6 +28,7 @@ set_variable = { name = bfl_dividend_paid value = 0 }
             add_gold = bfl_negative_payment
             overlord = { add_gold = scope:bfl_bank.var:bfl_payment }
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
+            set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }
     if = { limit = { var:bfl_shr_01_active = 1 exists = var:bfl_shr_01_party }
             set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_01_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }

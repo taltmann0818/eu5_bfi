@@ -53,8 +53,24 @@ class CampaignEvidenceTests(unittest.TestCase):
         diagnostic = '[time][jomini_script_system.cpp:256]: Script system error!\n  Error: Invalid left side\n  Script location: common/scripted_effects/bfl_deposits.txt:4\n'
         self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
 
+    def test_lowercase_gui_callback_error_fails_campaign(self):
+        diagnostic = '[time][pdx_gui_script_system.cpp:62]: failed reading callback at gui/bfl_economy_finance.gui:22'
+        self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
+
+    def test_overridden_native_gui_template_conflict_fails_campaign(self):
+        diagnostic = "[time][pdx_gui_factory.cpp:2108]: gui/technology_lateralview.gui:148 - Template 'unlock_icon' is already registered"
+        self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
+
+    def test_null_widget_binding_fails_campaign(self):
+        diagnostic = "[time][pdx_data_callstack.cpp:67]: Promote 'FindChild' returned nullptr, in 'bfl_royalty_thumb'"
+        self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
+
     def test_native_beta_warning_is_separate(self):
         diagnostic = '[time][native.cpp:62]: Error at common/cabinet_actions/frustrate_annexation.txt:20'
+        self.assertTrue(collect(self.log(), self.manifest, diagnostic)['passed'])
+
+    def test_missing_optional_notification_is_separate(self):
+        diagnostic = '[time][message_handler.cpp:62]: Failed to find message type: WE_PERFORM_bfl_place_deposit_1_ACTION.'
         self.assertTrue(collect(self.log(), self.manifest, diagnostic)['passed'])
 
     def test_missing_reload_cannot_pass(self):

@@ -1,3 +1,5 @@
 path,reason,source_sha256,game_version
-in_game/gui/economy_lateralview.gui,Insert finance inside native Economy; extract native types exactly once,675763819de9c0f368761dec5d01541553c78d9a9e25ea68135a5667bb2d621d,1.4.1
+in_game/gui/economy_lateralview.gui,Add three funded bank income rows after Trade Income; preserve native Balance controls and shared types once,675763819de9c0f368761dec5d01541553c78d9a9e25ea68135a5667bb2d621d,1.4.1
 in_game/common/country_interactions/siphon_income.txt,Exclude chartered bank at selection and execution; preserve every other native branch,2527ac28a5709b1d125a6e5f8314f173ad72e7abffb6c992f4aebb86b02141fd,1.4.1
+in_game/gui/credit.gui,Unify bank accounts and native state loans under Funding and Debt / Lending and Investments; native loan actors and templates retained,9e53368c3fda0e0d3a37654565d7acf24f3c770361029988199fea0daaa010a6,1.4.1
+in_game/gui/technology_lateralview.gui,Use the chartered-bank reform badge for BFI advances; retain all other native advance badges,266056e24bc159e77de1e37408b97dff834548debb99429449325b4ff419ece8,1.4.1

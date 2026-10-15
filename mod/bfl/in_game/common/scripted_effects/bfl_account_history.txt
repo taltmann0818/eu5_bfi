@@ -1,0 +1,82 @@
+﻿bfl_initialize_history = {
+if = { limit = { NOT = { has_variable = bfl_history_count } } set_variable = { name = bfl_history_count value = 0 }
+set_variable = { name = bfl_history_equity_01 value = 0 }
+set_variable = { name = bfl_history_debt_01 value = 0 }
+set_variable = { name = bfl_history_period_01 value = 0 }
+set_variable = { name = bfl_history_equity_02 value = 0 }
+set_variable = { name = bfl_history_debt_02 value = 0 }
+set_variable = { name = bfl_history_period_02 value = 0 }
+set_variable = { name = bfl_history_equity_03 value = 0 }
+set_variable = { name = bfl_history_debt_03 value = 0 }
+set_variable = { name = bfl_history_period_03 value = 0 }
+set_variable = { name = bfl_history_equity_04 value = 0 }
+set_variable = { name = bfl_history_debt_04 value = 0 }
+set_variable = { name = bfl_history_period_04 value = 0 }
+set_variable = { name = bfl_history_equity_05 value = 0 }
+set_variable = { name = bfl_history_debt_05 value = 0 }
+set_variable = { name = bfl_history_period_05 value = 0 }
+set_variable = { name = bfl_history_equity_06 value = 0 }
+set_variable = { name = bfl_history_debt_06 value = 0 }
+set_variable = { name = bfl_history_period_06 value = 0 }
+set_variable = { name = bfl_history_equity_07 value = 0 }
+set_variable = { name = bfl_history_debt_07 value = 0 }
+set_variable = { name = bfl_history_period_07 value = 0 }
+set_variable = { name = bfl_history_equity_08 value = 0 }
+set_variable = { name = bfl_history_debt_08 value = 0 }
+set_variable = { name = bfl_history_period_08 value = 0 }
+set_variable = { name = bfl_history_equity_09 value = 0 }
+set_variable = { name = bfl_history_debt_09 value = 0 }
+set_variable = { name = bfl_history_period_09 value = 0 }
+set_variable = { name = bfl_history_equity_10 value = 0 }
+set_variable = { name = bfl_history_debt_10 value = 0 }
+set_variable = { name = bfl_history_period_10 value = 0 }
+set_variable = { name = bfl_history_equity_11 value = 0 }
+set_variable = { name = bfl_history_debt_11 value = 0 }
+set_variable = { name = bfl_history_period_11 value = 0 }
+set_variable = { name = bfl_history_equity_12 value = 0 }
+set_variable = { name = bfl_history_debt_12 value = 0 }
+set_variable = { name = bfl_history_period_12 value = 0 }
+}
+if = { limit = { NOT = { has_variable = bfl_state_dividend_paid } } set_variable = { name = bfl_state_dividend_paid value = 0 } }
+}
+bfl_record_history = {
+bfl_initialize_history = yes
+set_variable = { name = bfl_history_equity_01 value = var:bfl_history_equity_02 }
+set_variable = { name = bfl_history_debt_01 value = var:bfl_history_debt_02 }
+set_variable = { name = bfl_history_period_01 value = var:bfl_history_period_02 }
+set_variable = { name = bfl_history_equity_02 value = var:bfl_history_equity_03 }
+set_variable = { name = bfl_history_debt_02 value = var:bfl_history_debt_03 }
+set_variable = { name = bfl_history_period_02 value = var:bfl_history_period_03 }
+set_variable = { name = bfl_history_equity_03 value = var:bfl_history_equity_04 }
+set_variable = { name = bfl_history_debt_03 value = var:bfl_history_debt_04 }
+set_variable = { name = bfl_history_period_03 value = var:bfl_history_period_04 }
+set_variable = { name = bfl_history_equity_04 value = var:bfl_history_equity_05 }
+set_variable = { name = bfl_history_debt_04 value = var:bfl_history_debt_05 }
+set_variable = { name = bfl_history_period_04 value = var:bfl_history_period_05 }
+set_variable = { name = bfl_history_equity_05 value = var:bfl_history_equity_06 }
+set_variable = { name = bfl_history_debt_05 value = var:bfl_history_debt_06 }
+set_variable = { name = bfl_history_period_05 value = var:bfl_history_period_06 }
+set_variable = { name = bfl_history_equity_06 value = var:bfl_history_equity_07 }
+set_variable = { name = bfl_history_debt_06 value = var:bfl_history_debt_07 }
+set_variable = { name = bfl_history_period_06 value = var:bfl_history_period_07 }
+set_variable = { name = bfl_history_equity_07 value = var:bfl_history_equity_08 }
+set_variable = { name = bfl_history_debt_07 value = var:bfl_history_debt_08 }
+set_variable = { name = bfl_history_period_07 value = var:bfl_history_period_08 }
+set_variable = { name = bfl_history_equity_08 value = var:bfl_history_equity_09 }
+set_variable = { name = bfl_history_debt_08 value = var:bfl_history_debt_09 }
+set_variable = { name = bfl_history_period_08 value = var:bfl_history_period_09 }
+set_variable = { name = bfl_history_equity_09 value = var:bfl_history_equity_10 }
+set_variable = { name = bfl_history_debt_09 value = var:bfl_history_debt_10 }
+set_variable = { name = bfl_history_period_09 value = var:bfl_history_period_10 }
+set_variable = { name = bfl_history_equity_10 value = var:bfl_history_equity_11 }
+set_variable = { name = bfl_history_debt_10 value = var:bfl_history_debt_11 }
+set_variable = { name = bfl_history_period_10 value = var:bfl_history_period_11 }
+set_variable = { name = bfl_history_equity_11 value = var:bfl_history_equity_12 }
+set_variable = { name = bfl_history_debt_11 value = var:bfl_history_debt_12 }
+set_variable = { name = bfl_history_period_11 value = var:bfl_history_period_12 }
+set_variable = { name = bfl_history_equity_12 value = bfl_equity }
+set_variable = { name = bfl_history_debt_12 value = bfl_liabilities }
+set_variable = { name = bfl_history_period_12 value = bfl_period }
+change_variable = { name = bfl_history_count add = 1 }
+if = { limit = { var:bfl_history_count > 12 } set_variable = { name = bfl_history_count value = 12 } }
+}

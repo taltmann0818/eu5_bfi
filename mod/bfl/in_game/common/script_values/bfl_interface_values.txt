@@ -1,0 +1,227 @@
+﻿bfl_chart_max = {
+value = 1 min = var:bfl_history_equity_01 min = var:bfl_history_debt_01 min = var:bfl_history_equity_02 min = var:bfl_history_debt_02 min = var:bfl_history_equity_03 min = var:bfl_history_debt_03 min = var:bfl_history_equity_04 min = var:bfl_history_debt_04 min = var:bfl_history_equity_05 min = var:bfl_history_debt_05 min = var:bfl_history_equity_06 min = var:bfl_history_debt_06 min = var:bfl_history_equity_07 min = var:bfl_history_debt_07 min = var:bfl_history_equity_08 min = var:bfl_history_debt_08 min = var:bfl_history_equity_09 min = var:bfl_history_debt_09 min = var:bfl_history_equity_10 min = var:bfl_history_debt_10 min = var:bfl_history_equity_11 min = var:bfl_history_debt_11 min = var:bfl_history_equity_12 min = var:bfl_history_debt_12
+}
+bfl_chart_min = {
+value = 0 max = var:bfl_history_equity_01 max = var:bfl_history_debt_01 max = var:bfl_history_equity_02 max = var:bfl_history_debt_02 max = var:bfl_history_equity_03 max = var:bfl_history_debt_03 max = var:bfl_history_equity_04 max = var:bfl_history_debt_04 max = var:bfl_history_equity_05 max = var:bfl_history_debt_05 max = var:bfl_history_equity_06 max = var:bfl_history_debt_06 max = var:bfl_history_equity_07 max = var:bfl_history_debt_07 max = var:bfl_history_equity_08 max = var:bfl_history_debt_08 max = var:bfl_history_equity_09 max = var:bfl_history_debt_09 max = var:bfl_history_equity_10 max = var:bfl_history_debt_10 max = var:bfl_history_equity_11 max = var:bfl_history_debt_11 max = var:bfl_history_equity_12 max = var:bfl_history_debt_12
+}
+bfl_chart_range = {
+value = bfl_chart_max subtract = bfl_chart_min min = 1
+}
+bfl_chart_equity_y_01 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_01 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_01 = {
+value = bfl_chart_equity_y_01 max = bfl_chart_equity_y_02
+}
+bfl_chart_equity_height_01 = {
+value = bfl_chart_equity_y_01 min = bfl_chart_equity_y_02 subtract = bfl_chart_equity_top_01 min = 2
+}
+bfl_chart_equity_y_02 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_02 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_02 = {
+value = bfl_chart_equity_y_02 max = bfl_chart_equity_y_03
+}
+bfl_chart_equity_height_02 = {
+value = bfl_chart_equity_y_02 min = bfl_chart_equity_y_03 subtract = bfl_chart_equity_top_02 min = 2
+}
+bfl_chart_equity_y_03 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_03 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_03 = {
+value = bfl_chart_equity_y_03 max = bfl_chart_equity_y_04
+}
+bfl_chart_equity_height_03 = {
+value = bfl_chart_equity_y_03 min = bfl_chart_equity_y_04 subtract = bfl_chart_equity_top_03 min = 2
+}
+bfl_chart_equity_y_04 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_04 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_04 = {
+value = bfl_chart_equity_y_04 max = bfl_chart_equity_y_05
+}
+bfl_chart_equity_height_04 = {
+value = bfl_chart_equity_y_04 min = bfl_chart_equity_y_05 subtract = bfl_chart_equity_top_04 min = 2
+}
+bfl_chart_equity_y_05 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_05 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_05 = {
+value = bfl_chart_equity_y_05 max = bfl_chart_equity_y_06
+}
+bfl_chart_equity_height_05 = {
+value = bfl_chart_equity_y_05 min = bfl_chart_equity_y_06 subtract = bfl_chart_equity_top_05 min = 2
+}
+bfl_chart_equity_y_06 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_06 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_06 = {
+value = bfl_chart_equity_y_06 max = bfl_chart_equity_y_07
+}
+bfl_chart_equity_height_06 = {
+value = bfl_chart_equity_y_06 min = bfl_chart_equity_y_07 subtract = bfl_chart_equity_top_06 min = 2
+}
+bfl_chart_equity_y_07 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_07 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_07 = {
+value = bfl_chart_equity_y_07 max = bfl_chart_equity_y_08
+}
+bfl_chart_equity_height_07 = {
+value = bfl_chart_equity_y_07 min = bfl_chart_equity_y_08 subtract = bfl_chart_equity_top_07 min = 2
+}
+bfl_chart_equity_y_08 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_08 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_08 = {
+value = bfl_chart_equity_y_08 max = bfl_chart_equity_y_09
+}
+bfl_chart_equity_height_08 = {
+value = bfl_chart_equity_y_08 min = bfl_chart_equity_y_09 subtract = bfl_chart_equity_top_08 min = 2
+}
+bfl_chart_equity_y_09 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_09 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_09 = {
+value = bfl_chart_equity_y_09 max = bfl_chart_equity_y_10
+}
+bfl_chart_equity_height_09 = {
+value = bfl_chart_equity_y_09 min = bfl_chart_equity_y_10 subtract = bfl_chart_equity_top_09 min = 2
+}
+bfl_chart_equity_y_10 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_10 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_10 = {
+value = bfl_chart_equity_y_10 max = bfl_chart_equity_y_11
+}
+bfl_chart_equity_height_10 = {
+value = bfl_chart_equity_y_10 min = bfl_chart_equity_y_11 subtract = bfl_chart_equity_top_10 min = 2
+}
+bfl_chart_equity_y_11 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_11 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_equity_top_11 = {
+value = bfl_chart_equity_y_11 max = bfl_chart_equity_y_12
+}
+bfl_chart_equity_height_11 = {
+value = bfl_chart_equity_y_11 min = bfl_chart_equity_y_12 subtract = bfl_chart_equity_top_11 min = 2
+}
+bfl_chart_equity_y_12 = {
+value = bfl_chart_max subtract = var:bfl_history_equity_12 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_y_01 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_01 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_01 = {
+value = bfl_chart_debt_y_01 max = bfl_chart_debt_y_02
+}
+bfl_chart_debt_height_01 = {
+value = bfl_chart_debt_y_01 min = bfl_chart_debt_y_02 subtract = bfl_chart_debt_top_01 min = 2
+}
+bfl_chart_debt_y_02 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_02 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_02 = {
+value = bfl_chart_debt_y_02 max = bfl_chart_debt_y_03
+}
+bfl_chart_debt_height_02 = {
+value = bfl_chart_debt_y_02 min = bfl_chart_debt_y_03 subtract = bfl_chart_debt_top_02 min = 2
+}
+bfl_chart_debt_y_03 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_03 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_03 = {
+value = bfl_chart_debt_y_03 max = bfl_chart_debt_y_04
+}
+bfl_chart_debt_height_03 = {
+value = bfl_chart_debt_y_03 min = bfl_chart_debt_y_04 subtract = bfl_chart_debt_top_03 min = 2
+}
+bfl_chart_debt_y_04 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_04 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_04 = {
+value = bfl_chart_debt_y_04 max = bfl_chart_debt_y_05
+}
+bfl_chart_debt_height_04 = {
+value = bfl_chart_debt_y_04 min = bfl_chart_debt_y_05 subtract = bfl_chart_debt_top_04 min = 2
+}
+bfl_chart_debt_y_05 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_05 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_05 = {
+value = bfl_chart_debt_y_05 max = bfl_chart_debt_y_06
+}
+bfl_chart_debt_height_05 = {
+value = bfl_chart_debt_y_05 min = bfl_chart_debt_y_06 subtract = bfl_chart_debt_top_05 min = 2
+}
+bfl_chart_debt_y_06 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_06 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_06 = {
+value = bfl_chart_debt_y_06 max = bfl_chart_debt_y_07
+}
+bfl_chart_debt_height_06 = {
+value = bfl_chart_debt_y_06 min = bfl_chart_debt_y_07 subtract = bfl_chart_debt_top_06 min = 2
+}
+bfl_chart_debt_y_07 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_07 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_07 = {
+value = bfl_chart_debt_y_07 max = bfl_chart_debt_y_08
+}
+bfl_chart_debt_height_07 = {
+value = bfl_chart_debt_y_07 min = bfl_chart_debt_y_08 subtract = bfl_chart_debt_top_07 min = 2
+}
+bfl_chart_debt_y_08 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_08 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_08 = {
+value = bfl_chart_debt_y_08 max = bfl_chart_debt_y_09
+}
+bfl_chart_debt_height_08 = {
+value = bfl_chart_debt_y_08 min = bfl_chart_debt_y_09 subtract = bfl_chart_debt_top_08 min = 2
+}
+bfl_chart_debt_y_09 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_09 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_09 = {
+value = bfl_chart_debt_y_09 max = bfl_chart_debt_y_10
+}
+bfl_chart_debt_height_09 = {
+value = bfl_chart_debt_y_09 min = bfl_chart_debt_y_10 subtract = bfl_chart_debt_top_09 min = 2
+}
+bfl_chart_debt_y_10 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_10 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_10 = {
+value = bfl_chart_debt_y_10 max = bfl_chart_debt_y_11
+}
+bfl_chart_debt_height_10 = {
+value = bfl_chart_debt_y_10 min = bfl_chart_debt_y_11 subtract = bfl_chart_debt_top_10 min = 2
+}
+bfl_chart_debt_y_11 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_11 divide = bfl_chart_range multiply = 160
+}
+bfl_chart_debt_top_11 = {
+value = bfl_chart_debt_y_11 max = bfl_chart_debt_y_12
+}
+bfl_chart_debt_height_11 = {
+value = bfl_chart_debt_y_11 min = bfl_chart_debt_y_12 subtract = bfl_chart_debt_top_11 min = 2
+}
+bfl_chart_debt_y_12 = {
+value = bfl_chart_max subtract = var:bfl_history_debt_12 divide = bfl_chart_range multiply = 160
+}
+bfl_royalty_happiness = {
+value = 0
+if = { limit = { var:bfl_royalty_tier = 0 } value = 0 }
+if = { limit = { var:bfl_royalty_tier = 1 } value = -0.02 }
+if = { limit = { var:bfl_royalty_tier = 2 } value = -0.05 }
+if = { limit = { var:bfl_royalty_tier = 3 } value = -0.1 }
+if = { limit = { var:bfl_royalty_tier = 4 } value = -0.2 }
+}
+bfl_royalty_preview = {
+value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value multiply = bfl_royalty_rate divide = 12
+}
+bfl_royalty_fill = {
+value = var:bfl_royalty_tier multiply = 18 add = 9
+}

@@ -9,6 +9,8 @@ from build_economy_gui import DEFAULT_GAME, MOD, ROOT, write
 
 CMF=Path('C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776')
 SOURCES=[
+ 'in_game/gui/credit.gui',
+ 'in_game/gui/technology_lateralview.gui',
  'in_game/gui/economy_lateralview.gui','in_game/common/subject_types/state_bank.txt',
  'in_game/common/country_interactions/take_over_loan.txt','in_game/common/country_interactions/request_loan.txt',
  'in_game/common/country_interactions/siphon_income.txt','in_game/common/script_values/bank_loan_takeover.txt',

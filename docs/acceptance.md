@@ -2,7 +2,7 @@
 
 The original setup stopped before gameplay as requested. The user subsequently authorized Florence campaign testing and repeatable PR checks on 14 October 2026. The focused engine suite is documented in [campaign_checks.md](campaign_checks.md); its deliberately limited coverage does not certify all P01–P12 probes or the full design plan.
 
-The final local run passed all **47 native-engine assertions**, twelve monthly periods and autosave reload, with no BFI-attributed errors under the suite's diagnostic scan. The [sanitized evidence](../tests/results/2026-10-14-florence-0.0.1_DEV.json) records the runtime SHA-256. Finance visibility and preserved native Credit were observed at 2560×1440. The selector, later-age positive paths and wider UI/multiplayer matrix below still require testing.
+The 0.0.2_dev local run passed all **60 native-engine assertions**, twelve monthly periods and autosave reload. The [sanitized evidence](../tests/results/2026-10-14-florence-0.0.2_dev.json) records the runtime SHA-256. The [interface revision](ui-0.0.2.md) records the restored Balance layout, unified Credit panels, working royalty slider and painted advance cards at 2560×1440. The selector, later-age positive paths and wider UI/multiplayer matrix below still require testing.
 
 Offline checks run before delivery:
 
