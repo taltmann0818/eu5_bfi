@@ -1,0 +1,4 @@
+﻿bfl_streamline_bank = { scope = country
+        is_shown = { bfl_has_management = yes country_type = location } is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { var:bfl_cost_program = 0 } }
+        effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { var:bfl_cost_program = 0 } } add_gold = -100 var:bfl_bank = { set_variable = { name = bfl_cost_program value = 1 } } } }
+    }

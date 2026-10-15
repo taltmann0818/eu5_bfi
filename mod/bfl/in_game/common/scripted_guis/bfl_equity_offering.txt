@@ -1,0 +1,6 @@
+﻿bfl_offer_bank_shares = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes } effect = { if = { limit = { bfl_has_management = yes }
+                bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_accept_equity value = 1 } } } } }
+bfl_close_bank_offering = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes } effect = { if = { limit = { bfl_has_management = yes }
+                bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_accept_equity value = 0 } } } } }

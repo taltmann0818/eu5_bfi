@@ -4,6 +4,8 @@ Create focused branches from `dev` with names such as `codex/credit-clarity-bank
 
 Each PR should explain the problem, the resulting behavior and the validation performed. Keep engine evidence distinct from offline checks, and record outstanding visual or gameplay checks. Generated runtime files must accompany their generator changes. Test with a disposable Florence campaign and separately installed CMF.
 
+`docs/coverage.md` is the single living implementation plan and milestone register. Every feature or behavior-changing PR must update its affected M0–M10 dashboard and feature rows, remaining work, completion gates and evidence links. Design changes must reconcile the detailed specification too. Only mark a path verified after its relevant checks pass, and only mark a milestone complete after its whole gate passes. Do not keep a duplicate plan in the legacy root filename; a queued workflow or an offline model is not engine evidence.
+
 Versioned distributions are produced by GitHub Releases. After the intended changes have been reviewed and integrated, create a release from the chosen commit with a semantic tag such as `v0.1.0` or `v0.1.0-rc.1`. The release workflow validates the committed runtime and attaches a ZIP plus its SHA-256 manifest. It stamps the release tag into the staged mod metadata without changing the source checkout or creating a version-bump PR. Mark prereleases in GitHub when appropriate.
 
 The version in `design/tuning.json` is the development metadata baseline, not a PR name or release promise. Feature work does not increment it. A release's tag, packaged metadata and assets identify its distributed version. Keep game compatibility and CMF dependency versions separate from the mod release number.

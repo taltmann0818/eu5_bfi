@@ -2,6 +2,7 @@
     set_variable = { name = bfl_state value = 0 }
     if = { limit = { bfl_free_cash <= 0 } set_variable = { name = bfl_state value = 1 } }
     if = { limit = { bfl_withdrawals_due > 0 } set_variable = { name = bfl_state value = 2 } }
+    if = { limit = { var:bfl_expense_arrears > 0 } set_variable = { name = bfl_state value = 2 } }
     if = { limit = { bfl_equity < 0 } set_variable = { name = bfl_state value = 3 } }
 }
 # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.

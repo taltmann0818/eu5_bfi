@@ -42,7 +42,16 @@ def build(game, pin=False):
         name = "bfl_income_{kind}"
         datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
         visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    }}''' for kind in ('dividends','royalties','facility'))+'\n\n'
+    }}''' for kind in ('facility',))+'''
+        bfl_income_dividends = {
+            name = "bfl_income_dividends" datacontext = "[GetPlayer]"
+            visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_share_income_display'), '(CFixedPoint)0'))]"
+        }
+        bfl_income_interest = {
+            name = "bfl_income_interest" datacontext = "[GetPlayer]"
+            visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_deposit_income_display'), '(CFixedPoint)0')]"
+        }
+    '''+'\n\n'
     view = view[:insert_pos] + insertion + view[insert_pos:]
     # File-scoped constants must accompany each extracted consumer.
     constants = '\n'.join(re.findall(r'^@[^\n]+', text, re.M))

@@ -1,39 +1,4 @@
-﻿bfl_set_royalty_0 = {
-            scope = country
-            is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 0 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
-        cmf_log = { action = bfl_log_royalty_0 } } }
-        }
-bfl_set_royalty_1 = {
-            scope = country
-            is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 1 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
-        cmf_log = { action = bfl_log_royalty_1 } } }
-        }
-bfl_set_royalty_2 = {
-            scope = country
-            is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 2 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
-        cmf_log = { action = bfl_log_royalty_2 } } }
-        }
-bfl_set_royalty_3 = {
-            scope = country
-            is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 3 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
-        cmf_log = { action = bfl_log_royalty_3 } } }
-        }
-bfl_set_royalty_4 = {
-            scope = country
-            is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_royalty_tier value = 4 } change_variable = { name = bfl_policy_revision add = 1 } bfl_apply_royalty_modifiers = yes }
-        cmf_log = { action = bfl_log_royalty_4 } } }
-        }
-bfl_payout_0 = {
+﻿bfl_payout_0 = {
             scope = country
             is_shown = { bfl_has_management = yes }
             is_valid = { bfl_has_management = yes }

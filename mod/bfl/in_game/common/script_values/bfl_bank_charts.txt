@@ -1,0 +1,1379 @@
+﻿bfl_asset_fraction_cash = {
+value = 0 if = { limit = { bfl_assets > 0 } value = gold divide = bfl_assets }
+}
+bfl_asset_fraction_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_bonds divide = bfl_assets }
+}
+bfl_asset_fraction_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_unsecured divide = bfl_assets }
+}
+bfl_asset_fraction_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_secured divide = bfl_assets }
+}
+bfl_asset_fraction_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_commodities divide = bfl_assets }
+}
+bfl_asset_fraction_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_01_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_01_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_02_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_02_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_03_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_03_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_04_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_04_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_05_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_05_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_06_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_06_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_07_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_07_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_08_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_08_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_09_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_09_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_10_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_10_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_11_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_11_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_12_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_12_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_13_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_13_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_14_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_14_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_15_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_15_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_16_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_16_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_17_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_17_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_18_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_18_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_19_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_19_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_20_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_20_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_21_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_21_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_22_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_22_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_23_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_23_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_24_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_24_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_25_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_25_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_26_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_26_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_27_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_27_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_28_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_28_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_29_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_29_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_30_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_30_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_31_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_31_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_32_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_32_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_33_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_33_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_34_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_34_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_35_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_35_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_36_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_36_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_37_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_37_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_38_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_38_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_39_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_39_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_40_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_40_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_41_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_41_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_42_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_42_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_43_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_43_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_44_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_44_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_45_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_45_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_46_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_46_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_47_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_47_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_48_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_48_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_49_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_49_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_50_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_50_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_51_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_51_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_52_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_52_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_53_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_53_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_54_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_54_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_55_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_55_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_56_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_56_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_57_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_57_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_58_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_58_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_59_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_59_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_60_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_60_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_61_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_61_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_62_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_62_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_63_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_63_bonds divide = bfl_assets }
+}
+bfl_asset_row_fraction_64_bonds = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_64_bonds divide = bfl_assets }
+}
+bfl_asset_listed_bonds = {
+value = 0
+add = var:bfl_asset_01_bonds
+add = var:bfl_asset_02_bonds
+add = var:bfl_asset_03_bonds
+add = var:bfl_asset_04_bonds
+add = var:bfl_asset_05_bonds
+add = var:bfl_asset_06_bonds
+add = var:bfl_asset_07_bonds
+add = var:bfl_asset_08_bonds
+add = var:bfl_asset_09_bonds
+add = var:bfl_asset_10_bonds
+add = var:bfl_asset_11_bonds
+add = var:bfl_asset_12_bonds
+add = var:bfl_asset_13_bonds
+add = var:bfl_asset_14_bonds
+add = var:bfl_asset_15_bonds
+add = var:bfl_asset_16_bonds
+add = var:bfl_asset_17_bonds
+add = var:bfl_asset_18_bonds
+add = var:bfl_asset_19_bonds
+add = var:bfl_asset_20_bonds
+add = var:bfl_asset_21_bonds
+add = var:bfl_asset_22_bonds
+add = var:bfl_asset_23_bonds
+add = var:bfl_asset_24_bonds
+add = var:bfl_asset_25_bonds
+add = var:bfl_asset_26_bonds
+add = var:bfl_asset_27_bonds
+add = var:bfl_asset_28_bonds
+add = var:bfl_asset_29_bonds
+add = var:bfl_asset_30_bonds
+add = var:bfl_asset_31_bonds
+add = var:bfl_asset_32_bonds
+add = var:bfl_asset_33_bonds
+add = var:bfl_asset_34_bonds
+add = var:bfl_asset_35_bonds
+add = var:bfl_asset_36_bonds
+add = var:bfl_asset_37_bonds
+add = var:bfl_asset_38_bonds
+add = var:bfl_asset_39_bonds
+add = var:bfl_asset_40_bonds
+add = var:bfl_asset_41_bonds
+add = var:bfl_asset_42_bonds
+add = var:bfl_asset_43_bonds
+add = var:bfl_asset_44_bonds
+add = var:bfl_asset_45_bonds
+add = var:bfl_asset_46_bonds
+add = var:bfl_asset_47_bonds
+add = var:bfl_asset_48_bonds
+add = var:bfl_asset_49_bonds
+add = var:bfl_asset_50_bonds
+add = var:bfl_asset_51_bonds
+add = var:bfl_asset_52_bonds
+add = var:bfl_asset_53_bonds
+add = var:bfl_asset_54_bonds
+add = var:bfl_asset_55_bonds
+add = var:bfl_asset_56_bonds
+add = var:bfl_asset_57_bonds
+add = var:bfl_asset_58_bonds
+add = var:bfl_asset_59_bonds
+add = var:bfl_asset_60_bonds
+add = var:bfl_asset_61_bonds
+add = var:bfl_asset_62_bonds
+add = var:bfl_asset_63_bonds
+add = var:bfl_asset_64_bonds
+}
+bfl_asset_unlisted_bonds = {
+value = var:bfl_asset_bonds subtract = bfl_asset_listed_bonds min = 0
+}
+bfl_asset_row_fraction_01_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_01_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_02_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_02_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_03_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_03_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_04_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_04_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_05_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_05_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_06_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_06_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_07_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_07_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_08_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_08_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_09_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_09_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_10_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_10_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_11_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_11_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_12_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_12_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_13_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_13_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_14_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_14_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_15_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_15_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_16_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_16_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_17_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_17_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_18_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_18_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_19_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_19_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_20_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_20_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_21_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_21_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_22_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_22_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_23_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_23_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_24_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_24_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_25_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_25_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_26_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_26_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_27_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_27_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_28_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_28_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_29_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_29_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_30_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_30_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_31_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_31_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_32_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_32_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_33_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_33_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_34_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_34_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_35_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_35_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_36_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_36_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_37_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_37_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_38_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_38_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_39_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_39_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_40_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_40_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_41_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_41_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_42_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_42_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_43_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_43_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_44_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_44_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_45_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_45_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_46_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_46_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_47_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_47_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_48_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_48_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_49_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_49_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_50_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_50_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_51_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_51_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_52_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_52_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_53_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_53_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_54_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_54_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_55_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_55_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_56_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_56_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_57_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_57_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_58_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_58_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_59_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_59_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_60_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_60_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_61_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_61_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_62_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_62_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_63_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_63_unsecured divide = bfl_assets }
+}
+bfl_asset_row_fraction_64_unsecured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_64_unsecured divide = bfl_assets }
+}
+bfl_asset_listed_unsecured = {
+value = 0
+add = var:bfl_asset_01_unsecured
+add = var:bfl_asset_02_unsecured
+add = var:bfl_asset_03_unsecured
+add = var:bfl_asset_04_unsecured
+add = var:bfl_asset_05_unsecured
+add = var:bfl_asset_06_unsecured
+add = var:bfl_asset_07_unsecured
+add = var:bfl_asset_08_unsecured
+add = var:bfl_asset_09_unsecured
+add = var:bfl_asset_10_unsecured
+add = var:bfl_asset_11_unsecured
+add = var:bfl_asset_12_unsecured
+add = var:bfl_asset_13_unsecured
+add = var:bfl_asset_14_unsecured
+add = var:bfl_asset_15_unsecured
+add = var:bfl_asset_16_unsecured
+add = var:bfl_asset_17_unsecured
+add = var:bfl_asset_18_unsecured
+add = var:bfl_asset_19_unsecured
+add = var:bfl_asset_20_unsecured
+add = var:bfl_asset_21_unsecured
+add = var:bfl_asset_22_unsecured
+add = var:bfl_asset_23_unsecured
+add = var:bfl_asset_24_unsecured
+add = var:bfl_asset_25_unsecured
+add = var:bfl_asset_26_unsecured
+add = var:bfl_asset_27_unsecured
+add = var:bfl_asset_28_unsecured
+add = var:bfl_asset_29_unsecured
+add = var:bfl_asset_30_unsecured
+add = var:bfl_asset_31_unsecured
+add = var:bfl_asset_32_unsecured
+add = var:bfl_asset_33_unsecured
+add = var:bfl_asset_34_unsecured
+add = var:bfl_asset_35_unsecured
+add = var:bfl_asset_36_unsecured
+add = var:bfl_asset_37_unsecured
+add = var:bfl_asset_38_unsecured
+add = var:bfl_asset_39_unsecured
+add = var:bfl_asset_40_unsecured
+add = var:bfl_asset_41_unsecured
+add = var:bfl_asset_42_unsecured
+add = var:bfl_asset_43_unsecured
+add = var:bfl_asset_44_unsecured
+add = var:bfl_asset_45_unsecured
+add = var:bfl_asset_46_unsecured
+add = var:bfl_asset_47_unsecured
+add = var:bfl_asset_48_unsecured
+add = var:bfl_asset_49_unsecured
+add = var:bfl_asset_50_unsecured
+add = var:bfl_asset_51_unsecured
+add = var:bfl_asset_52_unsecured
+add = var:bfl_asset_53_unsecured
+add = var:bfl_asset_54_unsecured
+add = var:bfl_asset_55_unsecured
+add = var:bfl_asset_56_unsecured
+add = var:bfl_asset_57_unsecured
+add = var:bfl_asset_58_unsecured
+add = var:bfl_asset_59_unsecured
+add = var:bfl_asset_60_unsecured
+add = var:bfl_asset_61_unsecured
+add = var:bfl_asset_62_unsecured
+add = var:bfl_asset_63_unsecured
+add = var:bfl_asset_64_unsecured
+}
+bfl_asset_unlisted_unsecured = {
+value = var:bfl_asset_unsecured subtract = bfl_asset_listed_unsecured min = 0
+}
+bfl_asset_row_fraction_01_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_01_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_02_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_02_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_03_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_03_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_04_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_04_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_05_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_05_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_06_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_06_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_07_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_07_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_08_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_08_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_09_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_09_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_10_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_10_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_11_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_11_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_12_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_12_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_13_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_13_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_14_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_14_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_15_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_15_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_16_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_16_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_17_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_17_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_18_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_18_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_19_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_19_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_20_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_20_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_21_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_21_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_22_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_22_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_23_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_23_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_24_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_24_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_25_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_25_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_26_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_26_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_27_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_27_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_28_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_28_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_29_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_29_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_30_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_30_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_31_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_31_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_32_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_32_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_33_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_33_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_34_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_34_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_35_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_35_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_36_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_36_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_37_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_37_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_38_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_38_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_39_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_39_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_40_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_40_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_41_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_41_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_42_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_42_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_43_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_43_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_44_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_44_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_45_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_45_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_46_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_46_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_47_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_47_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_48_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_48_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_49_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_49_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_50_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_50_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_51_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_51_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_52_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_52_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_53_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_53_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_54_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_54_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_55_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_55_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_56_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_56_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_57_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_57_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_58_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_58_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_59_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_59_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_60_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_60_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_61_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_61_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_62_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_62_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_63_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_63_secured divide = bfl_assets }
+}
+bfl_asset_row_fraction_64_secured = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_64_secured divide = bfl_assets }
+}
+bfl_asset_listed_secured = {
+value = 0
+add = var:bfl_asset_01_secured
+add = var:bfl_asset_02_secured
+add = var:bfl_asset_03_secured
+add = var:bfl_asset_04_secured
+add = var:bfl_asset_05_secured
+add = var:bfl_asset_06_secured
+add = var:bfl_asset_07_secured
+add = var:bfl_asset_08_secured
+add = var:bfl_asset_09_secured
+add = var:bfl_asset_10_secured
+add = var:bfl_asset_11_secured
+add = var:bfl_asset_12_secured
+add = var:bfl_asset_13_secured
+add = var:bfl_asset_14_secured
+add = var:bfl_asset_15_secured
+add = var:bfl_asset_16_secured
+add = var:bfl_asset_17_secured
+add = var:bfl_asset_18_secured
+add = var:bfl_asset_19_secured
+add = var:bfl_asset_20_secured
+add = var:bfl_asset_21_secured
+add = var:bfl_asset_22_secured
+add = var:bfl_asset_23_secured
+add = var:bfl_asset_24_secured
+add = var:bfl_asset_25_secured
+add = var:bfl_asset_26_secured
+add = var:bfl_asset_27_secured
+add = var:bfl_asset_28_secured
+add = var:bfl_asset_29_secured
+add = var:bfl_asset_30_secured
+add = var:bfl_asset_31_secured
+add = var:bfl_asset_32_secured
+add = var:bfl_asset_33_secured
+add = var:bfl_asset_34_secured
+add = var:bfl_asset_35_secured
+add = var:bfl_asset_36_secured
+add = var:bfl_asset_37_secured
+add = var:bfl_asset_38_secured
+add = var:bfl_asset_39_secured
+add = var:bfl_asset_40_secured
+add = var:bfl_asset_41_secured
+add = var:bfl_asset_42_secured
+add = var:bfl_asset_43_secured
+add = var:bfl_asset_44_secured
+add = var:bfl_asset_45_secured
+add = var:bfl_asset_46_secured
+add = var:bfl_asset_47_secured
+add = var:bfl_asset_48_secured
+add = var:bfl_asset_49_secured
+add = var:bfl_asset_50_secured
+add = var:bfl_asset_51_secured
+add = var:bfl_asset_52_secured
+add = var:bfl_asset_53_secured
+add = var:bfl_asset_54_secured
+add = var:bfl_asset_55_secured
+add = var:bfl_asset_56_secured
+add = var:bfl_asset_57_secured
+add = var:bfl_asset_58_secured
+add = var:bfl_asset_59_secured
+add = var:bfl_asset_60_secured
+add = var:bfl_asset_61_secured
+add = var:bfl_asset_62_secured
+add = var:bfl_asset_63_secured
+add = var:bfl_asset_64_secured
+}
+bfl_asset_unlisted_secured = {
+value = var:bfl_asset_secured subtract = bfl_asset_listed_secured min = 0
+}
+bfl_asset_row_fraction_01_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_01_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_02_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_02_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_03_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_03_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_04_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_04_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_05_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_05_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_06_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_06_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_07_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_07_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_08_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_08_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_09_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_09_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_10_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_10_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_11_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_11_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_12_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_12_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_13_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_13_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_14_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_14_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_15_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_15_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_16_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_16_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_17_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_17_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_18_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_18_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_19_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_19_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_20_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_20_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_21_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_21_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_22_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_22_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_23_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_23_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_24_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_24_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_25_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_25_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_26_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_26_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_27_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_27_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_28_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_28_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_29_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_29_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_30_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_30_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_31_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_31_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_32_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_32_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_33_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_33_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_34_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_34_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_35_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_35_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_36_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_36_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_37_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_37_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_38_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_38_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_39_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_39_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_40_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_40_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_41_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_41_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_42_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_42_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_43_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_43_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_44_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_44_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_45_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_45_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_46_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_46_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_47_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_47_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_48_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_48_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_49_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_49_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_50_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_50_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_51_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_51_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_52_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_52_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_53_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_53_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_54_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_54_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_55_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_55_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_56_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_56_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_57_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_57_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_58_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_58_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_59_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_59_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_60_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_60_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_61_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_61_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_62_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_62_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_63_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_63_commodities divide = bfl_assets }
+}
+bfl_asset_row_fraction_64_commodities = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_64_commodities divide = bfl_assets }
+}
+bfl_asset_listed_commodities = {
+value = 0
+add = var:bfl_asset_01_commodities
+add = var:bfl_asset_02_commodities
+add = var:bfl_asset_03_commodities
+add = var:bfl_asset_04_commodities
+add = var:bfl_asset_05_commodities
+add = var:bfl_asset_06_commodities
+add = var:bfl_asset_07_commodities
+add = var:bfl_asset_08_commodities
+add = var:bfl_asset_09_commodities
+add = var:bfl_asset_10_commodities
+add = var:bfl_asset_11_commodities
+add = var:bfl_asset_12_commodities
+add = var:bfl_asset_13_commodities
+add = var:bfl_asset_14_commodities
+add = var:bfl_asset_15_commodities
+add = var:bfl_asset_16_commodities
+add = var:bfl_asset_17_commodities
+add = var:bfl_asset_18_commodities
+add = var:bfl_asset_19_commodities
+add = var:bfl_asset_20_commodities
+add = var:bfl_asset_21_commodities
+add = var:bfl_asset_22_commodities
+add = var:bfl_asset_23_commodities
+add = var:bfl_asset_24_commodities
+add = var:bfl_asset_25_commodities
+add = var:bfl_asset_26_commodities
+add = var:bfl_asset_27_commodities
+add = var:bfl_asset_28_commodities
+add = var:bfl_asset_29_commodities
+add = var:bfl_asset_30_commodities
+add = var:bfl_asset_31_commodities
+add = var:bfl_asset_32_commodities
+add = var:bfl_asset_33_commodities
+add = var:bfl_asset_34_commodities
+add = var:bfl_asset_35_commodities
+add = var:bfl_asset_36_commodities
+add = var:bfl_asset_37_commodities
+add = var:bfl_asset_38_commodities
+add = var:bfl_asset_39_commodities
+add = var:bfl_asset_40_commodities
+add = var:bfl_asset_41_commodities
+add = var:bfl_asset_42_commodities
+add = var:bfl_asset_43_commodities
+add = var:bfl_asset_44_commodities
+add = var:bfl_asset_45_commodities
+add = var:bfl_asset_46_commodities
+add = var:bfl_asset_47_commodities
+add = var:bfl_asset_48_commodities
+add = var:bfl_asset_49_commodities
+add = var:bfl_asset_50_commodities
+add = var:bfl_asset_51_commodities
+add = var:bfl_asset_52_commodities
+add = var:bfl_asset_53_commodities
+add = var:bfl_asset_54_commodities
+add = var:bfl_asset_55_commodities
+add = var:bfl_asset_56_commodities
+add = var:bfl_asset_57_commodities
+add = var:bfl_asset_58_commodities
+add = var:bfl_asset_59_commodities
+add = var:bfl_asset_60_commodities
+add = var:bfl_asset_61_commodities
+add = var:bfl_asset_62_commodities
+add = var:bfl_asset_63_commodities
+add = var:bfl_asset_64_commodities
+}
+bfl_asset_unlisted_commodities = {
+value = var:bfl_asset_commodities subtract = bfl_asset_listed_commodities min = 0
+}
+bfl_asset_row_fraction_01_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_01_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_02_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_02_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_03_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_03_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_04_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_04_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_05_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_05_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_06_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_06_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_07_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_07_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_08_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_08_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_09_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_09_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_10_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_10_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_11_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_11_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_12_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_12_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_13_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_13_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_14_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_14_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_15_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_15_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_16_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_16_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_17_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_17_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_18_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_18_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_19_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_19_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_20_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_20_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_21_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_21_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_22_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_22_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_23_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_23_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_24_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_24_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_25_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_25_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_26_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_26_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_27_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_27_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_28_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_28_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_29_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_29_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_30_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_30_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_31_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_31_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_32_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_32_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_33_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_33_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_34_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_34_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_35_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_35_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_36_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_36_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_37_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_37_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_38_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_38_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_39_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_39_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_40_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_40_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_41_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_41_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_42_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_42_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_43_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_43_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_44_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_44_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_45_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_45_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_46_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_46_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_47_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_47_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_48_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_48_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_49_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_49_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_50_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_50_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_51_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_51_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_52_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_52_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_53_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_53_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_54_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_54_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_55_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_55_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_56_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_56_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_57_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_57_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_58_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_58_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_59_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_59_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_60_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_60_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_61_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_61_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_62_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_62_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_63_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_63_investments divide = bfl_assets }
+}
+bfl_asset_row_fraction_64_investments = {
+value = 0 if = { limit = { bfl_assets > 0 } value = var:bfl_asset_64_investments divide = bfl_assets }
+}
+bfl_asset_listed_investments = {
+value = 0
+add = var:bfl_asset_01_investments
+add = var:bfl_asset_02_investments
+add = var:bfl_asset_03_investments
+add = var:bfl_asset_04_investments
+add = var:bfl_asset_05_investments
+add = var:bfl_asset_06_investments
+add = var:bfl_asset_07_investments
+add = var:bfl_asset_08_investments
+add = var:bfl_asset_09_investments
+add = var:bfl_asset_10_investments
+add = var:bfl_asset_11_investments
+add = var:bfl_asset_12_investments
+add = var:bfl_asset_13_investments
+add = var:bfl_asset_14_investments
+add = var:bfl_asset_15_investments
+add = var:bfl_asset_16_investments
+add = var:bfl_asset_17_investments
+add = var:bfl_asset_18_investments
+add = var:bfl_asset_19_investments
+add = var:bfl_asset_20_investments
+add = var:bfl_asset_21_investments
+add = var:bfl_asset_22_investments
+add = var:bfl_asset_23_investments
+add = var:bfl_asset_24_investments
+add = var:bfl_asset_25_investments
+add = var:bfl_asset_26_investments
+add = var:bfl_asset_27_investments
+add = var:bfl_asset_28_investments
+add = var:bfl_asset_29_investments
+add = var:bfl_asset_30_investments
+add = var:bfl_asset_31_investments
+add = var:bfl_asset_32_investments
+add = var:bfl_asset_33_investments
+add = var:bfl_asset_34_investments
+add = var:bfl_asset_35_investments
+add = var:bfl_asset_36_investments
+add = var:bfl_asset_37_investments
+add = var:bfl_asset_38_investments
+add = var:bfl_asset_39_investments
+add = var:bfl_asset_40_investments
+add = var:bfl_asset_41_investments
+add = var:bfl_asset_42_investments
+add = var:bfl_asset_43_investments
+add = var:bfl_asset_44_investments
+add = var:bfl_asset_45_investments
+add = var:bfl_asset_46_investments
+add = var:bfl_asset_47_investments
+add = var:bfl_asset_48_investments
+add = var:bfl_asset_49_investments
+add = var:bfl_asset_50_investments
+add = var:bfl_asset_51_investments
+add = var:bfl_asset_52_investments
+add = var:bfl_asset_53_investments
+add = var:bfl_asset_54_investments
+add = var:bfl_asset_55_investments
+add = var:bfl_asset_56_investments
+add = var:bfl_asset_57_investments
+add = var:bfl_asset_58_investments
+add = var:bfl_asset_59_investments
+add = var:bfl_asset_60_investments
+add = var:bfl_asset_61_investments
+add = var:bfl_asset_62_investments
+add = var:bfl_asset_63_investments
+add = var:bfl_asset_64_investments
+}
+bfl_asset_unlisted_investments = {
+value = var:bfl_asset_investments subtract = bfl_asset_listed_investments min = 0
+}
+bfl_state_share_fraction = {
+value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_state_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_01 = {
+value = 0 if = { limit = { var:bfl_shr_01_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_01_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_02 = {
+value = 0 if = { limit = { var:bfl_shr_02_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_02_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_03 = {
+value = 0 if = { limit = { var:bfl_shr_03_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_03_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_04 = {
+value = 0 if = { limit = { var:bfl_shr_04_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_04_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_05 = {
+value = 0 if = { limit = { var:bfl_shr_05_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_05_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_06 = {
+value = 0 if = { limit = { var:bfl_shr_06_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_06_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_07 = {
+value = 0 if = { limit = { var:bfl_shr_07_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_07_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_08 = {
+value = 0 if = { limit = { var:bfl_shr_08_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_08_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_09 = {
+value = 0 if = { limit = { var:bfl_shr_09_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_09_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_10 = {
+value = 0 if = { limit = { var:bfl_shr_10_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_10_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_11 = {
+value = 0 if = { limit = { var:bfl_shr_11_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_11_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_12 = {
+value = 0 if = { limit = { var:bfl_shr_12_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_12_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_13 = {
+value = 0 if = { limit = { var:bfl_shr_13_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_13_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_14 = {
+value = 0 if = { limit = { var:bfl_shr_14_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_14_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_15 = {
+value = 0 if = { limit = { var:bfl_shr_15_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_15_units divide = var:bfl_total_units }
+}
+bfl_share_fraction_16 = {
+value = 0 if = { limit = { var:bfl_shr_16_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_16_units divide = var:bfl_total_units }
+}

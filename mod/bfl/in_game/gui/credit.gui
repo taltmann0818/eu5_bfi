@@ -238,6 +238,7 @@ lateralview = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = fixed
 				size = { -1 50 }
+ visible = "[Not(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 				hbox = {
 					layoutpolicy_horizontal = expanding
@@ -1449,7 +1450,7 @@ lateralview = {
 						margin = { 5 0 }
 						margin_top = 5
 
-						header_button_left = {
+						header_button_left = { visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 							blockoverride "adjust_to_content" {
 								minimumsize = { 150 40 }
 								set_parent_size_to_minimum = yes
@@ -1500,6 +1501,12 @@ lateralview = {
 								}
 							}
 						}
+ vbox = { layoutpolicy_horizontal = expanding visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button_regular = { name = "bfl_purchase_native_loan_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_loan_button"
+        datacontext = "[GetPlayer]"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_purchase_native_loan_tip"
+        scripted_action_tooltip = { click_type = left click_mode = single
+            action_name = "bfl_purchase_native_loan" action_direction = "offer" actor = "[GetPlayer]" }
+        } }
 
 						expand = {}
 
@@ -1591,7 +1598,7 @@ lateralview = {
 							}
 						}
 
-						button_regular = {
+						button_regular = { visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 							layoutpolicy_horizontal = expanding
 							datacontext = "[Player]"
 							text = "take_over_loan"
@@ -1619,6 +1626,12 @@ lateralview = {
 								}
 							}
 						}
+ vbox = { layoutpolicy_horizontal = expanding visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button_regular = { name = "bfl_purchase_native_loan_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_loan_button"
+        datacontext = "[GetPlayer]"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_purchase_native_loan_tip"
+        scripted_action_tooltip = { click_type = left click_mode = single
+            action_name = "bfl_purchase_native_loan" action_direction = "offer" actor = "[GetPlayer]" }
+        } }
 					}
 
 					filtered_sorted_list = {

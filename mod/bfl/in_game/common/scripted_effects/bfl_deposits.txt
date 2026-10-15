@@ -19,6 +19,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_01_active = 0 }
                 change_variable = { name = bfl_dep_01_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_01_state value = 2 }
             }
+            bfl_apply_deposit_bonus_01 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_02_active = 0 }
@@ -39,6 +40,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_02_active = 0 }
                 change_variable = { name = bfl_dep_02_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_02_state value = 2 }
             }
+            bfl_apply_deposit_bonus_02 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_03_active = 0 }
@@ -59,6 +61,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_03_active = 0 }
                 change_variable = { name = bfl_dep_03_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_03_state value = 2 }
             }
+            bfl_apply_deposit_bonus_03 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_04_active = 0 }
@@ -79,6 +82,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_04_active = 0 }
                 change_variable = { name = bfl_dep_04_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_04_state value = 2 }
             }
+            bfl_apply_deposit_bonus_04 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_05_active = 0 }
@@ -99,6 +103,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_05_active = 0 }
                 change_variable = { name = bfl_dep_05_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_05_state value = 2 }
             }
+            bfl_apply_deposit_bonus_05 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_06_active = 0 }
@@ -119,6 +124,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_06_active = 0 }
                 change_variable = { name = bfl_dep_06_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_06_state value = 2 }
             }
+            bfl_apply_deposit_bonus_06 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_07_active = 0 }
@@ -139,6 +145,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_07_active = 0 }
                 change_variable = { name = bfl_dep_07_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_07_state value = 2 }
             }
+            bfl_apply_deposit_bonus_07 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_08_active = 0 }
@@ -159,6 +166,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_08_active = 0 }
                 change_variable = { name = bfl_dep_08_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_08_state value = 2 }
             }
+            bfl_apply_deposit_bonus_08 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_09_active = 0 }
@@ -179,6 +187,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_09_active = 0 }
                 change_variable = { name = bfl_dep_09_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_09_state value = 2 }
             }
+            bfl_apply_deposit_bonus_09 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_10_active = 0 }
@@ -199,6 +208,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_10_active = 0 }
                 change_variable = { name = bfl_dep_10_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_10_state value = 2 }
             }
+            bfl_apply_deposit_bonus_10 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_11_active = 0 }
@@ -219,6 +229,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_11_active = 0 }
                 change_variable = { name = bfl_dep_11_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_11_state value = 2 }
             }
+            bfl_apply_deposit_bonus_11 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_12_active = 0 }
@@ -239,6 +250,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_12_active = 0 }
                 change_variable = { name = bfl_dep_12_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_12_state value = 2 }
             }
+            bfl_apply_deposit_bonus_12 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_13_active = 0 }
@@ -259,6 +271,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_13_active = 0 }
                 change_variable = { name = bfl_dep_13_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_13_state value = 2 }
             }
+            bfl_apply_deposit_bonus_13 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_14_active = 0 }
@@ -279,6 +292,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_14_active = 0 }
                 change_variable = { name = bfl_dep_14_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_14_state value = 2 }
             }
+            bfl_apply_deposit_bonus_14 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_15_active = 0 }
@@ -299,6 +313,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_15_active = 0 }
                 change_variable = { name = bfl_dep_15_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_15_state value = 2 }
             }
+            bfl_apply_deposit_bonus_15 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_16_active = 0 }
@@ -319,6 +334,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_16_active = 0 }
                 change_variable = { name = bfl_dep_16_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_16_state value = 2 }
             }
+            bfl_apply_deposit_bonus_16 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_17_active = 0 }
@@ -339,6 +355,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_17_active = 0 }
                 change_variable = { name = bfl_dep_17_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_17_state value = 2 }
             }
+            bfl_apply_deposit_bonus_17 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_18_active = 0 }
@@ -359,6 +376,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_18_active = 0 }
                 change_variable = { name = bfl_dep_18_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_18_state value = 2 }
             }
+            bfl_apply_deposit_bonus_18 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_19_active = 0 }
@@ -379,6 +397,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_19_active = 0 }
                 change_variable = { name = bfl_dep_19_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_19_state value = 2 }
             }
+            bfl_apply_deposit_bonus_19 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_20_active = 0 }
@@ -399,6 +418,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_20_active = 0 }
                 change_variable = { name = bfl_dep_20_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_20_state value = 2 }
             }
+            bfl_apply_deposit_bonus_20 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_21_active = 0 }
@@ -419,6 +439,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_21_active = 0 }
                 change_variable = { name = bfl_dep_21_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_21_state value = 2 }
             }
+            bfl_apply_deposit_bonus_21 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_22_active = 0 }
@@ -439,6 +460,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_22_active = 0 }
                 change_variable = { name = bfl_dep_22_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_22_state value = 2 }
             }
+            bfl_apply_deposit_bonus_22 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_23_active = 0 }
@@ -459,6 +481,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_23_active = 0 }
                 change_variable = { name = bfl_dep_23_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_23_state value = 2 }
             }
+            bfl_apply_deposit_bonus_23 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_24_active = 0 }
@@ -479,6 +502,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_24_active = 0 }
                 change_variable = { name = bfl_dep_24_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_24_state value = 2 }
             }
+            bfl_apply_deposit_bonus_24 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_25_active = 0 }
@@ -499,6 +523,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_25_active = 0 }
                 change_variable = { name = bfl_dep_25_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_25_state value = 2 }
             }
+            bfl_apply_deposit_bonus_25 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_26_active = 0 }
@@ -519,6 +544,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_26_active = 0 }
                 change_variable = { name = bfl_dep_26_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_26_state value = 2 }
             }
+            bfl_apply_deposit_bonus_26 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_27_active = 0 }
@@ -539,6 +565,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_27_active = 0 }
                 change_variable = { name = bfl_dep_27_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_27_state value = 2 }
             }
+            bfl_apply_deposit_bonus_27 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_28_active = 0 }
@@ -559,6 +586,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_28_active = 0 }
                 change_variable = { name = bfl_dep_28_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_28_state value = 2 }
             }
+            bfl_apply_deposit_bonus_28 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_29_active = 0 }
@@ -579,6 +607,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_29_active = 0 }
                 change_variable = { name = bfl_dep_29_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_29_state value = 2 }
             }
+            bfl_apply_deposit_bonus_29 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_30_active = 0 }
@@ -599,6 +628,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_30_active = 0 }
                 change_variable = { name = bfl_dep_30_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_30_state value = 2 }
             }
+            bfl_apply_deposit_bonus_30 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_31_active = 0 }
@@ -619,6 +649,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_31_active = 0 }
                 change_variable = { name = bfl_dep_31_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_31_state value = 2 }
             }
+            bfl_apply_deposit_bonus_31 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_32_active = 0 }
@@ -639,6 +670,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_32_active = 0 }
                 change_variable = { name = bfl_dep_32_maturity_period add = 12 }
                 set_variable = { name = bfl_dep_32_state value = 2 }
             }
+            bfl_apply_deposit_bonus_32 = yes
             scope:bfl_party = { add_gold = -100 } add_gold = 100
         }
 }
@@ -646,7 +678,7 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_32_active = 0 }
     # Root bank, saved depositor bfl_party. Both wallets and slot capacity checked before mutation.
     bfl_open_deposit = {
         if = { limit = {
-            bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes
+            bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes bfl_depositor_access = yes
             var:bfl_accept_deposits = 1 exists = scope:bfl_party
             scope:bfl_party = { gold >= 100 NOT = { this = prev } }
             OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } }

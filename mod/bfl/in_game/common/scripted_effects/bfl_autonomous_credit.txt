@@ -1,0 +1,14 @@
+﻿bfl_autonomous_takeover = {
+if = { limit = { bfl_can_originate_native_takeover = yes bfl_period > var:bfl_last_takeover_period }
+        save_scope_as = bfl_bank
+        if = { limit = { exists = scope:bfl_party } scope:bfl_party = { save_scope_as = bfl_saved_takeover_party } }
+        set_variable = { name = bfl_last_takeover_period value = bfl_period }
+        set_variable = { name = bfl_takeover_done value = 0 }
+        every_country = {
+            limit = { country_type = location num_loans > 0 NOT = { this = scope:bfl_bank } scope:bfl_bank = { var:bfl_takeover_done = 0 } }
+            save_scope_as = bfl_party
+            scope:bfl_bank = { bfl_native_takeover = yes }
+        }
+        if = { limit = { exists = scope:bfl_saved_takeover_party } scope:bfl_saved_takeover_party = { save_scope_as = bfl_party } }
+    }
+}
