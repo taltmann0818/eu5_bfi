@@ -8,7 +8,10 @@
             blockoverride "income_text" { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_deposit_income_display')|2+=]@income!" } }type bfl_income_facility = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_facility_tip"
             blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/debt.dds" }
             blockoverride "label" { text = "bfl_debt_facility" }
-            blockoverride "income_text" { raw_text = "[Country.MakeScope.GetVariable('bfl_facility_paid').GetValue|2+=]@income!" } }
+            blockoverride "income_text" { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_custom_bond_financing_received')|2+=]@income!" } }type bfl_income_bond_coupons = budget_card { size = { -1 30 } layoutpolicy_horizontal = expanding tooltip = "bfl_bond_income_tip"
+            blockoverride "icon_texture" { texture = "gfx/interface/icons/bfl/bond.dds" }
+            blockoverride "label" { text = "bfl_bond_coupons" }
+            blockoverride "income_text" { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bond_income_display')|2+=]@income!" } }
         type bfl_sovereign_debt_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/debt.dds" } }
@@ -1635,4 +1638,267 @@
         bfl_credit_investment_body = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
         visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
         }
+        type bfl_sovereign_bond_controls = scrollarea {
+        size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_count'), '(CFixedPoint)0'))]"
+        scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
+        scrollwidget = { vbox = { layoutpolicy_horizontal = expanding spacing = 4 margin = { 5 5 }
+            vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_custom_bonds_title_tip"
+        widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            text_single = { parentanchor = center text = "bfl_custom_bonds_title" autoresize = yes } } text_single = { text = "bfl_custom_bond_totals" autoresize = yes fontsize = 12 }
+        text_single = { text = "bfl_custom_bond_flows" autoresize = yes fontsize = 11 }
+        hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_draw_bond_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_draw_bond_tip" text = "bfl_draw_bond"
+        enabled = "[GetScriptedGui('bfl_draw_bond').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_draw_bond').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_bond_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_offer_bond_tip" text = "bfl_offer_bond"
+        enabled = "[GetScriptedGui('bfl_offer_bond').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_offer_bond').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } }
+        button_regular = { name = "bfl_close_bond_offer_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_close_bond_offer_tip" text = "bfl_close_bond_offer"
+        enabled = "[GetScriptedGui('bfl_close_bond_offer').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_close_bond_offer').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }
+        hbox = { spacing = 4 layoutpolicy_horizontal = expanding
+            text_single = { text = "bfl_custom_bond_terms" autoresize = yes fontsize = 11 }
+            button_regular = { name = "bfl_bond_rate_1_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_bond_rate_1_tip" text = "bfl_bond_rate_1"
+        enabled = "[GetScriptedGui('bfl_bond_rate_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_bond_rate_1').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }button_regular = { name = "bfl_bond_rate_3_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_bond_rate_3_tip" text = "bfl_bond_rate_3"
+        enabled = "[GetScriptedGui('bfl_bond_rate_3').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_bond_rate_3').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    }button_regular = { name = "bfl_bond_rate_6_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_bond_rate_6_tip" text = "bfl_bond_rate_6"
+        enabled = "[GetScriptedGui('bfl_bond_rate_6').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_bond_rate_6').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }
+        hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_01').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_01" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_01_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_01_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_01').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_01').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_02').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_02" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_02_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_02_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_02').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_02').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_03').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_03" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_03_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_03_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_03').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_03').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_04').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_04" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_04_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_04_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_04').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_04').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_05').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_05" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_05_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_05_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_05').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_05').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_06').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_06" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_06_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_06_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_06').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_06').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_07').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_07" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_07_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_07_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_07').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_07').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_08').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_08" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_08_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_08_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_08').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_08').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_09').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_09" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_09_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_09_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_09').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_09').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_10').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_10" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_10_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_10_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_10').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_10').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_11').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_11" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_11_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_11_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_11').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_11').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_12').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_12" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_12_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_12_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_12').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_12').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_13').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_13" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_13_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_13_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_13').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_13').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_14').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_14" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_14_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_14_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_14').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_14').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_15').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_15" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_15_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_15_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_15').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_15').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_16').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_16" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_16_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_16_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_16').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_16').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_17').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_17" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_17_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_17_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_17').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_17').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_18').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_18" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_18_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_18_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_18').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_18').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_19').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_19" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_19_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_19_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_19').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_19').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_20').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_20" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_20_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_20_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_20').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_20').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_21').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_21" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_21_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_21_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_21').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_21').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_22').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_22" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_22_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_22_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_22').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_22').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_23').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_23" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_23_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_23_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_23').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_23').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_24').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_24" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_24_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_24_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_24').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_24').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_25').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_25" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_25_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_25_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_25').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_26').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_26" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_26_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_26_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_26').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_26').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_27').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_27" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_27_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_27_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_27').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_27').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_28').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_28" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_28_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_28_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_28').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_28').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_29').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_29" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_29_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_29_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_29').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_29').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_30').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_30" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_30_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_30_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_30').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_30').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_31').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_31" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_31_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_31_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_31').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_31').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_32').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = { text = "bfl_bond_row_32" autoresize = yes fontsize = 11 }
+            expand = { } button_regular = { name = "bfl_redeem_bond_32_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_redeem_bond_32_tip" text = "bfl_redeem_bond"
+        enabled = "[GetScriptedGui('bfl_redeem_bond_32').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_redeem_bond_32').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } } } } }
     }

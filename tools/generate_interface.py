@@ -117,8 +117,10 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         'status_2':'Withdrawals queued','status_3':'Insolvent','status_4':'In resolution','status_5':'Closed',
         'profile_0':'Choose a specialization','profile_1':'Merchant Finance','profile_2':'Overseas Investment',
         'balance_paid_tip':'Funded payment received at the last monthly settlement. These transfers are already in your treasury and must not be added again to the native income total.',
-        'facility_tip':'Monthly funding actually received. Native bond execution remains unavailable in this development build; an unfunded mandate pays zero.',
+        'facility_tip':'Bank cash actually received from custom sovereign bond issuance this month. Financing creates debt and is excluded from earned income.',
         'deposit_income_tip':'Demand interest actually paid this month by your chartered bank and independent banks. Unpaid interest remains owed. Principal withdrawals and capital contributions are excluded.',
+        'bond_coupons':'Sovereign Bond Coupons',
+        'bond_income_tip':'Custom sovereign bond coupons actually paid to you this month by their issuers. Principal redemptions and secondary sale proceeds are excluded.',
         'advanced_tip':'Research unlocks the mandate. The bank must also meet its specialization, liquidity and operating requirements. Unavailable execution remains disabled.',
     }
     for k,v in labels.items(): loc('bfl_'+k,v)
@@ -193,7 +195,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         sv += effect('bfl_'+field,body)
     common('script_values','interface_values',sv)
     balance_types=''
-    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',var('facility_paid'),'debt','facility_tip')]:
+    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',value('custom_bond_financing_received'),'debt','facility_tip'),('bond_coupons','bond_coupons',value('bond_income_display'),'bond','bond_income_tip')]:
         balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding tooltip = "bfl_{tip}"
             blockoverride "icon_texture" {{ texture = "gfx/interface/icons/bfl/{art}.dds" }}
             blockoverride "label" {{ text = "bfl_{title}" }}
@@ -309,6 +311,26 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         hbox = {{ spacing = 4 tooltip = "bfl_state_bonds_tip" {icon('bond',18)}
             text_single = {{ text = "bfl_state_bonds_value" autoresize = yes fontsize = 12 }} }}
     }}'''
+    bond_rows = ''
+    for index in range(1, 33):
+        bond_rows += f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 4
+            visible = "[GetScriptedGui('bfl_redeem_bond_{index:02}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            text_single = {{ text = "bfl_bond_row_{index:02}" autoresize = yes fontsize = 11 }}
+            expand = {{ }} {action(f'bfl_redeem_bond_{index:02}', 'bond', title='bfl_redeem_bond')} }}'''
+    bond_body = f'''text_single = {{ text = "bfl_custom_bond_totals" autoresize = yes fontsize = 12 }}
+        text_single = {{ text = "bfl_custom_bond_flows" autoresize = yes fontsize = 11 }}
+        {pair(action('bfl_draw_bond','bond'), action('bfl_offer_bond','bond'))}
+        {action('bfl_close_bond_offer','lock')}
+        hbox = {{ spacing = 4 layoutpolicy_horizontal = expanding
+            text_single = {{ text = "bfl_custom_bond_terms" autoresize = yes fontsize = 11 }}
+            {''.join(action(f'bfl_bond_rate_{rate}', 'bond') for rate in (1,3,6))} }}
+        {bond_rows}'''
+    bond_control = f'''type bfl_sovereign_bond_controls = scrollarea {{
+        size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_count'), '(CFixedPoint)0'))]"
+        scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
+        scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 margin = {{ 5 5 }}
+            {section('bfl_custom_bonds_title', bond_body)} }} }} }}'''
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
         {balance_types}
         {sovereign_tooltips}
@@ -319,6 +341,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         }}
         {controls('funding',funding)}
         {controls('investment',investments)}
+        {bond_control}
     }}''')
 
 
@@ -354,6 +377,8 @@ def build_credit(game, baseline, pin=False):
         at=view.index('blockoverride "image"',start)
         end=balanced_block(view,view.index('{',at))
         insertion=f'\n bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}\n'
+        if kind == 'funding':
+            insertion += '\n bfl_sovereign_bond_controls = { name = "bfl_sovereign_bond_controls" }\n'
         view=view[:end]+insertion+view[end:]
         changes.append(('',insertion))
     search_at=0

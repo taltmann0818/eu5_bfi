@@ -220,6 +220,8 @@ def permissions():
             gate.append(f'var:bfl_profile = {rule["profile"]}')
         if rule.get('charter'):
             gate.append('bfl_has_valid_controller = yes')
+        if rule.get('stock_exchange'):
+            gate.append('bfl_can_trade_sovereign_bonds = yes')
         if rule.get('advance') or rule.get('native_advance'):
             a = rule.get('native_advance') or 'bfl_'+rule['advance']
             gate.append(f'OR = {{ AND = {{ bfl_is_independent_bank = yes has_advance = {a} }} AND = {{ bfl_has_valid_controller = yes overlord = {{ has_advance = {a} }} }} }}')
@@ -570,7 +572,7 @@ def native_adapters():
     ''')
     # These are executable fail-closed commands, not guessed engine signatures.
     blocked = {
-        'native_bond_adapter': [('bfl_run_controller_bond_facility','P03'),('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
+        'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
         'native_goods_adapter':[('bfl_purchase_native_inventory','P09'),('bfl_sell_native_inventory','P09'),('bfl_settle_warehouse_receipt','P09'),('bfl_settle_commodity_forward','P09')],
         'native_trade_adapter':[('bfl_execute_company_trade','P11'),('bfl_fund_commenda','P11')],
         'native_receipts_adapter':[('bfl_observe_native_receipts','P07'),('bfl_subscribe_company_equity','P07')],
@@ -663,6 +665,7 @@ def treasury_and_resolution():
     common('scripted_effects','monthly_settlement','''
     bfl_process_accounts = {
         if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+        bfl_settle_held_sovereign_bonds = yes
             save_scope_as = bfl_bank
             bfl_reconcile_charter = yes
             bfl_reconcile_native_assets = yes
@@ -711,6 +714,7 @@ def hooks_and_commands():
     monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
     bfl_monthly_accounts = {
         effect = {
+            if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }
             if = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes bfl_offer_profile = yes }
             if = { limit = { bfl_has_accounts = yes } bfl_process_accounts = yes }
             if = { limit = { bfl_is_company = yes } bfl_process_company = yes }
@@ -860,9 +864,9 @@ def gui_and_localization():
     loc('bfl_monetary','Monetary policy and liquidity')
     loc('bfl_distress','Distress and development gates')
     loc('bfl_no_bank','Charter an existing State Bank through Decisions, or play an independent banking country. Your country must own its capital market to charter a bank.')
-    loc('bfl_dev_notice','Development build: native bond funding, holder payment routing, goods execution and receipt attribution require the documented in-game probes. Locked adapters never move cash. See docs/acceptance.md before testing.')
+    loc('bfl_dev_notice','Sovereign bonds use funded custom claims with fixed annual coupons. Physical goods, company receipts and advanced native adapters remain under development.')
     loc('bfl_accounts_explanation','Native treasury is cash. Deposits and notes are liabilities. Lending exchanges cash for an asset; principal, subscriptions and issuance are not profit.')
-    loc('bfl_debt_explanation','Use the Bank: purchase native estate loan diplomatic action to select a debtor. Native Credit remains available above. Bond funding, resale and restructuring are development gated pending P03–P06; no ordinary loan substitutes for a bond.')
+    loc('bfl_debt_explanation','The chartered bank funds custom sovereign bonds. Secondary selling and buying require Stock Exchange research and an owned Stock Exchange building. Native estate-loan takeover remains available; native origination and restructuring are development gated.')
     loc('bfl_goods_explanation','Funded native inventory, backed receipts and forwards require Merchant Finance, their advances and P09 execution/custody verification. Encumbered goods cannot back a second claim.')
     loc('bfl_ventures_explanation','Commenda starts in Discovery; native companies and company equity require Reformation. Political overlord control and financial ownership stay separate. Project capital is not a dividend.')
     loc('bfl_monetary_explanation','Bills precede sovereign notes. Notes require an authorized charter, Absolutism research and backing that excludes note-sale cash. Secured liquidity and clearing have later research and adapter gates.')
@@ -912,6 +916,8 @@ def main():
     generate_bank_accounts(common,effect,loc,write,TUNE)
     from generate_bank_charts import generate as generate_bank_charts
     generate_bank_charts(common,effect,loc,write)
+    from generate_sovereign_bonds import generate as generate_bonds
+    generate_bonds(common,effect,loc,TUNE)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

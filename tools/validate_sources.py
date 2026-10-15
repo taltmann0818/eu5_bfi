@@ -115,7 +115,7 @@ def main():
             check(data[84:88]==b'DXT5',f'Expected BC3/DXT5 texture: {path}')
     economy=(MOD/'in_game/gui/economy_lateralview.gui').read_text(encoding='utf-8-sig')
     types=(MOD/'in_game/gui/vanilla/bfl_economy_vanilla_types.gui').read_text(encoding='utf-8-sig')
-    for kind in ('dividends','interest','facility'):
+    for kind in ('dividends','interest','bond_coupons'):
         check(economy.count(f'name = "bfl_income_{kind}"')==1,f'Bank {kind} row must occur exactly once')
     check('layoutpolicy_horizontal = fixed\n\t\t\t\t\t\t\t\t\t\t\tsize = { 49%' not in economy,'Native budget columns must retain their layout')
     credit=(MOD/'in_game/gui/credit.gui').read_text(encoding='utf-8-sig')

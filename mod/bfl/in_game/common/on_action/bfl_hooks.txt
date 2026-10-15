@@ -5,6 +5,7 @@ bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
 monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
 bfl_monthly_accounts = {
     effect = {
+        if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }
         if = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes bfl_offer_profile = yes }
         if = { limit = { bfl_has_accounts = yes } bfl_process_accounts = yes }
         if = { limit = { bfl_is_company = yes } bfl_process_company = yes }

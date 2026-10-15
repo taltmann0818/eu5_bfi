@@ -1,0 +1,220 @@
+{
+  "recorded": "2026-10-15",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "runtime_sha256": "86c3ce0fc8e735e2b875f6ad9b798a92e0e730cff7ba4101bcb530d080c101d9",
+  "fixture_sha256": "59c0c75c52a37e2a55982860851a993f1e41d1a5e1b32ac2bb65d6c7ac93fa78",
+  "native_bank_funded_bond_passed": false,
+  "scope": "Immediate exploratory issuance/transfer observations only. Later survival/reload assertions did not pass and are not evidence for native persistence or settlement. Three country wallets and issuer estates were observed; this is not a world-wide funding-source attribution.",
+  "script": "c:FLO = { sell_bonds = {} every_loan = { limit = { is_bond = yes } change_loan_owner = c:BRD } }",
+  "assertions": {
+    "native_bond_created": "PASS",
+    "native_bond_owner_transfer": "FAIL"
+  },
+  "measurements": {
+    "before.FLO.cash": [
+      "10000"
+    ],
+    "before.FLO.bonds": [
+      "0"
+    ],
+    "before.FLO.capacity": [
+      "1"
+    ],
+    "before.FLO.face": [
+      "0"
+    ],
+    "before.FLO.rate": [
+      "0.05"
+    ],
+    "before.FLO.estate": [
+      "0",
+      "15.90737",
+      "7.11495",
+      "23.09018",
+      "0.06486"
+    ],
+    "before.BRD.cash": [
+      "10000"
+    ],
+    "before.BRD.bonds": [
+      "0"
+    ],
+    "before.BRD.capacity": [
+      "1"
+    ],
+    "before.BRD.face": [
+      "0"
+    ],
+    "before.BRD.rate": [
+      "0.05"
+    ],
+    "before.BRD.estate": [
+      "0",
+      "1.29272"
+    ],
+    "before.PRZ.cash": [
+      "10000"
+    ],
+    "before.PRZ.bonds": [
+      "0"
+    ],
+    "before.PRZ.capacity": [
+      "1"
+    ],
+    "before.PRZ.face": [
+      "0"
+    ],
+    "before.PRZ.rate": [
+      "0.05"
+    ],
+    "before.PRZ.estate": [
+      "0",
+      "0.87288"
+    ],
+    "issued.FLO.cash": [
+      "10075.32702"
+    ],
+    "issued.FLO.bonds": [
+      "1"
+    ],
+    "issued.FLO.capacity": [
+      "0"
+    ],
+    "issued.FLO.face": [
+      "75.32702"
+    ],
+    "issued.FLO.rate": [
+      "0.05"
+    ],
+    "issued.FLO.loan_amount": [
+      "75.32702"
+    ],
+    "issued.FLO.loan_interest": [
+      "0.05"
+    ],
+    "issued.FLO.remaining_debt": [
+      "75.32702"
+    ],
+    "issued.FLO.months_left": [
+      "0"
+    ],
+    "issued.FLO.estate": [
+      "0",
+      "15.90737",
+      "7.11495",
+      "23.09018",
+      "0.06486"
+    ],
+    "issued.BRD.cash": [
+      "10000"
+    ],
+    "issued.BRD.bonds": [
+      "0"
+    ],
+    "issued.BRD.capacity": [
+      "1"
+    ],
+    "issued.BRD.face": [
+      "0"
+    ],
+    "issued.BRD.rate": [
+      "0.05"
+    ],
+    "issued.BRD.estate": [
+      "0",
+      "1.29272"
+    ],
+    "issued.PRZ.cash": [
+      "10000"
+    ],
+    "issued.PRZ.bonds": [
+      "0"
+    ],
+    "issued.PRZ.capacity": [
+      "1"
+    ],
+    "issued.PRZ.face": [
+      "0"
+    ],
+    "issued.PRZ.rate": [
+      "0.05"
+    ],
+    "issued.PRZ.estate": [
+      "0",
+      "0.87288"
+    ],
+    "transferred.FLO.cash": [
+      "10075.32702"
+    ],
+    "transferred.FLO.bonds": [
+      "1"
+    ],
+    "transferred.FLO.capacity": [
+      "0"
+    ],
+    "transferred.FLO.face": [
+      "75.32702"
+    ],
+    "transferred.FLO.rate": [
+      "0.05"
+    ],
+    "transferred.FLO.loan_amount": [
+      "75.32702"
+    ],
+    "transferred.FLO.loan_interest": [
+      "0.05"
+    ],
+    "transferred.FLO.remaining_debt": [
+      "75.32702"
+    ],
+    "transferred.FLO.months_left": [
+      "0"
+    ],
+    "transferred.FLO.estate": [
+      "0",
+      "15.90737",
+      "7.11495",
+      "23.09018",
+      "0.06486"
+    ],
+    "transferred.BRD.cash": [
+      "10000"
+    ],
+    "transferred.BRD.bonds": [
+      "0"
+    ],
+    "transferred.BRD.capacity": [
+      "1"
+    ],
+    "transferred.BRD.face": [
+      "0"
+    ],
+    "transferred.BRD.rate": [
+      "0.05"
+    ],
+    "transferred.BRD.estate": [
+      "0",
+      "1.29272"
+    ],
+    "transferred.PRZ.cash": [
+      "10000"
+    ],
+    "transferred.PRZ.bonds": [
+      "0"
+    ],
+    "transferred.PRZ.capacity": [
+      "1"
+    ],
+    "transferred.PRZ.face": [
+      "0"
+    ],
+    "transferred.PRZ.rate": [
+      "0.05"
+    ],
+    "transferred.PRZ.estate": [
+      "0",
+      "0.87288"
+    ]
+  }
+}

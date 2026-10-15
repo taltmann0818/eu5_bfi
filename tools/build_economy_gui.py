@@ -38,11 +38,8 @@ def build(game, pin=False):
         raise ValueError('Native template manifest changed')
     anchor = '\t\t\t\t\t\t\t\t\t\t\t#tariff income'
     insert_pos = view.index(anchor)
-    insertion = '\n'.join(f'''\t\t\t\t\t\t\t\t\t\t\tbfl_income_{kind} = {{
-        name = "bfl_income_{kind}"
-        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
-        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    }}''' for kind in ('facility',))+'''
+    # Financing belongs in Credit's debt statement, never among earned income.
+    insertion = '''
         bfl_income_dividends = {
             name = "bfl_income_dividends" datacontext = "[GetPlayer]"
             visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_share_income_display'), '(CFixedPoint)0'))]"
@@ -50,6 +47,10 @@ def build(game, pin=False):
         bfl_income_interest = {
             name = "bfl_income_interest" datacontext = "[GetPlayer]"
             visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_deposit_income_display'), '(CFixedPoint)0')]"
+        }
+        bfl_income_bond_coupons = {
+            name = "bfl_income_bond_coupons" datacontext = "[GetPlayer]"
+            visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_income_display'), '(CFixedPoint)0')]"
         }
     '''+'\n\n'
     view = view[:insert_pos] + insertion + view[insert_pos:]

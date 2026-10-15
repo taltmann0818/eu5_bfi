@@ -43,7 +43,6 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_bond_underwriting = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-custom_tooltip = { text = bfl_probe_P03 always = no }
 }
 bfl_can_service_bond_underwriting = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -54,7 +53,7 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_debt_resale = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-custom_tooltip = { text = bfl_probe_P04 always = no }
+bfl_can_trade_sovereign_bonds = yes
 }
 bfl_can_service_debt_resale = {
 bfl_has_accounts = yes var:bfl_state < 5

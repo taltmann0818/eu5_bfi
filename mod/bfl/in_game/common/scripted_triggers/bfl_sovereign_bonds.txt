@@ -1,0 +1,27 @@
+﻿# A charter trades through its live research/controller country. Independent
+    # banks and other buyers need their own advance and their own built exchange.
+    bfl_owns_stock_exchange = {
+        has_advance = stock_exchange_advance
+        any_owned_location = { has_building = building_type:stock_exchange }
+    }
+    bfl_can_trade_sovereign_bonds = {
+        OR = {
+            AND = { country_type = location bfl_owns_stock_exchange = yes }
+            AND = { bfl_is_independent_bank = yes bfl_owns_stock_exchange = yes }
+            AND = { bfl_has_valid_controller = yes overlord = { bfl_owns_stock_exchange = yes } }
+        }
+        NOT = { has_variable = bfl_bond_guard }
+    }
+    bfl_can_draw_custom_bond = {
+        bfl_has_management = yes country_type = location
+        monthly_income_total > 0 bfl_bond_capacity >= 100 bfl_bond_arrears = 0
+        OR = { NOT = { has_variable = bfl_bond_schema } bfl_has_bond_slot = yes }
+        OR = { NOT = { has_variable = bfl_bond_last_issue } bfl_period > var:bfl_bond_last_issue }
+        monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = 100 multiply = bfl_bond_new_rate divide = 12 } multiply = 4 }
+        var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
+            bfl_free_cash >= 100 bfl_capital_headroom >= 100 NOT = { has_variable = bfl_bond_guard } }
+        NOT = { has_variable = bfl_bond_guard }
+    }
+    bfl_has_bond_slot = {
+OR = { var:bfl_bnd_01_active = 0 var:bfl_bnd_02_active = 0 var:bfl_bnd_03_active = 0 var:bfl_bnd_04_active = 0 var:bfl_bnd_05_active = 0 var:bfl_bnd_06_active = 0 var:bfl_bnd_07_active = 0 var:bfl_bnd_08_active = 0 var:bfl_bnd_09_active = 0 var:bfl_bnd_10_active = 0 var:bfl_bnd_11_active = 0 var:bfl_bnd_12_active = 0 var:bfl_bnd_13_active = 0 var:bfl_bnd_14_active = 0 var:bfl_bnd_15_active = 0 var:bfl_bnd_16_active = 0 var:bfl_bnd_17_active = 0 var:bfl_bnd_18_active = 0 var:bfl_bnd_19_active = 0 var:bfl_bnd_20_active = 0 var:bfl_bnd_21_active = 0 var:bfl_bnd_22_active = 0 var:bfl_bnd_23_active = 0 var:bfl_bnd_24_active = 0 var:bfl_bnd_25_active = 0 var:bfl_bnd_26_active = 0 var:bfl_bnd_27_active = 0 var:bfl_bnd_28_active = 0 var:bfl_bnd_29_active = 0 var:bfl_bnd_30_active = 0 var:bfl_bnd_31_active = 0 var:bfl_bnd_32_active = 0 }
+}

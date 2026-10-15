@@ -1,0 +1,30 @@
+﻿bfl_offer_held_sovereign_bond = {
+    type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+    potential = { scope:actor = { bfl_can_trade_sovereign_bonds = yes } }
+    allow = { scope:actor = { bfl_can_trade_sovereign_bonds = yes } }
+    select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+        column = { data = country_diplomacy_info_loan }
+        visible = { has_variable = bfl_bond_schema }
+        enabled = { has_variable = bfl_bond_schema }
+    }
+    effect = { scope:actor = { save_scope_as = bfl_bond_underwriter }
+        scope:recipient = { bfl_list_owned_sovereign_bond = yes } }
+    ai_will_do = { value = 0 }
+}
+bfl_buy_sovereign_bond = {
+    type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = monthly ai_tick_frequency = 3
+    potential = { scope:actor = { bfl_can_trade_sovereign_bonds = yes } }
+    allow = { scope:actor = { bfl_can_trade_sovereign_bonds = yes } }
+    select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+        column = { data = country_diplomacy_info_loan }
+        visible = { has_variable = bfl_bond_schema }
+        enabled = { var:bfl_bond_offer_slot > 0 bfl_period <= var:bfl_bond_offer_expiry
+            scope:actor = { gold >= scope:recipient.var:bfl_bond_offer_price } }
+    }
+    effect = { scope:actor = { save_scope_as = bfl_bond_buyer }
+        scope:recipient = { bfl_accept_sovereign_bond_offer = yes } }
+    ai_will_do = { value = 0 if = { limit = {
+        scope:actor = { bfl_is_bank = yes bfl_can_conduct_business = yes bfl_free_cash > 500
+            opinion = { target = scope:recipient value >= 50 } }
+        scope:recipient = { bfl_bond_arrears = 0 monthly_balance > 0 } } add = 5 } }
+}

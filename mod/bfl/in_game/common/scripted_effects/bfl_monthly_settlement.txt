@@ -1,5 +1,6 @@
 ﻿bfl_process_accounts = {
     if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+    bfl_settle_held_sovereign_bonds = yes
         save_scope_as = bfl_bank
         bfl_reconcile_charter = yes
         bfl_reconcile_native_assets = yes

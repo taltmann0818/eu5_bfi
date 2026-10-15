@@ -1,0 +1,35 @@
+# Funded sovereign bonds
+
+On 15 October 2026 the design changed, with the user's authorization, from native government bonds to custom sovereign bonds. The [native experiment](../tests/results/2026-10-15-native-bond-audit.json) created a government bond with `sell_bonds = {}`, but `change_loan_owner` did not establish a country creditor. Native issuance credited the issuer while the observed bank and issuer-estate wallets stayed unchanged. These findings do not establish a bank-funded native transaction or native current-holder coupon routing. The custom path calls neither native issuance nor native redemption; existing native debts remain separate.
+
+## Transactions and terms
+
+The issuer owns a bounded ledger of 32 perpetual bonds. A bond is identified by issuer, slot and monotonically increasing generation. Its current holder, face, acquisition basis, accepted annual coupon, unpaid coupons, fractional-cent carry and last accrual period persist in the save. Issuer storage keeps obligations independent of a bank's later controller or specialization. Missing holders preserve the obligation and suspend payment; no fallback recipient is selected.
+
+Both bank profiles can underwrite their live landed controller. One issue per issuer and accounting month is permitted, with at most 100 gold transferred. The bank pays actual reserve-protected cash and receives an asset; the sovereign receives the same amount and records debt. Neither party recognizes issuance as profit. Primary issuance does not require Stock Exchange research.
+
+The default coupon is 3% annually. Credit offers 1%, 3% and 6% for **new** bonds; existing bonds retain their rate. Monthly accrual uses `face × annual rate × elapsed months + remainder`, divides by 12, rounds down to cents and carries the unused annual numerator. Paid coupons become realized bank credit income; unpaid coupons remain owed and block new issuance and trading. Monthly replay and save loading cannot accrue the same month twice. Redemption pays face plus accrued whole-cent coupons to the current holder, then closes the obligation. A fractional cent below the settlement unit is discarded when a bond closes.
+
+Debt headroom is `max(100, 24 × native monthly income) − custom face − native total debt`, floored at zero. New issues require positive native income; custom coupons including the new issue cannot exceed 25% of that income. Bank free cash and conservative capital headroom must both cover the entire issue. These are tuning choices, not campaign-balance conclusions. Custom coupons and bond receipts do not increase the native-income capacity calculation.
+
+## Recurring facility
+
+The facility defaults off. Debt first requests 60% of native forecast spending (`income − monthly balance`). Buffer requests enough cash to reach 200 gold after the native forecast balance. Both cap an issue at 100 gold and skip draws at 500 state gold. A shortfall, full ledger, arrears, authority change or capacity failure creates no debt and transfers no money. Manual and scheduled draws share the same monthly issue stamp.
+
+Native forecasts do not include mod-owned coupon outflows; the separate coupon burden and debt limits constrain the request. Broader long-run fiscal tuning and integration with native AI bankruptcy/creditworthiness remain work for M9/M10.
+
+## Secondary market
+
+**Selling and buying each require the native `stock_exchange_advance` and an owned location with a built native `stock_exchange`.** A chartered bank uses its live controller's research and building; an independent bank or sovereign buyer needs its own. Losing the building or research after listing blocks acceptance. These checks apply in the transaction service as well as the interface.
+
+The controller can offer a bank-held bond from Credit. Other holders use **Offer a held sovereign bond** and select the issuer. One offering per issuer is open at a time, expires after three months, and quotes the whole bond at 98% of face. This is an initial pricing rule, not guaranteed market demand. The offering records the seller, slot, generation, price and expiry. It cannot replace a different holder's unexpired offering.
+
+**Buy an offered sovereign bond** selects an issuer. Execution rechecks both parties' exchange access, live holder/generation, expiry, unpaid coupons and the buyer's full payment. Bank buyers additionally need operating, free-cash and capital capacity. The buyer pays the seller; the issuer receives zero. Face and coupon remain unchanged. The new holder's carrying basis is the actual price. Bank resale recognizes the difference from the seller's basis as gain or carried loss; bank redemption recognizes only the difference from basis as gain. Quote replay or a recycled slot cannot create another transfer.
+
+The bank's asset donut includes custom bonds by issuer at acquisition cost, alongside native loan assets. Each held bond contributes to fixed contract administration costs. Credit shows custom outstanding principal, coupon burden, arrears, monthly financing, coupon payments, redemptions and individual current holders. Balance shows funded coupons received separately from deposit interest and dividends. Bond financing is identified as debt, not earned income.
+
+## Evidence and remaining scope
+
+The licensed Florence suite exercises funded issuance, both profiles, prospective fixed rates, coupons and shortfalls, year-long cent conservation, monthly facility replay, Stock Exchange research-only/building-only failures, loss of either party's building after listing, expired/stale offers, funded secondary transfer, a subsequent offering by the buyer, current-holder coupons/redemption, slot generations and a second-process reload. Current results are linked from [campaign checks](campaign_checks.md).
+
+This implements the sovereign-bond branch. Native ordinary-loan origination/restructuring, native-claim resale, security/guarantees, full holder/issuer annexation workouts, multiplayer and broad AI/performance campaigns retain their separate gates. P09 physical goods and P07/P11 company/project receipts are not proved by a successful bond fixture; the complete M0 milestone remains subject to its other probes.

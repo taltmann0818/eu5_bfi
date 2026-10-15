@@ -1645,11 +1645,7 @@
 												}
 											}
 
-											bfl_income_facility = {
-        name = "bfl_income_facility"
-        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
-        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    }
+
         bfl_income_dividends = {
             name = "bfl_income_dividends" datacontext = "[GetPlayer]"
             visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_share_income_display'), '(CFixedPoint)0'))]"
@@ -1657,6 +1653,10 @@
         bfl_income_interest = {
             name = "bfl_income_interest" datacontext = "[GetPlayer]"
             visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_deposit_income_display'), '(CFixedPoint)0')]"
+        }
+        bfl_income_bond_coupons = {
+            name = "bfl_income_bond_coupons" datacontext = "[GetPlayer]"
+            visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_income_display'), '(CFixedPoint)0')]"
         }
     
 

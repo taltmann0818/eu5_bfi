@@ -201,6 +201,9 @@ def fixture(token, fingerprint):
     start += 'c:FLO = { research_advance = advance_type:banking_advance }\n'
     start += check('banking_does_not_research_bills_or_restructuring', 'c:FLO = { NOT = { has_advance = bfl_commercial_bills } NOT = { has_advance = bfl_debt_restructuring } }')
     start += check('banking_keeps_renaissance_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes } NOT = { bfl_can_originate_bank_subscription = yes }')
+    start += reset()
+    from sovereign_bond_checks import instant as bond_checks
+    start += bond_checks(check)
     # Keep the charter fixture for the natural monthly and persistence checks.
     start += reset() + '''c:FLO = { set_gold = 1000 save_scope_as = bfl_party }
         set_variable = { name = bfl_product value = 1 }
@@ -245,6 +248,7 @@ def write_script(path, body):
 
 
 def reload_fixture(token, fingerprint):
+    from sovereign_bond_checks import RELOAD_CHECKS
     checks = {
         'reload_sentinel': 'var:bfi_test_sentinel = 731 has_variable = bfi_test_started',
         'reload_schema': 'var:bfl_schema = 1',
@@ -253,6 +257,7 @@ def reload_fixture(token, fingerprint):
         'reload_live_controller': 'bfl_has_valid_controller = yes',
         'reload_native_banking_unlocks': 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }',
         'reload_expense_history': 'var:bfl_expense_history_count > 0 var:bfl_expense_history_12 > 0 var:bfl_expense_history_period <= bfl_period',
+        **RELOAD_CHECKS,
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'
     for name, condition in checks.items():

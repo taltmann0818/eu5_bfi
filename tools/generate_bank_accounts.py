@@ -104,6 +104,8 @@ def generate(common, effect, loc, write, tune):
         counter = 'value = 0\n'
         for index in range(1, count + 1):
             counter += f'if = {{ limit = {{ var:bfl_{prefix}_{index:02}_active = 1 }} add = 1 }}\n'
+        if name == 'contracts':
+            counter += 'add = var:bfl_custom_bond_count\n'
         operations += effect(f'bfl_operating_{name}_count', counter)
         operations += effect(f'bfl_operating_{name}_cost', f'value = bfl_operating_{name}_count multiply = {tune[setting]}')
         complexity += f'add = bfl_operating_{name}_cost\n'

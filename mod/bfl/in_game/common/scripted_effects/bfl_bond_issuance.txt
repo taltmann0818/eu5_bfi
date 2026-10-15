@@ -1,0 +1,440 @@
+﻿bfl_allocate_sovereign_bond = {
+set_variable = { name = bfl_bond_allocated value = 0 }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_01_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 1 }
+            set_variable = { name = bfl_bnd_01_active value = 1 }
+            change_variable = { name = bfl_bnd_01_generation add = 1 }
+            set_variable = { name = bfl_bnd_01_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_01_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_01_basis value = var:bfl_bnd_01_face }
+            set_variable = { name = bfl_bnd_01_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_01_due value = 0 }
+            set_variable = { name = bfl_bnd_01_remainder value = 0 }
+            set_variable = { name = bfl_bnd_01_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_02_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 2 }
+            set_variable = { name = bfl_bnd_02_active value = 1 }
+            change_variable = { name = bfl_bnd_02_generation add = 1 }
+            set_variable = { name = bfl_bnd_02_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_02_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_02_basis value = var:bfl_bnd_02_face }
+            set_variable = { name = bfl_bnd_02_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_02_due value = 0 }
+            set_variable = { name = bfl_bnd_02_remainder value = 0 }
+            set_variable = { name = bfl_bnd_02_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_03_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 3 }
+            set_variable = { name = bfl_bnd_03_active value = 1 }
+            change_variable = { name = bfl_bnd_03_generation add = 1 }
+            set_variable = { name = bfl_bnd_03_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_03_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_03_basis value = var:bfl_bnd_03_face }
+            set_variable = { name = bfl_bnd_03_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_03_due value = 0 }
+            set_variable = { name = bfl_bnd_03_remainder value = 0 }
+            set_variable = { name = bfl_bnd_03_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_04_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 4 }
+            set_variable = { name = bfl_bnd_04_active value = 1 }
+            change_variable = { name = bfl_bnd_04_generation add = 1 }
+            set_variable = { name = bfl_bnd_04_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_04_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_04_basis value = var:bfl_bnd_04_face }
+            set_variable = { name = bfl_bnd_04_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_04_due value = 0 }
+            set_variable = { name = bfl_bnd_04_remainder value = 0 }
+            set_variable = { name = bfl_bnd_04_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_05_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 5 }
+            set_variable = { name = bfl_bnd_05_active value = 1 }
+            change_variable = { name = bfl_bnd_05_generation add = 1 }
+            set_variable = { name = bfl_bnd_05_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_05_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_05_basis value = var:bfl_bnd_05_face }
+            set_variable = { name = bfl_bnd_05_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_05_due value = 0 }
+            set_variable = { name = bfl_bnd_05_remainder value = 0 }
+            set_variable = { name = bfl_bnd_05_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_06_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 6 }
+            set_variable = { name = bfl_bnd_06_active value = 1 }
+            change_variable = { name = bfl_bnd_06_generation add = 1 }
+            set_variable = { name = bfl_bnd_06_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_06_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_06_basis value = var:bfl_bnd_06_face }
+            set_variable = { name = bfl_bnd_06_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_06_due value = 0 }
+            set_variable = { name = bfl_bnd_06_remainder value = 0 }
+            set_variable = { name = bfl_bnd_06_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_07_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 7 }
+            set_variable = { name = bfl_bnd_07_active value = 1 }
+            change_variable = { name = bfl_bnd_07_generation add = 1 }
+            set_variable = { name = bfl_bnd_07_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_07_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_07_basis value = var:bfl_bnd_07_face }
+            set_variable = { name = bfl_bnd_07_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_07_due value = 0 }
+            set_variable = { name = bfl_bnd_07_remainder value = 0 }
+            set_variable = { name = bfl_bnd_07_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_08_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 8 }
+            set_variable = { name = bfl_bnd_08_active value = 1 }
+            change_variable = { name = bfl_bnd_08_generation add = 1 }
+            set_variable = { name = bfl_bnd_08_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_08_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_08_basis value = var:bfl_bnd_08_face }
+            set_variable = { name = bfl_bnd_08_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_08_due value = 0 }
+            set_variable = { name = bfl_bnd_08_remainder value = 0 }
+            set_variable = { name = bfl_bnd_08_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_09_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 9 }
+            set_variable = { name = bfl_bnd_09_active value = 1 }
+            change_variable = { name = bfl_bnd_09_generation add = 1 }
+            set_variable = { name = bfl_bnd_09_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_09_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_09_basis value = var:bfl_bnd_09_face }
+            set_variable = { name = bfl_bnd_09_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_09_due value = 0 }
+            set_variable = { name = bfl_bnd_09_remainder value = 0 }
+            set_variable = { name = bfl_bnd_09_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_10_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 10 }
+            set_variable = { name = bfl_bnd_10_active value = 1 }
+            change_variable = { name = bfl_bnd_10_generation add = 1 }
+            set_variable = { name = bfl_bnd_10_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_10_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_10_basis value = var:bfl_bnd_10_face }
+            set_variable = { name = bfl_bnd_10_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_10_due value = 0 }
+            set_variable = { name = bfl_bnd_10_remainder value = 0 }
+            set_variable = { name = bfl_bnd_10_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_11_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 11 }
+            set_variable = { name = bfl_bnd_11_active value = 1 }
+            change_variable = { name = bfl_bnd_11_generation add = 1 }
+            set_variable = { name = bfl_bnd_11_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_11_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_11_basis value = var:bfl_bnd_11_face }
+            set_variable = { name = bfl_bnd_11_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_11_due value = 0 }
+            set_variable = { name = bfl_bnd_11_remainder value = 0 }
+            set_variable = { name = bfl_bnd_11_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_12_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 12 }
+            set_variable = { name = bfl_bnd_12_active value = 1 }
+            change_variable = { name = bfl_bnd_12_generation add = 1 }
+            set_variable = { name = bfl_bnd_12_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_12_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_12_basis value = var:bfl_bnd_12_face }
+            set_variable = { name = bfl_bnd_12_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_12_due value = 0 }
+            set_variable = { name = bfl_bnd_12_remainder value = 0 }
+            set_variable = { name = bfl_bnd_12_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_13_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 13 }
+            set_variable = { name = bfl_bnd_13_active value = 1 }
+            change_variable = { name = bfl_bnd_13_generation add = 1 }
+            set_variable = { name = bfl_bnd_13_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_13_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_13_basis value = var:bfl_bnd_13_face }
+            set_variable = { name = bfl_bnd_13_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_13_due value = 0 }
+            set_variable = { name = bfl_bnd_13_remainder value = 0 }
+            set_variable = { name = bfl_bnd_13_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_14_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 14 }
+            set_variable = { name = bfl_bnd_14_active value = 1 }
+            change_variable = { name = bfl_bnd_14_generation add = 1 }
+            set_variable = { name = bfl_bnd_14_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_14_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_14_basis value = var:bfl_bnd_14_face }
+            set_variable = { name = bfl_bnd_14_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_14_due value = 0 }
+            set_variable = { name = bfl_bnd_14_remainder value = 0 }
+            set_variable = { name = bfl_bnd_14_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_15_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 15 }
+            set_variable = { name = bfl_bnd_15_active value = 1 }
+            change_variable = { name = bfl_bnd_15_generation add = 1 }
+            set_variable = { name = bfl_bnd_15_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_15_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_15_basis value = var:bfl_bnd_15_face }
+            set_variable = { name = bfl_bnd_15_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_15_due value = 0 }
+            set_variable = { name = bfl_bnd_15_remainder value = 0 }
+            set_variable = { name = bfl_bnd_15_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_16_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 16 }
+            set_variable = { name = bfl_bnd_16_active value = 1 }
+            change_variable = { name = bfl_bnd_16_generation add = 1 }
+            set_variable = { name = bfl_bnd_16_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_16_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_16_basis value = var:bfl_bnd_16_face }
+            set_variable = { name = bfl_bnd_16_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_16_due value = 0 }
+            set_variable = { name = bfl_bnd_16_remainder value = 0 }
+            set_variable = { name = bfl_bnd_16_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_17_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 17 }
+            set_variable = { name = bfl_bnd_17_active value = 1 }
+            change_variable = { name = bfl_bnd_17_generation add = 1 }
+            set_variable = { name = bfl_bnd_17_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_17_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_17_basis value = var:bfl_bnd_17_face }
+            set_variable = { name = bfl_bnd_17_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_17_due value = 0 }
+            set_variable = { name = bfl_bnd_17_remainder value = 0 }
+            set_variable = { name = bfl_bnd_17_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_18_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 18 }
+            set_variable = { name = bfl_bnd_18_active value = 1 }
+            change_variable = { name = bfl_bnd_18_generation add = 1 }
+            set_variable = { name = bfl_bnd_18_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_18_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_18_basis value = var:bfl_bnd_18_face }
+            set_variable = { name = bfl_bnd_18_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_18_due value = 0 }
+            set_variable = { name = bfl_bnd_18_remainder value = 0 }
+            set_variable = { name = bfl_bnd_18_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_19_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 19 }
+            set_variable = { name = bfl_bnd_19_active value = 1 }
+            change_variable = { name = bfl_bnd_19_generation add = 1 }
+            set_variable = { name = bfl_bnd_19_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_19_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_19_basis value = var:bfl_bnd_19_face }
+            set_variable = { name = bfl_bnd_19_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_19_due value = 0 }
+            set_variable = { name = bfl_bnd_19_remainder value = 0 }
+            set_variable = { name = bfl_bnd_19_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_20_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 20 }
+            set_variable = { name = bfl_bnd_20_active value = 1 }
+            change_variable = { name = bfl_bnd_20_generation add = 1 }
+            set_variable = { name = bfl_bnd_20_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_20_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_20_basis value = var:bfl_bnd_20_face }
+            set_variable = { name = bfl_bnd_20_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_20_due value = 0 }
+            set_variable = { name = bfl_bnd_20_remainder value = 0 }
+            set_variable = { name = bfl_bnd_20_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_21_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 21 }
+            set_variable = { name = bfl_bnd_21_active value = 1 }
+            change_variable = { name = bfl_bnd_21_generation add = 1 }
+            set_variable = { name = bfl_bnd_21_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_21_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_21_basis value = var:bfl_bnd_21_face }
+            set_variable = { name = bfl_bnd_21_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_21_due value = 0 }
+            set_variable = { name = bfl_bnd_21_remainder value = 0 }
+            set_variable = { name = bfl_bnd_21_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_22_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 22 }
+            set_variable = { name = bfl_bnd_22_active value = 1 }
+            change_variable = { name = bfl_bnd_22_generation add = 1 }
+            set_variable = { name = bfl_bnd_22_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_22_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_22_basis value = var:bfl_bnd_22_face }
+            set_variable = { name = bfl_bnd_22_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_22_due value = 0 }
+            set_variable = { name = bfl_bnd_22_remainder value = 0 }
+            set_variable = { name = bfl_bnd_22_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_23_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 23 }
+            set_variable = { name = bfl_bnd_23_active value = 1 }
+            change_variable = { name = bfl_bnd_23_generation add = 1 }
+            set_variable = { name = bfl_bnd_23_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_23_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_23_basis value = var:bfl_bnd_23_face }
+            set_variable = { name = bfl_bnd_23_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_23_due value = 0 }
+            set_variable = { name = bfl_bnd_23_remainder value = 0 }
+            set_variable = { name = bfl_bnd_23_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_24_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 24 }
+            set_variable = { name = bfl_bnd_24_active value = 1 }
+            change_variable = { name = bfl_bnd_24_generation add = 1 }
+            set_variable = { name = bfl_bnd_24_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_24_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_24_basis value = var:bfl_bnd_24_face }
+            set_variable = { name = bfl_bnd_24_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_24_due value = 0 }
+            set_variable = { name = bfl_bnd_24_remainder value = 0 }
+            set_variable = { name = bfl_bnd_24_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_25_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 25 }
+            set_variable = { name = bfl_bnd_25_active value = 1 }
+            change_variable = { name = bfl_bnd_25_generation add = 1 }
+            set_variable = { name = bfl_bnd_25_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_25_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_25_basis value = var:bfl_bnd_25_face }
+            set_variable = { name = bfl_bnd_25_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_25_due value = 0 }
+            set_variable = { name = bfl_bnd_25_remainder value = 0 }
+            set_variable = { name = bfl_bnd_25_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_26_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 26 }
+            set_variable = { name = bfl_bnd_26_active value = 1 }
+            change_variable = { name = bfl_bnd_26_generation add = 1 }
+            set_variable = { name = bfl_bnd_26_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_26_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_26_basis value = var:bfl_bnd_26_face }
+            set_variable = { name = bfl_bnd_26_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_26_due value = 0 }
+            set_variable = { name = bfl_bnd_26_remainder value = 0 }
+            set_variable = { name = bfl_bnd_26_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_27_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 27 }
+            set_variable = { name = bfl_bnd_27_active value = 1 }
+            change_variable = { name = bfl_bnd_27_generation add = 1 }
+            set_variable = { name = bfl_bnd_27_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_27_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_27_basis value = var:bfl_bnd_27_face }
+            set_variable = { name = bfl_bnd_27_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_27_due value = 0 }
+            set_variable = { name = bfl_bnd_27_remainder value = 0 }
+            set_variable = { name = bfl_bnd_27_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_28_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 28 }
+            set_variable = { name = bfl_bnd_28_active value = 1 }
+            change_variable = { name = bfl_bnd_28_generation add = 1 }
+            set_variable = { name = bfl_bnd_28_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_28_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_28_basis value = var:bfl_bnd_28_face }
+            set_variable = { name = bfl_bnd_28_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_28_due value = 0 }
+            set_variable = { name = bfl_bnd_28_remainder value = 0 }
+            set_variable = { name = bfl_bnd_28_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_29_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 29 }
+            set_variable = { name = bfl_bnd_29_active value = 1 }
+            change_variable = { name = bfl_bnd_29_generation add = 1 }
+            set_variable = { name = bfl_bnd_29_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_29_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_29_basis value = var:bfl_bnd_29_face }
+            set_variable = { name = bfl_bnd_29_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_29_due value = 0 }
+            set_variable = { name = bfl_bnd_29_remainder value = 0 }
+            set_variable = { name = bfl_bnd_29_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_30_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 30 }
+            set_variable = { name = bfl_bnd_30_active value = 1 }
+            change_variable = { name = bfl_bnd_30_generation add = 1 }
+            set_variable = { name = bfl_bnd_30_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_30_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_30_basis value = var:bfl_bnd_30_face }
+            set_variable = { name = bfl_bnd_30_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_30_due value = 0 }
+            set_variable = { name = bfl_bnd_30_remainder value = 0 }
+            set_variable = { name = bfl_bnd_30_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_31_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 31 }
+            set_variable = { name = bfl_bnd_31_active value = 1 }
+            change_variable = { name = bfl_bnd_31_generation add = 1 }
+            set_variable = { name = bfl_bnd_31_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_31_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_31_basis value = var:bfl_bnd_31_face }
+            set_variable = { name = bfl_bnd_31_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_31_due value = 0 }
+            set_variable = { name = bfl_bnd_31_remainder value = 0 }
+            set_variable = { name = bfl_bnd_31_last_accrual value = bfl_period }
+        }
+if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
+            set_variable = { name = bfl_bond_allocated value = 32 }
+            set_variable = { name = bfl_bnd_32_active value = 1 }
+            change_variable = { name = bfl_bnd_32_generation add = 1 }
+            set_variable = { name = bfl_bnd_32_holder value = scope:bfl_bond_underwriter }
+            set_variable = { name = bfl_bnd_32_face value = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+            set_variable = { name = bfl_bnd_32_basis value = var:bfl_bnd_32_face }
+            set_variable = { name = bfl_bnd_32_rate value = var:bfl_bond_rate }
+            set_variable = { name = bfl_bnd_32_due value = 0 }
+            set_variable = { name = bfl_bnd_32_remainder value = 0 }
+            set_variable = { name = bfl_bnd_32_last_accrual value = bfl_period }
+        }
+}
+
+    # Root bank. Only its live landed controller can be the primary issuer.
+    bfl_underwrite_sovereign_bond = {
+        if = { limit = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
+            NOT = { has_variable = bfl_bond_guard }
+            var:bfl_bond_amount > 0 var:bfl_bond_amount <= 100
+            bfl_free_cash >= var:bfl_bond_amount bfl_capital_headroom >= var:bfl_bond_amount
+        }
+            save_scope_as = bfl_bond_underwriter
+            overlord = { bfl_initialize_bonds = yes save_scope_as = bfl_bond_issuer }
+            if = { limit = { scope:bfl_bond_issuer = {
+                country_type = location monthly_income_total > 0 bfl_has_bond_slot = yes bfl_bond_arrears = 0
+                monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = scope:bfl_bond_underwriter.var:bfl_bond_amount multiply = var:bfl_bond_rate divide = 12 } multiply = 4 }
+                bfl_bond_capacity >= scope:bfl_bond_underwriter.var:bfl_bond_amount
+                bfl_period > var:bfl_bond_last_issue NOT = { has_variable = bfl_bond_guard }
+                var:bfl_bond_rate >= 0.01 var:bfl_bond_rate <= 0.06
+            } }
+                set_variable = bfl_bond_guard
+                scope:bfl_bond_issuer = {
+                    set_variable = bfl_bond_guard
+                    bfl_allocate_sovereign_bond = yes
+                    add_gold = scope:bfl_bond_underwriter.var:bfl_bond_amount
+                    set_variable = { name = bfl_bond_last_issue value = bfl_period }
+                    if = { limit = { var:bfl_bond_financing_period != bfl_period }
+                        set_variable = { name = bfl_bond_financing_period value = bfl_period }
+                        set_variable = { name = bfl_bond_financing value = 0 } }
+                    change_variable = { name = bfl_bond_financing add = scope:bfl_bond_underwriter.var:bfl_bond_amount }
+                    remove_variable = bfl_bond_guard
+                }
+                add_gold = { value = var:bfl_bond_amount multiply = -1 }
+                set_variable = { name = bfl_facility_paid value = var:bfl_bond_amount }
+                set_variable = { name = bfl_facility_blocked value = 0 }
+                remove_variable = bfl_bond_guard
+                bfl_refresh_asset_statement = yes
+            }
+        }
+    }
+    bfl_run_controller_bond_facility = {
+        set_variable = { name = bfl_facility_paid value = 0 }
+        set_variable = { name = bfl_facility_blocked value = 1 }
+        if = { limit = { bfl_has_valid_controller = yes var:bfl_facility_mode > 0 }
+            save_scope_as = bfl_bond_underwriter
+            overlord = {
+                set_variable = { name = bfl_bond_target value = { value = monthly_income_total subtract = monthly_balance min = 0 multiply = 0.6 } }
+                if = { limit = { scope:bfl_bond_underwriter.var:bfl_facility_mode = 2 }
+                    set_variable = { name = bfl_bond_target value = { value = 200 subtract = gold subtract = monthly_balance min = 0 } } }
+                if = { limit = { gold >= 500 } set_variable = { name = bfl_bond_target value = 0 } }
+            }
+            set_variable = { name = bfl_bond_amount value = { value = overlord.var:bfl_bond_target max = 100 multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_facility_requested value = var:bfl_bond_amount }
+            bfl_underwrite_sovereign_bond = yes
+        }
+    }

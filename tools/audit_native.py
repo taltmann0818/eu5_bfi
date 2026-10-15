@@ -15,6 +15,7 @@ SOURCES=[
  'in_game/common/country_interactions/take_over_loan.txt','in_game/common/country_interactions/request_loan.txt',
  'in_game/common/country_interactions/siphon_income.txt','in_game/common/script_values/bank_loan_takeover.txt',
  'in_game/common/building_types/trade_company_buildings.txt','in_game/common/building_types/unique_buildings.txt',
+ 'in_game/common/building_types/market_buildings.txt','in_game/common/advances/1_building_unlocks.txt',
  'in_game/common/advances/0_age_of_renaissance.txt','in_game/common/scripted_guis/scripted_guis.info',
  'in_game/common/on_action/_hardcoded.txt','main_menu/common/modifier_type_definitions/00_modifier_types.txt'
 ]

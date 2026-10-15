@@ -1,5 +1,7 @@
 {
   "schema":1,
+  "sovereign_bond_bound":32,
+  "sovereign_bond_fields":["active","generation","holder","face","basis","rate","due","remainder","last_accrual"],
   "bounds":{"deposit":32,"contract":32,"inventory":16,"shareholder":16,"offer":16,"branch":16,"charter_candidate":8},
   "profile":{"pending":0,"merchant":1,"overseas":2},
   "state":{"operating":0,"stressed":1,"restricted":2,"insolvent":3,"resolving":4,"closed":5},

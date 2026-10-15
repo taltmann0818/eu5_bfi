@@ -23,19 +23,19 @@ The original milestone IDs are preserved. Detailed requirements follow below; [s
 
 | Milestone | Overall status | Implemented so far | Remaining to complete |
 | --- | --- | --- | --- |
-| **M0 — Native audit** | Partial; blocking probes open | EUV 1.4.1 / build 25905365 and CMF 2.5.0 pinned; native-source hashes and override reconstruction; focused account, ownership, takeover and reload evidence. | Finish P01–P12, especially genuine bank-funded native bond issuance, source allocation, current-holder coupons/redemption/resale, goods execution and attributable company/project receipts. |
+| **M0 — Native audit** | Partial; non-bond probes remain | Pinned EUV/CMF source audit; native bond ownership limitation identified; the authorized custom bond replacement supplies funded issuance, current-holder settlement, resale and reload checks. | Finish the broader P01/P02 authority/lifecycle matrix, P06 credit metadata, P07/P09/P11 attributable receipts/goods/projects and P12 compatibility. Native bank-funded bonds are retired as a completion requirement. |
 | **M1 — Charter and accounts** | Partial | Existing-State-Bank decision/selector, paid investment service, persistent decision-installed reform, one-bank reconciliation, separate treasury, two-profile event, ledger initialization and direct subject Credit interface. | Prove the complete normal charter flow, identity/assets/loans preservation, cancellation and exactly-once price; cover selector overflow beyond eight candidates, succession/duplicate inheritance, profile choice/reload/AI and wrong-controller/multiplayer cases. |
 | **M2 — Operating companies** | Scaffold / reference only | Native company discovery/registration and separate settlement-period ownership; native identity and payments left intact. | Operating mandates, budgets/facilities, actual native trade/exploration commands, attributable receipts, distributions and company-finance acceptance. P07/P11 remain gated. |
-| **M3 — Sovereign credit and bonds** | Partial; native-bond work blocked | Player-directed and autonomous estate-loan takeover use bank cash and preserve the same native loan; bank creditor/borrower identity tested; autonomous success limited to one per month. | Prove and enable native origination/restructuring and acquisition-basis/default accounting; implement genuine bond underwriting, recurring facility, resale and redemption; later Merchant corporate-credit branch. |
+| **M3 — Sovereign credit and bonds** | Partial; custom sovereign bonds implemented | Native estate-loan takeover plus [funded custom sovereign bonds](sovereign-bonds.md): either profile underwrites its controller, recurring facility, fixed annual coupons, current-holder resale/redemption, cost-basis accounting and reload guards. Secondary sellers and buyers require Stock Exchange research and an owned Stock Exchange building. | Native ordinary origination/restructuring and default metadata; broader custom-bond lifecycle/campaign/multiplayer acceptance; later Merchant corporate-credit branch. |
 | **M4 — Treasury payouts and deposits** | Partial; core paths verified | Demand/term liabilities and accepted rates; queued withdrawals; funded demand interest; +50 independent-bank deposit gate; charter premium; fixed operating costs/reductions/arrears and twelve-assessment expense history; monthly loss-offset, ownership-weighted dividends and income UI. | Estate depositor pools, aggregation/renewal/early-exit offers, invalid-party workouts, broader shortfall/balance cases and native per-activity receipt attribution. Royalties are retired, not unfinished work. |
 | **M5 — Ownership** | Partial; primary bank equity verified | New charter is 100% sovereign-owned; NAV-priced primary issuance, diluted entitlements, repeated-holder aggregation, open/closed offerings, bank subscriptions, share-income aggregation and ownership donut. | Secondary share offers/transfers, estate/founder-holder coverage, safe cross-holdings, company-equity execution and voting/financial-control workflows. |
 | **M6 — Goods finance** | Scaffold / reference only; native execution blocked | Inventory/contract schema, permission gates, receipt-encumbrance guard and offline backing/double-use tests. | P09 physical purchases/sales and custody; transport/storage, collateral enforcement, receipt/forward delivery and margining; complete offers, UI and real settlement evidence. |
 | **M7 — Commenda** | Scaffold / reference only; native execution blocked | Discovery/profile research gates and offline capital/surplus/loss settlement model. | P11 actual funded projects/operators, accepted terms, attributable route/exploration outcomes, runtime settlement and bank/company distributions. Discovery by itself must not mint profit. |
-| **M8 — Monetary system** | Partial; advanced adapters blocked | Prospective deposit-rate controls with fixed accepted account rates; funded one-month commercial bills/redemption; research gates and offline note-backing exclusions. | Native bond rate/time-basis/repricing proof, notes/circulation/payment semantics, secured interbank facilities, advanced clearing, later-age upgrades and Central Banking integration. |
+| **M8 — Monetary system** | Partial; advanced adapters blocked | Prospective deposit-rate controls with fixed accepted account rates; funded one-month commercial bills/redemption; research gates and offline note-backing exclusions. | Notes/circulation/payment semantics, secured interbank facilities, advanced clearing, later-age upgrades and Central Banking integration. |
 | **M9 — Resolution** | Partial | Liquidity restrictions, insolvency checks, queued claims, operating-expense arrears and funded recapitalization; offline pro-rata recovery model. | Full creditor waterfalls/priorities, haircut consent, guarantees/calls, debt-to-equity and security recovery, closure/lifecycle transfer, contagion and integrated default campaigns. |
-| **M10 — Release integration** | Partial | Native Credit/Balance integration with separate sovereign accounts; country-keyed ownership/asset donut legends; native-styled expense tooltip with active green reductions and monthly line history; CMF registration/alerts/log; 16 separate advances plus two native Banking unlocks and 23 instrument gates; 57 graphics; deterministic builds, release staging and CI. | Both-player-role/full-profile campaigns; bounded opportunity/offer/deposit/company AI; CMM preference/reset callbacks, localization/responsive UI matrix, multiplayer, performance, patch compatibility and viable debt-led treasury balance after native bond gates pass. |
+| **M10 — Release integration** | Partial | Native Credit/Balance integration with separate sovereign accounts; country-keyed ownership/asset donut legends; native-styled expense tooltip with active green reductions and monthly line history; CMF registration/alerts/log; 16 separate advances plus two native Banking unlocks and 23 instrument gates; 57 graphics; deterministic builds, release staging and CI. | Both-player-role/full-profile campaigns; bounded opportunity/offer/deposit/company AI; CMM preference/reset callbacks, localization/responsive UI matrix, multiplayer, performance, patch compatibility and viable debt-led treasury balance with custom sovereign bonds. |
 
-**Next critical path:** finish the M0 bond/receipt probes → complete M1 normal-flow/lifecycle acceptance → enable and prove M3 native issuance/resale/redemption → complete the remaining M4/M5 workflows. M2 company execution and P09/P11 evidence are prerequisites for the advanced company/goods/venture branches. Existing verified deposit, dividend and native takeover paths do not authorize bypassing those gates.
+**Next critical path:** finish the remaining M0 authority/receipt probes → complete M1 normal-flow/lifecycle acceptance → enable and prove M3 native issuance/resale/redemption → complete the remaining M4/M5 workflows. M2 company execution and P09/P11 evidence are prerequisites for the advanced company/goods/venture branches. Existing verified deposit, dividend and native takeover paths do not authorize bypassing those gates.
 
 ## Feature coverage
 
@@ -55,7 +55,7 @@ The original milestone IDs are preserved. Detailed requirements follow below; [s
 | Foreign branches | M4, M6, M8 | **Scaffold / reference only.** Native offices preserved; branch ledger fields exist. | Discovery/registration, host consent/fees, servicing, custody and seizure. |
 | Sovereign/corporate origination | M3 | **Blocked.** Audited boundary and permission gates; P06 origination is not enabled by takeover success. | Native wallet/rate/term semantics, borrower offers, acquisition basis and default; Merchant-only company credit. |
 | Estate-loan takeover | M3 | **Verified path.** Current engine assertions verify funded manual/autonomous acquisition of the same loan by the bank and actual borrower display. [UI capture](screenshots/bank-takeover.jpg). | More loan/estate sizes, failures and default/interest lifecycle cases; this does not certify bond or bank-held claim resale. |
-| Native bond facility/resale/redemption | M0, M3 | **Blocked.** Policy/gate scaffolding and explicit rejecting adapters; offline same-claim resale arithmetic only. | P03–P05 source funding, native identity, current-holder coupon/redemption and rate semantics, then real runtime adapters. |
+| Custom sovereign bond facility/resale/redemption | M0, M3 | **Verified focused path.** [Custom ledger and services](sovereign-bonds.md) fund primary issuance, recurring requests, monthly fixed coupons, current-holder secondary transfer and redemption. Both secondary parties need Stock Exchange research and an owned Stock Exchange building. | Broader default/annexation workouts, marketplace UX, AI/performance/multiplayer and long debt-led campaigns. Native bond adapters remain disabled and are no longer the implementation target. |
 | Debt restructuring | M3 | **Scaffold / reference only; adapter blocked.** Research/permission boundary. | Accepted terms, native principal/interest mutation, impairment and consent; bond support separately proved. |
 | Company operations/equity/debt | M2, M3, M5 | **Scaffold / reference only.** Registration preserves native operating payments and political identity. | Mandates, budgets, attributable cash distributions, Overseas equity, Merchant credit and company distress. |
 | Commercial bills | M8 | **Implemented / needs broader QA.** Funded one-month claims and idempotent redemption. | Holder transfers, beneficiary selection, broader acceptance and settlement evidence. |
@@ -67,18 +67,19 @@ The original milestone IDs are preserved. Detailed requirements follow below; [s
 | Economy/CMF and statements | M10 | **Verified path** at 2560×1440: [actual-game captures](screenshots/README.md), folded sovereign debt/receivables, preserved sovereign loan controls/lists, native country-colored donut keys and expense history. Charter reform no longer invalidates itself on daily checks; source reconstruction passes. | P02/P12 multiplayer, other scales/resolutions, localization fit, CMM preferences/reset/settings callbacks and long populated asset lists. Counterparty display is bounded at 64; unlisted exposure remains in the chart and totals. |
 | AI | M1, M3, M5, M10 | **Implemented / needs QA** for charter/profile weights, bounded autonomous takeover and conservative open-offering subscriptions; native AI preserved. | Broad opportunity scoring, negotiation/offer responses, deposit strategy and company investment controller. |
 | Graphics/FX | M10 | **Implemented / needs QA.** [57 registered exports](asset_register.csv), editable masters and static accessible UI. | Distinct icons per advance, six separate painted outcomes and verified animation/FX. |
-| Validation and packaging | M0, M10 | **Verified path.** Deterministic generators, source/asset/hash checks, 53 offline tests, 82 engine assertions, reload and release-stage manifests. | Full P01–P12/acceptance matrix, multiplayer, performance and long campaigns. A queued licensed-runner job is not a pass. |
+| Validation and packaging | M0, M10 | **Verified path.** Deterministic generators, source/asset/hash checks, 53 offline tests, 114 engine assertions, reload and release-stage manifests. | Full P01–P12/acceptance matrix, multiplayer, performance and long campaigns. A queued licensed-runner job is not a pass. |
 
 ## Current policy and superseded requirements
 
 These rules amend the original 13 October plan throughout the detailed specification below. They are not optional future alternatives.
 
-1. **No royalty income.** The asset levy, its slider and political penalties are retired. The sovereign earns bank-related income from funded deposit interest and owned-share dividends. Native bond proceeds remain planned financing, never earned income, and their adapters remain disabled.
+1. **No royalty income.** The asset levy, its slider and political penalties are retired. The sovereign earns bank-related income from funded deposit interest and owned-share dividends. Custom sovereign bond proceeds are financing, never earned income. Native bonds remain separate, and their adapters stay disabled.
 2. **Shares determine dividends.** A new charter starts 100% sovereign-owned, including its opening equity. Paid issuance raises bank capital and dilutes existing holders. The sovereign selects one monthly payout ratio in Credit: retain (0%), 25% or 50%. Before the funding/loss guards, its entitlement is `sovereign shares × ((monthly bank net income × payout ratio) / outstanding shares)`. Current earnings close after the month; old retained profits are not paid out again automatically.
 3. **Deposits and operating costs are actual cash obligations.** Independent banks require their opinion of a new depositor to be at least +50. An own-charter sovereign deposit earns one additional annual percentage point. Fixed monthly administration costs scale with accounts/contracts/branches/asset classes and have additive reform/research/decision reductions. The [live tooltip](screenshots/bank-expenses.jpg) itemizes the current calculation and arrears; [tuning](../design/tuning.json) is the coefficient authority.
 4. **The bank owns purchased loans.** Both autonomous and player-directed estate-loan purchases use bank funds and make the bank creditor of the existing native loan. The sovereign benefits through its dividends, not a duplicate sovereign interest receivable.
 5. **Use the native Economy UI and required CMF.** Management is embedded in Credit/Balance, with native ownership/asset donuts and contextual tooltips; no separate finance launcher. CMF 2.5.0 is required for this baseline. Presentation settings belong in CMM; money and permissions remain in accounting services.
-6. **Disabled adapters are not completed features.** A research node, visible control, schema or offline model never unlocks unproved bond, goods, company/project, notes or advanced-clearing cash flows. Instrument-specific company receipt attribution remains blocked despite the working aggregate native-budget sampler.
+6. **Custom sovereign bonds replace the native bond requirement.** The user authorized this change on 15 October 2026 after the native ownership probe failed. Primary funding uses bank cash and a persistent issuer-owned custom ledger. Secondary selling and buying each require `stock_exchange_advance` and an owned native `stock_exchange` building. No custom transaction calls native issuance, coupon or redemption effects.
+7. **Disabled adapters are not completed features.** A research node, visible control, schema or offline model never unlocks unproved bond, goods, company/project, notes or advanced-clearing cash flows. Instrument-specific company receipt attribution remains blocked despite the working aggregate native-budget sampler.
 
 [Bank ownership/income notes](bank-equity-deposits.md), [ledger schema](ledger_schema.md) and [balance defaults](balance.md) explain the current implementation without replacing this milestone register.
 
@@ -89,14 +90,16 @@ These rules amend the original 13 October plan throughout the detailed specifica
 | Gate | Current boundary | Milestones affected |
 | --- | --- | --- |
 | P01/P02 charter/authority | Selected account authority and live-controller paths tested; complete normal conversion, lifecycle and multiplayer matrix still open. | M0, M1, M9, M10 |
-| P03–P05 bonds/holder/rates | Bank funding source, creation capture, current-holder coupons/redemption and repricing not proved; production adapters disabled. | M0, M3, M8, M10 |
+| P03–P05 sovereign bonds | Native country-creditor transfer failed in the installed-build probe. User authorized custom bonds; their funded, fixed-rate current-holder path is tested separately. Native bonds are retired as a requirement; native notes/clearing retain their own gates. | M0, M3, M8, M10 |
 | P06 credit | Estate takeover proved for focused fixtures; origination, restructuring and full acquisition/default metadata are not thereby proved. | M0, M3, M9 |
 | P07 attributable receipts | Aggregate native `monthly_balance` sampled without cash duplication; per-instrument/company receipt adapters still disabled. | M0, M2, M4, M5, M7 |
 | P08/P10 persistence/timing | Bounded account/holder records, monthly replay and reload tested; invalid targets, full lifecycle, coupon cutoff and advanced clearing open. | M0, M4, M8, M9 |
 | P09/P11 goods/projects | Physical quantities/custody and native operating command/receipt semantics unproved; adapters disabled. | M0, M2, M6, M7 |
 | P12 Economy/CMF | Source ownership/reconstruction and selected actual-game UI verified; responsive/localization/CMM and multiplayer matrix open. | M0, M10 |
 
-Latest focused evidence: **82/82 engine assertions** and **53 offline tests**, recorded on 15 October 2026 in [the versioned report](../tests/results/2026-10-15-bank-equity-deposits.json). The report pins runtime SHA-256 `f2b0d49b27c39a312bb2a163276bb1326990326383580435612df076452b16ca`. It covers twelve monthly settlements, expense-history replay/migration/persistence, retained charter access and a second-process autosave reload. [Seven native UI captures](screenshots/README.md) cover the visible Credit/Balance changes in a disposable funded Florence fixture, not a fabricated mockup.
+Latest custom-bond evidence: **114/114 real-engine assertions**, twelve monthly periods and a second-process autosave reload, recorded on 15 October 2026 in [the custom sovereign-bond report](../tests/results/2026-10-15-sovereign-bonds.json). Tested runtime SHA-256: `1c6a371ad1b640050a4af2ced8a3f5d35c622cc39963c9cff3196c385be575ce`. The 32 added checks cover funded custom bonds, fixed coupons, shortfalls, Stock Exchange gates on both sides, building loss after listing, stale/expired offers, secondary settlement, redemption, recurring funding and persistence. **53 offline tests** pass. The current custom-bond controls still need visual QA; existing screenshots show the earlier bank interface. This result does not certify the remaining full M0 probes.
+
+Earlier focused evidence: **82/82 engine assertions** and **53 offline tests**, recorded on 15 October 2026 in [the versioned report](../tests/results/2026-10-15-bank-equity-deposits.json). The report pins runtime SHA-256 `f2b0d49b27c39a312bb2a163276bb1326990326383580435612df076452b16ca`. It covers twelve monthly settlements, expense-history replay/migration/persistence, retained charter access and a second-process autosave reload. [Seven native UI captures](screenshots/README.md) cover the visible Credit/Balance changes in a disposable funded Florence fixture, not a fabricated mockup.
 
 This is **focused regression evidence**, not completion of all milestones, both-role campaigns or the full [acceptance matrix](#102-in-game-acceptance-matrix). Historical reports certify only their own runtime hashes; old royalty tests/screenshots do not describe current policy. See [test procedure](campaign_checks.md), [remaining acceptance work](acceptance.md) and [override manifest](overrides.csv).
 
@@ -126,25 +129,25 @@ The Chartered Bank is a separate native country subject with its own treasury, p
 
 Each bank chooses exactly one specialization through an event: Merchant Finance or Overseas Investment. Sovereign loan origination, native sovereign-loan purchasing and government-bond underwriting/resale are shared functions of both profiles. Merchant Finance adds commercial credit and commodity instruments; Overseas Investment adds commenda and company equity. Advanced instruments still require their advances and earliest ages.
 
-The landed sovereign earns bank-related treasury income from interest on its deposits and dividends on owned shares. The chartered bank remains a separate institution and pays those claims from its own funds. Recurring low-interest financing through genuine bank-funded native government bonds remains an intended debt-led playstyle, but its adapters are disabled until native funding and current-holder payment semantics are proved. Bond proceeds are debt financing, not income; taxation and trade remain part of the fiscal base supporting debt service.
+The landed sovereign earns bank-related treasury income from interest on its deposits and dividends on owned shares. The chartered bank remains a separate institution and pays those claims from its own funds. Recurring financing now uses funded custom sovereign bonds with fixed annual coupons; native bonds are not used by the facility. Bond proceeds are debt financing, not income; taxation and trade remain part of the fiscal base supporting debt service.
 
-Ordinary eligible estate-loan purchases retain the native regular-bank economics. The chartered bank buys automatically within bounded monthly checks, and the sovereign can direct a purchase through Credit; in both cases the bank pays and becomes creditor of the same loan. Native bonds and already bank-held claims require the separate creditor-transfer bridge in section 6.4. Resale pays the existing holder, preserves the debt and creates no second sovereign issuance receipt. Section 6.17 distinguishes earned income, bank costs and planned financing.
+Ordinary eligible estate-loan purchases retain the native regular-bank economics. The chartered bank buys automatically within bounded monthly checks, and the sovereign can direct a purchase through Credit; in both cases the bank pays and becomes creditor of the same loan. Custom sovereign bonds use the secondary market in section 6.4. Native bank-held ordinary claims retain their separately blocked transfer adapter. Resale pays the existing holder, preserves the debt and creates no second sovereign issuance receipt. Section 6.17 distinguishes earned income, bank costs and planned financing.
 
 ### Final feature matrix
 
 | Feature | Independent banking nations | Landed countries through their Chartered Bank subject |
 | --- | --- | --- |
 | Establishment and management | Newly created or initialized banks receive the specialization event; the bank-country player uses its own financial GUI. | A decision converts an existing native state_bank subject, transfers age-scaled investment, grants State Chartered Bank and opens the same GUI in authorized subject-management mode. |
-| Capital and reserves | Track actual bank cash, assets, liabilities and shareholder equity. | Track these on the subject; initial investment is equity. Deposit interest is a funded liability payment; dividends reduce bank cash/equity; future underwriting exchanges cash for a native sovereign credit asset. |
+| Capital and reserves | Track actual bank cash, assets, liabilities and shareholder equity. | Track these on the subject; initial investment is equity. Deposit interest is a funded liability payment; dividends reduce bank cash/equity; underwriting exchanges cash for a custom sovereign bond asset. |
 | Deposit-interest income | Eligible countries can deposit/withdraw through diplomacy; new independent-bank accounts require +50 bank opinion. | Own-charter sovereign deposits use Credit and earn one additional annual percentage point; paid interest is sovereign income, principal withdrawal is not. |
 | Monthly share dividends | Pay current shareholders from monthly net earnings after costs/losses, with cash/capital limits. | The sovereign receives its owned units times the funded per-share payout; it selects one monthly payout ratio. Full activity attribution remains a separate requirement. |
-| Recurring sovereign bond facility | Both profiles can underwrite eligible external governments' native bonds using their own funds. | Both profiles fund the controller's recurring low-interest native government-bond issuance where liquid; the sovereign pays coupons and ultimately redeems principal. |
-| Bond and bank-held debt resale | Trade the existing native bond/loan with payment to its current holder and native creditor transfer; retain instrument eligibility. | The subject can resell the controller's bonds to eligible banks, replenish liquidity and continue permitted funding; later coupons follow the new holder. |
+| Recurring sovereign bond facility | Both profiles share sovereign-credit permissions; primary custom underwriting currently funds their live landed controller. | Both profiles fund the controller's recurring custom sovereign-bond issuance where liquid; the sovereign pays coupons and ultimately redeems principal. |
+| Bond and bank-held debt resale | Trade an existing custom sovereign bond for funded consideration; both secondary parties require Stock Exchange research and an owned Stock Exchange building. Native loan resale remains separately gated. | The subject can resell the controller's bonds to eligible banks, replenish liquidity and continue permitted funding; later coupons follow the new holder. |
 | Demand and term deposits | Common banking functions; term deposits require native Banking and the Renaissance age gate, not a separate mod advance. | Deposits are liabilities of the subject, serviced from its own treasury. Public guarantees require authorization and their relevant advance. |
 | Foreign branches | Common servicing infrastructure subject to host permissions; branch instruments follow the bank's specialization and advances. | Subject-owned branches support the same functions; the overlord manages them through the GUI and negotiated permissions. |
-| Sovereign lending | Shared by Merchant Finance and Overseas Investment; use native sovereign loans and audited rates. | Both profiles lend to sovereigns. Recurring financing of the bank's own landed controller uses native government bonds through the facility. |
+| Sovereign lending | Shared by Merchant Finance and Overseas Investment; use native sovereign loans and audited rates. | Both profiles lend to sovereigns. Recurring financing of the bank's own landed controller uses custom sovereign bonds through the facility. |
 | Native loan purchasing | Both profiles use regular banks' native takeover operation for eligible sovereign claims, retaining native filters, cost and estate compensation. Merchant company purchases additionally require Reformation Corporate Credit. | The GUI invokes takeover with the subject as buyer; the overlord pays no duplicate cost. |
-| Debt restructuring | Both profiles restructure eligible sovereign debt from Renaissance after research; Merchant Finance also restructures eligible company debt after Reformation Corporate Credit. | Identical research and instrument gates apply to subject-owned native loans and bonds; tested bond-term support is required. |
+| Debt restructuring | Both profiles restructure eligible sovereign debt from Renaissance after research; Merchant Finance also restructures eligible company debt after Reformation Corporate Credit. | Research gates apply to native ordinary loans; accepted custom bond restructuring remains separate work and cannot be enabled by a native loan setter. |
 | Creditor concessions and collateral | Contractual access concessions follow eligible lending; secured claims and revenue pledges require Absolutism collateralization. | The subject negotiates financial concessions; the overlord authorizes sovereign commitments and enforcement. |
 | Commodity investments | Merchant Finance; native-goods positions require Discovery and the Commodity Investments advance. | The subject owns funded inventories; strategic procurement involving the bank follows the same permissions. |
 | Commodity instruments | Merchant Finance; backed receipts and collateralized forwards require Absolutism and their advances; complex margining is later. | The same instrument restrictions apply, including custody and public-guarantee rules. |
@@ -160,7 +163,7 @@ Ordinary eligible estate-loan purchases retain the native regular-bank economics
 | Company operations and profits | Finance real operations; distributions reflect actual cash and permitted investments. | Native political control and bank financial ownership remain separate; bank receipts enter the subject treasury. |
 | Company distress and contagion | Service existing obligations and resolve losses under the shared crisis system. | Subject losses, company liabilities and sovereign guarantees are reconciled separately. |
 
-Fixed requirements include the existing charter decision architecture, one-bank limit, named reform and direct GUI; bank-owned native loan purchasing; deposit-interest income and share dividends without royalties; fixed complexity-scaled expenses; genuine native government-bond financing/resale; both exclusive profiles and the specified earliest-age advances. Cost coefficients, payout presets, facility targets, reform bonus magnitudes and later-age instruments are tuning defaults, not proof of completed gameplay.
+Fixed requirements include the existing charter decision architecture, one-bank limit, named reform and direct GUI; bank-owned native loan purchasing; deposit-interest income and share dividends without royalties; fixed complexity-scaled expenses; funded custom sovereign-bond financing/resale with Stock Exchange gates; both exclusive profiles and the specified earliest-age advances. Cost coefficients, payout presets, facility targets, reform bonus magnitudes and later-age instruments are tuning defaults, not proof of completed gameplay.
 
 ## 2. Evidence, authority and patch discipline
 
@@ -177,7 +180,7 @@ Use this authority order when implementing:
 
 The public script-documentation mirror was read for effects, triggers, scopes, scope links, callbacks and GUI data functions. Published native trade-company definitions were also inspected. The official wiki's indexed metadata and debug-documentation guidance was available, but full page requests were blocked during preparation. The publisher's modding overview is linked as a canonical reference; its full text was not accessible. Those access limits are why this plan requires a local exact-patch audit rather than presenting every example as verified executable syntax. See the source register in section 15.
 
-The public current_docs directory is mutable. Its presence does not establish the user's installed patch, and older community annotations describe earlier versions. The inspected 1.3.10 documentation change log records sell_bonds, redeem_bonds and related bond fields as additions: they cannot be assumed present on older patches. Pin a patch exposing the required native bond APIs and record source hashes and generated documentation before coding. [S1–S8, S23]
+The public current_docs directory is mutable. Its presence does not establish the user's installed patch, and older community annotations describe earlier versions. The inspected 1.3.10 documentation change log records sell_bonds, redeem_bonds and related bond fields as additions: they cannot be assumed present on older patches. Record installed source hashes and measured capabilities before coding. Native bond APIs were audited but are no longer required for the custom facility. [S1–S8, S23]
 
 ### 2.2 Capability labels
 
@@ -196,10 +199,10 @@ The public current_docs directory is mutable. Its presence does not establish th
 | One-bank cap | Decision and lifecycle checks can enforce at most one direct Chartered Bank subject. | Resolve inherited duplicates by restoring additional banks to state_bank servicing status without deleting their obligations. |
 | GUI authority | A landed-country player can operate an authorized subject's accounts through scripted GUI effects. | Bind controller and bank explicitly; validate both at execution. GUI management is a required feature, not a diplomatic-only fallback. |
 | Native loan purchasing | Regular-bank eligibility, native purchase price, estate compensation and subject actor binding. | Keep the native takeover path unchanged economically; distinguish it from bond/bank-held resale. |
-| Native government-bond funding | sell_bonds/redeem_bonds availability, native permission/capacity, lot size, creation identity, proceeds source, bond rate/time basis and coupon/redemption payee. | Demonstrate a bank-funded native bond with one sovereign credit, one bank debit and a persistent native bond; no ordinary-loan substitute. |
-| Native bond/debt resale | Native owner transfer accepts bonds; existing-holder settlement and later coupons/redemption follow the transferred creditor. | Prefer a native resale dispatch; otherwise prove a minimal native-object transfer adapter. Hard-coded coupon routing must be resolved before the feature is release-ready. |
+| Sovereign-bond funding | Audit native feasibility; where unsupported, use the authorized custom ledger. | One bank debit, one issuer credit, persistent issuer/slot/generation, no native cash duplication; fixed annual coupon and income/capital limits. |
+| Sovereign-bond resale | Current-holder custom transfer and basis, generation/expiry/funding guards. | Seller and buyer each require Stock Exchange research plus an owned Stock Exchange building; seller receives payment, issuer receives zero; later coupons/redemption follow the buyer. Native ordinary-claim resale remains a distinct gate. |
 | Treasury income, costs and ownership | Funded deposit interest, owned-share monthly dividends, fixed expenses/arrears, loss offsets, reserves and native budget display. | Remove flat subject extraction; transfer cash once, preserve holder entitlements and reconcile displayed income and costs with actual obligations. Legacy royalty penalties are retired and removed, not reimplemented. |
-| Bond-rate policy | Whether bond_interest changes outstanding coupons, only new issues, or both; whether change_loan_interest supports bonds. | Match verified native behavior and disclose rate repricing; retain a low positive coupon with funding/risk limits. |
+| Bond-rate policy | Fixed custom annual coupon, monthly accrual, fractional carry, arrears and prospective rate changes. | Existing issues retain accepted rates; principal never creates earnings; native bond policy is outside the custom facility. |
 | Native cash movements | Treasury changes on origination, purchasing, interest, repayment, renewal, default and subject payments. | Correct the accounting adapter before enabling the affected operation. |
 | Rates and debt values | Interest units, repayment schedule, early-repayment rules and principal/remaining-debt distinction. | Follow native conventions, not guessed conversions. |
 | Specialization and research | One immutable profile, bank/overlord advance ownership, action gating and later-age availability. | Use a shared permission service and explicit synchronization of permitted advances. |
@@ -263,7 +266,7 @@ These paths are a planned layout. Confirm each loader and schema on the selected
 | in_game/common/scripted_effects/bfl_chartering.txt | Investment transfer, subject conversion, reform grant and one-bank/lifecycle reconciliation. |
 | in_game/common/scripted_effects/bfl_accounts.txt | Subject/independent-bank funding, deposits, transfers, reconciliation and payouts. |
 | in_game/common/scripted_effects/bfl_credit.txt | Native lending/takeover and existing-holder resale, gated refinancing and later collateral. |
-| in_game/common/scripted_effects/bfl_sovereign_treasury.txt | Illustrative responsibility: funded deposit/share income and planned native bond underwriting, coupon reconciliation and redemption; inspect current generated services. |
+| in_game/common/scripted_effects/bfl_sovereign_treasury.txt | Illustrative responsibility: funded deposit/share income and custom bond underwriting, coupon settlement and redemption; inspect current generated services. |
 | in_game/common/scripted_effects/bfl_companies.txt | Native company registration, management and distributions. |
 | in_game/common/scripted_effects/bfl_commodities.txt | Goods purchases, sales, custody and instrument settlement. |
 | in_game/common/scripted_effects/bfl_ventures.txt | Commenda lifecycle and settlement. |
@@ -405,9 +408,9 @@ The decision grants this non-major reform to the landed overlord. Manual adoptio
 
 A proposed benefit package preserves the native State Bank's audited bank-interest reduction and government-bond capacity benefit as reform modifiers. The inspected definition uses bank_interest = -0.005 and max_bonds_modifier = 0.33; verify these on the target patch. Move the corresponding bonuses out of the converted subject's overlord-modifier block so that the same charter benefit is applied once. Additional benefits remain tuning options. [S18]
 
-The bank subject retains native banking-country prerequisites. The landed reform authorizes sovereign management of deposit/dividend policies and, once proved, the native bond facility. A proposed modest bond_interest reduction, initially -0.005 in native percentage-point conventions, still requires verification; bank_interest and bond_interest are distinct fields. Existing capacity/rate bonuses and later central-bank buildings must not be duplicated. [S18, S25, S26]
+The bank retains native banking-country prerequisites. The landed reform authorizes deposit/dividend management and funded custom sovereign bonds. Custom coupon controls do not alter native `bond_interest`, native outstanding bonds or Central Banking requirements. Existing native reform bonuses remain separate. [S18, S25, S26]
 
-Basic unsecured charter funding is intended to be available after charter/profile activation on the selected bond-capable patch. Audit can_sell_bonds and any hard-coded issuance checks; use the reform as the mod's explicit native bond authorization where supported. This deliberately provides a charter route alongside vanilla Central Banking, whose inspected advance belongs to Absolutism. Do not auto-grant that later advance or its building, and do not bypass native capacity, issuer eligibility, funding or debt-service checks. If hard-coded eligibility cannot be extended, record that as a blocking M0 limitation, rather than replacing bonds with renamed ordinary loans. Advanced security, notes and backstops retain their agreed later-age gates. [S4, S23, S24, S27]
+Basic custom bond funding is available after charter/profile activation in either specialization. It neither grants native Banking/Central Banking nor bypasses native debt rules: native debt is included in custom headroom, while native borrowing remains a separate operation. Secondary trading requires the native Stock Exchange advance and a built exchange owned by each party (or the live controller of a chartered bank). Advanced security, notes and backstops retain their later-age gates.
 
 ### 4.2.3 One-bank cap and lifecycle
 
@@ -456,7 +459,7 @@ The bfl_ names above are definitions to implement. Test the target patch's appen
 | Sovereign funding policy | Landed charter controller | Bound bank, monthly dividend payout ratio, deposit/rate policy, future facility cadence/requested funding, buffers, debt-service ceilings, next review and completed draw. |
 | Operating expense account | Bank | Complexity components, active reductions, monthly amount assessed/paid, unpaid expense liability, last settlement and up to twelve real monthly assessments for read-only history; arrears are expensed once. |
 | Monthly profit register | Bank | Native aggregate and attributable custom earnings, funding/operating costs, realized losses and loss carryforward, current-period distributions and month-close stamp. Retained equity is not next month's new income. |
-| Bond facility audit | Sovereign issuer with linked bank metadata | Native bonds created in each guarded draw, lot size, bank funding source, cash changes, coupon owner, redemption status and idempotency stamp; no parallel custom principal ledger. |
+| Sovereign bond ledger | Sovereign issuer | 32 issuer-owned custom slots: active/generation, holder, face, carrying basis, accepted annual rate, due coupons, fractional carry and last accrual; monthly issuance and quote expiry/generation stamps. No matching native bond is created. |
 | Equity register | Issuer bank subject, independent bank or company | Outstanding units and holder identities/units; 100% sovereign opening charter ownership, paid NAV issuance/dilution, voting rules and monthly dividend policy. |
 | Commodity inventory | Asset owner | Native good, custody market/location, quantity, purchase basis, encumbered quantity, storage loss. |
 | Forward/receipt | Issuer or contract custodian | Parties, good, quantity, settlement price, custody/delivery market, collateral, maturity and state. |
@@ -486,7 +489,7 @@ For both independent banks and Chartered Bank subjects, native country gold is t
 
 - The charter decision transfers real gold from overlord to subject and records the initial investment as equity.
 - Later capitalization, deposit interest, dividends, operating costs, bond underwriting/redemption, guarantees and emergency payments are explicit, reconciled movements between the relevant entities.
-- Both profiles have sovereign-credit permission. Recurring charter-to-controller funding uses native government bonds; any ordinary bilateral sovereign loan remains a separate native instrument. Consolidated ownership does not cancel either obligation.
+- Both profiles have sovereign-credit permission. Recurring charter-to-controller funding uses custom sovereign bonds; any ordinary bilateral sovereign loan remains a separate native instrument. Consolidated ownership does not cancel either obligation.
 - Ordinary military/government spending by the overlord cannot consume subject bank reserves through a shared cash variable.
 - Replace automatic native subject tribute/extraction with funded deposit interest and owned-share dividends. An unrestricted siphon or leftover subject_pays_vassal rule must not bypass bank obligations. Deposit principal withdrawals, shareholder capital transactions and emergency transfers remain separately classified.
 - Capital contributions, deposit principal, bond proceeds, recovered asset principal and note issuance are excluded from operating profit. Only the realized gain/loss component of a resale can enter earnings.
@@ -506,10 +509,10 @@ For both independent banks and Chartered Bank subjects, native country gold is t
 | Secondary share trade | Buyer pays seller; holder register changes; issuer receives only an explicitly charged fee. |
 | Native loan origination | Native cash movement occurs once; the lender obtains a credit asset and borrower a debt. |
 | Native estate-loan purchase | Bank pays native takeover cost; native banking estates receive prescribed compensation; native ownership changes; borrower receives no new proceeds. |
-| Native bond draw of 100 | Sovereign cash rises 100 and native bond principal rises 100; bank cash falls 100 and gains the same native claim. No issuance profit or duplicate estate-funded proceeds are recorded. |
+| Custom bond draw of 100 | Sovereign cash/debt rise 100; bank cash falls 100 and its carrying asset rises 100. No earned profit or native estate-funded proceeds are created. |
 | Coupon of 1 | Sovereign cash falls 1; current native creditor receives the verified coupon once. Funding/expenses determine whether it contributes to bank profit. |
-| Native bond/loan resale for 95 | Buyer cash falls 95; existing holder cash rises 95; the same native claim changes creditor. Sovereign cash, face value and outstanding principal do not rise; seller's gain/loss depends on basis. |
-| Bond redemption of 100 | Sovereign pays native face value once; current holder receives the verified principal; the native bond closes. Principal recovery is not dividend profit. |
+| Custom bond resale for 98 | Buyer cash falls 98; current holder cash rises 98; the same issuer/slot/generation changes holder. Issuer cash and principal do not rise; bank gain/loss depends on basis. Both parties require Stock Exchange research and a built owned exchange. |
+| Bond redemption of 100 | Sovereign pays custom face and due coupons to the current holder once; the custom claim closes. Only proceeds above a bank holder's acquisition basis are realized gain. |
 | Monthly operating expense of 2 | Bank earnings/equity fall 2 when assessed. Funded payment reduces bank cash once; any shortage stays an expense liability. Sovereign cash does not rise. |
 | Commodity purchase/sale | Native market cash/stockpile effects occur once; the custom inventory changes by the same physical quantity. |
 | Forward settlement | Delivery and consideration, or bilateral cash settlement, occur once; released collateral is not another gain. |
@@ -549,13 +552,13 @@ Use explicit branch and facility identities for investments. Avoid stacking unca
 
 ### 6.3 Sovereign and company lending
 
-Sovereign origination is common to Merchant Finance and Overseas Investment. Both profiles may lend to eligible sovereigns, underwrite their native government bonds and hold sovereign debt. Merchant Finance adds ordinary corporate credit to native trade-company tags only from Reformation after Corporate Credit research. Overseas Investment provides commenda and company equity; common sovereign credit does not grant it company working-capital loans.
+Sovereign origination is common to Merchant Finance and Overseas Investment. Both profiles may lend to eligible sovereigns and hold sovereign debt; custom primary underwriting currently funds their live landed controller. Merchant Finance adds ordinary corporate credit to native trade-company tags only from Reformation after Corporate Credit research. Overseas Investment provides commenda and company equity; common sovereign credit does not grant it company working-capital loans.
 
-Wrap native ordinary-loan origination with bank role, controller authority, instrument/advance checks, available funding, borrower acceptance, native borrowing limits and risk pricing. For recurring funding of its own landed controller, the Chartered Bank uses the native bond facility in section 6.17, with the sovereign as issuer and bank as actual funder/creditor.
+Wrap native ordinary-loan origination with bank role, controller authority, instrument/advance checks, available funding, borrower acceptance, native borrowing limits and risk pricing. For recurring funding of its own landed controller, the Chartered Bank uses the custom bond facility in section 6.17, with the sovereign as issuer and bank as actual funder/creditor.
 
-Price new lending using a base rate and borrower spread, considering creditworthiness, cash flow, war, concentration and existing obligations. The charter-controller bond facility receives a preferential but positive coupon using verified bond-specific rate behavior. Before Absolutism collateral research, these exposures remain unsecured.
+Price new lending using a base rate and borrower spread, considering creditworthiness, cash flow, war, concentration and existing obligations. The charter-controller bond facility receives a preferential but positive coupon with a fixed accepted annual rate. Before Absolutism collateral research, these exposures remain unsecured.
 
-**Acceptance:** Both profiles originate eligible sovereign credit and fund actual native bonds; Overseas Investment still cannot originate corporate loans, and Merchant corporate credit fails before Reformation research.
+**Acceptance:** Both profiles originate eligible sovereign credit and fund actual custom sovereign bonds; Overseas Investment still cannot originate corporate loans, and Merchant corporate credit fails before Reformation research.
 
 ### 6.4 Native loan purchasing and bond/debt resale
 
@@ -567,31 +570,23 @@ The inspected action excludes bonds and claims already owned by a country. It se
 
 Expose the same eligible-claim view and native operation through the GUI with the independent or subject bank as buyer. Prefer native dispatch; otherwise use a minimal audited adapter preserving native takeover economics. Do not pay the landed controller a second amount or create another loan.
 
-#### 6.4.2 Resale of existing native bonds and bank-held claims
+#### 6.4.2 Secondary sovereign-bond market
 
-Government bonds, including bonds issued under the controller facility, must be resellable. Already bank-held ordinary claims can use the same existing-holder settlement bridge within their instrument permissions. This is a deliberate addition to the earlier takeover-only scope; simply removing is_bond = no from the estate-purchase action would route sale cash to the wrong payee.
+Use the issuer-owned custom bond identity, not an estate-loan takeover or a duplicated native loan. A seller lists a whole currently owned bond for three months at 98% of face. The offer snapshots issuer/slot/generation, seller, price and expiry. One issuer has one offering at a time; another holder's unexpired offering cannot be overwritten.
 
-Prefer an exposed native resale action that preserves the existing native debt. Otherwise implement a bounded offer/accept action using the existing loan-scope claim and tested change_loan_owner support:
+Both secondary seller and buyer require the native Stock Exchange advance and an owned location with a built Stock Exchange. A chartered bank uses its live controller's research/building. Recheck both gates when accepting, including a building lost after listing. Primary underwriting, coupon servicing and redemption do not require an exchange.
 
-1. Select an actual native bond/claim owned by the seller; validate native identity, live outstanding status, transfer permission and lack of an incompatible pledge.
-2. Validate buyer, instrument permission, funding, concentration and sovereign eligibility. Both bank profiles can buy sovereign bonds; corporate claims remain Merchant-only after research.
-3. Snapshot claim, owner, current terms, basis, quoted consideration and any accrued-coupon allocation. The seller may cancel before acceptance; execution revalidates the snapshot.
-4. Buyer pays the current holder once; transfer the same native creditor relationship once. Transfer the associated acquisition-basis/guarantee/servicing metadata without cloning principal.
-5. Confirm future native coupon and redemption receipts go to the current holder. The sovereign receives no resale proceeds and its contractual liability remains outstanding.
+The buyer pays the current holder once; the issuer receives no proceeds. Transfer the existing custom claim and its fixed annual coupon, store the buyer's actual acquisition basis, and recognize a bank seller's gain/loss against its old basis. Reject expired/replayed/stale-generation quotes, arrears, self-purchases, shortages and invalid holders. Later coupons and face redemption pay the new holder. Other holders can list their own acquired bonds again.
 
-Use face-value consideration for the first prototype if compatible with native remaining-principal semantics and both parties agree; permit risk/yield-adjusted quotes after the ownership/coupon bridge works. Face-value sale is a tuning choice, not a claim that vanilla fixes every resale price. Unsold offers expire without income. A resale below basis realizes a loss, and selling at par is principal recovery rather than earned bank profit.
+Native estate-loan takeover retains its audited economics. Native bank-held ordinary-claim resale is still disabled and is not enabled by these custom bond tests. See [the transaction specification](sovereign-bonds.md).
 
-Use a live portfolio view and bounded offers rather than a full order book, clearing exchange or custom auction engine. Native estate-loan takeover retains its own fixed economic operation; it is not replaced by these quotes.
-
-**Patch gate:** Published ownership-transfer documentation alone does not prove native bond coupons or redemption follow a country owner. M0 must demonstrate this on the selected patch. If routing is hard-coded, an engine-supported ownership/settlement integration must resolve it before release; a custom coupon paid on top of unchanged native coupon deductions is not an acceptable workaround.
-
-**Acceptance:** Vanilla takeover parity holds for estate claims. Bond and bank-held resale pays the existing seller, preserves native debt, changes subsequent receipts to the current creditor and creates no extra borrower principal/proceeds or duplicate coupon.
+**Acceptance:** Seller and buyer each pass research plus building gates at execution; funded resale preserves issuer debt and terms; current-holder coupons/redemption and basis reconcile after reload.
 
 ### 6.5 Debt restructuring
 
-Research Debt Restructuring from Renaissance. Both profiles can then renegotiate eligible sovereign debt; Merchant Finance may restructure company debt only after Reformation Corporate Credit as well. Overseas commenda/equity settlements retain their own risk-capital rules. Bond coupon/face adjustments or refinancing use the native bond path only where tested; rate/principal effects documented for ordinary loans are not automatically proven for bonds.
+Research Debt Restructuring from Renaissance. Both profiles can then renegotiate eligible sovereign debt; Merchant Finance may restructure company debt only after Reformation Corporate Credit as well. Overseas commenda/equity settlements retain their own risk-capital rules. Custom bond restructuring/refinancing remains a separate accepted-terms workflow; native ordinary-loan mutations never change custom bonds.
 
-Offer negotiated rate cuts, principal reductions, partial repayment and refinancing. Ordinary loans may use a tested replacement-loan sequence for maturity extension when no direct native effect exists. Bonds use tested native term changes or explicit native issuance/redemption refinancing; do not replace a required bond with an ordinary loan or invent a maturity on a redeemable/perpetual instrument. Until Absolutism Collateralization, restructuring cannot introduce secured collateral, revenue pledges or equivalent security through a differently named concession.
+Offer negotiated rate cuts, principal reductions, partial repayment and refinancing. Ordinary loans may use a tested replacement-loan sequence for maturity extension when no direct native effect exists. Custom bonds retain accepted fixed rates until an explicitly consented restructuring is implemented; funded redemption may close them at any time. Do not invent an ordinary-loan maturity. Until Absolutism Collateralization, restructuring cannot introduce secured collateral, revenue pledges or equivalent security through a differently named concession.
 
 Audit amount changes against native principal, coupons and remaining debt. Refinance without duplicate proceeds or parallel superseded obligations. Native purchases by a Chartered Bank of its overlord's debt leave a legitimate subject-to-overlord loan; retirement requires a separate tested repayment/forgiveness action and is not automatic.
 
@@ -673,7 +668,7 @@ Private banks require host authorization for circulating redeemable claims. The 
 
 The implementation is a currency abstraction coupled to native gold, not proof of engine-native national denominations or universal exchange-rate simulation. Record circulation liabilities, backing rules, redemption demand, acceptance and confidence.
 
-Note-funded eligible lending or underwriting of a native controller bond creates a matching native credit asset and note obligation. Newly issued notes cannot increase their own eligible backing reserves. Classify issuance flows separately from deposits, shareholder subscriptions and earnings. Apply inflation and confidence consequences through verified native hooks and calibrated scripted rules.
+Future note-funded eligible lending or custom controller-bond underwriting must create a matching asset and note obligation; the note path remains disabled. Newly issued notes cannot increase their own eligible backing reserves. Classify issuance flows separately from deposits, shareholder subscriptions and earnings. Apply inflation and confidence consequences through verified native hooks and calibrated scripted rules.
 
 Native gold cannot reveal the composition of every ordinary payment. Therefore do not promise to trace specie and every issuer's notes through all vanilla transactions. Reserve provenance and redemption are tracked for mod-managed financial operations, with conservative limits on aggregate issuance.
 
@@ -683,11 +678,11 @@ Native gold cannot reveal the composition of every ordinary payment. Therefore d
 
 Store separate deposit, lending-base, discount/policy and controller-bond facility rates. Ordinary bank_interest and sovereign bond_interest are distinct native fields; convert display rates to the verified native time basis in the relevant adapter. A percentage labeled annual in the GUI must not be passed unchanged to a monthly coupon field.
 
-Banking nations price permitted products. Landed policy instructions guide subject loans, the bond facility and liquidity operations. Fixed ordinary loans retain their contracts unless restructured. Probe whether native bonds reprice with issuer bond_interest or retain issue terms; disclose verified behavior in the GUI. Prefer a tested issue-specific coupon for the low-interest facility. If only issuer-wide native rates are supported, apply and display that policy's scope rather than promising facility-only or fixed coupons. Do not repeatedly use a restructuring effect to bypass Renaissance research.
+Banking nations price permitted products. Landed policy instructions guide subject loans, the bond facility and liquidity operations. Fixed ordinary loans retain their contracts unless restructured. Custom sovereign bonds retain their fixed accepted annual coupons. The issuer may set 1%, 3% or 6% for future issues; this never changes native bond policy or outstanding custom rates. Do not repeatedly use a restructuring effect to bypass Renaissance research.
 
 Wider domestic credit effects use existing verified country/estate modifiers or specified interactions. They are calibrated approximations. Defining a new modifier name alone does not make the engine apply a central-bank transmission mechanism.
 
-**Acceptance:** Policy changes reprice eligible new business; fixed ordinary loans remain unchanged; native bond repricing follows its measured rate regime; interest costs and credited deposits use the correct time basis.
+**Acceptance:** Policy changes reprice eligible new business; fixed ordinary loans remain unchanged; custom sovereign bonds retain accepted fixed rates; interest costs and credited deposits use the correct time basis.
 
 ### 6.13 Interbank liquidity and public support
 
@@ -718,7 +713,7 @@ Reconcile native bankruptcy cancellations before processing custom losses. Handl
 
 ### 6.15 Exclusive specialization event
 
-A bank chooses exactly ONE of Merchant Finance or Overseas Investment. Store the canonical choice on the bank, not the controller. Sovereign lending, sovereign-loan purchasing and native government-bond underwriting/resale are shared functions; there is no separate Sovereign Finance specialization.
+A bank chooses exactly ONE of Merchant Finance or Overseas Investment. Store the canonical choice on the bank, not the controller. Sovereign lending, sovereign-loan purchasing and custom sovereign-bond underwriting and Stock Exchange-gated resale are shared functions; there is no separate Sovereign Finance specialization.
 
 Fire the event at independent-bank creation/first initialization or charter completion. The landed controller chooses for its subject; independent bank players choose for themselves; AI uses the same two mutually exclusive outcomes.
 
@@ -734,7 +729,8 @@ Fire the event at independent-bank creation/first initialization or charter comp
 | Accounts, reserves, deposits, bank ownership, servicing branches, GUI and crises | Common core | Common core |
 | Permitted rate policy and legally authorized monetary services | Common core | Common core |
 | Sovereign loan origination and native sovereign-loan takeover | Common core | Common core |
-| Native government-bond underwriting, holding and resale | Common core; native/charter authorization | Common core; native/charter authorization |
+| Custom sovereign-bond underwriting and holding | Common core; live charter for primary controller finance | Common core; live charter for primary controller finance |
+| Secondary sovereign-bond selling and buying | Stock Exchange advance plus an owned Stock Exchange building | Stock Exchange advance plus an owned Stock Exchange building |
 | Chartered controller deposit interest, share dividends and future bond facility | Common sovereign policy | Common sovereign policy |
 | Sovereign debt restructuring | Renaissance advance; tested bond support | Renaissance advance; tested bond support |
 | Native company working-capital credit/debt and eligible claim purchases | Reformation Corporate Credit | No |
@@ -756,16 +752,16 @@ For an independent bank, the bank is the research owner. For a Chartered Bank, t
 
 | Earliest age | Proposed advance | Prerequisites / profile | Unlock |
 | --- | --- | --- | --- |
-| Traditions | Existing banking foundations and charter registration | Eligible bank; native requirements; one of two profiles selected | Basic accounts, demand deposits/rates, planned branches and common sovereign credit. Charter deposit interest, monthly share dividends and fixed expenses use protected bank cash; a genuine native bond facility remains adapter-gated. |
+| Traditions | Existing banking foundations and charter registration | Eligible bank; native requirements; one of two profiles selected | Basic accounts, demand deposits/rates, planned branches and common sovereign credit. Charter deposit interest, monthly share dividends and fixed expenses use protected bank cash; the custom bond facility uses protected bank cash and issuer debt/coupon limits. |
 | Renaissance | Native banking_advance | Native prerequisites; common core | Term deposits and primary bank capital subscriptions are integrated permissions on Banking, not separate mod research nodes. Preserve native Banking's existing unlocks. |
-| Renaissance | bfl_debt_restructuring | Native credit foundations; both profiles | Eligible sovereign debt renegotiation/refinancing; native bonds require tested support. Merchant company use also needs later Corporate Credit. |
+| Renaissance | bfl_debt_restructuring | Native credit foundations; both profiles | Eligible sovereign debt renegotiation/refinancing; custom bond restructuring remains a separate accepted-terms implementation. Merchant company use also needs later Corporate Credit. |
 | Renaissance | bfl_commercial_bills | Deposit/payment foundations; common core | Permitted bills and payment instruments; no advanced sovereign-note regime. |
 | Discovery | bfl_commodity_investments | Merchant Finance; branch/account foundations | Funded native-goods positions and commercial inventory investment. |
 | Discovery | bfl_commenda | Overseas Investment; native exploration/trade eligibility | Profit-sharing voyage, exploration-linked and trading projects. |
 | Reformation | bfl_corporate_credit | Merchant Finance; banking foundations; native company unlocks | Native credit/debt to trade-company actors and eligible native purchase paths. |
 | Reformation | bfl_company_equity | Overseas Investment; commenda; native company unlocks | Company subscriptions and long-term ownership stakes. |
 | Reformation | bfl_bank_share_dealing | Bank capital subscriptions; common core | Expanded transfer/public dealing in bank equity. |
-| Absolutism | bfl_collateralization | Both profiles for sovereign credit; relevant profile for other instruments | Secured credit/bonds where native support exists, pledged revenue, encumbrance and priority rules. |
+| Absolutism | bfl_collateralization | Both profiles for sovereign credit; relevant profile for other instruments | Secured credit and custom bonds after their respective security implementations, pledged revenue, encumbrance and priority rules. |
 | Absolutism | Native central_bank_advance | Native Manufactories and embraced Banking prerequisites; verify target patch | Native Central Banking upgrades/building and capacity; distinct from the mod's basic charter authorization, not automatically granted by chartering. |
 | Absolutism | bfl_warehouse_receipts | Merchant Finance; commodity investments; collateralization | Inventory-backed transferable claims. |
 | Absolutism | bfl_commodity_forwards | Merchant Finance; commodity investments; collateralization | Collateralized forward contracts. |
@@ -784,7 +780,7 @@ Research never changes specialization. Chartering grants the institution, reform
 
 **Acceptance:** Profile selection is one-time and exclusive; all specified features fail before both age and research requirements, remain available in later ages after research, and cannot be invoked through another interface or subject actor to bypass restrictions.
 
-### 6.17 Landed sovereign treasury: deposits, share dividends, expenses and native bonds
+### 6.17 Landed sovereign treasury: deposits, share dividends, expenses and custom bonds
 
 #### 6.17.1 Income, financing and policy authority
 
@@ -794,7 +790,7 @@ The landed controller manages its bank through State Chartered Bank and Economy 
 | --- | --- | --- | --- |
 | Deposit interest | Earned cash interest on deposits held at the chartered bank or eligible independent banks. Principal withdrawal is not income. | Accrued interest is a liability/funding expense; payment debits the bank and reduces the liability once. | +50 bank opinion for a new foreign deposit; own-charter premium of one annual percentage point; accepted rate/maturity and protected cash. |
 | Share dividends | Ownership-based receipt from the chartered bank and other owned bank shares. | Funded distribution of current monthly net earnings after costs and carried losses; capital subscriptions/principal are not profits. | One monthly payout ratio for the chartered bank, current holder units and liquidity/capital protection. |
-| Native bond facility | Planned financing proceeds with native sovereign debt, coupon expense and eventual redemption. | Planned cash-for-native-claim underwriting with no duplicate native cash flow. | Disabled until P03–P05 prove real bank funding, current-holder routing and native limits. |
+| Custom sovereign bond facility | Actual financing proceeds, custom debt, coupon expense and eventual redemption. | Bank cash purchases a persistent custom claim; proceeds are not earnings. | Bank funding/capital, issuer debt/coupon capacity and once-monthly issuance; secondary Stock Exchange gates. |
 
 There is no royalty channel. Remove automatic native subject tribute/extraction for the converted charter, and migrate legacy levy modifiers without creating cash. Balance shows paid deposit interest and share dividends; borrowing remains financing, not earned income. Do not add an income modifier that credits the sovereign without a corresponding payer.
 
@@ -839,54 +835,33 @@ Close the month's earnings registers after settlement. Undistributed profit rema
 
 **Acceptance:** Funded dividends match current ownership and eligible monthly net income after losses; principal creates no payout; repeated settlement/reload pays nobody twice; retained profits are not distributed again as new monthly earnings.
 
-#### 6.17.4 Recurring preferential native government-bond facility
+#### 6.17.4 Recurring funded custom sovereign-bond facility
 
-The facility automates repeated bank-funded native government-bond issuance. It does not automate give_loan with a bond label. Use documented sell_bonds for issuance and redeem_bonds for face-value retirement, with is_bond confirming the object. The government continues owing the native coupon and principal after bank resale. [S4, S5, S23]
+The native country-creditor bridge did not pass the installed-build probe. On 15 October 2026 the user authorized a fully custom replacement. The sovereign owns 32 persistent bond slots with holder, face, basis, fixed annual rate, coupons due, fractional carry, last accrual and generation. No native bond is created, transferred, paid or redeemed by this service. Existing native debt remains separate and contributes to custom headroom.
 
-Policy controls:
+Both profiles can underwrite their live landed controller. Manual draws and the scheduled facility share one issuer/month stamp and a 100-gold monthly cap. The bank must have the full protected free cash and capital headroom; the issuer needs positive native income, space, no coupon arrears, combined native/custom debt headroom of `max(100, 24 × native monthly income)` and custom coupon burden at most 25% of that income. Unfunded or invalid requests create nothing.
 
-| Setting | Proposed implementation |
-| --- | --- |
-| Mode/cadence | Off, monthly debt-first, or treasury-buffer draw; yearly review may be offered as a convenience. Monthly is the core intended playstyle. |
-| Funding target | In debt-first mode reserve a selected share of forecast spending for bond funding, with a proposed 60% campaign calibration target; buffer mode finances the forecast shortfall instead. |
-| Treasury ceiling | Skip/reduce draws when projected cash already exceeds the configured operating buffer/ceiling, so unused financing does not accumulate indefinitely. |
-| Available bank funding | Spendable bank cash after due withdrawals/costs, statutory reserves, committed investments and the current-period liquidity buffer. Capital and sovereign concentration also limit underwriting. |
-| Native limits | Verified can_sell_bonds/issuer eligibility, native bond_capacity, count/amount caps and actual native lot size; issue only fully fundable lots. |
-| Rate/service ceiling | A preferential positive native bond coupon, funding-cost/risk allowance and a ceiling on projected sovereign coupon/redemption burden. |
-| Rollover | Optional explicit refinancing/rollover of eligible native bonds, subject to relevant research where terms are restructured and renewed funding/capacity checks. |
+Policy defaults off. Debt first requests 60% of native forecast spending; Buffer targets 200 state gold after the forecast balance. Both stop at 500 gold. Accepted coupons default to 3% annually; Credit offers 1%, 3% and 6% for future issues. Existing rates never reprice. Monthly accrual carries fractional cents and unpaid coupons; only cash paid becomes bank earnings. Principal proceeds and principal recovery are excluded from earnings except a realized recovery above acquisition cost.
 
-Rates must remain consistent with the audited native bond model. Prefer a facility-specific issue coupon when the native API supports it. If rates are issuer-wide or outstanding bonds reprice, show that scope and consequences; do not promise fixed, issue-specific terms without a successful probe. Government coupons are native obligations even if the issuer and original creditor share a controller.
+The current holder receives coupons and full face plus due coupons on redemption. Redemption is perpetual/issuer-directed, not an invented ordinary-loan amortization schedule. It closes the claim once. Secondary selling and buying each require Stock Exchange research and an owned Stock Exchange building; see section 6.4.2. Underwriting, servicing and redemption remain available without that gate.
 
-Implement a guarded draw:
+Credit separately displays outstanding debt, coupon burden/arrears, financing, coupon cash and redemptions. Balance displays coupons received as earned cash; financing is never placed among earned income. The [custom bond specification](sovereign-bonds.md) records fields, calculations, workflow and remaining lifecycle/AI limitations.
 
-1. Bind landed issuer, its one valid bank, reform, completed profile and current policy; reject an already-processed period or stale command.
-2. Forecast funding need and coupon burden; compute reserve-protected bank capacity and native issuer capacity. Reduce/skip the request when a constraint binds.
-3. Use whole native bond lots if arbitrary amounts are not supported. Carry an unfilled target as a future request without creating debt or cash; show requested versus actual funding.
-4. Issue through the native bond operation and capture the new native object using a verified creation target or safe before/after native portfolio selection. No concurrent command may capture another issuer's bond.
-5. Ensure a single real bank cash debit funds a single sovereign cash credit and that the bank holds that native claim. Prefer native lender-directed issuance if exposed. If issuance initially uses an estate/abstract investor source, the adapter must reassign/settle that source and cancel its provisional cash/claim consequences using verified effects before finalizing bank ownership.
-6. Reconcile coupon destination, issuer debt/count/capacity and bank acquisition basis; record the completed draw and refresh the monthly statement.
-
-M0 must measure step 5 rather than guess it. An extra bank debit alongside unchanged outside-funded native proceeds is not automatically a correct bank-funded settlement; an extra sovereign credit is definitely a duplicate. Any source correction must preserve the tested estate/country cash accounting, native debt and creditor. If exposed scripting cannot implement genuine bank underwriting or route current-holder receipts, this is a blocking integration issue, not grounds to silently ship synthetic custom bonds.
-
-Do not add a custom coupon on top of a native coupon or pay native principal a second time. Redemption pays the current holder, including an outside buyer after resale; a native perpetual/redeemable bond remains outstanding until its verified redemption/default rather than an invented amortization schedule. Refinancing replaces or rolls the native obligation explicitly and cannot erase debt without payment.
-
-The bank may subsequently resell facility bonds through section 6.4. It recovers liquidity for further funding, reduces controller concentration and transfers credit risk; it gives up future coupons on the sold debt. Lower-interest sovereign bonds may need a discount to attract an outside buyer. Resale is possible, not guaranteed demand or par value.
-
-**Acceptance:** A repeated facility draw produces actual native bonds, one set of proceeds and bank-funded claims in either profile. A dry/insolvent bank skips issuance; coupon cost persists; resale changes future payee; redemption closes the correct claim once.
+**Acceptance:** Both profiles exchange one bank debit for one issuer credit and one persistent asset; current-holder coupons, funded secondary sales and redemption reconcile once, including replay and reload. Dry/insolvent banks, full ledgers, arrears, stale offers and missing Stock Exchange requirements reject safely.
 
 #### 6.17.5 Debt-led treasury playstyle and the funding cycle
 
-The intended loop is bank capitalization/deposits and outside earnings -> native bond underwriting -> sovereign spending on productive capacity and commerce -> larger bank business/earnings -> monthly deposit interest/share dividends and capacity for further bonds. Resale adds outside financing and recycles underwriting liquidity. Native trade companies connect spending and finance to operating trade, projects and profits rather than being passive bonus subjects.
+The intended loop is bank capitalization/deposits and outside earnings -> custom sovereign-bond underwriting -> sovereign spending on productive capacity and commerce -> larger bank business/earnings -> monthly deposit interest/share dividends and capacity for further bonds. Resale adds outside financing and recycles underwriting liquidity. Native trade companies connect spending and finance to operating trade, projects and profits rather than being passive bonus subjects.
 
 Debt-first funding can cover most regular cash needs when bank and investor capacity permit. For example, tune a sustainable fixture around 100 monthly expenditure, 35 native fiscal receipts, 5 funded deposit-interest/dividend receipts and 60 net new bond proceeds. This is a proposed cash-budget scenario, not a claim that borrowing is profit or that debt service can grow indefinitely. Include the current coupon cost in expenditure and verify the facility can keep operating as bond capacity, external sales and real economic cash generation evolve. Do not automatically disable all native taxes/trade: the player can adjust fiscal reliance while those receipts underpin interest and redemption.
 
 Primary issuance grows the bank's coupon-bearing portfolio but reduces its liquid cash. A funded interest/dividend payment reduces its cash further. Expansion is beneficial only while returns, funding, debt service, liquidity and risk remain sound. Increasing issuance alone does not guarantee better bank performance.
 
-Numerical accounting example: the bank underwrites a 100-gold native bond, so sovereign cash rises 100, bank cash falls 100 and the bank holds a 100 claim. A 1-gold monthly coupon moves 1 from sovereign to bank. If 0.5 is later returned as a valid dividend, the sovereign's net coupon cost is 0.5; the pair has not earned new external wealth from that internal coupon. If the bank resells the bond for 98, it receives outside buyer cash and realizes the appropriate basis loss; later coupon payments go to that buyer, and the sovereign receives no new 98 from the resale.
+Numerical accounting example: the bank underwrites a 100-gold custom bond, so sovereign cash rises 100, bank cash falls 100 and the bank holds a 100 claim. At 3% annually, a 0.25-gold monthly coupon moves from sovereign to bank. If 0.125 is later returned as a valid dividend, the sovereign's net coupon cost is 0.125; the pair has not earned new external wealth from that internal coupon. If the bank resells the bond for 98, it receives outside buyer cash and realizes the appropriate basis loss; later coupon payments go to that buyer, and the sovereign receives no new 98 from the resale.
 
 Display deposit-interest/share-dividend earnings, gross issuance, redemption, net financing, coupon expense, outside-held debt and total cash change as separate rows. Track borrowing dependence and stress indicators so the player can see the funding cycle strengthening or breaking. Contraction, an unsuccessful resale, a deposit run or rising coupon burden feeds the existing restructuring/concession/crisis framework.
 
-**Acceptance:** Campaign tuning demonstrates debt as the largest regular funding stream where feasible, while cash conservation, losses, native bond capacity and interest obligations remain visible and enforceable.
+**Acceptance:** Campaign tuning demonstrates debt as the largest regular funding stream where feasible, while cash conservation, losses, combined native/custom debt capacity and custom coupon obligations remain visible and enforceable.
 
 
 ## 7. Native trade-company implementation
@@ -962,7 +937,7 @@ The same financial GUI serves an independent-bank player and a landed player con
 | Monetary policy and distress | Permitted issuance, rates, confidence, guarantees, liquidity facilities and resolution. |
 | Research and specialization | The chosen exclusive profile, its advance path, earliest ages and explanations for locked instruments. |
 
-Build subject GUI binding and Treasury Funding scaffolding in M1. Deliver deposits, expenses and share dividends in M4; genuine recurring native bond issuance and current-holder resale/redemption follow M3's adapter gates. Add investments, company finance and resolution with their milestones. Diplomacy supports foreign consent/contracts; management is not diplomatic-only.
+Build subject GUI binding and Treasury Funding scaffolding in M1. Deliver deposits, expenses and share dividends in M4; funded custom issuance and current-holder settlement use M3's ledger, with secondary Stock Exchange requirements. Add investments, company finance and resolution with their milestones. Diplomacy supports foreign consent/contracts; management is not diplomatic-only.
 
 Every button repeats controller authority, current subject/reform binding, profile/advance/age permission, available bank funds and target-state checks. Gate disabled panels clearly by profile or research; a UI label alone is not enforcement.
 
@@ -976,28 +951,28 @@ Company AI chooses trade and construction based on native capacity and projected
 
 Chartered Bank AI follows its profile and sovereign policy, protects reserves/capital before dividends/underwriting, and evaluates eligible loan purchases, bond buyers, rollover, concentration and guarantees. Sovereign AI chooses deposit and payout policies using cash/capital needs, and bounds future debt-first draws by verified funding and debt service. Support considers collateral, fiscal capacity, issuance limits and exposure.
 
-Run bounded periodic reviews with cooldowns. Do not scan every bank against every country each month. Evaluate registered clients, counterparties, permitted local opportunities, native takeover targets and bounded native bond/claim resale offers; no global order-book matching is required.
+Run bounded periodic reviews with cooldowns. Do not scan every bank against every country each month. Evaluate registered clients, counterparties, permitted local opportunities, native takeover targets and bounded custom sovereign-bond resale offers; no global order-book matching is required.
 
 
 ## 9. Development milestones and completion gates
 
 | Milestone | Deliverable | Dependencies | Completion gate |
 | --- | --- | --- | --- |
-| M0: Native audit | Pin bond-capable patch; decision/conversion/market/GUI probes; native takeover; real bank-funded sell_bonds, creditor/coupon/redemption and resale tests; income/expense/rate checks. | None | Required native bridges demonstrated, including genuine native bonds and current-holder payments. |
+| M0: Native audit | Pin patch; decision/conversion/market/GUI and takeover probes; audit native bond feasibility and validate the authorized custom replacement; receipt/goods/project and timing checks. | None | Required native bridges demonstrated; custom bonds pass funded issuance, fixed-rate current-holder coupons, Stock Exchange-gated resale/redemption and reload. Other P01–P12 probes remain required; native bonds are retired. |
 | M1: Charter and accounts | Existing decision/cost/conversion/reform/cap; separate bank treasury; GUI/Treasury Funding scaffolding; two-option profile event/migration. | M0 | Full investment paid once, valid controller/reform, one bank and one of two profiles, 100% opening sovereign share ownership; no leftover flat subject tribute. |
 | M2: Operating companies | Native registration, facilities, budgets, working trade and conservative distributions. | M1 | Real company operations/receipts identified; financing and political authority remain distinct. |
-| M3: Sovereign credit and bonds | Common sovereign origination/takeover; native bond underwriting, recurring facility, resale/redemption; gated restructuring and Merchant corporate-credit branch. | M1; M2 for company branch | Both profiles finance native bonds; proceeds/coupons/principal reconcile through transfer and reload. |
+| M3: Sovereign credit and bonds | Common sovereign origination/takeover; custom sovereign bond underwriting, recurring facility, Stock Exchange-gated resale/redemption; gated restructuring and Merchant corporate-credit branch. | M1; M2 for company branch | Both profiles finance custom sovereign bonds; proceeds/coupons/principal reconcile through transfer and reload. |
 | M4: Treasury payouts and deposits | Funded sovereign deposit interest, fixed operating expenses/arrears, current monthly net earnings and share dividends; demand/term deposits, withdrawals and reserves. | M1, M3 for integrated native credit receipts | Deposits, costs and all holder dividends reconcile once; principal is excluded from profits; payouts respect losses/liquidity/capital; no royalty or native tribute extraction. |
 | M5: Ownership | Subscriptions, transfers, dilution and company-equity branch; extend existing monthly dividends to new holders. | M1, M2, M4 | Monthly distributions reconcile to diluted ownership and attributable earnings; company equity stays Overseas. |
 | M6: Goods finance | Discovery positions; Absolutism collateral/receipts/forwards; later margining. | M1, M2, M4 | Native quantities and activity earnings reconcile; age/advance/profile gates hold. |
 | M7: Commenda | Discovery ventures, early operators and later native companies; monthly distribution of realized surplus. | M2, M5; M6 only for custody-linked variants | Real outcomes settle and enter the correct bank activity bucket; no discovery-only payout. |
-| M8: Monetary system | Rates, staged notes, secured liquidity and Revolutions upgrades; native Central Banking progression. | M3–M7 | Native bond coupon behavior and later monetary powers follow their audited rules; no self-backed issuance. |
+| M8: Monetary system | Rates, staged notes, secured liquidity and Revolutions upgrades; native Central Banking progression. | M3–M7 | Custom fixed annual coupons and later monetary powers follow their audited rules; no self-backed issuance. |
 | M9: Resolution | Contagion, guarantee/recapitalization, payout/draw suspension, liquidation and lifecycle cleanup. | M3–M8 | Debt/coupons survive bank transfer appropriately; one-bank and controller rules preserve claims. |
 | M10: Release integration | Full GUI, two-profile AI, age tree, debt-led treasury balance, compatibility and performance. | M1–M9 | Both player roles pass full campaigns; recurring finance is viable, constrained and transparent. |
 
 Build each feature's GUI and AI with its milestone. M1 already demonstrates direct subject management; M3/M4 deliver the complete treasury loop before advanced commodity/venture instruments. Founder dividends do not wait for tradable-share research.
 
-The integrated prototype target contains a decision-converted bank, an independent bank, both profiles, funded deposits/share dividends/costs and a genuinely bank-funded native bond resold between two banks. This is not a description of current completion: the bond portion remains blocked. Test later modules in appropriate-age fixtures; the release combines the two profile feature sets plus their common sovereign core, without automatic debug grants.
+The integrated prototype target contains a decision-converted bank, an independent bank, both profiles, funded deposits/share dividends/costs and a funded custom sovereign bond with Stock Exchange-gated secondary trading. This is not a description of full-plan completion: the custom bond branch has focused engine checks, while the other milestone gates remain. Test later modules in appropriate-age fixtures; the release combines the two profile feature sets plus their common sovereign core, without automatic debug grants.
 
 ## 10. Validation plan
 
@@ -1007,7 +982,7 @@ Use offline checks for generated script structure, localization coverage, identi
 
 Include accounting sequences for charter equity -> underwriting -> coupon -> funded deposit interest/share dividend -> resale -> later coupon -> redemption. Bond stages remain future acceptance until their adapters pass. Verify conserved cash, one persistent debt, expense arrears, loss carryforward, monthly replay, lot limits and both profile permission maps.
 
-Offline tests cannot establish engine cash movements, native bond payee behavior, loader semantics or callback order. In-game probes and campaigns remain required.
+Offline tests cannot establish engine cash movements, custom current-holder settlement, loader semantics or callback order. In-game probes and campaigns remain required.
 
 
 ### 10.2 In-game acceptance matrix
@@ -1032,28 +1007,28 @@ Offline tests cannot establish engine cash movements, native bond payee behavior
 | Absolutism collateralization | No earlier pledge, backed receipt, secured facility or re-labelled security bypasses the age/advance gate. |
 | Later-age upgrades | Advanced notes, forwards, clearing and backstops unlock at their assigned age only after prerequisites/research. |
 | Native takeover parity | Same eligible estate-origin claim, native cost, estate payout and creditor assignment; no second debit or borrower windfall. |
-| Common sovereign functions | Merchant and Overseas banks can originate/purchase sovereign claims and underwrite native bonds; Overseas still cannot lend to companies. |
+| Common sovereign functions | Merchant and Overseas banks can originate/purchase sovereign claims and underwrite custom sovereign bonds; Overseas still cannot lend to companies. |
 | Operating expense breakdown/payment | Live counts/rates/classes/reductions match the rounded monthly assessment; funded payment changes bank cash once and creates no sovereign income. |
 | Native expense tooltip/history | Illustrated header, turquoise sections and striped rows; hide inactive reductions, green beneficial negative percentages, line graph of actual assessments only. Migration starts empty; replay/load do not duplicate samples. |
 | Integrated Credit loan information | Chartered view replaces the old Loans Taken/Loans Given banner with bank assets/liabilities and separate native sovereign debt/monthly costs/receivables. Country keys match donut slices; native loan lists and sovereign controls retain their actors. |
 | Expense arrears and legacy cleanup | Unpaid costs remain liabilities and reduce earnings once; later payment is not a second expense. Old levy modifiers are removed without money creation. |
 | Monthly share dividends | Current monthly net income/payout/owned units reconcile after costs/losses; no dividends from principal/deposits/subscriptions/bond proceeds or reused retained income. |
 | Native subject extraction | No leftover flat tribute/unrestricted siphon; share dividends and paid deposit interest reconcile to actual bank-related earned transfers. |
-| Recurring bond facility | Either profile funds actual is_bond claims repeatedly; sovereign debt/proceeds rise once and bank cash falls once; dry bank skips. |
-| Native lot/issuance limits | Lot size, can_sell_bonds, capacity and period stamp enforced; no fractional fake bond or duplicate concurrent issuance. |
-| Bond rate and coupon routing | Low positive coupon uses verified units/repricing; sovereign pays once; current native holder receives once after resale. |
-| Bond resale | Buyer pays current bank holder; same native claim transfers; sovereign receives no new principal and terms/coupon liability persist. |
-| Redemption and refinancing | Native principal reaches current holder once and claim closes; explicit refinancing cannot erase debt for free. |
+| Recurring bond facility | Either profile funds custom issuer/slot/generation claims repeatedly; debt/proceeds rise once and bank cash falls once; dry bank skips. |
+| Custom issuance limits | One issue and at most 100 gold per month; 32 slots, protected bank cash/capital, combined custom/native debt and custom coupon limits. |
+| Bond rate and coupon routing | Fixed annual rate, monthly cent carry and funded arrears; current custom holder receives once after resale. |
+| Bond resale | Seller and buyer both need Stock Exchange research and a built owned exchange; buyer pays current holder; same custom claim transfers; issuer receives no principal and fixed terms persist. |
+| Redemption and refinancing | Custom face and due coupons reach the current holder once and the claim closes; future accepted refinancing must conserve debt/cash. |
 | Internal coupon cycle | Returning controller coupon through dividends reduces net sovereign service cost without creating consolidated outside profit. |
 | Debt-led campaign | Debt-first policy supplies the largest regular funding stream in feasible fixtures; interest, losses, capacity and liquidity constrain continued issuance. |
 | Deposit/withdrawal and maturity | Cash/liability changes match; interest and principal settle once after reload; shortage follows resolution rules. |
 | Sovereign/company loan lifecycle | Correct bank subject creditor, borrower, repayments and default; profile and advance rules apply. |
-| Bank-to-overlord borrowing | Recurring facility creates native government bonds on separate sovereign/bank accounts; ownership consolidation does not retire them. |
+| Bank-to-overlord borrowing | Recurring facility creates custom sovereign bonds on separate sovereign/bank accounts; ownership consolidation does not retire them. |
 | Equity subscription/resale | Charter equity, dilution, holder payment and dividends reconcile; financial ownership does not transfer territory. |
 | Company equity/debt separation | Overseas equity and Merchant credit permissions remain distinct; ordinary sovereign company ownership does not expand bank permissions. |
 | Goods/forwards/receipts | Quantities, encumbrance, transport, collateral and bilateral settlement reconcile. |
 | Commenda outcomes | Capital and surplus split correctly; Discovery timing applies; discovery without actual receipts pays no profit. |
-| Note-funded operations and rates | Circulation is recorded; issuance cannot back itself; fixed ordinary debts retain terms, while native bond coupons follow the verified rate/repricing model. |
+| Note-funded operations and rates | Circulation is recorded; issuance cannot back itself; fixed ordinary debts and custom sovereign bonds retain accepted terms. |
 | Company income waterfall | Direct native overlord receipts and subject payments are reconciled before distributions. |
 | Default, bank run and guarantees | Losses and authorized public payments occur once; bank and sovereign accounts remain separate. |
 | Last-building loss, annexation and reform loss | Claims close, transfer or wind down safely; controller bindings and one-bank cap reconcile. |
@@ -1074,8 +1049,8 @@ Within one mod-owned account pass:
 4. Update conservative capital/liquidity, process withdrawals and crisis states, and reserve due obligations/committed capital.
 5. Assess fixed operating expenses once, recognize the full cost against earnings, pay from protected-cash headroom and retain any unpaid expense liability.
 6. Offset institution-wide carried losses, calculate cash/capital-limited monthly share dividends, pay current holders proportionately and close the month's earnings registers.
-7. Recompute capacity after payouts; execute a due native bond draw only after its adapter is enabled and authorization/funding checks pass. Permit other eligible commitments, including bounded bank-owned estate-loan takeover. New funding never retroactively becomes monthly profit.
-8. Process accepted native resales only through verified guarded adapters; reconcile current-holder metadata and separately stamp issuance, expenses, dividends and account completion.
+7. Recompute capacity after payouts; execute a due custom bond draw only after authorization/funding/capacity checks pass. Permit other eligible commitments, including bounded bank-owned estate-loan takeover. New funding never retroactively becomes monthly profit.
+8. Process accepted custom bond resales through guarded Stock Exchange-gated services; keep native ordinary-claim resales disabled until separately verified; reconcile current-holder metadata and separately stamp issuance, expenses, dividends and account completion.
 
 GUI acceptances may occur outside the monthly pass; they use the same transaction services and cannot trigger a second scheduled draw or payout. Choose a consistent cutoff for activity earnings and receipts, and include only settled available cash.
 
@@ -1105,7 +1080,7 @@ Implement these as model rules and acceptance tests:
 - Converted subjects use deposit-interest and owned-share dividend rules instead of flat native tribute; unrestricted siphoning cannot bypass protected obligations.
 - Fixed operating costs scale with complexity, not asset value; additive efficiency reductions are bounded, unpaid costs remain liabilities and payments do not create sovereign income.
 - Dividends follow current ownership and current monthly net earnings after expenses/carried losses; new issuance dilutes entitlements, and retained profits are not reused as new monthly income.
-- Native bond proceeds are financing, not bank or sovereign earned income; coupons and redemption remain payable to the current creditor.
+- Custom sovereign bond proceeds are financing, not bank or sovereign earned income; coupons and redemption remain payable to the current creditor.
 - Recurring draws require bank funding and native issuer capacity; new face value cannot become immediate profit or self-created backing.
 - Controller coupon recycling is an internal transfer. Outside operations/funding and adequate debt service sustain expansion; increasing issuance alone cannot guarantee returns.
 - A bond resale replenishes bank liquidity at the buyer's expense, creates no sovereign proceeds and does not reset principal/rate or erase acquisition losses.
@@ -1117,7 +1092,7 @@ Calibrate deposit rates/premiums, fixed cost coefficients/reductions, monthly pa
 
 ## 13. Compatibility and release requirements
 
-Maintain a manifest of every native override. Review State Bank conversion and subject tribute removal, decision/GUI authority, estate-loan takeover, native bond funding/capacity/coupons/redemption/resale/rates, deposit/share income, operating costs, research ownership, branches and company payments/assignment.
+Maintain a manifest of every native override. Review State Bank conversion and subject tribute removal, decision/GUI authority, estate-loan takeover, custom bond funding/capacity/coupons/redemption/resale/rates and native debt compatibility, deposit/share income, operating costs, research ownership, branches and company payments/assignment.
 
 Prefer custom interactions and appended child hooks over replacing large native files. Do not patch vanilla company payment formulas until measured receipts demonstrate why a change is needed. Preserve other mods' hooks in compatibility tests.
 
@@ -1144,8 +1119,8 @@ The implementation is complete when:
 - The new subject type is Chartered Bank; the landed controller receives State Chartered Bank with benefits and direct financial GUI access.
 - No country has more than one active Chartered Bank after chartering, migration or lifecycle reconciliation.
 - Independent and chartered banks choose Merchant Finance or Overseas Investment exactly once; both have common sovereign-credit/bond functions and cannot originate the other profile's corporate/commodity/venture instruments.
-- Eligible estate loans use regular banks' native takeover; existing native bonds/claims can be resold with payment to the current holder and preserved sovereign obligations.
-- Credit controls sovereign deposits/withdrawals, the monthly share-dividend payout ratio, external share offerings and administration efficiency, and exposes native ownership/asset donuts and detailed costs. Future bank-funded native bond controls remain disabled until proved; royalties never return.
+- Eligible estate loans use regular banks' native takeover; custom sovereign bonds can be resold after both parties research Stock Exchange and own its building; payment reaches the current holder and obligations persist.
+- Credit controls sovereign deposits/withdrawals, the monthly share-dividend payout ratio, external share offerings and administration efficiency, and exposes native ownership/asset donuts and detailed costs. Funded custom bond controls include prospective annual rates, recurring issuance, secondary offerings and redemption; royalties never return.
 - Bond proceeds, coupon costs, redemption and current-holder receipts reconcile once; borrowing is the primary funding stream in feasible bank-led scenarios, without being counted as earned profit.
 - Debt restructuring requires Renaissance; commodities and commenda require Discovery; trade-company corporate credit/debt requires Reformation; collateralization requires Absolutism; each requires its advance.
 - Later ages progressively unlock the most advanced monetary, security, clearing and risk-management features.
