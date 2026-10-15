@@ -99,7 +99,7 @@
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_asset_investments').GetValue)]" color = { 0.61 0.48 0.72 1 }
             tooltipwidget = { bfl_asset_investments_tooltip = { } } }
                 icon = { size = { 38 38 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/accounts.dds" } } } } }
-        hbox = { spacing = 8 tooltip = "bfl_operating_costs_tip"
+        hbox = { spacing = 8 tooltipwidget = { bfl_operating_cost_tooltip = { } }
             text_single = { text = "bfl_operating_costs" autoresize = yes fontsize = 12 }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_expense')|2]@gold!" autoresize = yes fontsize = 12 } } } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
         hbox = { spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = { using = CreditworthinessTooltip }

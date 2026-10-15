@@ -95,20 +95,36 @@ def generate(common, effect, loc, write, tune):
         if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment } }
     '''
     common('scripted_effects', 'share_income', effect('bfl_record_share_income', share_income))
-    complexity = f'value = {tune["operating_base"]}\n'
-    for prefix, count, cost in [('dep', 32, tune['operating_account']), ('con', 32, tune['operating_contract']), ('branch', 16, tune['operating_branch'])]:
+    components = [('accounts', 'dep', 32, 'operating_account'),
+                  ('contracts', 'con', 32, 'operating_contract'),
+                  ('branches', 'branch', 16, 'operating_branch')]
+    operations = effect('bfl_operating_base_cost', f'value = {tune["operating_base"]}')
+    complexity = 'value = bfl_operating_base_cost\n'
+    for name, prefix, count, setting in components:
+        counter = 'value = 0\n'
         for index in range(1, count + 1):
-            complexity += f'if = {{ limit = {{ var:bfl_{prefix}_{index:02}_active = 1 }} add = {cost} }}\n'
+            counter += f'if = {{ limit = {{ var:bfl_{prefix}_{index:02}_active = 1 }} add = 1 }}\n'
+        operations += effect(f'bfl_operating_{name}_count', counter)
+        operations += effect(f'bfl_operating_{name}_cost', f'value = bfl_operating_{name}_count multiply = {tune[setting]}')
+        complexity += f'add = bfl_operating_{name}_cost\n'
+    counter = 'value = 0\n'
     for asset_type in ASSET_TYPES:
-        complexity += f'if = {{ limit = {{ var:bfl_asset_{asset_type} > 0 }} add = {tune["operating_asset_type"]} }}\n'
-    reduction = '''value = 1
-        if = { limit = { var:bfl_cost_program = 1 } subtract = 0.10 }
-        if = { limit = { bfl_has_valid_controller = yes } subtract = 0.05 }
-        if = { limit = { OR = { has_advance = banking_advance overlord ?= { has_advance = banking_advance } } } subtract = 0.10 }
-        if = { limit = { OR = { has_advance = bfl_advanced_clearing overlord ?= { has_advance = bfl_advanced_clearing } } } subtract = 0.15 }
-        min = 0.25'''
-    common('script_values', 'bank_operations', effect('bfl_operating_complexity', complexity)
+        counter += f'if = {{ limit = {{ var:bfl_asset_{asset_type} > 0 }} add = 1 }}\n'
+    operations += effect('bfl_operating_asset_types_count', counter)
+    operations += effect('bfl_operating_asset_types_cost', f'value = bfl_operating_asset_types_count multiply = {tune["operating_asset_type"]}')
+    complexity += 'add = bfl_operating_asset_types_cost\n'
+    reductions = [('charter', 0.05, 'bfl_has_valid_controller = yes'),
+                  ('banking', 0.10, 'OR = { has_advance = banking_advance overlord ?= { has_advance = banking_advance } }'),
+                  ('clearing', 0.15, 'OR = { has_advance = bfl_advanced_clearing overlord ?= { has_advance = bfl_advanced_clearing } }'),
+                  ('administration', 0.10, 'var:bfl_cost_program = 1')]
+    reduction = 'value = 1\n'
+    for name, amount, condition in reductions:
+        operations += effect(f'bfl_operating_reduction_{name}', f'value = 0 if = {{ limit = {{ {condition} }} add = {amount} }}')
+        reduction += f'subtract = bfl_operating_reduction_{name}\n'
+    reduction += 'min = 0.25'
+    common('script_values', 'bank_operations', operations + effect('bfl_operating_complexity', complexity)
            + effect('bfl_operating_multiplier', reduction)
+           + effect('bfl_operating_total_reduction', 'value = 1 subtract = bfl_operating_multiplier')
            + effect('bfl_operating_expense', 'value = bfl_operating_complexity multiply = bfl_operating_multiplier multiply = 100 round = yes divide = 100')
            + effect('bfl_deposit_income_display', 'value = 0 if = { limit = { has_variable = bfl_interest_period var:bfl_interest_period = bfl_period } value = var:bfl_deposit_income }')
            + effect('bfl_share_income_display', 'value = 0 if = { limit = { has_variable = bfl_share_income_period var:bfl_share_income_period = bfl_period } value = var:bfl_share_income }'))
@@ -162,3 +178,57 @@ def generate(common, effect, loc, write, tune):
     loc('bfl_streamline_bank_tip', 'Pay 100 state gold once to reduce fixed bank operating expenses by 10%. The charter reform, Banking and Advanced Clearing provide additional reductions. This decision does not create bank profit.')
     loc('bfl_operating_costs', 'Monthly operating expenses')
     loc('bfl_operating_costs_tip', 'Fixed monthly costs scale with active deposit accounts, contracts, branches and asset classes. The State Chartered Bank reform reduces costs by 5%, Banking by 10%, Advanced Clearing by 15%, and streamlined administration by 10%. Unpaid costs remain liabilities and block dividends.')
+    generate_operating_tooltip(loc, write, tune)
+
+
+def generate_operating_tooltip(loc, write, tune):
+    def value(name):
+        return f"GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_{name}')"
+
+    def amount(name):
+        return f'[{value(name)}|2]@gold!'
+
+    def row(key, title, expression, visible=''):
+        loc(key, title)
+        return f'''hbox = {{ {visible} size = {{ -1 24 }} layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 12
+            text_single = {{ text = "{key}" autoresize = yes }} expand = {{ }}
+            text_single = {{ raw_text = "{expression}" autoresize = yes }} }}'''
+
+    body = row('bfl_cost_base', 'Base administration', amount('base_cost'))
+    for name, title, setting in [('accounts', 'Deposit accounts', 'operating_account'),
+                                 ('contracts', 'Custom financial contracts', 'operating_contract'),
+                                 ('branches', 'Branches', 'operating_branch'),
+                                 ('asset_types', 'Non-cash asset classes', 'operating_asset_type')]:
+        body += row(f'bfl_cost_{name}', f'{title}: [{value(name + "_count")}|0] × {tune[setting]:.2f}', amount(name + '_cost'))
+    loc('bfl_cost_asset_detail', 'Populated classes (included above)')
+    body += 'text_single = { text = "bfl_cost_asset_detail" autoresize = yes fontsize = 14 }'
+    for name, title in [('bonds', 'Bonds'), ('unsecured', 'Unsecured loans'), ('secured', 'Secured loans'),
+                        ('commodities', 'Commodities'), ('investments', 'Equity & ventures')]:
+        visible = f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_{name}').GetValue, '(CFixedPoint)0')]"'''
+        body += row(f'bfl_cost_class_{name}', title, f'{tune["operating_asset_type"]:.2f}@gold!', visible)
+    body += row('bfl_cost_gross', '#T Cost before reductions#!', amount('complexity'))
+    loc('bfl_cost_reductions', '#T Applicable reductions#!')
+    body += 'text_single = { text = "bfl_cost_reductions" autoresize = yes }'
+    for name, title in [('charter', 'State charter (5% if valid)'),
+                        ('banking', 'Banking (10% if researched)'),
+                        ('clearing', 'Advanced Clearing (15% if researched)'),
+                        ('administration', 'Streamlined administration (10% if adopted)')]:
+        body += row(f'bfl_cost_reduction_{name}', title, f'[{value("reduction_" + name)}|%0]')
+    body += row('bfl_cost_reduction_total', 'Combined reduction (additive)', f'[{value("total_reduction")}|%0]')
+    body += row('bfl_cost_net', '#T Monthly cost after reductions#!', amount('expense'))
+    loc('bfl_cost_rounding', 'Rounded to the nearest 0.01 gold. Research qualifies through the bank or its sovereign; each bonus applies once.')
+    body += 'text_multi = { text = "bfl_cost_rounding" size = { 480 48 } fontsize = 14 layoutpolicy_horizontal = expanding }'
+    for name, title in [('due', 'Last monthly expense assessed'),
+                        ('paid', 'Last cash payment (including old arrears)'),
+                        ('arrears', 'Unpaid operating-expense liability')]:
+        body += row(f'bfl_cost_settlement_{name}', title, f"[Country.MakeScope.GetVariable('bfl_expense_{name}').GetValue|2]@gold!")
+    loc('bfl_cost_payment_detail', 'Charged once per month from cash above protected reserves. Unpaid costs reduce earnings and restrict dividends. Deposit interest and native expenses are separate. Costs scale with complexity, not asset value.')
+    body += 'text_multi = { text = "bfl_cost_payment_detail" size = { 480 78 } fontsize = 14 layoutpolicy_horizontal = expanding }'
+    loc('bfl_cost_title', '#T Monthly operating expenses#!')
+    write('in_game/gui/bfl_operating_cost_tooltip.gui', f'''types BFLOperatingCostTooltip {{
+        type bfl_operating_cost_tooltip = ContextualTooltipTypeBase {{
+            vbox = {{ size = {{ 480 0 }} set_parent_size_to_minimum = yes ignoreinvisible = yes margin = {{ 16 12 }} spacing = 4
+                text_single = {{ text = "bfl_cost_title" autoresize = yes }} {body}
+            }}
+        }}
+    }}''')

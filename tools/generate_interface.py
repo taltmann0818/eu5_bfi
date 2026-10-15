@@ -213,7 +213,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
                         {metric('bfl_equity_label',value('equity'),'subscribe')} }} }}
                 text_multi = {{ text = "bfl_overview_hint" size = {{ -1 35 }} layoutpolicy_horizontal = expanding fontsize = 11 }} }}
             {charts(var,value)} }}
-        hbox = {{ spacing = 8 tooltip = "bfl_operating_costs_tip"
+        hbox = {{ spacing = 8 tooltipwidget = {{ bfl_operating_cost_tooltip = {{ }} }}
             text_single = {{ text = "bfl_operating_costs" autoresize = yes fontsize = 12 }}
             text_single = {{ raw_text = "[{value('operating_expense')}|2]@gold!" autoresize = yes fontsize = 12 }} }} }}'''
     loc('bfl_funding_tab','Funding & Debt')

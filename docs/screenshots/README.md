@@ -13,5 +13,6 @@ Screenshots are captured directly from the game. Hover captures demonstrate owne
 - [Asset breakdown hover](bank-assets.jpg): unsecured loan share and the actual Venice/Genoa borrowers with carrying values.
 - [Balance income](bank-income.jpg): deposit interest and share dividends, without royalties.
 - [Take over loan](bank-takeover.jpg): the bank-funded purchase and creditor/interest destination.
+- [Operating expense breakdown](bank-expenses.jpg): live component counts, per-unit costs, populated asset classes, applicable reductions, rounded monthly total and settlement/arrears.
 
 The revised Take over loan control also opens the bank-purchase country selector in-game. Financial outcomes are verified separately by the engine regression; no selector purchase is staged for these screenshots.

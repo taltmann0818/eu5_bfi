@@ -144,6 +144,7 @@ def fixture(token, fingerprint):
     start += check('fixed_operating_cost_funded', 'var:bfl_expense_paid = 0.95 gold = 999.05 c:FLO = { gold = 1000 } var:bfl_loss_carryforward = 0.95')
     start += 'bfl_settle_operating_expenses = yes\n'
     start += check('fixed_operating_cost_idempotent','gold = 999.05 var:bfl_loss_carryforward = 0.95')
+    start += check('expense_tooltip_matches_assessment', 'bfl_operating_base_cost = 1 bfl_operating_accounts_count = 0 bfl_operating_accounts_cost = 0 bfl_operating_contracts_cost = 0 bfl_operating_branches_cost = 0 bfl_operating_asset_types_count = 0 bfl_operating_complexity = 1 bfl_operating_reduction_charter = 0.05 bfl_operating_total_reduction = 0.05 bfl_operating_expense = var:bfl_expense_due')
     start += 'set_variable = { name = bfl_profit_services value = 100.95 } bfl_settle_dividends = yes\n'
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')

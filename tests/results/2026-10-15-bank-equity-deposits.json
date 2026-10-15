@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "token": "21418c5ae54e40a2b8b21db6af9015b8",
-  "runtime_sha256": "6ae5325e4fa5fb563ba1c63aeef4feea5ac76cd9efdddfadedd6da2a37ce79b3",
+  "token": "60b0e3e0d89643e7bb40e797bd757b64",
+  "runtime_sha256": "6355a50672e435c05b6265a3e503c6623aac7732e5cd575216a0d60ef5290d39",
   "results": {
     "florence_exists": "PASS",
     "native_bardi_bank": "PASS",
@@ -47,6 +47,7 @@
     "native_budget_income_period_idempotent": "PASS",
     "fixed_operating_cost_funded": "PASS",
     "fixed_operating_cost_idempotent": "PASS",
+    "expense_tooltip_matches_assessment": "PASS",
     "dividend_offsets_loss_and_ownership": "PASS",
     "balance_state_dividend_is_funded": "PASS",
     "recapitalization_funded": "PASS",
@@ -86,8 +87,8 @@
   "steam_build": "25905365",
   "cmf_version": "2.5.0",
   "mode": "Fresh Florence campaign; twelve monthly settlements; second-process autosave reload",
-  "offline_tests_passed": 47,
-  "engine_assertions_passed": 76,
-  "visual_review": "Actual native Credit overview, ownership and asset hover tooltips, Balance income, and Take over loan tooltip/selector; disposable funded Florence fixture",
+  "offline_tests_passed": 49,
+  "engine_assertions_passed": 77,
+  "visual_review": "Actual native Credit overview, ownership and asset hover tooltips, live operating expense breakdown, Balance income, and Take over loan tooltip/selector; disposable funded Florence fixture",
   "screenshots": "docs/screenshots/README.md"
 }
