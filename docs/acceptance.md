@@ -1,5 +1,9 @@
 # Florence testing and remaining acceptance work
 
+The revised Banking progression passed **70/70 engine assertions** and **43 offline tests** on 15 October 2026. The [current evidence](../tests/results/2026-10-15-banking-unlocks.json) includes integrated Banking modifiers, retained native bond access, separate Bills/Restructuring research, age gating and save/reload. Later-age positive financial origination and the wider acceptance matrix remain open.
+
+The [Credit clarity revision](credit-clarity.md) passed **65/65 engine assertions**, including the guarded charter research grant and deposit breakdowns; see its [sanitized evidence](../tests/results/2026-10-14-credit-clarity.json). The remaining acceptance matrix below still applies.
+
 The original setup stopped before gameplay as requested. The user subsequently authorized Florence campaign testing and repeatable PR checks on 14 October 2026. The focused engine suite is documented in [campaign_checks.md](campaign_checks.md); its deliberately limited coverage does not certify all P01–P12 probes or the full design plan.
 
 The 0.0.2_dev local run passed all **60 native-engine assertions**, twelve monthly periods and autosave reload. The [sanitized evidence](../tests/results/2026-10-14-florence-0.0.2_dev.json) records the runtime SHA-256. The [interface revision](ui-0.0.2.md) records the restored Balance layout, unified Credit panels, working royalty slider and painted advance cards at 2560×1440. The selector, later-age positive paths and wider UI/multiplayer matrix below still require testing.

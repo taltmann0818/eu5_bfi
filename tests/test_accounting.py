@@ -36,11 +36,26 @@ class Accounting(unittest.TestCase):
         b.accrue(1);self.assertEqual(b.deposits,old)
 
     def test_term_early_exit_rejected_before_cash_changes(self):
-        b=self.bank(age=2,advances={'term_deposits'});p=Wallet(D(100));b.deposit('p',p,100,term=True)
+        b=self.bank(age=2,advances={'banking_advance'});p=Wallet(D(100));b.deposit('p',p,100,term=True)
         old=(b.cash,p.cash)
         with self.assertRaises(Rejected):b.withdraw('p',p,100,11)
         self.assertEqual((b.cash,p.cash),old)
         b.withdraw('p',p,100,12);self.assertEqual(p.cash,D(100))
+
+    def test_native_banking_unlocks_term_and_capital_but_not_bills(self):
+        b=self.bank(age=2)
+        for known in (set(), {'term_deposits','bank_capital_subscriptions'}):
+            b.advances=known
+            self.assertFalse(b.permitted('term_deposit'))
+            self.assertFalse(b.permitted('bank_subscription'))
+        b.advances={'banking_advance'}
+        self.assertTrue(b.permitted('term_deposit'))
+        self.assertTrue(b.permitted('bank_subscription'))
+        self.assertFalse(b.permitted('commercial_bill'))
+        self.assertFalse(b.permitted('sovereign_restructuring'))
+        b.age=1
+        self.assertFalse(b.permitted('term_deposit'))
+        self.assertFalse(b.permitted('bank_subscription'))
 
     def test_queue_survives_cash_shortage(self):
         b=self.bank();p=Wallet(D(100));b.deposit('p',p,100);b.cash=D(40)
@@ -109,7 +124,7 @@ class Accounting(unittest.TestCase):
         self.assertEqual((b.cash,p.cash),(old,D(0)))
 
     def test_subscription_dilutes_instead_of_creating_profit(self):
-        b=self.bank(age=2,advances={'bank_capital_subscriptions'});b.holders={'founder':D(1000)};p=Wallet(100)
+        b=self.bank(age=2,advances={'banking_advance'});b.holders={'founder':D(1000)};p=Wallet(100)
         b.subscribe('state',p,100)
         self.assertEqual(b.holders['state'],100)
         self.assertEqual(b.equity,1100);self.assertEqual(b.reserves,{})

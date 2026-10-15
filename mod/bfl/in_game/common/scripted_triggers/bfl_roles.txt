@@ -28,7 +28,7 @@ bfl_has_management = {
             country_type = location
             has_reform = government_reform:bfl_state_chartered_bank
             exists = var:bfl_bank
-            var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = root }
+            var:bfl_bank ?= { bfl_is_chartered_bank = yes is_subject_of = prev }
         }
     }
 }
@@ -36,13 +36,13 @@ bfl_is_research_owner = { bfl_has_management = yes }
 bfl_research_merchant = {
     OR = {
         AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 1 }
-        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 1 } }
+        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank ?= { var:bfl_profile ?= 1 } }
     }
 }
 bfl_research_overseas = {
     OR = {
         AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 2 }
-        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 2 } }
+        AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank ?= { var:bfl_profile ?= 2 } }
     }
 }
 bfl_can_begin_charter = {

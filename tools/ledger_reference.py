@@ -136,6 +136,7 @@ class Bank(Wallet):
         return (self.profile in (1, 2) and self.state < 2 and self.age >= rule['age']
                 and rule['profile'] in (0, self.profile)
                 and ('advance' not in rule or rule['advance'] in self.advances)
+                and ('native_advance' not in rule or rule['native_advance'] in self.advances)
                 and (not rule.get('charter') or self.charter))
 
     def deposit(self, key, depositor, amount, period=0, term=False):

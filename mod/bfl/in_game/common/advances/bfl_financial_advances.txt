@@ -1,34 +1,19 @@
-﻿bfl_term_deposits = {
-age = age_2_renaissance
-icon = bfl_term_deposits
-bfl_enable_term_deposits = yes
-potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
-ai_weight = { add = 1 }
-}
-bfl_bank_capital_subscriptions = {
-age = age_2_renaissance
-icon = bfl_bank_capital_subscriptions
-bfl_enable_bank_capital_subscriptions = yes
-potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
-ai_weight = { add = 1 }
-}
-bfl_debt_restructuring = {
+﻿bfl_debt_restructuring = {
 age = age_2_renaissance
 icon = bfl_debt_restructuring
 bfl_enable_debt_restructuring = yes
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_commercial_bills = {
 age = age_2_renaissance
 icon = bfl_commercial_bills
 bfl_enable_commercial_bills = yes
-requires = bfl_term_deposits
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_commodity_investments = {
@@ -69,9 +54,9 @@ bfl_bank_share_dealing = {
 age = age_4_reformation
 icon = bfl_bank_share_dealing
 bfl_enable_bank_share_dealing = yes
-requires = bfl_bank_capital_subscriptions
+requires = banking_advance
 potential = { bfl_is_research_owner = yes }
-allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } }
+allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
 ai_weight = { add = 1 }
 }
 bfl_collateralization = {

@@ -83,8 +83,14 @@ def main(game, cmf, compare):
     write(MOD/'in_game/common/country_interactions/siphon_income.txt',siphon)
     with (ROOT/'docs/overrides.csv').open('w',newline='') as f:
         w=csv.writer(f);w.writerow(['path','reason','source_sha256','game_version'])
-        for path,why in [('in_game/gui/economy_lateralview.gui','Insert finance inside native Economy; extract native types exactly once'),('in_game/common/country_interactions/siphon_income.txt','Exclude chartered bank at selection and execution; preserve every other native branch')]:
-            w.writerow([path,why,current[path],'1.4.1'])
+        for path,why,source in [
+            ('in_game/gui/economy_lateralview.gui','Add funded bank income rows; preserve native Balance controls and shared types once','in_game/gui/economy_lateralview.gui'),
+            ('in_game/common/country_interactions/siphon_income.txt','Exclude chartered bank at selection and execution; preserve every other native branch','in_game/common/country_interactions/siphon_income.txt'),
+            ('in_game/gui/credit.gui','Unify bank accounts and native state loans; retain native loan actors and templates','in_game/gui/credit.gui'),
+            ('in_game/gui/technology_lateralview.gui','Use the chartered-bank badge for BFI advances; retain other native badges','in_game/gui/technology_lateralview.gui'),
+            ('in_game/common/advances/bfl_banking_unlocks.txt','INJECT two permissions into banking_advance; preserve its native effects and institution gate','in_game/common/advances/0_age_of_renaissance.txt'),
+        ]:
+            w.writerow([path,why,current[source],'1.4.1'])
     print('Pinned installed evidence and generated two narrow native integrations.')
 
 

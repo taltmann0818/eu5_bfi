@@ -42,7 +42,8 @@ def check_script(path):
 
 def main():
     metadata=json.loads((MOD/'.metadata/metadata.json').read_text())
-    check(metadata['version']=='0.0.2_dev','Metadata version must match requested version')
+    tuning=json.loads((ROOT/'design/tuning.json').read_text())
+    check(metadata['version']==tuning['version'],'Development metadata version must match tuning')
     check(metadata['game_id']=='eu5','Wrong game id')
     check(metadata['supported_game_version']=='1.4.1','Game pin changed')
     check(metadata['relationships'][0]['id']=='community_mod_framework','CMF dependency missing')
@@ -75,12 +76,33 @@ def main():
             check(key in declarations,f'{path}: undefined BFL service/value {key}')
     advances=json.loads((ROOT/'design/advances.json').read_text())
     seen=set()
+    integrated={a['id'] for a in advances if a.get('integrated_into')}
     for advance in advances:
         check(all(r in seen for r in advance['requires']),f'Advance graph not topological: {advance["id"]}')
+        check(not any(r in integrated for r in advance['requires']),f'Advance still depends on a removed standalone node: {advance["id"]}')
+        if advance.get('integrated_into'):
+            check(advance['integrated_into']=='banking_advance','Integrated features must belong to native Banking')
+        elif advance['age']==2:
+            check(advance.get('native_requires')==['banking_advance'],f'Renaissance advance must follow native Banking: {advance["id"]}')
         seen.add(advance['id'])
         icon=MOD/f'main_menu/gfx/interface/advance/bfl_{advance["id"]}.dds'
         check(icon.exists(),f'Missing advance icon {icon}')
-    check(len(seen)==18,'Expected 18 financial advances')
+    check(len(seen-integrated)==16,'Expected 16 separate financial advances')
+    check(integrated=={'term_deposits','bank_capital_subscriptions'},'Expected term deposits and bank capital in native Banking')
+    financial=(MOD/'in_game/common/advances/bfl_financial_advances.txt').read_text(encoding='utf-8-sig')
+    for key in integrated:
+        check(not re.search(r'^bfl_'+key+r'\s*=\s*\{',financial,re.M),f'Integrated feature still has a standalone research node: {key}')
+    injection=(MOD/'in_game/common/advances/bfl_banking_unlocks.txt').read_text(encoding='utf-8-sig')
+    check('INJECT:banking_advance' in injection,'Banking must be extended without replacing its native definition')
+    for key in integrated:
+        check(f'bfl_enable_{key} = yes' in injection,f'Native Banking unlock missing: {key}')
+    instruments=json.loads((ROOT/'design/instruments.json').read_text())
+    for key in ('term_deposit','bank_subscription'):
+        check(instruments[key].get('native_advance')=='banking_advance',f'{key} must use native Banking research')
+    interface=(MOD/'in_game/gui/bfl_economy_finance.gui').read_text(encoding='utf-8-sig')
+    tooltip_keys=set(re.findall(r'\btooltip\s*=\s*"(bfl_[\w]+)"',interface))
+    check(tooltip_keys <= loc_set,f'Missing Credit/Balance tooltips: {sorted(tooltip_keys-loc_set)}')
+    check('using = bg_paper_card' not in interface,'BFI controls must use native button states')
     # Assert every recorded export is a real, correctly sized runtime texture.
     with (ROOT/'docs/asset_register.csv').open(newline='') as f:
         rows=list(csv.DictReader(f))
@@ -113,7 +135,7 @@ def main():
     check(not (MOD/'descriptor.mod').exists(),'EUV does not use the EU4 descriptor assumption')
     if ERRORS:
         print('\n'.join(sorted(set(ERRORS))));return 1
-    print(f'PASS: {len(all_text)} script/GUI/localization files; 18 advances; {len(rows)} graphics; metadata, scopes, references and Economy ownership checks.')
+    print(f'PASS: {len(all_text)} script/GUI/localization files; 16 separate advances and 2 native Banking unlocks; {len(rows)} graphics; metadata, scopes, references and Economy ownership checks.')
     return 0
 
 

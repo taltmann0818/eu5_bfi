@@ -6,7 +6,7 @@ This is the first development iteration. A file's presence or an offline arithme
 | --- | --- | --- |
 | Existing State Bank charter, one-bank cap, reform | Runtime decision/selector, in-place conversion, one investment, lifecycle reconciliation | P01 identity preservation; more than eight selector candidates; full succession/duplicate fixtures |
 | Two exclusive specializations | Runtime event and immutable bank profile | Event/reload/AI fixture |
-| Progression | 18 advances, 23 instrument gates, controller research ownership | Native research UI and balance checks |
+| Progression | 16 separate advances plus two native Banking unlocks, 23 instrument gates, controller research ownership | Native research UI and balance checks |
 | Deposits | Runtime demand/term accounts, accrued liability, queue, fixed accepted rates | Estate depositor pools, renewal/early-exit offers, slot aggregation and invalid-party workouts |
 | Branches | Native banking offices preserved; branch schema supplied | Discovery, host consent/fees, custody/seizure services |
 | Sovereign/corporate lending | Audited native origination boundary and shared gates | P06; persisted acquisition basis; full borrower offer workflow |

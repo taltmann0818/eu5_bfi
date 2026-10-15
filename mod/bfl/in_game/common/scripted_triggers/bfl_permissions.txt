@@ -11,7 +11,7 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_term_deposit = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_term_deposits } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_term_deposits } } }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = banking_advance } AND = { bfl_has_valid_controller = yes overlord = { has_advance = banking_advance } } }
 }
 bfl_can_service_term_deposit = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -140,7 +140,7 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_bank_subscription = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_bank_capital_subscriptions } AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_bank_capital_subscriptions } } }
+OR = { AND = { bfl_is_independent_bank = yes has_advance = banking_advance } AND = { bfl_has_valid_controller = yes overlord = { has_advance = banking_advance } } }
 }
 bfl_can_service_bank_subscription = {
 bfl_has_accounts = yes var:bfl_state < 5

@@ -26,6 +26,14 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
 } } }
 }
 
+    # Country scope; grant only after the sovereign has a live, completed charter.
+    bfl_grant_charter_traditions = {
+        if = { limit = { country_type = location has_reform = government_reform:bfl_state_chartered_bank
+                exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev }
+                NOT = { has_advance = banking_country_traditions } }
+            research_advance = advance_type:banking_country_traditions
+        }
+    }
     # Root is landed controller; saved bfl_bank came from the live subject selector.
     bfl_commit_charter = {
         if = {
@@ -52,6 +60,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
             add_gold = bfl_negative_payment
             set_variable = { name = bfl_bank value = scope:bfl_bank }
             add_reform = government_reform:bfl_state_chartered_bank
+            bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
             scope:bfl_bank = { bfl_apply_royalty_modifiers = yes bfl_offer_profile = yes }

@@ -60,10 +60,12 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes\n'
     start += check('deposit_cash_conserved', 'gold = 1100 c:FLO = { gold = 900 }')
     start += check('deposit_ledger', 'var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:FLO bfl_liabilities = 100 bfl_equity = 1000')
+    start += check('deposit_tooltip_principal_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0')
     start += 'c:PRZ = { save_scope_as = bfl_party } bfl_request_all_withdrawals = yes\n'
     start += check('foreign_withdrawal_rejected', 'gold = 1100 var:bfl_dep_01_principal = 100')
     start += 'c:FLO = { save_scope_as = bfl_party } bfl_process_accounts = yes\n'
     start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0.08 var:bfl_dep_01_remainder = 0.04')
+    start += check('deposit_tooltip_interest_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0.08 bfl_deposit_liabilities = 100.08')
     start += check('history_records_actual_accounts', 'var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities var:bfl_history_period_12 = bfl_period')
     start += 'set_variable = { name = bfi_test_history_before value = var:bfl_history_count }\n'
     start += 'bfl_process_accounts = yes\n'
@@ -100,13 +102,22 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_new_units value = 100 } bfl_allocate_subscription = yes\n'
     start += check('subscription_funded', 'gold = 1100 c:FLO = { gold = 900 } var:bfl_total_units = 1100 var:bfl_shr_01_units = 100')
     start += check('subscription_not_profit', 'var:bfl_profit_services = 0 var:bfl_profit_credit = 0')
-    # Explicit fixture authority; the real charter gate was tested above, not bypassed invisibly.
-    start += reset() + '''c:FLO = {
-        set_gold = 1000 add_reform = government_reform:bfl_state_chartered_bank
+    # Grant uses the same guarded service called by the completed charter transaction.
+    start += reset() + '''c:FLO = { set_gold = 1000 }
+        c:FLO = { bfl_grant_charter_traditions = yes }
+    '''
+    start += check('invalid_charter_no_research_or_payment', 'gold = 1000 c:FLO = { gold = 1000 NOT = { has_advance = banking_country_traditions } }')
+    # Explicit fixture authority; this does not certify the full selector/market gate.
+    start += '''c:FLO = {
+        add_reform = government_reform:bfl_state_chartered_bank
         set_variable = { name = bfl_bank value = c:BRD }
     }
     make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
+    c:FLO = { bfl_grant_charter_traditions = yes }
     '''
+    start += check('charter_grants_banking_traditions', 'c:FLO = { has_advance = banking_country_traditions has_reform = government_reform:bfl_state_chartered_bank } is_subject_type = bfl_chartered_bank')
+    start += 'c:FLO = { bfl_grant_charter_traditions = yes }\n'
+    start += check('charter_research_repeat_no_payment', 'gold = 1000 c:FLO = { gold = 1000 has_advance = banking_country_traditions }')
     start += check('live_charter_authority', 'bfl_has_valid_controller = yes')
     for input_value, expected in [(-10,0),(2,2),(99,4)]:
         start += f'c:FLO = {{ save_scope_value_as = {{ name = bfl_royalty_input value = {input_value} }} bfl_apply_royalty_input = yes }}\n'
@@ -140,6 +151,9 @@ def fixture(token, fingerprint):
     '''
     start += check('history_negative_equity_domain', 'bfl_chart_min = -150 bfl_chart_max = 200 bfl_chart_range = 350 bfl_chart_equity_y_12 = 160 bfl_chart_debt_y_12 = 0')
     start += reset() + 'remove_variable = bfl_history_count bfl_initialize_history = yes\n'
+    start += 'c:FLO = { research_advance = advance_type:banking_advance }\n'
+    start += check('banking_does_not_research_bills_or_restructuring', 'c:FLO = { NOT = { has_advance = bfl_commercial_bills } NOT = { has_advance = bfl_debt_restructuring } }')
+    start += check('banking_keeps_renaissance_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes } NOT = { bfl_can_originate_bank_subscription = yes }')
     # Keep the charter fixture for the natural monthly and persistence checks.
     start += reset() + '''c:FLO = { set_gold = 1000 save_scope_as = bfl_party }
         set_variable = { name = bfl_product value = 1 }
@@ -157,6 +171,9 @@ def fixture(token, fingerprint):
     finish = 'c:BRD = {\n bfl_process_accounts = yes\n'
     finish += check('twelve_calendar_months', 'bfl_period = var:bfi_test_target_period')
     finish += check('natural_monthly_hook', 'var:bfl_last_period = bfl_period var:bfl_dep_01_interest_due = 1 var:bfl_dep_01_remainder = 0')
+    # Research ownership is immediate; native modifier caches update after the tick.
+    finish += check('native_banking_includes_term_and_capital', 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }')
+    finish += check('banking_injection_preserves_native_bonds', 'c:FLO = { modifier:can_sell_bonds = yes }')
     finish += check('history_twelve_settlements', 'var:bfl_history_count = 12 var:bfl_history_period_12 = bfl_period var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities')
     finish += check('persistent_schema_and_owner', 'var:bfl_schema = 1 var:bfi_test_sentinel = 731 var:bfl_dep_01_party = c:FLO bfl_has_valid_controller = yes')
     finish += 'set_variable = { name = bfi_test_interest_before value = var:bfl_dep_01_interest_due } bfl_process_accounts = yes\n'
@@ -185,6 +202,7 @@ def reload_fixture(token, fingerprint):
         'reload_claim_owner': 'var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:FLO var:bfl_dep_01_generation = 1',
         'reload_profile_and_rate': 'var:bfl_profile = 1 var:bfl_dep_01_annual_rate = 0.01',
         'reload_live_controller': 'bfl_has_valid_controller = yes',
+        'reload_native_banking_unlocks': 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }',
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'
     for name, condition in checks.items():

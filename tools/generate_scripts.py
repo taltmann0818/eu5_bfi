@@ -43,7 +43,7 @@ def age_gate(age):
 
 def initialize():
     metadata = {
-        'name':'Banking, Finance and Trade Companies — 0.0.2_dev',
+        'name':'Banking, Finance and Trade Companies',
         'id':'bfl_banking_finance_companies','version':TUNE['version'],'game_id':'eu5',
         'supported_game_version':'1.4.1',
         'short_description':'Development banking, chartered sovereign finance and native trade-company investment. Requires CMF 2.5.0.',
@@ -85,7 +85,7 @@ def initialize():
                 country_type = location
                 has_reform = government_reform:bfl_state_chartered_bank
                 exists = var:bfl_bank
-                var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = root }
+                var:bfl_bank ?= { bfl_is_chartered_bank = yes is_subject_of = prev }
             }
         }
     }
@@ -93,13 +93,13 @@ def initialize():
     bfl_research_merchant = {
         OR = {
             AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 1 }
-            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 1 } }
+            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank ?= { var:bfl_profile ?= 1 } }
         }
     }
     bfl_research_overseas = {
         OR = {
             AND = { bfl_is_independent_bank = yes var:bfl_profile ?= 2 }
-            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank = { var:bfl_profile ?= 2 } }
+            AND = { bfl_has_management = yes exists = var:bfl_bank var:bfl_bank ?= { var:bfl_profile ?= 2 } }
         }
     }
     bfl_can_begin_charter = {
@@ -227,8 +227,8 @@ def permissions():
             gate.append(f'var:bfl_profile = {rule["profile"]}')
         if rule.get('charter'):
             gate.append('bfl_has_valid_controller = yes')
-        if rule.get('advance'):
-            a = 'bfl_'+rule['advance']
+        if rule.get('advance') or rule.get('native_advance'):
+            a = rule.get('native_advance') or 'bfl_'+rule['advance']
             gate.append(f'OR = {{ AND = {{ bfl_is_independent_bank = yes has_advance = {a} }} AND = {{ bfl_has_valid_controller = yes overlord = {{ has_advance = {a} }} }} }}')
         if rule.get('probe'):
             # No save-game switch can enable an unproved adapter. Change design + regenerate after evidence.
@@ -241,19 +241,28 @@ def permissions():
         loc('bfl_'+key, key.replace('_',' ').title())
     common('scripted_triggers','permissions',triggers)
     definitions = ''
+    native_unlocks = {}
     for a in ADV:
         key = 'bfl_'+a['id']
+        if a.get('integrated_into'):
+            native_unlocks.setdefault(a['integrated_into'], []).append(f'bfl_enable_{a["id"]} = yes')
+            continue
         potential = {0:'bfl_is_research_owner',1:'bfl_research_merchant',2:'bfl_research_overseas'}[a['profile']]+' = yes'
         if a.get('charter'):
             potential += ' country_type = location has_reform = government_reform:bfl_state_chartered_bank'
         definitions += f'{key} = {{\nage = {AGES[a["age"]-1]}\nicon = {key}\n'
         definitions += f'bfl_enable_{a["id"]} = yes\n'
+        for req in a.get('native_requires', []):
+            definitions += f'requires = {req}\n'
         for req in a['requires']:
             definitions += f'requires = bfl_{req}\n'
-        definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])} }}\nai_weight = {{ add = 1 }}\n}}\n'
+        native_gate = ''.join(f' has_advance = {req}' for req in a.get('native_requires', []))
+        definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])}{native_gate} }}\nai_weight = {{ add = 1 }}\n}}\n'
         loc(key,a['id'].replace('_',' ').title())
         loc(key+'_desc', f"Unlocks {a['id'].replace('_',' ')} from the {AGES[a['age']-1].split('_',2)[2].title()} age. The bank's specialization and operating permissions still apply. Native integrations retain their development gates until measured.")
     common('advances','financial_advances',definitions)
+    # Add permissions to Banking without replacing its native effects or institution gate.
+    common('advances','banking_unlocks', ''.join(effect('INJECT:'+key, '\n'.join(flags)) for key,flags in native_unlocks.items()))
 
 
 def charter():
@@ -320,6 +329,14 @@ def charter():
         prep += f'if = {{ limit = {{ var:bfl_candidate_count = {i} }} set_variable = {{ name = bfl_candidate_{i:02} value = scope:bfl_candidate }} }}\n'
     prep += '} } }'
     common('scripted_effects','charter', effect('bfl_prepare_charter_selector',prep)+'''
+    # Country scope; grant only after the sovereign has a live, completed charter.
+    bfl_grant_charter_traditions = {
+        if = { limit = { country_type = location has_reform = government_reform:bfl_state_chartered_bank
+                exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev }
+                NOT = { has_advance = banking_country_traditions } }
+            research_advance = advance_type:banking_country_traditions
+        }
+    }
     # Root is landed controller; saved bfl_bank came from the live subject selector.
     bfl_commit_charter = {
         if = {
@@ -346,6 +363,7 @@ def charter():
             add_gold = bfl_negative_payment
             set_variable = { name = bfl_bank value = scope:bfl_bank }
             add_reform = government_reform:bfl_state_chartered_bank
+            bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
             scope:bfl_bank = { bfl_apply_royalty_modifiers = yes bfl_offer_profile = yes }
@@ -399,7 +417,7 @@ def charter():
     events += 'option = { name = bfl_cancel ai_chance = { base = 0 } }\n}\n'
     write('in_game/events/bfl_finance/bfl_specialization.txt', events)
     loc('bfl_establish_chartered_bank','Establish a State Chartered Bank')
-    loc('bfl_establish_chartered_bank_desc','Convert one existing State Bank in place. The current-age investment of 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold is transferred to its treasury as state equity. You must own your capital market. Select a bank before any payment occurs.')
+    loc('bfl_establish_chartered_bank_desc','Convert one existing State Bank in place and gain Banking Traditions when the charter is completed. The current-age investment of 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold is transferred to its treasury as state equity. You must own your capital market. Select a bank before any payment or research occurs.')
     loc('bfl_establish_chartered_bank.a','Select the existing State Bank')
     loc('bfl_state_chartered_bank','State Chartered Bank')
     loc('bfl_state_chartered_bank_desc','A separately funded native bank subject, managed within Economy. Royalties, realized dividends and bank-funded native bonds have separate accounts. Native bond integration is gated pending P03–P05.')
@@ -930,7 +948,8 @@ def main():
     from generate_contracts import generate
     generate(common,effect,loc)
     gui_and_localization()
-    print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {len(ADV)} advances, {len(INST)} instrument gates, {len(LOC)} localization keys.')
+    standalone = sum(not a.get('integrated_into') for a in ADV)
+    print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')
 
 
 if __name__ == '__main__':
