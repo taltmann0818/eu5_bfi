@@ -1,7 +1,7 @@
 # Feature Ideas
 ## Core Functions
 - government bonds
-
+- reselling sovereign bonds and buying other sovereign bonds on the secondary market should be locked behind an advance and building the stock exchange building
 ## Future Content
 - Laws affecting the bank: usury, ...
 - Catholic Church (international org) laws on usury
