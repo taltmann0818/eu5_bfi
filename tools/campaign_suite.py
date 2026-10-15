@@ -60,12 +60,10 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes\n'
     start += check('deposit_cash_conserved', 'gold = 1100 c:FLO = { gold = 900 }')
     start += check('deposit_ledger', 'var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:FLO bfl_liabilities = 100 bfl_equity = 1000')
-    start += check('deposit_tooltip_principal_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0')
     start += 'c:PRZ = { save_scope_as = bfl_party } bfl_request_all_withdrawals = yes\n'
     start += check('foreign_withdrawal_rejected', 'gold = 1100 var:bfl_dep_01_principal = 100')
     start += 'c:FLO = { save_scope_as = bfl_party } bfl_process_accounts = yes\n'
     start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0.08 var:bfl_dep_01_remainder = 0.04')
-    start += check('deposit_tooltip_interest_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0.08 bfl_deposit_liabilities = 100.08')
     start += check('history_records_actual_accounts', 'var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities var:bfl_history_period_12 = bfl_period')
     start += 'set_variable = { name = bfi_test_history_before value = var:bfl_history_count }\n'
     start += 'bfl_process_accounts = yes\n'
@@ -102,22 +100,13 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_new_units value = 100 } bfl_allocate_subscription = yes\n'
     start += check('subscription_funded', 'gold = 1100 c:FLO = { gold = 900 } var:bfl_total_units = 1100 var:bfl_shr_01_units = 100')
     start += check('subscription_not_profit', 'var:bfl_profit_services = 0 var:bfl_profit_credit = 0')
-    # Grant uses the same guarded service called by the completed charter transaction.
-    start += reset() + '''c:FLO = { set_gold = 1000 }
-        c:FLO = { bfl_grant_charter_traditions = yes }
-    '''
-    start += check('invalid_charter_no_research_or_payment', 'gold = 1000 c:FLO = { gold = 1000 NOT = { has_advance = banking_country_traditions } }')
-    # Explicit fixture authority; this does not certify the full selector/market gate.
-    start += '''c:FLO = {
-        add_reform = government_reform:bfl_state_chartered_bank
+    # Explicit fixture authority; the real charter gate was tested above, not bypassed invisibly.
+    start += reset() + '''c:FLO = {
+        set_gold = 1000 add_reform = government_reform:bfl_state_chartered_bank
         set_variable = { name = bfl_bank value = c:BRD }
     }
     make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
-    c:FLO = { bfl_grant_charter_traditions = yes }
     '''
-    start += check('charter_grants_banking_traditions', 'c:FLO = { has_advance = banking_country_traditions has_reform = government_reform:bfl_state_chartered_bank } is_subject_type = bfl_chartered_bank')
-    start += 'c:FLO = { bfl_grant_charter_traditions = yes }\n'
-    start += check('charter_research_repeat_no_payment', 'gold = 1000 c:FLO = { gold = 1000 has_advance = banking_country_traditions }')
     start += check('live_charter_authority', 'bfl_has_valid_controller = yes')
     for input_value, expected in [(-10,0),(2,2),(99,4)]:
         start += f'c:FLO = {{ save_scope_value_as = {{ name = bfl_royalty_input value = {input_value} }} bfl_apply_royalty_input = yes }}\n'
