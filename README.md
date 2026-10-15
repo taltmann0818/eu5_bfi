@@ -18,6 +18,15 @@ python tools/audit_native.py --compare
 python tools/build_economy_gui.py
 ./tools/stage_release.ps1
 ```
+Test env
+```powershell
+$eu5 = 'C:\Program Files (x86)\Steam\steamapps\common\Europa Universalis V\binaries\eu5.exe'
+$testUser = 'C:\Users\Thomas Altmann\.codex\worktrees\2fea\EU5_BFI\dist\ui-005\user'
+
+Start-Process -FilePath $eu5 `
+  -ArgumentList @('-debug_mode', '-play=FLO', "-userdir=`"$testUser`"") `
+  -WorkingDirectory (Split-Path $eu5)
+```
 
 The committed runtime under `mod/bfl/` requires no Python. `generate_scripts.py` regenerates definitions from `design/`; the Economy generator refuses an unknown native source hash and preserves native templates exactly once. Asset rebuilding uses Pillow 12.0.0 (`python -m pip install Pillow==12.0.0`) and `python tools/export_assets.py`. Accounting tests and static checks run in GitHub Actions; they cannot establish engine parsing, persistence or campaign behavior.
 
