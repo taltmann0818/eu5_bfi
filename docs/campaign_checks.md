@@ -1,5 +1,9 @@
 # Florence campaign regression checks
 
+Latest Banking unlocks result on 15 October 2026: **70/70 engine assertions passed**, twelve monthly settlements and autosave reload. The [current evidence](../tests/results/2026-10-15-banking-unlocks.json) pins the runtime. Banking carries the term-deposit and capital-subscription modifiers while retaining its native bond permission; Bills and Restructuring remain separate research. Modifier checks run after a settlement because native research modifiers refresh after the research tick. **43 offline tests passed.**
+
+Earlier Credit clarity result on 14 October 2026: **65/65 engine assertions passed**, twelve monthly settlements and autosave reload. The [earlier evidence](../tests/results/2026-10-14-credit-clarity.json) pins that runtime. Five assertions cover the deposit breakdowns and guarded charter research grant. See [Credit clarity and banking progression](credit-clarity.md).
+
 Local 0.0.2_dev result on 14 October 2026: **60/60 real-engine assertions passed**, including twelve monthly periods and a second-process autosave reload. **42 offline tests passed.** The sanitized [result record](../tests/results/2026-10-14-florence-0.0.2_dev.json) pins the tested runtime hash. The [interface revision record](ui-0.0.2.md) describes the Balance, Credit and advances checks at 2560×1440; the full UI scale/resolution matrix remains open.
 
 `tools/run_campaign.ps1` launches the actual licensed EUV engine, with a fresh isolated user directory, CMF, a copied BFI runtime, and a disposable test overlay. It never rewrites `BFI_dev`, the player's settings, installed game content, Workshop files, or personal saves. It stops only the processes it launched. Generated files and saves remain under ignored `dist/campaign-<run>/` for diagnosis.

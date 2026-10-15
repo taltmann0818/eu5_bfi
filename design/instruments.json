@@ -1,6 +1,6 @@
 {
   "demand_deposit":{"age":1,"profile":0},
-  "term_deposit":{"age":2,"profile":0,"advance":"term_deposits"},
+  "term_deposit":{"age":2,"profile":0,"native_advance":"banking_advance"},
   "sovereign_credit":{"age":1,"profile":0,"probe":"P06"},
   "native_takeover":{"age":1,"profile":0},
   "bond_underwriting":{"age":1,"profile":0,"probe":"P03"},
@@ -11,7 +11,7 @@
   "commenda":{"age":3,"profile":2,"advance":"commenda","probe":"P11"},
   "corporate_credit":{"age":4,"profile":1,"advance":"corporate_credit","probe":"P06"},
   "company_equity":{"age":4,"profile":2,"advance":"company_equity","probe":"P07"},
-  "bank_subscription":{"age":2,"profile":0,"advance":"bank_capital_subscriptions"},
+  "bank_subscription":{"age":2,"profile":0,"native_advance":"banking_advance"},
   "bank_share_transfer":{"age":4,"profile":0,"advance":"bank_share_dealing"},
   "collateral":{"age":5,"profile":0,"advance":"collateralization"},
   "warehouse_receipt":{"age":5,"profile":1,"advance":"warehouse_receipts","probe":"P09"},
