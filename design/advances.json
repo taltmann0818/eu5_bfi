@@ -1,8 +1,8 @@
 [
-  {"id":"term_deposits","age":2,"profile":0,"requires":[]},
-  {"id":"bank_capital_subscriptions","age":2,"profile":0,"requires":[]},
-  {"id":"debt_restructuring","age":2,"profile":0,"requires":[]},
-  {"id":"commercial_bills","age":2,"profile":0,"requires":["term_deposits"]},
+  {"id":"term_deposits","age":2,"profile":0,"native_requires":["banking_advance"],"requires":[]},
+  {"id":"bank_capital_subscriptions","age":2,"profile":0,"native_requires":["banking_advance"],"requires":[]},
+  {"id":"debt_restructuring","age":2,"profile":0,"native_requires":["banking_advance"],"requires":[]},
+  {"id":"commercial_bills","age":2,"profile":0,"native_requires":["banking_advance"],"requires":["term_deposits"]},
   {"id":"commodity_investments","age":3,"profile":1,"requires":[]},
   {"id":"commenda","age":3,"profile":2,"requires":[]},
   {"id":"corporate_credit","age":4,"profile":1,"requires":["debt_restructuring"]},

@@ -1,4 +1,4 @@
-# Banking, Finance and Trade Companies — 0.0.2_dev
+# Banking, Finance and Trade Companies
 
 An initial EUV development mod for **1.4.1 / Steam build 25905365**, using **Community Mod Framework 2.5.0**. The source implementation plans remain the design authority. This branch provides a testable first implementation, not a claim that the entire planned feature set is finished or campaign validated.
 
@@ -18,15 +18,15 @@ python tools/audit_native.py --compare
 python tools/build_economy_gui.py
 ./tools/stage_release.ps1
 ```
-Test env
-```powershell
-$eu5 = 'C:\Program Files (x86)\Steam\steamapps\common\Europa Universalis V\binaries\eu5.exe'
-$testUser = 'C:\Users\Thomas Altmann\.codex\worktrees\2fea\EU5_BFI\dist\ui-005\user'
+Start a fresh, fully configured Florence test campaign from this checkout:
 
-Start-Process -FilePath $eu5 `
-  -ArgumentList @('-debug_mode', '-play=FLO', "-userdir=`"$testUser`"") `
-  -WorkingDirectory (Split-Path $eu5)
+```powershell
+./tools/start_test_campaign.ps1
 ```
+
+The launcher copies the current committed runtime, enables CMF and the disposable test overlay, and isolates settings, logs and saves under `dist/interactive-<run>/`. The overlay sets up test funds, a chartered Bardi bank and deposit claims; use it only for disposable testing. Set `EU5_GAME_ROOT` and `EU5_CMF_ROOT` for nonstandard installations, or pass `-Game` and `-Cmf`. To copy an existing test display configuration, pass `-SettingsFrom '<test user directory>'`.
+
+Feature branches and PRs target `dev` and are named for their changes. Versioned distributions are created through GitHub Releases; the release tag is stamped into the packaged metadata. See [contribution and release conventions](CONTRIBUTING.md).
 
 The committed runtime under `mod/bfl/` requires no Python. `generate_scripts.py` regenerates definitions from `design/`; the Economy generator refuses an unknown native source hash and preserves native templates exactly once. Asset rebuilding uses Pillow 12.0.0 (`python -m pip install Pillow==12.0.0`) and `python tools/export_assets.py`. Accounting tests and static checks run in GitHub Actions; they cannot establish engine parsing, persistence or campaign behavior.
 
@@ -34,7 +34,7 @@ Only `.metadata`, `in_game`, `main_menu` and `thumbnail.png` are packaged. Sourc
 
 ## Development installation
 
-Use EUV's current Mod Tools / local-mod directory selection to register the repository's `mod/bfl` folder (or a staged copy). Create `BFI_dev`, enable **Community Mod Framework 2.5.0** followed by **Banking, Finance and Trade Companies — 0.0.2_dev**, and disable every other mod in that playset. Existing playsets and saves should remain available. Do not install into the game's content or Workshop cache.
+Use EUV's current Mod Tools / local-mod directory selection to register the repository's `mod/bfl` folder (or a staged copy). Create `BFI_dev`, enable **Community Mod Framework 2.5.0** followed by **Banking, Finance and Trade Companies**, and disable every other mod in that playset. Existing playsets and saves should remain available. Do not install into the game's content or Workshop cache.
 
 The user subsequently authorized a disposable Florence campaign. The [campaign suite](docs/campaign_checks.md) runs real engine assertions and twelve monthly settlements, then reloads its own autosave. A separate PR workflow requires a licensed Windows EUV/CMF runner; offline CI continues on GitHub-hosted runners. The [acceptance checklist](docs/acceptance.md) distinguishes this focused banking regression pass from the remaining full-plan probes.
 

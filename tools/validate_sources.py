@@ -42,7 +42,8 @@ def check_script(path):
 
 def main():
     metadata=json.loads((MOD/'.metadata/metadata.json').read_text())
-    check(metadata['version']=='0.0.2_dev','Metadata version must match requested version')
+    tuning=json.loads((ROOT/'design/tuning.json').read_text())
+    check(metadata['version']==tuning['version'],'Development metadata version must match tuning')
     check(metadata['game_id']=='eu5','Wrong game id')
     check(metadata['supported_game_version']=='1.4.1','Game pin changed')
     check(metadata['relationships'][0]['id']=='community_mod_framework','CMF dependency missing')
@@ -77,10 +78,16 @@ def main():
     seen=set()
     for advance in advances:
         check(all(r in seen for r in advance['requires']),f'Advance graph not topological: {advance["id"]}')
+        if advance['age']==2:
+            check(advance.get('native_requires')==['banking_advance'],f'Renaissance advance must follow native Banking: {advance["id"]}')
         seen.add(advance['id'])
         icon=MOD/f'main_menu/gfx/interface/advance/bfl_{advance["id"]}.dds'
         check(icon.exists(),f'Missing advance icon {icon}')
     check(len(seen)==18,'Expected 18 financial advances')
+    interface=(MOD/'in_game/gui/bfl_economy_finance.gui').read_text(encoding='utf-8-sig')
+    tooltip_keys=set(re.findall(r'\btooltip\s*=\s*"(bfl_[\w]+)"',interface))
+    check(tooltip_keys <= loc_set,f'Missing Credit/Balance tooltips: {sorted(tooltip_keys-loc_set)}')
+    check('using = bg_paper_card' not in interface,'BFI controls must use native button states')
     # Assert every recorded export is a real, correctly sized runtime texture.
     with (ROOT/'docs/asset_register.csv').open(newline='') as f:
         rows=list(csv.DictReader(f))
