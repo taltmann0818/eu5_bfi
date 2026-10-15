@@ -1,6 +1,8 @@
 # Florence testing and remaining acceptance work
 
-The revised Banking progression passed **70/70 engine assertions** and **43 offline tests** on 15 October 2026. The [current evidence](../tests/results/2026-10-15-banking-unlocks.json) includes integrated Banking modifiers, retained native bond access, separate Bills/Restructuring research, age gating and save/reload. Later-age positive financial origination and the wider acceptance matrix remain open.
+The current bank ownership/income/expense revision passed **77/77 engine assertions** and **49 offline tests** on 15 October 2026. The [latest focused evidence](../tests/results/2026-10-15-bank-equity-deposits.json) includes funded deposits/interest, expense breakdown and replay, share issuance/dilution/dividends, bank-owned manual/autonomous estate-loan takeover, twelve monthly settlements and autosave reload. [Six actual-game captures](screenshots/README.md) verify selected Credit/Balance UI at 2560×1440. The [unified implementation plan and M0–M10 coverage](coverage.md) is the canonical progress/remaining-work register; these results do not complete its full acceptance matrix.
+
+The earlier Banking progression passed **70/70 engine assertions** and **43 offline tests** on 15 October 2026. Its [historical evidence](../tests/results/2026-10-15-banking-unlocks.json) includes integrated Banking modifiers, retained native bond access, separate Bills/Restructuring research, age gating and save/reload. Later-age positive financial origination and the wider acceptance matrix remain open. Historical royalty tests/captures refer to retired behavior, not current requirements.
 
 The [Credit clarity revision](credit-clarity.md) passed **65/65 engine assertions**, including the guarded charter research grant and deposit breakdowns; see its [sanitized evidence](../tests/results/2026-10-14-credit-clarity.json). The remaining acceptance matrix below still applies.
 
@@ -11,7 +13,7 @@ The 0.0.2_dev local run passed all **60 native-engine assertions**, twelve month
 Offline checks run before delivery:
 
 - Structural script/GUI checks: BOM, balanced delimiters, custom service references, 57 texture/cover exports, metadata, localization, advance DAG and native Economy ownership.
-- 22 accounting fixtures: cash conservation, deposits versus equity, annual interest rounding, replayed months, term maturity, queued withdrawals, capacity exhaustion, age/profile gates, royalty funding, profit classification, dividends/current holders/rounding, subscriptions, same-claim resale/stale quotes, note-backing exclusion, receipt double backing, venture capital/profit/loss and unpaid resolution claims.
+- 49 offline unit tests across reference accounting, evidence integrity and read-only tooltip providers: cash conservation, deposits/equity/rates, monthly replay/maturity/queues, capacity and permission gates, complexity costs/arrears, profit classification/share dividends/dilution, same-claim resale arithmetic, backing exclusions, venture settlement and recovery. Reference-only instrument mathematics do not certify their runtime adapters.
 - Read-only pinned native/CMF hash comparison and reversible Economy-source reconstruction.
 - Explicit runtime package allowlist, SHA-256 manifest and zip.
 
@@ -27,7 +29,7 @@ Remaining broader acceptance checklist:
 6. Execute P03–P06 in isolated wallets/estates. Measure bond lot/source, new native identity, holder changes, coupons, rate units, redemption and ordinary credit. Do not enable production flags until correct adapters and persisted evidence exist.
 7. Execute P07–P11 for attributable earnings, storage/reload, actual native goods, monthly cutoff and native company/project commands. Never infer profit from unexplained treasury movement.
 8. P12: inspect Finance at 1280×720, 1920×1080, 2560×1440 and UI scale extremes. Preserve Balance/Credit/Markets/Policies/Trades, native Player context, CMM reset behavior, alerts opening Economy and multiplayer command authority.
-9. Run the integrated charter → bank-funded native issue → coupon → funded royalty/dividend → resale → coupon to buyer → redemption fixture. Track every wallet and estate funding source.
+9. After the required bond adapters pass, run the integrated charter → bank-funded native issue → coupon → funded deposit interest/share dividend → resale → coupon to buyer → redemption fixture. Track every wallet and estate funding source; no royalty channel is part of current acceptance.
 10. Only after the native bridges pass, broaden to company distress, guarantees, resolution, multiple AI institutions, save/reload and multiplayer/performance campaigns.
 
 Store local logs under ignored `tests/results/local/`; commit only deliberately redacted numerical fixtures and results. No user account identifiers or unrelated logs belong in the PR.

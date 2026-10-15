@@ -1,6 +1,6 @@
 # Banking, Finance and Trade Companies
 
-An initial EUV development mod for **1.4.1 / Steam build 25905365**, using **Community Mod Framework 2.5.0**. The source plans and [current bank ownership/income revision](docs/bank-equity-deposits.md) define the design; the revision supersedes older treasury-income sections. This branch provides a testable implementation, not a claim that the entire planned feature set is finished or campaign validated.
+An initial EUV development mod for **1.4.1 / Steam build 25905365**, using **Community Mod Framework 2.5.0**. The [unified implementation plan and M0–M10 milestone dashboard](docs/coverage.md) is the living source of requirements, implemented features, remaining work and completion evidence. The [bank ownership/income notes](docs/bank-equity-deposits.md) explain the current accounting/UI revision. This branch provides a testable implementation, not a claim that the entire planned feature set is finished or campaign validated.
 
 Open **Economy → Credit** for the unified bank and state-credit interface. Two native donut charts show share ownership and the bank's asset mix; hover for ownership percentages and assets by counterparty. Funding & Debt combines deposits, bank capital and dividend policy with native borrowing controls. Lending & Investments sends takeovers to the bank's balance sheet. Balance shows share dividends and deposit interest beneath Trade Income. A landed country charters an **existing direct State Bank** through Decisions and initially owns 100% of its shares.
 

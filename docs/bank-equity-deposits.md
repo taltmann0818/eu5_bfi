@@ -1,6 +1,6 @@
 # Bank ownership, income and Credit interface
 
-This revision supersedes the treasury-income, opening ownership, dividend and Credit-interface sections of the two original implementation plans. The asset-based royalty, its slider and political penalties are retired. Only inert legacy modifier identifiers remain so loading an old save can remove its penalties without changing wallets.
+The [unified implementation plan and milestone register](coverage.md) is the current requirement/status authority; this page explains the bank ownership, income and Credit revision. The asset-based royalty, its slider and political penalties are retired. Only inert legacy modifier identifiers remain so loading an old save can remove its penalties without changing wallets.
 
 ## Ownership and monthly income
 

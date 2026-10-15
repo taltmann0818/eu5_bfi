@@ -1,13 +1,15 @@
 # Europa Universalis V: Banking, Finance and Trade Companies
 ## Technical implementation specification
 
+**Current authority:** [docs/coverage.md](docs/coverage.md) unifies the implementation plan, M0–M10 status, remaining work and acceptance evidence. This document remains an engineering reference; its older royalty/per-activity-payout examples are superseded by the unified deposit-interest, share-dividend and operating-expense rules. Follow the canonical plan and current runtime rather than implementing those obsolete examples.
+
 Prepared 14 October 2026. Namespace: `bfl_`; event namespace: `bfl_finance`.
 
 Revised 14 October 2026: Community Mod Framework (CMF) is a required dependency. Banking and finance management is embedded in the existing Economy panel; the mod adds no action bar or separate finance launcher.
 
-This is the engineering companion to the supplied [feature and implementation plan](<C:/Users/Thomas Altmann/Downloads/EUV_Banking_Finance_Trade_Companies_Implementation_Plan.md>). It describes the files to author, persistent records, transaction services, native integrations, interface, graphics, FX, and verification required to build the complete mod. It is a specification, not an executable mod or a claim of campaign validation.
+This is the engineering companion to the [unified feature and implementation plan](docs/coverage.md). It describes file responsibilities, persistent records, transaction services, native integrations, interface, graphics, FX and verification for the complete mod. Illustrative skeletons are not evidence of completed gameplay; consult the unified milestone register for current delivery and validation.
 
-The attachment is the source of feature requirements. Its illustrative script and references are design material to evaluate against the installed game. This document preserves the one-bank charter architecture, two exclusive profiles, all three treasury channels, native debt, native companies, and the stated research gates.
+The unified plan is the source of feature requirements. Illustrative scripts and references here must be evaluated against the installed game. Preserve the one-bank charter architecture, two profiles, native debt/companies and research gates, but apply the current deposit-interest/share-dividend/operating-expense policy in place of the original royalty channel and per-activity payout controls.
 
 The later interface requirement supersedes the attachment's optional-framework recommendation: use CMF's shared services and keep the native economy interface as the player's management surface. CMF's Community Mod Menu (CMM) holds presentation preferences; institution accounts and financial commands remain in the Economy panel and the mod's accounting services.
 
