@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -22,7 +22,11 @@ try {
     $runRoot = Join-Path $repo "dist/campaign-$runId"
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
-    $suiteScript = if ($Suite -eq 'm0') { 'tools/m0_probe_suite.py' } else { 'tools/campaign_suite.py' }
+    $suiteScript = switch ($Suite) {
+        'm0' { 'tools/m0_probe_suite.py' }
+        'm1' { 'tools/m1_charter_suite.py' }
+        default { 'tools/campaign_suite.py' }
+    }
     python $suiteScript prepare --userdir $userDir --token $runId
     if ($LASTEXITCODE -ne 0) { throw 'Fixture preparation failed' }
     $bfi = Join-Path $userDir 'mod/bfi'

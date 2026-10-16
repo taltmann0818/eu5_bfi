@@ -75,6 +75,8 @@ def initialize():
     bfl_has_accounts = { has_variable = bfl_schema }
     bfl_can_conduct_business = {
         bfl_is_bank = yes
+        OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes }
+        NOT = { has_variable = bfl_legacy_servicing }
         has_variable = bfl_schema
         OR = { var:bfl_profile = 1 var:bfl_profile = 2 }
         var:bfl_state < 2
@@ -112,7 +114,7 @@ def initialize():
         capital = { market = { owner = root } }
         NOT = { has_variable = bfl_operation_guard }
         NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
-        any_subject = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
+        any_subject = { bfl_is_charter_candidate = yes }
         gold >= bfl_charter_investment
     }
     # Used inside bank scope with controller selected from the LIVE relationship.
@@ -175,9 +177,10 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
+        every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
         every_country = {
             limit = { NOT = { tag = CMF } }
             if = {
@@ -201,16 +204,14 @@ def initialize():
     }
     bfl_offer_profile = {
         if = {
-            limit = { var:bfl_profile = 0 NOT = { has_variable = bfl_profile_offered } }
+            limit = { var:bfl_profile = 0 OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes } }
             save_scope_as = bfl_bank
-            set_variable = bfl_profile_offered
-            if = {
-                limit = { bfl_has_valid_controller = yes }
-                overlord = { trigger_event_non_silently = bfl_finance.100 }
-            }
-            else_if = {
-                limit = { bfl_is_independent_bank = yes }
-                trigger_event_non_silently = bfl_finance.100
+            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_profile_actor } }
+            else = { save_scope_as = bfl_profile_actor }
+            if = { limit = { NOT = { var:bfl_profile_offered_to ?= scope:bfl_profile_actor } }
+                set_variable = bfl_profile_offered
+                set_variable = { name = bfl_profile_offered_to value = scope:bfl_profile_actor }
+                scope:bfl_profile_actor = { trigger_event_non_silently = bfl_finance.100 }
             }
         }
     }
@@ -289,7 +290,6 @@ def charter():
         allow = { has_reform = government_reform:bfl_state_chartered_bank }
         locked = { always = yes }
         country_modifier = { bank_interest = -0.005 max_bonds_modifier = 0.33 }
-        years = 2
     }
     ''')
     common('decisions','charter_decisions','''
@@ -313,12 +313,18 @@ def charter():
         }
     }
     ''')
-    prep = 'save_scope_as = bfl_controller\nset_variable = { name = bfl_candidate_count value = 0 }\n'
+    prep = '''save_scope_as = bfl_controller
+        if = { limit = { NOT = { has_variable = bfl_candidate_offset } } set_variable = { name = bfl_candidate_offset value = 0 } }
+        set_variable = { name = bfl_candidate_count value = 0 }
+        set_variable = { name = bfl_candidate_total value = 0 }
+        set_variable = { name = bfl_candidate_price value = bfl_charter_investment }
+    '''
     for i in range(1,9):
         prep += f'remove_variable = bfl_candidate_{i:02}\n'
     prep += '''every_subject = {
-        limit = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
-        if = { limit = { scope:bfl_controller.var:bfl_candidate_count < 8 }
+        limit = { bfl_is_charter_candidate = yes }
+        scope:bfl_controller = { change_variable = { name = bfl_candidate_total add = 1 } }
+        if = { limit = { scope:bfl_controller.var:bfl_candidate_count < 8 scope:bfl_controller.var:bfl_candidate_total > scope:bfl_controller.var:bfl_candidate_offset }
             save_scope_as = bfl_candidate
             scope:bfl_controller = {
                 change_variable = { name = bfl_candidate_count add = 1 }
@@ -326,6 +332,27 @@ def charter():
     for i in range(1,9):
         prep += f'if = {{ limit = {{ var:bfl_candidate_count = {i} }} set_variable = {{ name = bfl_candidate_{i:02} value = scope:bfl_candidate }} }}\n'
     prep += '} } }'
+    common('scripted_triggers', 'charter_selection', '''
+    bfl_is_charter_candidate = {
+        country_exists = this is_subject_type = state_bank country_type = building
+        has_reform = government_reform:banking_country
+        NOT = { has_variable = bfl_operation_guard }
+        OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+    }
+    bfl_can_choose_profile = {
+        var:bfl_profile = 0 exists = scope:bfl_profile_actor
+        OR = {
+            AND = { bfl_is_independent_bank = yes this = scope:bfl_profile_actor }
+            AND = { bfl_has_valid_controller = yes overlord = scope:bfl_profile_actor }
+        }
+    }
+    ''')
+    clear = '\n'.join(f'remove_variable = bfl_candidate_{i:02}' for i in range(1, 9))
+    # An already queued event can still evaluate its navigation triggers after
+    # cancellation/conversion. Keep numeric sentinels; erase all target scopes.
+    clear += '\n' + '\n'.join(f'set_variable = {{ name = bfl_candidate_{field} value = 0 }}' for field in ('offset', 'count', 'total'))
+    clear += '\nremove_variable = bfl_candidate_price'
+    common('scripted_effects', 'charter_selector_cleanup', effect('bfl_clear_charter_selector', clear))
     common('scripted_effects','charter', effect('bfl_prepare_charter_selector',prep)+'''
     # Country scope; grant only after the sovereign has a live, completed charter.
     bfl_grant_charter_traditions = {
@@ -340,7 +367,8 @@ def charter():
         if = {
             limit = {
                 bfl_can_begin_charter = yes exists = scope:bfl_bank
-                scope:bfl_bank = { is_subject_type = state_bank is_subject_of = root }
+                var:bfl_candidate_price ?= bfl_charter_investment
+                scope:bfl_bank = { bfl_is_charter_candidate = yes is_subject_of = root }
             }
             save_scope_as = bfl_controller
             set_variable = bfl_operation_guard
@@ -353,6 +381,8 @@ def charter():
                 change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
                 change_subject_type = subject_type:bfl_chartered_bank
                 set_variable = { name = bfl_controller value = scope:bfl_controller }
+                remove_variable = bfl_legacy_servicing
+                remove_variable = bfl_profile_offered_to
                 remove_variable = bfl_profile_offered
             }
             add_gold = bfl_negative_payment
@@ -361,27 +391,74 @@ def charter():
             bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
+            bfl_clear_charter_selector = yes
             scope:bfl_bank = { bfl_offer_profile = yes }
+        }
+        else_if = { limit = { bfl_can_begin_charter = yes }
+            # A stale price/selection must be confirmed again; never charge a new amount silently.
+            trigger_event_silently = bfl_finance.109
         }
     }
     bfl_reconcile_charter = {
-        # Bank owns lifecycle cleanup. A changed overlord cannot inherit cached authority.
-        if = {
-            limit = { bfl_is_chartered_bank = yes exists = overlord }
-            save_scope_as = bfl_bank
-            overlord = {
-                if = {
-                    limit = { exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev } NOT = { var:bfl_bank = scope:bfl_bank } }
-                    scope:bfl_bank = { change_subject_type = subject_type:state_bank set_variable = { name = bfl_state value = 2 } }
-                }
-                else = {
-                    set_variable = { name = bfl_bank value = scope:bfl_bank }
-                    if = { limit = { country_type = location } add_reform = government_reform:bfl_state_chartered_bank }
+        if = { limit = { exists = var:bfl_controller }
+            var:bfl_controller = { bfl_reconcile_controller = yes }
+        }
+        if = { limit = { exists = overlord } overlord = { bfl_reconcile_controller = yes } }
+        if = { limit = { bfl_is_independent_bank = yes } remove_variable = bfl_controller }
+    }
+    # Landed country scope. Keep the valid incumbent; otherwise native subject iteration
+    # supplies a stable first survivor. Reconcile the entire set in one guarded pass.
+    bfl_reconcile_controller = {
+        if = { limit = { country_type = location NOT = { has_variable = bfl_lifecycle_guard } }
+            set_variable = bfl_lifecycle_guard
+            save_scope_as = bfl_lifecycle_controller
+            if = { limit = { NOT = { var:bfl_bank ?= { bfl_is_chartered_bank = yes is_subject_of = prev } } }
+                remove_variable = bfl_bank
+                every_subject = { limit = { bfl_is_chartered_bank = yes }
+                    if = { limit = { NOT = { scope:bfl_lifecycle_controller = { has_variable = bfl_bank } } }
+                        save_scope_as = bfl_lifecycle_bank
+                        scope:bfl_lifecycle_controller = { set_variable = { name = bfl_bank value = scope:bfl_lifecycle_bank } }
+                    }
                 }
             }
+            every_subject = { limit = { is_subject_type = bfl_chartered_bank }
+                if = { limit = { NOT = { scope:bfl_lifecycle_controller = { var:bfl_bank ?= prev } } }
+                    change_subject_type = subject_type:state_bank
+                    set_variable = bfl_legacy_servicing
+                    set_variable = { name = bfl_state value = 2 }
+                    remove_variable = bfl_controller
+                    remove_variable = bfl_profile_offered_to
+                }
+                else = {
+                    set_variable = { name = bfl_controller value = scope:bfl_lifecycle_controller }
+                }
+            }
+            if = { limit = { exists = var:bfl_bank }
+                add_reform = government_reform:bfl_state_chartered_bank
+            }
+            else = { remove_reform = government_reform:bfl_state_chartered_bank remove_variable = bfl_bank }
+            remove_variable = bfl_lifecycle_guard
         }
     }
     ''')
+    profiles = '''bfl_migrate_profile = {
+        if = { limit = { NOT = { has_variable = bfl_profile_revision } }
+            if = { limit = { var:bfl_profile = 3 }
+                set_variable = { name = bfl_profile value = 0 }
+                remove_variable = bfl_choice_complete remove_variable = bfl_profile_offered
+                remove_variable = bfl_profile_offered_to
+            }
+            set_variable = { name = bfl_profile_revision value = 1 }
+        }
+    }
+    '''
+    for p, label in [(1, 'merchant'), (2, 'overseas')]:
+        profiles += effect('bfl_choose_' + label, f'''if = {{ limit = {{ bfl_can_choose_profile = yes }}
+            set_variable = {{ name = bfl_profile value = {p} }}
+            set_variable = bfl_choice_complete set_variable = {{ name = bfl_accept_deposits value = 1 }}
+            remove_variable = bfl_profile_offered remove_variable = bfl_profile_offered_to
+        }}''')
+    common('scripted_effects', 'profiles', profiles)
     events = '''namespace = bfl_finance
     bfl_finance.100 = {
         type = country_event title = bfl_finance.100.title desc = bfl_finance.100.desc
@@ -391,9 +468,9 @@ def charter():
         events += f'''option = {{
             name = bfl_finance.100.{label}
             ai_chance = {{ base = 50 }}
-            if = {{
-                limit = {{ exists = scope:bfl_bank scope:bfl_bank = {{ var:bfl_profile = 0 OR = {{ this = root is_subject_of = root }} }} }}
-                scope:bfl_bank = {{ set_variable = {{ name = bfl_profile value = {p} }} set_variable = bfl_choice_complete set_variable = {{ name = bfl_accept_deposits value = 1 }} }}
+            hidden_effect = {{
+                save_scope_as = bfl_profile_actor
+                scope:bfl_bank ?= {{ bfl_choose_{label} = yes }}
             }}
         }}\n'''
     events += '''}
@@ -403,7 +480,7 @@ def charter():
     '''
     for i in range(1,9):
         events += f'''option = {{ name = bfl_finance.110.bank_{i:02}
-            trigger = {{ exists = var:bfl_candidate_{i:02} }}
+            trigger = {{ var:bfl_candidate_{i:02} ?= {{ bfl_is_charter_candidate = yes is_subject_of = root }} }}
             ai_chance = {{ base = 10 }}
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {{
@@ -412,11 +489,24 @@ def charter():
             }}
         }}\n'''
         loc(f'bfl_finance.110.bank_{i:02}',f"[ROOT.GetCountry.MakeScope.GetVariable('bfl_candidate_{i:02}').GetCountry.GetName]")
-    events += '''option = { name = bfl_cancel ai_chance = { base = 0 } }\n}
+    events += '''option = { name = bfl_selector_next
+            trigger = { var:bfl_candidate_total > { value = var:bfl_candidate_offset add = 8 } }
+            ai_chance = { base = 10 }
+            hidden_effect = { trigger_event_silently = bfl_finance.112 }
+        }
+        option = { name = bfl_selector_previous trigger = { var:bfl_candidate_offset > 0 }
+            ai_chance = { base = 0 }
+            hidden_effect = { trigger_event_silently = bfl_finance.113 }
+        }
+        option = { name = bfl_cancel ai_chance = { base = 0 }
+            hidden_effect = { bfl_clear_charter_selector = yes }
+        }
+    }
     bfl_finance.109 = {
         type = country_event hidden = yes
         immediate = {
             if = { limit = { bfl_can_begin_charter = yes }
+                set_variable = { name = bfl_candidate_offset value = 0 }
                 bfl_prepare_charter_selector = yes
                 trigger_event_non_silently = bfl_finance.110
             }
@@ -426,6 +516,22 @@ def charter():
     bfl_finance.111 = {
         type = country_event hidden = yes
         immediate = { bfl_commit_charter = yes }
+    }
+    bfl_finance.112 = {
+        type = country_event hidden = yes
+        immediate = { if = { limit = { bfl_can_begin_charter = yes }
+            change_variable = { name = bfl_candidate_offset add = 8 }
+            bfl_prepare_charter_selector = yes
+            trigger_event_non_silently = bfl_finance.110
+        } }
+    }
+    bfl_finance.113 = {
+        type = country_event hidden = yes
+        immediate = { if = { limit = { bfl_can_begin_charter = yes }
+            set_variable = { name = bfl_candidate_offset value = { value = var:bfl_candidate_offset subtract = 8 min = 0 } }
+            bfl_prepare_charter_selector = yes
+            trigger_event_non_silently = bfl_finance.110
+        } }
     }
     '''
     write('in_game/events/bfl_finance/bfl_specialization.txt', events)
@@ -443,7 +549,9 @@ def charter():
     loc('bfl_finance.100.merchant','Merchant Finance')
     loc('bfl_finance.100.overseas','Overseas Investment')
     loc('bfl_finance.110.title','Choose the State Bank')
-    loc('bfl_finance.110.desc','The investment buys new state equity without confiscating the bank’s existing capital. Conversion preserves the bank’s country identity. Closing this selection transfers no money. Up to eight eligible direct subjects are listed.')
+    loc('bfl_finance.110.desc','The investment buys new state equity. Conversion preserves the bank’s country identity. Closing this selection transfers no money. Eight eligible direct subjects are shown per page; use Next to reach additional banks.')
+    loc('bfl_selector_next','Next banks')
+    loc('bfl_selector_previous','Previous banks')
     loc('bfl_cancel','Cancel')
     loc('bfl_log_charter','Chartered and capitalized a State Bank for')
 
@@ -737,6 +845,8 @@ def hooks_and_commands():
     monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
     bfl_monthly_accounts = {
         effect = {
+            if = { limit = { country_type = location } bfl_reconcile_controller = yes }
+            if = { limit = { has_variable = bfl_controller } bfl_reconcile_charter = yes }
             if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }
             if = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes bfl_offer_profile = yes }
             if = { limit = { bfl_has_accounts = yes } bfl_process_accounts = yes }
@@ -746,6 +856,16 @@ def hooks_and_commands():
             }
         }
     }
+    on_transfer_subject = { on_actions = { bfl_subject_transfer } }
+    bfl_subject_transfer = { effect = {
+        scope:former_overlord ?= { bfl_reconcile_controller = yes }
+        bfl_reconcile_charter = yes
+    } }
+    on_subject_created = { on_actions = { bfl_subject_refresh } }
+    on_subject_type_changed = { on_actions = { bfl_subject_refresh } }
+    bfl_subject_refresh = { effect = { bfl_reconcile_charter = yes } }
+    on_annex = { on_actions = { bfl_annex_refresh } }
+    bfl_annex_refresh = { effect = { bfl_reconcile_controller = yes } }
     ''')
     common('on_action','cmf_hooks','''
     cmf_on_mod_registration = { on_actions = { bfl_on_cmf_registration } }
@@ -839,7 +959,7 @@ def hooks_and_commands():
         key=f'bfl_rate_{int(rate*100)}'
         commands += command(key,'bfl_has_management = yes',f'scope:bfl_bank = {{ set_variable = {{ name = bfl_demand_rate value = {rate} }} }}')
         loc(key,label+' for new accounts')
-    commands += command('bfl_select_profile','bfl_has_management = yes','scope:bfl_bank = { remove_variable = bfl_profile_offered bfl_offer_profile = yes }')
+    commands += command('bfl_select_profile','bfl_has_management = yes','scope:bfl_bank = { remove_variable = bfl_profile_offered remove_variable = bfl_profile_offered_to bfl_offer_profile = yes }')
     loc('bfl_select_profile','Choose pending specialization')
     commands += 'bfl_independent_view = { scope = country is_shown = { bfl_is_independent_bank = yes } }\n'
     commands += 'bfl_charter_view = { scope = country is_shown = { bfl_has_management = yes country_type = location } }\n'

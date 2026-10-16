@@ -86,7 +86,7 @@ bfl_select_profile = {
             scope = country
             is_shown = { bfl_has_management = yes }
             is_valid = { bfl_has_management = yes }
-            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { remove_variable = bfl_profile_offered bfl_offer_profile = yes } } }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { remove_variable = bfl_profile_offered remove_variable = bfl_profile_offered_to bfl_offer_profile = yes } } }
         }
 bfl_independent_view = { scope = country is_shown = { bfl_is_independent_bank = yes } }
 bfl_charter_view = { scope = country is_shown = { bfl_has_management = yes country_type = location } }

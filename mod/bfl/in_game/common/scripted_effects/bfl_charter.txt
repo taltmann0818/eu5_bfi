@@ -1,7 +1,10 @@
 ﻿bfl_prepare_charter_selector = {
 save_scope_as = bfl_controller
-set_variable = { name = bfl_candidate_count value = 0 }
-remove_variable = bfl_candidate_01
+        if = { limit = { NOT = { has_variable = bfl_candidate_offset } } set_variable = { name = bfl_candidate_offset value = 0 } }
+        set_variable = { name = bfl_candidate_count value = 0 }
+        set_variable = { name = bfl_candidate_total value = 0 }
+        set_variable = { name = bfl_candidate_price value = bfl_charter_investment }
+    remove_variable = bfl_candidate_01
 remove_variable = bfl_candidate_02
 remove_variable = bfl_candidate_03
 remove_variable = bfl_candidate_04
@@ -10,8 +13,9 @@ remove_variable = bfl_candidate_06
 remove_variable = bfl_candidate_07
 remove_variable = bfl_candidate_08
 every_subject = {
-        limit = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
-        if = { limit = { scope:bfl_controller.var:bfl_candidate_count < 8 }
+        limit = { bfl_is_charter_candidate = yes }
+        scope:bfl_controller = { change_variable = { name = bfl_candidate_total add = 1 } }
+        if = { limit = { scope:bfl_controller.var:bfl_candidate_count < 8 scope:bfl_controller.var:bfl_candidate_total > scope:bfl_controller.var:bfl_candidate_offset }
             save_scope_as = bfl_candidate
             scope:bfl_controller = {
                 change_variable = { name = bfl_candidate_count add = 1 }
@@ -39,7 +43,8 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
         if = {
             limit = {
                 bfl_can_begin_charter = yes exists = scope:bfl_bank
-                scope:bfl_bank = { is_subject_type = state_bank is_subject_of = root }
+                var:bfl_candidate_price ?= bfl_charter_investment
+                scope:bfl_bank = { bfl_is_charter_candidate = yes is_subject_of = root }
             }
             save_scope_as = bfl_controller
             set_variable = bfl_operation_guard
@@ -52,6 +57,8 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
                 change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
                 change_subject_type = subject_type:bfl_chartered_bank
                 set_variable = { name = bfl_controller value = scope:bfl_controller }
+                remove_variable = bfl_legacy_servicing
+                remove_variable = bfl_profile_offered_to
                 remove_variable = bfl_profile_offered
             }
             add_gold = bfl_negative_payment
@@ -60,23 +67,52 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
             bfl_grant_charter_traditions = yes
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
+            bfl_clear_charter_selector = yes
             scope:bfl_bank = { bfl_offer_profile = yes }
+        }
+        else_if = { limit = { bfl_can_begin_charter = yes }
+            # A stale price/selection must be confirmed again; never charge a new amount silently.
+            trigger_event_silently = bfl_finance.109
         }
     }
     bfl_reconcile_charter = {
-        # Bank owns lifecycle cleanup. A changed overlord cannot inherit cached authority.
-        if = {
-            limit = { bfl_is_chartered_bank = yes exists = overlord }
-            save_scope_as = bfl_bank
-            overlord = {
-                if = {
-                    limit = { exists = var:bfl_bank var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev } NOT = { var:bfl_bank = scope:bfl_bank } }
-                    scope:bfl_bank = { change_subject_type = subject_type:state_bank set_variable = { name = bfl_state value = 2 } }
-                }
-                else = {
-                    set_variable = { name = bfl_bank value = scope:bfl_bank }
-                    if = { limit = { country_type = location } add_reform = government_reform:bfl_state_chartered_bank }
+        if = { limit = { exists = var:bfl_controller }
+            var:bfl_controller = { bfl_reconcile_controller = yes }
+        }
+        if = { limit = { exists = overlord } overlord = { bfl_reconcile_controller = yes } }
+        if = { limit = { bfl_is_independent_bank = yes } remove_variable = bfl_controller }
+    }
+    # Landed country scope. Keep the valid incumbent; otherwise native subject iteration
+    # supplies a stable first survivor. Reconcile the entire set in one guarded pass.
+    bfl_reconcile_controller = {
+        if = { limit = { country_type = location NOT = { has_variable = bfl_lifecycle_guard } }
+            set_variable = bfl_lifecycle_guard
+            save_scope_as = bfl_lifecycle_controller
+            if = { limit = { NOT = { var:bfl_bank ?= { bfl_is_chartered_bank = yes is_subject_of = prev } } }
+                remove_variable = bfl_bank
+                every_subject = { limit = { bfl_is_chartered_bank = yes }
+                    if = { limit = { NOT = { scope:bfl_lifecycle_controller = { has_variable = bfl_bank } } }
+                        save_scope_as = bfl_lifecycle_bank
+                        scope:bfl_lifecycle_controller = { set_variable = { name = bfl_bank value = scope:bfl_lifecycle_bank } }
+                    }
                 }
             }
+            every_subject = { limit = { is_subject_type = bfl_chartered_bank }
+                if = { limit = { NOT = { scope:bfl_lifecycle_controller = { var:bfl_bank ?= prev } } }
+                    change_subject_type = subject_type:state_bank
+                    set_variable = bfl_legacy_servicing
+                    set_variable = { name = bfl_state value = 2 }
+                    remove_variable = bfl_controller
+                    remove_variable = bfl_profile_offered_to
+                }
+                else = {
+                    set_variable = { name = bfl_controller value = scope:bfl_lifecycle_controller }
+                }
+            }
+            if = { limit = { exists = var:bfl_bank }
+                add_reform = government_reform:bfl_state_chartered_bank
+            }
+            else = { remove_reform = government_reform:bfl_state_chartered_bank remove_variable = bfl_bank }
+            remove_variable = bfl_lifecycle_guard
         }
     }

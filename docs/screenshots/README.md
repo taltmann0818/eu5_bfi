@@ -1,5 +1,18 @@
 # Native bank interface captures
 
+## M1 completion captures
+
+The M1 captures use the production runtime `a169093c733c860a40428a655b18f328001bd5ddf33c27ce03c7f7ad2a331506` in a disposable Florence campaign at 1280×720. [Ten manual observations](../../tests/results/2026-10-16-m1-ui.json) and [M1 engine acceptance](../m1-charter.md) are recorded separately. Setup creates ten native banks; actual charter, profile, deposit and withdrawal actions use normal UI controls.
+
+- [First-page navigation](m1-selector-first.png): the native scrollbar exposes the remaining bank options, Next and Cancel.
+- [Banks nine and ten](m1-selector-overflow.png): Aquisextain/Wessex, Previous and Cancel; sovereign treasury remains 10,000.
+- [Specialization event](m1-profile.png): paid conversion has reduced sovereign cash to 9,500, and the normal two-choice event is open.
+- [Direct Credit accounts](m1-credit.png): selected bank Aquisextain, Overseas Investment, Operating, cash/assets/equity 1,500 and zero liabilities.
+- [Funded deposit](m1-deposit.png): sovereign cash 9,400, bank cash/assets 1,600, liabilities 100 and equity 1,500.
+- [Withdrawal](m1-withdrawal.png): sovereign cash 9,500, bank cash/assets/equity 1,500 and liabilities zero again.
+
+The screenshots below retain their own historical runtime, layout and resolution provenance.
+
 These captures show EUV 1.4.1 / build 25905365 with CMF 2.5.0 at 2560 × 1440. They use the production GUI in a disposable Florence campaign, with the funded sample portfolio in `tests/campaign/bfi_visual.txt`. No personal campaign is modified.
 
 The sample sovereign initially owns all shares; Peruzzi subscribes 100 gold of new capital. The bank funds native loans to Venice and Genoa from its own treasury. A sovereign demand deposit provides the interest example. The original seven captures below predate custom sovereign bonds; native bond and commodity adapters were not enabled for them.

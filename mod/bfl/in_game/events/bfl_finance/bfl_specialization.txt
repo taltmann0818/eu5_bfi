@@ -5,17 +5,17 @@
     option = {
             name = bfl_finance.100.merchant
             ai_chance = { base = 50 }
-            if = {
-                limit = { exists = scope:bfl_bank scope:bfl_bank = { var:bfl_profile = 0 OR = { this = root is_subject_of = root } } }
-                scope:bfl_bank = { set_variable = { name = bfl_profile value = 1 } set_variable = bfl_choice_complete set_variable = { name = bfl_accept_deposits value = 1 } }
+            hidden_effect = {
+                save_scope_as = bfl_profile_actor
+                scope:bfl_bank ?= { bfl_choose_merchant = yes }
             }
         }
 option = {
             name = bfl_finance.100.overseas
             ai_chance = { base = 50 }
-            if = {
-                limit = { exists = scope:bfl_bank scope:bfl_bank = { var:bfl_profile = 0 OR = { this = root is_subject_of = root } } }
-                scope:bfl_bank = { set_variable = { name = bfl_profile value = 2 } set_variable = bfl_choice_complete set_variable = { name = bfl_accept_deposits value = 1 } }
+            hidden_effect = {
+                save_scope_as = bfl_profile_actor
+                scope:bfl_bank ?= { bfl_choose_overseas = yes }
             }
         }
 }
@@ -23,7 +23,7 @@ option = {
         type = country_event title = bfl_finance.110.title desc = bfl_finance.110.desc
         image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
     option = { name = bfl_finance.110.bank_01
-            trigger = { exists = var:bfl_candidate_01 }
+            trigger = { var:bfl_candidate_01 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -32,7 +32,7 @@ option = {
             }
         }
 option = { name = bfl_finance.110.bank_02
-            trigger = { exists = var:bfl_candidate_02 }
+            trigger = { var:bfl_candidate_02 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -41,7 +41,7 @@ option = { name = bfl_finance.110.bank_02
             }
         }
 option = { name = bfl_finance.110.bank_03
-            trigger = { exists = var:bfl_candidate_03 }
+            trigger = { var:bfl_candidate_03 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -50,7 +50,7 @@ option = { name = bfl_finance.110.bank_03
             }
         }
 option = { name = bfl_finance.110.bank_04
-            trigger = { exists = var:bfl_candidate_04 }
+            trigger = { var:bfl_candidate_04 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -59,7 +59,7 @@ option = { name = bfl_finance.110.bank_04
             }
         }
 option = { name = bfl_finance.110.bank_05
-            trigger = { exists = var:bfl_candidate_05 }
+            trigger = { var:bfl_candidate_05 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -68,7 +68,7 @@ option = { name = bfl_finance.110.bank_05
             }
         }
 option = { name = bfl_finance.110.bank_06
-            trigger = { exists = var:bfl_candidate_06 }
+            trigger = { var:bfl_candidate_06 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -77,7 +77,7 @@ option = { name = bfl_finance.110.bank_06
             }
         }
 option = { name = bfl_finance.110.bank_07
-            trigger = { exists = var:bfl_candidate_07 }
+            trigger = { var:bfl_candidate_07 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -86,7 +86,7 @@ option = { name = bfl_finance.110.bank_07
             }
         }
 option = { name = bfl_finance.110.bank_08
-            trigger = { exists = var:bfl_candidate_08 }
+            trigger = { var:bfl_candidate_08 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {
@@ -94,12 +94,24 @@ option = { name = bfl_finance.110.bank_08
                 trigger_event_silently = bfl_finance.111
             }
         }
-option = { name = bfl_cancel ai_chance = { base = 0 } }
-}
+option = { name = bfl_selector_next
+            trigger = { var:bfl_candidate_total > { value = var:bfl_candidate_offset add = 8 } }
+            ai_chance = { base = 10 }
+            hidden_effect = { trigger_event_silently = bfl_finance.112 }
+        }
+        option = { name = bfl_selector_previous trigger = { var:bfl_candidate_offset > 0 }
+            ai_chance = { base = 0 }
+            hidden_effect = { trigger_event_silently = bfl_finance.113 }
+        }
+        option = { name = bfl_cancel ai_chance = { base = 0 }
+            hidden_effect = { bfl_clear_charter_selector = yes }
+        }
+    }
     bfl_finance.109 = {
         type = country_event hidden = yes
         immediate = {
             if = { limit = { bfl_can_begin_charter = yes }
+                set_variable = { name = bfl_candidate_offset value = 0 }
                 bfl_prepare_charter_selector = yes
                 trigger_event_non_silently = bfl_finance.110
             }
@@ -109,4 +121,20 @@ option = { name = bfl_cancel ai_chance = { base = 0 } }
     bfl_finance.111 = {
         type = country_event hidden = yes
         immediate = { bfl_commit_charter = yes }
+    }
+    bfl_finance.112 = {
+        type = country_event hidden = yes
+        immediate = { if = { limit = { bfl_can_begin_charter = yes }
+            change_variable = { name = bfl_candidate_offset add = 8 }
+            bfl_prepare_charter_selector = yes
+            trigger_event_non_silently = bfl_finance.110
+        } }
+    }
+    bfl_finance.113 = {
+        type = country_event hidden = yes
+        immediate = { if = { limit = { bfl_can_begin_charter = yes }
+            set_variable = { name = bfl_candidate_offset value = { value = var:bfl_candidate_offset subtract = 8 min = 0 } }
+            bfl_prepare_charter_selector = yes
+            trigger_event_non_silently = bfl_finance.110
+        } }
     }

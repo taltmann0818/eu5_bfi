@@ -23,12 +23,12 @@ Offline checks run before delivery:
 
 These are not native parser or campaign tests. Record engine load diagnostics separately from gameplay acceptance.
 
-Broader M1–M10 acceptance checklist (the M0 primitive audit is complete):
+Broader M2–M10 acceptance checklist (M0 and [M1 charter/accounts](m1-charter.md) are complete):
 
 1. Record displayed version/checksum, current build and CMF release. Freeze updates for the probe cycle.
 2. Start a disposable debug fixture, not a personal campaign. Establish a landed sovereign controlling its capital market, one native State Bank, a second independent bank and a native company when age permits.
-3. M1/M9: extend the verified normal charter/authority path to selector overflow, remaining modifier/loyalty combinations and the complete succession/annexation matrix.
-4. Verify specialization persistence and the age/research matrix. Attempt early and wrong-profile operations; service inherited obligations without granting origination rights.
+3. M9: extend the completed M1 selector, modifier/loyalty and succession/annexation acceptance to destruction workouts, creditor recovery and closure.
+4. M10: broaden the completed M1 specialization/migration/reload acceptance to the release-wide age/research transaction matrix. Attempt early and wrong-profile operations; service inherited obligations without granting origination rights.
 5. Deposit 100, inspect bank liability/equity, advance through twelve monthly accruals, withdraw and reload. Queue a shortage; refill and ensure one claim is paid once. Repeat with term maturity and registry exhaustion.
 6. M3/M9: implement accepted ordinary-credit offers, basis/receipt bookkeeping and workouts using the completed native audit. Custom bonds already have funded issuance/current-holder/exchange-gate evidence.
 7. M2/M6/M7/M8: implement production receipt, custody, transport, venture settlement and clearing services within the audited native limits. Never infer profit from unexplained treasury movement.

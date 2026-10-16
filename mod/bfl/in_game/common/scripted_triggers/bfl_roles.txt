@@ -18,6 +18,8 @@ bfl_is_bank = { OR = { bfl_is_chartered_bank = yes bfl_is_independent_bank = yes
 bfl_has_accounts = { has_variable = bfl_schema }
 bfl_can_conduct_business = {
     bfl_is_bank = yes
+    OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes }
+    NOT = { has_variable = bfl_legacy_servicing }
     has_variable = bfl_schema
     OR = { var:bfl_profile = 1 var:bfl_profile = 2 }
     var:bfl_state < 2
@@ -55,7 +57,7 @@ bfl_can_begin_charter = {
     capital = { market = { owner = root } }
     NOT = { has_variable = bfl_operation_guard }
     NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
-    any_subject = { is_subject_type = state_bank country_type = building has_reform = government_reform:banking_country }
+    any_subject = { bfl_is_charter_candidate = yes }
     gold >= bfl_charter_investment
 }
 # Used inside bank scope with controller selected from the LIVE relationship.
