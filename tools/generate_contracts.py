@@ -11,7 +11,7 @@ def generate(common,effect,loc):
     capacity='OR = { '+' '.join(f'var:bfl_con_{i:02}_active = 0' for i in range(1,33))+' }'
     common('scripted_triggers','contract_validation',effect('bfl_has_contract_capacity',capacity)+'''
     bfl_valid_contract_parties = {
-        exists = scope:bfl_party
+        exists = scope:bfl_party country_exists = scope:bfl_party
         NOT = { this = scope:bfl_party }
         NOT = { has_variable = bfl_operation_guard }
     }
@@ -59,7 +59,7 @@ def generate(common,effect,loc):
         n=f'bfl_con_{i:02}'
         bills+=effect(f'bfl_redeem_bill_{i:02}',f'''
         if = {{ limit = {{ var:{n}_active = 1 var:{n}_kind = 1 var:{n}_state = 1
-            exists = var:{n}_party var:{n}_party = scope:bfl_party
+            exists = var:{n}_party country_exists = var:{n}_party var:{n}_party = scope:bfl_party
             bfl_period >= var:{n}_maturity_period gold >= var:{n}_basis
         }}
             save_scope_as = bfl_bank

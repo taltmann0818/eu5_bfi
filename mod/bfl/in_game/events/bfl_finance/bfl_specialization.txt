@@ -25,50 +25,88 @@ option = {
     option = { name = bfl_finance.110.bank_01
             trigger = { exists = var:bfl_candidate_01 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_01 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_01 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_02
             trigger = { exists = var:bfl_candidate_02 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_02 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_02 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_03
             trigger = { exists = var:bfl_candidate_03 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_03 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_03 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_04
             trigger = { exists = var:bfl_candidate_04 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_04 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_04 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_05
             trigger = { exists = var:bfl_candidate_05 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_05 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_05 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_06
             trigger = { exists = var:bfl_candidate_06 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_06 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_06 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_07
             trigger = { exists = var:bfl_candidate_07 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_07 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_07 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_finance.110.bank_08
             trigger = { exists = var:bfl_candidate_08 }
             ai_chance = { base = 10 }
-            var:bfl_candidate_08 = { save_scope_as = bfl_bank }
-            bfl_commit_charter = yes
+            custom_tooltip = bfl_charter_selection_tip
+            hidden_effect = {
+                var:bfl_candidate_08 = { save_scope_as = bfl_bank }
+                trigger_event_silently = bfl_finance.111
+            }
         }
 option = { name = bfl_cancel ai_chance = { base = 0 } }
 }
+    bfl_finance.109 = {
+        type = country_event hidden = yes
+        immediate = {
+            if = { limit = { bfl_can_begin_charter = yes }
+                bfl_prepare_charter_selector = yes
+                trigger_event_non_silently = bfl_finance.110
+            }
+        }
+    }
+    # Keep the transactional ledger out of event-option tooltip simulation.
+    bfl_finance.111 = {
+        type = country_event hidden = yes
+        immediate = { bfl_commit_charter = yes }
+    }

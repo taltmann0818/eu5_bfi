@@ -1,0 +1,15 @@
+# Disposable screenshot fixture only. Run after bfi_visual.txt, never in a personal save.
+c:FLO = {
+    set_gold = 250
+    bfl_initialize_bonds = yes
+    set_variable = { name = bfl_bond_rate value = 0.03 }
+}
+c:BRD = {
+    set_variable = { name = bfl_bond_amount value = 100 }
+    bfl_underwrite_sovereign_bond = yes
+}
+c:FLO = {
+    set_variable = { name = bfl_bnd_01_last_accrual value = { value = bfl_period subtract = 1 } }
+    bfl_service_sovereign_bonds = yes
+}
+debug_log = "BFI_VISUAL|custom_bond_fixture"

@@ -1,6 +1,6 @@
 ﻿bfl_redeem_bill_01 = {
 if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_01_state = 1
-    exists = var:bfl_con_01_party var:bfl_con_01_party = scope:bfl_party
+    exists = var:bfl_con_01_party country_exists = var:bfl_con_01_party var:bfl_con_01_party = scope:bfl_party
     bfl_period >= var:bfl_con_01_maturity_period gold >= var:bfl_con_01_basis
 }
     save_scope_as = bfl_bank
@@ -16,7 +16,7 @@ if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_02 = {
 if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_02_state = 1
-    exists = var:bfl_con_02_party var:bfl_con_02_party = scope:bfl_party
+    exists = var:bfl_con_02_party country_exists = var:bfl_con_02_party var:bfl_con_02_party = scope:bfl_party
     bfl_period >= var:bfl_con_02_maturity_period gold >= var:bfl_con_02_basis
 }
     save_scope_as = bfl_bank
@@ -32,7 +32,7 @@ if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_03 = {
 if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_03_state = 1
-    exists = var:bfl_con_03_party var:bfl_con_03_party = scope:bfl_party
+    exists = var:bfl_con_03_party country_exists = var:bfl_con_03_party var:bfl_con_03_party = scope:bfl_party
     bfl_period >= var:bfl_con_03_maturity_period gold >= var:bfl_con_03_basis
 }
     save_scope_as = bfl_bank
@@ -48,7 +48,7 @@ if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_04 = {
 if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_04_state = 1
-    exists = var:bfl_con_04_party var:bfl_con_04_party = scope:bfl_party
+    exists = var:bfl_con_04_party country_exists = var:bfl_con_04_party var:bfl_con_04_party = scope:bfl_party
     bfl_period >= var:bfl_con_04_maturity_period gold >= var:bfl_con_04_basis
 }
     save_scope_as = bfl_bank
@@ -64,7 +64,7 @@ if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_05 = {
 if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_05_state = 1
-    exists = var:bfl_con_05_party var:bfl_con_05_party = scope:bfl_party
+    exists = var:bfl_con_05_party country_exists = var:bfl_con_05_party var:bfl_con_05_party = scope:bfl_party
     bfl_period >= var:bfl_con_05_maturity_period gold >= var:bfl_con_05_basis
 }
     save_scope_as = bfl_bank
@@ -80,7 +80,7 @@ if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_06 = {
 if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_06_state = 1
-    exists = var:bfl_con_06_party var:bfl_con_06_party = scope:bfl_party
+    exists = var:bfl_con_06_party country_exists = var:bfl_con_06_party var:bfl_con_06_party = scope:bfl_party
     bfl_period >= var:bfl_con_06_maturity_period gold >= var:bfl_con_06_basis
 }
     save_scope_as = bfl_bank
@@ -96,7 +96,7 @@ if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_07 = {
 if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_07_state = 1
-    exists = var:bfl_con_07_party var:bfl_con_07_party = scope:bfl_party
+    exists = var:bfl_con_07_party country_exists = var:bfl_con_07_party var:bfl_con_07_party = scope:bfl_party
     bfl_period >= var:bfl_con_07_maturity_period gold >= var:bfl_con_07_basis
 }
     save_scope_as = bfl_bank
@@ -112,7 +112,7 @@ if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_08 = {
 if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_08_state = 1
-    exists = var:bfl_con_08_party var:bfl_con_08_party = scope:bfl_party
+    exists = var:bfl_con_08_party country_exists = var:bfl_con_08_party var:bfl_con_08_party = scope:bfl_party
     bfl_period >= var:bfl_con_08_maturity_period gold >= var:bfl_con_08_basis
 }
     save_scope_as = bfl_bank
@@ -128,7 +128,7 @@ if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_09 = {
 if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_09_state = 1
-    exists = var:bfl_con_09_party var:bfl_con_09_party = scope:bfl_party
+    exists = var:bfl_con_09_party country_exists = var:bfl_con_09_party var:bfl_con_09_party = scope:bfl_party
     bfl_period >= var:bfl_con_09_maturity_period gold >= var:bfl_con_09_basis
 }
     save_scope_as = bfl_bank
@@ -144,7 +144,7 @@ if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_0
 }
 bfl_redeem_bill_10 = {
 if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_10_state = 1
-    exists = var:bfl_con_10_party var:bfl_con_10_party = scope:bfl_party
+    exists = var:bfl_con_10_party country_exists = var:bfl_con_10_party var:bfl_con_10_party = scope:bfl_party
     bfl_period >= var:bfl_con_10_maturity_period gold >= var:bfl_con_10_basis
 }
     save_scope_as = bfl_bank
@@ -160,7 +160,7 @@ if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_11 = {
 if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_11_state = 1
-    exists = var:bfl_con_11_party var:bfl_con_11_party = scope:bfl_party
+    exists = var:bfl_con_11_party country_exists = var:bfl_con_11_party var:bfl_con_11_party = scope:bfl_party
     bfl_period >= var:bfl_con_11_maturity_period gold >= var:bfl_con_11_basis
 }
     save_scope_as = bfl_bank
@@ -176,7 +176,7 @@ if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_12 = {
 if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_12_state = 1
-    exists = var:bfl_con_12_party var:bfl_con_12_party = scope:bfl_party
+    exists = var:bfl_con_12_party country_exists = var:bfl_con_12_party var:bfl_con_12_party = scope:bfl_party
     bfl_period >= var:bfl_con_12_maturity_period gold >= var:bfl_con_12_basis
 }
     save_scope_as = bfl_bank
@@ -192,7 +192,7 @@ if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_13 = {
 if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_13_state = 1
-    exists = var:bfl_con_13_party var:bfl_con_13_party = scope:bfl_party
+    exists = var:bfl_con_13_party country_exists = var:bfl_con_13_party var:bfl_con_13_party = scope:bfl_party
     bfl_period >= var:bfl_con_13_maturity_period gold >= var:bfl_con_13_basis
 }
     save_scope_as = bfl_bank
@@ -208,7 +208,7 @@ if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_14 = {
 if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_14_state = 1
-    exists = var:bfl_con_14_party var:bfl_con_14_party = scope:bfl_party
+    exists = var:bfl_con_14_party country_exists = var:bfl_con_14_party var:bfl_con_14_party = scope:bfl_party
     bfl_period >= var:bfl_con_14_maturity_period gold >= var:bfl_con_14_basis
 }
     save_scope_as = bfl_bank
@@ -224,7 +224,7 @@ if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_15 = {
 if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_15_state = 1
-    exists = var:bfl_con_15_party var:bfl_con_15_party = scope:bfl_party
+    exists = var:bfl_con_15_party country_exists = var:bfl_con_15_party var:bfl_con_15_party = scope:bfl_party
     bfl_period >= var:bfl_con_15_maturity_period gold >= var:bfl_con_15_basis
 }
     save_scope_as = bfl_bank
@@ -240,7 +240,7 @@ if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_16 = {
 if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_16_state = 1
-    exists = var:bfl_con_16_party var:bfl_con_16_party = scope:bfl_party
+    exists = var:bfl_con_16_party country_exists = var:bfl_con_16_party var:bfl_con_16_party = scope:bfl_party
     bfl_period >= var:bfl_con_16_maturity_period gold >= var:bfl_con_16_basis
 }
     save_scope_as = bfl_bank
@@ -256,7 +256,7 @@ if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_17 = {
 if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_17_state = 1
-    exists = var:bfl_con_17_party var:bfl_con_17_party = scope:bfl_party
+    exists = var:bfl_con_17_party country_exists = var:bfl_con_17_party var:bfl_con_17_party = scope:bfl_party
     bfl_period >= var:bfl_con_17_maturity_period gold >= var:bfl_con_17_basis
 }
     save_scope_as = bfl_bank
@@ -272,7 +272,7 @@ if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_18 = {
 if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_18_state = 1
-    exists = var:bfl_con_18_party var:bfl_con_18_party = scope:bfl_party
+    exists = var:bfl_con_18_party country_exists = var:bfl_con_18_party var:bfl_con_18_party = scope:bfl_party
     bfl_period >= var:bfl_con_18_maturity_period gold >= var:bfl_con_18_basis
 }
     save_scope_as = bfl_bank
@@ -288,7 +288,7 @@ if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_19 = {
 if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_19_state = 1
-    exists = var:bfl_con_19_party var:bfl_con_19_party = scope:bfl_party
+    exists = var:bfl_con_19_party country_exists = var:bfl_con_19_party var:bfl_con_19_party = scope:bfl_party
     bfl_period >= var:bfl_con_19_maturity_period gold >= var:bfl_con_19_basis
 }
     save_scope_as = bfl_bank
@@ -304,7 +304,7 @@ if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_1
 }
 bfl_redeem_bill_20 = {
 if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_20_state = 1
-    exists = var:bfl_con_20_party var:bfl_con_20_party = scope:bfl_party
+    exists = var:bfl_con_20_party country_exists = var:bfl_con_20_party var:bfl_con_20_party = scope:bfl_party
     bfl_period >= var:bfl_con_20_maturity_period gold >= var:bfl_con_20_basis
 }
     save_scope_as = bfl_bank
@@ -320,7 +320,7 @@ if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_21 = {
 if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_21_state = 1
-    exists = var:bfl_con_21_party var:bfl_con_21_party = scope:bfl_party
+    exists = var:bfl_con_21_party country_exists = var:bfl_con_21_party var:bfl_con_21_party = scope:bfl_party
     bfl_period >= var:bfl_con_21_maturity_period gold >= var:bfl_con_21_basis
 }
     save_scope_as = bfl_bank
@@ -336,7 +336,7 @@ if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_22 = {
 if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_22_state = 1
-    exists = var:bfl_con_22_party var:bfl_con_22_party = scope:bfl_party
+    exists = var:bfl_con_22_party country_exists = var:bfl_con_22_party var:bfl_con_22_party = scope:bfl_party
     bfl_period >= var:bfl_con_22_maturity_period gold >= var:bfl_con_22_basis
 }
     save_scope_as = bfl_bank
@@ -352,7 +352,7 @@ if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_23 = {
 if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_23_state = 1
-    exists = var:bfl_con_23_party var:bfl_con_23_party = scope:bfl_party
+    exists = var:bfl_con_23_party country_exists = var:bfl_con_23_party var:bfl_con_23_party = scope:bfl_party
     bfl_period >= var:bfl_con_23_maturity_period gold >= var:bfl_con_23_basis
 }
     save_scope_as = bfl_bank
@@ -368,7 +368,7 @@ if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_24 = {
 if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_24_state = 1
-    exists = var:bfl_con_24_party var:bfl_con_24_party = scope:bfl_party
+    exists = var:bfl_con_24_party country_exists = var:bfl_con_24_party var:bfl_con_24_party = scope:bfl_party
     bfl_period >= var:bfl_con_24_maturity_period gold >= var:bfl_con_24_basis
 }
     save_scope_as = bfl_bank
@@ -384,7 +384,7 @@ if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_25 = {
 if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_25_state = 1
-    exists = var:bfl_con_25_party var:bfl_con_25_party = scope:bfl_party
+    exists = var:bfl_con_25_party country_exists = var:bfl_con_25_party var:bfl_con_25_party = scope:bfl_party
     bfl_period >= var:bfl_con_25_maturity_period gold >= var:bfl_con_25_basis
 }
     save_scope_as = bfl_bank
@@ -400,7 +400,7 @@ if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_26 = {
 if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_26_state = 1
-    exists = var:bfl_con_26_party var:bfl_con_26_party = scope:bfl_party
+    exists = var:bfl_con_26_party country_exists = var:bfl_con_26_party var:bfl_con_26_party = scope:bfl_party
     bfl_period >= var:bfl_con_26_maturity_period gold >= var:bfl_con_26_basis
 }
     save_scope_as = bfl_bank
@@ -416,7 +416,7 @@ if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_27 = {
 if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_27_state = 1
-    exists = var:bfl_con_27_party var:bfl_con_27_party = scope:bfl_party
+    exists = var:bfl_con_27_party country_exists = var:bfl_con_27_party var:bfl_con_27_party = scope:bfl_party
     bfl_period >= var:bfl_con_27_maturity_period gold >= var:bfl_con_27_basis
 }
     save_scope_as = bfl_bank
@@ -432,7 +432,7 @@ if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_28 = {
 if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_28_state = 1
-    exists = var:bfl_con_28_party var:bfl_con_28_party = scope:bfl_party
+    exists = var:bfl_con_28_party country_exists = var:bfl_con_28_party var:bfl_con_28_party = scope:bfl_party
     bfl_period >= var:bfl_con_28_maturity_period gold >= var:bfl_con_28_basis
 }
     save_scope_as = bfl_bank
@@ -448,7 +448,7 @@ if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_29 = {
 if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_29_state = 1
-    exists = var:bfl_con_29_party var:bfl_con_29_party = scope:bfl_party
+    exists = var:bfl_con_29_party country_exists = var:bfl_con_29_party var:bfl_con_29_party = scope:bfl_party
     bfl_period >= var:bfl_con_29_maturity_period gold >= var:bfl_con_29_basis
 }
     save_scope_as = bfl_bank
@@ -464,7 +464,7 @@ if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_2
 }
 bfl_redeem_bill_30 = {
 if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_30_state = 1
-    exists = var:bfl_con_30_party var:bfl_con_30_party = scope:bfl_party
+    exists = var:bfl_con_30_party country_exists = var:bfl_con_30_party var:bfl_con_30_party = scope:bfl_party
     bfl_period >= var:bfl_con_30_maturity_period gold >= var:bfl_con_30_basis
 }
     save_scope_as = bfl_bank
@@ -480,7 +480,7 @@ if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_3
 }
 bfl_redeem_bill_31 = {
 if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_31_state = 1
-    exists = var:bfl_con_31_party var:bfl_con_31_party = scope:bfl_party
+    exists = var:bfl_con_31_party country_exists = var:bfl_con_31_party var:bfl_con_31_party = scope:bfl_party
     bfl_period >= var:bfl_con_31_maturity_period gold >= var:bfl_con_31_basis
 }
     save_scope_as = bfl_bank
@@ -496,7 +496,7 @@ if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_3
 }
 bfl_redeem_bill_32 = {
 if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_con_32_state = 1
-    exists = var:bfl_con_32_party var:bfl_con_32_party = scope:bfl_party
+    exists = var:bfl_con_32_party country_exists = var:bfl_con_32_party var:bfl_con_32_party = scope:bfl_party
     bfl_period >= var:bfl_con_32_maturity_period gold >= var:bfl_con_32_basis
 }
     save_scope_as = bfl_bank

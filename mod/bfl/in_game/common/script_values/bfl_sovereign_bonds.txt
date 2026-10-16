@@ -1,0 +1,161 @@
+﻿bfl_bond_debt = {
+value = 0
+if = { limit = { var:bfl_bnd_01_active ?= 1 } add = var:bfl_bnd_01_face }
+if = { limit = { var:bfl_bnd_02_active ?= 1 } add = var:bfl_bnd_02_face }
+if = { limit = { var:bfl_bnd_03_active ?= 1 } add = var:bfl_bnd_03_face }
+if = { limit = { var:bfl_bnd_04_active ?= 1 } add = var:bfl_bnd_04_face }
+if = { limit = { var:bfl_bnd_05_active ?= 1 } add = var:bfl_bnd_05_face }
+if = { limit = { var:bfl_bnd_06_active ?= 1 } add = var:bfl_bnd_06_face }
+if = { limit = { var:bfl_bnd_07_active ?= 1 } add = var:bfl_bnd_07_face }
+if = { limit = { var:bfl_bnd_08_active ?= 1 } add = var:bfl_bnd_08_face }
+if = { limit = { var:bfl_bnd_09_active ?= 1 } add = var:bfl_bnd_09_face }
+if = { limit = { var:bfl_bnd_10_active ?= 1 } add = var:bfl_bnd_10_face }
+if = { limit = { var:bfl_bnd_11_active ?= 1 } add = var:bfl_bnd_11_face }
+if = { limit = { var:bfl_bnd_12_active ?= 1 } add = var:bfl_bnd_12_face }
+if = { limit = { var:bfl_bnd_13_active ?= 1 } add = var:bfl_bnd_13_face }
+if = { limit = { var:bfl_bnd_14_active ?= 1 } add = var:bfl_bnd_14_face }
+if = { limit = { var:bfl_bnd_15_active ?= 1 } add = var:bfl_bnd_15_face }
+if = { limit = { var:bfl_bnd_16_active ?= 1 } add = var:bfl_bnd_16_face }
+if = { limit = { var:bfl_bnd_17_active ?= 1 } add = var:bfl_bnd_17_face }
+if = { limit = { var:bfl_bnd_18_active ?= 1 } add = var:bfl_bnd_18_face }
+if = { limit = { var:bfl_bnd_19_active ?= 1 } add = var:bfl_bnd_19_face }
+if = { limit = { var:bfl_bnd_20_active ?= 1 } add = var:bfl_bnd_20_face }
+if = { limit = { var:bfl_bnd_21_active ?= 1 } add = var:bfl_bnd_21_face }
+if = { limit = { var:bfl_bnd_22_active ?= 1 } add = var:bfl_bnd_22_face }
+if = { limit = { var:bfl_bnd_23_active ?= 1 } add = var:bfl_bnd_23_face }
+if = { limit = { var:bfl_bnd_24_active ?= 1 } add = var:bfl_bnd_24_face }
+if = { limit = { var:bfl_bnd_25_active ?= 1 } add = var:bfl_bnd_25_face }
+if = { limit = { var:bfl_bnd_26_active ?= 1 } add = var:bfl_bnd_26_face }
+if = { limit = { var:bfl_bnd_27_active ?= 1 } add = var:bfl_bnd_27_face }
+if = { limit = { var:bfl_bnd_28_active ?= 1 } add = var:bfl_bnd_28_face }
+if = { limit = { var:bfl_bnd_29_active ?= 1 } add = var:bfl_bnd_29_face }
+if = { limit = { var:bfl_bnd_30_active ?= 1 } add = var:bfl_bnd_30_face }
+if = { limit = { var:bfl_bnd_31_active ?= 1 } add = var:bfl_bnd_31_face }
+if = { limit = { var:bfl_bnd_32_active ?= 1 } add = var:bfl_bnd_32_face }
+}
+bfl_bond_arrears = {
+value = 0
+if = { limit = { var:bfl_bnd_01_active ?= 1 } add = var:bfl_bnd_01_due }
+if = { limit = { var:bfl_bnd_02_active ?= 1 } add = var:bfl_bnd_02_due }
+if = { limit = { var:bfl_bnd_03_active ?= 1 } add = var:bfl_bnd_03_due }
+if = { limit = { var:bfl_bnd_04_active ?= 1 } add = var:bfl_bnd_04_due }
+if = { limit = { var:bfl_bnd_05_active ?= 1 } add = var:bfl_bnd_05_due }
+if = { limit = { var:bfl_bnd_06_active ?= 1 } add = var:bfl_bnd_06_due }
+if = { limit = { var:bfl_bnd_07_active ?= 1 } add = var:bfl_bnd_07_due }
+if = { limit = { var:bfl_bnd_08_active ?= 1 } add = var:bfl_bnd_08_due }
+if = { limit = { var:bfl_bnd_09_active ?= 1 } add = var:bfl_bnd_09_due }
+if = { limit = { var:bfl_bnd_10_active ?= 1 } add = var:bfl_bnd_10_due }
+if = { limit = { var:bfl_bnd_11_active ?= 1 } add = var:bfl_bnd_11_due }
+if = { limit = { var:bfl_bnd_12_active ?= 1 } add = var:bfl_bnd_12_due }
+if = { limit = { var:bfl_bnd_13_active ?= 1 } add = var:bfl_bnd_13_due }
+if = { limit = { var:bfl_bnd_14_active ?= 1 } add = var:bfl_bnd_14_due }
+if = { limit = { var:bfl_bnd_15_active ?= 1 } add = var:bfl_bnd_15_due }
+if = { limit = { var:bfl_bnd_16_active ?= 1 } add = var:bfl_bnd_16_due }
+if = { limit = { var:bfl_bnd_17_active ?= 1 } add = var:bfl_bnd_17_due }
+if = { limit = { var:bfl_bnd_18_active ?= 1 } add = var:bfl_bnd_18_due }
+if = { limit = { var:bfl_bnd_19_active ?= 1 } add = var:bfl_bnd_19_due }
+if = { limit = { var:bfl_bnd_20_active ?= 1 } add = var:bfl_bnd_20_due }
+if = { limit = { var:bfl_bnd_21_active ?= 1 } add = var:bfl_bnd_21_due }
+if = { limit = { var:bfl_bnd_22_active ?= 1 } add = var:bfl_bnd_22_due }
+if = { limit = { var:bfl_bnd_23_active ?= 1 } add = var:bfl_bnd_23_due }
+if = { limit = { var:bfl_bnd_24_active ?= 1 } add = var:bfl_bnd_24_due }
+if = { limit = { var:bfl_bnd_25_active ?= 1 } add = var:bfl_bnd_25_due }
+if = { limit = { var:bfl_bnd_26_active ?= 1 } add = var:bfl_bnd_26_due }
+if = { limit = { var:bfl_bnd_27_active ?= 1 } add = var:bfl_bnd_27_due }
+if = { limit = { var:bfl_bnd_28_active ?= 1 } add = var:bfl_bnd_28_due }
+if = { limit = { var:bfl_bnd_29_active ?= 1 } add = var:bfl_bnd_29_due }
+if = { limit = { var:bfl_bnd_30_active ?= 1 } add = var:bfl_bnd_30_due }
+if = { limit = { var:bfl_bnd_31_active ?= 1 } add = var:bfl_bnd_31_due }
+if = { limit = { var:bfl_bnd_32_active ?= 1 } add = var:bfl_bnd_32_due }
+}
+bfl_bond_count = {
+value = 0
+if = { limit = { var:bfl_bnd_01_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_02_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_03_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_04_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_05_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_06_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_07_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_08_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_09_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_10_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_11_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_12_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_13_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_14_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_15_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_16_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_17_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_18_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_19_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_20_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_21_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_22_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_23_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_24_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_25_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_26_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_27_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_28_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_29_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_30_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_31_active ?= 1 } add = 1 }
+if = { limit = { var:bfl_bnd_32_active ?= 1 } add = 1 }
+}
+bfl_bond_capacity = {
+value = monthly_income_total multiply = 24 min = 100 subtract = bfl_bond_debt subtract = total_debt min = 0
+}
+bfl_bond_new_rate = {
+value = 0.03 if = { limit = { has_variable = bfl_bond_rate } value = var:bfl_bond_rate }
+}
+bfl_custom_bond_financing_received = {
+value = 0 if = { limit = { bfl_has_valid_controller = yes } value = overlord.bfl_bond_financing_display }
+}
+bfl_bond_monthly_coupon = {
+value = 0
+if = { limit = { var:bfl_bnd_01_active ?= 1 } add = { value = var:bfl_bnd_01_face multiply = var:bfl_bnd_01_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_02_active ?= 1 } add = { value = var:bfl_bnd_02_face multiply = var:bfl_bnd_02_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_03_active ?= 1 } add = { value = var:bfl_bnd_03_face multiply = var:bfl_bnd_03_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_04_active ?= 1 } add = { value = var:bfl_bnd_04_face multiply = var:bfl_bnd_04_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_05_active ?= 1 } add = { value = var:bfl_bnd_05_face multiply = var:bfl_bnd_05_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_06_active ?= 1 } add = { value = var:bfl_bnd_06_face multiply = var:bfl_bnd_06_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_07_active ?= 1 } add = { value = var:bfl_bnd_07_face multiply = var:bfl_bnd_07_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_08_active ?= 1 } add = { value = var:bfl_bnd_08_face multiply = var:bfl_bnd_08_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_09_active ?= 1 } add = { value = var:bfl_bnd_09_face multiply = var:bfl_bnd_09_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_10_active ?= 1 } add = { value = var:bfl_bnd_10_face multiply = var:bfl_bnd_10_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_11_active ?= 1 } add = { value = var:bfl_bnd_11_face multiply = var:bfl_bnd_11_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_12_active ?= 1 } add = { value = var:bfl_bnd_12_face multiply = var:bfl_bnd_12_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_13_active ?= 1 } add = { value = var:bfl_bnd_13_face multiply = var:bfl_bnd_13_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_14_active ?= 1 } add = { value = var:bfl_bnd_14_face multiply = var:bfl_bnd_14_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_15_active ?= 1 } add = { value = var:bfl_bnd_15_face multiply = var:bfl_bnd_15_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_16_active ?= 1 } add = { value = var:bfl_bnd_16_face multiply = var:bfl_bnd_16_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_17_active ?= 1 } add = { value = var:bfl_bnd_17_face multiply = var:bfl_bnd_17_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_18_active ?= 1 } add = { value = var:bfl_bnd_18_face multiply = var:bfl_bnd_18_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_19_active ?= 1 } add = { value = var:bfl_bnd_19_face multiply = var:bfl_bnd_19_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_20_active ?= 1 } add = { value = var:bfl_bnd_20_face multiply = var:bfl_bnd_20_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_21_active ?= 1 } add = { value = var:bfl_bnd_21_face multiply = var:bfl_bnd_21_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_22_active ?= 1 } add = { value = var:bfl_bnd_22_face multiply = var:bfl_bnd_22_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_23_active ?= 1 } add = { value = var:bfl_bnd_23_face multiply = var:bfl_bnd_23_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_24_active ?= 1 } add = { value = var:bfl_bnd_24_face multiply = var:bfl_bnd_24_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_25_active ?= 1 } add = { value = var:bfl_bnd_25_face multiply = var:bfl_bnd_25_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_26_active ?= 1 } add = { value = var:bfl_bnd_26_face multiply = var:bfl_bnd_26_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_27_active ?= 1 } add = { value = var:bfl_bnd_27_face multiply = var:bfl_bnd_27_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_28_active ?= 1 } add = { value = var:bfl_bnd_28_face multiply = var:bfl_bnd_28_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_29_active ?= 1 } add = { value = var:bfl_bnd_29_face multiply = var:bfl_bnd_29_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_30_active ?= 1 } add = { value = var:bfl_bnd_30_face multiply = var:bfl_bnd_30_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_31_active ?= 1 } add = { value = var:bfl_bnd_31_face multiply = var:bfl_bnd_31_rate divide = 12 } }
+if = { limit = { var:bfl_bnd_32_active ?= 1 } add = { value = var:bfl_bnd_32_face multiply = var:bfl_bnd_32_rate divide = 12 } }
+}
+bfl_bond_income_display = {
+value = 0 if = { limit = { var:bfl_bond_receipt_period ?= bfl_period } value = var:bfl_bond_receipts }
+}
+bfl_bond_cost_display = {
+value = 0 if = { limit = { var:bfl_bond_cost_period ?= bfl_period } value = var:bfl_bond_cost_paid }
+}
+bfl_bond_financing_display = {
+value = 0 if = { limit = { var:bfl_bond_financing_period ?= bfl_period } value = var:bfl_bond_financing }
+}
+bfl_bond_redemption_display = {
+value = 0 if = { limit = { var:bfl_bond_redemption_period ?= bfl_period } value = var:bfl_bond_redemption_paid }
+}

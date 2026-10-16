@@ -57,6 +57,12 @@ def main():
     loc_set=set(keys)
     for path,text in all_text:
         if path.suffix=='.yml':continue
+        if 'decisions' in path.parts:
+            # Native decisions consume implicit .title/.desc keys even though
+            # those consumers do not appear as explicit fields in the script.
+            for decision in re.findall(r'^(bfl_[\w]+)\s*=\s*\{',text,re.M):
+                for suffix in ('.title','.desc'):
+                    check(decision+suffix in loc_set,f'{path}: missing decision localization {decision+suffix}')
         for key in re.findall(r'\b(?:text|title|desc|name)\s*=\s*"?(bfl_[\w.]+)"?',text):
             # Variables, scripted scopes, widget names and database keys are not localization consumers.
             if path.suffix=='.gui' and key not in loc_set:
@@ -115,7 +121,7 @@ def main():
             check(data[84:88]==b'DXT5',f'Expected BC3/DXT5 texture: {path}')
     economy=(MOD/'in_game/gui/economy_lateralview.gui').read_text(encoding='utf-8-sig')
     types=(MOD/'in_game/gui/vanilla/bfl_economy_vanilla_types.gui').read_text(encoding='utf-8-sig')
-    for kind in ('dividends','interest','facility'):
+    for kind in ('dividends','interest','bond_coupons'):
         check(economy.count(f'name = "bfl_income_{kind}"')==1,f'Bank {kind} row must occur exactly once')
     check('layoutpolicy_horizontal = fixed\n\t\t\t\t\t\t\t\t\t\t\tsize = { 49%' not in economy,'Native budget columns must retain their layout')
     credit=(MOD/'in_game/gui/credit.gui').read_text(encoding='utf-8-sig')

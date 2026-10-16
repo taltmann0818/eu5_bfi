@@ -1,0 +1,12 @@
+# Disposable screenshot fixture: grant native research/building to unlock resale.
+c:FLO = {
+    research_advance = advance_type:stock_exchange_advance
+    if = { limit = { NOT = { any_owned_location = { is_market_center = yes } } }
+        capital = { save_scope_as = bfi_exchange_location }
+        create_market = { builder = c:FLO location = scope:bfi_exchange_location price = price:create_market instant = yes price_modifier = 0 }
+    }
+    every_owned_location = { limit = { is_market_center = yes }
+        construct_building = { building_type = building_type:stock_exchange owner = c:FLO instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_custom_bonds_title }
+    }
+}
+debug_log = "BFI_VISUAL|stock_exchange_unlocked"

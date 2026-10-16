@@ -15,12 +15,30 @@ SOURCES=[
  'in_game/common/country_interactions/take_over_loan.txt','in_game/common/country_interactions/request_loan.txt',
  'in_game/common/country_interactions/siphon_income.txt','in_game/common/script_values/bank_loan_takeover.txt',
  'in_game/common/building_types/trade_company_buildings.txt','in_game/common/building_types/unique_buildings.txt',
+ 'in_game/common/building_types/market_buildings.txt','in_game/common/advances/1_building_unlocks.txt',
+ 'in_game/common/building_types/capital_buildings.txt','in_game/common/advances/0_age_of_absolutism.txt',
+ 'in_game/common/subject_types/trade_company.txt','in_game/common/prices/03_diplomacy.txt',
+ 'loading_screen/common/defines/00_defines.txt',
+ 'main_menu/common/game_concepts/00_game_concepts.txt',
+ 'main_menu/gfx/interface/icons/flat_icons/balance/government_bond.dds',
+ 'main_menu/gfx/interface/illustrations/institutions/banking.dds',
  'in_game/common/advances/0_age_of_renaissance.txt','in_game/common/scripted_guis/scripted_guis.info',
+ 'in_game/common/advances/0_age_of_reformation.txt',
+ 'in_game/common/goods/03_food.txt','in_game/common/prices/00_hardcoded.txt',
+ 'in_game/common/script_values/building_caps.txt',
+ 'in_game/common/scripted_relations/trade_access.txt',
+ 'in_game/common/scripted_triggers/exploration_triggers.txt',
+ 'in_game/common/generic_actions/explorers.txt','in_game/common/generic_actions/markets.txt',
+ 'in_game/common/generic_actions/create_building_subject.txt',
+ 'in_game/common/on_action/country_monthly.txt',
+ 'in_game/common/on_action/exploration_mission_monthly.txt',
  'in_game/common/on_action/_hardcoded.txt','main_menu/common/modifier_type_definitions/00_modifier_types.txt'
 ]
 CMF_SOURCES=['.metadata/metadata.json','in_game/common/on_action/cmf_on_actions.txt',
  'in_game/common/scripted_effects/cmf_alert_effects.txt','in_game/common/scripted_effects/cmf_log_effects.txt',
- 'in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt']
+ 'in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt',
+ 'in_game/common/scripted_effects/cmm_core_reset_effects.txt',
+ 'in_game/common/scripted_guis/cmm_settings_scripted_gui.txt']
 
 
 def sha(path):

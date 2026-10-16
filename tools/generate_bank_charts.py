@@ -10,6 +10,7 @@ def generate(common, effect, loc, write):
     reset = ''.join(f'set_variable = {{ name = bfl_asset_{kind} value = 0 }}\n' for kind in ASSET_TYPES)
     reset += 'set_variable = { name = bfl_asset_rows value = 0 }\n'
     reset += 'set_variable = { name = bfl_custom_credit_value value = 0 }\n'
+    reset += 'set_variable = { name = bfl_custom_bond_count value = 0 }\n'
     for index in range(1, 65):
         reset += f'remove_variable = bfl_asset_{index:02}_party\n'
         for kind in ASSET_TYPES:
@@ -67,6 +68,7 @@ def generate(common, effect, loc, write):
                 change_variable = {{ name = bfl_asset_secured add = var:bfl_asset_amount }}
                 change_variable = {{ name = bfl_custom_credit_value add = var:bfl_asset_amount }} }}
             bfl_allocate_asset_row = yes }}\n'''
+    reconcile += 'bfl_add_sovereign_bond_assets = yes\n'
     common('scripted_effects', 'asset_statement', effect('bfl_allocate_asset_row', allocate)
            + effect('bfl_refresh_asset_statement', reconcile))
     values = ''
@@ -129,7 +131,7 @@ def generate(common, effect, loc, write):
                         f'''visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_{kind}'), '(CFixedPoint)0')]"''', '{ ' + COLORS[kind] + ' }')
         content = list_block(f'bfl_asset_{kind}_summary', scroll_rows(rows))
         content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_asset_legend_footer" } }'
-        tooltips += tooltip_type(f'bfl_asset_{kind}_tooltip', f'bfl_asset_{kind}_heading', 'bfl_asset_subtitle', 'accounts', content)
+        tooltips += tooltip_type(f'bfl_asset_{kind}_tooltip', f'bfl_asset_{kind}_heading', 'bfl_asset_subtitle', 'bond' if kind == 'bonds' else 'accounts', content)
     write('in_game/gui/bfl_bank_chart_tooltips.gui', 'types BFLBankChartTooltips {\n' + tooltips + '}')
 
 

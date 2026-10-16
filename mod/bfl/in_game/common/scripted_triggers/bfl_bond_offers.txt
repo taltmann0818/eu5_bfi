@@ -1,0 +1,17 @@
+﻿bfl_valid_bond_offer = {
+    country_exists = this
+    has_variable = bfl_bond_schema var:bfl_bond_offer_slot > 0
+    var:bfl_bond_offer_price > 0 bfl_period <= var:bfl_bond_offer_expiry
+    NOT = { has_variable = bfl_bond_guard }
+    exists = var:bfl_bond_offer_seller
+    var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes }
+    exists = scope:bfl_bond_buyer
+    scope:bfl_bond_buyer = {
+        bfl_can_trade_sovereign_bonds = yes
+        NOT = { this = prev } NOT = { this = prev.var:bfl_bond_offer_seller }
+        gold >= prev.var:bfl_bond_offer_price
+        OR = { NOT = { bfl_has_accounts = yes } AND = {
+            bfl_can_conduct_business = yes bfl_free_cash >= prev.var:bfl_bond_offer_price
+            bfl_capital_headroom >= prev.var:bfl_bond_offer_price } }
+    }
+}

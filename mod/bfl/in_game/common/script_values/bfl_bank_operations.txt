@@ -73,6 +73,7 @@ if = { limit = { var:bfl_con_29_active = 1 } add = 1 }
 if = { limit = { var:bfl_con_30_active = 1 } add = 1 }
 if = { limit = { var:bfl_con_31_active = 1 } add = 1 }
 if = { limit = { var:bfl_con_32_active = 1 } add = 1 }
+add = var:bfl_custom_bond_count
 }
 bfl_operating_contracts_cost = {
 value = bfl_operating_contracts_count multiply = 0.1

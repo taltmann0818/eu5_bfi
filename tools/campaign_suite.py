@@ -23,6 +23,35 @@ def runtime_hash():
     return h.hexdigest()
 
 
+def engine_errors(directory):
+    """Include rotated diagnostics so a later log rollover cannot hide a failure."""
+    return '\n'.join(path.read_text(encoding='utf-8-sig', errors='replace')
+                     for path in sorted(Path(directory).glob('error*.log'))
+                     if re.fullmatch(r'error(?:\.\d+)?\.log', path.name))
+
+
+def native_gui_diagnostics(error_log):
+    """Exact native/CMF startup signatures, with paired property diagnostics only.
+
+    Line numbers move when native GUI nodes are injected, so match the source file
+    and full localized text. Never excuse a BFI key, scope error or other message.
+    """
+    baseline = json.loads((ROOT / 'docs/native-gui-diagnostics.json').read_text(encoding='utf-8'))
+    allowed = {(s['file'], s['localized_text']) for s in baseline['signatures']}
+    accepted = set()
+    locations = set()
+    for line in error_log.splitlines():
+        match = re.search(r'(gui/[^:]+):(\d+) - Failed parsing localized text: (.*)', line)
+        if match and (match[1], match[3]) in allowed and not re.search(r'bfl_|bfi_', line):
+            accepted.add(line)
+            locations.add((match[1], match[2]))
+    for line in error_log.splitlines():
+        match = re.search(r'failed reading property, at (gui/[^:]+):(\d+)$', line)
+        if match and (match[1], match[2]) in locations:
+            accepted.add(line)
+    return accepted
+
+
 def fixture(token, fingerprint):
     cases = []
 
@@ -201,6 +230,9 @@ def fixture(token, fingerprint):
     start += 'c:FLO = { research_advance = advance_type:banking_advance }\n'
     start += check('banking_does_not_research_bills_or_restructuring', 'c:FLO = { NOT = { has_advance = bfl_commercial_bills } NOT = { has_advance = bfl_debt_restructuring } }')
     start += check('banking_keeps_renaissance_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes } NOT = { bfl_can_originate_bank_subscription = yes }')
+    start += reset()
+    from sovereign_bond_checks import instant as bond_checks
+    start += bond_checks(check)
     # Keep the charter fixture for the natural monthly and persistence checks.
     start += reset() + '''c:FLO = { set_gold = 1000 save_scope_as = bfl_party }
         set_variable = { name = bfl_product value = 1 }
@@ -245,6 +277,7 @@ def write_script(path, body):
 
 
 def reload_fixture(token, fingerprint):
+    from sovereign_bond_checks import RELOAD_CHECKS
     checks = {
         'reload_sentinel': 'var:bfi_test_sentinel = 731 has_variable = bfi_test_started',
         'reload_schema': 'var:bfl_schema = 1',
@@ -253,6 +286,7 @@ def reload_fixture(token, fingerprint):
         'reload_live_controller': 'bfl_has_valid_controller = yes',
         'reload_native_banking_unlocks': 'c:FLO = { has_advance = banking_advance modifier:bfl_enable_term_deposits = yes modifier:bfl_enable_bank_capital_subscriptions = yes }',
         'reload_expense_history': 'var:bfl_expense_history_count > 0 var:bfl_expense_history_12 > 0 var:bfl_expense_history_period <= bfl_period',
+        **RELOAD_CHECKS,
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'
     for name, condition in checks.items():
@@ -367,7 +401,10 @@ def collect(log, manifest, error_log=''):
     errors += ['Failed: ' + case for case, status in results.items() if status != 'PASS']
     # Native beta diagnostics are kept local. Fail on errors attributed to BFI or its overlay.
     # Unused-variable warnings are not runtime errors and do not match these expressions.
+    native_diagnostics = native_gui_diagnostics(error_log)
     for line in error_log.splitlines():
+        if line in native_diagnostics:
+            continue
         # Missing optional notification settings do not prevent an interaction.
         # Keep these diagnostics in the full local log, separately from logic errors.
         if 'message_handler' in line and 'Failed to find message type:' in line:
@@ -379,7 +416,8 @@ def collect(log, manifest, error_log=''):
         if re.search(r'(?:bfl_|bfi_)', block):
             errors.append('BFI script runtime error: ' + ' '.join(block.splitlines()[1:4]).strip())
     return {'passed': not errors, 'token': manifest['token'], 'runtime_sha256': expected,
-            'results': results, 'errors': errors}
+            'results': results, 'errors': errors,
+            'native_baseline_diagnostics': sorted(line.split(']: ', 1)[-1] for line in native_diagnostics)}
 
 
 def main():
@@ -406,7 +444,7 @@ def main():
         def read(path):
             return path.read_text(encoding='utf-8-sig', errors='replace') if path and path.exists() else ''
         r = collect(read(args.prior_log) + '\n' + read(args.userdir / 'logs/debug.log'), m,
-                    read(args.prior_errors) + '\n' + read(args.userdir / 'logs/error.log'))
+                    read(args.prior_errors) + '\n' + engine_errors(args.userdir / 'logs'))
         if runtime_hash() != m['runtime_sha256']:
             r['errors'].append('Source runtime changed since staging')
             r['passed'] = False

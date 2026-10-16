@@ -1,5 +1,5 @@
 ﻿bfl_pay_deposit_01 = {
-if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_withdrawal_requested > 0 exists = var:bfl_dep_01_party }
+if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_withdrawal_requested > 0 exists = var:bfl_dep_01_party country_exists = var:bfl_dep_01_party }
     save_scope_as = bfl_bank
     var:bfl_dep_01_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_01_withdrawal_requested } }
@@ -17,7 +17,7 @@ if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_withdrawal_requested >
 }
 }
 bfl_pay_deposit_02 = {
-if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_withdrawal_requested > 0 exists = var:bfl_dep_02_party }
+if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_withdrawal_requested > 0 exists = var:bfl_dep_02_party country_exists = var:bfl_dep_02_party }
     save_scope_as = bfl_bank
     var:bfl_dep_02_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_02_withdrawal_requested } }
@@ -35,7 +35,7 @@ if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_withdrawal_requested >
 }
 }
 bfl_pay_deposit_03 = {
-if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_withdrawal_requested > 0 exists = var:bfl_dep_03_party }
+if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_withdrawal_requested > 0 exists = var:bfl_dep_03_party country_exists = var:bfl_dep_03_party }
     save_scope_as = bfl_bank
     var:bfl_dep_03_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_03_withdrawal_requested } }
@@ -53,7 +53,7 @@ if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_withdrawal_requested >
 }
 }
 bfl_pay_deposit_04 = {
-if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_withdrawal_requested > 0 exists = var:bfl_dep_04_party }
+if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_withdrawal_requested > 0 exists = var:bfl_dep_04_party country_exists = var:bfl_dep_04_party }
     save_scope_as = bfl_bank
     var:bfl_dep_04_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_04_withdrawal_requested } }
@@ -71,7 +71,7 @@ if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_withdrawal_requested >
 }
 }
 bfl_pay_deposit_05 = {
-if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_withdrawal_requested > 0 exists = var:bfl_dep_05_party }
+if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_withdrawal_requested > 0 exists = var:bfl_dep_05_party country_exists = var:bfl_dep_05_party }
     save_scope_as = bfl_bank
     var:bfl_dep_05_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_05_withdrawal_requested } }
@@ -89,7 +89,7 @@ if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_withdrawal_requested >
 }
 }
 bfl_pay_deposit_06 = {
-if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_withdrawal_requested > 0 exists = var:bfl_dep_06_party }
+if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_withdrawal_requested > 0 exists = var:bfl_dep_06_party country_exists = var:bfl_dep_06_party }
     save_scope_as = bfl_bank
     var:bfl_dep_06_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_06_withdrawal_requested } }
@@ -107,7 +107,7 @@ if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_withdrawal_requested >
 }
 }
 bfl_pay_deposit_07 = {
-if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_withdrawal_requested > 0 exists = var:bfl_dep_07_party }
+if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_withdrawal_requested > 0 exists = var:bfl_dep_07_party country_exists = var:bfl_dep_07_party }
     save_scope_as = bfl_bank
     var:bfl_dep_07_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_07_withdrawal_requested } }
@@ -125,7 +125,7 @@ if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_withdrawal_requested >
 }
 }
 bfl_pay_deposit_08 = {
-if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_withdrawal_requested > 0 exists = var:bfl_dep_08_party }
+if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_withdrawal_requested > 0 exists = var:bfl_dep_08_party country_exists = var:bfl_dep_08_party }
     save_scope_as = bfl_bank
     var:bfl_dep_08_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_08_withdrawal_requested } }
@@ -143,7 +143,7 @@ if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_withdrawal_requested >
 }
 }
 bfl_pay_deposit_09 = {
-if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_withdrawal_requested > 0 exists = var:bfl_dep_09_party }
+if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_withdrawal_requested > 0 exists = var:bfl_dep_09_party country_exists = var:bfl_dep_09_party }
     save_scope_as = bfl_bank
     var:bfl_dep_09_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_09_withdrawal_requested } }
@@ -161,7 +161,7 @@ if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_withdrawal_requested >
 }
 }
 bfl_pay_deposit_10 = {
-if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_withdrawal_requested > 0 exists = var:bfl_dep_10_party }
+if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_withdrawal_requested > 0 exists = var:bfl_dep_10_party country_exists = var:bfl_dep_10_party }
     save_scope_as = bfl_bank
     var:bfl_dep_10_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_10_withdrawal_requested } }
@@ -179,7 +179,7 @@ if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_withdrawal_requested >
 }
 }
 bfl_pay_deposit_11 = {
-if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_withdrawal_requested > 0 exists = var:bfl_dep_11_party }
+if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_withdrawal_requested > 0 exists = var:bfl_dep_11_party country_exists = var:bfl_dep_11_party }
     save_scope_as = bfl_bank
     var:bfl_dep_11_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_11_withdrawal_requested } }
@@ -197,7 +197,7 @@ if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_withdrawal_requested >
 }
 }
 bfl_pay_deposit_12 = {
-if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_withdrawal_requested > 0 exists = var:bfl_dep_12_party }
+if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_withdrawal_requested > 0 exists = var:bfl_dep_12_party country_exists = var:bfl_dep_12_party }
     save_scope_as = bfl_bank
     var:bfl_dep_12_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_12_withdrawal_requested } }
@@ -215,7 +215,7 @@ if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_withdrawal_requested >
 }
 }
 bfl_pay_deposit_13 = {
-if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_withdrawal_requested > 0 exists = var:bfl_dep_13_party }
+if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_withdrawal_requested > 0 exists = var:bfl_dep_13_party country_exists = var:bfl_dep_13_party }
     save_scope_as = bfl_bank
     var:bfl_dep_13_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_13_withdrawal_requested } }
@@ -233,7 +233,7 @@ if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_withdrawal_requested >
 }
 }
 bfl_pay_deposit_14 = {
-if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_withdrawal_requested > 0 exists = var:bfl_dep_14_party }
+if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_withdrawal_requested > 0 exists = var:bfl_dep_14_party country_exists = var:bfl_dep_14_party }
     save_scope_as = bfl_bank
     var:bfl_dep_14_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_14_withdrawal_requested } }
@@ -251,7 +251,7 @@ if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_withdrawal_requested >
 }
 }
 bfl_pay_deposit_15 = {
-if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_withdrawal_requested > 0 exists = var:bfl_dep_15_party }
+if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_withdrawal_requested > 0 exists = var:bfl_dep_15_party country_exists = var:bfl_dep_15_party }
     save_scope_as = bfl_bank
     var:bfl_dep_15_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_15_withdrawal_requested } }
@@ -269,7 +269,7 @@ if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_withdrawal_requested >
 }
 }
 bfl_pay_deposit_16 = {
-if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_withdrawal_requested > 0 exists = var:bfl_dep_16_party }
+if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_withdrawal_requested > 0 exists = var:bfl_dep_16_party country_exists = var:bfl_dep_16_party }
     save_scope_as = bfl_bank
     var:bfl_dep_16_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_16_withdrawal_requested } }
@@ -287,7 +287,7 @@ if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_withdrawal_requested >
 }
 }
 bfl_pay_deposit_17 = {
-if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_withdrawal_requested > 0 exists = var:bfl_dep_17_party }
+if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_withdrawal_requested > 0 exists = var:bfl_dep_17_party country_exists = var:bfl_dep_17_party }
     save_scope_as = bfl_bank
     var:bfl_dep_17_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_17_withdrawal_requested } }
@@ -305,7 +305,7 @@ if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_withdrawal_requested >
 }
 }
 bfl_pay_deposit_18 = {
-if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_withdrawal_requested > 0 exists = var:bfl_dep_18_party }
+if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_withdrawal_requested > 0 exists = var:bfl_dep_18_party country_exists = var:bfl_dep_18_party }
     save_scope_as = bfl_bank
     var:bfl_dep_18_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_18_withdrawal_requested } }
@@ -323,7 +323,7 @@ if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_withdrawal_requested >
 }
 }
 bfl_pay_deposit_19 = {
-if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_withdrawal_requested > 0 exists = var:bfl_dep_19_party }
+if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_withdrawal_requested > 0 exists = var:bfl_dep_19_party country_exists = var:bfl_dep_19_party }
     save_scope_as = bfl_bank
     var:bfl_dep_19_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_19_withdrawal_requested } }
@@ -341,7 +341,7 @@ if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_withdrawal_requested >
 }
 }
 bfl_pay_deposit_20 = {
-if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_withdrawal_requested > 0 exists = var:bfl_dep_20_party }
+if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_withdrawal_requested > 0 exists = var:bfl_dep_20_party country_exists = var:bfl_dep_20_party }
     save_scope_as = bfl_bank
     var:bfl_dep_20_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_20_withdrawal_requested } }
@@ -359,7 +359,7 @@ if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_withdrawal_requested >
 }
 }
 bfl_pay_deposit_21 = {
-if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_withdrawal_requested > 0 exists = var:bfl_dep_21_party }
+if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_withdrawal_requested > 0 exists = var:bfl_dep_21_party country_exists = var:bfl_dep_21_party }
     save_scope_as = bfl_bank
     var:bfl_dep_21_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_21_withdrawal_requested } }
@@ -377,7 +377,7 @@ if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_withdrawal_requested >
 }
 }
 bfl_pay_deposit_22 = {
-if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_withdrawal_requested > 0 exists = var:bfl_dep_22_party }
+if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_withdrawal_requested > 0 exists = var:bfl_dep_22_party country_exists = var:bfl_dep_22_party }
     save_scope_as = bfl_bank
     var:bfl_dep_22_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_22_withdrawal_requested } }
@@ -395,7 +395,7 @@ if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_withdrawal_requested >
 }
 }
 bfl_pay_deposit_23 = {
-if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_withdrawal_requested > 0 exists = var:bfl_dep_23_party }
+if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_withdrawal_requested > 0 exists = var:bfl_dep_23_party country_exists = var:bfl_dep_23_party }
     save_scope_as = bfl_bank
     var:bfl_dep_23_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_23_withdrawal_requested } }
@@ -413,7 +413,7 @@ if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_withdrawal_requested >
 }
 }
 bfl_pay_deposit_24 = {
-if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_withdrawal_requested > 0 exists = var:bfl_dep_24_party }
+if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_withdrawal_requested > 0 exists = var:bfl_dep_24_party country_exists = var:bfl_dep_24_party }
     save_scope_as = bfl_bank
     var:bfl_dep_24_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_24_withdrawal_requested } }
@@ -431,7 +431,7 @@ if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_withdrawal_requested >
 }
 }
 bfl_pay_deposit_25 = {
-if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_withdrawal_requested > 0 exists = var:bfl_dep_25_party }
+if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_withdrawal_requested > 0 exists = var:bfl_dep_25_party country_exists = var:bfl_dep_25_party }
     save_scope_as = bfl_bank
     var:bfl_dep_25_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_25_withdrawal_requested } }
@@ -449,7 +449,7 @@ if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_withdrawal_requested >
 }
 }
 bfl_pay_deposit_26 = {
-if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_withdrawal_requested > 0 exists = var:bfl_dep_26_party }
+if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_withdrawal_requested > 0 exists = var:bfl_dep_26_party country_exists = var:bfl_dep_26_party }
     save_scope_as = bfl_bank
     var:bfl_dep_26_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_26_withdrawal_requested } }
@@ -467,7 +467,7 @@ if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_withdrawal_requested >
 }
 }
 bfl_pay_deposit_27 = {
-if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_withdrawal_requested > 0 exists = var:bfl_dep_27_party }
+if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_withdrawal_requested > 0 exists = var:bfl_dep_27_party country_exists = var:bfl_dep_27_party }
     save_scope_as = bfl_bank
     var:bfl_dep_27_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_27_withdrawal_requested } }
@@ -485,7 +485,7 @@ if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_withdrawal_requested >
 }
 }
 bfl_pay_deposit_28 = {
-if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_withdrawal_requested > 0 exists = var:bfl_dep_28_party }
+if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_withdrawal_requested > 0 exists = var:bfl_dep_28_party country_exists = var:bfl_dep_28_party }
     save_scope_as = bfl_bank
     var:bfl_dep_28_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_28_withdrawal_requested } }
@@ -503,7 +503,7 @@ if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_withdrawal_requested >
 }
 }
 bfl_pay_deposit_29 = {
-if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_withdrawal_requested > 0 exists = var:bfl_dep_29_party }
+if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_withdrawal_requested > 0 exists = var:bfl_dep_29_party country_exists = var:bfl_dep_29_party }
     save_scope_as = bfl_bank
     var:bfl_dep_29_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_29_withdrawal_requested } }
@@ -521,7 +521,7 @@ if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_withdrawal_requested >
 }
 }
 bfl_pay_deposit_30 = {
-if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_withdrawal_requested > 0 exists = var:bfl_dep_30_party }
+if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_withdrawal_requested > 0 exists = var:bfl_dep_30_party country_exists = var:bfl_dep_30_party }
     save_scope_as = bfl_bank
     var:bfl_dep_30_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_30_withdrawal_requested } }
@@ -539,7 +539,7 @@ if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_withdrawal_requested >
 }
 }
 bfl_pay_deposit_31 = {
-if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_withdrawal_requested > 0 exists = var:bfl_dep_31_party }
+if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_withdrawal_requested > 0 exists = var:bfl_dep_31_party country_exists = var:bfl_dep_31_party }
     save_scope_as = bfl_bank
     var:bfl_dep_31_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_31_withdrawal_requested } }
@@ -557,7 +557,7 @@ if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_withdrawal_requested >
 }
 }
 bfl_pay_deposit_32 = {
-if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_withdrawal_requested > 0 exists = var:bfl_dep_32_party }
+if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_withdrawal_requested > 0 exists = var:bfl_dep_32_party country_exists = var:bfl_dep_32_party }
     save_scope_as = bfl_bank
     var:bfl_dep_32_party = { save_scope_as = bfl_party }
     set_variable = { name = bfl_payment value = { value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:bfl_dep_32_withdrawal_requested } }

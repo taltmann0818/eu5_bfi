@@ -83,28 +83,28 @@ All paths in this table are relative to `GAME`.
 | Installed CMF `.metadata/metadata.json`, `in_game/common/on_action/cmf_on_actions.txt` | CMF 2.5.0 supplies registration, load/transfer, and human-player lifecycle hooks. These supplement the all-institution accounting scheduler. |
 | Installed CMF `in_game/gui/vanilla/` and published extraction coverage | No extracted economy GUI or economy injection slot was found. An explicit, versioned `economy_lateralview.gui` override is required; CMF does not make same-widget overrides automatically composable. |
 
-### 1.3 Native behavior that must be proved
+### 1.3 Native feasibility audit — completed
 
-The local audit verifies definitions and examples; it does not expose the executable's complete bond accounting. [Published effect documentation](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/effects.log) describes country-scope bond issuance, loan-target redemption, loan-scope creditor changes, and country market purchases/sales. These descriptions do not establish bank-directed funding or payment routing.
+M0 is complete for the pinned single-player baseline. The [final audit](docs/m0-probes.md) answers P01–P12 with measured native outcomes, normal UI evidence and explicit unsupported boundaries. The questions below preserve the original engineering requirements; production adapters and broader campaign acceptance belong to later milestones. Source documentation alone does not expose the executable's complete bond accounting. [Published effect documentation](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/effects.log) describes country-scope bond issuance, loan-target redemption, loan-scope creditor changes, and country market purchases/sales. These descriptions do not establish bank-directed funding or payment routing.
 
-Create a small development-only probe mod before the production adapters. Use two banks, one sovereign, one company, and controlled estate balances. For each operation log before/after cash, estate gold, native debt, count, owner, face, rate, and available capacity; advance time through a coupon boundary and save/reload.
+The completed development-only probe suite runs separately from production adapters. Use two banks, one sovereign, one company, and controlled estate balances. For each operation log before/after cash, estate gold, native debt, count, owner, face, rate, and available capacity; advance time through a coupon boundary and save/reload.
 
 | Probe | Exact question | Completion condition |
 | --- | --- | --- |
 | P01 charter | Does `change_subject_type` preserve the same country, buildings, native claims, and mod variables? Does a zero tribute price work? | Same bank and obligations, no automatic native tribute or siphon path. |
-| P02 GUI | Can a player-root command act on a saved subject bank through the synchronized scripted-GUI command? | Controller validated at execution; wrong-controller command rejected; multiplayer identical. |
-| P03 bond issuance | What argument does `sell_bonds` accept? How is the lot sized? Who supplies proceeds? Is a new loan target exposed? | One actual bond identified, exact cash source measured, no guessed parameter such as `lender =`. |
-| P04 bond holder | Can the issued bond accept `change_loan_owner` and retain its identity? | Coupons and redemption reach the new holder exactly once after reload. |
-| P05 rate | Does `bond_interest` mean a monthly fraction? Does it reprice old bonds? Is the minimum enforced? Does loan-interest mutation affect bonds? | Measured rate/time basis and repricing policy recorded; facility rate respects engine floor. |
+| P02 GUI | Can a player-root command act on a saved subject bank through the native scripted-GUI command? | Controller validated at execution; wrong-controller command rejected; single-player authority validated. |
+| P03 sovereign issuance | Native ownership feasibility was audited; the authorized custom ledger replaces that target. | One bank debit and issuer credit; persistent custom identity and no issuance profit. |
+| P04 sovereign holder | Custom current-holder secondary transfer, coupon/redemption and acquisition basis. | Both Stock Exchange research/building gates, funded same-claim settlement, replay and reload. Native ordinary-claim resale remains blocked. |
+| P05 rate | Custom fixed annual coupons, monthly cent carry and prospective controls. | Existing issues never reprice; native note/circulation semantics retain their own gate. |
 | P06 native credit | Does `give_loan` move both wallets? When do interest, repayment, renewal, default, and bankruptcy mutate balances and fire callbacks? | Adapters never duplicate native transfers; realized interest is distinguishable from principal. |
 | P07 receipt observation | Can actual per-instrument coupon/interest receipts and net company operating receipts be read or reliably observed? | Profit register uses settled earnings, not unexplained treasury deltas or forecasts. |
 | P08 storage | Are country/estate/loan/building references persistent? Which scopes accept variables? Are variable maps iterable and stable? | Reload and destroyed-target tests pass; bounded slots work where maps do not. |
 | P09 goods | Can a bank purchase/sell at its capital and permitted branch custody? Does requested amount equal executed amount? | Stockpile, cash, price, and capital/access semantics measured. |
 | P10 scheduling | Where are native budget and coupon processing relative to monthly country pulses? | One documented cutoff and one owner for pair settlement; no double monthly execution. |
 | P11 native commands | Can native loan takeover, bonds, trade creation, and exploration be dispatched by the subject actor? | Subject, rather than controller, owns the financial action and pays its cost. |
-| P12 CMF/economy integration | Do CMF 2.5.0 registration/load hooks and the economy override preserve native controls, data contexts, templates, and multiplayer authority? | Finance is usable inside the existing Economy view; native tabs/budgets still work; no BFL action-bar element, launcher, or duplicate settlement. |
+| P12 CMF/economy integration | Do CMF 2.5.0 registration/load hooks and the economy override preserve native controls, data contexts, templates, authority? | Finance is usable inside the existing Economy view; native tabs/budgets still work; no BFL action-bar element, launcher, or duplicate settlement. |
 
-If genuine bank-funded native bonds or current-holder payment routing cannot be achieved with exposed scripting, that required integration remains blocked. Do not implement an ordinary loan under a bond label, synthetic duplicate coupons, or an outside-funded bond plus an unexplained bank debit. Document the engine limitation and keep its adapter disabled until resolved. This is a development feasibility gate, not a request for further design approval.
+The native country-creditor bridge failed the installed-build probe. On 15 October 2026 the user authorized custom sovereign bonds. The funded issuer-owned custom ledger replaces the native-bond requirement; no custom operation creates or pays a native bond. Other native credit/goods/project adapters retain their own gates. Secondary selling and buying both require the native Stock Exchange advance and an owned built Stock Exchange.
 
 ## 2. Repository, mod folder, and file responsibilities
 
@@ -344,8 +344,8 @@ Only adapter files call native financial effects. All user, diplomatic, event, a
 | --- | --- | --- |
 | `bfl_native_credit_adapter` | lender, borrower, amount, rate, duration | Native `give_loan`; capture actual loan and wallet changes. No second origination transfer. |
 | `bfl_native_takeover` in credit adapter | buyer, eligible borrower/claim | Native takeover filters, exact price, estate payout, same claim owner change. |
-| `bfl_native_bond_adapter` | issuer, underwriting bank, facility policy | Tested native issue/holder/redemption path; new bond identity and exact funder. |
-| `bfl_native_debt_transfer` in bond adapter | live claim, owner, buyer, price | Funded existing-holder sale; native owner changes; new holder receives later debt payments. |
+| `bfl_bond_issuance` / `bfl_bond_settlement` | issuer, underwriting bank, policy | Funded custom issue and fixed-rate current-holder settlement; native issuance remains unused. |
+| `bfl_bond_trading` | custom issuer/slot/generation, seller, buyer, price | Both Stock Exchange gates, funded existing-holder sale, preserved fixed terms and basis; native ordinary-claim transfer remains separately blocked. |
 | `bfl_native_receipts_adapter` | native claim/company and cutoff | Actual interest/coupon/profit facts already settled by native accounting. Never pay again. |
 | `bfl_native_goods_adapter` | owner, market, good, quantity, custody | Executed purchase/sale cash and physical stock changes. |
 | `bfl_native_trade_adapter` | company, markets, good, merchant, capacity | Native trade operation under company actor; actual capacity/cost/income behavior. |
@@ -498,7 +498,7 @@ Processing sequence inside one mod-owned pass:
 4. Recompute capital/liquidity; fulfill eligible withdrawals; apply crisis transitions; reserve upcoming obligations.
 5. Assess/pay permitted royalty; replace tier modifiers; allocate expense once.
 6. Offset losses; fund holder dividends; consume activity reserves once.
-7. Recompute remaining cash/capital; perform the due native bond draw and other authorized commitments.
+7. Recompute remaining cash/capital; perform the due custom bond draw and other authorized commitments.
 8. Settle accepted resale commands through their own guarded service; refresh snapshots; stamp completion.
 
 GUI commands may settle between scheduled passes, but call the same services and stamps. Company dividends received after the bank's cutoff enter the following bank period. Prefer this documented one-period lag to assuming country iteration order. Never have a GUI refresh advance time, accrue interest, or execute a payout.
@@ -575,7 +575,7 @@ Put definitions in one topologically ordered `bfl_financial_advances.txt`; prere
 
 | Advance | Earliest age | Prerequisites and permission | What the implementation enables |
 | --- | --- | --- | --- |
-| Basic registration, no new advance | Traditions | Native bank prerequisites, valid charter/independent role, selected profile | Demand deposits, rates, branches, sovereign credit/takeover, charter royalty/founder dividends and tested unsecured native bond facility. |
+| Basic registration, no new advance | Traditions | Native bank prerequisites, valid charter/independent role, selected profile | Demand deposits, rates, branches, sovereign credit/takeover, charter royalty/founder dividends and tested unsecured custom sovereign-bond facility. |
 | `bfl_term_deposits` | Renaissance | Common banking foundations | Maturity accounts, renewal and early-exit terms. |
 | `bfl_bank_capital_subscriptions` | Renaissance | Common accounting foundations | Additional bank capital subscriptions and recapitalization issuance. |
 | `bfl_debt_restructuring` | Renaissance | Common native credit foundations | Negotiated sovereign workouts; company workouts additionally require Corporate Credit. |
@@ -692,34 +692,17 @@ The local effect debits the actor by that price, compensates the borrower's bank
 
 Prefer dispatching the native interaction with bank as actor. If subject dispatch is unavailable, implement a minimal copy of the audited operation inside `bfl_native_takeover`, preserving price, estate recipient, filters, and native selection. Its actor binding must be tested; a landed GUI player is not the paying buyer. Do not remove the bond filter and call that bond resale.
 
-### 9.3 Native bond underwriting
+### 9.3 Funded custom sovereign bonds
 
-`bfl_native_bond_adapter.txt` implements issuance, funded allocation, claim capture, holder transfer, coupon observation, redemption, and native refinancing. Freeze the exact call shape after P03; the public effect summary does not establish a lender/amount parameter. Keep uncertain calls out of apparently executable example code.
+`tools/generate_sovereign_bonds.py` generates issuer-owned initialization, issuance, settlement, asset statements, trading, GUI and diplomacy services. See [the authoritative transaction details](docs/sovereign-bonds.md) and [the living plan](docs/coverage.md). A bond is an issuer/slot/generation with current holder, face, basis, fixed annual coupon, due coupons, fractional carry and last accrual. No native loan/bond identity is created.
 
-Preferred integration: an exposed native issuance path directly identifies the underwriting bank and performs one bank debit/sovereign credit. If issuance initially credits the sovereign from an abstract/estate investor, prove a complete source-allocation bridge: identify the provisional investor, reassign the same claim, settle/refund that provisional funding exactly, and debit the bank once. Reassigning a creditor without reconciling the original funding source is not sufficient.
+Either profile may underwrite its live controller. One bank cash debit funds one sovereign credit; the bank books acquisition cost, never issue profit. Manual and scheduled draws share one issue/month stamp and 100-gold cap. Debt/coupon limits use native income and include native debt; reserves, capital, arrears and bounded capacity gate execution. Fixed annual rates apply prospectively. Coupons settle from actual issuer cash and remain due on shortage; principal reaches the current holder once on perpetual-bond redemption.
 
-After issue, require `is_bond = yes`, the intended issuer, a unique new native object, correct face/count/capacity, correct bank basis, and verified current-holder receipts. Capture through a creation target where available. A before/after portfolio difference is acceptable only under an operation guard and proven unique identity; matching amount/rate is insufficient.
+### 9.4 Stock Exchange-gated secondary trading
 
-Use actual native whole lots when arbitrary amounts are unsupported. Compute native issuance capacity and reserve-protected bank funding before each lot; recompute after each issue. Record requested/unfilled facility targets as policy demand, not bank assets or sovereign liabilities. A full registry or failed prerequisite aborts before issuance.
+Seller and buyer each need `stock_exchange_advance` and an owned location with a native `stock_exchange`. A chartered bank uses its live controller's advance/building. Recheck at acceptance, including loss after listing. This gate applies to secondary trading only.
 
-Native bond coupon rules are independent of ordinary loan rates. Prefer issue-specific terms only if exposed and tested. If only issuer-wide `bond_interest` exists, present a sovereign-wide rate policy and its measured effect on outstanding debt. Respect its effective minimum. Do not alter shared native minimum definitions globally merely to obtain a desired headline rate.
-
-### 9.4 Existing-holder resale
-
-`bfl_debt_resale_interactions.txt` creates bounded seller offers with native claim reference, seller, buyer restriction if any, consideration, expiry, revision/generation, basis, and disclosed coupon/accrual treatment. There is no global exchange or duplicate bond object.
-
-Accept service:
-
-1. Confirm same live native claim, seller still current creditor, outstanding status, permitted instrument, transferability, and no incompatible encumbrance.
-2. Confirm buyer role/profile/age/research, sufficient free cash/capital, eligible issuer, and exposure headroom.
-3. Revalidate quote/version and both parties' consent; reserve buyer metadata slot.
-4. Move the agreed consideration from buyer to current seller once; transfer the **same** native creditor relationship through the tested adapter.
-5. Retire seller basis/exposure, recognize net sale gain/loss, and register buyer basis at the paid price. Move security/servicing references and preserve borrower obligations.
-6. Close offer and verify that later coupon/redemption goes to buyer after reload.
-
-First prototype may quote face value; later quotes may incorporate yield, issuer risk, remaining life/redemption expectations, and market demand. A 100 face bought for 98 has basis 98; later principal recovery of 100 contains a 2 realized basis gain if native accounting permits that treatment. Do not recognize the full 100 as profit. Define ex-coupon versus accrued-coupon consideration once to prevent double entitlement around payment dates.
-
-Both profiles may buy/sell eligible sovereign loans/bonds. New corporate debt purchases require Merchant Corporate Credit; inherited incompatible claims may be sold/serviced under legacy rules. Resale transfers no new money to the sovereign and does not reset face, maturity, rate, or default history. Expired or rejected offers do nothing.
+One issuer has one three-month offer for a currently owned whole bond, initially at 98% of face. Bind seller, issuer/slot/generation, price and expiry. A buyer pays the seller, takes the same claim and fixed coupon, and records actual cost as basis. Issuer cash and principal do not rise. Reject invalid holders, stale/expired/replayed offers, self-purchases, arrears and insufficient funding; bank buyers additionally need protected free cash and capital. A bank seller recognizes only consideration minus basis as gain/loss. Coupon/redemption pay the new holder; that holder can subsequently list its acquired bond. Native ordinary-claim resale remains disabled.
 
 ### 9.5 Redemption and restructuring
 
@@ -727,9 +710,9 @@ Native redemption targets the actual bond, pays the current holder, and closes i
 
 `bfl_restructure_native_claim` requires Renaissance Debt Restructuring, creditor/borrower acceptance, and claim eligibility. Merchant company restructuring also requires Reformation Corporate Credit. Offer rate reduction, partial repayment, principal haircut, or tested refinancing. Use loan amount/interest mutations only after their effects on native debt/coupons are measured. Lower principal records a creditor impairment, not another cash debit.
 
-For ordinary maturity extension without a native setter, a tested payoff/replacement-loan chain must leave exactly one live obligation and one net financing change. For bonds, use tested bond-term changes or native redemption/issue refinancing; an ordinary replacement loan does not satisfy the bond requirement. Collateral/security additions remain locked until Absolutism. Taking over the controller's debt does not retire it; forgiveness or repayment is an explicit separate operation.
+For ordinary maturity extension without a native setter, a tested payoff/replacement-loan chain must leave exactly one live obligation and one net financing change. Custom bond restructuring remains gated pending a separate accepted-terms implementation; native ordinary-loan setters cannot mutate custom claims. Collateral/security additions remain locked until Absolutism. Taking over the controller's debt does not retire it; forgiveness or repayment is an explicit separate operation.
 
-**Required integrated fixture:** charter equity → bank-funded native issue → native coupon → funded royalty/dividend → resale → next coupon to buyer → redemption to buyer. Track sovereign, both banks, and any native estate funding source throughout.
+**Required integrated fixture:** charter equity → funded custom issue → fixed annual coupon → funded deposit interest/share dividend → Stock Exchange-gated resale → next coupon to buyer → redemption to buyer. Track sovereign, both banks, and any native estate funding source throughout.
 
 ## 10. Royalty, dividends, and recurring treasury funding
 
@@ -762,7 +745,7 @@ Maintain distribution reserves for actual net earnings in each permitted bucket:
 
 | Bucket | Eligible realized receipts |
 | --- | --- |
-| Sovereign external credit | External ordinary-loan interest and native bond coupons. |
+| Sovereign external credit | External ordinary-loan interest and funded custom sovereign-bond coupons. |
 | Controller credit | Controller interest/coupons, separately labeled internal to the sovereign-bank group. |
 | Debt trading | Net realized native claim sale gains/losses after basis and costs. |
 | Merchant corporate | Permitted company loan interest/fees after Reformation research. |
@@ -974,7 +957,7 @@ Private circulating claims require host authorization. Sovereign tender/note man
 
 `bfl_issue_notes`, `bfl_redeem_notes`, `bfl_update_note_confidence`, and `bfl_set_note_authority` live in `bfl_monetary.txt`. The game wallet is native gold; note issuance is an explicit monetary abstraction whose permitted conversion into spendable gold must be recorded with a matching note liability. It is not evidence of native national denominations or universal FX markets.
 
-Issue only into an identified mod-managed payment/credit operation: increase outstanding face, record issuer liability and recipient/acceptance regime, create only the permitted spendable monetary amount once, then use the native lending/bond adapter when financing a claim. For controller finance the asset remains a genuine native bond. Prevent reuse of the issuance step on command replay.
+Issue only into an identified mod-managed payment/credit operation: increase outstanding face, record issuer liability and recipient/acceptance regime, create only the permitted spendable monetary amount once, then use the relevant separately verified native credit or custom bond service when financing a claim. For controller finance the asset remains a funded custom sovereign bond. Prevent reuse of the issuance step on command replay.
 
 ```text
 new_issue <= authorized_issue_ceiling - outstanding_face
@@ -991,7 +974,7 @@ Store redemption demand and confidence; apply calibrated `add_inflation`/verifie
 
 Store internal annual fractions for deposit, new ordinary lending, discount/liquidity, and facility policy. Adapter conversions expose measured native units. Display annual and native-period equivalents where needed; never pass an annual 5% value directly to a monthly 5% field.
 
-Ordinary loans retain fixed terms until eligible accepted restructuring. Demand deposits can reprice prospectively; term deposits retain contracts. Native bond policy follows P05: if the issuer rate reprices all outstanding debt, disclose the whole-issuer effect and forecast it. Do not advertise a facility-only fixed rate without an engine path that supports it.
+Ordinary loans retain fixed terms until eligible accepted restructuring. Demand deposits can reprice prospectively; term deposits retain contracts. Custom bond rate controls apply only to future issues. Existing issues retain their accepted annual coupon; monthly settlement carries fractional cents and preserves unpaid coupons. Native bond policy is separate.
 
 Domestic transmission is a calibrated gameplay approximation using verified modifiers and explicit actions. A new named modifier has no automatic engine effect unless used by scripts or registered native mechanics. Avoid adding generic income bonuses as a substitute for funded lending or operating profits.
 
@@ -1079,7 +1062,7 @@ onclick = "[GetScriptedGui('bfl_set_royalty_light').Execute(GuiScope.SetRoot(Get
 
 This uses the locally observed `Execute/GuiScope.SetRoot(...).End` pattern. The `bfl_` effect resolves the bank and repeats authority checks internally. Preset commands avoid pretending an unverified slider/amount API exists. For row selections, use the installed `saved_scopes` and generated GUI data-type API after P02, or generate bounded slot-specific commands that resolve the authoritative slot/generation themselves. Never trust an arbitrary client-supplied controller reference.
 
-GUI selection, sorting, pagination, expansion, and hover are presentation state. Read-only widgets and tooltips cannot initialize accounts, settle money, or repeatedly execute effects through animation callbacks. Synchronized commands handle game-state changes; multiplayer testing verifies the command actor and any selected targets.
+GUI selection, sorting, pagination, expansion, and hover are presentation state. Read-only widgets and tooltips cannot initialize accounts, settle money, or repeatedly execute effects through animation callbacks. Synchronized commands handle game-state changes; single-player authority testing verifies the command actor and any selected targets.
 
 ### 17.2 Required in-panel sections
 
@@ -1119,7 +1102,7 @@ l_english:
  bfl_bond_proceeds_explanation: "Bond proceeds provide financing and increase government debt."
 ```
 
-Add titles/descriptions for advances, reform, subject, decisions, events, actions, every disabled reason, variables displayed as statuses, and confirmation/notification strings. Use tested scope/name/number formatters; do not invent GUI methods in localization. Concepts explain cash versus equity, principal versus profit, native bond ownership, internal coupons, encumbrance, guarantees, and servicing-only assets. Link tooltips to native concepts where possible.
+Add titles/descriptions for advances, reform, subject, decisions, events, actions, every disabled reason, variables displayed as statuses, and confirmation/notification strings. Use tested scope/name/number formatters; do not invent GUI methods in localization. Concepts explain cash versus equity, principal versus profit, custom sovereign-bond ownership, internal coupons, encumbrance, guarantees, and servicing-only assets. Link tooltips to native concepts where possible.
 
 Provide clear confirmation for meaningful contractual/fiscal decisions, showing concrete amount, participants, risk, and revised terms. Ordinary view changes need none. In-game confirmation is a player UX choice, not a requirement for the developer to seek additional design approval.
 
@@ -1131,7 +1114,7 @@ Bank score components: expected net yield after funding/operations, borrower/def
 
 Controller AI selects royalty tier against loyalty/capital costs and debt-service prospects, sets bounded payout/facility targets, and authorizes support within fiscal limits. Company AI funds upkeep/buffers, evaluates native routes/construction by margin/capacity, and distributes only eligible earnings. Depositor AI keeps expense buffers and reacts to confidence/exposure.
 
-Review a bounded number of candidates per institution per period, stagger heavier reviews across periods, and retain cooldowns. Avoid all-banks × all-countries or global order-book searches each month. Stable tie-breaking and synchronized randomness preserve deterministic multiplayer behavior.
+Review a bounded number of candidates per institution per period, stagger heavier reviews across periods, and retain cooldowns. Avoid all-banks × all-countries or global order-book searches each month. Stable tie-breaking and synchronized randomness preserve deterministic single-player authority behavior.
 
 ### 17.6 CMF settings, alerts, and action log
 
@@ -1165,7 +1148,7 @@ cmf_set_alert_open_view = {
 cmf_show_alert = { alert = bfl_liquidity_warning }
 ```
 
-Gate repeated show calls by the wrapper's condition/state transition or verified active-alert membership. Clicking opens the existing Economy view, whose finance summary shows the problem; inline expansion is presentation-only. Do not route to a separate finance window or register an action-bar shortcut. Selecting a precise local subsection from an alert requires a separately proven UI callback; opening Economy itself is the source-backed route to validate in P12.
+Gate repeated show calls by the wrapper's condition/state transition or verified active-alert membership. Clicking opens the existing Economy view, whose finance summary shows the problem; inline expansion is presentation-only. Do not route to a separate finance window or register an action-bar shortcut. Selecting a precise local subsection from an alert requires a separately proven UI callback; opening Economy itself is the route validated in P12.
 
 After a successful transaction/policy change, call `cmf_log`, `cmf_log_with_scope_args`, or the installed `cmf_log_decimal_value` from the appropriate actor country scope, with localized BFL action keys. Log charter commitment, accepted debt resale, significant policy changes, and rescue/resolution decisions; avoid flooding the shared log with every accrual or GUI refresh. Log only committed facts and use transaction stamps to prevent duplicates. CMF's log is an inspectable history, not the financial ledger or the authority for native payments.
 
@@ -1253,19 +1236,19 @@ Keep optional runtime model/particle files under `main_menu/gfx/models/bfl/` and
 
 | Stage | Concrete output | Gate to proceed |
 | --- | --- | --- |
-| M0 | Pinned game/CMF 2.5.0 baseline, P01–P12 probes, adapter capability report, native payment observations | Native bonds, subject authority, CMF hooks, and preserved native Economy panel proved. |
+| M0 — complete | Pinned game/CMF 2.5.0 baseline; P01–P12 native audit; 56 engine assertions, 20 numerical checks, 114 account/bond assertions and separate 25-observation normal UI record. | No M0 checks remain. Native capabilities/limits, country-owned record/guard requirements, funded custom bonds, subject authority, CMF hooks and recorded Economy UI are established for single-player. Later production adapters and release campaigns retain their own milestone gates. |
 | M1 | Charter decision/selector, subject/reform, account schema, profile event/migration, embedded Economy finance/Treasury shell, CMM preferences | Same bank tag; investment once; no tribute; one bank; correct authority/profile; no BFL action bar/launcher. |
 | M2 | Native company registration, routes/facilities/budgets, income classification | Real operating income and direct-overlord streams identified. |
-| M3 | Ordinary sovereign credit/takeover, native bonds/facility/resale/redemption, researched restructuring | Full native debt chain and both profiles pass. |
+| M3 | Ordinary sovereign credit/takeover, custom sovereign bonds/facility/Stock Exchange-gated resale/redemption, researched restructuring | Native ordinary debt and custom sovereign bonds pass their respective cash, identity and permission checks in both profiles. |
 | M4 | Royalty/loyalty, activity reserves/founder dividends, deposits/withdrawals | All three funding channels conserve cash and protect obligations. |
 | M5 | Subscriptions/transfers/dilution/company equity | Unit totals, ownership entitlements, authority separation pass. |
 | M6 | Funded goods/custody/shipments, later receipts/forwards/margin | Physical stock, backing, settlement, and gates pass. |
 | M7 | Discovery operators/commenda/exploration, later company conversion | No discovery-only profit; actual surplus/loss settlement. |
 | M8 | Rate UI, bills/notes, liquidity/clearing/backstops | Correct units, backing, retirement, solvency distinctions. |
 | M9 | Full resolution/contagion/lifecycle cleanup | Losses/recoveries once, debt ownership survives transfer, safe disappearance. |
-| M10 | Full art/FX/localization, AI, compatibility, multiplayer/campaign/balance results | Complete feature matrix passes on identified build. |
+| M10 | Full art/FX/localization, AI, compatibility, campaign/balance results | Complete feature matrix passes on identified build. |
 
-Build player GUI and AI alongside each feature. Implement shared resolution guards and cleanup early; M9 completes the full system. The minimum integrated prototype includes an independent bank, a decision-converted bank, both profiles, all three treasury channels, and a native bond sold between two banks. Later research is tested in appropriate-age fixtures, not granted in normal gameplay.
+Build player GUI and AI alongside each feature. Implement shared resolution guards and cleanup early; M9 completes the full system. The minimum integrated prototype includes an independent bank, a decision-converted bank, both profiles, funded deposit interest/share dividends and a custom sovereign bond traded by exchange-qualified counterparties. Later research is tested in appropriate-age fixtures, not granted in normal gameplay.
 
 ### 19.2 Offline build checks
 
@@ -1317,7 +1300,7 @@ Build release staging from an explicit allowlist of `.metadata`, runtime stage f
 | Interbank/guarantee/recapitalization | Liquidity versus equity distinct; actual public cost; coverage and collateral limits. |
 | Bankruptcy/annexation/last building/overlord change | Native cancellation reconciled once; safe references; claims preserved or resolved. |
 | Monthly repeat/callback re-entry/load midway | Period and generation guards prevent duplicate settlement. |
-| Multiplayer and hotjoin/reload | Same command actor/permissions/results; deterministic finance/AI. |
+| Multiplayer — retired | Unsupported by user decision; no multiplayer or hotjoin acceptance remains. Single-player reload/authority checks remain in the relevant product campaigns. |
 | Graphics/localization/FX | No missing texture/key, correct sizes/crops, legible layouts, animation never settles money. |
 
 Use documented EU5 debug mode and generated scripting/GUI docs for the installed build. The [wiki modding overview](https://eu5.paradoxwikis.com/Modding) is a reference entry point, but direct access returned 401 during this audit; exact console commands and dump locations must be checked locally. Retain fresh script/error logs and before/after fixtures under `tests/results`, not inside the Workshop payload.
@@ -1332,7 +1315,7 @@ Expected compatibility touchpoints: native and CMF on-actions, charter subject e
 
 List `in_game/gui/economy_lateralview.gui` as a required override, with baseline native SHA-256 `675763819DE9C0F368761DEC5D01541553C78D9A9E25EA68135A5667BB2D621D`, the inserted finance section, preserved native definitions, and expected CMF 2.5.0 coverage. Other mods replacing this same file require a combined patch. CMF dependency alone does not resolve that collision. Carry any necessary file-scoped constants and ensure other native views still resolve the shared economy templates.
 
-For each game or CMF update, compare both pinned source sets, regenerate docs, re-run P01–P12, verify overrides and economy extraction coverage, then repeat affected fixtures and campaign/multiplayer checks. Update `supported_game_version` and the supported CMF matrix only after passing. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
+For each game or CMF update, compare both pinned source sets, regenerate docs, re-run P01–P12, verify overrides and economy extraction coverage, then repeat affected fixtures and campaign checks. Update `supported_game_version` and the supported CMF matrix only after passing. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
 
 ### 19.5 Workshop staging and uploader
 
@@ -1377,8 +1360,8 @@ Paths in this table are relative to the proposed `mod/bfl/` tree; short filename
 | Capital/reserves and separate treasury | transaction core, schema/slots, capital/liquidity values | 3–5 |
 | Monthly royalty and political costs | treasury payments/policy, financial static modifiers, Treasury GUI | 10 |
 | Monthly activity dividends and loss carryforward | receipt adapter, treasury payments, equity, profit registers | 4, 10, 13 |
-| Recurring low-interest native bond funding | native bond adapter, facility policy/commands, account scheduler | 9, 10 |
-| Native bond and bank-held debt resale/redemption | resale interactions, bond adapter, claim metadata | 9 |
+| Recurring funded custom sovereign bonds | issuer-owned ledger, facility policy/commands, account scheduler | 9, 10 |
+| Custom sovereign bond resale/redemption | Stock Exchange-gated offers, current-holder settlement, cost basis; native ordinary resale remains gated | 9 |
 | Demand/term/estate deposits | deposits effects/interactions, generated slots, account commands | 8 |
 | Foreign branches | branches effects, native office, access/security contracts | 8 |
 | Common sovereign lending and native takeover | credit adapter/interactions, exact native price/filters | 9 |
@@ -1443,8 +1426,8 @@ CMF paths in this table are relative to the installed Workshop framework root fr
 - [Community Mod Framework](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework): required dependency and public integration entry point. [Metadata at audited GitHub commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/.metadata/metadata.json) identifies the development package and explains why it is not the installed 2.5.0 release baseline.
 - [CMF vanilla-widget override documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Improved-Vanilla-Top-Level-Widget-Overrides) and [extraction tool at audited commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/tools/cmf_extract_vanilla_types.py): definition extraction and file-scoped constants; the inspected coverage omits economy. BFL's explicit replacement/definition ownership is specified in section 17.
 - [CMF basic registration](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Basic-Setup), [CMM setup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/CMM-Basic-Setup), and [on-action documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/On-Action-Hooks): public integration conventions, checked against installed 2.5.0 sources; older post-lobby hook names must not override local deprecation comments.
-- [CMF custom alerts](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Custom-Alerts), [action log](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Mod-Action-Log), and [dependency popup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup): framework notification/history/dependency services; exact release-matched calls and GUI template remain part of P12 verification.
+- [CMF custom alerts](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Custom-Alerts), [action log](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Mod-Action-Log), and [dependency popup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup): framework notification/history/dependency services; exact release-matched calls and GUI templates are covered by the completed P12 audit; release compatibility remains M10.
 - [Graphical assets](https://github.com/Europa-Universalis-5-Modding-Co-op/graphical-assets): template reference with no promised banking pack; inspect actual future assets/licenses individually.
 - [pdx-workshop-manager](https://github.com/kaiser-chris/pdx-workshop-manager): publishing workflow reference; installed sample informs the proposed configuration schema.
 
-Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned game/CMF combination, and both player roles pass persistence, multiplayer, performance, and campaign tests. Banking and finance management must work inside the existing Economy panel with native controls preserved and no added BFL action bar or separate finance launcher. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.
+Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned game/CMF combination, and both player roles pass persistence, performance, and campaign tests. Banking and finance management must work inside the existing Economy panel with native controls preserved and no added BFL action bar or separate finance launcher. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.

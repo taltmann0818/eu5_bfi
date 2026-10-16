@@ -1,0 +1,23 @@
+# Capture only: native game commands disable localization, including debug_log.
+# PHASE is expanded by the disposable overlay. A delayed event prints these snapshots.
+c:FLO = {
+    if = { limit = { gold = 10000 c:BRD = { gold = 880 is_subject_type = state_bank } }
+        set_variable = { name = bfi_ui_phase_$PHASE$_cash value = 0 } }
+    else_if = { limit = { gold = 9500 c:BRD = { gold = 1380 is_subject_type = bfl_chartered_bank } }
+        set_variable = { name = bfi_ui_phase_$PHASE$_cash value = 1 } }
+    else = { set_variable = { name = bfi_ui_phase_$PHASE$_cash value = 2 } }
+    set_variable = { name = bfi_ui_phase_$PHASE$_reform value = 0 }
+    if = { limit = { has_reform = government_reform:bfl_state_chartered_bank }
+        set_variable = { name = bfi_ui_phase_$PHASE$_reform value = 1 } }
+    set_variable = { name = bfi_ui_phase_$PHASE$_profile value = 0 }
+    set_variable = { name = bfi_ui_phase_$PHASE$_facility value = 0 }
+    set_variable = { name = bfi_ui_phase_$PHASE$_identity value = 0 }
+}
+c:BRD = {
+    if = { limit = { var:bfl_profile ?= 1 } c:FLO = { set_variable = { name = bfi_ui_phase_$PHASE$_profile value = 1 } } }
+    else_if = { limit = { var:bfl_profile ?= 2 } c:FLO = { set_variable = { name = bfi_ui_phase_$PHASE$_profile value = 2 } } }
+    if = { limit = { var:bfl_facility_mode ?= 1 } c:FLO = { set_variable = { name = bfi_ui_phase_$PHASE$_facility value = 1 } } }
+    else_if = { limit = { var:bfl_facility_mode ?= 2 } c:FLO = { set_variable = { name = bfi_ui_phase_$PHASE$_facility value = 2 } } }
+    if = { limit = { var:bfi_ui_identity = 813 capital = var:bfi_ui_capital capital = { total_building_levels = prev.var:bfi_ui_buildings } any_lent_loan = { borrower = c:PRZ loan_amount = 120 } }
+        c:FLO = { set_variable = { name = bfi_ui_phase_$PHASE$_identity value = 1 } } }
+}

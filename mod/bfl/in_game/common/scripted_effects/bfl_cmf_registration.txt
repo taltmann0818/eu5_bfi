@@ -5,7 +5,13 @@ cmm_register_bool_setting = { mod_id = bfl_banking_finance_companies setting_id 
 }
 
     bfl_refresh_alerts = {
-        if = { limit = { is_ai = no bfl_has_management = yes has_global_variable = cmf_active }
+        if = { limit = { has_variable = bfl_alert_active OR = {
+            NOT = { bfl_has_management = yes } NOT = { bfl_finance_notifications_enabled = yes }
+        } }
+            cmf_remove_alert = { alert = bfl_liquidity_warning }
+            remove_variable = bfl_alert_active
+        }
+        if = { limit = { is_ai = no bfl_has_management = yes has_global_variable = cmf_active bfl_finance_notifications_enabled = yes }
             bfl_resolve_command_bank = yes
             if = { limit = { scope:bfl_bank = { var:bfl_state >= 2 } NOT = { has_variable = bfl_alert_active } }
                 cmf_set_alert_open_view = { alert = bfl_liquidity_warning view = economy }

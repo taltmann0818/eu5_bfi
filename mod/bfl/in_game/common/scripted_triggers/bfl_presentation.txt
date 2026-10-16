@@ -1,0 +1,12 @@
+﻿bfl_finance_notifications_enabled = {
+    trigger_if = { limit = { has_variable_map = cmm }
+        NOT = { "variable_map(cmm|flag:bfl_banking_finance_companies__finance_notifications)" ?= 0 }
+    }
+    trigger_else = { always = yes }
+}
+bfl_expanded_details_enabled = {
+    trigger_if = { limit = { has_variable_map = cmm }
+        "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" ?= 1
+    }
+    trigger_else = { always = no }
+}

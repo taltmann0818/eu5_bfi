@@ -3,7 +3,8 @@ param(
     [string]$Cmf = $env:EU5_CMF_ROOT,
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
-    [switch]$Graphics
+    [switch]$Graphics,
+    [ValidateSet('accounts', 'm0')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -21,7 +22,8 @@ try {
     $runRoot = Join-Path $repo "dist/campaign-$runId"
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
-    python tools/campaign_suite.py prepare --userdir $userDir --token $runId
+    $suiteScript = if ($Suite -eq 'm0') { 'tools/m0_probe_suite.py' } else { 'tools/campaign_suite.py' }
+    python $suiteScript prepare --userdir $userDir --token $runId
     if ($LASTEXITCODE -ne 0) { throw 'Fixture preparation failed' }
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
@@ -42,11 +44,9 @@ try {
     $debugPath = Join-Path $userDir 'logs/debug.log'
     function Invoke-BfiEngine([string[]]$LaunchArguments, [string]$StopMarker) {
         # Preserve old logs before launch so a retry cannot see a prior completion marker.
-        foreach ($logName in @('debug.log','error.log')) {
-            $oldLog = Join-Path $userDir "logs/$logName"
-            if (Test-Path -LiteralPath $oldLog) {
-                Move-Item -LiteralPath $oldLog -Destination (Join-Path $runRoot ("previous-$([guid]::NewGuid().ToString('N'))-$logName"))
-            }
+        foreach ($oldLog in (Get-ChildItem -LiteralPath (Join-Path $userDir 'logs') -File -ErrorAction SilentlyContinue |
+                Where-Object { $_.Name -match '^(debug|error)(\.\d+)?\.log$' })) {
+            Move-Item -LiteralPath $oldLog.FullName -Destination (Join-Path $runRoot ("previous-$([guid]::NewGuid().ToString('N'))-$($oldLog.Name)"))
         }
         $proc = Start-Process -FilePath $exe -ArgumentList $LaunchArguments -WorkingDirectory (Join-Path $Game 'binaries') -WindowStyle Hidden -PassThru
         Write-Output "EUV campaign process $($proc.Id); isolated user directory: $userDir"
@@ -70,16 +70,17 @@ try {
     $priorLog = Join-Path $runRoot 'campaign-debug.log'
     $priorErrors = Join-Path $runRoot 'campaign-errors.log'
     Copy-Item -LiteralPath $debugPath -Destination $priorLog
-    Copy-Item -LiteralPath (Join-Path $userDir 'logs/error.log') -Destination $priorErrors
+    python -c "import sys;sys.path.insert(0,'tools');from pathlib import Path;from campaign_suite import engine_errors;Path(sys.argv[2]).write_text(engine_errors(sys.argv[1]),encoding='utf-8')" (Join-Path $userDir 'logs') $priorErrors
+    if ($LASTEXITCODE -ne 0) { throw 'Could not preserve engine diagnostics' }
     $save = Get-ChildItem -LiteralPath (Join-Path $userDir 'save games') -Filter '*.eu5' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 1
     if (-not $save) { throw 'Campaign produced no autosave for the persistence checks.' }
-    python tools/campaign_suite.py prepare-reload --userdir $userDir
+    python $suiteScript prepare-reload --userdir $userDir
     if ($LASTEXITCODE -ne 0) { throw 'Reload fixture preparation failed' }
     # EUV resolves this option under the isolated 'save games' directory and appends .eu5.
     $reloadArgs = @('-debug_mode', "-loadsavehandsoff=$($save.BaseName)", '-timed_handsoff=3', "-userdir=`"$userDir`"")
     if (-not $Graphics) { $reloadArgs += '-nographics' }
     Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|"
-    python tools/campaign_suite.py report --userdir $userDir --output $outPath --prior-log $priorLog --prior-errors $priorErrors
+    python $suiteScript report --userdir $userDir --output $outPath --prior-log $priorLog --prior-errors $priorErrors
     if ($LASTEXITCODE -ne 0) { throw 'Campaign assertions failed or execution was incomplete; see campaign.json.' }
     Write-Output "PASS: real Florence campaign; report $outPath"
 } finally { Pop-Location }

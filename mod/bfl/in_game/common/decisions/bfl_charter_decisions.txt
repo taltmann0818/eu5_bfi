@@ -12,10 +12,8 @@
         name = bfl_establish_chartered_bank.a
         ai_chance = { value = 100 }
         effect = {
-            if = { limit = { bfl_can_begin_charter = yes }
-                bfl_prepare_charter_selector = yes
-                trigger_event_non_silently = bfl_finance.110
-            }
+            custom_tooltip = bfl_charter_begin_tip
+            hidden_effect = { trigger_event_silently = bfl_finance.109 }
         }
     }
 }

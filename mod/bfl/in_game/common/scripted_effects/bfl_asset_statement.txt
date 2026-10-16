@@ -1033,6 +1033,7 @@ set_variable = { name = bfl_asset_commodities value = 0 }
 set_variable = { name = bfl_asset_investments value = 0 }
 set_variable = { name = bfl_asset_rows value = 0 }
 set_variable = { name = bfl_custom_credit_value value = 0 }
+set_variable = { name = bfl_custom_bond_count value = 0 }
 remove_variable = bfl_asset_01_party
 set_variable = { name = bfl_asset_01_bonds value = 0 }
 set_variable = { name = bfl_asset_01_unsecured value = 0 }
@@ -1928,4 +1929,5 @@ if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind >= 3 exists = var
                 change_variable = { name = bfl_asset_secured add = var:bfl_asset_amount }
                 change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
             bfl_allocate_asset_row = yes }
+bfl_add_sovereign_bond_assets = yes
 }
