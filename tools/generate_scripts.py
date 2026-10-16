@@ -815,25 +815,6 @@ def treasury_and_resolution():
         }
     }
     ''')
-    common('scripted_effects','company_operations','''
-    bfl_register_company = {
-        if = { limit = { bfl_is_company = yes NOT = { has_variable = bfl_company_schema } }
-            set_variable = { name = bfl_company_schema value = 1 }
-            set_variable = { name = bfl_company_buffer value = 100 }
-            set_variable = { name = bfl_company_mandate value = 0 }
-            set_variable = { name = bfl_company_verified_profit value = 0 }
-            set_variable = { name = bfl_company_last_period value = 0 }
-        }
-    }
-    # Native operating identity, trade routes and native income hooks remain authoritative.
-    bfl_process_company = {
-        bfl_register_company = yes
-        if = { limit = { bfl_period > var:bfl_company_last_period }
-            # No unexplained treasury delta is treated as company earnings.
-            set_variable = { name = bfl_company_last_period value = bfl_period }
-        }
-    }
-    ''')
 
 
 def hooks_and_commands():
@@ -1072,7 +1053,8 @@ def gui_and_localization():
     generate_interface(common, effect, loc, write, TUNE, ADV, INST)
     localization='l_english:\n'
     for key,value in sorted(LOC.items()):
-        localization += f' {key}: "{value.replace(chr(34),chr(39))}"\n'
+        escaped = value.replace(chr(34), chr(39)).replace('\n', '\\n')
+        localization += f' {key}: "{escaped}"\n'
     write('main_menu/localization/english/bfl_finance_l_english.yml',localization)
 
 

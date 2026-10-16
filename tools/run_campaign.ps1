@@ -41,7 +41,7 @@ try {
         orderedListMods = $mods; DLC = @()
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
-    if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=38', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }
     $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
     New-Item -ItemType Directory -Path $outPath -Force | Out-Null

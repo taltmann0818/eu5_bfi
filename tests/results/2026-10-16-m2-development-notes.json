@@ -1,0 +1,106 @@
+{
+  "scope": "Rejected development attempts; none is M2 completion evidence. The first aborted parser experiment produced no report. A separate UI experiment exposed diplomatic-capacity charges and was replaced with internal generic actions.",
+  "attempts": [
+    {
+      "attempt": "local-m2-development2",
+      "runtime_sha256": "d267e692f7e6179999c2e408049dc2a9bf42642228960095c482440856591dfb",
+      "passed": false,
+      "assertions_passed": 12,
+      "assertions_total": 19,
+      "errors": [
+        "Failed: migration_and_initialization_no_cash_grant",
+        "Failed: native_trade_created_by_company",
+        "Failed: ordinary_exploration_preparation_and_progress",
+        "Failed: natural_exploration_terminal_outcome",
+        "Failed: reload_company_identity_owner_and_policy",
+        "Failed: reload_company_capital_not_income",
+        "Failed: reload_project_metadata_and_terminal_outcome",
+        "  Error: Invalid right side during comparison 'var:bfi_persisted_owner'",
+        "  Error: Invalid right side during comparison 'var:bfi_persisted_funding'",
+        "  Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set",
+        "  Error: Event target link 'var:bfl_company_project_area' returned an unset scope",
+        "  Error: Invalid left side during comparison 'var:bfl_company_project_area'",
+        "BFI script runtime error: Error: Invalid right side during comparison 'var:bfi_persisted_owner'   Script location: common/scripted_effects/bfi_campaign_checks.txt:46 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Invalid right side during comparison 'var:bfi_persisted_funding'   Script location: common/scripted_effects/bfi_campaign_checks.txt:47 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set   Script location: common/scripted_effects/bfi_campaign_checks.txt:49 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Event target link 'var:bfl_company_project_area' returned an unset scope   Script location: common/scripted_effects/bfi_campaign_checks.txt:49 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Invalid left side during comparison 'var:bfl_company_project_area'   Script location: common/scripted_effects/bfi_campaign_checks.txt:49 common/on_action/zz_bfi_campaign_checks.txt:5"
+      ]
+    },
+    {
+      "attempt": "local-m2-development3",
+      "runtime_sha256": "e8de337eed44419ea17660fda8d14d3a540d6a3789de3782e37386167b7f450b",
+      "passed": false,
+      "assertions_passed": 15,
+      "assertions_total": 19,
+      "errors": [
+        "Failed: native_trade_created_by_company",
+        "Failed: ordinary_exploration_preparation_and_progress",
+        "Failed: natural_exploration_terminal_outcome",
+        "Failed: reload_project_metadata_and_terminal_outcome",
+        "  Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set",
+        "  Error: Event target link 'var:bfl_company_project_area' returned an unset scope",
+        "  Error: Invalid left side during comparison 'var:bfl_company_project_area'",
+        "BFI script runtime error: Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Event target link 'var:bfl_company_project_area' returned an unset scope   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Invalid left side during comparison 'var:bfl_company_project_area'   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5"
+      ]
+    },
+    {
+      "attempt": "local-m2-development4",
+      "runtime_sha256": "e6868c53144d4d0982e2629c5d5b71dc2da5690118ba5e4eb738d038d614bba4",
+      "passed": false,
+      "assertions_passed": 23,
+      "assertions_total": 27,
+      "errors": [
+        "Failed: company_deposit_funded_with_matching_bank_liability",
+        "Failed: ordinary_exploration_preparation_and_progress",
+        "Failed: natural_exploration_terminal_outcome",
+        "Failed: reload_project_metadata_and_terminal_outcome",
+        "  Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set",
+        "  Error: Event target link 'var:bfl_company_project_area' returned an unset scope",
+        "  Error: Invalid left side during comparison 'var:bfl_company_project_area'",
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:166",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: available_merchant_capacity trigger [ country ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:197 common/on_action/zz_bfi_campaign_checks.txt:28",
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:166",
+        "BFI script runtime error: Error: Failed to fetch variable for 'bfl_company_project_area' due to not being set   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Event target link 'var:bfl_company_project_area' returned an unset scope   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5",
+        "BFI script runtime error: Error: Invalid left side during comparison 'var:bfl_company_project_area'   Script location: common/scripted_effects/bfi_campaign_checks.txt:53 common/on_action/zz_bfi_campaign_checks.txt:5"
+      ]
+    },
+    {
+      "attempt": "local-m2-development5",
+      "runtime_sha256": "c045ab1b7c0ed6f936a5d971b6da1e3e0e8f77207d73fdc6b40ffaf6f4348035",
+      "passed": false,
+      "assertions_passed": 25,
+      "assertions_total": 27,
+      "errors": [
+        "Failed: natural_exploration_terminal_outcome",
+        "Failed: reload_project_metadata_and_terminal_outcome",
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:170",
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:170"
+      ]
+    },
+    {
+      "attempt": "local-m2-final",
+      "runtime_sha256": "1db00659f5d2ceb7b56df2e6c695ee3a9a6854acb42e70997601161e3203a7d6",
+      "passed": false,
+      "assertions_passed": 27,
+      "assertions_total": 27,
+      "errors": [
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:218",
+        "BFI script runtime error: Error: cancel_trade effect [ Expected opening bracket ]   Script location: common/scripted_effects/bfi_campaign_checks.txt:218"
+      ]
+    }
+  ]
+}

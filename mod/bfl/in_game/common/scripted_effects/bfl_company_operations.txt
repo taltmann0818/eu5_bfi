@@ -47,8 +47,14 @@ if = { limit = { NOT = { has_variable = bfl_company_last_trade } }
             set_variable = { name = bfl_company_last_trade value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_company_statement_count } }
             set_variable = { name = bfl_company_statement_count value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_income_period } }
+            set_variable = { name = bfl_company_income_period value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_company_ownership_initialized } }
-            set_variable = { name = bfl_company_owner value = overlord }
+            # Ordinary landed-company ownership does not grant either bank profile
+            # an unresearched/disabled M5 company-equity acquisition.
+            if = { limit = { overlord = { country_type = location } }
+                set_variable = { name = bfl_company_owner value = overlord }
+            }
             set_variable = { name = bfl_company_opening_equity value = gold }
             set_variable = bfl_company_ownership_initialized
         }
@@ -61,11 +67,29 @@ if = { limit = { bfl_company_authority = yes
         scope:bfl_company_actor.var:bfl_company_requested_mandate <= 2 }
         bfl_register_company = yes
         set_variable = { name = bfl_company_mandate value = scope:bfl_company_actor.var:bfl_company_requested_mandate }
+        bfl_company_refresh_capacity = yes
+    }
+}
+bfl_company_refresh_capacity = {
+if = { limit = { var:bfl_company_mandate = 2 NOT = { has_country_modifier = bfl_company_exploration_capacity } }
+    # Capacity only: crew must be provided from an actual sailor pool.
+    add_country_modifier = { modifier = bfl_company_exploration_capacity mode = add_and_extend }
+}
+else_if = { limit = { var:bfl_company_mandate != 2 has_country_modifier = bfl_company_exploration_capacity }
+    remove_country_modifier = bfl_company_exploration_capacity
+}
+}
+bfl_company_provide_crew = {
+if = { limit = { bfl_company_authority = yes
+        var:bfl_company_mandate = 2 max_sailors >= 0.25 sailors <= { value = max_sailors subtract = 0.25 }
+        scope:bfl_company_actor = { sailors >= 0.25 } }
+        scope:bfl_company_actor = { add_sailors = -0.25 }
+        add_sailors = 0.25
     }
 }
 bfl_company_capitalize = {
 if = { limit = { bfl_company_authority = yes
-        scope:bfl_company_actor = { gold >= 100 } }
+        scope:bfl_company_actor = { country_type = location gold >= 100 } }
         bfl_register_company = yes save_scope_as = bfl_company
         scope:bfl_company_actor = { add_gold = -100 }
         add_gold = 100 change_variable = { name = bfl_company_funding add = 100 }
@@ -83,16 +107,32 @@ save_scope_as = bfl_company
 }
 bfl_execute_company_exploration = {
 if = { limit = { bfl_company_exploration_valid = yes }
-        set_variable = { name = bfl_company_project_area value = scope:target }
-        set_variable = { name = bfl_company_project_actor value = scope:bfl_company_actor }
-        set_variable = { name = bfl_company_project_explorer value = scope:character }
-        set_variable = { name = bfl_company_cash_before value = gold }
-        start_exploration = { area = scope:target location = scope:launch_location
-            character = scope:character price = price:start_exploration_sea price_modifier = 1 }
-        if = { limit = { num_explorations_including_in_construction > 0 }
-            set_variable = { name = bfl_company_project_state value = 1 }
-            set_variable = { name = bfl_company_project_cost value = { value = var:bfl_company_cash_before subtract = gold } }
+        save_scope_as = bfl_company
+        # Native prices include resources and inflation. Escrow every protected
+        # gold unit with the live controller for this atomic effect, leaving only
+        # the authorized venture budget available to native can_pay_price.
+        set_variable = { name = bfl_company_price_escrow value = { value = gold
+            subtract = { value = bfl_company_available max = var:bfl_company_venture_budget } } }
+        add_gold = { value = var:bfl_company_price_escrow multiply = -1 }
+        scope:bfl_company_actor = { add_gold = scope:bfl_company.var:bfl_company_price_escrow }
+        if = { limit = { can_pay_price = price:start_exploration_sea }
+            set_variable = { name = bfl_company_cash_before value = gold }
+            set_variable = { name = bfl_company_explorations_before value = num_explorations_including_in_construction }
+            start_exploration = { area = scope:target location = scope:launch_location
+                character = scope:character price = price:start_exploration_sea price_modifier = 1 }
+            if = { limit = { num_explorations_including_in_construction > var:bfl_company_explorations_before }
+                set_variable = { name = bfl_company_project_area value = scope:target }
+                set_variable = { name = bfl_company_project_actor value = scope:bfl_company_actor }
+                set_variable = { name = bfl_company_project_explorer value = scope:character }
+                set_variable = { name = bfl_company_project_state value = 1 }
+                set_variable = { name = bfl_company_project_cost value = { value = var:bfl_company_cash_before subtract = gold } }
+            }
         }
+        # Both success and refusal return the exact escrow. Controller net cash
+        # is zero; only the native company expedition pays its native price.
+        scope:bfl_company_actor = { add_gold = { value = scope:bfl_company.var:bfl_company_price_escrow multiply = -1 } }
+        add_gold = var:bfl_company_price_escrow
+        set_variable = { name = bfl_company_price_escrow value = 0 }
     }
 }
 bfl_company_project_success = {
@@ -132,6 +172,8 @@ save_scope_as = bfl_operating_company
         }
 }
 bfl_settle_company_income = {
+if = { limit = { bfl_is_company = yes bfl_period > var:bfl_company_income_period }
+set_variable = { name = bfl_company_income_period value = bfl_period }
 # One native budget cutoff per period. HQ/direct-overlord income is NEVER
 # copied as a new bank receipt. Retained trade is bounded by executed
 # route profit, native trade income and the net budget after native costs.
@@ -165,9 +207,11 @@ if = { limit = { var:bfl_company_mandate > 0
     }
 }
 }
+}
 bfl_process_company = {
 if = { limit = { bfl_is_company = yes }
         bfl_register_company = yes
+        bfl_company_refresh_capacity = yes
         if = { limit = { bfl_period > var:bfl_company_last_period }
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
             set_variable = { name = bfl_company_last_period value = bfl_period }

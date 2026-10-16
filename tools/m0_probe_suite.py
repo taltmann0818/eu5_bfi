@@ -238,12 +238,12 @@ def fixture(token, fingerprint):
     finish += check('P01_reconciled_charter_survives_year', 'bfl_has_valid_controller = yes capital = var:bfi_old_capital var:bfi_identity_sentinel = 813')
     finish += check('P08_native_loan_reference_survives_year', 'exists = var:bfi_native_loan var:bfi_native_loan = { owner = c:BRD borrower = c:PRZ loan_amount = 120 }')
     finish += check('P08_building_estate_country_references_survive_year', 'exists = var:bfi_building c:FLO = { exists = var:bfi_estate } exists = var:bfl_controller')
-    finish += check('P11_native_company_registered', 'c:FLO = { exists = var:bfi_company var:bfi_company = { country_type = building is_subject_type = trade_company bfl_is_company = yes var:bfl_company_schema = 1 } }')
+    finish += check('P11_native_company_registered', 'c:FLO = { exists = var:bfi_company var:bfi_company = { country_type = building is_subject_type = trade_company bfl_is_company = yes var:bfl_company_schema = 2 } }')
     finish += check('P11_company_trade_actor', 'c:FLO = { var:bfi_company ?= { any_trade = { owner = prev } } }')
     finish += check('P11_company_exploration_actor', 'c:FLO = { var:bfi_company ?= { var:bfi_exploration_created = 1 } }')
     finish += check('P07_company_hq_landowner_and_overlord_are_distinct', 'c:FLO = { var:bfi_company ?= { overlord = c:FLO var:bfi_hq ?= { owner = prev location.owner = c:GEN } } }')
     finish += check('P11_native_success_callback_actor_and_area', 'var:bfi_project_success ?= 1 var:bfi_success_operator ?= c:FLO.var:bfi_company var:bfi_success_area ?= area:canadian_atlantic_coast_area exists = var:bfi_success_actor')
-    finish += check('P07_discovery_does_not_invent_verified_company_profit', 'c:FLO = { var:bfi_company ?= { var:bfl_company_verified_profit = 0 NOT = { bfl_is_bank = yes } } }')
+    finish += check('P07_discovery_does_not_invent_verified_company_profit', 'c:FLO = { var:bfi_company ?= { var:bfl_company_mandate = 0 var:bfl_company_dividend = 0 NOT = { bfl_is_bank = yes } } }')
     finish += check('P06_automatic_maturity_renewal_observed', 'c:GEN = { var:bfi_renewed >= 1 }')
     finish += check('P06_bankruptcy_callback_observed', 'c:SIE = { var:bfi_bankruptcy >= 1 }')
     finish += measure('P06.final.renewed_callbacks', 'c:GEN.var:bfi_renewed')
@@ -282,7 +282,7 @@ def reload_fixture(token, fingerprint):
         'P08_reload_variable_map': 'variable_map_size = { name = bfi_m0_map value = 2 } "variable_map(bfi_m0_map|c:VEN)" = 7 "variable_map(bfi_m0_map|goods:wheat)" = c:FLO',
         'P12_reload_CMM_preference': 'c:FLO = { "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 1 }',
         'P09_reload_country_owned_custody': 'var:bfi_custody_quantity = 2 var:bfi_custody_encumbered = 2 "variable_map(bfi_custody|goods:wheat)" = 2',
-        'P11_reload_native_company': 'c:FLO = { exists = var:bfi_company var:bfi_company = { is_subject_type = trade_company var:bfl_company_schema = 1 } }',
+        'P11_reload_native_company': 'c:FLO = { exists = var:bfi_company var:bfi_company = { is_subject_type = trade_company var:bfl_company_schema = 2 } }',
         'P11_reload_project_callback_metadata': 'var:bfi_project_success ?= 1 var:bfi_success_operator ?= c:FLO.var:bfi_company var:bfi_success_area ?= area:canadian_atlantic_coast_area exists = var:bfi_success_actor',
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'

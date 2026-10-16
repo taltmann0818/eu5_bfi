@@ -24,6 +24,34 @@ The bank owns the once-per-period sequence: reconcile roles/assets → native ne
 
 Operating-expense history is a separate, bounded display ledger: `bfl_expense_history_count` (0–12), `bfl_expense_history_period` (last recorded accounting period) and `bfl_expense_history_01` through `_12` (oldest to latest assessed costs). The monthly expense service appends its actual `bfl_expense_due` once per period, not the amount of cash paid towards old arrears. Initialization on old saves creates an empty history and never resets an existing one. Only recorded samples and their connecting line segments are visible; hovering the graph is read-only.
 
-Native bank income uses the native `monthly_balance` budget result, sampled once per month; no unexplained treasury delta or second interest transfer is used. Company-specific receipt adapters remain disabled pending M2 implementation, following the completed P07 audit. Monthly net income includes custom fees and deposit income, less funding costs and fixed operating expenses. Carried losses are offset before dividends. Monthly earnings registers close after settlement, leaving undistributed profit in equity rather than next month's payout base. Expense arrears are liabilities and are charged to profit only when incurred. Native bond adapters remain disabled; funded custom sovereign bonds use their own issuer-owned ledger and never create or settle a native bond.
+Native bank income uses the native `monthly_balance` budget result, sampled once per month; no unexplained treasury delta or second interest transfer is used. M2 has a separate company receipt service bounded by executed native route profit, company trade income and the company net budget; ordinary-credit/product receipt adapters retain their own milestone gates. Monthly net income includes custom fees and deposit income, less funding costs and fixed operating expenses. Carried losses are offset before dividends. Monthly earnings registers close after settlement, leaving undistributed profit in equity rather than next month's payout base. Expense arrears are liabilities and are charged to profit only when incurred. Native bond adapters remain disabled; funded custom sovereign bonds use their own issuer-owned ledger and never create or settle a native bond.
 
 Custom sovereign bonds use a separate `bfl_bond_schema = 1` per issuer/recipient, initialized without money or backfill. The issuer has 32 `bfl_bnd_XX` slots with `active`, monotonic `generation`, scope-valued `holder`, `face`, `basis`, accepted annual `rate`, coupons `due`, annual-numerator `remainder` and `last_accrual`. Issuance is stamped once per issuer/month. Offers snapshot slot/generation/seller/price and three-month expiry. Current-holder coupons are serviced before that bank's account close where available; the issuer pulse also services them, with the same accrual stamp and remaining-due balance preventing double payment. Issuer storage survives a bank controller/profile change; invalid holder claims remain pending. Bank statements rebuild custom bonds at acquisition cost by issuer, without adding due coupons as unearned assets. See [transactions and cutoff limitations](sovereign-bonds.md).
+
+
+## Native company schema 2
+
+Native companies migrate field by field without a cash grant or policy reset.
+Company settlement and income stamps are independent of bank accounting. The
+landed founder is the opening financial owner; political transfer preserves that
+reference. Bank founders acquire no automatic equity, and only a landed live
+controller may use ordinary capital contributions. M3/M5 bank financing remains
+separately gated.
+
+Statements record actual native route count/volume/profit, facility count, trade
+income, net budget, carried losses, eligible earnings and funded owner payouts.
+Eligible earnings are the nonnegative minimum of executed route profit, native
+trade income and native net budget, after losses. The 25% payout rounds down to
+cents and is capped by cash after the 100-gold buffer, 100-gold reinvestment
+reserve, full remaining native debt and active venture reserve. Financing, direct
+HQ overlord receipts and discoveries are excluded. Retained prior earnings are
+not a later payout base. The income stamp prevents direct-service replay as well
+as monthly-pass replay.
+
+One exploration record stores area, authorizing political actor, explorer, actual
+native start cost, progress and state (0 none, 1 preparing/active, 2 native success,
+3 ended/cancelled). No proxy or discovery payment is created. During a start, only
+the authorized venture budget stays in the company wallet; protected cash is
+atomically escrowed with and returned by the live controller. Native resource
+pricing therefore cannot consume protected obligations, and controller net cash
+is zero. Native preparation/progress and terminal success remain authoritative.

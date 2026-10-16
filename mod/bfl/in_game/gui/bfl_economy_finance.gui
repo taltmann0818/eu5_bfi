@@ -12,41 +12,46 @@
                 text_single = { raw_text = "[Country.GetName]" autoresize = yes }
                 text_multi = { text = "bfl_company_statement" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }
             }
-            button_regular = { name = "bfl_company_select_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_select"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_select_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_select" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_retain_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_retain"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_retain_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_retain" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_trade_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_trade"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_trade_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_trade" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_explore_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_explore"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_explore_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_explore" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_fund_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_fund"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_fund_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_fund" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_route_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_route"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_route_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_route" action_direction = "offer" actor = "[GetPlayer]" }
-        }button_regular = { name = "bfl_company_expedition_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_company_expedition"
-        datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_expedition_tip"
-        scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_company_expedition" action_direction = "offer" actor = "[GetPlayer]" }
+            button_regular = { name = "bfl_company_select_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_select" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_select_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_select" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_retain_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_retain" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_retain_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_retain" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_trade_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_trade" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_trade_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_trade" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_explore_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_explore" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_explore_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_explore" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_fund_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_fund" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_fund_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_fund" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_crew_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_crew" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_crew_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_crew" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_route_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_route" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_route_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_route" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_expedition_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_expedition" datacontext = "[GetPlayer]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_expedition_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_expedition" actor = "[GetPlayer]" }
         }
             text_multi = { text = "bfl_company_native_channels" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 11 }
         } }

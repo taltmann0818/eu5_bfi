@@ -52,6 +52,9 @@ def main():
         if path.suffix in ('.txt','.gui','.yml'):
             all_text.append((path,check_script(path)))
     localization=(MOD/'main_menu/localization/english/bfl_finance_l_english.yml').read_text(encoding='utf-8-sig')
+    for line in localization.splitlines()[1:]:
+        check(bool(re.fullmatch(r' [\w.]+: "[^"\r\n]*"', line)),
+              f'Malformed localization line (use escaped newlines): {line[:100]}')
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)

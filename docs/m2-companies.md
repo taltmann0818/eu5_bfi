@@ -1,39 +1,58 @@
 # M2 operating companies
 
 Implementation and acceptance are in progress. This PR targets the **entire M2
-completion gate**, not a new company-registration scaffold. No M2 completion or
-engine pass is claimed until the recorded checks pass.
+completion gate**. Final UI/finance-boundary acceptance and bank/native
+regressions are required before completion is claimed.
 
-Native company tags, headquarters, home regions, political relationships and
-native income formulas remain authoritative. Company schema 2 migrates existing
-registrations without granting cash. The explicit founding rule assigns financial
-ownership to the political founder at registration; later political transfers do
-not silently transfer that ownership. Company equity markets and bank corporate
-credit remain their M5/M3 instruments.
+Native tags, headquarters, home regions, political relationships and income
+formulas remain authoritative. Company schema 2 migrates existing registrations
+without granting cash. The explicit founding rule assigns financial ownership to
+the landed political founder at registration. Political transfers preserve that
+ownership. Bank founders acquire no automatic company shares; corporate credit
+and company equity retain their M3/M5 gates. Political bank control cannot bypass
+those gates through the landed capital-contribution service.
 
 Economy → Credit → Lending & Investments provides company selection, statements,
-cash retention/trade/exploration mandates, funded capital contributions and native
-trade/exploration commands. Every execution rechecks live political authority.
-Financial ownership alone never authorizes operating commands.
+earnings retention/trade/exploration mandates, funded capital and crew transfers,
+and native trade/exploration commands. Every execution rechecks live political
+authority. Financial ownership alone never authorizes operations. Internal
+actions use a company parameter rather than the native diplomatic recipient.
 
-Company operating reserves separate the cash buffer, trade budget, full native
-debt obligations, reinvestment reserve and venture budget. Native operating costs
-are charged once by the engine. Additional owner distributions are conservatively
-bounded by executed route profit, native trade income, the native net budget and
-available company cash after protected reserves. Negative native net budgets
-accumulate losses before later distributions. Capital, borrowing, direct HQ
-overlord income and discoveries do not become custom trading earnings.
+The budget separates a 100-gold operating buffer, 50-gold trade allocation, full
+remaining native debt, 100-gold reinvestment reserve and 100-gold venture budget.
+Active exploration also protects its venture reserve. Native costs and subject
+payments are charged once by the engine. Eligible earnings are conservatively
+bounded by executed native route profit, native trade income and the net budget,
+after carried losses. Additional 25% owner payouts require available company cash
+after reserves. Financing, direct HQ overlord receipts, discoveries and retained
+prior earnings do not become a new payout base. Native construction and facility
+ownership remain native; statements inventory actual owned facilities.
 
-The dedicated `m2` engine suite uses a disposable Florence campaign with a real
-native HQ in Genoa and an ordinary 50-skill explorer. It exercises production
-services, native trade volume, native exploration preparation/progress and terminal
-outcomes, company settlement periods and a second-process reload. It does not
-change exploration preparation/time or force exploration completion.
+An exploration mandate supplies capacity for 500 sailors, without creating crew.
+The controller can transfer 250 actual sailors from its own pool. Mapmaking, an
+eligible company explorer, a company-owned port facility and native payment
+eligibility remain required. The command temporarily escrows protected company
+cash with its controller, checks/pays the native resource price using only the
+venture budget, and returns the exact escrow on both success and refusal.
+Controller net cash is zero. Ordinary native preparation/progress and terminal
+callbacks remain authoritative; discovery changes status, never cash.
+
+The dedicated `m2` suite uses a disposable Florence campaign with a real HQ in
+Genoa, a 50-skill eligible explorer and a fixture-only controller sailor-capacity
+grant. It calls production services for trading, deposits, authority transfer,
+funding and distributions, observes twelve consecutive numerical settlements,
+allows natural exploration outcomes, and reloads an ordinary autosave in a second
+process. It never accelerates preparation/progress or forces completion.
+
+A clean development run passes **27/27 engine assertions**, all twelve numerical
+statements, natural exploration and reload. The final bank-finance restriction,
+internal UI selection and account/native regressions are still being accepted.
+[Rejected development runs](../tests/results/2026-10-16-m2-development-notes.json)
+are recorded separately and are not completion evidence.
 
 ```powershell
 ./tools/run_campaign.ps1 -Suite m2 -Output tests/results/local-m2 -TimeoutSeconds 1200
 ```
 
-Remaining acceptance: complete the real-engine suite and adversarial finance/
-lifecycle cases; verify the normal company UI; run bank/account regressions;
-record hashes, results and the final completion boundary in `coverage.md`.
+M3 corporate lending, M5 company share markets, M7 commenda, M9 workouts and M10
+release-wide AI/language/performance campaigns remain separate milestones.
