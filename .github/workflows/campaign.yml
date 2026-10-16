@@ -20,9 +20,14 @@ jobs:
             exit 1
           fi
   campaign:
+    name: Florence engine — ${{ matrix.suite }}
     needs: eligibility
     runs-on: [self-hosted, Windows, X64, euv-1.4.1, cmf-2.5.0]
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [accounts, m0]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,12 +35,12 @@ jobs:
           python-version: '3.12'
       - name: Run real Florence campaign in an isolated user directory
         shell: pwsh
-        run: ./tools/run_campaign.ps1 -Output tests/results/local -TimeoutSeconds 1200
+        run: ./tools/run_campaign.ps1 -Suite ${{ matrix.suite }} -Output tests/results/local -TimeoutSeconds 1200
       - name: Upload sanitized assertion results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: florence-campaign-${{ github.run_id }}
+          name: florence-campaign-${{ matrix.suite }}-${{ github.run_id }}
           path: |
             tests/results/local/campaign.json
             tests/results/local/campaign.xml

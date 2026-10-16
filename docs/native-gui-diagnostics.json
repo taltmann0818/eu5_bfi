@@ -1,0 +1,138 @@
+{
+  "recorded": "2026-10-15",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "scope": "Fresh isolated CMF-only native Florence startup, no BFI or test overlay. Same 32 localized-text signatures occur with BFI. Source hashes are pinned in baseline.json. This is a narrowly scoped startup diagnostic baseline, not a compatibility or gameplay pass.",
+  "log_sha256": "9769062ce1976c8838aecea6cdadede1628a2a0871b1e33dd9b0e55c4dd68430",
+  "signatures": [
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "LOANS_SCROLL_LIST_EMPTY"
+    },
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "REPAY_ALL_POSSIBLE_LOANS_DESC"
+    },
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "[LoanEntry.GetAmount|2][gold_i]"
+    },
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "[LoanEntry.GetLoan.GetDebt|2V][gold_i]"
+    },
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "[Player.GetEconomy.GetTotalDebt|2V][gold_i] (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)"
+    },
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "[bankrupt|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "ESTATE_CURRENT_TAX_AUTOMATED_TT"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "ESTATE_CURRENT_TAX_TT"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[balance|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[diplomatic_expense_s|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[diplomatic_income_s|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[expense|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[food|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[foreign_buildings|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[income|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[interest|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[mercenary_expense|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[mercenary|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[minting|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[payments|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[privateer|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[stability|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[subsidy_expense|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[subvention|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[subvention|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[tariffs|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[tax|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[trade_expense|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[trade_expense|e]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[trade_income|E]"
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[trade_income|e]"
+    },
+    {
+      "file": "gui/technology_lateralview.gui",
+      "localized_text": "[government_reforms|e]"
+    }
+  ]
+}

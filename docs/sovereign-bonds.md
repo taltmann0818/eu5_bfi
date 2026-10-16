@@ -1,10 +1,14 @@
 # Funded sovereign bonds
 
+The custom claims use the installed game's native `government_bond` concept icon throughout Credit/Balance, including the facility mandate, underwriting/resale controls, coupon and financing rows, ledger redemption and bond-asset tooltip. Credit retains the native Banking illustration. No native DDS is copied into the mod. The [coverage plan](coverage.md#6161-financial-buildings-and-earlier-exchange-access) proposes an earlier Reformation Stock Exchange and a future combined securities GUI; current native unlock timing remains unchanged.
+
 On 15 October 2026 the design changed, with the user's authorization, from native government bonds to custom sovereign bonds. The [native experiment](../tests/results/2026-10-15-native-bond-audit.json) created a government bond with `sell_bonds = {}`, but `change_loan_owner` did not establish a country creditor. Native issuance credited the issuer while the observed bank and issuer-estate wallets stayed unchanged. These findings do not establish a bank-funded native transaction or native current-holder coupon routing. The custom path calls neither native issuance nor native redemption; existing native debts remain separate.
 
 ## Transactions and terms
 
 The issuer owns a bounded ledger of 32 perpetual bonds. A bond is identified by issuer, slot and monotonically increasing generation. Its current holder, face, acquisition basis, accepted annual coupon, unpaid coupons, fractional-cent carry and last accrual period persist in the save. Issuer storage keeps obligations independent of a bank's later controller or specialization. Missing holders preserve the obligation and suspend payment; no fallback recipient is selected.
+
+The [M0 lifecycle probe](m0-probes.md) found that an annexed country's object reference can remain valid. Coupon, redemption and trading services therefore require live countries, including `country_exists` for the stored holder. An annexed holder receives no payment and its obligation remains recorded pending resolution; this is not an implemented inheritance workout.
 
 Both bank profiles can underwrite their live landed controller. One issue per issuer and accounting month is permitted, with at most 100 gold transferred. The bank pays actual reserve-protected cash and receives an asset; the sovereign receives the same amount and records debt. Neither party recognizes issuance as profit. Primary issuance does not require Stock Exchange research.
 

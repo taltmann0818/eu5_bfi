@@ -1,0 +1,13 @@
+{
+  "recorded": "2026-10-15",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "runtime_sha256": "1c6a371ad1b640050a4af2ced8a3f5d35c622cc39963c9cff3196c385be575ce",
+  "fixture_sha256": "4f6a1caa2dfde70d9a5d9d0ecaec03af8407dccb4ac187614ee2c899768abba8",
+  "native_loan_variables_supported": false,
+  "scope": "Exploratory native-loan variable attempt only. The containing campaign failed; this is limitation evidence, not a passed M0 suite.",
+  "operation": "Native give_loan followed by set_variable = { name = bfi_loan_sentinel value = 915 } in that native loan scope.",
+  "diagnostic": "set_variable effect [ This scope doesn't support variables. Scope: Loan International Loan (39) ]",
+  "response": "Keep per-claim custom metadata in country-owned bounded records; recheck native loan existence before use."
+}

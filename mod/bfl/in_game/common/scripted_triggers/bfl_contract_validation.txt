@@ -3,7 +3,7 @@ OR = { var:bfl_con_01_active = 0 var:bfl_con_02_active = 0 var:bfl_con_03_active
 }
 
     bfl_valid_contract_parties = {
-        exists = scope:bfl_party
+        exists = scope:bfl_party country_exists = scope:bfl_party
         NOT = { this = scope:bfl_party }
         NOT = { has_variable = bfl_operation_guard }
     }

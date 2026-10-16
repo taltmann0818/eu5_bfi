@@ -47,7 +47,7 @@ def generate(common, effect, loc, write, tune):
            + effect('bfl_assign_charter_ownership', charter))
     write('main_menu/common/static_modifiers/bfl_financial_modifiers.txt', '\n'.join(
         f'bfl_royalty_{role}_{index} = {{ }}' for role in ('bank', 'sovereign') for index in range(1, 5)))
-    access = f'''exists = scope:bfl_party
+    access = f'''exists = scope:bfl_party country_exists = scope:bfl_party
         OR = {{
             AND = {{ bfl_has_valid_controller = yes overlord = scope:bfl_party }}
             AND = {{ bfl_is_independent_bank = yes opinion = {{ target = scope:bfl_party value >= {tune['foreign_deposit_min_opinion']} }} }}
@@ -62,7 +62,7 @@ def generate(common, effect, loc, write, tune):
         prefix = f'bfl_dep_{index:02}'
         interest += effect(f'bfl_pay_demand_interest_{index:02}', f'''
             if = {{ limit = {{ var:{prefix}_active = 1 var:{prefix}_maturity_period = 0
-                var:{prefix}_withdrawal_requested = 0 var:{prefix}_interest_due > 0 exists = var:{prefix}_party }}
+                var:{prefix}_withdrawal_requested = 0 var:{prefix}_interest_due > 0 exists = var:{prefix}_party country_exists = var:{prefix}_party }}
                 save_scope_as = bfl_bank
                 set_variable = {{ name = bfl_interest_payment value = {{ value = bfl_free_cash max = var:{prefix}_interest_due multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = {{ value = var:bfl_interest_payment multiply = -1 }}
@@ -152,7 +152,7 @@ def generate(common, effect, loc, write, tune):
            + effect('bfl_observe_bank_income', income))
     autonomous = '''if = { limit = { bfl_can_originate_native_takeover = yes bfl_period > var:bfl_last_takeover_period }
         save_scope_as = bfl_bank
-        if = { limit = { exists = scope:bfl_party } scope:bfl_party = { save_scope_as = bfl_saved_takeover_party } }
+        if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party } scope:bfl_party = { save_scope_as = bfl_saved_takeover_party } }
         set_variable = { name = bfl_last_takeover_period value = bfl_period }
         set_variable = { name = bfl_takeover_done value = 0 }
         every_country = {

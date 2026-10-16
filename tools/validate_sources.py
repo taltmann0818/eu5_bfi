@@ -57,6 +57,12 @@ def main():
     loc_set=set(keys)
     for path,text in all_text:
         if path.suffix=='.yml':continue
+        if 'decisions' in path.parts:
+            # Native decisions consume implicit .title/.desc keys even though
+            # those consumers do not appear as explicit fields in the script.
+            for decision in re.findall(r'^(bfl_[\w]+)\s*=\s*\{',text,re.M):
+                for suffix in ('.title','.desc'):
+                    check(decision+suffix in loc_set,f'{path}: missing decision localization {decision+suffix}')
         for key in re.findall(r'\b(?:text|title|desc|name)\s*=\s*"?(bfl_[\w.]+)"?',text):
             # Variables, scripted scopes, widget names and database keys are not localization consumers.
             if path.suffix=='.gui' and key not in loc_set:

@@ -3,6 +3,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from generate_finance_widgets import icon_texture
 
 ROOT = Path(__file__).resolve().parents[1]
 MOD = ROOT / 'mod/bfl'
@@ -27,16 +28,19 @@ def text(key):
 
 
 def icon(key, size=32):
-    return f'icon = {{ texture = "gfx/interface/icons/bfl/{key}.dds" size = {{ {size} {size} }} }}'
+    return f'icon = {{ texture = "{icon_texture(key)}" size = {{ {size} {size} }} }}'
 
 
 def action(key, art, title=None, height=32, selected=None):
     selection = f'down = "[{selected}]"' if selected else ''
-    return f'''button_regular = {{ name = "{key}_button" size = {{ -1 {height} }} layoutpolicy_horizontal = expanding
+    button = f'''button_regular = {{ name = "{key}_button" size = {{ -1 {height} }} layoutpolicy_horizontal = expanding
         tooltip = "{key}_tip" text = "{title or key}" {selection}
         enabled = "[GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('{key}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
     }}'''
+    if art == 'bond':
+        return f'hbox = {{ layoutpolicy_horizontal = expanding spacing = 3 {icon("bond",18)} {button} }}'
+    return button
 
 
 def interaction(key, art, title):
@@ -48,10 +52,11 @@ def interaction(key, art, title):
         }}'''
 
 
-def section(title, body):
+def section(title, body, art=None):
+    heading_art = f'icon = {{ parentanchor = left|vcenter position = {{ 8 0 }} size = {{ 24 24 }} texture = "{icon_texture(art)}" }}' if art else ''
     return f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 tooltip = "{title}_tip"
         widget = {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
-            text_single = {{ parentanchor = center text = "{title}" autoresize = yes }} }} {body} }}'''
+            {heading_art} text_single = {{ parentanchor = center text = "{title}" autoresize = yes }} }} {body} }}'''
 
 
 def metric(title, expr, art):
@@ -195,9 +200,9 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         sv += effect('bfl_'+field,body)
     common('script_values','interface_values',sv)
     balance_types=''
-    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',value('custom_bond_financing_received'),'debt','facility_tip'),('bond_coupons','bond_coupons',value('bond_income_display'),'bond','bond_income_tip')]:
+    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',value('custom_bond_financing_received'),'bond','facility_tip'),('bond_coupons','bond_coupons',value('bond_income_display'),'bond','bond_income_tip')]:
         balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding tooltip = "bfl_{tip}"
-            blockoverride "icon_texture" {{ texture = "gfx/interface/icons/bfl/{art}.dds" }}
+            blockoverride "icon_texture" {{ texture = "{icon_texture(art)}" }}
             blockoverride "label" {{ text = "bfl_{title}" }}
             blockoverride "income_text" {{ raw_text = "[{expression}|2+=]@income!" }} }}'''
     status=''.join(f'text_single = {{ text = "bfl_status_{i}" autoresize = yes visible = "[EqualTo_CFixedPoint({var("state")}, \'(CFixedPoint){i}\')]" }}' for i in range(6))
@@ -246,7 +251,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_goods',['commodity_inventory','warehouse_receipt','commodity_forward','margining']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:
         cards=[]
         for k in keys:
-            art={'commodity_inventory':'custody','warehouse_receipt':'receipt','commodity_forward':'forward','commenda':'commenda','company_equity':'companies','project_security':'collateral','sovereign_note':'note','secured_liquidity':'liquidity','clearing':'accounts','public_backstop':'collateral'}.get(k,'loan')
+            art={'bond_underwriting':'bond','debt_resale':'bond','commodity_inventory':'custody','warehouse_receipt':'receipt','commodity_forward':'forward','commenda':'commenda','company_equity':'companies','project_security':'collateral','sovereign_note':'note','secured_liquidity':'liquidity','clearing':'accounts','public_backstop':'collateral'}.get(k,'loan')
             cards.append(f'''hbox = {{ spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_{k}_tip" {icon(art,24)}
                 text_single = {{ text = "bfl_{k}" autoresize = yes fontsize = 13 }} expand = {{ }}
                 icon = {{ size = {{ 16 16 }} texture = "gfx/interface/icons/bfl/lock.dds"
@@ -320,7 +325,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     bond_body = f'''text_single = {{ text = "bfl_custom_bond_totals" autoresize = yes fontsize = 12 }}
         text_single = {{ text = "bfl_custom_bond_flows" autoresize = yes fontsize = 11 }}
         {pair(action('bfl_draw_bond','bond'), action('bfl_offer_bond','bond'))}
-        {action('bfl_close_bond_offer','lock')}
+        {action('bfl_close_bond_offer','bond')}
         hbox = {{ spacing = 4 layoutpolicy_horizontal = expanding
             text_single = {{ text = "bfl_custom_bond_terms" autoresize = yes fontsize = 11 }}
             {''.join(action(f'bfl_bond_rate_{rate}', 'bond') for rate in (1,3,6))} }}
@@ -330,7 +335,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_count'), '(CFixedPoint)0'))]"
         scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
         scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 margin = {{ 5 5 }}
-            {section('bfl_custom_bonds_title', bond_body)} }} }} }}'''
+            {section('bfl_custom_bonds_title', bond_body, 'bond')} }} }} }}'''
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
         {balance_types}
         {sovereign_tooltips}

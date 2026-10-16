@@ -2,7 +2,7 @@
 # Native give_loan owns both wallets. P06 gate blocks until units/callbacks are measured.
 # Root bank; bfl_party is borrower. Never add a second principal transfer.
 bfl_originate_native_credit = {
-    if = { limit = { exists = scope:bfl_party bfl_free_cash >= 100
+    if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party bfl_free_cash >= 100
         OR = {
             AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location } }
             AND = { bfl_can_originate_corporate_credit = yes scope:bfl_party = { bfl_is_company = yes } }
@@ -15,7 +15,7 @@ bfl_originate_native_credit = {
 # Native regular-bank operation copied minimally; actor is ALWAYS paying bank.
 # Preserve native eligibility, ordering, price and estate compensation.
 bfl_native_takeover = {
-    if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party
+    if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party country_exists = scope:bfl_party
         NOT = { this = scope:bfl_party }
         scope:bfl_party = {
             OR = { NOT = { bfl_is_company = yes } scope:bfl_bank = { bfl_can_originate_corporate_credit = yes } }

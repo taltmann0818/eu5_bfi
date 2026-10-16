@@ -1,4 +1,5 @@
 ﻿bfl_valid_bond_offer = {
+    country_exists = this
     has_variable = bfl_bond_schema var:bfl_bond_offer_slot > 0
     var:bfl_bond_offer_price > 0 bfl_period <= var:bfl_bond_offer_expiry
     NOT = { has_variable = bfl_bond_guard }

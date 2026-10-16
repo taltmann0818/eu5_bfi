@@ -1,12 +1,14 @@
 ﻿# Country scope. Classify companies first, then chartered and independent banks.
-bfl_is_company = { is_subject_type = trade_company }
+bfl_is_company = { country_exists = this is_subject_type = trade_company }
 bfl_is_chartered_bank = {
+    country_exists = this
     NOT = { bfl_is_company = yes }
     country_type = building
     has_reform = government_reform:banking_country
     is_subject_type = bfl_chartered_bank
 }
 bfl_is_independent_bank = {
+    country_exists = this
     NOT = { bfl_is_company = yes }
     country_type = building
     has_reform = government_reform:banking_country
@@ -25,6 +27,7 @@ bfl_has_management = {
     OR = {
         bfl_is_independent_bank = yes
         AND = {
+            country_exists = this
             country_type = location
             has_reform = government_reform:bfl_state_chartered_bank
             exists = var:bfl_bank
@@ -46,6 +49,7 @@ bfl_research_overseas = {
     }
 }
 bfl_can_begin_charter = {
+    country_exists = this
     country_type = location
     exists = capital
     capital = { market = { owner = root } }
@@ -59,6 +63,7 @@ bfl_has_valid_controller = {
     bfl_is_chartered_bank = yes
     exists = overlord
     overlord = {
+        country_exists = this
         country_type = location
         has_reform = government_reform:bfl_state_chartered_bank
         exists = var:bfl_bank

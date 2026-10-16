@@ -1,0 +1,25 @@
+# Observe only. Literal markers work while native game commands disable localization.
+debug_log = "BFI_M0_UI|snapshot_begin"
+c:FLO = {
+    if = { limit = { gold = 10000 c:BRD = { gold = 880 is_subject_type = state_bank } }
+        debug_log = "BFI_M0_UI|cash|uncharted_10000_880" }
+    else_if = { limit = { gold = 9500 c:BRD = { gold = 1380 is_subject_type = bfl_chartered_bank } }
+        debug_log = "BFI_M0_UI|cash|chartered_9500_1380" }
+    else = { debug_log = "BFI_M0_UI|FAIL|unexpected_wallets_or_type" }
+    if = { limit = { has_reform = government_reform:bfl_state_chartered_bank } debug_log = "BFI_M0_UI|reform|yes" }
+    else = { debug_log = "BFI_M0_UI|reform|no" }
+}
+c:BRD = {
+    if = { limit = { var:bfl_profile = 0 } debug_log = "BFI_M0_UI|profile|0" }
+    else_if = { limit = { var:bfl_profile = 1 } debug_log = "BFI_M0_UI|profile|1" }
+    else_if = { limit = { var:bfl_profile = 2 } debug_log = "BFI_M0_UI|profile|2" }
+    else = { debug_log = "BFI_M0_UI|FAIL|unexpected_profile" }
+    if = { limit = { var:bfl_facility_mode = 0 } debug_log = "BFI_M0_UI|facility|0" }
+    else_if = { limit = { var:bfl_facility_mode = 1 } debug_log = "BFI_M0_UI|facility|1" }
+    else_if = { limit = { var:bfl_facility_mode = 2 } debug_log = "BFI_M0_UI|facility|2" }
+    else = { debug_log = "BFI_M0_UI|FAIL|unexpected_facility" }
+    if = { limit = { var:bfi_ui_identity = 813 capital = var:bfi_ui_capital capital = { total_building_levels = prev.var:bfi_ui_buildings } any_lent_loan = { borrower = c:PRZ loan_amount = 120 } }
+        debug_log = "BFI_M0_UI|identity_assets|preserved" }
+    else = { debug_log = "BFI_M0_UI|FAIL|identity_assets_changed" }
+}
+debug_log = "BFI_M0_UI|snapshot_end"

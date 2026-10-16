@@ -41,6 +41,7 @@ def generate(common, effect, loc, tune):
         any_owned_location = { has_building = building_type:stock_exchange }
     }
     bfl_can_trade_sovereign_bonds = {
+        country_exists = this
         OR = {
             AND = { country_type = location bfl_owns_stock_exchange = yes }
             AND = { bfl_is_independent_bank = yes bfl_owns_stock_exchange = yes }
@@ -150,7 +151,7 @@ def generate(common, effect, loc, tune):
         settlement += effect(f'bfl_accrue_bond_{i:02}', accrue)
         settlement += effect(f'bfl_service_bond_{i:02}', f'''
             bfl_accrue_bond_{i:02} = yes
-            if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_due > 0
+            if = {{ limit = {{ country_exists = this var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_due > 0
                 NOT = {{ has_variable = bfl_bond_guard }} }}
                 save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
                 var:{n}_holder = {{ save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }}
@@ -172,7 +173,7 @@ def generate(common, effect, loc, tune):
         ''')
         settlement += effect(f'bfl_redeem_sovereign_bond_{i:02}', f'''
             bfl_accrue_bond_{i:02} = yes
-            if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder
+            if = {{ limit = {{ country_exists = this var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder
                 NOT = {{ has_variable = bfl_bond_guard }}
                 gold >= {{ value = var:{n}_face add = var:{n}_due }} }}
                 save_scope_as = bfl_bond_issuer
@@ -194,7 +195,7 @@ def generate(common, effect, loc, tune):
                 remove_variable = bfl_bond_guard
             }}
         ''')
-        offers += f'''if = {{ limit = {{ var:bfl_bond_offer_selected = 0 var:{n}_active = 1 exists = var:{n}_holder
+        offers += f'''if = {{ limit = {{ var:bfl_bond_offer_selected = 0 var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder
             var:{n}_holder = scope:bfl_bond_underwriter var:{n}_due = 0 }}
             set_variable = {{ name = bfl_bond_offer_selected value = 1 }}
             set_variable = {{ name = bfl_bond_offer_slot value = {i} }}
@@ -205,7 +206,7 @@ def generate(common, effect, loc, tune):
         }}\n'''
         accept += f'''if = {{ limit = {{ bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = {i}
             var:{n}_active = 1 var:{n}_generation = var:bfl_bond_offer_generation
-            exists = var:{n}_holder var:{n}_holder = var:bfl_bond_offer_seller var:{n}_due = 0
+            exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = var:bfl_bond_offer_seller var:{n}_due = 0
         }}
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:{n}_holder = {{ save_scope_as = bfl_bond_seller }}
@@ -222,7 +223,7 @@ def generate(common, effect, loc, tune):
             scope:bfl_bond_buyer = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_refresh_asset_statement = yes }} }}
             remove_variable = bfl_bond_guard
         }}\n'''
-        assets += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_asset_owner }}
+        assets += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_asset_owner }}
             scope:bfl_bond_asset_owner = {{
                 set_variable = {{ name = bfl_asset_amount value = scope:bfl_bond_asset_issuer.var:{n}_basis }}
                 set_variable = {{ name = bfl_asset_kind value = 1 }}
@@ -231,13 +232,14 @@ def generate(common, effect, loc, tune):
                 change_variable = {{ name = bfl_custom_credit_value add = var:bfl_asset_amount }}
                 scope:bfl_bond_asset_issuer = {{ save_scope_as = bfl_asset_party }}
                 bfl_allocate_asset_row = yes }} }}\n'''
-        held += f'if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_processing_holder }} bfl_service_bond_{i:02} = yes }}\n'
+        held += f'if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_processing_holder }} bfl_service_bond_{i:02} = yes }}\n'
     common('scripted_effects', 'bond_settlement', settlement
            + effect('bfl_service_sovereign_bonds', '\n'.join(f'bfl_service_bond_{i:02} = yes' for i in range(1, COUNT + 1)))
            + effect('bfl_settle_held_sovereign_bonds', held + '}'))
     common('scripted_effects', 'bond_asset_statement', effect('bfl_add_sovereign_bond_assets', assets + '}'))
     common('scripted_triggers', 'bond_offers', '''
     bfl_valid_bond_offer = {
+        country_exists = this
         has_variable = bfl_bond_schema var:bfl_bond_offer_slot > 0
         var:bfl_bond_offer_price > 0 bfl_period <= var:bfl_bond_offer_expiry
         NOT = { has_variable = bfl_bond_guard }
@@ -257,7 +259,7 @@ def generate(common, effect, loc, tune):
     common('scripted_effects', 'bond_trading', effect('bfl_accept_sovereign_bond_offer', accept) + '''
     # Root sovereign issuer. The management command resolves the live bank first.
     bfl_list_owned_sovereign_bond = {
-        if = { limit = { exists = scope:bfl_bond_underwriter
+        if = { limit = { country_exists = this exists = scope:bfl_bond_underwriter
             scope:bfl_bond_underwriter = { bfl_can_trade_sovereign_bonds = yes }
             OR = { var:bfl_bond_offer_slot ?= 0 bfl_period > var:bfl_bond_offer_expiry
                 var:bfl_bond_offer_seller ?= scope:bfl_bond_underwriter }
@@ -281,7 +283,7 @@ def generate(common, effect, loc, tune):
     for i in range(1, COUNT + 1):
         guis += f'''bfl_redeem_bond_{i:02} = {{ scope = country
             is_shown = {{ var:bfl_bnd_{i:02}_active ?= 1 }}
-            is_valid = {{ country_type = location var:bfl_bnd_{i:02}_active ?= 1 exists = var:bfl_bnd_{i:02}_holder gold >= {{ value = var:bfl_bnd_{i:02}_face add = var:bfl_bnd_{i:02}_due }} }}
+            is_valid = {{ country_type = location var:bfl_bnd_{i:02}_active ?= 1 exists = var:bfl_bnd_{i:02}_holder country_exists = var:bfl_bnd_{i:02}_holder gold >= {{ value = var:bfl_bnd_{i:02}_face add = var:bfl_bnd_{i:02}_due }} }}
             effect = {{ if = {{ limit = {{ country_type = location }} bfl_redeem_sovereign_bond_{i:02} = yes }} }} }}\n'''
     for rate in (1, 3, 6):
         guis += f'''bfl_bond_rate_{rate} = {{ scope = country is_shown = {{ bfl_has_management = yes country_type = location }}

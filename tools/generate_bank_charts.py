@@ -131,7 +131,7 @@ def generate(common, effect, loc, write):
                         f'''visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_asset_unlisted_{kind}'), '(CFixedPoint)0')]"''', '{ ' + COLORS[kind] + ' }')
         content = list_block(f'bfl_asset_{kind}_summary', scroll_rows(rows))
         content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_asset_legend_footer" } }'
-        tooltips += tooltip_type(f'bfl_asset_{kind}_tooltip', f'bfl_asset_{kind}_heading', 'bfl_asset_subtitle', 'accounts', content)
+        tooltips += tooltip_type(f'bfl_asset_{kind}_tooltip', f'bfl_asset_{kind}_heading', 'bfl_asset_subtitle', 'bond' if kind == 'bonds' else 'accounts', content)
     write('in_game/gui/bfl_bank_chart_tooltips.gui', 'types BFLBankChartTooltips {\n' + tooltips + '}')
 
 

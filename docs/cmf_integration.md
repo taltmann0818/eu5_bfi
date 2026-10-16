@@ -9,3 +9,5 @@ Three presentation preferences are registered idempotently, with CMM's `_name`/`
 The inspected installed CMF release lacks an Economy injection slot and an extracted Economy definition set. BFI owns one explicit native Economy override and one extracted native types/template helper. The build proves these reconstruct the complete original file when the single finance insertion is removed. Other mods replacing Economy require a combined compatibility edit.
 
 The public GitHub release list currently exposes **2.4.1**, while the installed Workshop release is **2.5.0**. A release-matched self-contained dependency popup was not available in the installed package. Rather than silently vendoring an older helper, this build relies on declared dependency metadata and the verified playset. Acquiring/reviewing a 2.5.0 helper remains release work.
+
+The [M0 audit](m0-probes.md) separately verifies registration defaults, idempotence, preference preservation and reload. Preference consumption/reset/alert callbacks remain open; registration is not proof that every toggle affects the UI.

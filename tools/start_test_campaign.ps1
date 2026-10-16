@@ -2,7 +2,8 @@ param(
     [string]$Game = $env:EU5_GAME_ROOT,
     [string]$Cmf = $env:EU5_CMF_ROOT,
     [string]$SettingsFrom,
-    [switch]$PrepareOnly
+    [switch]$PrepareOnly,
+    [switch]$NormalCharter
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -21,6 +22,10 @@ try {
     $userDir = Join-Path $repo "dist/interactive-$token/user"
     python tools/campaign_suite.py prepare --userdir $userDir --token $token
     if ($LASTEXITCODE -ne 0) { throw 'Test preparation failed' }
+    if ($NormalCharter) {
+        python tools/prepare_m0_ui.py --userdir $userDir
+        if ($LASTEXITCODE -ne 0) { throw 'Normal charter UI fixture preparation failed' }
+    }
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
     if ($SettingsFrom) {

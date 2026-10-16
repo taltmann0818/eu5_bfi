@@ -10,7 +10,7 @@ if = { limit = { var:bfl_bnd_01_active = 1 bfl_period > var:bfl_bnd_01_last_accr
 }
 bfl_service_bond_01 = {
 bfl_accrue_bond_01 = yes
-if = { limit = { var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder var:bfl_bnd_01_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder var:bfl_bnd_01_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_01_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -32,7 +32,7 @@ if = { limit = { var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder var:bf
 }
 bfl_redeem_sovereign_bond_01 = {
 bfl_accrue_bond_01 = yes
-if = { limit = { var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder
+if = { limit = { country_exists = this var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_01_face add = var:bfl_bnd_01_due } }
     save_scope_as = bfl_bond_issuer
@@ -66,7 +66,7 @@ if = { limit = { var:bfl_bnd_02_active = 1 bfl_period > var:bfl_bnd_02_last_accr
 }
 bfl_service_bond_02 = {
 bfl_accrue_bond_02 = yes
-if = { limit = { var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder var:bfl_bnd_02_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder var:bfl_bnd_02_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_02_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -88,7 +88,7 @@ if = { limit = { var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder var:bf
 }
 bfl_redeem_sovereign_bond_02 = {
 bfl_accrue_bond_02 = yes
-if = { limit = { var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder
+if = { limit = { country_exists = this var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_02_face add = var:bfl_bnd_02_due } }
     save_scope_as = bfl_bond_issuer
@@ -122,7 +122,7 @@ if = { limit = { var:bfl_bnd_03_active = 1 bfl_period > var:bfl_bnd_03_last_accr
 }
 bfl_service_bond_03 = {
 bfl_accrue_bond_03 = yes
-if = { limit = { var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder var:bfl_bnd_03_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder var:bfl_bnd_03_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_03_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -144,7 +144,7 @@ if = { limit = { var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder var:bf
 }
 bfl_redeem_sovereign_bond_03 = {
 bfl_accrue_bond_03 = yes
-if = { limit = { var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder
+if = { limit = { country_exists = this var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_03_face add = var:bfl_bnd_03_due } }
     save_scope_as = bfl_bond_issuer
@@ -178,7 +178,7 @@ if = { limit = { var:bfl_bnd_04_active = 1 bfl_period > var:bfl_bnd_04_last_accr
 }
 bfl_service_bond_04 = {
 bfl_accrue_bond_04 = yes
-if = { limit = { var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder var:bfl_bnd_04_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder var:bfl_bnd_04_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_04_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -200,7 +200,7 @@ if = { limit = { var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder var:bf
 }
 bfl_redeem_sovereign_bond_04 = {
 bfl_accrue_bond_04 = yes
-if = { limit = { var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder
+if = { limit = { country_exists = this var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_04_face add = var:bfl_bnd_04_due } }
     save_scope_as = bfl_bond_issuer
@@ -234,7 +234,7 @@ if = { limit = { var:bfl_bnd_05_active = 1 bfl_period > var:bfl_bnd_05_last_accr
 }
 bfl_service_bond_05 = {
 bfl_accrue_bond_05 = yes
-if = { limit = { var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder var:bfl_bnd_05_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder var:bfl_bnd_05_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_05_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -256,7 +256,7 @@ if = { limit = { var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder var:bf
 }
 bfl_redeem_sovereign_bond_05 = {
 bfl_accrue_bond_05 = yes
-if = { limit = { var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder
+if = { limit = { country_exists = this var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_05_face add = var:bfl_bnd_05_due } }
     save_scope_as = bfl_bond_issuer
@@ -290,7 +290,7 @@ if = { limit = { var:bfl_bnd_06_active = 1 bfl_period > var:bfl_bnd_06_last_accr
 }
 bfl_service_bond_06 = {
 bfl_accrue_bond_06 = yes
-if = { limit = { var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder var:bfl_bnd_06_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder var:bfl_bnd_06_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_06_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -312,7 +312,7 @@ if = { limit = { var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder var:bf
 }
 bfl_redeem_sovereign_bond_06 = {
 bfl_accrue_bond_06 = yes
-if = { limit = { var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder
+if = { limit = { country_exists = this var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_06_face add = var:bfl_bnd_06_due } }
     save_scope_as = bfl_bond_issuer
@@ -346,7 +346,7 @@ if = { limit = { var:bfl_bnd_07_active = 1 bfl_period > var:bfl_bnd_07_last_accr
 }
 bfl_service_bond_07 = {
 bfl_accrue_bond_07 = yes
-if = { limit = { var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder var:bfl_bnd_07_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder var:bfl_bnd_07_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_07_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -368,7 +368,7 @@ if = { limit = { var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder var:bf
 }
 bfl_redeem_sovereign_bond_07 = {
 bfl_accrue_bond_07 = yes
-if = { limit = { var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder
+if = { limit = { country_exists = this var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_07_face add = var:bfl_bnd_07_due } }
     save_scope_as = bfl_bond_issuer
@@ -402,7 +402,7 @@ if = { limit = { var:bfl_bnd_08_active = 1 bfl_period > var:bfl_bnd_08_last_accr
 }
 bfl_service_bond_08 = {
 bfl_accrue_bond_08 = yes
-if = { limit = { var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder var:bfl_bnd_08_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder var:bfl_bnd_08_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_08_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -424,7 +424,7 @@ if = { limit = { var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder var:bf
 }
 bfl_redeem_sovereign_bond_08 = {
 bfl_accrue_bond_08 = yes
-if = { limit = { var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder
+if = { limit = { country_exists = this var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_08_face add = var:bfl_bnd_08_due } }
     save_scope_as = bfl_bond_issuer
@@ -458,7 +458,7 @@ if = { limit = { var:bfl_bnd_09_active = 1 bfl_period > var:bfl_bnd_09_last_accr
 }
 bfl_service_bond_09 = {
 bfl_accrue_bond_09 = yes
-if = { limit = { var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder var:bfl_bnd_09_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder var:bfl_bnd_09_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_09_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -480,7 +480,7 @@ if = { limit = { var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder var:bf
 }
 bfl_redeem_sovereign_bond_09 = {
 bfl_accrue_bond_09 = yes
-if = { limit = { var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder
+if = { limit = { country_exists = this var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_09_face add = var:bfl_bnd_09_due } }
     save_scope_as = bfl_bond_issuer
@@ -514,7 +514,7 @@ if = { limit = { var:bfl_bnd_10_active = 1 bfl_period > var:bfl_bnd_10_last_accr
 }
 bfl_service_bond_10 = {
 bfl_accrue_bond_10 = yes
-if = { limit = { var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder var:bfl_bnd_10_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder var:bfl_bnd_10_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_10_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -536,7 +536,7 @@ if = { limit = { var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder var:bf
 }
 bfl_redeem_sovereign_bond_10 = {
 bfl_accrue_bond_10 = yes
-if = { limit = { var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder
+if = { limit = { country_exists = this var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_10_face add = var:bfl_bnd_10_due } }
     save_scope_as = bfl_bond_issuer
@@ -570,7 +570,7 @@ if = { limit = { var:bfl_bnd_11_active = 1 bfl_period > var:bfl_bnd_11_last_accr
 }
 bfl_service_bond_11 = {
 bfl_accrue_bond_11 = yes
-if = { limit = { var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder var:bfl_bnd_11_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder var:bfl_bnd_11_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_11_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -592,7 +592,7 @@ if = { limit = { var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder var:bf
 }
 bfl_redeem_sovereign_bond_11 = {
 bfl_accrue_bond_11 = yes
-if = { limit = { var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder
+if = { limit = { country_exists = this var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_11_face add = var:bfl_bnd_11_due } }
     save_scope_as = bfl_bond_issuer
@@ -626,7 +626,7 @@ if = { limit = { var:bfl_bnd_12_active = 1 bfl_period > var:bfl_bnd_12_last_accr
 }
 bfl_service_bond_12 = {
 bfl_accrue_bond_12 = yes
-if = { limit = { var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder var:bfl_bnd_12_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder var:bfl_bnd_12_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_12_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -648,7 +648,7 @@ if = { limit = { var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder var:bf
 }
 bfl_redeem_sovereign_bond_12 = {
 bfl_accrue_bond_12 = yes
-if = { limit = { var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder
+if = { limit = { country_exists = this var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_12_face add = var:bfl_bnd_12_due } }
     save_scope_as = bfl_bond_issuer
@@ -682,7 +682,7 @@ if = { limit = { var:bfl_bnd_13_active = 1 bfl_period > var:bfl_bnd_13_last_accr
 }
 bfl_service_bond_13 = {
 bfl_accrue_bond_13 = yes
-if = { limit = { var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder var:bfl_bnd_13_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder var:bfl_bnd_13_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_13_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -704,7 +704,7 @@ if = { limit = { var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder var:bf
 }
 bfl_redeem_sovereign_bond_13 = {
 bfl_accrue_bond_13 = yes
-if = { limit = { var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder
+if = { limit = { country_exists = this var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_13_face add = var:bfl_bnd_13_due } }
     save_scope_as = bfl_bond_issuer
@@ -738,7 +738,7 @@ if = { limit = { var:bfl_bnd_14_active = 1 bfl_period > var:bfl_bnd_14_last_accr
 }
 bfl_service_bond_14 = {
 bfl_accrue_bond_14 = yes
-if = { limit = { var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder var:bfl_bnd_14_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder var:bfl_bnd_14_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_14_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -760,7 +760,7 @@ if = { limit = { var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder var:bf
 }
 bfl_redeem_sovereign_bond_14 = {
 bfl_accrue_bond_14 = yes
-if = { limit = { var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder
+if = { limit = { country_exists = this var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_14_face add = var:bfl_bnd_14_due } }
     save_scope_as = bfl_bond_issuer
@@ -794,7 +794,7 @@ if = { limit = { var:bfl_bnd_15_active = 1 bfl_period > var:bfl_bnd_15_last_accr
 }
 bfl_service_bond_15 = {
 bfl_accrue_bond_15 = yes
-if = { limit = { var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder var:bfl_bnd_15_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder var:bfl_bnd_15_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_15_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -816,7 +816,7 @@ if = { limit = { var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder var:bf
 }
 bfl_redeem_sovereign_bond_15 = {
 bfl_accrue_bond_15 = yes
-if = { limit = { var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder
+if = { limit = { country_exists = this var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_15_face add = var:bfl_bnd_15_due } }
     save_scope_as = bfl_bond_issuer
@@ -850,7 +850,7 @@ if = { limit = { var:bfl_bnd_16_active = 1 bfl_period > var:bfl_bnd_16_last_accr
 }
 bfl_service_bond_16 = {
 bfl_accrue_bond_16 = yes
-if = { limit = { var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder var:bfl_bnd_16_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder var:bfl_bnd_16_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_16_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -872,7 +872,7 @@ if = { limit = { var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder var:bf
 }
 bfl_redeem_sovereign_bond_16 = {
 bfl_accrue_bond_16 = yes
-if = { limit = { var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder
+if = { limit = { country_exists = this var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_16_face add = var:bfl_bnd_16_due } }
     save_scope_as = bfl_bond_issuer
@@ -906,7 +906,7 @@ if = { limit = { var:bfl_bnd_17_active = 1 bfl_period > var:bfl_bnd_17_last_accr
 }
 bfl_service_bond_17 = {
 bfl_accrue_bond_17 = yes
-if = { limit = { var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder var:bfl_bnd_17_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder var:bfl_bnd_17_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_17_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -928,7 +928,7 @@ if = { limit = { var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder var:bf
 }
 bfl_redeem_sovereign_bond_17 = {
 bfl_accrue_bond_17 = yes
-if = { limit = { var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder
+if = { limit = { country_exists = this var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_17_face add = var:bfl_bnd_17_due } }
     save_scope_as = bfl_bond_issuer
@@ -962,7 +962,7 @@ if = { limit = { var:bfl_bnd_18_active = 1 bfl_period > var:bfl_bnd_18_last_accr
 }
 bfl_service_bond_18 = {
 bfl_accrue_bond_18 = yes
-if = { limit = { var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder var:bfl_bnd_18_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder var:bfl_bnd_18_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_18_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -984,7 +984,7 @@ if = { limit = { var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder var:bf
 }
 bfl_redeem_sovereign_bond_18 = {
 bfl_accrue_bond_18 = yes
-if = { limit = { var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder
+if = { limit = { country_exists = this var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_18_face add = var:bfl_bnd_18_due } }
     save_scope_as = bfl_bond_issuer
@@ -1018,7 +1018,7 @@ if = { limit = { var:bfl_bnd_19_active = 1 bfl_period > var:bfl_bnd_19_last_accr
 }
 bfl_service_bond_19 = {
 bfl_accrue_bond_19 = yes
-if = { limit = { var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder var:bfl_bnd_19_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder var:bfl_bnd_19_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_19_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1040,7 +1040,7 @@ if = { limit = { var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder var:bf
 }
 bfl_redeem_sovereign_bond_19 = {
 bfl_accrue_bond_19 = yes
-if = { limit = { var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder
+if = { limit = { country_exists = this var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_19_face add = var:bfl_bnd_19_due } }
     save_scope_as = bfl_bond_issuer
@@ -1074,7 +1074,7 @@ if = { limit = { var:bfl_bnd_20_active = 1 bfl_period > var:bfl_bnd_20_last_accr
 }
 bfl_service_bond_20 = {
 bfl_accrue_bond_20 = yes
-if = { limit = { var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder var:bfl_bnd_20_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder var:bfl_bnd_20_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_20_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1096,7 +1096,7 @@ if = { limit = { var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder var:bf
 }
 bfl_redeem_sovereign_bond_20 = {
 bfl_accrue_bond_20 = yes
-if = { limit = { var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder
+if = { limit = { country_exists = this var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_20_face add = var:bfl_bnd_20_due } }
     save_scope_as = bfl_bond_issuer
@@ -1130,7 +1130,7 @@ if = { limit = { var:bfl_bnd_21_active = 1 bfl_period > var:bfl_bnd_21_last_accr
 }
 bfl_service_bond_21 = {
 bfl_accrue_bond_21 = yes
-if = { limit = { var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder var:bfl_bnd_21_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder var:bfl_bnd_21_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_21_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1152,7 +1152,7 @@ if = { limit = { var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder var:bf
 }
 bfl_redeem_sovereign_bond_21 = {
 bfl_accrue_bond_21 = yes
-if = { limit = { var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder
+if = { limit = { country_exists = this var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_21_face add = var:bfl_bnd_21_due } }
     save_scope_as = bfl_bond_issuer
@@ -1186,7 +1186,7 @@ if = { limit = { var:bfl_bnd_22_active = 1 bfl_period > var:bfl_bnd_22_last_accr
 }
 bfl_service_bond_22 = {
 bfl_accrue_bond_22 = yes
-if = { limit = { var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder var:bfl_bnd_22_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder var:bfl_bnd_22_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_22_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1208,7 +1208,7 @@ if = { limit = { var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder var:bf
 }
 bfl_redeem_sovereign_bond_22 = {
 bfl_accrue_bond_22 = yes
-if = { limit = { var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder
+if = { limit = { country_exists = this var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_22_face add = var:bfl_bnd_22_due } }
     save_scope_as = bfl_bond_issuer
@@ -1242,7 +1242,7 @@ if = { limit = { var:bfl_bnd_23_active = 1 bfl_period > var:bfl_bnd_23_last_accr
 }
 bfl_service_bond_23 = {
 bfl_accrue_bond_23 = yes
-if = { limit = { var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder var:bfl_bnd_23_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder var:bfl_bnd_23_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_23_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1264,7 +1264,7 @@ if = { limit = { var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder var:bf
 }
 bfl_redeem_sovereign_bond_23 = {
 bfl_accrue_bond_23 = yes
-if = { limit = { var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder
+if = { limit = { country_exists = this var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_23_face add = var:bfl_bnd_23_due } }
     save_scope_as = bfl_bond_issuer
@@ -1298,7 +1298,7 @@ if = { limit = { var:bfl_bnd_24_active = 1 bfl_period > var:bfl_bnd_24_last_accr
 }
 bfl_service_bond_24 = {
 bfl_accrue_bond_24 = yes
-if = { limit = { var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder var:bfl_bnd_24_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder var:bfl_bnd_24_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_24_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1320,7 +1320,7 @@ if = { limit = { var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder var:bf
 }
 bfl_redeem_sovereign_bond_24 = {
 bfl_accrue_bond_24 = yes
-if = { limit = { var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder
+if = { limit = { country_exists = this var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_24_face add = var:bfl_bnd_24_due } }
     save_scope_as = bfl_bond_issuer
@@ -1354,7 +1354,7 @@ if = { limit = { var:bfl_bnd_25_active = 1 bfl_period > var:bfl_bnd_25_last_accr
 }
 bfl_service_bond_25 = {
 bfl_accrue_bond_25 = yes
-if = { limit = { var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder var:bfl_bnd_25_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder var:bfl_bnd_25_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_25_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1376,7 +1376,7 @@ if = { limit = { var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder var:bf
 }
 bfl_redeem_sovereign_bond_25 = {
 bfl_accrue_bond_25 = yes
-if = { limit = { var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder
+if = { limit = { country_exists = this var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_25_face add = var:bfl_bnd_25_due } }
     save_scope_as = bfl_bond_issuer
@@ -1410,7 +1410,7 @@ if = { limit = { var:bfl_bnd_26_active = 1 bfl_period > var:bfl_bnd_26_last_accr
 }
 bfl_service_bond_26 = {
 bfl_accrue_bond_26 = yes
-if = { limit = { var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder var:bfl_bnd_26_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder var:bfl_bnd_26_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_26_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1432,7 +1432,7 @@ if = { limit = { var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder var:bf
 }
 bfl_redeem_sovereign_bond_26 = {
 bfl_accrue_bond_26 = yes
-if = { limit = { var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder
+if = { limit = { country_exists = this var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_26_face add = var:bfl_bnd_26_due } }
     save_scope_as = bfl_bond_issuer
@@ -1466,7 +1466,7 @@ if = { limit = { var:bfl_bnd_27_active = 1 bfl_period > var:bfl_bnd_27_last_accr
 }
 bfl_service_bond_27 = {
 bfl_accrue_bond_27 = yes
-if = { limit = { var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder var:bfl_bnd_27_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder var:bfl_bnd_27_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_27_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1488,7 +1488,7 @@ if = { limit = { var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder var:bf
 }
 bfl_redeem_sovereign_bond_27 = {
 bfl_accrue_bond_27 = yes
-if = { limit = { var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder
+if = { limit = { country_exists = this var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_27_face add = var:bfl_bnd_27_due } }
     save_scope_as = bfl_bond_issuer
@@ -1522,7 +1522,7 @@ if = { limit = { var:bfl_bnd_28_active = 1 bfl_period > var:bfl_bnd_28_last_accr
 }
 bfl_service_bond_28 = {
 bfl_accrue_bond_28 = yes
-if = { limit = { var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder var:bfl_bnd_28_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder var:bfl_bnd_28_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_28_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1544,7 +1544,7 @@ if = { limit = { var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder var:bf
 }
 bfl_redeem_sovereign_bond_28 = {
 bfl_accrue_bond_28 = yes
-if = { limit = { var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder
+if = { limit = { country_exists = this var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_28_face add = var:bfl_bnd_28_due } }
     save_scope_as = bfl_bond_issuer
@@ -1578,7 +1578,7 @@ if = { limit = { var:bfl_bnd_29_active = 1 bfl_period > var:bfl_bnd_29_last_accr
 }
 bfl_service_bond_29 = {
 bfl_accrue_bond_29 = yes
-if = { limit = { var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder var:bfl_bnd_29_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder var:bfl_bnd_29_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_29_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1600,7 +1600,7 @@ if = { limit = { var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder var:bf
 }
 bfl_redeem_sovereign_bond_29 = {
 bfl_accrue_bond_29 = yes
-if = { limit = { var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder
+if = { limit = { country_exists = this var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_29_face add = var:bfl_bnd_29_due } }
     save_scope_as = bfl_bond_issuer
@@ -1634,7 +1634,7 @@ if = { limit = { var:bfl_bnd_30_active = 1 bfl_period > var:bfl_bnd_30_last_accr
 }
 bfl_service_bond_30 = {
 bfl_accrue_bond_30 = yes
-if = { limit = { var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder var:bfl_bnd_30_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder var:bfl_bnd_30_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_30_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1656,7 +1656,7 @@ if = { limit = { var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder var:bf
 }
 bfl_redeem_sovereign_bond_30 = {
 bfl_accrue_bond_30 = yes
-if = { limit = { var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder
+if = { limit = { country_exists = this var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_30_face add = var:bfl_bnd_30_due } }
     save_scope_as = bfl_bond_issuer
@@ -1690,7 +1690,7 @@ if = { limit = { var:bfl_bnd_31_active = 1 bfl_period > var:bfl_bnd_31_last_accr
 }
 bfl_service_bond_31 = {
 bfl_accrue_bond_31 = yes
-if = { limit = { var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder var:bfl_bnd_31_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder var:bfl_bnd_31_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_31_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1712,7 +1712,7 @@ if = { limit = { var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder var:bf
 }
 bfl_redeem_sovereign_bond_31 = {
 bfl_accrue_bond_31 = yes
-if = { limit = { var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder
+if = { limit = { country_exists = this var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_31_face add = var:bfl_bnd_31_due } }
     save_scope_as = bfl_bond_issuer
@@ -1746,7 +1746,7 @@ if = { limit = { var:bfl_bnd_32_active = 1 bfl_period > var:bfl_bnd_32_last_accr
 }
 bfl_service_bond_32 = {
 bfl_accrue_bond_32 = yes
-if = { limit = { var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder var:bfl_bnd_32_due > 0
+if = { limit = { country_exists = this var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder var:bfl_bnd_32_due > 0
     NOT = { has_variable = bfl_bond_guard } }
     save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
     var:bfl_bnd_32_holder = { save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }
@@ -1768,7 +1768,7 @@ if = { limit = { var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder var:bf
 }
 bfl_redeem_sovereign_bond_32 = {
 bfl_accrue_bond_32 = yes
-if = { limit = { var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder
+if = { limit = { country_exists = this var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder
     NOT = { has_variable = bfl_bond_guard }
     gold >= { value = var:bfl_bnd_32_face add = var:bfl_bnd_32_due } }
     save_scope_as = bfl_bond_issuer
@@ -1827,37 +1827,37 @@ bfl_service_bond_32 = yes
 bfl_settle_held_sovereign_bonds = {
 save_scope_as = bfl_bond_processing_holder
 every_country = { limit = { has_variable = bfl_bond_schema }
-if = { limit = { var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = scope:bfl_bond_processing_holder } bfl_service_bond_01 = yes }
-if = { limit = { var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = scope:bfl_bond_processing_holder } bfl_service_bond_02 = yes }
-if = { limit = { var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = scope:bfl_bond_processing_holder } bfl_service_bond_03 = yes }
-if = { limit = { var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = scope:bfl_bond_processing_holder } bfl_service_bond_04 = yes }
-if = { limit = { var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = scope:bfl_bond_processing_holder } bfl_service_bond_05 = yes }
-if = { limit = { var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = scope:bfl_bond_processing_holder } bfl_service_bond_06 = yes }
-if = { limit = { var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = scope:bfl_bond_processing_holder } bfl_service_bond_07 = yes }
-if = { limit = { var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = scope:bfl_bond_processing_holder } bfl_service_bond_08 = yes }
-if = { limit = { var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = scope:bfl_bond_processing_holder } bfl_service_bond_09 = yes }
-if = { limit = { var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = scope:bfl_bond_processing_holder } bfl_service_bond_10 = yes }
-if = { limit = { var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = scope:bfl_bond_processing_holder } bfl_service_bond_11 = yes }
-if = { limit = { var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = scope:bfl_bond_processing_holder } bfl_service_bond_12 = yes }
-if = { limit = { var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = scope:bfl_bond_processing_holder } bfl_service_bond_13 = yes }
-if = { limit = { var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = scope:bfl_bond_processing_holder } bfl_service_bond_14 = yes }
-if = { limit = { var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = scope:bfl_bond_processing_holder } bfl_service_bond_15 = yes }
-if = { limit = { var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = scope:bfl_bond_processing_holder } bfl_service_bond_16 = yes }
-if = { limit = { var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = scope:bfl_bond_processing_holder } bfl_service_bond_17 = yes }
-if = { limit = { var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = scope:bfl_bond_processing_holder } bfl_service_bond_18 = yes }
-if = { limit = { var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = scope:bfl_bond_processing_holder } bfl_service_bond_19 = yes }
-if = { limit = { var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = scope:bfl_bond_processing_holder } bfl_service_bond_20 = yes }
-if = { limit = { var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = scope:bfl_bond_processing_holder } bfl_service_bond_21 = yes }
-if = { limit = { var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = scope:bfl_bond_processing_holder } bfl_service_bond_22 = yes }
-if = { limit = { var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = scope:bfl_bond_processing_holder } bfl_service_bond_23 = yes }
-if = { limit = { var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = scope:bfl_bond_processing_holder } bfl_service_bond_24 = yes }
-if = { limit = { var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = scope:bfl_bond_processing_holder } bfl_service_bond_25 = yes }
-if = { limit = { var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = scope:bfl_bond_processing_holder } bfl_service_bond_26 = yes }
-if = { limit = { var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = scope:bfl_bond_processing_holder } bfl_service_bond_27 = yes }
-if = { limit = { var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = scope:bfl_bond_processing_holder } bfl_service_bond_28 = yes }
-if = { limit = { var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = scope:bfl_bond_processing_holder } bfl_service_bond_29 = yes }
-if = { limit = { var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = scope:bfl_bond_processing_holder } bfl_service_bond_30 = yes }
-if = { limit = { var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = scope:bfl_bond_processing_holder } bfl_service_bond_31 = yes }
-if = { limit = { var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = scope:bfl_bond_processing_holder } bfl_service_bond_32 = yes }
+if = { limit = { var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = scope:bfl_bond_processing_holder } bfl_service_bond_01 = yes }
+if = { limit = { var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = scope:bfl_bond_processing_holder } bfl_service_bond_02 = yes }
+if = { limit = { var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = scope:bfl_bond_processing_holder } bfl_service_bond_03 = yes }
+if = { limit = { var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = scope:bfl_bond_processing_holder } bfl_service_bond_04 = yes }
+if = { limit = { var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = scope:bfl_bond_processing_holder } bfl_service_bond_05 = yes }
+if = { limit = { var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = scope:bfl_bond_processing_holder } bfl_service_bond_06 = yes }
+if = { limit = { var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = scope:bfl_bond_processing_holder } bfl_service_bond_07 = yes }
+if = { limit = { var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = scope:bfl_bond_processing_holder } bfl_service_bond_08 = yes }
+if = { limit = { var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = scope:bfl_bond_processing_holder } bfl_service_bond_09 = yes }
+if = { limit = { var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = scope:bfl_bond_processing_holder } bfl_service_bond_10 = yes }
+if = { limit = { var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = scope:bfl_bond_processing_holder } bfl_service_bond_11 = yes }
+if = { limit = { var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = scope:bfl_bond_processing_holder } bfl_service_bond_12 = yes }
+if = { limit = { var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = scope:bfl_bond_processing_holder } bfl_service_bond_13 = yes }
+if = { limit = { var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = scope:bfl_bond_processing_holder } bfl_service_bond_14 = yes }
+if = { limit = { var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = scope:bfl_bond_processing_holder } bfl_service_bond_15 = yes }
+if = { limit = { var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = scope:bfl_bond_processing_holder } bfl_service_bond_16 = yes }
+if = { limit = { var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = scope:bfl_bond_processing_holder } bfl_service_bond_17 = yes }
+if = { limit = { var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = scope:bfl_bond_processing_holder } bfl_service_bond_18 = yes }
+if = { limit = { var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = scope:bfl_bond_processing_holder } bfl_service_bond_19 = yes }
+if = { limit = { var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = scope:bfl_bond_processing_holder } bfl_service_bond_20 = yes }
+if = { limit = { var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = scope:bfl_bond_processing_holder } bfl_service_bond_21 = yes }
+if = { limit = { var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = scope:bfl_bond_processing_holder } bfl_service_bond_22 = yes }
+if = { limit = { var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = scope:bfl_bond_processing_holder } bfl_service_bond_23 = yes }
+if = { limit = { var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = scope:bfl_bond_processing_holder } bfl_service_bond_24 = yes }
+if = { limit = { var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = scope:bfl_bond_processing_holder } bfl_service_bond_25 = yes }
+if = { limit = { var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = scope:bfl_bond_processing_holder } bfl_service_bond_26 = yes }
+if = { limit = { var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = scope:bfl_bond_processing_holder } bfl_service_bond_27 = yes }
+if = { limit = { var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = scope:bfl_bond_processing_holder } bfl_service_bond_28 = yes }
+if = { limit = { var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = scope:bfl_bond_processing_holder } bfl_service_bond_29 = yes }
+if = { limit = { var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = scope:bfl_bond_processing_holder } bfl_service_bond_30 = yes }
+if = { limit = { var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = scope:bfl_bond_processing_holder } bfl_service_bond_31 = yes }
+if = { limit = { var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = scope:bfl_bond_processing_holder } bfl_service_bond_32 = yes }
 }
 }

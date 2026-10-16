@@ -1,0 +1,39 @@
+{
+  "recorded": "2026-10-15",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "runtime_sha256": "c0962ecb3bf4f1df8678ac55d7adb7d96c3f22e10b379d71c2ebcf4a4e05434e",
+  "fixture_sha256": "216eaeaaa1c6ce21c70640238a4355774dec391c4028c783392d4a889de81d43",
+  "token": "11da94edd70e493fbf57318d3b39ea45",
+  "passed": false,
+  "financial_assertions_passed": 114,
+  "errors": [
+    "gui/credit.gui:266 - Failed parsing localized text: [loan|e]",
+    "failed reading property, at gui/credit.gui:266"
+  ],
+  "scope": "Initial final-runtime regression failed overall despite all 114 financial assertions passing. The unbaselined [loan|e] label is copied unchanged from native Credit. Retained as a diagnostic limitation; a later passing repeat does not erase this failure.",
+  "earlier_exploration_failure": {
+    "runtime_sha256": "ea8a3624ef03c4f449b9d0eb393b32fe5809623f6c980d035718e76850871587",
+    "fixture_sha256": "e22e1f9b891c1cd9770b7ca704f9f0c0e7083f2cc08f9270e62426e1d31ba9ed",
+    "token": "9819fc59708d4cada4984f48523d34e5",
+    "measurement_assertions": {
+      "logger_control_value": "PASS",
+      "native_issue_debits_lender": "PASS",
+      "native_issue_credits_borrower": "PASS",
+      "native_repayment_debits_84_8": "PASS",
+      "native_repayment_credits_84_8": "PASS",
+      "native_purchase_removes_ten_goods": "PASS",
+      "native_sale_adds_ten_goods": "PASS",
+      "native_sale_requires_custom_custody_guard": "PASS",
+      "native_purchase_clamps_to_two_available": "PASS",
+      "native_purchase_requires_cash_guard": "PASS",
+      "company_funds_native_exploration": "PASS",
+      "exploration_does_not_debit_controller": "PASS",
+      "natural_exploration_progress_observed": "FAIL",
+      "native_trade_executed_volume_observed": "PASS"
+    },
+    "observed_progress": [],
+    "scope": "Earlier M0 attempt observed no positive natural exploration progress and failed. Later positive observations prove feasibility, not universal project completion or reliable outcomes."
+  }
+}

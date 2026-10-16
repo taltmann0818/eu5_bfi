@@ -1,0 +1,15 @@
+# Disposable normal-UI probe. Does not charter the bank or choose its profile.
+c:FLO = {
+    set_gold = 10000
+    capital = { save_scope_as = bfi_ui_capital }
+    create_market = { builder = c:FLO location = scope:bfi_ui_capital price = price:create_market instant = yes price_modifier = 0 }
+}
+c:BRD = {
+    make_subject_of = { target = c:FLO type = subject_type:state_bank }
+    set_gold = 1000
+    set_variable = { name = bfi_ui_identity value = 813 }
+    set_variable = { name = bfi_ui_capital value = capital }
+    set_variable = { name = bfi_ui_buildings value = capital.total_building_levels }
+    give_loan = { target = c:PRZ amount = 120 interest = 0.12 months = 60 }
+}
+debug_log = "BFI_M0_UI|setup_complete"

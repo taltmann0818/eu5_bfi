@@ -97,7 +97,7 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             text_single = { raw_text = "[Country.GetFixedPointCurrencyValue('gold')|2]@gold!" autoresize = yes align = right|nobaseline } } } } } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_asset_legend_footer" } } } }
     }type bfl_asset_bonds_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
-            texture = "gfx/interface/icons/bfl/accounts.dds" } }
+            texture = "[GetConceptTexture('government_bond')]" } }
         blockoverride "title_text" { text = "bfl_asset_bonds_heading" }
         blockoverride "concept_link" { text = "bfl_asset_subtitle" }
         blockoverride "tooltip_content" { vbox = { size = { 420 0 }

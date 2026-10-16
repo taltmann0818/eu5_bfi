@@ -5,6 +5,7 @@
         any_owned_location = { has_building = building_type:stock_exchange }
     }
     bfl_can_trade_sovereign_bonds = {
+        country_exists = this
         OR = {
             AND = { country_type = location bfl_owns_stock_exchange = yes }
             AND = { bfl_is_independent_bank = yes bfl_owns_stock_exchange = yes }
