@@ -1,0 +1,48 @@
+﻿bfl_company_authority = {
+bfl_is_company = yes
+        exists = scope:bfl_company_actor country_exists = scope:bfl_company_actor
+        overlord = scope:bfl_company_actor
+        NOT = { has_variable = bfl_company_guard }
+}
+bfl_company_operating = {
+bfl_company_authority = yes
+        var:bfl_company_mandate > 0
+        any_owned_building = { building_type = building_type:trade_company_headquarters }
+        gold > var:bfl_company_buffer
+}
+bfl_company_trade_valid = {
+bfl_company_operating = yes
+        exists = scope:from exists = scope:to exists = scope:merchant exists = scope:goods
+        scope:from != scope:to
+        bfl_period > var:bfl_company_last_trade
+        var:bfl_company_trade_budget > 0 bfl_company_available >= var:bfl_company_trade_budget
+        can_find_trade_route = { from = scope:from to = scope:to }
+        NOT = { is_embargoed_by = scope:from.owner }
+        NOT = { is_embargoed_by = scope:to.owner }
+        scope:from = {
+            in_trade_range_of = prev
+            NOT = { is_export_banned = scope:goods }
+            market_possible_goods_trade_surplus = { goods = scope:goods country = prev value > 0 }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_company } }
+        }
+        scope:to = { in_trade_range_of = prev NOT = { is_import_banned = scope:goods }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_company } }
+        }
+        scope:merchant = { has_merchant = prev
+            available_merchant_capacity = { country = prev value >= 0.1 }
+        }
+}
+bfl_company_exploration_valid = {
+bfl_company_operating = yes
+        var:bfl_company_mandate = 2 var:bfl_company_project_state != 1
+        modifier:may_explore = yes
+        exists = scope:target exists = scope:character exists = scope:launch_location
+        scope:character = { owner = prev is_valid_for_exploration = yes }
+        scope:launch_location = { is_port = yes }
+        any_owned_building = { location = scope:launch_location }
+        NOT = { has_discovered_area = scope:target }
+        scope:target = { NOT = { is_being_explored = prev } }
+        bfl_company_available >= var:bfl_company_venture_budget
+        var:bfl_company_venture_budget >= 100
+        can_pay_price = price:start_exploration_sea
+}

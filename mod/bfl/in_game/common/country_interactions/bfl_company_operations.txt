@@ -1,0 +1,102 @@
+﻿bfl_company_retain = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 0 } }
+                scope:recipient = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_trade = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 1 } }
+                scope:recipient = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_explore = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 2 } }
+                scope:recipient = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_fund = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor  }
+                scope:recipient = { bfl_company_capitalize = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_select = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+        effect = { if = { limit = { scope:recipient = { bfl_is_company = yes is_subject_of = scope:actor } }
+            scope:actor = { set_variable = { name = bfl_selected_company value = scope:recipient } } } }
+        ai_will_do = { value = 0 }
+    }
+bfl_company_route = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    } select_trigger = { looking_for_a = market target_flag = from
+        name = create_trade_select_from_market column = { data = name }
+        visible = { in_trade_range_of = scope:recipient }
+    }
+select_trigger = { looking_for_a = market target_flag = to
+        name = create_trade_select_to_market column = { data = name }
+        visible = { in_trade_range_of = scope:recipient }
+    }
+select_trigger = { looking_for_a = market target_flag = merchant
+        name = create_trade_select_merchant_market column = { data = name }
+        visible = { in_trade_range_of = scope:recipient }
+    }
+
+        select_trigger = { looking_for_a = goods target_flag = goods name = create_trade_select_goods
+            column = { data = name } visible = { } }
+        effect = { scope:actor = { save_scope_as = bfl_company_actor }
+            scope:recipient = { bfl_execute_company_trade = yes } }
+        ai_will_do = { value = 0 }
+    }
+bfl_company_expedition = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+        column = { data = country_diplomacy_info_loan }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+        select_trigger = { looking_for_a = area target_flag = target name = start_exploration_select_area
+            column = { data = name } visible = { scope:recipient = { NOT = { has_discovered_area = root } } } }
+        select_trigger = { looking_for_a = location target_flag = launch_location name = start_exploration_select_launch_point
+            column = { data = name } visible = { is_port = yes
+                scope:recipient = { any_owned_building = { location = root } } } }
+        select_trigger = { looking_for_a = character source = recipient target_flag = character name = start_exploration_select_character
+            column = { data = character_explorer } visible = { owner = scope:recipient is_valid_for_exploration = yes } }
+        effect = { scope:actor = { save_scope_as = bfl_company_actor }
+            scope:recipient = { bfl_execute_company_exploration = yes } }
+        ai_will_do = { value = 0 }
+    }

@@ -1,17 +1,183 @@
 ﻿bfl_register_company = {
-    if = { limit = { bfl_is_company = yes NOT = { has_variable = bfl_company_schema } }
-        set_variable = { name = bfl_company_schema value = 1 }
-        set_variable = { name = bfl_company_buffer value = 100 }
-        set_variable = { name = bfl_company_mandate value = 0 }
-        set_variable = { name = bfl_company_verified_profit value = 0 }
-        set_variable = { name = bfl_company_last_period value = 0 }
+if = { limit = { bfl_is_company = yes }
+        # Schema 1 saves acquire fields without resetting their cash or policy.
+    if = { limit = { NOT = { has_variable = bfl_company_buffer } }
+            set_variable = { name = bfl_company_buffer value = 100 } }
+if = { limit = { NOT = { has_variable = bfl_company_mandate } }
+            set_variable = { name = bfl_company_mandate value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_verified_profit } }
+            set_variable = { name = bfl_company_verified_profit value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_last_period } }
+            set_variable = { name = bfl_company_last_period value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_trade_budget } }
+            set_variable = { name = bfl_company_trade_budget value = 50 } }
+if = { limit = { NOT = { has_variable = bfl_company_venture_budget } }
+            set_variable = { name = bfl_company_venture_budget value = 100 } }
+if = { limit = { NOT = { has_variable = bfl_company_reinvestment } }
+            set_variable = { name = bfl_company_reinvestment value = 100 } }
+if = { limit = { NOT = { has_variable = bfl_company_payout_ratio } }
+            set_variable = { name = bfl_company_payout_ratio value = 0.25 } }
+if = { limit = { NOT = { has_variable = bfl_company_loss } }
+            set_variable = { name = bfl_company_loss value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_dividend } }
+            set_variable = { name = bfl_company_dividend value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_funding } }
+            set_variable = { name = bfl_company_funding value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_route_count } }
+            set_variable = { name = bfl_company_route_count value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_volume } }
+            set_variable = { name = bfl_company_volume value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_route_profit } }
+            set_variable = { name = bfl_company_route_profit value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_native_net } }
+            set_variable = { name = bfl_company_native_net value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_trade_receipts } }
+            set_variable = { name = bfl_company_trade_receipts value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_facility_count } }
+            set_variable = { name = bfl_company_facility_count value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_project_state } }
+            set_variable = { name = bfl_company_project_state value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_project_cost } }
+            set_variable = { name = bfl_company_project_cost value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_project_progress } }
+            set_variable = { name = bfl_company_project_progress value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_opening_equity } }
+            set_variable = { name = bfl_company_opening_equity value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_last_trade } }
+            set_variable = { name = bfl_company_last_trade value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_statement_count } }
+            set_variable = { name = bfl_company_statement_count value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_ownership_initialized } }
+            set_variable = { name = bfl_company_owner value = overlord }
+            set_variable = { name = bfl_company_opening_equity value = gold }
+            set_variable = bfl_company_ownership_initialized
+        }
+        set_variable = { name = bfl_company_schema value = 2 }
     }
 }
-# Native operating identity, trade routes and native income hooks remain authoritative.
+bfl_company_set_mandate = {
+if = { limit = { bfl_company_authority = yes
+        scope:bfl_company_actor.var:bfl_company_requested_mandate >= 0
+        scope:bfl_company_actor.var:bfl_company_requested_mandate <= 2 }
+        bfl_register_company = yes
+        set_variable = { name = bfl_company_mandate value = scope:bfl_company_actor.var:bfl_company_requested_mandate }
+    }
+}
+bfl_company_capitalize = {
+if = { limit = { bfl_company_authority = yes
+        scope:bfl_company_actor = { gold >= 100 } }
+        bfl_register_company = yes save_scope_as = bfl_company
+        scope:bfl_company_actor = { add_gold = -100 }
+        add_gold = 100 change_variable = { name = bfl_company_funding add = 100 }
+        # Owner contribution has no receipt/profit effect and conveys no bank permission.
+    }
+}
+bfl_execute_company_trade = {
+save_scope_as = bfl_company
+        if = { limit = { bfl_company_trade_valid = yes }
+        create_trade = { from = scope:from to = scope:to merchant = scope:merchant
+            goods = scope:goods desired = 0.1 locked = yes }
+        set_variable = { name = bfl_company_last_trade value = bfl_period }
+        # The budget is reserved cash, not a second charge for native trading costs.
+    }
+}
+bfl_execute_company_exploration = {
+if = { limit = { bfl_company_exploration_valid = yes }
+        set_variable = { name = bfl_company_project_area value = scope:target }
+        set_variable = { name = bfl_company_project_actor value = scope:bfl_company_actor }
+        set_variable = { name = bfl_company_project_explorer value = scope:character }
+        set_variable = { name = bfl_company_cash_before value = gold }
+        start_exploration = { area = scope:target location = scope:launch_location
+            character = scope:character price = price:start_exploration_sea price_modifier = 1 }
+        if = { limit = { num_explorations_including_in_construction > 0 }
+            set_variable = { name = bfl_company_project_state value = 1 }
+            set_variable = { name = bfl_company_project_cost value = { value = var:bfl_company_cash_before subtract = gold } }
+        }
+    }
+}
+bfl_company_project_success = {
+if = { limit = { bfl_is_company = yes
+        var:bfl_company_project_state ?= 1 scope:target = var:bfl_company_project_area }
+        set_variable = { name = bfl_company_project_state value = 2 }
+    }
+}
+bfl_company_project_failure = {
+if = { limit = { bfl_is_company = yes
+        var:bfl_company_project_state ?= 1 scope:target = var:bfl_company_project_area }
+        set_variable = { name = bfl_company_project_state value = 3 }
+    }
+}
+bfl_observe_company_operations = {
+save_scope_as = bfl_operating_company
+        set_variable = { name = bfl_company_route_count value = 0 }
+        set_variable = { name = bfl_company_volume value = 0 }
+        set_variable = { name = bfl_company_route_profit value = 0 }
+        every_trade = { limit = { owner = scope:bfl_operating_company }
+            save_scope_as = bfl_company_route
+            scope:bfl_operating_company = {
+                change_variable = { name = bfl_company_route_count add = 1 }
+                change_variable = { name = bfl_company_volume add = scope:bfl_company_route.trade_volume }
+                change_variable = { name = bfl_company_route_profit add = scope:bfl_company_route.trade_profit }
+            }
+        }
+        set_variable = { name = bfl_company_facility_count value = 0 }
+        every_owned_building = { limit = { owner = scope:bfl_operating_company }
+            scope:bfl_operating_company = { change_variable = { name = bfl_company_facility_count add = 1 } }
+        }
+        every_exploration_from_country = {
+            save_scope_as = bfl_company_exploration
+            scope:bfl_operating_company = {
+                set_variable = { name = bfl_company_project_progress value = scope:bfl_company_exploration.exploration_progress }
+            }
+        }
+}
+bfl_settle_company_income = {
+# One native budget cutoff per period. HQ/direct-overlord income is NEVER
+# copied as a new bank receipt. Retained trade is bounded by executed
+# route profit, native trade income and the net budget after native costs.
+set_variable = { name = bfl_company_native_net value = monthly_balance }
+set_variable = { name = bfl_company_trade_receipts value = monthly_trade_income }
+set_variable = { name = bfl_company_dividend value = 0 }
+set_variable = { name = bfl_company_verified_profit value = 0 }
+if = { limit = { var:bfl_company_native_net < 0 }
+    change_variable = { name = bfl_company_loss add = { value = var:bfl_company_native_net multiply = -1 } }
+}
+if = { limit = { var:bfl_company_volume > 0 }
+    set_variable = { name = bfl_company_verified_profit value = {
+        value = var:bfl_company_route_profit max = var:bfl_company_trade_receipts
+        max = var:bfl_company_native_net min = 0 } }
+}
+set_variable = { name = bfl_company_loss_offset value = {
+    value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
+change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
+change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
+if = { limit = { var:bfl_company_mandate > 0
+    exists = var:bfl_company_owner country_exists = var:bfl_company_owner }
+    set_variable = { name = bfl_company_dividend value = {
+        value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
+        max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
+    add_gold = { value = var:bfl_company_dividend multiply = -1 }
+    var:bfl_company_owner = {
+        add_gold = scope:bfl_operating_company.var:bfl_company_dividend
+        if = { limit = { bfl_is_bank = yes }
+            change_variable = { name = bfl_profit_company add = scope:bfl_operating_company.var:bfl_company_dividend }
+        }
+    }
+}
+}
 bfl_process_company = {
-    bfl_register_company = yes
-    if = { limit = { bfl_period > var:bfl_company_last_period }
-        # No unexplained treasury delta is treated as company earnings.
-        set_variable = { name = bfl_company_last_period value = bfl_period }
+if = { limit = { bfl_is_company = yes }
+        bfl_register_company = yes
+        if = { limit = { bfl_period > var:bfl_company_last_period }
+            # Stamp before dispatch; load/discovery and GUI refresh do not settle.
+            set_variable = { name = bfl_company_last_period value = bfl_period }
+            bfl_observe_company_operations = yes bfl_settle_company_income = yes
+            change_variable = { name = bfl_company_statement_count add = 1 }
+            if = { limit = { var:bfl_company_project_state = 1
+                num_explorations_including_in_construction = 0 }
+                # Cancellation/invalid explorer without a terminal callback is a failure.
+                set_variable = { name = bfl_company_project_state value = 3 }
+            }
+        }
     }
 }

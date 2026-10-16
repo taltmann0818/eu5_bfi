@@ -1,0 +1,4 @@
+﻿bfl_company_view = { scope = country is_shown = { any_subject = { bfl_is_company = yes } } }
+bfl_company_selected_view = { scope = country is_shown = {
+    var:bfl_selected_company ?= { bfl_is_company = yes is_subject_of = prev }
+} }

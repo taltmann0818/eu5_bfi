@@ -1,0 +1,7 @@
+﻿bfl_company_available = {
+value = gold subtract = var:bfl_company_buffer
+        subtract = var:bfl_company_reinvestment
+        # Reserve the complete remaining native claim, not only this month's coupon.
+        every_loan = { subtract = remaining_debt }
+        min = 0
+}

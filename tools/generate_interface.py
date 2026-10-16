@@ -341,7 +341,10 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
         scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 margin = {{ 5 5 }}
             {section('bfl_custom_bonds_title', bond_body, 'bond')} }} }} }}'''
+    from generate_company_operations import company_panel
+    company_controls = company_panel(loc)
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
+        {company_controls}
         {balance_types}
         {sovereign_tooltips}
         type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} {sovereign_accounts} }}
@@ -389,6 +392,8 @@ def build_credit(game, baseline, pin=False):
         insertion=f'\n bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}\n'
         if kind == 'funding':
             insertion += '\n bfl_sovereign_bond_controls = { name = "bfl_sovereign_bond_controls" }\n'
+        else:
+            insertion += '\n bfl_company_controls = { name = "bfl_company_controls" }\n'
         view=view[:end]+insertion+view[end:]
         changes.append(('',insertion))
     search_at=0
