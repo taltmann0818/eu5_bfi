@@ -119,7 +119,7 @@ def initialize():
     bfl_has_valid_controller = {
         bfl_is_chartered_bank = yes
         exists = overlord
-        overlord = {
+        overlord ?= {
             country_exists = this
             country_type = location
             has_reform = government_reform:bfl_state_chartered_bank
@@ -229,7 +229,7 @@ def permissions():
             gate.append('bfl_can_trade_sovereign_bonds = yes')
         if rule.get('advance') or rule.get('native_advance'):
             a = rule.get('native_advance') or 'bfl_'+rule['advance']
-            gate.append(f'OR = {{ AND = {{ bfl_is_independent_bank = yes has_advance = {a} }} AND = {{ bfl_has_valid_controller = yes overlord = {{ has_advance = {a} }} }} }}')
+            gate.append(f'OR = {{ AND = {{ bfl_is_independent_bank = yes has_advance = {a} }} AND = {{ bfl_has_valid_controller = yes overlord ?= {{ has_advance = {a} }} }} }}')
         if rule.get('probe'):
             # No save-game switch can enable an unproved adapter. Change design + regenerate after evidence.
             enabled = 'yes' if TUNE['native_probes'][rule['probe']] else 'no'
@@ -307,10 +307,8 @@ def charter():
             name = bfl_establish_chartered_bank.a
             ai_chance = { value = 100 }
             effect = {
-                if = { limit = { bfl_can_begin_charter = yes }
-                    bfl_prepare_charter_selector = yes
-                    trigger_event_non_silently = bfl_finance.110
-                }
+                custom_tooltip = bfl_charter_begin_tip
+                hidden_effect = { trigger_event_silently = bfl_finance.109 }
             }
         }
     }
@@ -410,15 +408,31 @@ def charter():
             custom_tooltip = bfl_charter_selection_tip
             hidden_effect = {{
                 var:bfl_candidate_{i:02} = {{ save_scope_as = bfl_bank }}
-                bfl_commit_charter = yes
+                trigger_event_silently = bfl_finance.111
             }}
         }}\n'''
         loc(f'bfl_finance.110.bank_{i:02}',f"[ROOT.GetCountry.MakeScope.GetVariable('bfl_candidate_{i:02}').GetCountry.GetName]")
-    events += 'option = { name = bfl_cancel ai_chance = { base = 0 } }\n}\n'
+    events += '''option = { name = bfl_cancel ai_chance = { base = 0 } }\n}
+    bfl_finance.109 = {
+        type = country_event hidden = yes
+        immediate = {
+            if = { limit = { bfl_can_begin_charter = yes }
+                bfl_prepare_charter_selector = yes
+                trigger_event_non_silently = bfl_finance.110
+            }
+        }
+    }
+    # Keep the transactional ledger out of event-option tooltip simulation.
+    bfl_finance.111 = {
+        type = country_event hidden = yes
+        immediate = { bfl_commit_charter = yes }
+    }
+    '''
     write('in_game/events/bfl_finance/bfl_specialization.txt', events)
     loc('bfl_establish_chartered_bank.title','Establish a State Chartered Bank')
     loc('bfl_establish_chartered_bank.desc','Convert one existing State Bank in place and gain Banking Traditions when the charter is completed. The current-age investment of 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold is transferred to its treasury as state equity. You must own your capital market. Select a bank before any payment or research occurs.')
     loc('bfl_establish_chartered_bank.a','Select the existing State Bank')
+    loc('bfl_charter_begin_tip','Open the eligible State Bank selector. No money or research changes until a bank is selected; Cancel leaves both treasuries unchanged.')
     loc('bfl_charter_selection_tip',"Transfer [ROOT.GetCountry.MakeScope.ScriptValue('bfl_charter_investment')|0]@gold! to the selected bank as new state equity. Preserve its country, buildings, existing claims and obligations, then choose its permanent specialization.")
     loc('bfl_state_chartered_bank','State Chartered Bank')
     loc('bfl_state_chartered_bank_desc','A separately funded native bank subject. The sovereign initially owns all shares and sets the monthly dividend payout in Credit. New bank subscriptions raise capital and dilute existing ownership. State deposits earn preferential interest.')
@@ -740,13 +754,44 @@ def hooks_and_commands():
     bfl_human_alerts = { effect = { bfl_refresh_alerts = yes } }
     cmf_on_country_transfer = { on_actions = { bfl_transfer_refresh } }
     bfl_transfer_refresh = { effect = { bfl_refresh_alerts = yes } }
+    cmf_on_callback = { on_actions = { bfl_presentation_changed } }
+    bfl_presentation_changed = { effect = {
+        if = { limit = { OR = {
+            var:cmf_callback ?= flag:bfl_banking_finance_companies__finance_notifications
+            var:cmf_callback ?= flag:bfl_banking_finance_companies__expanded_details
+            var:cmf_callback ?= flag:bfl_banking_finance_companies__reduced_motion
+        } } bfl_refresh_alerts = yes }
+    } }
+    ''')
+    common('scripted_triggers','presentation','''
+    bfl_finance_notifications_enabled = {
+        trigger_if = { limit = { has_variable_map = cmm }
+            NOT = { "variable_map(cmm|flag:bfl_banking_finance_companies__finance_notifications)" ?= 0 }
+        }
+        trigger_else = { always = yes }
+    }
+    bfl_expanded_details_enabled = {
+        trigger_if = { limit = { has_variable_map = cmm }
+            "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" ?= 1
+        }
+        trigger_else = { always = no }
+    }
+    ''')
+    common('scripted_guis','presentation','''
+    bfl_presentation_details = { scope = country is_shown = { bfl_expanded_details_enabled = yes } }
     ''')
     registration=''
     for setting,default in [('reduced_motion',1),('expanded_details',0),('finance_notifications',1)]:
         registration += f'cmm_register_bool_setting = {{ mod_id = bfl_banking_finance_companies setting_id = {setting} tab_id = presentation group_id = interface default_value = {default} }}\n'
     common('scripted_effects','cmf_registration',effect('bfl_register_cmf_presentation',registration)+'''
     bfl_refresh_alerts = {
-        if = { limit = { is_ai = no bfl_has_management = yes has_global_variable = cmf_active }
+        if = { limit = { has_variable = bfl_alert_active OR = {
+            NOT = { bfl_has_management = yes } NOT = { bfl_finance_notifications_enabled = yes }
+        } }
+            cmf_remove_alert = { alert = bfl_liquidity_warning }
+            remove_variable = bfl_alert_active
+        }
+        if = { limit = { is_ai = no bfl_has_management = yes has_global_variable = cmf_active bfl_finance_notifications_enabled = yes }
             bfl_resolve_command_bank = yes
             if = { limit = { scope:bfl_bank = { var:bfl_state >= 2 } NOT = { has_variable = bfl_alert_active } }
                 cmf_set_alert_open_view = { alert = bfl_liquidity_warning view = economy }

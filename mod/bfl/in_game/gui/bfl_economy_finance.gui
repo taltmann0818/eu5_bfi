@@ -1441,7 +1441,9 @@
                 icon = { size = { 30 30 } parentanchor = center alwaystransparent = yes texture = "gfx/interface/icons/bfl/accounts.dds" } } } } }
         hbox = { spacing = 8 tooltipwidget = { bfl_operating_cost_tooltip = { } }
             text_single = { text = "bfl_operating_costs" autoresize = yes fontsize = 12 }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_expense')|2]@gold!" autoresize = yes fontsize = 12 } } } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_expense')|2]@gold!" autoresize = yes fontsize = 12 } } }text_multi = { text = "bfl_expanded_accounting_detail" autoresize = yes fontsize = 11
+        layoutpolicy_horizontal = expanding
+        visible = "[GetScriptedGui('bfl_presentation_details').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" } hbox = { layoutpolicy_horizontal = expanding spacing = 14 margin = { 10 0 }
         hbox = { spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = { using = CreditworthinessTooltip }
             icon = { texture = "gfx/interface/icons/bfl/collateral.dds" size = { 18 18 } } text_single = { text = "bfl_state_credit_value" autoresize = yes fontsize = 12 } }
         hbox = { spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = { using = BankInterest_tooltip }

@@ -41,3 +41,14 @@ Captured on 15 October 2026 at 2560 × 1440, EUV 1.4.1 / build 25905365, CMF 2.5
 - [Native bond asset tooltip and holder ledger](13-native-bond-assets-ledger.png): native icon in the asset tooltip; Florence's 100-gold claim is 8.34% of Bardi's assets; the scrolled ledger shows the fixed 3% coupon, current holder and native-icon redemption control.
 
 These captures inspect current Credit presentation only. They do not show a new secondary securities GUI: the user confirmed that the mini exchange belongs to M5. Its implementing PR must include actual screenshots of populated secondary equity and bond listings, portfolio/order controls and eligibility states, as required by [the coverage plan](../coverage.md#691-mini-exchange-bank-shares-first).
+
+## M0 completion captures
+
+Captured on 16 October 2026 with EUV 1.4.1 / build 25905365 and CMF 2.5.0, modded checksum `bc34`, runtime SHA-256 `4afd588f84b66062f7052b01d41b92f39105d6e3853304bd7c4cd9c81938f5f5`. The game is windowed at 1280×720; raw PNGs include the window border. These are actual game captures, without resizing or compositing.
+
+The disposable normal-charter fixture initializes controlled wallets and a native 120-gold claim. The tester uses the real decision, Cancel, Bardi selection, Merchant Finance profile, Debt-first and Off buttons. The [25-observation UI record](../../tests/results/2026-10-16-m0-ui-completion.json) verifies those actions. After that record, the tester uses the actual Borrow 100 control: Bardi 1,380 → 1,280, sovereign 9,504.07 → 9,604.07. The funded 100-gold custom bond has a fixed 3% annual coupon and 0.25 monthly obligation, with zero coupons paid. Time advances naturally to 14 April 1337; no coupon is backdated or staged.
+
+- [Credit at 60% GUI scale](14-m0-credit-1280.png): real funded bond, native government-bond artwork, bank accounts and issuance controls at the native recommended scale for this resolution.
+- [Credit at 50% GUI scale](15-m0-credit-1280-scale50.png): the same paused bank/claim, with the complete Credit overview and native bond controls at the minimum GUI scale.
+
+[The visual record](../../tests/results/2026-10-16-m0-visual-completion.json) hashes both captures and their scoped sources. All scoped GUI/command/localization files are unchanged in the final runtime `68f8d2a7a0a8a75747ed7329c35d282c685a24c60e11d70a9bccdff6e024072d`. Its only later correction safely handles absent CMM preference maps, validated by the final engine suites. Historical captures above keep their original provenance. M0 is complete; release-wide layouts/languages/mod compatibility remain M10 work. The dedicated secondary equity/bond listings GUI and its screenshots remain in the user-confirmed M5 scope.

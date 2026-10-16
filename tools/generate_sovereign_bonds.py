@@ -45,7 +45,7 @@ def generate(common, effect, loc, tune):
         OR = {
             AND = { country_type = location bfl_owns_stock_exchange = yes }
             AND = { bfl_is_independent_bank = yes bfl_owns_stock_exchange = yes }
-            AND = { bfl_has_valid_controller = yes overlord = { bfl_owns_stock_exchange = yes } }
+            AND = { bfl_has_valid_controller = yes overlord ?= { bfl_owns_stock_exchange = yes } }
         }
         NOT = { has_variable = bfl_bond_guard }
     }

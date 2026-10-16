@@ -17,6 +17,8 @@ SOURCES=[
  'in_game/common/building_types/trade_company_buildings.txt','in_game/common/building_types/unique_buildings.txt',
  'in_game/common/building_types/market_buildings.txt','in_game/common/advances/1_building_unlocks.txt',
  'in_game/common/building_types/capital_buildings.txt','in_game/common/advances/0_age_of_absolutism.txt',
+ 'in_game/common/subject_types/trade_company.txt','in_game/common/prices/03_diplomacy.txt',
+ 'loading_screen/common/defines/00_defines.txt',
  'main_menu/common/game_concepts/00_game_concepts.txt',
  'main_menu/gfx/interface/icons/flat_icons/balance/government_bond.dds',
  'main_menu/gfx/interface/illustrations/institutions/banking.dds',
@@ -34,7 +36,9 @@ SOURCES=[
 ]
 CMF_SOURCES=['.metadata/metadata.json','in_game/common/on_action/cmf_on_actions.txt',
  'in_game/common/scripted_effects/cmf_alert_effects.txt','in_game/common/scripted_effects/cmf_log_effects.txt',
- 'in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt']
+ 'in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt',
+ 'in_game/common/scripted_effects/cmm_core_reset_effects.txt',
+ 'in_game/common/scripted_guis/cmm_settings_scripted_gui.txt']
 
 
 def sha(path):

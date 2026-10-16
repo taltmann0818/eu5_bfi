@@ -7,7 +7,7 @@
   "checksum_file": "f2abcc5053c43f1979de8910637063ec",
   "displayed_checksum": "9788 (BFI_dev main-menu resource load; modded checksum, not a clean-vanilla checksum)",
   "cmf_version": "2.5.0",
-  "runtime_probes": "User authorized Florence testing on 2026-10-14. Focused campaign evidence is recorded per runtime hash in tests/results; full P01-P12 acceptance remains incomplete.",
+  "runtime_probes": "M0 single-player native feasibility audit completed on 2026-10-16. Engine, normal UI and visual evidence are recorded separately in tests/results/2026-10-16-m0-*.json; later product adapters and campaign acceptance remain documented in coverage.md.",
   "game_sources": {
     "in_game/gui/credit.gui": "9e53368c3fda0e0d3a37654565d7acf24f3c770361029988199fea0daaa010a6",
     "in_game/gui/technology_lateralview.gui": "266056e24bc159e77de1e37408b97dff834548debb99429449325b4ff419ece8",
@@ -23,6 +23,8 @@
     "in_game/common/advances/1_building_unlocks.txt": "16cf96d54d506411b3baeb1c50df322cfb987ffe16244bdfd4a9d864563de16a",
     "in_game/common/building_types/capital_buildings.txt": "11ef4f45e40b9a20573487837ce04450c339a6990f2c5f3322a3b29277425f7f",
     "in_game/common/advances/0_age_of_absolutism.txt": "80e397a83dda17c7425777d7199870c7f9c0594b4e95f01e84ba7daa146debea",
+    "in_game/common/subject_types/trade_company.txt": "18b036e6e42b1465bbf32116de88e933f3dcf4df785158f1e60780402539b616",
+    "in_game/common/prices/03_diplomacy.txt": "3460e8e00c7805b4a151ea4681247999270e362979d2114f80b7b0b707922720",
     "main_menu/common/game_concepts/00_game_concepts.txt": "50c26713085e5c0163530aec76ca5d778012476b8d649d42cd736c1ba913d5e9",
     "main_menu/gfx/interface/icons/flat_icons/balance/government_bond.dds": "9b100a4e592b639c5ccd77f7ad1ed008d4a93aae3281a02c7419b604dc0bd69c",
     "main_menu/gfx/interface/illustrations/institutions/banking.dds": "f417a9ba1d256223ede85755eb66d09dcd142e0bbf518758bcbccdfc9b8939d1",
@@ -40,14 +42,18 @@
     "in_game/common/on_action/country_monthly.txt": "c4086b7d8d2a97e4550d5628b91568da83348d997abaebe8bd13d368e0c9b50f",
     "in_game/common/on_action/exploration_mission_monthly.txt": "f08eeff1f402a8088cf3197a81ada58e77c440b6a9fffe55961689296690b22b",
     "in_game/common/on_action/_hardcoded.txt": "8127ede6c32815e0cd9a2ac3d84dbfd1c0dc17dfe2ab55173d87c4ec3f0715c3",
-    "main_menu/common/modifier_type_definitions/00_modifier_types.txt": "85896b7a0f9cdda14ea6ca5c58e8f1e20d18f5ea4c79a664f3e2ca529db0f804"
+    "main_menu/common/modifier_type_definitions/00_modifier_types.txt": "85896b7a0f9cdda14ea6ca5c58e8f1e20d18f5ea4c79a664f3e2ca529db0f804",
+    "loading_screen/common/defines/00_defines.txt": "30cfc03da0874e8ffe0eaf7e44cdbb0bc1d0837b71e360859cd43119aedf8c5f"
   },
   "cmf_sources": {
     ".metadata/metadata.json": "668c214d279f0daf827417d2e280e1f495f0776a8dfd027d889f0c8d6933a5f8",
     "in_game/common/on_action/cmf_on_actions.txt": "3f14e4c92196fc440bca6d10cae4c73d86fe74ea7b0c46041e6a99063911440c",
     "in_game/common/scripted_effects/cmf_alert_effects.txt": "79a7a97d0270802b3149877a66b8f6cd78ed2b27a27c51db23cbce710e8d085c",
     "in_game/common/scripted_effects/cmf_log_effects.txt": "0092eb0cd8fc1da4a13f6eb24da53386d84fd9ff9d896c6447284735482094d4",
-    "in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt": "2305b100729c2238bd44f1f3a8f5a6bb3adaf7d273d188d6d69870b71bba85eb"
+    "in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt": "2305b100729c2238bd44f1f3a8f5a6bb3adaf7d273d188d6d69870b71bba85eb",
+    "in_game/common/scripted_effects/cmm_core_reset_effects.txt": "09b576514ea48bbb9b53e36c4720a2052c2bf350104f7fcad03fd1100e27bf98",
+    "in_game/common/scripted_guis/cmm_settings_scripted_gui.txt": "b5230b8aebc96926d5aed0a0c2c3865d607e5f4bd65827bd99a2ca4067f62126"
   },
-  "graphics_reference_commit": "52fac49f3c189f50a04204b743f19335887f88ad"
+  "graphics_reference_commit": "52fac49f3c189f50a04204b743f19335887f88ad",
+  "audit_extensions_recorded": "2026-10-15"
 }

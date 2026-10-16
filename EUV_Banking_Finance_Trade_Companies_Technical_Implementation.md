@@ -83,16 +83,16 @@ All paths in this table are relative to `GAME`.
 | Installed CMF `.metadata/metadata.json`, `in_game/common/on_action/cmf_on_actions.txt` | CMF 2.5.0 supplies registration, load/transfer, and human-player lifecycle hooks. These supplement the all-institution accounting scheduler. |
 | Installed CMF `in_game/gui/vanilla/` and published extraction coverage | No extracted economy GUI or economy injection slot was found. An explicit, versioned `economy_lateralview.gui` override is required; CMF does not make same-widget overrides automatically composable. |
 
-### 1.3 Native behavior that must be proved
+### 1.3 Native feasibility audit — completed
 
-The local audit verifies definitions and examples; it does not expose the executable's complete bond accounting. [Published effect documentation](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/effects.log) describes country-scope bond issuance, loan-target redemption, loan-scope creditor changes, and country market purchases/sales. These descriptions do not establish bank-directed funding or payment routing.
+M0 is complete for the pinned single-player baseline. The [final audit](docs/m0-probes.md) answers P01–P12 with measured native outcomes, normal UI evidence and explicit unsupported boundaries. The questions below preserve the original engineering requirements; production adapters and broader campaign acceptance belong to later milestones. Source documentation alone does not expose the executable's complete bond accounting. [Published effect documentation](https://raw.githubusercontent.com/Europa-Universalis-5-Modding-Co-op/modding-digests/main/current_docs/effects.log) describes country-scope bond issuance, loan-target redemption, loan-scope creditor changes, and country market purchases/sales. These descriptions do not establish bank-directed funding or payment routing.
 
-Create a small development-only probe mod before the production adapters. Use two banks, one sovereign, one company, and controlled estate balances. For each operation log before/after cash, estate gold, native debt, count, owner, face, rate, and available capacity; advance time through a coupon boundary and save/reload.
+The completed development-only probe suite runs separately from production adapters. Use two banks, one sovereign, one company, and controlled estate balances. For each operation log before/after cash, estate gold, native debt, count, owner, face, rate, and available capacity; advance time through a coupon boundary and save/reload.
 
 | Probe | Exact question | Completion condition |
 | --- | --- | --- |
 | P01 charter | Does `change_subject_type` preserve the same country, buildings, native claims, and mod variables? Does a zero tribute price work? | Same bank and obligations, no automatic native tribute or siphon path. |
-| P02 GUI | Can a player-root command act on a saved subject bank through the synchronized scripted-GUI command? | Controller validated at execution; wrong-controller command rejected; multiplayer identical. |
+| P02 GUI | Can a player-root command act on a saved subject bank through the native scripted-GUI command? | Controller validated at execution; wrong-controller command rejected; single-player authority validated. |
 | P03 sovereign issuance | Native ownership feasibility was audited; the authorized custom ledger replaces that target. | One bank debit and issuer credit; persistent custom identity and no issuance profit. |
 | P04 sovereign holder | Custom current-holder secondary transfer, coupon/redemption and acquisition basis. | Both Stock Exchange research/building gates, funded same-claim settlement, replay and reload. Native ordinary-claim resale remains blocked. |
 | P05 rate | Custom fixed annual coupons, monthly cent carry and prospective controls. | Existing issues never reprice; native note/circulation semantics retain their own gate. |
@@ -102,7 +102,7 @@ Create a small development-only probe mod before the production adapters. Use tw
 | P09 goods | Can a bank purchase/sell at its capital and permitted branch custody? Does requested amount equal executed amount? | Stockpile, cash, price, and capital/access semantics measured. |
 | P10 scheduling | Where are native budget and coupon processing relative to monthly country pulses? | One documented cutoff and one owner for pair settlement; no double monthly execution. |
 | P11 native commands | Can native loan takeover, bonds, trade creation, and exploration be dispatched by the subject actor? | Subject, rather than controller, owns the financial action and pays its cost. |
-| P12 CMF/economy integration | Do CMF 2.5.0 registration/load hooks and the economy override preserve native controls, data contexts, templates, and multiplayer authority? | Finance is usable inside the existing Economy view; native tabs/budgets still work; no BFL action-bar element, launcher, or duplicate settlement. |
+| P12 CMF/economy integration | Do CMF 2.5.0 registration/load hooks and the economy override preserve native controls, data contexts, templates, authority? | Finance is usable inside the existing Economy view; native tabs/budgets still work; no BFL action-bar element, launcher, or duplicate settlement. |
 
 The native country-creditor bridge failed the installed-build probe. On 15 October 2026 the user authorized custom sovereign bonds. The funded issuer-owned custom ledger replaces the native-bond requirement; no custom operation creates or pays a native bond. Other native credit/goods/project adapters retain their own gates. Secondary selling and buying both require the native Stock Exchange advance and an owned built Stock Exchange.
 
@@ -1062,7 +1062,7 @@ onclick = "[GetScriptedGui('bfl_set_royalty_light').Execute(GuiScope.SetRoot(Get
 
 This uses the locally observed `Execute/GuiScope.SetRoot(...).End` pattern. The `bfl_` effect resolves the bank and repeats authority checks internally. Preset commands avoid pretending an unverified slider/amount API exists. For row selections, use the installed `saved_scopes` and generated GUI data-type API after P02, or generate bounded slot-specific commands that resolve the authoritative slot/generation themselves. Never trust an arbitrary client-supplied controller reference.
 
-GUI selection, sorting, pagination, expansion, and hover are presentation state. Read-only widgets and tooltips cannot initialize accounts, settle money, or repeatedly execute effects through animation callbacks. Synchronized commands handle game-state changes; multiplayer testing verifies the command actor and any selected targets.
+GUI selection, sorting, pagination, expansion, and hover are presentation state. Read-only widgets and tooltips cannot initialize accounts, settle money, or repeatedly execute effects through animation callbacks. Synchronized commands handle game-state changes; single-player authority testing verifies the command actor and any selected targets.
 
 ### 17.2 Required in-panel sections
 
@@ -1114,7 +1114,7 @@ Bank score components: expected net yield after funding/operations, borrower/def
 
 Controller AI selects royalty tier against loyalty/capital costs and debt-service prospects, sets bounded payout/facility targets, and authorizes support within fiscal limits. Company AI funds upkeep/buffers, evaluates native routes/construction by margin/capacity, and distributes only eligible earnings. Depositor AI keeps expense buffers and reacts to confidence/exposure.
 
-Review a bounded number of candidates per institution per period, stagger heavier reviews across periods, and retain cooldowns. Avoid all-banks × all-countries or global order-book searches each month. Stable tie-breaking and synchronized randomness preserve deterministic multiplayer behavior.
+Review a bounded number of candidates per institution per period, stagger heavier reviews across periods, and retain cooldowns. Avoid all-banks × all-countries or global order-book searches each month. Stable tie-breaking and synchronized randomness preserve deterministic single-player authority behavior.
 
 ### 17.6 CMF settings, alerts, and action log
 
@@ -1148,7 +1148,7 @@ cmf_set_alert_open_view = {
 cmf_show_alert = { alert = bfl_liquidity_warning }
 ```
 
-Gate repeated show calls by the wrapper's condition/state transition or verified active-alert membership. Clicking opens the existing Economy view, whose finance summary shows the problem; inline expansion is presentation-only. Do not route to a separate finance window or register an action-bar shortcut. Selecting a precise local subsection from an alert requires a separately proven UI callback; opening Economy itself is the source-backed route to validate in P12.
+Gate repeated show calls by the wrapper's condition/state transition or verified active-alert membership. Clicking opens the existing Economy view, whose finance summary shows the problem; inline expansion is presentation-only. Do not route to a separate finance window or register an action-bar shortcut. Selecting a precise local subsection from an alert requires a separately proven UI callback; opening Economy itself is the route validated in P12.
 
 After a successful transaction/policy change, call `cmf_log`, `cmf_log_with_scope_args`, or the installed `cmf_log_decimal_value` from the appropriate actor country scope, with localized BFL action keys. Log charter commitment, accepted debt resale, significant policy changes, and rescue/resolution decisions; avoid flooding the shared log with every accrual or GUI refresh. Log only committed facts and use transaction stamps to prevent duplicates. CMF's log is an inspectable history, not the financial ledger or the authority for native payments.
 
@@ -1236,7 +1236,7 @@ Keep optional runtime model/particle files under `main_menu/gfx/models/bfl/` and
 
 | Stage | Concrete output | Gate to proceed |
 | --- | --- | --- |
-| M0 | Pinned game/CMF 2.5.0 baseline, P01–P12 probes, adapter capability report, native payment observations | Required native bridges plus the authorized custom sovereign-bond replacement, subject authority, CMF hooks and native Economy integration proved; remaining full P01–P12 gates still apply. |
+| M0 — complete | Pinned game/CMF 2.5.0 baseline; P01–P12 native audit; 56 engine assertions, 20 numerical checks, 114 account/bond assertions and separate 25-observation normal UI record. | No M0 checks remain. Native capabilities/limits, country-owned record/guard requirements, funded custom bonds, subject authority, CMF hooks and recorded Economy UI are established for single-player. Later production adapters and release campaigns retain their own milestone gates. |
 | M1 | Charter decision/selector, subject/reform, account schema, profile event/migration, embedded Economy finance/Treasury shell, CMM preferences | Same bank tag; investment once; no tribute; one bank; correct authority/profile; no BFL action bar/launcher. |
 | M2 | Native company registration, routes/facilities/budgets, income classification | Real operating income and direct-overlord streams identified. |
 | M3 | Ordinary sovereign credit/takeover, custom sovereign bonds/facility/Stock Exchange-gated resale/redemption, researched restructuring | Native ordinary debt and custom sovereign bonds pass their respective cash, identity and permission checks in both profiles. |
@@ -1246,7 +1246,7 @@ Keep optional runtime model/particle files under `main_menu/gfx/models/bfl/` and
 | M7 | Discovery operators/commenda/exploration, later company conversion | No discovery-only profit; actual surplus/loss settlement. |
 | M8 | Rate UI, bills/notes, liquidity/clearing/backstops | Correct units, backing, retirement, solvency distinctions. |
 | M9 | Full resolution/contagion/lifecycle cleanup | Losses/recoveries once, debt ownership survives transfer, safe disappearance. |
-| M10 | Full art/FX/localization, AI, compatibility, multiplayer/campaign/balance results | Complete feature matrix passes on identified build. |
+| M10 | Full art/FX/localization, AI, compatibility, campaign/balance results | Complete feature matrix passes on identified build. |
 
 Build player GUI and AI alongside each feature. Implement shared resolution guards and cleanup early; M9 completes the full system. The minimum integrated prototype includes an independent bank, a decision-converted bank, both profiles, funded deposit interest/share dividends and a custom sovereign bond traded by exchange-qualified counterparties. Later research is tested in appropriate-age fixtures, not granted in normal gameplay.
 
@@ -1300,7 +1300,7 @@ Build release staging from an explicit allowlist of `.metadata`, runtime stage f
 | Interbank/guarantee/recapitalization | Liquidity versus equity distinct; actual public cost; coverage and collateral limits. |
 | Bankruptcy/annexation/last building/overlord change | Native cancellation reconciled once; safe references; claims preserved or resolved. |
 | Monthly repeat/callback re-entry/load midway | Period and generation guards prevent duplicate settlement. |
-| Multiplayer and hotjoin/reload | Same command actor/permissions/results; deterministic finance/AI. |
+| Multiplayer — retired | Unsupported by user decision; no multiplayer or hotjoin acceptance remains. Single-player reload/authority checks remain in the relevant product campaigns. |
 | Graphics/localization/FX | No missing texture/key, correct sizes/crops, legible layouts, animation never settles money. |
 
 Use documented EU5 debug mode and generated scripting/GUI docs for the installed build. The [wiki modding overview](https://eu5.paradoxwikis.com/Modding) is a reference entry point, but direct access returned 401 during this audit; exact console commands and dump locations must be checked locally. Retain fresh script/error logs and before/after fixtures under `tests/results`, not inside the Workshop payload.
@@ -1315,7 +1315,7 @@ Expected compatibility touchpoints: native and CMF on-actions, charter subject e
 
 List `in_game/gui/economy_lateralview.gui` as a required override, with baseline native SHA-256 `675763819DE9C0F368761DEC5D01541553C78D9A9E25EA68135A5667BB2D621D`, the inserted finance section, preserved native definitions, and expected CMF 2.5.0 coverage. Other mods replacing this same file require a combined patch. CMF dependency alone does not resolve that collision. Carry any necessary file-scoped constants and ensure other native views still resolve the shared economy templates.
 
-For each game or CMF update, compare both pinned source sets, regenerate docs, re-run P01–P12, verify overrides and economy extraction coverage, then repeat affected fixtures and campaign/multiplayer checks. Update `supported_game_version` and the supported CMF matrix only after passing. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
+For each game or CMF update, compare both pinned source sets, regenerate docs, re-run P01–P12, verify overrides and economy extraction coverage, then repeat affected fixtures and campaign checks. Update `supported_game_version` and the supported CMF matrix only after passing. Publish save-schema changes and downgrade limitations; never promise a safe removal from a save with unpaid mod-managed obligations without a tested wind-down/export path.
 
 ### 19.5 Workshop staging and uploader
 
@@ -1426,8 +1426,8 @@ CMF paths in this table are relative to the installed Workshop framework root fr
 - [Community Mod Framework](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework): required dependency and public integration entry point. [Metadata at audited GitHub commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/.metadata/metadata.json) identifies the development package and explains why it is not the installed 2.5.0 release baseline.
 - [CMF vanilla-widget override documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Improved-Vanilla-Top-Level-Widget-Overrides) and [extraction tool at audited commit](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/blob/38fe85623ada459207adc73fe8acffcd039e71ba/tools/cmf_extract_vanilla_types.py): definition extraction and file-scoped constants; the inspected coverage omits economy. BFL's explicit replacement/definition ownership is specified in section 17.
 - [CMF basic registration](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Basic-Setup), [CMM setup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/CMM-Basic-Setup), and [on-action documentation](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/On-Action-Hooks): public integration conventions, checked against installed 2.5.0 sources; older post-lobby hook names must not override local deprecation comments.
-- [CMF custom alerts](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Custom-Alerts), [action log](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Mod-Action-Log), and [dependency popup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup): framework notification/history/dependency services; exact release-matched calls and GUI template remain part of P12 verification.
+- [CMF custom alerts](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Custom-Alerts), [action log](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Mod-Action-Log), and [dependency popup](https://github.com/Europa-Universalis-5-Modding-Co-op/community-mod-framework/wiki/Dependency-Check-Popup): framework notification/history/dependency services; exact release-matched calls and GUI templates are covered by the completed P12 audit; release compatibility remains M10.
 - [Graphical assets](https://github.com/Europa-Universalis-5-Modding-Co-op/graphical-assets): template reference with no promised banking pack; inspect actual future assets/licenses individually.
 - [pdx-workshop-manager](https://github.com/kaiser-chris/pdx-workshop-manager): publishing workflow reference; installed sample informs the proposed configuration schema.
 
-Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned game/CMF combination, and both player roles pass persistence, multiplayer, performance, and campaign tests. Banking and finance management must work inside the existing Economy panel with native controls preserved and no added BFL action bar or separate finance launcher. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.
+Completion means the full feature set is implemented across both exclusive profiles and their common sovereign core, all required native bridges pass on the pinned game/CMF combination, and both player roles pass persistence, performance, and campaign tests. Banking and finance management must work inside the existing Economy panel with native controls preserved and no added BFL action bar or separate finance launcher. This document supplies the technical design and evidence boundary; no game execution, mod installation, media generation, or Workshop publication was performed while preparing it.

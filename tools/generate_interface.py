@@ -223,6 +223,11 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         hbox = {{ spacing = 8 tooltipwidget = {{ bfl_operating_cost_tooltip = {{ }} }}
             text_single = {{ text = "bfl_operating_costs" autoresize = yes fontsize = 12 }}
             text_single = {{ raw_text = "[{value('operating_expense')}|2]@gold!" autoresize = yes fontsize = 12 }} }} }}'''
+    # Preference belongs to the human viewing country, including a landed controller.
+    loc('bfl_expanded_accounting_detail', 'Cash transfers settle once. Financing and principal are excluded from earned income; unpaid obligations remain recorded.')
+    overview += '''text_multi = { text = "bfl_expanded_accounting_detail" autoresize = yes fontsize = 11
+        layoutpolicy_horizontal = expanding
+        visible = "[GetScriptedGui('bfl_presentation_details').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }'''
     loc('bfl_funding_tab','Funding & Debt')
     loc('bfl_investment_tab','Lending & Investments')
     loc('bfl_financial_advance','Banking advance')

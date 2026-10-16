@@ -11,6 +11,13 @@ import campaign_suite as campaign
 from audit_native import balanced_block
 
 ROOT = Path(__file__).resolve().parents[1]
+EXPLORATION_CONDITIONS = {
+    'native_exploration_construction_days': 1,
+    'normal_native_construction_days': 270,
+    'test_country_preparation_modifier': -0.99,
+    'test_explorer_adm_dip_mil': 90,
+    'completion': 'Observe native positive progress before test-only change_exploration_progress = 1000 exercises the success callback. This is not natural terminal-outcome or ordinary-preparation acceptance.',
+}
 
 
 def gui_effect(key):
@@ -163,10 +170,14 @@ def fixture(token, fingerprint):
         c:GEN = { set_gold = 0 }
         c:SIE = { set_gold = 1000 }
         give_loan = { target = c:SIE amount = 20 interest = 0.12 months = 60 }
+    '''
+    start += measure('P06.bankrupt.before_lender_cash', 'gold')
+    start += '''
         c:SIE = { set_bankruptcy = yes }
     '''
     start += measure('P06.bankrupt.lender_cash', 'gold')
     start += measure('P06.bankrupt.borrower_cash', 'c:SIE.gold')
+    start += check('P06_default_removes_native_claim_without_lender_recovery', 'NOT = { any_lent_loan = { borrower = c:SIE } }')
     start += '''every_lent_loan = { limit = { borrower = c:SIE } save_scope_as = bfi_bankrupt_loan }
         if = { limit = { exists = scope:bfi_bankrupt_loan }
     '''
@@ -205,6 +216,7 @@ def fixture(token, fingerprint):
         c:GEN.capital = { construct_building = { building_type = building_type:trade_company_headquarters owner = c:FLO instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_custom_bonds_title } }
         c:FLO = {
     '''
+    start += check('P12_unregistered_presentation_defaults_are_safe', 'c:SIE = { NOT = { has_variable_map = cmm } bfl_finance_notifications_enabled = yes NOT = { bfl_expanded_details_enabled = yes } }')
     start += '''bfl_register_cmf_presentation = yes
     '''
     start += check('P12_CMM_preferences_registered', '"variable_map(cmm|flag:bfl_banking_finance_companies__reduced_motion)" = 1 "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 0 "variable_map(cmm|flag:bfl_banking_finance_companies__finance_notifications)" = 1')
@@ -216,6 +228,8 @@ def fixture(token, fingerprint):
     start += '''}
         c:BRD = { }
     '''
+    from m0_boundary_probes import fixture as boundary_fixture
+    start += boundary_fixture(check, measure)
     instant_count = cases.copy()
     start += f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
 
@@ -227,6 +241,11 @@ def fixture(token, fingerprint):
     finish += check('P11_native_company_registered', 'c:FLO = { exists = var:bfi_company var:bfi_company = { country_type = building is_subject_type = trade_company bfl_is_company = yes var:bfl_company_schema = 1 } }')
     finish += check('P11_company_trade_actor', 'c:FLO = { var:bfi_company ?= { any_trade = { owner = prev } } }')
     finish += check('P11_company_exploration_actor', 'c:FLO = { var:bfi_company ?= { var:bfi_exploration_created = 1 } }')
+    finish += check('P07_company_hq_landowner_and_overlord_are_distinct', 'c:FLO = { var:bfi_company ?= { overlord = c:FLO var:bfi_hq ?= { owner = prev location.owner = c:GEN } } }')
+    finish += check('P11_native_success_callback_actor_and_area', 'var:bfi_project_success ?= 1 var:bfi_success_operator ?= c:FLO.var:bfi_company var:bfi_success_area ?= area:canadian_atlantic_coast_area exists = var:bfi_success_actor')
+    finish += check('P07_discovery_does_not_invent_verified_company_profit', 'c:FLO = { var:bfi_company ?= { var:bfl_company_verified_profit = 0 NOT = { bfl_is_bank = yes } } }')
+    finish += check('P06_automatic_maturity_renewal_observed', 'c:GEN = { var:bfi_renewed >= 1 }')
+    finish += check('P06_bankruptcy_callback_observed', 'c:SIE = { var:bfi_bankruptcy >= 1 }')
     finish += measure('P06.final.renewed_callbacks', 'c:GEN.var:bfi_renewed')
     finish += measure('P06.final.bankruptcy_callbacks', 'c:SIE.var:bfi_bankruptcy')
     finish += '''set_variable = { name = bfi_annexed_country value = c:SIE }
@@ -262,7 +281,9 @@ def reload_fixture(token, fingerprint):
         'P08_reload_building_and_estate': 'exists = var:bfi_building c:FLO = { exists = var:bfi_estate }',
         'P08_reload_variable_map': 'variable_map_size = { name = bfi_m0_map value = 2 } "variable_map(bfi_m0_map|c:VEN)" = 7 "variable_map(bfi_m0_map|goods:wheat)" = c:FLO',
         'P12_reload_CMM_preference': 'c:FLO = { "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 1 }',
+        'P09_reload_country_owned_custody': 'var:bfi_custody_quantity = 2 var:bfi_custody_encumbered = 2 "variable_map(bfi_custody|goods:wheat)" = 2',
         'P11_reload_native_company': 'c:FLO = { exists = var:bfi_company var:bfi_company = { is_subject_type = trade_company var:bfl_company_schema = 1 } }',
+        'P11_reload_project_callback_metadata': 'var:bfi_project_success ?= 1 var:bfi_success_operator ?= c:FLO.var:bfi_company var:bfi_success_area ?= area:canadian_atlantic_coast_area exists = var:bfi_success_actor',
     }
     body = f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\nc:BRD = {{\n'
     for name, condition in conditions.items():
@@ -299,9 +320,12 @@ def prepare(directory, token=None):
                 bfl_register_company = yes
                 create_trade = { from = c:GEN.capital.market to = c:FLO.capital.market merchant = c:GEN.capital.market goods = goods:wheat desired = 0.1 locked = yes }
                 research_advance = advance_type:mapmaking
-                create_character = { adm = 50 dip = 50 mil = 50 estate = estate_type:burghers_estate save_scope_as = bfi_explorer }
+                add_country_modifier = { modifier = bfi_m0_exploration_preparation months = 24 mode = add_and_extend }
+                create_character = { adm = 90 dip = 90 mil = 90 age = 25 estate = estate_type:burghers_estate save_scope_as = bfi_explorer }
                 set_variable = { name = bfi_explorer value = scope:bfi_explorer }
                 set_variable = { name = bfi_exploration_created value = 0 }
+                every_owned_building = { save_scope_as = bfi_hq }
+                set_variable = { name = bfi_hq value = scope:bfi_hq }
             }
             set_variable = { name = bfi_company value = scope:bfi_company }
         }
@@ -323,6 +347,7 @@ def prepare(directory, token=None):
     pulse += '}\n'
     for field, expression in [('cash', 'gold'), ('budget', 'monthly_balance'), ('income', 'monthly_income_total'), ('trade_income', 'monthly_trade_income')]:
         pulse += measurement(token, 'P07.monthly.company_' + field, expression)
+    pulse += measurement(token, 'P07.monthly.company_hq_profit', 'var:bfi_hq.building_profit')
     pulse += '''set_variable = { name = bfi_trade_total_volume value = 0 }
         every_trade = { save_scope_as = bfi_trade
             owner = { change_variable = { name = bfi_trade_total_volume add = scope:bfi_trade.trade_volume } }
@@ -336,9 +361,24 @@ def prepare(directory, token=None):
     '''
     pulse += measurement(token, 'P11.exploration.progress', 'scope:bfi_exploration.exploration_progress')
     pulse += measurement(token, 'P11.exploration.monthly_cost', 'scope:bfi_exploration.exploration_monthly_cost')
+    # Preserve the natural-progress observation above, then exercise the native
+    # completion callback deterministically. This is NOT a natural project outcome.
+    pulse += '''if = { limit = { scope:bfi_exploration = { exploration_progress > 0 }
+            NOT = { has_variable = bfi_controlled_completion_requested } }
+        set_variable = bfi_controlled_completion_requested
+        scope:bfi_exploration = { change_exploration_progress = 1000 }
+    }
+    '''
     pulse += '}\n'
     pulse += '} } }\n'
     campaign.write_script(overlay / 'scripted_effects/bfi_m0_observation.txt', commands + pulse)
+    campaign.write_script(directory / 'mod/bfi_campaign_checks/main_menu/common/static_modifiers/bfi_m0_preparation.txt',
+                          'bfi_m0_exploration_preparation = { exploration_preparation_time_modifier = -0.99 }')
+    # Feasibility fixture only: bypass the native 270-day construction queue,
+    # not project progress, costs or outcomes. Ordinary preparation is retained
+    # as a campaign/balance limitation, not confused with callback feasibility.
+    campaign.write_script(directory / 'mod/bfi_campaign_checks/loading_screen/common/defines/bfi_m0_preparation.txt',
+                          'NColony = { EXPLORATION_CONSTRUCTION_TIME = 1 }')
     hooks = (overlay / 'on_action/zz_bfi_campaign_checks.txt').read_text(encoding='utf-8-sig')
     # Charter guards deliberately use ROOT = the sovereign command actor.
     # Do not test them with a bank-root monthly callback and nested country scope.
@@ -363,22 +403,41 @@ def prepare(directory, token=None):
                 }}
             }} }}
         '''
+    hooks += f'''on_exploration_success = {{ on_actions = {{ bfi_m0_project_success }} }}
+        bfi_m0_project_success = {{ effect = {{ if = {{ limit = {{ has_variable = bfi_exploration_created c:BRD = {{ NOT = {{ has_variable = bfi_project_success }} }} }}
+            save_scope_as = bfi_success_operator
+            c:BRD = {{
+                set_variable = {{ name = bfi_project_success value = 1 }}
+                set_variable = {{ name = bfi_success_operator value = scope:bfi_success_operator }}
+                set_variable = {{ name = bfi_success_area value = scope:target }}
+                set_variable = {{ name = bfi_success_actor value = scope:actor }}
+            }}
+            {measurement(token, 'P11.success.company_cash', 'gold')}
+        }} }} }}
+    '''
     campaign.write_script(overlay / 'on_action/zz_bfi_campaign_checks.txt', hooks)
     # Hash the exact executed test definitions, including observation callbacks.
     import hashlib
     digest = hashlib.sha256()
-    for path in sorted(overlay.rglob('*.txt')):
-        digest.update(path.relative_to(overlay).as_posix().encode() + b'\0' + path.read_bytes())
+    fixture_root = directory / 'mod/bfi_campaign_checks'
+    for path in sorted(fixture_root.rglob('*.txt')):
+        digest.update(path.relative_to(fixture_root).as_posix().encode() + b'\0' + path.read_bytes())
     manifest['fixture_sha256'] = digest.hexdigest()
-    manifest['suite'] = 'M0 feasibility (single process plus reload; multiplayer untested)'
+    manifest['suite'] = 'M0 single-player native audit (process plus reload)'
+    manifest['fixture_conditions'] = EXPLORATION_CONDITIONS
     manifest['required_measurements'] = {
         'logger.control': 1,
         **{f'P06.{phase}.{field}': 1 for phase in ('before', 'issued', 'repaid') for field in ('lender_cash', 'borrower_cash')},
+        'P06.restructured.remaining_debt': 1,
+        'P06.bankrupt.before_lender_cash': 1,
+        'P06.bankrupt.lender_cash': 1,
         **{f'P09.{phase}.{field}': 1 for phase in ('before', 'bought', 'sold', 'unbacked_sale') for field in ('stock', 'cash')},
         **{f'P09.{field}': 1 for field in ('short_stock.before', 'short_stock.after', 'zero_cash.after')},
+        **{f'P09.branch.{field}': 1 for field in ('actor_capital_quote', 'selected_market_quote', 'before_cash', 'after_buy_cash', 'after_sale_cash')},
         **{f'P10.monthly.{field}': 12 for field in ('period', 'day', 'bank_cash', 'bank_budget', 'bank_income', 'bank_custom_expense_paid', 'bank_dividends_paid', 'borrower_cash', 'borrower_budget', 'loan_amount', 'loan_interest', 'remaining_debt', 'months_left')},
-        **{f'P07.monthly.company_{field}': 12 for field in ('cash', 'budget', 'income', 'trade_income')},
+        **{f'P07.monthly.company_{field}': 12 for field in ('cash', 'budget', 'income', 'trade_income', 'hq_profit')},
         **{f'P11.exploration.{field}': 1 for field in ('before_cash', 'after_cash', 'controller_before_cash', 'controller_after_cash', 'count')},
+        'P11.success.company_cash': 1,
         **{f'P11.monthly.{field}': 12 for field in ('trade_buy', 'trade_sell', 'trade_profit', 'trade_volume')},
     }
     (directory / 'bfi_campaign_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
@@ -410,6 +469,7 @@ def collect(log, manifest, error_log=''):
         if len(values) != count:
             result['errors'].append(f'Measurement count {key}: expected {count}, observed {len(values)}')
     result['fixture_sha256'] = manifest.get('fixture_sha256')
+    result['fixture_conditions'] = manifest.get('fixture_conditions', {})
     # Assertions below compare native observed before/after values. No custom
     # cash transfers are used to imitate the measured native operations.
     checks = {}
@@ -424,6 +484,13 @@ def collect(log, manifest, error_log=''):
         checks['native_issue_credits_borrower'] = observed('P06.issued.borrower_cash') - observed('P06.before.borrower_cash') == 100
         checks['native_repayment_debits_84_8'] = observed('P06.issued.borrower_cash') - observed('P06.repaid.borrower_cash') == Decimal('84.8')
         checks['native_repayment_credits_84_8'] = observed('P06.repaid.lender_cash') - observed('P06.issued.lender_cash') == Decimal('84.8')
+        if 'P06.restructured.remaining_debt' in manifest.get('required_measurements', {}):
+            checks['native_full_payoff_attributable_interest_is_4_8'] = observed('P06.restructured.remaining_debt') == Decimal('84.8') and observed('P06.repaid.lender_cash') - observed('P06.issued.lender_cash') - 80 == Decimal('4.8')
+            checks['native_default_pays_no_creditor_recovery'] = observed('P06.bankrupt.before_lender_cash') == observed('P06.bankrupt.lender_cash')
+        if 'P09.branch.before_cash' in manifest.get('required_measurements', {}):
+            checks['native_foreign_purchase_debits_actor'] = observed('P09.branch.before_cash') > observed('P09.branch.after_buy_cash')
+            checks['native_foreign_sale_credits_actor'] = observed('P09.branch.after_sale_cash') > observed('P09.branch.after_buy_cash')
+            checks['both_native_market_quotes_available'] = observed('P09.branch.actor_capital_quote') > 0 and observed('P09.branch.selected_market_quote') > 0
         checks['native_purchase_removes_ten_goods'] = observed('P09.before.stock') - observed('P09.bought.stock') == 10
         checks['native_sale_adds_ten_goods'] = observed('P09.sold.stock') - observed('P09.bought.stock') == 10
         checks['native_sale_requires_custom_custody_guard'] = observed('P09.unbacked_sale.stock') - observed('P09.sold.stock') == 10 and observed('P09.unbacked_sale.cash') > observed('P09.sold.cash')
@@ -437,17 +504,23 @@ def collect(log, manifest, error_log=''):
             checks['native_trade_executed_volume_observed'] = any(Decimal(value) > 0 for value in measurements.get('P11.monthly.total_trade_volume', []))
     except (KeyError, ValueError, InvalidOperation) as error:
         result['errors'].append(f'Incomplete numerical native evidence: {error}')
-    result['measurement_assertions'] = {key: 'PASS' if passed else 'FAIL' for key, passed in checks.items()}
     if 'P10.monthly.period' in manifest.get('required_measurements', {}):
         try:
             periods = [Decimal(v) for v in measurements['P10.monthly.period']]
             if len(periods) != 12 or any(b - a != 1 for a, b in zip(periods, periods[1:])):
                 result['errors'].append('Monthly observations are not twelve consecutive periods')
+            faces = [Decimal(v) for v in measurements['P10.monthly.loan_amount']]
+            rates = [Decimal(v) for v in measurements['P10.monthly.loan_interest']]
+            remaining = [Decimal(v) for v in measurements['P10.monthly.remaining_debt']]
+            checks['native_annual_coupon_has_fixed_face_and_monthly_1_2_reduction'] = (
+                all(v == 120 for v in faces) and all(v == Decimal('0.12') for v in rates)
+                and all(a - b == Decimal('1.2') for a, b in zip(remaining, remaining[1:])))
         except (KeyError, InvalidOperation):
-            result['errors'].append('Invalid monthly observation periods')
+            result['errors'].append('Invalid monthly observation fields')
+    result['measurement_assertions'] = {key: 'PASS' if passed else 'FAIL' for key, passed in checks.items()}
     result['errors'].extend('Failed numerical native assertion: ' + key for key, passed in checks.items() if not passed)
     result['passed'] = not result['errors']
-    result['scope'] = 'Single-player engine effects and reload. GUI transport, multiplayer and other UI scales are not certified.'
+    result['scope'] = 'Single-player engine effects and reload. GUI transport and other UI scales require the separate visual record. Multiplayer is outside scope.'
     return result
 
 
