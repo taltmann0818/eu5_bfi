@@ -146,6 +146,10 @@ def fixture(token, fingerprint):
     '''
     start += check('resolving_candidate_rejected', 'gold = 10000 c:BRD = { is_subject_type = state_bank }')
     start += '''c:BRD = { set_variable = { name = bfl_state value = 0 } }
+        c:BRD = {
+            set_variable = { name = bfi_expected_opening value = { value = gold add = 120 subtract = bfl_liabilities } }
+            set_variable = { name = bfi_expected_units value = { value = gold add = 620 subtract = bfl_liabilities } }
+        }
         set_variable = { name = bfi_before_bank_interest value = modifier:bank_interest }
         set_variable = { name = bfi_before_bond_capacity value = modifier:max_bonds_modifier }
         bfl_prepare_charter_selector = yes bfl_commit_charter = yes
@@ -159,7 +163,7 @@ def fixture(token, fingerprint):
         var:bfl_dep_01_active = 1 var:bfl_dep_01_principal = 100 var:bfl_dep_01_party = c:GEN
         var:bfl_dep_01_annual_rate = 0.02 var:bfl_native_credit_value = 120 }''')
     start += check('opening_ownership_includes_net_assets', '''c:BRD = {
-        var:bfl_opening_equity = 900 var:bfl_total_units = 1400 var:bfl_state_units = 1400
+        var:bfl_opening_equity = var:bfi_expected_opening var:bfl_total_units = var:bfi_expected_units var:bfl_state_units = var:bfi_expected_units
         var:bfl_profit_credit = 0 var:bfl_profit_services = 0 }''')
     start += '''bfl_commit_charter = yes bfl_grant_charter_traditions = yes
         add_reform = government_reform:bfl_state_chartered_bank
@@ -244,6 +248,16 @@ def fixture(token, fingerprint):
     start += '''c:BRD = { make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank } bfl_reconcile_charter = yes }
     '''
     start += check('annex_successor_loses_old_authority', 'bfl_has_management = yes c:VEN = { NOT = { bfl_has_management = yes } NOT = { has_variable = bfl_bank } }')
+    start += '''c:BRD = { remove_reform = government_reform:banking_country }
+        bfl_reconcile_controller = yes
+    '''
+    start += check('invalid_bank_reform_loses_charter_safely', '''NOT = { bfl_has_management = yes }
+        c:BRD = { is_subject_type = state_bank var:bfl_profile = 2 var:bfl_dep_01_principal = 100 gold = 1380 exists = var:bfi_loan }''')
+    start += '''c:BRD = { add_reform = government_reform:banking_country
+        make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
+        remove_variable = bfl_legacy_servicing set_variable = { name = bfl_state value = 0 }
+        bfl_reconcile_charter = yes }
+    '''
     start += '''}
         c:BRD = { remove_variable = bfl_profile_revision set_variable = { name = bfl_profile value = 3 }
             set_variable = { name = bfi_before_cash value = gold }
@@ -281,19 +295,22 @@ def fixture(token, fingerprint):
         c:BRD = { set_variable = { name = bfl_profile value = 0 }
             remove_variable = bfl_profile_offered_to bfl_offer_profile = yes
             set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 12 } }
+            set_variable = { name = bfi_m1_start_period value = bfl_period }
+            set_variable = { name = bfi_m1_last_observation value = bfl_period }
+            set_variable = { name = bfi_m1_periods value = 0 }
             set_variable = bfi_test_pending set_variable = { name = bfi_test_sentinel value = 731 }
             set_variable = { name = bfl_facility_mode value = 0 }
         }
     '''
     instant = len(cases)
     start += f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
-    finish = 'c:BRD = {\n'
+    finish = 'c:BRD = { bfi_m1_observe = yes\n'
+    finish += check('twelve_consecutive_months', 'var:bfi_m1_periods = 12 NOT = { has_variable = bfi_m1_period_gap }')
     finish += check('year_charter_identity_and_authority', 'bfl_has_valid_controller = yes var:bfi_identity = 813 capital = var:bfi_capital')
     finish += check('AI_controller_completes_native_profile_event', 'OR = { var:bfl_profile = 1 var:bfl_profile = 2 } has_variable = bfl_choice_complete')
     finish += check('AI_independent_completes_native_profile_event', 'c:FLO.var:bfi_ai_independent = { OR = { var:bfl_profile = 1 var:bfl_profile = 2 } has_variable = bfl_choice_complete }')
-    finish += '''set_variable = { name = bfi_persisted_profile value = var:bfl_profile }
-        c:FLO.var:bfi_ai_independent = { set_variable = { name = bfi_persisted_profile value = var:bfl_profile } }
-        remove_variable = bfi_test_pending }
+    finish += check('profile_snapshots_precede_autosave', 'var:bfi_persisted_profile = var:bfl_profile c:FLO.var:bfi_ai_independent = { var:bfi_persisted_profile = var:bfl_profile }')
+    finish += '''remove_variable = bfi_test_pending }
     '''
     finish += f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'
     return start, finish, instant, cases
@@ -325,7 +342,32 @@ def prepare(directory, token=None):
     hooks = hooks.replace('tag = BRD NOT = { has_variable = bfi_test_started }',
                           'tag = FLO c:BRD = { NOT = { has_variable = bfi_test_started } }')
     hooks = hooks.replace('        set_variable = bfi_test_started', '        c:BRD = { set_variable = bfi_test_started }')
+    hooks += '''monthly_country_pulse = { on_actions = { bfi_m1_profile_observation } }
+        bfi_m1_profile_observation = { effect = {
+            if = { limit = { tag = BRD has_variable = bfi_test_pending } bfi_m1_observe = yes }
+        } }
+    '''
     campaign.write_script(hooks_path, hooks)
+    effects_path = hooks_path.parent.parent / 'scripted_effects/bfi_campaign_checks.txt'
+    effects = effects_path.read_text(encoding='utf-8-sig')
+    effects += '''bfi_m1_observe = {
+        if = { limit = { bfl_period > var:bfi_m1_last_observation }
+            set_variable = { name = bfi_m1_expected_period value = { value = var:bfi_m1_last_observation add = 1 } }
+            if = { limit = { NOT = { var:bfi_m1_expected_period = bfl_period } } set_variable = bfi_m1_period_gap }
+            change_variable = { name = bfi_m1_periods add = 1 }
+            set_variable = { name = bfi_m1_last_observation value = bfl_period }
+        }
+        if = { limit = { var:bfl_profile > 0 NOT = { has_variable = bfi_persisted_profile } }
+            set_variable = { name = bfi_persisted_profile value = var:bfl_profile }
+        }
+        c:FLO.var:bfi_ai_independent ?= {
+            if = { limit = { var:bfl_profile > 0 NOT = { has_variable = bfi_persisted_profile } }
+                set_variable = { name = bfi_persisted_profile value = var:bfl_profile }
+            }
+        }
+    }
+    '''
+    campaign.write_script(effects_path, effects)
     return manifest
 
 

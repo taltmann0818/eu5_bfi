@@ -290,7 +290,6 @@ def charter():
         allow = { has_reform = government_reform:bfl_state_chartered_bank }
         locked = { always = yes }
         country_modifier = { bank_interest = -0.005 max_bonds_modifier = 0.33 }
-        years = 2
     }
     ''')
     common('decisions','charter_decisions','''
@@ -349,7 +348,10 @@ def charter():
     }
     ''')
     clear = '\n'.join(f'remove_variable = bfl_candidate_{i:02}' for i in range(1, 9))
-    clear += '\n' + '\n'.join(f'remove_variable = bfl_candidate_{field}' for field in ('offset', 'count', 'total', 'price'))
+    # An already queued event can still evaluate its navigation triggers after
+    # cancellation/conversion. Keep numeric sentinels; erase all target scopes.
+    clear += '\n' + '\n'.join(f'set_variable = {{ name = bfl_candidate_{field} value = 0 }}' for field in ('offset', 'count', 'total'))
+    clear += '\nremove_variable = bfl_candidate_price'
     common('scripted_effects', 'charter_selector_cleanup', effect('bfl_clear_charter_selector', clear))
     common('scripted_effects','charter', effect('bfl_prepare_charter_selector',prep)+'''
     # Country scope; grant only after the sovereign has a live, completed charter.
@@ -420,7 +422,7 @@ def charter():
                 }
             }
             every_subject = { limit = { is_subject_type = bfl_chartered_bank }
-                if = { limit = { NOT = { this = scope:bfl_lifecycle_controller.var:bfl_bank } }
+                if = { limit = { NOT = { scope:bfl_lifecycle_controller = { var:bfl_bank ?= prev } } }
                     change_subject_type = subject_type:state_bank
                     set_variable = bfl_legacy_servicing
                     set_variable = { name = bfl_state value = 2 }

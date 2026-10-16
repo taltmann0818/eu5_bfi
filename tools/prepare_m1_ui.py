@@ -21,7 +21,7 @@ def prepare(directory):
     ''' + ten_bank_setup() + '}\n'
     effects = overlay / 'scripted_effects/bfi_campaign_checks.txt'
     source = effects.read_text(encoding='utf-8-sig')
-    source += '\nbfi_m1_ui_setup = { bfi_m0_ui_setup = yes\n' + setup + '\n}\n'
+    source += '\nbfi_m1_ui_setup = { if = { limit = { c:FLO = { NOT = { has_variable = bfi_m1_ui_started } } } bfi_m0_ui_setup = yes\n' + setup + '\nc:FLO = { set_variable = bfi_m1_ui_started } } }\n'
     report = ''
     conditions = {
         'uncharted_cash_preserved': 'gold = 10000 NOT = { has_reform = government_reform:bfl_state_chartered_bank }',
@@ -40,6 +40,8 @@ def prepare(directory):
     report += ('debug_log = "BFI_UI_BUFFER_PADDING_' + 'x' * 240 + '"\n') * 40
     source += '\nbfi_m1_ui_observe = {\n' + report + '}\n'
     write_script(effects, source)
+    hooks_path = overlay / 'on_action/zz_bfi_campaign_checks.txt'
+    write_script(hooks_path, hooks_path.read_text(encoding='utf-8-sig').replace('bfi_m0_ui_setup = yes', 'bfi_m1_ui_setup = yes'))
     write_script(directory / 'bfi_m1_ui_begin.txt', 'bfi_m1_ui_setup = yes')
     write_script(directory / 'bfi_m1_ui_observe.txt', 'bfi_m1_ui_observe = yes')
     digest = hashlib.sha256()

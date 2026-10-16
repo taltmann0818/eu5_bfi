@@ -98,7 +98,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
                 }
             }
             every_subject = { limit = { is_subject_type = bfl_chartered_bank }
-                if = { limit = { NOT = { this = scope:bfl_lifecycle_controller.var:bfl_bank } }
+                if = { limit = { NOT = { scope:bfl_lifecycle_controller = { var:bfl_bank ?= prev } } }
                     change_subject_type = subject_type:state_bank
                     set_variable = bfl_legacy_servicing
                     set_variable = { name = bfl_state value = 2 }
