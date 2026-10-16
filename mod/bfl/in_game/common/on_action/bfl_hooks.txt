@@ -5,6 +5,8 @@ bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
 monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
 bfl_monthly_accounts = {
     effect = {
+        if = { limit = { country_type = location } bfl_reconcile_controller = yes }
+        if = { limit = { has_variable = bfl_controller } bfl_reconcile_charter = yes }
         if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }
         if = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes bfl_offer_profile = yes }
         if = { limit = { bfl_has_accounts = yes } bfl_process_accounts = yes }
@@ -14,3 +16,13 @@ bfl_monthly_accounts = {
         }
     }
 }
+on_transfer_subject = { on_actions = { bfl_subject_transfer } }
+bfl_subject_transfer = { effect = {
+    scope:former_overlord ?= { bfl_reconcile_controller = yes }
+    bfl_reconcile_charter = yes
+} }
+on_subject_created = { on_actions = { bfl_subject_refresh } }
+on_subject_type_changed = { on_actions = { bfl_subject_refresh } }
+bfl_subject_refresh = { effect = { bfl_reconcile_charter = yes } }
+on_annex = { on_actions = { bfl_annex_refresh } }
+bfl_annex_refresh = { effect = { bfl_reconcile_controller = yes } }

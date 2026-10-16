@@ -915,6 +915,7 @@ set_variable = { name = bfl_branch_16_fee value = 0 }
 set_variable = { name = bfl_branch_16_expiry value = 0 }
 set_variable = { name = bfl_branch_16_state value = 0 }
 }
+bfl_migrate_profile = yes
 bfl_migrate_accounts = yes
 bfl_initialize_history = yes
 bfl_initialize_expense_history = yes
@@ -922,6 +923,7 @@ bfl_reconcile_native_assets = yes
 }
 
     bfl_discover_institutions = {
+        every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
         every_country = {
             limit = { NOT = { tag = CMF } }
             if = {
@@ -945,16 +947,14 @@ bfl_reconcile_native_assets = yes
     }
     bfl_offer_profile = {
         if = {
-            limit = { var:bfl_profile = 0 NOT = { has_variable = bfl_profile_offered } }
+            limit = { var:bfl_profile = 0 OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes } }
             save_scope_as = bfl_bank
-            set_variable = bfl_profile_offered
-            if = {
-                limit = { bfl_has_valid_controller = yes }
-                overlord = { trigger_event_non_silently = bfl_finance.100 }
-            }
-            else_if = {
-                limit = { bfl_is_independent_bank = yes }
-                trigger_event_non_silently = bfl_finance.100
+            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_profile_actor } }
+            else = { save_scope_as = bfl_profile_actor }
+            if = { limit = { NOT = { var:bfl_profile_offered_to ?= scope:bfl_profile_actor } }
+                set_variable = bfl_profile_offered
+                set_variable = { name = bfl_profile_offered_to value = scope:bfl_profile_actor }
+                scope:bfl_profile_actor = { trigger_event_non_silently = bfl_finance.100 }
             }
         }
     }

@@ -1,0 +1,13 @@
+﻿bfl_is_charter_candidate = {
+    country_exists = this is_subject_type = state_bank country_type = building
+    has_reform = government_reform:banking_country
+    NOT = { has_variable = bfl_operation_guard }
+    OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+}
+bfl_can_choose_profile = {
+    var:bfl_profile = 0 exists = scope:bfl_profile_actor
+    OR = {
+        AND = { bfl_is_independent_bank = yes this = scope:bfl_profile_actor }
+        AND = { bfl_has_valid_controller = yes overlord = scope:bfl_profile_actor }
+    }
+}
