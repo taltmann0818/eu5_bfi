@@ -5,6 +5,8 @@ bodies, lifecycle reconciliation and permission checks use production code.
 The shared runner requires twelve monthly periods and a second-process reload.
 """
 from pathlib import Path
+import hashlib
+import json
 import campaign_suite as campaign
 from audit_native import balanced_block
 
@@ -64,6 +66,7 @@ def fixture(token, fingerprint):
             set_gold = 1000
             set_variable = { name = bfl_state value = 0 }
             make_subject_of = { target = c:FLO type = subject_type:state_bank }
+            c:FLO = { add_country_modifier = { modifier = bfi_m1_disloyal months = 24 mode = add_and_extend } }
             set_variable = { name = bfi_identity value = 813 }
             set_variable = { name = bfi_capital value = capital }
             set_variable = { name = bfi_buildings value = capital.total_building_levels }
@@ -170,6 +173,20 @@ def fixture(token, fingerprint):
     '''
     start += check('replay_and_reform_no_second_payment', 'gold = 9500 has_advance = banking_country_traditions c:BRD = { gold = 1380 } NOT = { bfl_can_begin_charter = yes }')
     start += check('charter_benefits_once', 'modifier:bank_interest = var:bfi_before_bank_interest modifier:max_bonds_modifier = var:bfi_before_bond_capacity')
+    start += check('disloyal_charter_preserves_authority_and_benefits', 'bfl_has_management = yes c:BRD = { subject_loyalty < 50 bfl_has_valid_controller = yes } modifier:bank_interest = var:bfi_before_bank_interest modifier:max_bonds_modifier = var:bfi_before_bond_capacity')
+    start += '''remove_country_modifier = bfi_m1_disloyal
+        add_country_modifier = { modifier = bfi_m1_loyal months = 24 mode = add_and_extend }
+        c:BRD = { add_country_modifier = { modifier = bfi_m1_loyal months = 24 mode = add_and_extend }
+            add_liberty_desire = -100 }
+    '''
+    start += '''set_variable = { name = bfi_expected_interest value = { value = var:bfi_before_bank_interest subtract = 0.01 } }
+        set_variable = { name = bfi_expected_capacity value = { value = var:bfi_before_bond_capacity add = 0.5 } }
+        add_country_modifier = { modifier = bfi_m1_other_benefits months = 24 mode = add_and_extend }
+        bfl_reconcile_controller = yes
+    '''
+    start += check('charter_benefits_stack_without_reapplication', 'modifier:bank_interest = var:bfi_expected_interest modifier:max_bonds_modifier = var:bfi_expected_capacity gold = 9500 c:BRD = { gold = 1380 }')
+    start += '''remove_country_modifier = bfi_m1_other_benefits
+    '''
     start += '''set_variable = { name = bfi_after_bank_interest value = modifier:bank_interest }
         set_variable = { name = bfi_after_bond_capacity value = modifier:max_bonds_modifier }
         debug_log = "BFI_M1|benefits_before_after|[GetCountry('FLO').MakeScope.GetVariable('bfi_before_bank_interest').GetValue]|[GetCountry('FLO').MakeScope.GetVariable('bfi_after_bank_interest').GetValue]|[GetCountry('FLO').MakeScope.GetVariable('bfi_before_bond_capacity').GetValue]|[GetCountry('FLO').MakeScope.GetVariable('bfi_after_bond_capacity').GetValue]"
@@ -229,6 +246,25 @@ def fixture(token, fingerprint):
         bfl_reconcile_controller = yes
     '''
     start += check('missing_binding_recovered_without_repayment', 'var:bfl_bank = c:BRD bfl_has_management = yes gold = 9500 c:BRD = { var:bfl_profile = 2 gold = 1380 }')
+    start += '''set_variable = bfl_lifecycle_guard
+        var:bfi_duplicate = { change_subject_type = subject_type:bfl_chartered_bank }
+        remove_variable = bfl_bank remove_variable = bfl_lifecycle_guard
+        bfl_reconcile_controller = yes
+        set_variable = { name = bfi_default_survivor value = var:bfl_bank }
+        set_variable = { name = bfi_active_charters value = 0 }
+        every_subject = { limit = { is_subject_type = bfl_chartered_bank }
+            c:FLO = { change_variable = { name = bfi_active_charters add = 1 } }
+        }
+        bfl_reconcile_controller = yes
+    '''
+    start += check('unbound_duplicate_set_has_one_stable_survivor', '''var:bfi_active_charters = 1 var:bfl_bank = var:bfi_default_survivor
+        c:BRD = { gold = 1380 var:bfl_dep_01_principal = 100 var:bfl_profile = 2 }
+        var:bfi_duplicate = { gold = var:bfi_before_cash var:bfl_dep_01_principal = 77 var:bfl_profile = 1 }''')
+    start += '''var:bfi_duplicate = { change_subject_type = subject_type:state_bank }
+        c:BRD = { change_subject_type = subject_type:bfl_chartered_bank
+            remove_variable = bfl_legacy_servicing set_variable = { name = bfl_state value = 0 } }
+        bfl_reconcile_controller = yes
+    '''
     start += '''add_gold = -123
     '''
     start += check('sovereign_spending_keeps_bank_wallet_separate', 'gold = 9377 c:BRD = { gold = 1380 }')
@@ -242,9 +278,10 @@ def fixture(token, fingerprint):
         c:VEN = { annex_country = { country = c:GEN } bfl_reconcile_controller = yes }
         c:BRD = { bfl_reconcile_charter = yes }
     '''
-    start += check('annexed_controller_transfers_live_charter', '''NOT = { country_exists = c:GEN }
-        c:BRD = { is_subject_of = c:VEN bfl_has_valid_controller = yes var:bfl_controller = c:VEN
-            gold = 1380 var:bfl_profile = 2 var:bfl_dep_01_principal = 100 exists = var:bfi_loan }''')
+    start += check('annexed_controller_retired', 'NOT = { country_exists = c:GEN }')
+    start += check('annexed_controller_transfers_live_charter', 'c:BRD = { is_subject_of = c:VEN bfl_has_valid_controller = yes var:bfl_controller = c:VEN }')
+    start += check('annexed_controller_preserves_bank_wallet', 'c:BRD = { gold = 1380 }')
+    start += check('annexed_controller_preserves_profile_and_claims', 'c:BRD = { var:bfl_profile = 2 var:bfl_dep_01_principal = 100 exists = var:bfi_loan }')
     start += '''c:BRD = { make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank } bfl_reconcile_charter = yes }
     '''
     start += check('annex_successor_loses_old_authority', 'bfl_has_management = yes c:VEN = { NOT = { bfl_has_management = yes } NOT = { has_variable = bfl_bank } }')
@@ -307,6 +344,9 @@ def fixture(token, fingerprint):
     finish = 'c:BRD = { bfi_m1_observe = yes\n'
     finish += check('twelve_consecutive_months', 'var:bfi_m1_periods = 12 NOT = { has_variable = bfi_m1_period_gap }')
     finish += check('year_charter_identity_and_authority', 'bfl_has_valid_controller = yes var:bfi_identity = 813 capital = var:bfi_capital')
+    # Loyalty is a native cached relation value, so inspect the loyal scenario
+    # after natural monthly updates rather than immediately after adding a modifier.
+    finish += check('loyal_charter_preserves_authority_and_benefits', 'subject_loyalty >= 50 bfl_has_valid_controller = yes c:FLO = { bfl_has_management = yes has_reform = government_reform:bfl_state_chartered_bank }')
     finish += check('AI_controller_completes_native_profile_event', 'OR = { var:bfl_profile = 1 var:bfl_profile = 2 } has_variable = bfl_choice_complete')
     finish += check('AI_independent_completes_native_profile_event', 'c:FLO.var:bfi_ai_independent = { OR = { var:bfl_profile = 1 var:bfl_profile = 2 } has_variable = bfl_choice_complete }')
     finish += check('profile_snapshots_precede_autosave', 'var:bfi_persisted_profile = var:bfl_profile c:FLO.var:bfi_ai_independent = { var:bfi_persisted_profile = var:bfl_profile }')
@@ -368,11 +408,35 @@ def prepare(directory, token=None):
     }
     '''
     campaign.write_script(effects_path, effects)
+    campaign.write_script(Path(directory) / 'mod/bfi_campaign_checks/main_menu/common/static_modifiers/bfi_m1_modifiers.txt', '''
+        bfi_m1_disloyal = { subject_loyalty = -100 }
+        bfi_m1_loyal = { subject_loyalty = 100 }
+        bfi_m1_other_benefits = { bank_interest = -0.01 max_bonds_modifier = 0.5 }
+    ''')
+    digest = hashlib.sha256()
+    overlay = Path(directory) / 'mod/bfi_campaign_checks'
+    for path in sorted(overlay.rglob('*')):
+        if path.is_file():
+            digest.update(path.relative_to(overlay).as_posix().encode() + b'\0' + path.read_bytes())
+    manifest['fixture_sha256'] = digest.hexdigest()
+    manifest['suite'] = 'M1 charter and accounts'
+    (Path(directory) / 'bfi_campaign_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     return manifest
+
+
+base_collect = campaign.collect
+
+
+def collect(log, manifest, errors=''):
+    result = base_collect(log, manifest, errors)
+    result['fixture_sha256'] = manifest['fixture_sha256']
+    result['scope'] = 'Single-player M1 production services, verbatim event options, native AI choice, twelve consecutive months and second-process reload; normal UI has separate observations.'
+    return result
 
 
 if __name__ == '__main__':
     campaign.fixture = fixture
     campaign.reload_fixture = reload_fixture
     campaign.prepare = prepare
+    campaign.collect = collect
     campaign.main()

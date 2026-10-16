@@ -1,0 +1,45 @@
+{
+  "recorded": "2026-10-16",
+  "runtime_sha256": "a169093c733c860a40428a655b18f328001bd5ddf33c27ce03c7f7ad2a331506",
+  "fixture_sha256": "e40f3977f4a0f35125482c2863e43820c98ac1cafa308f423359ac97df648571",
+  "token": "691489010ede46b6910ac515bacdbc5c",
+  "scope": "Manual inspection of real single-player decisions, events and Credit commands; screenshots and displayed wallets. These are visual observations, not automated assertion logs.",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "client_resolution": "1280x720",
+  "results": {
+    "normal_decision": "PASS",
+    "first_page": "PASS",
+    "overflow_page": "PASS",
+    "previous_page": "PASS",
+    "cancel": "PASS",
+    "paid_overflow_conversion": "PASS",
+    "two_choice_event": "PASS",
+    "committed_profile_not_reopened": "PASS",
+    "direct_controller_deposit": "PASS",
+    "direct_controller_withdrawal": "PASS"
+  },
+  "observations": {
+    "normal_decision": "Opened Establish a State Chartered Bank through the native Florence Content/Decisions panel.",
+    "first_page": "Eight candidates use the native scrollable option list; Next and Cancel are reachable with its scrollbar.",
+    "overflow_page": "Next shows the ninth and tenth banks, Aquisextain and Wessex, plus Previous and Cancel; sovereign treasury stays 10,000.",
+    "previous_page": "Previous restores Bardi and the original first-page banks without payment.",
+    "cancel": "Cancel closes the event; sovereign treasury remains 10,000 and the charter decision can be reopened.",
+    "paid_overflow_conversion": "Selected the ninth bank through its event-option button. Sovereign treasury becomes 9,500; Credit shows Aquisextain cash/assets/equity of 1,500 and no liabilities.",
+    "two_choice_event": "The normal event presents Merchant Finance and Overseas Investment; chose Overseas Investment. Credit displays that profile and Operating state.",
+    "committed_profile_not_reopened": "Clicked Choose pending specialization in Credit. No choice event opens; Overseas Investment and both wallets remain unchanged.",
+    "direct_controller_deposit": "Clicked Deposit 100 gold on demand. Sovereign cash becomes 9,400; selected bank cash/assets 1,600, liabilities 100, equity 1,500.",
+    "direct_controller_withdrawal": "Clicked Withdraw matured state deposits while paused. Sovereign cash returns to 9,500; selected bank cash/assets/equity returns to 1,500 and liabilities to zero."
+  },
+  "screenshots": {
+    "docs/screenshots/m1-credit.png": "24bb0922f42ee8323c268f25ea91c36bb3506081d2c539cd192a4d9ee237e29a",
+    "docs/screenshots/m1-deposit.png": "060c7c5431f8f2cfa7c749426aa206ca4773289606b2157bbb1aada274cc95a5",
+    "docs/screenshots/m1-profile.png": "a7327bd25791dea59fdeeca71398e8822132257a650326e4dc151a6b239f9135",
+    "docs/screenshots/m1-selector-first.png": "f10ffff3baa76e9ca4e084cf18182324017c5a6be30970d0c57ccae8c87dd021",
+    "docs/screenshots/m1-selector-overflow.png": "9a178a372aaddb7c19c38fbfa9b1a7c223b2338b0b3316848831fb44946a110d",
+    "docs/screenshots/m1-withdrawal.png": "0959fdd3c9d664ed17aedfa305cb4f10ac30c226086da1fdbaa4afcf902418aa"
+  },
+  "passed": true,
+  "limits": "No release-wide language/scale or later-age transaction acceptance; those remain M10. Map loading/background rendering is not part of this finance UI inspection."
+}
