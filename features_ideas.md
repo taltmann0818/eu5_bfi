@@ -1,7 +1,6 @@
 # Feature Ideas
 ## Core Functions
-- government bonds
-- reselling sovereign bonds and buying other sovereign bonds on the secondary market should be locked behind an advance and building the stock exchange building
+- Once a bank's shares begin trading on the secondary market, their value should increase such that it becomes a viable investment strategy (another asset class that banks can hold) for both a chartered and non-charetered bank. Only banks with the requisite advance researched and stock exchange building constructed can participate in this secondary market. Once trade companies are created, their equity shares can be listed on the exchange. In essence, we're creating a mini stock exchange that will probably need its own custom interface/GUI. 
 ## Future Content
 - Laws affecting the bank: usury, ...
 - Catholic Church (international org) laws on usury
