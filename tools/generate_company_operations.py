@@ -242,7 +242,8 @@ def generate(common, effect, loc, write):
         bfl_company_exploration_success = { effect = { bfl_company_project_success = yes } }
     ''')
     interactions = ''
-    selection = '''select_trigger = { looking_for_a = country source = subjects target_flag = company name = choose_country
+    selection = '''select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
         column = { data = name }
         visible = { bfl_is_company = yes is_subject_of = scope:actor }
         enabled = { bfl_is_company = yes is_subject_of = scope:actor }
@@ -328,7 +329,7 @@ def generate(common, effect, loc, write):
 def company_panel(loc):
     def internal_action(key):
         return f'''button_regular = {{ name = "{key}_button" size = {{ -1 32 }}
-            layoutpolicy_horizontal = expanding text = "{key}" datacontext = "[GetPlayer]"
+            layoutpolicy_horizontal = expanding text = "{key}" datacontext = "[GetGenericAction('{key}')]"
             enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "{key}_tip"
             scripted_action_tooltip = {{ click_type = left click_mode = single
                 action_name = "{key}" actor = "[GetPlayer]" }}

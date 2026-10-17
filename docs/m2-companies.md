@@ -1,8 +1,8 @@
 # M2 operating companies
 
-Implementation and acceptance are in progress. This PR targets the **entire M2
-completion gate**. Final UI/finance-boundary acceptance and bank/native
-regressions are required before completion is claimed.
+**M2 is complete for the pinned single-player baseline.** It implements native registration, facilities, protected budgets, real trade and
+exploration, and conservative funded distributions. Acceptance evidence below
+separates engine execution, numerical measurements and normal UI observations.
 
 Native tags, headquarters, home regions, political relationships and income
 formulas remain authoritative. Company schema 2 migrates existing registrations
@@ -44,9 +44,45 @@ funding and distributions, observes twelve consecutive numerical settlements,
 allows natural exploration outcomes, and reloads an ordinary autosave in a second
 process. It never accelerates preparation/progress or forces completion.
 
-A clean development run passes **27/27 engine assertions**, all twelve numerical
-statements, natural exploration and reload. The final bank-finance restriction,
-internal UI selection and account/native regressions are still being accepted.
+The [final company campaign](../tests/results/2026-10-16-m2-companies.json) passes
+**28/28 engine assertions**, **120 numerical samples across twelve consecutive
+settlements**, natural exploration and second-process reload. It includes the
+restriction preventing political bank control from bypassing company finance
+gates. Runtime SHA-256 is
+`1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5`.
+
+[Accounts](../tests/results/2026-10-16-m2-accounts.json) passes **114/114** and
+[native regression](../tests/results/2026-10-16-m2-native-regression.json) passes
+**56/56 assertions plus 20/20 numerical checks**, on runtime
+`36e39536458865a4821370f7bb557989d112210dea1fc262fa4ee249a46355dc`.
+Every production file except the company generic actions and company GUI is
+byte-identical to the final runtime. Those two frontend files receive the final
+M2 engine run and separate normal UI acceptance; these regressions are not
+relabeled as runs on a different hash.
+
+[Normal UI acceptance](../tests/results/2026-10-17-m2-ui.json) passes **11/11
+manual observations** at 1280×720 and 60% GUI scale, on the final runtime. Real
+Credit company selection, contribution preview/cancellation, one confirmed
+100-gold transfer, exclusion of funding from earnings, trade-mandate confirmation
+and a naturally populated monthly statement are inspected. Diplomatic capacity
+stays unchanged. Native confirmation and self-notification popups remain.
+[Unedited captures](screenshots/README.md#m2-company-controls) retain their hashes
+and fixture provenance; positive route/exploration execution is certified by the
+separate engine suite, not claimed as manual UI transactions.
+
+Native construction remains the facility-assignment mechanism: its creation
+path assigns the real headquarters to the company, including on foreign-owned
+land. The operating service inventories the company's owned buildings and uses
+an owned port facility for exploration. It neither constructs an overlord-owned
+replacement nor invents a warehouse/custody asset. New warehouse systems and
+host-market financial privileges retain their later product gates.
+
+**86 offline tests**, source validation, pinned native/CMF hashes, deterministic
+generation, Economy reconstruction and **151-file package staging** pass;
+[validation provenance](../tests/results/2026-10-17-m2-validation.json) records
+the checks and runtime boundary. Queued
+licensed-runner jobs are not counted as passes.
+
 [Rejected development runs](../tests/results/2026-10-16-m2-development-notes.json)
 are recorded separately and are not completion evidence.
 
