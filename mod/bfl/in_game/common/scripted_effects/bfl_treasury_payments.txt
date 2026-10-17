@@ -5,6 +5,7 @@ if = { limit = { bfl_is_bank = yes bfl_period > var:bfl_last_dividend_period }
         save_scope_as = bfl_bank
         set_variable = { name = bfl_last_dividend_period value = bfl_period }
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
+        bfl_record_activity_statement = yes
         bfl_offset_losses = yes
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 }
         set_variable = { name = bfl_funded_dividend value = {

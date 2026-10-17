@@ -1,0 +1,9 @@
+﻿bfl_open_receipt_period = {
+if = { limit = { NOT = { has_variable = bfl_receipt_period } }
+        set_variable = { name = bfl_receipt_period value = bfl_period }
+    set_variable = { name = bfl_native_interest value = 0 }
+set_variable = { name = bfl_native_principal value = 0 }
+set_variable = { name = bfl_native_recovery_gain value = 0 }
+set_variable = { name = bfl_native_recovery_loss value = 0 }
+}
+}

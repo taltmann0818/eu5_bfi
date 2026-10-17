@@ -6,4 +6,4 @@ bfl_credit_taken = { effect = { scope:owner ?= { if = { limit = { has_variable =
 } } } }
 on_loan_repaid = { on_actions = { bfl_credit_repaid } }
 bfl_credit_repaid = { effect = { scope:owner ?= { if = { limit = { has_variable = bfl_credit_schema }
-    bfl_mark_native_repayment = yes } } } }
+    bfl_capture_native_payoff = yes } } } }

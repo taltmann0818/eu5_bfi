@@ -13,7 +13,8 @@ if = { limit = { bfl_period > var:bfl_last_expense_period var:bfl_state < 5 }
 bfl_observe_bank_income = {
 if = { limit = { bfl_period > var:bfl_last_income_period }
         set_variable = { name = bfl_last_income_period value = bfl_period }
-        set_variable = { name = bfl_native_monthly_net value = monthly_balance }
+        set_variable = { name = bfl_native_monthly_net value = { value = monthly_balance subtract = var:bfl_native_interest } }
+        change_variable = { name = bfl_profit_credit add = var:bfl_native_interest }
         if = { limit = { var:bfl_native_monthly_net >= 0 }
             change_variable = { name = bfl_profit_native add = var:bfl_native_monthly_net } }
         else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_monthly_net } }

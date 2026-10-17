@@ -55,6 +55,9 @@ bfl_native_takeover = {
     }
 }
 bfl_reconcile_native_assets = {
+    bfl_initialize_credit = yes
+    bfl_recognize_native_payoffs = yes
+    bfl_sample_native_coupons = yes
     bfl_review_native_credit = yes
     set_variable = { name = bfl_native_credit_value value = 0 }
     save_scope_as = bfl_bank

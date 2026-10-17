@@ -82,7 +82,8 @@ def fixture(token, fingerprint):
         bfl_reconcile_native_assets = yes
     '''
     start += check('payoff_native_wallets_and_record_close', 'gold = { value = 9900 add = var:bfi_m3_repayment } c:GEN = { gold = { value = 1100 subtract = c:BRD.var:bfi_m3_repayment } } var:bfl_cr_01_state = 2 var:bfl_native_credit_value = 0')
-    start += check('callback_does_not_mint_or_guess_interest', 'var:bfl_credit_settled = 1 var:bfl_credit_deferred_receipts = 80 var:bfl_profit_credit = 0')
+    start += 'set_variable = { name = bfi_m3_expected_gain value = { value = var:bfi_m3_repayment subtract = 80 } }\n'
+    start += check('callback_attributes_gain_without_principal_or_cash_replay', 'var:bfl_credit_settled = 1 var:bfl_credit_deferred_receipts = 80 var:bfl_profit_credit = var:bfi_m3_expected_gain var:bfl_native_principal = 80')
     start += '''bfl_offer_native_credit = yes c:GEN = { bfl_accept_native_credit = yes }
         bfl_offer_native_restructuring = yes
         set_variable = { name = bfi_m3_partial_payment value = { value = var:bfl_cr_01_loan.remaining_debt multiply = 0.25 } }

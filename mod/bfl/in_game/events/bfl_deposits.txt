@@ -1,0 +1,10 @@
+﻿namespace = bfl_deposits
+bfl_deposits.1 = { type = country_event title = bfl_term_offer_1_title desc = bfl_term_offer_1_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_term_accept bfl_accept_deposit_offer = yes ai_chance = { base = 0 } }
+            option = { name = bfl_term_decline bfl_decline_deposit_offer = yes ai_chance = { base = 100 } }
+        }bfl_deposits.2 = { type = country_event title = bfl_term_offer_2_title desc = bfl_term_offer_2_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_term_accept bfl_accept_deposit_offer = yes ai_chance = { base = 0 } }
+            option = { name = bfl_term_decline bfl_decline_deposit_offer = yes ai_chance = { base = 100 } }
+        }

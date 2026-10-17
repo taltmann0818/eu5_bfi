@@ -101,7 +101,7 @@ def fixture(token, fingerprint):
     start += check('deposit_tooltip_principal_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0')
     start += 'c:PRZ = { save_scope_as = bfl_party } bfl_request_all_withdrawals = yes\n'
     start += check('foreign_withdrawal_rejected', 'gold = 1100 var:bfl_dep_01_principal = 100')
-    start += 'c:FLO = { save_scope_as = bfl_party } bfl_process_accounts = yes\n'
+    start += 'c:FLO = { save_scope_as = bfl_party } set_variable = { name = bfl_dep_01_last_accrual value = { value = bfl_period subtract = 1 } } bfl_process_accounts = yes\n'
     start += check('monthly_interest', 'var:bfl_dep_01_interest_due = 0 var:bfl_dep_01_remainder = 0.04 c:FLO = { var:bfl_deposit_income = 0.08 gold = 900.08 }')
     start += check('deposit_tooltip_interest_breakdown', 'bfl_deposit_principal = 100 bfl_deposit_interest = 0 bfl_deposit_liabilities = 100')
     start += check('history_records_actual_accounts', 'var:bfl_history_equity_12 = bfl_equity var:bfl_history_debt_12 = bfl_liabilities var:bfl_history_period_12 = bfl_period')

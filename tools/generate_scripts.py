@@ -177,7 +177,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -557,88 +557,9 @@ def charter():
 
 
 def deposits():
-    opened = 'save_scope_as = bfl_bank\nset_variable = { name = bfl_slot_found value = 0 }\n'
-    for i in range(1,33):
-        n=f'bfl_dep_{i:02}'
-        opened += f'''if = {{ limit = {{ var:bfl_slot_found = 0 var:{n}_active = 0 }}
-            set_variable = {{ name = bfl_slot_found value = 1 }}
-            set_variable = {{ name = {n}_active value = 1 }}
-            change_variable = {{ name = {n}_generation add = 1 }}
-            set_variable = {{ name = {n}_party value = scope:bfl_party }}
-            set_variable = {{ name = {n}_principal value = 100 }}
-            set_variable = {{ name = {n}_interest_due value = 0 }}
-            set_variable = {{ name = {n}_withdrawal_requested value = 0 }}
-            set_variable = {{ name = {n}_remainder value = 0 }}
-            set_variable = {{ name = {n}_annual_rate value = var:bfl_demand_rate }}
-            set_variable = {{ name = {n}_maturity_period value = 0 }}
-            set_variable = {{ name = {n}_state value = 1 }}
-            if = {{ limit = {{ var:bfl_product = 2 }}
-                set_variable = {{ name = {n}_annual_rate value = var:bfl_term_rate }}
-                set_variable = {{ name = {n}_maturity_period value = bfl_period }}
-                change_variable = {{ name = {n}_maturity_period add = 12 }}
-                set_variable = {{ name = {n}_state value = 2 }}
-            }}
-            bfl_apply_deposit_bonus_{i:02} = yes
-            scope:bfl_party = {{ add_gold = -100 }} add_gold = 100
-        }}\n'''
-    free = 'OR = { '+' '.join(f'var:bfl_dep_{i:02}_active = 0' for i in range(1,33))+' }'
-    common('scripted_triggers','deposit_validation',effect('bfl_has_deposit_capacity',free))
-    common('scripted_effects','deposits',effect('bfl_allocate_deposit',opened)+'''
-    # Root bank, saved depositor bfl_party. Both wallets and slot capacity checked before mutation.
-    bfl_open_deposit = {
-        if = { limit = {
-            bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes bfl_depositor_access = yes
-            var:bfl_accept_deposits = 1 exists = scope:bfl_party country_exists = scope:bfl_party
-            scope:bfl_party = { gold >= 100 NOT = { this = prev } }
-            OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } }
-        }
-            set_variable = bfl_operation_guard
-            bfl_allocate_deposit = yes
-            remove_variable = bfl_operation_guard
-        }
-    }
-    ''' + effect('bfl_request_all_withdrawals', '\n'.join(f'''if = {{
-        limit = {{ var:bfl_dep_{i:02}_active = 1 exists = var:bfl_dep_{i:02}_party country_exists = var:bfl_dep_{i:02}_party var:bfl_dep_{i:02}_party = scope:bfl_party bfl_period >= var:bfl_dep_{i:02}_maturity_period }}
-        set_variable = {{ name = bfl_dep_{i:02}_withdrawal_requested value = var:bfl_dep_{i:02}_principal }}
-        change_variable = {{ name = bfl_dep_{i:02}_withdrawal_requested add = var:bfl_dep_{i:02}_interest_due }}
-        bfl_pay_deposit_{i:02} = yes
-    }}''' for i in range(1,33))))
-    settlement = ''
-    accrue = 'save_scope_as = bfl_bank\n'
-    for i in range(1,33):
-        n=f'bfl_dep_{i:02}'
-        accrue += f'''if = {{ limit = {{ var:{n}_active = 1 }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:{n}_principal multiply = var:{n}_annual_rate add = var:{n}_remainder }} }}
-            set_variable = {{ name = {n}_remainder value = var:bfl_payment }}
-            # Carry the annual numerator to avoid recurring-decimal cent loss.
-            change_variable = {{ name = bfl_payment divide = 12 }}
-            change_variable = {{ name = bfl_payment multiply = 100 }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_payment floor = yes divide = 100 }} }}
-            change_variable = {{ name = {n}_remainder subtract = {{ value = var:bfl_payment multiply = 12 }} }}
-            change_variable = {{ name = {n}_interest_due add = var:bfl_payment }}
-            change_variable = {{ name = bfl_loss_carryforward add = var:bfl_payment }}
-            bfl_pay_demand_interest_{i:02} = yes
-            bfl_pay_deposit_{i:02} = yes
-        }}\n'''
-        settlement += effect(f'bfl_pay_deposit_{i:02}',f'''
-        if = {{ limit = {{ var:{n}_active = 1 var:{n}_withdrawal_requested > 0 exists = var:{n}_party country_exists = var:{n}_party }}
-            save_scope_as = bfl_bank
-            var:{n}_party = {{ save_scope_as = bfl_party }}
-            set_variable = {{ name = bfl_payment value = {{ value = gold subtract = 25 subtract = var:bfl_cash_committed min = 0 max = var:{n}_withdrawal_requested }} }}
-            add_gold = bfl_negative_payment
-            scope:bfl_party = {{ add_gold = scope:bfl_bank.var:bfl_payment }}
-            set_variable = {{ name = bfl_interest_paid value = {{ value = var:bfl_payment max = var:{n}_interest_due }} }}
-            scope:bfl_party = {{ bfl_record_withdrawn_interest = yes }}
-            change_variable = {{ name = {n}_interest_due subtract = var:bfl_interest_paid }}
-            change_variable = {{ name = {n}_withdrawal_requested subtract = var:bfl_payment }}
-            change_variable = {{ name = bfl_payment subtract = var:bfl_interest_paid }}
-            change_variable = {{ name = {n}_principal subtract = var:bfl_payment }}
-            if = {{ limit = {{ var:{n}_principal <= 0 var:{n}_interest_due <= 0 }}
-                set_variable = {{ name = {n}_active value = 0 }} remove_variable = {n}_party
-            }}
-        }}
-        ''')
-    common('scripted_effects','generated_deposit_settlement',settlement+effect('bfl_accrue_deposits',accrue))
+    from generate_deposits import generate
+    generate(common, effect, loc)
+    return
 
 
 def native_adapters():
@@ -700,6 +621,9 @@ def native_adapters():
         }
     }
     bfl_reconcile_native_assets = {
+        bfl_initialize_credit = yes
+        bfl_recognize_native_payoffs = yes
+        bfl_sample_native_coupons = yes
         bfl_review_native_credit = yes
         set_variable = { name = bfl_native_credit_value value = 0 }
         save_scope_as = bfl_bank
@@ -747,6 +671,7 @@ def treasury_and_resolution():
         save_scope_as = bfl_bank
         set_variable = { name = bfl_last_dividend_period value = bfl_period }
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
+        bfl_record_activity_statement = yes
         bfl_offset_losses = yes
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 }
         set_variable = { name = bfl_funded_dividend value = {
@@ -930,7 +855,7 @@ def hooks_and_commands():
     for product,label in [(1,'Deposit 100 gold on demand'),(2,'Deposit 100 gold for 12 months')]:
         key=f'bfl_deposit_{product}'
         instrument='demand_deposit' if product==1 else 'term_deposit'
-        valid=f'bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = {{ bfl_can_originate_{instrument} = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 }}'
+        valid=f'bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = {{ bfl_can_originate_{instrument} = yes var:bfl_accept_deposits = 1 }}'
         commands += command(key,valid,f'save_scope_as = bfl_party scope:bfl_bank = {{ set_variable = {{ name = bfl_product value = {product} }} bfl_open_deposit = yes }}')
         loc(key,label)
     commands += command('bfl_withdraw','bfl_has_management = yes country_type = location','save_scope_as = bfl_party scope:bfl_bank = { bfl_request_all_withdrawals = yes }')
@@ -968,7 +893,7 @@ def hooks_and_commands():
             select_trigger = {{ looking_for_a = country target_flag = recipient name = choose_country default_sort = will
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ bfl_is_bank = yes }}
-                enabled = {{ bfl_can_originate_{instrument} = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1
+                enabled = {{ bfl_can_originate_{instrument} = yes var:bfl_accept_deposits = 1
                     OR = {{ AND = {{ bfl_is_independent_bank = yes opinion = {{ target = scope:actor value >= 50 }} }} AND = {{ bfl_has_valid_controller = yes overlord = scope:actor }} }}
                     NOT = {{ this = scope:actor }} }}
             }}
@@ -1087,6 +1012,8 @@ def main():
     generate_bonds(common,effect,loc,TUNE)
     from generate_native_credit import generate as generate_credit
     generate_credit(common,effect,loc)
+    from generate_receipts import generate as generate_receipts
+    generate_receipts(common,effect,loc)
     from generate_bond_panel import generate as generate_bond_panel
     generate_bond_panel(common,effect,loc,write)
     gui_and_localization()

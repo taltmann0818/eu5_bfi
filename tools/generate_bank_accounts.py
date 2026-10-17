@@ -57,27 +57,7 @@ def generate(common, effect, loc, write, tune):
     for index in range(1, 33):
         rates += effect(f'bfl_apply_deposit_bonus_{index:02}', f'''if = {{ limit = {{ bfl_has_valid_controller = yes overlord = scope:bfl_party }}
             change_variable = {{ name = bfl_dep_{index:02}_annual_rate add = {tune['charter_deposit_bonus']} }} }}''')
-    interest = ''
-    for index in range(1, 33):
-        prefix = f'bfl_dep_{index:02}'
-        interest += effect(f'bfl_pay_demand_interest_{index:02}', f'''
-            if = {{ limit = {{ var:{prefix}_active = 1 var:{prefix}_maturity_period = 0
-                var:{prefix}_withdrawal_requested = 0 var:{prefix}_interest_due > 0 exists = var:{prefix}_party country_exists = var:{prefix}_party }}
-                save_scope_as = bfl_bank
-                set_variable = {{ name = bfl_interest_payment value = {{ value = bfl_free_cash max = var:{prefix}_interest_due multiply = 100 floor = yes divide = 100 }} }}
-                add_gold = {{ value = var:bfl_interest_payment multiply = -1 }}
-                change_variable = {{ name = {prefix}_interest_due subtract = var:bfl_interest_payment }}
-                var:{prefix}_party = {{
-                    if = {{ limit = {{ NOT = {{ has_variable = bfl_interest_period }} }} set_variable = {{ name = bfl_interest_period value = 0 }} }}
-                    if = {{ limit = {{ bfl_period > var:bfl_interest_period }}
-                        set_variable = {{ name = bfl_deposit_income value = 0 }}
-                        set_variable = {{ name = bfl_interest_period value = bfl_period }} }}
-                    add_gold = scope:bfl_bank.var:bfl_interest_payment
-                    change_variable = {{ name = bfl_deposit_income add = scope:bfl_bank.var:bfl_interest_payment }}
-                    if = {{ limit = {{ bfl_is_bank = yes }} change_variable = {{ name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_payment }} }}
-                }}
-            }}''')
-    common('scripted_effects', 'deposit_income', rates + interest)
+    common('scripted_effects', 'deposit_income', rates)
     withdrawn_interest = '''if = { limit = { scope:bfl_bank.var:bfl_interest_paid > 0 }
         if = { limit = { NOT = { has_variable = bfl_interest_period } } set_variable = { name = bfl_interest_period value = 0 } }
         if = { limit = { bfl_period > var:bfl_interest_period }
@@ -143,7 +123,8 @@ def generate(common, effect, loc, write, tune):
     }'''
     income = '''if = { limit = { bfl_period > var:bfl_last_income_period }
         set_variable = { name = bfl_last_income_period value = bfl_period }
-        set_variable = { name = bfl_native_monthly_net value = monthly_balance }
+        set_variable = { name = bfl_native_monthly_net value = { value = monthly_balance subtract = var:bfl_native_interest } }
+        change_variable = { name = bfl_profit_credit add = var:bfl_native_interest }
         if = { limit = { var:bfl_native_monthly_net >= 0 }
             change_variable = { name = bfl_profit_native add = var:bfl_native_monthly_net } }
         else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_monthly_net } }

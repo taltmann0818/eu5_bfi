@@ -1,0 +1,102 @@
+﻿bfl_term_service_1 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { } allow = { }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_has_accounts = yes } enabled = { bfl_term_interaction_eligible_1 = yes } }
+            effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { set_variable = { name = bfl_offer_mode value = 1 } bfl_offer_term_servicing = yes } }
+            ai_will_do = { value = 0 } }
+bfl_term_service_2 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { } allow = { }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_has_accounts = yes } enabled = { bfl_term_interaction_eligible_2 = yes } }
+            effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { set_variable = { name = bfl_offer_mode value = 2 } bfl_offer_term_servicing = yes } }
+            ai_will_do = { value = 0 } }
+bfl_estate_deposit_1 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:burghers_estate } }
+                allow = { scope:actor = { "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 1 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_term_1 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:burghers_estate } }
+                allow = { scope:actor = { "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 1 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_deposit_2 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:nobles_estate } }
+                allow = { scope:actor = { "estate(estate_type:nobles_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 2 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_term_2 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:nobles_estate } }
+                allow = { scope:actor = { "estate(estate_type:nobles_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 2 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_deposit_3 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:clergy_estate } }
+                allow = { scope:actor = { "estate(estate_type:clergy_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 3 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_term_3 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:clergy_estate } }
+                allow = { scope:actor = { "estate(estate_type:clergy_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 3 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_deposit_4 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:peasants_estate } }
+                allow = { scope:actor = { "estate(estate_type:peasants_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 4 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
+bfl_estate_term_4 = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+                potential = { scope:actor = { country_has_estate = estate_type:peasants_estate } }
+                allow = { scope:actor = { "estate(estate_type:peasants_estate)" = { estate_gold >= 125 } } }
+                select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                    column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes }
+                    enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                        OR = { AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } }
+                            AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
+                effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { scope:bfl_party = { set_variable = { name = bfl_pool value = 4 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } }
+                ai_will_do = { value = 0 } }
