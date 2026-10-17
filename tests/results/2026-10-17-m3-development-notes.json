@@ -1,0 +1,274 @@
+{
+  "recorded": "2026-10-17",
+  "scope": "Rejected development runs. Individual passing assertions in an overall failed or incomplete run are not completion evidence.",
+  "attempts": [
+    {
+      "attempt": "local-m3-accounts",
+      "runtime_sha256": "def12c5cde2cb21224a64b46ed9f70663ba962f9a60baee77b24c8b43fc6a293",
+      "token": "0e6fcb63d77d44dfaa16fb774699b7fe",
+      "passed": false,
+      "assertions_observed": 114,
+      "failed_assertions": [
+        "manual_takeover_bank_owns_same_loan",
+        "asset_tooltip_counterparty_is_borrower",
+        "bank_autonomous_takeover_funded"
+      ],
+      "error_count": 3642,
+      "first_errors": [
+        "Failed: manual_takeover_bank_owns_same_loan",
+        "Failed: asset_tooltip_counterparty_is_borrower",
+        "Failed: bank_autonomous_takeover_funded"
+      ]
+    },
+    {
+      "attempt": "local-m3-accounts-v2",
+      "runtime_sha256": "a9ba2e15a7eaa737aebb0befdb38c3448e38c7c8dbbc258ac7db8f72f164c1c0",
+      "token": "fcc2308cb98b414bb58f085443b746a6",
+      "passed": false,
+      "assertions_observed": 114,
+      "failed_assertions": [],
+      "error_count": 1,
+      "first_errors": [
+        "Source runtime changed since staging"
+      ]
+    },
+    {
+      "attempt": "local-m3-completion",
+      "runtime_sha256": "73ff04d9fd13e9b91ba85517733c00a12aa0ac20a15dc29e4a7b924ce42a3dc4",
+      "token": "0c35b6daa4d24700abfff7ea36bc6b0a",
+      "passed": false,
+      "assertions_observed": 46,
+      "failed_assertions": [],
+      "error_count": 2,
+      "first_errors": [
+        "Error: \"Failed to read enum! Type: \"ECountryInteractionType\", Val \"owncountry\": owncountry, near line: 2\" in file: \"common/country_interactions/bfl_bond_browser.txt\" near line: 2",
+        "Error: \"Failed to read enum! Type: \"ECountryInteractionType\", Val \"owncountry\": owncountry, near line: 2\" in file: \"common/country_interactions/bfl_bond_browser.txt\" near line: 2"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit",
+      "runtime_sha256": "b7a404aaae41e68490885e265a7eb8d943ee38b7f0bb333ff9369fd1b5cb9045",
+      "token": "0c19ee472ac34cfbab2993e72bcf9d25",
+      "passed": false,
+      "assertions_observed": 24,
+      "failed_assertions": [
+        "reformation_fixture_and_live_controller",
+        "offer_quotes_without_cash_movement",
+        "accepted_sovereign_loan_funded_once",
+        "originated_basis_and_native_identity",
+        "accepted_offer_replay_rejected",
+        "unresearched_restructuring_rejected",
+        "researched_offer_preserves_terms_until_consent",
+        "accepted_haircut_booked_once_without_cash",
+        "payoff_native_wallets_and_record_close",
+        "callback_does_not_mint_or_guess_interest",
+        "bankruptcy_zero_recovery_impairment_once",
+        "overseas_sovereign_credit_and_generation",
+        "real_company_overseas_credit_rejected",
+        "merchant_company_without_research_rejected",
+        "merchant_reformation_company_credit_funded",
+        "reload_credit_metadata_and_identity",
+        "reload_default_and_haircut_history"
+      ],
+      "error_count": 51,
+      "first_errors": [
+        "Failed: reformation_fixture_and_live_controller",
+        "Failed: offer_quotes_without_cash_movement",
+        "Failed: accepted_sovereign_loan_funded_once"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-final",
+      "runtime_sha256": "d619fd4dc49c438cde9adfb700db7655930d9f7626b05af37cd8710ed2135e23",
+      "token": "766746dd13e94de583af9e5443f2f2d9",
+      "passed": false,
+      "assertions_observed": 44,
+      "failed_assertions": [],
+      "error_count": 128,
+      "first_errors": [
+        "Error at gui/bfl_bond_desk.gui:119 (property origin is at gui/bfl_bond_desk.gui:119) - Unsupported property: size with a percentage on widgets that are a child of a vbox/hbox. Consider using layout policies and stretch factors instead.",
+        "Error at gui/bfl_bond_desk.gui:126 (property origin is at gui/bfl_bond_desk.gui:126) - Unsupported property: size with a percentage on widgets that are a child of a vbox/hbox. Consider using layout policies and stretch factors instead.",
+        "Error at gui/bfl_bond_desk.gui:145 (property origin is at gui/bfl_bond_desk.gui:145) - Unsupported property: size with a percentage on widgets that are a child of a vbox/hbox. Consider using layout policies and stretch factors instead."
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v2",
+      "runtime_sha256": "26e629d751a3d8f5309276d48ce62403c24e75990a77c9c1de70e17b307dd9f1",
+      "token": "1a81e7afd1994bcab896e64b02749055",
+      "passed": false,
+      "assertions_observed": 27,
+      "failed_assertions": [
+        "actual_later_age",
+        "reformation_fixture_and_live_controller",
+        "researched_offer_preserves_terms_until_consent",
+        "accepted_haircut_booked_once_without_cash",
+        "callback_does_not_mint_or_guess_interest",
+        "bankruptcy_zero_recovery_impairment_once",
+        "real_company_overseas_credit_rejected",
+        "merchant_company_without_research_rejected",
+        "merchant_reformation_company_credit_funded",
+        "reload_credit_metadata_and_identity",
+        "reload_default_and_haircut_history"
+      ],
+      "error_count": 34,
+      "first_errors": [
+        "Failed: actual_later_age",
+        "Failed: reformation_fixture_and_live_controller",
+        "Failed: researched_offer_preserves_terms_until_consent"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v3",
+      "runtime_sha256": "56ec7f597f28f3404aed64662e13e951afd1cdf4ab9149f4261db7fa0be20adb",
+      "token": "e02c1566342f435badfe55010ca5177e",
+      "passed": false,
+      "assertions_observed": 29,
+      "failed_assertions": [
+        "reload_credit_metadata_and_identity",
+        "reload_default_and_haircut_history"
+      ],
+      "error_count": 15,
+      "first_errors": [
+        "Failed: reload_credit_metadata_and_identity",
+        "Failed: reload_default_and_haircut_history",
+        "Failed to parse wild card data from string for event target link. Link: value, location: common/scripted_effects/bfi_campaign_checks.txt:67"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v4",
+      "runtime_sha256": "ca18c5b737d0a01ebed972c99b2a5c8bde04f7c15accd52895f1d77810178c25",
+      "token": "38050591e4ef4dd8809abf9db6e0cbd9",
+      "passed": false,
+      "assertions_observed": 30,
+      "failed_assertions": [
+        "bankruptcy_zero_recovery_impairment_once",
+        "overseas_sovereign_credit_and_generation",
+        "independent_overseas_bank_funds_sovereign",
+        "merchant_reformation_company_credit_funded",
+        "merchant_company_restructuring_booked"
+      ],
+      "error_count": 21,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_credit_metadata_and_identity, reload_default_and_haircut_history, reload_live_authority_and_profile"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v5",
+      "runtime_sha256": "82aeadd36193fa0d86b2a6952752bf959e5285a0ced1c7a44f083a147e9321cc",
+      "token": "a132589718a64dfca87b71879b5ec702",
+      "passed": false,
+      "assertions_observed": 35,
+      "failed_assertions": [
+        "bankruptcy_zero_recovery_impairment_once",
+        "overseas_sovereign_credit_and_generation",
+        "independent_overseas_bank_funds_sovereign",
+        "merchant_reformation_company_credit_funded",
+        "merchant_company_restructuring_booked",
+        "reload_default_and_haircut_history"
+      ],
+      "error_count": 7,
+      "first_errors": [
+        "Failed: bankruptcy_zero_recovery_impairment_once",
+        "Failed: overseas_sovereign_credit_and_generation",
+        "Failed: independent_overseas_bank_funds_sovereign"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v6",
+      "runtime_sha256": "be7e1dca758e1eee377b205179dd3a914dfd7b2cbf300362d3acfaa0d7100d1b",
+      "token": "4075dd28f77b4651a7f9c33feea3172f",
+      "passed": false,
+      "assertions_observed": 37,
+      "failed_assertions": [
+        "independent_full_funding_gate",
+        "independent_overseas_bank_funds_sovereign",
+        "merchant_reformation_company_credit_funded",
+        "merchant_company_restructuring_booked"
+      ],
+      "error_count": 5,
+      "first_errors": [
+        "Failed: independent_full_funding_gate",
+        "Failed: independent_overseas_bank_funds_sovereign",
+        "Failed: merchant_reformation_company_credit_funded"
+      ]
+    },
+    {
+      "attempt": "local-m3-credit-v7",
+      "runtime_sha256": "587f9f4519e9da16a0f95938b226ce8685a7a4677bfe13f4594763525f476715",
+      "token": "cf6b474ec11447cba242e727a52d4c7f",
+      "passed": false,
+      "assertions_observed": 42,
+      "failed_assertions": [
+        "independent_full_funding_gate",
+        "independent_borrower_budget_headroom",
+        "independent_offer_created",
+        "independent_overseas_bank_funds_sovereign"
+      ],
+      "error_count": 133,
+      "first_errors": [
+        "Failed: independent_full_funding_gate",
+        "Failed: independent_borrower_budget_headroom",
+        "Failed: independent_offer_created"
+      ]
+    },
+    {
+      "attempt": "local-m3-final",
+      "runtime_sha256": "e12e9f6ece39ef6a5ceceb8bee671682d2ceb1ec5924237f40bb5285110add6a",
+      "token": "987c88fb42e348fdb2b09834d4bf85e9",
+      "passed": false,
+      "assertions_observed": 43,
+      "failed_assertions": [],
+      "error_count": 4,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_credit_metadata_and_identity, reload_default_and_haircut_history, reload_live_authority_and_profile"
+      ]
+    },
+    {
+      "attempt": "local-m3-integrated",
+      "runtime_sha256": "fc90b2e405cdfe3aaf35af3ed03f35be653975f6c72c26a649df6d390f302315",
+      "token": "879d961a22a54fd893ae004784400f0d",
+      "passed": false,
+      "assertions_observed": 41,
+      "failed_assertions": [],
+      "error_count": 4,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_credit_metadata_and_identity, reload_default_and_haircut_history, reload_live_authority_and_profile"
+      ]
+    },
+    {
+      "attempt": "local-m3-premium",
+      "runtime_sha256": "16a0f0755060d9220c46ef1ea04c6780f0a44b94790e2ab5d294889d8ac4cf61",
+      "token": "50c048f12aee406c8eab4fd0b1f2cd5c",
+      "passed": false,
+      "assertions_observed": 46,
+      "failed_assertions": [
+        "reload_credit_metadata_and_identity"
+      ],
+      "error_count": 3,
+      "first_errors": [
+        "Missing, duplicate or stale END marker",
+        "Failed: reload_credit_metadata_and_identity",
+        "Source runtime changed since staging"
+      ]
+    },
+    {
+      "attempt": "local-m3-verified",
+      "runtime_sha256": "9f6bb1839efccaa36550453a50bbe4ca5c6a2fe5d974a011d53da01debd6635b",
+      "token": "065055c04ac341ae98ae58fb42031ed4",
+      "passed": false,
+      "assertions_observed": 46,
+      "failed_assertions": [],
+      "error_count": 1,
+      "first_errors": [
+        "Source runtime changed since staging"
+      ]
+    }
+  ],
+  "interrupted": "Several additional isolated runs were stopped before acceptance while UI files changed or to keep concurrent EUV memory bounded. They are not counted as passes."
+}

@@ -69,7 +69,16 @@ try {
         } finally {
             # Only terminate the exact process created here. Never stop a player's EUV process.
             $proc.Refresh()
-            if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force; $proc.WaitForExit() }
+            if (-not $proc.HasExited) {
+                try { $proc.Kill() }
+                catch {
+                    # Native timed handsoff can exit between Refresh and Kill.
+                    # Ignore only a confirmed exit of this exact owned process.
+                    $proc.Refresh()
+                    if (-not $proc.HasExited) { throw }
+                }
+                $proc.WaitForExit()
+            }
         }
     }
     $runtimeFingerprint=(Get-Content -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Raw | ConvertFrom-Json).runtime_sha256

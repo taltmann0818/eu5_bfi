@@ -61,6 +61,23 @@ listing. Primary issuance, coupon payments and redemption do not require an exch
 
 ## Acceptance
 
-Final engine reports and actual-game screenshots are being collected. Source,
-offline arithmetic, licensed engine assertions and manual visual observations are
-recorded separately. Failed development attempts do not establish completion.
+**M3 is complete for the pinned single-player baseline:** EUV 1.4.1 / Steam build
+25905365, CMF 2.5.0. The engine suites use runtime SHA-256
+`95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41`.
+
+- [Credit acceptance](../tests/results/2026-10-17-m3-credit.json): **46/46 assertions**, accepted sovereign credit for both profiles and the independent role, Merchant-only researched company credit, stale/rejected/expired/underfunded offers, consent, payoff, haircuts, partial repayment/refinancing, actual purchase premiums, proportional impairments, twelve consecutive periods and second-process metadata reload. The fixture uses the actual Reformation age with a 1337 date; it does not certify a naturally researched later-age campaign.
+- [Accounts and bond regression](../tests/results/2026-10-17-m3-accounts.json): **114/114 assertions**, both profiles, funded issuance, fixed coupons and annual cent conservation, facility limits/replay, research-only rejection, completed-building-only access, loss of either exchange, funded current-holder resale/redemption, expiry/generation guards and reload. The buying country never researches Stock Exchange in the successful resale test.
+- [Native regression](../tests/results/2026-10-17-m3-native-regression.json): **56/56 assertions plus 20/20 numerical checks**, twelve consecutive native observations and reload.
+- [Normal UI](../tests/results/2026-10-17-m3-ui.json): **15/15 manual observations** and [two actual-game captures](screenshots/README.md#m3-sovereign-bonds-in-credit). The tester browses issuers, lists/cancels a pre-advance offering, redeems its claim, funds a replacement and checks coupon/mandate/repeat-draw controls. Fixture grants and native hot-reload provenance are recorded separately.
+
+[Validation provenance](../tests/results/2026-10-17-m3-validation.json) records
+**86 offline tests**, native/CMF pins, source validation, deterministic generation,
+exact Economy/Credit reconstruction and **168-file staging**. It also records the
+accounts runner's natural-exit race and completion of that same run's reload.
+[Rejected development attempts](../tests/results/2026-10-17-m3-development-notes.json)
+are excluded from completion evidence. Full logs, licensed saves and native setup
+files remain in ignored disposable directories. Queued CI jobs are not passes.
+
+Detailed native receipt attribution remains M4, secondary equity markets M5, full
+custom-bond renegotiation/recovery and inheritance workouts M9, and the broad
+player-role, language, scale, AI, performance and debt-led balance matrix M10.
