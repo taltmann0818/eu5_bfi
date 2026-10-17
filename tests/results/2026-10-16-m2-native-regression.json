@@ -1,0 +1,749 @@
+{
+  "passed": true,
+  "token": "873628f28b284b01b43a777b92f0cdef",
+  "runtime_sha256": "36e39536458865a4821370f7bb557989d112210dea1fc262fa4ee249a46355dc",
+  "results": {
+    "P01_foreign_market_blocks_charter": "PASS",
+    "P01_owned_capital_market_allows_charter": "PASS",
+    "P01_selector_contains_native_bank": "PASS",
+    "P01_selector_repeat_no_payment": "PASS",
+    "P01_wrong_candidate_rejected": "PASS",
+    "P01_conversion_identity_capital_buildings": "PASS",
+    "P01_investment_single_transfer": "PASS",
+    "P01_reform_and_banking_traditions": "PASS",
+    "P01_native_claim_preserved": "PASS",
+    "P01_opening_equity_includes_existing_native_claim": "PASS",
+    "P01_one_bank_and_replay_price": "PASS",
+    "P02_controller_gui_effect_targets_bank": "PASS",
+    "P02_wrong_controller_execution_rejected": "PASS",
+    "P01_duplicate_demoted_without_cash_loss": "PASS",
+    "P02_stale_controller_execution_rejected": "PASS",
+    "P01_live_overlord_reconciled": "PASS",
+    "P08_scope_keys_map": "PASS",
+    "P08_heterogeneous_map_keys_iterable": "PASS",
+    "P06_native_term_setters": "PASS",
+    "P06_repayment_conserves_pair_cash": "PASS",
+    "P08_repaid_loan_reference_invalidated": "PASS",
+    "P06_default_removes_native_claim_without_lender_recovery": "PASS",
+    "P12_unregistered_presentation_defaults_are_safe": "PASS",
+    "P12_CMM_preferences_registered": "PASS",
+    "P12_CMM_registration_preserves_preference_and_cash": "PASS",
+    "P12_details_preference_consumed": "PASS",
+    "P12_notifications_off_removes_existing_alert": "PASS",
+    "P12_CMM_reset_changes_presentation_only": "PASS",
+    "P12_alert_opens_native_economy": "PASS",
+    "P09_native_purchase_can_back_country_owned_custody": "PASS",
+    "P09_encumbered_goods_cannot_be_sold_by_guarded_adapter": "PASS",
+    "P09_guarded_sale_preserves_pledged_quantity": "PASS",
+    "P09_selected_foreign_market_stock_is_used": "PASS",
+    "P09_foreign_market_roundtrip_restores_stock": "PASS",
+    "P10_twelve_monthly_probe_pulses": "PASS",
+    "P01_reconciled_charter_survives_year": "PASS",
+    "P08_native_loan_reference_survives_year": "PASS",
+    "P08_building_estate_country_references_survive_year": "PASS",
+    "P11_native_company_registered": "PASS",
+    "P11_company_trade_actor": "PASS",
+    "P11_company_exploration_actor": "PASS",
+    "P07_company_hq_landowner_and_overlord_are_distinct": "PASS",
+    "P11_native_success_callback_actor_and_area": "PASS",
+    "P07_discovery_does_not_invent_verified_company_profit": "PASS",
+    "P06_automatic_maturity_renewal_observed": "PASS",
+    "P06_bankruptcy_callback_observed": "PASS",
+    "P08_annexed_country_object_retained_but_not_live": "PASS",
+    "P08_annexed_holder_not_paid_obligation_preserved": "PASS",
+    "P08_reload_country_and_charter": "PASS",
+    "P08_reload_loan_reference": "PASS",
+    "P08_reload_building_and_estate": "PASS",
+    "P08_reload_variable_map": "PASS",
+    "P12_reload_CMM_preference": "PASS",
+    "P09_reload_country_owned_custody": "PASS",
+    "P11_reload_native_company": "PASS",
+    "P11_reload_project_callback_metadata": "PASS"
+  },
+  "errors": [],
+  "native_baseline_diagnostics": [
+    "failed reading property, at gui/credit.gui:1417",
+    "failed reading property, at gui/credit.gui:1417",
+    "failed reading property, at gui/credit.gui:166",
+    "failed reading property, at gui/credit.gui:166",
+    "failed reading property, at gui/credit.gui:350",
+    "failed reading property, at gui/credit.gui:350",
+    "failed reading property, at gui/credit.gui:39",
+    "failed reading property, at gui/credit.gui:39",
+    "failed reading property, at gui/credit.gui:394",
+    "failed reading property, at gui/credit.gui:394",
+    "failed reading property, at gui/credit.gui:513",
+    "failed reading property, at gui/credit.gui:513",
+    "failed reading property, at gui/economy_lateralview.gui:1021",
+    "failed reading property, at gui/economy_lateralview.gui:1021",
+    "failed reading property, at gui/economy_lateralview.gui:1208",
+    "failed reading property, at gui/economy_lateralview.gui:1208",
+    "failed reading property, at gui/economy_lateralview.gui:1215",
+    "failed reading property, at gui/economy_lateralview.gui:1215",
+    "failed reading property, at gui/economy_lateralview.gui:1226",
+    "failed reading property, at gui/economy_lateralview.gui:1226",
+    "failed reading property, at gui/economy_lateralview.gui:1561",
+    "failed reading property, at gui/economy_lateralview.gui:1561",
+    "failed reading property, at gui/economy_lateralview.gui:1596",
+    "failed reading property, at gui/economy_lateralview.gui:1596",
+    "failed reading property, at gui/economy_lateralview.gui:1614",
+    "failed reading property, at gui/economy_lateralview.gui:1614",
+    "failed reading property, at gui/economy_lateralview.gui:1687",
+    "failed reading property, at gui/economy_lateralview.gui:1687",
+    "failed reading property, at gui/economy_lateralview.gui:1737",
+    "failed reading property, at gui/economy_lateralview.gui:1737",
+    "failed reading property, at gui/economy_lateralview.gui:1767",
+    "failed reading property, at gui/economy_lateralview.gui:1767",
+    "failed reading property, at gui/economy_lateralview.gui:1835",
+    "failed reading property, at gui/economy_lateralview.gui:1835",
+    "failed reading property, at gui/economy_lateralview.gui:1882",
+    "failed reading property, at gui/economy_lateralview.gui:1882",
+    "failed reading property, at gui/economy_lateralview.gui:1930",
+    "failed reading property, at gui/economy_lateralview.gui:1930",
+    "failed reading property, at gui/economy_lateralview.gui:1976",
+    "failed reading property, at gui/economy_lateralview.gui:1976",
+    "failed reading property, at gui/economy_lateralview.gui:2359",
+    "failed reading property, at gui/economy_lateralview.gui:2359",
+    "failed reading property, at gui/economy_lateralview.gui:2673",
+    "failed reading property, at gui/economy_lateralview.gui:2673",
+    "failed reading property, at gui/economy_lateralview.gui:2690",
+    "failed reading property, at gui/economy_lateralview.gui:2690",
+    "failed reading property, at gui/economy_lateralview.gui:2731",
+    "failed reading property, at gui/economy_lateralview.gui:2731",
+    "failed reading property, at gui/economy_lateralview.gui:2747",
+    "failed reading property, at gui/economy_lateralview.gui:2747",
+    "failed reading property, at gui/economy_lateralview.gui:2790",
+    "failed reading property, at gui/economy_lateralview.gui:2790",
+    "failed reading property, at gui/economy_lateralview.gui:2820",
+    "failed reading property, at gui/economy_lateralview.gui:2820",
+    "failed reading property, at gui/economy_lateralview.gui:2883",
+    "failed reading property, at gui/economy_lateralview.gui:2883",
+    "failed reading property, at gui/economy_lateralview.gui:460",
+    "failed reading property, at gui/economy_lateralview.gui:460",
+    "failed reading property, at gui/economy_lateralview.gui:729",
+    "failed reading property, at gui/economy_lateralview.gui:729",
+    "failed reading property, at gui/economy_lateralview.gui:951",
+    "failed reading property, at gui/economy_lateralview.gui:951",
+    "failed reading property, at gui/technology_lateralview.gui:2002",
+    "failed reading property, at gui/technology_lateralview.gui:2002",
+    "gui/credit.gui:1417 - Failed parsing localized text: LOANS_SCROLL_LIST_EMPTY",
+    "gui/credit.gui:1417 - Failed parsing localized text: LOANS_SCROLL_LIST_EMPTY",
+    "gui/credit.gui:166 - Failed parsing localized text: [LoanEntry.GetLoan.GetDebt|2V][gold_i]",
+    "gui/credit.gui:166 - Failed parsing localized text: [LoanEntry.GetLoan.GetDebt|2V][gold_i]",
+    "gui/credit.gui:350 - Failed parsing localized text: [Player.GetEconomy.GetTotalDebt|2V][gold_i] (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)",
+    "gui/credit.gui:350 - Failed parsing localized text: [Player.GetEconomy.GetTotalDebt|2V][gold_i] (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)",
+    "gui/credit.gui:39 - Failed parsing localized text: REPAY_ALL_POSSIBLE_LOANS_DESC",
+    "gui/credit.gui:39 - Failed parsing localized text: REPAY_ALL_POSSIBLE_LOANS_DESC",
+    "gui/credit.gui:394 - Failed parsing localized text: [LoanEntry.GetAmount|2][gold_i]",
+    "gui/credit.gui:394 - Failed parsing localized text: [LoanEntry.GetAmount|2][gold_i]",
+    "gui/credit.gui:513 - Failed parsing localized text: [bankrupt|e]",
+    "gui/credit.gui:513 - Failed parsing localized text: [bankrupt|e]",
+    "gui/economy_lateralview.gui:1021 - Failed parsing localized text: [minting|e]",
+    "gui/economy_lateralview.gui:1021 - Failed parsing localized text: [minting|e]",
+    "gui/economy_lateralview.gui:1208 - Failed parsing localized text: [tax|E]",
+    "gui/economy_lateralview.gui:1208 - Failed parsing localized text: [tax|E]",
+    "gui/economy_lateralview.gui:1215 - Failed parsing localized text: ESTATE_CURRENT_TAX_TT",
+    "gui/economy_lateralview.gui:1215 - Failed parsing localized text: ESTATE_CURRENT_TAX_TT",
+    "gui/economy_lateralview.gui:1226 - Failed parsing localized text: ESTATE_CURRENT_TAX_AUTOMATED_TT",
+    "gui/economy_lateralview.gui:1226 - Failed parsing localized text: ESTATE_CURRENT_TAX_AUTOMATED_TT",
+    "gui/economy_lateralview.gui:1561 - Failed parsing localized text: [interest|E]",
+    "gui/economy_lateralview.gui:1561 - Failed parsing localized text: [interest|E]",
+    "gui/economy_lateralview.gui:1596 - Failed parsing localized text: [trade_income|e]",
+    "gui/economy_lateralview.gui:1596 - Failed parsing localized text: [trade_income|e]",
+    "gui/economy_lateralview.gui:1614 - Failed parsing localized text: [trade_income|E]",
+    "gui/economy_lateralview.gui:1614 - Failed parsing localized text: [trade_income|E]",
+    "gui/economy_lateralview.gui:1687 - Failed parsing localized text: [tariffs|E]",
+    "gui/economy_lateralview.gui:1687 - Failed parsing localized text: [tariffs|E]",
+    "gui/economy_lateralview.gui:1737 - Failed parsing localized text: [food|E]",
+    "gui/economy_lateralview.gui:1737 - Failed parsing localized text: [food|E]",
+    "gui/economy_lateralview.gui:1767 - Failed parsing localized text: [diplomatic_income_s|E]",
+    "gui/economy_lateralview.gui:1767 - Failed parsing localized text: [diplomatic_income_s|E]",
+    "gui/economy_lateralview.gui:1835 - Failed parsing localized text: [payments|E]",
+    "gui/economy_lateralview.gui:1835 - Failed parsing localized text: [payments|E]",
+    "gui/economy_lateralview.gui:1882 - Failed parsing localized text: [mercenary|E]",
+    "gui/economy_lateralview.gui:1882 - Failed parsing localized text: [mercenary|E]",
+    "gui/economy_lateralview.gui:1930 - Failed parsing localized text: [privateer|E]",
+    "gui/economy_lateralview.gui:1930 - Failed parsing localized text: [privateer|E]",
+    "gui/economy_lateralview.gui:1976 - Failed parsing localized text: [foreign_buildings|E]",
+    "gui/economy_lateralview.gui:1976 - Failed parsing localized text: [foreign_buildings|E]",
+    "gui/economy_lateralview.gui:2359 - Failed parsing localized text: [stability|E]",
+    "gui/economy_lateralview.gui:2359 - Failed parsing localized text: [stability|E]",
+    "gui/economy_lateralview.gui:2673 - Failed parsing localized text: [trade_expense|e]",
+    "gui/economy_lateralview.gui:2673 - Failed parsing localized text: [trade_expense|e]",
+    "gui/economy_lateralview.gui:2690 - Failed parsing localized text: [trade_expense|E]",
+    "gui/economy_lateralview.gui:2690 - Failed parsing localized text: [trade_expense|E]",
+    "gui/economy_lateralview.gui:2731 - Failed parsing localized text: [subvention|e]",
+    "gui/economy_lateralview.gui:2731 - Failed parsing localized text: [subvention|e]",
+    "gui/economy_lateralview.gui:2747 - Failed parsing localized text: [subvention|E]",
+    "gui/economy_lateralview.gui:2747 - Failed parsing localized text: [subvention|E]",
+    "gui/economy_lateralview.gui:2790 - Failed parsing localized text: [diplomatic_expense_s|E]",
+    "gui/economy_lateralview.gui:2790 - Failed parsing localized text: [diplomatic_expense_s|E]",
+    "gui/economy_lateralview.gui:2820 - Failed parsing localized text: [mercenary_expense|e]",
+    "gui/economy_lateralview.gui:2820 - Failed parsing localized text: [mercenary_expense|e]",
+    "gui/economy_lateralview.gui:2883 - Failed parsing localized text: [subsidy_expense|e]",
+    "gui/economy_lateralview.gui:2883 - Failed parsing localized text: [subsidy_expense|e]",
+    "gui/economy_lateralview.gui:460 - Failed parsing localized text: [income|e]",
+    "gui/economy_lateralview.gui:460 - Failed parsing localized text: [income|e]",
+    "gui/economy_lateralview.gui:729 - Failed parsing localized text: [balance|e]",
+    "gui/economy_lateralview.gui:729 - Failed parsing localized text: [balance|e]",
+    "gui/economy_lateralview.gui:951 - Failed parsing localized text: [expense|e]",
+    "gui/economy_lateralview.gui:951 - Failed parsing localized text: [expense|e]",
+    "gui/technology_lateralview.gui:2002 - Failed parsing localized text: [government_reforms|e]",
+    "gui/technology_lateralview.gui:2002 - Failed parsing localized text: [government_reforms|e]"
+  ],
+  "measurements": {
+    "logger.control": [
+      "123.45"
+    ],
+    "P06.before.lender_cash": [
+      "1380"
+    ],
+    "P06.before.borrower_cash": [
+      "1000"
+    ],
+    "P06.callback.taken.cash": [
+      "1100",
+      "10",
+      "1020"
+    ],
+    "P06.callback.taken.lender_cash": [
+      "1280",
+      "1354.8",
+      "1334.8"
+    ],
+    "P06.callback.taken.loan_face": [
+      "100",
+      "10",
+      "20"
+    ],
+    "P06.callback.taken.loan_remaining": [
+      "112",
+      "10.1",
+      "32"
+    ],
+    "P06.issued.lender_cash": [
+      "1280"
+    ],
+    "P06.issued.borrower_cash": [
+      "1100"
+    ],
+    "P06.issued.loan_amount": [
+      "100"
+    ],
+    "P06.issued.loan_interest": [
+      "0.12"
+    ],
+    "P06.issued.remaining_debt": [
+      "112"
+    ],
+    "P06.issued.months_left": [
+      "12"
+    ],
+    "P06.restructured.remaining_debt": [
+      "84.8"
+    ],
+    "P06.restructured.lender_cash": [
+      "1280"
+    ],
+    "P06.callback.repaid.cash": [
+      "1100",
+      "39.41552"
+    ],
+    "P06.callback.repaid.lender_cash": [
+      "1280",
+      "1294.42623"
+    ],
+    "P06.callback.repaid.loan_face": [
+      "80",
+      "10"
+    ],
+    "P06.callback.repaid.loan_remaining": [
+      "84.8",
+      "16"
+    ],
+    "P06.repaid.lender_cash": [
+      "1364.8"
+    ],
+    "P06.repaid.borrower_cash": [
+      "1015.2"
+    ],
+    "P06.bankrupt.before_lender_cash": [
+      "1334.8"
+    ],
+    "P06.callback.bankruptcy.cash": [
+      "1"
+    ],
+    "P06.callback.bankruptcy.lender_cash": [
+      "1334.8"
+    ],
+    "P06.bankrupt.lender_cash": [
+      "1334.8"
+    ],
+    "P06.bankrupt.borrower_cash": [
+      "1"
+    ],
+    "P09.before.stock": [
+      "1000"
+    ],
+    "P09.before.cash": [
+      "1334.8"
+    ],
+    "P09.bought.stock": [
+      "990"
+    ],
+    "P09.bought.cash": [
+      "1323.737"
+    ],
+    "P09.sold.stock": [
+      "1000"
+    ],
+    "P09.sold.cash": [
+      "1334.5513"
+    ],
+    "P09.unbacked_sale.stock": [
+      "1010"
+    ],
+    "P09.unbacked_sale.cash": [
+      "1345.3656"
+    ],
+    "P09.short_stock.before": [
+      "2"
+    ],
+    "P09.short_stock.after": [
+      "0"
+    ],
+    "P09.zero_cash.after": [
+      "-11.063"
+    ],
+    "P07.controller.cash_at_start": [
+      "9500"
+    ],
+    "P07.controller.budget_at_start": [
+      "7.44359"
+    ],
+    "P09.branch.actor_capital_quote": [
+      "1.1063"
+    ],
+    "P09.branch.selected_market_quote": [
+      "1.03267"
+    ],
+    "P09.branch.before_cash": [
+      "1342.95404"
+    ],
+    "P09.branch.after_buy_cash": [
+      "1332.62734"
+    ],
+    "P09.branch.after_sale_cash": [
+      "1333.62734"
+    ],
+    "P06.callback.renewed.cash": [
+      "0"
+    ],
+    "P06.callback.renewed.lender_cash": [
+      "1292.82103"
+    ],
+    "P06.callback.renewed.loan_face": [
+      "10"
+    ],
+    "P06.callback.renewed.loan_remaining": [
+      "16"
+    ],
+    "P10.monthly.period": [
+      "16050",
+      "16051",
+      "16052",
+      "16053",
+      "16054",
+      "16055",
+      "16056",
+      "16057",
+      "16058",
+      "16059",
+      "16060",
+      "16061"
+    ],
+    "P10.monthly.day": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "P10.monthly.bank_cash": [
+      "1294.42623",
+      "1311.6361",
+      "1312.48507",
+      "1369.02153",
+      "1369.13636",
+      "1369.29113",
+      "1369.09157",
+      "1369.22945",
+      "1369.23537",
+      "1369.53023",
+      "1369.83041",
+      "1370.2095"
+    ],
+    "P10.monthly.bank_budget": [
+      "4.3252",
+      "2.78987",
+      "2.30897",
+      "1.46919",
+      "1.33483",
+      "1.39477",
+      "0.99044",
+      "1.32788",
+      "1.19592",
+      "1.55486",
+      "1.58018",
+      "1.68909"
+    ],
+    "P10.monthly.bank_income": [
+      "0.55998",
+      "0.56868",
+      "0.57081",
+      "0.51412",
+      "0.47296",
+      "0.46284",
+      "0.41441",
+      "0.43345",
+      "0.41728",
+      "0.43405",
+      "0.44831",
+      "0.46927"
+    ],
+    "P10.monthly.bank_custom_expense_paid": [
+      "2.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19",
+      "1.19"
+    ],
+    "P10.monthly.bank_dividends_paid": [
+      "0.53",
+      "0.39",
+      "0.27",
+      "0.06",
+      "0.03",
+      "0.05",
+      "0",
+      "0",
+      "0",
+      "0.07",
+      "0.09",
+      "0.12"
+    ],
+    "P10.monthly.borrower_cash": [
+      "0.91879",
+      "1.83475",
+      "2.62162",
+      "2.95434",
+      "2.99268",
+      "3.23822",
+      "2.94677",
+      "2.99741",
+      "2.89536",
+      "3.0426",
+      "3.08491",
+      "3.49358"
+    ],
+    "P10.monthly.borrower_budget": [
+      "0.91879",
+      "0.91596",
+      "0.78687",
+      "0.33272",
+      "0.03834",
+      "0.24554",
+      "-0.29145",
+      "0.05064",
+      "-0.10205",
+      "0.14724",
+      "0.04231",
+      "0.40867"
+    ],
+    "P10.monthly.loan_amount": [
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120",
+      "120"
+    ],
+    "P10.monthly.loan_interest": [
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12",
+      "0.12"
+    ],
+    "P10.monthly.remaining_debt": [
+      "190.8",
+      "189.6",
+      "188.4",
+      "187.2",
+      "186",
+      "184.8",
+      "183.6",
+      "182.4",
+      "181.2",
+      "180",
+      "178.8",
+      "177.6"
+    ],
+    "P10.monthly.months_left": [
+      "59",
+      "58",
+      "57",
+      "56",
+      "55",
+      "54",
+      "53",
+      "52",
+      "51",
+      "50",
+      "49",
+      "48"
+    ],
+    "P07.monthly.controller_cash": [
+      "9516.58248",
+      "9495.42811",
+      "9509.96888",
+      "9483.3958",
+      "9489.91709",
+      "9444.94535",
+      "9450.24673",
+      "9253.78613",
+      "9261.40489",
+      "9213.80223",
+      "9219.84624",
+      "9171.30942"
+    ],
+    "P11.exploration.before_cash": [
+      "1000"
+    ],
+    "P11.exploration.controller_before_cash": [
+      "9516.58248"
+    ],
+    "P11.exploration.after_cash": [
+      "904.213"
+    ],
+    "P11.exploration.controller_after_cash": [
+      "9516.58248"
+    ],
+    "P11.exploration.count": [
+      "1"
+    ],
+    "P07.monthly.company_cash": [
+      "904.213",
+      "902.32867",
+      "904.61931",
+      "907.13296",
+      "907.23708",
+      "900.71854",
+      "902.16043",
+      "903.60458",
+      "904.97927",
+      "906.28533",
+      "907.83047",
+      "901.18521"
+    ],
+    "P07.monthly.company_budget": [
+      "5.52657",
+      "-1.88433",
+      "2.29064",
+      "2.51365",
+      "0.10412",
+      "1.34194",
+      "1.44189",
+      "1.44415",
+      "1.37469",
+      "1.30606",
+      "1.54514",
+      "1.71106"
+    ],
+    "P07.monthly.company_income": [
+      "0.66487",
+      "0.72018",
+      "0.618",
+      "0.63103",
+      "0.36659",
+      "0.36757",
+      "0.38653",
+      "0.40262",
+      "0.4085",
+      "0.39238",
+      "0.38902",
+      "0.40778"
+    ],
+    "P07.monthly.company_trade_income": [
+      "0",
+      "0.06677",
+      "0.10043",
+      "0.09415",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P07.monthly.company_hq_profit": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.monthly.total_trade_volume": [
+      "0",
+      "0.22",
+      "0.23081",
+      "0.23081",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.monthly.trade_buy": [
+      "0",
+      "0.32902",
+      "0.21994",
+      "0.22026",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.monthly.trade_sell": [
+      "0",
+      "0.53642",
+      "0.52924",
+      "0.52684",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.monthly.trade_profit": [
+      "-0.025",
+      "0.11205",
+      "0.23398",
+      "0.23071",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.monthly.trade_volume": [
+      "0",
+      "0.22",
+      "0.23081",
+      "0.23081",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "P11.exploration.progress": [
+      "7.666"
+    ],
+    "P11.exploration.monthly_cost": [
+      "6.4935"
+    ],
+    "P11.success.company_cash": [
+      "904.61931"
+    ],
+    "P06.final.renewed_callbacks": [
+      "1"
+    ],
+    "P06.final.bankruptcy_callbacks": [
+      "1"
+    ]
+  },
+  "fixture_sha256": "774588cfa26d61fbcdd3dd6dd660cb92c9237f8c5fa0c3e92b2a94224722d33f",
+  "fixture_conditions": {
+    "native_exploration_construction_days": 1,
+    "normal_native_construction_days": 270,
+    "test_country_preparation_modifier": -0.99,
+    "test_explorer_adm_dip_mil": 90,
+    "completion": "Observe native positive progress before test-only change_exploration_progress = 1000 exercises the success callback. This is not natural terminal-outcome or ordinary-preparation acceptance."
+  },
+  "measurement_assertions": {
+    "logger_control_value": "PASS",
+    "native_issue_debits_lender": "PASS",
+    "native_issue_credits_borrower": "PASS",
+    "native_repayment_debits_84_8": "PASS",
+    "native_repayment_credits_84_8": "PASS",
+    "native_full_payoff_attributable_interest_is_4_8": "PASS",
+    "native_default_pays_no_creditor_recovery": "PASS",
+    "native_foreign_purchase_debits_actor": "PASS",
+    "native_foreign_sale_credits_actor": "PASS",
+    "both_native_market_quotes_available": "PASS",
+    "native_purchase_removes_ten_goods": "PASS",
+    "native_sale_adds_ten_goods": "PASS",
+    "native_sale_requires_custom_custody_guard": "PASS",
+    "native_purchase_clamps_to_two_available": "PASS",
+    "native_purchase_requires_cash_guard": "PASS",
+    "company_funds_native_exploration": "PASS",
+    "exploration_does_not_debit_controller": "PASS",
+    "natural_exploration_progress_observed": "PASS",
+    "native_trade_executed_volume_observed": "PASS",
+    "native_annual_coupon_has_fixed_face_and_monthly_1_2_reduction": "PASS"
+  },
+  "scope": "Single-player engine effects and reload. GUI transport and other UI scales require the separate visual record. Multiplayer is outside scope."
+}

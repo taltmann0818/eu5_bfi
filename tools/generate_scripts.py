@@ -705,7 +705,7 @@ def native_adapters():
     blocked = {
         'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
         'native_goods_adapter':[('bfl_purchase_native_inventory','P09'),('bfl_sell_native_inventory','P09'),('bfl_settle_warehouse_receipt','P09'),('bfl_settle_commodity_forward','P09')],
-        'native_trade_adapter':[('bfl_execute_company_trade','P11'),('bfl_fund_commenda','P11')],
+        'native_trade_adapter':[('bfl_fund_commenda','P11')],
         'native_receipts_adapter':[('bfl_observe_native_receipts','P07'),('bfl_subscribe_company_equity','P07')],
         'monetary':[('bfl_issue_sovereign_notes','P05'),('bfl_settle_interbank_liquidity','P04'),('bfl_run_clearing','P10')],
         'security':[('bfl_pledge_native_collateral','P04'),('bfl_enforce_native_collateral','P04')],
@@ -812,25 +812,6 @@ def treasury_and_resolution():
             bfl_autonomous_takeover = yes
             bfl_record_history = yes
             set_variable = { name = bfl_last_period value = bfl_period }
-        }
-    }
-    ''')
-    common('scripted_effects','company_operations','''
-    bfl_register_company = {
-        if = { limit = { bfl_is_company = yes NOT = { has_variable = bfl_company_schema } }
-            set_variable = { name = bfl_company_schema value = 1 }
-            set_variable = { name = bfl_company_buffer value = 100 }
-            set_variable = { name = bfl_company_mandate value = 0 }
-            set_variable = { name = bfl_company_verified_profit value = 0 }
-            set_variable = { name = bfl_company_last_period value = 0 }
-        }
-    }
-    # Native operating identity, trade routes and native income hooks remain authoritative.
-    bfl_process_company = {
-        bfl_register_company = yes
-        if = { limit = { bfl_period > var:bfl_company_last_period }
-            # No unexplained treasury delta is treated as company earnings.
-            set_variable = { name = bfl_company_last_period value = bfl_period }
         }
     }
     ''')
@@ -1072,7 +1053,8 @@ def gui_and_localization():
     generate_interface(common, effect, loc, write, TUNE, ADV, INST)
     localization='l_english:\n'
     for key,value in sorted(LOC.items()):
-        localization += f' {key}: "{value.replace(chr(34),chr(39))}"\n'
+        escaped = value.replace(chr(34), chr(39)).replace('\n', '\\n')
+        localization += f' {key}: "{escaped}"\n'
     write('main_menu/localization/english/bfl_finance_l_english.yml',localization)
 
 
@@ -1083,6 +1065,8 @@ def main():
     deposits()
     native_adapters()
     treasury_and_resolution()
+    from generate_company_operations import generate as generate_companies
+    generate_companies(common, effect, loc, write)
     hooks_and_commands()
     from generate_contracts import generate
     generate(common,effect,loc)

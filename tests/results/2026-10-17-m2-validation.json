@@ -1,0 +1,40 @@
+{
+  "recorded": "2026-10-17",
+  "runtime_sha256": "1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5",
+  "regression_runtime_sha256": "36e39536458865a4821370f7bb557989d112210dea1fc262fa4ee249a46355dc",
+  "regression_difference": [
+    "in_game/common/generic_actions/bfl_company_operations.txt",
+    "in_game/gui/bfl_economy_finance.gui"
+  ],
+  "regression_scope": "All other runtime files, including every financial service, trigger, value, role, migration and native adapter, are byte-identical. Final M2 and UI evidence exercise the updated frontend. Reports retain their original hashes.",
+  "offline_tests": {
+    "passed": true,
+    "count": 86,
+    "command": "python -m unittest discover -s tests -q"
+  },
+  "source_validation": {
+    "passed": true,
+    "script_gui_localization_files": 93
+  },
+  "native_cmf_source_pins": "PASS",
+  "deterministic_generation": {
+    "passed": true,
+    "before_and_after_sha256": "1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5"
+  },
+  "economy_reconstruction": "PASS",
+  "package_staging": {
+    "passed": true,
+    "files": 151,
+    "scope": "Local package only; no release/tag/upload."
+  },
+  "engine_reports": {
+    "company": "2026-10-16-m2-companies.json",
+    "accounts": "2026-10-16-m2-accounts.json",
+    "native": "2026-10-16-m2-native-regression.json"
+  },
+  "changed_frontend_sha256": {
+    "in_game/common/generic_actions/bfl_company_operations.txt": "87fef3e09a51120f64a63597776fecaac9c02932280ed2cbfbe2736d4f104c71",
+    "in_game/gui/bfl_economy_finance.gui": "655693e359992a0c7d338486674f9f091a90dea760da842f2f1a037b33fedafa"
+  },
+  "ci_boundary": "Local engine evidence is independent of GitHub licensed-runner jobs. Queued jobs are not passes."
+}

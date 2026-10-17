@@ -1,5 +1,12 @@
 # Florence testing and M0 completion
 
+Current M2 evidence is summarized in [operating companies](m2-companies.md):
+28/28 engine assertions, twelve numerical company statements, ordinary native
+exploration through a natural terminal outcome and save/reload. Separate
+accounts/native regressions and normal UI observations keep their original
+runtime hashes. M2 native operating receipts do not enable company equity,
+corporate credit, commenda, goods custody or workouts.
+
 M0 is **complete for the pinned single-player baseline**: EUV 1.4.1 / Steam build 25905365 with CMF 2.5.0. The [native audit](m0-probes.md) records **56/56 engine assertions** and **20/20 numerical checks**, twelve consecutive monthly observations and a second-process reload. The [accounts/bond regression](../tests/results/2026-10-16-m0-completion-accounts.json) passes **114/114 assertions** on runtime SHA-256 `68f8d2a7a0a8a75747ed7329c35d282c685a24c60e11d70a9bccdff6e024072d`. The [normal UI record](../tests/results/2026-10-16-m0-ui-completion.json) separately passes **25/25 observations** of real charter cancellation, paid conversion, profile choice and facility on/off commands. Its captured runtime is `4afd588f84b66062f7052b01d41b92f39105d6e3853304bd7c4cd9c81938f5f5`; all scoped command/GUI sources remain identical in the final runtime, whose only subsequent change guards absent CMM preference maps and passes the final engine suites. [Visual evidence](../tests/results/2026-10-16-m0-visual-completion.json) records new 1280×720 captures at 60% and 50% GUI scale; historical 2560×1440 native-art captures retain their original provenance. **73 offline tests**, source pins, deterministic generation, Economy reconstruction and 142-file package staging pass. **No M0 checks remain.** Multiplayer is retired. M0 establishes native capabilities and limits; later product implementation and release-wide compatibility belong to M1–M10. Historical failed attempts remain [recorded](../tests/results/2026-10-15-m0-repeatability-limitations.json) and are not counted as passes.
 
 Earlier custom sovereign-bond revision on 15 October 2026: **114/114 real-engine assertions passed**, twelve monthly periods and a second-process autosave reload. [Committed result](../tests/results/2026-10-15-sovereign-bonds.json) pins runtime `1c6a371ad1b640050a4af2ced8a3f5d35c622cc39963c9cff3196c385be575ce`. The 32 additional assertions exercise funded issuance, both profiles, fixed annual coupons and cent conservation, arrears, recurring funding, Stock Exchange advance/building gates on both secondary parties (including post-listing loss), stale/expired offers, funded current-holder resale/redemption and reload. **53 offline tests pass.** See [custom transactions and limitations](sovereign-bonds.md). Selected bond visuals are documented separately; broader lifecycle/campaign acceptance remains in M1–M10.
@@ -23,7 +30,7 @@ Offline checks run before delivery:
 
 These are not native parser or campaign tests. Record engine load diagnostics separately from gameplay acceptance.
 
-Broader M2–M10 acceptance checklist (M0 and [M1 charter/accounts](m1-charter.md) are complete):
+Broader M3–M10 acceptance checklist (M0, [M1 charter/accounts](m1-charter.md) and [M2 operating companies](m2-companies.md) are complete):
 
 1. Record displayed version/checksum, current build and CMF release. Freeze updates for the probe cycle.
 2. Start a disposable debug fixture, not a personal campaign. Establish a landed sovereign controlling its capital market, one native State Bank, a second independent bank and a native company when age permits.
@@ -31,7 +38,7 @@ Broader M2–M10 acceptance checklist (M0 and [M1 charter/accounts](m1-charter.m
 4. M10: broaden the completed M1 specialization/migration/reload acceptance to the release-wide age/research transaction matrix. Attempt early and wrong-profile operations; service inherited obligations without granting origination rights.
 5. Deposit 100, inspect bank liability/equity, advance through twelve monthly accruals, withdraw and reload. Queue a shortage; refill and ensure one claim is paid once. Repeat with term maturity and registry exhaustion.
 6. M3/M9: implement accepted ordinary-credit offers, basis/receipt bookkeeping and workouts using the completed native audit. Custom bonds already have funded issuance/current-holder/exchange-gate evidence.
-7. M2/M6/M7/M8: implement production receipt, custody, transport, venture settlement and clearing services within the audited native limits. Never infer profit from unexplained treasury movement.
+7. M6/M7/M8: build custody, transport, investor venture settlement and clearing services on the verified M2 native operating path. Never infer profit from unexplained treasury movement.
 8. M10: extend the recorded M0 UI inspection to release-wide resolution/scale, language and mod compatibility. Preserve native tabs, Player context, CMM reset/alerts and single-player authority as later interfaces are added.
 9. Broaden the tested custom-bond fixture to normal charter → funded custom issue → coupon → deposit interest/share dividend → Stock Exchange-gated resale → buyer coupon → redemption. Track every wallet and estate funding source; no royalty channel is part of current acceptance.
 10. Only after the native bridges pass, broaden to company distress, guarantees, resolution, multiple AI institutions, save/reload and performance campaigns.

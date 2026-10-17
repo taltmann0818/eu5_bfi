@@ -1,5 +1,52 @@
 # Native bank interface captures
 
+## M2 company controls
+
+**Chartered bank and company together:** the supplementary [shared Credit visual
+test](../../tests/results/2026-10-17-m2-company-bank-ui.json) passes five manual
+layout observations on 17 October 2026, using the same production runtime and
+1280×720 / 60% scale as below. The disposable Florence fixture contains Bardi as
+its chartered bank with a deposit and native loan assets, plus Liguria and Corsica
+as its native operating company. It is paused on 22 May 1337.
+
+- [Shared Credit overview](m2-company-with-chartered-bank.png): Bardi's accounts,
+  ownership/assets charts and bank investment controls remain visible above the
+  separate company statement. Company cash is a test-only 1,000-gold setup grant;
+  earnings and payouts remain zero.
+- [Scrolled company commands](m2-company-with-chartered-bank-controls.png): company
+  mandates, capital, crew and route controls remain accessible beneath the bank
+  investment viewport. Native loan controls remain below. The two regions scroll
+  independently without replacing the bank overview.
+
+These are unedited full game-window PNGs. This supplementary check exercises the
+shared layout; it does not add a normal-charter or financial-transaction pass.
+
+Captured on 17 October 2026 with EUV 1.4.1 / build 25905365 and CMF 2.5.0 at
+1280×720 and 60% GUI scale. Runtime SHA-256:
+`1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5`.
+The [11-observation UI record](../../tests/results/2026-10-17-m2-ui.json) hashes
+these full, unedited window captures and the disposable fixture. The fixture
+creates a market, trade access and a native company headquarters; normal UI
+commands perform selection, cancellation, funding and the commercial mandate.
+
+- [Selected company](m2-company-selection.png): company cash 10, buffer 100 and
+  no funding/earnings/payout mutation; sovereign cash 10,000 and diplomatic capacity 4.50.
+- [Capital preview](m2-capital-offer.png): prospective sovereign debit and company
+  credit of 100; this first confirmation is cancelled.
+- [Confirmed contribution](m2-capital-funded.png): a subsequent confirmation moves
+  exactly 100, leaving company cash 110 and sovereign cash 9,900. Earnings and payout stay zero.
+- [Trade mandate](m2-trade-mandate.png): the native acknowledgement after the
+  normal command; diplomatic capacity remains 4.50.
+- [Natural monthly statement](m2-monthly-statement.png): 20 June 1337, company cash
+  120.14, trade 0.17, net budget 4.46, eligible earnings 0.17, payout zero, one
+  facility, one route and 0.42 executed volume. Unrelated native battle/faction
+  notices remain visible. The service protects reserves despite positive earnings.
+
+Native confirmation and self-notification dialogs remain. These captures certify
+the listed controls and displayed outcomes; the separate [M2 campaign](../m2-companies.md)
+certifies positive commanded route/exploration execution, natural exploration and reload.
+Broader language/layout/AI campaigns remain M10.
+
 ## M1 completion captures
 
 The M1 captures use the production runtime `a169093c733c860a40428a655b18f328001bd5ddf33c27ce03c7f7ad2a331506` in a disposable Florence campaign at 1280×720. [Ten manual observations](../../tests/results/2026-10-16-m1-ui.json) and [M1 engine acceptance](../m1-charter.md) are recorded separately. Setup creates ten native banks; actual charter, profile, deposit and withdrawal actions use normal UI controls.

@@ -1,0 +1,130 @@
+﻿bfl_company_retain = { type = owncountry ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 0 } }
+                scope:company = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_trade = { type = owncountry ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 1 } }
+                scope:company = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_explore = { type = owncountry ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 2 } }
+                scope:company = { bfl_company_set_mandate = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_fund = { type = owncountry ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor  }
+                scope:company = { bfl_company_capitalize = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_crew = { type = owncountry ai_tick = never
+            potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
+            select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+            effect = { scope:actor = { save_scope_as = bfl_company_actor  }
+                scope:company = { bfl_company_provide_crew = yes } }
+            ai_will_do = { value = 0 }
+        }
+bfl_company_select = { type = owncountry ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+        effect = { if = { limit = { scope:company = { bfl_is_company = yes is_subject_of = scope:actor } }
+            scope:company = { bfl_register_company = yes }
+            scope:actor = { set_variable = { name = bfl_selected_company value = scope:company } } } }
+        ai_will_do = { value = 0 }
+    }
+bfl_company_route = { type = owncountry ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    } select_trigger = { looking_for_a = market target_flag = from
+        name = create_trade_select_from_market column = { data = name }
+        visible = { in_trade_range_of = scope:company }
+        enabled = {  }
+    }
+select_trigger = { looking_for_a = market target_flag = to
+        name = create_trade_select_to_market column = { data = name }
+        visible = { in_trade_range_of = scope:company }
+        enabled = {  }
+    }
+select_trigger = { looking_for_a = market target_flag = merchant
+        name = create_trade_select_merchant_market column = { data = name }
+        visible = { in_trade_range_of = scope:company }
+        enabled = { has_merchant = scope:company available_merchant_capacity = { country = scope:company value >= 0.1 } }
+    }
+
+        select_trigger = { looking_for_a = goods target_flag = goods name = create_trade_select_goods
+            column = { data = name } visible = {
+                scope:from = { NOT = { is_export_banned = root }
+                    market_possible_goods_trade_surplus = { goods = root country = scope:company value > 0 } }
+                scope:to = { NOT = { is_import_banned = root } }
+            } }
+        effect = { scope:actor = { save_scope_as = bfl_company_actor }
+            scope:company = { bfl_execute_company_trade = yes } }
+        ai_will_do = { value = 0 }
+    }
+bfl_company_expedition = { type = owncountry ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = company name = choose_country
+        interaction_source_list = { scope:actor = { every_subject = { limit = { bfl_is_company = yes } add_to_list = source } } }
+        column = { data = name }
+        visible = { bfl_is_company = yes is_subject_of = scope:actor }
+        enabled = { bfl_is_company = yes is_subject_of = scope:actor }
+    }
+        select_trigger = { looking_for_a = area source = company source_flags = possible_exploration_areas target_flag = target name = start_exploration_select_area
+            column = { data = name } visible = { scope:company = { NOT = { has_discovered_area = root } } } }
+        select_trigger = { looking_for_a = location source = target source_flags = possible_launch_locations target_flag = launch_location name = start_exploration_select_launch_point
+            column = { data = name } visible = { is_port = yes
+                scope:company = { any_owned_building = { location = root } } } }
+        select_trigger = { looking_for_a = character source = company target_flag = character name = start_exploration_select_character
+            column = { data = character_explorer } visible = { owner = scope:company is_valid_for_exploration = yes } }
+        effect = { scope:actor = { save_scope_as = bfl_company_actor }
+            scope:company = { bfl_execute_company_exploration = yes } }
+        ai_will_do = { value = 0 }
+    }

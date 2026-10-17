@@ -1,0 +1,48 @@
+{
+  "token": "b2a8904a29f84e1a8dcec72973cfef88",
+  "suite": "M2 normal UI",
+  "fixture_sha256": "1681eadd923428d1776487eb9554a5cdde05827da02da3304aabed3479f573a9",
+  "runtime_sha256": "1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5",
+  "recorded": "2026-10-17",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "client_resolution": "1280x720",
+  "gui_scale": 0.6,
+  "passed": true,
+  "scope": "Manual observations of real Credit controls and displayed wallets/statements; these are not automated engine assertions.",
+  "results": {
+    "credit_company_controls": "PASS",
+    "native_company_selection": "PASS",
+    "selection_does_not_spend_diplomatic_capacity": "PASS",
+    "capital_preview": "PASS",
+    "capital_cancel": "PASS",
+    "capital_accepted": "PASS",
+    "capital_excluded_from_earnings": "PASS",
+    "mandate_command": "PASS",
+    "scrollbar_access": "PASS",
+    "natural_statement": "PASS",
+    "buffer_blocks_distribution": "PASS"
+  },
+  "observations": {
+    "credit_company_controls": "Economy > Credit > Lending & Investments exposes operating companies without a chartered bank.",
+    "native_company_selection": "Native selector lists the controlled Liguria and Corsica company; selection initializes buffer 100 without changing cash 10.",
+    "selection_does_not_spend_diplomatic_capacity": "Displayed diplomatic capacity stays 4.50 through selection, contribution and mandate.",
+    "capital_preview": "Confirmation previews sovereign -100 and company +100; sovereign remains 10000 before acceptance.",
+    "capital_cancel": "Cancel returns to selection. Subsequent single acceptance leaves sovereign 9900 and company 110, proving the cancelled preview transferred nothing.",
+    "capital_accepted": "Normal confirmation debits sovereign 10000 -> 9900 and credits company 10 -> 110.",
+    "capital_excluded_from_earnings": "After funding, eligible earnings and paid owner distribution remain 0.00.",
+    "mandate_command": "Trade mandate is selected and confirmed through the normal UI; native acknowledgement appears without a cash charge.",
+    "scrollbar_access": "Dragging the native scrollbar reaches mandate, capital, crew and route controls within the fixed Credit viewport.",
+    "natural_statement": "After ordinary elapsed time, 20 June 1337 shows company cash 120.14, native trade 0.17, net budget 4.46, eligible 0.17, payout 0.00, one owned facility, one native route and 0.42 executed volume.",
+    "buffer_blocks_distribution": "The natural statement recognizes trade earnings but pays no additional owner distribution while cash is below the combined buffer and reinvestment reserve."
+  },
+  "screenshots": {
+    "m2-company-selection.png": "b6b3b08352ee5ee19ba9a8a7c0dcfed9425a2adea884ba705f7ce389996870b1",
+    "m2-capital-offer.png": "24e8430722f2ebafb5a407e88cbcb21b371080a7d6c452de0fd3688a8d747a76",
+    "m2-capital-funded.png": "92aa2674103e90d4f9ce9222fa5a6c7a552156683436b28324f9d43a60cf67d3",
+    "m2-trade-mandate.png": "d1732078d8a41be2ad148e14b6e030edb109fc701406fff94f985e69b76c4290",
+    "m2-monthly-statement.png": "68b0da7e16dd54229d5977801c546cb00aa0a361c20aab2c5d3b534a0e4e7aad"
+  },
+  "limitations": "Native confirmation/self-notification popups remain. The monthly capture includes unrelated native battle/faction notices. Full-window PNGs are unedited. Positive route/exploration execution and reload are established by the separate M2 engine campaign, not claimed as manual UI transactions. Broader language/layout/AI campaigns remain M10."
+}
