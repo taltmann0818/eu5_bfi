@@ -1,0 +1,37 @@
+{
+  "token": "c36ec2bf68824c529ea4114317701517",
+  "suite": "M2 company and chartered bank shared Credit UI",
+  "fixture_sha256": "73bcb694668fd328c0fca892221894351e998d90562cd91160daba19a9a11532",
+  "runtime_sha256": "1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5",
+  "fixture_conditions": "Populated bfi_visual bank fixture plus native company HQ; test-only 1000 company cash grant, trade mandate and selection. Normal charter conversion is not tested by this visual fixture.",
+  "recorded": "2026-10-17",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "client_resolution": "1280x720",
+  "gui_scale": 0.6,
+  "campaign_date": "22 May 1337",
+  "passed": true,
+  "scope": "Five manual shared Credit layout observations in a disposable Florence campaign with both a chartered bank and native operating company. No additional financial transaction or normal-charter acceptance is claimed.",
+  "results": {
+    "chartered_bank_overview": "PASS",
+    "company_statement_with_bank": "PASS",
+    "company_commands_scroll": "PASS",
+    "independent_scroll_regions": "PASS",
+    "native_controls_remain": "PASS"
+  },
+  "observations": {
+    "chartered_bank_overview": "Bardi Merchant Finance is Operating; treasury 1345.98, assets 1845.98, liabilities 100 and equity 1745.98, with both ownership/asset charts visible.",
+    "company_statement_with_bank": "On the same Lending & Investments tab, Liguria and Corsica shows its separate 1000 cash, 100 buffer, native net budget 7.89, one owned facility, and zero trade earnings/payout. The company wallet is fixture setup, not earned income.",
+    "company_commands_scroll": "Dragging the company scrollbar reveals trade/exploration mandates, capital, crew and native-route controls; the bank overview remains visible.",
+    "independent_scroll_regions": "Dragging the bank investment scrollbar changes its instrument rows while the company command viewport remains in the same position.",
+    "native_controls_remain": "Take over loan, Offer a Loan, native search and loan-list controls remain below the two investment viewports without covering the company section."
+  },
+  "screenshots": {
+    "m2-company-with-chartered-bank.png": "8e1a617456e64154a6b9069c0f0026e6b20e35c125f0be749444af05672b25e4",
+    "m2-company-with-chartered-bank-controls.png": "e4401e4d60c720236600dd5bb7c7e1f4b4efaa220779e18af1b67b98c876c387"
+  },
+  "image_handling": "Unedited full game-window PNGs, including window border; no resizing/compositing.",
+  "validation": "86 offline tests and source/native-pin checks pass; production runtime unchanged.",
+  "limitations": "Only the recorded English 1280x720 layout at 60% GUI scale is inspected. Release-wide languages/resolutions and finance behavior retain their separate evidence."
+}

@@ -60,6 +60,14 @@ byte-identical to the final runtime. Those two frontend files receive the final
 M2 engine run and separate normal UI acceptance; these regressions are not
 relabeled as runs on a different hash.
 
+A supplementary [shared bank/company Credit test](../tests/results/2026-10-17-m2-company-bank-ui.json)
+passes **five manual layout observations** with a populated Bardi chartered bank
+and native operating company together. Both the bank overview and company
+statement remain visible; bank investments and company commands scroll
+independently, with native loan controls below. [Two unedited screenshots](screenshots/README.md#m2-company-controls)
+record the 1280×720 / 60% layout. The test uses fixture opening balances and does
+not claim another financial-transaction or normal-charter workflow pass.
+
 [Normal UI acceptance](../tests/results/2026-10-17-m2-ui.json) passes **11/11
 manual observations** at 1280×720 and 60% GUI scale, on the final runtime. Real
 Credit company selection, contribution preview/cancellation, one confirmed
@@ -89,6 +97,15 @@ are recorded separately and are not completion evidence.
 ```powershell
 ./tools/run_campaign.ps1 -Suite m2 -Output tests/results/local-m2 -TimeoutSeconds 1200
 ```
+
+For a disposable **shared bank/company Credit layout** inspection, prepare an
+interactive campaign with `tools/start_test_campaign.ps1 -PrepareOnly`, then run
+`python tools/prepare_m2_ui.py --userdir <that-test-user-directory> --with-chartered-bank`
+before launching its game process. This combines the populated `bfi_visual.txt`
+chartered-bank fixture with the native company setup. The company receives a
+test-only 1,000-gold wallet, trade mandate and selection on the first pulse after
+creation; these setup grants are not operating earnings or another normal-charter
+workflow test. The production runtime is unchanged.
 
 M3 corporate lending, M5 company share markets, M7 commenda, M9 workouts and M10
 release-wide AI/language/performance campaigns remain separate milestones.

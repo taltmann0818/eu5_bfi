@@ -2,6 +2,25 @@
 
 ## M2 company controls
 
+**Chartered bank and company together:** the supplementary [shared Credit visual
+test](../../tests/results/2026-10-17-m2-company-bank-ui.json) passes five manual
+layout observations on 17 October 2026, using the same production runtime and
+1280×720 / 60% scale as below. The disposable Florence fixture contains Bardi as
+its chartered bank with a deposit and native loan assets, plus Liguria and Corsica
+as its native operating company. It is paused on 22 May 1337.
+
+- [Shared Credit overview](m2-company-with-chartered-bank.png): Bardi's accounts,
+  ownership/assets charts and bank investment controls remain visible above the
+  separate company statement. Company cash is a test-only 1,000-gold setup grant;
+  earnings and payouts remain zero.
+- [Scrolled company commands](m2-company-with-chartered-bank-controls.png): company
+  mandates, capital, crew and route controls remain accessible beneath the bank
+  investment viewport. Native loan controls remain below. The two regions scroll
+  independently without replacing the bank overview.
+
+These are unedited full game-window PNGs. This supplementary check exercises the
+shared layout; it does not add a normal-charter or financial-transaction pass.
+
 Captured on 17 October 2026 with EUV 1.4.1 / build 25905365 and CMF 2.5.0 at
 1280×720 and 60% GUI scale. Runtime SHA-256:
 `1e1ff60269538fdd83c2f26a25c96ec97caaf239e6bce935f72f85feda8ac7f5`.
