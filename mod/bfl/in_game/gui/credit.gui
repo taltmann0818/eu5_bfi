@@ -238,7 +238,7 @@ lateralview = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = fixed
 				size = { -1 50 }
- visible = "[And(Not(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)), Not(CreditLateralView.Vars.HasValue('subtab','bfl_bonds')))]"
+ visible = "[Not(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 				hbox = {
 					layoutpolicy_horizontal = expanding
@@ -472,7 +472,7 @@ lateralview = {
 				layoutpolicy_horizontal = expanding
 				layoutpolicy_vertical = fixed
 				size = { -1 220 }
- visible = "[And(Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)), Not(CreditLateralView.Vars.HasValue('subtab','bfl_bonds')))]"
+ visible = "[Not(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
 
 				background = {
 					texture = "gfx/interface/illustrations/institutions/banking.dds"
@@ -797,7 +797,7 @@ lateralview = {
 					}
 				}
 			}
- bfl_credit_overview = { visible = "[And(GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), Not(CreditLateralView.Vars.HasValue('subtab','bfl_bonds')))]" }
+ bfl_credit_overview = { visible = "[GetScriptedGui('bfl_permission_demand_deposit').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
 
 
 			vbox = {

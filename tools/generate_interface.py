@@ -354,7 +354,7 @@ def build_credit(game, baseline, pin=False):
     original = view[header_start:header_end]
     charter_view = "GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)"
     bonds_tab = "CreditLateralView.Vars.HasValue('subtab','bfl_bonds')"
-    replacement = original.replace('size = { -1 50 }', f'size = {{ -1 50 }}\n visible = "[And(Not({charter_view}), Not({bonds_tab}))]"', 1)
+    replacement = original.replace('size = { -1 50 }', f'size = {{ -1 50 }}\n visible = "[Not({charter_view})]"', 1)
     changes.append((original, replacement))
     view = view[:header_start] + replacement + view[header_end:]
     # Replace only the illustrated overview for managed banks. State debt totals,
@@ -362,8 +362,8 @@ def build_credit(game, baseline, pin=False):
     anchor='\t\t\twidget = {\n\t\t\t\tlayoutpolicy_horizontal = expanding\n\t\t\t\tlayoutpolicy_vertical = fixed\n\t\t\t\tsize = { -1 220 }'
     pos=view.index(anchor);end=balanced_block(view,view.index('{',pos))
     original=view[pos:end]
-    replacement=original.replace('size = { -1 220 }',f'size = {{ -1 220 }}\n visible = "[And(Not({MANAGED}), Not({bonds_tab}))]"',1)
-    replacement+=f'\n bfl_credit_overview = {{ visible = "[And({MANAGED}, Not({bonds_tab}))]" }}\n'
+    replacement=original.replace('size = { -1 220 }',f'size = {{ -1 220 }}\n visible = "[Not({MANAGED})]"',1)
+    replacement+=f'\n bfl_credit_overview = {{ visible = "[{MANAGED}]" }}\n'
     changes.append((original,replacement));view=view[:pos]+replacement+view[end:]
     for marker,kind in [('# loans taken','funding'),('# loans given','investment')]:
         start=view.index(marker)

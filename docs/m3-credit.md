@@ -47,7 +47,10 @@ receive conservative losses; full recovery and inheritance workouts remain M9.
 
 ## Sovereign Bonds in Credit
 
-The Sovereign Bonds tab occupies the existing Credit Panel. Financing separates
+The Sovereign Bonds tab occupies the existing Credit Panel below the shared bank
+details, ownership/assets charts and sovereign accounts, matching the other Credit
+subtabs. The full bond section scrolls within the remaining panel space, so its
+summary and controls never replace the bank overview. Financing separates
 new-issue coupon presets from the recurring funding mandate. Holdings & market
 provides a native issuer selector, quote, current holder, fixed rate, unpaid coupons
 and specific claim listing/redemption controls. Cards have a bounded scroll area;
@@ -60,6 +63,16 @@ banks and sovereign buyers use their own. Execution rechecks both parties after
 listing. Primary issuance, coupon payments and redemption do not require an exchange.
 
 ## Acceptance
+
+The [Credit layout follow-up](../tests/results/2026-10-17-m3-credit-layout.json)
+records **6/6 focused UI observations** and three new [actual-game captures](screenshots/README.md#m3-credit-bank-details-layout-follow-up).
+Runtime `16b66a66be3aab211e897b62456cfc656e73039a93bad3076db9f1b99a216f74`
+changes only the Credit and Sovereign Bonds GUI files from the accepted runtime
+below. A cold launch confirms the shared bank overview stays visible across all
+Credit subtabs and the full Financing/claim controls remain reachable by scrollbar.
+Source validation, native/CMF pins, deterministic generation, native reconstruction
+and 168-file staging pass. Gameplay services are unchanged; the engine assertions
+below retain their original runtime and were not rerun for this layout-only change.
 
 **M3 is complete for the pinned single-player baseline:** EUV 1.4.1 / Steam build
 25905365, CMF 2.5.0. The engine suites use runtime SHA-256

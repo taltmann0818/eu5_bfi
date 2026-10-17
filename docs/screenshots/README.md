@@ -114,7 +114,29 @@ The disposable normal-charter fixture initializes controlled wallets and a nativ
 [The visual record](../../tests/results/2026-10-16-m0-visual-completion.json) hashes both captures and their scoped sources. All scoped GUI/command/localization files are unchanged in the final runtime `68f8d2a7a0a8a75747ed7329c35d282c685a24c60e11d70a9bccdff6e024072d`. Its only later correction safely handles absent CMM preference maps, validated by the final engine suites. Historical captures above keep their original provenance. M0 is complete; release-wide layouts/languages/mod compatibility remain M10 work. The dedicated secondary equity/bond listings GUI and its screenshots remain in the user-confirmed M5 scope.
 
 
+## M3 Credit bank details layout follow-up
+
+The current layout keeps the shared bank details, charts and sovereign accounts
+above Sovereign Bonds, matching Funding & Debt and Lending & Investments. Only
+the bond section scrolls. These three unedited full-window captures use a
+1280x720 client and 60% GUI scale, paused on 1 April 1337:
+
+- [Bank overview and bond summary](20-m3-sovereign-bonds-bank-overview.png): the bank overview remains above the bond summary and new-financing controls.
+- [Financing scrolled to its controls](21-m3-sovereign-bonds-financing-scroll.png): coupon presets, Borrow 100 and recurring-funding controls remain reachable beneath the fixed bank overview.
+- [Holdings scrolled to its claim](22-m3-sovereign-bonds-holdings-scroll.png): the full claim, holder, arrears, listing and redemption controls remain reachable below the same overview.
+
+The [six-observation follow-up record](../../tests/results/2026-10-17-m3-credit-layout.json)
+hashes the captures and sources. It cold-loads current runtime
+`16b66a66be3aab211e897b62456cfc656e73039a93bad3076db9f1b99a216f74` with
+EUV 1.4.1 / build 25905365 and CMF 2.5.0. This reuses the disposable charter,
+wallet and initial funded-claim fixture below. The early exchange is still pending;
+there is no live offering or transaction acceptance in this paused follow-up.
+Gameplay services are unchanged; the prior engine reports retain their own hashes.
+
 ## M3 Sovereign Bonds in Credit
+
+The two captures below document the original M3 acceptance layout. The current
+bank-overview-preserving layout is shown in the follow-up above.
 
 Captured on 17 October 2026 with EUV 1.4.1 / build 25905365 and CMF 2.5.0.
 These are unedited full game-window PNGs at a 1280x720 client resolution and

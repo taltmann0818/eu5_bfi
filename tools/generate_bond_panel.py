@@ -233,18 +233,21 @@ def generate(common, effect, loc, write):
         nav += f'''button_secondary_tab_alt = {{ layoutpolicy_horizontal = expanding tooltip_enabled = no
             blockoverride "tab_text" {{ text = "{title}" fontsize = 17 }}
             onclick = "[CreditLateralView.Vars.Set('bond_section','{value}')]" down = "[{test}]" }}'''
-    def scroll(body, visible, context):
-        return f'''scrollarea = {{ size = {{ -1 600 }} maximumsize = {{ -1 600 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed visible = "[{visible}]"
-            datacontext = "[{context}]" scrollbarpolicy_horizontal = always_off
-            scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-            scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding
-                ignoreinvisible = yes spacing = 16 margin = {{ 8 12 }} {body} }} }} }}'''
-    gui = f'''types BFLSovereignBondTypes {{ type bfl_sovereign_bonds = vbox {{
-        name = "bfl_sovereign_bonds" size = {{ 520 -1 }} minimumsize = {{ 520 0 }} maximumsize = {{ 520 -1 }}
-        layoutpolicy_horizontal = fixed layoutpolicy_vertical = expanding spacing = 12 datacontext = "[GetPlayer]"
-        widget = {{ size = {{ -1 216 }} layoutpolicy_horizontal = expanding {header} }}
-        header_secondary_tabs = {{ blockoverride "content" {{ {nav} }} }}
-        {scroll(finance, "Not(CreditLateralView.Vars.HasValue('bond_section','holdings'))", 'GetPlayer')}
-        {scroll(holdings, "CreditLateralView.Vars.HasValue('bond_section','holdings')", "GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry")}
+    # The shared bank overview stays above every Credit subtab. Scroll the entire
+    # bond section in the remaining space, including its summary and inner tabs,
+    # rather than reserving a second fixed-height header below the bank details.
+    def section(body, visible, context):
+        return f'''vbox = {{ layoutpolicy_horizontal = expanding visible = "[{visible}]"
+            datacontext = "[{context}]" ignoreinvisible = yes spacing = 16 {body} }}'''
+    gui = f'''types BFLSovereignBondTypes {{ type bfl_sovereign_bonds = scrollarea {{
+        name = "bfl_sovereign_bonds" size = {{ 520 0 }} minimumsize = {{ 520 0 }} maximumsize = {{ 520 -1 }}
+        layoutpolicy_horizontal = fixed layoutpolicy_vertical = expanding datacontext = "[GetPlayer]"
+        scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
+        scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding ignoreinvisible = yes spacing = 16 margin = {{ 8 12 }}
+            widget = {{ size = {{ -1 216 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed {header} }}
+            header_secondary_tabs = {{ blockoverride "content" {{ {nav} }} }}
+            {section(finance, "Not(CreditLateralView.Vars.HasValue('bond_section','holdings'))", 'GetPlayer')}
+            {section(holdings, "CreditLateralView.Vars.HasValue('bond_section','holdings')", "GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry")}
+        }} }}
     }} }}'''
     write('in_game/gui/bfl_sovereign_bonds.gui', gui)
