@@ -1,0 +1,12 @@
+﻿bfl_browse_bond_issuers = {
+        type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+        potential = { } allow = { }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+            column = { data = country_diplomacy_info_loan }
+            visible = { has_variable = bfl_bond_schema bfl_bond_count > 0 }
+            enabled = { country_exists = this bfl_bond_count > 0 } }
+        effect = { scope:actor = {
+            set_variable = { name = bfl_bond_selected_issuer value = scope:recipient }
+            set_variable = { name = bfl_bond_desk_open value = 1 } } }
+        ai_will_do = { value = 0 }
+    }

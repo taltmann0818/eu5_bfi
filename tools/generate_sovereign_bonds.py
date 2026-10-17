@@ -35,9 +35,8 @@ def generate(common, effect, loc, tune):
     common('script_values', 'sovereign_bonds', values)
     common('scripted_triggers', 'sovereign_bonds', '''
     # A charter trades through its live research/controller country. Independent
-    # banks and other buyers need their own advance and their own built exchange.
+    # banks and other buyers need their own built exchange, including early grants.
     bfl_owns_stock_exchange = {
-        has_advance = stock_exchange_advance
         any_owned_location = { has_building = building_type:stock_exchange }
     }
     bfl_can_trade_sovereign_bonds = {
@@ -196,6 +195,7 @@ def generate(common, effect, loc, tune):
             }}
         ''')
         offers += f'''if = {{ limit = {{ var:bfl_bond_offer_selected = 0 var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder
+            OR = {{ NOT = {{ has_variable = bfl_bond_requested_slot }} var:bfl_bond_requested_slot = {i} }}
             var:{n}_holder = scope:bfl_bond_underwriter var:{n}_due = 0 }}
             set_variable = {{ name = bfl_bond_offer_selected value = 1 }}
             set_variable = {{ name = bfl_bond_offer_slot value = {i} }}
@@ -328,13 +328,13 @@ def generate(common, effect, loc, tune):
         'bfl_draw_bond': 'Borrow 100 from the bank',
         'bfl_draw_bond_tip': 'The chartered bank pays 100 gold for a perpetual sovereign bond. One issue per month, subject to protected cash, capital and issuer debt capacity. Proceeds are financing. Repay face value to its current holder to retire it.',
         'bfl_offer_bond': 'Offer a bank-held sovereign bond',
-        'bfl_offer_bond_tip': 'List the oldest bank-held bond for three months at 98% of face value. Selling and buying both require the Stock Exchange advance and an owned Stock Exchange building. Acceptance rechecks the seller, current holder, generation, funds and expiry. Arrears block trading.',
+        'bfl_offer_bond_tip': 'List the oldest bank-held bond for three months at 98% of face value. Selling and buying both require an owned completed Stock Exchange building. Acceptance rechecks the seller, current holder, generation, funds and expiry. Arrears block trading.',
         'bfl_close_bond_offer': 'Close bond offering', 'bfl_close_bond_offer_tip': 'Withdraw the current secondary offering. Outstanding debt and coupons remain owed.',
         'bfl_buy_sovereign_bond': 'Buy an offered sovereign bond',
-        'bfl_buy_sovereign_bond_desc': 'Buy an existing sovereign bond from its current holder. Requires the Stock Exchange advance and an owned Stock Exchange building.',
+        'bfl_buy_sovereign_bond_desc': 'Buy an existing sovereign bond from its current holder. Requires an owned completed Stock Exchange building.',
         'bfl_buy_sovereign_bond_tip': 'Select the issuer of an open offering. Payment goes to the existing holder; the issuer receives no new proceeds. The whole claim changes hands with its fixed annual coupon and principal intact.',
         'bfl_offer_held_sovereign_bond': 'Offer a held sovereign bond',
-        'bfl_offer_held_sovereign_bond_desc': 'Select an issuer and list one of your sovereign bonds at 98% of face value. Requires Stock Exchange research and an owned Stock Exchange building.',
+        'bfl_offer_held_sovereign_bond_desc': 'Select an issuer and list one of your sovereign bonds at 98% of face value. Requires an owned completed Stock Exchange building.',
         'bfl_offer_held_sovereign_bond_tip': 'List an existing bond you own for three months. You retain the claim until a funded buyer accepts; coupons and redemption then follow that buyer.',
         'bfl_custom_bonds_title': 'Sovereign bonds',
         'bfl_custom_bonds_title_tip': 'The bank funds custom perpetual sovereign bonds. Current holders receive monthly coupons and face-value redemption. Combined custom and native debt capacity is 24 months of native income with a 100-gold minimum; custom coupons may consume at most 25% of native income. Unpaid coupons block new issuance and resale.',

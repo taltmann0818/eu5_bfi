@@ -1,7 +1,6 @@
 ﻿# A charter trades through its live research/controller country. Independent
-    # banks and other buyers need their own advance and their own built exchange.
+    # banks and other buyers need their own built exchange, including early grants.
     bfl_owns_stock_exchange = {
-        has_advance = stock_exchange_advance
         any_owned_location = { has_building = building_type:stock_exchange }
     }
     bfl_can_trade_sovereign_bonds = {

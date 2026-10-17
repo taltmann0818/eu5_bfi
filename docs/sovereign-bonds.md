@@ -24,7 +24,7 @@ Native forecasts do not include mod-owned coupon outflows; the separate coupon b
 
 ## Secondary market
 
-**Selling and buying each require the native `stock_exchange_advance` and an owned location with a built native `stock_exchange`.** A chartered bank uses its live controller's research and building; an independent bank or sovereign buyer needs its own. Losing the building or research after listing blocks acceptance. These checks apply in the transaction service as well as the interface.
+**Selling and buying each require an owned location with a completed native `stock_exchange`. The Stock Exchange advance is not required.** A chartered bank uses its live controller's completed building; an independent bank or sovereign buyer needs its own. Losing the building after listing blocks acceptance. These checks apply in the transaction service as well as the interface.
 
 The controller can offer a bank-held bond from Credit. Other holders use **Offer a held sovereign bond** and select the issuer. One offering per issuer is open at a time, expires after three months, and quotes the whole bond at 98% of face. This is an initial pricing rule, not guaranteed market demand. The offering records the seller, slot, generation, price and expiry. It cannot replace a different holder's unexpired offering.
 

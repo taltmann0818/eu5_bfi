@@ -248,11 +248,11 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding+=policies('bfl_deposit_policy_title',[f'bfl_rate_{i}' for i in (0,1,2)],'deposit')
     funding+=policies('bfl_distribution_title',[f'bfl_payout_{i}' for i in (0,25,50)],'dividend')
     funding+=pair(action('bfl_offer_bank_shares','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)1')"),action('bfl_close_bank_offering','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)0')"))
-    funding+=policies('bfl_facility_title',[f'bfl_facility_{i}' for i in range(3)],'bond')
     funding+=section('bfl_safeguards_title',pair(action('bfl_recapitalize_command','liquidity'),action('bfl_suspend_command','lock')))
     funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
-    investments=action('bfl_buy_bill','note')
+    investments=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
+    investments+=action('bfl_buy_bill','note')
     for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_goods',['commodity_inventory','warehouse_receipt','commodity_forward','margining']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:
         cards=[]
         for k in keys:
@@ -321,26 +321,11 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         hbox = {{ spacing = 4 tooltip = "bfl_state_bonds_tip" {icon('bond',18)}
             text_single = {{ text = "bfl_state_bonds_value" autoresize = yes fontsize = 12 }} }}
     }}'''
-    bond_rows = ''
-    for index in range(1, 33):
-        bond_rows += f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 4
-            visible = "[GetScriptedGui('bfl_redeem_bond_{index:02}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            text_single = {{ text = "bfl_bond_row_{index:02}" autoresize = yes fontsize = 11 }}
-            expand = {{ }} {action(f'bfl_redeem_bond_{index:02}', 'bond', title='bfl_redeem_bond')} }}'''
-    bond_body = f'''text_single = {{ text = "bfl_custom_bond_totals" autoresize = yes fontsize = 12 }}
-        text_single = {{ text = "bfl_custom_bond_flows" autoresize = yes fontsize = 11 }}
-        {pair(action('bfl_draw_bond','bond'), action('bfl_offer_bond','bond'))}
-        {action('bfl_close_bond_offer','bond')}
-        hbox = {{ spacing = 4 layoutpolicy_horizontal = expanding
-            text_single = {{ text = "bfl_custom_bond_terms" autoresize = yes fontsize = 11 }}
-            {''.join(action(f'bfl_bond_rate_{rate}', 'bond') for rate in (1,3,6))} }}
-        {bond_rows}'''
-    bond_control = f'''type bfl_sovereign_bond_controls = scrollarea {{
-        size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
-        visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_count'), '(CFixedPoint)0'))]"
-        scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-        scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding spacing = 4 margin = {{ 5 5 }}
-            {section('bfl_custom_bonds_title', bond_body, 'bond')} }} }} }}'''
+    bond_control = f'''type bfl_sovereign_bond_controls = vbox {{
+        size = {{ -1 65 }} layoutpolicy_horizontal = expanding spacing = 8
+        text_single = {{ text = "bfl_custom_bond_totals" autoresize = yes fontsize = 13 }}
+        {action('bfl_open_bond_desk', 'bond', height=40)}
+    }}'''
     from generate_company_operations import company_panel
     company_controls = company_panel(loc)
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
@@ -396,6 +381,10 @@ def build_credit(game, baseline, pin=False):
             insertion += '\n bfl_company_controls = { name = "bfl_company_controls" }\n'
         view=view[:end]+insertion+view[end:]
         changes.append(('',insertion))
+    desk = '\n bfl_bond_desk = { }\n'
+    end = view.rfind('}')
+    view = view[:end] + desk + view[end:]
+    changes.append(('',desk))
     search_at=0
     while True:
         action_at=view.find('action_name = "take_over_loan"',search_at)

@@ -1,0 +1,46 @@
+﻿bfl_offer_native_restructuring = {
+    if = { limit = { bfl_restructure_eligible = yes exists = scope:bfl_credit_actor
+        OR = { this = scope:bfl_credit_actor AND = { bfl_has_valid_controller = yes overlord = scope:bfl_credit_actor } }
+        scope:bfl_party = { OR = { NOT = { has_variable = bfl_restructure_bank } bfl_period > var:bfl_restructure_expiry } }
+    }
+        save_scope_as = bfl_credit_bank
+        ordered_lent_loan = { limit = { borrower = scope:bfl_party is_bond = no } order_by = remaining_debt max = 1
+            save_scope_as = bfl_restructure_claim }
+        if = { limit = { exists = scope:bfl_restructure_claim }
+            scope:bfl_party = {
+                set_variable = { name = bfl_restructure_bank value = scope:bfl_credit_bank }
+                set_variable = { name = bfl_restructure_actor value = scope:bfl_credit_actor }
+                set_variable = { name = bfl_restructure_loan value = scope:bfl_restructure_claim }
+                set_variable = { name = bfl_restructure_face value = scope:bfl_restructure_claim.loan_amount }
+                set_variable = { name = bfl_restructure_rate value = scope:bfl_restructure_claim.loan_interest }
+                set_variable = { name = bfl_restructure_expiry value = { value = bfl_period add = 3 } }
+                trigger_event_non_silently = bfl_credit.2
+            }
+        }
+    }
+}
+bfl_accept_native_restructuring = {
+    if = { limit = { country_exists = this exists = var:bfl_restructure_bank country_exists = var:bfl_restructure_bank
+        exists = var:bfl_restructure_loan bfl_period <= var:bfl_restructure_expiry
+        NOT = { has_variable = bfl_credit_guard }
+        var:bfl_restructure_loan = { owner = prev.var:bfl_restructure_bank borrower = prev
+            is_bond = no loan_amount = prev.var:bfl_restructure_face loan_interest = prev.var:bfl_restructure_rate }
+    }
+        save_scope_as = bfl_party
+        var:bfl_restructure_loan = { save_scope_as = bfl_restructure_claim }
+        var:bfl_restructure_bank = { save_scope_as = bfl_credit_bank }
+        if = { limit = { scope:bfl_credit_bank = { bfl_restructure_eligible = yes
+            OR = { this = scope:bfl_party.var:bfl_restructure_actor
+                AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party.var:bfl_restructure_actor } } } }
+            set_variable = bfl_credit_guard
+            scope:bfl_credit_bank = { bfl_book_native_haircut = yes }
+            scope:bfl_restructure_claim = {
+                change_loan_amount = { value = loan_amount multiply = -0.20 }
+                change_loan_interest = { value = loan_interest subtract = 0.01 min = 0.01 subtract = loan_interest }
+            }
+            remove_variable = bfl_restructure_bank remove_variable = bfl_credit_guard
+            scope:bfl_credit_bank = { bfl_reconcile_native_assets = yes }
+        }
+    }
+}
+bfl_reject_native_restructuring = { remove_variable = bfl_restructure_bank }

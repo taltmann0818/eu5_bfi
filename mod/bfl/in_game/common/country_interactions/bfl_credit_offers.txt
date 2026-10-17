@@ -1,0 +1,18 @@
+﻿bfl_offer_credit = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { bfl_has_management = yes } } allow = { scope:actor = { bfl_has_management = yes } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { OR = { country_type = location bfl_is_company = yes } NOT = { this = scope:actor } }
+                enabled = { country_exists = this } }
+            effect = { scope:actor = { save_scope_as = bfl_credit_actor bfl_resolve_command_bank = yes }
+                scope:recipient = { save_scope_as = bfl_party } scope:bfl_bank = { bfl_offer_native_credit = yes } }
+            ai_will_do = { value = 0 } }
+bfl_offer_restructuring = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { bfl_has_management = yes } } allow = { scope:actor = { bfl_has_management = yes } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { OR = { country_type = location bfl_is_company = yes } NOT = { this = scope:actor } }
+                enabled = { country_exists = this } }
+            effect = { scope:actor = { save_scope_as = bfl_credit_actor bfl_resolve_command_bank = yes }
+                scope:recipient = { save_scope_as = bfl_party } scope:bfl_bank = { bfl_offer_native_restructuring = yes } }
+            ai_will_do = { value = 0 } }

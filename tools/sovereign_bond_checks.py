@@ -43,9 +43,9 @@ def instant(check):
     body += 'c:VEN = { save_scope_as = bfl_bond_buyer } c:FLO = { bfl_accept_sovereign_bond_offer = yes }\n'
     body += check('custom_bond_buyer_exchange_gate_rechecked', 'gold = 900.5 c:VEN = { gold = 1000 } c:FLO = { var:bfl_bnd_01_holder = c:BRD }')
     body += '''c:VEN = { every_owned_location = { limit = { is_market_center = yes } construct_building = { building_type = building_type:stock_exchange owner = c:VEN instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_custom_bonds_title } } }
-        c:FLO = { bfl_accept_sovereign_bond_offer = yes }
+        c:FLO = { set_variable = bfl_bond_guard bfl_accept_sovereign_bond_offer = yes remove_variable = bfl_bond_guard }
     '''
-    body += check('custom_bond_building_alone_insufficient', 'c:VEN = { gold = 1000 NOT = { bfl_can_trade_sovereign_bonds = yes } }')
+    body += check('custom_bond_building_without_research_permits_trading', 'c:VEN = { gold = 1000 bfl_can_trade_sovereign_bonds = yes NOT = { has_advance = stock_exchange_advance } }')
     body += '''c:VEN = { research_advance = advance_type:stock_exchange_advance set_gold = 10 }
         c:FLO = { bfl_accept_sovereign_bond_offer = yes }
     '''

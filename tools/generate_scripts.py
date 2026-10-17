@@ -644,22 +644,28 @@ def deposits():
 def native_adapters():
     common('scripted_effects','native_credit_adapter','''
     # Audited native request_loan and takeover definitions, EUV 1.4.1 build 25905365.
-    # Native give_loan owns both wallets. P06 gate blocks until units/callbacks are measured.
+    # Native give_loan owns both wallets; accepted offers supply the rate.
     # Root bank; bfl_party is borrower. Never add a second principal transfer.
     bfl_originate_native_credit = {
         if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party bfl_free_cash >= 100
+            bfl_credit_capacity = yes bfl_capital_headroom >= 100
+            scope:bfl_party = { has_variable = bfl_credit_guard var:bfl_credit_offer_bank = prev }
             OR = {
                 AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location } }
                 AND = { bfl_can_originate_corporate_credit = yes scope:bfl_party = { bfl_is_company = yes } }
             }
         }
-            give_loan = { target = scope:bfl_party amount = 100 interest = 0.05 months = 60 }
+            set_variable = bfl_credit_issuing
+            set_variable = { name = bfl_credit_basis value = 100 }
+            give_loan = { target = scope:bfl_party amount = 100 interest = var:bfl_credit_rate months = 60 }
+            remove_variable = bfl_credit_issuing
             bfl_reconcile_native_assets = yes
         }
     }
     # Native regular-bank operation copied minimally; actor is ALWAYS paying bank.
     # Preserve native eligibility, ordering, price and estate compensation.
     bfl_native_takeover = {
+        bfl_initialize_credit = yes
         if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party country_exists = scope:bfl_party
             NOT = { this = scope:bfl_party }
             scope:bfl_party = {
@@ -676,6 +682,7 @@ def native_adapters():
                         scope:actor.gold > remaining_debt
                         scope:actor.bfl_free_cash >= bank_loan_takeover_cost
                         scope:actor.bfl_capital_headroom > 0
+                        scope:actor = { bfl_credit_capacity = yes }
                     }
                     order_by = remaining_debt max = 1
                     save_scope_as = bfl_claim
@@ -685,6 +692,7 @@ def native_adapters():
                     }
                     scope:recipient = { distribute_gold_to_banking_estates = scope:actor.var:bfl_payment }
                     change_loan_owner = scope:actor
+                    scope:actor = { set_variable = { name = bfl_credit_basis value = var:bfl_payment } bfl_register_native_claim = yes }
                     scope:actor = { set_variable = { name = bfl_takeover_done value = 1 } }
                 }
             }
@@ -692,11 +700,12 @@ def native_adapters():
         }
     }
     bfl_reconcile_native_assets = {
+        bfl_review_native_credit = yes
         set_variable = { name = bfl_native_credit_value value = 0 }
         save_scope_as = bfl_bank
         every_lent_loan = {
             save_scope_as = bfl_claim
-            scope:bfl_bank = { change_variable = { name = bfl_native_credit_value add = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } } }
+            scope:bfl_bank = { bfl_native_claim_value = yes change_variable = { name = bfl_native_credit_value add = var:bfl_credit_carrying_value } }
         }
         bfl_refresh_asset_statement = yes
     }
@@ -1021,7 +1030,7 @@ def gui_and_localization():
     loc('bfl_no_bank','Charter an existing State Bank through Decisions, or play an independent banking country. Your country must own its capital market to charter a bank.')
     loc('bfl_dev_notice','Sovereign bonds use funded custom claims with fixed annual coupons. Physical goods, company receipts and advanced native adapters remain under development.')
     loc('bfl_accounts_explanation','Native treasury is cash. Deposits and notes are liabilities. Lending exchanges cash for an asset; principal, subscriptions and issuance are not profit.')
-    loc('bfl_debt_explanation','The chartered bank funds custom sovereign bonds. Secondary selling and buying require Stock Exchange research and an owned Stock Exchange building. Native estate-loan takeover remains available; native origination and restructuring are development gated.')
+    loc('bfl_debt_explanation','The chartered bank funds custom sovereign bonds. Secondary trading requires completed Stock Exchanges on both sides, including early event grants. Native credit uses accepted offers and researched debt relief with persisted claim records.')
     loc('bfl_goods_explanation','Funded native inventory, backed receipts and forwards require Merchant Finance, their advances and P09 execution/custody verification. Encumbered goods cannot back a second claim.')
     loc('bfl_ventures_explanation','Commenda starts in Discovery; native companies and company equity require Reformation. Political overlord control and financial ownership stay separate. Project capital is not a dividend.')
     loc('bfl_monetary_explanation','Bills precede sovereign notes. Notes require an authorized charter, Absolutism research and backing that excludes note-sale cash. Secured liquidity and clearing have later research and adapter gates.')
@@ -1076,6 +1085,10 @@ def main():
     generate_bank_charts(common,effect,loc,write)
     from generate_sovereign_bonds import generate as generate_bonds
     generate_bonds(common,effect,loc,TUNE)
+    from generate_native_credit import generate as generate_credit
+    generate_credit(common,effect,loc)
+    from generate_bond_desk import generate as generate_bond_desk
+    generate_bond_desk(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

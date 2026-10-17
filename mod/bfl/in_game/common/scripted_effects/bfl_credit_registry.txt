@@ -1,0 +1,388 @@
+﻿bfl_register_native_claim = {
+bfl_initialize_credit = yes
+        set_variable = { name = bfl_credit_allocated value = 0 }
+    if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_allocated value = 1 } }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_01_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_01_state value = 1 }
+            change_variable = { name = bfl_cr_01_generation add = 1 }
+            set_variable = { name = bfl_cr_01_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_01_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_01_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_01_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_01_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_02_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_02_state value = 1 }
+            change_variable = { name = bfl_cr_02_generation add = 1 }
+            set_variable = { name = bfl_cr_02_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_02_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_02_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_02_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_02_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_03_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_03_state value = 1 }
+            change_variable = { name = bfl_cr_03_generation add = 1 }
+            set_variable = { name = bfl_cr_03_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_03_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_03_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_03_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_03_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_04_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_04_state value = 1 }
+            change_variable = { name = bfl_cr_04_generation add = 1 }
+            set_variable = { name = bfl_cr_04_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_04_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_04_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_04_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_04_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_05_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_05_state value = 1 }
+            change_variable = { name = bfl_cr_05_generation add = 1 }
+            set_variable = { name = bfl_cr_05_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_05_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_05_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_05_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_05_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_06_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_06_state value = 1 }
+            change_variable = { name = bfl_cr_06_generation add = 1 }
+            set_variable = { name = bfl_cr_06_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_06_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_06_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_06_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_06_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_07_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_07_state value = 1 }
+            change_variable = { name = bfl_cr_07_generation add = 1 }
+            set_variable = { name = bfl_cr_07_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_07_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_07_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_07_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_07_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_08_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_08_state value = 1 }
+            change_variable = { name = bfl_cr_08_generation add = 1 }
+            set_variable = { name = bfl_cr_08_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_08_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_08_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_08_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_08_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_09_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_09_state value = 1 }
+            change_variable = { name = bfl_cr_09_generation add = 1 }
+            set_variable = { name = bfl_cr_09_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_09_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_09_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_09_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_09_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_10_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_10_state value = 1 }
+            change_variable = { name = bfl_cr_10_generation add = 1 }
+            set_variable = { name = bfl_cr_10_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_10_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_10_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_10_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_10_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_11_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_11_state value = 1 }
+            change_variable = { name = bfl_cr_11_generation add = 1 }
+            set_variable = { name = bfl_cr_11_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_11_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_11_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_11_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_11_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_12_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_12_state value = 1 }
+            change_variable = { name = bfl_cr_12_generation add = 1 }
+            set_variable = { name = bfl_cr_12_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_12_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_12_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_12_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_12_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_13_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_13_state value = 1 }
+            change_variable = { name = bfl_cr_13_generation add = 1 }
+            set_variable = { name = bfl_cr_13_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_13_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_13_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_13_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_13_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_14_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_14_state value = 1 }
+            change_variable = { name = bfl_cr_14_generation add = 1 }
+            set_variable = { name = bfl_cr_14_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_14_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_14_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_14_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_14_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_15_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_15_state value = 1 }
+            change_variable = { name = bfl_cr_15_generation add = 1 }
+            set_variable = { name = bfl_cr_15_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_15_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_15_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_15_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_15_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_16_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_16_state value = 1 }
+            change_variable = { name = bfl_cr_16_generation add = 1 }
+            set_variable = { name = bfl_cr_16_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_16_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_16_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_16_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_16_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_17_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_17_state value = 1 }
+            change_variable = { name = bfl_cr_17_generation add = 1 }
+            set_variable = { name = bfl_cr_17_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_17_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_17_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_17_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_17_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_18_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_18_state value = 1 }
+            change_variable = { name = bfl_cr_18_generation add = 1 }
+            set_variable = { name = bfl_cr_18_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_18_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_18_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_18_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_18_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_19_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_19_state value = 1 }
+            change_variable = { name = bfl_cr_19_generation add = 1 }
+            set_variable = { name = bfl_cr_19_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_19_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_19_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_19_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_19_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_20_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_20_state value = 1 }
+            change_variable = { name = bfl_cr_20_generation add = 1 }
+            set_variable = { name = bfl_cr_20_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_20_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_20_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_20_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_20_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_21_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_21_state value = 1 }
+            change_variable = { name = bfl_cr_21_generation add = 1 }
+            set_variable = { name = bfl_cr_21_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_21_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_21_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_21_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_21_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_22_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_22_state value = 1 }
+            change_variable = { name = bfl_cr_22_generation add = 1 }
+            set_variable = { name = bfl_cr_22_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_22_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_22_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_22_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_22_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_23_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_23_state value = 1 }
+            change_variable = { name = bfl_cr_23_generation add = 1 }
+            set_variable = { name = bfl_cr_23_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_23_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_23_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_23_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_23_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_24_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_24_state value = 1 }
+            change_variable = { name = bfl_cr_24_generation add = 1 }
+            set_variable = { name = bfl_cr_24_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_24_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_24_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_24_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_24_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_25_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_25_state value = 1 }
+            change_variable = { name = bfl_cr_25_generation add = 1 }
+            set_variable = { name = bfl_cr_25_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_25_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_25_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_25_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_25_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_26_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_26_state value = 1 }
+            change_variable = { name = bfl_cr_26_generation add = 1 }
+            set_variable = { name = bfl_cr_26_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_26_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_26_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_26_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_26_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_27_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_27_state value = 1 }
+            change_variable = { name = bfl_cr_27_generation add = 1 }
+            set_variable = { name = bfl_cr_27_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_27_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_27_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_27_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_27_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_28_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_28_state value = 1 }
+            change_variable = { name = bfl_cr_28_generation add = 1 }
+            set_variable = { name = bfl_cr_28_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_28_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_28_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_28_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_28_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_29_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_29_state value = 1 }
+            change_variable = { name = bfl_cr_29_generation add = 1 }
+            set_variable = { name = bfl_cr_29_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_29_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_29_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_29_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_29_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_30_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_30_state value = 1 }
+            change_variable = { name = bfl_cr_30_generation add = 1 }
+            set_variable = { name = bfl_cr_30_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_30_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_30_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_30_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_30_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_31_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_31_state value = 1 }
+            change_variable = { name = bfl_cr_31_generation add = 1 }
+            set_variable = { name = bfl_cr_31_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_31_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_31_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_31_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_31_repaid value = 0 }
+        }
+if = { limit = { var:bfl_credit_allocated = 0 var:bfl_cr_32_state != 1 }
+            set_variable = { name = bfl_credit_allocated value = 1 }
+            set_variable = { name = bfl_cr_32_state value = 1 }
+            change_variable = { name = bfl_cr_32_generation add = 1 }
+            set_variable = { name = bfl_cr_32_loan value = scope:bfl_claim }
+            set_variable = { name = bfl_cr_32_party value = scope:bfl_claim.borrower }
+            set_variable = { name = bfl_cr_32_basis value = var:bfl_credit_basis }
+            set_variable = { name = bfl_cr_32_face value = scope:bfl_claim.loan_amount }
+            set_variable = { name = bfl_cr_32_repaid value = 0 }
+        }
+}

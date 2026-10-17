@@ -1,0 +1,903 @@
+﻿bfl_review_native_credit = {
+bfl_initialize_credit = yes
+if = { limit = { var:bfl_cr_01_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_01_loan } }
+                if = { limit = { var:bfl_cr_01_repaid = 1 }
+                    set_variable = { name = bfl_cr_01_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_01_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_01_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_01_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_01_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_01_party } }
+                set_variable = { name = bfl_cr_01_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_01_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_01_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_02_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_02_loan } }
+                if = { limit = { var:bfl_cr_02_repaid = 1 }
+                    set_variable = { name = bfl_cr_02_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_02_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_02_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_02_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_02_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_02_party } }
+                set_variable = { name = bfl_cr_02_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_02_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_02_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_03_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_03_loan } }
+                if = { limit = { var:bfl_cr_03_repaid = 1 }
+                    set_variable = { name = bfl_cr_03_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_03_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_03_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_03_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_03_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_03_party } }
+                set_variable = { name = bfl_cr_03_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_03_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_03_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_04_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_04_loan } }
+                if = { limit = { var:bfl_cr_04_repaid = 1 }
+                    set_variable = { name = bfl_cr_04_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_04_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_04_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_04_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_04_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_04_party } }
+                set_variable = { name = bfl_cr_04_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_04_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_04_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_05_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_05_loan } }
+                if = { limit = { var:bfl_cr_05_repaid = 1 }
+                    set_variable = { name = bfl_cr_05_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_05_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_05_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_05_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_05_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_05_party } }
+                set_variable = { name = bfl_cr_05_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_05_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_05_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_06_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_06_loan } }
+                if = { limit = { var:bfl_cr_06_repaid = 1 }
+                    set_variable = { name = bfl_cr_06_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_06_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_06_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_06_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_06_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_06_party } }
+                set_variable = { name = bfl_cr_06_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_06_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_06_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_07_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_07_loan } }
+                if = { limit = { var:bfl_cr_07_repaid = 1 }
+                    set_variable = { name = bfl_cr_07_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_07_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_07_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_07_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_07_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_07_party } }
+                set_variable = { name = bfl_cr_07_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_07_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_07_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_08_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_08_loan } }
+                if = { limit = { var:bfl_cr_08_repaid = 1 }
+                    set_variable = { name = bfl_cr_08_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_08_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_08_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_08_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_08_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_08_party } }
+                set_variable = { name = bfl_cr_08_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_08_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_08_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_09_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_09_loan } }
+                if = { limit = { var:bfl_cr_09_repaid = 1 }
+                    set_variable = { name = bfl_cr_09_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_09_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_09_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_09_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_09_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_09_party } }
+                set_variable = { name = bfl_cr_09_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_09_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_09_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_10_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_10_loan } }
+                if = { limit = { var:bfl_cr_10_repaid = 1 }
+                    set_variable = { name = bfl_cr_10_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_10_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_10_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_10_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_10_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_10_party } }
+                set_variable = { name = bfl_cr_10_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_10_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_10_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_11_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_11_loan } }
+                if = { limit = { var:bfl_cr_11_repaid = 1 }
+                    set_variable = { name = bfl_cr_11_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_11_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_11_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_11_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_11_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_11_party } }
+                set_variable = { name = bfl_cr_11_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_11_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_11_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_12_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_12_loan } }
+                if = { limit = { var:bfl_cr_12_repaid = 1 }
+                    set_variable = { name = bfl_cr_12_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_12_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_12_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_12_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_12_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_12_party } }
+                set_variable = { name = bfl_cr_12_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_12_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_12_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_13_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_13_loan } }
+                if = { limit = { var:bfl_cr_13_repaid = 1 }
+                    set_variable = { name = bfl_cr_13_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_13_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_13_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_13_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_13_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_13_party } }
+                set_variable = { name = bfl_cr_13_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_13_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_13_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_14_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_14_loan } }
+                if = { limit = { var:bfl_cr_14_repaid = 1 }
+                    set_variable = { name = bfl_cr_14_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_14_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_14_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_14_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_14_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_14_party } }
+                set_variable = { name = bfl_cr_14_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_14_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_14_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_15_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_15_loan } }
+                if = { limit = { var:bfl_cr_15_repaid = 1 }
+                    set_variable = { name = bfl_cr_15_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_15_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_15_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_15_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_15_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_15_party } }
+                set_variable = { name = bfl_cr_15_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_15_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_15_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_16_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_16_loan } }
+                if = { limit = { var:bfl_cr_16_repaid = 1 }
+                    set_variable = { name = bfl_cr_16_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_16_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_16_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_16_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_16_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_16_party } }
+                set_variable = { name = bfl_cr_16_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_16_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_16_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_17_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_17_loan } }
+                if = { limit = { var:bfl_cr_17_repaid = 1 }
+                    set_variable = { name = bfl_cr_17_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_17_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_17_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_17_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_17_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_17_party } }
+                set_variable = { name = bfl_cr_17_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_17_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_17_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_18_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_18_loan } }
+                if = { limit = { var:bfl_cr_18_repaid = 1 }
+                    set_variable = { name = bfl_cr_18_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_18_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_18_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_18_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_18_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_18_party } }
+                set_variable = { name = bfl_cr_18_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_18_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_18_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_19_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_19_loan } }
+                if = { limit = { var:bfl_cr_19_repaid = 1 }
+                    set_variable = { name = bfl_cr_19_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_19_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_19_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_19_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_19_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_19_party } }
+                set_variable = { name = bfl_cr_19_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_19_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_19_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_20_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_20_loan } }
+                if = { limit = { var:bfl_cr_20_repaid = 1 }
+                    set_variable = { name = bfl_cr_20_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_20_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_20_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_20_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_20_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_20_party } }
+                set_variable = { name = bfl_cr_20_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_20_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_20_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_21_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_21_loan } }
+                if = { limit = { var:bfl_cr_21_repaid = 1 }
+                    set_variable = { name = bfl_cr_21_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_21_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_21_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_21_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_21_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_21_party } }
+                set_variable = { name = bfl_cr_21_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_21_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_21_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_22_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_22_loan } }
+                if = { limit = { var:bfl_cr_22_repaid = 1 }
+                    set_variable = { name = bfl_cr_22_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_22_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_22_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_22_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_22_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_22_party } }
+                set_variable = { name = bfl_cr_22_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_22_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_22_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_23_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_23_loan } }
+                if = { limit = { var:bfl_cr_23_repaid = 1 }
+                    set_variable = { name = bfl_cr_23_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_23_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_23_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_23_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_23_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_23_party } }
+                set_variable = { name = bfl_cr_23_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_23_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_23_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_24_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_24_loan } }
+                if = { limit = { var:bfl_cr_24_repaid = 1 }
+                    set_variable = { name = bfl_cr_24_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_24_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_24_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_24_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_24_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_24_party } }
+                set_variable = { name = bfl_cr_24_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_24_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_24_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_25_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_25_loan } }
+                if = { limit = { var:bfl_cr_25_repaid = 1 }
+                    set_variable = { name = bfl_cr_25_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_25_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_25_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_25_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_25_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_25_party } }
+                set_variable = { name = bfl_cr_25_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_25_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_25_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_26_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_26_loan } }
+                if = { limit = { var:bfl_cr_26_repaid = 1 }
+                    set_variable = { name = bfl_cr_26_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_26_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_26_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_26_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_26_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_26_party } }
+                set_variable = { name = bfl_cr_26_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_26_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_26_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_27_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_27_loan } }
+                if = { limit = { var:bfl_cr_27_repaid = 1 }
+                    set_variable = { name = bfl_cr_27_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_27_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_27_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_27_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_27_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_27_party } }
+                set_variable = { name = bfl_cr_27_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_27_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_27_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_28_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_28_loan } }
+                if = { limit = { var:bfl_cr_28_repaid = 1 }
+                    set_variable = { name = bfl_cr_28_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_28_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_28_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_28_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_28_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_28_party } }
+                set_variable = { name = bfl_cr_28_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_28_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_28_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_29_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_29_loan } }
+                if = { limit = { var:bfl_cr_29_repaid = 1 }
+                    set_variable = { name = bfl_cr_29_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_29_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_29_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_29_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_29_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_29_party } }
+                set_variable = { name = bfl_cr_29_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_29_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_29_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_30_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_30_loan } }
+                if = { limit = { var:bfl_cr_30_repaid = 1 }
+                    set_variable = { name = bfl_cr_30_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_30_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_30_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_30_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_30_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_30_party } }
+                set_variable = { name = bfl_cr_30_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_30_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_30_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_31_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_31_loan } }
+                if = { limit = { var:bfl_cr_31_repaid = 1 }
+                    set_variable = { name = bfl_cr_31_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_31_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_31_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_31_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_31_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_31_party } }
+                set_variable = { name = bfl_cr_31_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_31_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_31_basis }
+            }
+        }
+if = { limit = { var:bfl_cr_32_state = 1 }
+            if = { limit = { NOT = { exists = var:bfl_cr_32_loan } }
+                if = { limit = { var:bfl_cr_32_repaid = 1 }
+                    set_variable = { name = bfl_cr_32_state value = 2 }
+                    change_variable = { name = bfl_credit_settled add = 1 }
+                    # Native payoff callback precedes cash: retain an audit amount,
+                    # never recognize a speculative treasury-delta receipt.
+                    change_variable = { name = bfl_credit_deferred_receipts add = var:bfl_cr_32_basis }
+                } else = {
+                    set_variable = { name = bfl_cr_32_state value = 3 }
+                    change_variable = { name = bfl_credit_defaults add = 1 }
+                    change_variable = { name = bfl_credit_impairments add = var:bfl_cr_32_basis }
+                    change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_32_basis }
+                }
+            } else_if = { limit = { NOT = { country_exists = var:bfl_cr_32_party } }
+                set_variable = { name = bfl_cr_32_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_32_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_32_basis }
+            }
+        }
+}
+bfl_mark_native_repayment = {
+if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:target }
+            set_variable = { name = bfl_cr_01_repaid value = 1 } }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:target }
+            set_variable = { name = bfl_cr_02_repaid value = 1 } }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:target }
+            set_variable = { name = bfl_cr_03_repaid value = 1 } }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:target }
+            set_variable = { name = bfl_cr_04_repaid value = 1 } }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:target }
+            set_variable = { name = bfl_cr_05_repaid value = 1 } }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:target }
+            set_variable = { name = bfl_cr_06_repaid value = 1 } }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:target }
+            set_variable = { name = bfl_cr_07_repaid value = 1 } }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:target }
+            set_variable = { name = bfl_cr_08_repaid value = 1 } }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:target }
+            set_variable = { name = bfl_cr_09_repaid value = 1 } }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:target }
+            set_variable = { name = bfl_cr_10_repaid value = 1 } }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:target }
+            set_variable = { name = bfl_cr_11_repaid value = 1 } }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:target }
+            set_variable = { name = bfl_cr_12_repaid value = 1 } }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:target }
+            set_variable = { name = bfl_cr_13_repaid value = 1 } }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:target }
+            set_variable = { name = bfl_cr_14_repaid value = 1 } }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:target }
+            set_variable = { name = bfl_cr_15_repaid value = 1 } }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:target }
+            set_variable = { name = bfl_cr_16_repaid value = 1 } }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:target }
+            set_variable = { name = bfl_cr_17_repaid value = 1 } }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:target }
+            set_variable = { name = bfl_cr_18_repaid value = 1 } }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:target }
+            set_variable = { name = bfl_cr_19_repaid value = 1 } }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:target }
+            set_variable = { name = bfl_cr_20_repaid value = 1 } }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:target }
+            set_variable = { name = bfl_cr_21_repaid value = 1 } }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:target }
+            set_variable = { name = bfl_cr_22_repaid value = 1 } }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:target }
+            set_variable = { name = bfl_cr_23_repaid value = 1 } }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:target }
+            set_variable = { name = bfl_cr_24_repaid value = 1 } }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:target }
+            set_variable = { name = bfl_cr_25_repaid value = 1 } }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:target }
+            set_variable = { name = bfl_cr_26_repaid value = 1 } }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:target }
+            set_variable = { name = bfl_cr_27_repaid value = 1 } }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:target }
+            set_variable = { name = bfl_cr_28_repaid value = 1 } }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:target }
+            set_variable = { name = bfl_cr_29_repaid value = 1 } }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:target }
+            set_variable = { name = bfl_cr_30_repaid value = 1 } }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:target }
+            set_variable = { name = bfl_cr_31_repaid value = 1 } }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:target }
+            set_variable = { name = bfl_cr_32_repaid value = 1 } }
+}
+bfl_book_native_haircut = {
+if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_01_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_01_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_02_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_02_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_03_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_03_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_04_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_04_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_05_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_05_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_06_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_06_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_07_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_07_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_08_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_08_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_09_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_09_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_10_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_10_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_11_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_11_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_12_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_12_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_13_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_13_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_14_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_14_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_15_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_15_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_16_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_16_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_17_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_17_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_18_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_18_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_19_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_19_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_20_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_20_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_21_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_21_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_22_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_22_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_23_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_23_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_24_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_24_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_25_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_25_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_26_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_26_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_27_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_27_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_28_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_28_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_29_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_29_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_30_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_30_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_31_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_31_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_32_basis multiply = 0.20 } }
+            change_variable = { name = bfl_cr_32_basis subtract = var:bfl_credit_haircut }
+            change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
+        }
+}

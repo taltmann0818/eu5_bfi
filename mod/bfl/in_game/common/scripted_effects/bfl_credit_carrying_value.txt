@@ -1,0 +1,131 @@
+﻿bfl_native_claim_value = {
+set_variable = { name = bfl_credit_carrying_value value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }
+if = { limit = { var:bfl_cr_01_state ?= 1 var:bfl_cr_01_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_01_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_01_state ?= 4 var:bfl_cr_01_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_02_state ?= 1 var:bfl_cr_02_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_02_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_02_state ?= 4 var:bfl_cr_02_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_03_state ?= 1 var:bfl_cr_03_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_03_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_03_state ?= 4 var:bfl_cr_03_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_04_state ?= 1 var:bfl_cr_04_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_04_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_04_state ?= 4 var:bfl_cr_04_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_05_state ?= 1 var:bfl_cr_05_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_05_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_05_state ?= 4 var:bfl_cr_05_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_06_state ?= 1 var:bfl_cr_06_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_06_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_06_state ?= 4 var:bfl_cr_06_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_07_state ?= 1 var:bfl_cr_07_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_07_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_07_state ?= 4 var:bfl_cr_07_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_08_state ?= 1 var:bfl_cr_08_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_08_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_08_state ?= 4 var:bfl_cr_08_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_09_state ?= 1 var:bfl_cr_09_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_09_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_09_state ?= 4 var:bfl_cr_09_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_10_state ?= 1 var:bfl_cr_10_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_10_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_10_state ?= 4 var:bfl_cr_10_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_11_state ?= 1 var:bfl_cr_11_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_11_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_11_state ?= 4 var:bfl_cr_11_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_12_state ?= 1 var:bfl_cr_12_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_12_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_12_state ?= 4 var:bfl_cr_12_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_13_state ?= 1 var:bfl_cr_13_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_13_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_13_state ?= 4 var:bfl_cr_13_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_14_state ?= 1 var:bfl_cr_14_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_14_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_14_state ?= 4 var:bfl_cr_14_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_15_state ?= 1 var:bfl_cr_15_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_15_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_15_state ?= 4 var:bfl_cr_15_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_16_state ?= 1 var:bfl_cr_16_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_16_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_16_state ?= 4 var:bfl_cr_16_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_17_state ?= 1 var:bfl_cr_17_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_17_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_17_state ?= 4 var:bfl_cr_17_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_18_state ?= 1 var:bfl_cr_18_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_18_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_18_state ?= 4 var:bfl_cr_18_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_19_state ?= 1 var:bfl_cr_19_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_19_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_19_state ?= 4 var:bfl_cr_19_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_20_state ?= 1 var:bfl_cr_20_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_20_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_20_state ?= 4 var:bfl_cr_20_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_21_state ?= 1 var:bfl_cr_21_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_21_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_21_state ?= 4 var:bfl_cr_21_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_22_state ?= 1 var:bfl_cr_22_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_22_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_22_state ?= 4 var:bfl_cr_22_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_23_state ?= 1 var:bfl_cr_23_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_23_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_23_state ?= 4 var:bfl_cr_23_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_24_state ?= 1 var:bfl_cr_24_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_24_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_24_state ?= 4 var:bfl_cr_24_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_25_state ?= 1 var:bfl_cr_25_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_25_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_25_state ?= 4 var:bfl_cr_25_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_26_state ?= 1 var:bfl_cr_26_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_26_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_26_state ?= 4 var:bfl_cr_26_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_27_state ?= 1 var:bfl_cr_27_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_27_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_27_state ?= 4 var:bfl_cr_27_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_28_state ?= 1 var:bfl_cr_28_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_28_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_28_state ?= 4 var:bfl_cr_28_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_29_state ?= 1 var:bfl_cr_29_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_29_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_29_state ?= 4 var:bfl_cr_29_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_30_state ?= 1 var:bfl_cr_30_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_30_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_30_state ?= 4 var:bfl_cr_30_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_31_state ?= 1 var:bfl_cr_31_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_31_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_31_state ?= 4 var:bfl_cr_31_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+if = { limit = { var:bfl_cr_32_state ?= 1 var:bfl_cr_32_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = { value = var:bfl_cr_32_basis max = scope:bfl_claim.remaining_debt } } }
+if = { limit = { var:bfl_cr_32_state ?= 4 var:bfl_cr_32_loan ?= scope:bfl_claim }
+            set_variable = { name = bfl_credit_carrying_value value = 0 } }
+}
