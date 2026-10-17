@@ -1,0 +1,50 @@
+{
+  "recorded": "2026-10-17",
+  "passed": true,
+  "runtime_sha256": "6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565",
+  "implementation_commit": "197dc48aaeab8ef701bc70ca0261f8c8ee588a50",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "checks": {
+    "m4_engine_assertions": "43/43",
+    "credit_regression_assertions": "46/46",
+    "accounts_bond_engine_assertions": "114/114",
+    "total_engine_assertions": "203/203",
+    "monthly_persistence": "Twelve consecutive settlements and second-process autosave reload in all three suites",
+    "manual_ui_observations": "12/12",
+    "unedited_game_window_captures": 10,
+    "offline_tests": "91/91",
+    "source_validation": "124 script/GUI/localization files; 57 graphics",
+    "native_cmf_pins": "PASS",
+    "deterministic_generation": "PASS: generation and Economy reconstruction preserve the committed runtime",
+    "native_economy_credit_reconstruction": "PASS",
+    "release_staging": "182 files"
+  },
+  "package_manifest_sha256": "90cebc415056cd2c3feeab017af103344f98fff55c9b284d4d79caef8369744b",
+  "reports": {
+    "treasury": {
+      "path": "tests/results/2026-10-17-m4-treasury.json",
+      "token": "46c9efcd0a6a43ee82e3fb1c6fd95597",
+      "runtime_sha256": "6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565",
+      "assertions": 43,
+      "sha256": "e5dd76c3849c77358f42d3f6dc347b664d8975d5f0b365a18a20f6cbe8cc9fdb"
+    },
+    "credit": {
+      "path": "tests/results/2026-10-17-m4-credit-regression.json",
+      "token": "ac8ddbbe285543c09b63aac6d73b27b1",
+      "runtime_sha256": "6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565",
+      "assertions": 46,
+      "sha256": "f60d167851ad9e321c967ad6809c72bcbd1aeeb19a088f49c21a173e194423e3"
+    },
+    "accounts": {
+      "path": "tests/results/2026-10-17-m4-accounts-regression.json",
+      "token": "035ef35143e3492780738d7fdd29855d",
+      "runtime_sha256": "6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565",
+      "assertions": 114,
+      "sha256": "e9cf772cc4c13ef474f87a155d678a891a3202baee20d7254a7f309a6497f11c"
+    }
+  },
+  "ui_provenance": "Cold-loaded final runtime; normal GUI renewal and early-exit commands/options. See 2026-10-17-m4-ui.json for fixture and capture hashes. Wallet/age/accrual/maturity staging is visual setup, not natural campaign acceptance.",
+  "scope": "Complete M4 for the pinned single-player baseline. Native company operations retain M2 evidence; M5 ownership/exchange, M6/M8 branch expansion, M9 full destruction recovery/waterfalls and M10 broad AI/language/scale/performance/debt-led balance remain separate gates. No prior M0/M1/M2 run is relabelled as current-runtime acceptance. Queued CI is not a pass."
+}

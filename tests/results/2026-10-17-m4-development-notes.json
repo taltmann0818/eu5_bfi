@@ -1,0 +1,161 @@
+{
+  "recorded": "2026-10-17",
+  "scope": "Rejected or superseded development runs. Individual passing assertions in a failed, incomplete or source-changed run are not acceptance evidence. The separate final reports pin their common runtime. Native borrower wallet caps in the final fixture preserve its loan for twelve coupon observations rather than letting AI pay it off early.",
+  "attempts": [
+    {
+      "attempt": "local-m4",
+      "runtime_sha256": "71e14b270e3e4ffffacf6d0982f7ccfee6afca09330ab48e45537657fdcec032",
+      "token": "b796138503c1435aa9d16d15d8038f99",
+      "passed": false,
+      "assertions_observed": 30,
+      "failed_assertions": [
+        "estate_pool_actual_gold_and_no_sovereign_premium",
+        "estate_interest_once_to_same_wallet",
+        "country_and_estate_round_trip_preserves_term",
+        "expense_shortfall_and_replay",
+        "native_monthly_interest_attributed_without_principal",
+        "reload_native_cost_and_repayment_history"
+      ],
+      "error_count": 1191,
+      "first_errors": [
+        "Failed: estate_pool_actual_gold_and_no_sovereign_premium",
+        "Failed: estate_interest_once_to_same_wallet",
+        "Failed: country_and_estate_round_trip_preserves_term",
+        "Failed: expense_shortfall_and_replay"
+      ]
+    },
+    {
+      "attempt": "local-m4-accepted",
+      "runtime_sha256": "640794f7343b6bc52590053464039c5a2094883ebfb6d4119438b4cce465ffc6",
+      "token": "2451123d6ea241f89f21a002a430dec8",
+      "passed": false,
+      "assertions_observed": 42,
+      "failed_assertions": [],
+      "error_count": 7,
+      "first_errors": [
+        "  Error: Failed to fetch variable for 'bfl_dep_06_party' due to not being set",
+        "  Error: Event target link 'var:bfl_dep_06_party' returned an unset scope",
+        "  Error: Invalid left side during comparison 'var:bfl_dep_06_party'",
+        "BFI script runtime error: Error: Failed to fetch variable for 'bfl_dep_06_party' due to not being set   Script location: common/scripted_effects/bfl_generated_deposit_settlement.txt:1708 common/on_action/zz_bfi_campaign_checks.txt:14"
+      ]
+    },
+    {
+      "attempt": "local-m4-accounts",
+      "runtime_sha256": "61b161d8471db7d3b5eb781c8c420304e3bf691956982da5677a03e101e4ed11",
+      "token": "6e8e25d47d00422c9301e4ea34aea785",
+      "passed": false,
+      "assertions_observed": 104,
+      "failed_assertions": [],
+      "error_count": 190,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_claim_owner, reload_custom_bond_identity, reload_expense_history, reload_live_controller, reload_month_idempotent, reload_native_banking_unlocks, reload_profile_and_rate, reload_schema, reload_sentinel, reload_stock_exchange_gate",
+        "  Error: Failed to fetch variable for 'bfl_dep_02_party' due to not being set"
+      ]
+    },
+    {
+      "attempt": "local-m4-complete",
+      "runtime_sha256": "cdad65159c4368d4c2c5c08de60c8b8b2be427be437456214333acad3820390b",
+      "token": "17b4d761cd6f42088fa622cb484976f5",
+      "passed": false,
+      "assertions_observed": 40,
+      "failed_assertions": [],
+      "error_count": 10,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_accepted_rate_and_generation, reload_native_cost_and_repayment_history, reload_quarantined_liability_and_statement",
+        "  Error: Failed to fetch variable for 'bfl_dep_06_party' due to not being set"
+      ]
+    },
+    {
+      "attempt": "local-m4-credit",
+      "runtime_sha256": "640794f7343b6bc52590053464039c5a2094883ebfb6d4119438b4cce465ffc6",
+      "token": "5cb78b8d71dd41c0b68209258a3cc7a5",
+      "passed": false,
+      "assertions_observed": 46,
+      "failed_assertions": [],
+      "error_count": 3,
+      "first_errors": [
+        "  Error: Invalid right side during comparison 'scope:bfl_restructure_claim'",
+        "BFI script runtime error: Error: Invalid right side during comparison 'scope:bfl_restructure_claim'   Script location: common/scripted_effects/bfl_native_receipts.txt:1165 common/on_action/zz_bfi_campaign_checks.txt:14",
+        "Source runtime changed since staging"
+      ]
+    },
+    {
+      "attempt": "local-m4-final",
+      "runtime_sha256": "61b161d8471db7d3b5eb781c8c420304e3bf691956982da5677a03e101e4ed11",
+      "token": "d0fa9d3a47b94def9c0a31f3364bab30",
+      "passed": false,
+      "assertions_observed": 39,
+      "failed_assertions": [
+        "estate_term_actual_wallet_and_fixed_terms",
+        "estate_term_renewal_preserves_pool",
+        "native_monthly_interest_attributed_without_principal"
+      ],
+      "error_count": 13,
+      "first_errors": [
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: reload_accepted_rate_and_generation, reload_native_cost_and_repayment_history, reload_quarantined_liability_and_statement",
+        "Failed: estate_term_actual_wallet_and_fixed_terms"
+      ]
+    },
+    {
+      "attempt": "local-m4-fourth",
+      "runtime_sha256": "9658dfd7fc9a28f15e467bc835ac3afd87384dd6a4e9be421d1760fe56095804",
+      "token": "ca2660c82d44404ab1a6b5840a29ecbe",
+      "passed": false,
+      "assertions_observed": 39,
+      "failed_assertions": [
+        "native_monthly_interest_attributed_without_principal"
+      ],
+      "error_count": 2,
+      "first_errors": [
+        "Failed: native_monthly_interest_attributed_without_principal",
+        "Source runtime changed since staging"
+      ]
+    },
+    {
+      "attempt": "local-m4-second",
+      "runtime_sha256": "7506e6e3da1d9440255d2bb9dfac965c574a9839ff9c407de4b9dc62ab0d80a1",
+      "token": "bbe9b5544f784a91a64bfd05e6575f2c",
+      "passed": false,
+      "assertions_observed": 30,
+      "failed_assertions": [
+        "estate_pool_actual_gold_and_no_sovereign_premium",
+        "estate_interest_once_to_same_wallet",
+        "country_and_estate_round_trip_preserves_term"
+      ],
+      "error_count": 20,
+      "first_errors": [
+        "Failed: estate_pool_actual_gold_and_no_sovereign_premium",
+        "Failed: estate_interest_once_to_same_wallet",
+        "Failed: country_and_estate_round_trip_preserves_term",
+        "Failed to parse wild card data from string for event target link. Link: , location: common/scripted_effects/bfi_campaign_checks.txt:30"
+      ]
+    },
+    {
+      "attempt": "local-m4-third",
+      "runtime_sha256": "188f09ca3f18f6f52bfbf0972102e029ef22387c8ecd6affcae1d8d8ddb4701b",
+      "token": "0f94844951094a7d8b8ba6624157da97",
+      "passed": false,
+      "assertions_observed": 39,
+      "failed_assertions": [
+        "estate_pool_actual_gold_and_no_sovereign_premium",
+        "estate_interest_once_to_same_wallet",
+        "country_and_estate_round_trip_preserves_term",
+        "native_monthly_interest_attributed_without_principal",
+        "reload_native_cost_and_repayment_history"
+      ],
+      "error_count": 14,
+      "first_errors": [
+        "Failed: estate_pool_actual_gold_and_no_sovereign_premium",
+        "Failed: estate_interest_once_to_same_wallet",
+        "Failed: country_and_estate_round_trip_preserves_term",
+        "Failed: native_monthly_interest_attributed_without_principal"
+      ]
+    }
+  ]
+}

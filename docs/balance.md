@@ -1,6 +1,6 @@
 # Initial tuning, not campaign balance
 
-Investment by native age: 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold. New accounts use 100-gold lots, 1% annual demand interest or 2% for a 12-month term. Accounts retain accepted rates. Cash protection defaults to 25 gold plus 25% of unqueued liabilities, queued withdrawals and separately committed funds. Required equity is 10% of carrying assets.
+Investment by native age: 500 / 750 / 1,000 / 1,500 / 2,000 / 3,000 gold. New accounts use 100-gold lots, 1% annual demand interest or 2% for a 12-month term. Accounts retain accepted rates; matching depositor/pool/rate/maturity lots aggregate. Estate pools use actual gold and retain a 25-gold wallet buffer. Early exit cancels accrued interest up to 1% of principal, only after explicit acceptance; renewal fixes a new 12-month term. Cash protection defaults to 25 gold plus 25% of unqueued liabilities, queued withdrawals and separately committed funds. Required equity is 10% of carrying assets.
 
 Independent banks require +50 opinion for new accounts. The sovereign's own chartered bank adds one annual percentage point to its deposit rates. Accepted rates remain fixed. Demand interest is paid monthly when funded; unpaid interest stays owed. Term interest remains payable at maturity. Lower relations never block matured withdrawals.
 
