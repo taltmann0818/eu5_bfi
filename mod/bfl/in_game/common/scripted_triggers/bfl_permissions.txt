@@ -22,7 +22,6 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_sovereign_credit = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-custom_tooltip = { text = bfl_probe_P06 always = no }
 }
 bfl_can_service_sovereign_credit = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -65,7 +64,6 @@ bfl_can_originate_sovereign_restructuring = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_debt_restructuring } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_debt_restructuring } } }
-custom_tooltip = { text = bfl_probe_P06 always = no }
 }
 bfl_can_service_sovereign_restructuring = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -115,7 +113,6 @@ bfl_can_conduct_business = yes
 OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
 var:bfl_profile = 1
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_corporate_credit } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_corporate_credit } } }
-custom_tooltip = { text = bfl_probe_P06 always = no }
 }
 bfl_can_service_corporate_credit = {
 bfl_has_accounts = yes var:bfl_state < 5

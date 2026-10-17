@@ -1,0 +1,427 @@
+﻿bfl_book_funded_credit_settlement = {
+if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_01_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_01_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_01_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_01_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_02_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_02_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_02_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_02_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_03_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_03_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_03_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_03_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_04_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_04_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_04_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_04_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_05_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_05_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_05_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_05_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_06_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_06_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_06_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_06_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_07_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_07_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_07_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_07_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_08_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_08_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_08_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_08_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_09_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_09_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_09_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_09_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_10_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_10_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_10_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_10_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_11_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_11_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_11_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_11_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_12_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_12_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_12_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_12_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_13_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_13_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_13_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_13_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_14_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_14_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_14_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_14_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_15_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_15_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_15_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_15_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_16_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_16_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_16_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_16_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_17_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_17_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_17_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_17_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_18_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_18_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_18_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_18_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_19_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_19_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_19_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_19_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_20_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_20_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_20_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_20_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_21_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_21_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_21_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_21_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_22_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_22_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_22_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_22_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_23_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_23_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_23_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_23_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_24_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_24_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_24_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_24_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_25_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_25_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_25_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_25_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_26_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_26_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_26_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_26_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_27_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_27_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_27_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_27_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_28_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_28_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_28_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_28_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_29_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_29_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_29_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_29_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_30_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_30_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_30_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_30_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_31_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_31_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_31_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_31_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_credit_released_basis value = { value = var:bfl_cr_32_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction } }
+            change_variable = { name = bfl_cr_32_basis subtract = var:bfl_credit_released_basis }
+            set_variable = { name = bfl_cr_32_face value = { value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount } }
+            set_variable = { name = bfl_credit_settlement_gain value = { value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis } }
+            if = { limit = { var:bfl_credit_settlement_gain >= 0 } change_variable = { name = bfl_profit_credit add = var:bfl_credit_settlement_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain } }
+            if = { limit = { scope:bfl_party.var:bfl_credit_settlement_fraction = 1 }
+                set_variable = { name = bfl_cr_32_state value = 2 }
+                change_variable = { name = bfl_credit_settled add = 1 } }
+        }
+}
+
+    bfl_accept_funded_restructuring = {
+        if = { limit = { country_exists = this exists = var:bfl_restructure_bank country_exists = var:bfl_restructure_bank
+            exists = scope:bfl_restructure_quote_generation var:bfl_restructure_generation = scope:bfl_restructure_quote_generation
+            exists = var:bfl_restructure_loan bfl_period <= var:bfl_restructure_expiry
+            NOT = { has_variable = bfl_credit_guard }
+            OR = { var:bfl_credit_settlement_fraction = 0.25 var:bfl_credit_settlement_fraction = 1 }
+            var:bfl_restructure_loan = { owner = prev.var:bfl_restructure_bank borrower = prev is_bond = no
+                loan_amount = prev.var:bfl_restructure_face loan_interest = prev.var:bfl_restructure_rate }
+            gold >= { value = var:bfl_restructure_loan.remaining_debt multiply = var:bfl_credit_settlement_fraction }
+        }
+            save_scope_as = bfl_party
+            var:bfl_restructure_bank = { save_scope_as = bfl_credit_bank }
+            var:bfl_restructure_loan = { save_scope_as = bfl_restructure_claim }
+            if = { limit = { scope:bfl_credit_bank = { bfl_restructure_eligible = yes
+                OR = { this = scope:bfl_party.var:bfl_restructure_actor
+                    AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party.var:bfl_restructure_actor } }
+            } }
+                set_variable = bfl_credit_guard
+                set_variable = { name = bfl_credit_settlement_payment value = { value = scope:bfl_restructure_claim.remaining_debt multiply = var:bfl_credit_settlement_fraction } }
+                add_gold = { value = var:bfl_credit_settlement_payment multiply = -1 }
+                scope:bfl_credit_bank = { add_gold = scope:bfl_party.var:bfl_credit_settlement_payment bfl_book_funded_credit_settlement = yes }
+                if = { limit = { var:bfl_credit_settlement_fraction = 0.25 }
+                    scope:bfl_restructure_claim = { change_loan_amount = { value = loan_amount multiply = -0.25 } }
+                } else = {
+                    cancel_loan = scope:bfl_restructure_claim
+                    scope:bfl_credit_bank = {
+                        set_variable = { name = bfl_credit_basis value = scope:bfl_party.var:bfl_restructure_face }
+                        set_variable = bfl_credit_issuing
+                        give_loan = { target = scope:bfl_party amount = var:bfl_credit_basis
+                            interest = scope:bfl_party.var:bfl_restructure_rate months = 60 }
+                        remove_variable = bfl_credit_issuing
+                    }
+                }
+                remove_variable = bfl_restructure_bank remove_variable = bfl_credit_guard
+                scope:bfl_credit_bank = { bfl_reconcile_native_assets = yes }
+            }
+        }
+    }
+    bfl_accept_native_partial_repayment = { set_variable = { name = bfl_credit_settlement_fraction value = 0.25 } bfl_accept_funded_restructuring = yes }
+    bfl_accept_native_refinancing = { set_variable = { name = bfl_credit_settlement_fraction value = 1 } bfl_accept_funded_restructuring = yes }

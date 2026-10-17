@@ -1,0 +1,40 @@
+{
+  "recorded": "2026-10-17",
+  "passed": true,
+  "runtime_sha256": "95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41",
+  "implementation_commit": "a69b886266ec9bf28cff7a45a526ca0edf19f7a1",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "checks": {
+    "m3_engine_assertions": "46/46",
+    "accounts_bond_engine_assertions": "114/114",
+    "native_engine_assertions": "56/56",
+    "native_numerical_assertions": "20/20",
+    "manual_ui_observations": "15/15",
+    "offline_tests": "86/86",
+    "source_validation": "110 script/GUI/localization files; 57 graphics",
+    "native_cmf_pins": "PASS",
+    "deterministic_generation": "PASS; repeated script and Economy generators preserve this runtime hash",
+    "native_economy_credit_reconstruction": "PASS",
+    "release_staging": "168 files"
+  },
+  "package_manifest_sha256": "0efda7cc1ffbb6423429772d807dbf8be302a403d536546a9ce705940dd904b3",
+  "reports": {
+    "credit": {
+      "token": "043122bfeadd49668d53f1c928d16f3c",
+      "runtime_sha256": "95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41"
+    },
+    "accounts": {
+      "token": "cab35697a7e4420caa7abbe59145388f",
+      "runtime_sha256": "95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41"
+    },
+    "native-regression": {
+      "token": "8f3e59c7f7c34344af583b1243ef8946",
+      "runtime_sha256": "95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41"
+    }
+  },
+  "accounts_runner_recovery": "The native first-phase process exited after its full END marker. The runner then raced against that exit while stopping it. Preserved logs and the same run autosave were used for the normal second-process reload, with the original token and runtime fingerprint. No assertion was rerun or relabeled. The runner now tolerates a confirmed exit of its exact owned process.",
+  "ui_provenance": "See 2026-10-17-m3-ui.json for the cold-load hash and native hot reload of the final issuer browser; all other runtime files are unchanged.",
+  "scope": "Pinned single-player baseline. Native per-activity receipt attribution remains M4; equity markets M5, full recovery/workouts M9 and broad UI/language/AI/performance M10. Queued CI is not counted as a pass."
+}

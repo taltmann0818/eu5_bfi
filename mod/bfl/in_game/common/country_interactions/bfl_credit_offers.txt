@@ -1,0 +1,31 @@
+﻿bfl_offer_credit = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { bfl_has_management = yes } } allow = { scope:actor = { OR = {
+            AND = { bfl_is_independent_bank = yes bfl_can_originate_sovereign_credit = yes }
+            AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_sovereign_credit = yes } }
+        } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { OR = { country_type = location bfl_is_company = yes } NOT = { this = scope:actor } }
+                enabled = { country_exists = this monthly_income_total > 0 OR = { bfl_is_company = yes country_loan_capacity >= 100 }
+                    OR = { NOT = { bfl_is_company = yes }
+                        scope:actor = { OR = { bfl_can_originate_corporate_credit = yes
+                            AND = { country_type = location var:bfl_bank = { bfl_can_originate_corporate_credit = yes } } } } } } }
+            effect = { scope:actor = { save_scope_as = bfl_credit_actor bfl_resolve_command_bank = yes }
+                scope:recipient = { save_scope_as = bfl_party } scope:bfl_bank = { bfl_offer_native_credit = yes } }
+            ai_will_do = { value = 0 } }
+bfl_offer_restructuring = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { bfl_has_management = yes } } allow = { scope:actor = { OR = {
+            AND = { bfl_is_independent_bank = yes bfl_can_originate_sovereign_restructuring = yes }
+            AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_sovereign_restructuring = yes } }
+        } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan }
+                visible = { OR = { country_type = location bfl_is_company = yes } NOT = { this = scope:actor } }
+                enabled = { country_exists = this any_loan = {
+            OR = { owner = scope:actor AND = { exists = scope:actor.var:bfl_bank owner = scope:actor.var:bfl_bank } } is_bond = no }
+                    OR = { NOT = { bfl_is_company = yes }
+                        scope:actor = { OR = { bfl_can_originate_corporate_credit = yes
+                            AND = { country_type = location var:bfl_bank = { bfl_can_originate_corporate_credit = yes } } } } } } }
+            effect = { scope:actor = { save_scope_as = bfl_credit_actor bfl_resolve_command_bank = yes }
+                scope:recipient = { save_scope_as = bfl_party } scope:bfl_bank = { bfl_offer_native_restructuring = yes } }
+            ai_will_do = { value = 0 } }

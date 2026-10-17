@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -26,6 +26,7 @@ try {
         'm0' { 'tools/m0_probe_suite.py' }
         'm1' { 'tools/m1_charter_suite.py' }
         'm2' { 'tools/m2_company_suite.py' }
+        'm3' { 'tools/m3_credit_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId
@@ -68,10 +69,20 @@ try {
         } finally {
             # Only terminate the exact process created here. Never stop a player's EUV process.
             $proc.Refresh()
-            if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force; $proc.WaitForExit() }
+            if (-not $proc.HasExited) {
+                try { $proc.Kill() }
+                catch {
+                    # Native timed handsoff can exit between Refresh and Kill.
+                    # Ignore only a confirmed exit of this exact owned process.
+                    $proc.Refresh()
+                    if (-not $proc.HasExited) { throw }
+                }
+                $proc.WaitForExit()
+            }
         }
     }
-    Invoke-BfiEngine $arguments "BFI_TEST|$runId|END|"
+    $runtimeFingerprint=(Get-Content -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Raw | ConvertFrom-Json).runtime_sha256
+    Invoke-BfiEngine $arguments "BFI_TEST|$runId|END|$runtimeFingerprint"
     if (-not (Test-Path -LiteralPath $debugPath)) { throw 'EUV did not create isolated logs; campaign did not run.' }
     $priorLog = Join-Path $runRoot 'campaign-debug.log'
     $priorErrors = Join-Path $runRoot 'campaign-errors.log'
@@ -85,7 +96,7 @@ try {
     # EUV resolves this option under the isolated 'save games' directory and appends .eu5.
     $reloadArgs = @('-debug_mode', "-loadsavehandsoff=$($save.BaseName)", '-timed_handsoff=3', "-userdir=`"$userDir`"")
     if (-not $Graphics) { $reloadArgs += '-nographics' }
-    Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|"
+    Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|$runtimeFingerprint"
     python $suiteScript report --userdir $userDir --output $outPath --prior-log $priorLog --prior-errors $priorErrors
     if ($LASTEXITCODE -ne 0) { throw 'Campaign assertions failed or execution was incomplete; see campaign.json.' }
     Write-Output "PASS: real Florence campaign; report $outPath"

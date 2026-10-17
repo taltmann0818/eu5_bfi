@@ -35,7 +35,8 @@ def generate(common, effect, loc, write):
             save_scope_as = bfl_claim
             borrower = { save_scope_as = bfl_asset_party }
             scope:bfl_bank = {
-                set_variable = { name = bfl_asset_amount value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }
+                bfl_native_claim_value = yes
+                set_variable = { name = bfl_asset_amount value = var:bfl_credit_carrying_value }
                 set_variable = { name = bfl_asset_kind value = 2 }
                 if = { limit = { scope:bfl_claim = { is_bond = yes } } set_variable = { name = bfl_asset_kind value = 1 } }
                 if = { limit = { var:bfl_asset_kind = 1 } change_variable = { name = bfl_asset_bonds add = var:bfl_asset_amount } }

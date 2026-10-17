@@ -1,0 +1,32 @@
+﻿bfl_credit_party_eligible = {
+        exists = scope:bfl_party country_exists = scope:bfl_party
+        NOT = { this = scope:bfl_party }
+        OR = {
+            AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { country_type = location NOT = { bfl_is_company = yes } } }
+            AND = { bfl_can_originate_corporate_credit = yes scope:bfl_party = { bfl_is_company = yes } }
+        }
+    }
+    bfl_credit_funding_available = {
+        bfl_credit_party_eligible = yes bfl_credit_capacity = yes
+        bfl_free_cash >= 100 bfl_capital_headroom >= 100
+        scope:bfl_party = { monthly_income_total > 0
+            OR = {
+                AND = { NOT = { bfl_is_company = yes } country_loan_capacity >= 100
+                    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt subtract = 100 } }
+                # Building countries have no estate borrowing capacity. Limit
+                # unsecured working capital by real cash and operating income.
+                AND = { bfl_is_company = yes
+                    total_debt <= { value = monthly_income_total multiply = 12 add = gold subtract = 100 } }
+            }
+            NOT = { has_variable = bfl_credit_guard } }
+        NOT = { has_variable = bfl_credit_guard }
+    }
+    bfl_restructure_eligible = {
+        bfl_can_originate_sovereign_restructuring = yes
+        exists = scope:bfl_party country_exists = scope:bfl_party NOT = { this = scope:bfl_party }
+        OR = { scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location }
+            AND = { bfl_can_originate_corporate_credit = yes scope:bfl_party = { bfl_is_company = yes } } }
+    }
+    bfl_credit_capacity = {
+OR = { var:bfl_cr_01_state != 1 var:bfl_cr_02_state != 1 var:bfl_cr_03_state != 1 var:bfl_cr_04_state != 1 var:bfl_cr_05_state != 1 var:bfl_cr_06_state != 1 var:bfl_cr_07_state != 1 var:bfl_cr_08_state != 1 var:bfl_cr_09_state != 1 var:bfl_cr_10_state != 1 var:bfl_cr_11_state != 1 var:bfl_cr_12_state != 1 var:bfl_cr_13_state != 1 var:bfl_cr_14_state != 1 var:bfl_cr_15_state != 1 var:bfl_cr_16_state != 1 var:bfl_cr_17_state != 1 var:bfl_cr_18_state != 1 var:bfl_cr_19_state != 1 var:bfl_cr_20_state != 1 var:bfl_cr_21_state != 1 var:bfl_cr_22_state != 1 var:bfl_cr_23_state != 1 var:bfl_cr_24_state != 1 var:bfl_cr_25_state != 1 var:bfl_cr_26_state != 1 var:bfl_cr_27_state != 1 var:bfl_cr_28_state != 1 var:bfl_cr_29_state != 1 var:bfl_cr_30_state != 1 var:bfl_cr_31_state != 1 var:bfl_cr_32_state != 1 }
+}

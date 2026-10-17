@@ -1,0 +1,19 @@
+﻿namespace = bfl_credit
+bfl_credit.1 = { type = country_event
+            title = bfl_credit_1_title desc = bfl_credit_1_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_credit_accept bfl_accept_native_credit = yes ai_chance = { base = 100 } }
+            option = { name = bfl_credit_reject bfl_reject_native_credit = yes ai_chance = { base = 0 } }
+        }
+bfl_credit.2 = { type = country_event
+            title = bfl_credit_2_title desc = bfl_credit_2_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_credit_accept bfl_accept_native_restructuring = yes ai_chance = { base = 100 } }
+            option = { name = bfl_credit_reject bfl_reject_native_restructuring = yes ai_chance = { base = 0 } }
+        option = { name = bfl_credit_partial
+                trigger = { exists = var:bfl_restructure_loan gold >= { value = var:bfl_restructure_loan.remaining_debt multiply = 0.25 } }
+                bfl_accept_native_partial_repayment = yes ai_chance = { base = 0 } }
+                option = { name = bfl_credit_refinance
+                    trigger = { exists = var:bfl_restructure_loan gold >= var:bfl_restructure_loan.remaining_debt }
+                    bfl_accept_native_refinancing = yes ai_chance = { base = 0 } }
+            }

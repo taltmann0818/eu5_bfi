@@ -1,0 +1,49 @@
+{
+  "suite": "M3 Credit bank overview layout follow-up",
+  "recorded": "2026-10-17",
+  "runtime_sha256": "16b66a66be3aab211e897b62456cfc656e73039a93bad3076db9f1b99a216f74",
+  "previous_accepted_runtime_sha256": "95736fe7f222a6583d482177994cbd2f50d3ddb6b00e96e858ae812cf6e29b41",
+  "token": "8ef06aaa297143d4903677805448042a",
+  "fixture_sha256": "478df5b6695465d10cac27c8a68dc5f1b93f23de1691886434455b96cdf6a463",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "client_resolution": "1280x720",
+  "gui_scale": 0.6,
+  "campaign_date": "1 April 1337",
+  "provenance": "Cold launch of the full current runtime in the existing disposable M3 Florence visual user directory. Staged production files are byte-identical to the checkout. No source hot reload in this follow-up. Native market notice centers Florence; the campaign stays paused.",
+  "passed": true,
+  "results": {
+    "shared_bank_details": "PASS",
+    "summary_below_bank_details": "PASS",
+    "financing_scroll": "PASS",
+    "holdings_scroll": "PASS",
+    "credit_subtab_consistency": "PASS",
+    "return_to_bonds": "PASS"
+  },
+  "observations": {
+    "shared_bank_details": "Bardi name/profile/state, treasury cash, assets, liabilities, equity, ownership and asset donuts, operating expenses and sovereign accounts remain above Sovereign Bonds.",
+    "summary_below_bank_details": "The 100 principal, 0.25 monthly coupon, zero arrears and zero current headroom appear below the shared Credit subtabs.",
+    "financing_scroll": "Dragging the bond scrollbar to its end exposes the full coupon presets, disabled Borrow 100 action and Off/Debt first/Buffer controls while the bank overview remains fixed.",
+    "holdings_scroll": "Holdings & market opens below the same overview; dragging to its end exposes the full 100-face, 3-percent Bardi-held claim, unpaid coupons, List at 98% and Redeem controls. No live listing exists in this paused fixture.",
+    "credit_subtab_consistency": "Switching to Funding & Debt and Lending & Investments preserves the same bank details at the same vertical position. Their existing controls remain present.",
+    "return_to_bonds": "Returning from Lending to Sovereign Bonds keeps the shared bank overview visible."
+  },
+  "checks": {
+    "source_validation": "PASS: 110 script/GUI/localization files and 57 graphics",
+    "native_cmf_pins": "PASS",
+    "deterministic_generation": "PASS: repeated generators preserve runtime hash; native Credit/Economy reversal assertions pass",
+    "release_staging": "PASS: 168 files",
+    "changed_gui_error_scan": "PASS: no errors attributed to credit.gui, bfl_sovereign_bonds.gui or bfl_bond_panel in this process error.log"
+  },
+  "scope": "Focused layout inspection only. Only the two GUI files change from the accepted M3 runtime; gameplay services and prior engine assertions are unchanged, not rerun or relabelled. The visual fixture grants charter, wallets, one funded bond and a pending early exchange. No transaction or exchange-completion acceptance is claimed in this paused follow-up. Scrollbar dragging is verified; broader role/language/scale matrices remain M10.",
+  "sources": {
+    "in_game/gui/credit.gui": "5c86db1d681c7158f2aaa9d4c3804548cf320c0121b7384767aa7c98ed602e03",
+    "in_game/gui/bfl_sovereign_bonds.gui": "c24ff05f36afe7cf01864b9205c69d9fa0fd975a0190760733f34d67e3980a73"
+  },
+  "captures": {
+    "docs/screenshots/20-m3-sovereign-bonds-bank-overview.png": "641f67e062d09990339108253443f8e17eb5d58627feac8697432d3bed08fcdc",
+    "docs/screenshots/21-m3-sovereign-bonds-financing-scroll.png": "ff0dbf74c7ea4f9fb9697e62d4daa49402555e143f0a2def8b75ee0c16c7c9cb",
+    "docs/screenshots/22-m3-sovereign-bonds-holdings-scroll.png": "b8828c4e86cfbcfb444f1e8ffcfb355ae9dc22430a3189c722b23c0a8ab7aaba"
+  }
+}

@@ -804,6 +804,13 @@ lateralview = {
 				using = layoutpolicy_expanding
 				header_secondary_tabs = {
 					blockoverride "content" {
+        button_secondary_tab_alt = { layoutpolicy_horizontal = expanding tooltip_enabled = no
+            blockoverride "tab_text" { text = "bfl_bond_panel_title" fontsize = 16 }
+            onclick = "[GetScriptedGui('bfl_prepare_bond_panel').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[CreditLateralView.Vars.Set('subtab','bfl_bonds')]"
+            down = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]"
+        }
+
 						button_secondary_tab_alt = {
 							layoutpolicy_horizontal = expanding
 							tooltip_enabled = no
@@ -835,6 +842,8 @@ lateralview = {
 						}
 					}
 				}
+ bfl_sovereign_bonds = { visible = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]" }
+
 
 				# loans taken
 				vbox = {
@@ -846,8 +855,6 @@ lateralview = {
 						texture = "gfx/interface/economy/bg_credit.dds"
 					}
  bfl_credit_funding = { name = "bfl_credit_funding" }
-
- bfl_sovereign_bond_controls = { name = "bfl_sovereign_bond_controls" }
 
 
 					hbox = {

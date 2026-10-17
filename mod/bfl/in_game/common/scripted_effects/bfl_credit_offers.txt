@@ -1,0 +1,45 @@
+﻿# Root lender, saved borrower and real command actor. Offers move no money.
+bfl_offer_native_credit = {
+    bfl_initialize_credit = yes
+    if = { limit = { bfl_credit_funding_available = yes exists = scope:bfl_credit_actor
+        OR = { this = scope:bfl_credit_actor AND = { bfl_has_valid_controller = yes overlord = scope:bfl_credit_actor } }
+        scope:bfl_party = { OR = { NOT = { has_variable = bfl_credit_offer_bank } bfl_period > var:bfl_credit_offer_expiry } }
+    }
+        save_scope_as = bfl_credit_bank
+        set_variable = { name = bfl_credit_rate value = bfl_credit_quote_rate }
+        scope:bfl_party = {
+            if = { limit = { NOT = { has_variable = bfl_credit_offer_generation } }
+                set_variable = { name = bfl_credit_offer_generation value = 0 } }
+            change_variable = { name = bfl_credit_offer_generation add = 1 }
+            save_scope_value_as = { name = bfl_credit_quote_generation value = var:bfl_credit_offer_generation }
+            set_variable = { name = bfl_credit_offer_bank value = scope:bfl_credit_bank }
+            set_variable = { name = bfl_credit_offer_actor value = scope:bfl_credit_actor }
+            set_variable = { name = bfl_credit_offer_rate value = scope:bfl_credit_bank.var:bfl_credit_rate }
+            set_variable = { name = bfl_credit_offer_expiry value = { value = bfl_period add = 3 } }
+            trigger_event_non_silently = bfl_credit.1
+        }
+    }
+}
+# Root borrower; accepted offer is consumed before native dispatch.
+bfl_accept_native_credit = {
+    if = { limit = { country_exists = this exists = var:bfl_credit_offer_bank country_exists = var:bfl_credit_offer_bank
+        exists = scope:bfl_credit_quote_generation var:bfl_credit_offer_generation = scope:bfl_credit_quote_generation
+        bfl_period <= var:bfl_credit_offer_expiry NOT = { has_variable = bfl_credit_guard }
+        var:bfl_credit_offer_rate >= 0.03 var:bfl_credit_offer_rate <= 0.20
+    }
+        save_scope_as = bfl_party
+        var:bfl_credit_offer_bank = { save_scope_as = bfl_credit_bank }
+        if = { limit = { scope:bfl_credit_bank = { bfl_credit_funding_available = yes
+            OR = { this = scope:bfl_party.var:bfl_credit_offer_actor
+                AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party.var:bfl_credit_offer_actor } } } }
+            set_variable = bfl_credit_guard
+            scope:bfl_credit_bank = {
+                set_variable = { name = bfl_credit_rate value = scope:bfl_party.var:bfl_credit_offer_rate }
+                bfl_originate_native_credit = yes
+            }
+            remove_variable = bfl_credit_offer_bank remove_variable = bfl_credit_guard
+        }
+    }
+}
+bfl_reject_native_credit = { if = { limit = { exists = scope:bfl_credit_quote_generation
+    var:bfl_credit_offer_generation ?= scope:bfl_credit_quote_generation } remove_variable = bfl_credit_offer_bank } }
