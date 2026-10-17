@@ -1,4 +1,0 @@
-﻿bfl_resolved_bond_seller_valid = {
-        OR = { bfl_can_trade_sovereign_bonds = yes
-            AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_trade_sovereign_bonds = yes } } }
-    }

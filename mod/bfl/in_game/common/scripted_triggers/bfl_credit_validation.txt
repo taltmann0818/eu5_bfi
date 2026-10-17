@@ -9,7 +9,15 @@
     bfl_credit_funding_available = {
         bfl_credit_party_eligible = yes bfl_credit_capacity = yes
         bfl_free_cash >= 100 bfl_capital_headroom >= 100
-        scope:bfl_party = { monthly_income_total > 0 total_debt < { value = monthly_income_total multiply = 24 }
+        scope:bfl_party = { monthly_income_total > 0
+            OR = {
+                AND = { NOT = { bfl_is_company = yes } country_loan_capacity >= 100
+                    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt subtract = 100 } }
+                # Building countries have no estate borrowing capacity. Limit
+                # unsecured working capital by real cash and operating income.
+                AND = { bfl_is_company = yes
+                    total_debt <= { value = monthly_income_total multiply = 12 add = gold subtract = 100 } }
+            }
             NOT = { has_variable = bfl_credit_guard } }
         NOT = { has_variable = bfl_credit_guard }
     }

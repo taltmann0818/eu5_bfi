@@ -1,0 +1,32 @@
+﻿bfl_resolved_bond_seller_valid = {
+        OR = { bfl_can_trade_sovereign_bonds = yes
+            AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_trade_sovereign_bonds = yes } } }
+    }
+    bfl_can_cancel_selected_bond_offer = {
+        exists = var:bfl_bond_selected_issuer
+        var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot > 0 }
+        OR = { this = var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller
+            AND = { bfl_has_management = yes country_type = location
+                var:bfl_bank = var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller } }
+    }
+    bfl_selected_bond_offer_ready = {
+        exists = var:bfl_bond_selected_issuer country_exists = var:bfl_bond_selected_issuer
+        bfl_resolved_bond_seller_valid = yes
+        var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot > 0 bfl_period <= var:bfl_bond_offer_expiry
+            exists = var:bfl_bond_offer_seller country_exists = var:bfl_bond_offer_seller
+            var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes } }
+        OR = {
+            AND = { bfl_has_management = yes country_type = location
+                var:bfl_bank = { bfl_can_conduct_business = yes
+                    NOT = { this = prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller }
+                    bfl_free_cash >= prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
+                    bfl_capital_headroom >= prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_price } }
+            AND = { NOT = { AND = { bfl_has_management = yes country_type = location } }
+                NOT = { this = var:bfl_bond_selected_issuer }
+                NOT = { this = var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller }
+                gold >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
+                OR = { NOT = { bfl_has_accounts = yes } AND = { bfl_can_conduct_business = yes
+                    bfl_free_cash >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
+                    bfl_capital_headroom >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price } } }
+        }
+    }

@@ -8,6 +8,10 @@
             save_scope_as = bfl_restructure_claim }
         if = { limit = { exists = scope:bfl_restructure_claim }
             scope:bfl_party = {
+                if = { limit = { NOT = { has_variable = bfl_restructure_generation } }
+                    set_variable = { name = bfl_restructure_generation value = 0 } }
+                change_variable = { name = bfl_restructure_generation add = 1 }
+                save_scope_value_as = { name = bfl_restructure_quote_generation value = var:bfl_restructure_generation }
                 set_variable = { name = bfl_restructure_bank value = scope:bfl_credit_bank }
                 set_variable = { name = bfl_restructure_actor value = scope:bfl_credit_actor }
                 set_variable = { name = bfl_restructure_loan value = scope:bfl_restructure_claim }
@@ -21,6 +25,7 @@
 }
 bfl_accept_native_restructuring = {
     if = { limit = { country_exists = this exists = var:bfl_restructure_bank country_exists = var:bfl_restructure_bank
+        exists = scope:bfl_restructure_quote_generation var:bfl_restructure_generation = scope:bfl_restructure_quote_generation
         exists = var:bfl_restructure_loan bfl_period <= var:bfl_restructure_expiry
         NOT = { has_variable = bfl_credit_guard }
         var:bfl_restructure_loan = { owner = prev.var:bfl_restructure_bank borrower = prev
@@ -43,4 +48,5 @@ bfl_accept_native_restructuring = {
         }
     }
 }
-bfl_reject_native_restructuring = { remove_variable = bfl_restructure_bank }
+bfl_reject_native_restructuring = { if = { limit = { exists = scope:bfl_restructure_quote_generation
+    var:bfl_restructure_generation ?= scope:bfl_restructure_quote_generation } remove_variable = bfl_restructure_bank } }

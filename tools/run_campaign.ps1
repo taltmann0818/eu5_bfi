@@ -72,7 +72,8 @@ try {
             if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force; $proc.WaitForExit() }
         }
     }
-    Invoke-BfiEngine $arguments "BFI_TEST|$runId|END|"
+    $runtimeFingerprint=(Get-Content -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Raw | ConvertFrom-Json).runtime_sha256
+    Invoke-BfiEngine $arguments "BFI_TEST|$runId|END|$runtimeFingerprint"
     if (-not (Test-Path -LiteralPath $debugPath)) { throw 'EUV did not create isolated logs; campaign did not run.' }
     $priorLog = Join-Path $runRoot 'campaign-debug.log'
     $priorErrors = Join-Path $runRoot 'campaign-errors.log'
@@ -86,7 +87,7 @@ try {
     # EUV resolves this option under the isolated 'save games' directory and appends .eu5.
     $reloadArgs = @('-debug_mode', "-loadsavehandsoff=$($save.BaseName)", '-timed_handsoff=3', "-userdir=`"$userDir`"")
     if (-not $Graphics) { $reloadArgs += '-nographics' }
-    Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|"
+    Invoke-BfiEngine $reloadArgs "BFI_TEST|$runId|RELOAD_END|$runtimeFingerprint"
     python $suiteScript report --userdir $userDir --output $outPath --prior-log $priorLog --prior-errors $priorErrors
     if ($LASTEXITCODE -ne 0) { throw 'Campaign assertions failed or execution was incomplete; see campaign.json.' }
     Write-Output "PASS: real Florence campaign; report $outPath"

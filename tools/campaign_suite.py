@@ -64,6 +64,7 @@ def fixture(token, fingerprint):
     def reset():
         return '''every_lent_loan = { cancel_loan = this }
             remove_variable = bfl_schema remove_variable = bfl_accounts_revision
+            remove_variable = bfl_credit_schema
             remove_variable = bfl_expense_history_count
             bfl_initialize_bank = yes
             set_variable = { name = bfl_profile value = 1 }

@@ -1087,8 +1087,8 @@ def main():
     generate_bonds(common,effect,loc,TUNE)
     from generate_native_credit import generate as generate_credit
     generate_credit(common,effect,loc)
-    from generate_bond_desk import generate as generate_bond_desk
-    generate_bond_desk(common,effect,loc,write)
+    from generate_bond_panel import generate as generate_bond_panel
+    generate_bond_panel(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

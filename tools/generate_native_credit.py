@@ -29,7 +29,15 @@ def generate(common, effect, loc):
     bfl_credit_funding_available = {
         bfl_credit_party_eligible = yes bfl_credit_capacity = yes
         bfl_free_cash >= 100 bfl_capital_headroom >= 100
-        scope:bfl_party = { monthly_income_total > 0 total_debt < { value = monthly_income_total multiply = 24 }
+        scope:bfl_party = { monthly_income_total > 0
+            OR = {
+                AND = { NOT = { bfl_is_company = yes } country_loan_capacity >= 100
+                    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt subtract = 100 } }
+                # Building countries have no estate borrowing capacity. Limit
+                # unsecured working capital by real cash and operating income.
+                AND = { bfl_is_company = yes
+                    total_debt <= { value = monthly_income_total multiply = 12 add = gold subtract = 100 } }
+            }
             NOT = { has_variable = bfl_credit_guard } }
         NOT = { has_variable = bfl_credit_guard }
     }
@@ -47,6 +55,7 @@ def generate(common, effect, loc):
         if = { limit = { scope:bfl_party = { monthly_balance < 0 } } add = 0.02 }
         if = { limit = { scope:bfl_party = { at_war = yes } } add = 0.02 }
         if = { limit = { scope:bfl_party = { total_debt > { value = monthly_income_total multiply = 12 } } } add = 0.02 }
+        add = { value = 1 subtract = scope:bfl_party.creditworthiness multiply = 0.04 }
         max = 0.20
     }
     ''')
@@ -90,6 +99,10 @@ def generate(common, effect, loc):
             save_scope_as = bfl_credit_bank
             set_variable = { name = bfl_credit_rate value = bfl_credit_quote_rate }
             scope:bfl_party = {
+                if = { limit = { NOT = { has_variable = bfl_credit_offer_generation } }
+                    set_variable = { name = bfl_credit_offer_generation value = 0 } }
+                change_variable = { name = bfl_credit_offer_generation add = 1 }
+                save_scope_value_as = { name = bfl_credit_quote_generation value = var:bfl_credit_offer_generation }
                 set_variable = { name = bfl_credit_offer_bank value = scope:bfl_credit_bank }
                 set_variable = { name = bfl_credit_offer_actor value = scope:bfl_credit_actor }
                 set_variable = { name = bfl_credit_offer_rate value = scope:bfl_credit_bank.var:bfl_credit_rate }
@@ -101,6 +114,7 @@ def generate(common, effect, loc):
     # Root borrower; accepted offer is consumed before native dispatch.
     bfl_accept_native_credit = {
         if = { limit = { country_exists = this exists = var:bfl_credit_offer_bank country_exists = var:bfl_credit_offer_bank
+            exists = scope:bfl_credit_quote_generation var:bfl_credit_offer_generation = scope:bfl_credit_quote_generation
             bfl_period <= var:bfl_credit_offer_expiry NOT = { has_variable = bfl_credit_guard }
             var:bfl_credit_offer_rate >= 0.03 var:bfl_credit_offer_rate <= 0.20
         }
@@ -118,11 +132,23 @@ def generate(common, effect, loc):
             }
         }
     }
-    bfl_reject_native_credit = { remove_variable = bfl_credit_offer_bank }
+    bfl_reject_native_credit = { if = { limit = { exists = scope:bfl_credit_quote_generation
+        var:bfl_credit_offer_generation ?= scope:bfl_credit_quote_generation } remove_variable = bfl_credit_offer_bank } }
     ''')
     # Claim loss is booked exactly once. Invalid references without a native payoff
     # callback are impairments, never guessed principal or interest receipts.
-    review = 'bfl_initialize_credit = yes\n'
+    review = '''bfl_initialize_credit = yes
+        save_scope_as = bfl_credit_review_bank
+        every_lent_loan = { limit = { is_bond = no }
+            save_scope_as = bfl_claim
+            scope:bfl_credit_review_bank = {
+                # Legacy claims have no historical acquisition receipt. Adopt
+                # their conservative principal carrying value without cash or P&L.
+                set_variable = { name = bfl_credit_basis value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }
+                bfl_register_native_claim = yes
+            }
+        }
+    '''
     repay = ''
     restructure = ''
     for i in range(1, COUNT + 1):
@@ -145,6 +171,20 @@ def generate(common, effect, loc):
                 set_variable = {{ name = {n}_state value = 4 }}
                 change_variable = {{ name = bfl_credit_impairments add = var:{n}_basis }}
                 change_variable = {{ name = bfl_loss_carryforward add = var:{n}_basis }}
+            }} else_if = {{ limit = {{ var:{n}_loan = {{ NOT = {{ owner = scope:bfl_credit_review_bank }} }} }}
+                set_variable = {{ name = {n}_state value = 4 }}
+                change_variable = {{ name = bfl_credit_impairments add = var:{n}_basis }}
+                change_variable = {{ name = bfl_loss_carryforward add = var:{n}_basis }}
+            }} else_if = {{ limit = {{ var:{n}_face > 0 var:{n}_face > var:{n}_loan.loan_amount }}
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = {{ name = bfl_credit_external_haircut value = {{ value = var:{n}_basis
+                    multiply = var:{n}_loan.loan_amount divide = var:{n}_face
+                    multiply = -1 add = var:{n}_basis }} }}
+                change_variable = {{ name = {n}_basis subtract = var:bfl_credit_external_haircut }}
+                set_variable = {{ name = {n}_face value = var:{n}_loan.loan_amount }}
+                change_variable = {{ name = bfl_credit_impairments add = var:bfl_credit_external_haircut }}
+                change_variable = {{ name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }}
             }}
         }}\n'''
         repay += f'''if = {{ limit = {{ var:{n}_state = 1 var:{n}_loan ?= scope:target }}
@@ -152,6 +192,7 @@ def generate(common, effect, loc):
         restructure += f'''if = {{ limit = {{ var:{n}_state = 1 var:{n}_loan ?= scope:bfl_restructure_claim }}
             set_variable = {{ name = bfl_credit_haircut value = {{ value = var:{n}_basis multiply = 0.20 }} }}
             change_variable = {{ name = {n}_basis subtract = var:bfl_credit_haircut }}
+            set_variable = {{ name = {n}_face value = {{ value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 }} }}
             change_variable = {{ name = bfl_credit_impairments add = var:bfl_credit_haircut }}
             change_variable = {{ name = bfl_loss_carryforward add = var:bfl_credit_haircut }}
         }}\n'''
@@ -179,6 +220,10 @@ def generate(common, effect, loc):
                 save_scope_as = bfl_restructure_claim }
             if = { limit = { exists = scope:bfl_restructure_claim }
                 scope:bfl_party = {
+                    if = { limit = { NOT = { has_variable = bfl_restructure_generation } }
+                        set_variable = { name = bfl_restructure_generation value = 0 } }
+                    change_variable = { name = bfl_restructure_generation add = 1 }
+                    save_scope_value_as = { name = bfl_restructure_quote_generation value = var:bfl_restructure_generation }
                     set_variable = { name = bfl_restructure_bank value = scope:bfl_credit_bank }
                     set_variable = { name = bfl_restructure_actor value = scope:bfl_credit_actor }
                     set_variable = { name = bfl_restructure_loan value = scope:bfl_restructure_claim }
@@ -192,6 +237,7 @@ def generate(common, effect, loc):
     }
     bfl_accept_native_restructuring = {
         if = { limit = { country_exists = this exists = var:bfl_restructure_bank country_exists = var:bfl_restructure_bank
+            exists = scope:bfl_restructure_quote_generation var:bfl_restructure_generation = scope:bfl_restructure_quote_generation
             exists = var:bfl_restructure_loan bfl_period <= var:bfl_restructure_expiry
             NOT = { has_variable = bfl_credit_guard }
             var:bfl_restructure_loan = { owner = prev.var:bfl_restructure_bank borrower = prev
@@ -214,7 +260,8 @@ def generate(common, effect, loc):
             }
         }
     }
-    bfl_reject_native_restructuring = { remove_variable = bfl_restructure_bank }
+    bfl_reject_native_restructuring = { if = { limit = { exists = scope:bfl_restructure_quote_generation
+        var:bfl_restructure_generation ?= scope:bfl_restructure_quote_generation } remove_variable = bfl_restructure_bank } }
     ''')
     # Optional funded settlement paths use the same consent snapshot. They are
     # explicit wallet transfers around audited setters/cancellation, not guessed
@@ -225,6 +272,8 @@ def generate(common, effect, loc):
         settlement += f'''if = {{ limit = {{ var:{n}_state = 1 var:{n}_loan ?= scope:bfl_restructure_claim }}
             set_variable = {{ name = bfl_credit_released_basis value = {{ value = var:{n}_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction }} }}
             change_variable = {{ name = {n}_basis subtract = var:bfl_credit_released_basis }}
+            set_variable = {{ name = {n}_face value = {{ value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
+                multiply = scope:bfl_restructure_claim.loan_amount }} }}
             set_variable = {{ name = bfl_credit_settlement_gain value = {{ value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis }} }}
             if = {{ limit = {{ var:bfl_credit_settlement_gain >= 0 }} change_variable = {{ name = bfl_profit_credit add = var:bfl_credit_settlement_gain }} }}
             else = {{ change_variable = {{ name = bfl_loss_carryforward subtract = var:bfl_credit_settlement_gain }} }}
@@ -235,6 +284,7 @@ def generate(common, effect, loc):
     common('scripted_effects', 'credit_funded_settlement', effect('bfl_book_funded_credit_settlement', settlement) + '''
     bfl_accept_funded_restructuring = {
         if = { limit = { country_exists = this exists = var:bfl_restructure_bank country_exists = var:bfl_restructure_bank
+            exists = scope:bfl_restructure_quote_generation var:bfl_restructure_generation = scope:bfl_restructure_quote_generation
             exists = var:bfl_restructure_loan bfl_period <= var:bfl_restructure_expiry
             NOT = { has_variable = bfl_credit_guard }
             OR = { var:bfl_credit_settlement_fraction = 0.25 var:bfl_credit_settlement_fraction = 1 }
@@ -248,7 +298,6 @@ def generate(common, effect, loc):
             if = { limit = { scope:bfl_credit_bank = { bfl_restructure_eligible = yes
                 OR = { this = scope:bfl_party.var:bfl_restructure_actor
                     AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party.var:bfl_restructure_actor } }
-                bfl_credit_capacity = yes
             } }
                 set_variable = bfl_credit_guard
                 set_variable = { name = bfl_credit_settlement_payment value = { value = scope:bfl_restructure_claim.remaining_debt multiply = var:bfl_credit_settlement_fraction } }
@@ -303,12 +352,22 @@ def generate(common, effect, loc):
     interactions = ''
     for key, service, title in [('bfl_offer_credit', 'bfl_offer_native_credit', 'Offer a funded loan'),
                                 ('bfl_offer_restructuring', 'bfl_offer_native_restructuring', 'Offer debt relief')]:
+        gate = 'sovereign_credit' if key == 'bfl_offer_credit' else 'sovereign_restructuring'
+        access = f'''OR = {{
+            AND = {{ bfl_is_independent_bank = yes bfl_can_originate_{gate} = yes }}
+            AND = {{ bfl_has_management = yes country_type = location var:bfl_bank = {{ bfl_can_originate_{gate} = yes }} }}
+        }}'''
+        target = '''monthly_income_total > 0 OR = { bfl_is_company = yes country_loan_capacity >= 100 }''' if key == 'bfl_offer_credit' else '''any_loan = {
+            OR = { owner = scope:actor AND = { exists = scope:actor.var:bfl_bank owner = scope:actor.var:bfl_bank } } is_bond = no }'''
         interactions += f'''{key} = {{ type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
-            potential = {{ scope:actor = {{ bfl_has_management = yes }} }} allow = {{ scope:actor = {{ bfl_has_management = yes }} }}
+            potential = {{ scope:actor = {{ bfl_has_management = yes }} }} allow = {{ scope:actor = {{ {access} }} }}
             select_trigger = {{ looking_for_a = country target_flag = recipient name = choose_country default_sort = will
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ OR = {{ country_type = location bfl_is_company = yes }} NOT = {{ this = scope:actor }} }}
-                enabled = {{ country_exists = this }} }}
+                enabled = {{ country_exists = this {target}
+                    OR = {{ NOT = {{ bfl_is_company = yes }}
+                        scope:actor = {{ OR = {{ bfl_can_originate_corporate_credit = yes
+                            AND = {{ country_type = location var:bfl_bank = {{ bfl_can_originate_corporate_credit = yes }} }} }} }} }} }} }}
             effect = {{ scope:actor = {{ save_scope_as = bfl_credit_actor bfl_resolve_command_bank = yes }}
                 scope:recipient = {{ save_scope_as = bfl_party }} scope:bfl_bank = {{ {service} = yes }} }}
             ai_will_do = {{ value = 0 }} }}\n'''

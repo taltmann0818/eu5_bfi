@@ -1,6 +1,16 @@
 ﻿bfl_review_native_credit = {
 bfl_initialize_credit = yes
-if = { limit = { var:bfl_cr_01_state = 1 }
+        save_scope_as = bfl_credit_review_bank
+        every_lent_loan = { limit = { is_bond = no }
+            save_scope_as = bfl_claim
+            scope:bfl_credit_review_bank = {
+                # Legacy claims have no historical acquisition receipt. Adopt
+                # their conservative principal carrying value without cash or P&L.
+                set_variable = { name = bfl_credit_basis value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }
+                bfl_register_native_claim = yes
+            }
+        }
+    if = { limit = { var:bfl_cr_01_state = 1 }
             if = { limit = { NOT = { exists = var:bfl_cr_01_loan } }
                 if = { limit = { var:bfl_cr_01_repaid = 1 }
                     set_variable = { name = bfl_cr_01_state value = 2 }
@@ -18,6 +28,20 @@ if = { limit = { var:bfl_cr_01_state = 1 }
                 set_variable = { name = bfl_cr_01_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_01_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_01_basis }
+            } else_if = { limit = { var:bfl_cr_01_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_01_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_01_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_01_basis }
+            } else_if = { limit = { var:bfl_cr_01_face > 0 var:bfl_cr_01_face > var:bfl_cr_01_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_01_basis
+                    multiply = var:bfl_cr_01_loan.loan_amount divide = var:bfl_cr_01_face
+                    multiply = -1 add = var:bfl_cr_01_basis } }
+                change_variable = { name = bfl_cr_01_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_01_face value = var:bfl_cr_01_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_02_state = 1 }
@@ -38,6 +62,20 @@ if = { limit = { var:bfl_cr_02_state = 1 }
                 set_variable = { name = bfl_cr_02_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_02_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_02_basis }
+            } else_if = { limit = { var:bfl_cr_02_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_02_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_02_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_02_basis }
+            } else_if = { limit = { var:bfl_cr_02_face > 0 var:bfl_cr_02_face > var:bfl_cr_02_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_02_basis
+                    multiply = var:bfl_cr_02_loan.loan_amount divide = var:bfl_cr_02_face
+                    multiply = -1 add = var:bfl_cr_02_basis } }
+                change_variable = { name = bfl_cr_02_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_02_face value = var:bfl_cr_02_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_03_state = 1 }
@@ -58,6 +96,20 @@ if = { limit = { var:bfl_cr_03_state = 1 }
                 set_variable = { name = bfl_cr_03_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_03_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_03_basis }
+            } else_if = { limit = { var:bfl_cr_03_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_03_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_03_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_03_basis }
+            } else_if = { limit = { var:bfl_cr_03_face > 0 var:bfl_cr_03_face > var:bfl_cr_03_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_03_basis
+                    multiply = var:bfl_cr_03_loan.loan_amount divide = var:bfl_cr_03_face
+                    multiply = -1 add = var:bfl_cr_03_basis } }
+                change_variable = { name = bfl_cr_03_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_03_face value = var:bfl_cr_03_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_04_state = 1 }
@@ -78,6 +130,20 @@ if = { limit = { var:bfl_cr_04_state = 1 }
                 set_variable = { name = bfl_cr_04_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_04_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_04_basis }
+            } else_if = { limit = { var:bfl_cr_04_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_04_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_04_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_04_basis }
+            } else_if = { limit = { var:bfl_cr_04_face > 0 var:bfl_cr_04_face > var:bfl_cr_04_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_04_basis
+                    multiply = var:bfl_cr_04_loan.loan_amount divide = var:bfl_cr_04_face
+                    multiply = -1 add = var:bfl_cr_04_basis } }
+                change_variable = { name = bfl_cr_04_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_04_face value = var:bfl_cr_04_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_05_state = 1 }
@@ -98,6 +164,20 @@ if = { limit = { var:bfl_cr_05_state = 1 }
                 set_variable = { name = bfl_cr_05_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_05_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_05_basis }
+            } else_if = { limit = { var:bfl_cr_05_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_05_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_05_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_05_basis }
+            } else_if = { limit = { var:bfl_cr_05_face > 0 var:bfl_cr_05_face > var:bfl_cr_05_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_05_basis
+                    multiply = var:bfl_cr_05_loan.loan_amount divide = var:bfl_cr_05_face
+                    multiply = -1 add = var:bfl_cr_05_basis } }
+                change_variable = { name = bfl_cr_05_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_05_face value = var:bfl_cr_05_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_06_state = 1 }
@@ -118,6 +198,20 @@ if = { limit = { var:bfl_cr_06_state = 1 }
                 set_variable = { name = bfl_cr_06_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_06_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_06_basis }
+            } else_if = { limit = { var:bfl_cr_06_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_06_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_06_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_06_basis }
+            } else_if = { limit = { var:bfl_cr_06_face > 0 var:bfl_cr_06_face > var:bfl_cr_06_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_06_basis
+                    multiply = var:bfl_cr_06_loan.loan_amount divide = var:bfl_cr_06_face
+                    multiply = -1 add = var:bfl_cr_06_basis } }
+                change_variable = { name = bfl_cr_06_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_06_face value = var:bfl_cr_06_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_07_state = 1 }
@@ -138,6 +232,20 @@ if = { limit = { var:bfl_cr_07_state = 1 }
                 set_variable = { name = bfl_cr_07_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_07_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_07_basis }
+            } else_if = { limit = { var:bfl_cr_07_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_07_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_07_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_07_basis }
+            } else_if = { limit = { var:bfl_cr_07_face > 0 var:bfl_cr_07_face > var:bfl_cr_07_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_07_basis
+                    multiply = var:bfl_cr_07_loan.loan_amount divide = var:bfl_cr_07_face
+                    multiply = -1 add = var:bfl_cr_07_basis } }
+                change_variable = { name = bfl_cr_07_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_07_face value = var:bfl_cr_07_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_08_state = 1 }
@@ -158,6 +266,20 @@ if = { limit = { var:bfl_cr_08_state = 1 }
                 set_variable = { name = bfl_cr_08_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_08_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_08_basis }
+            } else_if = { limit = { var:bfl_cr_08_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_08_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_08_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_08_basis }
+            } else_if = { limit = { var:bfl_cr_08_face > 0 var:bfl_cr_08_face > var:bfl_cr_08_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_08_basis
+                    multiply = var:bfl_cr_08_loan.loan_amount divide = var:bfl_cr_08_face
+                    multiply = -1 add = var:bfl_cr_08_basis } }
+                change_variable = { name = bfl_cr_08_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_08_face value = var:bfl_cr_08_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_09_state = 1 }
@@ -178,6 +300,20 @@ if = { limit = { var:bfl_cr_09_state = 1 }
                 set_variable = { name = bfl_cr_09_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_09_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_09_basis }
+            } else_if = { limit = { var:bfl_cr_09_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_09_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_09_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_09_basis }
+            } else_if = { limit = { var:bfl_cr_09_face > 0 var:bfl_cr_09_face > var:bfl_cr_09_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_09_basis
+                    multiply = var:bfl_cr_09_loan.loan_amount divide = var:bfl_cr_09_face
+                    multiply = -1 add = var:bfl_cr_09_basis } }
+                change_variable = { name = bfl_cr_09_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_09_face value = var:bfl_cr_09_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_10_state = 1 }
@@ -198,6 +334,20 @@ if = { limit = { var:bfl_cr_10_state = 1 }
                 set_variable = { name = bfl_cr_10_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_10_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_10_basis }
+            } else_if = { limit = { var:bfl_cr_10_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_10_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_10_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_10_basis }
+            } else_if = { limit = { var:bfl_cr_10_face > 0 var:bfl_cr_10_face > var:bfl_cr_10_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_10_basis
+                    multiply = var:bfl_cr_10_loan.loan_amount divide = var:bfl_cr_10_face
+                    multiply = -1 add = var:bfl_cr_10_basis } }
+                change_variable = { name = bfl_cr_10_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_10_face value = var:bfl_cr_10_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_11_state = 1 }
@@ -218,6 +368,20 @@ if = { limit = { var:bfl_cr_11_state = 1 }
                 set_variable = { name = bfl_cr_11_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_11_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_11_basis }
+            } else_if = { limit = { var:bfl_cr_11_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_11_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_11_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_11_basis }
+            } else_if = { limit = { var:bfl_cr_11_face > 0 var:bfl_cr_11_face > var:bfl_cr_11_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_11_basis
+                    multiply = var:bfl_cr_11_loan.loan_amount divide = var:bfl_cr_11_face
+                    multiply = -1 add = var:bfl_cr_11_basis } }
+                change_variable = { name = bfl_cr_11_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_11_face value = var:bfl_cr_11_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_12_state = 1 }
@@ -238,6 +402,20 @@ if = { limit = { var:bfl_cr_12_state = 1 }
                 set_variable = { name = bfl_cr_12_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_12_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_12_basis }
+            } else_if = { limit = { var:bfl_cr_12_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_12_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_12_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_12_basis }
+            } else_if = { limit = { var:bfl_cr_12_face > 0 var:bfl_cr_12_face > var:bfl_cr_12_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_12_basis
+                    multiply = var:bfl_cr_12_loan.loan_amount divide = var:bfl_cr_12_face
+                    multiply = -1 add = var:bfl_cr_12_basis } }
+                change_variable = { name = bfl_cr_12_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_12_face value = var:bfl_cr_12_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_13_state = 1 }
@@ -258,6 +436,20 @@ if = { limit = { var:bfl_cr_13_state = 1 }
                 set_variable = { name = bfl_cr_13_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_13_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_13_basis }
+            } else_if = { limit = { var:bfl_cr_13_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_13_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_13_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_13_basis }
+            } else_if = { limit = { var:bfl_cr_13_face > 0 var:bfl_cr_13_face > var:bfl_cr_13_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_13_basis
+                    multiply = var:bfl_cr_13_loan.loan_amount divide = var:bfl_cr_13_face
+                    multiply = -1 add = var:bfl_cr_13_basis } }
+                change_variable = { name = bfl_cr_13_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_13_face value = var:bfl_cr_13_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_14_state = 1 }
@@ -278,6 +470,20 @@ if = { limit = { var:bfl_cr_14_state = 1 }
                 set_variable = { name = bfl_cr_14_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_14_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_14_basis }
+            } else_if = { limit = { var:bfl_cr_14_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_14_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_14_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_14_basis }
+            } else_if = { limit = { var:bfl_cr_14_face > 0 var:bfl_cr_14_face > var:bfl_cr_14_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_14_basis
+                    multiply = var:bfl_cr_14_loan.loan_amount divide = var:bfl_cr_14_face
+                    multiply = -1 add = var:bfl_cr_14_basis } }
+                change_variable = { name = bfl_cr_14_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_14_face value = var:bfl_cr_14_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_15_state = 1 }
@@ -298,6 +504,20 @@ if = { limit = { var:bfl_cr_15_state = 1 }
                 set_variable = { name = bfl_cr_15_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_15_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_15_basis }
+            } else_if = { limit = { var:bfl_cr_15_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_15_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_15_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_15_basis }
+            } else_if = { limit = { var:bfl_cr_15_face > 0 var:bfl_cr_15_face > var:bfl_cr_15_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_15_basis
+                    multiply = var:bfl_cr_15_loan.loan_amount divide = var:bfl_cr_15_face
+                    multiply = -1 add = var:bfl_cr_15_basis } }
+                change_variable = { name = bfl_cr_15_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_15_face value = var:bfl_cr_15_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_16_state = 1 }
@@ -318,6 +538,20 @@ if = { limit = { var:bfl_cr_16_state = 1 }
                 set_variable = { name = bfl_cr_16_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_16_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_16_basis }
+            } else_if = { limit = { var:bfl_cr_16_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_16_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_16_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_16_basis }
+            } else_if = { limit = { var:bfl_cr_16_face > 0 var:bfl_cr_16_face > var:bfl_cr_16_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_16_basis
+                    multiply = var:bfl_cr_16_loan.loan_amount divide = var:bfl_cr_16_face
+                    multiply = -1 add = var:bfl_cr_16_basis } }
+                change_variable = { name = bfl_cr_16_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_16_face value = var:bfl_cr_16_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_17_state = 1 }
@@ -338,6 +572,20 @@ if = { limit = { var:bfl_cr_17_state = 1 }
                 set_variable = { name = bfl_cr_17_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_17_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_17_basis }
+            } else_if = { limit = { var:bfl_cr_17_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_17_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_17_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_17_basis }
+            } else_if = { limit = { var:bfl_cr_17_face > 0 var:bfl_cr_17_face > var:bfl_cr_17_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_17_basis
+                    multiply = var:bfl_cr_17_loan.loan_amount divide = var:bfl_cr_17_face
+                    multiply = -1 add = var:bfl_cr_17_basis } }
+                change_variable = { name = bfl_cr_17_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_17_face value = var:bfl_cr_17_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_18_state = 1 }
@@ -358,6 +606,20 @@ if = { limit = { var:bfl_cr_18_state = 1 }
                 set_variable = { name = bfl_cr_18_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_18_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_18_basis }
+            } else_if = { limit = { var:bfl_cr_18_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_18_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_18_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_18_basis }
+            } else_if = { limit = { var:bfl_cr_18_face > 0 var:bfl_cr_18_face > var:bfl_cr_18_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_18_basis
+                    multiply = var:bfl_cr_18_loan.loan_amount divide = var:bfl_cr_18_face
+                    multiply = -1 add = var:bfl_cr_18_basis } }
+                change_variable = { name = bfl_cr_18_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_18_face value = var:bfl_cr_18_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_19_state = 1 }
@@ -378,6 +640,20 @@ if = { limit = { var:bfl_cr_19_state = 1 }
                 set_variable = { name = bfl_cr_19_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_19_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_19_basis }
+            } else_if = { limit = { var:bfl_cr_19_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_19_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_19_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_19_basis }
+            } else_if = { limit = { var:bfl_cr_19_face > 0 var:bfl_cr_19_face > var:bfl_cr_19_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_19_basis
+                    multiply = var:bfl_cr_19_loan.loan_amount divide = var:bfl_cr_19_face
+                    multiply = -1 add = var:bfl_cr_19_basis } }
+                change_variable = { name = bfl_cr_19_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_19_face value = var:bfl_cr_19_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_20_state = 1 }
@@ -398,6 +674,20 @@ if = { limit = { var:bfl_cr_20_state = 1 }
                 set_variable = { name = bfl_cr_20_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_20_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_20_basis }
+            } else_if = { limit = { var:bfl_cr_20_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_20_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_20_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_20_basis }
+            } else_if = { limit = { var:bfl_cr_20_face > 0 var:bfl_cr_20_face > var:bfl_cr_20_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_20_basis
+                    multiply = var:bfl_cr_20_loan.loan_amount divide = var:bfl_cr_20_face
+                    multiply = -1 add = var:bfl_cr_20_basis } }
+                change_variable = { name = bfl_cr_20_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_20_face value = var:bfl_cr_20_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_21_state = 1 }
@@ -418,6 +708,20 @@ if = { limit = { var:bfl_cr_21_state = 1 }
                 set_variable = { name = bfl_cr_21_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_21_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_21_basis }
+            } else_if = { limit = { var:bfl_cr_21_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_21_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_21_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_21_basis }
+            } else_if = { limit = { var:bfl_cr_21_face > 0 var:bfl_cr_21_face > var:bfl_cr_21_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_21_basis
+                    multiply = var:bfl_cr_21_loan.loan_amount divide = var:bfl_cr_21_face
+                    multiply = -1 add = var:bfl_cr_21_basis } }
+                change_variable = { name = bfl_cr_21_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_21_face value = var:bfl_cr_21_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_22_state = 1 }
@@ -438,6 +742,20 @@ if = { limit = { var:bfl_cr_22_state = 1 }
                 set_variable = { name = bfl_cr_22_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_22_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_22_basis }
+            } else_if = { limit = { var:bfl_cr_22_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_22_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_22_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_22_basis }
+            } else_if = { limit = { var:bfl_cr_22_face > 0 var:bfl_cr_22_face > var:bfl_cr_22_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_22_basis
+                    multiply = var:bfl_cr_22_loan.loan_amount divide = var:bfl_cr_22_face
+                    multiply = -1 add = var:bfl_cr_22_basis } }
+                change_variable = { name = bfl_cr_22_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_22_face value = var:bfl_cr_22_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_23_state = 1 }
@@ -458,6 +776,20 @@ if = { limit = { var:bfl_cr_23_state = 1 }
                 set_variable = { name = bfl_cr_23_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_23_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_23_basis }
+            } else_if = { limit = { var:bfl_cr_23_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_23_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_23_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_23_basis }
+            } else_if = { limit = { var:bfl_cr_23_face > 0 var:bfl_cr_23_face > var:bfl_cr_23_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_23_basis
+                    multiply = var:bfl_cr_23_loan.loan_amount divide = var:bfl_cr_23_face
+                    multiply = -1 add = var:bfl_cr_23_basis } }
+                change_variable = { name = bfl_cr_23_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_23_face value = var:bfl_cr_23_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_24_state = 1 }
@@ -478,6 +810,20 @@ if = { limit = { var:bfl_cr_24_state = 1 }
                 set_variable = { name = bfl_cr_24_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_24_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_24_basis }
+            } else_if = { limit = { var:bfl_cr_24_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_24_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_24_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_24_basis }
+            } else_if = { limit = { var:bfl_cr_24_face > 0 var:bfl_cr_24_face > var:bfl_cr_24_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_24_basis
+                    multiply = var:bfl_cr_24_loan.loan_amount divide = var:bfl_cr_24_face
+                    multiply = -1 add = var:bfl_cr_24_basis } }
+                change_variable = { name = bfl_cr_24_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_24_face value = var:bfl_cr_24_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_25_state = 1 }
@@ -498,6 +844,20 @@ if = { limit = { var:bfl_cr_25_state = 1 }
                 set_variable = { name = bfl_cr_25_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_25_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_25_basis }
+            } else_if = { limit = { var:bfl_cr_25_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_25_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_25_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_25_basis }
+            } else_if = { limit = { var:bfl_cr_25_face > 0 var:bfl_cr_25_face > var:bfl_cr_25_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_25_basis
+                    multiply = var:bfl_cr_25_loan.loan_amount divide = var:bfl_cr_25_face
+                    multiply = -1 add = var:bfl_cr_25_basis } }
+                change_variable = { name = bfl_cr_25_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_25_face value = var:bfl_cr_25_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_26_state = 1 }
@@ -518,6 +878,20 @@ if = { limit = { var:bfl_cr_26_state = 1 }
                 set_variable = { name = bfl_cr_26_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_26_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_26_basis }
+            } else_if = { limit = { var:bfl_cr_26_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_26_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_26_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_26_basis }
+            } else_if = { limit = { var:bfl_cr_26_face > 0 var:bfl_cr_26_face > var:bfl_cr_26_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_26_basis
+                    multiply = var:bfl_cr_26_loan.loan_amount divide = var:bfl_cr_26_face
+                    multiply = -1 add = var:bfl_cr_26_basis } }
+                change_variable = { name = bfl_cr_26_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_26_face value = var:bfl_cr_26_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_27_state = 1 }
@@ -538,6 +912,20 @@ if = { limit = { var:bfl_cr_27_state = 1 }
                 set_variable = { name = bfl_cr_27_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_27_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_27_basis }
+            } else_if = { limit = { var:bfl_cr_27_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_27_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_27_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_27_basis }
+            } else_if = { limit = { var:bfl_cr_27_face > 0 var:bfl_cr_27_face > var:bfl_cr_27_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_27_basis
+                    multiply = var:bfl_cr_27_loan.loan_amount divide = var:bfl_cr_27_face
+                    multiply = -1 add = var:bfl_cr_27_basis } }
+                change_variable = { name = bfl_cr_27_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_27_face value = var:bfl_cr_27_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_28_state = 1 }
@@ -558,6 +946,20 @@ if = { limit = { var:bfl_cr_28_state = 1 }
                 set_variable = { name = bfl_cr_28_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_28_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_28_basis }
+            } else_if = { limit = { var:bfl_cr_28_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_28_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_28_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_28_basis }
+            } else_if = { limit = { var:bfl_cr_28_face > 0 var:bfl_cr_28_face > var:bfl_cr_28_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_28_basis
+                    multiply = var:bfl_cr_28_loan.loan_amount divide = var:bfl_cr_28_face
+                    multiply = -1 add = var:bfl_cr_28_basis } }
+                change_variable = { name = bfl_cr_28_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_28_face value = var:bfl_cr_28_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_29_state = 1 }
@@ -578,6 +980,20 @@ if = { limit = { var:bfl_cr_29_state = 1 }
                 set_variable = { name = bfl_cr_29_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_29_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_29_basis }
+            } else_if = { limit = { var:bfl_cr_29_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_29_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_29_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_29_basis }
+            } else_if = { limit = { var:bfl_cr_29_face > 0 var:bfl_cr_29_face > var:bfl_cr_29_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_29_basis
+                    multiply = var:bfl_cr_29_loan.loan_amount divide = var:bfl_cr_29_face
+                    multiply = -1 add = var:bfl_cr_29_basis } }
+                change_variable = { name = bfl_cr_29_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_29_face value = var:bfl_cr_29_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_30_state = 1 }
@@ -598,6 +1014,20 @@ if = { limit = { var:bfl_cr_30_state = 1 }
                 set_variable = { name = bfl_cr_30_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_30_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_30_basis }
+            } else_if = { limit = { var:bfl_cr_30_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_30_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_30_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_30_basis }
+            } else_if = { limit = { var:bfl_cr_30_face > 0 var:bfl_cr_30_face > var:bfl_cr_30_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_30_basis
+                    multiply = var:bfl_cr_30_loan.loan_amount divide = var:bfl_cr_30_face
+                    multiply = -1 add = var:bfl_cr_30_basis } }
+                change_variable = { name = bfl_cr_30_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_30_face value = var:bfl_cr_30_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_31_state = 1 }
@@ -618,6 +1048,20 @@ if = { limit = { var:bfl_cr_31_state = 1 }
                 set_variable = { name = bfl_cr_31_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_31_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_31_basis }
+            } else_if = { limit = { var:bfl_cr_31_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_31_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_31_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_31_basis }
+            } else_if = { limit = { var:bfl_cr_31_face > 0 var:bfl_cr_31_face > var:bfl_cr_31_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_31_basis
+                    multiply = var:bfl_cr_31_loan.loan_amount divide = var:bfl_cr_31_face
+                    multiply = -1 add = var:bfl_cr_31_basis } }
+                change_variable = { name = bfl_cr_31_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_31_face value = var:bfl_cr_31_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 if = { limit = { var:bfl_cr_32_state = 1 }
@@ -638,6 +1082,20 @@ if = { limit = { var:bfl_cr_32_state = 1 }
                 set_variable = { name = bfl_cr_32_state value = 4 }
                 change_variable = { name = bfl_credit_impairments add = var:bfl_cr_32_basis }
                 change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_32_basis }
+            } else_if = { limit = { var:bfl_cr_32_loan = { NOT = { owner = scope:bfl_credit_review_bank } } }
+                set_variable = { name = bfl_cr_32_state value = 4 }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_cr_32_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_cr_32_basis }
+            } else_if = { limit = { var:bfl_cr_32_face > 0 var:bfl_cr_32_face > var:bfl_cr_32_loan.loan_amount }
+                # Compare the current face with the recorded face, not cost.
+                # Native takeover prices legitimately include a paid premium.
+                set_variable = { name = bfl_credit_external_haircut value = { value = var:bfl_cr_32_basis
+                    multiply = var:bfl_cr_32_loan.loan_amount divide = var:bfl_cr_32_face
+                    multiply = -1 add = var:bfl_cr_32_basis } }
+                change_variable = { name = bfl_cr_32_basis subtract = var:bfl_credit_external_haircut }
+                set_variable = { name = bfl_cr_32_face value = var:bfl_cr_32_loan.loan_amount }
+                change_variable = { name = bfl_credit_impairments add = var:bfl_credit_external_haircut }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }
             }
         }
 }
@@ -711,192 +1169,224 @@ bfl_book_native_haircut = {
 if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_01_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_01_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_01_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_02_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_02_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_02_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_03_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_03_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_03_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_04_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_04_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_04_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_05_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_05_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_05_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_06_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_06_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_06_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_07_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_07_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_07_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_08_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_08_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_08_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_09_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_09_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_09_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_10_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_10_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_10_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_11_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_11_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_11_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_12_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_12_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_12_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_13_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_13_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_13_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_14_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_14_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_14_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_15_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_15_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_15_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_16_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_16_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_16_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_17_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_17_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_17_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_18_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_18_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_18_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_19_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_19_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_19_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_20_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_20_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_20_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_21_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_21_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_21_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_22_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_22_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_22_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_23_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_23_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_23_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_24_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_24_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_24_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_25_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_25_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_25_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_26_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_26_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_26_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_27_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_27_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_27_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_28_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_28_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_28_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_29_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_29_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_29_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_30_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_30_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_30_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_31_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_31_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_31_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }
 if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:bfl_restructure_claim }
             set_variable = { name = bfl_credit_haircut value = { value = var:bfl_cr_32_basis multiply = 0.20 } }
             change_variable = { name = bfl_cr_32_basis subtract = var:bfl_credit_haircut }
+            set_variable = { name = bfl_cr_32_face value = { value = scope:bfl_restructure_claim.loan_amount multiply = 0.80 } }
             change_variable = { name = bfl_credit_impairments add = var:bfl_credit_haircut }
             change_variable = { name = bfl_loss_carryforward add = var:bfl_credit_haircut }
         }

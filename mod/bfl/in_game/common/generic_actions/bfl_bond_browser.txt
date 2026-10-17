@@ -1,0 +1,16 @@
+﻿bfl_browse_bond_issuers = {
+        type = owncountry ai_tick = never show_message = no
+        potential = { } allow = { }
+        select_trigger = { looking_for_a = country target_flag = bond_issuer name = choose_country
+            allow_self = yes
+            interaction_source_list = { scope:actor = { every_country = {
+                limit = { country_exists = this has_variable = bfl_bond_schema bfl_bond_count > 0 }
+                add_to_list = source } } }
+            column = { data = name }
+            visible = { has_variable = bfl_bond_schema bfl_bond_count > 0 }
+            enabled = { country_exists = this bfl_bond_count > 0 } }
+        effect = { scope:actor = {
+            set_variable = { name = bfl_bond_selected_issuer value = scope:bond_issuer }
+            } }
+        ai_will_do = { value = 0 }
+    }

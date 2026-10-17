@@ -1694,13 +1694,4 @@
         bfl_credit_investment_body = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
         visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }
         }
-        type bfl_sovereign_bond_controls = vbox {
-        size = { -1 65 } layoutpolicy_horizontal = expanding spacing = 8
-        text_single = { text = "bfl_custom_bond_totals" autoresize = yes fontsize = 13 }
-        hbox = { layoutpolicy_horizontal = expanding spacing = 3 icon = { texture = "[GetConceptTexture('government_bond')]" size = { 18 18 } } button_regular = { name = "bfl_open_bond_desk_button" size = { -1 40 } layoutpolicy_horizontal = expanding
-        tooltip = "bfl_open_bond_desk_tip" text = "bfl_open_bond_desk"
-        enabled = "[GetScriptedGui('bfl_open_bond_desk').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        onclick = "[GetScriptedGui('bfl_open_bond_desk').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } }
-    }
     }

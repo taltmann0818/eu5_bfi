@@ -321,11 +321,6 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         hbox = {{ spacing = 4 tooltip = "bfl_state_bonds_tip" {icon('bond',18)}
             text_single = {{ text = "bfl_state_bonds_value" autoresize = yes fontsize = 12 }} }}
     }}'''
-    bond_control = f'''type bfl_sovereign_bond_controls = vbox {{
-        size = {{ -1 65 }} layoutpolicy_horizontal = expanding spacing = 8
-        text_single = {{ text = "bfl_custom_bond_totals" autoresize = yes fontsize = 13 }}
-        {action('bfl_open_bond_desk', 'bond', height=40)}
-    }}'''
     from generate_company_operations import company_panel
     company_controls = company_panel(loc)
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
@@ -339,7 +334,6 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         }}
         {controls('funding',funding)}
         {controls('investment',investments)}
-        {bond_control}
     }}''')
 
 
@@ -359,7 +353,8 @@ def build_credit(game, baseline, pin=False):
     header_end = balanced_block(view, view.index('{', header_start))
     original = view[header_start:header_end]
     charter_view = "GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)"
-    replacement = original.replace('size = { -1 50 }', f'size = {{ -1 50 }}\n visible = "[Not({charter_view})]"', 1)
+    bonds_tab = "CreditLateralView.Vars.HasValue('subtab','bfl_bonds')"
+    replacement = original.replace('size = { -1 50 }', f'size = {{ -1 50 }}\n visible = "[And(Not({charter_view}), Not({bonds_tab}))]"', 1)
     changes.append((original, replacement))
     view = view[:header_start] + replacement + view[header_end:]
     # Replace only the illustrated overview for managed banks. State debt totals,
@@ -367,24 +362,18 @@ def build_credit(game, baseline, pin=False):
     anchor='\t\t\twidget = {\n\t\t\t\tlayoutpolicy_horizontal = expanding\n\t\t\t\tlayoutpolicy_vertical = fixed\n\t\t\t\tsize = { -1 220 }'
     pos=view.index(anchor);end=balanced_block(view,view.index('{',pos))
     original=view[pos:end]
-    replacement=original.replace('size = { -1 220 }',f'size = {{ -1 220 }}\n visible = "[Not({MANAGED})]"',1)
-    replacement+=f'\n bfl_credit_overview = {{ visible = "[{MANAGED}]" }}\n'
+    replacement=original.replace('size = { -1 220 }',f'size = {{ -1 220 }}\n visible = "[And(Not({MANAGED}), Not({bonds_tab}))]"',1)
+    replacement+=f'\n bfl_credit_overview = {{ visible = "[And({MANAGED}, Not({bonds_tab}))]" }}\n'
     changes.append((original,replacement));view=view[:pos]+replacement+view[end:]
     for marker,kind in [('# loans taken','funding'),('# loans given','investment')]:
         start=view.index(marker)
         at=view.index('blockoverride "image"',start)
         end=balanced_block(view,view.index('{',at))
         insertion=f'\n bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}\n'
-        if kind == 'funding':
-            insertion += '\n bfl_sovereign_bond_controls = { name = "bfl_sovereign_bond_controls" }\n'
-        else:
+        if kind == 'investment':
             insertion += '\n bfl_company_controls = { name = "bfl_company_controls" }\n'
         view=view[:end]+insertion+view[end:]
         changes.append(('',insertion))
-    desk = '\n bfl_bond_desk = { }\n'
-    end = view.rfind('}')
-    view = view[:end] + desk + view[end:]
-    changes.append(('',desk))
     search_at=0
     while True:
         action_at=view.find('action_name = "take_over_loan"',search_at)
@@ -401,11 +390,22 @@ def build_credit(game, baseline, pin=False):
         view=view[:button_at]+replacement+view[button_end:]
         changes.append((original,replacement))
         search_at=button_at+len(replacement)
-    # Rename the existing two tabs: each now contains state and institution controls.
+    # Sovereign Bonds is a third native Credit subtab, inside the same panel.
     at=view.index('header_secondary_tabs = {')
     header_end=balanced_block(view,view.index('{',at))
     original=view[at:header_end]
     replacement=original.replace('LOANS_TAKEN_TITLE','bfl_funding_tab').replace('LOANS_GIVEN_TITLE','bfl_investment_tab')
+    content = replacement.index('blockoverride "content" {') + len('blockoverride "content" {')
+    tab = '''
+        button_secondary_tab_alt = { layoutpolicy_horizontal = expanding tooltip_enabled = no
+            blockoverride "tab_text" { text = "bfl_bond_panel_title" fontsize = 16 }
+            onclick = "[GetScriptedGui('bfl_prepare_bond_panel').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[CreditLateralView.Vars.Set('subtab','bfl_bonds')]"
+            down = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]"
+        }
+    '''
+    replacement = replacement[:content] + tab.rstrip() + '\n' + replacement[content:]
+    replacement += f'\n bfl_sovereign_bonds = {{ visible = "[{bonds_tab}]" }}\n'
     changes.append((original,replacement));view=view[:at]+replacement+view[header_end:]
     write(MOD/rel,templates+view)
     restored=view

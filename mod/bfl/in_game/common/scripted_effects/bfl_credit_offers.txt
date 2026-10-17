@@ -8,6 +8,10 @@ bfl_offer_native_credit = {
         save_scope_as = bfl_credit_bank
         set_variable = { name = bfl_credit_rate value = bfl_credit_quote_rate }
         scope:bfl_party = {
+            if = { limit = { NOT = { has_variable = bfl_credit_offer_generation } }
+                set_variable = { name = bfl_credit_offer_generation value = 0 } }
+            change_variable = { name = bfl_credit_offer_generation add = 1 }
+            save_scope_value_as = { name = bfl_credit_quote_generation value = var:bfl_credit_offer_generation }
             set_variable = { name = bfl_credit_offer_bank value = scope:bfl_credit_bank }
             set_variable = { name = bfl_credit_offer_actor value = scope:bfl_credit_actor }
             set_variable = { name = bfl_credit_offer_rate value = scope:bfl_credit_bank.var:bfl_credit_rate }
@@ -19,6 +23,7 @@ bfl_offer_native_credit = {
 # Root borrower; accepted offer is consumed before native dispatch.
 bfl_accept_native_credit = {
     if = { limit = { country_exists = this exists = var:bfl_credit_offer_bank country_exists = var:bfl_credit_offer_bank
+        exists = scope:bfl_credit_quote_generation var:bfl_credit_offer_generation = scope:bfl_credit_quote_generation
         bfl_period <= var:bfl_credit_offer_expiry NOT = { has_variable = bfl_credit_guard }
         var:bfl_credit_offer_rate >= 0.03 var:bfl_credit_offer_rate <= 0.20
     }
@@ -36,4 +41,5 @@ bfl_accept_native_credit = {
         }
     }
 }
-bfl_reject_native_credit = { remove_variable = bfl_credit_offer_bank }
+bfl_reject_native_credit = { if = { limit = { exists = scope:bfl_credit_quote_generation
+    var:bfl_credit_offer_generation ?= scope:bfl_credit_quote_generation } remove_variable = bfl_credit_offer_bank } }

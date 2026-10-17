@@ -1,0 +1,6 @@
+﻿bfl_bond_facility_display = {
+        value = 0
+        if = { limit = { bfl_is_independent_bank = yes } value = var:bfl_facility_mode }
+        else_if = { limit = { bfl_has_management = yes country_type = location }
+            value = var:bfl_bank.var:bfl_facility_mode }
+    }

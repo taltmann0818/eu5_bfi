@@ -112,3 +112,22 @@ The disposable normal-charter fixture initializes controlled wallets and a nativ
 - [Credit at 50% GUI scale](15-m0-credit-1280-scale50.png): the same paused bank/claim, with the complete Credit overview and native bond controls at the minimum GUI scale.
 
 [The visual record](../../tests/results/2026-10-16-m0-visual-completion.json) hashes both captures and their scoped sources. All scoped GUI/command/localization files are unchanged in the final runtime `68f8d2a7a0a8a75747ed7329c35d282c685a24c60e11d70a9bccdff6e024072d`. Its only later correction safely handles absent CMM preference maps, validated by the final engine suites. Historical captures above keep their original provenance. M0 is complete; release-wide layouts/languages/mod compatibility remain M10 work. The dedicated secondary equity/bond listings GUI and its screenshots remain in the user-confirmed M5 scope.
+
+
+## M3 Sovereign Bonds in Credit
+
+Captured on 17 October 2026 with EUV 1.4.1 / build 25905365 and CMF 2.5.0.
+These are unedited full game-window PNGs at a 1280x720 client resolution and
+60% GUI scale, paused on 17 May 1337. The [15-observation UI record](../../tests/results/2026-10-17-m3-ui.json)
+hashes the captures and loaded sources, including the final native hot reload of
+the issuer browser. All other runtime sources are unchanged from the cold launch.
+
+- [Financing inside Credit](18-m3-sovereign-bonds-financing.png): summary, future coupon presets, a funded 100-gold manual issue and recurring-funding mandate. Repeat drawing is correctly shaded.
+- [Holdings and secondary market](19-m3-sovereign-bonds-market.png): live 98-gold quote, Bardi current holder, fixed 3% rate, zero arrears and specific listing/redemption controls. The completed early exchange qualifies in the Age of Traditions without Stock Exchange research.
+
+The disposable setup grants the charter, wallets, initial funded claim and early
+exchange. The tester then uses the real selector, listing, cancellation, redemption,
+new issue, coupon and mandate controls. The market capture shows the original claim;
+the Financing capture follows its redemption and a newly funded replacement in the
+same paused month. This does not certify normal charter conversion, long ledgers,
+other player roles, languages or the M10 resolution/scale matrix.
