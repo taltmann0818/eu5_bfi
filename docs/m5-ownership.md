@@ -3,6 +3,16 @@
 Final revised-runtime acceptance is in progress. The paused-trading issuance bug is reproduced in [the historical red regression](../tests/results/2026-10-18-m5-paused-cycle-reproduction.json): three atomic cycles grew issued units from 1,200 to 1,215. The revised market suite requires 1,200 throughout ordinary trading. The canonical status remains
 in [coverage.md](coverage.md); earlier passing candidates do not certify later changes.
 
+The corrected [22-check market report](../tests/results/2026-10-18-m5-market.json)
+and [114-check accounts/bond regression](../tests/results/2026-10-18-m5-accounts-regression.json)
+pass on runtime `216acf0abd52b0012ee222e0dc3c00a2b95dcde63168661897cfe99553268cd8`.
+The market report includes secondary-only paused cycles, exact diplomat cost,
+same-issuer opposite-side rejection, per-issuer independence, a native cooldown
+still active after 28 days and expired after 32, sovereign charter-stake proceeds,
+explicit funded new issuance, paid AI exchange construction, natural completion
+and second-process reload. Ownership/treasury regression and final UI acceptance
+remain pending; these focused passes do not close the entire M5 gate.
+
 ## Delivered behavior
 
 Credit has two subtabs. Funding & Debt includes sovereign bonds, bank funding,

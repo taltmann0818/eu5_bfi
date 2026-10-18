@@ -159,8 +159,8 @@ def charts(var, value):
         value = "[FixedPointToFloat({var('founder_units')})]" color = {{ 0.65 0.55 0.35 1 }}
         visible = "[GreaterThan_CFixedPoint({var('founder_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
     shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
-        value = "[FixedPointToFloat({value('bfl_dealer_units')})]" color = {{ 0.48 0.53 0.58 1 }}
-        visible = "[GreaterThan_CFixedPoint({value('bfl_dealer_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
+        value = "[FixedPointToFloat({value('dealer_units')})]" color = {{ 0.48 0.53 0.58 1 }}
+        visible = "[GreaterThan_CFixedPoint({value('dealer_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
     for index in range(1, 17):
         shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat({var(f'shr_{index:02}_units')})]"

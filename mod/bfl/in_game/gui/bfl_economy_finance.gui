@@ -144,8 +144,8 @@
         visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
         value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_founder_units').GetValue)]" color = { 0.65 0.55 0.35 1 }
         visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_founder_units').GetValue, '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
-        value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bfl_dealer_units'))]" color = { 0.48 0.53 0.58 1 }
-        visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bfl_dealer_units'), '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'))]" color = { 0.48 0.53 0.58 1 }
+        visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'), '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_01_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetMapColor]"
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
