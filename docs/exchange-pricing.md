@@ -59,11 +59,7 @@ A useful game extension would retain NAV as a fundamental anchor and model a
 stochastic premium separately. With `x = log(market price / NAV)`, one possible
 monthly update is:
 
-$
-x_{t+\Delta t}=(1-\kappa\Delta t)x_t+\beta I_t
- +(\mu-\sigma^2/2)\Delta t+\sigma\sqrt{\Delta t}Z_t,
-\qquad P_{t+\Delta t}=NAV_{t+\Delta t}\exp(x_{t+\Delta t})
-$
+$x_{t+\Delta t}=(1-\kappa\Delta t)x_t+\beta I_t +(\mu-\sigma^2/2)\Delta t+\sigma\sqrt{\Delta t}Z_t, \qquad P_{t+\Delta t}=NAV_{t+\Delta t}\exp(x_{t+\Delta t})$
 
 This is a proposed mean-reverting GBM-style extension, not pure GBM and not current
 gameplay. `kappa` pulls extreme premiums toward fundamentals. `I` would measure
