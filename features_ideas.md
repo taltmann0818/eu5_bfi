@@ -1,6 +1,7 @@
 # Feature Ideas
 ## Core Functions
-- banks that are better capitalised should drive AI to be more likely to invest in that bank either by depositing their money there, getting loans from there, or buying its available equity 
+- banks that are better capitalised should drive AI to be more likely to invest in that bank either by depositing their money there, getting loans from there, or buying its available equity
+- the ai should be able to see a bank’s performance represented as its creditworthiness score for wanting to invest with the bank
 ## Future Content
 - Laws affecting the bank: usury, ...
 - Catholic Church (international org) laws on usury
