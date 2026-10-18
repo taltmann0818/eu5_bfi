@@ -1,0 +1,38 @@
+﻿bfl_initialize_portfolio_history = {
+if = { limit = { NOT = { has_variable = bfl_portfolio_history_count } }
+        set_variable = { name = bfl_portfolio_history_count value = 0 }
+        set_variable = { name = bfl_portfolio_history_period value = 0 }
+    set_variable = { name = bfl_portfolio_history_01 value = 0 }
+set_variable = { name = bfl_portfolio_history_02 value = 0 }
+set_variable = { name = bfl_portfolio_history_03 value = 0 }
+set_variable = { name = bfl_portfolio_history_04 value = 0 }
+set_variable = { name = bfl_portfolio_history_05 value = 0 }
+set_variable = { name = bfl_portfolio_history_06 value = 0 }
+set_variable = { name = bfl_portfolio_history_07 value = 0 }
+set_variable = { name = bfl_portfolio_history_08 value = 0 }
+set_variable = { name = bfl_portfolio_history_09 value = 0 }
+set_variable = { name = bfl_portfolio_history_10 value = 0 }
+set_variable = { name = bfl_portfolio_history_11 value = 0 }
+set_variable = { name = bfl_portfolio_history_12 value = 0 }
+}
+}
+bfl_record_portfolio_history = {
+bfl_initialize_portfolio_history = yes
+        if = { limit = { bfl_has_management = yes bfl_period > var:bfl_portfolio_history_period }
+            set_variable = { name = bfl_portfolio_history_period value = bfl_period }
+    set_variable = { name = bfl_portfolio_history_01 value = var:bfl_portfolio_history_02 }
+set_variable = { name = bfl_portfolio_history_02 value = var:bfl_portfolio_history_03 }
+set_variable = { name = bfl_portfolio_history_03 value = var:bfl_portfolio_history_04 }
+set_variable = { name = bfl_portfolio_history_04 value = var:bfl_portfolio_history_05 }
+set_variable = { name = bfl_portfolio_history_05 value = var:bfl_portfolio_history_06 }
+set_variable = { name = bfl_portfolio_history_06 value = var:bfl_portfolio_history_07 }
+set_variable = { name = bfl_portfolio_history_07 value = var:bfl_portfolio_history_08 }
+set_variable = { name = bfl_portfolio_history_08 value = var:bfl_portfolio_history_09 }
+set_variable = { name = bfl_portfolio_history_09 value = var:bfl_portfolio_history_10 }
+set_variable = { name = bfl_portfolio_history_10 value = var:bfl_portfolio_history_11 }
+set_variable = { name = bfl_portfolio_history_11 value = var:bfl_portfolio_history_12 }
+set_variable = { name = bfl_portfolio_history_12 value = bfl_portfolio_market }
+        change_variable = { name = bfl_portfolio_history_count add = 1 }
+        if = { limit = { var:bfl_portfolio_history_count > 12 } set_variable = { name = bfl_portfolio_history_count value = 12 } }
+    }
+}

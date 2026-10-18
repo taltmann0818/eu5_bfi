@@ -1,0 +1,11 @@
+﻿bfl_market_buy_visible = {
+trigger_if = { limit = { has_variable = bfl_ownership_schema } bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
+            NOT = { this = scope:actor }
+            OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } }
+            OR = { bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } } }
+            trigger_else = { always = no }
+}
+bfl_market_sell_visible = {
+trigger_if = { limit = { has_variable = bfl_ownership_schema } bfl_equity_issuer = yes bfl_market_sell_units > 0 }
+            trigger_else = { always = no }
+}

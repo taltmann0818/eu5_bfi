@@ -15,6 +15,9 @@
         }
         bfl_autonomous_takeover = yes
         bfl_record_history = yes
+        bfl_record_exchange_history = yes
+        if = { limit = { bfl_is_independent_bank = yes } bfl_record_portfolio_history = yes }
+        else_if = { limit = { bfl_has_valid_controller = yes } overlord = { bfl_record_portfolio_history = yes } }
         set_variable = { name = bfl_last_period value = bfl_period }
     }
 }

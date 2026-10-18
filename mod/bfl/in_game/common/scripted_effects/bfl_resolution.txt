@@ -7,15 +7,26 @@
 }
 # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
 bfl_recapitalize = {
-    if = { limit = { bfl_has_valid_controller = yes overlord = { gold >= 100 } }
+    if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 } }
         save_scope_as = bfl_bank
+        overlord = { save_scope_as = bfl_party }
+        set_variable = { name = bfl_equity_pool value = 0 }
+        if = { limit = { OR = { var:bfl_state_owner ?= scope:bfl_party bfl_has_shareholder_capacity = yes } }
+        set_variable = { name = bfl_new_units value = 100 }
+        if = { limit = { bfl_tangible_equity > 0 var:bfl_total_units > 0 }
+            set_variable = { name = bfl_new_units value = { value = 100 multiply = var:bfl_total_units divide = bfl_tangible_equity multiply = 1000 floor = yes divide = 1000 } } }
         overlord = { add_gold = -100 }
         add_gold = 100
         # Rescue contribution is booked as paid-in capital; no realized earnings.
         change_variable = { name = bfl_paid_in_capital add = 100 }
-        change_variable = { name = bfl_state_units add = 100 }
-        change_variable = { name = bfl_total_units add = 100 }
+        if = { limit = { var:bfl_state_owner ?= scope:bfl_party }
+            change_variable = { name = bfl_state_units add = var:bfl_new_units }
+            change_variable = { name = bfl_state_basis add = 100 } }
+        else = { set_variable = { name = bfl_equity_amount value = 100 } bfl_allocate_equity_holder = yes }
+        change_variable = { name = bfl_total_units add = var:bfl_new_units }
+        change_variable = { name = bfl_equity_revision add = 1 }
         bfl_evaluate_distress = yes
+        }
     }
 }
 bfl_suspend_new_business = { set_variable = { name = bfl_accept_deposits value = 0 } set_variable = { name = bfl_state value = 2 } }

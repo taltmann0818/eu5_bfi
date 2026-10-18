@@ -27,6 +27,12 @@ def generate(common, effect, loc, write):
             set_variable = bfl_company_ownership_initialized
         }
         set_variable = { name = bfl_company_schema value = 2 }
+        if = { limit = { NOT = { has_variable = bfl_ownership_schema } }
+            set_variable = { name = bfl_total_units value = { value = bfl_tangible_equity min = 1 } }
+            set_variable = { name = bfl_state_units value = 0 }
+            set_variable = { name = bfl_accept_equity value = 0 }
+            bfl_initialize_ownership = yes
+        }
     }'''
     triggers = effect('bfl_company_authority', '''bfl_is_company = yes
         exists = scope:bfl_company_actor country_exists = scope:bfl_company_actor
@@ -201,18 +207,11 @@ def generate(common, effect, loc, write):
             value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
         change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
         change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
-        if = { limit = { var:bfl_company_mandate > 0
-            exists = var:bfl_company_owner country_exists = var:bfl_company_owner }
+        if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
             set_variable = { name = bfl_company_dividend value = {
                 value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
                 max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
-            add_gold = { value = var:bfl_company_dividend multiply = -1 }
-            var:bfl_company_owner = {
-                add_gold = scope:bfl_operating_company.var:bfl_company_dividend
-                if = { limit = { bfl_is_bank = yes }
-                    change_variable = { name = bfl_profit_company add = scope:bfl_operating_company.var:bfl_company_dividend }
-                }
-            }
+            bfl_distribute_company_equity_income = yes
         }
         }
     ''')
@@ -223,6 +222,7 @@ def generate(common, effect, loc, write):
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
             set_variable = { name = bfl_company_last_period value = bfl_period }
             bfl_observe_company_operations = yes bfl_settle_company_income = yes
+            bfl_record_exchange_history = yes
             change_variable = { name = bfl_company_statement_count add = 1 }
             if = { limit = { var:bfl_company_project_state = 1
                 num_explorations_including_in_construction = 0 }
@@ -339,7 +339,7 @@ def company_panel(loc):
     loc('bfl_company_panel_tip', 'Company treasuries and political control remain separate from bank accounts. Native HQ owner income, HQ direct-overlord income and native subject payments remain with their native recipients. Only executed retained trade net of native costs can fund an additional owner distribution. Capital and discovery are excluded.')
     loc('bfl_company_statement', 'Cash: [Country.GetFixedPointCurrencyValue(\'gold\')|2]@gold!   Reserved buffer: [Country.MakeScope.GetVariable(\'bfl_company_buffer\').GetValue|2]@gold!\nNative trade: [Country.MakeScope.GetVariable(\'bfl_company_trade_receipts\').GetValue|2]   Net budget: [Country.MakeScope.GetVariable(\'bfl_company_native_net\').GetValue|2]\nEligible earnings: [Country.MakeScope.GetVariable(\'bfl_company_verified_profit\').GetValue|2]   Paid to owner: [Country.MakeScope.GetVariable(\'bfl_company_dividend\').GetValue|2]@gold!\nFacilities: [Country.MakeScope.GetVariable(\'bfl_company_facility_count\').GetValue|0]   Routes: [Country.MakeScope.GetVariable(\'bfl_company_route_count\').GetValue|0]   Executed volume: [Country.MakeScope.GetVariable(\'bfl_company_volume\').GetValue|2]\nTrade budget: 50   Reinvestment reserve: 100   Venture budget: 100   Owner payout: 25%')
     loc('bfl_company_native_channels', 'Native HQ income and subject payments remain in the native budget. Company equity markets, bank corporate credit and commenda use their separate research and delivery gates.')
-    buttons = ''.join(internal_action('bfl_company_' + name) for name in ['select', 'retain', 'trade', 'explore', 'fund', 'crew', 'route', 'expedition'])
+    buttons = ''.join(internal_action('bfl_company_' + name) for name in ['select', 'retain', 'trade', 'explore', 'fund', 'crew', 'route', 'expedition']) + internal_action('bfl_company_list_equity')
     return f'''type bfl_company_controls = scrollarea {{
         visible = "[GetScriptedGui('bfl_company_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         size = {{ -1 180 }} layoutpolicy_horizontal = expanding scrollbarpolicy_horizontal = always_off

@@ -1,0 +1,201 @@
+﻿bfl_treasury_portfolio_units = {
+value = 0 if = { limit = { country_type = location bfl_has_management = yes
+        exists = var:bfl_bank var:bfl_bank = { has_variable = bfl_ownership_schema
+            var:bfl_state_owner ?= prev var:bfl_state_units > 0 } } value = var:bfl_bank.var:bfl_state_units }
+}
+bfl_treasury_portfolio_market = {
+value = 0 if = { limit = { country_type = location bfl_has_management = yes
+        exists = var:bfl_bank var:bfl_bank = { has_variable = bfl_ownership_schema
+            var:bfl_state_owner ?= prev var:bfl_state_units > 0 } } value = var:bfl_bank.bfl_equity_quote multiply = var:bfl_bank.var:bfl_state_units }
+}
+bfl_portfolio_market = {
+value = bfl_exchange_market add = bfl_treasury_portfolio_market
+}
+bfl_treasury_portfolio_basis = {
+value = 0 if = { limit = { country_type = location bfl_has_management = yes
+        exists = var:bfl_bank var:bfl_bank = { has_variable = bfl_ownership_schema
+            var:bfl_state_owner ?= prev var:bfl_state_units > 0 } } value = var:bfl_bank.var:bfl_state_basis }
+}
+bfl_portfolio_basis = {
+value = bfl_exchange_basis add = bfl_treasury_portfolio_basis
+}
+bfl_portfolio_return = {
+value = 0 if = { limit = { bfl_portfolio_basis > 0 }
+        value = bfl_portfolio_market divide = bfl_portfolio_basis subtract = 1 }
+}
+bfl_treasury_portfolio_return = {
+value = 0 if = { limit = { bfl_treasury_portfolio_basis > 0 }
+        value = bfl_treasury_portfolio_market divide = bfl_treasury_portfolio_basis subtract = 1 }
+}
+bfl_treasury_portfolio_weight = {
+value = 0 if = { limit = { bfl_portfolio_market > 0 }
+        value = bfl_treasury_portfolio_market divide = bfl_portfolio_market }
+}
+bfl_portfolio_realized = {
+value = bfl_exchange_realized
+        if = { limit = { has_variable = bfl_treasury_equity_realized } add = var:bfl_treasury_equity_realized }
+}
+bfl_issuer_cash = {
+value = gold
+}
+bfl_issuer_liabilities = {
+value = 0 if = { limit = { bfl_has_accounts = yes } value = bfl_liabilities }
+        else_if = { limit = { bfl_is_company = yes } every_loan = { add = remaining_debt } }
+}
+bfl_issuer_credit = {
+value = 0 if = { limit = { bfl_has_accounts = yes }
+        value = var:bfl_native_credit_value add = var:bfl_custom_credit_value }
+}
+bfl_issuer_productive_assets = {
+value = 0 if = { limit = { bfl_has_accounts = yes }
+        value = var:bfl_inventory_value add = var:bfl_project_value }
+}
+bfl_issuer_last_income = {
+value = 0 if = { limit = { bfl_has_accounts = yes } value = var:bfl_monthly_net_income }
+        else_if = { limit = { bfl_is_company = yes } value = var:bfl_company_verified_profit }
+}
+bfl_issuer_last_costs = {
+value = 0 if = { limit = { bfl_has_accounts = yes } value = var:bfl_expense_due }
+}
+bfl_issuer_reference_price = {
+value = 0
+        if = { limit = { var:bfl_quote_01_period < bfl_period } value = var:bfl_quote_01_price }
+        else = { value = var:bfl_quote_02_price }
+}
+bfl_issuer_price_change = {
+value = 0 if = { limit = { bfl_issuer_reference_price > 0 }
+        value = bfl_equity_quote divide = bfl_issuer_reference_price subtract = 1 }
+}
+bfl_portfolio_chart_max = {
+value = 1
+if = { limit = { has_variable = bfl_portfolio_history_01 } min = var:bfl_portfolio_history_01 }
+if = { limit = { has_variable = bfl_portfolio_history_02 } min = var:bfl_portfolio_history_02 }
+if = { limit = { has_variable = bfl_portfolio_history_03 } min = var:bfl_portfolio_history_03 }
+if = { limit = { has_variable = bfl_portfolio_history_04 } min = var:bfl_portfolio_history_04 }
+if = { limit = { has_variable = bfl_portfolio_history_05 } min = var:bfl_portfolio_history_05 }
+if = { limit = { has_variable = bfl_portfolio_history_06 } min = var:bfl_portfolio_history_06 }
+if = { limit = { has_variable = bfl_portfolio_history_07 } min = var:bfl_portfolio_history_07 }
+if = { limit = { has_variable = bfl_portfolio_history_08 } min = var:bfl_portfolio_history_08 }
+if = { limit = { has_variable = bfl_portfolio_history_09 } min = var:bfl_portfolio_history_09 }
+if = { limit = { has_variable = bfl_portfolio_history_10 } min = var:bfl_portfolio_history_10 }
+if = { limit = { has_variable = bfl_portfolio_history_11 } min = var:bfl_portfolio_history_11 }
+if = { limit = { has_variable = bfl_portfolio_history_12 } min = var:bfl_portfolio_history_12 }
+add = 1
+}
+bfl_portfolio_history_count = {
+value = 0 if = { limit = { has_variable = bfl_portfolio_history_count } value = var:bfl_portfolio_history_count }
+}
+bfl_portfolio_chart_y_01 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_01 }
+            value = var:bfl_portfolio_history_01 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_01 = {
+value = bfl_portfolio_chart_y_01 max = bfl_portfolio_chart_y_02
+}
+bfl_portfolio_chart_height_01 = {
+value = bfl_portfolio_chart_y_01 min = bfl_portfolio_chart_y_02 subtract = bfl_portfolio_chart_top_01 min = 2
+}
+bfl_portfolio_chart_y_02 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_02 }
+            value = var:bfl_portfolio_history_02 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_02 = {
+value = bfl_portfolio_chart_y_02 max = bfl_portfolio_chart_y_03
+}
+bfl_portfolio_chart_height_02 = {
+value = bfl_portfolio_chart_y_02 min = bfl_portfolio_chart_y_03 subtract = bfl_portfolio_chart_top_02 min = 2
+}
+bfl_portfolio_chart_y_03 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_03 }
+            value = var:bfl_portfolio_history_03 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_03 = {
+value = bfl_portfolio_chart_y_03 max = bfl_portfolio_chart_y_04
+}
+bfl_portfolio_chart_height_03 = {
+value = bfl_portfolio_chart_y_03 min = bfl_portfolio_chart_y_04 subtract = bfl_portfolio_chart_top_03 min = 2
+}
+bfl_portfolio_chart_y_04 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_04 }
+            value = var:bfl_portfolio_history_04 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_04 = {
+value = bfl_portfolio_chart_y_04 max = bfl_portfolio_chart_y_05
+}
+bfl_portfolio_chart_height_04 = {
+value = bfl_portfolio_chart_y_04 min = bfl_portfolio_chart_y_05 subtract = bfl_portfolio_chart_top_04 min = 2
+}
+bfl_portfolio_chart_y_05 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_05 }
+            value = var:bfl_portfolio_history_05 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_05 = {
+value = bfl_portfolio_chart_y_05 max = bfl_portfolio_chart_y_06
+}
+bfl_portfolio_chart_height_05 = {
+value = bfl_portfolio_chart_y_05 min = bfl_portfolio_chart_y_06 subtract = bfl_portfolio_chart_top_05 min = 2
+}
+bfl_portfolio_chart_y_06 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_06 }
+            value = var:bfl_portfolio_history_06 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_06 = {
+value = bfl_portfolio_chart_y_06 max = bfl_portfolio_chart_y_07
+}
+bfl_portfolio_chart_height_06 = {
+value = bfl_portfolio_chart_y_06 min = bfl_portfolio_chart_y_07 subtract = bfl_portfolio_chart_top_06 min = 2
+}
+bfl_portfolio_chart_y_07 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_07 }
+            value = var:bfl_portfolio_history_07 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_07 = {
+value = bfl_portfolio_chart_y_07 max = bfl_portfolio_chart_y_08
+}
+bfl_portfolio_chart_height_07 = {
+value = bfl_portfolio_chart_y_07 min = bfl_portfolio_chart_y_08 subtract = bfl_portfolio_chart_top_07 min = 2
+}
+bfl_portfolio_chart_y_08 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_08 }
+            value = var:bfl_portfolio_history_08 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_08 = {
+value = bfl_portfolio_chart_y_08 max = bfl_portfolio_chart_y_09
+}
+bfl_portfolio_chart_height_08 = {
+value = bfl_portfolio_chart_y_08 min = bfl_portfolio_chart_y_09 subtract = bfl_portfolio_chart_top_08 min = 2
+}
+bfl_portfolio_chart_y_09 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_09 }
+            value = var:bfl_portfolio_history_09 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_09 = {
+value = bfl_portfolio_chart_y_09 max = bfl_portfolio_chart_y_10
+}
+bfl_portfolio_chart_height_09 = {
+value = bfl_portfolio_chart_y_09 min = bfl_portfolio_chart_y_10 subtract = bfl_portfolio_chart_top_09 min = 2
+}
+bfl_portfolio_chart_y_10 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_10 }
+            value = var:bfl_portfolio_history_10 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_10 = {
+value = bfl_portfolio_chart_y_10 max = bfl_portfolio_chart_y_11
+}
+bfl_portfolio_chart_height_10 = {
+value = bfl_portfolio_chart_y_10 min = bfl_portfolio_chart_y_11 subtract = bfl_portfolio_chart_top_10 min = 2
+}
+bfl_portfolio_chart_y_11 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_11 }
+            value = var:bfl_portfolio_history_11 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}
+bfl_portfolio_chart_top_11 = {
+value = bfl_portfolio_chart_y_11 max = bfl_portfolio_chart_y_12
+}
+bfl_portfolio_chart_height_11 = {
+value = bfl_portfolio_chart_y_11 min = bfl_portfolio_chart_y_12 subtract = bfl_portfolio_chart_top_11 min = 2
+}
+bfl_portfolio_chart_y_12 = {
+value = 100 if = { limit = { has_variable = bfl_portfolio_history_12 }
+            value = var:bfl_portfolio_history_12 divide = bfl_portfolio_chart_max multiply = -100 add = 100 }
+}

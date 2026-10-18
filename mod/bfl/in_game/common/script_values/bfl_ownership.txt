@@ -1,0 +1,411 @@
+﻿bfl_tangible_equity = {
+value = gold
+        if = { limit = { bfl_has_accounts = yes }
+            add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
+            add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
+        else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt } }
+}
+bfl_nav_quote = {
+value = 0
+        if = { limit = { var:bfl_total_units > 0 }
+            value = bfl_tangible_equity min = 0 divide = var:bfl_total_units
+            multiply = 1000 floor = yes divide = 1000 }
+}
+bfl_equity_concentration_limit = {
+value = 0.25 if = { limit = { bfl_is_company = yes } value = 0.60 }
+}
+bfl_dealer_units = {
+value = 0 if = { limit = { has_variable = bfl_dealer_units } value = var:bfl_dealer_units }
+}
+bfl_registered_units = {
+value = 0 if = { limit = { has_variable = bfl_ownership_schema }
+value = var:bfl_state_units add = var:bfl_founder_units add = bfl_dealer_units
+if = { limit = { var:bfl_shr_01_active = 1 } add = var:bfl_shr_01_units }
+if = { limit = { var:bfl_shr_02_active = 1 } add = var:bfl_shr_02_units }
+if = { limit = { var:bfl_shr_03_active = 1 } add = var:bfl_shr_03_units }
+if = { limit = { var:bfl_shr_04_active = 1 } add = var:bfl_shr_04_units }
+if = { limit = { var:bfl_shr_05_active = 1 } add = var:bfl_shr_05_units }
+if = { limit = { var:bfl_shr_06_active = 1 } add = var:bfl_shr_06_units }
+if = { limit = { var:bfl_shr_07_active = 1 } add = var:bfl_shr_07_units }
+if = { limit = { var:bfl_shr_08_active = 1 } add = var:bfl_shr_08_units }
+if = { limit = { var:bfl_shr_09_active = 1 } add = var:bfl_shr_09_units }
+if = { limit = { var:bfl_shr_10_active = 1 } add = var:bfl_shr_10_units }
+if = { limit = { var:bfl_shr_11_active = 1 } add = var:bfl_shr_11_units }
+if = { limit = { var:bfl_shr_12_active = 1 } add = var:bfl_shr_12_units }
+if = { limit = { var:bfl_shr_13_active = 1 } add = var:bfl_shr_13_units }
+if = { limit = { var:bfl_shr_14_active = 1 } add = var:bfl_shr_14_units }
+if = { limit = { var:bfl_shr_15_active = 1 } add = var:bfl_shr_15_units }
+if = { limit = { var:bfl_shr_16_active = 1 } add = var:bfl_shr_16_units }
+}
+}
+bfl_equity_buyer_units = {
+value = 0
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_equity_buyer } add = var:bfl_shr_01_units }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_equity_buyer } add = var:bfl_shr_02_units }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_equity_buyer } add = var:bfl_shr_03_units }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_equity_buyer } add = var:bfl_shr_04_units }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_equity_buyer } add = var:bfl_shr_05_units }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_equity_buyer } add = var:bfl_shr_06_units }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_equity_buyer } add = var:bfl_shr_07_units }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_equity_buyer } add = var:bfl_shr_08_units }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_equity_buyer } add = var:bfl_shr_09_units }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_equity_buyer } add = var:bfl_shr_10_units }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_equity_buyer } add = var:bfl_shr_11_units }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_equity_buyer } add = var:bfl_shr_12_units }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_equity_buyer } add = var:bfl_shr_13_units }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_equity_buyer } add = var:bfl_shr_14_units }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_equity_buyer } add = var:bfl_shr_15_units }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_equity_buyer } add = var:bfl_shr_16_units }
+}
+bfl_equity_buyer_basis = {
+value = 0
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_equity_buyer } add = var:bfl_shr_01_basis }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_equity_buyer } add = var:bfl_shr_02_basis }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_equity_buyer } add = var:bfl_shr_03_basis }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_equity_buyer } add = var:bfl_shr_04_basis }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_equity_buyer } add = var:bfl_shr_05_basis }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_equity_buyer } add = var:bfl_shr_06_basis }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_equity_buyer } add = var:bfl_shr_07_basis }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_equity_buyer } add = var:bfl_shr_08_basis }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_equity_buyer } add = var:bfl_shr_09_basis }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_equity_buyer } add = var:bfl_shr_10_basis }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_equity_buyer } add = var:bfl_shr_11_basis }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_equity_buyer } add = var:bfl_shr_12_basis }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_equity_buyer } add = var:bfl_shr_13_basis }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_equity_buyer } add = var:bfl_shr_14_basis }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_equity_buyer } add = var:bfl_shr_15_basis }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_equity_buyer } add = var:bfl_shr_16_basis }
+}
+bfl_position_owner_units = {
+value = 0
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_position_owner } add = var:bfl_shr_01_units }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_position_owner } add = var:bfl_shr_02_units }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_position_owner } add = var:bfl_shr_03_units }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_position_owner } add = var:bfl_shr_04_units }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_position_owner } add = var:bfl_shr_05_units }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_position_owner } add = var:bfl_shr_06_units }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_position_owner } add = var:bfl_shr_07_units }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_position_owner } add = var:bfl_shr_08_units }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_position_owner } add = var:bfl_shr_09_units }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_position_owner } add = var:bfl_shr_10_units }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_position_owner } add = var:bfl_shr_11_units }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_position_owner } add = var:bfl_shr_12_units }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_position_owner } add = var:bfl_shr_13_units }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_position_owner } add = var:bfl_shr_14_units }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_position_owner } add = var:bfl_shr_15_units }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_position_owner } add = var:bfl_shr_16_units }
+}
+bfl_position_owner_basis = {
+value = 0
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_position_owner } add = var:bfl_shr_01_basis }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_position_owner } add = var:bfl_shr_02_basis }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_position_owner } add = var:bfl_shr_03_basis }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_position_owner } add = var:bfl_shr_04_basis }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_position_owner } add = var:bfl_shr_05_basis }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_position_owner } add = var:bfl_shr_06_basis }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_position_owner } add = var:bfl_shr_07_basis }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_position_owner } add = var:bfl_shr_08_basis }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_position_owner } add = var:bfl_shr_09_basis }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_position_owner } add = var:bfl_shr_10_basis }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_position_owner } add = var:bfl_shr_11_basis }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_position_owner } add = var:bfl_shr_12_basis }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_position_owner } add = var:bfl_shr_13_basis }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_position_owner } add = var:bfl_shr_14_basis }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_position_owner } add = var:bfl_shr_15_basis }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_position_owner } add = var:bfl_shr_16_basis }
+}
+bfl_position_carrying_01 = {
+value = 0 if = { limit = { exists = var:bfl_pos_01_issuer country_exists = var:bfl_pos_01_issuer NOT = { var:bfl_pos_01_issuer = this } }
+            value = var:bfl_pos_01_issuer.bfl_equity_quote multiply = var:bfl_pos_01_units max = var:bfl_pos_01_basis min = 0 }
+}
+bfl_position_market_01 = {
+value = 0 if = { limit = { exists = var:bfl_pos_01_issuer country_exists = var:bfl_pos_01_issuer NOT = { var:bfl_pos_01_issuer = this } } value = var:bfl_pos_01_issuer.bfl_equity_quote multiply = var:bfl_pos_01_units }
+}
+bfl_position_carrying_02 = {
+value = 0 if = { limit = { exists = var:bfl_pos_02_issuer country_exists = var:bfl_pos_02_issuer NOT = { var:bfl_pos_02_issuer = this } }
+            value = var:bfl_pos_02_issuer.bfl_equity_quote multiply = var:bfl_pos_02_units max = var:bfl_pos_02_basis min = 0 }
+}
+bfl_position_market_02 = {
+value = 0 if = { limit = { exists = var:bfl_pos_02_issuer country_exists = var:bfl_pos_02_issuer NOT = { var:bfl_pos_02_issuer = this } } value = var:bfl_pos_02_issuer.bfl_equity_quote multiply = var:bfl_pos_02_units }
+}
+bfl_position_carrying_03 = {
+value = 0 if = { limit = { exists = var:bfl_pos_03_issuer country_exists = var:bfl_pos_03_issuer NOT = { var:bfl_pos_03_issuer = this } }
+            value = var:bfl_pos_03_issuer.bfl_equity_quote multiply = var:bfl_pos_03_units max = var:bfl_pos_03_basis min = 0 }
+}
+bfl_position_market_03 = {
+value = 0 if = { limit = { exists = var:bfl_pos_03_issuer country_exists = var:bfl_pos_03_issuer NOT = { var:bfl_pos_03_issuer = this } } value = var:bfl_pos_03_issuer.bfl_equity_quote multiply = var:bfl_pos_03_units }
+}
+bfl_position_carrying_04 = {
+value = 0 if = { limit = { exists = var:bfl_pos_04_issuer country_exists = var:bfl_pos_04_issuer NOT = { var:bfl_pos_04_issuer = this } }
+            value = var:bfl_pos_04_issuer.bfl_equity_quote multiply = var:bfl_pos_04_units max = var:bfl_pos_04_basis min = 0 }
+}
+bfl_position_market_04 = {
+value = 0 if = { limit = { exists = var:bfl_pos_04_issuer country_exists = var:bfl_pos_04_issuer NOT = { var:bfl_pos_04_issuer = this } } value = var:bfl_pos_04_issuer.bfl_equity_quote multiply = var:bfl_pos_04_units }
+}
+bfl_position_carrying_05 = {
+value = 0 if = { limit = { exists = var:bfl_pos_05_issuer country_exists = var:bfl_pos_05_issuer NOT = { var:bfl_pos_05_issuer = this } }
+            value = var:bfl_pos_05_issuer.bfl_equity_quote multiply = var:bfl_pos_05_units max = var:bfl_pos_05_basis min = 0 }
+}
+bfl_position_market_05 = {
+value = 0 if = { limit = { exists = var:bfl_pos_05_issuer country_exists = var:bfl_pos_05_issuer NOT = { var:bfl_pos_05_issuer = this } } value = var:bfl_pos_05_issuer.bfl_equity_quote multiply = var:bfl_pos_05_units }
+}
+bfl_position_carrying_06 = {
+value = 0 if = { limit = { exists = var:bfl_pos_06_issuer country_exists = var:bfl_pos_06_issuer NOT = { var:bfl_pos_06_issuer = this } }
+            value = var:bfl_pos_06_issuer.bfl_equity_quote multiply = var:bfl_pos_06_units max = var:bfl_pos_06_basis min = 0 }
+}
+bfl_position_market_06 = {
+value = 0 if = { limit = { exists = var:bfl_pos_06_issuer country_exists = var:bfl_pos_06_issuer NOT = { var:bfl_pos_06_issuer = this } } value = var:bfl_pos_06_issuer.bfl_equity_quote multiply = var:bfl_pos_06_units }
+}
+bfl_position_carrying_07 = {
+value = 0 if = { limit = { exists = var:bfl_pos_07_issuer country_exists = var:bfl_pos_07_issuer NOT = { var:bfl_pos_07_issuer = this } }
+            value = var:bfl_pos_07_issuer.bfl_equity_quote multiply = var:bfl_pos_07_units max = var:bfl_pos_07_basis min = 0 }
+}
+bfl_position_market_07 = {
+value = 0 if = { limit = { exists = var:bfl_pos_07_issuer country_exists = var:bfl_pos_07_issuer NOT = { var:bfl_pos_07_issuer = this } } value = var:bfl_pos_07_issuer.bfl_equity_quote multiply = var:bfl_pos_07_units }
+}
+bfl_position_carrying_08 = {
+value = 0 if = { limit = { exists = var:bfl_pos_08_issuer country_exists = var:bfl_pos_08_issuer NOT = { var:bfl_pos_08_issuer = this } }
+            value = var:bfl_pos_08_issuer.bfl_equity_quote multiply = var:bfl_pos_08_units max = var:bfl_pos_08_basis min = 0 }
+}
+bfl_position_market_08 = {
+value = 0 if = { limit = { exists = var:bfl_pos_08_issuer country_exists = var:bfl_pos_08_issuer NOT = { var:bfl_pos_08_issuer = this } } value = var:bfl_pos_08_issuer.bfl_equity_quote multiply = var:bfl_pos_08_units }
+}
+bfl_position_carrying_09 = {
+value = 0 if = { limit = { exists = var:bfl_pos_09_issuer country_exists = var:bfl_pos_09_issuer NOT = { var:bfl_pos_09_issuer = this } }
+            value = var:bfl_pos_09_issuer.bfl_equity_quote multiply = var:bfl_pos_09_units max = var:bfl_pos_09_basis min = 0 }
+}
+bfl_position_market_09 = {
+value = 0 if = { limit = { exists = var:bfl_pos_09_issuer country_exists = var:bfl_pos_09_issuer NOT = { var:bfl_pos_09_issuer = this } } value = var:bfl_pos_09_issuer.bfl_equity_quote multiply = var:bfl_pos_09_units }
+}
+bfl_position_carrying_10 = {
+value = 0 if = { limit = { exists = var:bfl_pos_10_issuer country_exists = var:bfl_pos_10_issuer NOT = { var:bfl_pos_10_issuer = this } }
+            value = var:bfl_pos_10_issuer.bfl_equity_quote multiply = var:bfl_pos_10_units max = var:bfl_pos_10_basis min = 0 }
+}
+bfl_position_market_10 = {
+value = 0 if = { limit = { exists = var:bfl_pos_10_issuer country_exists = var:bfl_pos_10_issuer NOT = { var:bfl_pos_10_issuer = this } } value = var:bfl_pos_10_issuer.bfl_equity_quote multiply = var:bfl_pos_10_units }
+}
+bfl_position_carrying_11 = {
+value = 0 if = { limit = { exists = var:bfl_pos_11_issuer country_exists = var:bfl_pos_11_issuer NOT = { var:bfl_pos_11_issuer = this } }
+            value = var:bfl_pos_11_issuer.bfl_equity_quote multiply = var:bfl_pos_11_units max = var:bfl_pos_11_basis min = 0 }
+}
+bfl_position_market_11 = {
+value = 0 if = { limit = { exists = var:bfl_pos_11_issuer country_exists = var:bfl_pos_11_issuer NOT = { var:bfl_pos_11_issuer = this } } value = var:bfl_pos_11_issuer.bfl_equity_quote multiply = var:bfl_pos_11_units }
+}
+bfl_position_carrying_12 = {
+value = 0 if = { limit = { exists = var:bfl_pos_12_issuer country_exists = var:bfl_pos_12_issuer NOT = { var:bfl_pos_12_issuer = this } }
+            value = var:bfl_pos_12_issuer.bfl_equity_quote multiply = var:bfl_pos_12_units max = var:bfl_pos_12_basis min = 0 }
+}
+bfl_position_market_12 = {
+value = 0 if = { limit = { exists = var:bfl_pos_12_issuer country_exists = var:bfl_pos_12_issuer NOT = { var:bfl_pos_12_issuer = this } } value = var:bfl_pos_12_issuer.bfl_equity_quote multiply = var:bfl_pos_12_units }
+}
+bfl_position_carrying_13 = {
+value = 0 if = { limit = { exists = var:bfl_pos_13_issuer country_exists = var:bfl_pos_13_issuer NOT = { var:bfl_pos_13_issuer = this } }
+            value = var:bfl_pos_13_issuer.bfl_equity_quote multiply = var:bfl_pos_13_units max = var:bfl_pos_13_basis min = 0 }
+}
+bfl_position_market_13 = {
+value = 0 if = { limit = { exists = var:bfl_pos_13_issuer country_exists = var:bfl_pos_13_issuer NOT = { var:bfl_pos_13_issuer = this } } value = var:bfl_pos_13_issuer.bfl_equity_quote multiply = var:bfl_pos_13_units }
+}
+bfl_position_carrying_14 = {
+value = 0 if = { limit = { exists = var:bfl_pos_14_issuer country_exists = var:bfl_pos_14_issuer NOT = { var:bfl_pos_14_issuer = this } }
+            value = var:bfl_pos_14_issuer.bfl_equity_quote multiply = var:bfl_pos_14_units max = var:bfl_pos_14_basis min = 0 }
+}
+bfl_position_market_14 = {
+value = 0 if = { limit = { exists = var:bfl_pos_14_issuer country_exists = var:bfl_pos_14_issuer NOT = { var:bfl_pos_14_issuer = this } } value = var:bfl_pos_14_issuer.bfl_equity_quote multiply = var:bfl_pos_14_units }
+}
+bfl_position_carrying_15 = {
+value = 0 if = { limit = { exists = var:bfl_pos_15_issuer country_exists = var:bfl_pos_15_issuer NOT = { var:bfl_pos_15_issuer = this } }
+            value = var:bfl_pos_15_issuer.bfl_equity_quote multiply = var:bfl_pos_15_units max = var:bfl_pos_15_basis min = 0 }
+}
+bfl_position_market_15 = {
+value = 0 if = { limit = { exists = var:bfl_pos_15_issuer country_exists = var:bfl_pos_15_issuer NOT = { var:bfl_pos_15_issuer = this } } value = var:bfl_pos_15_issuer.bfl_equity_quote multiply = var:bfl_pos_15_units }
+}
+bfl_position_carrying_16 = {
+value = 0 if = { limit = { exists = var:bfl_pos_16_issuer country_exists = var:bfl_pos_16_issuer NOT = { var:bfl_pos_16_issuer = this } }
+            value = var:bfl_pos_16_issuer.bfl_equity_quote multiply = var:bfl_pos_16_units max = var:bfl_pos_16_basis min = 0 }
+}
+bfl_position_market_16 = {
+value = 0 if = { limit = { exists = var:bfl_pos_16_issuer country_exists = var:bfl_pos_16_issuer NOT = { var:bfl_pos_16_issuer = this } } value = var:bfl_pos_16_issuer.bfl_equity_quote multiply = var:bfl_pos_16_units }
+}
+bfl_security_carrying = {
+value = 0
+add = bfl_position_carrying_01
+add = bfl_position_carrying_02
+add = bfl_position_carrying_03
+add = bfl_position_carrying_04
+add = bfl_position_carrying_05
+add = bfl_position_carrying_06
+add = bfl_position_carrying_07
+add = bfl_position_carrying_08
+add = bfl_position_carrying_09
+add = bfl_position_carrying_10
+add = bfl_position_carrying_11
+add = bfl_position_carrying_12
+add = bfl_position_carrying_13
+add = bfl_position_carrying_14
+add = bfl_position_carrying_15
+add = bfl_position_carrying_16
+}
+bfl_security_market = {
+value = 0
+add = bfl_position_market_01
+add = bfl_position_market_02
+add = bfl_position_market_03
+add = bfl_position_market_04
+add = bfl_position_market_05
+add = bfl_position_market_06
+add = bfl_position_market_07
+add = bfl_position_market_08
+add = bfl_position_market_09
+add = bfl_position_market_10
+add = bfl_position_market_11
+add = bfl_position_market_12
+add = bfl_position_market_13
+add = bfl_position_market_14
+add = bfl_position_market_15
+add = bfl_position_market_16
+}
+bfl_security_basis = {
+value = 0
+add = var:bfl_pos_01_basis
+add = var:bfl_pos_02_basis
+add = var:bfl_pos_03_basis
+add = var:bfl_pos_04_basis
+add = var:bfl_pos_05_basis
+add = var:bfl_pos_06_basis
+add = var:bfl_pos_07_basis
+add = var:bfl_pos_08_basis
+add = var:bfl_pos_09_basis
+add = var:bfl_pos_10_basis
+add = var:bfl_pos_11_basis
+add = var:bfl_pos_12_basis
+add = var:bfl_pos_13_basis
+add = var:bfl_pos_14_basis
+add = var:bfl_pos_15_basis
+add = var:bfl_pos_16_basis
+}
+bfl_security_unrealized = {
+value = bfl_security_market subtract = bfl_security_basis
+}
+bfl_security_realized = {
+value = var:bfl_equity_realized
+}
+bfl_security_dividends = {
+value = var:bfl_equity_dividends
+}
+bfl_exchange_basis = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_basis }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_basis }
+}
+bfl_exchange_carrying = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_carrying }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_carrying }
+}
+bfl_exchange_market = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_market }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_market }
+}
+bfl_exchange_unrealized = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_unrealized }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_unrealized }
+}
+bfl_exchange_realized = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_realized }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_realized }
+}
+bfl_exchange_dividends = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_security_dividends }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_security_dividends }
+}
+bfl_quote_chart_max = {
+value = 0.001
+min = var:bfl_quote_01_price
+min = var:bfl_quote_02_price
+min = var:bfl_quote_03_price
+min = var:bfl_quote_04_price
+min = var:bfl_quote_05_price
+min = var:bfl_quote_06_price
+min = var:bfl_quote_07_price
+min = var:bfl_quote_08_price
+min = var:bfl_quote_09_price
+min = var:bfl_quote_10_price
+min = var:bfl_quote_11_price
+min = var:bfl_quote_12_price
+}
+bfl_quote_chart_y_01 = {
+value = var:bfl_quote_01_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_01 = {
+value = var:bfl_quote_01_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_02 = {
+value = var:bfl_quote_02_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_02 = {
+value = var:bfl_quote_02_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_03 = {
+value = var:bfl_quote_03_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_03 = {
+value = var:bfl_quote_03_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_04 = {
+value = var:bfl_quote_04_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_04 = {
+value = var:bfl_quote_04_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_05 = {
+value = var:bfl_quote_05_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_05 = {
+value = var:bfl_quote_05_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_06 = {
+value = var:bfl_quote_06_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_06 = {
+value = var:bfl_quote_06_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_07 = {
+value = var:bfl_quote_07_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_07 = {
+value = var:bfl_quote_07_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_08 = {
+value = var:bfl_quote_08_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_08 = {
+value = var:bfl_quote_08_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_09 = {
+value = var:bfl_quote_09_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_09 = {
+value = var:bfl_quote_09_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_10 = {
+value = var:bfl_quote_10_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_10 = {
+value = var:bfl_quote_10_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_11 = {
+value = var:bfl_quote_11_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_11 = {
+value = var:bfl_quote_11_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}
+bfl_quote_chart_y_12 = {
+value = var:bfl_quote_12_price divide = bfl_quote_chart_max multiply = -90 add = 98
+}
+bfl_quote_chart_x_12 = {
+value = var:bfl_quote_12_period subtract = var:bfl_quote_01_period add = 11 multiply = 40
+}

@@ -1,0 +1,36 @@
+﻿bfl_apply_equity_vote_payout_0 = {
+if = { limit = { country_exists = this exists = var:bfl_exchange_selected
+        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } var:bfl_exchange_selected = {
+            if = { limit = { bfl_is_company = yes } set_variable = { name = bfl_company_payout_ratio value = 0.0 } }
+            else_if = { limit = { bfl_has_valid_controller = no } set_variable = { name = bfl_payout_ratio value = 0.0 } }
+        } }
+}
+bfl_apply_equity_vote_payout_25 = {
+if = { limit = { country_exists = this exists = var:bfl_exchange_selected
+        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } var:bfl_exchange_selected = {
+            if = { limit = { bfl_is_company = yes } set_variable = { name = bfl_company_payout_ratio value = 0.25 } }
+            else_if = { limit = { bfl_has_valid_controller = no } set_variable = { name = bfl_payout_ratio value = 0.25 } }
+        } }
+}
+bfl_apply_equity_vote_payout_50 = {
+if = { limit = { country_exists = this exists = var:bfl_exchange_selected
+        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } var:bfl_exchange_selected = {
+            if = { limit = { bfl_is_company = yes } set_variable = { name = bfl_company_payout_ratio value = 0.5 } }
+            else_if = { limit = { bfl_has_valid_controller = no } set_variable = { name = bfl_payout_ratio value = 0.5 } }
+        } }
+}
+bfl_apply_equity_vote_reserve_100 = {
+if = { limit = { country_exists = this exists = var:bfl_exchange_selected
+        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } } var:bfl_exchange_selected = { set_variable = { name = bfl_company_reinvestment value = 100 }
+            set_variable = { name = bfl_company_trade_budget value = 50 } } }
+}
+bfl_apply_equity_vote_reserve_200 = {
+if = { limit = { country_exists = this exists = var:bfl_exchange_selected
+        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } } var:bfl_exchange_selected = { set_variable = { name = bfl_company_reinvestment value = 200 }
+            set_variable = { name = bfl_company_trade_budget value = 25 } } }
+}

@@ -1,20 +1,20 @@
 ﻿bfl_payout_0 = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes }
-            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0 } } } }
+            is_valid = { bfl_has_payout_authority = yes }
+            effect = { if = { limit = { bfl_has_payout_authority = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0 } } } }
         }
 bfl_payout_25 = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes }
-            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.25 } } } }
+            is_valid = { bfl_has_payout_authority = yes }
+            effect = { if = { limit = { bfl_has_payout_authority = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.25 } } } }
         }
 bfl_payout_50 = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes }
-            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.5 } } } }
+            is_valid = { bfl_has_payout_authority = yes }
+            effect = { if = { limit = { bfl_has_payout_authority = yes } bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_payout_ratio value = 0.5 } } } }
         }
 bfl_deposit_1 = {
             scope = country
@@ -37,8 +37,8 @@ bfl_withdraw = {
 bfl_recapitalize_command = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location gold >= 100 }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_recapitalize = yes } } }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_primary_price_safe = yes } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_primary_price_safe = yes } } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_recapitalize = yes } } }
         }
 bfl_suspend_command = {
             scope = country

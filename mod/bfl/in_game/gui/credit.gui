@@ -804,13 +804,6 @@ lateralview = {
 				using = layoutpolicy_expanding
 				header_secondary_tabs = {
 					blockoverride "content" {
-        button_secondary_tab_alt = { layoutpolicy_horizontal = expanding tooltip_enabled = no
-            blockoverride "tab_text" { text = "bfl_bond_panel_title" fontsize = 16 }
-            onclick = "[GetScriptedGui('bfl_prepare_bond_panel').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            onclick = "[CreditLateralView.Vars.Set('subtab','bfl_bonds')]"
-            down = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]"
-        }
-
 						button_secondary_tab_alt = {
 							layoutpolicy_horizontal = expanding
 							tooltip_enabled = no
@@ -821,7 +814,8 @@ lateralview = {
 
 							action_tooltip = {
 								title = "OPEN_TAB"
-								on_action = "[CreditLateralView.Vars.Set('subtab','loans_taken')]"
+								on_action = "[GetScriptedGui('bfl_prepare_bond_panel').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+on_action = "[CreditLateralView.Vars.Set('subtab','loans_taken')]"
 							}
 							down = "[CreditLateralView.Vars.HasValue('subtab','loans_taken')]"
 						}
@@ -842,8 +836,6 @@ lateralview = {
 						}
 					}
 				}
- bfl_sovereign_bonds = { visible = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]" }
-
 
 				# loans taken
 				vbox = {

@@ -1,0 +1,43 @@
+{
+  "passed": false,
+  "token": "201181e1380f45268481c77f32b7200b",
+  "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc",
+  "reason": "Thirty-assertion development attempt: saved-state persistence and all twelve observations passed; the next-shock test failed. The final fixture separately checks persistence before supplying a solvent wallet for its isolated next-shock primitive and records the pre-grant NAV/model/draw diagnostics. Rejected result is not acceptance.",
+  "results": {
+    "pricing_migration_starts_at_nav_without_backfill": "PASS",
+    "existing_owned_bank_migration_preserves_cash_claims_and_units": "PASS",
+    "native_pow_positive_exponential": "PASS",
+    "native_pow_negative_exponential": "PASS",
+    "participation_and_imbalance_limit_huge_order": "PASS",
+    "equal_large_wash_legs_cancel_before_flow_cap": "PASS",
+    "monthly_pressure_moves_market_not_nav": "PASS",
+    "spread_widens_on_observed_imbalance": "PASS",
+    "same_month_and_reinitialization_do_not_reroll": "PASS",
+    "mean_reversion_reduces_unopposed_premium": "PASS",
+    "total_premium_and_monthly_move_are_bounded": "PASS",
+    "backend_nav_mode_ignores_premium_and_returns_legacy_spread": "PASS",
+    "distress_discount_and_risk_spread_are_separate_from_nav": "PASS",
+    "default_zeroes_quote_and_resets_premium": "PASS",
+    "funded_recovery_reanchors_without_random_windfall": "PASS",
+    "primary_at_nav_cannot_be_sold_immediately_for_guaranteed_premium": "PASS",
+    "primary_issuance_uses_nav_not_market_and_adds_no_pressure": "PASS",
+    "successful_public_buy_counts_one_initiating_order": "PASS",
+    "successful_sell_offsets_pressure_once": "PASS",
+    "background_inventory_resale_does_not_double_count_pressure": "PASS",
+    "gbm_sale_pays_market_bid_with_dynamic_spread_without_issuance": "PASS",
+    "expired_market_quote_costs_no_cash_diplomat_or_pressure": "PASS",
+    "defaulted_issuer_rejects_accepted_positive_sale_quote": "PASS",
+    "twelve_natural_months_consume_twelve_persisted_draws": "PASS",
+    "native_seed_stream_matches_offline_reference": "PASS",
+    "real_engine_paired_NAV_GBM_price_observations": "PASS",
+    "native_log_premium_matches_reference_within_five_basis_points": "PASS",
+    "saved_seed_premium_and_draw_count_survive_second_process": "PASS",
+    "same_period_price_reads_and_initialization_do_not_consume_draws": "PASS",
+    "future_seed_is_reproducible_after_reload": "FAIL"
+  },
+  "errors": [
+    "Failed: future_seed_is_reproducible_after_reload"
+  ],
+  "original_error_count": 1,
+  "source_report_sha256": "f4a8a61cf1b647a6e7fe0d0b210dcc3dceaa29eca5b8c0fa24b2d293d3448c19"
+}

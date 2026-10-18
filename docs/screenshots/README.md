@@ -1,5 +1,70 @@
 # Native bank interface captures
 
+## M5 ownership and share trading
+
+Actual, unedited EUV 1.4.1 / build 25905365 windows with CMF 2.5.0,
+1280×720 at 60% GUI scale (1282×752 window captures). The original fourteen
+captures use runtime `9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b`.
+They precede the non-issuer picker guard and sovereign buyback follow-up;
+current-runtime company/history and buyback captures are recorded separately.
+Debug grants establish Reformation, research, completed exchanges, wallets,
+charter, a bond and a staged Peruzzi NAV. They do not prove natural construction
+or normal campaign balance; dedicated engine reports cover those separately.
+
+- [Integrated Investments](m5-investments.png): two Credit subtabs, generated
+  Buy/Sell art, compact portfolio and explicit primary-capital action.
+- [Total assets](m5-assets-equity.png): 4,800 cash + 100 equity carrying value +
+  100 custom bonds reconcile to 5,000 assets.
+- [Portfolio hover](m5-portfolio.png): 100 Peruzzi shares, 100 basis, 120 value
+  and green +20.0% unrealized return.
+- [Buy popup](m5-buy-slider.png) and [confirmation](m5-buy-confirmation.png):
+  native flag/name/paper country card and same-popup slider select 4.921
+  existing shares for 5.91 gold.
+- [Settled purchase](m5-buy-settled.png): 104.921 units, basis 105.91, value
+  125.90 and +18.8%; bank cash 4,794.09; diplomats fall 4.50 → 3.50.
+- [Same-issuer cooldown](m5-issuer-cooldown.png): Peruzzi cannot immediately
+  be selected for an opposite-side sale; Bardi remains eligible.
+- [Charter sale slider](m5-sell-charter-slider.png), [confirmation](m5-sell-charter-confirmation.png)
+  and [settlement](m5-sell-charter-settled.png): 984.011 sovereign-owned Bardi
+  shares sell for 943.12, paid to Florence. Bank cash stays 4,794.09, issued
+  shares stay 5,000, the dealer owns 984.011 without votes, and diplomats fall
+  3.50 → 2.50.
+- [Funding & Debt](m5-funding-bonds.png), [bond registry](m5-funding-bond-registry.png)
+  and [deposit controls](m5-funding-deposits.png): sovereign bonds and bank
+  funding share the same scrollable subtab; native loan controls remain below.
+- [Missing exchange](m5-exchange-locked.png): both share actions are disabled,
+  while existing holdings and their value remain visible.
+
+Current buyback/company captures cold-load runtime
+`a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e`.
+The disposable setup additionally performs a real production sale of 2,500
+sovereign Bardi shares to its dealer on 1 April. The actual native cooldown is
+preserved. Native time then advances to 1 June; monthly history and funded AI
+purchases occur normally. No price-history samples are fabricated.
+
+- [Sale cooldown](m5-buyback-cooldown.png): Bardi appears in Buy while dealer
+  inventory exists, but its April sale blocks immediate repurchase.
+- [Bank/company histories](m5-company-and-bank-history.png): native operating
+  company and both banks share the same country-card list with actual monthly
+  NAV sparklines.
+- [Charter buyback slider](m5-charter-buyback-slider.png),
+  [treasury confirmation](m5-charter-buyback-confirmation.png) and
+  [restored ownership](m5-charter-buyback-settled.png): buy 295.204 existing
+  Bardi shares for 288.42 sovereign gold; diplomats fall 4.10 to 3.10,
+  bank cash stays 4,753.69 and issued units stay 5,000. Florence holds
+  2,795.204 units, Peruzzi and Acciaiuoli each hold 500 acquired in the
+  background, and the dealer retains 1,204.796 with no votes.
+- [Company slider](m5-company-buy-slider.png),
+  [secondary confirmation](m5-company-buy-confirmation.png) and
+  [mixed portfolio](m5-company-portfolio-settled.png): Bardi buys 4.921 existing
+  Liguria and Corsica shares from Acciaiuoli for 4.93 bank gold. Bank cash
+  falls to 4,748.76; diplomats fall 3.10 to 2.10. The hover shows Peruzzi's
+  79.30 value / red -20.7% and the company's 4.94 value / green +0.3% against
+  separate acquisition bases.
+- [Current assets](m5-current-assets-equity.png): 4,748.76 cash + 35.90 native
+  loans + 84.23 conservative equity carrying value + 100 custom bonds reconcile
+  to 4,968.90 assets (display rounding).
+
 ## M2 company controls
 
 **Chartered bank and company together:** the supplementary [shared Credit visual
@@ -181,3 +246,39 @@ Borrow/Repay/search controls remain below it. The current session has no runtime
 or parser errors attributed to the changed BFI services/GUI. Broader independent-player,
 language and scale matrices remain M10. No personal save, installed game content
 or Workshop file was changed.
+
+## M5 portfolio and charter-sale follow-up
+
+[12 actual-game observations and exact screenshot fingerprints](../../tests/results/2026-10-18-m5-portfolio-ui.json) and [validation provenance](../../tests/results/2026-10-18-m5-portfolio-validation.json) cover this follow-up. The corrected campaign cold-loads `7b628548...` from an exact active-save copy, then reloads only the two GUI files. Six earlier captures retain `7de2694e...`; the final three tooltip captures display shipping `16b31f31...`. These are unedited native window captures at the disposable campaign's existing scale. External-company holdings use a once-only funded production subscription fixture with no money/diplomat/history grants. Broad languages/scales remain M10.
+
+- [Fixed one-share selector](m5-sale-default-fixed.png)
+- [Exact charter-sale confirmation](m5-charter-sale-fixed-confirmation.png)
+- [Treasury settlement and unchanged issued shares](m5-charter-sale-fixed-settled.png)
+- [Explicit diplomat requirement](m5-share-diplomat-explanation.png)
+- [Treasury stake and initial actual history](m5-portfolio-treasury-history.png)
+- [Initial nested bank finances](m5-portfolio-bank-finances.png)
+- [Final separate owners and six monthly observations](m5-portfolio-owners-history.png)
+- [Final nested external-company finances](m5-portfolio-company-finances.png)
+- [Final nested bank finances](m5-portfolio-bank-finances-final.png)
+
+[Historical zero-cash sale reproduction](m5-default-sale-zero-quote.png) is deliberately retained as **failing pre-fix evidence** on `a16944b9...`; it is not an accepted behavior or a shipping screenshot.
+
+## M5 stochastic pricing
+
+[Current pricing UI observations and individual hashes](../../tests/results/2026-10-18-gbm-ui.json)
+record a standard disposable fixture, then natural monthly prices and a normal
+one-share company purchase. The initial five captures cold-load `69f43d3e...`.
+After saving the campaign, the final capture cold-loads shipping `767c813d...`;
+only the recapitalization effect guard and matching button/tooltip differ, with
+identical pricing/layout files. No premium/seed/history grants are used for visual evidence.
+
+- [Portfolio market values/history](m5-gbm-portfolio.png)
+- [Peruzzi NAV 1.200 versus market 1.286](m5-gbm-issuer-finances.png)
+- [Charter NAV 0.977 versus market 0.972](m5-gbm-charter-finances.png)
+- [Bank/company market-price list and actual sparklines](m5-gbm-buy-history.png)
+- [Purchased company, NAV 1.005 versus market 1.001](m5-gbm-company-finances.png)
+- [Saved campaign reopened on the final runtime](m5-gbm-final-reload.png)
+
+[A/B simulation figure](../figures/equity-pricing-ab.png) is a separately labeled
+offline research plot, not a game screenshot. Native assertions and twelve
+actual same-bank NAV/market samples have their own [provenance](../../tests/results/2026-10-18-gbm-validation.json).

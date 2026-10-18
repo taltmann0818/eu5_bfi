@@ -1,0 +1,1800 @@
+﻿bfl_initialize_ownership = {
+if = { limit = { NOT = { has_variable = bfl_ownership_schema } }
+        set_variable = { name = bfl_ownership_schema value = 1 }
+        set_variable = { name = bfl_equity_revision value = 1 }
+        if = { limit = { NOT = { has_variable = bfl_ai_equity_enabled } } set_variable = { name = bfl_ai_equity_enabled value = 1 } }
+        set_variable = { name = bfl_equity_offer_revision value = 0 }
+        set_variable = { name = bfl_equity_offer_active value = 0 }
+        set_variable = { name = bfl_equity_listed value = 0 }
+        set_variable = { name = bfl_equity_realized value = 0 }
+        set_variable = { name = bfl_equity_dividends value = 0 }
+        set_variable = { name = bfl_equity_trades value = 0 }
+        set_variable = { name = bfl_equity_last_trade value = 0 }
+        set_variable = { name = bfl_equity_last_price value = 0 }
+        set_variable = { name = bfl_equity_last_volume value = 0 }
+        set_variable = { name = bfl_equity_pending_volume value = 0 }
+        set_variable = { name = bfl_equity_offer_expiry value = 0 }
+        set_variable = { name = bfl_equity_offer_units value = 0 }
+        set_variable = { name = bfl_equity_offer_price value = 0 }
+        set_variable = { name = bfl_equity_offer_capital_revision value = 0 }
+        set_variable = { name = bfl_quote_samples value = 0 }
+        set_variable = { name = bfl_quote_period value = 0 }
+        set_variable = { name = bfl_known_units value = var:bfl_state_units }
+        set_variable = { name = bfl_founder_units value = 0 }
+        if = { limit = { NOT = { has_variable = bfl_paid_in_capital } }
+            set_variable = { name = bfl_paid_in_capital value = bfl_tangible_equity } }
+        if = { limit = { var:bfl_state_units > 0 NOT = { exists = var:bfl_state_owner } bfl_has_valid_controller = yes }
+            set_variable = { name = bfl_state_owner value = overlord } }
+    if = { limit = { NOT = { has_variable = bfl_shr_01_active } } set_variable = { name = bfl_shr_01_active value = 0 } }
+            set_variable = { name = bfl_shr_01_pool value = 0 }
+            if = { limit = { var:bfl_shr_01_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_01_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_01_generation } } set_variable = { name = bfl_shr_01_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_01_units } } set_variable = { name = bfl_shr_01_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_01_basis } } set_variable = { name = bfl_shr_01_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_02_active } } set_variable = { name = bfl_shr_02_active value = 0 } }
+            set_variable = { name = bfl_shr_02_pool value = 0 }
+            if = { limit = { var:bfl_shr_02_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_02_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_02_generation } } set_variable = { name = bfl_shr_02_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_02_units } } set_variable = { name = bfl_shr_02_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_02_basis } } set_variable = { name = bfl_shr_02_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_03_active } } set_variable = { name = bfl_shr_03_active value = 0 } }
+            set_variable = { name = bfl_shr_03_pool value = 0 }
+            if = { limit = { var:bfl_shr_03_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_03_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_03_generation } } set_variable = { name = bfl_shr_03_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_03_units } } set_variable = { name = bfl_shr_03_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_03_basis } } set_variable = { name = bfl_shr_03_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_04_active } } set_variable = { name = bfl_shr_04_active value = 0 } }
+            set_variable = { name = bfl_shr_04_pool value = 0 }
+            if = { limit = { var:bfl_shr_04_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_04_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_04_generation } } set_variable = { name = bfl_shr_04_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_04_units } } set_variable = { name = bfl_shr_04_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_04_basis } } set_variable = { name = bfl_shr_04_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_05_active } } set_variable = { name = bfl_shr_05_active value = 0 } }
+            set_variable = { name = bfl_shr_05_pool value = 0 }
+            if = { limit = { var:bfl_shr_05_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_05_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_05_generation } } set_variable = { name = bfl_shr_05_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_05_units } } set_variable = { name = bfl_shr_05_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_05_basis } } set_variable = { name = bfl_shr_05_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_06_active } } set_variable = { name = bfl_shr_06_active value = 0 } }
+            set_variable = { name = bfl_shr_06_pool value = 0 }
+            if = { limit = { var:bfl_shr_06_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_06_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_06_generation } } set_variable = { name = bfl_shr_06_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_06_units } } set_variable = { name = bfl_shr_06_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_06_basis } } set_variable = { name = bfl_shr_06_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_07_active } } set_variable = { name = bfl_shr_07_active value = 0 } }
+            set_variable = { name = bfl_shr_07_pool value = 0 }
+            if = { limit = { var:bfl_shr_07_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_07_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_07_generation } } set_variable = { name = bfl_shr_07_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_07_units } } set_variable = { name = bfl_shr_07_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_07_basis } } set_variable = { name = bfl_shr_07_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_08_active } } set_variable = { name = bfl_shr_08_active value = 0 } }
+            set_variable = { name = bfl_shr_08_pool value = 0 }
+            if = { limit = { var:bfl_shr_08_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_08_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_08_generation } } set_variable = { name = bfl_shr_08_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_08_units } } set_variable = { name = bfl_shr_08_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_08_basis } } set_variable = { name = bfl_shr_08_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_09_active } } set_variable = { name = bfl_shr_09_active value = 0 } }
+            set_variable = { name = bfl_shr_09_pool value = 0 }
+            if = { limit = { var:bfl_shr_09_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_09_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_09_generation } } set_variable = { name = bfl_shr_09_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_09_units } } set_variable = { name = bfl_shr_09_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_09_basis } } set_variable = { name = bfl_shr_09_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_10_active } } set_variable = { name = bfl_shr_10_active value = 0 } }
+            set_variable = { name = bfl_shr_10_pool value = 0 }
+            if = { limit = { var:bfl_shr_10_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_10_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_10_generation } } set_variable = { name = bfl_shr_10_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_10_units } } set_variable = { name = bfl_shr_10_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_10_basis } } set_variable = { name = bfl_shr_10_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_11_active } } set_variable = { name = bfl_shr_11_active value = 0 } }
+            set_variable = { name = bfl_shr_11_pool value = 0 }
+            if = { limit = { var:bfl_shr_11_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_11_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_11_generation } } set_variable = { name = bfl_shr_11_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_11_units } } set_variable = { name = bfl_shr_11_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_11_basis } } set_variable = { name = bfl_shr_11_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_12_active } } set_variable = { name = bfl_shr_12_active value = 0 } }
+            set_variable = { name = bfl_shr_12_pool value = 0 }
+            if = { limit = { var:bfl_shr_12_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_12_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_12_generation } } set_variable = { name = bfl_shr_12_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_12_units } } set_variable = { name = bfl_shr_12_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_12_basis } } set_variable = { name = bfl_shr_12_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_13_active } } set_variable = { name = bfl_shr_13_active value = 0 } }
+            set_variable = { name = bfl_shr_13_pool value = 0 }
+            if = { limit = { var:bfl_shr_13_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_13_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_13_generation } } set_variable = { name = bfl_shr_13_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_13_units } } set_variable = { name = bfl_shr_13_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_13_basis } } set_variable = { name = bfl_shr_13_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_14_active } } set_variable = { name = bfl_shr_14_active value = 0 } }
+            set_variable = { name = bfl_shr_14_pool value = 0 }
+            if = { limit = { var:bfl_shr_14_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_14_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_14_generation } } set_variable = { name = bfl_shr_14_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_14_units } } set_variable = { name = bfl_shr_14_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_14_basis } } set_variable = { name = bfl_shr_14_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_15_active } } set_variable = { name = bfl_shr_15_active value = 0 } }
+            set_variable = { name = bfl_shr_15_pool value = 0 }
+            if = { limit = { var:bfl_shr_15_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_15_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_15_generation } } set_variable = { name = bfl_shr_15_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_15_units } } set_variable = { name = bfl_shr_15_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_15_basis } } set_variable = { name = bfl_shr_15_basis value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_16_active } } set_variable = { name = bfl_shr_16_active value = 0 } }
+            set_variable = { name = bfl_shr_16_pool value = 0 }
+            if = { limit = { var:bfl_shr_16_active = 1 } change_variable = { name = bfl_known_units add = var:bfl_shr_16_units } }
+if = { limit = { NOT = { has_variable = bfl_shr_16_generation } } set_variable = { name = bfl_shr_16_generation value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_16_units } } set_variable = { name = bfl_shr_16_units value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_shr_16_basis } } set_variable = { name = bfl_shr_16_basis value = 0 } }
+set_variable = { name = bfl_pos_01_units value = 0 } set_variable = { name = bfl_pos_01_basis value = 0 }
+            set_variable = { name = bfl_pos_01_dividends value = 0 } set_variable = { name = bfl_pos_01_realized value = 0 }
+set_variable = { name = bfl_pos_02_units value = 0 } set_variable = { name = bfl_pos_02_basis value = 0 }
+            set_variable = { name = bfl_pos_02_dividends value = 0 } set_variable = { name = bfl_pos_02_realized value = 0 }
+set_variable = { name = bfl_pos_03_units value = 0 } set_variable = { name = bfl_pos_03_basis value = 0 }
+            set_variable = { name = bfl_pos_03_dividends value = 0 } set_variable = { name = bfl_pos_03_realized value = 0 }
+set_variable = { name = bfl_pos_04_units value = 0 } set_variable = { name = bfl_pos_04_basis value = 0 }
+            set_variable = { name = bfl_pos_04_dividends value = 0 } set_variable = { name = bfl_pos_04_realized value = 0 }
+set_variable = { name = bfl_pos_05_units value = 0 } set_variable = { name = bfl_pos_05_basis value = 0 }
+            set_variable = { name = bfl_pos_05_dividends value = 0 } set_variable = { name = bfl_pos_05_realized value = 0 }
+set_variable = { name = bfl_pos_06_units value = 0 } set_variable = { name = bfl_pos_06_basis value = 0 }
+            set_variable = { name = bfl_pos_06_dividends value = 0 } set_variable = { name = bfl_pos_06_realized value = 0 }
+set_variable = { name = bfl_pos_07_units value = 0 } set_variable = { name = bfl_pos_07_basis value = 0 }
+            set_variable = { name = bfl_pos_07_dividends value = 0 } set_variable = { name = bfl_pos_07_realized value = 0 }
+set_variable = { name = bfl_pos_08_units value = 0 } set_variable = { name = bfl_pos_08_basis value = 0 }
+            set_variable = { name = bfl_pos_08_dividends value = 0 } set_variable = { name = bfl_pos_08_realized value = 0 }
+set_variable = { name = bfl_pos_09_units value = 0 } set_variable = { name = bfl_pos_09_basis value = 0 }
+            set_variable = { name = bfl_pos_09_dividends value = 0 } set_variable = { name = bfl_pos_09_realized value = 0 }
+set_variable = { name = bfl_pos_10_units value = 0 } set_variable = { name = bfl_pos_10_basis value = 0 }
+            set_variable = { name = bfl_pos_10_dividends value = 0 } set_variable = { name = bfl_pos_10_realized value = 0 }
+set_variable = { name = bfl_pos_11_units value = 0 } set_variable = { name = bfl_pos_11_basis value = 0 }
+            set_variable = { name = bfl_pos_11_dividends value = 0 } set_variable = { name = bfl_pos_11_realized value = 0 }
+set_variable = { name = bfl_pos_12_units value = 0 } set_variable = { name = bfl_pos_12_basis value = 0 }
+            set_variable = { name = bfl_pos_12_dividends value = 0 } set_variable = { name = bfl_pos_12_realized value = 0 }
+set_variable = { name = bfl_pos_13_units value = 0 } set_variable = { name = bfl_pos_13_basis value = 0 }
+            set_variable = { name = bfl_pos_13_dividends value = 0 } set_variable = { name = bfl_pos_13_realized value = 0 }
+set_variable = { name = bfl_pos_14_units value = 0 } set_variable = { name = bfl_pos_14_basis value = 0 }
+            set_variable = { name = bfl_pos_14_dividends value = 0 } set_variable = { name = bfl_pos_14_realized value = 0 }
+set_variable = { name = bfl_pos_15_units value = 0 } set_variable = { name = bfl_pos_15_basis value = 0 }
+            set_variable = { name = bfl_pos_15_dividends value = 0 } set_variable = { name = bfl_pos_15_realized value = 0 }
+set_variable = { name = bfl_pos_16_units value = 0 } set_variable = { name = bfl_pos_16_basis value = 0 }
+            set_variable = { name = bfl_pos_16_dividends value = 0 } set_variable = { name = bfl_pos_16_realized value = 0 }
+set_variable = { name = bfl_quote_01_price value = 0 }
+set_variable = { name = bfl_quote_01_period value = 0 }
+set_variable = { name = bfl_quote_01_volume value = 0 }
+set_variable = { name = bfl_quote_02_price value = 0 }
+set_variable = { name = bfl_quote_02_period value = 0 }
+set_variable = { name = bfl_quote_02_volume value = 0 }
+set_variable = { name = bfl_quote_03_price value = 0 }
+set_variable = { name = bfl_quote_03_period value = 0 }
+set_variable = { name = bfl_quote_03_volume value = 0 }
+set_variable = { name = bfl_quote_04_price value = 0 }
+set_variable = { name = bfl_quote_04_period value = 0 }
+set_variable = { name = bfl_quote_04_volume value = 0 }
+set_variable = { name = bfl_quote_05_price value = 0 }
+set_variable = { name = bfl_quote_05_period value = 0 }
+set_variable = { name = bfl_quote_05_volume value = 0 }
+set_variable = { name = bfl_quote_06_price value = 0 }
+set_variable = { name = bfl_quote_06_period value = 0 }
+set_variable = { name = bfl_quote_06_volume value = 0 }
+set_variable = { name = bfl_quote_07_price value = 0 }
+set_variable = { name = bfl_quote_07_period value = 0 }
+set_variable = { name = bfl_quote_07_volume value = 0 }
+set_variable = { name = bfl_quote_08_price value = 0 }
+set_variable = { name = bfl_quote_08_period value = 0 }
+set_variable = { name = bfl_quote_08_volume value = 0 }
+set_variable = { name = bfl_quote_09_price value = 0 }
+set_variable = { name = bfl_quote_09_period value = 0 }
+set_variable = { name = bfl_quote_09_volume value = 0 }
+set_variable = { name = bfl_quote_10_price value = 0 }
+set_variable = { name = bfl_quote_10_period value = 0 }
+set_variable = { name = bfl_quote_10_volume value = 0 }
+set_variable = { name = bfl_quote_11_price value = 0 }
+set_variable = { name = bfl_quote_11_period value = 0 }
+set_variable = { name = bfl_quote_11_volume value = 0 }
+set_variable = { name = bfl_quote_12_price value = 0 }
+set_variable = { name = bfl_quote_12_period value = 0 }
+set_variable = { name = bfl_quote_12_volume value = 0 }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_02_active = 1 var:bfl_shr_01_party = var:bfl_shr_02_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_02_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_02_basis }
+                set_variable = { name = bfl_shr_02_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_03_active = 1 var:bfl_shr_01_party = var:bfl_shr_03_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_03_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_03_basis }
+                set_variable = { name = bfl_shr_03_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_04_active = 1 var:bfl_shr_01_party = var:bfl_shr_04_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_04_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_04_basis }
+                set_variable = { name = bfl_shr_04_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_05_active = 1 var:bfl_shr_01_party = var:bfl_shr_05_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_05_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_05_basis }
+                set_variable = { name = bfl_shr_05_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_06_active = 1 var:bfl_shr_01_party = var:bfl_shr_06_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_06_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_06_basis }
+                set_variable = { name = bfl_shr_06_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_01_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_01_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_01_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_01_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_01_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_01_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_01_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_01_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_01_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_01_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_01_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_01_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_03_active = 1 var:bfl_shr_02_party = var:bfl_shr_03_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_03_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_03_basis }
+                set_variable = { name = bfl_shr_03_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_04_active = 1 var:bfl_shr_02_party = var:bfl_shr_04_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_04_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_04_basis }
+                set_variable = { name = bfl_shr_04_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_05_active = 1 var:bfl_shr_02_party = var:bfl_shr_05_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_05_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_05_basis }
+                set_variable = { name = bfl_shr_05_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_06_active = 1 var:bfl_shr_02_party = var:bfl_shr_06_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_06_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_06_basis }
+                set_variable = { name = bfl_shr_06_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_02_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_02_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_02_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_02_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_02_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_02_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_02_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_02_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_02_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_02_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_02_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_02_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_04_active = 1 var:bfl_shr_03_party = var:bfl_shr_04_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_04_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_04_basis }
+                set_variable = { name = bfl_shr_04_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_05_active = 1 var:bfl_shr_03_party = var:bfl_shr_05_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_05_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_05_basis }
+                set_variable = { name = bfl_shr_05_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_06_active = 1 var:bfl_shr_03_party = var:bfl_shr_06_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_06_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_06_basis }
+                set_variable = { name = bfl_shr_06_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_03_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_03_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_03_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_03_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_03_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_03_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_03_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_03_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_03_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_03_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_03_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_03_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_05_active = 1 var:bfl_shr_04_party = var:bfl_shr_05_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_05_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_05_basis }
+                set_variable = { name = bfl_shr_05_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_06_active = 1 var:bfl_shr_04_party = var:bfl_shr_06_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_06_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_06_basis }
+                set_variable = { name = bfl_shr_06_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_04_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_04_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_04_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_04_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_04_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_04_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_04_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_04_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_04_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_04_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_04_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_04_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_06_active = 1 var:bfl_shr_05_party = var:bfl_shr_06_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_06_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_06_basis }
+                set_variable = { name = bfl_shr_06_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_05_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_05_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_05_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_05_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_05_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_05_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_05_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_05_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_05_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_05_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_05_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_05_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_07_active = 1 var:bfl_shr_06_party = var:bfl_shr_07_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_07_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_07_basis }
+                set_variable = { name = bfl_shr_07_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_06_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_06_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_06_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_06_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_06_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_06_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_06_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_06_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_06_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_06_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_06_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_08_active = 1 var:bfl_shr_07_party = var:bfl_shr_08_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_08_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_08_basis }
+                set_variable = { name = bfl_shr_08_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_07_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_07_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_07_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_07_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_07_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_07_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_07_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_07_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_07_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_07_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_09_active = 1 var:bfl_shr_08_party = var:bfl_shr_09_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_09_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_09_basis }
+                set_variable = { name = bfl_shr_09_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_08_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_08_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_08_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_08_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_08_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_08_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_08_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_08_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_08_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_10_active = 1 var:bfl_shr_09_party = var:bfl_shr_10_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_10_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_10_basis }
+                set_variable = { name = bfl_shr_10_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_09_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_09_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_09_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_09_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_09_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_09_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_09_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_09_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_11_active = 1 var:bfl_shr_10_party = var:bfl_shr_11_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_11_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_11_basis }
+                set_variable = { name = bfl_shr_11_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_10_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_10_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_10_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_10_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_10_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_10_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_10_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_12_active = 1 var:bfl_shr_11_party = var:bfl_shr_12_party }
+                change_variable = { name = bfl_shr_11_units add = var:bfl_shr_12_units }
+                change_variable = { name = bfl_shr_11_basis add = var:bfl_shr_12_basis }
+                set_variable = { name = bfl_shr_12_active value = 0 } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_11_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_11_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_11_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_11_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_11_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_11_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_11_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_11_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_11_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_11_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_11_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_11_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_13_active = 1 var:bfl_shr_12_party = var:bfl_shr_13_party }
+                change_variable = { name = bfl_shr_12_units add = var:bfl_shr_13_units }
+                change_variable = { name = bfl_shr_12_basis add = var:bfl_shr_13_basis }
+                set_variable = { name = bfl_shr_13_active value = 0 } }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_12_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_12_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_12_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_12_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_12_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_12_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_12_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_12_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_12_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_14_active = 1 var:bfl_shr_13_party = var:bfl_shr_14_party }
+                change_variable = { name = bfl_shr_13_units add = var:bfl_shr_14_units }
+                change_variable = { name = bfl_shr_13_basis add = var:bfl_shr_14_basis }
+                set_variable = { name = bfl_shr_14_active value = 0 } }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_13_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_13_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_13_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_13_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_13_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_13_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_15_active = 1 var:bfl_shr_14_party = var:bfl_shr_15_party }
+                change_variable = { name = bfl_shr_14_units add = var:bfl_shr_15_units }
+                change_variable = { name = bfl_shr_14_basis add = var:bfl_shr_15_basis }
+                set_variable = { name = bfl_shr_15_active value = 0 } }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_14_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_14_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_14_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_16_active = 1 var:bfl_shr_15_party = var:bfl_shr_16_party }
+                change_variable = { name = bfl_shr_15_units add = var:bfl_shr_16_units }
+                change_variable = { name = bfl_shr_15_basis add = var:bfl_shr_16_basis }
+                set_variable = { name = bfl_shr_16_active value = 0 } }
+set_variable = { name = bfl_equity_pool value = 5 }
+        set_variable = { name = bfl_equity_amount value = 0 }
+        set_variable = { name = bfl_new_units value = { value = var:bfl_total_units subtract = var:bfl_known_units min = 0 } }
+        if = { limit = { var:bfl_new_units > 0 }
+            save_scope_as = bfl_issuer save_scope_as = bfl_party
+            if = { limit = { bfl_is_company = yes exists = var:bfl_company_owner }
+                var:bfl_company_owner = { save_scope_as = bfl_party }
+                set_variable = { name = bfl_equity_pool value = 0 } }
+            if = { limit = { bfl_is_company = yes } bfl_allocate_equity_holder = yes }
+            else = { set_variable = { name = bfl_founder_units value = var:bfl_new_units } }
+        }
+        set_variable = { name = bfl_equity_pool value = 0 }
+    }
+bfl_initialize_pricing = yes
+bfl_initialize_market_maker = yes
+if = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }
+}
+bfl_allocate_equity_holder = {
+set_variable = { name = bfl_equity_allocated value = 0 }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_01_active = 1
+            var:bfl_shr_01_party = scope:bfl_party var:bfl_shr_01_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 1 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_02_active = 1
+            var:bfl_shr_02_party = scope:bfl_party var:bfl_shr_02_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 2 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_03_active = 1
+            var:bfl_shr_03_party = scope:bfl_party var:bfl_shr_03_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 3 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_04_active = 1
+            var:bfl_shr_04_party = scope:bfl_party var:bfl_shr_04_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 4 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_05_active = 1
+            var:bfl_shr_05_party = scope:bfl_party var:bfl_shr_05_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 5 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_06_active = 1
+            var:bfl_shr_06_party = scope:bfl_party var:bfl_shr_06_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 6 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_07_active = 1
+            var:bfl_shr_07_party = scope:bfl_party var:bfl_shr_07_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 7 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_08_active = 1
+            var:bfl_shr_08_party = scope:bfl_party var:bfl_shr_08_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 8 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_09_active = 1
+            var:bfl_shr_09_party = scope:bfl_party var:bfl_shr_09_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 9 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_10_active = 1
+            var:bfl_shr_10_party = scope:bfl_party var:bfl_shr_10_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 10 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_11_active = 1
+            var:bfl_shr_11_party = scope:bfl_party var:bfl_shr_11_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 11 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_12_active = 1
+            var:bfl_shr_12_party = scope:bfl_party var:bfl_shr_12_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 12 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_13_active = 1
+            var:bfl_shr_13_party = scope:bfl_party var:bfl_shr_13_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 13 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_14_active = 1
+            var:bfl_shr_14_party = scope:bfl_party var:bfl_shr_14_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 14 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_15_active = 1
+            var:bfl_shr_15_party = scope:bfl_party var:bfl_shr_15_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 15 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_16_active = 1
+            var:bfl_shr_16_party = scope:bfl_party var:bfl_shr_16_pool = var:bfl_equity_pool }
+            set_variable = { name = bfl_equity_allocated value = 16 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_01_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 1 }
+            set_variable = { name = bfl_shr_01_active value = 1 }
+            change_variable = { name = bfl_shr_01_generation add = 1 }
+            set_variable = { name = bfl_shr_01_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_01_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_01_units value = 0 } set_variable = { name = bfl_shr_01_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_02_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 2 }
+            set_variable = { name = bfl_shr_02_active value = 1 }
+            change_variable = { name = bfl_shr_02_generation add = 1 }
+            set_variable = { name = bfl_shr_02_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_02_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_02_units value = 0 } set_variable = { name = bfl_shr_02_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_03_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 3 }
+            set_variable = { name = bfl_shr_03_active value = 1 }
+            change_variable = { name = bfl_shr_03_generation add = 1 }
+            set_variable = { name = bfl_shr_03_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_03_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_03_units value = 0 } set_variable = { name = bfl_shr_03_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_04_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 4 }
+            set_variable = { name = bfl_shr_04_active value = 1 }
+            change_variable = { name = bfl_shr_04_generation add = 1 }
+            set_variable = { name = bfl_shr_04_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_04_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_04_units value = 0 } set_variable = { name = bfl_shr_04_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_05_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 5 }
+            set_variable = { name = bfl_shr_05_active value = 1 }
+            change_variable = { name = bfl_shr_05_generation add = 1 }
+            set_variable = { name = bfl_shr_05_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_05_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_05_units value = 0 } set_variable = { name = bfl_shr_05_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_06_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 6 }
+            set_variable = { name = bfl_shr_06_active value = 1 }
+            change_variable = { name = bfl_shr_06_generation add = 1 }
+            set_variable = { name = bfl_shr_06_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_06_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_06_units value = 0 } set_variable = { name = bfl_shr_06_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_07_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 7 }
+            set_variable = { name = bfl_shr_07_active value = 1 }
+            change_variable = { name = bfl_shr_07_generation add = 1 }
+            set_variable = { name = bfl_shr_07_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_07_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_07_units value = 0 } set_variable = { name = bfl_shr_07_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_08_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 8 }
+            set_variable = { name = bfl_shr_08_active value = 1 }
+            change_variable = { name = bfl_shr_08_generation add = 1 }
+            set_variable = { name = bfl_shr_08_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_08_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_08_units value = 0 } set_variable = { name = bfl_shr_08_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_09_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 9 }
+            set_variable = { name = bfl_shr_09_active value = 1 }
+            change_variable = { name = bfl_shr_09_generation add = 1 }
+            set_variable = { name = bfl_shr_09_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_09_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_09_units value = 0 } set_variable = { name = bfl_shr_09_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_10_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 10 }
+            set_variable = { name = bfl_shr_10_active value = 1 }
+            change_variable = { name = bfl_shr_10_generation add = 1 }
+            set_variable = { name = bfl_shr_10_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_10_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_10_units value = 0 } set_variable = { name = bfl_shr_10_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_11_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 11 }
+            set_variable = { name = bfl_shr_11_active value = 1 }
+            change_variable = { name = bfl_shr_11_generation add = 1 }
+            set_variable = { name = bfl_shr_11_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_11_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_11_units value = 0 } set_variable = { name = bfl_shr_11_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_12_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 12 }
+            set_variable = { name = bfl_shr_12_active value = 1 }
+            change_variable = { name = bfl_shr_12_generation add = 1 }
+            set_variable = { name = bfl_shr_12_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_12_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_12_units value = 0 } set_variable = { name = bfl_shr_12_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_13_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 13 }
+            set_variable = { name = bfl_shr_13_active value = 1 }
+            change_variable = { name = bfl_shr_13_generation add = 1 }
+            set_variable = { name = bfl_shr_13_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_13_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_13_units value = 0 } set_variable = { name = bfl_shr_13_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_14_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 14 }
+            set_variable = { name = bfl_shr_14_active value = 1 }
+            change_variable = { name = bfl_shr_14_generation add = 1 }
+            set_variable = { name = bfl_shr_14_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_14_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_14_units value = 0 } set_variable = { name = bfl_shr_14_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_15_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 15 }
+            set_variable = { name = bfl_shr_15_active value = 1 }
+            change_variable = { name = bfl_shr_15_generation add = 1 }
+            set_variable = { name = bfl_shr_15_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_15_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_15_units value = 0 } set_variable = { name = bfl_shr_15_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 0 var:bfl_shr_16_active = 0 }
+            set_variable = { name = bfl_equity_allocated value = 16 }
+            set_variable = { name = bfl_shr_16_active value = 1 }
+            change_variable = { name = bfl_shr_16_generation add = 1 }
+            set_variable = { name = bfl_shr_16_party value = scope:bfl_party }
+            set_variable = { name = bfl_shr_16_pool value = var:bfl_equity_pool }
+            set_variable = { name = bfl_shr_16_units value = 0 } set_variable = { name = bfl_shr_16_basis value = 0 } }
+if = { limit = { var:bfl_equity_allocated = 1 }
+            change_variable = { name = bfl_shr_01_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_01_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 2 }
+            change_variable = { name = bfl_shr_02_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_02_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 3 }
+            change_variable = { name = bfl_shr_03_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_03_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 4 }
+            change_variable = { name = bfl_shr_04_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_04_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 5 }
+            change_variable = { name = bfl_shr_05_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_05_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 6 }
+            change_variable = { name = bfl_shr_06_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_06_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 7 }
+            change_variable = { name = bfl_shr_07_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_07_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 8 }
+            change_variable = { name = bfl_shr_08_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_08_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 9 }
+            change_variable = { name = bfl_shr_09_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_09_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 10 }
+            change_variable = { name = bfl_shr_10_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_10_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 11 }
+            change_variable = { name = bfl_shr_11_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_11_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 12 }
+            change_variable = { name = bfl_shr_12_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_12_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 13 }
+            change_variable = { name = bfl_shr_13_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_13_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 14 }
+            change_variable = { name = bfl_shr_14_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_14_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 15 }
+            change_variable = { name = bfl_shr_15_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_15_basis add = var:bfl_equity_amount } }
+if = { limit = { var:bfl_equity_allocated = 16 }
+            change_variable = { name = bfl_shr_16_units add = var:bfl_new_units }
+            change_variable = { name = bfl_shr_16_basis add = var:bfl_equity_amount } }
+}
+bfl_index_equity_position = {
+set_variable = { name = bfl_position_allocated value = 0 }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_01_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 1 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_02_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 2 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_03_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 3 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_04_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 4 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_05_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 5 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_06_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 6 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_07_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 7 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_08_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 8 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_09_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 9 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_10_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 10 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_11_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 11 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_12_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 12 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_13_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 13 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_14_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 14 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_15_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 15 } }
+if = { limit = { var:bfl_position_allocated = 0 var:bfl_pos_16_issuer ?= scope:bfl_issuer }
+            set_variable = { name = bfl_position_allocated value = 16 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_01_issuer } }
+            set_variable = { name = bfl_position_allocated value = 1 }
+            set_variable = { name = bfl_pos_01_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_01_dividends value = 0 }
+            set_variable = { name = bfl_pos_01_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_02_issuer } }
+            set_variable = { name = bfl_position_allocated value = 2 }
+            set_variable = { name = bfl_pos_02_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_02_dividends value = 0 }
+            set_variable = { name = bfl_pos_02_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_03_issuer } }
+            set_variable = { name = bfl_position_allocated value = 3 }
+            set_variable = { name = bfl_pos_03_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_03_dividends value = 0 }
+            set_variable = { name = bfl_pos_03_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_04_issuer } }
+            set_variable = { name = bfl_position_allocated value = 4 }
+            set_variable = { name = bfl_pos_04_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_04_dividends value = 0 }
+            set_variable = { name = bfl_pos_04_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_05_issuer } }
+            set_variable = { name = bfl_position_allocated value = 5 }
+            set_variable = { name = bfl_pos_05_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_05_dividends value = 0 }
+            set_variable = { name = bfl_pos_05_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_06_issuer } }
+            set_variable = { name = bfl_position_allocated value = 6 }
+            set_variable = { name = bfl_pos_06_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_06_dividends value = 0 }
+            set_variable = { name = bfl_pos_06_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_07_issuer } }
+            set_variable = { name = bfl_position_allocated value = 7 }
+            set_variable = { name = bfl_pos_07_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_07_dividends value = 0 }
+            set_variable = { name = bfl_pos_07_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_08_issuer } }
+            set_variable = { name = bfl_position_allocated value = 8 }
+            set_variable = { name = bfl_pos_08_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_08_dividends value = 0 }
+            set_variable = { name = bfl_pos_08_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_09_issuer } }
+            set_variable = { name = bfl_position_allocated value = 9 }
+            set_variable = { name = bfl_pos_09_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_09_dividends value = 0 }
+            set_variable = { name = bfl_pos_09_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_10_issuer } }
+            set_variable = { name = bfl_position_allocated value = 10 }
+            set_variable = { name = bfl_pos_10_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_10_dividends value = 0 }
+            set_variable = { name = bfl_pos_10_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_11_issuer } }
+            set_variable = { name = bfl_position_allocated value = 11 }
+            set_variable = { name = bfl_pos_11_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_11_dividends value = 0 }
+            set_variable = { name = bfl_pos_11_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_12_issuer } }
+            set_variable = { name = bfl_position_allocated value = 12 }
+            set_variable = { name = bfl_pos_12_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_12_dividends value = 0 }
+            set_variable = { name = bfl_pos_12_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_13_issuer } }
+            set_variable = { name = bfl_position_allocated value = 13 }
+            set_variable = { name = bfl_pos_13_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_13_dividends value = 0 }
+            set_variable = { name = bfl_pos_13_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_14_issuer } }
+            set_variable = { name = bfl_position_allocated value = 14 }
+            set_variable = { name = bfl_pos_14_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_14_dividends value = 0 }
+            set_variable = { name = bfl_pos_14_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_15_issuer } }
+            set_variable = { name = bfl_position_allocated value = 15 }
+            set_variable = { name = bfl_pos_15_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_15_dividends value = 0 }
+            set_variable = { name = bfl_pos_15_realized value = 0 } }
+if = { limit = { var:bfl_position_allocated = 0 NOT = { exists = var:bfl_pos_16_issuer } }
+            set_variable = { name = bfl_position_allocated value = 16 }
+            set_variable = { name = bfl_pos_16_issuer value = scope:bfl_issuer }
+            set_variable = { name = bfl_pos_16_dividends value = 0 }
+            set_variable = { name = bfl_pos_16_realized value = 0 } }
+save_scope_as = bfl_position_owner
+if = { limit = { var:bfl_position_allocated = 1 }
+            set_variable = { name = bfl_pos_01_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_01_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_01_units <= 0 } remove_variable = bfl_pos_01_issuer } }
+if = { limit = { var:bfl_position_allocated = 2 }
+            set_variable = { name = bfl_pos_02_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_02_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_02_units <= 0 } remove_variable = bfl_pos_02_issuer } }
+if = { limit = { var:bfl_position_allocated = 3 }
+            set_variable = { name = bfl_pos_03_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_03_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_03_units <= 0 } remove_variable = bfl_pos_03_issuer } }
+if = { limit = { var:bfl_position_allocated = 4 }
+            set_variable = { name = bfl_pos_04_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_04_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_04_units <= 0 } remove_variable = bfl_pos_04_issuer } }
+if = { limit = { var:bfl_position_allocated = 5 }
+            set_variable = { name = bfl_pos_05_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_05_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_05_units <= 0 } remove_variable = bfl_pos_05_issuer } }
+if = { limit = { var:bfl_position_allocated = 6 }
+            set_variable = { name = bfl_pos_06_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_06_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_06_units <= 0 } remove_variable = bfl_pos_06_issuer } }
+if = { limit = { var:bfl_position_allocated = 7 }
+            set_variable = { name = bfl_pos_07_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_07_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_07_units <= 0 } remove_variable = bfl_pos_07_issuer } }
+if = { limit = { var:bfl_position_allocated = 8 }
+            set_variable = { name = bfl_pos_08_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_08_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_08_units <= 0 } remove_variable = bfl_pos_08_issuer } }
+if = { limit = { var:bfl_position_allocated = 9 }
+            set_variable = { name = bfl_pos_09_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_09_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_09_units <= 0 } remove_variable = bfl_pos_09_issuer } }
+if = { limit = { var:bfl_position_allocated = 10 }
+            set_variable = { name = bfl_pos_10_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_10_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_10_units <= 0 } remove_variable = bfl_pos_10_issuer } }
+if = { limit = { var:bfl_position_allocated = 11 }
+            set_variable = { name = bfl_pos_11_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_11_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_11_units <= 0 } remove_variable = bfl_pos_11_issuer } }
+if = { limit = { var:bfl_position_allocated = 12 }
+            set_variable = { name = bfl_pos_12_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_12_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_12_units <= 0 } remove_variable = bfl_pos_12_issuer } }
+if = { limit = { var:bfl_position_allocated = 13 }
+            set_variable = { name = bfl_pos_13_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_13_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_13_units <= 0 } remove_variable = bfl_pos_13_issuer } }
+if = { limit = { var:bfl_position_allocated = 14 }
+            set_variable = { name = bfl_pos_14_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_14_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_14_units <= 0 } remove_variable = bfl_pos_14_issuer } }
+if = { limit = { var:bfl_position_allocated = 15 }
+            set_variable = { name = bfl_pos_15_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_15_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_15_units <= 0 } remove_variable = bfl_pos_15_issuer } }
+if = { limit = { var:bfl_position_allocated = 16 }
+            set_variable = { name = bfl_pos_16_units value = scope:bfl_issuer.bfl_position_owner_units }
+            set_variable = { name = bfl_pos_16_basis value = scope:bfl_issuer.bfl_position_owner_basis }
+            if = { limit = { var:bfl_pos_16_units <= 0 } remove_variable = bfl_pos_16_issuer } }
+}
+bfl_record_equity_dividend = {
+if = { limit = { var:bfl_pos_01_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_01_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_02_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_02_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_03_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_03_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_04_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_04_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_05_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_05_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_06_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_06_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_07_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_07_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_08_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_08_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_09_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_09_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_10_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_10_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_11_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_11_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_12_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_12_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_13_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_13_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_14_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_14_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_15_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_15_dividends add = scope:bfl_bank.var:bfl_payment } }
+if = { limit = { var:bfl_pos_16_issuer ?= scope:bfl_bank }
+            change_variable = { name = bfl_pos_16_dividends add = scope:bfl_bank.var:bfl_payment } }
+}
+bfl_record_equity_gain = {
+if = { limit = { var:bfl_pos_01_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_01_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_02_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_02_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_03_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_03_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_04_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_04_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_05_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_05_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_06_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_06_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_07_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_07_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_08_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_08_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_09_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_09_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_10_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_10_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_11_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_11_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_12_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_12_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_13_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_13_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_14_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_14_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_15_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_15_realized add = var:bfl_trade_gain } }
+if = { limit = { var:bfl_pos_16_issuer ?= scope:bfl_issuer }
+            change_variable = { name = bfl_pos_16_realized add = var:bfl_trade_gain } }
+}
+bfl_migrate_equity_portfolio = {
+if = { limit = { NOT = { has_variable = bfl_portfolio_migrated } }
+        set_variable = bfl_portfolio_migrated save_scope_as = bfl_position_owner
+        every_country = { limit = { has_variable = bfl_ownership_schema NOT = { this = scope:bfl_position_owner }
+            bfl_position_owner_units > 0 }
+            save_scope_as = bfl_issuer
+            scope:bfl_position_owner = { bfl_index_equity_position = yes }
+        }
+    }
+}
+bfl_list_equity_offer = {
+save_scope_as = bfl_issuer
+        if = { limit = { exists = scope:bfl_equity_seller
+            scope:bfl_equity_seller = { bfl_equity_actor_authority = yes bfl_equity_exchange_access = yes }
+            bfl_equity_issuer = yes var:bfl_equity_listed = 1
+            OR = { var:bfl_equity_offer_active = 0 bfl_period > var:bfl_equity_offer_expiry var:bfl_equity_offer_seller = scope:bfl_equity_seller }
+            OR = { bfl_is_bank = yes scope:bfl_equity_seller = { bfl_can_originate_company_equity = yes } }
+            var:bfl_requested_units > 0 bfl_equity_seller_units >= var:bfl_requested_units
+            var:bfl_requested_multiplier >= 0.5 var:bfl_requested_multiplier <= 1.5 bfl_equity_quote > 0 }
+            set_variable = { name = bfl_requested_value value = { value = bfl_equity_quote multiply = var:bfl_requested_units multiply = var:bfl_requested_multiplier multiply = 100 round = yes divide = 100 } }
+            if = { limit = { var:bfl_requested_value >= 0.01 }
+            change_variable = { name = bfl_equity_offer_revision add = 1 }
+            set_variable = { name = bfl_equity_offer_active value = 1 }
+            set_variable = { name = bfl_equity_offer_seller value = scope:bfl_equity_seller }
+            set_variable = { name = bfl_equity_offer_units value = var:bfl_requested_units }
+            set_variable = { name = bfl_equity_offer_price value = var:bfl_requested_value }
+            set_variable = { name = bfl_equity_offer_expiry value = { value = bfl_period add = 3 } }
+            set_variable = { name = bfl_equity_offer_capital_revision value = var:bfl_equity_revision }
+            }
+        }
+}
+bfl_prepare_equity_order = {
+save_scope_as = bfl_issuer
+        scope:bfl_equity_buyer ?= { save_scope_as = bfl_party }
+        set_variable = { name = bfl_equity_pool value = 0 }
+        var:bfl_equity_offer_seller ?= { save_scope_as = bfl_equity_seller }
+        if = { limit = { bfl_equity_trade_ready = yes scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes } }
+            scope:bfl_equity_actor = {
+                if = { limit = { NOT = { has_variable = bfl_order_revision } } set_variable = { name = bfl_order_revision value = 0 } }
+                change_variable = { name = bfl_order_revision add = 1 }
+                set_variable = { name = bfl_order_issuer value = scope:bfl_issuer }
+                set_variable = { name = bfl_order_buyer value = scope:bfl_equity_buyer }
+                set_variable = { name = bfl_order_seller value = scope:bfl_equity_seller }
+                set_variable = { name = bfl_order_offer_revision value = scope:bfl_issuer.var:bfl_equity_offer_revision }
+                set_variable = { name = bfl_order_units value = scope:bfl_issuer.var:bfl_equity_offer_units }
+                set_variable = { name = bfl_order_price value = scope:bfl_issuer.var:bfl_equity_offer_price }
+                save_scope_value_as = { name = bfl_confirm_revision value = var:bfl_order_revision }
+                trigger_event_non_silently = bfl_exchange.1
+            }
+        }
+}
+bfl_accept_equity_order = {
+save_scope_as = bfl_equity_actor
+        if = { limit = { exists = var:bfl_order_issuer exists = var:bfl_order_buyer
+            exists = var:bfl_order_seller var:bfl_order_revision = scope:bfl_confirm_revision }
+            var:bfl_order_buyer = { save_scope_as = bfl_equity_buyer }
+            var:bfl_order_seller = { save_scope_as = bfl_equity_seller }
+            var:bfl_order_issuer = {
+                save_scope_as = bfl_issuer
+                scope:bfl_equity_buyer = { save_scope_as = bfl_party }
+                set_variable = { name = bfl_equity_pool value = 0 }
+                if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
+                    scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
+                    var:bfl_equity_offer_revision = scope:bfl_equity_actor.var:bfl_order_offer_revision
+                    var:bfl_equity_offer_units = scope:bfl_equity_actor.var:bfl_order_units
+                    var:bfl_equity_offer_price = scope:bfl_equity_actor.var:bfl_order_price }
+                    bfl_execute_equity_trade = yes
+                }
+            }
+            remove_variable = bfl_order_issuer remove_variable = bfl_order_buyer remove_variable = bfl_order_seller
+        }
+}
+bfl_execute_equity_trade = {
+if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
+        scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
+        scope:bfl_equity_actor = { exists = var:bfl_order_issuer var:bfl_order_issuer = scope:bfl_issuer
+            var:bfl_order_offer_revision = scope:bfl_issuer.var:bfl_equity_offer_revision
+            var:bfl_order_units = scope:bfl_issuer.var:bfl_equity_offer_units
+            var:bfl_order_price = scope:bfl_issuer.var:bfl_equity_offer_price
+            var:bfl_order_seller = scope:bfl_equity_seller var:bfl_order_buyer = scope:bfl_equity_buyer
+            var:bfl_order_revision = scope:bfl_confirm_revision } }
+    set_variable = bfl_operation_guard
+        set_variable = { name = bfl_equity_released_basis value = { value = bfl_equity_seller_basis multiply = var:bfl_equity_offer_units divide = bfl_equity_seller_units } }
+    if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_01_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_01_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_01_units <= 0 } set_variable = { name = bfl_shr_01_active value = 0 } } }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_02_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_02_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_02_units <= 0 } set_variable = { name = bfl_shr_02_active value = 0 } } }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_03_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_03_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_03_units <= 0 } set_variable = { name = bfl_shr_03_active value = 0 } } }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_04_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_04_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_04_units <= 0 } set_variable = { name = bfl_shr_04_active value = 0 } } }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_05_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_05_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_05_units <= 0 } set_variable = { name = bfl_shr_05_active value = 0 } } }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_06_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_06_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_06_units <= 0 } set_variable = { name = bfl_shr_06_active value = 0 } } }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_07_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_07_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_07_units <= 0 } set_variable = { name = bfl_shr_07_active value = 0 } } }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_08_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_08_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_08_units <= 0 } set_variable = { name = bfl_shr_08_active value = 0 } } }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_09_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_09_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_09_units <= 0 } set_variable = { name = bfl_shr_09_active value = 0 } } }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_10_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_10_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_10_units <= 0 } set_variable = { name = bfl_shr_10_active value = 0 } } }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_11_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_11_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_11_units <= 0 } set_variable = { name = bfl_shr_11_active value = 0 } } }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_12_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_12_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_12_units <= 0 } set_variable = { name = bfl_shr_12_active value = 0 } } }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_13_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_13_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_13_units <= 0 } set_variable = { name = bfl_shr_13_active value = 0 } } }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_14_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_14_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_14_units <= 0 } set_variable = { name = bfl_shr_14_active value = 0 } } }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_15_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_15_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_15_units <= 0 } set_variable = { name = bfl_shr_15_active value = 0 } } }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_equity_seller }
+            change_variable = { name = bfl_shr_16_units subtract = var:bfl_equity_offer_units }
+            change_variable = { name = bfl_shr_16_basis subtract = var:bfl_equity_released_basis }
+            if = { limit = { var:bfl_shr_16_units <= 0 } set_variable = { name = bfl_shr_16_active value = 0 } } }
+set_variable = { name = bfl_new_units value = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_equity_amount value = var:bfl_equity_offer_price }
+        bfl_allocate_equity_holder = yes
+        scope:bfl_equity_seller = {
+            add_gold = scope:bfl_issuer.var:bfl_equity_offer_price
+            set_variable = { name = bfl_trade_gain value = { value = scope:bfl_issuer.var:bfl_equity_offer_price subtract = scope:bfl_issuer.var:bfl_equity_released_basis } }
+            change_variable = { name = bfl_equity_realized add = var:bfl_trade_gain }
+            bfl_record_equity_gain = yes
+            if = { limit = { var:bfl_trade_gain >= 0 } change_variable = { name = bfl_profit_trading add = var:bfl_trade_gain } }
+            else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_trade_gain } }
+            bfl_index_equity_position = yes bfl_record_equity_transaction = yes bfl_refresh_asset_statement = yes
+        }
+        scope:bfl_equity_buyer = { add_gold = { value = scope:bfl_issuer.var:bfl_equity_offer_price multiply = -1 }
+            bfl_index_equity_position = yes bfl_record_equity_transaction = yes bfl_refresh_asset_statement = yes }
+        set_variable = { name = bfl_equity_last_price value = { value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units } }
+        set_variable = { name = bfl_equity_last_volume value = var:bfl_equity_offer_units }
+        change_variable = { name = bfl_equity_pending_volume add = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_units value = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_side value = 1 } bfl_record_price_pressure = yes
+        set_variable = { name = bfl_equity_last_trade value = bfl_period }
+        change_variable = { name = bfl_equity_trades add = 1 }
+        set_variable = { name = bfl_equity_offer_active value = 0 }
+        remove_variable = bfl_operation_guard
+    }
+}
+bfl_record_equity_transaction = {
+if = { limit = { has_variable = bfl_tx_05_issuer } set_variable = { name = bfl_tx_06_issuer value = var:bfl_tx_05_issuer } }
+if = { limit = { has_variable = bfl_tx_05_seller } set_variable = { name = bfl_tx_06_seller value = var:bfl_tx_05_seller } }
+if = { limit = { has_variable = bfl_tx_05_buyer } set_variable = { name = bfl_tx_06_buyer value = var:bfl_tx_05_buyer } }
+if = { limit = { has_variable = bfl_tx_05_units } set_variable = { name = bfl_tx_06_units value = var:bfl_tx_05_units } }
+if = { limit = { has_variable = bfl_tx_05_price } set_variable = { name = bfl_tx_06_price value = var:bfl_tx_05_price } }
+if = { limit = { has_variable = bfl_tx_05_period } set_variable = { name = bfl_tx_06_period value = var:bfl_tx_05_period } }
+if = { limit = { has_variable = bfl_tx_04_issuer } set_variable = { name = bfl_tx_05_issuer value = var:bfl_tx_04_issuer } }
+if = { limit = { has_variable = bfl_tx_04_seller } set_variable = { name = bfl_tx_05_seller value = var:bfl_tx_04_seller } }
+if = { limit = { has_variable = bfl_tx_04_buyer } set_variable = { name = bfl_tx_05_buyer value = var:bfl_tx_04_buyer } }
+if = { limit = { has_variable = bfl_tx_04_units } set_variable = { name = bfl_tx_05_units value = var:bfl_tx_04_units } }
+if = { limit = { has_variable = bfl_tx_04_price } set_variable = { name = bfl_tx_05_price value = var:bfl_tx_04_price } }
+if = { limit = { has_variable = bfl_tx_04_period } set_variable = { name = bfl_tx_05_period value = var:bfl_tx_04_period } }
+if = { limit = { has_variable = bfl_tx_03_issuer } set_variable = { name = bfl_tx_04_issuer value = var:bfl_tx_03_issuer } }
+if = { limit = { has_variable = bfl_tx_03_seller } set_variable = { name = bfl_tx_04_seller value = var:bfl_tx_03_seller } }
+if = { limit = { has_variable = bfl_tx_03_buyer } set_variable = { name = bfl_tx_04_buyer value = var:bfl_tx_03_buyer } }
+if = { limit = { has_variable = bfl_tx_03_units } set_variable = { name = bfl_tx_04_units value = var:bfl_tx_03_units } }
+if = { limit = { has_variable = bfl_tx_03_price } set_variable = { name = bfl_tx_04_price value = var:bfl_tx_03_price } }
+if = { limit = { has_variable = bfl_tx_03_period } set_variable = { name = bfl_tx_04_period value = var:bfl_tx_03_period } }
+if = { limit = { has_variable = bfl_tx_02_issuer } set_variable = { name = bfl_tx_03_issuer value = var:bfl_tx_02_issuer } }
+if = { limit = { has_variable = bfl_tx_02_seller } set_variable = { name = bfl_tx_03_seller value = var:bfl_tx_02_seller } }
+if = { limit = { has_variable = bfl_tx_02_buyer } set_variable = { name = bfl_tx_03_buyer value = var:bfl_tx_02_buyer } }
+if = { limit = { has_variable = bfl_tx_02_units } set_variable = { name = bfl_tx_03_units value = var:bfl_tx_02_units } }
+if = { limit = { has_variable = bfl_tx_02_price } set_variable = { name = bfl_tx_03_price value = var:bfl_tx_02_price } }
+if = { limit = { has_variable = bfl_tx_02_period } set_variable = { name = bfl_tx_03_period value = var:bfl_tx_02_period } }
+if = { limit = { has_variable = bfl_tx_01_issuer } set_variable = { name = bfl_tx_02_issuer value = var:bfl_tx_01_issuer } }
+if = { limit = { has_variable = bfl_tx_01_seller } set_variable = { name = bfl_tx_02_seller value = var:bfl_tx_01_seller } }
+if = { limit = { has_variable = bfl_tx_01_buyer } set_variable = { name = bfl_tx_02_buyer value = var:bfl_tx_01_buyer } }
+if = { limit = { has_variable = bfl_tx_01_units } set_variable = { name = bfl_tx_02_units value = var:bfl_tx_01_units } }
+if = { limit = { has_variable = bfl_tx_01_price } set_variable = { name = bfl_tx_02_price value = var:bfl_tx_01_price } }
+if = { limit = { has_variable = bfl_tx_01_period } set_variable = { name = bfl_tx_02_period value = var:bfl_tx_01_period } }
+set_variable = { name = bfl_tx_01_issuer value = scope:bfl_issuer }
+set_variable = { name = bfl_tx_01_seller value = scope:bfl_equity_seller }
+set_variable = { name = bfl_tx_01_buyer value = scope:bfl_equity_buyer }
+set_variable = { name = bfl_tx_01_units value = scope:bfl_issuer.var:bfl_equity_offer_units }
+set_variable = { name = bfl_tx_01_price value = scope:bfl_issuer.var:bfl_equity_offer_price }
+set_variable = { name = bfl_tx_01_period value = bfl_period }
+}
+bfl_record_exchange_history = {
+bfl_update_market_price = yes
+if = { limit = { var:bfl_equity_listed = 1 bfl_period > var:bfl_quote_period }
+        set_variable = { name = bfl_quote_period value = bfl_period }
+        change_variable = { name = bfl_quote_samples add = 1 }
+    set_variable = { name = bfl_quote_12_price value = var:bfl_quote_11_price }
+set_variable = { name = bfl_quote_12_period value = var:bfl_quote_11_period }
+set_variable = { name = bfl_quote_12_volume value = var:bfl_quote_11_volume }
+set_variable = { name = bfl_quote_11_price value = var:bfl_quote_10_price }
+set_variable = { name = bfl_quote_11_period value = var:bfl_quote_10_period }
+set_variable = { name = bfl_quote_11_volume value = var:bfl_quote_10_volume }
+set_variable = { name = bfl_quote_10_price value = var:bfl_quote_09_price }
+set_variable = { name = bfl_quote_10_period value = var:bfl_quote_09_period }
+set_variable = { name = bfl_quote_10_volume value = var:bfl_quote_09_volume }
+set_variable = { name = bfl_quote_09_price value = var:bfl_quote_08_price }
+set_variable = { name = bfl_quote_09_period value = var:bfl_quote_08_period }
+set_variable = { name = bfl_quote_09_volume value = var:bfl_quote_08_volume }
+set_variable = { name = bfl_quote_08_price value = var:bfl_quote_07_price }
+set_variable = { name = bfl_quote_08_period value = var:bfl_quote_07_period }
+set_variable = { name = bfl_quote_08_volume value = var:bfl_quote_07_volume }
+set_variable = { name = bfl_quote_07_price value = var:bfl_quote_06_price }
+set_variable = { name = bfl_quote_07_period value = var:bfl_quote_06_period }
+set_variable = { name = bfl_quote_07_volume value = var:bfl_quote_06_volume }
+set_variable = { name = bfl_quote_06_price value = var:bfl_quote_05_price }
+set_variable = { name = bfl_quote_06_period value = var:bfl_quote_05_period }
+set_variable = { name = bfl_quote_06_volume value = var:bfl_quote_05_volume }
+set_variable = { name = bfl_quote_05_price value = var:bfl_quote_04_price }
+set_variable = { name = bfl_quote_05_period value = var:bfl_quote_04_period }
+set_variable = { name = bfl_quote_05_volume value = var:bfl_quote_04_volume }
+set_variable = { name = bfl_quote_04_price value = var:bfl_quote_03_price }
+set_variable = { name = bfl_quote_04_period value = var:bfl_quote_03_period }
+set_variable = { name = bfl_quote_04_volume value = var:bfl_quote_03_volume }
+set_variable = { name = bfl_quote_03_price value = var:bfl_quote_02_price }
+set_variable = { name = bfl_quote_03_period value = var:bfl_quote_02_period }
+set_variable = { name = bfl_quote_03_volume value = var:bfl_quote_02_volume }
+set_variable = { name = bfl_quote_02_price value = var:bfl_quote_01_price }
+set_variable = { name = bfl_quote_02_period value = var:bfl_quote_01_period }
+set_variable = { name = bfl_quote_02_volume value = var:bfl_quote_01_volume }
+set_variable = { name = bfl_quote_01_price value = bfl_equity_quote }
+        set_variable = { name = bfl_quote_01_period value = bfl_period }
+        set_variable = { name = bfl_quote_01_volume value = var:bfl_equity_pending_volume }
+        set_variable = { name = bfl_equity_pending_volume value = 0 }
+    }
+}
+bfl_pay_equity_holder = {
+if = { limit = { var:bfl_receipt_slot = 1 }
+            if = { limit = { NOT = { has_variable = bfl_shr_01_pool } } set_variable = { name = bfl_shr_01_pool value = 0 } }
+            if = { limit = { var:bfl_shr_01_pool = 0 }
+                var:bfl_shr_01_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_01_pool = 1 } var:bfl_shr_01_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_01_pool = 2 } var:bfl_shr_01_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_01_pool = 3 } var:bfl_shr_01_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_01_pool = 4 } var:bfl_shr_01_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_01_pool = 5 } var:bfl_shr_01_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 2 }
+            if = { limit = { NOT = { has_variable = bfl_shr_02_pool } } set_variable = { name = bfl_shr_02_pool value = 0 } }
+            if = { limit = { var:bfl_shr_02_pool = 0 }
+                var:bfl_shr_02_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_02_pool = 1 } var:bfl_shr_02_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_02_pool = 2 } var:bfl_shr_02_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_02_pool = 3 } var:bfl_shr_02_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_02_pool = 4 } var:bfl_shr_02_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_02_pool = 5 } var:bfl_shr_02_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 3 }
+            if = { limit = { NOT = { has_variable = bfl_shr_03_pool } } set_variable = { name = bfl_shr_03_pool value = 0 } }
+            if = { limit = { var:bfl_shr_03_pool = 0 }
+                var:bfl_shr_03_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_03_pool = 1 } var:bfl_shr_03_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_03_pool = 2 } var:bfl_shr_03_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_03_pool = 3 } var:bfl_shr_03_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_03_pool = 4 } var:bfl_shr_03_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_03_pool = 5 } var:bfl_shr_03_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 4 }
+            if = { limit = { NOT = { has_variable = bfl_shr_04_pool } } set_variable = { name = bfl_shr_04_pool value = 0 } }
+            if = { limit = { var:bfl_shr_04_pool = 0 }
+                var:bfl_shr_04_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_04_pool = 1 } var:bfl_shr_04_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_04_pool = 2 } var:bfl_shr_04_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_04_pool = 3 } var:bfl_shr_04_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_04_pool = 4 } var:bfl_shr_04_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_04_pool = 5 } var:bfl_shr_04_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 5 }
+            if = { limit = { NOT = { has_variable = bfl_shr_05_pool } } set_variable = { name = bfl_shr_05_pool value = 0 } }
+            if = { limit = { var:bfl_shr_05_pool = 0 }
+                var:bfl_shr_05_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_05_pool = 1 } var:bfl_shr_05_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_05_pool = 2 } var:bfl_shr_05_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_05_pool = 3 } var:bfl_shr_05_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_05_pool = 4 } var:bfl_shr_05_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_05_pool = 5 } var:bfl_shr_05_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 6 }
+            if = { limit = { NOT = { has_variable = bfl_shr_06_pool } } set_variable = { name = bfl_shr_06_pool value = 0 } }
+            if = { limit = { var:bfl_shr_06_pool = 0 }
+                var:bfl_shr_06_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_06_pool = 1 } var:bfl_shr_06_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_06_pool = 2 } var:bfl_shr_06_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_06_pool = 3 } var:bfl_shr_06_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_06_pool = 4 } var:bfl_shr_06_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_06_pool = 5 } var:bfl_shr_06_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 7 }
+            if = { limit = { NOT = { has_variable = bfl_shr_07_pool } } set_variable = { name = bfl_shr_07_pool value = 0 } }
+            if = { limit = { var:bfl_shr_07_pool = 0 }
+                var:bfl_shr_07_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_07_pool = 1 } var:bfl_shr_07_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_07_pool = 2 } var:bfl_shr_07_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_07_pool = 3 } var:bfl_shr_07_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_07_pool = 4 } var:bfl_shr_07_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_07_pool = 5 } var:bfl_shr_07_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 8 }
+            if = { limit = { NOT = { has_variable = bfl_shr_08_pool } } set_variable = { name = bfl_shr_08_pool value = 0 } }
+            if = { limit = { var:bfl_shr_08_pool = 0 }
+                var:bfl_shr_08_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_08_pool = 1 } var:bfl_shr_08_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_08_pool = 2 } var:bfl_shr_08_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_08_pool = 3 } var:bfl_shr_08_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_08_pool = 4 } var:bfl_shr_08_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_08_pool = 5 } var:bfl_shr_08_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 9 }
+            if = { limit = { NOT = { has_variable = bfl_shr_09_pool } } set_variable = { name = bfl_shr_09_pool value = 0 } }
+            if = { limit = { var:bfl_shr_09_pool = 0 }
+                var:bfl_shr_09_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_09_pool = 1 } var:bfl_shr_09_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_09_pool = 2 } var:bfl_shr_09_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_09_pool = 3 } var:bfl_shr_09_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_09_pool = 4 } var:bfl_shr_09_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_09_pool = 5 } var:bfl_shr_09_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 10 }
+            if = { limit = { NOT = { has_variable = bfl_shr_10_pool } } set_variable = { name = bfl_shr_10_pool value = 0 } }
+            if = { limit = { var:bfl_shr_10_pool = 0 }
+                var:bfl_shr_10_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_10_pool = 1 } var:bfl_shr_10_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_10_pool = 2 } var:bfl_shr_10_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_10_pool = 3 } var:bfl_shr_10_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_10_pool = 4 } var:bfl_shr_10_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_10_pool = 5 } var:bfl_shr_10_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 11 }
+            if = { limit = { NOT = { has_variable = bfl_shr_11_pool } } set_variable = { name = bfl_shr_11_pool value = 0 } }
+            if = { limit = { var:bfl_shr_11_pool = 0 }
+                var:bfl_shr_11_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_11_pool = 1 } var:bfl_shr_11_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_11_pool = 2 } var:bfl_shr_11_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_11_pool = 3 } var:bfl_shr_11_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_11_pool = 4 } var:bfl_shr_11_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_11_pool = 5 } var:bfl_shr_11_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 12 }
+            if = { limit = { NOT = { has_variable = bfl_shr_12_pool } } set_variable = { name = bfl_shr_12_pool value = 0 } }
+            if = { limit = { var:bfl_shr_12_pool = 0 }
+                var:bfl_shr_12_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_12_pool = 1 } var:bfl_shr_12_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_12_pool = 2 } var:bfl_shr_12_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_12_pool = 3 } var:bfl_shr_12_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_12_pool = 4 } var:bfl_shr_12_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_12_pool = 5 } var:bfl_shr_12_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 13 }
+            if = { limit = { NOT = { has_variable = bfl_shr_13_pool } } set_variable = { name = bfl_shr_13_pool value = 0 } }
+            if = { limit = { var:bfl_shr_13_pool = 0 }
+                var:bfl_shr_13_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_13_pool = 1 } var:bfl_shr_13_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_13_pool = 2 } var:bfl_shr_13_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_13_pool = 3 } var:bfl_shr_13_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_13_pool = 4 } var:bfl_shr_13_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_13_pool = 5 } var:bfl_shr_13_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 14 }
+            if = { limit = { NOT = { has_variable = bfl_shr_14_pool } } set_variable = { name = bfl_shr_14_pool value = 0 } }
+            if = { limit = { var:bfl_shr_14_pool = 0 }
+                var:bfl_shr_14_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_14_pool = 1 } var:bfl_shr_14_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_14_pool = 2 } var:bfl_shr_14_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_14_pool = 3 } var:bfl_shr_14_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_14_pool = 4 } var:bfl_shr_14_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_14_pool = 5 } var:bfl_shr_14_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 15 }
+            if = { limit = { NOT = { has_variable = bfl_shr_15_pool } } set_variable = { name = bfl_shr_15_pool value = 0 } }
+            if = { limit = { var:bfl_shr_15_pool = 0 }
+                var:bfl_shr_15_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_15_pool = 1 } var:bfl_shr_15_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_15_pool = 2 } var:bfl_shr_15_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_15_pool = 3 } var:bfl_shr_15_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_15_pool = 4 } var:bfl_shr_15_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_15_pool = 5 } var:bfl_shr_15_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+if = { limit = { var:bfl_receipt_slot = 16 }
+            if = { limit = { NOT = { has_variable = bfl_shr_16_pool } } set_variable = { name = bfl_shr_16_pool value = 0 } }
+            if = { limit = { var:bfl_shr_16_pool = 0 }
+                var:bfl_shr_16_party = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes
+                    if = { limit = { NOT = { has_variable = bfl_equity_dividends } } set_variable = { name = bfl_equity_dividends value = 0 } }
+                    change_variable = { name = bfl_equity_dividends add = scope:bfl_bank.var:bfl_payment } bfl_record_equity_dividend = yes } }
+        if = { limit = { var:bfl_shr_16_pool = 1 } var:bfl_shr_16_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_16_pool = 2 } var:bfl_shr_16_party = {
+                "estate(estate_type:nobles_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_16_pool = 3 } var:bfl_shr_16_party = {
+                "estate(estate_type:clergy_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_16_pool = 4 } var:bfl_shr_16_party = {
+                "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+if = { limit = { var:bfl_shr_16_pool = 5 } var:bfl_shr_16_party = {
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
+}
+}
+bfl_distribute_company_equity_income = {
+save_scope_as = bfl_bank
+        set_variable = { name = bfl_funded_dividend value = var:bfl_company_dividend }
+        set_variable = { name = bfl_company_dividend value = 0 }
+        if = { limit = { var:bfl_total_units > 0 }
+    if = { limit = { var:bfl_shr_01_active = 1 exists = var:bfl_shr_01_party country_exists = var:bfl_shr_01_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_01_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 1 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_02_active = 1 exists = var:bfl_shr_02_party country_exists = var:bfl_shr_02_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_02_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 2 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_03_active = 1 exists = var:bfl_shr_03_party country_exists = var:bfl_shr_03_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_03_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 3 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_04_active = 1 exists = var:bfl_shr_04_party country_exists = var:bfl_shr_04_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_04_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 4 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_05_active = 1 exists = var:bfl_shr_05_party country_exists = var:bfl_shr_05_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_05_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 5 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_06_active = 1 exists = var:bfl_shr_06_party country_exists = var:bfl_shr_06_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_06_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 6 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_07_active = 1 exists = var:bfl_shr_07_party country_exists = var:bfl_shr_07_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_07_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 7 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_08_active = 1 exists = var:bfl_shr_08_party country_exists = var:bfl_shr_08_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_08_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 8 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_09_active = 1 exists = var:bfl_shr_09_party country_exists = var:bfl_shr_09_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_09_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 9 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_10_active = 1 exists = var:bfl_shr_10_party country_exists = var:bfl_shr_10_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_10_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 10 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_11_active = 1 exists = var:bfl_shr_11_party country_exists = var:bfl_shr_11_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_11_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 11 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_12_active = 1 exists = var:bfl_shr_12_party country_exists = var:bfl_shr_12_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_12_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 12 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_13_active = 1 exists = var:bfl_shr_13_party country_exists = var:bfl_shr_13_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_13_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 13 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_14_active = 1 exists = var:bfl_shr_14_party country_exists = var:bfl_shr_14_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_14_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 14 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_15_active = 1 exists = var:bfl_shr_15_party country_exists = var:bfl_shr_15_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_15_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 15 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+if = { limit = { var:bfl_shr_16_active = 1 exists = var:bfl_shr_16_party country_exists = var:bfl_shr_16_party }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_16_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            add_gold = { value = var:bfl_payment multiply = -1 }
+            set_variable = { name = bfl_receipt_slot value = 16 } bfl_pay_equity_holder = yes
+            change_variable = { name = bfl_company_dividend add = var:bfl_payment }
+        }
+bfl_pay_dealer_dividend = yes
+change_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }
+}
+}
+bfl_prepare_silent_equity_order = {
+save_scope_as = bfl_issuer
+        scope:bfl_equity_buyer ?= { save_scope_as = bfl_party }
+        set_variable = { name = bfl_equity_pool value = 0 }
+        var:bfl_equity_offer_seller ?= { save_scope_as = bfl_equity_seller }
+        if = { limit = { bfl_equity_trade_ready = yes scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes } }
+            scope:bfl_equity_actor = {
+                if = { limit = { NOT = { has_variable = bfl_order_revision } } set_variable = { name = bfl_order_revision value = 0 } }
+                change_variable = { name = bfl_order_revision add = 1 }
+                set_variable = { name = bfl_order_issuer value = scope:bfl_issuer }
+                set_variable = { name = bfl_order_buyer value = scope:bfl_equity_buyer }
+                set_variable = { name = bfl_order_seller value = scope:bfl_equity_seller }
+                set_variable = { name = bfl_order_offer_revision value = scope:bfl_issuer.var:bfl_equity_offer_revision }
+                set_variable = { name = bfl_order_units value = scope:bfl_issuer.var:bfl_equity_offer_units }
+                set_variable = { name = bfl_order_price value = scope:bfl_issuer.var:bfl_equity_offer_price }
+                save_scope_value_as = { name = bfl_confirm_revision value = var:bfl_order_revision }
+
+            }
+        }
+}

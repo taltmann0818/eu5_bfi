@@ -239,15 +239,40 @@ def generate(common, effect, loc, write):
     def section(body, visible, context):
         return f'''vbox = {{ layoutpolicy_horizontal = expanding visible = "[{visible}]"
             datacontext = "[{context}]" ignoreinvisible = yes spacing = 16 {body} }}'''
-    gui = f'''types BFLSovereignBondTypes {{ type bfl_sovereign_bonds = scrollarea {{
-        name = "bfl_sovereign_bonds" size = {{ 520 0 }} minimumsize = {{ 520 0 }} maximumsize = {{ 520 -1 }}
-        layoutpolicy_horizontal = fixed layoutpolicy_vertical = expanding datacontext = "[GetPlayer]"
-        scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-        scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding ignoreinvisible = yes spacing = 16 margin = {{ 8 12 }}
-            widget = {{ size = {{ -1 216 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed {header} }}
-            header_secondary_tabs = {{ blockoverride "content" {{ {nav} }} }}
-            {section(finance, "Not(CreditLateralView.Vars.HasValue('bond_section','holdings'))", 'GetPlayer')}
-            {section(holdings, "CreditLateralView.Vars.HasValue('bond_section','holdings')", "GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry")}
-        }} }}
-    }} }}'''
+    compact_rows = ''
+    for i in range(1,33):
+        n=f'bfl_bnd_{i:02}'
+        compact_rows += f'''widget = {{ size = {{ -1 112 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+            visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue,'(CFixedPoint)0')]"
+            text_single = {{ position = {{ 10 5 }} text = "bfl_bond_card_{i:02}" autoresize = yes fontsize = 16 }}
+            text_single = {{ position = {{ 10 30 }} text = "bfl_bond_holder_{i:02}" autoresize = yes fontsize = 14 }}
+            text_single = {{ position = {{ 10 53 }} text = "bfl_bond_arrears_{i:02}" autoresize = yes fontsize = 13 }}
+            widget = {{ position = {{ 10 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_list_selected_bond_{i:02}')}]" {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 28)} }}
+            widget = {{ position = {{ 252 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]" {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 28)} }}
+        }}'''
+    compact = '''hbox = { layoutpolicy_horizontal = expanding spacing = 8
+        icon = { size = { 28 28 } texture = "[GetConceptTexture('government_bond')]" }
+        text_single = { text = "bfl_bond_panel_title" autoresize = yes fontsize = 20 } }
+        text_multi = { text = "bfl_custom_bond_totals" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 13 }
+    '''
+    def flow_button(key, height):
+        return f'widget = {{ size = {{ -1 {height} }} layoutpolicy_horizontal = expanding {button(key,height=height)} }}'
+    compact += flow_button('bfl_draw_bond',36)
+    compact += 'hbox = { layoutpolicy_horizontal = expanding spacing = 5 ' + ''.join(flow_button(f'bfl_bond_rate_{rate}',30) for rate in (1,3,6)) + '}'
+    compact += '''text_single = { text = "bfl_bond_register_title" autoresize = yes fontsize = 16 }'''
+    compact += '''widget = { size = { -1 42 } layoutpolicy_horizontal = expanding ''' + browse(y=0) + '}'
+    compact += f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 6 datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry]"
+        text_single = {{ text = "bfl_bond_selected_name" autoresize = yes fontsize = 17 }}
+        text_multi = {{ text = "bfl_bond_market_quote" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 13
+            visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bond_offer_slot').GetValue,'(CFixedPoint)0')]" }}
+        hbox = {{ layoutpolicy_horizontal = expanding spacing = 6 {flow_button('bfl_buy_selected_bond',32)} {flow_button('bfl_cancel_selected_bond_offer',32)} }}
+        {compact_rows}
+    }}'''
+    gui = f'''types BFLSovereignBondTypes {{
+    type bfl_bond_contents = vbox {{
+        layoutpolicy_horizontal = expanding ignoreinvisible = yes spacing = 10
+        datacontext = "[GetPlayer]"
+        {compact}
+    }}
+    }}'''
     write('in_game/gui/bfl_sovereign_bonds.gui', gui)

@@ -1,0 +1,36 @@
+﻿bfl_previous_equity_votes = {
+value = 0
+if = { limit = { var:bfl_state_owner ?= prev } add = var:bfl_state_units }
+if = { limit = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0
+            OR = { var:bfl_shr_01_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_01_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_01_units }
+if = { limit = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0
+            OR = { var:bfl_shr_02_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_02_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_02_units }
+if = { limit = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0
+            OR = { var:bfl_shr_03_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_03_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_03_units }
+if = { limit = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0
+            OR = { var:bfl_shr_04_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_04_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_04_units }
+if = { limit = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0
+            OR = { var:bfl_shr_05_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_05_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_05_units }
+if = { limit = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0
+            OR = { var:bfl_shr_06_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_06_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_06_units }
+if = { limit = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0
+            OR = { var:bfl_shr_07_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_07_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_07_units }
+if = { limit = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0
+            OR = { var:bfl_shr_08_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_08_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_08_units }
+if = { limit = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0
+            OR = { var:bfl_shr_09_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_09_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_09_units }
+if = { limit = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0
+            OR = { var:bfl_shr_10_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_10_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_10_units }
+if = { limit = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0
+            OR = { var:bfl_shr_11_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_11_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_11_units }
+if = { limit = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0
+            OR = { var:bfl_shr_12_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_12_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_12_units }
+if = { limit = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0
+            OR = { var:bfl_shr_13_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_13_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_13_units }
+if = { limit = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0
+            OR = { var:bfl_shr_14_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_14_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_14_units }
+if = { limit = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0
+            OR = { var:bfl_shr_15_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_15_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_15_units }
+if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0
+            OR = { var:bfl_shr_16_party = prev AND = { prev = { bfl_has_management = yes country_type = location } var:bfl_shr_16_party ?= prev.var:bfl_bank } } } add = var:bfl_shr_16_units }
+}

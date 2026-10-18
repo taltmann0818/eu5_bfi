@@ -3,7 +3,8 @@ param(
     [string]$Cmf = $env:EU5_CMF_ROOT,
     [string]$SettingsFrom,
     [switch]$PrepareOnly,
-    [switch]$NormalCharter
+    [switch]$NormalCharter,
+    [switch]$Exchange
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -25,6 +26,10 @@ try {
     if ($NormalCharter) {
         python tools/prepare_m0_ui.py --userdir $userDir
         if ($LASTEXITCODE -ne 0) { throw 'Normal charter UI fixture preparation failed' }
+    }
+    if ($Exchange) {
+        python tools/prepare_m5_ui.py --userdir $userDir --companies
+        if ($LASTEXITCODE -ne 0) { throw 'Exchange UI fixture preparation failed' }
     }
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse

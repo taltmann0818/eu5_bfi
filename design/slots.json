@@ -10,5 +10,9 @@
   "inventory_fields":["active","generation","goods","market","location","quantity","encumbered","basis"],
   "offer_fields":["active","generation","party","claim","price","basis","expiry","revision"],
   "branch_fields":["active","generation","host","location","market","fee","expiry","state"],
-  "shareholder_fields":["active","generation","party","units","basis","last_payment"]
+  "shareholder_fields":["active","generation","party","pool","units","basis","last_payment"],
+  "equity_position_bound":16,
+  "equity_position_fields":["issuer","units","basis","dividends","realized"],
+  "equity_quote_history_bound":12,
+  "equity_transaction_history_bound":6
 }

@@ -1,0 +1,78 @@
+﻿bfl_portfolio_capacity = {
+OR = { NOT = { exists = var:bfl_pos_01_issuer } var:bfl_pos_01_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_02_issuer } var:bfl_pos_02_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_03_issuer } var:bfl_pos_03_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_04_issuer } var:bfl_pos_04_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_05_issuer } var:bfl_pos_05_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_06_issuer } var:bfl_pos_06_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_07_issuer } var:bfl_pos_07_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_08_issuer } var:bfl_pos_08_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_09_issuer } var:bfl_pos_09_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_10_issuer } var:bfl_pos_10_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_11_issuer } var:bfl_pos_11_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_12_issuer } var:bfl_pos_12_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_13_issuer } var:bfl_pos_13_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_14_issuer } var:bfl_pos_14_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_15_issuer } var:bfl_pos_15_issuer = scope:bfl_issuer NOT = { exists = var:bfl_pos_16_issuer } var:bfl_pos_16_issuer = scope:bfl_issuer }
+}
+bfl_equity_wallet_funded = {
+OR = { AND = { var:bfl_equity_pool = 0 scope:bfl_party = { gold >= 100 } }
+AND = { var:bfl_equity_pool = 1 scope:bfl_party = { "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } } }
+AND = { var:bfl_equity_pool = 2 scope:bfl_party = { "estate(estate_type:nobles_estate)" = { estate_gold >= 125 } } }
+AND = { var:bfl_equity_pool = 3 scope:bfl_party = { "estate(estate_type:clergy_estate)" = { estate_gold >= 125 } } }
+AND = { var:bfl_equity_pool = 4 scope:bfl_party = { "estate(estate_type:peasants_estate)" = { estate_gold >= 125 } } }
+AND = { var:bfl_equity_pool = 5 scope:bfl_party = { "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } } }
+ }
+}
+bfl_equity_issuer = {
+trigger_if = { limit = { has_variable = bfl_ownership_schema }
+        OR = { bfl_is_bank = yes bfl_is_company = yes } bfl_registered_units = var:bfl_total_units }
+        trigger_else = { always = no }
+}
+bfl_company_equity_eligible = {
+bfl_is_company = yes var:bfl_company_schema = 2 any_owned_building = { building_type = building_type:trade_company_headquarters }
+}
+bfl_independent_board_authority = {
+bfl_is_independent_bank = yes NOT = { OR = { AND = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_01_party country_exists = var:bfl_shr_01_party } AND = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_02_party country_exists = var:bfl_shr_02_party } AND = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_03_party country_exists = var:bfl_shr_03_party } AND = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_04_party country_exists = var:bfl_shr_04_party } AND = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_05_party country_exists = var:bfl_shr_05_party } AND = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_06_party country_exists = var:bfl_shr_06_party } AND = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_07_party country_exists = var:bfl_shr_07_party } AND = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_08_party country_exists = var:bfl_shr_08_party } AND = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_09_party country_exists = var:bfl_shr_09_party } AND = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_10_party country_exists = var:bfl_shr_10_party } AND = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_11_party country_exists = var:bfl_shr_11_party } AND = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_12_party country_exists = var:bfl_shr_12_party } AND = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_13_party country_exists = var:bfl_shr_13_party } AND = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_14_party country_exists = var:bfl_shr_14_party } AND = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_15_party country_exists = var:bfl_shr_15_party } AND = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_units > { value = var:bfl_total_units multiply = 0.5 } exists = var:bfl_shr_16_party country_exists = var:bfl_shr_16_party } } }
+}
+bfl_has_payout_authority = {
+OR = { bfl_independent_board_authority = yes
+        AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_has_valid_controller = yes } } }
+}
+bfl_equity_buyer_risk = {
+exists = scope:bfl_party country_exists = scope:bfl_party
+        OR = { var:bfl_equity_pool > 0 NOT = { scope:bfl_party = { bfl_is_bank = yes } }
+            AND = { var:bfl_equity_pool = 0 NOT = { this = scope:bfl_party }
+                scope:bfl_party = { bfl_can_conduct_business = yes bfl_free_cash >= 100 bfl_capital_headroom >= 100 bfl_portfolio_capacity = yes }
+                bfl_equity_buyer_units <= { value = var:bfl_total_units multiply = bfl_equity_concentration_limit }
+            } }
+}
+bfl_can_subscribe_equity = {
+bfl_equity_issuer = yes bfl_primary_price_safe = yes
+        NOT = { has_variable = bfl_operation_guard }
+        exists = scope:bfl_party country_exists = scope:bfl_party
+        OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
+        bfl_has_shareholder_capacity = yes bfl_tangible_equity > 0 var:bfl_total_units > 0
+        bfl_equity_wallet_funded = yes bfl_equity_buyer_risk = yes
+        OR = { AND = { bfl_is_bank = yes bfl_can_originate_bank_subscription = yes }
+            AND = { bfl_company_equity_eligible = yes scope:bfl_party = { bfl_can_originate_company_equity = yes bfl_can_trade_sovereign_bonds = yes } } }
+}
+bfl_equity_exchange_access = {
+bfl_can_originate_bank_share_transfer = yes
+        bfl_can_trade_sovereign_bonds = yes
+}
+bfl_equity_actor_authority = {
+exists = scope:bfl_equity_actor country_exists = scope:bfl_equity_actor
+        OR = { AND = { bfl_is_independent_bank = yes this = scope:bfl_equity_actor }
+            AND = { bfl_has_valid_controller = yes overlord = scope:bfl_equity_actor } }
+}
+bfl_equity_security_access = {
+bfl_equity_issuer = yes
+        var:bfl_equity_listed = 1 bfl_tangible_equity > 0
+        OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+            scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes }
+            scope:bfl_equity_seller = { bfl_can_originate_company_equity = yes } } }
+}
+bfl_equity_trade_ready = {
+bfl_equity_security_access = yes
+        NOT = { has_variable = bfl_operation_guard }
+        var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry
+        var:bfl_equity_offer_units > 0 var:bfl_equity_offer_price > 0
+        var:bfl_equity_offer_capital_revision = var:bfl_equity_revision
+        var:bfl_equity_offer_seller = scope:bfl_equity_seller
+        scope:bfl_equity_seller = { bfl_equity_exchange_access = yes }
+        scope:bfl_equity_buyer = { bfl_equity_exchange_access = yes
+            NOT = { this = scope:bfl_equity_seller } NOT = { this = scope:bfl_issuer }
+            bfl_free_cash >= scope:bfl_issuer.var:bfl_equity_offer_price
+            bfl_capital_headroom >= scope:bfl_issuer.var:bfl_equity_offer_price
+            bfl_portfolio_capacity = yes }
+        bfl_equity_seller_units >= var:bfl_equity_offer_units
+        bfl_equity_buyer_units <= { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = var:bfl_equity_offer_units }
+        bfl_has_shareholder_capacity = yes
+}

@@ -1,0 +1,152 @@
+﻿bfl_initialize_pricing = {
+if = { limit = { NOT = { has_variable = bfl_price_schema } }
+        set_variable = { name = bfl_price_schema value = 1 }
+        set_variable = { name = bfl_price_seed value = { integer_range = { min = 1 max = 65520 } } }
+        set_variable = { name = bfl_price_period value = bfl_period }
+    set_variable = { name = bfl_price_log_bps value = 0 }
+set_variable = { name = bfl_price_net_units value = 0 }
+set_variable = { name = bfl_price_gross_units value = 0 }
+set_variable = { name = bfl_price_last_flow value = 0 }
+set_variable = { name = bfl_price_shock value = 0 }
+set_variable = { name = bfl_price_draws value = 0 }
+set_variable = { name = bfl_price_defaulted value = 0 }
+}
+}
+bfl_record_price_pressure = {
+bfl_initialize_pricing = yes
+        if = { limit = { var:bfl_price_order_units > 0 OR = { var:bfl_price_order_side = 1 var:bfl_price_order_side = -1 } }
+            change_variable = { name = bfl_price_gross_units add = var:bfl_price_order_units }
+            change_variable = { name = bfl_price_net_units add = { value = var:bfl_price_order_units multiply = var:bfl_price_order_side } }
+        }
+}
+bfl_update_market_price = {
+bfl_initialize_pricing = yes
+        if = { limit = { bfl_period > var:bfl_price_period }
+            set_variable = { name = bfl_price_period value = bfl_period }
+            set_variable = { name = bfl_price_last_flow value = bfl_price_flow }
+            set_variable = { name = bfl_price_net_units value = 0 }
+            set_variable = { name = bfl_price_gross_units value = 0 }
+            if = { limit = { bfl_nav_quote <= 0 }
+                set_variable = { name = bfl_price_defaulted value = 1 }
+                set_variable = { name = bfl_price_log_bps value = 0 }
+                set_variable = { name = bfl_price_shock value = 0 }
+            }
+            else_if = { limit = { bfl_price_model = 0 }
+                set_variable = { name = bfl_price_log_bps value = 0 }
+                set_variable = { name = bfl_price_shock value = 0 }
+            }
+            else_if = { limit = { var:bfl_price_defaulted = 1 }
+                set_variable = { name = bfl_price_defaulted value = 0 }
+                set_variable = { name = bfl_price_log_bps value = 0 }
+                set_variable = { name = bfl_price_last_flow value = 0 }
+                set_variable = { name = bfl_price_shock value = 0 }
+            }
+            else = {
+    set_variable = { name = bfl_price_seed value = { value = var:bfl_price_seed multiply = 17364 modulo = 65521 } }
+            set_variable = { name = bfl_price_bucket value = { value = var:bfl_price_seed multiply = 101 divide = 65521 floor = yes } }
+if = { limit = { var:bfl_price_bucket = 0 } set_variable = { name = bfl_price_shock value = -2.59563 } }
+else_if = { limit = { var:bfl_price_bucket = 1 } set_variable = { name = bfl_price_shock value = -2.18782 } }
+else_if = { limit = { var:bfl_price_bucket = 2 } set_variable = { name = bfl_price_shock value = -1.97668 } }
+else_if = { limit = { var:bfl_price_bucket = 3 } set_variable = { name = bfl_price_shock value = -1.82794 } }
+else_if = { limit = { var:bfl_price_bucket = 4 } set_variable = { name = bfl_price_shock value = -1.7109 } }
+else_if = { limit = { var:bfl_price_bucket = 5 } set_variable = { name = bfl_price_shock value = -1.61328 } }
+else_if = { limit = { var:bfl_price_bucket = 6 } set_variable = { name = bfl_price_shock value = -1.52883 } }
+else_if = { limit = { var:bfl_price_bucket = 7 } set_variable = { name = bfl_price_shock value = -1.45396 } }
+else_if = { limit = { var:bfl_price_bucket = 8 } set_variable = { name = bfl_price_shock value = -1.38637 } }
+else_if = { limit = { var:bfl_price_bucket = 9 } set_variable = { name = bfl_price_shock value = -1.32451 } }
+else_if = { limit = { var:bfl_price_bucket = 10 } set_variable = { name = bfl_price_shock value = -1.26729 } }
+else_if = { limit = { var:bfl_price_bucket = 11 } set_variable = { name = bfl_price_shock value = -1.2139 } }
+else_if = { limit = { var:bfl_price_bucket = 12 } set_variable = { name = bfl_price_shock value = -1.16372 } }
+else_if = { limit = { var:bfl_price_bucket = 13 } set_variable = { name = bfl_price_shock value = -1.11628 } }
+else_if = { limit = { var:bfl_price_bucket = 14 } set_variable = { name = bfl_price_shock value = -1.07119 } }
+else_if = { limit = { var:bfl_price_bucket = 15 } set_variable = { name = bfl_price_shock value = -1.02816 } }
+else_if = { limit = { var:bfl_price_bucket = 16 } set_variable = { name = bfl_price_shock value = -0.98694 } }
+else_if = { limit = { var:bfl_price_bucket = 17 } set_variable = { name = bfl_price_shock value = -0.9473 } }
+else_if = { limit = { var:bfl_price_bucket = 18 } set_variable = { name = bfl_price_shock value = -0.90909 } }
+else_if = { limit = { var:bfl_price_bucket = 19 } set_variable = { name = bfl_price_shock value = -0.87214 } }
+else_if = { limit = { var:bfl_price_bucket = 20 } set_variable = { name = bfl_price_shock value = -0.83633 } }
+else_if = { limit = { var:bfl_price_bucket = 21 } set_variable = { name = bfl_price_shock value = -0.80155 } }
+else_if = { limit = { var:bfl_price_bucket = 22 } set_variable = { name = bfl_price_shock value = -0.7677 } }
+else_if = { limit = { var:bfl_price_bucket = 23 } set_variable = { name = bfl_price_shock value = -0.7347 } }
+else_if = { limit = { var:bfl_price_bucket = 24 } set_variable = { name = bfl_price_shock value = -0.70247 } }
+else_if = { limit = { var:bfl_price_bucket = 25 } set_variable = { name = bfl_price_shock value = -0.67095 } }
+else_if = { limit = { var:bfl_price_bucket = 26 } set_variable = { name = bfl_price_shock value = -0.64007 } }
+else_if = { limit = { var:bfl_price_bucket = 27 } set_variable = { name = bfl_price_shock value = -0.60978 } }
+else_if = { limit = { var:bfl_price_bucket = 28 } set_variable = { name = bfl_price_shock value = -0.58004 } }
+else_if = { limit = { var:bfl_price_bucket = 29 } set_variable = { name = bfl_price_shock value = -0.55079 } }
+else_if = { limit = { var:bfl_price_bucket = 30 } set_variable = { name = bfl_price_shock value = -0.522 } }
+else_if = { limit = { var:bfl_price_bucket = 31 } set_variable = { name = bfl_price_shock value = -0.49364 } }
+else_if = { limit = { var:bfl_price_bucket = 32 } set_variable = { name = bfl_price_shock value = -0.46566 } }
+else_if = { limit = { var:bfl_price_bucket = 33 } set_variable = { name = bfl_price_shock value = -0.43803 } }
+else_if = { limit = { var:bfl_price_bucket = 34 } set_variable = { name = bfl_price_shock value = -0.41073 } }
+else_if = { limit = { var:bfl_price_bucket = 35 } set_variable = { name = bfl_price_shock value = -0.38373 } }
+else_if = { limit = { var:bfl_price_bucket = 36 } set_variable = { name = bfl_price_shock value = -0.35701 } }
+else_if = { limit = { var:bfl_price_bucket = 37 } set_variable = { name = bfl_price_shock value = -0.33053 } }
+else_if = { limit = { var:bfl_price_bucket = 38 } set_variable = { name = bfl_price_shock value = -0.30428 } }
+else_if = { limit = { var:bfl_price_bucket = 39 } set_variable = { name = bfl_price_shock value = -0.27824 } }
+else_if = { limit = { var:bfl_price_bucket = 40 } set_variable = { name = bfl_price_shock value = -0.25238 } }
+else_if = { limit = { var:bfl_price_bucket = 41 } set_variable = { name = bfl_price_shock value = -0.22668 } }
+else_if = { limit = { var:bfl_price_bucket = 42 } set_variable = { name = bfl_price_shock value = -0.20114 } }
+else_if = { limit = { var:bfl_price_bucket = 43 } set_variable = { name = bfl_price_shock value = -0.17572 } }
+else_if = { limit = { var:bfl_price_bucket = 44 } set_variable = { name = bfl_price_shock value = -0.15041 } }
+else_if = { limit = { var:bfl_price_bucket = 45 } set_variable = { name = bfl_price_shock value = -0.1252 } }
+else_if = { limit = { var:bfl_price_bucket = 46 } set_variable = { name = bfl_price_shock value = -0.10007 } }
+else_if = { limit = { var:bfl_price_bucket = 47 } set_variable = { name = bfl_price_shock value = -0.075 } }
+else_if = { limit = { var:bfl_price_bucket = 48 } set_variable = { name = bfl_price_shock value = -0.04997 } }
+else_if = { limit = { var:bfl_price_bucket = 49 } set_variable = { name = bfl_price_shock value = -0.02498 } }
+else_if = { limit = { var:bfl_price_bucket = 50 } set_variable = { name = bfl_price_shock value = 0.0 } }
+else_if = { limit = { var:bfl_price_bucket = 51 } set_variable = { name = bfl_price_shock value = 0.02498 } }
+else_if = { limit = { var:bfl_price_bucket = 52 } set_variable = { name = bfl_price_shock value = 0.04997 } }
+else_if = { limit = { var:bfl_price_bucket = 53 } set_variable = { name = bfl_price_shock value = 0.075 } }
+else_if = { limit = { var:bfl_price_bucket = 54 } set_variable = { name = bfl_price_shock value = 0.10007 } }
+else_if = { limit = { var:bfl_price_bucket = 55 } set_variable = { name = bfl_price_shock value = 0.1252 } }
+else_if = { limit = { var:bfl_price_bucket = 56 } set_variable = { name = bfl_price_shock value = 0.15041 } }
+else_if = { limit = { var:bfl_price_bucket = 57 } set_variable = { name = bfl_price_shock value = 0.17572 } }
+else_if = { limit = { var:bfl_price_bucket = 58 } set_variable = { name = bfl_price_shock value = 0.20114 } }
+else_if = { limit = { var:bfl_price_bucket = 59 } set_variable = { name = bfl_price_shock value = 0.22668 } }
+else_if = { limit = { var:bfl_price_bucket = 60 } set_variable = { name = bfl_price_shock value = 0.25238 } }
+else_if = { limit = { var:bfl_price_bucket = 61 } set_variable = { name = bfl_price_shock value = 0.27824 } }
+else_if = { limit = { var:bfl_price_bucket = 62 } set_variable = { name = bfl_price_shock value = 0.30428 } }
+else_if = { limit = { var:bfl_price_bucket = 63 } set_variable = { name = bfl_price_shock value = 0.33053 } }
+else_if = { limit = { var:bfl_price_bucket = 64 } set_variable = { name = bfl_price_shock value = 0.35701 } }
+else_if = { limit = { var:bfl_price_bucket = 65 } set_variable = { name = bfl_price_shock value = 0.38373 } }
+else_if = { limit = { var:bfl_price_bucket = 66 } set_variable = { name = bfl_price_shock value = 0.41073 } }
+else_if = { limit = { var:bfl_price_bucket = 67 } set_variable = { name = bfl_price_shock value = 0.43803 } }
+else_if = { limit = { var:bfl_price_bucket = 68 } set_variable = { name = bfl_price_shock value = 0.46566 } }
+else_if = { limit = { var:bfl_price_bucket = 69 } set_variable = { name = bfl_price_shock value = 0.49364 } }
+else_if = { limit = { var:bfl_price_bucket = 70 } set_variable = { name = bfl_price_shock value = 0.522 } }
+else_if = { limit = { var:bfl_price_bucket = 71 } set_variable = { name = bfl_price_shock value = 0.55079 } }
+else_if = { limit = { var:bfl_price_bucket = 72 } set_variable = { name = bfl_price_shock value = 0.58004 } }
+else_if = { limit = { var:bfl_price_bucket = 73 } set_variable = { name = bfl_price_shock value = 0.60978 } }
+else_if = { limit = { var:bfl_price_bucket = 74 } set_variable = { name = bfl_price_shock value = 0.64007 } }
+else_if = { limit = { var:bfl_price_bucket = 75 } set_variable = { name = bfl_price_shock value = 0.67095 } }
+else_if = { limit = { var:bfl_price_bucket = 76 } set_variable = { name = bfl_price_shock value = 0.70247 } }
+else_if = { limit = { var:bfl_price_bucket = 77 } set_variable = { name = bfl_price_shock value = 0.7347 } }
+else_if = { limit = { var:bfl_price_bucket = 78 } set_variable = { name = bfl_price_shock value = 0.7677 } }
+else_if = { limit = { var:bfl_price_bucket = 79 } set_variable = { name = bfl_price_shock value = 0.80155 } }
+else_if = { limit = { var:bfl_price_bucket = 80 } set_variable = { name = bfl_price_shock value = 0.83633 } }
+else_if = { limit = { var:bfl_price_bucket = 81 } set_variable = { name = bfl_price_shock value = 0.87214 } }
+else_if = { limit = { var:bfl_price_bucket = 82 } set_variable = { name = bfl_price_shock value = 0.90909 } }
+else_if = { limit = { var:bfl_price_bucket = 83 } set_variable = { name = bfl_price_shock value = 0.9473 } }
+else_if = { limit = { var:bfl_price_bucket = 84 } set_variable = { name = bfl_price_shock value = 0.98694 } }
+else_if = { limit = { var:bfl_price_bucket = 85 } set_variable = { name = bfl_price_shock value = 1.02816 } }
+else_if = { limit = { var:bfl_price_bucket = 86 } set_variable = { name = bfl_price_shock value = 1.07119 } }
+else_if = { limit = { var:bfl_price_bucket = 87 } set_variable = { name = bfl_price_shock value = 1.11628 } }
+else_if = { limit = { var:bfl_price_bucket = 88 } set_variable = { name = bfl_price_shock value = 1.16372 } }
+else_if = { limit = { var:bfl_price_bucket = 89 } set_variable = { name = bfl_price_shock value = 1.2139 } }
+else_if = { limit = { var:bfl_price_bucket = 90 } set_variable = { name = bfl_price_shock value = 1.26729 } }
+else_if = { limit = { var:bfl_price_bucket = 91 } set_variable = { name = bfl_price_shock value = 1.32451 } }
+else_if = { limit = { var:bfl_price_bucket = 92 } set_variable = { name = bfl_price_shock value = 1.38637 } }
+else_if = { limit = { var:bfl_price_bucket = 93 } set_variable = { name = bfl_price_shock value = 1.45396 } }
+else_if = { limit = { var:bfl_price_bucket = 94 } set_variable = { name = bfl_price_shock value = 1.52883 } }
+else_if = { limit = { var:bfl_price_bucket = 95 } set_variable = { name = bfl_price_shock value = 1.61328 } }
+else_if = { limit = { var:bfl_price_bucket = 96 } set_variable = { name = bfl_price_shock value = 1.7109 } }
+else_if = { limit = { var:bfl_price_bucket = 97 } set_variable = { name = bfl_price_shock value = 1.82794 } }
+else_if = { limit = { var:bfl_price_bucket = 98 } set_variable = { name = bfl_price_shock value = 1.97668 } }
+else_if = { limit = { var:bfl_price_bucket = 99 } set_variable = { name = bfl_price_shock value = 2.18782 } }
+else_if = { limit = { var:bfl_price_bucket = 100 } set_variable = { name = bfl_price_shock value = 2.59563 } }change_variable = { name = bfl_price_draws add = 1 }
+        change_variable = { name = bfl_price_log_bps add = bfl_price_delta_bps }
+        set_variable = { name = bfl_price_log_bps value = { value = var:bfl_price_log_bps min = -5000.0 max = 5000.0 round = yes } }
+            }
+        }
+}

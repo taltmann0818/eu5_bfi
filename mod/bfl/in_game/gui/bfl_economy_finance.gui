@@ -52,6 +52,11 @@
             enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_expedition_tip"
             scripted_action_tooltip = { click_type = left click_mode = single
                 action_name = "bfl_company_expedition" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_list_equity_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_list_equity" datacontext = "[GetGenericAction('bfl_company_list_equity')]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_list_equity_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_list_equity" actor = "[GetPlayer]" }
         }
             text_multi = { text = "bfl_company_native_channels" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 11 }
         } }
@@ -135,8 +140,12 @@
             text_single = { text = "bfl_share_ownership" autoresize = yes fontsize = 13 }
             piechart = { name = "bfl_share_ownership_donut" size = { 100 100 } using = piechart_angles using = bg_circle_piechart_big
                 pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
-        value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_state_units').GetValue)]" color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]"
+        value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_state_units').GetValue)]" color = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetMapColor]"
         visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_founder_units').GetValue)]" color = { 0.65 0.55 0.35 1 }
+        visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_founder_units').GetValue, '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'))]" color = { 0.48 0.53 0.58 1 }
+        visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'), '(CFixedPoint)0')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat(Country.MakeScope.GetVariable('bfl_shr_01_units').GetValue)]"
             color = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetMapColor]"
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" tooltipwidget = { bfl_share_ownership_tooltip = { } } }pieslice = { texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
@@ -1530,7 +1539,7 @@
         type bfl_credit_funding_body = scrollarea {
             size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
-            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_funding_title_tip"
+            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 bfl_bond_contents = { }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_funding_title_tip"
         widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
              text_single = { parentanchor = center text = "bfl_funding_title" autoresize = yes } } hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_deposit_1_button" size = { -1 32 } layoutpolicy_horizontal = expanding
         tooltip = "bfl_deposit_1_tip" text = "bfl_deposit_1"
@@ -1544,10 +1553,10 @@
         tooltip = "bfl_withdraw_tip" text = "bfl_withdraw"
         enabled = "[GetScriptedGui('bfl_withdraw').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_withdraw').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } } vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_buy_capital_button" size = { -1 32 } layoutpolicy_horizontal = expanding
-        tooltip = "bfl_buy_capital_tip" text = "bfl_buy_capital"
-        enabled = "[GetScriptedGui('bfl_buy_capital').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        onclick = "[GetScriptedGui('bfl_buy_capital').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_invite_equity_capital_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_invite_equity_capital_tip" text = "bfl_invite_equity_capital"
+        enabled = "[GetScriptedGui('bfl_invite_equity_capital').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_invite_equity_capital').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
     } } } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_term_service_1_button" size = { -1 32 } layoutpolicy_horizontal = expanding
         tooltip = "bfl_term_service_1_tip" text = "bfl_term_service_1"
         enabled = "[GetScriptedGui('bfl_term_service_1').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2136,7 +2145,7 @@
         type bfl_credit_investment_body = scrollarea {
             size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
-            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
+            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 bfl_equity_investments = { }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
         datacontext = "[GetPlayer]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_offer_credit_tip"
         scripted_action_tooltip = { click_type = left click_mode = single

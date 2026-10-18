@@ -1,0 +1,6 @@
+﻿bfl_exchange_construction_budget = {
+value = expensive_build_price_age_of_reformation
+        if = { limit = { current_age = age_5_absolutism } value = expensive_build_price_age_of_absolutism }
+        else_if = { limit = { current_age = age_6_revolutions } value = expensive_build_price_age_of_revolution }
+        add = 250
+}

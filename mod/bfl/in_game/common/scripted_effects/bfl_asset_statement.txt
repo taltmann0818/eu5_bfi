@@ -1931,4 +1931,85 @@ if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind >= 3 exists = var
                 change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
             bfl_allocate_asset_row = yes }
 bfl_add_sovereign_bond_assets = yes
+change_variable = { name = bfl_asset_investments add = bfl_security_carrying }
+if = { limit = { exists = var:bfl_pos_01_issuer }
+            var:bfl_pos_01_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_01 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_02_issuer }
+            var:bfl_pos_02_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_02 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_03_issuer }
+            var:bfl_pos_03_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_03 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_04_issuer }
+            var:bfl_pos_04_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_04 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_05_issuer }
+            var:bfl_pos_05_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_05 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_06_issuer }
+            var:bfl_pos_06_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_06 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_07_issuer }
+            var:bfl_pos_07_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_07 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_08_issuer }
+            var:bfl_pos_08_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_08 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_09_issuer }
+            var:bfl_pos_09_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_09 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_10_issuer }
+            var:bfl_pos_10_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_10 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_11_issuer }
+            var:bfl_pos_11_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_11 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_12_issuer }
+            var:bfl_pos_12_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_12 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_13_issuer }
+            var:bfl_pos_13_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_13 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_14_issuer }
+            var:bfl_pos_14_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_14 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_15_issuer }
+            var:bfl_pos_15_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_15 }
+            bfl_allocate_asset_row = yes }
+if = { limit = { exists = var:bfl_pos_16_issuer }
+            var:bfl_pos_16_issuer = { save_scope_as = bfl_asset_party }
+            set_variable = { name = bfl_asset_kind value = 5 }
+            set_variable = { name = bfl_asset_amount value = bfl_position_carrying_16 }
+            bfl_allocate_asset_row = yes }
 }

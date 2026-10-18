@@ -1,0 +1,109 @@
+{
+  "passed": true,
+  "runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668",
+  "engine_assertions": 239,
+  "engine_reports": {
+    "pricing": {
+      "path": "tests/results/2026-10-18-gbm-pricing.json",
+      "sha256": "5d87c8078bbae9bdea9377c065932a8ad67f55bc4c07174ca159d7ae0c4d8b56",
+      "assertions": 31,
+      "runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668",
+      "fixture_sha256": "19b0cfc026dc025a5592b9a8307ff8164c58bfb9b5ebaa57f5ff9c70926dfcbc"
+    },
+    "market": {
+      "path": "tests/results/2026-10-18-gbm-market.json",
+      "sha256": "2937dd6121965fa255e0fa5b180298c68e42a6b835a9e50d2979bd6b0634448b",
+      "assertions": 40,
+      "runtime_sha256": "ff89175424c6ebd9db4ecceffa27436b768824e1ec96d3b3a2a17140353ce9a1",
+      "fixture_sha256": "b3b72eda41a737be861e20b51fa02038f898e347aa29051a29189f36102f9fba"
+    },
+    "ownership": {
+      "path": "tests/results/2026-10-18-gbm-ownership.json",
+      "sha256": "57f5f7f42ecd78db7b671936d975cf02923d2925250b85426a768dffb34e4b09",
+      "assertions": 54,
+      "runtime_sha256": "ff89175424c6ebd9db4ecceffa27436b768824e1ec96d3b3a2a17140353ce9a1",
+      "fixture_sha256": "18fde622ddeb7ba286ea7928c66295f7f6a855ea12f9c834cd54a104088b0e8b"
+    },
+    "accounts": {
+      "path": "tests/results/2026-10-18-gbm-accounts.json",
+      "sha256": "b36eb7970e7c76aa76c6a119e37b7a2a1aecc1b6df683576ac834d188b743481",
+      "assertions": 114,
+      "runtime_sha256": "ff89175424c6ebd9db4ecceffa27436b768824e1ec96d3b3a2a17140353ce9a1",
+      "fixture_sha256": "a80113f7b41b9c2e26bd685c84332a9fe0718423f9698989bebd74a532f8b218"
+    }
+  },
+  "native_ab": {
+    "scope": "Twelve paired quotes from the same actual issuer and observation time. NAV is the pure-NAV counterfactual of the same cash/claims/liabilities/units. AI trading is disabled in this isolated pricing fixture; this is not a multi-country macro balance experiment.",
+    "observations": 12,
+    "metrics": {
+      "nav": {
+        "annualized_log_vol": 0.010200513122994545,
+        "initial": 1.2,
+        "final": 1.195
+      },
+      "gbm_nav": {
+        "annualized_log_vol": 0.07300348196965828,
+        "initial": 1.2,
+        "final": 1.221
+      }
+    },
+    "price_formula_checks": "All twelve observed market quotes agree with rounded NAV times exp(log premium) within 0.001 gold."
+  },
+  "persistence": "Twelve natural observed closes; test fixture freezes only its pricing clock after close 12, waits for the following yearly autosave, and finishes at month 24. A second process checks saved seed/premium/draw count before any grants. The separate next-shock primitive records pre-grant NAV and supplies 5000 gold to isolate a solvent draw from year-two native cash changes. Freeze/grants are fixture-only, not production behavior or campaign-profit evidence.",
+  "offline": {
+    "tests": 108,
+    "paired_paths": 2560,
+    "months": 120,
+    "scenarios": 5,
+    "sensitivity_rows": 130,
+    "interaction_cells": 54,
+    "analysis": {
+      "path": "tests/results/2026-10-18-equity-pricing/analysis.json",
+      "sha256": "8107bc505d1dc3aab9d55af837a223ec9a4c946250a10736ba3ddd0ca4daae58"
+    },
+    "checked": "All CSV summaries independently reconcile; normal moments/full PRNG period and checkpoint replay checked. Synthetic prices use the same rounded NAV anchor/quantile precision; reference order quantities/cash use continuous arithmetic, while native assertions separately verify share/cent rounding. Percentiles are path distributions, not confidence intervals."
+  },
+  "ui": {
+    "path": "tests/results/2026-10-18-gbm-ui.json",
+    "sha256": "8de7bf13daf7fa0bf86bfb1ccb3da786913ed99beab18670f39ea1ddbb149b67",
+    "observations": 10,
+    "captures": 6
+  },
+  "source_validation": {
+    "files": 161,
+    "graphics": 59,
+    "pinned_native_and_cmf": "PASS",
+    "deterministic_generation_and_reconstruction": "PASS"
+  },
+  "staging": {
+    "files": 221,
+    "manifest_sha256": "377123a01851af929958ff1ef86a9d8564aa705ed8d6b1b3b9cf8f18cbee6286"
+  },
+  "backend_config": {
+    "path": "design/equity_pricing.json",
+    "sha256": "d4f2b8806d2c7e2f3b3d926b7b45d90d372bf4974a794c4097d7691a41e8cf09",
+    "compiled_runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668",
+    "note": "Backend explicitly exposes the existing 5% dealer resale default; regeneration is byte-identical to the accepted runtime. Optional non-default settings are sensitivity-tested offline; not every combination has its own native campaign."
+  },
+  "rejected_attempts": [
+    {
+      "path": "tests/results/2026-10-18-gbm-rejected-native-first.json",
+      "sha256": "cfc4e5cf8817860aa2fe6da7ae0538a25a544fc292f0df9351a4aa14bb564aaf"
+    },
+    {
+      "path": "tests/results/2026-10-18-gbm-rejected-native-fixed.json",
+      "sha256": "33b1dfca97941eca26c12d692f131593d91ec2f7d44b8b8f132e69aecacc1499"
+    },
+    {
+      "path": "tests/results/2026-10-18-gbm-rejected-native-checkpoint.json",
+      "sha256": "566409ac857e6c3578ca73c783230f2477e07daa8bc7ea0b44a098dd243da740"
+    },
+    {
+      "path": "tests/results/2026-10-18-gbm-rejected-paired-ab-final.json",
+      "sha256": "a75d4d22c43a56741a099bc540654b8c9daae6a692381bb2f63fb316f4dad935"
+    }
+  ],
+  "financial_provenance": "The 40/54/114 regressions retain financial-runtime ff891754; shipping 767c813d differs only in scripted_guis/bfl_account_commands.txt (matching button/command guard) and localization. All financial effects, values, prices and settlement files are byte-identical. The 31-case pricing suite and cold-loaded final UI exercise shipping.",
+  "historical": "Prior 245-assertion full M5 gate and 208-assertion portfolio follow-up retain their original fingerprints. Unchanged treasury paths are not relabeled as newly rerun. Earlier duplicate pricing runs are not added to the 239 final assertion count.",
+  "scope": "Pinned single-player baseline. Controlled pricing A/B and actual UI do not establish release-wide macroeconomic balance, normal campaign profits, independent real-market tails or every alternate backend configuration; M10 retains calibration/performance/AI integration."
+}

@@ -1329,6 +1329,12 @@ value = var:bfl_asset_investments subtract = bfl_asset_listed_investments min = 
 bfl_state_share_fraction = {
 value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_state_units divide = var:bfl_total_units }
 }
+bfl_founder_share_fraction = {
+value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_founder_units divide = var:bfl_total_units }
+}
+bfl_dealer_share_fraction = {
+value = 0 if = { limit = { var:bfl_total_units > 0 } value = bfl_dealer_units divide = var:bfl_total_units }
+}
 bfl_share_fraction_01 = {
 value = 0 if = { limit = { var:bfl_shr_01_active = 1 var:bfl_total_units > 0 } value = var:bfl_shr_01_units divide = var:bfl_total_units }
 }

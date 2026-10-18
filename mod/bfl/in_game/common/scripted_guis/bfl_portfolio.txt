@@ -1,0 +1,3 @@
+﻿bfl_treasury_portfolio_visible = { scope = country is_shown = { bfl_treasury_portfolio_units > 0 } }
+        bfl_portfolio_bank_financials = { scope = country is_shown = { bfl_has_accounts = yes } }
+        bfl_portfolio_has_reference = { scope = country is_shown = { bfl_issuer_reference_price > 0 } }

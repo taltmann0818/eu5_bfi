@@ -37,7 +37,7 @@ def generate(common, effect, loc, tune):
     # A charter trades through its live research/controller country. Independent
     # banks and other buyers need their own built exchange, including early grants.
     bfl_owns_stock_exchange = {
-        any_owned_location = { has_building = building_type:stock_exchange }
+        any_owned_building = { building_type = building_type:stock_exchange building_level > 0 }
     }
     bfl_can_trade_sovereign_bonds = {
         country_exists = this

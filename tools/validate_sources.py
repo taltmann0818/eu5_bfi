@@ -32,6 +32,8 @@ def check_script(path):
         check(depth>=0,f'{path}: unexpected closing brace')
     check(depth==0,f'{path}: unbalanced braces')
     check(text.count('"')%2==0,f'{path}: unbalanced quotes')
+    check(not re.search(r'var:bfl_\w+\s*=\s*\{\s*value\s*=',text),
+          f'{path}: numeric variable equality needs a named script value; an inline value block is parsed as triggers')
     if 'events' in path.parts:
         check(not re.search(r'ai_chance\s*=\s*\{\s*value\s*=',text),f'{path}: event AI chance uses MTTH base, not decision script-value syntax')
     for texture in re.findall(r'"(gfx/[^"\[\]]+\.(?:dds|png))"',text):
@@ -51,6 +53,11 @@ def main():
     for path in MOD.rglob('*'):
         if path.suffix in ('.txt','.gui','.yml'):
             all_text.append((path,check_script(path)))
+    script_values = {name for path, text in all_text if 'script_values' in path.parts
+                     for name in re.findall(r'^\s*(bfl_\w+)\s*=\s*\{', text, re.M)}
+    for path, text in all_text:
+        for name in re.findall(r"ScriptValue\('?(bfl_\w+)'?\)", text):
+            check(name in script_values, f'{path}: undefined GUI script value {name}')
     localization=(MOD/'main_menu/localization/english/bfl_finance_l_english.yml').read_text(encoding='utf-8-sig')
     for line in localization.splitlines()[1:]:
         check(bool(re.fullmatch(r' [\w.]+: "[^"\r\n]*"', line)),

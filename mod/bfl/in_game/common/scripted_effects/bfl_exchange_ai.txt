@@ -1,0 +1,57 @@
+﻿bfl_ai_prioritize_exchange = {
+save_scope_as = bfl_exchange_builder
+if = { limit = { has_variable = bfl_exchange_project }
+    if = { limit = { exists = var:bfl_exchange_project }
+        var:bfl_exchange_project = { if = { limit = { building_type = building_type:stock_exchange building_level > 0
+            owner = scope:bfl_exchange_builder.var:bfl_exchange_project_host }
+            change_building_owner = scope:bfl_exchange_builder
+            scope:bfl_exchange_builder = { remove_variable = bfl_exchange_project remove_variable = bfl_exchange_project_host }
+        } }
+    }
+    else = { remove_variable = bfl_exchange_project remove_variable = bfl_exchange_project_host }
+}
+if = { limit = { bfl_ai_exchange_ready = yes }
+    save_scope_as = bfl_exchange_builder
+    if = { limit = { country_type = location any_owned_location = { bfl_ai_exchange_site = yes } }
+        random_owned_location = { limit = { bfl_ai_exchange_site = yes }
+            construct_building = { building_type = building_type:stock_exchange owner = scope:bfl_exchange_builder cost_multiplier = 1 cost_multiplier_reason = bfl_ai_exchange_priority } }
+    }
+    else_if = { limit = { bfl_is_independent_bank = yes exists = capital
+        capital = { bfl_ai_exchange_site = yes owner = { is_ai = yes } } }
+        # A landless bank sponsors a real exchange at its own home.
+        # Human land and country ownership never change.
+        capital = { bfl_sponsor_exchange_at_location = yes }
+    }
+    else_if = { limit = { bfl_is_independent_bank = yes }
+        set_variable = { name = bfl_exchange_site_population value = 0 }
+        remove_variable = bfl_exchange_site
+        every_country = { limit = { is_ai = yes country_type = location
+            NOT = { is_at_war_with = scope:bfl_exchange_builder }
+            opinion = { target = scope:bfl_exchange_builder value >= 0 }
+            any_owned_location = { bfl_ai_exchange_site = yes } }
+            every_owned_location = { limit = { bfl_ai_exchange_site = yes population > scope:bfl_exchange_builder.var:bfl_exchange_site_population }
+                save_scope_as = bfl_exchange_candidate
+                scope:bfl_exchange_builder = {
+                    set_variable = { name = bfl_exchange_site value = scope:bfl_exchange_candidate }
+                    set_variable = { name = bfl_exchange_site_population value = scope:bfl_exchange_candidate.population }
+                }
+            }
+        }
+        if = { limit = { exists = var:bfl_exchange_site }
+            var:bfl_exchange_site = { bfl_sponsor_exchange_at_location = yes }
+        }
+    }
+}
+}
+bfl_sponsor_exchange_at_location = {
+owner = { save_scope_as = bfl_exchange_host }
+construct_building = { building_type = building_type:stock_exchange owner = scope:bfl_exchange_host
+    payer = scope:bfl_exchange_builder cost_multiplier = 1 cost_multiplier_reason = bfl_ai_exchange_priority }
+every_buildings_in_location = { limit = { building_type = building_type:stock_exchange owner = scope:bfl_exchange_host }
+    save_scope_as = bfl_exchange_project
+    scope:bfl_exchange_builder = {
+        set_variable = { name = bfl_exchange_project value = scope:bfl_exchange_project }
+        set_variable = { name = bfl_exchange_project_host value = scope:bfl_exchange_host }
+    }
+}
+}

@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "recorded": "2026-10-18",
+  "suite": "M5 actual-game UI observations",
+  "final_runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+  "observation_count": 22,
+  "observations": {
+    "two_credit_subtabs": "Funding & Debt and Lending & Investments replace the separate exchange/bonds subtabs; native credit actions remain below.",
+    "custom_share_actions": "Generated Buy/Sell artwork and compact portfolio are visible in Investments.",
+    "native_country_cards": "Buy and Sell use native search, flags, colored country headers and paper details matching the takeover reference. Header selection sets the security.",
+    "buy_quantity_same_popup": "The Buy popup slider selects 4.921 existing Peruzzi shares; review quotes 5.91 gold.",
+    "secondary_buy_settles": "Normal confirmation raises Peruzzi position 100 to 104.921, basis 100 to 105.91 and lowers bank cash 4800 to 4794.09.",
+    "buy_spends_native_diplomat": "Peruzzi purchase lowers diplomats 4.50 to 3.50.",
+    "shared_issuer_cooldown": "Peruzzi immediately becomes unavailable for opposite-side sale while Bardi remains available.",
+    "sell_quantity_same_popup": "Charter Sell slider selects 984.011 sovereign shares in the same country popup.",
+    "guaranteed_charter_sale": "Normal sale credits Florence 943.12, preserves bank cash 4794.09, transfers 984.011 to the hidden dealer and leaves issued shares 5000.",
+    "sell_spends_native_diplomat": "Charter sale lowers diplomats 3.50 to 2.50.",
+    "positive_portfolio_tooltip": "Original Peruzzi holding shows 100 units, 100 basis, 120 current value and green +20.0%; purchase updates all fields.",
+    "merged_bond_controls": "Funding & Debt includes bond financing, current-holder registry and deposit controls reachable with its native scrollbar.",
+    "missing_building_preserves_holdings": "Locked fixture disables both share actions but keeps existing holdings/value visible.",
+    "buyback_sale_cooldown": "Current-runtime fixture performs a production 2500-share state sale on 1 April. Buy lists Bardi with dealer stock, but native sale cooldown blocks immediate repurchase.",
+    "company_and_actual_histories": "On 1 June the Buy list contains native company Liguria and Corsica, Bardi and Peruzzi with actual monthly NAV sparklines; native time advanced normally.",
+    "charter_buyback_quantity_and_wallet": "Current-runtime Buy slider selects 295.204 Bardi shares. Dedicated confirmation quotes 288.42 from country treasury, restoration of sovereign ownership and unchanged issuer financing/units.",
+    "charter_buyback_settlement": "Normal confirmation spends one diplomat (4.10 to 3.10), restores state units to 2795.204 and keeps bank cash 4753.69 and total issued shares 5000.",
+    "funded_background_owners": "Current ownership tooltip separates Florence, Peruzzi 500 units, Acciaiuoli 500 units and remaining dealer 1204.796 without votes.",
+    "native_company_secondary_purchase": "Normal Buy slider/confirmation acquires 4.921 company shares from Acciaiuoli for 4.93 bank gold. Cash falls 4753.69 to 4748.76, diplomats 3.10 to 2.10; issuer receives no funding.",
+    "mixed_portfolio_colored_returns": "Current tooltip shows Peruzzi 100 shares / basis100 / value79.30 / red -20.7%, and company 4.921 / basis4.93 / value4.94 / green +0.3%.",
+    "equity_in_total_assets": "Current tooltip shows cash4748.76, native loans35.90, conservative equity84.23 and custom bonds100, total4968.90 after displayed rounding.",
+    "current_ui_runtime_diagnostics": "Cold-loaded current UI session has zero collected BFI parser/runtime errors after all current-runtime picker, buyback and company actions."
+  },
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "viewport": "1280x720 client, 60% GUI scale; unedited 1282x752 game-window PNGs",
+  "fixtures": [
+    {
+      "token": "8016925715f445e89f26f90a6a3d6412",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b",
+      "fixture_sha256": "8e53f83b1c8f0fb22ce28c215d9c5cde56b54ef5789a1b22a29e9dfd6c9b63bb",
+      "suite": "M5 exchange UI",
+      "locked": false,
+      "companies": true,
+      "scope": "Disposable Florence. Granted Reformation, charter, research, completed buildings, wallets and staged NAV. Real funded primary bank subscriptions, equity sell order and custom bond offer. UI acceptance and natural campaign acceptance are separate."
+    },
+    {
+      "token": "b18921b9dd12498baf9277ed7aeedd71",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b",
+      "fixture_sha256": "f72b4ae0d9d381085aeacafa1531e90bef9fb7aae4255247c0370389af4fbd75",
+      "suite": "M5 exchange UI",
+      "locked": true,
+      "companies": false,
+      "scope": "Disposable Florence. Granted Reformation, charter, research, completed buildings, wallets and staged NAV. Real funded primary bank subscriptions, equity sell order and custom bond offer. UI acceptance and natural campaign acceptance are separate."
+    },
+    {
+      "token": "77ec5bb2785149e8b3c2b41781c98913",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+      "fixture_sha256": "923f1558ff791ccf8be5407c52709e5216fcf3ff72b0c10c3e983faac3a1cf5a",
+      "suite": "M5 exchange UI",
+      "locked": false,
+      "companies": true,
+      "charter_inventory": true,
+      "scope": "Disposable Florence. Granted Reformation, charter, research, completed buildings, wallets and staged NAV. Real funded primary bank subscriptions, equity sell order and custom bond offer. UI acceptance and natural campaign acceptance are separate."
+    }
+  ],
+  "captures": {
+    "docs/screenshots/m5-assets-equity.png": {
+      "sha256": "acf6fa44a0ca14cf726f7fde6acefccddfe253e8a6e63bc5b6d00668a3644594",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-buy-confirmation.png": {
+      "sha256": "168d85cf4015a68a3577705866065b59d2efaa4dc657e3414928196b299bcb2c",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-buy-settled.png": {
+      "sha256": "b21fb3f1b0de2157a086f8bfa54a4b81cfae634f1d181dae62abe1d5b711a7b3",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-buy-slider.png": {
+      "sha256": "f19397726624dcadfa0c6a4351dad2f6152ff969804e6b9c343ada874ed8e496",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-buyback-cooldown.png": {
+      "sha256": "d913a929d4c1f6a141b0be5419de5c66f2bd8b694a64b1127d024e2a598a2169",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-charter-buyback-confirmation.png": {
+      "sha256": "357c363bc7a8353cce6fe6c1eed411a34f1240d73d19b8119231a5c2f0119ed9",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-charter-buyback-settled.png": {
+      "sha256": "209748f8874ae7b8e9476ce34b1084ef898b19a49236b37f7d407e3b18d9e593",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-charter-buyback-slider.png": {
+      "sha256": "0cf103c8d30ddfbdf00e30052abb3815eb0d3a4e5207395b92a355ef79c78006",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-company-and-bank-history.png": {
+      "sha256": "38c9e78e7f6b84ceead81d884d7329fb5fc91fa92bba0fc2cf6efe4bdd22972f",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-company-buy-confirmation.png": {
+      "sha256": "11d79bdd49fc1f7a97d533379bbd387ab293db3234c19d4557d6bb81010491af",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-company-buy-slider.png": {
+      "sha256": "e3d507be929e0bec5bfd4a2638686692c43deae29cbf76f3312eac380b6f493f",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-company-portfolio-settled.png": {
+      "sha256": "7ec497331b179c6937065f530104d198ac5b18a0a19e1abb20cf81840212fa25",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-current-assets-equity.png": {
+      "sha256": "79f7a49f5ae96fa3b26b1fd4b8772fa0a3f6a868118259bee1f30496b9c5b35d",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+    },
+    "docs/screenshots/m5-exchange-locked.png": {
+      "sha256": "f63024c99cd9bf57a6cc62d2d5c4d9f49d0dcbf223f202495dcf24667fb268a4",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-funding-bond-registry.png": {
+      "sha256": "c4b0336b7318bc4910a9c7b2ba2189edddf88703b4e114397c48b3d4e4ee53a6",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-funding-bonds.png": {
+      "sha256": "feedbcdcf36a3bc4d636e6b77bbdbacef4831302590503990d90a9c7fed25014",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-funding-deposits.png": {
+      "sha256": "145a0034328f51e31c58be24f61a6cbfb1766242da82be422f165691ccfc5515",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-investments.png": {
+      "sha256": "a89f07fe47492d7083b499148fda7c7cbcc596b3855878a0eafe7cb72939d54c",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-issuer-cooldown.png": {
+      "sha256": "5407e496e8921b578e6321dd42087c83562a919b74c361f155c6af6ab1478e7f",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-portfolio.png": {
+      "sha256": "e9808372441cbd95a9509f3ff0319e425d5dce1d0412f01ca83de0ee164a0643",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-sell-charter-confirmation.png": {
+      "sha256": "06972e12750dba46effffc338ad04d9b130c2c45b051e245a05f0329450fe67e",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-sell-charter-settled.png": {
+      "sha256": "70eabc715975a86e91c20594efaf95a5dc530ec1e1267957b5ab0503ffab5e5f",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    },
+    "docs/screenshots/m5-sell-charter-slider.png": {
+      "sha256": "cc96262b329239873fac62c0d3e1c6e57e2a3ce5f54d8ad7b3c3d7a03b4ff362",
+      "runtime_sha256": "9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b"
+    }
+  },
+  "current_session_bfi_runtime_parser_errors": 0,
+  "provenance": "Fourteen original captures on 9570a06 precede the non-issuer picker guard and charter buybacks. Nine new captures cold-load final a16944b and exercise its company/history, sale cooldown, buyback and asset/portfolio paths. Each capture retains its actual runtime. These fixture grants are visual setup, not proof of natural research/construction or macroeconomic balance. Dedicated engine suites cover the financial and natural construction gates separately. The running final disposable campaign is left paused on 1 June 1337."
+}

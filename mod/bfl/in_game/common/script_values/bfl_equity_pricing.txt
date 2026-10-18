@@ -1,0 +1,118 @@
+﻿bfl_price_annual_drift = {
+value = 0.0
+}
+bfl_price_annual_volatility = {
+value = 0.1
+}
+bfl_price_annual_mean_reversion = {
+value = 2.0
+}
+bfl_price_trade_impact = {
+value = 0.08
+}
+bfl_price_liquid_float_fraction = {
+value = 0.1
+}
+bfl_price_flow_cap = {
+value = 1.0
+}
+bfl_price_participation_cap = {
+value = 0.25
+}
+bfl_price_base_spread = {
+value = 0.02
+}
+bfl_price_imbalance_spread = {
+value = 0.01
+}
+bfl_price_maximum_spread = {
+value = 0.08
+}
+bfl_price_distress_spread = {
+value = 0.02
+}
+bfl_price_distress_multiplier = {
+value = 0.85
+}
+bfl_price_distress_state = {
+value = 2
+}
+bfl_price_maximum_log_premium = {
+value = 0.5
+}
+bfl_price_maximum_monthly_log_move = {
+value = 0.15
+}
+bfl_price_normal_quantiles = {
+value = 101
+}
+bfl_price_seed_modulus = {
+value = 65521
+}
+bfl_price_seed_multiplier = {
+value = 17364
+}
+bfl_price_quote_validity_months = {
+value = 0
+}
+bfl_price_model = {
+value = 1
+        if = { limit = { has_variable = bfl_price_model_override } value = var:bfl_price_model_override }
+}
+bfl_price_sigma = {
+value = 0.1
+        if = { limit = { has_variable = bfl_price_sigma_override } value = var:bfl_price_sigma_override min = 0 max = 1 }
+}
+bfl_price_distress = {
+value = 0 if = { limit = { bfl_has_accounts = yes var:bfl_state >= 2 } value = 1 }
+}
+bfl_price_log_premium = {
+value = 0 if = { limit = { has_variable = bfl_price_schema } value = var:bfl_price_log_bps divide = 10000 }
+}
+bfl_price_factor = {
+value = 1 if = { limit = { bfl_price_model = 1 has_variable = bfl_price_schema }
+        value = 2.71828 pow = bfl_price_log_premium }
+}
+bfl_equity_quote = {
+value = bfl_nav_quote
+        if = { limit = { bfl_price_model = 1 } multiply = bfl_price_factor
+            if = { limit = { bfl_price_distress = 1 } multiply = 0.85 } }
+        multiply = 1000 floor = yes divide = 1000
+}
+bfl_price_premium = {
+value = 0 if = { limit = { bfl_nav_quote > 0 } value = bfl_equity_quote divide = bfl_nav_quote subtract = 1 }
+}
+bfl_price_flow = {
+value = 0 if = { limit = { var:bfl_total_units > 0 has_variable = bfl_price_schema }
+        value = var:bfl_price_net_units
+        if = { limit = { var:bfl_price_gross_units > { value = var:bfl_total_units multiply = 0.025 } }
+            divide = var:bfl_price_gross_units multiply = var:bfl_total_units multiply = 0.025 }
+        divide = { value = var:bfl_total_units multiply = 0.1 min = 0.001 }
+        min = -1.0 max = 1.0 }
+}
+bfl_price_spread = {
+value = 0.02
+        if = { limit = { bfl_price_model = 1 has_variable = bfl_price_schema }
+            add = { value = var:bfl_price_last_flow if = { limit = { var:bfl_price_last_flow < 0 } multiply = -1 } multiply = 0.01 } }
+        if = { limit = { bfl_price_model = 1 bfl_price_distress = 1 } add = 0.02 } max = 0.08
+}
+bfl_price_bid_factor = {
+value = 1 subtract = { value = bfl_price_spread multiply = 1 }
+}
+bfl_price_ask_factor = {
+value = 1 add = { value = bfl_price_spread multiply = 0 }
+}
+bfl_dealer_ask = {
+value = bfl_equity_quote multiply = bfl_price_ask_factor
+}
+bfl_dealer_bid = {
+value = bfl_equity_quote multiply = bfl_price_bid_factor
+}
+bfl_price_delta_bps = {
+value = var:bfl_price_log_bps multiply = -0.16667
+        add = { value = var:bfl_price_last_flow multiply = 800.0 }
+        add = { value = bfl_price_sigma multiply = bfl_price_sigma multiply = -416.66667 }
+        add = 0.0
+        add = { value = bfl_price_sigma multiply = var:bfl_price_shock multiply = 2886.75135 }
+        min = -1500.0 max = 1500.0
+}

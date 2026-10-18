@@ -156,8 +156,10 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     # Same guarded, funded services used by party-initiated interactions, now directly accessible.
     cmds=''
     for key,gate,service in [('bfl_buy_bill','commercial_bill','bfl_issue_funded_bill'),('bfl_buy_capital','bank_subscription','bfl_subscribe_bank_capital')]:
-        capacity='bfl_has_contract_capacity' if gate=='commercial_bill' else 'bfl_has_shareholder_capacity'
-        valid=f'bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = {{ bfl_can_originate_{gate} = yes {capacity} = yes var:bfl_accept_deposits = 1 }}'
+        capacity='bfl_has_contract_capacity = yes' if gate=='commercial_bill' else (
+            'OR = { var:bfl_state_owner ?= prev ' + ' '.join(f'var:bfl_shr_{i:02}_active = 0 AND = {{ var:bfl_shr_{i:02}_party = prev var:bfl_shr_{i:02}_pool = 0 }}' for i in range(1,17)) + ' }')
+        admission = 'var:bfl_accept_deposits = 1' if gate=='commercial_bill' else 'OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = prev } }'
+        valid=f'bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = {{ bfl_can_originate_{gate} = yes {capacity} {admission} }}'
         cmds+=f'''{key} = {{ scope = country is_shown = {{ bfl_has_management = yes }}
             is_valid = {{ {valid} }} effect = {{ if = {{ limit = {{ {valid} }}
             save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = {{ {service} = yes }} }} }} }}\n'''
@@ -244,7 +246,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         return f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 8 tooltip = "{title}_tip"
             text_single = {{ text = "{title}" size = {{ 155 30 }} autoresize = no fontsize = 13 }} {buttons} }}'''
     funding=section('bfl_funding_title',pair(action('bfl_deposit_1','deposit'),action('bfl_deposit_2','deposit'))
-        +pair(action('bfl_withdraw','withdraw'),action('bfl_buy_capital','subscribe')))
+        +pair(action('bfl_withdraw','withdraw'),action('bfl_invite_equity_capital','subscribe')))
     funding += pair(action('bfl_term_service_1','deposit'), action('bfl_term_service_2','withdraw'))
     for pool in range(1,5):
         funding += pair(action(f'bfl_estate_deposit_{pool}','deposit'), action(f'bfl_estate_term_{pool}','deposit'))
@@ -284,7 +286,9 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding+=section('bfl_safeguards_title',pair(action('bfl_recapitalize_command','liquidity'),action('bfl_suspend_command','lock')))
     funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
-    investments=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
+    funding = 'bfl_bond_contents = { }' + funding
+    investments='bfl_equity_investments = { }'
+    investments+=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
     investments+=action('bfl_buy_bill','note')
     for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_goods',['commodity_inventory','warehouse_receipt','commodity_forward','margining']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:
         cards=[]
@@ -423,22 +427,15 @@ def build_credit(game, baseline, pin=False):
         view=view[:button_at]+replacement+view[button_end:]
         changes.append((original,replacement))
         search_at=button_at+len(replacement)
-    # Sovereign Bonds is a third native Credit subtab, inside the same panel.
+    # Keep the two native tabs. Bonds belong to Funding & Debt; shares to
+    # Lending & Investments. Native borrowing/loan lists retain their actors.
     at=view.index('header_secondary_tabs = {')
     header_end=balanced_block(view,view.index('{',at))
     original=view[at:header_end]
     replacement=original.replace('LOANS_TAKEN_TITLE','bfl_funding_tab').replace('LOANS_GIVEN_TITLE','bfl_investment_tab')
-    content = replacement.index('blockoverride "content" {') + len('blockoverride "content" {')
-    tab = '''
-        button_secondary_tab_alt = { layoutpolicy_horizontal = expanding tooltip_enabled = no
-            blockoverride "tab_text" { text = "bfl_bond_panel_title" fontsize = 16 }
-            onclick = "[GetScriptedGui('bfl_prepare_bond_panel').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            onclick = "[CreditLateralView.Vars.Set('subtab','bfl_bonds')]"
-            down = "[CreditLateralView.Vars.HasValue('subtab','bfl_bonds')]"
-        }
-    '''
-    replacement = replacement[:content] + tab.rstrip() + '\n' + replacement[content:]
-    replacement += f'\n bfl_sovereign_bonds = {{ visible = "[{bonds_tab}]" }}\n'
+    replacement = replacement.replace('on_action = "[CreditLateralView.Vars.Set(\'subtab\',\'loans_taken\')]"',
+        'on_action = "[GetScriptedGui(\'bfl_prepare_bond_panel\').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"\n'
+        'on_action = "[CreditLateralView.Vars.Set(\'subtab\',\'loans_taken\')]"')
     changes.append((original,replacement));view=view[:at]+replacement+view[header_end:]
     write(MOD/rel,templates+view)
     restored=view

@@ -1,0 +1,22 @@
+﻿bfl_company_list_equity = { type = owncountry ai_tick = never
+        potential = { scope:actor = { any_subject = { bfl_is_company = yes } } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = company name = choose_country column = { data = name }
+            visible = { bfl_is_company = yes is_subject_of = scope:actor }
+            enabled = { bfl_is_company = yes is_subject_of = scope:actor } }
+        effect = { scope:actor = { save_scope_as = bfl_company_actor }
+            scope:company = { if = { limit = { bfl_company_authority = yes }
+                bfl_register_company = yes set_variable = { name = bfl_accept_equity value = 1 }
+                set_variable = { name = bfl_equity_listed value = 1 } bfl_record_exchange_history = yes } } }
+        ai_will_do = { value = 0 }
+    }
+    bfl_exchange_browse = { type = owncountry ai_tick = never show_message = no
+        potential = { scope:actor = { bfl_has_management = yes } } allow = { }
+        select_trigger = { looking_for_a = country target_flag = security name = choose_country
+            allow_self = yes column = { data = name }
+            interaction_source_list = { scope:actor = { every_country = {
+                limit = { has_variable = bfl_ownership_schema OR = { var:bfl_equity_listed = 1 bfl_has_valid_controller = yes } }
+                add_to_list = source } } }
+            visible = { has_variable = bfl_ownership_schema } enabled = { country_exists = this } }
+        effect = { scope:actor = { set_variable = { name = bfl_exchange_selected value = scope:security } } }
+        ai_will_do = { value = 0 }
+    }

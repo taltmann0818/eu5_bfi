@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -28,6 +28,9 @@ try {
         'm2' { 'tools/m2_company_suite.py' }
         'm3' { 'tools/m3_credit_suite.py' }
         'm4' { 'tools/m4_treasury_suite.py' }
+        'm5' { 'tools/m5_ownership_suite.py' }
+        'm5market' { 'tools/m5_market_suite.py' }
+        'm5pricing' { 'tools/m5_pricing_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId
@@ -44,6 +47,8 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
     if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm5market') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm5pricing') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=90', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }
     $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
     New-Item -ItemType Directory -Path $outPath -Force | Out-Null

@@ -1,5 +1,25 @@
 # Florence campaign regression checks
 
+**Current stochastic-pricing acceptance:** the implemented [NAV-anchored market model](exchange-pricing.md) and [paired comparison/sensitivity](equity-pricing-ab.md) pass the pinned single-player gate. **31 pricing + 40 market + 54 ownership + 114 accounts/bond = 239 native assertions**, including twelve matched same-bank NAV/market observations and second-process saved-state checks, pass with exact per-report provenance. The 31-case pricing suite runs shipping `767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668`; 40/54/114 regressions retain `ff891754...`, differing only in the matching recapitalization-button/command guard and its tooltip localization. All financial price/value/effect files are byte-identical. The ordinary financial regression suites explicitly select pure NAV on that identical runtime; the dedicated pricing suite enables GBM. **108 offline tests**, native/CMF source pins, deterministic generation/reconstruction and **221-file staging** pass. [Exact provenance](../tests/results/2026-10-18-gbm-validation.json) preserves actual hashes, rejected development attempts, synthetic-versus-native scope and the fixture-only solvency grant for the isolated next-draw check.
+
+The offline A/B uses **2,560 paths over 120 months and five scenarios**, **130 sensitivity rows** and **54 interaction cells**. Results are controlled synthetic model outputs, not campaign earnings or release-wide economic calibration. Backend defaults select 10% annual volatility, zero independent drift, 2/year mean reversion, bounded initiating-order pressure and spreads, actual ex-dividend NAV and paid NAV issuance. Subscriptions and the sovereign recapitalization route both enforce the primary/dealer arbitrage guard. Zero NAV halts sales/reset premia; a funded recovery reanchors without a shock. Seed/period guards prevent rerolls and background inventory distribution adds no duplicate pressure.
+
+[Current UI evidence](../tests/results/2026-10-18-gbm-ui.json) records actual market-versus-NAV bank/company tooltips, premiums/discounts, spreads, price histories and a normal funded company purchase. Original captures retain their `69f43d3e...` fingerprint; the final saved-campaign reload cold-loads the shipping runtime. The resolution recapitalization guard and matching button condition/tooltip are the only later changes; pricing and layout files are identical. Full M10 macroeconomic balance, AI integration, languages/scales/performance and alternate-setting campaigns remain separate gates.
+
+Historical [M5 portfolio/sale follow-up](m5-ownership.md) passes **208 focused engine assertions** (40 market, 54 ownership, 114 accounts/bond), including monthly history bounds and reload. [12 actual UI observations / nine captures](../tests/results/2026-10-18-m5-portfolio-ui.json) verify the active-campaign charter sale, treasury-inclusive portfolio, owner rows, nested bank/company finances and actual monthly chart. **98 offline tests**, source pins, deterministic generation/reconstruction and **218-file staging** pass. [Provenance](../tests/results/2026-10-18-m5-portfolio-validation.json) preserves actual engine hashes: shipping differs only in the two GUI files. Earlier full M5 gate and unchanged treasury evidence below remain historical, not relabeled. That historical acceptance retained NAV; the current stochastic follow-up above supersedes it.
+
+Historical full M5 gate:
+
+[M5 ownership/share trading acceptance](m5-ownership.md) passes its pinned-baseline gate:
+54 ownership + 34 market + 114 accounts/bond + 43 treasury = **245 engine assertions**,
+twelve-period observations and second-process reload on the final runtime.
+[22 UI observations / 23 actual-game captures](../tests/results/2026-10-18-m5-ui.json)
+retain individual runtime/fixture hashes. **98 offline tests** and **214-file staging** pass.
+[Validation provenance](../tests/results/2026-10-18-m5-validation.json) preserves rejected
+fixture/native-label attempts and the paused issuance reproduction. M6-M10 remain separate gates.
+Run `./tools/run_campaign.ps1 -Suite m5` and `-Suite m5market`; use
+`./tools/start_test_campaign.ps1 -Exchange` for a disposable populated share/bond UI.
+
 [M4 treasury/deposit acceptance](m4-treasury.md) is complete for the pinned baseline:
 43/43 dedicated, 114/114 accounts/bond and 46/46 credit assertions, including twelve
 consecutive monthly settlements and second-process reload. All final engine and

@@ -10,7 +10,7 @@ M4 deposit slots add numeric `pool` (0 treasury; 1 burghers; 2 nobles; 3 clergy;
 
 Profiles: 0 pending, 1 Merchant, 2 Overseas. States: 0 operating, 1 stressed, 2 restricted, 3 insolvent, 4 resolving, 5 closed. Current runtime transitions cover 0–3; full resolution/closure remains acceptance and development work. Servicing permissions are independent of new-business research/profile gates.
 
-M1 adds `bfl_profile_revision = 1` for once-only migration of obsolete profile 3 to pending; valid 1/2 choices persist. Pending offers store `bfl_profile_offered_to` and execution checks the live independent-bank/controller authority. `bfl_controller` is reconciled from the current overlord. Duplicate demotion adds `bfl_legacy_servicing`, which blocks new expanded business independently of liquidity recovery while keeping account and holder slots intact. Charter-owned state units follow the charter's live controller; external shareholder records are preserved.
+M1 adds `bfl_profile_revision = 1` for once-only migration of obsolete profile 3 to pending; valid 1/2 choices persist. Pending offers store `bfl_profile_offered_to` and execution checks the live independent-bank/controller authority. `bfl_controller` is reconciled from the current overlord. Duplicate demotion adds `bfl_legacy_servicing`, which blocks new expanded business independently of liquidity recovery while keeping account and holder slots intact. M5 separates monetary authority from financial ownership: `bfl_state_owner` preserves the original sovereign's paid units through political transfer. External shareholder records persist too.
 
 Charter selection has eight scope-valued slots **per page**, not an eight-bank total limit. `bfl_candidate_offset`, `count`, `total` and confirmed `price` belong to the sovereign. Cancellation/conversion erase all candidate scopes and the price, and zero numeric navigation fields so queued events can still safely evaluate their triggers. A stale price requires a new selection. The paid charter reform activates immediately; a timed reform would scale its replacement bonuses during implementation.
 
@@ -20,7 +20,11 @@ Demand and term accounts store principal and accepted annual rate. Accrual chang
 
 Withdrawals pay interest claims first, then principal, from actual cash after the operating buffer and separately committed funds. An unpaid request stays queued. Repeating an already completed request cannot recreate its claim. Deposits do not add equity; subscriptions do not add profits. Term withdrawals are unavailable before the recorded maturity period.
 
-Custom funded bills are one-month payment claims backed by the payer's actual 100 gold transfer. The bank books a payable and committed cash; redemption removes both exactly once. Bank capital subscriptions buy units using pre-transfer NAV. New charters give the sovereign 100% ownership; explicitly recorded external holdings survive legacy migration, with unassigned charter units allocated to the sovereign. Repeated subscriptions aggregate by holder. Secondary trading remains outstanding.
+Custom funded bills are one-month payment claims backed by the payer's actual 100 gold transfer. The bank books a payable and committed cash; redemption removes both exactly once. Bank capital subscriptions buy units using pre-transfer NAV. New charters give the sovereign 100% ownership. M5 records independent opening equity in `bfl_founder_units` without adding cash; founder distributions pay the actual burgher estate wallet. Repeated subscriptions aggregate by country and estate pool. Secondary transfers change the actual holder and acquisition basis without adding issuer proceeds.
+
+M5 ownership schema 1 has sixteen issuer-owned shareholder slots (`party`, `pool`, `units`, `basis`, generation), sixteen investor portfolio indexes, one bounded public ask per issuer, twelve monthly NAV observations and six recent executions. Issuer ledgers are authoritative; portfolio indexes are rebuilt from them. Assets carry external shares at the lower of acquisition basis and tangible NAV. Lending capital deducts the entire carrying amount, and tangible NAV excludes securities, preventing recursive cross-capitalization. Unrealized changes remain separate from realized income and cash dividends. A bank may hold at most 25% of another bank or 60% of an eligible company; self holdings are excluded.
+
+Native share dialogs capture quantity, unit price, rounded total and a monotonic actor revision. Accepting a partial secondary purchase rechecks the original public ask and preserves the unsold remainder with a new revision. Instant sales go to the hidden dealer at the accepted market quote less the backend spread. Its explicit signed cash ledger records liquidity credit; funded background AI resales replenish it without a second demand signal. Pure NAV remains a backend comparison mode. Both bank roles use live research and completed-building permissions; queued exchanges do not qualify. Financial majority choices never change native political ownership.
 
 The bank owns the once-per-period sequence: reconcile roles/assets → native net-budget result → deposits/interest/withdrawals → fixed operating expenses → distress → loss offsets/share dividends → facility adapter → autonomous takeover → history/completion stamp. Load and GUI refresh never settle a month. Commands re-resolve live subject authority. Account revision 2 removes retired political modifiers once without paying money or recreating accounts.
 
@@ -57,3 +61,52 @@ the authorized venture budget stays in the company wallet; protected cash is
 atomically escrowed with and returned by the live controller. Native resource
 pricing therefore cannot consume protected obligations, and controller net cash
 is zero. Native preparation/progress and terminal success remain authoritative.
+
+## Hidden market maker (M5, 18 October revision)
+
+Each issuer owns an off-balance clearing subledger: `bfl_dealer_units`, `basis`, signed `cash`, `realized`, `dividends`, `sales` and `resales` (all with the `bfl_dealer_` prefix). Dealer units join founder, state and registered holder units in the authoritative conservation equation. The hidden bank supplies explicit liquidity credit when cash is negative; it neither votes nor contributes to issuer NAV, ordinary bank capital or issuer treasury cash. Player sales release proportional position basis and credit actual cash immediately. AI resale debits an eligible bank's protected cash, allocates ordinary holder units/basis, and replenishes the clearing account. Dividends debit the issuer and credit the dealer account. None of these operations changes issued units or creates issuer financing. This replaces the former single eligible AI dealer requirement.
+
+Ordinary Buy consumes existing public-offer or dealer units. A separate accepted
+100-gold capital subscription is the only exchange action that issues new units;
+it snapshots issuer units and tangible NAV before acceptance. All player trade
+preparations capture issuer identity, revision, quantity, price and expiry.
+Successful settlement consumes that preparation, spends one native diplomat on
+the command actor and installs the issuer's native `bfl_share_trade` cooldown
+for one month. Buy, Sell and explicit capital subscriptions share this cooldown.
+Failed, cancelled and replayed orders consume neither resource. The cooldown is
+per issuer in the supported single-player baseline; background AI distribution
+has its own bounded monthly service.
+
+`bfl_state_basis` records the sovereign's charter stake acquisition basis.
+Opening capitalization and recapitalization add actual paid capital; old saves
+initialize an absent basis from opening state units. A state-stake sale uses
+`bfl_market_wallet = 1`, reduces state units and proportional basis, and pays the
+recorded state's native treasury. `bfl_treasury_equity_realized` records its
+realized result outside bank earnings. Wallet 0 is the managed bank's indexed
+portfolio; its sales pay bank cash and release position basis. Neither path
+changes issued units, political control or reserved charter authority.
+
+A dealer buyback of the managed charter also uses wallet 1. It debits the
+sovereign's native gold, adds existing units and the actual purchase price to
+`bfl_state_units` / `bfl_state_basis`, and releases proportional dealer units and
+basis (the entire remaining basis on a complete fill). The country must remain
+both the recorded state owner and the live charter controller. No bank portfolio
+slot is allocated, and bank cash and issued units stay unchanged. Zero remaining
+state units do not erase the recorded owner's eligibility to recover dealer stock.
+
+M5 management history lives on the command actor (the live landed charter controller or independent bank): `bfl_portfolio_history_01..12`, `bfl_portfolio_history_count` and `bfl_portfolio_history_period`. It samples combined sovereign-stake and bank-held-equity market value once per monthly bank close, starts empty on migration, caps at twelve and rejects same-period resampling. This presentation total never creates a bank self-held asset, liability, capital allowance or profit. Position flows affect chart value; it is not a return index.
+
+M5 stochastic pricing adds issuer-owned `bfl_price_schema = 1`, `seed`, `period`,
+`log_bps`, `net_units`, `gross_units`, `last_flow`, `shock`, `draws` and `defaulted`
+(all prefixed `bfl_price_`). Initial migration sets a zero premium/current period
+without cash, units or fabricated history. Monthly update is once per period;
+log premium is integer basis points, seed 1..65520, and default/recovery is explicit.
+Temporary `bfl_price_order_units/side` identify a successful initiating order.
+Net/gross records aggregate before participation caps; dealer background resales
+and primary issuance add no signal. Existing indexed portfolios read market prices,
+but issuer tangible NAV, paid issuance and lending/dividend capital remain separate.
+Country `bfl_price_model_override` and `bfl_price_sigma_override` are internal
+fixture overrides, not new player settings. Backend `design/equity_pricing.json`
+compiles default model, impact/liquidity/spreads, dividend/issuance/default rules,
+limits and draw policy. [Acceptance and exact evidence](m5-ownership.md) distinguish
+saved-state assertions, controlled offline sensitivity and real UI inspection.
