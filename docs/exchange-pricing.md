@@ -5,9 +5,7 @@
 The runtime remains NAV-based by user decision on 18 October 2026.
 `tools/generate_ownership.py` defines the live quote:
 
-\
 $P_t=\frac{\left\lfloor 1000\max(E_t,0)/N_t\right\rfloor}{1000}.$
-\
 
 Here `N` is the authoritative issued-share count. A bank's tangible net assets
 `E` are actual cash plus recorded native/custom loan and bond carrying values,
