@@ -65,3 +65,23 @@ is zero. Native preparation/progress and terminal success remain authoritative.
 ## Hidden market maker (M5, 18 October revision)
 
 Each issuer owns an off-balance clearing subledger: `bfl_dealer_units`, `basis`, signed `cash`, `realized`, `dividends`, `sales` and `resales` (all with the `bfl_dealer_` prefix). Dealer units join founder, state and registered holder units in the authoritative conservation equation. The hidden bank supplies explicit liquidity credit when cash is negative; it neither votes nor contributes to issuer NAV, ordinary bank capital or issuer treasury cash. Player sales release proportional position basis and credit actual cash immediately. AI resale debits an eligible bank's protected cash, allocates ordinary holder units/basis, and replenishes the clearing account. Dividends debit the issuer and credit the dealer account. None of these operations changes issued units or creates issuer financing. This replaces the former single eligible AI dealer requirement.
+
+Ordinary Buy consumes existing public-offer or dealer units. A separate accepted
+100-gold capital subscription is the only exchange action that issues new units;
+it snapshots issuer units and tangible NAV before acceptance. All player trade
+preparations capture issuer identity, revision, quantity, price and expiry.
+Successful settlement consumes that preparation, spends one native diplomat on
+the command actor and installs the issuer's native `bfl_share_trade` cooldown
+for one month. Buy, Sell and explicit capital subscriptions share this cooldown.
+Failed, cancelled and replayed orders consume neither resource. The cooldown is
+per issuer in the supported single-player baseline; background AI distribution
+has its own bounded monthly service.
+
+`bfl_state_basis` records the sovereign's charter stake acquisition basis.
+Opening capitalization and recapitalization add actual paid capital; old saves
+initialize an absent basis from opening state units. A state-stake sale uses
+`bfl_market_wallet = 1`, reduces state units and proportional basis, and pays the
+recorded state's native treasury. `bfl_treasury_equity_realized` records its
+realized result outside bank earnings. Wallet 0 is the managed bank's indexed
+portfolio; its sales pay bank cash and release position basis. Neither path
+changes issued units, political control or reserved charter authority.

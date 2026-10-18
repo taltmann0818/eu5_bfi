@@ -28,7 +28,7 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'Normal charter UI fixture preparation failed' }
     }
     if ($Exchange) {
-        python tools/prepare_m5_ui.py --userdir $userDir
+        python tools/prepare_m5_ui.py --userdir $userDir --companies
         if ($LASTEXITCODE -ne 0) { throw 'Exchange UI fixture preparation failed' }
     }
     $bfi = Join-Path $userDir 'mod/bfi'
