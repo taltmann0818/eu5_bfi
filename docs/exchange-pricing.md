@@ -47,11 +47,7 @@ purchases and sales; this is not a time-weighted investment-return series.
 
 Pure geometric Brownian motion (GBM) uses proportional random changes:
 
-$
-\frac{dP}{P}=\mu\,dt+\sigma\,dW_t,\qquad
-P_{t+\Delta t}=P_t\exp\left[(\mu-\sigma^2/2)\Delta t
-  +\sigma\sqrt{\Delta t}Z_t\right],\quad Z_t\sim N(0,1)
-$
+$\frac{dP}{P}=\mu\,dt+\sigma\,dW_t,\qquad P_{t+\Delta t}=P_t\exp\left[(\mu-\sigma^2/2)\Delta t +\sigma\sqrt{\Delta t}Z_t\right],\quad Z_t\sim N(0,1)$
 
 `mu` is drift and `sigma` is volatility. Annual parameters use `Delta t = 1/12`
 for monthly observations. Brownian noise gives variability, not an explicit
