@@ -5,7 +5,7 @@
 The runtime remains NAV-based by user decision on 18 October 2026.
 `tools/generate_ownership.py` defines the live quote:
 
-$P_t=\frac{\left\lfloor 1000\max(E_t,0)/N_t\right\rfloor}{1000}.$
+$P_t=\frac{\left\lfloor 1000\max(E_t,0)/N_t\right\rfloor}{1000}$
 
 Here `N` is the authoritative issued-share count. A bank's tangible net assets
 `E` are actual cash plus recorded native/custom loan and bond carrying values,
@@ -47,11 +47,11 @@ purchases and sales; this is not a time-weighted investment-return series.
 
 Pure geometric Brownian motion (GBM) uses proportional random changes:
 
-\[
+$
 \frac{dP}{P}=\mu\,dt+\sigma\,dW_t,\qquad
 P_{t+\Delta t}=P_t\exp\left[(\mu-\sigma^2/2)\Delta t
-  +\sigma\sqrt{\Delta t}Z_t\right],\quad Z_t\sim N(0,1).
-\]
+  +\sigma\sqrt{\Delta t}Z_t\right],\quad Z_t\sim N(0,1)
+$
 
 `mu` is drift and `sigma` is volatility. Annual parameters use `Delta t = 1/12`
 for monthly observations. Brownian noise gives variability, not an explicit
@@ -63,11 +63,11 @@ A useful game extension would retain NAV as a fundamental anchor and model a
 stochastic premium separately. With `x = log(market price / NAV)`, one possible
 monthly update is:
 
-\[
+$
 x_{t+\Delta t}=(1-\kappa\Delta t)x_t+\beta I_t
  +(\mu-\sigma^2/2)\Delta t+\sigma\sqrt{\Delta t}Z_t,
-\qquad P_{t+\Delta t}=NAV_{t+\Delta t}\exp(x_{t+\Delta t}).
-\]
+\qquad P_{t+\Delta t}=NAV_{t+\Delta t}\exp(x_{t+\Delta t})
+$
 
 This is a proposed mean-reverting GBM-style extension, not pure GBM and not current
 gameplay. `kappa` pulls extreme premiums toward fundamentals. `I` would measure
