@@ -245,6 +245,39 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             text_single = {{ text = "{title}" size = {{ 155 30 }} autoresize = no fontsize = 13 }} {buttons} }}'''
     funding=section('bfl_funding_title',pair(action('bfl_deposit_1','deposit'),action('bfl_deposit_2','deposit'))
         +pair(action('bfl_withdraw','withdraw'),action('bfl_buy_capital','subscribe')))
+    funding += pair(action('bfl_term_service_1','deposit'), action('bfl_term_service_2','withdraw'))
+    for pool in range(1,5):
+        funding += pair(action(f'bfl_estate_deposit_{pool}','deposit'), action(f'bfl_estate_term_{pool}','deposit'))
+    ledger = text('bfl_deposit_ledger_help')
+    for i in range(1,33):
+        prefix = f'dep_{i:02}'
+        details = f'''text_multi = {{ raw_text = "Principal [{var(prefix+'_principal')}|2]@gold! · interest owed [{var(prefix+'_interest_due')}|2]@gold! · [{var(prefix+'_annual_rate')}|%1] annually"
+            autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }}'''
+        for pool, name in enumerate(['Treasury', 'Burghers', 'Nobles', 'Clergy', 'Peasants']):
+            details += f'''text_single = {{ raw_text = "{name} account" autoresize = yes fontsize = 12
+                visible = "[EqualTo_CFixedPoint({var(prefix+'_pool')}, '(CFixedPoint){pool}')]" }}'''
+        for state, name in [(1, 'On demand'), (2, 'Fixed term'), (3, 'Withdrawal requested'), (4, 'Quarantined: counterparty unavailable')]:
+            details += f'''text_single = {{ raw_text = "{name}" autoresize = yes fontsize = 12
+                visible = "[EqualTo_CFixedPoint({var(prefix+'_state')}, '(CFixedPoint){state}')]" }}'''
+        details += f'''text_single = {{ raw_text = "Queued payment: [{var(prefix+'_withdrawal_requested')}|2]@gold!"
+            visible = "[GreaterThan_CFixedPoint({var(prefix+'_withdrawal_requested')}, '(CFixedPoint)0')]" autoresize = yes fontsize = 12 }}'''
+        party_visible = f"GetScriptedGui('bfl_{prefix}_party_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)"
+        details = f'''text_single = {{ raw_text = "[Country.MakeScope.GetVariable('bfl_{prefix}_party').GetCountry.GetName]"
+            visible = "[{party_visible}]" autoresize = yes fontsize = 13 }}''' + details
+        details += f'''text_single = {{ raw_text = "Matures in [{value(prefix+'_months_left')}|0] months"
+            visible = "[GreaterThan_CFixedPoint({var(prefix+'_maturity_period')}, '(CFixedPoint)0')]" autoresize = yes fontsize = 12 }}'''
+        ledger += f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 2
+            visible = "[EqualTo_CFixedPoint({var(prefix+'_active')}, '(CFixedPoint)1')]"
+            using = bg_text_mask_container_dark_brown {details} }}'''
+    loc('bfl_deposit_ledger_title', 'Deposit ledger and servicing')
+    loc('bfl_deposit_ledger_title_tip', 'Bank liabilities, accepted terms and unpaid claims. Servicing never depends on continuing diplomatic admission.')
+    loc('bfl_deposit_ledger_help', 'Each lot retains its accepted rate. Matching deposits aggregate; term deposits mature after 12 months. Quarantined claims remain owed and stop accruing until a valid recipient is available. Estate principal and interest return to the same pool.')
+    funding += section('bfl_deposit_ledger_title', ledger)
+    statement = ''
+    for label_name, field in [('Native monthly interest (included in credit)', 'native_interest'), ('Recovered native acquisition cost (excluded)', 'principal'), ('Native payoff gain (included in credit)', 'recovery_gain'), ('Native payoff loss (included in losses)', 'recovery_loss'), ('Credit, deposit and bond receipts', 'credit'), ('Service receipts and agreed interest waivers', 'services'), ('Company and share distributions', 'company'), ('Other native net operations', 'native'), ('Costs and carried losses before offset', 'losses')]:
+        statement += label(f"{label_name}: [{var('statement_'+field)}|2]@gold!", 24)
+    funding += section('bfl_activity_title', statement)
+
     funding+=policies('bfl_deposit_policy_title',[f'bfl_rate_{i}' for i in (0,1,2)],'deposit')
     funding+=policies('bfl_distribution_title',[f'bfl_payout_{i}' for i in (0,25,50)],'dividend')
     funding+=pair(action('bfl_offer_bank_shares','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)1')"),action('bfl_close_bank_offering','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)0')"))

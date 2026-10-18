@@ -78,6 +78,11 @@ def generate(common, effect, loc):
             set_variable = {{ name = {n}_basis value = var:bfl_credit_basis }}
             set_variable = {{ name = {n}_face value = scope:bfl_claim.loan_amount }}
             set_variable = {{ name = {n}_repaid value = 0 }}
+            remove_variable = {n}_receipt
+            set_variable = {{ name = {n}_observed_remaining value = scope:bfl_claim.remaining_debt }}
+            set_variable = {{ name = {n}_observed_face value = scope:bfl_claim.loan_amount }}
+            set_variable = {{ name = {n}_observed_rate value = scope:bfl_claim.loan_interest }}
+            set_variable = {{ name = {n}_observed_months value = scope:bfl_claim.months_left }}
         }}\n'''
     common('scripted_effects', 'credit_registry', effect('bfl_register_native_claim', register))
     carrying = '''set_variable = { name = bfl_credit_carrying_value value = { value = scope:bfl_claim.loan_amount max = scope:bfl_claim.remaining_debt } }\n'''
@@ -207,7 +212,7 @@ def generate(common, effect, loc):
     } } } }
     on_loan_repaid = { on_actions = { bfl_credit_repaid } }
     bfl_credit_repaid = { effect = { scope:owner ?= { if = { limit = { has_variable = bfl_credit_schema }
-        bfl_mark_native_repayment = yes } } } }
+        bfl_capture_native_payoff = yes } } } }
     ''')
     common('scripted_effects', 'credit_restructuring', '''
     bfl_offer_native_restructuring = {
@@ -256,7 +261,7 @@ def generate(common, effect, loc):
                     change_loan_interest = { value = loan_interest subtract = 0.01 min = 0.01 subtract = loan_interest }
                 }
                 remove_variable = bfl_restructure_bank remove_variable = bfl_credit_guard
-                scope:bfl_credit_bank = { bfl_reconcile_native_assets = yes }
+                scope:bfl_credit_bank = { bfl_reset_restructured_receipt_basis = yes bfl_reconcile_native_assets = yes }
             }
         }
     }
@@ -266,12 +271,13 @@ def generate(common, effect, loc):
     # Optional funded settlement paths use the same consent snapshot. They are
     # explicit wallet transfers around audited setters/cancellation, not guessed
     # fractional pay_off_loans semantics (which may affect unrelated loans).
-    settlement = ''
+    settlement = 'bfl_open_receipt_period = yes\n'
     for i in range(1, COUNT + 1):
         n = f'bfl_cr_{i:02}'
         settlement += f'''if = {{ limit = {{ var:{n}_state = 1 var:{n}_loan ?= scope:bfl_restructure_claim }}
             set_variable = {{ name = bfl_credit_released_basis value = {{ value = var:{n}_basis multiply = scope:bfl_party.var:bfl_credit_settlement_fraction }} }}
             change_variable = {{ name = {n}_basis subtract = var:bfl_credit_released_basis }}
+            change_variable = {{ name = bfl_native_principal add = var:bfl_credit_released_basis }}
             set_variable = {{ name = {n}_face value = {{ value = 1 subtract = scope:bfl_party.var:bfl_credit_settlement_fraction
                 multiply = scope:bfl_restructure_claim.loan_amount }} }}
             set_variable = {{ name = bfl_credit_settlement_gain value = {{ value = scope:bfl_party.var:bfl_credit_settlement_payment subtract = var:bfl_credit_released_basis }} }}
@@ -316,7 +322,7 @@ def generate(common, effect, loc):
                     }
                 }
                 remove_variable = bfl_restructure_bank remove_variable = bfl_credit_guard
-                scope:bfl_credit_bank = { bfl_reconcile_native_assets = yes }
+                scope:bfl_credit_bank = { bfl_reset_restructured_receipt_basis = yes bfl_reconcile_native_assets = yes }
             }
         }
     }

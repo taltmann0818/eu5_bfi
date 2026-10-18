@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "date": "2026-10-17",
+  "suite": "M4 normal UI observations",
+  "runtime_sha256": "6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565",
+  "fixture_sha256": "95825f53fdca4d87209b0c6169aa97435e4a645db5e7fe6185bfd0214a3d3f91",
+  "observations": {
+    "controls_and_live_eligibility": "Funding & Debt shows treasury demand/term deposits, withdrawal, renewal/early exit and estate commands. After renewal the matured-account action becomes disabled.",
+    "four_estate_pools": "Dragging the same native scrollbar exposes burghers, nobles, clergy and peasants demand/term controls with funding/permission eligibility.",
+    "treasury_terms_and_aggregation": "Florence treasury lots show aggregate 300 at 2% on demand and 100 at 3% for twelve months, including the charter premium.",
+    "estate_wallet_terms": "Separate burgher demand 100 at 1% and term 100 at 2% show no sovereign premium; due term interest is 0.16.",
+    "normal_renewal_offer": "The normal renewal button opens a 100-principal, twelve-month, 2% offer with explicit accept/keep options and month-end expiry.",
+    "renewal_cash_unchanged": "Normal acceptance leaves bank cash 5499.42, assets 5999.42, liabilities 600.41 and equity 5399.01 unchanged.",
+    "renewed_estate_claim_preserved": "The burgher term still shows 100 principal, 0.16 interest due, 2% and twelve months to maturity after acceptance.",
+    "normal_early_exit_offer": "The normal early-exit command quotes 100 principal and cancellation of 0.25 accrued interest, capped at 1% of principal with no principal penalty.",
+    "early_exit_funded_once": "Normal acceptance changes bank cash 5499.42 to 5399.42, liabilities 600.41 to 500.16 and equity 5399.01 to 5399.26. The sovereign receives 100 principal.",
+    "activity_statement_accessible": "Native interest, recovered acquisition cost, payoff gain/loss, credit and service receipts are visible by dragging; this paused fixture has zero native receipts.",
+    "costs_and_policies_accessible": "Company/share receipts, residual native operations, 2.23 costs/carried losses, new-rate controls and payout presets remain reachable below the ledger.",
+    "overview_and_native_controls_preserved": "The bank overview stays above the scrolled controls; separate sovereign accounts and native Borrow/Repay/search remain present."
+  },
+  "observation_count": 12,
+  "game": "EUV 1.4.1 / Steam build 25905365",
+  "cmf": "2.5.0",
+  "viewport": "1280x720, GUI scale 60%; full window captures 1282x752",
+  "current_session_bfi_runtime_parser_errors": 0,
+  "scope": "Disposable Florence, paused 1 April 1337, staged Renaissance age/charter/wallets/one accrual and a matured estate term. Both offers were opened and accepted through production GUI commands. No personal saves or installed files changed. Native receipt rows are zero in this visual fixture; separate engine assertions verify funded receipts. All PNGs are unedited native window captures.",
+  "captures": {
+    "docs/screenshots/23-m4-deposit-controls.png": "ed80ca9e673e4bffccdaf4f1572ec849fccfefc6f58000336db512e0d2f72db4",
+    "docs/screenshots/24-m4-treasury-ledger.png": "e7f6844376747a034ad3a945621d8501f2ca2af21b78432235019989fec7750c",
+    "docs/screenshots/25-m4-estate-ledger.png": "551ced5c95663f8611eac297e7d52f11b9d9714a44f456b29a89d56cab04c6a3",
+    "docs/screenshots/26-m4-activity-statement.png": "95f99240baad33d4cb140707642938790c3e1905f13ad1506f2e42df07ab54fd",
+    "docs/screenshots/27-m4-early-exit-offer.png": "099bafe429b6d01e0e300c585e6b84848962e07774be4347ddada159cf27f235",
+    "docs/screenshots/28-m4-early-exit-settled.png": "ba304d486926240f6b9449abd81128f492ca4fb3d6fdfa6e0e9c007d6d3ff330",
+    "docs/screenshots/29-m4-renewal-offer.png": "725f2d2dc6b6204e9762455687db068792cc6f31a44a2a27c360545557494cfb",
+    "docs/screenshots/30-m4-renewed-estate-term.png": "8a01ad24427a119f95ed88ef77b1b744d1b2be6ccccee27884e19d55b8af5c9d",
+    "docs/screenshots/31-m4-statement-costs-and-policies.png": "e21d058ffb391c19aa57b4f9bb89af1ba0ab28182f3b5ad39a901bf15bb4327a",
+    "docs/screenshots/32-m4-estate-pool-controls.png": "d44dedd80224db349db2c75ce2ea2d734dde1310c6e33b57ecb4580a695a52bc"
+  }
+}

@@ -1,5 +1,12 @@
 # Florence testing and M0 completion
 
+Current [M4 treasury/deposit acceptance](m4-treasury.md) passes its complete pinned-baseline gate:
+43 dedicated + 114 accounts/bond + 46 credit assertions, twelve monthly periods/reload,
+12 normal UI observations, ten actual-game captures, 91 offline tests and 182-file staging.
+[Provenance](../tests/results/2026-10-17-m4-validation.json) pins the common runtime;
+M5 ownership, later products/resolution and release-wide integration remain separate gates.
+
+
 Current M2 evidence is summarized in [operating companies](m2-companies.md):
 28/28 engine assertions, twelve numerical company statements, ordinary native
 exploration through a natural terminal outcome and save/reload. Separate

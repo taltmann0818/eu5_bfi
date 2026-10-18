@@ -44,7 +44,7 @@ bfl_accept_native_restructuring = {
                 change_loan_interest = { value = loan_interest subtract = 0.01 min = 0.01 subtract = loan_interest }
             }
             remove_variable = bfl_restructure_bank remove_variable = bfl_credit_guard
-            scope:bfl_credit_bank = { bfl_reconcile_native_assets = yes }
+            scope:bfl_credit_bank = { bfl_reset_restructured_receipt_basis = yes bfl_reconcile_native_assets = yes }
         }
     }
 }

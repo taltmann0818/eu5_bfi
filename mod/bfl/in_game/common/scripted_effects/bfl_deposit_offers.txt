@@ -1,0 +1,1525 @@
+﻿bfl_offer_term_servicing = {
+bfl_initialize_deposits = yes
+save_scope_as = bfl_bank
+set_variable = { name = bfl_offer_found value = 0 }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4
+            var:bfl_dep_01_party ?= scope:bfl_party var:bfl_dep_01_maturity_period > 0 var:bfl_dep_01_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_01_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_01_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 1 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_01_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_01_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_01_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_01_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_01_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 1 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4
+            var:bfl_dep_02_party ?= scope:bfl_party var:bfl_dep_02_maturity_period > 0 var:bfl_dep_02_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_02_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_02_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 2 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_02_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_02_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_02_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_02_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_02_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 2 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4
+            var:bfl_dep_03_party ?= scope:bfl_party var:bfl_dep_03_maturity_period > 0 var:bfl_dep_03_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_03_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_03_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 3 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_03_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_03_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_03_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_03_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_03_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 3 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4
+            var:bfl_dep_04_party ?= scope:bfl_party var:bfl_dep_04_maturity_period > 0 var:bfl_dep_04_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_04_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_04_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 4 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_04_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_04_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_04_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_04_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_04_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 4 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4
+            var:bfl_dep_05_party ?= scope:bfl_party var:bfl_dep_05_maturity_period > 0 var:bfl_dep_05_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_05_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_05_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 5 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_05_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_05_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_05_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_05_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_05_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 5 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4
+            var:bfl_dep_06_party ?= scope:bfl_party var:bfl_dep_06_maturity_period > 0 var:bfl_dep_06_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_06_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_06_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 6 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_06_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_06_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_06_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_06_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_06_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 6 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4
+            var:bfl_dep_07_party ?= scope:bfl_party var:bfl_dep_07_maturity_period > 0 var:bfl_dep_07_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_07_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_07_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 7 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_07_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_07_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_07_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_07_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_07_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 7 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4
+            var:bfl_dep_08_party ?= scope:bfl_party var:bfl_dep_08_maturity_period > 0 var:bfl_dep_08_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_08_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_08_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 8 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_08_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_08_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_08_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_08_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_08_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 8 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4
+            var:bfl_dep_09_party ?= scope:bfl_party var:bfl_dep_09_maturity_period > 0 var:bfl_dep_09_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_09_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_09_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 9 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_09_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_09_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_09_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_09_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_09_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 9 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4
+            var:bfl_dep_10_party ?= scope:bfl_party var:bfl_dep_10_maturity_period > 0 var:bfl_dep_10_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_10_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_10_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 10 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_10_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_10_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_10_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_10_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_10_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 10 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4
+            var:bfl_dep_11_party ?= scope:bfl_party var:bfl_dep_11_maturity_period > 0 var:bfl_dep_11_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_11_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_11_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 11 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_11_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_11_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_11_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_11_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_11_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 11 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4
+            var:bfl_dep_12_party ?= scope:bfl_party var:bfl_dep_12_maturity_period > 0 var:bfl_dep_12_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_12_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_12_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 12 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_12_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_12_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_12_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_12_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_12_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 12 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4
+            var:bfl_dep_13_party ?= scope:bfl_party var:bfl_dep_13_maturity_period > 0 var:bfl_dep_13_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_13_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_13_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 13 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_13_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_13_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_13_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_13_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_13_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 13 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4
+            var:bfl_dep_14_party ?= scope:bfl_party var:bfl_dep_14_maturity_period > 0 var:bfl_dep_14_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_14_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_14_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 14 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_14_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_14_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_14_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_14_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_14_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 14 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4
+            var:bfl_dep_15_party ?= scope:bfl_party var:bfl_dep_15_maturity_period > 0 var:bfl_dep_15_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_15_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_15_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 15 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_15_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_15_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_15_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_15_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_15_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 15 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4
+            var:bfl_dep_16_party ?= scope:bfl_party var:bfl_dep_16_maturity_period > 0 var:bfl_dep_16_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_16_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_16_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 16 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_16_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_16_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_16_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_16_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_16_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 16 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4
+            var:bfl_dep_17_party ?= scope:bfl_party var:bfl_dep_17_maturity_period > 0 var:bfl_dep_17_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_17_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_17_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 17 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_17_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_17_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_17_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_17_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_17_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 17 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4
+            var:bfl_dep_18_party ?= scope:bfl_party var:bfl_dep_18_maturity_period > 0 var:bfl_dep_18_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_18_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_18_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 18 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_18_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_18_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_18_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_18_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_18_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 18 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4
+            var:bfl_dep_19_party ?= scope:bfl_party var:bfl_dep_19_maturity_period > 0 var:bfl_dep_19_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_19_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_19_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 19 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_19_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_19_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_19_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_19_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_19_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 19 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4
+            var:bfl_dep_20_party ?= scope:bfl_party var:bfl_dep_20_maturity_period > 0 var:bfl_dep_20_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_20_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_20_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 20 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_20_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_20_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_20_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_20_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_20_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 20 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4
+            var:bfl_dep_21_party ?= scope:bfl_party var:bfl_dep_21_maturity_period > 0 var:bfl_dep_21_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_21_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_21_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 21 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_21_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_21_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_21_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_21_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_21_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 21 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4
+            var:bfl_dep_22_party ?= scope:bfl_party var:bfl_dep_22_maturity_period > 0 var:bfl_dep_22_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_22_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_22_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 22 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_22_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_22_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_22_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_22_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_22_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 22 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4
+            var:bfl_dep_23_party ?= scope:bfl_party var:bfl_dep_23_maturity_period > 0 var:bfl_dep_23_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_23_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_23_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 23 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_23_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_23_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_23_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_23_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_23_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 23 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4
+            var:bfl_dep_24_party ?= scope:bfl_party var:bfl_dep_24_maturity_period > 0 var:bfl_dep_24_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_24_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_24_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 24 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_24_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_24_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_24_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_24_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_24_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 24 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4
+            var:bfl_dep_25_party ?= scope:bfl_party var:bfl_dep_25_maturity_period > 0 var:bfl_dep_25_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_25_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_25_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 25 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_25_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_25_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_25_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_25_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_25_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 25 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4
+            var:bfl_dep_26_party ?= scope:bfl_party var:bfl_dep_26_maturity_period > 0 var:bfl_dep_26_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_26_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_26_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 26 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_26_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_26_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_26_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_26_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_26_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 26 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4
+            var:bfl_dep_27_party ?= scope:bfl_party var:bfl_dep_27_maturity_period > 0 var:bfl_dep_27_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_27_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_27_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 27 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_27_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_27_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_27_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_27_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_27_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 27 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4
+            var:bfl_dep_28_party ?= scope:bfl_party var:bfl_dep_28_maturity_period > 0 var:bfl_dep_28_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_28_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_28_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 28 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_28_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_28_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_28_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_28_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_28_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 28 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4
+            var:bfl_dep_29_party ?= scope:bfl_party var:bfl_dep_29_maturity_period > 0 var:bfl_dep_29_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_29_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_29_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 29 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_29_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_29_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_29_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_29_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_29_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 29 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4
+            var:bfl_dep_30_party ?= scope:bfl_party var:bfl_dep_30_maturity_period > 0 var:bfl_dep_30_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_30_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_30_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 30 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_30_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_30_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_30_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_30_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_30_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 30 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4
+            var:bfl_dep_31_party ?= scope:bfl_party var:bfl_dep_31_maturity_period > 0 var:bfl_dep_31_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_31_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_31_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 31 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_31_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_31_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_31_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_31_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_31_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 31 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+if = { limit = { var:bfl_offer_found = 0 var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4
+            var:bfl_dep_32_party ?= scope:bfl_party var:bfl_dep_32_maturity_period > 0 var:bfl_dep_32_withdrawal_requested = 0
+            OR = { AND = { var:bfl_offer_mode = 1 bfl_period >= var:bfl_dep_32_maturity_period bfl_can_originate_term_deposit = yes }
+                AND = { var:bfl_offer_mode = 2 bfl_period < var:bfl_dep_32_maturity_period } } }
+            set_variable = { name = bfl_offer_found value = 1 }
+            scope:bfl_party = {
+                set_variable = { name = bfl_deposit_offer_bank value = scope:bfl_bank }
+                set_variable = { name = bfl_deposit_offer_slot value = 32 }
+                set_variable = { name = bfl_deposit_offer_generation value = scope:bfl_bank.var:bfl_dep_32_generation }
+                set_variable = { name = bfl_deposit_offer_mode value = scope:bfl_bank.var:bfl_offer_mode }
+                set_variable = { name = bfl_deposit_offer_principal value = scope:bfl_bank.var:bfl_dep_32_principal }
+                set_variable = { name = bfl_deposit_offer_rate value = scope:bfl_bank.var:bfl_term_rate }
+                if = { limit = { scope:bfl_bank = { bfl_has_valid_controller = yes overlord = scope:bfl_party var:bfl_dep_32_pool = 0 } }
+                    change_variable = { name = bfl_deposit_offer_rate add = 0.01 } }
+                set_variable = { name = bfl_deposit_offer_penalty value = { value = scope:bfl_bank.var:bfl_dep_32_principal multiply = 0.01
+                    max = scope:bfl_bank.var:bfl_dep_32_interest_due multiply = 100 floor = yes divide = 100 } }
+                set_variable = { name = bfl_deposit_offer_expiry value = bfl_period }
+                save_scope_value_as = { name = bfl_deposit_quote_generation value = var:bfl_deposit_offer_generation }
+                save_scope_value_as = { name = bfl_deposit_quote_slot value = 32 }
+                if = { limit = { NOT = { has_variable = bfl_deposit_offer_revision } } set_variable = { name = bfl_deposit_offer_revision value = 0 } }
+                change_variable = { name = bfl_deposit_offer_revision add = 1 }
+                save_scope_value_as = { name = bfl_deposit_quote_revision value = var:bfl_deposit_offer_revision }
+                if = { limit = { var:bfl_deposit_offer_mode = 1 } trigger_event_non_silently = bfl_deposits.1 }
+                else = { trigger_event_non_silently = bfl_deposits.2 }
+            }
+        }
+}
+bfl_execute_deposit_offer = {
+save_scope_as = bfl_bank
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 1
+            var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4 var:bfl_dep_01_party ?= scope:bfl_party
+            var:bfl_dep_01_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_01_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_01_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_01_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_01_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_01_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_01_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_01_maturity_period
+                var:bfl_dep_01_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_01_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_01_withdrawal_requested value = { value = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due } }
+                set_variable = { name = bfl_dep_01_state value = 3 }
+                change_variable = { name = bfl_dep_01_generation add = 1 }
+                bfl_pay_deposit_01 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 2
+            var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4 var:bfl_dep_02_party ?= scope:bfl_party
+            var:bfl_dep_02_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_02_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_02_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_02_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_02_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_02_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_02_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_02_maturity_period
+                var:bfl_dep_02_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_02_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_02_withdrawal_requested value = { value = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due } }
+                set_variable = { name = bfl_dep_02_state value = 3 }
+                change_variable = { name = bfl_dep_02_generation add = 1 }
+                bfl_pay_deposit_02 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 3
+            var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4 var:bfl_dep_03_party ?= scope:bfl_party
+            var:bfl_dep_03_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_03_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_03_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_03_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_03_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_03_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_03_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_03_maturity_period
+                var:bfl_dep_03_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_03_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_03_withdrawal_requested value = { value = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due } }
+                set_variable = { name = bfl_dep_03_state value = 3 }
+                change_variable = { name = bfl_dep_03_generation add = 1 }
+                bfl_pay_deposit_03 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 4
+            var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4 var:bfl_dep_04_party ?= scope:bfl_party
+            var:bfl_dep_04_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_04_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_04_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_04_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_04_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_04_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_04_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_04_maturity_period
+                var:bfl_dep_04_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_04_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_04_withdrawal_requested value = { value = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due } }
+                set_variable = { name = bfl_dep_04_state value = 3 }
+                change_variable = { name = bfl_dep_04_generation add = 1 }
+                bfl_pay_deposit_04 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 5
+            var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4 var:bfl_dep_05_party ?= scope:bfl_party
+            var:bfl_dep_05_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_05_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_05_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_05_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_05_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_05_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_05_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_05_maturity_period
+                var:bfl_dep_05_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_05_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_05_withdrawal_requested value = { value = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due } }
+                set_variable = { name = bfl_dep_05_state value = 3 }
+                change_variable = { name = bfl_dep_05_generation add = 1 }
+                bfl_pay_deposit_05 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 6
+            var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4 var:bfl_dep_06_party ?= scope:bfl_party
+            var:bfl_dep_06_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_06_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_06_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_06_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_06_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_06_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_06_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_06_maturity_period
+                var:bfl_dep_06_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_06_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_06_withdrawal_requested value = { value = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due } }
+                set_variable = { name = bfl_dep_06_state value = 3 }
+                change_variable = { name = bfl_dep_06_generation add = 1 }
+                bfl_pay_deposit_06 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 7
+            var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4 var:bfl_dep_07_party ?= scope:bfl_party
+            var:bfl_dep_07_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_07_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_07_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_07_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_07_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_07_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_07_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_07_maturity_period
+                var:bfl_dep_07_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_07_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_07_withdrawal_requested value = { value = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due } }
+                set_variable = { name = bfl_dep_07_state value = 3 }
+                change_variable = { name = bfl_dep_07_generation add = 1 }
+                bfl_pay_deposit_07 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 8
+            var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4 var:bfl_dep_08_party ?= scope:bfl_party
+            var:bfl_dep_08_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_08_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_08_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_08_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_08_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_08_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_08_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_08_maturity_period
+                var:bfl_dep_08_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_08_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_08_withdrawal_requested value = { value = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due } }
+                set_variable = { name = bfl_dep_08_state value = 3 }
+                change_variable = { name = bfl_dep_08_generation add = 1 }
+                bfl_pay_deposit_08 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 9
+            var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4 var:bfl_dep_09_party ?= scope:bfl_party
+            var:bfl_dep_09_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_09_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_09_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_09_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_09_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_09_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_09_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_09_maturity_period
+                var:bfl_dep_09_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_09_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_09_withdrawal_requested value = { value = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due } }
+                set_variable = { name = bfl_dep_09_state value = 3 }
+                change_variable = { name = bfl_dep_09_generation add = 1 }
+                bfl_pay_deposit_09 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 10
+            var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4 var:bfl_dep_10_party ?= scope:bfl_party
+            var:bfl_dep_10_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_10_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_10_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_10_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_10_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_10_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_10_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_10_maturity_period
+                var:bfl_dep_10_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_10_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_10_withdrawal_requested value = { value = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due } }
+                set_variable = { name = bfl_dep_10_state value = 3 }
+                change_variable = { name = bfl_dep_10_generation add = 1 }
+                bfl_pay_deposit_10 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 11
+            var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4 var:bfl_dep_11_party ?= scope:bfl_party
+            var:bfl_dep_11_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_11_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_11_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_11_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_11_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_11_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_11_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_11_maturity_period
+                var:bfl_dep_11_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_11_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_11_withdrawal_requested value = { value = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due } }
+                set_variable = { name = bfl_dep_11_state value = 3 }
+                change_variable = { name = bfl_dep_11_generation add = 1 }
+                bfl_pay_deposit_11 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 12
+            var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4 var:bfl_dep_12_party ?= scope:bfl_party
+            var:bfl_dep_12_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_12_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_12_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_12_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_12_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_12_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_12_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_12_maturity_period
+                var:bfl_dep_12_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_12_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_12_withdrawal_requested value = { value = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due } }
+                set_variable = { name = bfl_dep_12_state value = 3 }
+                change_variable = { name = bfl_dep_12_generation add = 1 }
+                bfl_pay_deposit_12 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 13
+            var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4 var:bfl_dep_13_party ?= scope:bfl_party
+            var:bfl_dep_13_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_13_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_13_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_13_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_13_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_13_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_13_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_13_maturity_period
+                var:bfl_dep_13_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_13_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_13_withdrawal_requested value = { value = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due } }
+                set_variable = { name = bfl_dep_13_state value = 3 }
+                change_variable = { name = bfl_dep_13_generation add = 1 }
+                bfl_pay_deposit_13 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 14
+            var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4 var:bfl_dep_14_party ?= scope:bfl_party
+            var:bfl_dep_14_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_14_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_14_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_14_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_14_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_14_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_14_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_14_maturity_period
+                var:bfl_dep_14_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_14_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_14_withdrawal_requested value = { value = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due } }
+                set_variable = { name = bfl_dep_14_state value = 3 }
+                change_variable = { name = bfl_dep_14_generation add = 1 }
+                bfl_pay_deposit_14 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 15
+            var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4 var:bfl_dep_15_party ?= scope:bfl_party
+            var:bfl_dep_15_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_15_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_15_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_15_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_15_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_15_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_15_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_15_maturity_period
+                var:bfl_dep_15_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_15_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_15_withdrawal_requested value = { value = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due } }
+                set_variable = { name = bfl_dep_15_state value = 3 }
+                change_variable = { name = bfl_dep_15_generation add = 1 }
+                bfl_pay_deposit_15 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 16
+            var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4 var:bfl_dep_16_party ?= scope:bfl_party
+            var:bfl_dep_16_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_16_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_16_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_16_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_16_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_16_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_16_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_16_maturity_period
+                var:bfl_dep_16_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_16_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_16_withdrawal_requested value = { value = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due } }
+                set_variable = { name = bfl_dep_16_state value = 3 }
+                change_variable = { name = bfl_dep_16_generation add = 1 }
+                bfl_pay_deposit_16 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 17
+            var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4 var:bfl_dep_17_party ?= scope:bfl_party
+            var:bfl_dep_17_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_17_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_17_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_17_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_17_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_17_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_17_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_17_maturity_period
+                var:bfl_dep_17_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_17_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_17_withdrawal_requested value = { value = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due } }
+                set_variable = { name = bfl_dep_17_state value = 3 }
+                change_variable = { name = bfl_dep_17_generation add = 1 }
+                bfl_pay_deposit_17 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 18
+            var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4 var:bfl_dep_18_party ?= scope:bfl_party
+            var:bfl_dep_18_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_18_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_18_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_18_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_18_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_18_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_18_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_18_maturity_period
+                var:bfl_dep_18_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_18_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_18_withdrawal_requested value = { value = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due } }
+                set_variable = { name = bfl_dep_18_state value = 3 }
+                change_variable = { name = bfl_dep_18_generation add = 1 }
+                bfl_pay_deposit_18 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 19
+            var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4 var:bfl_dep_19_party ?= scope:bfl_party
+            var:bfl_dep_19_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_19_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_19_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_19_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_19_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_19_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_19_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_19_maturity_period
+                var:bfl_dep_19_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_19_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_19_withdrawal_requested value = { value = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due } }
+                set_variable = { name = bfl_dep_19_state value = 3 }
+                change_variable = { name = bfl_dep_19_generation add = 1 }
+                bfl_pay_deposit_19 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 20
+            var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4 var:bfl_dep_20_party ?= scope:bfl_party
+            var:bfl_dep_20_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_20_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_20_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_20_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_20_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_20_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_20_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_20_maturity_period
+                var:bfl_dep_20_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_20_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_20_withdrawal_requested value = { value = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due } }
+                set_variable = { name = bfl_dep_20_state value = 3 }
+                change_variable = { name = bfl_dep_20_generation add = 1 }
+                bfl_pay_deposit_20 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 21
+            var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4 var:bfl_dep_21_party ?= scope:bfl_party
+            var:bfl_dep_21_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_21_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_21_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_21_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_21_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_21_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_21_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_21_maturity_period
+                var:bfl_dep_21_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_21_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_21_withdrawal_requested value = { value = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due } }
+                set_variable = { name = bfl_dep_21_state value = 3 }
+                change_variable = { name = bfl_dep_21_generation add = 1 }
+                bfl_pay_deposit_21 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 22
+            var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4 var:bfl_dep_22_party ?= scope:bfl_party
+            var:bfl_dep_22_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_22_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_22_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_22_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_22_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_22_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_22_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_22_maturity_period
+                var:bfl_dep_22_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_22_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_22_withdrawal_requested value = { value = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due } }
+                set_variable = { name = bfl_dep_22_state value = 3 }
+                change_variable = { name = bfl_dep_22_generation add = 1 }
+                bfl_pay_deposit_22 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 23
+            var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4 var:bfl_dep_23_party ?= scope:bfl_party
+            var:bfl_dep_23_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_23_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_23_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_23_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_23_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_23_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_23_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_23_maturity_period
+                var:bfl_dep_23_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_23_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_23_withdrawal_requested value = { value = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due } }
+                set_variable = { name = bfl_dep_23_state value = 3 }
+                change_variable = { name = bfl_dep_23_generation add = 1 }
+                bfl_pay_deposit_23 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 24
+            var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4 var:bfl_dep_24_party ?= scope:bfl_party
+            var:bfl_dep_24_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_24_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_24_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_24_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_24_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_24_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_24_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_24_maturity_period
+                var:bfl_dep_24_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_24_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_24_withdrawal_requested value = { value = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due } }
+                set_variable = { name = bfl_dep_24_state value = 3 }
+                change_variable = { name = bfl_dep_24_generation add = 1 }
+                bfl_pay_deposit_24 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 25
+            var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4 var:bfl_dep_25_party ?= scope:bfl_party
+            var:bfl_dep_25_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_25_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_25_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_25_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_25_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_25_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_25_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_25_maturity_period
+                var:bfl_dep_25_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_25_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_25_withdrawal_requested value = { value = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due } }
+                set_variable = { name = bfl_dep_25_state value = 3 }
+                change_variable = { name = bfl_dep_25_generation add = 1 }
+                bfl_pay_deposit_25 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 26
+            var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4 var:bfl_dep_26_party ?= scope:bfl_party
+            var:bfl_dep_26_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_26_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_26_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_26_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_26_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_26_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_26_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_26_maturity_period
+                var:bfl_dep_26_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_26_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_26_withdrawal_requested value = { value = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due } }
+                set_variable = { name = bfl_dep_26_state value = 3 }
+                change_variable = { name = bfl_dep_26_generation add = 1 }
+                bfl_pay_deposit_26 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 27
+            var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4 var:bfl_dep_27_party ?= scope:bfl_party
+            var:bfl_dep_27_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_27_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_27_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_27_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_27_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_27_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_27_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_27_maturity_period
+                var:bfl_dep_27_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_27_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_27_withdrawal_requested value = { value = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due } }
+                set_variable = { name = bfl_dep_27_state value = 3 }
+                change_variable = { name = bfl_dep_27_generation add = 1 }
+                bfl_pay_deposit_27 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 28
+            var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4 var:bfl_dep_28_party ?= scope:bfl_party
+            var:bfl_dep_28_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_28_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_28_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_28_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_28_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_28_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_28_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_28_maturity_period
+                var:bfl_dep_28_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_28_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_28_withdrawal_requested value = { value = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due } }
+                set_variable = { name = bfl_dep_28_state value = 3 }
+                change_variable = { name = bfl_dep_28_generation add = 1 }
+                bfl_pay_deposit_28 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 29
+            var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4 var:bfl_dep_29_party ?= scope:bfl_party
+            var:bfl_dep_29_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_29_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_29_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_29_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_29_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_29_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_29_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_29_maturity_period
+                var:bfl_dep_29_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_29_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_29_withdrawal_requested value = { value = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due } }
+                set_variable = { name = bfl_dep_29_state value = 3 }
+                change_variable = { name = bfl_dep_29_generation add = 1 }
+                bfl_pay_deposit_29 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 30
+            var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4 var:bfl_dep_30_party ?= scope:bfl_party
+            var:bfl_dep_30_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_30_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_30_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_30_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_30_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_30_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_30_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_30_maturity_period
+                var:bfl_dep_30_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_30_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_30_withdrawal_requested value = { value = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due } }
+                set_variable = { name = bfl_dep_30_state value = 3 }
+                change_variable = { name = bfl_dep_30_generation add = 1 }
+                bfl_pay_deposit_30 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 31
+            var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4 var:bfl_dep_31_party ?= scope:bfl_party
+            var:bfl_dep_31_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_31_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_31_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_31_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_31_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_31_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_31_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_31_maturity_period
+                var:bfl_dep_31_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_31_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_31_withdrawal_requested value = { value = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due } }
+                set_variable = { name = bfl_dep_31_state value = 3 }
+                change_variable = { name = bfl_dep_31_generation add = 1 }
+                bfl_pay_deposit_31 = yes
+            }
+        }
+if = { limit = { scope:bfl_party.var:bfl_deposit_offer_slot = 32
+            var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4 var:bfl_dep_32_party ?= scope:bfl_party
+            var:bfl_dep_32_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:bfl_dep_32_withdrawal_requested = 0 }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:bfl_dep_32_maturity_period
+                bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }
+                set_variable = { name = bfl_dep_32_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }
+                set_variable = { name = bfl_dep_32_maturity_period value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_dep_32_last_accrual value = bfl_period }
+                change_variable = { name = bfl_dep_32_generation add = 1 }
+            }
+            if = { limit = { scope:bfl_party.var:bfl_deposit_offer_mode = 2 bfl_period < var:bfl_dep_32_maturity_period
+                var:bfl_dep_32_interest_due >= scope:bfl_party.var:bfl_deposit_offer_penalty }
+                # Agreed penalty cancels accrued interest, never mints a cash fee.
+                change_variable = { name = bfl_dep_32_interest_due subtract = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                change_variable = { name = bfl_profit_services add = scope:bfl_party.var:bfl_deposit_offer_penalty }
+                set_variable = { name = bfl_dep_32_withdrawal_requested value = { value = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due } }
+                set_variable = { name = bfl_dep_32_state value = 3 }
+                change_variable = { name = bfl_dep_32_generation add = 1 }
+                bfl_pay_deposit_32 = yes
+            }
+        }
+}
+
+    bfl_accept_deposit_offer = {
+        if = { limit = { exists = var:bfl_deposit_offer_bank country_exists = var:bfl_deposit_offer_bank
+            exists = scope:bfl_deposit_quote_generation exists = scope:bfl_deposit_quote_slot
+            exists = scope:bfl_deposit_quote_revision var:bfl_deposit_offer_revision = scope:bfl_deposit_quote_revision
+            var:bfl_deposit_offer_generation = scope:bfl_deposit_quote_generation
+            var:bfl_deposit_offer_slot = scope:bfl_deposit_quote_slot bfl_period <= var:bfl_deposit_offer_expiry }
+            save_scope_as = bfl_party
+            var:bfl_deposit_offer_bank = { bfl_execute_deposit_offer = yes }
+            remove_variable = bfl_deposit_offer_bank
+        }
+    }
+    bfl_decline_deposit_offer = { if = { limit = { exists = scope:bfl_deposit_quote_revision var:bfl_deposit_offer_revision = scope:bfl_deposit_quote_revision } remove_variable = bfl_deposit_offer_bank } }

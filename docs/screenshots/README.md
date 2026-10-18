@@ -153,3 +153,31 @@ new issue, coupon and mandate controls. The market capture shows the original cl
 the Financing capture follows its redemption and a newly funded replacement in the
 same paused month. This does not certify normal charter conversion, long ledgers,
 other player roles, languages or the M10 resolution/scale matrix.
+
+## M4 treasury payouts and deposit servicing
+
+Captured 17 October 2026 in EUV 1.4.1 / build 25905365 with CMF 2.5.0,
+1280 × 720 at 60% GUI scale (full unedited window PNGs are 1282 × 752).
+The cold-loaded runtime is `6de69c4172c4938cc104172ef1ddd13e7c0ea58b8df74efddf5341a29f6dd565`.
+[12/12 normal UI observations and capture hashes](../../tests/results/2026-10-17-m4-ui.json)
+are separate from the [43/43 real-engine deposit/treasury assertions](../../tests/results/2026-10-17-m4-treasury.json).
+
+The isolated Florence fixture uses `prepare_m4_ui.py --mature`: granted Renaissance
+age, charter and wallets; real production treasury/estate demand and term services;
+one deliberately staged accrual; and a staged matured estate term. These grants
+make the UI inspectable and do not certify natural campaign balance. Both offer
+buttons and their accept options were executed normally while paused on 1 April 1337.
+
+- [Deposit and servicing controls](23-m4-deposit-controls.png), with live renewal/early-exit eligibility.
+- [Treasury lots](24-m4-treasury-ledger.png): aggregated 300 demand at 2%, 100 term at 3% and 0.25 term interest due.
+- [Estate lots](25-m4-estate-ledger.png): separate burgher demand/term, 1%/2%, no sovereign premium.
+- [Activity statement](26-m4-activity-statement.png) and [costs/policies](31-m4-statement-costs-and-policies.png): all receipt classifications, costs/carried losses and rate/payout presets remain reachable. Native receipt rows are correctly zero in this paused visual fixture; engine assertions verify nonzero funded native attribution separately.
+- [Normal renewal offer](29-m4-renewal-offer.png) and [accepted estate term](30-m4-renewed-estate-term.png): 100 principal, fixed 2%, twelve months, old 0.16 interest preserved and no second principal transfer. Bank cash/liabilities remain 5499.42/600.41.
+- [Normal early-exit offer](27-m4-early-exit-offer.png) and [funded settlement](28-m4-early-exit-settled.png): quoted 0.25 interest cancellation, no principal penalty; bank cash falls exactly 100 to 5399.42, liabilities fall 100.25 to 500.16 and equity increases 0.25 to 5399.26.
+- [Other estate pools](32-m4-estate-pool-controls.png): nobles, clergy and peasants each have demand/term controls.
+
+The bank overview remains fixed above the native scrollbar, and native sovereign
+Borrow/Repay/search controls remain below it. The current session has no runtime
+or parser errors attributed to the changed BFI services/GUI. Broader independent-player,
+language and scale matrices remain M10. No personal save, installed game content
+or Workshop file was changed.

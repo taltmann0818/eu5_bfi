@@ -1,0 +1,130 @@
+﻿bfl_initialize_deposits = {
+if = { limit = { NOT = { has_variable = bfl_dep_01_pool } }
+                set_variable = { name = bfl_dep_01_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_01_last_accrual } }
+                set_variable = { name = bfl_dep_01_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_02_pool } }
+                set_variable = { name = bfl_dep_02_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_02_last_accrual } }
+                set_variable = { name = bfl_dep_02_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_03_pool } }
+                set_variable = { name = bfl_dep_03_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_03_last_accrual } }
+                set_variable = { name = bfl_dep_03_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_04_pool } }
+                set_variable = { name = bfl_dep_04_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_04_last_accrual } }
+                set_variable = { name = bfl_dep_04_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_05_pool } }
+                set_variable = { name = bfl_dep_05_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_05_last_accrual } }
+                set_variable = { name = bfl_dep_05_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_06_pool } }
+                set_variable = { name = bfl_dep_06_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_06_last_accrual } }
+                set_variable = { name = bfl_dep_06_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_07_pool } }
+                set_variable = { name = bfl_dep_07_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_07_last_accrual } }
+                set_variable = { name = bfl_dep_07_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_08_pool } }
+                set_variable = { name = bfl_dep_08_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_08_last_accrual } }
+                set_variable = { name = bfl_dep_08_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_09_pool } }
+                set_variable = { name = bfl_dep_09_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_09_last_accrual } }
+                set_variable = { name = bfl_dep_09_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_10_pool } }
+                set_variable = { name = bfl_dep_10_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_10_last_accrual } }
+                set_variable = { name = bfl_dep_10_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_11_pool } }
+                set_variable = { name = bfl_dep_11_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_11_last_accrual } }
+                set_variable = { name = bfl_dep_11_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_12_pool } }
+                set_variable = { name = bfl_dep_12_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_12_last_accrual } }
+                set_variable = { name = bfl_dep_12_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_13_pool } }
+                set_variable = { name = bfl_dep_13_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_13_last_accrual } }
+                set_variable = { name = bfl_dep_13_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_14_pool } }
+                set_variable = { name = bfl_dep_14_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_14_last_accrual } }
+                set_variable = { name = bfl_dep_14_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_15_pool } }
+                set_variable = { name = bfl_dep_15_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_15_last_accrual } }
+                set_variable = { name = bfl_dep_15_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_16_pool } }
+                set_variable = { name = bfl_dep_16_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_16_last_accrual } }
+                set_variable = { name = bfl_dep_16_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_17_pool } }
+                set_variable = { name = bfl_dep_17_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_17_last_accrual } }
+                set_variable = { name = bfl_dep_17_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_18_pool } }
+                set_variable = { name = bfl_dep_18_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_18_last_accrual } }
+                set_variable = { name = bfl_dep_18_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_19_pool } }
+                set_variable = { name = bfl_dep_19_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_19_last_accrual } }
+                set_variable = { name = bfl_dep_19_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_20_pool } }
+                set_variable = { name = bfl_dep_20_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_20_last_accrual } }
+                set_variable = { name = bfl_dep_20_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_21_pool } }
+                set_variable = { name = bfl_dep_21_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_21_last_accrual } }
+                set_variable = { name = bfl_dep_21_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_22_pool } }
+                set_variable = { name = bfl_dep_22_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_22_last_accrual } }
+                set_variable = { name = bfl_dep_22_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_23_pool } }
+                set_variable = { name = bfl_dep_23_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_23_last_accrual } }
+                set_variable = { name = bfl_dep_23_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_24_pool } }
+                set_variable = { name = bfl_dep_24_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_24_last_accrual } }
+                set_variable = { name = bfl_dep_24_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_25_pool } }
+                set_variable = { name = bfl_dep_25_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_25_last_accrual } }
+                set_variable = { name = bfl_dep_25_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_26_pool } }
+                set_variable = { name = bfl_dep_26_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_26_last_accrual } }
+                set_variable = { name = bfl_dep_26_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_27_pool } }
+                set_variable = { name = bfl_dep_27_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_27_last_accrual } }
+                set_variable = { name = bfl_dep_27_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_28_pool } }
+                set_variable = { name = bfl_dep_28_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_28_last_accrual } }
+                set_variable = { name = bfl_dep_28_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_29_pool } }
+                set_variable = { name = bfl_dep_29_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_29_last_accrual } }
+                set_variable = { name = bfl_dep_29_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_30_pool } }
+                set_variable = { name = bfl_dep_30_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_30_last_accrual } }
+                set_variable = { name = bfl_dep_30_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_31_pool } }
+                set_variable = { name = bfl_dep_31_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_31_last_accrual } }
+                set_variable = { name = bfl_dep_31_last_accrual value = bfl_period } }
+if = { limit = { NOT = { has_variable = bfl_dep_32_pool } }
+                set_variable = { name = bfl_dep_32_pool value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dep_32_last_accrual } }
+                set_variable = { name = bfl_dep_32_last_accrual value = bfl_period } }
+}

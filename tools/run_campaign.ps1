@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -27,6 +27,7 @@ try {
         'm1' { 'tools/m1_charter_suite.py' }
         'm2' { 'tools/m2_company_suite.py' }
         'm3' { 'tools/m3_credit_suite.py' }
+        'm4' { 'tools/m4_treasury_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId

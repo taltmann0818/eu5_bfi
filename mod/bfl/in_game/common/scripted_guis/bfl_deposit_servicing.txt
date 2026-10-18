@@ -1,0 +1,136 @@
+﻿bfl_dep_01_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_01_party country_exists = var:bfl_dep_01_party } }
+bfl_dep_02_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_02_party country_exists = var:bfl_dep_02_party } }
+bfl_dep_03_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_03_party country_exists = var:bfl_dep_03_party } }
+bfl_dep_04_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_04_party country_exists = var:bfl_dep_04_party } }
+bfl_dep_05_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_05_party country_exists = var:bfl_dep_05_party } }
+bfl_dep_06_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_06_party country_exists = var:bfl_dep_06_party } }
+bfl_dep_07_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_07_party country_exists = var:bfl_dep_07_party } }
+bfl_dep_08_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_08_party country_exists = var:bfl_dep_08_party } }
+bfl_dep_09_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_09_party country_exists = var:bfl_dep_09_party } }
+bfl_dep_10_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_10_party country_exists = var:bfl_dep_10_party } }
+bfl_dep_11_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_11_party country_exists = var:bfl_dep_11_party } }
+bfl_dep_12_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_12_party country_exists = var:bfl_dep_12_party } }
+bfl_dep_13_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_13_party country_exists = var:bfl_dep_13_party } }
+bfl_dep_14_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_14_party country_exists = var:bfl_dep_14_party } }
+bfl_dep_15_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_15_party country_exists = var:bfl_dep_15_party } }
+bfl_dep_16_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_16_party country_exists = var:bfl_dep_16_party } }
+bfl_dep_17_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_17_party country_exists = var:bfl_dep_17_party } }
+bfl_dep_18_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_18_party country_exists = var:bfl_dep_18_party } }
+bfl_dep_19_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_19_party country_exists = var:bfl_dep_19_party } }
+bfl_dep_20_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_20_party country_exists = var:bfl_dep_20_party } }
+bfl_dep_21_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_21_party country_exists = var:bfl_dep_21_party } }
+bfl_dep_22_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_22_party country_exists = var:bfl_dep_22_party } }
+bfl_dep_23_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_23_party country_exists = var:bfl_dep_23_party } }
+bfl_dep_24_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_24_party country_exists = var:bfl_dep_24_party } }
+bfl_dep_25_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_25_party country_exists = var:bfl_dep_25_party } }
+bfl_dep_26_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_26_party country_exists = var:bfl_dep_26_party } }
+bfl_dep_27_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_27_party country_exists = var:bfl_dep_27_party } }
+bfl_dep_28_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_28_party country_exists = var:bfl_dep_28_party } }
+bfl_dep_29_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_29_party country_exists = var:bfl_dep_29_party } }
+bfl_dep_30_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_30_party country_exists = var:bfl_dep_30_party } }
+bfl_dep_31_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_31_party country_exists = var:bfl_dep_31_party } }
+bfl_dep_32_party_visible = { scope = country is_shown = {
+            exists = var:bfl_dep_32_party country_exists = var:bfl_dep_32_party } }
+bfl_term_service_1 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_term_eligible_1 = yes } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location }
+                save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_offer_mode value = 1 } bfl_offer_term_servicing = yes } } } }
+bfl_term_service_2 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_term_eligible_2 = yes } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location }
+                save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { set_variable = { name = bfl_offer_mode value = 2 } bfl_offer_term_servicing = yes } } } }
+bfl_estate_deposit_1 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:burghers_estate
+                "estate(estate_type:burghers_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:burghers_estate
+                "estate(estate_type:burghers_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 1 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } } } }
+bfl_estate_term_1 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:burghers_estate
+                "estate(estate_type:burghers_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:burghers_estate
+                "estate(estate_type:burghers_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 1 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } } } }
+bfl_estate_deposit_2 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:nobles_estate
+                "estate(estate_type:nobles_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:nobles_estate
+                "estate(estate_type:nobles_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 2 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } } } }
+bfl_estate_term_2 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:nobles_estate
+                "estate(estate_type:nobles_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:nobles_estate
+                "estate(estate_type:nobles_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 2 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } } } }
+bfl_estate_deposit_3 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:clergy_estate
+                "estate(estate_type:clergy_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:clergy_estate
+                "estate(estate_type:clergy_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 3 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } } } }
+bfl_estate_term_3 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:clergy_estate
+                "estate(estate_type:clergy_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:clergy_estate
+                "estate(estate_type:clergy_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 3 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } } } }
+bfl_estate_deposit_4 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:peasants_estate
+                "estate(estate_type:peasants_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:peasants_estate
+                "estate(estate_type:peasants_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 4 } }
+                set_variable = { name = bfl_product value = 1 } bfl_commit_deposit = yes } } } }
+bfl_estate_term_4 = { scope = country is_shown = { bfl_has_management = yes }
+                is_valid = { bfl_has_management = yes country_type = location country_has_estate = estate_type:peasants_estate
+                "estate(estate_type:peasants_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } } effect = { if = { limit = { bfl_has_management = yes country_type = location country_has_estate = estate_type:peasants_estate
+                "estate(estate_type:peasants_estate)" = { estate_gold >= 125 }
+                var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } }
+                    save_scope_as = bfl_party bfl_resolve_command_bank = yes scope:bfl_bank = { scope:bfl_party = { set_variable = { name = bfl_pool value = 4 } }
+                set_variable = { name = bfl_product value = 2 } bfl_commit_deposit = yes } } } }

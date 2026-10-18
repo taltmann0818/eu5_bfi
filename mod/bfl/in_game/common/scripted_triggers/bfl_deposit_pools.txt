@@ -1,0 +1,16 @@
+﻿bfl_valid_deposit_pool = {
+OR = { var:bfl_pool = 0
+AND = { var:bfl_pool = 1 country_has_estate = estate_type:burghers_estate }
+AND = { var:bfl_pool = 2 country_has_estate = estate_type:nobles_estate }
+AND = { var:bfl_pool = 3 country_has_estate = estate_type:clergy_estate }
+AND = { var:bfl_pool = 4 country_has_estate = estate_type:peasants_estate }
+}
+}
+bfl_deposit_pool_funded = {
+OR = { AND = { var:bfl_pool = 0 gold >= 100 }
+AND = { var:bfl_pool = 1 country_has_estate = estate_type:burghers_estate "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } }
+AND = { var:bfl_pool = 2 country_has_estate = estate_type:nobles_estate "estate(estate_type:nobles_estate)" = { estate_gold >= 125 } }
+AND = { var:bfl_pool = 3 country_has_estate = estate_type:clergy_estate "estate(estate_type:clergy_estate)" = { estate_gold >= 125 } }
+AND = { var:bfl_pool = 4 country_has_estate = estate_type:peasants_estate "estate(estate_type:peasants_estate)" = { estate_gold >= 125 } }
+}
+}

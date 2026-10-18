@@ -19,14 +19,14 @@ bfl_payout_50 = {
 bfl_deposit_1 = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes } } }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes } } }
         }
 bfl_deposit_2 = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes bfl_has_deposit_capacity = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 2 } bfl_open_deposit = yes } } }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 } } bfl_resolve_command_bank = yes save_scope_as = bfl_party scope:bfl_bank = { set_variable = { name = bfl_product value = 2 } bfl_open_deposit = yes } } }
         }
 bfl_withdraw = {
             scope = country

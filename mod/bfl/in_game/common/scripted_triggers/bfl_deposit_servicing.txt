@@ -1,0 +1,400 @@
+﻿bfl_term_eligible_1 = {
+OR = {
+AND = { var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4 var:bfl_dep_01_party ?= root
+                var:bfl_dep_01_maturity_period > 0 var:bfl_dep_01_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_01_maturity_period }
+AND = { var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4 var:bfl_dep_02_party ?= root
+                var:bfl_dep_02_maturity_period > 0 var:bfl_dep_02_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_02_maturity_period }
+AND = { var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4 var:bfl_dep_03_party ?= root
+                var:bfl_dep_03_maturity_period > 0 var:bfl_dep_03_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_03_maturity_period }
+AND = { var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4 var:bfl_dep_04_party ?= root
+                var:bfl_dep_04_maturity_period > 0 var:bfl_dep_04_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_04_maturity_period }
+AND = { var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4 var:bfl_dep_05_party ?= root
+                var:bfl_dep_05_maturity_period > 0 var:bfl_dep_05_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_05_maturity_period }
+AND = { var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4 var:bfl_dep_06_party ?= root
+                var:bfl_dep_06_maturity_period > 0 var:bfl_dep_06_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_06_maturity_period }
+AND = { var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4 var:bfl_dep_07_party ?= root
+                var:bfl_dep_07_maturity_period > 0 var:bfl_dep_07_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_07_maturity_period }
+AND = { var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4 var:bfl_dep_08_party ?= root
+                var:bfl_dep_08_maturity_period > 0 var:bfl_dep_08_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_08_maturity_period }
+AND = { var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4 var:bfl_dep_09_party ?= root
+                var:bfl_dep_09_maturity_period > 0 var:bfl_dep_09_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_09_maturity_period }
+AND = { var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4 var:bfl_dep_10_party ?= root
+                var:bfl_dep_10_maturity_period > 0 var:bfl_dep_10_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_10_maturity_period }
+AND = { var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4 var:bfl_dep_11_party ?= root
+                var:bfl_dep_11_maturity_period > 0 var:bfl_dep_11_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_11_maturity_period }
+AND = { var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4 var:bfl_dep_12_party ?= root
+                var:bfl_dep_12_maturity_period > 0 var:bfl_dep_12_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_12_maturity_period }
+AND = { var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4 var:bfl_dep_13_party ?= root
+                var:bfl_dep_13_maturity_period > 0 var:bfl_dep_13_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_13_maturity_period }
+AND = { var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4 var:bfl_dep_14_party ?= root
+                var:bfl_dep_14_maturity_period > 0 var:bfl_dep_14_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_14_maturity_period }
+AND = { var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4 var:bfl_dep_15_party ?= root
+                var:bfl_dep_15_maturity_period > 0 var:bfl_dep_15_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_15_maturity_period }
+AND = { var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4 var:bfl_dep_16_party ?= root
+                var:bfl_dep_16_maturity_period > 0 var:bfl_dep_16_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_16_maturity_period }
+AND = { var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4 var:bfl_dep_17_party ?= root
+                var:bfl_dep_17_maturity_period > 0 var:bfl_dep_17_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_17_maturity_period }
+AND = { var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4 var:bfl_dep_18_party ?= root
+                var:bfl_dep_18_maturity_period > 0 var:bfl_dep_18_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_18_maturity_period }
+AND = { var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4 var:bfl_dep_19_party ?= root
+                var:bfl_dep_19_maturity_period > 0 var:bfl_dep_19_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_19_maturity_period }
+AND = { var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4 var:bfl_dep_20_party ?= root
+                var:bfl_dep_20_maturity_period > 0 var:bfl_dep_20_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_20_maturity_period }
+AND = { var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4 var:bfl_dep_21_party ?= root
+                var:bfl_dep_21_maturity_period > 0 var:bfl_dep_21_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_21_maturity_period }
+AND = { var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4 var:bfl_dep_22_party ?= root
+                var:bfl_dep_22_maturity_period > 0 var:bfl_dep_22_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_22_maturity_period }
+AND = { var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4 var:bfl_dep_23_party ?= root
+                var:bfl_dep_23_maturity_period > 0 var:bfl_dep_23_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_23_maturity_period }
+AND = { var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4 var:bfl_dep_24_party ?= root
+                var:bfl_dep_24_maturity_period > 0 var:bfl_dep_24_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_24_maturity_period }
+AND = { var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4 var:bfl_dep_25_party ?= root
+                var:bfl_dep_25_maturity_period > 0 var:bfl_dep_25_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_25_maturity_period }
+AND = { var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4 var:bfl_dep_26_party ?= root
+                var:bfl_dep_26_maturity_period > 0 var:bfl_dep_26_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_26_maturity_period }
+AND = { var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4 var:bfl_dep_27_party ?= root
+                var:bfl_dep_27_maturity_period > 0 var:bfl_dep_27_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_27_maturity_period }
+AND = { var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4 var:bfl_dep_28_party ?= root
+                var:bfl_dep_28_maturity_period > 0 var:bfl_dep_28_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_28_maturity_period }
+AND = { var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4 var:bfl_dep_29_party ?= root
+                var:bfl_dep_29_maturity_period > 0 var:bfl_dep_29_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_29_maturity_period }
+AND = { var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4 var:bfl_dep_30_party ?= root
+                var:bfl_dep_30_maturity_period > 0 var:bfl_dep_30_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_30_maturity_period }
+AND = { var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4 var:bfl_dep_31_party ?= root
+                var:bfl_dep_31_maturity_period > 0 var:bfl_dep_31_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_31_maturity_period }
+AND = { var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4 var:bfl_dep_32_party ?= root
+                var:bfl_dep_32_maturity_period > 0 var:bfl_dep_32_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_32_maturity_period }
+}
+}
+bfl_term_interaction_eligible_1 = {
+OR = {
+AND = { var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4 var:bfl_dep_01_party ?= scope:actor
+                var:bfl_dep_01_maturity_period > 0 var:bfl_dep_01_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_01_maturity_period }
+AND = { var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4 var:bfl_dep_02_party ?= scope:actor
+                var:bfl_dep_02_maturity_period > 0 var:bfl_dep_02_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_02_maturity_period }
+AND = { var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4 var:bfl_dep_03_party ?= scope:actor
+                var:bfl_dep_03_maturity_period > 0 var:bfl_dep_03_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_03_maturity_period }
+AND = { var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4 var:bfl_dep_04_party ?= scope:actor
+                var:bfl_dep_04_maturity_period > 0 var:bfl_dep_04_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_04_maturity_period }
+AND = { var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4 var:bfl_dep_05_party ?= scope:actor
+                var:bfl_dep_05_maturity_period > 0 var:bfl_dep_05_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_05_maturity_period }
+AND = { var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4 var:bfl_dep_06_party ?= scope:actor
+                var:bfl_dep_06_maturity_period > 0 var:bfl_dep_06_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_06_maturity_period }
+AND = { var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4 var:bfl_dep_07_party ?= scope:actor
+                var:bfl_dep_07_maturity_period > 0 var:bfl_dep_07_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_07_maturity_period }
+AND = { var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4 var:bfl_dep_08_party ?= scope:actor
+                var:bfl_dep_08_maturity_period > 0 var:bfl_dep_08_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_08_maturity_period }
+AND = { var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4 var:bfl_dep_09_party ?= scope:actor
+                var:bfl_dep_09_maturity_period > 0 var:bfl_dep_09_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_09_maturity_period }
+AND = { var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4 var:bfl_dep_10_party ?= scope:actor
+                var:bfl_dep_10_maturity_period > 0 var:bfl_dep_10_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_10_maturity_period }
+AND = { var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4 var:bfl_dep_11_party ?= scope:actor
+                var:bfl_dep_11_maturity_period > 0 var:bfl_dep_11_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_11_maturity_period }
+AND = { var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4 var:bfl_dep_12_party ?= scope:actor
+                var:bfl_dep_12_maturity_period > 0 var:bfl_dep_12_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_12_maturity_period }
+AND = { var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4 var:bfl_dep_13_party ?= scope:actor
+                var:bfl_dep_13_maturity_period > 0 var:bfl_dep_13_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_13_maturity_period }
+AND = { var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4 var:bfl_dep_14_party ?= scope:actor
+                var:bfl_dep_14_maturity_period > 0 var:bfl_dep_14_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_14_maturity_period }
+AND = { var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4 var:bfl_dep_15_party ?= scope:actor
+                var:bfl_dep_15_maturity_period > 0 var:bfl_dep_15_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_15_maturity_period }
+AND = { var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4 var:bfl_dep_16_party ?= scope:actor
+                var:bfl_dep_16_maturity_period > 0 var:bfl_dep_16_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_16_maturity_period }
+AND = { var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4 var:bfl_dep_17_party ?= scope:actor
+                var:bfl_dep_17_maturity_period > 0 var:bfl_dep_17_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_17_maturity_period }
+AND = { var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4 var:bfl_dep_18_party ?= scope:actor
+                var:bfl_dep_18_maturity_period > 0 var:bfl_dep_18_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_18_maturity_period }
+AND = { var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4 var:bfl_dep_19_party ?= scope:actor
+                var:bfl_dep_19_maturity_period > 0 var:bfl_dep_19_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_19_maturity_period }
+AND = { var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4 var:bfl_dep_20_party ?= scope:actor
+                var:bfl_dep_20_maturity_period > 0 var:bfl_dep_20_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_20_maturity_period }
+AND = { var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4 var:bfl_dep_21_party ?= scope:actor
+                var:bfl_dep_21_maturity_period > 0 var:bfl_dep_21_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_21_maturity_period }
+AND = { var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4 var:bfl_dep_22_party ?= scope:actor
+                var:bfl_dep_22_maturity_period > 0 var:bfl_dep_22_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_22_maturity_period }
+AND = { var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4 var:bfl_dep_23_party ?= scope:actor
+                var:bfl_dep_23_maturity_period > 0 var:bfl_dep_23_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_23_maturity_period }
+AND = { var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4 var:bfl_dep_24_party ?= scope:actor
+                var:bfl_dep_24_maturity_period > 0 var:bfl_dep_24_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_24_maturity_period }
+AND = { var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4 var:bfl_dep_25_party ?= scope:actor
+                var:bfl_dep_25_maturity_period > 0 var:bfl_dep_25_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_25_maturity_period }
+AND = { var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4 var:bfl_dep_26_party ?= scope:actor
+                var:bfl_dep_26_maturity_period > 0 var:bfl_dep_26_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_26_maturity_period }
+AND = { var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4 var:bfl_dep_27_party ?= scope:actor
+                var:bfl_dep_27_maturity_period > 0 var:bfl_dep_27_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_27_maturity_period }
+AND = { var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4 var:bfl_dep_28_party ?= scope:actor
+                var:bfl_dep_28_maturity_period > 0 var:bfl_dep_28_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_28_maturity_period }
+AND = { var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4 var:bfl_dep_29_party ?= scope:actor
+                var:bfl_dep_29_maturity_period > 0 var:bfl_dep_29_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_29_maturity_period }
+AND = { var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4 var:bfl_dep_30_party ?= scope:actor
+                var:bfl_dep_30_maturity_period > 0 var:bfl_dep_30_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_30_maturity_period }
+AND = { var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4 var:bfl_dep_31_party ?= scope:actor
+                var:bfl_dep_31_maturity_period > 0 var:bfl_dep_31_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_31_maturity_period }
+AND = { var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4 var:bfl_dep_32_party ?= scope:actor
+                var:bfl_dep_32_maturity_period > 0 var:bfl_dep_32_withdrawal_requested = 0
+                bfl_period >= var:bfl_dep_32_maturity_period }
+}
+}
+bfl_term_eligible_2 = {
+OR = {
+AND = { var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4 var:bfl_dep_01_party ?= root
+                var:bfl_dep_01_maturity_period > 0 var:bfl_dep_01_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_01_maturity_period }
+AND = { var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4 var:bfl_dep_02_party ?= root
+                var:bfl_dep_02_maturity_period > 0 var:bfl_dep_02_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_02_maturity_period }
+AND = { var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4 var:bfl_dep_03_party ?= root
+                var:bfl_dep_03_maturity_period > 0 var:bfl_dep_03_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_03_maturity_period }
+AND = { var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4 var:bfl_dep_04_party ?= root
+                var:bfl_dep_04_maturity_period > 0 var:bfl_dep_04_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_04_maturity_period }
+AND = { var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4 var:bfl_dep_05_party ?= root
+                var:bfl_dep_05_maturity_period > 0 var:bfl_dep_05_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_05_maturity_period }
+AND = { var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4 var:bfl_dep_06_party ?= root
+                var:bfl_dep_06_maturity_period > 0 var:bfl_dep_06_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_06_maturity_period }
+AND = { var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4 var:bfl_dep_07_party ?= root
+                var:bfl_dep_07_maturity_period > 0 var:bfl_dep_07_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_07_maturity_period }
+AND = { var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4 var:bfl_dep_08_party ?= root
+                var:bfl_dep_08_maturity_period > 0 var:bfl_dep_08_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_08_maturity_period }
+AND = { var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4 var:bfl_dep_09_party ?= root
+                var:bfl_dep_09_maturity_period > 0 var:bfl_dep_09_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_09_maturity_period }
+AND = { var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4 var:bfl_dep_10_party ?= root
+                var:bfl_dep_10_maturity_period > 0 var:bfl_dep_10_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_10_maturity_period }
+AND = { var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4 var:bfl_dep_11_party ?= root
+                var:bfl_dep_11_maturity_period > 0 var:bfl_dep_11_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_11_maturity_period }
+AND = { var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4 var:bfl_dep_12_party ?= root
+                var:bfl_dep_12_maturity_period > 0 var:bfl_dep_12_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_12_maturity_period }
+AND = { var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4 var:bfl_dep_13_party ?= root
+                var:bfl_dep_13_maturity_period > 0 var:bfl_dep_13_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_13_maturity_period }
+AND = { var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4 var:bfl_dep_14_party ?= root
+                var:bfl_dep_14_maturity_period > 0 var:bfl_dep_14_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_14_maturity_period }
+AND = { var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4 var:bfl_dep_15_party ?= root
+                var:bfl_dep_15_maturity_period > 0 var:bfl_dep_15_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_15_maturity_period }
+AND = { var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4 var:bfl_dep_16_party ?= root
+                var:bfl_dep_16_maturity_period > 0 var:bfl_dep_16_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_16_maturity_period }
+AND = { var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4 var:bfl_dep_17_party ?= root
+                var:bfl_dep_17_maturity_period > 0 var:bfl_dep_17_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_17_maturity_period }
+AND = { var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4 var:bfl_dep_18_party ?= root
+                var:bfl_dep_18_maturity_period > 0 var:bfl_dep_18_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_18_maturity_period }
+AND = { var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4 var:bfl_dep_19_party ?= root
+                var:bfl_dep_19_maturity_period > 0 var:bfl_dep_19_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_19_maturity_period }
+AND = { var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4 var:bfl_dep_20_party ?= root
+                var:bfl_dep_20_maturity_period > 0 var:bfl_dep_20_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_20_maturity_period }
+AND = { var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4 var:bfl_dep_21_party ?= root
+                var:bfl_dep_21_maturity_period > 0 var:bfl_dep_21_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_21_maturity_period }
+AND = { var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4 var:bfl_dep_22_party ?= root
+                var:bfl_dep_22_maturity_period > 0 var:bfl_dep_22_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_22_maturity_period }
+AND = { var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4 var:bfl_dep_23_party ?= root
+                var:bfl_dep_23_maturity_period > 0 var:bfl_dep_23_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_23_maturity_period }
+AND = { var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4 var:bfl_dep_24_party ?= root
+                var:bfl_dep_24_maturity_period > 0 var:bfl_dep_24_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_24_maturity_period }
+AND = { var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4 var:bfl_dep_25_party ?= root
+                var:bfl_dep_25_maturity_period > 0 var:bfl_dep_25_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_25_maturity_period }
+AND = { var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4 var:bfl_dep_26_party ?= root
+                var:bfl_dep_26_maturity_period > 0 var:bfl_dep_26_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_26_maturity_period }
+AND = { var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4 var:bfl_dep_27_party ?= root
+                var:bfl_dep_27_maturity_period > 0 var:bfl_dep_27_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_27_maturity_period }
+AND = { var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4 var:bfl_dep_28_party ?= root
+                var:bfl_dep_28_maturity_period > 0 var:bfl_dep_28_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_28_maturity_period }
+AND = { var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4 var:bfl_dep_29_party ?= root
+                var:bfl_dep_29_maturity_period > 0 var:bfl_dep_29_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_29_maturity_period }
+AND = { var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4 var:bfl_dep_30_party ?= root
+                var:bfl_dep_30_maturity_period > 0 var:bfl_dep_30_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_30_maturity_period }
+AND = { var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4 var:bfl_dep_31_party ?= root
+                var:bfl_dep_31_maturity_period > 0 var:bfl_dep_31_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_31_maturity_period }
+AND = { var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4 var:bfl_dep_32_party ?= root
+                var:bfl_dep_32_maturity_period > 0 var:bfl_dep_32_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_32_maturity_period }
+}
+}
+bfl_term_interaction_eligible_2 = {
+OR = {
+AND = { var:bfl_dep_01_active = 1 var:bfl_dep_01_state < 4 var:bfl_dep_01_party ?= scope:actor
+                var:bfl_dep_01_maturity_period > 0 var:bfl_dep_01_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_01_maturity_period }
+AND = { var:bfl_dep_02_active = 1 var:bfl_dep_02_state < 4 var:bfl_dep_02_party ?= scope:actor
+                var:bfl_dep_02_maturity_period > 0 var:bfl_dep_02_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_02_maturity_period }
+AND = { var:bfl_dep_03_active = 1 var:bfl_dep_03_state < 4 var:bfl_dep_03_party ?= scope:actor
+                var:bfl_dep_03_maturity_period > 0 var:bfl_dep_03_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_03_maturity_period }
+AND = { var:bfl_dep_04_active = 1 var:bfl_dep_04_state < 4 var:bfl_dep_04_party ?= scope:actor
+                var:bfl_dep_04_maturity_period > 0 var:bfl_dep_04_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_04_maturity_period }
+AND = { var:bfl_dep_05_active = 1 var:bfl_dep_05_state < 4 var:bfl_dep_05_party ?= scope:actor
+                var:bfl_dep_05_maturity_period > 0 var:bfl_dep_05_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_05_maturity_period }
+AND = { var:bfl_dep_06_active = 1 var:bfl_dep_06_state < 4 var:bfl_dep_06_party ?= scope:actor
+                var:bfl_dep_06_maturity_period > 0 var:bfl_dep_06_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_06_maturity_period }
+AND = { var:bfl_dep_07_active = 1 var:bfl_dep_07_state < 4 var:bfl_dep_07_party ?= scope:actor
+                var:bfl_dep_07_maturity_period > 0 var:bfl_dep_07_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_07_maturity_period }
+AND = { var:bfl_dep_08_active = 1 var:bfl_dep_08_state < 4 var:bfl_dep_08_party ?= scope:actor
+                var:bfl_dep_08_maturity_period > 0 var:bfl_dep_08_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_08_maturity_period }
+AND = { var:bfl_dep_09_active = 1 var:bfl_dep_09_state < 4 var:bfl_dep_09_party ?= scope:actor
+                var:bfl_dep_09_maturity_period > 0 var:bfl_dep_09_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_09_maturity_period }
+AND = { var:bfl_dep_10_active = 1 var:bfl_dep_10_state < 4 var:bfl_dep_10_party ?= scope:actor
+                var:bfl_dep_10_maturity_period > 0 var:bfl_dep_10_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_10_maturity_period }
+AND = { var:bfl_dep_11_active = 1 var:bfl_dep_11_state < 4 var:bfl_dep_11_party ?= scope:actor
+                var:bfl_dep_11_maturity_period > 0 var:bfl_dep_11_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_11_maturity_period }
+AND = { var:bfl_dep_12_active = 1 var:bfl_dep_12_state < 4 var:bfl_dep_12_party ?= scope:actor
+                var:bfl_dep_12_maturity_period > 0 var:bfl_dep_12_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_12_maturity_period }
+AND = { var:bfl_dep_13_active = 1 var:bfl_dep_13_state < 4 var:bfl_dep_13_party ?= scope:actor
+                var:bfl_dep_13_maturity_period > 0 var:bfl_dep_13_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_13_maturity_period }
+AND = { var:bfl_dep_14_active = 1 var:bfl_dep_14_state < 4 var:bfl_dep_14_party ?= scope:actor
+                var:bfl_dep_14_maturity_period > 0 var:bfl_dep_14_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_14_maturity_period }
+AND = { var:bfl_dep_15_active = 1 var:bfl_dep_15_state < 4 var:bfl_dep_15_party ?= scope:actor
+                var:bfl_dep_15_maturity_period > 0 var:bfl_dep_15_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_15_maturity_period }
+AND = { var:bfl_dep_16_active = 1 var:bfl_dep_16_state < 4 var:bfl_dep_16_party ?= scope:actor
+                var:bfl_dep_16_maturity_period > 0 var:bfl_dep_16_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_16_maturity_period }
+AND = { var:bfl_dep_17_active = 1 var:bfl_dep_17_state < 4 var:bfl_dep_17_party ?= scope:actor
+                var:bfl_dep_17_maturity_period > 0 var:bfl_dep_17_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_17_maturity_period }
+AND = { var:bfl_dep_18_active = 1 var:bfl_dep_18_state < 4 var:bfl_dep_18_party ?= scope:actor
+                var:bfl_dep_18_maturity_period > 0 var:bfl_dep_18_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_18_maturity_period }
+AND = { var:bfl_dep_19_active = 1 var:bfl_dep_19_state < 4 var:bfl_dep_19_party ?= scope:actor
+                var:bfl_dep_19_maturity_period > 0 var:bfl_dep_19_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_19_maturity_period }
+AND = { var:bfl_dep_20_active = 1 var:bfl_dep_20_state < 4 var:bfl_dep_20_party ?= scope:actor
+                var:bfl_dep_20_maturity_period > 0 var:bfl_dep_20_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_20_maturity_period }
+AND = { var:bfl_dep_21_active = 1 var:bfl_dep_21_state < 4 var:bfl_dep_21_party ?= scope:actor
+                var:bfl_dep_21_maturity_period > 0 var:bfl_dep_21_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_21_maturity_period }
+AND = { var:bfl_dep_22_active = 1 var:bfl_dep_22_state < 4 var:bfl_dep_22_party ?= scope:actor
+                var:bfl_dep_22_maturity_period > 0 var:bfl_dep_22_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_22_maturity_period }
+AND = { var:bfl_dep_23_active = 1 var:bfl_dep_23_state < 4 var:bfl_dep_23_party ?= scope:actor
+                var:bfl_dep_23_maturity_period > 0 var:bfl_dep_23_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_23_maturity_period }
+AND = { var:bfl_dep_24_active = 1 var:bfl_dep_24_state < 4 var:bfl_dep_24_party ?= scope:actor
+                var:bfl_dep_24_maturity_period > 0 var:bfl_dep_24_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_24_maturity_period }
+AND = { var:bfl_dep_25_active = 1 var:bfl_dep_25_state < 4 var:bfl_dep_25_party ?= scope:actor
+                var:bfl_dep_25_maturity_period > 0 var:bfl_dep_25_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_25_maturity_period }
+AND = { var:bfl_dep_26_active = 1 var:bfl_dep_26_state < 4 var:bfl_dep_26_party ?= scope:actor
+                var:bfl_dep_26_maturity_period > 0 var:bfl_dep_26_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_26_maturity_period }
+AND = { var:bfl_dep_27_active = 1 var:bfl_dep_27_state < 4 var:bfl_dep_27_party ?= scope:actor
+                var:bfl_dep_27_maturity_period > 0 var:bfl_dep_27_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_27_maturity_period }
+AND = { var:bfl_dep_28_active = 1 var:bfl_dep_28_state < 4 var:bfl_dep_28_party ?= scope:actor
+                var:bfl_dep_28_maturity_period > 0 var:bfl_dep_28_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_28_maturity_period }
+AND = { var:bfl_dep_29_active = 1 var:bfl_dep_29_state < 4 var:bfl_dep_29_party ?= scope:actor
+                var:bfl_dep_29_maturity_period > 0 var:bfl_dep_29_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_29_maturity_period }
+AND = { var:bfl_dep_30_active = 1 var:bfl_dep_30_state < 4 var:bfl_dep_30_party ?= scope:actor
+                var:bfl_dep_30_maturity_period > 0 var:bfl_dep_30_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_30_maturity_period }
+AND = { var:bfl_dep_31_active = 1 var:bfl_dep_31_state < 4 var:bfl_dep_31_party ?= scope:actor
+                var:bfl_dep_31_maturity_period > 0 var:bfl_dep_31_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_31_maturity_period }
+AND = { var:bfl_dep_32_active = 1 var:bfl_dep_32_state < 4 var:bfl_dep_32_party ?= scope:actor
+                var:bfl_dep_32_maturity_period > 0 var:bfl_dep_32_withdrawal_requested = 0
+                bfl_period < var:bfl_dep_32_maturity_period }
+}
+}

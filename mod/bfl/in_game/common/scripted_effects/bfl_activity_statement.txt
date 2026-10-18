@@ -1,0 +1,21 @@
+﻿bfl_record_activity_statement = {
+set_variable = { name = bfl_statement_period value = bfl_period }
+        set_variable = { name = bfl_statement_native_interest value = var:bfl_native_interest }
+        set_variable = { name = bfl_statement_principal value = var:bfl_native_principal }
+        set_variable = { name = bfl_statement_recovery_gain value = var:bfl_native_recovery_gain }
+        set_variable = { name = bfl_statement_recovery_loss value = var:bfl_native_recovery_loss }
+        set_variable = { name = bfl_statement_losses value = var:bfl_loss_carryforward }
+    set_variable = { name = bfl_statement_services value = var:bfl_profit_services }
+set_variable = { name = bfl_statement_credit value = var:bfl_profit_credit }
+set_variable = { name = bfl_statement_controller value = var:bfl_profit_controller }
+set_variable = { name = bfl_statement_trading value = var:bfl_profit_trading }
+set_variable = { name = bfl_statement_goods value = var:bfl_profit_goods }
+set_variable = { name = bfl_statement_ventures value = var:bfl_profit_ventures }
+set_variable = { name = bfl_statement_company value = var:bfl_profit_company }
+set_variable = { name = bfl_statement_native value = var:bfl_profit_native }
+set_variable = { name = bfl_native_interest value = 0 }
+set_variable = { name = bfl_native_principal value = 0 }
+set_variable = { name = bfl_native_recovery_gain value = 0 }
+set_variable = { name = bfl_native_recovery_loss value = 0 }
+set_variable = { name = bfl_receipt_period value = bfl_period }
+}

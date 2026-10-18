@@ -1,0 +1,1327 @@
+﻿bfl_sample_native_coupons = {
+bfl_initialize_credit = yes
+bfl_open_receipt_period = yes
+save_scope_as = bfl_receipt_bank
+if = { limit = { var:bfl_cr_01_state = 1 exists = var:bfl_cr_01_loan
+            var:bfl_cr_01_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_01_observed_remaining has_variable = bfl_cr_01_observed_face
+                var:bfl_cr_01_observed_face = var:bfl_cr_01_loan.loan_amount
+                var:bfl_cr_01_observed_rate ?= var:bfl_cr_01_loan.loan_interest
+                has_variable = bfl_cr_01_observed_months var:bfl_cr_01_observed_months > var:bfl_cr_01_loan.months_left
+                var:bfl_cr_01_observed_remaining > var:bfl_cr_01_loan.remaining_debt
+                var:bfl_cr_01_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_01_observed_remaining
+                    subtract = var:bfl_cr_01_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_01_observed_remaining value = var:bfl_cr_01_loan.remaining_debt }
+            set_variable = { name = bfl_cr_01_observed_face value = var:bfl_cr_01_loan.loan_amount }
+            set_variable = { name = bfl_cr_01_observed_rate value = var:bfl_cr_01_loan.loan_interest }
+            set_variable = { name = bfl_cr_01_observed_months value = var:bfl_cr_01_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_02_state = 1 exists = var:bfl_cr_02_loan
+            var:bfl_cr_02_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_02_observed_remaining has_variable = bfl_cr_02_observed_face
+                var:bfl_cr_02_observed_face = var:bfl_cr_02_loan.loan_amount
+                var:bfl_cr_02_observed_rate ?= var:bfl_cr_02_loan.loan_interest
+                has_variable = bfl_cr_02_observed_months var:bfl_cr_02_observed_months > var:bfl_cr_02_loan.months_left
+                var:bfl_cr_02_observed_remaining > var:bfl_cr_02_loan.remaining_debt
+                var:bfl_cr_02_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_02_observed_remaining
+                    subtract = var:bfl_cr_02_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_02_observed_remaining value = var:bfl_cr_02_loan.remaining_debt }
+            set_variable = { name = bfl_cr_02_observed_face value = var:bfl_cr_02_loan.loan_amount }
+            set_variable = { name = bfl_cr_02_observed_rate value = var:bfl_cr_02_loan.loan_interest }
+            set_variable = { name = bfl_cr_02_observed_months value = var:bfl_cr_02_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_03_state = 1 exists = var:bfl_cr_03_loan
+            var:bfl_cr_03_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_03_observed_remaining has_variable = bfl_cr_03_observed_face
+                var:bfl_cr_03_observed_face = var:bfl_cr_03_loan.loan_amount
+                var:bfl_cr_03_observed_rate ?= var:bfl_cr_03_loan.loan_interest
+                has_variable = bfl_cr_03_observed_months var:bfl_cr_03_observed_months > var:bfl_cr_03_loan.months_left
+                var:bfl_cr_03_observed_remaining > var:bfl_cr_03_loan.remaining_debt
+                var:bfl_cr_03_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_03_observed_remaining
+                    subtract = var:bfl_cr_03_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_03_observed_remaining value = var:bfl_cr_03_loan.remaining_debt }
+            set_variable = { name = bfl_cr_03_observed_face value = var:bfl_cr_03_loan.loan_amount }
+            set_variable = { name = bfl_cr_03_observed_rate value = var:bfl_cr_03_loan.loan_interest }
+            set_variable = { name = bfl_cr_03_observed_months value = var:bfl_cr_03_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_04_state = 1 exists = var:bfl_cr_04_loan
+            var:bfl_cr_04_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_04_observed_remaining has_variable = bfl_cr_04_observed_face
+                var:bfl_cr_04_observed_face = var:bfl_cr_04_loan.loan_amount
+                var:bfl_cr_04_observed_rate ?= var:bfl_cr_04_loan.loan_interest
+                has_variable = bfl_cr_04_observed_months var:bfl_cr_04_observed_months > var:bfl_cr_04_loan.months_left
+                var:bfl_cr_04_observed_remaining > var:bfl_cr_04_loan.remaining_debt
+                var:bfl_cr_04_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_04_observed_remaining
+                    subtract = var:bfl_cr_04_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_04_observed_remaining value = var:bfl_cr_04_loan.remaining_debt }
+            set_variable = { name = bfl_cr_04_observed_face value = var:bfl_cr_04_loan.loan_amount }
+            set_variable = { name = bfl_cr_04_observed_rate value = var:bfl_cr_04_loan.loan_interest }
+            set_variable = { name = bfl_cr_04_observed_months value = var:bfl_cr_04_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_05_state = 1 exists = var:bfl_cr_05_loan
+            var:bfl_cr_05_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_05_observed_remaining has_variable = bfl_cr_05_observed_face
+                var:bfl_cr_05_observed_face = var:bfl_cr_05_loan.loan_amount
+                var:bfl_cr_05_observed_rate ?= var:bfl_cr_05_loan.loan_interest
+                has_variable = bfl_cr_05_observed_months var:bfl_cr_05_observed_months > var:bfl_cr_05_loan.months_left
+                var:bfl_cr_05_observed_remaining > var:bfl_cr_05_loan.remaining_debt
+                var:bfl_cr_05_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_05_observed_remaining
+                    subtract = var:bfl_cr_05_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_05_observed_remaining value = var:bfl_cr_05_loan.remaining_debt }
+            set_variable = { name = bfl_cr_05_observed_face value = var:bfl_cr_05_loan.loan_amount }
+            set_variable = { name = bfl_cr_05_observed_rate value = var:bfl_cr_05_loan.loan_interest }
+            set_variable = { name = bfl_cr_05_observed_months value = var:bfl_cr_05_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_06_state = 1 exists = var:bfl_cr_06_loan
+            var:bfl_cr_06_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_06_observed_remaining has_variable = bfl_cr_06_observed_face
+                var:bfl_cr_06_observed_face = var:bfl_cr_06_loan.loan_amount
+                var:bfl_cr_06_observed_rate ?= var:bfl_cr_06_loan.loan_interest
+                has_variable = bfl_cr_06_observed_months var:bfl_cr_06_observed_months > var:bfl_cr_06_loan.months_left
+                var:bfl_cr_06_observed_remaining > var:bfl_cr_06_loan.remaining_debt
+                var:bfl_cr_06_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_06_observed_remaining
+                    subtract = var:bfl_cr_06_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_06_observed_remaining value = var:bfl_cr_06_loan.remaining_debt }
+            set_variable = { name = bfl_cr_06_observed_face value = var:bfl_cr_06_loan.loan_amount }
+            set_variable = { name = bfl_cr_06_observed_rate value = var:bfl_cr_06_loan.loan_interest }
+            set_variable = { name = bfl_cr_06_observed_months value = var:bfl_cr_06_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_07_state = 1 exists = var:bfl_cr_07_loan
+            var:bfl_cr_07_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_07_observed_remaining has_variable = bfl_cr_07_observed_face
+                var:bfl_cr_07_observed_face = var:bfl_cr_07_loan.loan_amount
+                var:bfl_cr_07_observed_rate ?= var:bfl_cr_07_loan.loan_interest
+                has_variable = bfl_cr_07_observed_months var:bfl_cr_07_observed_months > var:bfl_cr_07_loan.months_left
+                var:bfl_cr_07_observed_remaining > var:bfl_cr_07_loan.remaining_debt
+                var:bfl_cr_07_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_07_observed_remaining
+                    subtract = var:bfl_cr_07_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_07_observed_remaining value = var:bfl_cr_07_loan.remaining_debt }
+            set_variable = { name = bfl_cr_07_observed_face value = var:bfl_cr_07_loan.loan_amount }
+            set_variable = { name = bfl_cr_07_observed_rate value = var:bfl_cr_07_loan.loan_interest }
+            set_variable = { name = bfl_cr_07_observed_months value = var:bfl_cr_07_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_08_state = 1 exists = var:bfl_cr_08_loan
+            var:bfl_cr_08_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_08_observed_remaining has_variable = bfl_cr_08_observed_face
+                var:bfl_cr_08_observed_face = var:bfl_cr_08_loan.loan_amount
+                var:bfl_cr_08_observed_rate ?= var:bfl_cr_08_loan.loan_interest
+                has_variable = bfl_cr_08_observed_months var:bfl_cr_08_observed_months > var:bfl_cr_08_loan.months_left
+                var:bfl_cr_08_observed_remaining > var:bfl_cr_08_loan.remaining_debt
+                var:bfl_cr_08_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_08_observed_remaining
+                    subtract = var:bfl_cr_08_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_08_observed_remaining value = var:bfl_cr_08_loan.remaining_debt }
+            set_variable = { name = bfl_cr_08_observed_face value = var:bfl_cr_08_loan.loan_amount }
+            set_variable = { name = bfl_cr_08_observed_rate value = var:bfl_cr_08_loan.loan_interest }
+            set_variable = { name = bfl_cr_08_observed_months value = var:bfl_cr_08_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_09_state = 1 exists = var:bfl_cr_09_loan
+            var:bfl_cr_09_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_09_observed_remaining has_variable = bfl_cr_09_observed_face
+                var:bfl_cr_09_observed_face = var:bfl_cr_09_loan.loan_amount
+                var:bfl_cr_09_observed_rate ?= var:bfl_cr_09_loan.loan_interest
+                has_variable = bfl_cr_09_observed_months var:bfl_cr_09_observed_months > var:bfl_cr_09_loan.months_left
+                var:bfl_cr_09_observed_remaining > var:bfl_cr_09_loan.remaining_debt
+                var:bfl_cr_09_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_09_observed_remaining
+                    subtract = var:bfl_cr_09_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_09_observed_remaining value = var:bfl_cr_09_loan.remaining_debt }
+            set_variable = { name = bfl_cr_09_observed_face value = var:bfl_cr_09_loan.loan_amount }
+            set_variable = { name = bfl_cr_09_observed_rate value = var:bfl_cr_09_loan.loan_interest }
+            set_variable = { name = bfl_cr_09_observed_months value = var:bfl_cr_09_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_10_state = 1 exists = var:bfl_cr_10_loan
+            var:bfl_cr_10_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_10_observed_remaining has_variable = bfl_cr_10_observed_face
+                var:bfl_cr_10_observed_face = var:bfl_cr_10_loan.loan_amount
+                var:bfl_cr_10_observed_rate ?= var:bfl_cr_10_loan.loan_interest
+                has_variable = bfl_cr_10_observed_months var:bfl_cr_10_observed_months > var:bfl_cr_10_loan.months_left
+                var:bfl_cr_10_observed_remaining > var:bfl_cr_10_loan.remaining_debt
+                var:bfl_cr_10_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_10_observed_remaining
+                    subtract = var:bfl_cr_10_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_10_observed_remaining value = var:bfl_cr_10_loan.remaining_debt }
+            set_variable = { name = bfl_cr_10_observed_face value = var:bfl_cr_10_loan.loan_amount }
+            set_variable = { name = bfl_cr_10_observed_rate value = var:bfl_cr_10_loan.loan_interest }
+            set_variable = { name = bfl_cr_10_observed_months value = var:bfl_cr_10_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_11_state = 1 exists = var:bfl_cr_11_loan
+            var:bfl_cr_11_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_11_observed_remaining has_variable = bfl_cr_11_observed_face
+                var:bfl_cr_11_observed_face = var:bfl_cr_11_loan.loan_amount
+                var:bfl_cr_11_observed_rate ?= var:bfl_cr_11_loan.loan_interest
+                has_variable = bfl_cr_11_observed_months var:bfl_cr_11_observed_months > var:bfl_cr_11_loan.months_left
+                var:bfl_cr_11_observed_remaining > var:bfl_cr_11_loan.remaining_debt
+                var:bfl_cr_11_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_11_observed_remaining
+                    subtract = var:bfl_cr_11_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_11_observed_remaining value = var:bfl_cr_11_loan.remaining_debt }
+            set_variable = { name = bfl_cr_11_observed_face value = var:bfl_cr_11_loan.loan_amount }
+            set_variable = { name = bfl_cr_11_observed_rate value = var:bfl_cr_11_loan.loan_interest }
+            set_variable = { name = bfl_cr_11_observed_months value = var:bfl_cr_11_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_12_state = 1 exists = var:bfl_cr_12_loan
+            var:bfl_cr_12_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_12_observed_remaining has_variable = bfl_cr_12_observed_face
+                var:bfl_cr_12_observed_face = var:bfl_cr_12_loan.loan_amount
+                var:bfl_cr_12_observed_rate ?= var:bfl_cr_12_loan.loan_interest
+                has_variable = bfl_cr_12_observed_months var:bfl_cr_12_observed_months > var:bfl_cr_12_loan.months_left
+                var:bfl_cr_12_observed_remaining > var:bfl_cr_12_loan.remaining_debt
+                var:bfl_cr_12_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_12_observed_remaining
+                    subtract = var:bfl_cr_12_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_12_observed_remaining value = var:bfl_cr_12_loan.remaining_debt }
+            set_variable = { name = bfl_cr_12_observed_face value = var:bfl_cr_12_loan.loan_amount }
+            set_variable = { name = bfl_cr_12_observed_rate value = var:bfl_cr_12_loan.loan_interest }
+            set_variable = { name = bfl_cr_12_observed_months value = var:bfl_cr_12_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_13_state = 1 exists = var:bfl_cr_13_loan
+            var:bfl_cr_13_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_13_observed_remaining has_variable = bfl_cr_13_observed_face
+                var:bfl_cr_13_observed_face = var:bfl_cr_13_loan.loan_amount
+                var:bfl_cr_13_observed_rate ?= var:bfl_cr_13_loan.loan_interest
+                has_variable = bfl_cr_13_observed_months var:bfl_cr_13_observed_months > var:bfl_cr_13_loan.months_left
+                var:bfl_cr_13_observed_remaining > var:bfl_cr_13_loan.remaining_debt
+                var:bfl_cr_13_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_13_observed_remaining
+                    subtract = var:bfl_cr_13_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_13_observed_remaining value = var:bfl_cr_13_loan.remaining_debt }
+            set_variable = { name = bfl_cr_13_observed_face value = var:bfl_cr_13_loan.loan_amount }
+            set_variable = { name = bfl_cr_13_observed_rate value = var:bfl_cr_13_loan.loan_interest }
+            set_variable = { name = bfl_cr_13_observed_months value = var:bfl_cr_13_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_14_state = 1 exists = var:bfl_cr_14_loan
+            var:bfl_cr_14_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_14_observed_remaining has_variable = bfl_cr_14_observed_face
+                var:bfl_cr_14_observed_face = var:bfl_cr_14_loan.loan_amount
+                var:bfl_cr_14_observed_rate ?= var:bfl_cr_14_loan.loan_interest
+                has_variable = bfl_cr_14_observed_months var:bfl_cr_14_observed_months > var:bfl_cr_14_loan.months_left
+                var:bfl_cr_14_observed_remaining > var:bfl_cr_14_loan.remaining_debt
+                var:bfl_cr_14_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_14_observed_remaining
+                    subtract = var:bfl_cr_14_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_14_observed_remaining value = var:bfl_cr_14_loan.remaining_debt }
+            set_variable = { name = bfl_cr_14_observed_face value = var:bfl_cr_14_loan.loan_amount }
+            set_variable = { name = bfl_cr_14_observed_rate value = var:bfl_cr_14_loan.loan_interest }
+            set_variable = { name = bfl_cr_14_observed_months value = var:bfl_cr_14_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_15_state = 1 exists = var:bfl_cr_15_loan
+            var:bfl_cr_15_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_15_observed_remaining has_variable = bfl_cr_15_observed_face
+                var:bfl_cr_15_observed_face = var:bfl_cr_15_loan.loan_amount
+                var:bfl_cr_15_observed_rate ?= var:bfl_cr_15_loan.loan_interest
+                has_variable = bfl_cr_15_observed_months var:bfl_cr_15_observed_months > var:bfl_cr_15_loan.months_left
+                var:bfl_cr_15_observed_remaining > var:bfl_cr_15_loan.remaining_debt
+                var:bfl_cr_15_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_15_observed_remaining
+                    subtract = var:bfl_cr_15_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_15_observed_remaining value = var:bfl_cr_15_loan.remaining_debt }
+            set_variable = { name = bfl_cr_15_observed_face value = var:bfl_cr_15_loan.loan_amount }
+            set_variable = { name = bfl_cr_15_observed_rate value = var:bfl_cr_15_loan.loan_interest }
+            set_variable = { name = bfl_cr_15_observed_months value = var:bfl_cr_15_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_16_state = 1 exists = var:bfl_cr_16_loan
+            var:bfl_cr_16_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_16_observed_remaining has_variable = bfl_cr_16_observed_face
+                var:bfl_cr_16_observed_face = var:bfl_cr_16_loan.loan_amount
+                var:bfl_cr_16_observed_rate ?= var:bfl_cr_16_loan.loan_interest
+                has_variable = bfl_cr_16_observed_months var:bfl_cr_16_observed_months > var:bfl_cr_16_loan.months_left
+                var:bfl_cr_16_observed_remaining > var:bfl_cr_16_loan.remaining_debt
+                var:bfl_cr_16_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_16_observed_remaining
+                    subtract = var:bfl_cr_16_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_16_observed_remaining value = var:bfl_cr_16_loan.remaining_debt }
+            set_variable = { name = bfl_cr_16_observed_face value = var:bfl_cr_16_loan.loan_amount }
+            set_variable = { name = bfl_cr_16_observed_rate value = var:bfl_cr_16_loan.loan_interest }
+            set_variable = { name = bfl_cr_16_observed_months value = var:bfl_cr_16_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_17_state = 1 exists = var:bfl_cr_17_loan
+            var:bfl_cr_17_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_17_observed_remaining has_variable = bfl_cr_17_observed_face
+                var:bfl_cr_17_observed_face = var:bfl_cr_17_loan.loan_amount
+                var:bfl_cr_17_observed_rate ?= var:bfl_cr_17_loan.loan_interest
+                has_variable = bfl_cr_17_observed_months var:bfl_cr_17_observed_months > var:bfl_cr_17_loan.months_left
+                var:bfl_cr_17_observed_remaining > var:bfl_cr_17_loan.remaining_debt
+                var:bfl_cr_17_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_17_observed_remaining
+                    subtract = var:bfl_cr_17_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_17_observed_remaining value = var:bfl_cr_17_loan.remaining_debt }
+            set_variable = { name = bfl_cr_17_observed_face value = var:bfl_cr_17_loan.loan_amount }
+            set_variable = { name = bfl_cr_17_observed_rate value = var:bfl_cr_17_loan.loan_interest }
+            set_variable = { name = bfl_cr_17_observed_months value = var:bfl_cr_17_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_18_state = 1 exists = var:bfl_cr_18_loan
+            var:bfl_cr_18_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_18_observed_remaining has_variable = bfl_cr_18_observed_face
+                var:bfl_cr_18_observed_face = var:bfl_cr_18_loan.loan_amount
+                var:bfl_cr_18_observed_rate ?= var:bfl_cr_18_loan.loan_interest
+                has_variable = bfl_cr_18_observed_months var:bfl_cr_18_observed_months > var:bfl_cr_18_loan.months_left
+                var:bfl_cr_18_observed_remaining > var:bfl_cr_18_loan.remaining_debt
+                var:bfl_cr_18_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_18_observed_remaining
+                    subtract = var:bfl_cr_18_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_18_observed_remaining value = var:bfl_cr_18_loan.remaining_debt }
+            set_variable = { name = bfl_cr_18_observed_face value = var:bfl_cr_18_loan.loan_amount }
+            set_variable = { name = bfl_cr_18_observed_rate value = var:bfl_cr_18_loan.loan_interest }
+            set_variable = { name = bfl_cr_18_observed_months value = var:bfl_cr_18_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_19_state = 1 exists = var:bfl_cr_19_loan
+            var:bfl_cr_19_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_19_observed_remaining has_variable = bfl_cr_19_observed_face
+                var:bfl_cr_19_observed_face = var:bfl_cr_19_loan.loan_amount
+                var:bfl_cr_19_observed_rate ?= var:bfl_cr_19_loan.loan_interest
+                has_variable = bfl_cr_19_observed_months var:bfl_cr_19_observed_months > var:bfl_cr_19_loan.months_left
+                var:bfl_cr_19_observed_remaining > var:bfl_cr_19_loan.remaining_debt
+                var:bfl_cr_19_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_19_observed_remaining
+                    subtract = var:bfl_cr_19_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_19_observed_remaining value = var:bfl_cr_19_loan.remaining_debt }
+            set_variable = { name = bfl_cr_19_observed_face value = var:bfl_cr_19_loan.loan_amount }
+            set_variable = { name = bfl_cr_19_observed_rate value = var:bfl_cr_19_loan.loan_interest }
+            set_variable = { name = bfl_cr_19_observed_months value = var:bfl_cr_19_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_20_state = 1 exists = var:bfl_cr_20_loan
+            var:bfl_cr_20_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_20_observed_remaining has_variable = bfl_cr_20_observed_face
+                var:bfl_cr_20_observed_face = var:bfl_cr_20_loan.loan_amount
+                var:bfl_cr_20_observed_rate ?= var:bfl_cr_20_loan.loan_interest
+                has_variable = bfl_cr_20_observed_months var:bfl_cr_20_observed_months > var:bfl_cr_20_loan.months_left
+                var:bfl_cr_20_observed_remaining > var:bfl_cr_20_loan.remaining_debt
+                var:bfl_cr_20_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_20_observed_remaining
+                    subtract = var:bfl_cr_20_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_20_observed_remaining value = var:bfl_cr_20_loan.remaining_debt }
+            set_variable = { name = bfl_cr_20_observed_face value = var:bfl_cr_20_loan.loan_amount }
+            set_variable = { name = bfl_cr_20_observed_rate value = var:bfl_cr_20_loan.loan_interest }
+            set_variable = { name = bfl_cr_20_observed_months value = var:bfl_cr_20_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_21_state = 1 exists = var:bfl_cr_21_loan
+            var:bfl_cr_21_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_21_observed_remaining has_variable = bfl_cr_21_observed_face
+                var:bfl_cr_21_observed_face = var:bfl_cr_21_loan.loan_amount
+                var:bfl_cr_21_observed_rate ?= var:bfl_cr_21_loan.loan_interest
+                has_variable = bfl_cr_21_observed_months var:bfl_cr_21_observed_months > var:bfl_cr_21_loan.months_left
+                var:bfl_cr_21_observed_remaining > var:bfl_cr_21_loan.remaining_debt
+                var:bfl_cr_21_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_21_observed_remaining
+                    subtract = var:bfl_cr_21_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_21_observed_remaining value = var:bfl_cr_21_loan.remaining_debt }
+            set_variable = { name = bfl_cr_21_observed_face value = var:bfl_cr_21_loan.loan_amount }
+            set_variable = { name = bfl_cr_21_observed_rate value = var:bfl_cr_21_loan.loan_interest }
+            set_variable = { name = bfl_cr_21_observed_months value = var:bfl_cr_21_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_22_state = 1 exists = var:bfl_cr_22_loan
+            var:bfl_cr_22_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_22_observed_remaining has_variable = bfl_cr_22_observed_face
+                var:bfl_cr_22_observed_face = var:bfl_cr_22_loan.loan_amount
+                var:bfl_cr_22_observed_rate ?= var:bfl_cr_22_loan.loan_interest
+                has_variable = bfl_cr_22_observed_months var:bfl_cr_22_observed_months > var:bfl_cr_22_loan.months_left
+                var:bfl_cr_22_observed_remaining > var:bfl_cr_22_loan.remaining_debt
+                var:bfl_cr_22_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_22_observed_remaining
+                    subtract = var:bfl_cr_22_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_22_observed_remaining value = var:bfl_cr_22_loan.remaining_debt }
+            set_variable = { name = bfl_cr_22_observed_face value = var:bfl_cr_22_loan.loan_amount }
+            set_variable = { name = bfl_cr_22_observed_rate value = var:bfl_cr_22_loan.loan_interest }
+            set_variable = { name = bfl_cr_22_observed_months value = var:bfl_cr_22_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_23_state = 1 exists = var:bfl_cr_23_loan
+            var:bfl_cr_23_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_23_observed_remaining has_variable = bfl_cr_23_observed_face
+                var:bfl_cr_23_observed_face = var:bfl_cr_23_loan.loan_amount
+                var:bfl_cr_23_observed_rate ?= var:bfl_cr_23_loan.loan_interest
+                has_variable = bfl_cr_23_observed_months var:bfl_cr_23_observed_months > var:bfl_cr_23_loan.months_left
+                var:bfl_cr_23_observed_remaining > var:bfl_cr_23_loan.remaining_debt
+                var:bfl_cr_23_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_23_observed_remaining
+                    subtract = var:bfl_cr_23_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_23_observed_remaining value = var:bfl_cr_23_loan.remaining_debt }
+            set_variable = { name = bfl_cr_23_observed_face value = var:bfl_cr_23_loan.loan_amount }
+            set_variable = { name = bfl_cr_23_observed_rate value = var:bfl_cr_23_loan.loan_interest }
+            set_variable = { name = bfl_cr_23_observed_months value = var:bfl_cr_23_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_24_state = 1 exists = var:bfl_cr_24_loan
+            var:bfl_cr_24_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_24_observed_remaining has_variable = bfl_cr_24_observed_face
+                var:bfl_cr_24_observed_face = var:bfl_cr_24_loan.loan_amount
+                var:bfl_cr_24_observed_rate ?= var:bfl_cr_24_loan.loan_interest
+                has_variable = bfl_cr_24_observed_months var:bfl_cr_24_observed_months > var:bfl_cr_24_loan.months_left
+                var:bfl_cr_24_observed_remaining > var:bfl_cr_24_loan.remaining_debt
+                var:bfl_cr_24_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_24_observed_remaining
+                    subtract = var:bfl_cr_24_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_24_observed_remaining value = var:bfl_cr_24_loan.remaining_debt }
+            set_variable = { name = bfl_cr_24_observed_face value = var:bfl_cr_24_loan.loan_amount }
+            set_variable = { name = bfl_cr_24_observed_rate value = var:bfl_cr_24_loan.loan_interest }
+            set_variable = { name = bfl_cr_24_observed_months value = var:bfl_cr_24_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_25_state = 1 exists = var:bfl_cr_25_loan
+            var:bfl_cr_25_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_25_observed_remaining has_variable = bfl_cr_25_observed_face
+                var:bfl_cr_25_observed_face = var:bfl_cr_25_loan.loan_amount
+                var:bfl_cr_25_observed_rate ?= var:bfl_cr_25_loan.loan_interest
+                has_variable = bfl_cr_25_observed_months var:bfl_cr_25_observed_months > var:bfl_cr_25_loan.months_left
+                var:bfl_cr_25_observed_remaining > var:bfl_cr_25_loan.remaining_debt
+                var:bfl_cr_25_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_25_observed_remaining
+                    subtract = var:bfl_cr_25_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_25_observed_remaining value = var:bfl_cr_25_loan.remaining_debt }
+            set_variable = { name = bfl_cr_25_observed_face value = var:bfl_cr_25_loan.loan_amount }
+            set_variable = { name = bfl_cr_25_observed_rate value = var:bfl_cr_25_loan.loan_interest }
+            set_variable = { name = bfl_cr_25_observed_months value = var:bfl_cr_25_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_26_state = 1 exists = var:bfl_cr_26_loan
+            var:bfl_cr_26_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_26_observed_remaining has_variable = bfl_cr_26_observed_face
+                var:bfl_cr_26_observed_face = var:bfl_cr_26_loan.loan_amount
+                var:bfl_cr_26_observed_rate ?= var:bfl_cr_26_loan.loan_interest
+                has_variable = bfl_cr_26_observed_months var:bfl_cr_26_observed_months > var:bfl_cr_26_loan.months_left
+                var:bfl_cr_26_observed_remaining > var:bfl_cr_26_loan.remaining_debt
+                var:bfl_cr_26_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_26_observed_remaining
+                    subtract = var:bfl_cr_26_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_26_observed_remaining value = var:bfl_cr_26_loan.remaining_debt }
+            set_variable = { name = bfl_cr_26_observed_face value = var:bfl_cr_26_loan.loan_amount }
+            set_variable = { name = bfl_cr_26_observed_rate value = var:bfl_cr_26_loan.loan_interest }
+            set_variable = { name = bfl_cr_26_observed_months value = var:bfl_cr_26_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_27_state = 1 exists = var:bfl_cr_27_loan
+            var:bfl_cr_27_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_27_observed_remaining has_variable = bfl_cr_27_observed_face
+                var:bfl_cr_27_observed_face = var:bfl_cr_27_loan.loan_amount
+                var:bfl_cr_27_observed_rate ?= var:bfl_cr_27_loan.loan_interest
+                has_variable = bfl_cr_27_observed_months var:bfl_cr_27_observed_months > var:bfl_cr_27_loan.months_left
+                var:bfl_cr_27_observed_remaining > var:bfl_cr_27_loan.remaining_debt
+                var:bfl_cr_27_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_27_observed_remaining
+                    subtract = var:bfl_cr_27_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_27_observed_remaining value = var:bfl_cr_27_loan.remaining_debt }
+            set_variable = { name = bfl_cr_27_observed_face value = var:bfl_cr_27_loan.loan_amount }
+            set_variable = { name = bfl_cr_27_observed_rate value = var:bfl_cr_27_loan.loan_interest }
+            set_variable = { name = bfl_cr_27_observed_months value = var:bfl_cr_27_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_28_state = 1 exists = var:bfl_cr_28_loan
+            var:bfl_cr_28_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_28_observed_remaining has_variable = bfl_cr_28_observed_face
+                var:bfl_cr_28_observed_face = var:bfl_cr_28_loan.loan_amount
+                var:bfl_cr_28_observed_rate ?= var:bfl_cr_28_loan.loan_interest
+                has_variable = bfl_cr_28_observed_months var:bfl_cr_28_observed_months > var:bfl_cr_28_loan.months_left
+                var:bfl_cr_28_observed_remaining > var:bfl_cr_28_loan.remaining_debt
+                var:bfl_cr_28_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_28_observed_remaining
+                    subtract = var:bfl_cr_28_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_28_observed_remaining value = var:bfl_cr_28_loan.remaining_debt }
+            set_variable = { name = bfl_cr_28_observed_face value = var:bfl_cr_28_loan.loan_amount }
+            set_variable = { name = bfl_cr_28_observed_rate value = var:bfl_cr_28_loan.loan_interest }
+            set_variable = { name = bfl_cr_28_observed_months value = var:bfl_cr_28_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_29_state = 1 exists = var:bfl_cr_29_loan
+            var:bfl_cr_29_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_29_observed_remaining has_variable = bfl_cr_29_observed_face
+                var:bfl_cr_29_observed_face = var:bfl_cr_29_loan.loan_amount
+                var:bfl_cr_29_observed_rate ?= var:bfl_cr_29_loan.loan_interest
+                has_variable = bfl_cr_29_observed_months var:bfl_cr_29_observed_months > var:bfl_cr_29_loan.months_left
+                var:bfl_cr_29_observed_remaining > var:bfl_cr_29_loan.remaining_debt
+                var:bfl_cr_29_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_29_observed_remaining
+                    subtract = var:bfl_cr_29_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_29_observed_remaining value = var:bfl_cr_29_loan.remaining_debt }
+            set_variable = { name = bfl_cr_29_observed_face value = var:bfl_cr_29_loan.loan_amount }
+            set_variable = { name = bfl_cr_29_observed_rate value = var:bfl_cr_29_loan.loan_interest }
+            set_variable = { name = bfl_cr_29_observed_months value = var:bfl_cr_29_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_30_state = 1 exists = var:bfl_cr_30_loan
+            var:bfl_cr_30_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_30_observed_remaining has_variable = bfl_cr_30_observed_face
+                var:bfl_cr_30_observed_face = var:bfl_cr_30_loan.loan_amount
+                var:bfl_cr_30_observed_rate ?= var:bfl_cr_30_loan.loan_interest
+                has_variable = bfl_cr_30_observed_months var:bfl_cr_30_observed_months > var:bfl_cr_30_loan.months_left
+                var:bfl_cr_30_observed_remaining > var:bfl_cr_30_loan.remaining_debt
+                var:bfl_cr_30_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_30_observed_remaining
+                    subtract = var:bfl_cr_30_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_30_observed_remaining value = var:bfl_cr_30_loan.remaining_debt }
+            set_variable = { name = bfl_cr_30_observed_face value = var:bfl_cr_30_loan.loan_amount }
+            set_variable = { name = bfl_cr_30_observed_rate value = var:bfl_cr_30_loan.loan_interest }
+            set_variable = { name = bfl_cr_30_observed_months value = var:bfl_cr_30_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_31_state = 1 exists = var:bfl_cr_31_loan
+            var:bfl_cr_31_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_31_observed_remaining has_variable = bfl_cr_31_observed_face
+                var:bfl_cr_31_observed_face = var:bfl_cr_31_loan.loan_amount
+                var:bfl_cr_31_observed_rate ?= var:bfl_cr_31_loan.loan_interest
+                has_variable = bfl_cr_31_observed_months var:bfl_cr_31_observed_months > var:bfl_cr_31_loan.months_left
+                var:bfl_cr_31_observed_remaining > var:bfl_cr_31_loan.remaining_debt
+                var:bfl_cr_31_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_31_observed_remaining
+                    subtract = var:bfl_cr_31_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_31_observed_remaining value = var:bfl_cr_31_loan.remaining_debt }
+            set_variable = { name = bfl_cr_31_observed_face value = var:bfl_cr_31_loan.loan_amount }
+            set_variable = { name = bfl_cr_31_observed_rate value = var:bfl_cr_31_loan.loan_interest }
+            set_variable = { name = bfl_cr_31_observed_months value = var:bfl_cr_31_loan.months_left }
+        }
+if = { limit = { var:bfl_cr_32_state = 1 exists = var:bfl_cr_32_loan
+            var:bfl_cr_32_loan = { owner = scope:bfl_receipt_bank } }
+            if = { limit = { has_variable = bfl_cr_32_observed_remaining has_variable = bfl_cr_32_observed_face
+                var:bfl_cr_32_observed_face = var:bfl_cr_32_loan.loan_amount
+                var:bfl_cr_32_observed_rate ?= var:bfl_cr_32_loan.loan_interest
+                has_variable = bfl_cr_32_observed_months var:bfl_cr_32_observed_months > var:bfl_cr_32_loan.months_left
+                var:bfl_cr_32_observed_remaining > var:bfl_cr_32_loan.remaining_debt
+                var:bfl_cr_32_repaid = 0 }
+                # With unchanged face, declining native remaining interest is the
+                # native monthly coupon, not principal or a treasury delta.
+                set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_32_observed_remaining
+                    subtract = var:bfl_cr_32_loan.remaining_debt } }
+                change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+            }
+            set_variable = { name = bfl_cr_32_observed_remaining value = var:bfl_cr_32_loan.remaining_debt }
+            set_variable = { name = bfl_cr_32_observed_face value = var:bfl_cr_32_loan.loan_amount }
+            set_variable = { name = bfl_cr_32_observed_rate value = var:bfl_cr_32_loan.loan_interest }
+            set_variable = { name = bfl_cr_32_observed_months value = var:bfl_cr_32_loan.months_left }
+        }
+}
+bfl_capture_native_payoff = {
+bfl_open_receipt_period = yes
+if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_repaid = 0 var:bfl_cr_01_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_01_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_01_repaid value = 1 } }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_repaid = 0 var:bfl_cr_02_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_02_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_02_repaid value = 1 } }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_repaid = 0 var:bfl_cr_03_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_03_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_03_repaid value = 1 } }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_repaid = 0 var:bfl_cr_04_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_04_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_04_repaid value = 1 } }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_repaid = 0 var:bfl_cr_05_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_05_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_05_repaid value = 1 } }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_repaid = 0 var:bfl_cr_06_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_06_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_06_repaid value = 1 } }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_repaid = 0 var:bfl_cr_07_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_07_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_07_repaid value = 1 } }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_repaid = 0 var:bfl_cr_08_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_08_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_08_repaid value = 1 } }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_repaid = 0 var:bfl_cr_09_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_09_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_09_repaid value = 1 } }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_repaid = 0 var:bfl_cr_10_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_10_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_10_repaid value = 1 } }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_repaid = 0 var:bfl_cr_11_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_11_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_11_repaid value = 1 } }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_repaid = 0 var:bfl_cr_12_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_12_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_12_repaid value = 1 } }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_repaid = 0 var:bfl_cr_13_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_13_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_13_repaid value = 1 } }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_repaid = 0 var:bfl_cr_14_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_14_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_14_repaid value = 1 } }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_repaid = 0 var:bfl_cr_15_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_15_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_15_repaid value = 1 } }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_repaid = 0 var:bfl_cr_16_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_16_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_16_repaid value = 1 } }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_repaid = 0 var:bfl_cr_17_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_17_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_17_repaid value = 1 } }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_repaid = 0 var:bfl_cr_18_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_18_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_18_repaid value = 1 } }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_repaid = 0 var:bfl_cr_19_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_19_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_19_repaid value = 1 } }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_repaid = 0 var:bfl_cr_20_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_20_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_20_repaid value = 1 } }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_repaid = 0 var:bfl_cr_21_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_21_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_21_repaid value = 1 } }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_repaid = 0 var:bfl_cr_22_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_22_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_22_repaid value = 1 } }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_repaid = 0 var:bfl_cr_23_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_23_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_23_repaid value = 1 } }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_repaid = 0 var:bfl_cr_24_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_24_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_24_repaid value = 1 } }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_repaid = 0 var:bfl_cr_25_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_25_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_25_repaid value = 1 } }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_repaid = 0 var:bfl_cr_26_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_26_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_26_repaid value = 1 } }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_repaid = 0 var:bfl_cr_27_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_27_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_27_repaid value = 1 } }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_repaid = 0 var:bfl_cr_28_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_28_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_28_repaid value = 1 } }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_repaid = 0 var:bfl_cr_29_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_29_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_29_repaid value = 1 } }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_repaid = 0 var:bfl_cr_30_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_30_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_30_repaid value = 1 } }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_repaid = 0 var:bfl_cr_31_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_31_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_31_repaid value = 1 } }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_repaid = 0 var:bfl_cr_32_loan ?= scope:target }
+            # Native callback precedes its atomic wallet transfer. Recognition
+            # waits for the claim's subsequent native invalidation.
+            set_variable = { name = bfl_cr_32_receipt value = scope:target.remaining_debt }
+            set_variable = { name = bfl_cr_32_repaid value = 1 } }
+}
+bfl_recognize_native_payoffs = {
+bfl_open_receipt_period = yes
+if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_repaid = 1 NOT = { exists = var:bfl_cr_01_loan } has_variable = bfl_cr_01_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_01_basis max = var:bfl_cr_01_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_01_receipt subtract = var:bfl_cr_01_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_01_receipt
+        }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_repaid = 1 NOT = { exists = var:bfl_cr_02_loan } has_variable = bfl_cr_02_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_02_basis max = var:bfl_cr_02_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_02_receipt subtract = var:bfl_cr_02_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_02_receipt
+        }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_repaid = 1 NOT = { exists = var:bfl_cr_03_loan } has_variable = bfl_cr_03_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_03_basis max = var:bfl_cr_03_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_03_receipt subtract = var:bfl_cr_03_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_03_receipt
+        }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_repaid = 1 NOT = { exists = var:bfl_cr_04_loan } has_variable = bfl_cr_04_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_04_basis max = var:bfl_cr_04_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_04_receipt subtract = var:bfl_cr_04_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_04_receipt
+        }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_repaid = 1 NOT = { exists = var:bfl_cr_05_loan } has_variable = bfl_cr_05_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_05_basis max = var:bfl_cr_05_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_05_receipt subtract = var:bfl_cr_05_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_05_receipt
+        }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_repaid = 1 NOT = { exists = var:bfl_cr_06_loan } has_variable = bfl_cr_06_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_06_basis max = var:bfl_cr_06_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_06_receipt subtract = var:bfl_cr_06_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_06_receipt
+        }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_repaid = 1 NOT = { exists = var:bfl_cr_07_loan } has_variable = bfl_cr_07_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_07_basis max = var:bfl_cr_07_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_07_receipt subtract = var:bfl_cr_07_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_07_receipt
+        }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_repaid = 1 NOT = { exists = var:bfl_cr_08_loan } has_variable = bfl_cr_08_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_08_basis max = var:bfl_cr_08_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_08_receipt subtract = var:bfl_cr_08_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_08_receipt
+        }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_repaid = 1 NOT = { exists = var:bfl_cr_09_loan } has_variable = bfl_cr_09_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_09_basis max = var:bfl_cr_09_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_09_receipt subtract = var:bfl_cr_09_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_09_receipt
+        }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_repaid = 1 NOT = { exists = var:bfl_cr_10_loan } has_variable = bfl_cr_10_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_10_basis max = var:bfl_cr_10_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_10_receipt subtract = var:bfl_cr_10_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_10_receipt
+        }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_repaid = 1 NOT = { exists = var:bfl_cr_11_loan } has_variable = bfl_cr_11_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_11_basis max = var:bfl_cr_11_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_11_receipt subtract = var:bfl_cr_11_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_11_receipt
+        }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_repaid = 1 NOT = { exists = var:bfl_cr_12_loan } has_variable = bfl_cr_12_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_12_basis max = var:bfl_cr_12_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_12_receipt subtract = var:bfl_cr_12_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_12_receipt
+        }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_repaid = 1 NOT = { exists = var:bfl_cr_13_loan } has_variable = bfl_cr_13_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_13_basis max = var:bfl_cr_13_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_13_receipt subtract = var:bfl_cr_13_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_13_receipt
+        }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_repaid = 1 NOT = { exists = var:bfl_cr_14_loan } has_variable = bfl_cr_14_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_14_basis max = var:bfl_cr_14_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_14_receipt subtract = var:bfl_cr_14_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_14_receipt
+        }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_repaid = 1 NOT = { exists = var:bfl_cr_15_loan } has_variable = bfl_cr_15_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_15_basis max = var:bfl_cr_15_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_15_receipt subtract = var:bfl_cr_15_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_15_receipt
+        }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_repaid = 1 NOT = { exists = var:bfl_cr_16_loan } has_variable = bfl_cr_16_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_16_basis max = var:bfl_cr_16_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_16_receipt subtract = var:bfl_cr_16_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_16_receipt
+        }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_repaid = 1 NOT = { exists = var:bfl_cr_17_loan } has_variable = bfl_cr_17_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_17_basis max = var:bfl_cr_17_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_17_receipt subtract = var:bfl_cr_17_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_17_receipt
+        }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_repaid = 1 NOT = { exists = var:bfl_cr_18_loan } has_variable = bfl_cr_18_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_18_basis max = var:bfl_cr_18_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_18_receipt subtract = var:bfl_cr_18_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_18_receipt
+        }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_repaid = 1 NOT = { exists = var:bfl_cr_19_loan } has_variable = bfl_cr_19_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_19_basis max = var:bfl_cr_19_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_19_receipt subtract = var:bfl_cr_19_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_19_receipt
+        }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_repaid = 1 NOT = { exists = var:bfl_cr_20_loan } has_variable = bfl_cr_20_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_20_basis max = var:bfl_cr_20_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_20_receipt subtract = var:bfl_cr_20_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_20_receipt
+        }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_repaid = 1 NOT = { exists = var:bfl_cr_21_loan } has_variable = bfl_cr_21_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_21_basis max = var:bfl_cr_21_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_21_receipt subtract = var:bfl_cr_21_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_21_receipt
+        }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_repaid = 1 NOT = { exists = var:bfl_cr_22_loan } has_variable = bfl_cr_22_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_22_basis max = var:bfl_cr_22_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_22_receipt subtract = var:bfl_cr_22_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_22_receipt
+        }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_repaid = 1 NOT = { exists = var:bfl_cr_23_loan } has_variable = bfl_cr_23_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_23_basis max = var:bfl_cr_23_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_23_receipt subtract = var:bfl_cr_23_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_23_receipt
+        }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_repaid = 1 NOT = { exists = var:bfl_cr_24_loan } has_variable = bfl_cr_24_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_24_basis max = var:bfl_cr_24_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_24_receipt subtract = var:bfl_cr_24_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_24_receipt
+        }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_repaid = 1 NOT = { exists = var:bfl_cr_25_loan } has_variable = bfl_cr_25_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_25_basis max = var:bfl_cr_25_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_25_receipt subtract = var:bfl_cr_25_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_25_receipt
+        }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_repaid = 1 NOT = { exists = var:bfl_cr_26_loan } has_variable = bfl_cr_26_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_26_basis max = var:bfl_cr_26_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_26_receipt subtract = var:bfl_cr_26_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_26_receipt
+        }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_repaid = 1 NOT = { exists = var:bfl_cr_27_loan } has_variable = bfl_cr_27_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_27_basis max = var:bfl_cr_27_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_27_receipt subtract = var:bfl_cr_27_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_27_receipt
+        }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_repaid = 1 NOT = { exists = var:bfl_cr_28_loan } has_variable = bfl_cr_28_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_28_basis max = var:bfl_cr_28_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_28_receipt subtract = var:bfl_cr_28_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_28_receipt
+        }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_repaid = 1 NOT = { exists = var:bfl_cr_29_loan } has_variable = bfl_cr_29_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_29_basis max = var:bfl_cr_29_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_29_receipt subtract = var:bfl_cr_29_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_29_receipt
+        }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_repaid = 1 NOT = { exists = var:bfl_cr_30_loan } has_variable = bfl_cr_30_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_30_basis max = var:bfl_cr_30_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_30_receipt subtract = var:bfl_cr_30_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_30_receipt
+        }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_repaid = 1 NOT = { exists = var:bfl_cr_31_loan } has_variable = bfl_cr_31_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_31_basis max = var:bfl_cr_31_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_31_receipt subtract = var:bfl_cr_31_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_31_receipt
+        }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_repaid = 1 NOT = { exists = var:bfl_cr_32_loan } has_variable = bfl_cr_32_receipt }
+            set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_32_basis max = var:bfl_cr_32_receipt } }
+            change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_32_receipt subtract = var:bfl_cr_32_basis } }
+            if = { limit = { var:bfl_native_gain >= 0 }
+                change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+            } else = {
+                change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+            remove_variable = bfl_cr_32_receipt
+        }
+}
+bfl_reset_restructured_receipt_basis = {
+if = { limit = { exists = scope:bfl_restructure_claim }
+if = { limit = { var:bfl_cr_01_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_01_observed_remaining value = var:bfl_cr_01_loan.remaining_debt }
+            set_variable = { name = bfl_cr_01_observed_face value = var:bfl_cr_01_loan.loan_amount }
+            set_variable = { name = bfl_cr_01_observed_rate value = var:bfl_cr_01_loan.loan_interest }
+            set_variable = { name = bfl_cr_01_observed_months value = var:bfl_cr_01_loan.months_left } }
+if = { limit = { var:bfl_cr_02_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_02_observed_remaining value = var:bfl_cr_02_loan.remaining_debt }
+            set_variable = { name = bfl_cr_02_observed_face value = var:bfl_cr_02_loan.loan_amount }
+            set_variable = { name = bfl_cr_02_observed_rate value = var:bfl_cr_02_loan.loan_interest }
+            set_variable = { name = bfl_cr_02_observed_months value = var:bfl_cr_02_loan.months_left } }
+if = { limit = { var:bfl_cr_03_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_03_observed_remaining value = var:bfl_cr_03_loan.remaining_debt }
+            set_variable = { name = bfl_cr_03_observed_face value = var:bfl_cr_03_loan.loan_amount }
+            set_variable = { name = bfl_cr_03_observed_rate value = var:bfl_cr_03_loan.loan_interest }
+            set_variable = { name = bfl_cr_03_observed_months value = var:bfl_cr_03_loan.months_left } }
+if = { limit = { var:bfl_cr_04_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_04_observed_remaining value = var:bfl_cr_04_loan.remaining_debt }
+            set_variable = { name = bfl_cr_04_observed_face value = var:bfl_cr_04_loan.loan_amount }
+            set_variable = { name = bfl_cr_04_observed_rate value = var:bfl_cr_04_loan.loan_interest }
+            set_variable = { name = bfl_cr_04_observed_months value = var:bfl_cr_04_loan.months_left } }
+if = { limit = { var:bfl_cr_05_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_05_observed_remaining value = var:bfl_cr_05_loan.remaining_debt }
+            set_variable = { name = bfl_cr_05_observed_face value = var:bfl_cr_05_loan.loan_amount }
+            set_variable = { name = bfl_cr_05_observed_rate value = var:bfl_cr_05_loan.loan_interest }
+            set_variable = { name = bfl_cr_05_observed_months value = var:bfl_cr_05_loan.months_left } }
+if = { limit = { var:bfl_cr_06_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_06_observed_remaining value = var:bfl_cr_06_loan.remaining_debt }
+            set_variable = { name = bfl_cr_06_observed_face value = var:bfl_cr_06_loan.loan_amount }
+            set_variable = { name = bfl_cr_06_observed_rate value = var:bfl_cr_06_loan.loan_interest }
+            set_variable = { name = bfl_cr_06_observed_months value = var:bfl_cr_06_loan.months_left } }
+if = { limit = { var:bfl_cr_07_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_07_observed_remaining value = var:bfl_cr_07_loan.remaining_debt }
+            set_variable = { name = bfl_cr_07_observed_face value = var:bfl_cr_07_loan.loan_amount }
+            set_variable = { name = bfl_cr_07_observed_rate value = var:bfl_cr_07_loan.loan_interest }
+            set_variable = { name = bfl_cr_07_observed_months value = var:bfl_cr_07_loan.months_left } }
+if = { limit = { var:bfl_cr_08_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_08_observed_remaining value = var:bfl_cr_08_loan.remaining_debt }
+            set_variable = { name = bfl_cr_08_observed_face value = var:bfl_cr_08_loan.loan_amount }
+            set_variable = { name = bfl_cr_08_observed_rate value = var:bfl_cr_08_loan.loan_interest }
+            set_variable = { name = bfl_cr_08_observed_months value = var:bfl_cr_08_loan.months_left } }
+if = { limit = { var:bfl_cr_09_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_09_observed_remaining value = var:bfl_cr_09_loan.remaining_debt }
+            set_variable = { name = bfl_cr_09_observed_face value = var:bfl_cr_09_loan.loan_amount }
+            set_variable = { name = bfl_cr_09_observed_rate value = var:bfl_cr_09_loan.loan_interest }
+            set_variable = { name = bfl_cr_09_observed_months value = var:bfl_cr_09_loan.months_left } }
+if = { limit = { var:bfl_cr_10_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_10_observed_remaining value = var:bfl_cr_10_loan.remaining_debt }
+            set_variable = { name = bfl_cr_10_observed_face value = var:bfl_cr_10_loan.loan_amount }
+            set_variable = { name = bfl_cr_10_observed_rate value = var:bfl_cr_10_loan.loan_interest }
+            set_variable = { name = bfl_cr_10_observed_months value = var:bfl_cr_10_loan.months_left } }
+if = { limit = { var:bfl_cr_11_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_11_observed_remaining value = var:bfl_cr_11_loan.remaining_debt }
+            set_variable = { name = bfl_cr_11_observed_face value = var:bfl_cr_11_loan.loan_amount }
+            set_variable = { name = bfl_cr_11_observed_rate value = var:bfl_cr_11_loan.loan_interest }
+            set_variable = { name = bfl_cr_11_observed_months value = var:bfl_cr_11_loan.months_left } }
+if = { limit = { var:bfl_cr_12_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_12_observed_remaining value = var:bfl_cr_12_loan.remaining_debt }
+            set_variable = { name = bfl_cr_12_observed_face value = var:bfl_cr_12_loan.loan_amount }
+            set_variable = { name = bfl_cr_12_observed_rate value = var:bfl_cr_12_loan.loan_interest }
+            set_variable = { name = bfl_cr_12_observed_months value = var:bfl_cr_12_loan.months_left } }
+if = { limit = { var:bfl_cr_13_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_13_observed_remaining value = var:bfl_cr_13_loan.remaining_debt }
+            set_variable = { name = bfl_cr_13_observed_face value = var:bfl_cr_13_loan.loan_amount }
+            set_variable = { name = bfl_cr_13_observed_rate value = var:bfl_cr_13_loan.loan_interest }
+            set_variable = { name = bfl_cr_13_observed_months value = var:bfl_cr_13_loan.months_left } }
+if = { limit = { var:bfl_cr_14_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_14_observed_remaining value = var:bfl_cr_14_loan.remaining_debt }
+            set_variable = { name = bfl_cr_14_observed_face value = var:bfl_cr_14_loan.loan_amount }
+            set_variable = { name = bfl_cr_14_observed_rate value = var:bfl_cr_14_loan.loan_interest }
+            set_variable = { name = bfl_cr_14_observed_months value = var:bfl_cr_14_loan.months_left } }
+if = { limit = { var:bfl_cr_15_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_15_observed_remaining value = var:bfl_cr_15_loan.remaining_debt }
+            set_variable = { name = bfl_cr_15_observed_face value = var:bfl_cr_15_loan.loan_amount }
+            set_variable = { name = bfl_cr_15_observed_rate value = var:bfl_cr_15_loan.loan_interest }
+            set_variable = { name = bfl_cr_15_observed_months value = var:bfl_cr_15_loan.months_left } }
+if = { limit = { var:bfl_cr_16_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_16_observed_remaining value = var:bfl_cr_16_loan.remaining_debt }
+            set_variable = { name = bfl_cr_16_observed_face value = var:bfl_cr_16_loan.loan_amount }
+            set_variable = { name = bfl_cr_16_observed_rate value = var:bfl_cr_16_loan.loan_interest }
+            set_variable = { name = bfl_cr_16_observed_months value = var:bfl_cr_16_loan.months_left } }
+if = { limit = { var:bfl_cr_17_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_17_observed_remaining value = var:bfl_cr_17_loan.remaining_debt }
+            set_variable = { name = bfl_cr_17_observed_face value = var:bfl_cr_17_loan.loan_amount }
+            set_variable = { name = bfl_cr_17_observed_rate value = var:bfl_cr_17_loan.loan_interest }
+            set_variable = { name = bfl_cr_17_observed_months value = var:bfl_cr_17_loan.months_left } }
+if = { limit = { var:bfl_cr_18_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_18_observed_remaining value = var:bfl_cr_18_loan.remaining_debt }
+            set_variable = { name = bfl_cr_18_observed_face value = var:bfl_cr_18_loan.loan_amount }
+            set_variable = { name = bfl_cr_18_observed_rate value = var:bfl_cr_18_loan.loan_interest }
+            set_variable = { name = bfl_cr_18_observed_months value = var:bfl_cr_18_loan.months_left } }
+if = { limit = { var:bfl_cr_19_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_19_observed_remaining value = var:bfl_cr_19_loan.remaining_debt }
+            set_variable = { name = bfl_cr_19_observed_face value = var:bfl_cr_19_loan.loan_amount }
+            set_variable = { name = bfl_cr_19_observed_rate value = var:bfl_cr_19_loan.loan_interest }
+            set_variable = { name = bfl_cr_19_observed_months value = var:bfl_cr_19_loan.months_left } }
+if = { limit = { var:bfl_cr_20_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_20_observed_remaining value = var:bfl_cr_20_loan.remaining_debt }
+            set_variable = { name = bfl_cr_20_observed_face value = var:bfl_cr_20_loan.loan_amount }
+            set_variable = { name = bfl_cr_20_observed_rate value = var:bfl_cr_20_loan.loan_interest }
+            set_variable = { name = bfl_cr_20_observed_months value = var:bfl_cr_20_loan.months_left } }
+if = { limit = { var:bfl_cr_21_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_21_observed_remaining value = var:bfl_cr_21_loan.remaining_debt }
+            set_variable = { name = bfl_cr_21_observed_face value = var:bfl_cr_21_loan.loan_amount }
+            set_variable = { name = bfl_cr_21_observed_rate value = var:bfl_cr_21_loan.loan_interest }
+            set_variable = { name = bfl_cr_21_observed_months value = var:bfl_cr_21_loan.months_left } }
+if = { limit = { var:bfl_cr_22_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_22_observed_remaining value = var:bfl_cr_22_loan.remaining_debt }
+            set_variable = { name = bfl_cr_22_observed_face value = var:bfl_cr_22_loan.loan_amount }
+            set_variable = { name = bfl_cr_22_observed_rate value = var:bfl_cr_22_loan.loan_interest }
+            set_variable = { name = bfl_cr_22_observed_months value = var:bfl_cr_22_loan.months_left } }
+if = { limit = { var:bfl_cr_23_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_23_observed_remaining value = var:bfl_cr_23_loan.remaining_debt }
+            set_variable = { name = bfl_cr_23_observed_face value = var:bfl_cr_23_loan.loan_amount }
+            set_variable = { name = bfl_cr_23_observed_rate value = var:bfl_cr_23_loan.loan_interest }
+            set_variable = { name = bfl_cr_23_observed_months value = var:bfl_cr_23_loan.months_left } }
+if = { limit = { var:bfl_cr_24_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_24_observed_remaining value = var:bfl_cr_24_loan.remaining_debt }
+            set_variable = { name = bfl_cr_24_observed_face value = var:bfl_cr_24_loan.loan_amount }
+            set_variable = { name = bfl_cr_24_observed_rate value = var:bfl_cr_24_loan.loan_interest }
+            set_variable = { name = bfl_cr_24_observed_months value = var:bfl_cr_24_loan.months_left } }
+if = { limit = { var:bfl_cr_25_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_25_observed_remaining value = var:bfl_cr_25_loan.remaining_debt }
+            set_variable = { name = bfl_cr_25_observed_face value = var:bfl_cr_25_loan.loan_amount }
+            set_variable = { name = bfl_cr_25_observed_rate value = var:bfl_cr_25_loan.loan_interest }
+            set_variable = { name = bfl_cr_25_observed_months value = var:bfl_cr_25_loan.months_left } }
+if = { limit = { var:bfl_cr_26_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_26_observed_remaining value = var:bfl_cr_26_loan.remaining_debt }
+            set_variable = { name = bfl_cr_26_observed_face value = var:bfl_cr_26_loan.loan_amount }
+            set_variable = { name = bfl_cr_26_observed_rate value = var:bfl_cr_26_loan.loan_interest }
+            set_variable = { name = bfl_cr_26_observed_months value = var:bfl_cr_26_loan.months_left } }
+if = { limit = { var:bfl_cr_27_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_27_observed_remaining value = var:bfl_cr_27_loan.remaining_debt }
+            set_variable = { name = bfl_cr_27_observed_face value = var:bfl_cr_27_loan.loan_amount }
+            set_variable = { name = bfl_cr_27_observed_rate value = var:bfl_cr_27_loan.loan_interest }
+            set_variable = { name = bfl_cr_27_observed_months value = var:bfl_cr_27_loan.months_left } }
+if = { limit = { var:bfl_cr_28_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_28_observed_remaining value = var:bfl_cr_28_loan.remaining_debt }
+            set_variable = { name = bfl_cr_28_observed_face value = var:bfl_cr_28_loan.loan_amount }
+            set_variable = { name = bfl_cr_28_observed_rate value = var:bfl_cr_28_loan.loan_interest }
+            set_variable = { name = bfl_cr_28_observed_months value = var:bfl_cr_28_loan.months_left } }
+if = { limit = { var:bfl_cr_29_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_29_observed_remaining value = var:bfl_cr_29_loan.remaining_debt }
+            set_variable = { name = bfl_cr_29_observed_face value = var:bfl_cr_29_loan.loan_amount }
+            set_variable = { name = bfl_cr_29_observed_rate value = var:bfl_cr_29_loan.loan_interest }
+            set_variable = { name = bfl_cr_29_observed_months value = var:bfl_cr_29_loan.months_left } }
+if = { limit = { var:bfl_cr_30_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_30_observed_remaining value = var:bfl_cr_30_loan.remaining_debt }
+            set_variable = { name = bfl_cr_30_observed_face value = var:bfl_cr_30_loan.loan_amount }
+            set_variable = { name = bfl_cr_30_observed_rate value = var:bfl_cr_30_loan.loan_interest }
+            set_variable = { name = bfl_cr_30_observed_months value = var:bfl_cr_30_loan.months_left } }
+if = { limit = { var:bfl_cr_31_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_31_observed_remaining value = var:bfl_cr_31_loan.remaining_debt }
+            set_variable = { name = bfl_cr_31_observed_face value = var:bfl_cr_31_loan.loan_amount }
+            set_variable = { name = bfl_cr_31_observed_rate value = var:bfl_cr_31_loan.loan_interest }
+            set_variable = { name = bfl_cr_31_observed_months value = var:bfl_cr_31_loan.months_left } }
+if = { limit = { var:bfl_cr_32_loan ?= scope:bfl_restructure_claim }
+            set_variable = { name = bfl_cr_32_observed_remaining value = var:bfl_cr_32_loan.remaining_debt }
+            set_variable = { name = bfl_cr_32_observed_face value = var:bfl_cr_32_loan.loan_amount }
+            set_variable = { name = bfl_cr_32_observed_rate value = var:bfl_cr_32_loan.loan_interest }
+            set_variable = { name = bfl_cr_32_observed_months value = var:bfl_cr_32_loan.months_left } }
+}
+}

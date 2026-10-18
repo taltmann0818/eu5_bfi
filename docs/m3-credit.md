@@ -41,7 +41,7 @@ at conservative principal value without new cash or earnings.
 Native payoff callbacks precede the wallet transfer. They mark settlement without
 minting a second receipt or guessing interest from a treasury change. The native
 budget bridge retains native interest accounting; detailed per-activity receipt
-attribution remains M4. Native bankruptcy removes a claim without lender recovery,
+attribution was deferred to M4 and is now [verified there](m4-treasury.md). Native bankruptcy removes a claim without lender recovery,
 so its remaining basis is impaired once. Missing or externally removed claims
 receive conservative losses; full recovery and inheritance workouts remain M9.
 
@@ -91,6 +91,7 @@ accounts runner's natural-exit race and completion of that same run's reload.
 are excluded from completion evidence. Full logs, licensed saves and native setup
 files remain in ignored disposable directories. Queued CI jobs are not passes.
 
-Detailed native receipt attribution remains M4, secondary equity markets M5, full
+M4 now verifies detailed native receipt attribution and the treasury/deposit loop.
+Secondary equity markets remain M5, full
 custom-bond renegotiation/recovery and inheritance workouts M9, and the broad
 player-role, language, scale, AI, performance and debt-led balance matrix M10.
