@@ -135,10 +135,14 @@ def generate(common, effect, loc, write):
     common('scripted_effects', 'equity_market', services)
 
     actions = ''
+    visibility_triggers = ''
     for side in ('buy', 'sell'):
         visible = '''bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
             NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank }
             OR = { bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }''' if side == 'buy' else 'bfl_equity_issuer = yes bfl_market_sell_units > 0'
+        visibility_triggers += effect(f'bfl_market_{side}_visible', f'''trigger_if = {{ limit = {{ has_variable = bfl_ownership_schema }} {visible} }}
+            trigger_else = {{ always = no }}''')
+        visible = f'bfl_market_{side}_visible = yes'
         maximum = 'scope:security.bfl_market_buy_max' if side == 'buy' else 'scope:security.bfl_market_sell_units'
         actions += f'''bfl_{side}_shares = {{ type = owncountry ai_tick = never show_message = no
             potential = {{ scope:actor = {{ bfl_has_management = yes }} }}
@@ -153,13 +157,16 @@ def generate(common, effect, loc, write):
             effect = {{ scope:actor = {{ trigger_event_silently = bfl_market.{11 if side == 'buy' else 12} }} }}
             ai_will_do = {{ value = 0 }} }}\n'''
     common('generic_actions', 'share_market', actions)
+    common('scripted_triggers', 'equity_market_visibility', visibility_triggers)
     common('generic_actions','capital_subscription', '''bfl_new_capital_subscription = { type = owncountry ai_tick = never show_message = no
         potential = { scope:actor = { bfl_has_management = yes } }
         allow = { scope:actor = { num_of_diplomats >= 1 } }
         select_trigger = { looking_for_a = country target_flag = security name = bfl_new_capital_subscription
             column = { data = bfl_equity_market }
-            visible = { bfl_equity_issuer = yes var:bfl_accept_equity = 1 bfl_tangible_equity > 0
+            visible = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
+                bfl_equity_issuer = yes var:bfl_accept_equity = 1 bfl_tangible_equity > 0
                 NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank } }
+                trigger_else = { always = no } }
             enabled = { NOT = { has_cooldown = bfl_share_trade } } }
         effect = { scope:actor = { trigger_event_silently = bfl_market.15 } }
         ai_will_do = { value = 0 }
@@ -168,8 +175,12 @@ def generate(common, effect, loc, write):
         potential = { } allow = { }
         select_trigger = { looking_for_a = country target_flag = security name = bfl_manage_shareholdings
             column = { data = bfl_equity_market } allow_self = yes
-            visible = { has_variable = bfl_ownership_schema OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
-            enabled = { bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 } } }
+            visible = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
+                OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
+                trigger_else = { always = no } }
+            enabled = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
+                bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 } }
+                trigger_else = { always = no } } }
         effect = { scope:actor = { set_variable = { name = bfl_exchange_selected value = scope:security }
             trigger_event_non_silently = bfl_market.6 } } ai_will_do = { value = 0 }
     }''')

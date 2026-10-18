@@ -31,7 +31,7 @@ def generate(common, effect, loc, write):
     ''')
     values += effect('bfl_equity_concentration_limit','value = 0.25 if = { limit = { bfl_is_company = yes } value = 0.60 }')
     values += effect('bfl_dealer_units', 'value = 0 if = { limit = { has_variable = bfl_dealer_units } value = var:bfl_dealer_units }')
-    values += effect('bfl_registered_units','value = var:bfl_state_units add = var:bfl_founder_units add = bfl_dealer_units\n'+'\n'.join(f'if = {{ limit = {{ var:{s(i)}_active = 1 }} add = var:{s(i)}_units }}' for i in HOLDERS))
+    values += effect('bfl_registered_units','value = 0 if = { limit = { has_variable = bfl_ownership_schema }\nvalue = var:bfl_state_units add = var:bfl_founder_units add = bfl_dealer_units\n'+'\n'.join(f'if = {{ limit = {{ var:{s(i)}_active = 1 }} add = var:{s(i)}_units }}' for i in HOLDERS)+'\n}')
     owned = 'value = 0\n'
     basis = 'value = 0\n'
     for i in HOLDERS:
@@ -202,7 +202,9 @@ def generate(common, effect, loc, write):
         debit += f'''if = {{ limit = {{ var:bfl_equity_pool = {pool} }} scope:bfl_party = {{ "estate(estate_type:{estate})" = {{ estate_add_gold = {{ value = -100 }} }} }} }}\n'''
     wallet += ' }'
     triggers += effect('bfl_equity_wallet_funded', wallet)
-    triggers += effect('bfl_equity_issuer', 'OR = { bfl_is_bank = yes bfl_is_company = yes } has_variable = bfl_ownership_schema bfl_registered_units = var:bfl_total_units')
+    triggers += effect('bfl_equity_issuer', '''trigger_if = { limit = { has_variable = bfl_ownership_schema }
+        OR = { bfl_is_bank = yes bfl_is_company = yes } bfl_registered_units = var:bfl_total_units }
+        trigger_else = { always = no }''')
     triggers += effect('bfl_company_equity_eligible','bfl_is_company = yes var:bfl_company_schema = 2 any_owned_building = { building_type = building_type:trade_company_headquarters }')
     external_majority='OR = { '+' '.join(f'AND = {{ var:{s(i)}_active = 1 var:{s(i)}_pool = 0 var:{s(i)}_units > {{ value = var:bfl_total_units multiply = 0.5 }} exists = var:{s(i)}_party country_exists = var:{s(i)}_party }}' for i in HOLDERS)+' }'
     triggers += effect('bfl_independent_board_authority',f'bfl_is_independent_bank = yes NOT = {{ {external_majority} }}')

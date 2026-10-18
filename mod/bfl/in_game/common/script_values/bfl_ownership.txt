@@ -18,6 +18,7 @@ bfl_dealer_units = {
 value = 0 if = { limit = { has_variable = bfl_dealer_units } value = var:bfl_dealer_units }
 }
 bfl_registered_units = {
+value = 0 if = { limit = { has_variable = bfl_ownership_schema }
 value = var:bfl_state_units add = var:bfl_founder_units add = bfl_dealer_units
 if = { limit = { var:bfl_shr_01_active = 1 } add = var:bfl_shr_01_units }
 if = { limit = { var:bfl_shr_02_active = 1 } add = var:bfl_shr_02_units }
@@ -35,6 +36,7 @@ if = { limit = { var:bfl_shr_13_active = 1 } add = var:bfl_shr_13_units }
 if = { limit = { var:bfl_shr_14_active = 1 } add = var:bfl_shr_14_units }
 if = { limit = { var:bfl_shr_15_active = 1 } add = var:bfl_shr_15_units }
 if = { limit = { var:bfl_shr_16_active = 1 } add = var:bfl_shr_16_units }
+}
 }
 bfl_equity_buyer_units = {
 value = 0

@@ -11,7 +11,9 @@ AND = { var:bfl_equity_pool = 5 scope:bfl_party = { "estate(estate_type:burghers
  }
 }
 bfl_equity_issuer = {
-OR = { bfl_is_bank = yes bfl_is_company = yes } has_variable = bfl_ownership_schema bfl_registered_units = var:bfl_total_units
+trigger_if = { limit = { has_variable = bfl_ownership_schema }
+        OR = { bfl_is_bank = yes bfl_is_company = yes } bfl_registered_units = var:bfl_total_units }
+        trigger_else = { always = no }
 }
 bfl_company_equity_eligible = {
 bfl_is_company = yes var:bfl_company_schema = 2 any_owned_building = { building_type = building_type:trade_company_headquarters }

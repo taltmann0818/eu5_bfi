@@ -30,6 +30,9 @@ def fixture(token, fingerprint):
             bfl_market_{side}_shares = yes
         }}\n'''
     setup=f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\nc:FLO = {{ bfi_m5_ui_setup = yes }}\n'
+    setup+='c:FLO = { save_scope_as = actor }\n'
+    setup+=check('share_picker_rejects_uninitialized_countries_without_ledger_reads',
+        'c:GEN = { NOT = { has_variable = bfl_ownership_schema } bfl_equity_issuer = no bfl_registered_units = 0 bfl_market_buy_visible = no bfl_market_sell_visible = no }')
     setup+='''every_country = { limit = { bfl_has_management = yes } set_variable = { name = bfl_ai_equity_enabled value = 0 } }
         c:FLO = { add_diplomats = 10 set_variable = { name = bfl_market_revision value = 0 }
             set_variable = { name = bfi_cycle_start_period value = bfl_period } }

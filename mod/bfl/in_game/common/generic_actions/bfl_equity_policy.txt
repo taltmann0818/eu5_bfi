@@ -2,8 +2,12 @@
         potential = { } allow = { }
         select_trigger = { looking_for_a = country target_flag = security name = bfl_manage_shareholdings
             column = { data = bfl_equity_market } allow_self = yes
-            visible = { has_variable = bfl_ownership_schema OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
-            enabled = { bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 } } }
+            visible = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
+                OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
+                trigger_else = { always = no } }
+            enabled = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
+                bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 } }
+                trigger_else = { always = no } } }
         effect = { scope:actor = { set_variable = { name = bfl_exchange_selected value = scope:security }
             trigger_event_non_silently = bfl_market.6 } } ai_will_do = { value = 0 }
     }
