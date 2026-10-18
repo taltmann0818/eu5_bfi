@@ -282,6 +282,7 @@
  bfl_buy_sovereign_bond: "Buy an offered sovereign bond"
  bfl_buy_sovereign_bond_desc: "Buy an existing sovereign bond from its current holder. Requires an owned completed Stock Exchange building."
  bfl_buy_sovereign_bond_tip: "Select the issuer of an open offering. Payment goes to the existing holder; the issuer receives no new proceeds. The whole claim changes hands with its fixed annual coupon and principal intact."
+ bfl_buy_state_confirm_desc: "Buy back [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] existing shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] from market-maker inventory for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid from your country treasury. These shares return to your treasury stake. The bank receives no financing and issued shares do not change. Available dealer stock, current NAV, live charter authority and treasury cash are checked again. Settlement consumes one diplomat and starts this bank’s one-month buy/sell cooldown."
  bfl_cancel: "Cancel"
  bfl_cancel_selected_bond_offer: "Cancel listing"
  bfl_cancel_selected_bond_offer_tip: "Withdraw an offering owned by you or your live chartered bank. The debt and coupon remain unchanged."

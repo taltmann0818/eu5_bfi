@@ -94,6 +94,46 @@ def fixture(token, fingerprint):
             bfl_market_subscribe_capital = yes }
 '''
     setup+=check('explicit_capital_subscription_alone_issues_paid_shares','c:BRD = { gold = 4816 var:bfl_pos_01_units = 84.333 } c:PRZ = { gold = 1540 var:bfl_total_units = 1283.333 bfl_registered_units = 1283.333 has_cooldown = bfl_share_trade } c:FLO = { var:bfl_market_result = 1 }')
+    # Own-charter repurchases restore the state wallet, never a self-investment
+    # in the bank's portfolio. Clear cooldowns only to isolate book arithmetic.
+    setup+='c:FLO = { save_scope_as = actor set_variable = { name = bfi_buyback_cash value = gold } set_variable = { name = bfi_buyback_diplomats value = num_of_diplomats } }\n'
+    setup+=check('dealer_charter_inventory_is_visible_and_not_concentration_capped',
+        'c:BRD = { bfl_market_charter_buyback = yes bfl_market_buy_visible = yes bfl_market_buy_max = 100 }')
+    setup+=trade('buy',issuer='BRD',quantity='40',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1)
+    setup+=check('charter_buyback_obeys_existing_sell_cooldown',
+        'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_buyback_cash num_of_diplomats = var:bfi_buyback_diplomats } c:BRD = { var:bfl_state_units = 4900 var:bfl_dealer_units = 100 }')
+    setup+=trade('buy',issuer='BRD',quantity='101',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1,clear=True)
+    setup+=check('charter_buyback_cannot_exceed_remaining_dealer_stock',
+        'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_buyback_cash } c:BRD = { var:bfl_state_units = 4900 var:bfl_dealer_units = 100 }')
+    setup+='c:FLO = { set_gold = 0 }\n'
+    setup+=trade('buy',issuer='BRD',quantity='40',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1)
+    setup+=check('charter_buyback_requires_actual_treasury_cash',
+        'c:FLO = { var:bfl_market_result = 0 gold = 0 } c:BRD = { gold = 4816 var:bfl_state_units = 4900 var:bfl_dealer_units = 100 }')
+    setup+='c:FLO = { set_gold = var:bfi_buyback_cash } c:BRD = { set_variable = { name = bfl_state_owner value = c:GEN } }\n'
+    setup+=trade('buy',issuer='BRD',quantity='40',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1)
+    setup+=check('charter_buyback_rechecks_recorded_owner',
+        'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_buyback_cash } c:BRD = { var:bfl_state_units = 4900 var:bfl_dealer_units = 100 }')
+    setup+='c:BRD = { set_variable = { name = bfl_state_owner value = c:FLO } } c:FLO = { set_variable = { name = bfi_buyback_diplomats value = num_of_diplomats } }\n'
+    setup+=trade('buy',issuer='BRD',quantity='40',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1)
+    setup+=check('partial_charter_buyback_pays_treasury_and_restores_state_units',
+        'c:FLO = { var:bfl_market_result = 1 gold = { value = var:bfi_buyback_cash subtract = var:bfl_market_total } num_of_diplomats = { value = var:bfi_buyback_diplomats subtract = 1 } } c:BRD = { gold = 4816 var:bfl_state_units = 4940 var:bfl_dealer_units = 60 var:bfl_state_basis = { value = 4900 add = c:FLO.var:bfl_market_total } var:bfl_total_units = 5000 bfl_registered_units = 5000 var:bfl_pos_01_units = 84.333 has_cooldown = bfl_share_trade overlord = c:FLO }')
+    setup+='c:FLO = { set_variable = { name = bfi_buyback_cash value = gold } set_variable = { name = bfi_buyback_diplomats value = num_of_diplomats } bfl_market_buy_shares = yes }\n'
+    setup+=check('charter_buyback_replay_costs_no_cash_or_diplomat',
+        'c:FLO = { gold = var:bfi_buyback_cash num_of_diplomats = var:bfi_buyback_diplomats } c:BRD = { var:bfl_state_units = 4940 var:bfl_dealer_units = 60 }')
+    setup+=trade('buy',issuer='BRD',quantity='60',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1,clear=True)
+    setup+=check('complete_charter_buyback_exhausts_inventory_without_issuance',
+        'c:BRD = { gold = 4816 var:bfl_state_units = 5000 var:bfl_dealer_units = 0 var:bfl_dealer_basis = 0 var:bfl_total_units = 5000 bfl_registered_units = 5000 bfl_market_buy_visible = no }')
+    setup+=trade('sell',issuer='BRD',quantity='5000',price='c:BRD.bfl_equity_quote',wallet=1,clear=True)
+    setup+=check('fully_sold_charter_stake_remains_eligible_for_dealer_buyback',
+        'c:BRD = { var:bfl_state_units = 0 var:bfl_state_basis = 0 var:bfl_dealer_units = 5000 bfl_market_charter_buyback = yes bfl_market_buy_visible = yes bfl_market_buy_max = 5000 }')
+    setup+=trade('buy',issuer='BRD',quantity='5000',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1,clear=True)
+    setup+=check('treasury_can_recover_entire_charter_stake',
+        'c:BRD = { gold = 4816 var:bfl_state_units = 5000 var:bfl_dealer_units = 0 var:bfl_dealer_basis = 0 var:bfl_total_units = 5000 bfl_registered_units = 5000 var:bfl_pos_01_units = 84.333 overlord = c:FLO }')
+    setup+=trade('buy',issuer='BRD',quantity='1',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1,clear=True)
+    setup+=check('exhausted_charter_inventory_rejects_further_buybacks',
+        'c:FLO = { var:bfl_market_result = 0 } c:BRD = { var:bfl_state_units = 5000 var:bfl_dealer_units = 0 var:bfl_total_units = 5000 }')
+    setup+=trade('sell',issuer='BRD',quantity='100',price='c:BRD.bfl_equity_quote',wallet=1,clear=True)
+    setup+='c:BRD = { set_variable = { name = bfi_saved_state_basis value = var:bfl_state_basis } }\n'
     setup+='c:FLO = { trigger_event_silently = { id = bfi_market_cooldown.1 days = 28 } trigger_event_silently = { id = bfi_market_cooldown.2 days = 32 } }\n'
     setup+='''c:ACC = { set_gold = 10000 research_advance = advance_type:stock_exchange_advance
         set_variable = { name = bfl_ai_equity_enabled value = 1 }
@@ -130,7 +170,7 @@ def fixture(token, fingerprint):
 
 def reload_fixture(token, fingerprint):
     key='dealer_units_and_completed_buildings_survive_reload'
-    condition='c:BRD = { var:bfl_pos_01_units = 84.333 var:bfl_state_units = 4900 var:bfl_dealer_units = 100 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes } c:ACC = { bfl_owns_stock_exchange = yes }'
+    condition='c:BRD = { var:bfl_pos_01_units = 84.333 var:bfl_state_units = 4900 var:bfl_state_basis = var:bfi_saved_state_basis var:bfl_dealer_units = 100 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes } c:ACC = { bfl_owns_stock_exchange = yes }'
     return f'''debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"
         if = {{ limit = {{ {condition} }} debug_log = "BFI_TEST|{token}|PASS|{key}" }} else = {{ debug_log = "BFI_TEST|{token}|FAIL|{key}" }}
         debug_log = "BFI_TEST|{token}|RELOAD_END|{fingerprint}"''',[key]

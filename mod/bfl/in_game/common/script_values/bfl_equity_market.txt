@@ -73,12 +73,15 @@ value = bfl_market_owned_units if = { limit = { bfl_market_state_owned_units > 0
 }
 bfl_market_buy_price = {
 value = bfl_equity_quote
-        if = { limit = { var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
+        if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
             value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units }
 }
 bfl_market_buy_max = {
 value = 0
-        if = { limit = { bfl_market_buy_price > 0 }
+        if = { limit = { bfl_market_charter_buyback = yes bfl_equity_quote > 0 }
+            value = scope:actor.gold divide = bfl_equity_quote max = bfl_dealer_units
+            min = 0 multiply = 1000 floor = yes divide = 1000 }
+        else_if = { limit = { bfl_market_buy_price > 0 }
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
             divide = bfl_market_buy_price
             max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }

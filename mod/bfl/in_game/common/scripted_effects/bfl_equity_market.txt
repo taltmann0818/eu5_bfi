@@ -1,5 +1,5 @@
 ﻿bfl_market_buy_shares = {
-save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
+save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor save_scope_as = actor
         set_variable = { name = bfl_market_result value = 0 }
         if = { limit = { bfl_market_trade_ready = yes
             exists = var:bfl_market_issuer var:bfl_market_quantity > 0
@@ -9,7 +9,9 @@ save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
             var:bfl_market_issuer = { save_scope_as = bfl_issuer set_variable = { name = bfl_equity_pool value = 0 }
                 set_variable = { name = bfl_market_units value = scope:bfl_market_actor.var:bfl_market_quantity }
                 set_variable = { name = bfl_market_price value = scope:bfl_market_actor.var:bfl_market_total }
-                if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 1
+                if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet ?= 1 }
+                    bfl_buy_charter_dealer_inventory = yes }
+                else_if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 1
                     var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry
                     var:bfl_equity_offer_revision = scope:bfl_market_actor.var:bfl_market_offer_revision
                     var:bfl_equity_offer_units >= var:bfl_market_units
@@ -87,6 +89,36 @@ if = { limit = { NOT = { has_variable = bfl_dealer_sales } }
         set_variable = { name = bfl_dealer_sales value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_dealer_resales } }
         set_variable = { name = bfl_dealer_resales value = 0 } }
+}
+bfl_buy_charter_dealer_inventory = {
+if = { limit = {
+        bfl_market_charter_buyback = yes bfl_equity_issuer = yes var:bfl_equity_listed = 1
+        scope:bfl_market_actor.var:bfl_market_secondary = 2 NOT = { has_variable = bfl_operation_guard }
+        var:bfl_market_units > 0 var:bfl_market_price >= 0.01 bfl_dealer_units >= var:bfl_market_units
+        bfl_equity_quote = scope:bfl_market_actor.var:bfl_market_unit_price
+        scope:bfl_market_actor = { gold >= scope:bfl_issuer.var:bfl_market_price }
+    }
+        set_variable = bfl_operation_guard
+        set_variable = { name = bfl_dealer_released_basis value = { value = var:bfl_dealer_basis
+            multiply = var:bfl_market_units divide = var:bfl_dealer_units } }
+        if = { limit = { var:bfl_market_units = var:bfl_dealer_units }
+            set_variable = { name = bfl_dealer_released_basis value = var:bfl_dealer_basis } }
+        change_variable = { name = bfl_dealer_units subtract = var:bfl_market_units }
+        change_variable = { name = bfl_dealer_basis subtract = var:bfl_dealer_released_basis }
+        change_variable = { name = bfl_dealer_cash add = var:bfl_market_price }
+        change_variable = { name = bfl_dealer_realized add = { value = var:bfl_market_price subtract = var:bfl_dealer_released_basis } }
+        change_variable = { name = bfl_dealer_resales add = 1 }
+        change_variable = { name = bfl_state_units add = var:bfl_market_units }
+        change_variable = { name = bfl_state_basis add = var:bfl_market_price }
+        scope:bfl_market_actor = { add_gold = { value = scope:bfl_issuer.var:bfl_market_price multiply = -1 }
+            set_variable = { name = bfl_market_result value = 1 } }
+        set_variable = { name = bfl_equity_last_price value = scope:bfl_market_actor.var:bfl_market_unit_price }
+        set_variable = { name = bfl_equity_last_volume value = var:bfl_market_units }
+        change_variable = { name = bfl_equity_pending_volume add = var:bfl_market_units }
+        set_variable = { name = bfl_equity_last_trade value = bfl_period }
+        change_variable = { name = bfl_equity_trades add = 1 }
+        remove_variable = bfl_operation_guard
+    }
 }
 bfl_buy_dealer_inventory = {
 if = { limit = {

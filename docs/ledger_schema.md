@@ -85,3 +85,11 @@ recorded state's native treasury. `bfl_treasury_equity_realized` records its
 realized result outside bank earnings. Wallet 0 is the managed bank's indexed
 portfolio; its sales pay bank cash and release position basis. Neither path
 changes issued units, political control or reserved charter authority.
+
+A dealer buyback of the managed charter also uses wallet 1. It debits the
+sovereign's native gold, adds existing units and the actual purchase price to
+`bfl_state_units` / `bfl_state_basis`, and releases proportional dealer units and
+basis (the entire remaining basis on a complete fill). The country must remain
+both the recorded state owner and the live charter controller. No bank portfolio
+slot is allocated, and bank cash and issued units stay unchanged. Zero remaining
+state units do not erase the recorded owner's eligibility to recover dealer stock.

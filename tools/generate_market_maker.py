@@ -10,6 +10,34 @@ def generate(effect):
     initialize = '\n'.join(f'''if = {{ limit = {{ NOT = {{ has_variable = bfl_dealer_{field} }} }}
         set_variable = {{ name = bfl_dealer_{field} value = 0 }} }}''' for field in ('units', 'basis', 'cash', 'realized', 'dividends', 'sales', 'resales'))
     services = effect('bfl_initialize_market_maker', initialize)
+    services += effect('bfl_buy_charter_dealer_inventory', '''if = { limit = {
+        bfl_market_charter_buyback = yes bfl_equity_issuer = yes var:bfl_equity_listed = 1
+        scope:bfl_market_actor.var:bfl_market_secondary = 2 NOT = { has_variable = bfl_operation_guard }
+        var:bfl_market_units > 0 var:bfl_market_price >= 0.01 bfl_dealer_units >= var:bfl_market_units
+        bfl_equity_quote = scope:bfl_market_actor.var:bfl_market_unit_price
+        scope:bfl_market_actor = { gold >= scope:bfl_issuer.var:bfl_market_price }
+    }
+        set_variable = bfl_operation_guard
+        set_variable = { name = bfl_dealer_released_basis value = { value = var:bfl_dealer_basis
+            multiply = var:bfl_market_units divide = var:bfl_dealer_units } }
+        if = { limit = { var:bfl_market_units = var:bfl_dealer_units }
+            set_variable = { name = bfl_dealer_released_basis value = var:bfl_dealer_basis } }
+        change_variable = { name = bfl_dealer_units subtract = var:bfl_market_units }
+        change_variable = { name = bfl_dealer_basis subtract = var:bfl_dealer_released_basis }
+        change_variable = { name = bfl_dealer_cash add = var:bfl_market_price }
+        change_variable = { name = bfl_dealer_realized add = { value = var:bfl_market_price subtract = var:bfl_dealer_released_basis } }
+        change_variable = { name = bfl_dealer_resales add = 1 }
+        change_variable = { name = bfl_state_units add = var:bfl_market_units }
+        change_variable = { name = bfl_state_basis add = var:bfl_market_price }
+        scope:bfl_market_actor = { add_gold = { value = scope:bfl_issuer.var:bfl_market_price multiply = -1 }
+            set_variable = { name = bfl_market_result value = 1 } }
+        set_variable = { name = bfl_equity_last_price value = scope:bfl_market_actor.var:bfl_market_unit_price }
+        set_variable = { name = bfl_equity_last_volume value = var:bfl_market_units }
+        change_variable = { name = bfl_equity_pending_volume add = var:bfl_market_units }
+        set_variable = { name = bfl_equity_last_trade value = bfl_period }
+        change_variable = { name = bfl_equity_trades add = 1 }
+        remove_variable = bfl_operation_guard
+    }''')
     services += effect('bfl_buy_dealer_inventory', '''if = { limit = {
         bfl_equity_issuer = yes var:bfl_equity_listed = 1 NOT = { has_variable = bfl_operation_guard }
         var:bfl_market_units > 0 var:bfl_market_price >= 0.01 var:bfl_dealer_units >= var:bfl_market_units

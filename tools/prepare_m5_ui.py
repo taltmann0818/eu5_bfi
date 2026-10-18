@@ -8,7 +8,7 @@ from pathlib import Path
 from campaign_suite import ROOT, prepare as base_prepare, runtime_hash, write_script
 
 
-def prepare(directory,locked=False,companies=False):
+def prepare(directory,locked=False,companies=False,charter_inventory=False):
     directory=Path(directory).resolve()
     prior=base_prepare(directory)
     overlay=directory/'mod/bfi_campaign_checks'
@@ -69,6 +69,21 @@ def prepare(directory,locked=False,companies=False):
         }
     } }
     '''
+    if charter_inventory:
+        setup+='''
+bfi_m5_ui_seed_dealer = { if = { limit = { NOT = { has_variable = bfi_ui_dealer_seeded } }
+    set_variable = bfi_ui_dealer_seeded
+    set_variable = { name = bfl_market_revision value = 1 }
+    save_scope_value_as = { name = bfl_market_confirmation value = 1 }
+    set_variable = { name = bfl_market_expiry value = { value = bfl_period add = 1 } }
+    set_variable = { name = bfl_market_issuer value = c:BRD }
+    set_variable = { name = bfl_market_wallet value = 1 }
+    set_variable = { name = bfl_market_quantity value = 2500 }
+    set_variable = { name = bfl_market_unit_price value = c:BRD.bfl_equity_quote }
+    set_variable = { name = bfl_market_total value = bfl_market_sell_total }
+    bfl_market_sell_shares = yes
+} }
+'''
     company_hook=''
     if companies:
         setup=setup.replace('        c:FLO = { bfl_offer_sovereign_bond = yes', '''        c:FLO = { research_advance = advance_type:trade_companies_advance research_advance = advance_type:bfl_company_equity
@@ -115,14 +130,14 @@ bfi_m5_ui_company_setup = { if = { limit = { tag = FLO NOT = { has_variable = bf
     write_script(overlay/'in_game/common/scripted_effects/bfi_campaign_checks.txt',setup)
     write_script(overlay/'in_game/common/on_action/zz_bfi_campaign_checks.txt','''on_game_started_after_lobby = { on_actions = { bfi_m5_ui_start } }
         bfi_m5_ui_start = { effect = { c:FLO = { bfi_m5_ui_setup = yes } } }
-    ''')
+    '''.replace('bfi_m5_ui_setup = yes', 'bfi_m5_ui_setup = yes bfi_m5_ui_seed_dealer = yes' if charter_inventory else 'bfi_m5_ui_setup = yes'))
     if company_hook:
         hooks=overlay/'in_game/common/on_action/zz_bfi_campaign_checks.txt'
         write_script(hooks,hooks.read_text(encoding='utf-8-sig')+'\n'+company_hook)
     digest=hashlib.sha256()
     for path in sorted(overlay.rglob('*')):
         if path.is_file():digest.update(path.relative_to(overlay).as_posix().encode()+b'\0'+path.read_bytes())
-    manifest=dict(token=prior['token'],runtime_sha256=runtime_hash(),fixture_sha256=digest.hexdigest(),suite='M5 exchange UI',locked=locked,companies=companies,
+    manifest=dict(token=prior['token'],runtime_sha256=runtime_hash(),fixture_sha256=digest.hexdigest(),suite='M5 exchange UI',locked=locked,companies=companies,charter_inventory=charter_inventory,
         scope='Disposable Florence. Granted Reformation, charter, research, completed buildings, wallets and staged NAV. Real funded primary bank subscriptions, equity sell order and custom bond offer. UI acceptance and natural campaign acceptance are separate.')
     (directory/'bfi_campaign_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     return manifest
@@ -133,5 +148,6 @@ if __name__=='__main__':
     ap.add_argument('--userdir',type=Path,required=True)
     ap.add_argument('--locked',action='store_true')
     ap.add_argument('--companies',action='store_true')
+    ap.add_argument('--charter-inventory',action='store_true',help='Seed dealer stock through a real 2500-unit sovereign sale; native cooldown remains active.')
     a=ap.parse_args()
-    print(json.dumps(prepare(a.userdir,a.locked,a.companies),indent=2))
+    print(json.dumps(prepare(a.userdir,a.locked,a.companies,a.charter_inventory),indent=2))

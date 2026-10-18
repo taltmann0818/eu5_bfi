@@ -47,6 +47,15 @@ bank's votes; state/founder ownership is preserved across political transfers.
 
 ## Guaranteed player sales
 
+Buy also lists the player's own charter while its hidden dealer retains shares.
+A buyback uses the country treasury and restores the sovereign's units and actual
+acquisition basis, including after the entire original stake was sold. It does
+not spend bank cash, create a self-held bank asset, fund the issuer or issue units.
+The recorded sovereign must still be the live charter controller. Current NAV,
+remaining dealer stock, real treasury cash, one diplomat and the shared one-month
+issuer cooldown are checked again at settlement. Stock already resold to AI
+cannot be repurchased through this exception.
+
 The user replaced the original single funded AI dealer design after a sale
 failed. A hidden clearing-bank book now absorbs every valid player order at the
 displayed NAV less a 2% spread, with a quote valid through the following month.

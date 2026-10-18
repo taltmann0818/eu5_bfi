@@ -1,4 +1,11 @@
-﻿bfl_market_trade_ready = {
+﻿bfl_market_charter_buyback = {
+trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor }
+        scope:actor = { country_type = location bfl_has_management = yes }
+        this = scope:actor.var:bfl_bank var:bfl_state_owner ?= scope:actor
+        bfl_has_valid_controller = yes overlord = scope:actor }
+        trigger_else = { always = no }
+}
+bfl_market_trade_ready = {
 bfl_has_management = yes bfl_resolved_equity_access = yes num_of_diplomats >= 1
         trigger_if = { limit = { exists = var:bfl_market_issuer }
             var:bfl_market_issuer = { NOT = { has_cooldown = bfl_share_trade } } }
