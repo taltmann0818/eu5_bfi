@@ -327,6 +327,13 @@ def prepare(directory, token=None):
     fingerprint = runtime_hash()
     start, finish, instant, cases = fixture(token, fingerprint)
     reload_body, reload_cases = reload_fixture(token, fingerprint)
+    # Instant native construction still queues a level-zero building. These
+    # fixtures intend completed debug grants; actual AI completion is tested
+    # separately with normal cost/time and no level grant.
+    from exchange_fixture import complete_debug_exchange_grants
+    start = complete_debug_exchange_grants(start)
+    finish = complete_debug_exchange_grants(finish)
+    reload_body = complete_debug_exchange_grants(reload_body)
     write_script(directory / 'run/bfi_begin.txt', start)
     write_script(directory / 'run/bfi_finish.txt', finish)
     write_script(directory / 'run/bfi_reload.txt', reload_body)

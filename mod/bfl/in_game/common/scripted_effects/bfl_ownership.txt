@@ -683,6 +683,7 @@ set_variable = { name = bfl_equity_pool value = 5 }
         set_variable = { name = bfl_equity_pool value = 0 }
     }
 bfl_initialize_market_maker = yes
+if = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }
 }
 bfl_allocate_equity_holder = {
 set_variable = { name = bfl_equity_allocated value = 0 }

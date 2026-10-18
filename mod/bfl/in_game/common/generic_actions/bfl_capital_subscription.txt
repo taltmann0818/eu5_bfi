@@ -1,0 +1,11 @@
+﻿bfl_new_capital_subscription = { type = owncountry ai_tick = never show_message = no
+        potential = { scope:actor = { bfl_has_management = yes } }
+        allow = { scope:actor = { num_of_diplomats >= 1 } }
+        select_trigger = { looking_for_a = country target_flag = security name = bfl_new_capital_subscription
+            column = { data = bfl_equity_market }
+            visible = { bfl_equity_issuer = yes var:bfl_accept_equity = 1 bfl_tangible_equity > 0
+                NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank } }
+            enabled = { NOT = { has_cooldown = bfl_share_trade } } }
+        effect = { scope:actor = { trigger_event_silently = bfl_market.15 } }
+        ai_will_do = { value = 0 }
+    }

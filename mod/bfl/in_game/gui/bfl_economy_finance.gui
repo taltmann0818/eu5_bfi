@@ -52,6 +52,11 @@
             enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_expedition_tip"
             scripted_action_tooltip = { click_type = left click_mode = single
                 action_name = "bfl_company_expedition" actor = "[GetPlayer]" }
+        }button_regular = { name = "bfl_company_list_equity_button" size = { -1 32 }
+            layoutpolicy_horizontal = expanding text = "bfl_company_list_equity" datacontext = "[GetGenericAction('bfl_company_list_equity')]"
+            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_company_list_equity_tip"
+            scripted_action_tooltip = { click_type = left click_mode = single
+                action_name = "bfl_company_list_equity" actor = "[GetPlayer]" }
         }
             text_multi = { text = "bfl_company_native_channels" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 11 }
         } }

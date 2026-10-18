@@ -1,0 +1,14 @@
+{
+  "purpose": "Historical red regression: reproduce the reported paused Buy/Sell issuance bug. Not a passing acceptance run.",
+  "reproduced": true,
+  "runtime_sha256": "2b3e43cb1e022b2a6fb3b8fa5c6e57c191ef77283648ca0489a76bc91a182309",
+  "fixture_sha256": "9178741dd9f8fe9287cb809d0a2d918887e94b964cac620cbfb5d5f0cd78f1b5",
+  "token": "c5152c2fa8a344748e9df6d1ea175bd0",
+  "cycles": 3,
+  "initial_issued_units": 1200,
+  "observed_final_issued_units": 1215,
+  "advance_between_service_calls": false,
+  "failed_assertion": "paused_buy_sell_cycles_never_issue_new_shares",
+  "cause": "Buy fell back to primary issuance when there was no live public ask, ignoring inventory from the preceding dealer purchase.",
+  "fix_requirement": "Ordinary Buy transfers existing public-offer or dealer stock only; new issuance remains an explicit capital subscription."
+}

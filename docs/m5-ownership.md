@@ -1,6 +1,6 @@
 # M5 ownership and share trading
 
-Final revised-runtime acceptance is in progress. The canonical status remains
+Final revised-runtime acceptance is in progress. The paused-trading issuance bug is reproduced in [the historical red regression](../tests/results/2026-10-18-m5-paused-cycle-reproduction.json): three atomic cycles grew issued units from 1,200 to 1,215. The revised market suite requires 1,200 throughout ordinary trading. The canonical status remains
 in [coverage.md](coverage.md); earlier passing candidates do not certify later changes.
 
 ## Delivered behavior
@@ -14,8 +14,8 @@ the quantity slider on the same popup. Confirmation identifies the exact units
 and total. Portfolio hover lists cost basis, current value, colored unrealized
 return, realized gains and cash dividends.
 
-Funded primary subscriptions pay the issuer and dilute existing holders.
-Ordinary secondary trades pay the existing seller without funding the issuer.
+The separate Subscribe new capital action pays the issuer and dilutes existing holders. Ordinary Buy never falls back to primary issuance.
+Ordinary secondary trades pay the existing seller or hidden dealer without funding the issuer. Each successful player trade or capital subscription spends one native diplomat and applies a shared native one-month cooldown to that issuer. Failed or cancelled orders consume neither.
 Bank shares are common to both profiles; native company equity requires
 Overseas Investment, the applicable research and the operating company schema/HQ.
 Both ordinary secondary banks require completed exchanges and research;

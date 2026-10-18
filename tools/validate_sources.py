@@ -32,6 +32,8 @@ def check_script(path):
         check(depth>=0,f'{path}: unexpected closing brace')
     check(depth==0,f'{path}: unbalanced braces')
     check(text.count('"')%2==0,f'{path}: unbalanced quotes')
+    check(not re.search(r'var:bfl_\w+\s*(?:=|<=|>=|<|>)\s*\{\s*value\s*=',text),
+          f'{path}: numeric variable comparison needs a named script value; an inline value block is parsed as triggers')
     if 'events' in path.parts:
         check(not re.search(r'ai_chance\s*=\s*\{\s*value\s*=',text),f'{path}: event AI chance uses MTTH base, not decision script-value syntax')
     for texture in re.findall(r'"(gfx/[^"\[\]]+\.(?:dds|png))"',text):

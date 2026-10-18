@@ -152,7 +152,7 @@ def generate(common, effect, loc, write):
             change_variable = {{ name = {n}_basis add = var:bfl_equity_amount }} }}\n'''
     capacity = 'OR = { AND = { var:bfl_state_owner ?= scope:bfl_party var:bfl_equity_pool = 0 }\n' + '\n'.join(f'var:{s(i)}_active = 0 AND = {{ var:{s(i)}_active = 1 var:{s(i)}_party = scope:bfl_party var:{s(i)}_pool = var:bfl_equity_pool }}' for i in HOLDERS) + ' }'
     common('scripted_triggers', 'equity_validation', effect('bfl_has_shareholder_capacity', capacity))
-    services = effect('bfl_initialize_ownership', initialize + '\nbfl_initialize_market_maker = yes') + effect('bfl_allocate_equity_holder', allocate)
+    services = effect('bfl_initialize_ownership', initialize + '\nbfl_initialize_market_maker = yes\nif = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }') + effect('bfl_allocate_equity_holder', allocate)
     # Positions are recovered from the authoritative issuer ledger, including
     # existing-save bank subscriptions. A sixteen-position cap is checked first.
     portfolio_capacity = 'OR = { ' + ' '.join(f'NOT = {{ exists = var:{p(i)}_issuer }} var:{p(i)}_issuer = scope:bfl_issuer' for i in PORTFOLIO) + ' }'
@@ -235,7 +235,8 @@ def generate(common, effect, loc, write):
                 set_variable = bfl_operation_guard
                 set_variable = { name = bfl_equity_amount value = 100 }
                 if = { limit = { var:bfl_state_owner ?= scope:bfl_party var:bfl_equity_pool = 0 }
-                    change_variable = { name = bfl_state_units add = var:bfl_new_units } }
+                    change_variable = { name = bfl_state_units add = var:bfl_new_units }
+                    change_variable = { name = bfl_state_basis add = 100 } }
                 else = { bfl_allocate_equity_holder = yes }
                 change_variable = { name = bfl_total_units add = var:bfl_new_units }
                 change_variable = { name = bfl_paid_in_capital add = 100 }

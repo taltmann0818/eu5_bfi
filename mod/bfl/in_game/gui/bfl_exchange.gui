@@ -222,6 +222,9 @@
             text_single = { position = { 60 30 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_security_market')|2]@gold!  [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes fontsize = 21 }
             text_single = { position = { 60 57 } text = "bfl_share_portfolio_hint" autoresize = yes fontsize = 11 }
         }
+            button_regular = { size = { -1 30 } layoutpolicy_horizontal = expanding text = "bfl_new_capital_subscription"
+                datacontext = "[GetGenericAction('bfl_new_capital_subscription')]" tooltip = "bfl_new_capital_subscription_tip"
+                enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_new_capital_subscription" actor = "[GetPlayer]" } }
             button_regular = { size = { -1 30 } layoutpolicy_horizontal = expanding text = "bfl_manage_shareholdings"
                 datacontext = "[GetGenericAction('bfl_manage_shareholdings')]" tooltip = "bfl_manage_shareholdings_desc"
                 enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_manage_shareholdings" actor = "[GetPlayer]" } }

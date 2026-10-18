@@ -5,6 +5,21 @@ from campaign_suite import write_script
 from audit_native import balanced_block
 
 
+def complete_debug_exchange_grants(text):
+    """Complete explicitly instant test grants, never paid natural construction."""
+    edits=[]
+    for match in re.finditer(r'construct_building\s*=\s*\{',text):
+        end=balanced_block(text,text.index('{',match.start()))
+        block=text[match.start():end]
+        if 'building_type = building_type:stock_exchange' not in block or 'instant = yes' not in block:
+            continue
+        owner=re.search(r'owner\s*=\s*([^\s}]+)',block)[1]
+        grant=f' every_buildings_in_location = {{ limit = {{ building_type = building_type:stock_exchange owner = {owner} building_level = 0 }} change_building_level = 1 }}'
+        edits.append((end,grant))
+    for end,grant in reversed(edits):text=text[:end]+grant+text[end:]
+    return text
+
+
 def defer_completed_exchanges(directory):
     overlay=Path(directory)/'mod/bfi_campaign_checks'
     path=overlay/'in_game/common/scripted_effects/bfi_campaign_checks.txt'

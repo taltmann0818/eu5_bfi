@@ -10,7 +10,8 @@ save_scope_as = bfl_issuer
                 set_variable = bfl_operation_guard
                 set_variable = { name = bfl_equity_amount value = 100 }
                 if = { limit = { var:bfl_state_owner ?= scope:bfl_party var:bfl_equity_pool = 0 }
-                    change_variable = { name = bfl_state_units add = var:bfl_new_units } }
+                    change_variable = { name = bfl_state_units add = var:bfl_new_units }
+                    change_variable = { name = bfl_state_basis add = 100 } }
                 else = { bfl_allocate_equity_holder = yes }
                 change_variable = { name = bfl_total_units add = var:bfl_new_units }
                 change_variable = { name = bfl_paid_in_capital add = 100 }

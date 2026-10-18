@@ -111,7 +111,10 @@ def generate(common,effect,loc):
         ('bfl_subscribe_bank','bank_subscription','bfl_subscribe_bank_capital','Subscribe 100 gold of bank capital')]:
         cadence = 'ai_tick = monthly ai_tick_frequency = 6' if gate == 'bank_subscription' else 'ai_tick = never'
         offering = 'var:bfl_accept_equity = 1' if gate == 'bank_subscription' else ''
-        score = 'value = 0 if = { limit = { scope:actor = { bfl_is_bank = yes bfl_free_cash > 500 var:bfl_ai_equity_enabled = 1 } scope:recipient = { bfl_equity > 0 var:bfl_accept_equity = 1 } } add = 10 }' if gate == 'bank_subscription' else 'value = 0'
+        score = '''value = 0 if = { limit = { scope:actor = { bfl_is_bank = yes bfl_free_cash > 500 var:bfl_ai_equity_enabled = 1
+            OR = { bfl_is_independent_bank = yes
+                AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes
+                    OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 } } } } } scope:recipient = { bfl_equity > 0 var:bfl_accept_equity = 1 } } add = 10 }''' if gate == 'bank_subscription' else 'value = 0'
         deposit_mandate = 'var:bfl_accept_deposits = 1' if gate == 'commercial_bill' else ''
         interactions+=f'''{key} = {{
             type = diplomacy category = CATEGORY_ECONOMY_ACTIONS {cadence}

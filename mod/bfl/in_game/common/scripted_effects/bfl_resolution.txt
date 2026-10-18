@@ -20,7 +20,8 @@ bfl_recapitalize = {
         # Rescue contribution is booked as paid-in capital; no realized earnings.
         change_variable = { name = bfl_paid_in_capital add = 100 }
         if = { limit = { var:bfl_state_owner ?= scope:bfl_party }
-            change_variable = { name = bfl_state_units add = var:bfl_new_units } }
+            change_variable = { name = bfl_state_units add = var:bfl_new_units }
+            change_variable = { name = bfl_state_basis add = 100 } }
         else = { set_variable = { name = bfl_equity_amount value = 100 } bfl_allocate_equity_holder = yes }
         change_variable = { name = bfl_total_units add = var:bfl_new_units }
         change_variable = { name = bfl_equity_revision add = 1 }
