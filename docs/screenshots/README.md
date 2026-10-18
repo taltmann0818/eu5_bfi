@@ -1,5 +1,40 @@
 # Native bank interface captures
 
+## M5 ownership and share trading
+
+Actual, unedited EUV 1.4.1 / build 25905365 windows with CMF 2.5.0,
+1280×720 at 60% GUI scale (1282×752 window captures). The original fourteen
+captures use runtime `9570a06f3a6faddf0b358aa78d41cce0a88601271a1b7d07ea02e83e5a47744b`.
+They precede the non-issuer picker guard and sovereign buyback follow-up;
+current-runtime company/history and buyback captures are recorded separately.
+Debug grants establish Reformation, research, completed exchanges, wallets,
+charter, a bond and a staged Peruzzi NAV. They do not prove natural construction
+or normal campaign balance; dedicated engine reports cover those separately.
+
+- [Integrated Investments](m5-investments.png): two Credit subtabs, generated
+  Buy/Sell art, compact portfolio and explicit primary-capital action.
+- [Total assets](m5-assets-equity.png): 4,800 cash + 100 equity carrying value +
+  100 custom bonds reconcile to 5,000 assets.
+- [Portfolio hover](m5-portfolio.png): 100 Peruzzi shares, 100 basis, 120 value
+  and green +20.0% unrealized return.
+- [Buy popup](m5-buy-slider.png) and [confirmation](m5-buy-confirmation.png):
+  native flag/name/paper country card and same-popup slider select 4.921
+  existing shares for 5.91 gold.
+- [Settled purchase](m5-buy-settled.png): 104.921 units, basis 105.91, value
+  125.90 and +18.8%; bank cash 4,794.09; diplomats fall 4.50 → 3.50.
+- [Same-issuer cooldown](m5-issuer-cooldown.png): Peruzzi cannot immediately
+  be selected for an opposite-side sale; Bardi remains eligible.
+- [Charter sale slider](m5-sell-charter-slider.png), [confirmation](m5-sell-charter-confirmation.png)
+  and [settlement](m5-sell-charter-settled.png): 984.011 sovereign-owned Bardi
+  shares sell for 943.12, paid to Florence. Bank cash stays 4,794.09, issued
+  shares stay 5,000, the dealer owns 984.011 without votes, and diplomats fall
+  3.50 → 2.50.
+- [Funding & Debt](m5-funding-bonds.png), [bond registry](m5-funding-bond-registry.png)
+  and [deposit controls](m5-funding-deposits.png): sovereign bonds and bank
+  funding share the same scrollable subtab; native loan controls remain below.
+- [Missing exchange](m5-exchange-locked.png): both share actions are disabled,
+  while existing holdings and their value remain visible.
+
 ## M2 company controls
 
 **Chartered bank and company together:** the supplementary [shared Credit visual
