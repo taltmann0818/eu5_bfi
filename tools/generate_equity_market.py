@@ -43,8 +43,6 @@ def generate(common, effect, loc, write):
     for i in range(1, 17):
         values += effect(f'bfl_position_return_{i:02}', f'''value = 0 if = {{ limit = {{ var:bfl_pos_{i:02}_basis > 0 }}
             value = bfl_position_market_{i:02} divide = var:bfl_pos_{i:02}_basis subtract = 1 }}''')
-    values += effect('bfl_portfolio_return', '''value = 0 if = { limit = { bfl_security_basis > 0 }
-        value = bfl_security_market divide = bfl_security_basis subtract = 1 }''')
     values += effect('bfl_primary_paid_expected', 'value = var:bfl_primary_paid_before add = 100')
     values += effect('bfl_market_buy_total', 'value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 100 ceiling = yes divide = 100')
     values += effect('bfl_market_sell_total', 'value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 0.98 multiply = 100 round = yes divide = 100')
@@ -54,7 +52,11 @@ def generate(common, effect, loc, write):
             OR = {{ var:bfl_shr_{i:02}_party = scope:actor AND = {{ scope:actor = {{ bfl_has_management = yes country_type = location }} var:bfl_shr_{i:02}_party ?= scope:actor.var:bfl_bank }} }} }} add = var:bfl_shr_{i:02}_units }}\n'''
     values+=effect('bfl_market_actor_votes',actor_votes)
     for side, maximum in [('buy','bfl_market_buy_max'),('sell','bfl_market_sell_units')]:
-        values += effect(f'bfl_market_{side}_selection_max', f'value = 0 if = {{ limit = {{ exists = scope:security }} value = scope:security.{maximum} }}')
+        # Hidden sliders still evaluate their bounds before a country is chosen.
+        # Keep a valid nominal range until actual liquidity can be resolved.
+        values += effect(f'bfl_market_{side}_selection_max', f'value = 1 if = {{ limit = {{ exists = scope:security }} value = scope:security.{maximum} }}')
+    values += effect('bfl_available_trade_diplomats', 'value = num_of_diplomats')
+    values += effect('bfl_market_sell_selection_price', 'value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_equity_quote multiply = 0.98 }')
     common('script_values', 'equity_market', values)
 
     common('scripted_triggers', 'equity_market', effect('bfl_market_charter_buyback', '''trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor }
@@ -314,7 +316,7 @@ def generate(common, effect, loc, write):
         'bfl_sell_state_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of your treasury’s stake in [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid to your country treasury. The bank receives no financing and issued shares do not change. The hidden dealer guarantees the displayed quote, including a 2% spread. Settlement consumes one diplomat and starts a one-month buy/sell cooldown for this issuer. Your charter’s monetary authority stays with you.",
         'bfl_sell_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!. The hidden market maker guarantees this sale, including a 2% dealing spread, while the quote is valid. Shares leave your portfolio immediately; background AI purchases do not delay payment. Proceeds go to your bank’s treasury. Settlement consumes one diplomat and starts this issuer’s one-month buy/sell cooldown.",
         'bfl_buy_state_confirm_desc': "Buy back [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] existing shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] from market-maker inventory for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid from your country treasury. These shares return to your treasury stake. The bank receives no financing and issued shares do not change. Available dealer stock, current NAV, live charter authority and treasury cash are checked again. Settlement consumes one diplomat and starts this bank’s one-month buy/sell cooldown.",
-        'bfl_share_portfolio_title': 'Share portfolio', 'bfl_share_portfolio_subtitle': 'Current holdings · value and unrealized return',
+        'bfl_share_portfolio_title': 'Share portfolio', 'bfl_share_portfolio_subtitle': 'Treasury stake and bank-held investments',
         'bfl_share_value_label': 'Portfolio value', 'bfl_share_portfolio_hint': 'Hover for holdings, current values and returns',
         'bfl_share_empty': 'No shares held', 'bfl_share_chart_empty': 'No price history yet',
         'bfl_share_row_detail': "NAV [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold! / share",
@@ -323,6 +325,7 @@ def generate(common, effect, loc, write):
         'bfl_sale_unavailable': 'Share order could not settle',
         'bfl_sale_unavailable_desc': 'The issuer has a one-month trading cooldown, you lack a diplomat, your quote expired, or available shares, funds or exchange access changed. Reopen Buy or Sell shares for a fresh quote. No cash or shares moved.',
         'bfl_review_trade': 'Review trade',
+        'bfl_review_trade_tip': 'Review the selected units and exact payment. A sale must round to at least 0.01 gold; increase the quantity if Review is unavailable. No diplomat is spent until a valid trade settles.',
         'bfl_share_trade': 'Recent share trade',
         'bfl_new_capital_subscription': 'Subscribe new capital',
         'bfl_new_capital_subscription_desc': "Invest 100@gold! of your bank’s funds in [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] as newly issued equity at its tangible NAV. The issuer receives the payment and existing holders are diluted. This is a capital subscription, separate from Buy shares. Execution rechecks the captured NAV, issued units, research, protected funds and concentration limit. It consumes one diplomat and starts this issuer’s one-month trading cooldown.",
@@ -336,7 +339,10 @@ def generate(common, effect, loc, write):
         'bfl_invite_equity_capital_desc': "Subscribe 100 gold to [ROOT.GetCountry.MakeScope.GetVariable('bfl_capital_issuer').GetCountry.GetName] from the selected treasury or estate wallet. The subscriber receives new shares at tangible NAV. Estate wallets retain at least 25 gold. Financial ownership, future dividends and dilution follow the paid shares.",
     }
     for key, text in labels.items(): loc(key, text)
-    for side in ('buy','sell'): loc(f'bfl_{side}_shares_tip', labels[f'bfl_{side}_shares_desc'])
+    for side in ('buy','sell'):
+        loc(f'bfl_{side}_shares_tip', labels[f'bfl_{side}_shares_desc'] + "\nRequires a completed exchange, Share Dealing and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_available_trade_diplomats')|2]. Orders must have a cash value of at least 0.01 gold.")
+    from generate_portfolio import generate as generate_portfolio
+    generate_portfolio(common, effect, loc, write)
     gui(loc, write)
 
 
@@ -352,18 +358,7 @@ def gui(loc, write):
                 size = "[ToVector2f('(float)2',FixedPointToFloat({val(f'bfl_market_height_{i:02}')}))]"
                 visible = "[And({visible},GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_quote_{i+1:02}_period').GetValue,'(CFixedPoint)0'))]"
                 background = {{ texture = "gfx/interface/colors/white.dds" color = {{ 0.45 0.80 0.69 1 }} }} }}'''
-    tooltip_rows = ''
-    for i in range(1, 17):
-        field = f'bfl_pos_{i:02}'
-        tooltip_rows += f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 3
-            visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{field}_units').GetValue,'(CFixedPoint)0')]"
-            widget = {{ size = {{ -1 74 }} layoutpolicy_horizontal = expanding background = {{ using = tooltip_table_field_texture }}
-                text_single = {{ position = {{ 10 4 }} raw_text = "[Country.MakeScope.GetVariable('{field}_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 }}
-                text_single = {{ position = {{ 10 28 }} raw_text = "[Country.MakeScope.GetVariable('{field}_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('{field}_basis').GetValue|2]@gold!" autoresize = yes fontsize = 14 }}
-                text_single = {{ position = {{ 10 50 }} raw_text = "Value [{val(f'bfl_position_market_{i:02}')}|2]@gold!   [{val(f'bfl_position_return_{i:02}')}|%1+=]" autoresize = yes fontsize = 15 }}
-            }} }}'''
-    tooltip_rows += f'''text_single = {{ raw_text = "Realized [{val('bfl_security_realized')}|2+=]@gold! · Dividends [{val('bfl_security_dividends')}|2]@gold!" autoresize = yes fontsize = 14 }}'''
-    tooltip = tooltip_type('bfl_share_portfolio_tooltip', 'bfl_share_portfolio_title', 'bfl_share_portfolio_subtitle', 'share_transfer', scroll_rows(tooltip_rows, 420, 300))
+    tooltip = ''
     buttons = ''
     for side in ('buy', 'sell'):
         buttons += f'''button_regular = {{ size = {{ -1 64 }} layoutpolicy_horizontal = expanding
@@ -375,26 +370,31 @@ def gui(loc, write):
     portfolio = ''
     for context, condition in [('GetPlayer', 'bfl_independent_view'), ("GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry", 'bfl_charter_view')]:
         portfolio += f'''widget = {{ size = {{ -1 74 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
-            datacontext = "[{context}]" visible = "[GetScriptedGui('{condition}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            datacontext = "[GetPlayer]" visible = "[GetScriptedGui('{condition}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             tooltipwidget = {{ bfl_share_portfolio_tooltip = {{ }} }}
             icon = {{ position = {{ 10 14 }} size = {{ 40 40 }} texture = "gfx/interface/icons/bfl/share_transfer.dds" }}
             text_single = {{ position = {{ 60 8 }} text = "bfl_share_value_label" autoresize = yes fontsize = 15 }}
-            text_single = {{ position = {{ 60 30 }} raw_text = "[{val('bfl_security_market')}|2]@gold!  [{val('bfl_portfolio_return')}|%1+=]" autoresize = yes fontsize = 21 }}
+            text_single = {{ position = {{ 60 30 }} raw_text = "[{val('bfl_portfolio_market')}|2]@gold!  [{val('bfl_portfolio_return')}|%1+=]" autoresize = yes fontsize = 21 }}
             text_single = {{ position = {{ 60 57 }} text = "bfl_share_portfolio_hint" autoresize = yes fontsize = 11 }}
         }}'''
     quantity_widgets = ''
     for side in ('buy','sell'):
+        selection_max = f"FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_{side}_selection_max'))"
+        review_enabled = "And(SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.IsValid,GreaterThan_CFixedPoint(SelectInteractionTargetGlue.GetValue,'(CFixedPoint)0'))"
+        if side == 'sell':
+            price = "GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_sell_selection_price')"
+            review_enabled = f"And({review_enabled},GreaterThanOrEqualTo_CFixedPoint(Multiply_CFixedPoint(SelectInteractionTargetGlue.GetValue,{price}),'(CFixedPoint)0.005'))"
         quantity_widgets += f'''        type bfl_{side}_quantity_widget = widget {{ size = {{ -1 118 }} layoutpolicy_horizontal = expanding
             datacontext = "[SelectInteractionTargetView.GetValueGlue('share_quantity')]"
             using = bg_paper_card
             text_single = {{ position = {{ 15 8 }} text = "bfl_share_quantity" autoresize = yes fontsize = 16 }}
             text_single = {{ position = {{ 15 32 }} text = "[SelectInteractionTargetGlue.GetValue|3]" autoresize = yes fontsize = 20 }}
             economy_slider = {{ visible = "[SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.IsValid]" position = {{ 15 72 }} size = {{ 315 10 }}
-                min = "[SelectInteractionTargetGlue.GetMinValue]" max = "[FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_{side}_selection_max'))]"
+                min = "[Min_float('(float)1',{selection_max})]" max = "[{selection_max}]"
                 step = "[SelectInteractionTargetGlue.GetStep]" value = "[SelectInteractionTargetGlue.GetValue]"
                 onvaluechanged = "[SelectInteractionTargetGlue.OnValueChanged]" }}
             button_regular = {{ position = {{ 350 45 }} size = {{ 160 40 }} text = "bfl_review_trade"
-                enabled = "[And(SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.IsValid,GreaterThan_CFixedPoint(SelectInteractionTargetGlue.GetValue,'(CFixedPoint)0'))]"
+                enabled = "[{review_enabled}]" tooltip = "bfl_review_trade_tip"
                 onclick = "[SelectInteractionTargetView.Confirm]" }}
         }}
 '''

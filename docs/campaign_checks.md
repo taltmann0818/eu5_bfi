@@ -1,6 +1,10 @@
 # Florence campaign regression checks
 
-Current [M5 ownership/share trading acceptance](m5-ownership.md) passes its pinned-baseline gate:
+Current [M5 portfolio/sale follow-up](m5-ownership.md) passes **208 focused engine assertions** (40 market, 54 ownership, 114 accounts/bond), including monthly history bounds and reload. [12 actual UI observations / nine captures](../tests/results/2026-10-18-m5-portfolio-ui.json) verify the active-campaign charter sale, treasury-inclusive portfolio, owner rows, nested bank/company finances and actual monthly chart. **98 offline tests**, source pins, deterministic generation/reconstruction and **218-file staging** pass. [Provenance](../tests/results/2026-10-18-m5-portfolio-validation.json) preserves actual engine hashes: shipping differs only in the two GUI files. Earlier full M5 gate and unchanged treasury evidence below remain historical, not relabeled. NAV pricing is retained; [GBM is a separate proposal](exchange-pricing.md).
+
+Historical full M5 gate:
+
+[M5 ownership/share trading acceptance](m5-ownership.md) passes its pinned-baseline gate:
 54 ownership + 34 market + 114 accounts/bond + 43 treasury = **245 engine assertions**,
 twelve-period observations and second-process reload on the final runtime.
 [22 UI observations / 23 actual-game captures](../tests/results/2026-10-18-m5-ui.json)

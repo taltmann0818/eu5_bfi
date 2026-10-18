@@ -246,3 +246,19 @@ Borrow/Repay/search controls remain below it. The current session has no runtime
 or parser errors attributed to the changed BFI services/GUI. Broader independent-player,
 language and scale matrices remain M10. No personal save, installed game content
 or Workshop file was changed.
+
+## M5 portfolio and charter-sale follow-up
+
+[12 actual-game observations and exact screenshot fingerprints](../../tests/results/2026-10-18-m5-portfolio-ui.json) and [validation provenance](../../tests/results/2026-10-18-m5-portfolio-validation.json) cover this follow-up. The corrected campaign cold-loads `7b628548...` from an exact active-save copy, then reloads only the two GUI files. Six earlier captures retain `7de2694e...`; the final three tooltip captures display shipping `16b31f31...`. These are unedited native window captures at the disposable campaign's existing scale. External-company holdings use a once-only funded production subscription fixture with no money/diplomat/history grants. Broad languages/scales remain M10.
+
+- [Fixed one-share selector](m5-sale-default-fixed.png)
+- [Exact charter-sale confirmation](m5-charter-sale-fixed-confirmation.png)
+- [Treasury settlement and unchanged issued shares](m5-charter-sale-fixed-settled.png)
+- [Explicit diplomat requirement](m5-share-diplomat-explanation.png)
+- [Treasury stake and initial actual history](m5-portfolio-treasury-history.png)
+- [Initial nested bank finances](m5-portfolio-bank-finances.png)
+- [Final separate owners and six monthly observations](m5-portfolio-owners-history.png)
+- [Final nested external-company finances](m5-portfolio-company-finances.png)
+- [Final nested bank finances](m5-portfolio-bank-finances-final.png)
+
+[Historical zero-cash sale reproduction](m5-default-sale-zero-quote.png) is deliberately retained as **failing pre-fix evidence** on `a16944b9...`; it is not an accepted behavior or a shipping screenshot.

@@ -75,7 +75,7 @@ def generate(effect):
     sell = '''save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
         set_variable = { name = bfl_market_result value = 0 }
         if = { limit = { bfl_market_trade_ready = yes
-            exists = var:bfl_market_issuer var:bfl_market_quantity > 0
+            exists = var:bfl_market_issuer var:bfl_market_quantity > 0 var:bfl_market_total >= 0.01
             var:bfl_market_total = bfl_market_sell_total
             var:bfl_market_revision = scope:bfl_market_confirmation bfl_period <= var:bfl_market_expiry }
             if = { limit = { NOT = { has_variable = bfl_market_wallet } } set_variable = { name = bfl_market_wallet value = 0 } }

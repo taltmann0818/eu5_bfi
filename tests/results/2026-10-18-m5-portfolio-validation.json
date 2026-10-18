@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "shipping_runtime_sha256": "16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52",
+  "engine_assertions": 208,
+  "engine_reports": {
+    "market": {
+      "path": "tests/results/2026-10-18-m5-portfolio-market.json",
+      "sha256": "27d67ff5e69e31188dfc045a2f8fc5c3986c60401f1882ea9de9dfd30d8bf71b",
+      "assertions": 40,
+      "runtime_sha256": "af6cb7988cedaf9b90386ad34e74f72ca543a8b4be56616c83ba8094d6afb250",
+      "shipping_differences": [
+        "in_game/gui/bfl_exchange.gui",
+        "in_game/gui/bfl_portfolio.gui"
+      ]
+    },
+    "ownership": {
+      "path": "tests/results/2026-10-18-m5-portfolio-ownership.json",
+      "sha256": "a57f21b3c1d7b6919fa0aca19eb3ee16f3c871e45cf8ec504ee7ff624efcc37f",
+      "assertions": 54,
+      "runtime_sha256": "af6cb7988cedaf9b90386ad34e74f72ca543a8b4be56616c83ba8094d6afb250",
+      "shipping_differences": [
+        "in_game/gui/bfl_exchange.gui",
+        "in_game/gui/bfl_portfolio.gui"
+      ]
+    },
+    "accounts": {
+      "path": "tests/results/2026-10-18-m5-portfolio-accounts.json",
+      "sha256": "0b1d09d7c080d8e76e53bb9366b96f659eebcea3e1b1601f7ba3ca23a1042338",
+      "assertions": 114,
+      "runtime_sha256": "7b628548f0863db3003fe204d29e84aea33955c9d6602bdcb532822a1fffda80",
+      "shipping_differences": [
+        "in_game/gui/bfl_exchange.gui",
+        "in_game/gui/bfl_portfolio.gui"
+      ]
+    }
+  },
+  "provenance": "All production financial effects, script values, guards, history services and localization are byte-identical to the passing staged engine runs. Only the two named GUI files differ; final layouts and normal sale controls were exercised in the actual game. Engine hashes are retained, not relabeled as shipping.",
+  "ui_report": {
+    "path": "tests/results/2026-10-18-m5-portfolio-ui.json",
+    "sha256": "d3098e5f0afc70cb0266fca9d159a0d58b7a253f87ab3d7f3044e1d59a26e78f",
+    "observations": 12,
+    "captures": 9
+  },
+  "offline_tests": 98,
+  "source_validation": {
+    "files": 158,
+    "graphics": 59
+  },
+  "native_and_cmf_pins": "PASS",
+  "deterministic_generation": "PASS: generation and native Economy reconstruction leave shipping fingerprint unchanged",
+  "package": {
+    "files": 218,
+    "manifest_sha256": "5356fd8feaf8800d7088b41e813dbc355e31b3a3f4fa2b7822933954e3bcd12e"
+  },
+  "rejected_accounts": {
+    "path": "tests/results/2026-10-18-m5-portfolio-rejected-accounts.json",
+    "sha256": "686cee63fb94457619fca17ec6da6c2c62703586cbb6baa860edd19e2c618428",
+    "reason": "Source changed during an earlier run. Rejected despite assertion output; superseded by accepted accounts report."
+  },
+  "previous_gate": "Historical 245-assertion M5 gate and 23 screenshots retain their original a169 runtime; this focused follow-up does not relabel or rerun the unchanged 43-assertion treasury suite.",
+  "scope": "Pinned single-player baseline; M6-M10 and release-wide balance/languages/scales remain separate. NAV retained by user choice; GBM is proposal only."
+}

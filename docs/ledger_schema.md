@@ -93,3 +93,5 @@ basis (the entire remaining basis on a complete fill). The country must remain
 both the recorded state owner and the live charter controller. No bank portfolio
 slot is allocated, and bank cash and issued units stay unchanged. Zero remaining
 state units do not erase the recorded owner's eligibility to recover dealer stock.
+
+M5 management history lives on the command actor (the live landed charter controller or independent bank): `bfl_portfolio_history_01..12`, `bfl_portfolio_history_count` and `bfl_portfolio_history_period`. It samples combined sovereign-stake and bank-held-equity market value once per monthly bank close, starts empty on migration, caps at twelve and rejects same-period resampling. This presentation total never creates a bank self-held asset, liability, capital allowance or profit. Position flows affect chart value; it is not a return index.

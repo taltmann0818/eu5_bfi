@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "shipping_runtime_sha256": "16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52",
+  "startup_runtime_sha256": "7b628548f0863db3003fe204d29e84aea33955c9d6602bdcb532822a1fffda80",
+  "provenance": "Cold-loaded an exact copy of the active 11 November 1337 save, then hot-reloaded only bfl_exchange.gui and bfl_portfolio.gui. Individual captures retain the runtime actually displayed. Final three tooltip captures display the shipping GUI. No historical capture is relabeled.",
+  "active_save_sha256": "64dc396f9f1b3f0a806053b68d242277ab6c00c0c4eb07f59e2c48d274458a9b",
+  "original_state": "Original campaign preserved; pre-test save separately backed up. Corrected copy paused 30 May 1338 with 1.40 diplomats.",
+  "observations": [
+    "Active November campaign had 0.60 diplomats: disabled actions were valid but lacked an explanation.",
+    "Historical a169 runtime reproduced a 0.001-share charter sale for 0.00 gold which nevertheless spent a diplomat. Reproduction capture is red evidence, not a pass.",
+    "Fixed popup defaults to 1.000 share after selection; quantity remains on the list popup.",
+    "Ordinary GUI sale of 104.107 Bardi shares paid Florence 99.98 gold and spent one diplomat (1.20 to 0.20).",
+    "That sale left bank cash 5003.10 and issued shares 5204.049 unchanged; treasury units fell from 2795.204 to 2691.097.",
+    "Portfolio decreased from 2739.29 to 2637.27 after the sale and included the remaining sovereign stake despite no bank-held equities.",
+    "Disabled-action hover states access, one diplomat, shared one-month issuer cooldown and actual available 0.20 diplomats.",
+    "Six actual monthly value samples, December through May, show the sale-related drop; no history was backfilled or granted.",
+    "Separate owner headings display treasury Bardi value 2586.14 and bank-held company equity 99.94, combined 2686.08; basis and colored unrealized percentages remain readable.",
+    "Nested Bardi tooltip shows its NAV 0.961, issued shares 5204.049, cash 4901.31, credit 100 and net tangible assets 5001.31, plus last bank income/costs.",
+    "Nested Liguria and Corsica tooltip resolves the external issuer: NAV 0.997, issued shares 1200.243, cash/NAV 1197.33 and prior-month change +0.2%; bank-only results are hidden.",
+    "Final session has zero BFI-attributed runtime/GUI errors under the same diagnostic rules as the engine collector."
+  ],
+  "external_holding_fixture": "After the ordinary sale and natural monthly observations, a disposable once-only monthly overlay called production funded subscription services using Bardi cash. Company subscription debited 100 gold, creating 100.243 shares with basis 100. Peruzzi attempt did not produce a position. No cash, diplomat or history grants; this is visual fixture evidence, not a natural investment/secondary-trade assertion.",
+  "external_fixture_sha256": "02b3dee0cb2bad6a0293fab2e8d4647321d26d75ce002e577c8ca82f421a8dac",
+  "captures": {
+    "m5-sale-default-fixed": {
+      "sha256": "52d201de9ab87f865e9a7564e6b20b4ba1cda05b9ecb3d8bdd64e7c7122a7d93",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-charter-sale-fixed-confirmation": {
+      "sha256": "64a34f0863602f45f919637936911f8a9d9020ba32de2fb28f2f472c50114876",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-charter-sale-fixed-settled": {
+      "sha256": "3c3fa898df42349c12157df5346d9a29515b64f09f368c42fc760fccf53057c1",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-share-diplomat-explanation": {
+      "sha256": "bea37a00cd2ec8cadd07d508f6d1a9d46132fba20c9d79b0d58870038197a375",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-portfolio-treasury-history": {
+      "sha256": "0fd8729d5d7e5b7966d1bb8ce686419ea1c460c71b80654a1cbc24dbcd206eef",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-portfolio-bank-finances": {
+      "sha256": "01e2b29b46cf3df5ef044976799cc8f5eb6728ae6e46525d2d95c3256166bc78",
+      "runtime_sha256": "7de2694ec157e1403193a7fa0a00c0a4cdc40bdc440775c18cd5cd97acfa57e6"
+    },
+    "m5-portfolio-owners-history": {
+      "sha256": "76a58ba85eb8f7a421eab947b1ce41b0dc50b2168118271f811d23724eaeb4eb",
+      "runtime_sha256": "16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52"
+    },
+    "m5-portfolio-company-finances": {
+      "sha256": "0ffd68f6c4454a4ae686119cd3d59d698606ff32a4c9eac3fab46cf610d6fa9c",
+      "runtime_sha256": "16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52"
+    },
+    "m5-portfolio-bank-finances-final": {
+      "sha256": "dbb4484f2f2e752c5847b0a45993740bda719e1d6dc759c9f157ef81c9a21971",
+      "runtime_sha256": "16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52"
+    }
+  },
+  "attributed_errors": [],
+  "reproduction": {
+    "path": "docs/screenshots/m5-default-sale-zero-quote.png",
+    "sha256": "041a8be5379879da093e9362a9cf55d98d2b95d058a3391aa41db93820a2df43",
+    "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e"
+  }
+}

@@ -38,6 +38,20 @@ def fixture(token, fingerprint):
             set_variable = { name = bfi_cycle_start_period value = bfl_period } }
         c:PRZ = { set_variable = { name = bfl_equity_offer_active value = 0 } }
     '''
+    setup+='c:FLO = { set_variable = { name = bfi_portfolio_expected value = { value = bfl_exchange_market add = bfl_treasury_portfolio_market } } }\n'
+    setup+=check('management_portfolio_includes_treasury_stake_without_bank_self_asset',
+        'c:FLO = { bfl_treasury_portfolio_units = 5000 bfl_portfolio_market = var:bfi_portfolio_expected bfl_treasury_portfolio_market > 0 } c:BRD = { gold = 4800 bfl_security_basis = 100 bfl_assets = 5000 }')
+    setup+=check('portfolio_migration_does_not_fabricate_history', 'c:FLO = { bfl_portfolio_history_count = 0 }')
+    setup+='c:FLO = { bfl_record_portfolio_history = yes bfl_record_portfolio_history = yes }\n'
+    setup+=check('portfolio_value_sample_is_actual_and_same_period_idempotent',
+        'c:FLO = { var:bfl_portfolio_history_count = 1 var:bfl_portfolio_history_12 = var:bfi_portfolio_expected var:bfl_portfolio_history_period = bfl_period }')
+    setup+='c:FLO = { set_variable = { name = bfi_zero_sale_cash value = gold } set_variable = { name = bfi_zero_sale_diplomats value = num_of_diplomats } }\n'
+    setup+=trade('sell',issuer='BRD',quantity='0.001',price='c:BRD.bfl_equity_quote',total='0',wallet=1)
+    setup+=check('zero_value_charter_sale_costs_no_shares_cash_diplomat_or_cooldown',
+        'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_zero_sale_cash num_of_diplomats = var:bfi_zero_sale_diplomats } c:BRD = { var:bfl_state_units = 5000 var:bfl_dealer_units = 0 NOT = { has_cooldown = bfl_share_trade } }')
+    setup+=trade('sell',quantity='0.001',price='1.2',total='0')
+    setup+=check('zero_value_bank_position_sale_costs_no_resources',
+        'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_zero_sale_cash num_of_diplomats = var:bfi_zero_sale_diplomats } c:BRD = { gold = 4800 var:bfl_pos_01_units = 100 } c:PRZ = { var:bfl_dealer_units = 0 NOT = { has_cooldown = bfl_share_trade } }')
     for _ in range(3):
         setup+=trade('buy',quantity='5',total='6',secondary=0)
         setup+='''c:FLO = { if = { limit = { var:bfl_market_result = 1 }
@@ -165,13 +179,14 @@ def fixture(token, fingerprint):
     instant=list(cases)
     cases.extend(['cooldown_still_blocks_before_full_month','cooldown_expires_after_month'])
     finish=check('natural_construction_completion_unlocks_exchange','c:VEN = { bfl_owns_stock_exchange = yes } c:ACC = { bfl_owns_stock_exchange = yes }')
+    finish+=check('monthly_portfolio_history_is_bounded_and_owned_by_live_controller','c:VEN = { var:bfl_portfolio_history_count = 12 bfl_portfolio_market > 0 } c:ACC = { var:bfl_portfolio_history_count = 12 }')
     finish+='c:BRD = { remove_variable = bfi_test_pending }\n'+f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'
     return setup,finish,instant,cases
 
 
 def reload_fixture(token, fingerprint):
     key='dealer_units_and_completed_buildings_survive_reload'
-    condition='c:BRD = { var:bfl_pos_01_units = 84.333 var:bfl_state_units = 4900 var:bfl_state_basis = var:bfi_saved_state_basis var:bfl_dealer_units = 100 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes } c:ACC = { bfl_owns_stock_exchange = yes }'
+    condition='c:BRD = { var:bfl_pos_01_units = 84.333 var:bfl_state_units = 4900 var:bfl_state_basis = var:bfi_saved_state_basis var:bfl_dealer_units = 100 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 } c:ACC = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 }'
     return f'''debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"
         if = {{ limit = {{ {condition} }} debug_log = "BFI_TEST|{token}|PASS|{key}" }} else = {{ debug_log = "BFI_TEST|{token}|FAIL|{key}" }}
         debug_log = "BFI_TEST|{token}|RELOAD_END|{fingerprint}"''',[key]

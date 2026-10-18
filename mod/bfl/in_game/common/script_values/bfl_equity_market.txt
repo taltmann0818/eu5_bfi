@@ -289,10 +289,6 @@ bfl_position_return_16 = {
 value = 0 if = { limit = { var:bfl_pos_16_basis > 0 }
             value = bfl_position_market_16 divide = var:bfl_pos_16_basis subtract = 1 }
 }
-bfl_portfolio_return = {
-value = 0 if = { limit = { bfl_security_basis > 0 }
-        value = bfl_security_market divide = bfl_security_basis subtract = 1 }
-}
 bfl_primary_paid_expected = {
 value = var:bfl_primary_paid_before add = 100
 }
@@ -339,8 +335,14 @@ if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0
             OR = { var:bfl_shr_16_party = scope:actor AND = { scope:actor = { bfl_has_management = yes country_type = location } var:bfl_shr_16_party ?= scope:actor.var:bfl_bank } } } add = var:bfl_shr_16_units }
 }
 bfl_market_buy_selection_max = {
-value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_market_buy_max }
+value = 1 if = { limit = { exists = scope:security } value = scope:security.bfl_market_buy_max }
 }
 bfl_market_sell_selection_max = {
-value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_market_sell_units }
+value = 1 if = { limit = { exists = scope:security } value = scope:security.bfl_market_sell_units }
+}
+bfl_available_trade_diplomats = {
+value = num_of_diplomats
+}
+bfl_market_sell_selection_price = {
+value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_equity_quote multiply = 0.98 }
 }

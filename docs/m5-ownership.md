@@ -1,5 +1,13 @@
 # M5 ownership and share trading
 
+The 18 October portfolio/sale follow-up passes [208 focused engine assertions](../tests/results/2026-10-18-m5-portfolio-validation.json): 40 market, 54 ownership and 114 accounts/bond, including monthly history, twelve-period bounds and second-process reload. Financial code is byte-identical to those accepted runs; the final runtime `16b31f31f239d4bfb7c97a139070301c26299af94eafe544b37d93ba2cb31a52` differs only in the two GUI files named in the provenance record. [12 actual-game observations and nine captures](../tests/results/2026-10-18-m5-portfolio-ui.json) retain their individual fingerprints and cold-load/GUI-reload provenance. **98 offline tests**, pinned sources, deterministic generation/reconstruction and **218-file staging** pass. The unchanged treasury suite remains covered by the historical gate below.
+
+The active campaign reproduced a zero-value 0.001-share sale that spent a diplomat. The fixed popup starts at one share (or the entire residual when fewer than one remain), and both review and settlement reject zero-cash sales without spending resources. A normal 104.107-share charter sale paid Florence 99.98 gold, spent one diplomat, and preserved bank cash and issued units. Tooltips now state diplomat/access/cooldown requirements.
+
+The management portfolio includes the sovereign charter stake and bank-held external equities under separate owner headings, with value, basis and colored unrealized return. The sovereign stake never enters bank assets or lending capital. Nested entity tooltips show the issuer's NAV, financial position and monthly quote change. The bottom chart records up to twelve actual monthly portfolio values, including purchases and sales; it starts empty on migration and persists through reload. External-company visual evidence uses an explicitly recorded funded subscription fixture, not natural investment returns. [Current NAV math and the separate GBM proposal](exchange-pricing.md) document the user's decision to retain NAV pricing.
+
+Historical full M5 gate before this focused follow-up:
+
 M5 is complete for the pinned single-player baseline: EUV 1.4.1 / Steam build
 25905365 with CMF 2.5.0. [Final validation](../tests/results/2026-10-18-m5-validation.json)
 records **54/54 ownership**, **34/34 market**, **114/114 accounts/bond** and
