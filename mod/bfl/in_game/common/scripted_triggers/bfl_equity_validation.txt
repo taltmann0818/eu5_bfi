@@ -1,3 +1,19 @@
 ﻿bfl_has_shareholder_capacity = {
-OR = { var:bfl_shr_01_active = 0 var:bfl_shr_02_active = 0 var:bfl_shr_03_active = 0 var:bfl_shr_04_active = 0 var:bfl_shr_05_active = 0 var:bfl_shr_06_active = 0 var:bfl_shr_07_active = 0 var:bfl_shr_08_active = 0 var:bfl_shr_09_active = 0 var:bfl_shr_10_active = 0 var:bfl_shr_11_active = 0 var:bfl_shr_12_active = 0 var:bfl_shr_13_active = 0 var:bfl_shr_14_active = 0 var:bfl_shr_15_active = 0 var:bfl_shr_16_active = 0 }
+OR = { AND = { var:bfl_state_owner ?= scope:bfl_party var:bfl_equity_pool = 0 }
+var:bfl_shr_01_active = 0 AND = { var:bfl_shr_01_active = 1 var:bfl_shr_01_party = scope:bfl_party var:bfl_shr_01_pool = var:bfl_equity_pool }
+var:bfl_shr_02_active = 0 AND = { var:bfl_shr_02_active = 1 var:bfl_shr_02_party = scope:bfl_party var:bfl_shr_02_pool = var:bfl_equity_pool }
+var:bfl_shr_03_active = 0 AND = { var:bfl_shr_03_active = 1 var:bfl_shr_03_party = scope:bfl_party var:bfl_shr_03_pool = var:bfl_equity_pool }
+var:bfl_shr_04_active = 0 AND = { var:bfl_shr_04_active = 1 var:bfl_shr_04_party = scope:bfl_party var:bfl_shr_04_pool = var:bfl_equity_pool }
+var:bfl_shr_05_active = 0 AND = { var:bfl_shr_05_active = 1 var:bfl_shr_05_party = scope:bfl_party var:bfl_shr_05_pool = var:bfl_equity_pool }
+var:bfl_shr_06_active = 0 AND = { var:bfl_shr_06_active = 1 var:bfl_shr_06_party = scope:bfl_party var:bfl_shr_06_pool = var:bfl_equity_pool }
+var:bfl_shr_07_active = 0 AND = { var:bfl_shr_07_active = 1 var:bfl_shr_07_party = scope:bfl_party var:bfl_shr_07_pool = var:bfl_equity_pool }
+var:bfl_shr_08_active = 0 AND = { var:bfl_shr_08_active = 1 var:bfl_shr_08_party = scope:bfl_party var:bfl_shr_08_pool = var:bfl_equity_pool }
+var:bfl_shr_09_active = 0 AND = { var:bfl_shr_09_active = 1 var:bfl_shr_09_party = scope:bfl_party var:bfl_shr_09_pool = var:bfl_equity_pool }
+var:bfl_shr_10_active = 0 AND = { var:bfl_shr_10_active = 1 var:bfl_shr_10_party = scope:bfl_party var:bfl_shr_10_pool = var:bfl_equity_pool }
+var:bfl_shr_11_active = 0 AND = { var:bfl_shr_11_active = 1 var:bfl_shr_11_party = scope:bfl_party var:bfl_shr_11_pool = var:bfl_equity_pool }
+var:bfl_shr_12_active = 0 AND = { var:bfl_shr_12_active = 1 var:bfl_shr_12_party = scope:bfl_party var:bfl_shr_12_pool = var:bfl_equity_pool }
+var:bfl_shr_13_active = 0 AND = { var:bfl_shr_13_active = 1 var:bfl_shr_13_party = scope:bfl_party var:bfl_shr_13_pool = var:bfl_equity_pool }
+var:bfl_shr_14_active = 0 AND = { var:bfl_shr_14_active = 1 var:bfl_shr_14_party = scope:bfl_party var:bfl_shr_14_pool = var:bfl_equity_pool }
+var:bfl_shr_15_active = 0 AND = { var:bfl_shr_15_active = 1 var:bfl_shr_15_party = scope:bfl_party var:bfl_shr_15_pool = var:bfl_equity_pool }
+var:bfl_shr_16_active = 0 AND = { var:bfl_shr_16_active = 1 var:bfl_shr_16_party = scope:bfl_party var:bfl_shr_16_pool = var:bfl_equity_pool } }
 }

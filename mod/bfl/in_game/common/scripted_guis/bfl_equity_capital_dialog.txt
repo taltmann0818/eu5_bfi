@@ -1,0 +1,7 @@
+﻿bfl_invite_equity_capital = { scope = country
+        is_shown = { bfl_has_management = yes country_type = location }
+        is_valid = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_bank_subscription = yes } }
+        effect = { if = { limit = { bfl_has_management = yes country_type = location }
+            bfl_resolve_command_bank = yes set_variable = { name = bfl_capital_issuer value = scope:bfl_bank }
+            trigger_event_non_silently = bfl_market.8 } }
+    }

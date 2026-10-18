@@ -27,6 +27,12 @@ def generate(common, effect, loc, write):
             set_variable = bfl_company_ownership_initialized
         }
         set_variable = { name = bfl_company_schema value = 2 }
+        if = { limit = { NOT = { has_variable = bfl_ownership_schema } }
+            set_variable = { name = bfl_total_units value = { value = bfl_tangible_equity min = 1 } }
+            set_variable = { name = bfl_state_units value = 0 }
+            set_variable = { name = bfl_accept_equity value = 0 }
+            bfl_initialize_ownership = yes
+        }
     }'''
     triggers = effect('bfl_company_authority', '''bfl_is_company = yes
         exists = scope:bfl_company_actor country_exists = scope:bfl_company_actor
@@ -201,18 +207,11 @@ def generate(common, effect, loc, write):
             value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
         change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
         change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
-        if = { limit = { var:bfl_company_mandate > 0
-            exists = var:bfl_company_owner country_exists = var:bfl_company_owner }
+        if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
             set_variable = { name = bfl_company_dividend value = {
                 value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
                 max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
-            add_gold = { value = var:bfl_company_dividend multiply = -1 }
-            var:bfl_company_owner = {
-                add_gold = scope:bfl_operating_company.var:bfl_company_dividend
-                if = { limit = { bfl_is_bank = yes }
-                    change_variable = { name = bfl_profit_company add = scope:bfl_operating_company.var:bfl_company_dividend }
-                }
-            }
+            bfl_distribute_company_equity_income = yes
         }
         }
     ''')
@@ -223,6 +222,7 @@ def generate(common, effect, loc, write):
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
             set_variable = { name = bfl_company_last_period value = bfl_period }
             bfl_observe_company_operations = yes bfl_settle_company_income = yes
+            bfl_record_exchange_history = yes
             change_variable = { name = bfl_company_statement_count add = 1 }
             if = { limit = { var:bfl_company_project_state = 1
                 num_explorations_including_in_construction = 0 }

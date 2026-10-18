@@ -13,8 +13,12 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
-        color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]" } text_single = { raw_text = "[Country.GetDiplomacy.GetOverlord.GetName]" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_state_units').GetValue|2])" autoresize = yes align = right|nobaseline } } }widget = { visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+        color = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetName]" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_state_units').GetValue|2])" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_founder_units').GetValue,'(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+            icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
+        color = { 0.65 0.55 0.35 1 } } text_single = { raw_text = "[Localize('bfl_founder_class')]" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_founder_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_founder_units').GetValue|2])" autoresize = yes align = right|nobaseline } } }widget = { visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_01_active').GetValue, '(CFixedPoint)1')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_shr_01_party').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -78,7 +82,11 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_shr_16_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_shr_16_party').GetCountry.GetName]" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_16')|%2] ([Country.MakeScope.GetVariable('bfl_shr_16_units').GetValue|2])" autoresize = yes align = right|nobaseline } } } } } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_share_legend_footer" } } } }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_16')|%2] ([Country.MakeScope.GetVariable('bfl_shr_16_units').GetValue|2])" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'),'(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+            icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
+        color = { 0.48 0.53 0.58 1 } } text_single = { raw_text = "[Localize('bfl_dealer_inventory_class')]" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_share_fraction')|%2] ([GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units')|2])" autoresize = yes align = right|nobaseline } } } } } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_share_legend_footer" } } } }
     }type bfl_asset_cash_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/accounts.dds" } }

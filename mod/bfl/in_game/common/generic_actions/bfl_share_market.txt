@@ -1,0 +1,30 @@
+﻿bfl_buy_shares = { type = owncountry ai_tick = never show_message = no
+            potential = { scope:actor = { bfl_has_management = yes } }
+            allow = { scope:actor = { bfl_resolved_equity_access = yes } }
+            select_trigger = { looking_for_a = country target_flag = security name = bfl_select_buy_shares
+                column = { data = bfl_equity_market }
+                bottom_widget = bfl_buy_quantity_widget move_to_next_section_on_click = no
+                interaction_source_list = { scope:actor = { every_country = { limit = { bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
+            NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank }
+            OR = { var:bfl_accept_equity = 1 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } } } add_to_list = source } } }
+                visible = { bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
+            NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank }
+            OR = { var:bfl_accept_equity = 1 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } } } enabled = { bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
+            NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank }
+            OR = { var:bfl_accept_equity = 1 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } } } }
+            select_trigger = { looking_for_a = value target_flag = share_quantity name = bfl_share_quantity
+                min = 0.001 max = 1000000 step = 0.001 default = 1 }
+            effect = { scope:actor = { trigger_event_silently = bfl_market.11 } }
+            ai_will_do = { value = 0 } }
+bfl_sell_shares = { type = owncountry ai_tick = never show_message = no
+            potential = { scope:actor = { bfl_has_management = yes } }
+            allow = { scope:actor = { bfl_resolved_equity_access = yes } }
+            select_trigger = { looking_for_a = country target_flag = security name = bfl_select_sell_shares
+                column = { data = bfl_equity_market }
+                bottom_widget = bfl_sell_quantity_widget move_to_next_section_on_click = no
+                interaction_source_list = { scope:actor = { every_country = { limit = { bfl_equity_issuer = yes bfl_market_owned_units > 0 } add_to_list = source } } }
+                visible = { bfl_equity_issuer = yes bfl_market_owned_units > 0 } enabled = { bfl_equity_issuer = yes bfl_market_owned_units > 0 } }
+            select_trigger = { looking_for_a = value target_flag = share_quantity name = bfl_share_quantity
+                min = 0.001 max = 1000000 step = 0.001 default = 1 }
+            effect = { scope:actor = { trigger_event_silently = bfl_market.12 } }
+            ai_will_do = { value = 0 } }

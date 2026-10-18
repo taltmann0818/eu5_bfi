@@ -1,0 +1,20 @@
+﻿bfl_resolved_equity_access = {
+trigger_if = { limit = { bfl_is_independent_bank = yes } bfl_equity_exchange_access = yes }
+        trigger_else_if = { limit = { bfl_has_management = yes country_type = location exists = var:bfl_bank }
+            var:bfl_bank = { bfl_equity_exchange_access = yes } }
+        trigger_else = { always = no }
+}
+bfl_selected_equity_buy_ready = {
+bfl_resolved_equity_access = yes
+        exists = var:bfl_exchange_selected country_exists = var:bfl_exchange_selected
+        bfl_exchange_cash >= var:bfl_exchange_selected.var:bfl_equity_offer_price
+        bfl_exchange_capital >= var:bfl_exchange_selected.var:bfl_equity_offer_price
+        var:bfl_exchange_selected = { bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0 var:bfl_equity_offer_active = 1
+            bfl_period <= var:bfl_equity_offer_expiry var:bfl_equity_offer_capital_revision = var:bfl_equity_revision
+            exists = var:bfl_equity_offer_seller country_exists = var:bfl_equity_offer_seller
+            var:bfl_equity_offer_seller = { bfl_equity_exchange_access = yes }
+            NOT = { this = prev } OR = { NOT = { exists = prev.var:bfl_bank } NOT = { this = prev.var:bfl_bank } }
+            NOT = { var:bfl_equity_offer_seller = prev }
+            OR = { NOT = { exists = prev.var:bfl_bank } NOT = { var:bfl_equity_offer_seller = prev.var:bfl_bank } }
+        }
+}

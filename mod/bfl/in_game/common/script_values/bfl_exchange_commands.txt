@@ -1,0 +1,45 @@
+﻿bfl_exchange_cash = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_free_cash }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_free_cash }
+}
+bfl_exchange_capital = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes } value = bfl_capital_headroom }
+            else_if = { limit = { bfl_has_management = yes } value = var:bfl_bank.bfl_capital_headroom }
+}
+bfl_exchange_selected_units = {
+value = 0
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_01_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_01_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_01_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_01_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_02_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_02_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_02_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_02_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_03_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_03_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_03_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_03_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_04_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_04_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_04_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_04_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_05_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_05_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_05_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_05_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_06_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_06_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_06_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_06_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_07_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_07_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_07_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_07_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_08_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_08_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_08_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_08_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_09_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_09_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_09_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_09_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_10_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_10_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_10_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_10_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_11_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_11_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_11_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_11_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_12_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_12_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_12_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_12_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_13_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_13_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_13_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_13_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_14_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_14_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_14_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_14_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_15_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_15_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_15_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_15_units }
+if = { limit = { bfl_is_independent_bank = yes var:bfl_pos_16_issuer ?= var:bfl_exchange_selected } add = var:bfl_pos_16_units }
+            else_if = { limit = { bfl_has_management = yes country_type = location var:bfl_bank.var:bfl_pos_16_issuer ?= var:bfl_exchange_selected } add = var:bfl_bank.var:bfl_pos_16_units }
+}

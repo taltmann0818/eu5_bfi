@@ -1,0 +1,16 @@
+﻿bfl_ai_exchange_ready = {
+is_ai = yes bfl_has_management = yes has_advance = stock_exchange_advance
+        OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+        OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 }
+        NOT = { bfl_owns_stock_exchange = yes }
+        NOT = { exists = var:bfl_exchange_project }
+        NOT = { any_owned_building = { building_type = building_type:stock_exchange building_levels_under_construction > 0 } }
+        can_build_building = building_type:stock_exchange
+        gold >= bfl_exchange_construction_budget
+        OR = { country_type = location AND = { bfl_is_independent_bank = yes bfl_free_cash >= bfl_exchange_construction_budget bfl_capital_headroom >= bfl_exchange_construction_budget } }
+}
+bfl_ai_exchange_site = {
+is_market_center = yes can_build_building = building_type:stock_exchange
+        NOT = { has_building_with_at_least_one_level = stock_exchange }
+        NOT = { any_buildings_in_location = { building_type = building_type:stock_exchange building_levels_under_construction > 0 } }
+}

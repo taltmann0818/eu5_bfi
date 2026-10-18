@@ -1,0 +1,10 @@
+﻿namespace = bfl_exchange
+        bfl_exchange.1 = { type = country_event title = bfl_exchange.1.title desc = bfl_exchange.1.desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_exchange_confirm ai_chance = { base = 100 }
+                hidden_effect = { trigger_event_silently = bfl_exchange.2 } }
+            option = { name = bfl_cancel ai_chance = { base = 0 }
+                hidden_effect = { if = { limit = { var:bfl_order_revision = scope:bfl_confirm_revision }
+                    remove_variable = bfl_order_issuer remove_variable = bfl_order_buyer remove_variable = bfl_order_seller } } }
+        }
+        bfl_exchange.2 = { type = country_event hidden = yes immediate = { bfl_accept_equity_order = yes } }

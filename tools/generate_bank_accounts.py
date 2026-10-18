@@ -38,7 +38,9 @@ def generate(common, effect, loc, write, tune):
         migration += f'''remove_country_modifier = bfl_royalty_bank_{index}
             if = {{ limit = {{ exists = overlord }} overlord = {{ remove_country_modifier = bfl_royalty_sovereign_{index} }} }}\n'''
     migration += '}\n'
-    charter = '''set_variable = { name = bfl_state_units value = { value = bfl_equity add = scope:bfl_controller.var:bfl_payment min = 1 } }
+    charter = '''set_variable = { name = bfl_state_owner value = scope:bfl_controller }
+        set_variable = { name = bfl_founder_units value = 0 }
+        set_variable = { name = bfl_state_units value = { value = bfl_equity add = scope:bfl_controller.var:bfl_payment min = 1 } }
         set_variable = { name = bfl_total_units value = var:bfl_state_units }
     '''
     for index in range(1, 17):

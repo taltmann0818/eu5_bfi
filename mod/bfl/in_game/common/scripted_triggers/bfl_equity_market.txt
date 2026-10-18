@@ -1,0 +1,15 @@
+﻿bfl_market_primary_ready = {
+bfl_equity_issuer = yes var:bfl_accept_equity = 1 var:bfl_equity_listed = 1
+        NOT = { has_variable = bfl_operation_guard } bfl_tangible_equity > 0
+        var:bfl_market_units > 0 var:bfl_market_price >= 0.01
+        bfl_equity_quote = scope:bfl_market_actor.var:bfl_market_unit_price
+        bfl_has_shareholder_capacity = yes
+        scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes bfl_equity_exchange_access = yes
+            NOT = { this = scope:bfl_issuer } bfl_portfolio_capacity = yes
+            bfl_free_cash >= scope:bfl_issuer.var:bfl_market_price
+            bfl_capital_headroom >= scope:bfl_issuer.var:bfl_market_price }
+        bfl_equity_buyer_units <= { value = var:bfl_total_units add = var:bfl_market_units
+            multiply = bfl_equity_concentration_limit subtract = var:bfl_market_units }
+        OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+            scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
+}

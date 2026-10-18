@@ -67,6 +67,8 @@ def build(game, pin=False):
     assert types + restored == text
     from generate_interface import build_credit
     build_credit(game, baseline, pin)
+    from build_exchange_advance import build as build_exchange_advance
+    build_exchange_advance(game)
     print('Economy generated: Balance income rows and Credit homepage; native templates owned once.')
 
 

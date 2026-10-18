@@ -182,7 +182,8 @@ def fixture(token, fingerprint):
         start += f'set_variable = {{ name = bfl_profit_{bucket} value = 0 }}\n'
     start += '''set_gold = 10000 set_variable = { name = bfl_expense_arrears value = 0 }
         set_variable = { name = bfl_state value = 0 } set_variable = { name = bfl_total_units value = 100 }
-        set_variable = { name = bfl_state_units value = 60 } set_variable = { name = bfl_shr_01_active value = 1 }
+        set_variable = { name = bfl_state_units value = 60 } set_variable = { name = bfl_state_owner value = c:FLO }
+        set_variable = { name = bfl_founder_units value = 0 } set_variable = { name = bfl_shr_01_active value = 1 }
         set_variable = { name = bfl_shr_01_party value = c:GEN } set_variable = { name = bfl_shr_01_units value = 40 }
         set_variable = { name = bfl_payout_ratio value = 0.5 } set_variable = { name = bfl_profit_credit value = 100 }
         set_variable = { name = bfl_loss_carryforward value = 40 }

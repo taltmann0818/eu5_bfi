@@ -57,7 +57,7 @@ bfl_enable_bank_share_dealing = yes
 requires = banking_advance
 potential = { bfl_is_research_owner = yes }
 allow = { OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = banking_advance }
-ai_weight = { add = 1 }
+ai_weight = { add = 15000 }
 }
 bfl_collateralization = {
 age = age_5_absolutism

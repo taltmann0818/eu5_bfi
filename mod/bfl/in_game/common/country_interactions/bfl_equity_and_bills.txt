@@ -15,10 +15,10 @@ bfl_subscribe_bank = {
             select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
                 column = { data = country_diplomacy_info_loan }
                 visible = { bfl_is_bank = yes }
-                enabled = { bfl_can_originate_bank_subscription = yes var:bfl_accept_deposits = 1 var:bfl_accept_equity = 1 NOT = { this = scope:actor } }
+                enabled = { bfl_can_originate_bank_subscription = yes  var:bfl_accept_equity = 1 NOT = { this = scope:actor } }
             }
             effect = { scope:actor = { save_scope_as = bfl_party } scope:recipient = { bfl_subscribe_bank_capital = yes } }
-            ai_will_do = { value = 0 if = { limit = { scope:actor = { bfl_is_bank = yes bfl_free_cash > 500 } scope:recipient = { bfl_equity > 0 var:bfl_accept_equity = 1 } } add = 10 } }
+            ai_will_do = { value = 0 if = { limit = { scope:actor = { bfl_is_bank = yes bfl_free_cash > 500 var:bfl_ai_equity_enabled = 1 } scope:recipient = { bfl_equity > 0 var:bfl_accept_equity = 1 } } add = 10 } }
         }
 bfl_redeem_funded_bills = {
         type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never potential = { } allow = { }

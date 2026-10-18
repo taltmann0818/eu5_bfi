@@ -127,7 +127,9 @@ remove_country_modifier = bfl_royalty_bank_4
 }
 }
 bfl_assign_charter_ownership = {
-set_variable = { name = bfl_state_units value = { value = bfl_equity add = scope:bfl_controller.var:bfl_payment min = 1 } }
+set_variable = { name = bfl_state_owner value = scope:bfl_controller }
+        set_variable = { name = bfl_founder_units value = 0 }
+        set_variable = { name = bfl_state_units value = { value = bfl_equity add = scope:bfl_controller.var:bfl_payment min = 1 } }
         set_variable = { name = bfl_total_units value = var:bfl_state_units }
     set_variable = { name = bfl_shr_01_active value = 0 }
 remove_variable = bfl_shr_01_party

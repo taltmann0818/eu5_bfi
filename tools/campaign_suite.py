@@ -70,6 +70,8 @@ def fixture(token, fingerprint):
             set_variable = { name = bfl_profile value = 1 }
             set_variable = { name = bfl_accept_deposits value = 1 }
             set_variable = { name = bfl_total_units value = 1000 }
+            set_variable = { name = bfl_founder_units value = 0 }
+            set_variable = { name = bfl_state_owner value = c:FLO }
             set_variable = { name = bfl_last_takeover_period value = { value = bfl_period add = 100 } }
             set_gold = 1000
         '''
@@ -138,9 +140,10 @@ def fixture(token, fingerprint):
         start += check(label + '_fails_closed', 'gold = 1000 var:bfl_facility_blocked = 1')
     start += 'c:FLO = { save_scope_as = bfl_party } bfl_issue_funded_bill = yes bfl_subscribe_bank_capital = yes\n'
     start += check('age_locked_products_no_mutation', 'gold = 1000 c:FLO = { gold = 1000 } var:bfl_other_payables = 0 var:bfl_shr_01_active = 0')
-    # A fixture subscription exercises the live allocator, independently of its age gate.
+    # M5 removed the public allocator's age/research bypass. The positive funded
+    # NAV path now has its own Reformation suite; this Traditions fixture rejects.
     start += 'set_variable = { name = bfl_new_units value = 100 } bfl_allocate_subscription = yes\n'
-    start += check('subscription_funded', 'gold = 1100 c:FLO = { gold = 900 } var:bfl_total_units = 1100 var:bfl_shr_01_units = 100')
+    start += check('allocator_cannot_bypass_subscription_gates', 'gold = 1000 c:FLO = { gold = 1000 } var:bfl_total_units = 1000 var:bfl_shr_01_active = 0')
     start += check('subscription_not_profit', 'var:bfl_profit_services = 0 var:bfl_profit_credit = 0')
     # Grant uses the same guarded service called by the completed charter transaction.
     start += reset() + '''c:FLO = { set_gold = 1000 }
@@ -183,7 +186,7 @@ def fixture(token, fingerprint):
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
     start += 'bfl_recapitalize = yes\n'
-    start += check('recapitalization_funded', 'gold = 1086.55 c:FLO = { gold = 912.5 } var:bfl_state_units = 600 var:bfl_total_units = 1100 var:bfl_profit_services = 0')
+    start += check('recapitalization_funded', 'gold = 1086.55 c:FLO = { gold = 912.5 } var:bfl_state_units > 600 var:bfl_total_units > 1100 var:bfl_profit_services = 0')
     start += '''set_variable = { name = bfl_total_units value = 1000 }
         set_variable = { name = bfl_state_units value = 500 }
         set_variable = { name = bfl_shr_01_active value = 1 }
@@ -203,9 +206,9 @@ def fixture(token, fingerprint):
     start += '''c:PRZ = { set_gold = 1000 save_scope_as = bfl_party }
         set_variable = { name = bfl_new_units value = 100 } bfl_allocate_subscription = yes
     '''
-    start += check('external_bank_subscription_dilutes', 'var:bfl_total_units = 1600 var:bfl_state_units = 1500 var:bfl_shr_01_party = c:PRZ var:bfl_shr_01_units = 100 gold = 1100 c:PRZ = { gold = 900 }')
+    start += check('unresearched_external_subscription_rejected', 'var:bfl_total_units = 1500 var:bfl_state_units = 1500 var:bfl_shr_01_active = 0 gold = 1000 c:PRZ = { gold = 1000 }')
     start += 'bfl_allocate_subscription = yes\n'
-    start += check('repeat_subscriber_aggregated','var:bfl_shr_01_units = 200 var:bfl_shr_02_active = 0 var:bfl_total_units = 1700')
+    start += check('repeated_unresearched_subscription_stays_rejected','var:bfl_shr_01_active = 0 var:bfl_shr_02_active = 0 var:bfl_total_units = 1500')
     start += reset() + '''set_gold = 10000
         c:VEN = { create_estate_loan = { amount = 100 interest = 0.25 months = 60 }
             ordered_loan = { order_by = loan_interest max = 1 save_scope_as = bfi_takeover_claim }

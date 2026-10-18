@@ -70,6 +70,13 @@ def generate(common, effect, loc, write):
                 change_variable = {{ name = bfl_custom_credit_value add = var:bfl_asset_amount }} }}
             bfl_allocate_asset_row = yes }}\n'''
     reconcile += 'bfl_add_sovereign_bond_assets = yes\n'
+    reconcile += 'change_variable = { name = bfl_asset_investments add = bfl_security_carrying }\n'
+    for i in range(1,17):
+        reconcile += f'''if = {{ limit = {{ exists = var:bfl_pos_{i:02}_issuer }}
+            var:bfl_pos_{i:02}_issuer = {{ save_scope_as = bfl_asset_party }}
+            set_variable = {{ name = bfl_asset_kind value = 5 }}
+            set_variable = {{ name = bfl_asset_amount value = bfl_position_carrying_{i:02} }}
+            bfl_allocate_asset_row = yes }}\n'''
     common('scripted_effects', 'asset_statement', effect('bfl_allocate_asset_row', allocate)
            + effect('bfl_refresh_asset_statement', reconcile))
     values = ''
@@ -84,13 +91,15 @@ def generate(common, effect, loc, write):
         values += effect(f'bfl_asset_listed_{kind}', listed)
         values += effect(f'bfl_asset_unlisted_{kind}', f'value = var:bfl_asset_{kind} subtract = bfl_asset_listed_{kind} min = 0')
     values += effect('bfl_state_share_fraction', 'value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_state_units divide = var:bfl_total_units }')
+    values += effect('bfl_founder_share_fraction','value = 0 if = { limit = { var:bfl_total_units > 0 } value = var:bfl_founder_units divide = var:bfl_total_units }')
+    values += effect('bfl_dealer_share_fraction','value = 0 if = { limit = { var:bfl_total_units > 0 } value = bfl_dealer_units divide = var:bfl_total_units }')
     for index in range(1, 17):
         values += effect(f'bfl_share_fraction_{index:02}', f'value = 0 if = {{ limit = {{ var:bfl_shr_{index:02}_active = 1 var:bfl_total_units > 0 }} value = var:bfl_shr_{index:02}_units divide = var:bfl_total_units }}')
     common('script_values', 'bank_charts', values)
     loc('bfl_share_ownership', 'Share ownership')
     loc('bfl_asset_mix', 'Bank assets')
     loc('bfl_chart_empty', 'No recorded holdings')
-    loc('bfl_share_state_tip', "#T [Country.GetDiplomacy.GetOverlord.GetName]#!\\nOwned shares: [Country.MakeScope.GetVariable('bfl_state_units').GetValue|2] / [Country.MakeScope.GetVariable('bfl_total_units').GetValue|2]\\nOwnership: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2]\\nLast monthly dividend: [Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!")
+    loc('bfl_share_state_tip', "#T [Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetName]#!\\nOwned shares: [Country.MakeScope.GetVariable('bfl_state_units').GetValue|2] / [Country.MakeScope.GetVariable('bfl_total_units').GetValue|2]\\nOwnership: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2]\\nLast monthly dividend: [Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!")
     for index in range(1, 17):
         loc(f'bfl_share_{index:02}_tip', f"#T [Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetName]#!\\nShares: [Country.MakeScope.GetVariable('bfl_shr_{index:02}_units').GetValue|2]\\nOwnership: [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_{index:02}')|%2]")
     from generate_finance_widgets import list_block, row, scroll_rows, tooltip_type
@@ -98,15 +107,21 @@ def generate(common, effect, loc, write):
     loc('bfl_share_title', 'Share ownership of [Country.GetName]')
     loc('bfl_share_subtitle', 'Outstanding bank equity')
     loc('bfl_share_legend_title', "[Country.MakeScope.GetVariable('bfl_total_units').GetValue|2] shares outstanding")
-    share_rows = row('[Country.GetDiplomacy.GetOverlord.GetName]',
+    share_rows = row("[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetName]",
                      "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_state_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_state_units').GetValue|2])", 0,
                      '''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]"''',
-                     '"[Country.GetDiplomacy.GetOverlord.GetMapColor]"')
+                     '"[Country.MakeScope.GetVariable(\'bfl_state_owner\').GetCountry.GetMapColor]"')
+    loc('bfl_founder_class','Founders · local burgher pool')
+    share_rows += row("[Localize('bfl_founder_class')]", "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_founder_share_fraction')|%2] ([Country.MakeScope.GetVariable('bfl_founder_units').GetValue|2])",0,
+                      '''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_founder_units').GetValue,'(CFixedPoint)0')]"''', '{ 0.65 0.55 0.35 1 }')
     for index in range(1, 17):
         share_rows += row(f"[Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetName]",
                           f"[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_share_fraction_{index:02}')|%2] ([Country.MakeScope.GetVariable('bfl_shr_{index:02}_units').GetValue|2])", index,
                           f'''visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_shr_{index:02}_active').GetValue, '(CFixedPoint)1')]"''',
                           f'''"[Country.MakeScope.GetVariable('bfl_shr_{index:02}_party').GetCountry.GetMapColor]"''')
+    loc('bfl_dealer_inventory_class','Market maker inventory · no votes')
+    share_rows += row("[Localize('bfl_dealer_inventory_class')]", "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_share_fraction')|%2] ([GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units')|2])",0,
+                      '''visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_dealer_units'),'(CFixedPoint)0')]"''', '{ 0.48 0.53 0.58 1 }')
     loc('bfl_share_legend_footer', "Ownership percentage (owned shares). Country colors match the ring. Last sovereign dividend: [Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!")
     share_content = list_block('bfl_share_legend_title', scroll_rows(share_rows))
     share_content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_share_legend_footer" } }'
@@ -138,8 +153,14 @@ def generate(common, effect, loc, write):
 
 def charts(var, value):
     shares = f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
-        value = "[FixedPointToFloat({var('state_units')})]" color = "[Country.GetDiplomacy.GetOverlord.GetMapColor]"
+        value = "[FixedPointToFloat({var('state_units')})]" color = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetMapColor]"
         visible = "[GreaterThan_CFixedPoint({var('state_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
+    shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat({var('founder_units')})]" color = {{ 0.65 0.55 0.35 1 }}
+        visible = "[GreaterThan_CFixedPoint({var('founder_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
+    shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
+        value = "[FixedPointToFloat({value('bfl_dealer_units')})]" color = {{ 0.48 0.53 0.58 1 }}
+        visible = "[GreaterThan_CFixedPoint({value('bfl_dealer_units')}, '(CFixedPoint)0')]" tooltipwidget = {{ bfl_share_ownership_tooltip = {{ }} }} }}'''
     for index in range(1, 17):
         shares += f'''pieslice = {{ texture = "gfx/interface/pie_charts/piechart_alpha.dds" texture_density = 2
             value = "[FixedPointToFloat({var(f'shr_{index:02}_units')})]"

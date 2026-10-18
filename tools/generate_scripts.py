@@ -148,7 +148,7 @@ def initialize():
     for i in range(1,33):
         values += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_withdrawal_requested }}\n'
     values += '''}
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying }
     bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
@@ -156,7 +156,7 @@ def initialize():
         multiply = 0.25 add = bfl_withdrawals_due add = 25 add = var:bfl_cash_committed
     }
     bfl_free_cash = { value = gold subtract = bfl_protected_cash min = 0 }
-    bfl_capital_headroom = { value = bfl_assets multiply = -0.10 add = bfl_equity min = 0 }
+    bfl_capital_headroom = { value = bfl_assets multiply = -0.10 add = bfl_equity subtract = bfl_security_carrying min = 0 }
     bfl_negative_payment = { value = var:bfl_payment multiply = -1 }
     bfl_ai_charter_score = { value = 0 if = { limit = { gold > 1500 } add = 10 } }
     '''
@@ -177,7 +177,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\n'
+    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -193,6 +193,7 @@ def initialize():
                 bfl_register_company = yes
             }
         }
+        every_country = { limit = { bfl_is_bank = yes } bfl_migrate_equity_portfolio = yes }
     }
     bfl_resolve_command_bank = {
         save_scope_as = bfl_actor
@@ -258,7 +259,8 @@ def permissions():
         for req in a['requires']:
             definitions += f'requires = bfl_{req}\n'
         native_gate = ''.join(f' has_advance = {req}' for req in a.get('native_requires', []))
-        definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])}{native_gate} }}\nai_weight = {{ add = 1 }}\n}}\n'
+        priority = 'add = 15000' if a['id'] == 'bank_share_dealing' else 'add = 1'
+        definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])}{native_gate} }}\nai_weight = {{ {priority} }}\n}}\n'
         loc(key,a['id'].replace('_',' ').title())
         loc(key+'_desc', f"Unlocks {a['id'].replace('_',' ')} from the {AGES[a['age']-1].split('_',2)[2].title()} age. The bank's specialization and operating permissions still apply. Native integrations retain their development gates until measured.")
     common('advances','financial_advances',definitions)
@@ -639,7 +641,7 @@ def native_adapters():
         'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
         'native_goods_adapter':[('bfl_purchase_native_inventory','P09'),('bfl_sell_native_inventory','P09'),('bfl_settle_warehouse_receipt','P09'),('bfl_settle_commodity_forward','P09')],
         'native_trade_adapter':[('bfl_fund_commenda','P11')],
-        'native_receipts_adapter':[('bfl_observe_native_receipts','P07'),('bfl_subscribe_company_equity','P07')],
+        'native_receipts_adapter':[('bfl_observe_native_receipts','P07')],
         'monetary':[('bfl_issue_sovereign_notes','P05'),('bfl_settle_interbank_liquidity','P04'),('bfl_run_clearing','P10')],
         'security':[('bfl_pledge_native_collateral','P04'),('bfl_enforce_native_collateral','P04')],
     }
@@ -673,16 +675,16 @@ def treasury_and_resolution():
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_record_activity_statement = yes
         bfl_offset_losses = yes
-    if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 }
+    if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 bfl_registered_units <= var:bfl_total_units }
         set_variable = { name = bfl_funded_dividend value = {
             value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller
             add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native
             multiply = var:bfl_payout_ratio max = bfl_free_cash max = bfl_capital_headroom
         } }
-        if = { limit = { bfl_has_valid_controller = yes var:bfl_state_units > 0 }
+        if = { limit = { exists = var:bfl_state_owner country_exists = var:bfl_state_owner var:bfl_state_units > 0 }
             set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_state_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
-            overlord = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }
+            var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
             set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }
@@ -692,10 +694,19 @@ def treasury_and_resolution():
         dividends+=f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_party country_exists = var:{n}_party }}
             set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = var:{n}_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
             add_gold = bfl_negative_payment
-            var:{n}_party = {{ add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }}
+            set_variable = {{ name = bfl_receipt_slot value = {i} }}
+            bfl_pay_equity_holder = yes
             change_variable = {{ name = bfl_dividend_paid add = var:bfl_payment }}
             set_variable = {{ name = {n}_last_payment value = bfl_period }}
         }}\n'''
+    dividends+='''bfl_pay_dealer_dividend = yes
+        change_variable = { name = bfl_dividend_paid add = var:bfl_dealer_payment }
+        if = { limit = { var:bfl_founder_units > 0 }
+        set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_founder_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+        add_gold = bfl_negative_payment
+        "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } }
+        change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
+    }'''
     dividends+='''
         set_variable = { name = bfl_payment value = var:bfl_dividend_paid }
         bfl_consume_profit_reserves = yes
@@ -716,13 +727,23 @@ def treasury_and_resolution():
     bfl_recapitalize = {
         if = { limit = { bfl_has_valid_controller = yes overlord = { gold >= 100 } }
             save_scope_as = bfl_bank
+            overlord = { save_scope_as = bfl_party }
+            set_variable = { name = bfl_equity_pool value = 0 }
+            if = { limit = { OR = { var:bfl_state_owner ?= scope:bfl_party bfl_has_shareholder_capacity = yes } }
+            set_variable = { name = bfl_new_units value = 100 }
+            if = { limit = { bfl_tangible_equity > 0 var:bfl_total_units > 0 }
+                set_variable = { name = bfl_new_units value = { value = 100 multiply = var:bfl_total_units divide = bfl_tangible_equity multiply = 1000 floor = yes divide = 1000 } } }
             overlord = { add_gold = -100 }
             add_gold = 100
             # Rescue contribution is booked as paid-in capital; no realized earnings.
             change_variable = { name = bfl_paid_in_capital add = 100 }
-            change_variable = { name = bfl_state_units add = 100 }
-            change_variable = { name = bfl_total_units add = 100 }
+            if = { limit = { var:bfl_state_owner ?= scope:bfl_party }
+                change_variable = { name = bfl_state_units add = var:bfl_new_units } }
+            else = { set_variable = { name = bfl_equity_amount value = 100 } bfl_allocate_equity_holder = yes }
+            change_variable = { name = bfl_total_units add = var:bfl_new_units }
+            change_variable = { name = bfl_equity_revision add = 1 }
             bfl_evaluate_distress = yes
+            }
         }
     }
     bfl_suspend_new_business = { set_variable = { name = bfl_accept_deposits value = 0 } set_variable = { name = bfl_state value = 2 } }
@@ -745,6 +766,7 @@ def treasury_and_resolution():
             }
             bfl_autonomous_takeover = yes
             bfl_record_history = yes
+            bfl_record_exchange_history = yes
             set_variable = { name = bfl_last_period value = bfl_period }
         }
     }
@@ -850,7 +872,7 @@ def hooks_and_commands():
         }}\n'''
     for ratio,label in [(0,'Retain profits'),(0.25,'25% payout'),(0.5,'50% payout')]:
         key=f'bfl_payout_{int(ratio*100)}'
-        commands += command(key,'bfl_has_management = yes',f'scope:bfl_bank = {{ set_variable = {{ name = bfl_payout_ratio value = {ratio} }} }}')
+        commands += command(key,'bfl_has_payout_authority = yes',f'scope:bfl_bank = {{ set_variable = {{ name = bfl_payout_ratio value = {ratio} }} }}')
         loc(key,label)
     for product,label in [(1,'Deposit 100 gold on demand'),(2,'Deposit 100 gold for 12 months')]:
         key=f'bfl_deposit_{product}'
@@ -1016,6 +1038,8 @@ def main():
     generate_receipts(common,effect,loc)
     from generate_bond_panel import generate as generate_bond_panel
     generate_bond_panel(common,effect,loc,write)
+    from generate_ownership import generate as generate_ownership
+    generate_ownership(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')
