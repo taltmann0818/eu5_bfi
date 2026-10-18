@@ -7,6 +7,9 @@ through a country's treasury. Ordinary banks still obey every investment limit.
 
 
 def generate(effect):
+    from equity_pricing import load_policy
+    resale_fraction=load_policy().dealer_resale_fraction
+    resale_literal=f'{resale_fraction:.5f}'.rstrip('0').rstrip('.')
     initialize = '\n'.join(f'''if = {{ limit = {{ NOT = {{ has_variable = bfl_dealer_{field} }} }}
         set_variable = {{ name = bfl_dealer_{field} value = 0 }} }}''' for field in ('units', 'basis', 'cash', 'realized', 'dividends', 'sales', 'resales'))
     services = effect('bfl_initialize_market_maker', initialize)
@@ -14,7 +17,7 @@ def generate(effect):
         bfl_market_charter_buyback = yes bfl_equity_issuer = yes var:bfl_equity_listed = 1
         scope:bfl_market_actor.var:bfl_market_secondary = 2 NOT = { has_variable = bfl_operation_guard }
         var:bfl_market_units > 0 var:bfl_market_price >= 0.01 bfl_dealer_units >= var:bfl_market_units
-        bfl_equity_quote = scope:bfl_market_actor.var:bfl_market_unit_price
+        bfl_dealer_ask = scope:bfl_market_actor.var:bfl_market_unit_price
         scope:bfl_market_actor = { gold >= scope:bfl_issuer.var:bfl_market_price }
     }
         set_variable = bfl_operation_guard
@@ -34,6 +37,8 @@ def generate(effect):
         set_variable = { name = bfl_equity_last_price value = scope:bfl_market_actor.var:bfl_market_unit_price }
         set_variable = { name = bfl_equity_last_volume value = var:bfl_market_units }
         change_variable = { name = bfl_equity_pending_volume add = var:bfl_market_units }
+        set_variable = { name = bfl_price_order_units value = var:bfl_market_units }
+        set_variable = { name = bfl_price_order_side value = 1 } bfl_record_price_pressure = yes
         set_variable = { name = bfl_equity_last_trade value = bfl_period }
         change_variable = { name = bfl_equity_trades add = 1 }
         remove_variable = bfl_operation_guard
@@ -41,7 +46,7 @@ def generate(effect):
     services += effect('bfl_buy_dealer_inventory', '''if = { limit = {
         bfl_equity_issuer = yes var:bfl_equity_listed = 1 NOT = { has_variable = bfl_operation_guard }
         var:bfl_market_units > 0 var:bfl_market_price >= 0.01 var:bfl_dealer_units >= var:bfl_market_units
-        bfl_equity_quote = scope:bfl_market_actor.var:bfl_market_unit_price bfl_has_shareholder_capacity = yes
+        bfl_dealer_ask = scope:bfl_market_actor.var:bfl_market_unit_price bfl_has_shareholder_capacity = yes
         scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes bfl_equity_exchange_access = yes
             NOT = { this = scope:bfl_issuer } bfl_portfolio_capacity = yes
             bfl_free_cash >= scope:bfl_issuer.var:bfl_market_price bfl_capital_headroom >= scope:bfl_issuer.var:bfl_market_price }
@@ -67,6 +72,8 @@ def generate(effect):
         set_variable = { name = bfl_equity_last_price value = scope:bfl_market_actor.var:bfl_market_unit_price }
         set_variable = { name = bfl_equity_last_volume value = var:bfl_market_units }
         change_variable = { name = bfl_equity_pending_volume add = var:bfl_market_units }
+        set_variable = { name = bfl_price_order_units value = var:bfl_market_units }
+        set_variable = { name = bfl_price_order_side value = 1 } bfl_record_price_pressure = yes
         set_variable = { name = bfl_equity_last_trade value = bfl_period }
         change_variable = { name = bfl_equity_trades add = 1 }
         scope:bfl_market_actor = { set_variable = { name = bfl_market_result value = 1 } }
@@ -82,7 +89,7 @@ def generate(effect):
             if = { limit = { var:bfl_market_wallet = 1 } save_scope_as = bfl_equity_seller }
             else = { bfl_resolve_command_bank = yes scope:bfl_bank = { save_scope_as = bfl_equity_seller } }
             var:bfl_market_issuer = { save_scope_as = bfl_issuer bfl_initialize_market_maker = yes
-                if = { limit = { bfl_equity_issuer = yes
+                if = { limit = { bfl_equity_issuer = yes bfl_nav_quote > 0
                     OR = { var:bfl_equity_listed = 1 AND = { scope:bfl_market_actor.var:bfl_market_wallet = 1 var:bfl_state_owner ?= scope:bfl_market_actor } }
                     NOT = { has_variable = bfl_operation_guard }
                     OR = { AND = { scope:bfl_market_actor.var:bfl_market_wallet = 0
@@ -150,6 +157,8 @@ def generate(effect):
             divide = scope:bfl_market_actor.var:bfl_market_quantity } }
         set_variable = { name = bfl_equity_last_volume value = scope:bfl_market_actor.var:bfl_market_quantity }
         change_variable = { name = bfl_equity_pending_volume add = scope:bfl_market_actor.var:bfl_market_quantity }
+        set_variable = { name = bfl_price_order_units value = scope:bfl_market_actor.var:bfl_market_quantity }
+        set_variable = { name = bfl_price_order_side value = -1 } bfl_record_price_pressure = yes
         set_variable = { name = bfl_equity_last_trade value = bfl_period }
         change_variable = { name = bfl_equity_trades add = 1 }
         scope:bfl_market_actor = { set_variable = { name = bfl_market_result value = 1 } bfl_market_finish_trade = yes }
@@ -177,11 +186,11 @@ def generate(effect):
                             scope:bfl_equity_buyer = { bfl_portfolio_capacity = yes bfl_free_cash > 0.01 bfl_capital_headroom > 0.01 }
                             OR = { bfl_is_bank = yes scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
                             set_variable = { name = bfl_new_units value = { value = scope:bfl_equity_buyer.bfl_free_cash
-                                max = scope:bfl_equity_buyer.bfl_capital_headroom divide = bfl_equity_quote
+                                max = scope:bfl_equity_buyer.bfl_capital_headroom divide = bfl_dealer_ask
                                 max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_equity_buyer_units }
                                 max = var:bfl_dealer_units max = { value = var:bfl_total_units multiply = 0.05 }
                                 min = 0 multiply = 1000 floor = yes divide = 1000 } }
-                            set_variable = { name = bfl_equity_amount value = { value = var:bfl_new_units multiply = bfl_equity_quote
+                            set_variable = { name = bfl_equity_amount value = { value = var:bfl_new_units multiply = bfl_dealer_ask
                                 multiply = 100 round = yes divide = 100 } }
                             if = { limit = { var:bfl_new_units > 0 var:bfl_equity_amount >= 0.01 }
                                 set_variable = bfl_operation_guard
@@ -215,4 +224,5 @@ def generate(effect):
             change_variable = { name = bfl_dealer_dividends add = var:bfl_dealer_payment }
         }
     ''')
-    return services
+    return services.replace('max = { value = var:bfl_total_units multiply = 0.05 }',
+                            f'max = {{ value = var:bfl_total_units multiply = {resale_literal} }}')

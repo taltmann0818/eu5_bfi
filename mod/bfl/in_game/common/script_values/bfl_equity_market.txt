@@ -72,14 +72,14 @@ bfl_market_sell_units = {
 value = bfl_market_owned_units if = { limit = { bfl_market_state_owned_units > 0 } value = bfl_market_state_owned_units }
 }
 bfl_market_buy_price = {
-value = bfl_equity_quote
+value = bfl_dealer_ask
         if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
             value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units }
 }
 bfl_market_buy_max = {
 value = 0
         if = { limit = { bfl_market_charter_buyback = yes bfl_equity_quote > 0 }
-            value = scope:actor.gold divide = bfl_equity_quote max = bfl_dealer_units
+            value = scope:actor.gold divide = bfl_dealer_ask max = bfl_dealer_units
             min = 0 multiply = 1000 floor = yes divide = 1000 }
         else_if = { limit = { bfl_market_buy_price > 0 }
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
@@ -296,7 +296,7 @@ bfl_market_buy_total = {
 value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 100 ceiling = yes divide = 100
 }
 bfl_market_sell_total = {
-value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 0.98 multiply = 100 round = yes divide = 100
+value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = bfl_order_bid_factor multiply = 100 round = yes divide = 100
 }
 bfl_market_actor_votes = {
 value = 0
@@ -344,5 +344,8 @@ bfl_available_trade_diplomats = {
 value = num_of_diplomats
 }
 bfl_market_sell_selection_price = {
-value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_equity_quote multiply = 0.98 }
+value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_dealer_bid }
+}
+bfl_order_bid_factor = {
+value = 0.98 if = { limit = { exists = var:bfl_market_issuer } value = var:bfl_market_issuer.bfl_price_bid_factor }
 }

@@ -5,7 +5,7 @@ value = gold
             add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
         else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt } }
 }
-bfl_equity_quote = {
+bfl_nav_quote = {
 value = 0
         if = { limit = { var:bfl_total_units > 0 }
             value = bfl_tangible_equity min = 0 divide = var:bfl_total_units

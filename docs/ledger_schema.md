@@ -24,7 +24,7 @@ Custom funded bills are one-month payment claims backed by the payer's actual 10
 
 M5 ownership schema 1 has sixteen issuer-owned shareholder slots (`party`, `pool`, `units`, `basis`, generation), sixteen investor portfolio indexes, one bounded public ask per issuer, twelve monthly NAV observations and six recent executions. Issuer ledgers are authoritative; portfolio indexes are rebuilt from them. Assets carry external shares at the lower of acquisition basis and tangible NAV. Lending capital deducts the entire carrying amount, and tangible NAV excludes securities, preventing recursive cross-capitalization. Unrealized changes remain separate from realized income and cash dividends. A bank may hold at most 25% of another bank or 60% of an eligible company; self holdings are excluded.
 
-Native share dialogs capture quantity, unit price, rounded total and a monotonic actor revision. Accepting a partial secondary purchase rechecks the original public ask and preserves the unsold remainder with a new revision. Instant sales route invisibly to an eligible funded AI dealer at a 2% spread; the dealer owns the inventory and may offer it onward at NAV. There is no synthetic market-maker cash account. Both bank roles use live research and completed-building permissions; queued exchanges do not qualify. Financial majority choices never change native political ownership.
+Native share dialogs capture quantity, unit price, rounded total and a monotonic actor revision. Accepting a partial secondary purchase rechecks the original public ask and preserves the unsold remainder with a new revision. Instant sales go to the hidden dealer at the accepted market quote less the backend spread. Its explicit signed cash ledger records liquidity credit; funded background AI resales replenish it without a second demand signal. Pure NAV remains a backend comparison mode. Both bank roles use live research and completed-building permissions; queued exchanges do not qualify. Financial majority choices never change native political ownership.
 
 The bank owns the once-per-period sequence: reconcile roles/assets → native net-budget result → deposits/interest/withdrawals → fixed operating expenses → distress → loss offsets/share dividends → facility adapter → autonomous takeover → history/completion stamp. Load and GUI refresh never settle a month. Commands re-resolve live subject authority. Account revision 2 removes retired political modifiers once without paying money or recreating accounts.
 
@@ -95,3 +95,18 @@ slot is allocated, and bank cash and issued units stay unchanged. Zero remaining
 state units do not erase the recorded owner's eligibility to recover dealer stock.
 
 M5 management history lives on the command actor (the live landed charter controller or independent bank): `bfl_portfolio_history_01..12`, `bfl_portfolio_history_count` and `bfl_portfolio_history_period`. It samples combined sovereign-stake and bank-held-equity market value once per monthly bank close, starts empty on migration, caps at twelve and rejects same-period resampling. This presentation total never creates a bank self-held asset, liability, capital allowance or profit. Position flows affect chart value; it is not a return index.
+
+M5 stochastic pricing adds issuer-owned `bfl_price_schema = 1`, `seed`, `period`,
+`log_bps`, `net_units`, `gross_units`, `last_flow`, `shock`, `draws` and `defaulted`
+(all prefixed `bfl_price_`). Initial migration sets a zero premium/current period
+without cash, units or fabricated history. Monthly update is once per period;
+log premium is integer basis points, seed 1..65520, and default/recovery is explicit.
+Temporary `bfl_price_order_units/side` identify a successful initiating order.
+Net/gross records aggregate before participation caps; dealer background resales
+and primary issuance add no signal. Existing indexed portfolios read market prices,
+but issuer tangible NAV, paid issuance and lending/dividend capital remain separate.
+Country `bfl_price_model_override` and `bfl_price_sigma_override` are internal
+fixture overrides, not new player settings. Backend `design/equity_pricing.json`
+compiles default model, impact/liquidity/spreads, dividend/issuance/default rules,
+limits and draw policy. [Acceptance and exact evidence](m5-ownership.md) distinguish
+saved-state assertions, controlled offline sensitivity and real UI inspection.

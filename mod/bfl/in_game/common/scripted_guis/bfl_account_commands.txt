@@ -37,8 +37,8 @@ bfl_withdraw = {
 bfl_recapitalize_command = {
             scope = country
             is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location gold >= 100 }
-            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_recapitalize = yes } } }
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_primary_price_safe = yes } }
+            effect = { if = { limit = { bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_primary_price_safe = yes } } bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_recapitalize = yes } } }
         }
 bfl_suspend_command = {
             scope = country

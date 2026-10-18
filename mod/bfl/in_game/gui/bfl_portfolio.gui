@@ -9,8 +9,17 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         blockoverride "block_title" { visible = yes text = "bfl_security_price_heading" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "NAV per share" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GetScriptedGui('bfl_portfolio_has_reference').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             text_single = { raw_text = "Tangible NAV per share" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_nav_quote')|3]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+             text_single = { raw_text = "Market price" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+             text_single = { raw_text = "Premium / discount to NAV" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_price_premium')|%1+=]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+             text_single = { raw_text = "Dealer spread" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_price_spread')|%1]" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GetScriptedGui('bfl_portfolio_has_reference').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
              text_single = { raw_text = "Previous recorded month" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_price_change')|%1+=]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding

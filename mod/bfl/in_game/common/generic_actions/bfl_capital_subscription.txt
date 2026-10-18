@@ -7,7 +7,7 @@
                 bfl_equity_issuer = yes var:bfl_accept_equity = 1 bfl_tangible_equity > 0
                 NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank } }
                 trigger_else = { always = no } }
-            enabled = { NOT = { has_cooldown = bfl_share_trade } } }
+            enabled = { NOT = { has_cooldown = bfl_share_trade } bfl_primary_price_safe = yes } }
         effect = { scope:actor = { trigger_event_silently = bfl_market.15 } }
         ai_will_do = { value = 0 }
     }

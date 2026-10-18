@@ -262,3 +262,23 @@ or Workshop file was changed.
 - [Final nested bank finances](m5-portfolio-bank-finances-final.png)
 
 [Historical zero-cash sale reproduction](m5-default-sale-zero-quote.png) is deliberately retained as **failing pre-fix evidence** on `a16944b9...`; it is not an accepted behavior or a shipping screenshot.
+
+## M5 stochastic pricing
+
+[Current pricing UI observations and individual hashes](../../tests/results/2026-10-18-gbm-ui.json)
+record a standard disposable fixture, then natural monthly prices and a normal
+one-share company purchase. The initial five captures cold-load `69f43d3e...`.
+After saving the campaign, the final capture cold-loads shipping `767c813d...`;
+only the recapitalization effect guard and matching button/tooltip differ, with
+identical pricing/layout files. No premium/seed/history grants are used for visual evidence.
+
+- [Portfolio market values/history](m5-gbm-portfolio.png)
+- [Peruzzi NAV 1.200 versus market 1.286](m5-gbm-issuer-finances.png)
+- [Charter NAV 0.977 versus market 0.972](m5-gbm-charter-finances.png)
+- [Bank/company market-price list and actual sparklines](m5-gbm-buy-history.png)
+- [Purchased company, NAV 1.005 versus market 1.001](m5-gbm-company-finances.png)
+- [Saved campaign reopened on the final runtime](m5-gbm-final-reload.png)
+
+[A/B simulation figure](../figures/equity-pricing-ab.png) is a separately labeled
+offline research plot, not a game screenshot. Native assertions and twelve
+actual same-bank NAV/market samples have their own [provenance](../../tests/results/2026-10-18-gbm-validation.json).

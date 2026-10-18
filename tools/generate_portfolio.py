@@ -92,7 +92,10 @@ def generate(common, effect, loc, write):
     }
     for key, label in labels.items(): loc(key,label)
     def val(name): return f"GuiScope.SetRoot(Country.MakeScope).ScriptValue('{name}')"
-    price_rows = row('NAV per share', f"[{val('bfl_equity_quote')}|3]@gold!")
+    price_rows = row('Tangible NAV per share', f"[{val('bfl_nav_quote')}|3]@gold!")
+    price_rows += row('Market price', f"[{val('bfl_equity_quote')}|3]@gold!",1)
+    price_rows += row('Premium / discount to NAV', f"[{val('bfl_price_premium')}|%1+=]",2)
+    price_rows += row('Dealer spread', f"[{val('bfl_price_spread')}|%1]",3)
     price_rows += row('Previous recorded month', f"[{val('bfl_issuer_price_change')}|%1+=]",1,
         '''visible = "[GetScriptedGui('bfl_portfolio_has_reference').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"''')
     price_rows += row('Issued shares', "[Country.MakeScope.GetVariable('bfl_total_units').GetValue|3]",2)

@@ -34,7 +34,7 @@ exists = scope:bfl_party country_exists = scope:bfl_party
             } }
 }
 bfl_can_subscribe_equity = {
-bfl_equity_issuer = yes
+bfl_equity_issuer = yes bfl_primary_price_safe = yes
         NOT = { has_variable = bfl_operation_guard }
         exists = scope:bfl_party country_exists = scope:bfl_party
         OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }

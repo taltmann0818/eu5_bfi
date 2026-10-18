@@ -13,13 +13,13 @@ def generate(common, effect, loc, write):
         add = var:bfl_shr_{i:02}_units }}''' for i in range(1, 17)))
     values += effect('bfl_market_state_owned_units','value = 0 if = { limit = { var:bfl_state_owner ?= scope:actor } value = var:bfl_state_units }')
     values += effect('bfl_market_sell_units','value = bfl_market_owned_units if = { limit = { bfl_market_state_owned_units > 0 } value = bfl_market_state_owned_units }')
-    values += effect('bfl_market_buy_price', '''value = bfl_equity_quote
+    values += effect('bfl_market_buy_price', '''value = bfl_dealer_ask
         if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
             value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units }
     ''')
     values += effect('bfl_market_buy_max', '''value = 0
         if = { limit = { bfl_market_charter_buyback = yes bfl_equity_quote > 0 }
-            value = scope:actor.gold divide = bfl_equity_quote max = bfl_dealer_units
+            value = scope:actor.gold divide = bfl_dealer_ask max = bfl_dealer_units
             min = 0 multiply = 1000 floor = yes divide = 1000 }
         else_if = { limit = { bfl_market_buy_price > 0 }
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
@@ -30,7 +30,7 @@ def generate(common, effect, loc, write):
             else = { max = bfl_dealer_units }
             min = 0 multiply = 1000 floor = yes divide = 1000 }
     ''')
-    # Honest per-security sparklines. Samples are monthly NAV observations;
+    # Honest per-security sparklines. Samples are actual monthly market-price observations;
     # there is no synthetic history before an institution is listed.
     values += effect('bfl_market_chart_max', 'value = 0.001\n' + '\n'.join(f'min = var:bfl_quote_{i:02}_price' for i in range(1, 13)))
     values += effect('bfl_market_chart_min', 'value = bfl_market_chart_max\n' + '\n'.join(f'if = {{ limit = {{ var:bfl_quote_{i:02}_period > 0 }} max = var:bfl_quote_{i:02}_price }}' for i in range(1,13)))
@@ -45,7 +45,7 @@ def generate(common, effect, loc, write):
             value = bfl_position_market_{i:02} divide = var:bfl_pos_{i:02}_basis subtract = 1 }}''')
     values += effect('bfl_primary_paid_expected', 'value = var:bfl_primary_paid_before add = 100')
     values += effect('bfl_market_buy_total', 'value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 100 ceiling = yes divide = 100')
-    values += effect('bfl_market_sell_total', 'value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = 0.98 multiply = 100 round = yes divide = 100')
+    values += effect('bfl_market_sell_total', 'value = var:bfl_market_unit_price multiply = var:bfl_market_quantity multiply = bfl_order_bid_factor multiply = 100 round = yes divide = 100')
     actor_votes='value = 0\nif = { limit = { var:bfl_state_owner ?= scope:actor } add = var:bfl_state_units }\n'
     for i in range(1,17):
         actor_votes+=f'''if = {{ limit = {{ var:bfl_shr_{i:02}_active = 1 var:bfl_shr_{i:02}_pool = 0
@@ -56,7 +56,8 @@ def generate(common, effect, loc, write):
         # Keep a valid nominal range until actual liquidity can be resolved.
         values += effect(f'bfl_market_{side}_selection_max', f'value = 1 if = {{ limit = {{ exists = scope:security }} value = scope:security.{maximum} }}')
     values += effect('bfl_available_trade_diplomats', 'value = num_of_diplomats')
-    values += effect('bfl_market_sell_selection_price', 'value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_equity_quote multiply = 0.98 }')
+    values += effect('bfl_market_sell_selection_price', 'value = 0 if = { limit = { exists = scope:security } value = scope:security.bfl_dealer_bid }')
+    values += effect('bfl_order_bid_factor', 'value = 0.98 if = { limit = { exists = var:bfl_market_issuer } value = var:bfl_market_issuer.bfl_price_bid_factor }')
     common('script_values', 'equity_market', values)
 
     common('scripted_triggers', 'equity_market', effect('bfl_market_charter_buyback', '''trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor }
@@ -180,7 +181,7 @@ def generate(common, effect, loc, write):
                 bfl_equity_issuer = yes var:bfl_accept_equity = 1 bfl_tangible_equity > 0
                 NOT = { this = scope:actor } NOT = { this = scope:actor.var:bfl_bank } }
                 trigger_else = { always = no } }
-            enabled = { NOT = { has_cooldown = bfl_share_trade } } }
+            enabled = { NOT = { has_cooldown = bfl_share_trade } bfl_primary_price_safe = yes } }
         effect = { scope:actor = { trigger_event_silently = bfl_market.15 } }
         ai_will_do = { value = 0 }
     }''')
@@ -204,7 +205,7 @@ def generate(common, effect, loc, write):
         set_variable = { name = bfl_market_issuer value = scope:security }
         set_variable = { name = bfl_primary_nav value = scope:security.bfl_tangible_equity }
         set_variable = { name = bfl_primary_units value = scope:security.var:bfl_total_units }
-        set_variable = { name = bfl_market_expiry value = { value = bfl_period add = 1 } }
+        set_variable = { name = bfl_market_expiry value = bfl_period }
         save_scope_value_as = { name = bfl_market_confirmation value = var:bfl_market_revision }
         trigger_event_non_silently = bfl_market.16
     } }
@@ -222,7 +223,7 @@ def generate(common, effect, loc, write):
         events += f'''bfl_market.{number} = {{ type = country_event hidden = yes title = bfl_{side}_confirm_title immediate = {{
                 if = {{ limit = {{ NOT = {{ has_variable = bfl_market_revision }} }} set_variable = {{ name = bfl_market_revision value = 0 }} }}
                 change_variable = {{ name = bfl_market_revision add = 1 }}
-                set_variable = {{ name = bfl_market_expiry value = {{ value = bfl_period add = 1 }} }}
+                set_variable = {{ name = bfl_market_expiry value = bfl_period }}
                 set_variable = {{ name = bfl_market_issuer value = scope:security }}
                 set_variable = {{ name = bfl_market_quantity value = scope:share_quantity }}
                 set_variable = {{ name = bfl_market_secondary value = 0 }}
@@ -232,7 +233,7 @@ def generate(common, effect, loc, write):
                 set_variable = {{ name = bfl_market_offer_revision value = scope:security.var:bfl_equity_offer_revision }}
                 set_variable = {{ name = bfl_market_unit_price value = scope:security.{'bfl_market_buy_price' if side == 'buy' else 'bfl_equity_quote'} }}
                 set_variable = {{ name = bfl_market_total value = {{ value = var:bfl_market_unit_price multiply = var:bfl_market_quantity
-                    {'multiply = 0.98' if side == 'sell' else ''} multiply = 100 {'ceiling' if side == 'buy' else 'round'} = yes divide = 100 }} }}
+                    {'multiply = scope:security.bfl_price_bid_factor' if side == 'sell' else ''} multiply = 100 {'ceiling' if side == 'buy' else 'round'} = yes divide = 100 }} }}
                 if = {{ limit = {{ var:bfl_market_wallet = 1 {"always = yes" if side == 'buy' else 'always = no'} }}
                     set_variable = {{ name = bfl_market_secondary value = 2 }} }}
                 else_if = {{ limit = {{ scope:security = {{ var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }} }}
@@ -309,17 +310,17 @@ def generate(common, effect, loc, write):
         'bfl_select_buy_shares': 'Buy bank & company shares', 'bfl_select_sell_shares': 'Sell shares you own',
         'bfl_share_quantity': 'Shares to trade · 1 diplomat · 1 month cooldown', 'bfl_market_sort_price': 'Sort by price per share',
         'bfl_buy_shares_desc': 'Choose a bank or company, set a share quantity, then review the total. Buy transfers existing shares from a sell offer or market-maker inventory. Use the separate capital-subscription action to fund new issuance.',
-        'bfl_sell_shares_desc': 'Choose one of your holdings and a quantity. The hidden market maker immediately buys your shares at 98% of NAV. AI banks purchase its inventory in the background.',
+        'bfl_sell_shares_desc': 'Choose one of your holdings and a quantity. The hidden market maker immediately buys your shares at the market quote less the displayed dealer spread. AI banks purchase its inventory in the background.',
         'bfl_buy_confirm_title': 'Confirm share purchase', 'bfl_sell_confirm_title': 'Confirm instant share sale',
         'bfl_buy_confirm_desc': "Purchase [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!. These are existing shares from market-maker inventory. The issuer receives no financing and issued shares do not change. The quoted price, live market access, available units, protected cash and concentration limit are checked again on acceptance. Settlement consumes one diplomat and starts this issuer’s one-month buy/sell cooldown.",
         'bfl_buy_secondary_confirm_desc': "Buy [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] existing shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] from [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_seller').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!. The current seller receives the payment. The issuer receives no financing and issued shares do not change. Availability, access, protected funds and this offer’s revision are checked again on acceptance. Settlement consumes one diplomat and starts this issuer’s one-month buy/sell cooldown.",
-        'bfl_sell_state_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of your treasury’s stake in [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid to your country treasury. The bank receives no financing and issued shares do not change. The hidden dealer guarantees the displayed quote, including a 2% spread. Settlement consumes one diplomat and starts a one-month buy/sell cooldown for this issuer. Your charter’s monetary authority stays with you.",
-        'bfl_sell_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!. The hidden market maker guarantees this sale, including a 2% dealing spread, while the quote is valid. Shares leave your portfolio immediately; background AI purchases do not delay payment. Proceeds go to your bank’s treasury. Settlement consumes one diplomat and starts this issuer’s one-month buy/sell cooldown.",
-        'bfl_buy_state_confirm_desc': "Buy back [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] existing shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] from market-maker inventory for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid from your country treasury. These shares return to your treasury stake. The bank receives no financing and issued shares do not change. Available dealer stock, current NAV, live charter authority and treasury cash are checked again. Settlement consumes one diplomat and starts this bank’s one-month buy/sell cooldown.",
+        'bfl_sell_state_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of your treasury’s stake in [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid to your country treasury. The bank receives no financing and issued shares do not change. The hidden dealer guarantees the displayed quote, including the quoted dealer spread. Settlement consumes one diplomat and starts a one-month buy/sell cooldown for this issuer. Your charter’s monetary authority stays with you.",
+        'bfl_sell_confirm_desc': "Sell [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!. The hidden market maker guarantees this sale, including the quoted dealing spread, while the quote is valid. Shares leave your portfolio immediately; background AI purchases do not delay payment. Proceeds go to your bank’s treasury. Settlement consumes one diplomat and starts this issuer’s one-month buy/sell cooldown.",
+        'bfl_buy_state_confirm_desc': "Buy back [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_quantity').GetValue|3] existing shares of [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_issuer').GetCountry.GetName] from market-maker inventory for [ROOT.GetCountry.MakeScope.GetVariable('bfl_market_total').GetValue|2]@gold!, paid from your country treasury. These shares return to your treasury stake. The bank receives no financing and issued shares do not change. Available dealer stock, current market quote, live charter authority and treasury cash are checked again. Settlement consumes one diplomat and starts this bank’s one-month buy/sell cooldown.",
         'bfl_share_portfolio_title': 'Share portfolio', 'bfl_share_portfolio_subtitle': 'Treasury stake and bank-held investments',
         'bfl_share_value_label': 'Portfolio value', 'bfl_share_portfolio_hint': 'Hover for holdings, current values and returns',
         'bfl_share_empty': 'No shares held', 'bfl_share_chart_empty': 'No price history yet',
-        'bfl_share_row_detail': "NAV [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold! / share",
+        'bfl_share_row_detail': "Market [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold! / share",
         'bfl_share_row_owned': "Owned [GuiScope.SetRoot(Country.MakeScope).AddScope('actor',GetPlayer.MakeScope).ScriptValue('bfl_market_sell_units')|3] · Issued [Country.MakeScope.GetVariable('bfl_total_units').GetValue|0]",
         'bfl_share_trade_note': 'Select a row, set the quantity below, then review your trade.',
         'bfl_sale_unavailable': 'Share order could not settle',
@@ -336,7 +337,7 @@ def generate(common, effect, loc, write):
         'bfl_manage_shareholdings_desc': 'Select a financial holding. More than half of the issued votes may set independent-bank dividends or company payout and reinvestment policy. A live controller may exercise its managed bank\'s votes. Chartered monetary policy and political overlordship remain separate.',
         'bfl_invite_equity_capital': 'Add bank equity capital',
         'bfl_invite_equity_capital_tip': 'Choose the treasury or an estate wallet to subscribe 100 gold at the bank\'s current NAV. New shares dilute existing holders; the bank receives the payment.',
-        'bfl_invite_equity_capital_desc': "Subscribe 100 gold to [ROOT.GetCountry.MakeScope.GetVariable('bfl_capital_issuer').GetCountry.GetName] from the selected treasury or estate wallet. The subscriber receives new shares at tangible NAV. Estate wallets retain at least 25 gold. Financial ownership, future dividends and dilution follow the paid shares.",
+        'bfl_invite_equity_capital_desc': "Subscribe 100 gold to [ROOT.GetCountry.MakeScope.GetVariable('bfl_capital_issuer').GetCountry.GetName] from the selected treasury or estate wallet. The subscriber receives new shares at the market quote. Estate wallets retain at least 25 gold. Financial ownership, future dividends and dilution follow the paid shares.",
     }
     for key, text in labels.items(): loc(key, text)
     for side in ('buy','sell'):

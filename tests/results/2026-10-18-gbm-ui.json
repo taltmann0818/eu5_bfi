@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668",
+  "observations": [
+    "Initially cold-loaded 69f43d3e in the standard disposable Exchange fixture. Saved, copied the single resolution-effect guard change and cold-loaded the saved state on final 767c813d. Individual captures retain their actual fingerprints. The resolution guard, its matching recapitalization-button condition and explanatory tooltip are the only later changes; pricing/layout files are identical.",
+    "Natural May/June monthly observations move market values without modifying original issued units or drawing on hover.",
+    "Peruzzi financial tooltip shows tangible NAV 1.200 versus market 1.286, +7.1% premium, 2.0% spread and +1.3% previous-month price movement.",
+    "Bardi financial tooltip shows NAV 0.977 versus market 0.972, -0.5% discount and 2.0% spread. Cash/credit/NAV remain separate from external equity marks.",
+    "Native Buy list displays bank/company market-price labels and actual price sparklines with the same-popup slider.",
+    "Normal purchase of one existing Liguria and Corsica share paid 1.00 gold from Bardi (4853.92 to 4852.92), spent one diplomat (4.50 to 3.50) and preserved company issued shares at 1100.",
+    "Company financial tooltip resolves NAV 1.005, market 1.001, -0.3% discount, cash/tangible assets 1105.79 and hides bank-only income/cost rows.",
+    "Market portfolio includes separate treasury stake, Peruzzi and company rows, unrealized values and real monthly value history; pricing explanation includes the primary arbitrage gate.",
+    "Final reload preserves the company share, 3.50 diplomats, portfolio 4989.60 and Peruzzi NAV 1.200/market 1.286 without a new shock. The recapitalization button shares the same gate and has an explanatory tooltip.",
+    "All captures are unedited native window captures. BFI-attributed GUI/runtime diagnostics from both original and reloaded sessions are zero under the engine collector rules."
+  ],
+  "captures": {
+    "m5-gbm-portfolio": {
+      "sha256": "97479e413a1d0507f53a8df8ead7db69f0ae4b2911ae62932da275fc1d997b80",
+      "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc"
+    },
+    "m5-gbm-issuer-finances": {
+      "sha256": "cf46f48d04e3455209ee2807417beb0ccf3ea25178e463b8038c347179ad0bd4",
+      "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc"
+    },
+    "m5-gbm-charter-finances": {
+      "sha256": "25e9bbd00a91c12163fef56ac6bffb98ca1c06bbf6241722b756e679aefeccd6",
+      "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc"
+    },
+    "m5-gbm-buy-history": {
+      "sha256": "a5fdd8eb523ab1055f93c26f2f139a11887b04fe4d532a9cb88688cf6c4e0361",
+      "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc"
+    },
+    "m5-gbm-company-finances": {
+      "sha256": "549cf5cbbbc97afdf75e3ea544dc9dadbf667ddc04783fb9755374505a673b31",
+      "runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc"
+    },
+    "m5-gbm-final-reload": {
+      "sha256": "5f3ea371221ff3a271fac756a66001a691dc95bc140167abe491205f635927ce",
+      "runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668"
+    }
+  },
+  "errors": [],
+  "scope": "Standard disposable fixture grants Reformation, research, charter, opening wallets/NAV and completed exchanges. Subsequent monthly prices and company purchase use production services. No direct premium, seed, history or random-shock grants. Paused 21 June 1337, 3.50 diplomats, for manual testing.",
+  "fixture_sha256": "8e53f83b1c8f0fb22ce28c215d9c5cde56b54ef5789a1b22a29e9dfd6c9b63bb",
+  "reload_provenance": {
+    "startup_runtime_sha256": "767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668",
+    "initial_runtime_sha256": "69f43d3ef88aff03776e0d58c26ffb08615652b2b2acd8c9f34f4f6dd0aca9fc",
+    "save_sha256": "6aff4a8103f5d2206d9910825f74f909dd265ed7a18e1757429ef5cb5413ffec",
+    "difference": "Initial 69f43d3e; intermediate ff891754 adds resolution guard; final 767c813d adds the matching recapitalization command/button guard and tooltip. Pricing, quote-history and financial settlement files are identical to ff891754.",
+    "intermediate_runtime_sha256": "ff89175424c6ebd9db4ecceffa27436b768824e1ec96d3b3a2a17140353ce9a1"
+  }
+}

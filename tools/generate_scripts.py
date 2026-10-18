@@ -725,7 +725,7 @@ def treasury_and_resolution():
     }
     # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
     bfl_recapitalize = {
-        if = { limit = { bfl_has_valid_controller = yes overlord = { gold >= 100 } }
+        if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 } }
             save_scope_as = bfl_bank
             overlord = { save_scope_as = bfl_party }
             set_variable = { name = bfl_equity_pool value = 0 }
@@ -885,7 +885,7 @@ def hooks_and_commands():
         loc(key,label)
     commands += command('bfl_withdraw','bfl_has_management = yes country_type = location','save_scope_as = bfl_party scope:bfl_bank = { bfl_request_all_withdrawals = yes }')
     loc('bfl_withdraw','Withdraw matured state deposits')
-    commands += command('bfl_recapitalize_command','bfl_has_management = yes country_type = location gold >= 100','scope:bfl_bank = { bfl_recapitalize = yes }')
+    commands += command('bfl_recapitalize_command','bfl_has_management = yes country_type = location gold >= 100 var:bfl_bank = { bfl_primary_price_safe = yes }','scope:bfl_bank = { bfl_recapitalize = yes }')
     loc('bfl_recapitalize_command','Recapitalize with 100 gold')
     commands += command('bfl_suspend_command','bfl_has_management = yes','scope:bfl_bank = { bfl_suspend_new_business = yes }')
     loc('bfl_suspend_command','Suspend new deposits')
@@ -1010,6 +1010,8 @@ def gui_and_localization():
     loc('bfl_banking_finance_companies__presentation__interface_name','Interface')
     from generate_interface import generate as generate_interface
     generate_interface(common, effect, loc, write, TUNE, ADV, INST)
+    from generate_equity_pricing import generate as generate_pricing
+    generate_pricing(common,effect,loc)
     localization='l_english:\n'
     for key,value in sorted(LOC.items()):
         escaped = value.replace(chr(34), chr(39)).replace('\n', '\\n')

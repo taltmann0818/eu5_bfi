@@ -1,7 +1,7 @@
 """Funded ownership, conservative portfolios and bounded secondary offers.
 
 Issuer-owned holder records are authoritative. Investor portfolios are an index
-of those records, never another source of units. All prices use tangible NAV;
+of those records, never another source of units. Primary issuance uses tangible NAV; secondary prices use a separate market premium;
 securities are fully deducted from regulatory capital to break valuation loops.
 """
 HOLDERS = range(1, 17)
@@ -24,7 +24,7 @@ def generate(common, effect, loc, write):
             add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
         else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt } }
     ''')
-    values += effect('bfl_equity_quote', '''value = 0
+    values += effect('bfl_nav_quote', '''value = 0
         if = { limit = { var:bfl_total_units > 0 }
             value = bfl_tangible_equity min = 0 divide = var:bfl_total_units
             multiply = 1000 floor = yes divide = 1000 }
@@ -152,7 +152,7 @@ def generate(common, effect, loc, write):
             change_variable = {{ name = {n}_basis add = var:bfl_equity_amount }} }}\n'''
     capacity = 'OR = { AND = { var:bfl_state_owner ?= scope:bfl_party var:bfl_equity_pool = 0 }\n' + '\n'.join(f'var:{s(i)}_active = 0 AND = {{ var:{s(i)}_active = 1 var:{s(i)}_party = scope:bfl_party var:{s(i)}_pool = var:bfl_equity_pool }}' for i in HOLDERS) + ' }'
     common('scripted_triggers', 'equity_validation', effect('bfl_has_shareholder_capacity', capacity))
-    services = effect('bfl_initialize_ownership', initialize + '\nbfl_initialize_market_maker = yes\nif = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }') + effect('bfl_allocate_equity_holder', allocate)
+    services = effect('bfl_initialize_ownership', initialize + '\nbfl_initialize_pricing = yes\nbfl_initialize_market_maker = yes\nif = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }') + effect('bfl_allocate_equity_holder', allocate)
     # Positions are recovered from the authoritative issuer ledger, including
     # existing-save bank subscriptions. A sixteen-position cap is checked first.
     portfolio_capacity = 'OR = { ' + ' '.join(f'NOT = {{ exists = var:{p(i)}_issuer }} var:{p(i)}_issuer = scope:bfl_issuer' for i in PORTFOLIO) + ' }'
@@ -217,7 +217,7 @@ def generate(common, effect, loc, write):
                 bfl_equity_buyer_units <= { value = var:bfl_total_units multiply = bfl_equity_concentration_limit }
             } }
     ''')
-    triggers += effect('bfl_can_subscribe_equity', '''bfl_equity_issuer = yes
+    triggers += effect('bfl_can_subscribe_equity', '''bfl_equity_issuer = yes bfl_primary_price_safe = yes
         NOT = { has_variable = bfl_operation_guard }
         exists = scope:bfl_party country_exists = scope:bfl_party
         OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
@@ -342,7 +342,7 @@ def generate(common, effect, loc, write):
                 save_scope_as = bfl_issuer
                 scope:bfl_equity_buyer = { save_scope_as = bfl_party }
                 set_variable = { name = bfl_equity_pool value = 0 }
-                if = { limit = { bfl_equity_trade_ready = yes
+                if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
                     scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
                     var:bfl_equity_offer_revision = scope:bfl_equity_actor.var:bfl_order_offer_revision
                     var:bfl_equity_offer_units = scope:bfl_equity_actor.var:bfl_order_units
@@ -379,6 +379,8 @@ def generate(common, effect, loc, write):
         set_variable = { name = bfl_equity_last_price value = { value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units } }
         set_variable = { name = bfl_equity_last_volume value = var:bfl_equity_offer_units }
         change_variable = { name = bfl_equity_pending_volume add = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_units value = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_side value = 1 } bfl_record_price_pressure = yes
         set_variable = { name = bfl_equity_last_trade value = bfl_period }
         change_variable = { name = bfl_equity_trades add = 1 }
         set_variable = { name = bfl_equity_offer_active value = 0 }
@@ -386,7 +388,7 @@ def generate(common, effect, loc, write):
     '''
     # The internal mutation is guarded independently; GUI, interactions, AI and
     # console dispatch cannot bypass the consent/quote snapshot with a direct call.
-    services += effect('bfl_execute_equity_trade', '''if = { limit = { bfl_equity_trade_ready = yes
+    services += effect('bfl_execute_equity_trade', '''if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
         scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
         scope:bfl_equity_actor = { exists = var:bfl_order_issuer var:bfl_order_issuer = scope:bfl_issuer
             var:bfl_order_offer_revision = scope:bfl_issuer.var:bfl_equity_offer_revision
@@ -402,7 +404,7 @@ def generate(common, effect, loc, write):
     for field, expr in [('issuer','scope:bfl_issuer'), ('seller','scope:bfl_equity_seller'), ('buyer','scope:bfl_equity_buyer'), ('units','scope:bfl_issuer.var:bfl_equity_offer_units'), ('price','scope:bfl_issuer.var:bfl_equity_offer_price'), ('period','bfl_period')]:
         history += f'set_variable = {{ name = bfl_tx_01_{field} value = {expr} }}\n'
     services += effect('bfl_record_equity_transaction', history)
-    quotes = '''if = { limit = { var:bfl_equity_listed = 1 bfl_period > var:bfl_quote_period }
+    quotes = '''bfl_update_market_price = yes\nif = { limit = { var:bfl_equity_listed = 1 bfl_period > var:bfl_quote_period }
         set_variable = { name = bfl_quote_period value = bfl_period }
         change_variable = { name = bfl_quote_samples add = 1 }
     '''
@@ -506,7 +508,7 @@ def generate_ai(common,effect,loc):
         ai_will_do = { value = 0 if = { limit = { scope:actor = { bfl_exchange_cash > 500 } } add = 10 } }
     }''')
     loc('bfl_ai_equity_purchase','Consider funded exchange investment')
-    loc('bfl_ai_equity_purchase_desc','AI purchase uses the same live research, building, authority, capacity and exact-quote confirmation checks as the player. Monthly opportunity review, with at least 500 gold of cash and capital surplus. No above-NAV asks.')
+    loc('bfl_ai_equity_purchase_desc','AI purchase uses the same live research, building, authority, capacity and exact-quote confirmation checks as the player. Monthly opportunity review, with at least 500 gold of cash and capital surplus. No above-market asks.')
     loc('bfl_ai_equity_offering','Admit bank and open paid capital offering')
     loc('bfl_ai_equity_offering_desc','AI management may admit its actual bank and authorize paid primary subscriptions after Share Dealing and a completed exchange. No cash or shares are created by admission.')
     from generate_exchange_ai import generate as generate_exchange_ai
@@ -570,8 +572,8 @@ def generate_commands(common, effect, loc, write):
     for multiplier in (95,100,105):
         key=f'bfl_exchange_limit_{multiplier}'
         command(key,'bfl_has_management = yes',f'set_variable = {{ name = bfl_exchange_limit value = {multiplier/100} }}')
-        loc(key,f'{multiplier}% NAV')
-        loc(key+'_tip','Choose a limit ask relative to current tangible NAV. Price is fixed at listing, not guaranteed to find a funded buyer.')
+        loc(key,f'{multiplier}% market')
+        loc(key+'_tip','Choose a limit ask relative to the current market price. Price is fixed at listing, not guaranteed to find a funded buyer.')
     command('bfl_exchange_buy', '''bfl_selected_equity_buy_ready = yes''', '''save_scope_as = bfl_equity_actor
         bfl_resolve_command_bank = yes scope:bfl_bank = { save_scope_as = bfl_equity_buyer }
         var:bfl_exchange_selected = { bfl_prepare_equity_order = yes }''')
@@ -672,10 +674,10 @@ def generate_commands(common, effect, loc, write):
         'bfl_exchange_primary':'PRIMARY CAPITAL · New units at tangible NAV',
         'bfl_exchange_portfolio':'PORTFOLIO · No unrealized profit is distributable',
         'bfl_exchange_totals':"Basis [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_basis')|2] · Carrying [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_carrying')|2]@gold!\\nIndicative value [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_market')|2] · Unrealized [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_unrealized')|2]@gold!\\nRealized [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_realized')|2] · Cash dividends [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_exchange_dividends')|2]@gold!\\nSecurities are fully deducted from lending capital. No automatic quote growth.",
-        'bfl_exchange_security':"[Country.GetName] · [Country.MakeScope.GetVariable('bfl_total_units').GetValue|3] units outstanding\\nTangible NAV / unit [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold!\\nLast execution [Country.MakeScope.GetVariable('bfl_equity_last_price').GetValue|3] · Volume [Country.MakeScope.GetVariable('bfl_equity_last_volume').GetValue|3]",
+        'bfl_exchange_security':"[Country.GetName] · [Country.MakeScope.GetVariable('bfl_total_units').GetValue|3] units outstanding\\nMarket price / unit [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold!\\nLast execution [Country.MakeScope.GetVariable('bfl_equity_last_price').GetValue|3] · Volume [Country.MakeScope.GetVariable('bfl_equity_last_volume').GetValue|3]",
         'bfl_exchange_offer':"Seller [Country.MakeScope.GetVariable('bfl_equity_offer_seller').GetCountry.GetName]\\nAvailable [Country.MakeScope.GetVariable('bfl_equity_offer_units').GetValue|3] units · Ask total [Country.MakeScope.GetVariable('bfl_equity_offer_price').GetValue|2]@gold!\\nExpires month [Country.MakeScope.GetVariable('bfl_equity_offer_expiry').GetValue|0] · Revision [Country.MakeScope.GetVariable('bfl_equity_offer_revision').GetValue|0]",
         'bfl_exchange_no_offer':'No live sell order. A funded existing holder may list its units.',
-        'bfl_exchange_quotes':'MONTHLY NAV · Actual observations; blank months have no sample',
+        'bfl_exchange_quotes':'MONTHLY MARKET PRICES · Actual observations; blank months have no sample',
         'bfl_exchange_history':'EXECUTIONS · Most recent funded transfers',
     }
     for key, text in labels.items():

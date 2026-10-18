@@ -5,7 +5,7 @@ bfl_market.15 = { type = country_event hidden = yes title = bfl_new_capital_subs
         set_variable = { name = bfl_market_issuer value = scope:security }
         set_variable = { name = bfl_primary_nav value = scope:security.bfl_tangible_equity }
         set_variable = { name = bfl_primary_units value = scope:security.var:bfl_total_units }
-        set_variable = { name = bfl_market_expiry value = { value = bfl_period add = 1 } }
+        set_variable = { name = bfl_market_expiry value = bfl_period }
         save_scope_value_as = { name = bfl_market_confirmation value = var:bfl_market_revision }
         trigger_event_non_silently = bfl_market.16
     } }
@@ -20,7 +20,7 @@ bfl_market.15 = { type = country_event hidden = yes title = bfl_new_capital_subs
     bfl_market.11 = { type = country_event hidden = yes title = bfl_buy_confirm_title immediate = {
                 if = { limit = { NOT = { has_variable = bfl_market_revision } } set_variable = { name = bfl_market_revision value = 0 } }
                 change_variable = { name = bfl_market_revision add = 1 }
-                set_variable = { name = bfl_market_expiry value = { value = bfl_period add = 1 } }
+                set_variable = { name = bfl_market_expiry value = bfl_period }
                 set_variable = { name = bfl_market_issuer value = scope:security }
                 set_variable = { name = bfl_market_quantity value = scope:share_quantity }
                 set_variable = { name = bfl_market_secondary value = 0 }
@@ -43,7 +43,7 @@ bfl_market.15 = { type = country_event hidden = yes title = bfl_new_capital_subs
 bfl_market.12 = { type = country_event hidden = yes title = bfl_sell_confirm_title immediate = {
                 if = { limit = { NOT = { has_variable = bfl_market_revision } } set_variable = { name = bfl_market_revision value = 0 } }
                 change_variable = { name = bfl_market_revision add = 1 }
-                set_variable = { name = bfl_market_expiry value = { value = bfl_period add = 1 } }
+                set_variable = { name = bfl_market_expiry value = bfl_period }
                 set_variable = { name = bfl_market_issuer value = scope:security }
                 set_variable = { name = bfl_market_quantity value = scope:share_quantity }
                 set_variable = { name = bfl_market_secondary value = 0 }
@@ -53,7 +53,7 @@ bfl_market.12 = { type = country_event hidden = yes title = bfl_sell_confirm_tit
                 set_variable = { name = bfl_market_offer_revision value = scope:security.var:bfl_equity_offer_revision }
                 set_variable = { name = bfl_market_unit_price value = scope:security.bfl_equity_quote }
                 set_variable = { name = bfl_market_total value = { value = var:bfl_market_unit_price multiply = var:bfl_market_quantity
-                    multiply = 0.98 multiply = 100 round = yes divide = 100 } }
+                    multiply = scope:security.bfl_price_bid_factor multiply = 100 round = yes divide = 100 } }
                 if = { limit = { var:bfl_market_wallet = 1 always = no }
                     set_variable = { name = bfl_market_secondary value = 2 } }
                 else_if = { limit = { scope:security = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }

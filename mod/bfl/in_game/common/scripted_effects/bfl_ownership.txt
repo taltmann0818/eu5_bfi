@@ -682,6 +682,7 @@ set_variable = { name = bfl_equity_pool value = 5 }
         }
         set_variable = { name = bfl_equity_pool value = 0 }
     }
+bfl_initialize_pricing = yes
 bfl_initialize_market_maker = yes
 if = { limit = { NOT = { has_variable = bfl_state_basis } } set_variable = { name = bfl_state_basis value = var:bfl_state_units } }
 }
@@ -1205,7 +1206,7 @@ save_scope_as = bfl_equity_actor
                 save_scope_as = bfl_issuer
                 scope:bfl_equity_buyer = { save_scope_as = bfl_party }
                 set_variable = { name = bfl_equity_pool value = 0 }
-                if = { limit = { bfl_equity_trade_ready = yes
+                if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
                     scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
                     var:bfl_equity_offer_revision = scope:bfl_equity_actor.var:bfl_order_offer_revision
                     var:bfl_equity_offer_units = scope:bfl_equity_actor.var:bfl_order_units
@@ -1217,7 +1218,7 @@ save_scope_as = bfl_equity_actor
         }
 }
 bfl_execute_equity_trade = {
-if = { limit = { bfl_equity_trade_ready = yes
+if = { limit = { bfl_equity_trade_ready = yes bfl_nav_quote > 0
         scope:bfl_equity_buyer = { bfl_equity_actor_authority = yes }
         scope:bfl_equity_actor = { exists = var:bfl_order_issuer var:bfl_order_issuer = scope:bfl_issuer
             var:bfl_order_offer_revision = scope:bfl_issuer.var:bfl_equity_offer_revision
@@ -1308,6 +1309,8 @@ set_variable = { name = bfl_new_units value = var:bfl_equity_offer_units }
         set_variable = { name = bfl_equity_last_price value = { value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units } }
         set_variable = { name = bfl_equity_last_volume value = var:bfl_equity_offer_units }
         change_variable = { name = bfl_equity_pending_volume add = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_units value = var:bfl_equity_offer_units }
+        set_variable = { name = bfl_price_order_side value = 1 } bfl_record_price_pressure = yes
         set_variable = { name = bfl_equity_last_trade value = bfl_period }
         change_variable = { name = bfl_equity_trades add = 1 }
         set_variable = { name = bfl_equity_offer_active value = 0 }
@@ -1353,6 +1356,7 @@ set_variable = { name = bfl_tx_01_price value = scope:bfl_issuer.var:bfl_equity_
 set_variable = { name = bfl_tx_01_period value = bfl_period }
 }
 bfl_record_exchange_history = {
+bfl_update_market_price = yes
 if = { limit = { var:bfl_equity_listed = 1 bfl_period > var:bfl_quote_period }
         set_variable = { name = bfl_quote_period value = bfl_period }
         change_variable = { name = bfl_quote_samples add = 1 }

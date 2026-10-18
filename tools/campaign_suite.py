@@ -327,6 +327,9 @@ def prepare(directory, token=None):
     fingerprint = runtime_hash()
     start, finish, instant, cases = fixture(token, fingerprint)
     reload_body, reload_cases = reload_fixture(token, fingerprint)
+    # Legacy financial regressions deliberately retain the pure NAV backend.
+    # The dedicated pricing suite explicitly enables matched GBM issuers.
+    start = 'every_country = { set_variable = { name = bfl_price_model_override value = 0 } }\n' + start
     # Instant native construction still queues a level-zero building. These
     # fixtures intend completed debug grants; actual AI completion is tested
     # separately with normal cost/time and no level grant.
