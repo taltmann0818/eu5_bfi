@@ -1,8 +1,9 @@
 {
   "passed": true,
-  "token": "60baa5256a724550892a8b000a0baac6",
-  "runtime_sha256": "216acf0abd52b0012ee222e0dc3c00a2b95dcde63168661897cfe99553268cd8",
+  "token": "e73467eeb19d455c86b80493306f52c4",
+  "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
   "results": {
+    "share_picker_rejects_uninitialized_countries_without_ledger_reads": "PASS",
     "paused_buy_sell_cycles_never_issue_new_shares": "PASS",
     "partial_offer_funded_units_and_unsold_remainder": "PASS",
     "successful_trade_spends_one_diplomat_and_locks_issuer": "PASS",
@@ -18,6 +19,17 @@
     "cooldown_is_per_issuer_not_global": "PASS",
     "capital_subscription_respects_shared_issuer_cooldown": "PASS",
     "explicit_capital_subscription_alone_issues_paid_shares": "PASS",
+    "dealer_charter_inventory_is_visible_and_not_concentration_capped": "PASS",
+    "charter_buyback_obeys_existing_sell_cooldown": "PASS",
+    "charter_buyback_cannot_exceed_remaining_dealer_stock": "PASS",
+    "charter_buyback_requires_actual_treasury_cash": "PASS",
+    "charter_buyback_rechecks_recorded_owner": "PASS",
+    "partial_charter_buyback_pays_treasury_and_restores_state_units": "PASS",
+    "charter_buyback_replay_costs_no_cash_or_diplomat": "PASS",
+    "complete_charter_buyback_exhausts_inventory_without_issuance": "PASS",
+    "fully_sold_charter_stake_remains_eligible_for_dealer_buyback": "PASS",
+    "treasury_can_recover_entire_charter_stake": "PASS",
+    "exhausted_charter_inventory_rejects_further_buybacks": "PASS",
     "independent_ai_queues_paid_exchange": "PASS",
     "queued_construction_does_not_charge_twice": "PASS",
     "charter_ai_controller_queues_paid_exchange": "PASS",
@@ -156,5 +168,10 @@
     "gui/economy_lateralview.gui:951 - Failed parsing localized text: [expense|e]",
     "gui/technology_lateralview.gui:2002 - Failed parsing localized text: [government_reforms|e]",
     "gui/technology_lateralview.gui:2002 - Failed parsing localized text: [government_reforms|e]"
-  ]
+  ],
+  "recorded": "2026-10-18",
+  "fixture_sha256": "021c62f84e3982764317e1660deda426b47a7f3dcf15fa77bc74732f73784062",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0"
 }

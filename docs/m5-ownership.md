@@ -1,17 +1,37 @@
 # M5 ownership and share trading
 
-Final revised-runtime acceptance is in progress. The paused-trading issuance bug is reproduced in [the historical red regression](../tests/results/2026-10-18-m5-paused-cycle-reproduction.json): three atomic cycles grew issued units from 1,200 to 1,215. The revised market suite requires 1,200 throughout ordinary trading. The canonical status remains
-in [coverage.md](coverage.md); earlier passing candidates do not certify later changes.
+M5 is complete for the pinned single-player baseline: EUV 1.4.1 / Steam build
+25905365 with CMF 2.5.0. [Final validation](../tests/results/2026-10-18-m5-validation.json)
+records **54/54 ownership**, **34/34 market**, **114/114 accounts/bond** and
+**43/43 treasury assertions** on runtime
+`a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e`.
+All four suites reload in a second process. Twelve consecutive observations,
+funded dividends, company equity, financial votes and natural paid exchange
+construction pass their dedicated gates. **98 offline tests**, source pins,
+deterministic generation/reconstruction and **214-file staging** also pass.
 
-The corrected [22-check market report](../tests/results/2026-10-18-m5-market.json)
-and [114-check accounts/bond regression](../tests/results/2026-10-18-m5-accounts-regression.json)
-pass on runtime `216acf0abd52b0012ee222e0dc3c00a2b95dcde63168661897cfe99553268cd8`.
-The market report includes secondary-only paused cycles, exact diplomat cost,
-same-issuer opposite-side rejection, per-issuer independence, a native cooldown
-still active after 28 days and expired after 32, sovereign charter-stake proceeds,
-explicit funded new issuance, paid AI exchange construction, natural completion
-and second-process reload. Ownership/treasury regression and final UI acceptance
-remain pending; these focused passes do not close the entire M5 gate.
+[22 actual-game UI observations](../tests/results/2026-10-18-m5-ui.json) and
+[23 unedited screenshots](screenshots/README.md#m5-ownership-and-share-trading)
+document populated buy/sell sliders, ordinary purchase and guaranteed sale,
+native diplomats/cooldowns, charter buybacks, company listings and actual price
+history, portfolio returns, equity in assets, merged bond controls and locked
+eligibility. Fourteen initial captures retain their earlier runtime fingerprint;
+nine additional captures cold-load the final runtime and exercise its changed paths.
+
+The [historical paused-trading reproduction](../tests/results/2026-10-18-m5-paused-cycle-reproduction.json)
+grew Peruzzi's issued units from 1,200 to 1,215 in three cycles. The final suite
+holds 1,200 throughout secondary trading; only explicit paid capital subscriptions
+issue new shares. Rejected [fixture parsing](../tests/results/2026-10-18-m5-rejected-market-fixture.json)
+and [intermittent inherited native-label](../tests/results/2026-10-18-m5-rejected-treasury-native-label.json)
+attempts remain recorded and are not acceptance passes. The latter diagnostic
+is not erased or broadly allowlisted by the successful treasury repeat.
+
+The controlled investment scenario uses a funded native 1,000-gold loan at 12%
+and staged borrower cash to prevent early repayment. Twenty shares with 21 gold
+basis produce 1.11 cash dividends and an executed funded resale quote of 1.063
+after six observations: 6.523% total return versus a 1.5% six-month 3% bond
+benchmark. This proves the bounded accounting/investment path, not normal
+campaign profitability, macroeconomic calibration or guaranteed appreciation.
 
 ## Delivered behavior
 
@@ -108,5 +128,4 @@ python tools/validate_sources.py
 The interactive command stages a disposable Florence campaign with explicit
 Reformation, research, completed-building, wallet and NAV grants. These grants
 make controls inspectable and do not prove natural construction or campaign
-balance. Engine reports, actual screenshots and runtime/fixture hashes must be
-recorded separately before M5 is marked complete.
+balance. Engine reports and actual screenshots retain separate runtime/fixture hashes in the acceptance records above. M6-M10 remain separate product and release gates.

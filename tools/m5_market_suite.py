@@ -115,8 +115,9 @@ def fixture(token, fingerprint):
         'c:FLO = { var:bfl_market_result = 0 gold = var:bfi_buyback_cash } c:BRD = { var:bfl_state_units = 4900 var:bfl_dealer_units = 100 }')
     setup+='c:BRD = { set_variable = { name = bfl_state_owner value = c:FLO } } c:FLO = { set_variable = { name = bfi_buyback_diplomats value = num_of_diplomats } }\n'
     setup+=trade('buy',issuer='BRD',quantity='40',price='c:BRD.bfl_equity_quote',secondary=2,wallet=1)
+    setup+='c:BRD = { set_variable = { name = bfi_expected_state_basis value = { value = 4900 add = c:FLO.var:bfl_market_total } } }\n'
     setup+=check('partial_charter_buyback_pays_treasury_and_restores_state_units',
-        'c:FLO = { var:bfl_market_result = 1 gold = { value = var:bfi_buyback_cash subtract = var:bfl_market_total } num_of_diplomats = { value = var:bfi_buyback_diplomats subtract = 1 } } c:BRD = { gold = 4816 var:bfl_state_units = 4940 var:bfl_dealer_units = 60 var:bfl_state_basis = { value = 4900 add = c:FLO.var:bfl_market_total } var:bfl_total_units = 5000 bfl_registered_units = 5000 var:bfl_pos_01_units = 84.333 has_cooldown = bfl_share_trade overlord = c:FLO }')
+        'c:FLO = { var:bfl_market_result = 1 gold = { value = var:bfi_buyback_cash subtract = var:bfl_market_total } num_of_diplomats = { value = var:bfi_buyback_diplomats subtract = 1 } } c:BRD = { gold = 4816 var:bfl_state_units = 4940 var:bfl_dealer_units = 60 var:bfl_state_basis = var:bfi_expected_state_basis var:bfl_total_units = 5000 bfl_registered_units = 5000 var:bfl_pos_01_units = 84.333 has_cooldown = bfl_share_trade overlord = c:FLO }')
     setup+='c:FLO = { set_variable = { name = bfi_buyback_cash value = gold } set_variable = { name = bfi_buyback_diplomats value = num_of_diplomats } bfl_market_buy_shares = yes }\n'
     setup+=check('charter_buyback_replay_costs_no_cash_or_diplomat',
         'c:FLO = { gold = var:bfi_buyback_cash num_of_diplomats = var:bfi_buyback_diplomats } c:BRD = { var:bfl_state_units = 4940 var:bfl_dealer_units = 60 }')

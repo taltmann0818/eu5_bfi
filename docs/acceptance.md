@@ -1,10 +1,20 @@
 # Florence testing and M0 completion
 
-Current [M4 treasury/deposit acceptance](m4-treasury.md) passes its complete pinned-baseline gate:
+Current [M5 ownership/share trading acceptance](m5-ownership.md) passes its pinned-baseline gate:
+54 ownership + 34 market + 114 accounts/bond + 43 treasury = **245 engine assertions**,
+twelve-period observations and second-process reload on the final runtime.
+[22 UI observations / 23 actual-game captures](../tests/results/2026-10-18-m5-ui.json)
+retain individual runtime/fixture hashes. **98 offline tests** and **214-file staging** pass.
+[Validation provenance](../tests/results/2026-10-18-m5-validation.json) preserves rejected
+fixture/native-label attempts and the paused issuance reproduction. M6-M10 remain separate gates.
+Run `./tools/run_campaign.ps1 -Suite m5` and `-Suite m5market`; use
+`./tools/start_test_campaign.ps1 -Exchange` for a disposable populated share/bond UI.
+
+Historical [M4 treasury/deposit acceptance](m4-treasury.md) passes its complete pinned-baseline gate:
 43 dedicated + 114 accounts/bond + 46 credit assertions, twelve monthly periods/reload,
 12 normal UI observations, ten actual-game captures, 91 offline tests and 182-file staging.
 [Provenance](../tests/results/2026-10-17-m4-validation.json) pins the common runtime;
-M5 ownership, later products/resolution and release-wide integration remain separate gates.
+later products/resolution and release-wide integration remain separate gates.
 
 
 Current M2 evidence is summarized in [operating companies](m2-companies.md):

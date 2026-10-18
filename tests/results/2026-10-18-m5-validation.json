@@ -1,0 +1,70 @@
+{
+  "recorded": "2026-10-18",
+  "passed": true,
+  "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+  "implementation_commit": "6e1d5822675ff81929c36e99aecb1ccba5262098",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "checks": {
+    "ownership_engine_assertions": "54/54",
+    "market_engine_assertions": "34/34",
+    "accounts_bond_regression": "114/114",
+    "treasury_regression": "43/43",
+    "total_engine_assertions": "245/245",
+    "manual_ui_observations": "22/22",
+    "unedited_game_window_captures": 23,
+    "offline_tests": "98/98",
+    "source_validation": "154 script/GUI/localization files; 59 graphics",
+    "native_cmf_pins": "PASS",
+    "deterministic_generation": "PASS",
+    "economy_credit_reconstruction": "PASS",
+    "release_staging": "214 files",
+    "persistence": "Twelve consecutive monthly observations in ownership/accounts/treasury; market checks natural paid construction through completion. Every suite reloads an autosave in a second process."
+  },
+  "reports": {
+    "ownership": {
+      "path": "tests/results/2026-10-18-m5-ownership.json",
+      "token": "08855e6c697b430695d5791afef0db2e",
+      "fixture_sha256": "94404659f0a6f31330cb4f2080168ac0251c28f7d5aa795ff1e1ae22ba295660",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+      "assertions": 54,
+      "sha256": "2cd353b00c5f6e6baf983ff4ef7708d55f2f1a95b2f15c9ea7e456e0b96a70a5"
+    },
+    "market": {
+      "path": "tests/results/2026-10-18-m5-market.json",
+      "token": "e73467eeb19d455c86b80493306f52c4",
+      "fixture_sha256": "021c62f84e3982764317e1660deda426b47a7f3dcf15fa77bc74732f73784062",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+      "assertions": 34,
+      "sha256": "aa0d31d5c06507e525d2b1da7972ca819e72c88e07d89fea6df73afd55c023dd"
+    },
+    "accounts": {
+      "path": "tests/results/2026-10-18-m5-accounts-regression.json",
+      "token": "bd639ff6e81849b3a2e79b72a8687125",
+      "fixture_sha256": "b692a4a965b4ab6ee295621a0e90d8aa4996a7fabc1b2cc583559b23337ac200",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+      "assertions": 114,
+      "sha256": "412c5f58e99316ea89f3e60e91f21bc0a98cb78d6733a8cbf81cd8d9d6e2d5e6"
+    },
+    "treasury": {
+      "path": "tests/results/2026-10-18-m5-treasury-regression.json",
+      "token": "c23abeb641564ad1a1f3bfb610de291c",
+      "fixture_sha256": "12496d09bab804230f8de7ff8bee9ea0c79e76195a5ee02ce90fb6775a341e1f",
+      "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
+      "assertions": 43,
+      "sha256": "1c4a7625a3e5642e59f0b8d813188ff4e239220849c0e688c729e6d44a975fe1"
+    }
+  },
+  "ui_report": {
+    "path": "tests/results/2026-10-18-m5-ui.json",
+    "sha256": "2bbed5ffe5d10a4b86461af9ba0fc9d23f0751f2ec17d31d23fb1c7b9e1ac8a3"
+  },
+  "package_manifest_sha256": "df63c5f48e12168e9e3cf9fcce5a5724bd97ed861405f7e37f6c5bf31a6f165d",
+  "rejected_attempts": [
+    "tests/results/2026-10-18-m5-rejected-market-fixture.json",
+    "tests/results/2026-10-18-m5-rejected-treasury-native-label.json"
+  ],
+  "ui_provenance": "Fourteen original captures on 9570a06 precede the non-issuer picker guard and charter buybacks. Nine new captures cold-load final a16944b and exercise its company/history, sale cooldown, buyback and asset/portfolio paths. Each capture retains its actual runtime. These fixture grants are visual setup, not proof of natural research/construction or macroeconomic balance. Dedicated engine suites cover the financial and natural construction gates separately. The running final disposable campaign is left paused on 1 June 1337.",
+  "scope": "M5 complete for the pinned single-player baseline. Controlled native-loan investment return is not a macroeconomic balance claim. The native [loan|e] diagnostic is an intermittent inherited limitation retained in a rejected treasury attempt; a later pass does not erase it. M6-M10 products, full destruction recovery, release-wide AI/balance/languages/scales/performance and compatibility remain separate gates. Queued CI is not counted as a pass."
+}

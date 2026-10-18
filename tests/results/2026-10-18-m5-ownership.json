@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "token": "1e56e39508514681a0a5718f3370a659",
-  "runtime_sha256": "216acf0abd52b0012ee222e0dc3c00a2b95dcde63168661897cfe99553268cd8",
+  "token": "08855e6c697b430695d5791afef0db2e",
+  "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
   "results": {
     "actual_reformation_and_bank_roles": "PASS",
     "legacy_opening_founder_registered_without_capital_mint": "PASS",
@@ -97,6 +97,7 @@
     "failed reading property, at gui/economy_lateralview.gui:1882",
     "failed reading property, at gui/economy_lateralview.gui:1882",
     "failed reading property, at gui/economy_lateralview.gui:1930",
+    "failed reading property, at gui/economy_lateralview.gui:1930",
     "failed reading property, at gui/economy_lateralview.gui:1976",
     "failed reading property, at gui/economy_lateralview.gui:1976",
     "failed reading property, at gui/economy_lateralview.gui:2359",
@@ -160,6 +161,7 @@
     "gui/economy_lateralview.gui:1882 - Failed parsing localized text: [mercenary|E]",
     "gui/economy_lateralview.gui:1882 - Failed parsing localized text: [mercenary|E]",
     "gui/economy_lateralview.gui:1930 - Failed parsing localized text: [privateer|E]",
+    "gui/economy_lateralview.gui:1930 - Failed parsing localized text: [privateer|E]",
     "gui/economy_lateralview.gui:1976 - Failed parsing localized text: [foreign_buildings|E]",
     "gui/economy_lateralview.gui:1976 - Failed parsing localized text: [foreign_buildings|E]",
     "gui/economy_lateralview.gui:2359 - Failed parsing localized text: [stability|E]",
@@ -191,12 +193,17 @@
     "original_units": 20,
     "acquisition_basis": 21,
     "observed_months": 6,
-    "six_month_quote": "1.064",
+    "six_month_quote": "1.063",
     "cash_dividends": "1.11",
-    "total_shareholder_return": "0.06619",
+    "total_shareholder_return": "0.06523",
     "six_month_3pct_bond_benchmark": "0.015",
-    "executed_resale_unit_price": "1.064",
-    "final_quote": "1.088",
+    "executed_resale_unit_price": "1.063",
+    "final_quote": "1.087",
     "scope": "Controlled bank-funded native 1000-gold credit at 12%; borrower wallet staged at 25 per observation to avoid native early payoff. Share return uses actual native receipts, funded dividends and a funded resale. This is not a macroeconomic or release-wide balance campaign."
-  }
+  },
+  "recorded": "2026-10-18",
+  "fixture_sha256": "94404659f0a6f31330cb4f2080168ac0251c28f7d5aa795ff1e1ae22ba295660",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0"
 }

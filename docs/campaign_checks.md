@@ -1,5 +1,15 @@
 # Florence campaign regression checks
 
+Current [M5 ownership/share trading acceptance](m5-ownership.md) passes its pinned-baseline gate:
+54 ownership + 34 market + 114 accounts/bond + 43 treasury = **245 engine assertions**,
+twelve-period observations and second-process reload on the final runtime.
+[22 UI observations / 23 actual-game captures](../tests/results/2026-10-18-m5-ui.json)
+retain individual runtime/fixture hashes. **98 offline tests** and **214-file staging** pass.
+[Validation provenance](../tests/results/2026-10-18-m5-validation.json) preserves rejected
+fixture/native-label attempts and the paused issuance reproduction. M6-M10 remain separate gates.
+Run `./tools/run_campaign.ps1 -Suite m5` and `-Suite m5market`; use
+`./tools/start_test_campaign.ps1 -Exchange` for a disposable populated share/bond UI.
+
 [M4 treasury/deposit acceptance](m4-treasury.md) is complete for the pinned baseline:
 43/43 dedicated, 114/114 accounts/bond and 46/46 credit assertions, including twelve
 consecutive monthly settlements and second-process reload. All final engine and

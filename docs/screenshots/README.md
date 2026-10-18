@@ -35,6 +35,36 @@ or normal campaign balance; dedicated engine reports cover those separately.
 - [Missing exchange](m5-exchange-locked.png): both share actions are disabled,
   while existing holdings and their value remain visible.
 
+Current buyback/company captures cold-load runtime
+`a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e`.
+The disposable setup additionally performs a real production sale of 2,500
+sovereign Bardi shares to its dealer on 1 April. The actual native cooldown is
+preserved. Native time then advances to 1 June; monthly history and funded AI
+purchases occur normally. No price-history samples are fabricated.
+
+- [Sale cooldown](m5-buyback-cooldown.png): Bardi appears in Buy while dealer
+  inventory exists, but its April sale blocks immediate repurchase.
+- [Bank/company histories](m5-company-and-bank-history.png): native operating
+  company and both banks share the same country-card list with actual monthly
+  NAV sparklines.
+- [Charter buyback slider](m5-charter-buyback-slider.png),
+  [treasury confirmation](m5-charter-buyback-confirmation.png) and
+  [restored ownership](m5-charter-buyback-settled.png): buy 295.204 existing
+  Bardi shares for 288.42 sovereign gold; diplomats fall 4.10 to 3.10,
+  bank cash stays 4,753.69 and issued units stay 5,000. Florence holds
+  2,795.204 units, Peruzzi and Acciaiuoli each hold 500 acquired in the
+  background, and the dealer retains 1,204.796 with no votes.
+- [Company slider](m5-company-buy-slider.png),
+  [secondary confirmation](m5-company-buy-confirmation.png) and
+  [mixed portfolio](m5-company-portfolio-settled.png): Bardi buys 4.921 existing
+  Liguria and Corsica shares from Acciaiuoli for 4.93 bank gold. Bank cash
+  falls to 4,748.76; diplomats fall 3.10 to 2.10. The hover shows Peruzzi's
+  79.30 value / red -20.7% and the company's 4.94 value / green +0.3% against
+  separate acquisition bases.
+- [Current assets](m5-current-assets-equity.png): 4,748.76 cash + 35.90 native
+  loans + 84.23 conservative equity carrying value + 100 custom bonds reconcile
+  to 4,968.90 assets (display rounding).
+
 ## M2 company controls
 
 **Chartered bank and company together:** the supplementary [shared Credit visual
