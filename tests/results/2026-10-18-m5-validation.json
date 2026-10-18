@@ -29,7 +29,7 @@
       "fixture_sha256": "94404659f0a6f31330cb4f2080168ac0251c28f7d5aa795ff1e1ae22ba295660",
       "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
       "assertions": 54,
-      "sha256": "2cd353b00c5f6e6baf983ff4ef7708d55f2f1a95b2f15c9ea7e456e0b96a70a5"
+      "sha256": "671184a7a69d015bc6a2f45fa75def87dc3efc461680d0eaa1e68f35617f78b0"
     },
     "market": {
       "path": "tests/results/2026-10-18-m5-market.json",
@@ -37,7 +37,7 @@
       "fixture_sha256": "021c62f84e3982764317e1660deda426b47a7f3dcf15fa77bc74732f73784062",
       "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
       "assertions": 34,
-      "sha256": "aa0d31d5c06507e525d2b1da7972ca819e72c88e07d89fea6df73afd55c023dd"
+      "sha256": "134ea9f3aab6026528cdf09581c8016f242d40c6fed9d5f2fdae8c1f21c7bb87"
     },
     "accounts": {
       "path": "tests/results/2026-10-18-m5-accounts-regression.json",
@@ -45,7 +45,7 @@
       "fixture_sha256": "b692a4a965b4ab6ee295621a0e90d8aa4996a7fabc1b2cc583559b23337ac200",
       "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
       "assertions": 114,
-      "sha256": "412c5f58e99316ea89f3e60e91f21bc0a98cb78d6733a8cbf81cd8d9d6e2d5e6"
+      "sha256": "5d2617169d16920de885c0029e2184a9039f54e811f2ca18650e38da08d1222a"
     },
     "treasury": {
       "path": "tests/results/2026-10-18-m5-treasury-regression.json",
@@ -53,12 +53,12 @@
       "fixture_sha256": "12496d09bab804230f8de7ff8bee9ea0c79e76195a5ee02ce90fb6775a341e1f",
       "runtime_sha256": "a16944b9ac104564151651c403f28304a4ff823ebb0712c105f7e8c09197dc9e",
       "assertions": 43,
-      "sha256": "1c4a7625a3e5642e59f0b8d813188ff4e239220849c0e688c729e6d44a975fe1"
+      "sha256": "2d6f91cf1eefcbc121f17af83c15292778a2a09de1abcf30288ec67b296ebcbf"
     }
   },
   "ui_report": {
     "path": "tests/results/2026-10-18-m5-ui.json",
-    "sha256": "2bbed5ffe5d10a4b86461af9ba0fc9d23f0751f2ec17d31d23fb1c7b9e1ac8a3"
+    "sha256": "a884531e953456cab4f91647659f1c9ea2eb273a125aeef4755618fa1f469509"
   },
   "package_manifest_sha256": "df63c5f48e12168e9e3cf9fcce5a5724bd97ed861405f7e37f6c5bf31a6f165d",
   "rejected_attempts": [
@@ -66,5 +66,6 @@
     "tests/results/2026-10-18-m5-rejected-treasury-native-label.json"
   ],
   "ui_provenance": "Fourteen original captures on 9570a06 precede the non-issuer picker guard and charter buybacks. Nine new captures cold-load final a16944b and exercise its company/history, sale cooldown, buyback and asset/portfolio paths. Each capture retains its actual runtime. These fixture grants are visual setup, not proof of natural research/construction or macroeconomic balance. Dedicated engine suites cover the financial and natural construction gates separately. The running final disposable campaign is left paused on 1 June 1337.",
-  "scope": "M5 complete for the pinned single-player baseline. Controlled native-loan investment return is not a macroeconomic balance claim. The native [loan|e] diagnostic is an intermittent inherited limitation retained in a rejected treasury attempt; a later pass does not erase it. M6-M10 products, full destruction recovery, release-wide AI/balance/languages/scales/performance and compatibility remain separate gates. Queued CI is not counted as a pass."
+  "scope": "M5 complete for the pinned single-player baseline. Controlled native-loan investment return is not a macroeconomic balance claim. The native [loan|e] diagnostic is an intermittent inherited limitation retained in a rejected treasury attempt; a later pass does not erase it. M6-M10 products, full destruction recovery, release-wide AI/balance/languages/scales/performance and compatibility remain separate gates. Queued CI is not counted as a pass.",
+  "evidence_serialization": "Committed JSON uses LF newlines so report hashes verify against Git blobs on every platform."
 }
