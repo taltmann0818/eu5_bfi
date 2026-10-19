@@ -199,6 +199,12 @@ set_variable = { name = bfl_company_loss_offset value = {
     value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
 change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
 change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
+# One exclusive retained-trade cutoff before any equity distribution.
+bfl_service_commenda_operator = yes
+if = { limit = { var:bfl_venture_excluded_period ?= bfl_period }
+    change_variable = { name = bfl_company_verified_profit subtract = var:bfl_venture_excluded }
+    change_variable = { name = bfl_company_verified_profit add = var:bfl_venture_company_surplus }
+    set_variable = { name = bfl_company_verified_profit value = { value = var:bfl_company_verified_profit min = 0 } } }
 if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
     set_variable = { name = bfl_company_dividend value = {
         value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio

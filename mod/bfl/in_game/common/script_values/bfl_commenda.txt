@@ -1,0 +1,61 @@
+﻿bfl_venture_operator_cash = {
+value = gold min = 0
+        every_loan = { subtract = remaining_debt }
+        if = { limit = { bfl_is_company = yes } subtract = var:bfl_company_buffer subtract = var:bfl_company_reinvestment }
+        min = 0
+}
+bfl_venture_count = {
+value = 0
+if = { limit = { var:bfl_v_01_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_02_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_03_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_04_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_05_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_06_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_07_state = 1 } add = 1 }
+if = { limit = { var:bfl_v_08_state = 1 } add = 1 }
+}
+bfl_venture_basis = {
+value = 0
+if = { limit = { var:bfl_v_01_state = 1 } add = var:bfl_v_01_basis }
+if = { limit = { var:bfl_v_02_state = 1 } add = var:bfl_v_02_basis }
+if = { limit = { var:bfl_v_03_state = 1 } add = var:bfl_v_03_basis }
+if = { limit = { var:bfl_v_04_state = 1 } add = var:bfl_v_04_basis }
+if = { limit = { var:bfl_v_05_state = 1 } add = var:bfl_v_05_basis }
+if = { limit = { var:bfl_v_06_state = 1 } add = var:bfl_v_06_basis }
+if = { limit = { var:bfl_v_07_state = 1 } add = var:bfl_v_07_basis }
+if = { limit = { var:bfl_v_08_state = 1 } add = var:bfl_v_08_basis }
+}
+bfl_venture_returned = {
+value = 0
+if = { limit = { var:bfl_v_01_state > 0 } add = var:bfl_v_01_returned }
+if = { limit = { var:bfl_v_02_state > 0 } add = var:bfl_v_02_returned }
+if = { limit = { var:bfl_v_03_state > 0 } add = var:bfl_v_03_returned }
+if = { limit = { var:bfl_v_04_state > 0 } add = var:bfl_v_04_returned }
+if = { limit = { var:bfl_v_05_state > 0 } add = var:bfl_v_05_returned }
+if = { limit = { var:bfl_v_06_state > 0 } add = var:bfl_v_06_returned }
+if = { limit = { var:bfl_v_07_state > 0 } add = var:bfl_v_07_returned }
+if = { limit = { var:bfl_v_08_state > 0 } add = var:bfl_v_08_returned }
+}
+bfl_venture_profit = {
+value = 0
+if = { limit = { var:bfl_v_01_state > 0 } add = var:bfl_v_01_profit }
+if = { limit = { var:bfl_v_02_state > 0 } add = var:bfl_v_02_profit }
+if = { limit = { var:bfl_v_03_state > 0 } add = var:bfl_v_03_profit }
+if = { limit = { var:bfl_v_04_state > 0 } add = var:bfl_v_04_profit }
+if = { limit = { var:bfl_v_05_state > 0 } add = var:bfl_v_05_profit }
+if = { limit = { var:bfl_v_06_state > 0 } add = var:bfl_v_06_profit }
+if = { limit = { var:bfl_v_07_state > 0 } add = var:bfl_v_07_profit }
+if = { limit = { var:bfl_v_08_state > 0 } add = var:bfl_v_08_profit }
+}
+bfl_venture_loss = {
+value = 0
+if = { limit = { var:bfl_v_01_state > 0 } add = var:bfl_v_01_loss }
+if = { limit = { var:bfl_v_02_state > 0 } add = var:bfl_v_02_loss }
+if = { limit = { var:bfl_v_03_state > 0 } add = var:bfl_v_03_loss }
+if = { limit = { var:bfl_v_04_state > 0 } add = var:bfl_v_04_loss }
+if = { limit = { var:bfl_v_05_state > 0 } add = var:bfl_v_05_loss }
+if = { limit = { var:bfl_v_06_state > 0 } add = var:bfl_v_06_loss }
+if = { limit = { var:bfl_v_07_state > 0 } add = var:bfl_v_07_loss }
+if = { limit = { var:bfl_v_08_state > 0 } add = var:bfl_v_08_loss }
+}

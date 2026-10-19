@@ -22,7 +22,9 @@ def generate(common, effect, loc, write):
         if = { limit = { bfl_has_accounts = yes }
             add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
             add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
-        else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt } }
+        else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt }
+            if = { limit = { has_variable = bfl_venture_bank }
+                subtract = var:bfl_venture_external_basis } }
     ''')
     values += effect('bfl_nav_quote', '''value = 0
         if = { limit = { var:bfl_total_units > 0 }

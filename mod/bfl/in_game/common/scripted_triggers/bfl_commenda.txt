@@ -1,0 +1,17 @@
+﻿bfl_venture_capacity = {
+OR = { var:bfl_v_01_state != 1 var:bfl_v_02_state != 1 var:bfl_v_03_state != 1 var:bfl_v_04_state != 1 var:bfl_v_05_state != 1 var:bfl_v_06_state != 1 var:bfl_v_07_state != 1 var:bfl_v_08_state != 1 }
+}
+bfl_venture_authority = {
+exists = scope:bfl_venture_actor country_exists = scope:bfl_venture_actor
+        OR = { this = scope:bfl_venture_actor AND = { bfl_has_valid_controller = yes overlord = scope:bfl_venture_actor } }
+}
+bfl_venture_eligible = {
+exists = scope:bfl_operator country_exists = scope:bfl_operator
+        NOT = { this = scope:bfl_operator }
+        scope:bfl_operator = { NOT = { bfl_is_bank = yes } NOT = { has_variable = bfl_venture_bank }
+            OR = { country_type = location bfl_is_company = yes }
+            NOT = { has_variable = bfl_venture_guard } }
+        bfl_can_originate_commenda = yes bfl_venture_capacity = yes
+        bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
+        var:bfl_venture_ticket >= 100 var:bfl_venture_ticket <= 400
+}

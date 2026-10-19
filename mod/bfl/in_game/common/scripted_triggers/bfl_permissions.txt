@@ -99,7 +99,6 @@ bfl_can_conduct_business = yes
 OR = { current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
 var:bfl_profile = 2
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_commenda } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_commenda } } }
-custom_tooltip = { text = bfl_probe_P11 always = no }
 }
 bfl_can_service_commenda = {
 bfl_has_accounts = yes var:bfl_state < 5

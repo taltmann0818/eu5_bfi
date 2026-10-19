@@ -82,6 +82,7 @@ def generate(common, effect, loc, write):
     common('scripted_triggers', 'company_operations', triggers)
     values = effect('bfl_company_available', '''value = gold subtract = var:bfl_company_buffer
         subtract = var:bfl_company_reinvestment
+        if = { limit = { has_variable = bfl_venture_bank } subtract = var:bfl_venture_remaining }
         # Reserve the complete remaining native claim, not only this month's coupon.
         every_loan = { subtract = remaining_debt }
         if = { limit = { var:bfl_company_project_state = 1 } subtract = var:bfl_company_venture_budget }
@@ -207,6 +208,12 @@ def generate(common, effect, loc, write):
             value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
         change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
         change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
+        # One exclusive retained-trade cutoff before any equity distribution.
+        bfl_service_commenda_operator = yes
+        if = { limit = { var:bfl_venture_excluded_period ?= bfl_period }
+            change_variable = { name = bfl_company_verified_profit subtract = var:bfl_venture_excluded }
+            change_variable = { name = bfl_company_verified_profit add = var:bfl_venture_company_surplus }
+            set_variable = { name = bfl_company_verified_profit value = { value = var:bfl_company_verified_profit min = 0 } } }
         if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
             set_variable = { name = bfl_company_dividend value = {
                 value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio

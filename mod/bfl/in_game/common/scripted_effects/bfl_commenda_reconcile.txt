@@ -1,0 +1,43 @@
+﻿bfl_reconcile_commenda = {
+bfl_initialize_commenda = yes
+if = { limit = { var:bfl_v_01_state = 1 OR = { NOT = { exists = var:bfl_v_01_operator } NOT = { country_exists = var:bfl_v_01_operator } } }
+            set_variable = { name = bfl_v_01_loss value = var:bfl_v_01_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_01_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_01_basis }
+            set_variable = { name = bfl_v_01_basis value = 0 } set_variable = { name = bfl_v_01_state value = 3 } }
+if = { limit = { var:bfl_v_02_state = 1 OR = { NOT = { exists = var:bfl_v_02_operator } NOT = { country_exists = var:bfl_v_02_operator } } }
+            set_variable = { name = bfl_v_02_loss value = var:bfl_v_02_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_02_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_02_basis }
+            set_variable = { name = bfl_v_02_basis value = 0 } set_variable = { name = bfl_v_02_state value = 3 } }
+if = { limit = { var:bfl_v_03_state = 1 OR = { NOT = { exists = var:bfl_v_03_operator } NOT = { country_exists = var:bfl_v_03_operator } } }
+            set_variable = { name = bfl_v_03_loss value = var:bfl_v_03_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_03_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_03_basis }
+            set_variable = { name = bfl_v_03_basis value = 0 } set_variable = { name = bfl_v_03_state value = 3 } }
+if = { limit = { var:bfl_v_04_state = 1 OR = { NOT = { exists = var:bfl_v_04_operator } NOT = { country_exists = var:bfl_v_04_operator } } }
+            set_variable = { name = bfl_v_04_loss value = var:bfl_v_04_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_04_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_04_basis }
+            set_variable = { name = bfl_v_04_basis value = 0 } set_variable = { name = bfl_v_04_state value = 3 } }
+if = { limit = { var:bfl_v_05_state = 1 OR = { NOT = { exists = var:bfl_v_05_operator } NOT = { country_exists = var:bfl_v_05_operator } } }
+            set_variable = { name = bfl_v_05_loss value = var:bfl_v_05_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_05_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_05_basis }
+            set_variable = { name = bfl_v_05_basis value = 0 } set_variable = { name = bfl_v_05_state value = 3 } }
+if = { limit = { var:bfl_v_06_state = 1 OR = { NOT = { exists = var:bfl_v_06_operator } NOT = { country_exists = var:bfl_v_06_operator } } }
+            set_variable = { name = bfl_v_06_loss value = var:bfl_v_06_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_06_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_06_basis }
+            set_variable = { name = bfl_v_06_basis value = 0 } set_variable = { name = bfl_v_06_state value = 3 } }
+if = { limit = { var:bfl_v_07_state = 1 OR = { NOT = { exists = var:bfl_v_07_operator } NOT = { country_exists = var:bfl_v_07_operator } } }
+            set_variable = { name = bfl_v_07_loss value = var:bfl_v_07_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_07_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_07_basis }
+            set_variable = { name = bfl_v_07_basis value = 0 } set_variable = { name = bfl_v_07_state value = 3 } }
+if = { limit = { var:bfl_v_08_state = 1 OR = { NOT = { exists = var:bfl_v_08_operator } NOT = { country_exists = var:bfl_v_08_operator } } }
+            set_variable = { name = bfl_v_08_loss value = var:bfl_v_08_basis }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_08_basis }
+            change_variable = { name = bfl_project_value subtract = var:bfl_v_08_basis }
+            set_variable = { name = bfl_v_08_basis value = 0 } set_variable = { name = bfl_v_08_state value = 3 } }
+}

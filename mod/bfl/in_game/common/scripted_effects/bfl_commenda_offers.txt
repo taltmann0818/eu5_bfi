@@ -1,0 +1,349 @@
+﻿bfl_fund_commenda = {
+if = { limit = { bfl_is_bank = yes exists = scope:bfl_venture_actor exists = scope:bfl_operator }
+        bfl_propose_commenda = yes }
+}
+bfl_propose_commenda = {
+bfl_initialize_commenda = yes
+        if = { limit = { bfl_venture_authority = yes bfl_venture_eligible = yes
+            scope:bfl_operator = { OR = { NOT = { has_variable = bfl_venture_offer_bank } bfl_period > var:bfl_venture_offer_expiry } } }
+            save_scope_as = bfl_venture_lender
+            scope:bfl_operator = {
+                if = { limit = { NOT = { has_variable = bfl_venture_offer_generation } } set_variable = { name = bfl_venture_offer_generation value = 0 } }
+                change_variable = { name = bfl_venture_offer_generation add = 1 }
+                save_scope_value_as = { name = bfl_venture_quote value = var:bfl_venture_offer_generation }
+                set_variable = { name = bfl_venture_offer_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_offer_actor value = scope:bfl_venture_actor }
+                set_variable = { name = bfl_venture_offer_ticket value = scope:bfl_venture_lender.var:bfl_venture_ticket }
+                set_variable = { name = bfl_venture_offer_preset value = scope:bfl_venture_lender.var:bfl_venture_preset }
+                set_variable = { name = bfl_venture_offer_duration value = scope:bfl_venture_lender.var:bfl_venture_duration }
+                set_variable = { name = bfl_venture_offer_expiry value = { value = bfl_period add = 3 } }
+                if = { limit = { var:bfl_venture_offer_preset = 0 } trigger_event_non_silently = bfl_commenda.1 }
+                else = { trigger_event_non_silently = bfl_commenda.2 }
+            }
+        }
+}
+bfl_accept_commenda = {
+if = { limit = { country_exists = this exists = var:bfl_venture_offer_bank country_exists = var:bfl_venture_offer_bank
+        exists = scope:bfl_venture_quote var:bfl_venture_offer_generation = scope:bfl_venture_quote
+        bfl_period <= var:bfl_venture_offer_expiry
+        var:bfl_venture_offer_duration >= 6 var:bfl_venture_offer_duration <= 120
+        var:bfl_venture_offer_preset >= 0 var:bfl_venture_offer_preset <= 1 }
+        save_scope_as = bfl_operator
+        var:bfl_venture_offer_actor = { save_scope_as = bfl_venture_actor }
+        var:bfl_venture_offer_bank = { save_scope_as = bfl_venture_lender bfl_initialize_commenda = yes
+            if = { limit = { bfl_venture_authority = yes bfl_venture_eligible = yes
+                var:bfl_venture_ticket = scope:bfl_operator.var:bfl_venture_offer_ticket
+                var:bfl_venture_preset = scope:bfl_operator.var:bfl_venture_offer_preset
+                var:bfl_venture_duration = scope:bfl_operator.var:bfl_venture_offer_duration
+                OR = { var:bfl_venture_preset = 0 scope:bfl_operator = { bfl_venture_operator_cash >= { value = var:bfl_venture_offer_ticket divide = 2 } } } }
+                set_variable = { name = bfl_venture_allocated value = 0 }
+    if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_01_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_01_state value = 1 } change_variable = { name = bfl_v_01_generation add = 1 }
+            set_variable = { name = bfl_v_01_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_01_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_01_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_01_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_01_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_01_returned value = 0 } set_variable = { name = bfl_v_01_profit value = 0 }
+            set_variable = { name = bfl_v_01_loss value = 0 } set_variable = { name = bfl_v_01_discovery value = 0 }
+            set_variable = { name = bfl_v_01_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 1 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_01_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_02_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_02_state value = 1 } change_variable = { name = bfl_v_02_generation add = 1 }
+            set_variable = { name = bfl_v_02_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_02_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_02_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_02_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_02_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_02_returned value = 0 } set_variable = { name = bfl_v_02_profit value = 0 }
+            set_variable = { name = bfl_v_02_loss value = 0 } set_variable = { name = bfl_v_02_discovery value = 0 }
+            set_variable = { name = bfl_v_02_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 2 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_02_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_03_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_03_state value = 1 } change_variable = { name = bfl_v_03_generation add = 1 }
+            set_variable = { name = bfl_v_03_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_03_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_03_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_03_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_03_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_03_returned value = 0 } set_variable = { name = bfl_v_03_profit value = 0 }
+            set_variable = { name = bfl_v_03_loss value = 0 } set_variable = { name = bfl_v_03_discovery value = 0 }
+            set_variable = { name = bfl_v_03_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 3 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_03_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_04_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_04_state value = 1 } change_variable = { name = bfl_v_04_generation add = 1 }
+            set_variable = { name = bfl_v_04_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_04_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_04_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_04_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_04_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_04_returned value = 0 } set_variable = { name = bfl_v_04_profit value = 0 }
+            set_variable = { name = bfl_v_04_loss value = 0 } set_variable = { name = bfl_v_04_discovery value = 0 }
+            set_variable = { name = bfl_v_04_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 4 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_04_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_05_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_05_state value = 1 } change_variable = { name = bfl_v_05_generation add = 1 }
+            set_variable = { name = bfl_v_05_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_05_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_05_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_05_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_05_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_05_returned value = 0 } set_variable = { name = bfl_v_05_profit value = 0 }
+            set_variable = { name = bfl_v_05_loss value = 0 } set_variable = { name = bfl_v_05_discovery value = 0 }
+            set_variable = { name = bfl_v_05_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 5 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_05_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_06_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_06_state value = 1 } change_variable = { name = bfl_v_06_generation add = 1 }
+            set_variable = { name = bfl_v_06_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_06_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_06_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_06_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_06_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_06_returned value = 0 } set_variable = { name = bfl_v_06_profit value = 0 }
+            set_variable = { name = bfl_v_06_loss value = 0 } set_variable = { name = bfl_v_06_discovery value = 0 }
+            set_variable = { name = bfl_v_06_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 6 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_06_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_07_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_07_state value = 1 } change_variable = { name = bfl_v_07_generation add = 1 }
+            set_variable = { name = bfl_v_07_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_07_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_07_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_07_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_07_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_07_returned value = 0 } set_variable = { name = bfl_v_07_profit value = 0 }
+            set_variable = { name = bfl_v_07_loss value = 0 } set_variable = { name = bfl_v_07_discovery value = 0 }
+            set_variable = { name = bfl_v_07_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 7 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_07_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_08_state != 1 }
+            set_variable = { name = bfl_venture_allocated value = 1 }
+            set_variable = { name = bfl_v_08_state value = 1 } change_variable = { name = bfl_v_08_generation add = 1 }
+            set_variable = { name = bfl_v_08_operator value = scope:bfl_operator }
+            set_variable = { name = bfl_v_08_basis value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_08_original value = var:bfl_venture_ticket }
+            set_variable = { name = bfl_v_08_preset value = var:bfl_venture_preset }
+            set_variable = { name = bfl_v_08_maturity value = { value = bfl_period add = var:bfl_venture_duration } }
+            set_variable = { name = bfl_v_08_returned value = 0 } set_variable = { name = bfl_v_08_profit value = 0 }
+            set_variable = { name = bfl_v_08_loss value = 0 } set_variable = { name = bfl_v_08_discovery value = 0 }
+            set_variable = { name = bfl_v_08_outcome value = 0 }
+            add_gold = { value = var:bfl_venture_ticket multiply = -1 }
+            change_variable = { name = bfl_project_value add = var:bfl_venture_ticket }
+            scope:bfl_operator = {
+                add_gold = scope:bfl_venture_lender.var:bfl_venture_ticket
+                set_variable = { name = bfl_venture_bank value = scope:bfl_venture_lender }
+                set_variable = { name = bfl_venture_slot value = 8 }
+                set_variable = { name = bfl_venture_generation value = scope:bfl_venture_lender.var:bfl_v_08_generation }
+                set_variable = { name = bfl_venture_remaining value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_external_basis value = var:bfl_venture_offer_ticket }
+                set_variable = { name = bfl_venture_investor_fraction value = 1 }
+                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 }
+                    set_variable = { name = bfl_venture_remaining value = { value = var:bfl_venture_offer_ticket multiply = 1.5 } }
+                    set_variable = { name = bfl_venture_investor_fraction value = 0.66667 }
+                    set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_last_period value = bfl_period }
+                set_variable = { name = bfl_venture_pool value = var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_company_surplus value = 0 }
+                set_variable = { name = bfl_venture_exploration_cost value = 0 }
+                set_variable = { name = bfl_venture_trade_loss value = 0 }
+                set_variable = { name = bfl_venture_receipts value = 0 }
+                set_variable = { name = bfl_venture_excluded value = 0 }
+                set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+                remove_variable = bfl_venture_area
+                remove_variable = bfl_venture_offer_bank
+            }
+        }
+ } } }
+}
+bfl_decline_commenda = {
+if = { limit = { exists = scope:bfl_venture_quote var:bfl_venture_offer_generation = scope:bfl_venture_quote }
+        remove_variable = bfl_venture_offer_bank }
+}

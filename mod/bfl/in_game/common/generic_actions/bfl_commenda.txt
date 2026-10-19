@@ -1,0 +1,13 @@
+﻿bfl_commenda_expedition = { type = owncountry ai_tick = never
+            potential = { scope:actor = { OR = { has_variable = bfl_venture_bank any_subject = { has_variable = bfl_venture_bank } } } }
+            allow = { scope:actor = { OR = { has_variable = bfl_venture_bank any_subject = { has_variable = bfl_venture_bank } } } }
+            select_trigger = { looking_for_a = country target_flag = operator name = choose_country column = { data = name }
+                visible = { has_variable = bfl_venture_bank OR = { this = scope:actor overlord = scope:actor } }
+                enabled = { modifier:may_explore = yes NOT = { has_variable = bfl_venture_area } } }
+            select_trigger = { looking_for_a = area source = operator source_flags = possible_exploration_areas target_flag = target name = start_exploration_select_area
+                column = { data = name } visible = { scope:operator = { NOT = { has_discovered_area = root } } } }
+            select_trigger = { looking_for_a = location source = target source_flags = possible_launch_locations target_flag = launch_location name = start_exploration_select_launch_point
+                column = { data = name } visible = { is_port = yes } enabled = { is_port = yes } }
+            select_trigger = { looking_for_a = character source = operator target_flag = character name = start_exploration_select_character
+                column = { data = character_explorer } visible = { owner = scope:operator is_valid_for_exploration = yes } }
+            effect = { scope:operator = { bfl_start_commenda_exploration = yes } } ai_will_do = { value = 0 } }

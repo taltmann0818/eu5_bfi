@@ -121,3 +121,33 @@ Custodian free inventory and forward backing carry actual native acquisition cos
 Branch host/market/expiry/last-fee-period, per-lot custody references and holder delivery/transfer quote snapshots persist separately from financial claims. The same monthly account owner processes goods before operating costs, distress and dividends. [M6 behavior and acceptance](m6-goods.md) define the fixed pilot policies and distinguish native execution, offline checks and UI evidence.
 
 M6 automatic trading persists `bfl_goods_allocation`, `risk`, `turnover`, `mandate`, `contracts`, `policy_period` and the presentation-only `policy_open` (each prefixed `bfl_goods_`). Existing five-good IDs migrate to native goods references without resetting quantity, cost, encumbrance, security or holders. New goods use native scopes directly. `policy_period` rejects same-month trading replays; native custody servicing keeps its own cutoff. Marks refresh from native seller-capital quotes after transactions and monthly physical loss, and never enter income or carried assets. Paused/run-off and contract-policy UI changes invalidate outstanding unaccepted offers while accepted obligations persist. [The current product note](m6-goods.md) records the revised gate separately from historical manual-pilot evidence.
+
+
+## M7 accepted commenda records
+
+`bfl_venture_schema = 1` initializes metadata without cash or backfill. Each bank
+owns eight `bfl_v_XX` records: state (unused/active/closed/loss), generation,
+operator, accepted preset, original/remaining bank basis, maturity, cumulative
+capital returned, realized profit/loss and discovery outcome. Offers live on the
+operator and snapshot bank, command actor, generation, ticket, preset, term and
+expiry. No GUI supplies a settlement amount.
+
+The exclusive operator backlink stores investor, slot and generation; total
+remaining capital, exact external bank basis, contribution/profit proportions,
+recorded project pool, last cutoff, observed receipts and linked exploration
+area/cost. Contributions initialize the pool, native retained trade increases
+it, negative native budgets/exploration costs reduce it, and every capital or
+surplus allocation removes its full amount (including the operator share that
+stays in the treasury). Available cash and the recorded pool both cap maturity
+settlement. Missing operators cause one bank-basis impairment; full institution
+succession/recovery remains M9.
+
+Company operating availability reserves the outstanding project capital.
+Company NAV deducts exact external project basis. M2 income excludes capital
+and the investor's share, and can distribute only earned operator surplus.
+Deferred operator surplus is recognized at the maturity cutoff. Investor
+returns release `bfl_project_value`; only actual surplus enters
+`bfl_profit_ventures` and the persisted `bfl_statement_ventures`.
+
+See [product rules and outstanding acceptance](m7-commenda.md). The native
+company's general treasury is not an engine-native isolated voyage wallet.

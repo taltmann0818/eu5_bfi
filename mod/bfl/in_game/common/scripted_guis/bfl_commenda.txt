@@ -1,0 +1,24 @@
+﻿bfl_venture_settings = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes
+                scope:bfl_bank = { bfl_initialize_commenda = yes if = { limit = { var:bfl_venture_open = 0 } set_variable = { name = bfl_venture_open value = 1 } }
+        else = { set_variable = { name = bfl_venture_open value = 0 } } } } } }
+bfl_venture_preset = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes
+                scope:bfl_bank = { bfl_initialize_commenda = yes if = { limit = { var:bfl_venture_preset = 0 } set_variable = { name = bfl_venture_preset value = 1 } }
+else_if = { limit = { var:bfl_venture_preset = 1 } set_variable = { name = bfl_venture_preset value = 0 } }
+ } } } }
+bfl_venture_duration = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes
+                scope:bfl_bank = { bfl_initialize_commenda = yes if = { limit = { var:bfl_venture_duration = 6 } set_variable = { name = bfl_venture_duration value = 12 } }
+else_if = { limit = { var:bfl_venture_duration = 12 } set_variable = { name = bfl_venture_duration value = 24 } }
+else_if = { limit = { var:bfl_venture_duration = 24 } set_variable = { name = bfl_venture_duration value = 60 } }
+else_if = { limit = { var:bfl_venture_duration = 60 } set_variable = { name = bfl_venture_duration value = 120 } }
+else_if = { limit = { var:bfl_venture_duration = 120 } set_variable = { name = bfl_venture_duration value = 6 } }
+ } } } }
+bfl_venture_ticket = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes }
+            effect = { if = { limit = { bfl_has_management = yes } bfl_resolve_command_bank = yes
+                scope:bfl_bank = { bfl_initialize_commenda = yes if = { limit = { var:bfl_venture_ticket = 100 } set_variable = { name = bfl_venture_ticket value = 200 } }
+else_if = { limit = { var:bfl_venture_ticket = 200 } set_variable = { name = bfl_venture_ticket value = 400 } }
+else_if = { limit = { var:bfl_venture_ticket = 400 } set_variable = { name = bfl_venture_ticket value = 100 } }
+ } } } }
+bfl_venture_view = { scope = country is_shown = { var:bfl_venture_open = 1 } }

@@ -1,0 +1,8 @@
+﻿namespace = bfl_commenda
+bfl_commenda.1 = { type = country_event title = bfl_venture_offer_title desc = bfl_venture_offer_desc_0
+            image = "gfx/interface/illustrations/bfl/commenda.dds" outcome = neutral
+            option = { name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = { bfl_accept_commenda = yes } ai_chance = { base = 100 } }
+            option = { name = bfl_venture_decline hidden_effect = { bfl_decline_commenda = yes } ai_chance = { base = 0 } } }bfl_commenda.2 = { type = country_event title = bfl_venture_offer_title desc = bfl_venture_offer_desc_1
+            image = "gfx/interface/illustrations/bfl/commenda.dds" outcome = neutral
+            option = { name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = { bfl_accept_commenda = yes } ai_chance = { base = 100 } }
+            option = { name = bfl_venture_decline hidden_effect = { bfl_decline_commenda = yes } ai_chance = { base = 0 } } }
