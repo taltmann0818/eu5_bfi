@@ -423,7 +423,7 @@ def collect(log, manifest, error_log=''):
         # Keep these diagnostics in the full local log, separately from logic errors.
         if 'message_handler' in line and 'Failed to find message type:' in line:
             continue
-        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered)', line, re.I)
+        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered|Badly read script value|Cannot read)', line, re.I)
                 and re.search(r'(?:bfl_|bfi_|gui/(?:credit|economy_lateralview|technology_lateralview)\.gui)',line)):
             errors.append(line.split(']: ', 1)[-1])
     for block in re.findall(r'Script system error![\s\S]*?(?=\n\[|\Z)', error_log):

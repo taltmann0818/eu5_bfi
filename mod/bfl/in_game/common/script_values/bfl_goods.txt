@@ -1,0 +1,227 @@
+﻿bfl_goods_spot_01 = {
+value = 0
+if = { limit = { var:bfl_inv_01_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_01_accepted_quantity }
+if = { limit = { var:bfl_inv_01_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_01_accepted_quantity }
+if = { limit = { var:bfl_inv_01_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_01_accepted_quantity }
+if = { limit = { var:bfl_inv_01_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_01_accepted_quantity }
+if = { limit = { var:bfl_inv_01_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_01_accepted_quantity }
+}
+bfl_goods_due_01 = {
+value = var:bfl_inv_01_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_01 = {
+value = var:bfl_inv_01_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_02 = {
+value = 0
+if = { limit = { var:bfl_inv_02_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_02_accepted_quantity }
+if = { limit = { var:bfl_inv_02_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_02_accepted_quantity }
+if = { limit = { var:bfl_inv_02_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_02_accepted_quantity }
+if = { limit = { var:bfl_inv_02_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_02_accepted_quantity }
+if = { limit = { var:bfl_inv_02_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_02_accepted_quantity }
+}
+bfl_goods_due_02 = {
+value = var:bfl_inv_02_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_02 = {
+value = var:bfl_inv_02_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_03 = {
+value = 0
+if = { limit = { var:bfl_inv_03_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_03_accepted_quantity }
+if = { limit = { var:bfl_inv_03_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_03_accepted_quantity }
+if = { limit = { var:bfl_inv_03_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_03_accepted_quantity }
+if = { limit = { var:bfl_inv_03_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_03_accepted_quantity }
+if = { limit = { var:bfl_inv_03_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_03_accepted_quantity }
+}
+bfl_goods_due_03 = {
+value = var:bfl_inv_03_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_03 = {
+value = var:bfl_inv_03_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_04 = {
+value = 0
+if = { limit = { var:bfl_inv_04_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_04_accepted_quantity }
+if = { limit = { var:bfl_inv_04_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_04_accepted_quantity }
+if = { limit = { var:bfl_inv_04_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_04_accepted_quantity }
+if = { limit = { var:bfl_inv_04_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_04_accepted_quantity }
+if = { limit = { var:bfl_inv_04_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_04_accepted_quantity }
+}
+bfl_goods_due_04 = {
+value = var:bfl_inv_04_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_04 = {
+value = var:bfl_inv_04_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_05 = {
+value = 0
+if = { limit = { var:bfl_inv_05_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_05_accepted_quantity }
+if = { limit = { var:bfl_inv_05_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_05_accepted_quantity }
+if = { limit = { var:bfl_inv_05_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_05_accepted_quantity }
+if = { limit = { var:bfl_inv_05_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_05_accepted_quantity }
+if = { limit = { var:bfl_inv_05_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_05_accepted_quantity }
+}
+bfl_goods_due_05 = {
+value = var:bfl_inv_05_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_05 = {
+value = var:bfl_inv_05_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_06 = {
+value = 0
+if = { limit = { var:bfl_inv_06_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_06_accepted_quantity }
+if = { limit = { var:bfl_inv_06_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_06_accepted_quantity }
+if = { limit = { var:bfl_inv_06_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_06_accepted_quantity }
+if = { limit = { var:bfl_inv_06_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_06_accepted_quantity }
+if = { limit = { var:bfl_inv_06_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_06_accepted_quantity }
+}
+bfl_goods_due_06 = {
+value = var:bfl_inv_06_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_06 = {
+value = var:bfl_inv_06_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_07 = {
+value = 0
+if = { limit = { var:bfl_inv_07_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_07_accepted_quantity }
+if = { limit = { var:bfl_inv_07_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_07_accepted_quantity }
+if = { limit = { var:bfl_inv_07_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_07_accepted_quantity }
+if = { limit = { var:bfl_inv_07_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_07_accepted_quantity }
+if = { limit = { var:bfl_inv_07_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_07_accepted_quantity }
+}
+bfl_goods_due_07 = {
+value = var:bfl_inv_07_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_07 = {
+value = var:bfl_inv_07_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_08 = {
+value = 0
+if = { limit = { var:bfl_inv_08_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_08_accepted_quantity }
+if = { limit = { var:bfl_inv_08_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_08_accepted_quantity }
+if = { limit = { var:bfl_inv_08_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_08_accepted_quantity }
+if = { limit = { var:bfl_inv_08_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_08_accepted_quantity }
+if = { limit = { var:bfl_inv_08_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_08_accepted_quantity }
+}
+bfl_goods_due_08 = {
+value = var:bfl_inv_08_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_08 = {
+value = var:bfl_inv_08_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_09 = {
+value = 0
+if = { limit = { var:bfl_inv_09_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_09_accepted_quantity }
+if = { limit = { var:bfl_inv_09_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_09_accepted_quantity }
+if = { limit = { var:bfl_inv_09_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_09_accepted_quantity }
+if = { limit = { var:bfl_inv_09_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_09_accepted_quantity }
+if = { limit = { var:bfl_inv_09_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_09_accepted_quantity }
+}
+bfl_goods_due_09 = {
+value = var:bfl_inv_09_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_09 = {
+value = var:bfl_inv_09_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_10 = {
+value = 0
+if = { limit = { var:bfl_inv_10_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_10_accepted_quantity }
+if = { limit = { var:bfl_inv_10_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_10_accepted_quantity }
+if = { limit = { var:bfl_inv_10_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_10_accepted_quantity }
+if = { limit = { var:bfl_inv_10_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_10_accepted_quantity }
+if = { limit = { var:bfl_inv_10_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_10_accepted_quantity }
+}
+bfl_goods_due_10 = {
+value = var:bfl_inv_10_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_10 = {
+value = var:bfl_inv_10_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_11 = {
+value = 0
+if = { limit = { var:bfl_inv_11_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_11_accepted_quantity }
+if = { limit = { var:bfl_inv_11_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_11_accepted_quantity }
+if = { limit = { var:bfl_inv_11_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_11_accepted_quantity }
+if = { limit = { var:bfl_inv_11_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_11_accepted_quantity }
+if = { limit = { var:bfl_inv_11_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_11_accepted_quantity }
+}
+bfl_goods_due_11 = {
+value = var:bfl_inv_11_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_11 = {
+value = var:bfl_inv_11_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_12 = {
+value = 0
+if = { limit = { var:bfl_inv_12_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_12_accepted_quantity }
+if = { limit = { var:bfl_inv_12_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_12_accepted_quantity }
+if = { limit = { var:bfl_inv_12_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_12_accepted_quantity }
+if = { limit = { var:bfl_inv_12_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_12_accepted_quantity }
+if = { limit = { var:bfl_inv_12_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_12_accepted_quantity }
+}
+bfl_goods_due_12 = {
+value = var:bfl_inv_12_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_12 = {
+value = var:bfl_inv_12_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_13 = {
+value = 0
+if = { limit = { var:bfl_inv_13_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_13_accepted_quantity }
+if = { limit = { var:bfl_inv_13_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_13_accepted_quantity }
+if = { limit = { var:bfl_inv_13_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_13_accepted_quantity }
+if = { limit = { var:bfl_inv_13_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_13_accepted_quantity }
+if = { limit = { var:bfl_inv_13_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_13_accepted_quantity }
+}
+bfl_goods_due_13 = {
+value = var:bfl_inv_13_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_13 = {
+value = var:bfl_inv_13_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_14 = {
+value = 0
+if = { limit = { var:bfl_inv_14_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_14_accepted_quantity }
+if = { limit = { var:bfl_inv_14_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_14_accepted_quantity }
+if = { limit = { var:bfl_inv_14_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_14_accepted_quantity }
+if = { limit = { var:bfl_inv_14_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_14_accepted_quantity }
+if = { limit = { var:bfl_inv_14_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_14_accepted_quantity }
+}
+bfl_goods_due_14 = {
+value = var:bfl_inv_14_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_14 = {
+value = var:bfl_inv_14_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_15 = {
+value = 0
+if = { limit = { var:bfl_inv_15_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_15_accepted_quantity }
+if = { limit = { var:bfl_inv_15_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_15_accepted_quantity }
+if = { limit = { var:bfl_inv_15_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_15_accepted_quantity }
+if = { limit = { var:bfl_inv_15_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_15_accepted_quantity }
+if = { limit = { var:bfl_inv_15_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_15_accepted_quantity }
+}
+bfl_goods_due_15 = {
+value = var:bfl_inv_15_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_15 = {
+value = var:bfl_inv_15_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_spot_16 = {
+value = 0
+if = { limit = { var:bfl_inv_16_good = 1 } value = "capital.market.market_price(goods:wheat)" multiply = var:bfl_inv_16_accepted_quantity }
+if = { limit = { var:bfl_inv_16_good = 2 } value = "capital.market.market_price(goods:salt)" multiply = var:bfl_inv_16_accepted_quantity }
+if = { limit = { var:bfl_inv_16_good = 3 } value = "capital.market.market_price(goods:iron)" multiply = var:bfl_inv_16_accepted_quantity }
+if = { limit = { var:bfl_inv_16_good = 4 } value = "capital.market.market_price(goods:cloth)" multiply = var:bfl_inv_16_accepted_quantity }
+if = { limit = { var:bfl_inv_16_good = 5 } value = "capital.market.market_price(goods:pepper)" multiply = var:bfl_inv_16_accepted_quantity }
+}
+bfl_goods_due_16 = {
+value = var:bfl_inv_16_due subtract = bfl_period min = 0
+}
+bfl_goods_transit_16 = {
+value = var:bfl_inv_16_transit_due subtract = bfl_period min = 0
+}
+bfl_goods_quote = { value = var:bfl_goods_quote }
+        bfl_goods_refund = { value = var:bfl_goods_refund }
+        bfl_goods_margin_call = { value = var:bfl_goods_margin_call }

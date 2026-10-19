@@ -639,7 +639,6 @@ def native_adapters():
     # These are executable fail-closed commands, not guessed engine signatures.
     blocked = {
         'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
-        'native_goods_adapter':[('bfl_purchase_native_inventory','P09'),('bfl_sell_native_inventory','P09'),('bfl_settle_warehouse_receipt','P09'),('bfl_settle_commodity_forward','P09')],
         'native_trade_adapter':[('bfl_fund_commenda','P11')],
         'native_receipts_adapter':[('bfl_observe_native_receipts','P07')],
         'monetary':[('bfl_issue_sovereign_notes','P05'),('bfl_settle_interbank_liquidity','P04'),('bfl_run_clearing','P10')],
@@ -759,6 +758,7 @@ def treasury_and_resolution():
             set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
             bfl_observe_bank_income = yes
             bfl_accrue_deposits = yes
+            bfl_process_goods = yes
             bfl_settle_operating_expenses = yes
             bfl_evaluate_distress = yes
             bfl_settle_dividends = yes
@@ -1031,6 +1031,8 @@ def main():
     hooks_and_commands()
     from generate_contracts import generate
     generate(common,effect,loc)
+    from generate_goods import generate as generate_goods
+    generate_goods(common,effect,loc,write)
     from generate_bank_accounts import generate as generate_bank_accounts
     generate_bank_accounts(common,effect,loc,write,TUNE)
     from generate_bank_charts import generate as generate_bank_charts

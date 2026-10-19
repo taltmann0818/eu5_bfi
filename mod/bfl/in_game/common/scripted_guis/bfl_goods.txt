@@ -1,0 +1,282 @@
+﻿bfl_buy_goods_wheat = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:wheat)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:wheat)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:wheat)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:wheat)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 1 }
+            set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } } }
+bfl_buy_branch_wheat = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:wheat)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:wheat)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:wheat)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:wheat)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:wheat)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 1 }
+            if = { limit = { bfl_goods_branch_access = yes } set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes } } } } }
+bfl_buy_goods_salt = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:salt)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:salt)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:salt)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:salt)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 2 }
+            set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } } }
+bfl_buy_branch_salt = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:salt)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:salt)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:salt)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:salt)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:salt)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 2 }
+            if = { limit = { bfl_goods_branch_access = yes } set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes } } } } }
+bfl_buy_goods_iron = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:iron)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:iron)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:iron)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:iron)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 3 }
+            set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } } }
+bfl_buy_branch_iron = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:iron)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:iron)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:iron)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:iron)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:iron)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 3 }
+            if = { limit = { bfl_goods_branch_access = yes } set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes } } } } }
+bfl_buy_goods_cloth = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:cloth)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:cloth)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:cloth)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:cloth)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 4 }
+            set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } } }
+bfl_buy_branch_cloth = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:cloth)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:cloth)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:cloth)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:cloth)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:cloth)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 4 }
+            if = { limit = { bfl_goods_branch_access = yes } set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes } } } } }
+bfl_buy_goods_pepper = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:pepper)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:pepper)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:pepper)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            "capital.market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "capital.market.market_price(goods:pepper)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 5 }
+            set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } } }
+bfl_buy_branch_pepper = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:pepper)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:pepper)" multiply = 10 add = 1 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:pepper)" multiply = 10 add = 1 } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
+            "var:bfl_goods_branch_market.stockpile_in_market(goods:pepper)" >= 10
+            bfl_free_cash >= { value = "var:bfl_goods_branch_market.market_price(goods:pepper)" multiply = 10 add = 1 } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_good value = 5 }
+            if = { limit = { bfl_goods_branch_access = yes } set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes } } } } }
+bfl_goods_select_01 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 1 } } } } }
+bfl_goods_select_02 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 2 } } } } }
+bfl_goods_select_03 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 3 } } } } }
+bfl_goods_select_04 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 4 } } } } }
+bfl_goods_select_05 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 5 } } } } }
+bfl_goods_select_06 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 6 } } } } }
+bfl_goods_select_07 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 7 } } } } }
+bfl_goods_select_08 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 8 } } } } }
+bfl_goods_select_09 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 9 } } } } }
+bfl_goods_select_10 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 10 } } } } }
+bfl_goods_select_11 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 11 } } } } }
+bfl_goods_select_12 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 12 } } } } }
+bfl_goods_select_13 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 13 } } } } }
+bfl_goods_select_14 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 14 } } } } }
+bfl_goods_select_15 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 15 } } } } }
+bfl_goods_select_16 = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes set_variable = { name = bfl_goods_selected value = 16 } } } } }
+bfl_goods_open_menu = { scope = country is_shown = { bfl_has_management = yes }
+        is_valid = { bfl_has_management = yes } effect = { if = { limit = { bfl_has_management = yes }
+            bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes }
+            set_variable = { name = bfl_goods_browser_bank value = scope:bfl_bank }
+            set_variable = { name = bfl_goods_browser_page value = 1 }
+            set_variable = { name = bfl_goods_menu_branch value = 0 }
+            trigger_event_non_silently = bfl_goods.10
+        } } }
+    bfl_goods_sell = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_sellable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_sellable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_sellable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_sellable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_sellable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_sellable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_sellable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_sellable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_sellable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_sellable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_sellable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_sellable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_sellable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_sellable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_sellable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_sellable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_sellable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_sellable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_sellable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_sellable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_sellable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_sellable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_sellable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_sellable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_sellable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_sellable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_sellable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_sellable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_sellable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_sellable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_sellable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_sellable_16 = yes } } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_sellable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_sellable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_sellable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_sellable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_sellable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_sellable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_sellable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_sellable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_sellable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_sellable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_sellable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_sellable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_sellable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_sellable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_sellable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_sellable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_sellable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_sellable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_sellable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_sellable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_sellable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_sellable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_sellable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_sellable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_sellable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_sellable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_sellable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_sellable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_sellable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_sellable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_sellable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_sellable_16 = yes } } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_selected = 1 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_sell_native_inventory = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_sell_native_inventory = yes }
+ } } } }
+bfl_goods_receipt = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_warehouse_receipt = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_warehouse_receipt = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_warehouse_receipt = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_warehouse_receipt = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_selected = 1 } bfl_list_goods_1_01 = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_list_goods_1_02 = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_list_goods_1_03 = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_list_goods_1_04 = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_list_goods_1_05 = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_list_goods_1_06 = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_list_goods_1_07 = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_list_goods_1_08 = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_list_goods_1_09 = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_list_goods_1_10 = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_list_goods_1_11 = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_list_goods_1_12 = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_list_goods_1_13 = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_list_goods_1_14 = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_list_goods_1_15 = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_list_goods_1_16 = yes }
+ } } } }
+bfl_goods_forward = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_forward = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_forward = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commodity_forward = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } AND = { bfl_has_management = yes country_type = location var:bfl_bank = { bfl_can_originate_commodity_forward = yes bfl_goods_researched_collateral = yes OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes } AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes } AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes } AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes } AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes } AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes } AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes } AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes } AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes } AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes } AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes } AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes } AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes } AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes } AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes } AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes } } } } } }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_selected = 1 } bfl_list_goods_2_01 = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_list_goods_2_02 = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_list_goods_2_03 = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_list_goods_2_04 = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_list_goods_2_05 = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_list_goods_2_06 = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_list_goods_2_07 = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_list_goods_2_08 = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_list_goods_2_09 = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_list_goods_2_10 = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_list_goods_2_11 = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_list_goods_2_12 = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_list_goods_2_13 = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_list_goods_2_14 = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_list_goods_2_15 = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_list_goods_2_16 = yes }
+ } } } }
+bfl_goods_cancel = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  }
+                    bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_selected = 1 } set_variable = { name = bfl_inv_01_offer value = 0 } change_variable = { name = bfl_inv_01_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 2 } set_variable = { name = bfl_inv_02_offer value = 0 } change_variable = { name = bfl_inv_02_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 3 } set_variable = { name = bfl_inv_03_offer value = 0 } change_variable = { name = bfl_inv_03_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 4 } set_variable = { name = bfl_inv_04_offer value = 0 } change_variable = { name = bfl_inv_04_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 5 } set_variable = { name = bfl_inv_05_offer value = 0 } change_variable = { name = bfl_inv_05_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 6 } set_variable = { name = bfl_inv_06_offer value = 0 } change_variable = { name = bfl_inv_06_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 7 } set_variable = { name = bfl_inv_07_offer value = 0 } change_variable = { name = bfl_inv_07_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 8 } set_variable = { name = bfl_inv_08_offer value = 0 } change_variable = { name = bfl_inv_08_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 9 } set_variable = { name = bfl_inv_09_offer value = 0 } change_variable = { name = bfl_inv_09_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 10 } set_variable = { name = bfl_inv_10_offer value = 0 } change_variable = { name = bfl_inv_10_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 11 } set_variable = { name = bfl_inv_11_offer value = 0 } change_variable = { name = bfl_inv_11_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 12 } set_variable = { name = bfl_inv_12_offer value = 0 } change_variable = { name = bfl_inv_12_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 13 } set_variable = { name = bfl_inv_13_offer value = 0 } change_variable = { name = bfl_inv_13_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 14 } set_variable = { name = bfl_inv_14_offer value = 0 } change_variable = { name = bfl_inv_14_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 15 } set_variable = { name = bfl_inv_15_offer value = 0 } change_variable = { name = bfl_inv_15_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 16 } set_variable = { name = bfl_inv_16_offer value = 0 } change_variable = { name = bfl_inv_16_offer_generation add = 1 } }
+ } } } }

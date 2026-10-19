@@ -1,0 +1,586 @@
+﻿namespace = bfl_goods
+        bfl_goods.1 = { type = country_event title = bfl_goods_browser_title desc = bfl_goods_browser_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_custody_inspect_lot_01
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_01_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_01_state = 0 } bfl_quote_goods_01 = yes }
+                else_if = { limit = { var:bfl_inv_01_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 1 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_01_host ?= scope:bfl_goods_party } bfl_enforce_goods_01 = yes bfl_release_goods_01 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_02
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_02_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_02_state = 0 } bfl_quote_goods_02 = yes }
+                else_if = { limit = { var:bfl_inv_02_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 2 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_02_host ?= scope:bfl_goods_party } bfl_enforce_goods_02 = yes bfl_release_goods_02 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_03
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_03_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_03_state = 0 } bfl_quote_goods_03 = yes }
+                else_if = { limit = { var:bfl_inv_03_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 3 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_03_host ?= scope:bfl_goods_party } bfl_enforce_goods_03 = yes bfl_release_goods_03 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_04
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_04_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_04_state = 0 } bfl_quote_goods_04 = yes }
+                else_if = { limit = { var:bfl_inv_04_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 4 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_04_host ?= scope:bfl_goods_party } bfl_enforce_goods_04 = yes bfl_release_goods_04 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_05
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_05_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_05_state = 0 } bfl_quote_goods_05 = yes }
+                else_if = { limit = { var:bfl_inv_05_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 5 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_05_host ?= scope:bfl_goods_party } bfl_enforce_goods_05 = yes bfl_release_goods_05 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_06
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_06_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_06_state = 0 } bfl_quote_goods_06 = yes }
+                else_if = { limit = { var:bfl_inv_06_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 6 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_06_host ?= scope:bfl_goods_party } bfl_enforce_goods_06 = yes bfl_release_goods_06 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_07
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_07_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_07_state = 0 } bfl_quote_goods_07 = yes }
+                else_if = { limit = { var:bfl_inv_07_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 7 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_07_host ?= scope:bfl_goods_party } bfl_enforce_goods_07 = yes bfl_release_goods_07 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_08
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_08_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_08_state = 0 } bfl_quote_goods_08 = yes }
+                else_if = { limit = { var:bfl_inv_08_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 8 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_08_host ?= scope:bfl_goods_party } bfl_enforce_goods_08 = yes bfl_release_goods_08 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_09
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_09_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_09_state = 0 } bfl_quote_goods_09 = yes }
+                else_if = { limit = { var:bfl_inv_09_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 9 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_09_host ?= scope:bfl_goods_party } bfl_enforce_goods_09 = yes bfl_release_goods_09 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_10
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_10_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_10_state = 0 } bfl_quote_goods_10 = yes }
+                else_if = { limit = { var:bfl_inv_10_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 10 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_10_host ?= scope:bfl_goods_party } bfl_enforce_goods_10 = yes bfl_release_goods_10 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_11
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_11_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_11_state = 0 } bfl_quote_goods_11 = yes }
+                else_if = { limit = { var:bfl_inv_11_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 11 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_11_host ?= scope:bfl_goods_party } bfl_enforce_goods_11 = yes bfl_release_goods_11 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_12
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_12_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_12_state = 0 } bfl_quote_goods_12 = yes }
+                else_if = { limit = { var:bfl_inv_12_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 12 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_12_host ?= scope:bfl_goods_party } bfl_enforce_goods_12 = yes bfl_release_goods_12 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_13
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_13_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_13_state = 0 } bfl_quote_goods_13 = yes }
+                else_if = { limit = { var:bfl_inv_13_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 13 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_13_host ?= scope:bfl_goods_party } bfl_enforce_goods_13 = yes bfl_release_goods_13 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_14
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_14_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_14_state = 0 } bfl_quote_goods_14 = yes }
+                else_if = { limit = { var:bfl_inv_14_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 14 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_14_host ?= scope:bfl_goods_party } bfl_enforce_goods_14 = yes bfl_release_goods_14 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_15
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_15_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_15_state = 0 } bfl_quote_goods_15 = yes }
+                else_if = { limit = { var:bfl_inv_15_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 15 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_15_host ?= scope:bfl_goods_party } bfl_enforce_goods_15 = yes bfl_release_goods_15 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_16
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_16_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_16_state = 0 } bfl_quote_goods_16 = yes }
+                else_if = { limit = { var:bfl_inv_16_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 16 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_16_host ?= scope:bfl_goods_party } bfl_enforce_goods_16 = yes bfl_release_goods_16 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_goods_previous trigger = { var:bfl_goods_browser_page > 1 }
+            change_variable = { name = bfl_goods_browser_page subtract = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_next trigger = { var:bfl_goods_browser_page < 4 }
+            change_variable = { name = bfl_goods_browser_page add = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+        bfl_goods.2 = { type = country_event title = bfl_goods_quote_title desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } }
+        }
+        bfl_goods.3 = { type = country_event title = bfl_goods_branch_title desc = bfl_goods_branch_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_branch_tip hidden_effect = { bfl_accept_goods_branch = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_branch_bank ai_chance = { base = 100 } }
+        }
+    bfl_goods.4 = { type = country_event title = bfl_goods_claim_title desc = bfl_goods_claim_desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        option = { name = bfl_goods_deliver save_scope_as = bfl_goods_party
+var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 1 } bfl_deliver_goods_01 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 2 } bfl_deliver_goods_02 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 3 } bfl_deliver_goods_03 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 4 } bfl_deliver_goods_04 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 5 } bfl_deliver_goods_05 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 6 } bfl_deliver_goods_06 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 7 } bfl_deliver_goods_07 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 8 } bfl_deliver_goods_08 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 9 } bfl_deliver_goods_09 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 10 } bfl_deliver_goods_10 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 11 } bfl_deliver_goods_11 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 12 } bfl_deliver_goods_12 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 13 } bfl_deliver_goods_13 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 14 } bfl_deliver_goods_14 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 15 } bfl_deliver_goods_15 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 16 } bfl_deliver_goods_16 = yes }
+}
+ ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+bfl_goods.5 = { type = country_event title = bfl_goods_transfer_title desc = bfl_goods_transfer_desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+        option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+    bfl_goods.31 = { type = country_event title = bfl_goods_transfer_wheat_title desc = bfl_goods_transfer_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+bfl_goods.32 = { type = country_event title = bfl_goods_transfer_salt_title desc = bfl_goods_transfer_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+bfl_goods.33 = { type = country_event title = bfl_goods_transfer_iron_title desc = bfl_goods_transfer_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+bfl_goods.34 = { type = country_event title = bfl_goods_transfer_cloth_title desc = bfl_goods_transfer_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+bfl_goods.35 = { type = country_event title = bfl_goods_transfer_pepper_title desc = bfl_goods_transfer_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
+bfl_goods.21 = { type = country_event title = bfl_goods_quote_1_wheat desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.22 = { type = country_event title = bfl_goods_quote_1_salt desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.23 = { type = country_event title = bfl_goods_quote_1_iron desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.24 = { type = country_event title = bfl_goods_quote_1_cloth desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.25 = { type = country_event title = bfl_goods_quote_1_pepper desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.41 = { type = country_event title = bfl_goods_quote_2_wheat desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.42 = { type = country_event title = bfl_goods_quote_2_salt desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.43 = { type = country_event title = bfl_goods_quote_2_iron desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.44 = { type = country_event title = bfl_goods_quote_2_cloth desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.45 = { type = country_event title = bfl_goods_quote_2_pepper desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } } }
+bfl_goods.10 = { type = country_event title = bfl_goods_menu_title desc = bfl_goods_menu_desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_buy_goods_wheat
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes } }
+            custom_tooltip = bfl_goods_menu_buy_wheat_tip
+            hidden_effect = { if = { limit = { bfl_goods_menu_authority = yes } save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {
+                set_variable = { name = bfl_goods_good value = 1 }
+                if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }
+                    set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes }
+                else_if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }
+                    set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } }
+            trigger_event_non_silently = bfl_goods.10 } ai_chance = { base = 0 } }
+option = { name = bfl_buy_goods_salt
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes } }
+            custom_tooltip = bfl_goods_menu_buy_salt_tip
+            hidden_effect = { if = { limit = { bfl_goods_menu_authority = yes } save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {
+                set_variable = { name = bfl_goods_good value = 2 }
+                if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }
+                    set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes }
+                else_if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }
+                    set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } }
+            trigger_event_non_silently = bfl_goods.10 } ai_chance = { base = 0 } }
+option = { name = bfl_buy_goods_iron
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes } }
+            custom_tooltip = bfl_goods_menu_buy_iron_tip
+            hidden_effect = { if = { limit = { bfl_goods_menu_authority = yes } save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {
+                set_variable = { name = bfl_goods_good value = 3 }
+                if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }
+                    set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes }
+                else_if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }
+                    set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } }
+            trigger_event_non_silently = bfl_goods.10 } ai_chance = { base = 0 } }
+option = { name = bfl_buy_goods_cloth
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes } }
+            custom_tooltip = bfl_goods_menu_buy_cloth_tip
+            hidden_effect = { if = { limit = { bfl_goods_menu_authority = yes } save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {
+                set_variable = { name = bfl_goods_good value = 4 }
+                if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }
+                    set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes }
+                else_if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }
+                    set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } }
+            trigger_event_non_silently = bfl_goods.10 } ai_chance = { base = 0 } }
+option = { name = bfl_buy_goods_pepper
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes } }
+            custom_tooltip = bfl_goods_menu_buy_pepper_tip
+            hidden_effect = { if = { limit = { bfl_goods_menu_authority = yes } save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {
+                set_variable = { name = bfl_goods_good value = 5 }
+                if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }
+                    set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } bfl_purchase_native_inventory = yes }
+                else_if = { limit = { scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }
+                    set_variable = { name = bfl_goods_market value = capital.market } bfl_purchase_native_inventory = yes } } }
+            trigger_event_non_silently = bfl_goods.10 } ai_chance = { base = 0 } }
+option = { name = bfl_goods_use_branch trigger = { bfl_goods_menu_authority = yes var:bfl_goods_menu_branch = 0 var:bfl_goods_browser_bank = { bfl_goods_branch_access = yes } }
+            set_variable = { name = bfl_goods_menu_branch value = 1 } trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_use_capital trigger = { bfl_goods_menu_authority = yes var:bfl_goods_menu_branch = 1 }
+            set_variable = { name = bfl_goods_menu_branch value = 0 } trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_manage_lots trigger = { bfl_goods_menu_authority = yes }
+        trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+        bfl_goods.11 = { type = country_event title = bfl_goods_lots_title desc = bfl_goods_lots_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_custody_inspect_lot_01
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 1
+                var:bfl_goods_browser_bank = { var:bfl_inv_01_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 1 } }
+                set_variable = { name = bfl_goods_claim_slot value = 1 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_02
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 1
+                var:bfl_goods_browser_bank = { var:bfl_inv_02_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 2 } }
+                set_variable = { name = bfl_goods_claim_slot value = 2 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_03
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 1
+                var:bfl_goods_browser_bank = { var:bfl_inv_03_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 3 } }
+                set_variable = { name = bfl_goods_claim_slot value = 3 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_04
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 1
+                var:bfl_goods_browser_bank = { var:bfl_inv_04_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 4 } }
+                set_variable = { name = bfl_goods_claim_slot value = 4 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_05
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 2
+                var:bfl_goods_browser_bank = { var:bfl_inv_05_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 5 } }
+                set_variable = { name = bfl_goods_claim_slot value = 5 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_06
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 2
+                var:bfl_goods_browser_bank = { var:bfl_inv_06_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 6 } }
+                set_variable = { name = bfl_goods_claim_slot value = 6 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_07
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 2
+                var:bfl_goods_browser_bank = { var:bfl_inv_07_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 7 } }
+                set_variable = { name = bfl_goods_claim_slot value = 7 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_08
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 2
+                var:bfl_goods_browser_bank = { var:bfl_inv_08_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 8 } }
+                set_variable = { name = bfl_goods_claim_slot value = 8 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_09
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 3
+                var:bfl_goods_browser_bank = { var:bfl_inv_09_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 9 } }
+                set_variable = { name = bfl_goods_claim_slot value = 9 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_10
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 3
+                var:bfl_goods_browser_bank = { var:bfl_inv_10_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 10 } }
+                set_variable = { name = bfl_goods_claim_slot value = 10 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_11
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 3
+                var:bfl_goods_browser_bank = { var:bfl_inv_11_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 11 } }
+                set_variable = { name = bfl_goods_claim_slot value = 11 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_12
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 3
+                var:bfl_goods_browser_bank = { var:bfl_inv_12_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 12 } }
+                set_variable = { name = bfl_goods_claim_slot value = 12 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_13
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 4
+                var:bfl_goods_browser_bank = { var:bfl_inv_13_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 13 } }
+                set_variable = { name = bfl_goods_claim_slot value = 13 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_14
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 4
+                var:bfl_goods_browser_bank = { var:bfl_inv_14_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 14 } }
+                set_variable = { name = bfl_goods_claim_slot value = 14 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_15
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 4
+                var:bfl_goods_browser_bank = { var:bfl_inv_15_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 15 } }
+                set_variable = { name = bfl_goods_claim_slot value = 15 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_16
+            trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_page = 4
+                var:bfl_goods_browser_bank = { var:bfl_inv_16_active = 1 } }
+            if = { limit = { bfl_goods_menu_authority = yes }
+                var:bfl_goods_browser_bank = { set_variable = { name = bfl_goods_selected value = 16 } }
+                set_variable = { name = bfl_goods_claim_slot value = 16 }
+                trigger_event_non_silently = bfl_goods.12
+            } ai_chance = { base = 0 } }
+option = { name = bfl_goods_previous trigger = { var:bfl_goods_browser_page > 1 }
+            change_variable = { name = bfl_goods_browser_page subtract = 1 } trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_next trigger = { var:bfl_goods_browser_page < 4 }
+            change_variable = { name = bfl_goods_browser_page add = 1 } trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+        bfl_goods.12 = { type = country_event title = bfl_goods_selected_title desc = bfl_goods_selected_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_goods_sell trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_sellable_01 = yes }
+AND = { var:bfl_goods_selected = 2 bfl_goods_sellable_02 = yes }
+AND = { var:bfl_goods_selected = 3 bfl_goods_sellable_03 = yes }
+AND = { var:bfl_goods_selected = 4 bfl_goods_sellable_04 = yes }
+AND = { var:bfl_goods_selected = 5 bfl_goods_sellable_05 = yes }
+AND = { var:bfl_goods_selected = 6 bfl_goods_sellable_06 = yes }
+AND = { var:bfl_goods_selected = 7 bfl_goods_sellable_07 = yes }
+AND = { var:bfl_goods_selected = 8 bfl_goods_sellable_08 = yes }
+AND = { var:bfl_goods_selected = 9 bfl_goods_sellable_09 = yes }
+AND = { var:bfl_goods_selected = 10 bfl_goods_sellable_10 = yes }
+AND = { var:bfl_goods_selected = 11 bfl_goods_sellable_11 = yes }
+AND = { var:bfl_goods_selected = 12 bfl_goods_sellable_12 = yes }
+AND = { var:bfl_goods_selected = 13 bfl_goods_sellable_13 = yes }
+AND = { var:bfl_goods_selected = 14 bfl_goods_sellable_14 = yes }
+AND = { var:bfl_goods_selected = 15 bfl_goods_sellable_15 = yes }
+AND = { var:bfl_goods_selected = 16 bfl_goods_sellable_16 = yes }
+ } } }
+            if = { limit = { bfl_goods_menu_authority = yes } var:bfl_goods_browser_bank = { if = { limit = { var:bfl_goods_selected = 1 } bfl_sell_goods_01 = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_sell_goods_02 = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_sell_goods_03 = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_sell_goods_04 = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_sell_goods_05 = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_sell_goods_06 = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_sell_goods_07 = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_sell_goods_08 = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_sell_goods_09 = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_sell_goods_10 = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_sell_goods_11 = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_sell_goods_12 = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_sell_goods_13 = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_sell_goods_14 = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_sell_goods_15 = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_sell_goods_16 = yes }
+ } }
+            trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+option = { name = bfl_goods_receipt trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes bfl_goods_researched_collateral = yes bfl_can_originate_warehouse_receipt = yes }
+ } } }
+            if = { limit = { bfl_goods_menu_authority = yes } var:bfl_goods_browser_bank = { if = { limit = { var:bfl_goods_selected = 1 } bfl_list_goods_1_01 = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_list_goods_1_02 = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_list_goods_1_03 = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_list_goods_1_04 = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_list_goods_1_05 = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_list_goods_1_06 = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_list_goods_1_07 = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_list_goods_1_08 = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_list_goods_1_09 = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_list_goods_1_10 = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_list_goods_1_11 = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_list_goods_1_12 = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_list_goods_1_13 = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_list_goods_1_14 = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_list_goods_1_15 = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_list_goods_1_16 = yes }
+ } }
+            trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+option = { name = bfl_goods_forward trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { OR = { AND = { var:bfl_goods_selected = 1 bfl_goods_offerable_01 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 2 bfl_goods_offerable_02 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 3 bfl_goods_offerable_03 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 4 bfl_goods_offerable_04 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 5 bfl_goods_offerable_05 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 6 bfl_goods_offerable_06 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 7 bfl_goods_offerable_07 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 8 bfl_goods_offerable_08 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 9 bfl_goods_offerable_09 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 10 bfl_goods_offerable_10 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 11 bfl_goods_offerable_11 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 12 bfl_goods_offerable_12 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 13 bfl_goods_offerable_13 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 14 bfl_goods_offerable_14 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 15 bfl_goods_offerable_15 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+AND = { var:bfl_goods_selected = 16 bfl_goods_offerable_16 = yes bfl_goods_researched_collateral = yes bfl_can_originate_commodity_forward = yes }
+ } } }
+            if = { limit = { bfl_goods_menu_authority = yes } var:bfl_goods_browser_bank = { if = { limit = { var:bfl_goods_selected = 1 } bfl_list_goods_2_01 = yes }
+if = { limit = { var:bfl_goods_selected = 2 } bfl_list_goods_2_02 = yes }
+if = { limit = { var:bfl_goods_selected = 3 } bfl_list_goods_2_03 = yes }
+if = { limit = { var:bfl_goods_selected = 4 } bfl_list_goods_2_04 = yes }
+if = { limit = { var:bfl_goods_selected = 5 } bfl_list_goods_2_05 = yes }
+if = { limit = { var:bfl_goods_selected = 6 } bfl_list_goods_2_06 = yes }
+if = { limit = { var:bfl_goods_selected = 7 } bfl_list_goods_2_07 = yes }
+if = { limit = { var:bfl_goods_selected = 8 } bfl_list_goods_2_08 = yes }
+if = { limit = { var:bfl_goods_selected = 9 } bfl_list_goods_2_09 = yes }
+if = { limit = { var:bfl_goods_selected = 10 } bfl_list_goods_2_10 = yes }
+if = { limit = { var:bfl_goods_selected = 11 } bfl_list_goods_2_11 = yes }
+if = { limit = { var:bfl_goods_selected = 12 } bfl_list_goods_2_12 = yes }
+if = { limit = { var:bfl_goods_selected = 13 } bfl_list_goods_2_13 = yes }
+if = { limit = { var:bfl_goods_selected = 14 } bfl_list_goods_2_14 = yes }
+if = { limit = { var:bfl_goods_selected = 15 } bfl_list_goods_2_15 = yes }
+if = { limit = { var:bfl_goods_selected = 16 } bfl_list_goods_2_16 = yes }
+ } }
+            trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+option = { name = bfl_goods_cancel trigger = { bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = { OR = { AND = { var:bfl_goods_selected = 1 var:bfl_inv_01_offer > 0 }
+AND = { var:bfl_goods_selected = 2 var:bfl_inv_02_offer > 0 }
+AND = { var:bfl_goods_selected = 3 var:bfl_inv_03_offer > 0 }
+AND = { var:bfl_goods_selected = 4 var:bfl_inv_04_offer > 0 }
+AND = { var:bfl_goods_selected = 5 var:bfl_inv_05_offer > 0 }
+AND = { var:bfl_goods_selected = 6 var:bfl_inv_06_offer > 0 }
+AND = { var:bfl_goods_selected = 7 var:bfl_inv_07_offer > 0 }
+AND = { var:bfl_goods_selected = 8 var:bfl_inv_08_offer > 0 }
+AND = { var:bfl_goods_selected = 9 var:bfl_inv_09_offer > 0 }
+AND = { var:bfl_goods_selected = 10 var:bfl_inv_10_offer > 0 }
+AND = { var:bfl_goods_selected = 11 var:bfl_inv_11_offer > 0 }
+AND = { var:bfl_goods_selected = 12 var:bfl_inv_12_offer > 0 }
+AND = { var:bfl_goods_selected = 13 var:bfl_inv_13_offer > 0 }
+AND = { var:bfl_goods_selected = 14 var:bfl_inv_14_offer > 0 }
+AND = { var:bfl_goods_selected = 15 var:bfl_inv_15_offer > 0 }
+AND = { var:bfl_goods_selected = 16 var:bfl_inv_16_offer > 0 }
+ } } }
+            if = { limit = { bfl_goods_menu_authority = yes } var:bfl_goods_browser_bank = { if = { limit = { var:bfl_goods_selected = 1 } set_variable = { name = bfl_inv_01_offer value = 0 } change_variable = { name = bfl_inv_01_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 2 } set_variable = { name = bfl_inv_02_offer value = 0 } change_variable = { name = bfl_inv_02_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 3 } set_variable = { name = bfl_inv_03_offer value = 0 } change_variable = { name = bfl_inv_03_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 4 } set_variable = { name = bfl_inv_04_offer value = 0 } change_variable = { name = bfl_inv_04_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 5 } set_variable = { name = bfl_inv_05_offer value = 0 } change_variable = { name = bfl_inv_05_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 6 } set_variable = { name = bfl_inv_06_offer value = 0 } change_variable = { name = bfl_inv_06_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 7 } set_variable = { name = bfl_inv_07_offer value = 0 } change_variable = { name = bfl_inv_07_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 8 } set_variable = { name = bfl_inv_08_offer value = 0 } change_variable = { name = bfl_inv_08_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 9 } set_variable = { name = bfl_inv_09_offer value = 0 } change_variable = { name = bfl_inv_09_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 10 } set_variable = { name = bfl_inv_10_offer value = 0 } change_variable = { name = bfl_inv_10_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 11 } set_variable = { name = bfl_inv_11_offer value = 0 } change_variable = { name = bfl_inv_11_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 12 } set_variable = { name = bfl_inv_12_offer value = 0 } change_variable = { name = bfl_inv_12_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 13 } set_variable = { name = bfl_inv_13_offer value = 0 } change_variable = { name = bfl_inv_13_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 14 } set_variable = { name = bfl_inv_14_offer value = 0 } change_variable = { name = bfl_inv_14_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 15 } set_variable = { name = bfl_inv_15_offer value = 0 } change_variable = { name = bfl_inv_15_offer_generation add = 1 } }
+if = { limit = { var:bfl_goods_selected = 16 } set_variable = { name = bfl_inv_16_offer value = 0 } change_variable = { name = bfl_inv_16_offer_generation add = 1 } }
+ } }
+            trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
+option = { name = bfl_goods_close ai_chance = { base = 100 } } }

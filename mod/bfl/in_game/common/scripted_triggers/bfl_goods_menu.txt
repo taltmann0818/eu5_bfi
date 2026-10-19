@@ -1,0 +1,5 @@
+﻿bfl_goods_menu_authority = {
+        exists = var:bfl_goods_browser_bank country_exists = var:bfl_goods_browser_bank
+        OR = { AND = { bfl_is_independent_bank = yes var:bfl_goods_browser_bank = this }
+            AND = { bfl_has_management = yes country_type = location var:bfl_bank = var:bfl_goods_browser_bank } }
+    }
