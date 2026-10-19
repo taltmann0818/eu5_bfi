@@ -43,7 +43,9 @@
     "in_game/common/on_action/exploration_mission_monthly.txt": "f08eeff1f402a8088cf3197a81ada58e77c440b6a9fffe55961689296690b22b",
     "in_game/common/on_action/_hardcoded.txt": "8127ede6c32815e0cd9a2ac3d84dbfd1c0dc17dfe2ab55173d87c4ec3f0715c3",
     "main_menu/common/modifier_type_definitions/00_modifier_types.txt": "85896b7a0f9cdda14ea6ca5c58e8f1e20d18f5ea4c79a664f3e2ca529db0f804",
-    "loading_screen/common/defines/00_defines.txt": "30cfc03da0874e8ffe0eaf7e44cdbb0bc1d0837b71e360859cd43119aedf8c5f"
+    "loading_screen/common/defines/00_defines.txt": "30cfc03da0874e8ffe0eaf7e44cdbb0bc1d0837b71e360859cd43119aedf8c5f",
+    "in_game/common/goods/00_raw_materials.txt": "9d60168ad841b9581fb0d681750f6e6c0cb1088b53887770993697ee9283a551",
+    "in_game/common/goods/02_produced_goods.txt": "633744c87ae66fdb12397c2f917ea769d1ae8f55edec2d266a108d004488e49c"
   },
   "cmf_sources": {
     ".metadata/metadata.json": "668c214d279f0daf827417d2e280e1f495f0776a8dfd027d889f0c8d6933a5f8",
@@ -55,5 +57,16 @@
     "in_game/common/scripted_guis/cmm_settings_scripted_gui.txt": "b5230b8aebc96926d5aed0a0c2c3865d607e5f4bd65827bd99a2ca4067f62126"
   },
   "graphics_reference_commit": "52fac49f3c189f50a04204b743f19335887f88ad",
-  "audit_extensions_recorded": "2026-10-15"
+  "audit_extensions_recorded": "2026-10-15",
+  "m6_goods_source_extension": {
+    "reviewed": "2026-10-18",
+    "goods": [
+      "wheat",
+      "salt",
+      "iron",
+      "cloth",
+      "pepper"
+    ],
+    "scope": "Add the raw-material and produced-goods source pins for the M6 pilot. Existing source pins and historical M0 evidence are preserved."
+  }
 }

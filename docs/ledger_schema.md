@@ -110,3 +110,14 @@ fixture overrides, not new player settings. Backend `design/equity_pricing.json`
 compiles default model, impact/liquidity/spreads, dividend/issuance/default rules,
 limits and draw policy. [Acceptance and exact evidence](m5-ownership.md) distinguish
 saved-state assertions, controlled offline sensitivity and real UI inspection.
+
+
+### M6 physical custody
+
+`bfl_goods_schema = 1` initializes sixteen `bfl_inv_01..16` lots without replacing core registry data. Each lot persists active/generation/legacy-good-ID, native goods-scope `type`, acquired_period, indicative `mark`, quantity, basis, market/location/host, holder/holder_basis, encumbered quantity, state, fixed price, buyer escrow, seller margin, due/transit_due, storage_due, last_period and offer identity/expiry. State 0 is free inventory, 1 a paid receipt, 2 a funded physical forward, 3 delivered and 4 a host freeze; the freeze preserves its prior state. Offer and lot generations reject stale recipient snapshots.
+
+Custodian free inventory and forward backing carry actual native acquisition cost. A paid receipt removes that asset from the custodian; a bank holder's paid claim cost is included through a bounded cross-custodian scan. Buyer principal increases other payables and committed cash, while seller performance security increases committed cash only. Delivery removes both protections exactly once; proportional missing-quantity principal and security compensation are actual bilateral cash movements. Only net realized proceeds less cost/compensation become goods earnings. Monthly physical loss reduces the owner's cost; storage is funded or retained as an obligation.
+
+Branch host/market/expiry/last-fee-period, per-lot custody references and holder delivery/transfer quote snapshots persist separately from financial claims. The same monthly account owner processes goods before operating costs, distress and dividends. [M6 behavior and acceptance](m6-goods.md) define the fixed pilot policies and distinguish native execution, offline checks and UI evidence.
+
+M6 automatic trading persists `bfl_goods_allocation`, `risk`, `turnover`, `mandate`, `contracts`, `policy_period` and the presentation-only `policy_open` (each prefixed `bfl_goods_`). Existing five-good IDs migrate to native goods references without resetting quantity, cost, encumbrance, security or holders. New goods use native scopes directly. `policy_period` rejects same-month trading replays; native custody servicing keeps its own cutoff. Marks refresh from native seller-capital quotes after transactions and monthly physical loss, and never enter income or carried assets. Paused/run-off and contract-policy UI changes invalidate outstanding unaccepted offers while accepted obligations persist. [The current product note](m6-goods.md) records the revised gate separately from historical manual-pilot evidence.

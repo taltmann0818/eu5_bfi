@@ -1,0 +1,189 @@
+{
+  "date": "2026-10-18",
+  "game_version": "1.4.1",
+  "cmf_version": "2.5.0",
+  "resolution": [
+    2560,
+    1440
+  ],
+  "mode": "normal UI, paused disposable Florence; no console or debug overlays",
+  "fixture": "tools/prepare_m6_ui.py",
+  "fixture_sha256": "ba0e314b4b24eebe97911f1258d7b90d6c687613bc7b4519d874509468b33513",
+  "fixture_grants": "Charter, Revolutions/research, cash, native supply, host-owned completed Venice Customs House; acquisitions and contracts invoke production services. Not natural research/construction/balance evidence.",
+  "initial_runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+  "shipping_runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261",
+  "presentation_only_delta": [
+    {
+      "path": "in_game/events/bfl_goods.txt",
+      "before_sha256": "73054361aff35a485572c933ed3fab37649181a949fa1c49e6bb6d6a5eddff15",
+      "after_sha256": "8b85c416c020007be800147caf9100a6af0a7cb7bcdc22b44fe9d34d2bc201a2"
+    },
+    {
+      "path": "main_menu/localization/english/bfl_finance_l_english.yml",
+      "before_sha256": "2cd2045c0dffb7ee47e34b4b5e4939255d29b46087c482ec016f7dede5de9d92",
+      "after_sha256": "47f85e030fb06efb6d32cb69712f4c5e014a20de419675f4545d88c782c064e2"
+    }
+  ],
+  "unchanged_runtime": "Every scripted effect, trigger, script value, scripted GUI, country interaction and GUI layout is byte-identical across this final delta. Only event accept-effect tooltip wrappers and three English explanation keys change. Final goods/Absolutism and cold UI checks separately cover the shipping runtime.",
+  "observations": [
+    {
+      "id": "credit_menu",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Economy/Credit/Lending & Investments opens Goods Finance with all five native goods and accessible terms.",
+      "screenshots": [
+        "docs/screenshots/m6-goods-menu.png"
+      ]
+    },
+    {
+      "id": "funded_purchase",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Normal Buy 10 wheat changes bank cash 4969.16 to 4959.89 while total assets remain 5519.52 and equity 5403.83. The native acquisition is booked at cost.",
+      "screenshots": [
+        "docs/screenshots/m6-goods-menu.png",
+        "docs/screenshots/m6-funded-purchase.png"
+      ]
+    },
+    {
+      "id": "lot_pagination",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Acquired physical slots appear four per page; quantities are localized and readable.",
+      "screenshots": [
+        "docs/screenshots/m6-lot-browser.png"
+      ]
+    },
+    {
+      "id": "listing",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Normal lot selection exposes free sale, backed receipt and forward listing; publishing the free wheat lot creates an offer without cash movement.",
+      "screenshots": [
+        "docs/screenshots/m6-lot-actions.png"
+      ]
+    },
+    {
+      "id": "receipt_backing",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "The populated salt receipt shows 10 units all pledged, warehouse receipt state and zero remaining custodian inventory basis.",
+      "screenshots": [
+        "docs/screenshots/m6-receipt-ledger.png"
+      ]
+    },
+    {
+      "id": "forward_security",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Populated iron forward shows 10 acquired and pledged units, cost14.93, price15.69, escrow15.69, seller security15.69 and three months to maturity.",
+      "screenshots": [
+        "docs/screenshots/m6-forward-ledger.png"
+      ]
+    },
+    {
+      "id": "populated_receipt_terms",
+      "passed": true,
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0",
+      "observation": "Startup salt terms are a populated fixture display; the fixture has already accepted that receipt. This capture is not evidence of manual positive acceptance.",
+      "screenshots": [
+        "docs/screenshots/m6-receipt-terms.png"
+      ]
+    },
+    {
+      "id": "live_cloth_quote",
+      "passed": true,
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261",
+      "observation": "Normal diplomacy search, Bardi selection and lot4 open the live cloth receipt offer: ten units at27.46 plus one-gold service fee, risk/storage/delivery terms, distinct acceptance/decline.",
+      "screenshots": [
+        "docs/screenshots/m6-cloth-offer.png"
+      ]
+    },
+    {
+      "id": "shipping_acceptance_tooltip",
+      "passed": true,
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261",
+      "observation": "Cold-loaded shipping event shows the explicit contract-price plus fee tooltip with guard semantics and no stale simulated cash preview.",
+      "screenshots": [
+        "docs/screenshots/m6-acceptance-tooltip.png"
+      ]
+    },
+    {
+      "id": "shipping_paid_receipt_acceptance",
+      "passed": true,
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261",
+      "observation": "Normal diplomacy opens live cloth lot4 at27.46 plus1 fee. Clicking Accept these terms raises bank cash from4969.16 to4997.62. Total assets5519.52 to5521.83 and equity5403.83 to5406.14 reflect only2.31 realized margin/service income after releasing26.15 inventory cost.",
+      "screenshots": [
+        "docs/screenshots/m6-cloth-offer.png",
+        "docs/screenshots/m6-receipt-accepted-accounts.png"
+      ]
+    },
+    {
+      "id": "shipping_accepted_backing",
+      "passed": true,
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261",
+      "observation": "After normal acceptance, cloth lot4 remains10 acquired units, all10 pledged, Warehouse receipt state, zero custodian cost and fixed27.46 price. Existing iron forward remains separately backed with escrow/security15.69.",
+      "screenshots": [
+        "docs/screenshots/m6-cloth-accepted-backing.png"
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "path": "docs/screenshots/m6-cloth-offer.png",
+      "sha256": "afec3bb1fa1102ddd6d02612b702706b73d93cd20e8ac112a96a9f98694b473b",
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261"
+    },
+    {
+      "path": "docs/screenshots/m6-forward-ledger.png",
+      "sha256": "d2bf83711ea3fed2dee533dcf0eb096059d604d286e613b1c15056d2535c0eb8",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-funded-purchase.png",
+      "sha256": "4b557d0d4844ba2e6eb1d548f1b22adfffcd169aa37d8b4b2ea8a5be35514e67",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-goods-menu.png",
+      "sha256": "3cdff79198a2ceb1025f8d50e523654be7ab87cf3387a8e5de8d79490c0eb2e5",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-lot-actions.png",
+      "sha256": "e512e11fbbc7c5dc38a91a656fd24c24eb6c38b7ddc1b728bc37a9a623c89947",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-lot-browser.png",
+      "sha256": "18395aaeacfafb61b1759ad3709a11e602c8a8ae7733b0f91274774ae4717fb3",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-receipt-ledger.png",
+      "sha256": "1ca3e7515dc8e6b4164362311ef94057be8e873f4dbcdd2d4dfa6ef294c97bfd",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-receipt-terms.png",
+      "sha256": "eb3b8df9272a8dfc07fda7955edd5af91a6b592ab21a7807ddcfa48d6435ac10",
+      "runtime_sha256": "884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0"
+    },
+    {
+      "path": "docs/screenshots/m6-acceptance-tooltip.png",
+      "sha256": "a9df71ee7f8c11171ecdee09fcd63a2d76deebc74d1ffe399885168bbadafce8",
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261"
+    },
+    {
+      "path": "docs/screenshots/m6-receipt-accepted-accounts.png",
+      "sha256": "5650527650722014bf092b84c2ab6d54ee2fd17690b90716bda12a7e541e21e0",
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261"
+    },
+    {
+      "path": "docs/screenshots/m6-cloth-accepted-backing.png",
+      "sha256": "07b2a3b1875a1040ab74ed4d809efb834e4f5794eaf17593102af2b155941f81",
+      "runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261"
+    }
+  ],
+  "shipping_installed_runtime_sha256": "8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261"
+}

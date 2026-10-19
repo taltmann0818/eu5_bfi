@@ -1,0 +1,194 @@
+﻿namespace = bfl_goods
+        bfl_goods.1 = { type = country_event title = bfl_goods_browser_title desc = bfl_goods_browser_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+    option = { name = bfl_custody_inspect_lot_01
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_01_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_01_state = 0 } bfl_quote_goods_01 = yes }
+                else_if = { limit = { var:bfl_inv_01_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 1 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_01_host ?= scope:bfl_goods_party } bfl_enforce_goods_01 = yes bfl_release_goods_01 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_02
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_02_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_02_state = 0 } bfl_quote_goods_02 = yes }
+                else_if = { limit = { var:bfl_inv_02_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 2 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_02_host ?= scope:bfl_goods_party } bfl_enforce_goods_02 = yes bfl_release_goods_02 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_03
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_03_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_03_state = 0 } bfl_quote_goods_03 = yes }
+                else_if = { limit = { var:bfl_inv_03_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 3 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_03_host ?= scope:bfl_goods_party } bfl_enforce_goods_03 = yes bfl_release_goods_03 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_04
+            trigger = { var:bfl_goods_browser_page = 1 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_04_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_04_state = 0 } bfl_quote_goods_04 = yes }
+                else_if = { limit = { var:bfl_inv_04_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 4 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_04_host ?= scope:bfl_goods_party } bfl_enforce_goods_04 = yes bfl_release_goods_04 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_05
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_05_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_05_state = 0 } bfl_quote_goods_05 = yes }
+                else_if = { limit = { var:bfl_inv_05_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 5 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_05_host ?= scope:bfl_goods_party } bfl_enforce_goods_05 = yes bfl_release_goods_05 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_06
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_06_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_06_state = 0 } bfl_quote_goods_06 = yes }
+                else_if = { limit = { var:bfl_inv_06_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 6 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_06_host ?= scope:bfl_goods_party } bfl_enforce_goods_06 = yes bfl_release_goods_06 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_07
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_07_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_07_state = 0 } bfl_quote_goods_07 = yes }
+                else_if = { limit = { var:bfl_inv_07_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 7 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_07_host ?= scope:bfl_goods_party } bfl_enforce_goods_07 = yes bfl_release_goods_07 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_08
+            trigger = { var:bfl_goods_browser_page = 2 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_08_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_08_state = 0 } bfl_quote_goods_08 = yes }
+                else_if = { limit = { var:bfl_inv_08_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 8 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_08_host ?= scope:bfl_goods_party } bfl_enforce_goods_08 = yes bfl_release_goods_08 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_09
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_09_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_09_state = 0 } bfl_quote_goods_09 = yes }
+                else_if = { limit = { var:bfl_inv_09_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 9 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_09_host ?= scope:bfl_goods_party } bfl_enforce_goods_09 = yes bfl_release_goods_09 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_10
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_10_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_10_state = 0 } bfl_quote_goods_10 = yes }
+                else_if = { limit = { var:bfl_inv_10_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 10 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_10_host ?= scope:bfl_goods_party } bfl_enforce_goods_10 = yes bfl_release_goods_10 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_11
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_11_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_11_state = 0 } bfl_quote_goods_11 = yes }
+                else_if = { limit = { var:bfl_inv_11_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 11 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_11_host ?= scope:bfl_goods_party } bfl_enforce_goods_11 = yes bfl_release_goods_11 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_12
+            trigger = { var:bfl_goods_browser_page = 3 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_12_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_12_state = 0 } bfl_quote_goods_12 = yes }
+                else_if = { limit = { var:bfl_inv_12_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 12 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_12_host ?= scope:bfl_goods_party } bfl_enforce_goods_12 = yes bfl_release_goods_12 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_13
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_13_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_13_state = 0 } bfl_quote_goods_13 = yes }
+                else_if = { limit = { var:bfl_inv_13_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 13 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_13_host ?= scope:bfl_goods_party } bfl_enforce_goods_13 = yes bfl_release_goods_13 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_14
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_14_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_14_state = 0 } bfl_quote_goods_14 = yes }
+                else_if = { limit = { var:bfl_inv_14_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 14 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_14_host ?= scope:bfl_goods_party } bfl_enforce_goods_14 = yes bfl_release_goods_14 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_15
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_15_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_15_state = 0 } bfl_quote_goods_15 = yes }
+                else_if = { limit = { var:bfl_inv_15_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 15 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_15_host ?= scope:bfl_goods_party } bfl_enforce_goods_15 = yes bfl_release_goods_15 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_custody_inspect_lot_16
+            trigger = { var:bfl_goods_browser_page = 4 exists = var:bfl_goods_browser_bank var:bfl_goods_browser_bank = { var:bfl_inv_16_active = 1 } }
+            save_scope_as = bfl_goods_party
+            var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+                if = { limit = { var:bfl_inv_16_state = 0 } bfl_quote_goods_16 = yes }
+                else_if = { limit = { var:bfl_inv_16_holder ?= scope:bfl_goods_party }
+                    scope:bfl_goods_party = { set_variable = { name = bfl_goods_claim_slot value = 16 } trigger_event_non_silently = bfl_goods.4 } }
+                else_if = { limit = { var:bfl_inv_16_host ?= scope:bfl_goods_party } bfl_enforce_goods_16 = yes bfl_release_goods_16 = yes }
+            } ai_chance = { base = 0 } }
+option = { name = bfl_goods_previous trigger = { var:bfl_goods_browser_page > 1 }
+            change_variable = { name = bfl_goods_browser_page subtract = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_next trigger = { var:bfl_goods_browser_page < 4 }
+            change_variable = { name = bfl_goods_browser_page add = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+        bfl_goods.2 = { type = country_event title = bfl_goods_quote_title desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } }
+        }
+        bfl_goods.6 = { type = country_event title = bfl_goods_forward_title desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } }
+        }
+        bfl_goods.3 = { type = country_event title = bfl_goods_branch_title desc = bfl_goods_branch_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_branch_tip hidden_effect = { bfl_accept_goods_branch = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_branch_bank ai_chance = { base = 100 } }
+        }
+    bfl_goods.4 = { type = country_event title = bfl_goods_claim_title desc = bfl_goods_claim_desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        option = { name = bfl_goods_deliver save_scope_as = bfl_goods_party
+var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 1 } bfl_deliver_goods_01 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 2 } bfl_deliver_goods_02 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 3 } bfl_deliver_goods_03 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 4 } bfl_deliver_goods_04 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 5 } bfl_deliver_goods_05 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 6 } bfl_deliver_goods_06 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 7 } bfl_deliver_goods_07 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 8 } bfl_deliver_goods_08 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 9 } bfl_deliver_goods_09 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 10 } bfl_deliver_goods_10 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 11 } bfl_deliver_goods_11 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 12 } bfl_deliver_goods_12 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 13 } bfl_deliver_goods_13 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 14 } bfl_deliver_goods_14 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 15 } bfl_deliver_goods_15 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_claim_slot = 16 } bfl_deliver_goods_16 = yes }
+}
+ ai_chance = { base = 0 } }
+        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
+bfl_goods.5 = { type = country_event title = bfl_goods_transfer_title desc = bfl_goods_transfer_desc
+        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
+        option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }

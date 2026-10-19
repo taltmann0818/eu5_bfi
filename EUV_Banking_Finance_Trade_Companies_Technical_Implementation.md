@@ -822,15 +822,17 @@ Record paid/unpaid separately, reduce remaining coverage, and prevent native rel
 
 ## 12. Commodity inventory, receipts, and forwards
 
+**Current M6 implementation:** [goods finance product and acceptance](docs/m6-goods.md). The bank automatically considers all available native goods, including added goods, with no category/name whitelist. Sixteen custody records accommodate bank-owned positions and accepted claims; quantities scale with capital and native stock rather than ten-unit lots. The player sets allocation, risk, holding period, automatic/pause/run-off and contract mandates in Lending & Investments. A compact inventory-value card below the stock portfolio has a scrollable native-icon quantity/value/return tooltip. Capital custody and one accepted host-owned Customs House capital-market branch use a persistent country-owned ledger; no duplicate warehouse building is added. Storage is an explicit administrative cost, and two-month shipments are a disclosed custody abstraction. Receipts sell ownership of existing backing. Physical forwards prefund buyer consideration plus 100% seller security, settle to receipts and compensate missing quantity from that security. Revolutions margining locks replacement-cost increases; it does not pay speculative mark gains. General cash derivatives, ship-specific cargo and Clearing House netting are not part of this bounded physical pilot. The canonical plan retains later money, resolution and release gates.
+
 ### 12.1 Funded goods positions
 
-Merchant Finance requires Discovery and `bfl_commodity_investments`. `goods.json` selects a small pilot of **existing native goods**, for example grain, iron, and cloth if confirmed in the pinned goods database. Generate explicit good cases; do not add duplicate commodity definitions or assume dynamic string-to-good scope resolution.
+Merchant Finance requires Discovery and `bfl_commodity_investments`. `goods.json` selects the pinned native wheat, salt, iron, cloth and pepper definitions. Generate explicit cases; do not add duplicate commodity definitions or assume dynamic string-to-good scope resolution.
 
 `bfl_buy_inventory` checks legal market access, native available stock, affordable buy price, custody capacity, free cash, and permission. Invoke the native purchase once, measure executed quantity/cost, then create the matching custody lot at that basis. The custom quantity is an owned inventory record removed from market supply by the native purchase, not an additional market stockpile. `bfl_sell_inventory` permits only physically available, unencumbered quantity and invokes the native sale once.
 
-The published native sale uses the actor's capital-location sale price and requires a capital. P09 must determine whether branch custody can legally deliver to that path. Restrict the pilot to supported capital/custody markets if necessary. Do not use a chosen market's headline price as guaranteed cash proceeds or silently sell at the host owner's price.
+P09 established that native purchase uses selected-market stock/price and native sale realization is actor/capital dependent. The production guard requires the bank's current capital market or a live accepted host Customs House agreement for the recorded custody market. Do not use a chosen market's headline price as guaranteed sale proceeds or silently sell at the host owner's price.
 
-Weighted-average basis for merged same-custody lots:
+Lots remain separate at their own actual acquisition basis; no weighted-average merging occurs in this pilot. The corresponding basis arithmetic is:
 
 ```text
 new_basis_total = old_basis_total + actual_purchase_cost
@@ -842,7 +844,7 @@ Spoilage reduces physical quantity and associated basis once. Storage charges ar
 
 ### 12.2 Custody and transport
 
-Use native warehouses where ownership/capacity is sufficient; otherwise define `bfl_bonded_warehouse` with native building-type fields, explicit bank/company owner, local construction legality, production-method maintenance, and finite capacity. It does not grant free merchant capacity or control of the location. Receipt backing refers to a real custody lot, not just the existence of this building.
+The bank's capital and a consenting foreign host's completed, host-owned Customs House provide the bounded custody gateways. Sixteen persistent records cap simultaneous custody positions, with no ten-unit or 160-unit cap. Automatic trading targets eight diversified bank-owned positions and at most four new positions per monthly close, bounded by allocation, protected funds and 5% of available stock. No additional warehouse building, free merchant capacity or territorial control is created. Receipt backing refers to a real acquired custody lot, not just the existence of a building.
 
 Cross-market movement creates a shipment slot with origin, destination, good/quantity, owner, funded transport cost, access, departure/arrival period, risk/loss policy, and state. Remove quantity from sellable origin stock while in transit; add actual arrival quantity to destination. Destruction/blockade/permission loss delays or loses the defined shipment and feeds impairment. Avoid a second native market purchase at delivery that would charge for the same goods again.
 
@@ -858,9 +860,9 @@ Redemption checks current holder and generation, releases/physically delivers th
 
 Require Merchant, Absolutism, Collateralization, and Commodity Forwards. Contract fields: parties, good, quantity, strike, custody/delivery market, settlement date, physical/cash mode, collateral amount/custodian, margin rule, failure/cure/closeout terms, and unique settlement stamp.
 
-Initial physical settlement: reserve deliverable quantity, debit buyer consideration/credit seller, deliver/release goods, return only unused collateral, close once. Cash settlement: calculate a capped bilateral difference using a verified terminal reference price, move winner's funded entitlement from loser/collateral, and record residual default. Cash settlement creates no goods. Released collateral is return of principal, not extra profit.
+Physical settlement reserves the whole acquired lot, prefunds buyer consideration and equal seller security, then converts surviving backing to a receipt at maturity. Missing quantity refunds its pro-rata contract price plus equal compensation from seller security. Obligations and unused security close once; released collateral is principal, not extra profit. This milestone's bounded product uses physical delivery; cash derivatives are outside this contract design.
 
-Variation margin and broader clearing require Revolutions Margining/Risk Management and any clearing prerequisite. Store previous settlement mark; pay only its change, then adjust final settlement for margin already paid. Margin calls reserve actual cash and can fail; notional limits and concentration checks apply before opening contracts. Avoid paying both full terminal gain and accumulated margin again.
+Variation margin and broader receipt transfer require Revolutions Margining/Risk Management. Reserve only the additional replacement-cost exposure above the existing seller security; a failed call attempts an early physical close and otherwise preserves the obligation. Marks do not pay speculative profits. Fixed physical capacity and full buyer/seller cash cover bound opening notional. Clearing remains an M8 service with its own acceptance gate.
 
 Procurement involving the sovereign requires explicit authorization and profile gates. A subsidy is a sovereign debit/recipient credit, distinct from market price and bank profit. Delivery failure, loss, and collateral shortfall persist through reload and feed the shared crisis services.
 

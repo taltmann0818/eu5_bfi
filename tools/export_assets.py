@@ -16,6 +16,9 @@ def export(im,path,kind,master,rights='Original BFI painting; generated with the
     REG.append([path.relative_to(ROOT).as_posix(),master,im.width,im.height,kind,rights])
 
 def main():
+    from PIL import __version__
+    if int(__version__.split('.')[0]) < 11:
+        raise SystemExit('BC3 export requires Pillow 11 or newer; use the bundled workspace Python runtime.')
     manifest=json.loads((ROOT/'assets_source/painted/manifest.json').read_text())
     for row in manifest['exports']:
         source=ROOT/row['master']

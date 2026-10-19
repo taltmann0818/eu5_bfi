@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -31,6 +31,11 @@ try {
         'm5' { 'tools/m5_ownership_suite.py' }
         'm5market' { 'tools/m5_market_suite.py' }
         'm5pricing' { 'tools/m5_pricing_suite.py' }
+        'm6' { 'tools/m6_goods_suite.py' }
+        'm6policy' { 'tools/m6_policy_suite.py' }
+        'm6traditions' { 'tools/m6_traditions_suite.py' }
+        'm6discovery' { 'tools/m6_discovery_suite.py' }
+        'm6absolutism' { 'tools/m6_absolutism_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId

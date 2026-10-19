@@ -329,7 +329,7 @@ def prepare(directory, token=None):
     reload_body, reload_cases = reload_fixture(token, fingerprint)
     # Legacy financial regressions deliberately retain the pure NAV backend.
     # The dedicated pricing suite explicitly enables matched GBM issuers.
-    start = 'every_country = { set_variable = { name = bfl_price_model_override value = 0 } }\n' + start
+    start = 'every_country = { set_variable = { name = bfl_price_model_override value = 0 } set_variable = { name = bfl_goods_mandate value = 0 } }\n' + start
     # Instant native construction still queues a level-zero building. These
     # fixtures intend completed debug grants; actual AI completion is tested
     # separately with normal cost/time and no level grant.
@@ -423,7 +423,7 @@ def collect(log, manifest, error_log=''):
         # Keep these diagnostics in the full local log, separately from logic errors.
         if 'message_handler' in line and 'Failed to find message type:' in line:
             continue
-        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered)', line, re.I)
+        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered|Badly read script value|Cannot read)', line, re.I)
                 and re.search(r'(?:bfl_|bfi_|gui/(?:credit|economy_lateralview|technology_lateralview)\.gui)',line)):
             errors.append(line.split(']: ', 1)[-1])
     for block in re.findall(r'Script system error![\s\S]*?(?=\n\[|\Z)', error_log):

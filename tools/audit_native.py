@@ -24,6 +24,7 @@ SOURCES=[
  'main_menu/gfx/interface/illustrations/institutions/banking.dds',
  'in_game/common/advances/0_age_of_renaissance.txt','in_game/common/scripted_guis/scripted_guis.info',
  'in_game/common/advances/0_age_of_reformation.txt',
+ 'in_game/common/goods/00_raw_materials.txt','in_game/common/goods/02_produced_goods.txt',
  'in_game/common/goods/03_food.txt','in_game/common/prices/00_hardcoded.txt',
  'in_game/common/script_values/building_caps.txt',
  'in_game/common/scripted_relations/trade_access.txt',

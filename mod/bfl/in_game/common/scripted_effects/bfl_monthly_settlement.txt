@@ -7,6 +7,7 @@
         set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
         bfl_observe_bank_income = yes
         bfl_accrue_deposits = yes
+        bfl_process_goods = yes
         bfl_settle_operating_expenses = yes
         bfl_evaluate_distress = yes
         bfl_settle_dividends = yes
