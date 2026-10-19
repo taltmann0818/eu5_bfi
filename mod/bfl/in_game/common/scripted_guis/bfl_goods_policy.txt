@@ -1,0 +1,45 @@
+﻿bfl_goods_settings = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_policy_open = 0 }
+        set_variable = { name = bfl_goods_policy_open value = 1 } }
+        else = { set_variable = { name = bfl_goods_policy_open value = 0 } } } } } }
+bfl_goods_set_allocation = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_allocation = 0 } set_variable = { name = bfl_goods_allocation value = 10 } }
+else_if = { limit = { var:bfl_goods_allocation = 10 } set_variable = { name = bfl_goods_allocation value = 25 } }
+else_if = { limit = { var:bfl_goods_allocation = 25 } set_variable = { name = bfl_goods_allocation value = 50 } }
+else_if = { limit = { var:bfl_goods_allocation = 50 } set_variable = { name = bfl_goods_allocation value = 0 } }
+ } } } }
+bfl_goods_set_risk = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_risk = 0 } set_variable = { name = bfl_goods_risk value = 1 } }
+else_if = { limit = { var:bfl_goods_risk = 1 } set_variable = { name = bfl_goods_risk value = 2 } }
+else_if = { limit = { var:bfl_goods_risk = 2 } set_variable = { name = bfl_goods_risk value = 0 } }
+ } } } }
+bfl_goods_set_turnover = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_turnover = 6 } set_variable = { name = bfl_goods_turnover value = 12 } }
+else_if = { limit = { var:bfl_goods_turnover = 12 } set_variable = { name = bfl_goods_turnover value = 24 } }
+else_if = { limit = { var:bfl_goods_turnover = 24 } set_variable = { name = bfl_goods_turnover value = 6 } }
+ } } } }
+bfl_goods_set_mandate = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_mandate = 0 } set_variable = { name = bfl_goods_mandate value = 1 } }
+else_if = { limit = { var:bfl_goods_mandate = 1 } set_variable = { name = bfl_goods_mandate value = 2 } }
+else_if = { limit = { var:bfl_goods_mandate = 2 } set_variable = { name = bfl_goods_mandate value = 0 } }
+bfl_clear_goods_offers = yes
+ } } } }
+bfl_goods_set_contracts = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  } effect = {
+                if = { limit = { bfl_has_management = yes  } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_goods = yes if = { limit = { var:bfl_goods_contracts = 0 } set_variable = { name = bfl_goods_contracts value = 1 } }
+else_if = { limit = { var:bfl_goods_contracts = 1 } set_variable = { name = bfl_goods_contracts value = 2 } }
+else_if = { limit = { var:bfl_goods_contracts = 2 } set_variable = { name = bfl_goods_contracts value = 0 } }
+bfl_clear_goods_offers = yes
+ } } } }
+bfl_goods_policy_view = { scope = country is_shown = { var:bfl_goods_policy_open = 1 } }

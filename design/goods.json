@@ -1,1 +1,23 @@
-{"goods":["wheat","salt","iron","cloth","pepper"],"quantity_lot":10,"custody":"capital market or explicitly accepted host Customs House capital market","annual_storage_loss":0.02,"monthly_storage_cost":0.1,"monthly_branch_fee":1,"transport_months":2,"transport_fee":1,"transport_loss":0.01,"forward_months":3,"seller_security_fraction":1}
+{
+  "custody": "capital market or explicitly accepted host Customs House capital market",
+  "annual_storage_loss": 0.02,
+  "monthly_storage_cost": 0.1,
+  "monthly_branch_fee": 1,
+  "transport_months": 2,
+  "transport_fee": 1,
+  "transport_loss": 0.01,
+  "forward_months": 3,
+  "seller_security_fraction": 1,
+  "legacy_goods_ids": [
+    "wheat",
+    "salt",
+    "iron",
+    "cloth",
+    "pepper"
+  ],
+  "goods": "every available native goods scope; no whitelist",
+  "execution": "automatic monthly bank policy",
+  "default_allocation_percent": 25,
+  "maximum_positions": 16,
+  "market_stock_participation": 0.05
+}

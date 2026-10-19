@@ -2145,11 +2145,7 @@
         type bfl_credit_investment_body = scrollarea {
             size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
-            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 button_regular = { name = "bfl_goods_open_menu_button" size = { -1 32 } layoutpolicy_horizontal = expanding
-        tooltip = "bfl_goods_open_menu_tip" text = "bfl_goods_open_menu"
-        enabled = "[GetScriptedGui('bfl_goods_open_menu').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        onclick = "[GetScriptedGui('bfl_goods_open_menu').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    }bfl_equity_investments = { }bfl_goods_contents = { }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
+            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 bfl_equity_investments = { }bfl_goods_contents = { }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
         datacontext = "[GetPlayer]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_offer_credit_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
@@ -2180,21 +2176,7 @@
                     visible = "[Not(GetScriptedGui('bfl_permission_corporate_credit').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_debt_resale_tip" icon = { texture = "[GetConceptTexture('government_bond')]" size = { 24 24 } }
                 text_single = { text = "bfl_debt_resale" autoresize = yes fontsize = 13 } expand = { }
                 icon = { size = { 16 16 } texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_debt_resale').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } vbox = { layoutpolicy_horizontal = expanding  } } }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_goods_tip"
-        widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
-             text_single = { parentanchor = center text = "bfl_goods" autoresize = yes } } hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_commodity_inventory_tip" icon = { texture = "gfx/interface/icons/bfl/custody.dds" size = { 24 24 } }
-                text_single = { text = "bfl_commodity_inventory" autoresize = yes fontsize = 13 } expand = { }
-                icon = { size = { 16 16 } texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_commodity_inventory').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_warehouse_receipt_tip" icon = { texture = "gfx/interface/icons/bfl/receipt.dds" size = { 24 24 } }
-                text_single = { text = "bfl_warehouse_receipt" autoresize = yes fontsize = 13 } expand = { }
-                icon = { size = { 16 16 } texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_warehouse_receipt').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_commodity_forward_tip" icon = { texture = "gfx/interface/icons/bfl/forward.dds" size = { 24 24 } }
-                text_single = { text = "bfl_commodity_forward" autoresize = yes fontsize = 13 } expand = { }
-                icon = { size = { 16 16 } texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_commodity_forward').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_margining_tip" icon = { texture = "gfx/interface/icons/bfl/loan.dds" size = { 24 24 } }
-                text_single = { text = "bfl_margining" autoresize = yes fontsize = 13 } expand = { }
-                icon = { size = { 16 16 } texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_margining').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } } }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_ventures_tip"
+                    visible = "[Not(GetScriptedGui('bfl_permission_debt_resale').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } vbox = { layoutpolicy_horizontal = expanding  } } }vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_ventures_tip"
         widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
              text_single = { parentanchor = center text = "bfl_ventures" autoresize = yes } } hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding hbox = { spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_commenda_tip" icon = { texture = "gfx/interface/icons/bfl/commenda.dds" size = { 24 24 } }
                 text_single = { text = "bfl_commenda" autoresize = yes fontsize = 13 } expand = { }

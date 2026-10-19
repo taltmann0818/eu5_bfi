@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = json.loads((ROOT / 'design/goods.json').read_text())
-GOODS = POLICY['goods']
+GOODS = POLICY['legacy_goods_ids']  # Save migration only; execution uses native goods scopes.
 LOTS = range(1, 17)
 FIELDS = ('active', 'generation', 'good', 'quantity', 'basis', 'encumbered',
           'state', 'price', 'escrow', 'margin', 'due', 'last_period', 'transit_due',
@@ -28,6 +28,13 @@ def generate(common, effect, loc, write):
             # Existing core registry fields remain intact during migration.
             init += f'if = {{ limit = {{ NOT = {{ has_variable = {n(i)}_{field} }} }} set_variable = {{ name = {n(i)}_{field} value = 0 }} }}\n'
     init += '}\n'
+    # Upgrade existing saves without resetting acquired backing or contracts.
+    for i in LOTS:
+        p = n(i)
+        for g, good in enumerate(GOODS, 1):
+            init += f'if = {{ limit = {{ var:{p}_active = 1 NOT = {{ exists = var:{p}_type }} var:{p}_good = {g} }} set_variable = {{ name = {p}_type value = goods:{good} }} }}\n'
+    from generate_goods_policy import initialization
+    init += initialization()
     triggers = '''bfl_goods_researched_collateral = { OR = {
         AND = { bfl_is_independent_bank = yes has_advance = bfl_collateralization }
         AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_collateralization } }
@@ -54,64 +61,66 @@ def generate(common, effect, loc, write):
     '''
     # Native engine `is_at_war_with` is deliberately a live access condition.
     values = ''
-    quote_events = ''.join(f'if = {{ limit = {{ var:bfl_goods_quote_good = {g} var:bfl_goods_quote_mode = {mode} }} trigger_event_non_silently = bfl_goods.{base+g} }}\n' for mode, base in ((1,20),(2,40)) for g in range(1, len(GOODS)+1))
-    purchase = '''bfl_initialize_goods = yes
-        if = { limit = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
-            bfl_goods_market_access = yes exists = capital NOT = { has_variable = bfl_goods_guard } }
-            save_scope_as = bfl_goods_bank
-            set_variable = { name = bfl_goods_allocated value = 0 }
-    '''
+    quote_events = 'if = { limit = { var:bfl_goods_quote_mode = 1 } trigger_event_non_silently = bfl_goods.2 } else = { trigger_event_non_silently = bfl_goods.6 }'
+    purchase = 'bfl_initialize_goods = yes\n'
     for g, good in enumerate(GOODS, 1):
-        quote = f'"var:bfl_goods_market.market_price(goods:{good})"'
-        # P09: buy uses selected-market price; sale uses actor-capital quote.
-        purchase += f'''if = {{ limit = {{ var:bfl_goods_good = {g}
-            "var:bfl_goods_market.stockpile_in_market(goods:{good})" >= 10
-            bfl_free_cash >= {{ value = {quote} multiply = 10 add = 1 }} }}
-            set_variable = bfl_goods_guard
-            set_variable = {{ name = bfl_goods_cash_before value = gold }}
-            set_variable = {{ name = bfl_goods_stock_before value = "var:bfl_goods_market.stockpile_in_market(goods:{good})" }}
-            buy_goods_from_market = {{ market = var:bfl_goods_market goods = goods:{good} amount = 10 }}
-            set_variable = {{ name = bfl_goods_acquired value = {{ value = var:bfl_goods_stock_before subtract = "var:bfl_goods_market.stockpile_in_market(goods:{good})" }} }}
-            set_variable = {{ name = bfl_goods_cost value = {{ value = var:bfl_goods_cash_before subtract = gold }} }}
-            if = {{ limit = {{ var:bfl_goods_acquired > 0 }}
-        '''
-        for i in LOTS:
-            p = n(i)
-            purchase += f'''if = {{ limit = {{ var:bfl_goods_allocated = 0 var:{p}_active = 0 }}
-                set_variable = {{ name = bfl_goods_allocated value = {i} }}
-                set_variable = {{ name = bfl_goods_selected value = {i} }}
-                change_variable = {{ name = {p}_generation add = 1 }}
-                set_variable = {{ name = {p}_active value = 1 }}
-                set_variable = {{ name = {p}_good value = {g} }}
-                set_variable = {{ name = {p}_quantity value = var:bfl_goods_acquired }}
-                set_variable = {{ name = {p}_basis value = var:bfl_goods_cost }}
-                set_variable = {{ name = {p}_market value = var:bfl_goods_market }}
-                set_variable = {{ name = {p}_location value = capital }}
-                set_variable = {{ name = {p}_state value = 0 }}
-                set_variable = {{ name = {p}_last_period value = bfl_period }}
-                set_variable = {{ name = {p}_encumbered value = 0 }}
-                set_variable = {{ name = {p}_storage_due value = 0 }}
-                set_variable = {{ name = {p}_offer value = 0 }}
-                set_variable = {{ name = {p}_transit_due value = 0 }}
-                set_variable = {{ name = {p}_escrow value = 0 }}
-                set_variable = {{ name = {p}_margin value = 0 }}
-                set_variable = {{ name = {p}_price value = 0 }}
-                set_variable = {{ name = {p}_due value = 0 }}
-                set_variable = {{ name = {p}_holder_basis value = 0 }}
-                remove_variable = {p}_holder remove_variable = {p}_destination
-                remove_variable = {p}_host
-                if = {{ limit = {{ NOT = {{ var:{p}_market = capital.market }} }}
-                    set_variable = {{ name = {p}_host value = var:bfl_goods_host }}
-                    set_variable = {{ name = {p}_location value = var:bfl_goods_host.capital }}
-                }}
-            }}\n'''
-        purchase += '''} remove_variable = bfl_goods_guard
-        }\n'''
-    purchase += '} bfl_value_goods = yes\n'
+        purchase += f'if = {{ limit = {{ var:bfl_goods_good = {g} }} set_variable = {{ name = bfl_goods_type value = goods:{good} }} }}\n'
+    purchase += '''save_scope_as = bfl_goods_bank
+        if = { limit = { exists = var:bfl_goods_type } var:bfl_goods_type = { save_scope_as = bfl_goods_execution } }
+        if = { limit = { NOT = { has_variable = bfl_goods_amount } }
+        set_variable = { name = bfl_goods_amount value = 10 } }
+        if = { limit = { bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
+            bfl_goods_market_access = yes exists = capital exists = var:bfl_goods_type
+            var:bfl_goods_amount > 0 NOT = { has_variable = bfl_goods_guard }
+            "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" >= var:bfl_goods_amount
+            bfl_free_cash >= { value = "var:bfl_goods_market.market_price(scope:bfl_goods_execution)" multiply = var:bfl_goods_amount add = 1 } }
+            save_scope_as = bfl_goods_bank set_variable = bfl_goods_guard
+            set_variable = { name = bfl_goods_allocated value = 0 }
+            set_variable = { name = bfl_goods_cash_before value = gold }
+            set_variable = { name = bfl_goods_stock_before value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" }
+            buy_goods_from_market = { market = var:bfl_goods_market goods = var:bfl_goods_type amount = var:bfl_goods_amount }
+            set_variable = { name = bfl_goods_acquired value = { value = var:bfl_goods_stock_before subtract = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" } }
+            set_variable = { name = bfl_goods_cost value = { value = var:bfl_goods_cash_before subtract = gold } }
+            if = { limit = { var:bfl_goods_acquired > 0 }
+    '''
+    for i in LOTS:
+        p = n(i)
+        purchase += f'''if = {{ limit = {{ var:bfl_goods_allocated = 0 var:{p}_active = 0 }}
+            set_variable = {{ name = bfl_goods_allocated value = {i} }}
+            set_variable = {{ name = bfl_goods_selected value = {i} }}
+            change_variable = {{ name = {p}_generation add = 1 }}
+            set_variable = {{ name = {p}_active value = 1 }}
+            set_variable = {{ name = {p}_good value = var:bfl_goods_good }}
+            set_variable = {{ name = {p}_type value = var:bfl_goods_type }}
+            set_variable = {{ name = {p}_acquired_period value = bfl_period }}
+            set_variable = {{ name = {p}_quantity value = var:bfl_goods_acquired }}
+            set_variable = {{ name = {p}_basis value = var:bfl_goods_cost }}
+            set_variable = {{ name = {p}_market value = var:bfl_goods_market }}
+            set_variable = {{ name = {p}_location value = capital }}
+            set_variable = {{ name = {p}_state value = 0 }}
+            set_variable = {{ name = {p}_last_period value = bfl_period }}
+            set_variable = {{ name = {p}_encumbered value = 0 }}
+            set_variable = {{ name = {p}_storage_due value = 0 }}
+            set_variable = {{ name = {p}_offer value = 0 }}
+            set_variable = {{ name = {p}_transit_due value = 0 }}
+            set_variable = {{ name = {p}_escrow value = 0 }}
+            set_variable = {{ name = {p}_margin value = 0 }}
+            set_variable = {{ name = {p}_price value = 0 }}
+            set_variable = {{ name = {p}_due value = 0 }}
+            set_variable = {{ name = {p}_holder_basis value = 0 }}
+            remove_variable = {p}_holder remove_variable = {p}_destination
+            remove_variable = {p}_host
+            if = {{ limit = {{ NOT = {{ var:{p}_market = capital.market }} }}
+                set_variable = {{ name = {p}_host value = var:bfl_goods_host }}
+                set_variable = {{ name = {p}_location value = var:bfl_goods_host.capital }}
+            }}
+        }}\n'''
+    purchase += '} remove_variable = bfl_goods_guard } bfl_value_goods = yes\n'
     # Native purchase and sales affect treasury directly. Book only observed
     # sale proceeds less the carried purchase cost; no price-mark gains.
     valuation = 'set_variable = { name = bfl_inventory_value value = 0 }\n'
     services = ''
+    margins = ''
     selected = ''
     monthly = '''bfl_initialize_goods = yes save_scope_as = bfl_goods_bank
         if = { limit = { bfl_period > var:bfl_goods_branch_period }
@@ -140,10 +149,7 @@ def generate(common, effect, loc, write):
             save_scope_as = bfl_goods_bank set_variable = bfl_goods_guard
             set_variable = {{ name = bfl_goods_cash_before value = gold }}
         '''
-        for g, good in enumerate(GOODS, 1):
-            sale += f'''if = {{ limit = {{ var:{p}_good = {g} }}
-                sell_goods_to_market = {{ market = var:{p}_market goods = goods:{good} amount = var:{p}_quantity }}
-            }}\n'''
+        sale += f'sell_goods_to_market = {{ market = var:{p}_market goods = var:{p}_type amount = var:{p}_quantity }}\n'
         sale += f'''set_variable = {{ name = bfl_goods_realized value = {{ value = gold subtract = var:bfl_goods_cash_before subtract = var:{p}_basis }} }}
             bfl_book_goods_gain = yes
             set_variable = {{ name = {p}_quantity value = 0 }} set_variable = {{ name = {p}_basis value = 0 }}
@@ -174,6 +180,7 @@ def generate(common, effect, loc, write):
                 set_variable = {{ name = bfl_goods_quote_quantity value = scope:bfl_goods_bank.var:{p}_quantity }}
                 set_variable = {{ name = bfl_goods_quote_mode value = scope:bfl_goods_bank.var:{p}_offer }}
                 set_variable = {{ name = bfl_goods_quote_good value = scope:bfl_goods_bank.var:{p}_good }}
+                set_variable = {{ name = bfl_goods_quote_type value = scope:bfl_goods_bank.var:{p}_type }}
                 set_variable = {{ name = bfl_goods_quote_expiry value = scope:bfl_goods_bank.var:{p}_offer_expiry }}
                 {quote_events}
             }}
@@ -252,9 +259,7 @@ def generate(common, effect, loc, write):
             save_scope_as = bfl_goods_bank
         '''
         redeem += f'set_variable = {{ name = bfl_goods_holder_before value = var:{p}_holder.gold }}\n'
-        for g, good in enumerate(GOODS, 1):
-            redeem += f'''if = {{ limit = {{ var:{p}_good = {g} }} var:{p}_holder = {{
-                sell_goods_to_market = {{ market = capital.market goods = goods:{good} amount = scope:bfl_goods_bank.var:{p}_quantity }} }} }}\n'''
+        redeem += f'var:{p}_holder = {{ sell_goods_to_market = {{ market = capital.market goods = scope:bfl_goods_bank.var:{p}_type amount = scope:bfl_goods_bank.var:{p}_quantity }} }}\n'
         redeem += f'''if = {{ limit = {{ var:{p}_holder = {{ bfl_has_accounts = yes }} }}
                 set_variable = {{ name = bfl_goods_holder_gain value = {{ value = var:{p}_holder.gold subtract = var:bfl_goods_holder_before subtract = var:{p}_holder_basis }} }}
                 var:{p}_holder = {{ set_variable = {{ name = bfl_goods_realized value = scope:bfl_goods_bank.var:bfl_goods_holder_gain }} bfl_book_goods_gain = yes }}
@@ -367,9 +372,7 @@ def generate(common, effect, loc, write):
         }}\n'''
         # Later variation margin reserves the actual positive replacement-cost
         # exposure on top of the original 100% seller performance security.
-        spot = 'value = 0\n'
-        for g, good in enumerate(GOODS, 1):
-            spot += f'if = {{ limit = {{ var:{p}_good = {g} }} value = "capital.market.market_price(goods:{good})" multiply = var:{p}_accepted_quantity }}\n'
+        spot = f'value = 0 if = {{ limit = {{ var:{p}_quantity > 0 }} value = var:{p}_mark divide = var:{p}_quantity multiply = var:{p}_accepted_quantity }}\n'
         values += effect(f'bfl_goods_spot_{i:02}', spot)
         values += effect(f'bfl_goods_due_{i:02}', f'value = var:{p}_due subtract = bfl_period min = 0')
         values += effect(f'bfl_goods_transit_{i:02}', f'value = var:{p}_transit_due subtract = bfl_period min = 0')
@@ -385,8 +388,9 @@ def generate(common, effect, loc, write):
                 bfl_settle_goods_forward_{i:02} = yes
             }}
         }}''')
-        monthly += f'bfl_margin_goods_{i:02} = yes\n'
+        margins += f'bfl_margin_goods_{i:02} = yes\n'
         selected += f'if = {{ limit = {{ var:bfl_goods_selected = {i} }} bfl_sell_goods_{i:02} = yes }}\n'
+    monthly += 'bfl_refresh_goods_marks = yes\n' + margins
     # Holder-bank assets retain paid cost; no mark-to-market income and no
     # duplicate asset remains on the issuing custodian's balance sheet.
     valuation += 'save_scope_as = bfl_goods_value_owner\nevery_country = { limit = { has_variable = bfl_goods_schema }\n'
@@ -404,82 +408,20 @@ def generate(common, effect, loc, write):
     common('scripted_effects', 'native_goods_adapter', effect('bfl_initialize_goods', init)
            + effect('bfl_purchase_native_inventory', purchase)
            + effect('bfl_sell_native_inventory', selected)
-           + effect('bfl_value_goods', valuation)
-           + effect('bfl_process_goods', monthly + 'bfl_value_goods = yes\n')
+           + effect('bfl_value_goods', valuation + 'bfl_refresh_goods_marks = yes\n')
+           + effect('bfl_process_goods', monthly + 'bfl_value_goods = yes bfl_manage_goods_policy = yes\n')
            + effect('bfl_book_goods_gain', '''if = { limit = { var:bfl_goods_realized >= 0 }
                 change_variable = { name = bfl_profit_goods add = var:bfl_goods_realized } }
                 else = { change_variable = { name = bfl_loss_carryforward subtract = var:bfl_goods_realized } }''')
            + services)
     generate_ui(common, effect, loc, write)
+    from generate_goods_policy import generate as generate_policy
+    generate_policy(common, effect, loc, write, LOTS)
 
 
 def generate_ui(common, effect, loc, write):
-    from generate_interface import action, label, section, var
-    def pair(left, right):
-        return f'hbox = {{ layoutpolicy_horizontal = expanding spacing = 5 {left} {right} }}'
-    commands = ''
-    def command(key, valid, body, bank_valid=''):
-        nonlocal commands
-        if bank_valid:
-            valid += f' OR = {{ AND = {{ bfl_is_independent_bank = yes {bank_valid} }} AND = {{ bfl_has_management = yes country_type = location var:bfl_bank = {{ {bank_valid} }} }} }}'
-        commands += f'''{key} = {{ scope = country is_shown = {{ bfl_has_management = yes }}
-            is_valid = {{ bfl_has_management = yes {valid} }} effect = {{
-                if = {{ limit = {{ bfl_has_management = yes {valid} }}
-                    bfl_resolve_command_bank = yes scope:bfl_bank = {{ bfl_initialize_goods = yes {body} }} }} }} }}\n'''
-    for g, good in enumerate(GOODS, 1):
-        key = f'bfl_buy_goods_{good}'
-        command(key, '', f'''set_variable = {{ name = bfl_goods_good value = {g} }}
-            set_variable = {{ name = bfl_goods_market value = capital.market }} bfl_purchase_native_inventory = yes''',
-            f'''bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes
-            "capital.market.stockpile_in_market(goods:{good})" >= 10
-            bfl_free_cash >= {{ value = "capital.market.market_price(goods:{good})" multiply = 10 add = 1 }}''')
-        loc(key, f'Buy 10 {good}')
-        loc(key+'_tip', 'Use the bank capital market. Requires Discovery, Merchant Finance, Commodity Investments, stock, free cash and a custody slot. Native cash and stock changes determine cost and quantity.')
-        key = f'bfl_buy_branch_{good}'
-        command(key, '', f'''set_variable = {{ name = bfl_goods_good value = {g} }}
-            if = {{ limit = {{ bfl_goods_branch_access = yes }} set_variable = {{ name = bfl_goods_market value = var:bfl_goods_branch_market }} bfl_purchase_native_inventory = yes }}''',
-            f'''bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes bfl_goods_branch_access = yes
-            "var:bfl_goods_branch_market.stockpile_in_market(goods:{good})" >= 10
-            bfl_free_cash >= {{ value = "var:bfl_goods_branch_market.market_price(goods:{good})" multiply = 10 add = 1 }}''')
-        loc(key, f'Branch: 10 {good}')
-        loc(key+'_tip', 'Requires an accepted, current host agreement and the host own Customs House. The native purchase is charged once; the separate 1 gold monthly access fee is paid to the host.')
-    for i in LOTS:
-        command(f'bfl_goods_select_{i:02}', '', f'set_variable = {{ name = bfl_goods_selected value = {i} }}')
-    commands += '''bfl_goods_open_menu = { scope = country is_shown = { bfl_has_management = yes }
-        is_valid = { bfl_has_management = yes } effect = { if = { limit = { bfl_has_management = yes }
-            bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_initialize_goods = yes }
-            set_variable = { name = bfl_goods_browser_bank value = scope:bfl_bank }
-            set_variable = { name = bfl_goods_browser_page value = 1 }
-            set_variable = { name = bfl_goods_menu_branch value = 0 }
-            trigger_event_non_silently = bfl_goods.10
-        } } }
-    '''
-    for key, service, title in [('bfl_goods_sell', 'bfl_sell_native_inventory', 'Sell free lot'),
-                                ('bfl_goods_receipt', None, 'List warehouse receipt'),
-                                ('bfl_goods_forward', None, 'List physical forward'),
-                                ('bfl_goods_cancel', None, 'Cancel unaccepted offer')]:
-        body = ''
-        for i in LOTS:
-            operation = service+' = yes' if service else (
-                f'bfl_list_goods_1_{i:02} = yes' if key == 'bfl_goods_receipt' else
-                f'bfl_list_goods_2_{i:02} = yes' if key == 'bfl_goods_forward' else
-                f'set_variable = {{ name = bfl_inv_{i:02}_offer value = 0 }} change_variable = {{ name = bfl_inv_{i:02}_offer_generation add = 1 }}')
-            body += f'if = {{ limit = {{ var:bfl_goods_selected = {i} }} {operation} }}\n'
-        checks = ''
-        if key == 'bfl_goods_sell':
-            checks = 'OR = { '+' '.join(f'AND = {{ var:bfl_goods_selected = {i} bfl_goods_sellable_{i:02} = yes }}' for i in LOTS)+' }'
-        elif key in ('bfl_goods_receipt','bfl_goods_forward'):
-            gate = 'warehouse_receipt' if key == 'bfl_goods_receipt' else 'commodity_forward'
-            checks = f'bfl_can_originate_{gate} = yes bfl_goods_researched_collateral = yes OR = {{ '+' '.join(f'AND = {{ var:bfl_goods_selected = {i} bfl_goods_offerable_{i:02} = yes }}' for i in LOTS)+' }'
-        command(key, '', body, checks)
-        loc(key, title)
-        loc(key+'_tip', 'Select an acquired lot. Receipt/forward offers require Absolutism, Collateralization and instrument research. Quoted price is 105% of carried cost plus 1 gold custody fee. Offers expire in two months. Encumbered and inaccessible goods cannot be sold or pledged again.')
-    common('scripted_guis', 'goods', commands)
-    common('scripted_triggers', 'goods_menu', '''bfl_goods_menu_authority = {
-        exists = var:bfl_goods_browser_bank country_exists = var:bfl_goods_browser_bank
-        OR = { AND = { bfl_is_independent_bank = yes var:bfl_goods_browser_bank = this }
-            AND = { bfl_has_management = yes country_type = location var:bfl_bank = var:bfl_goods_browser_bank } }
-    }''')
+    common('scripted_triggers', 'goods_menu', '# Manual purchase and lot-management menus are retired.')
+    common('scripted_guis', 'goods', '# Direct purchase and lot-management commands are retired; see bfl_goods_policy.txt.')
     # Counterparties explicitly choose a bank and then a lot; no transaction
     # occurs until the separate review event is accepted.
     interactions = ''
@@ -543,13 +485,18 @@ def generate_ui(common, effect, loc, write):
                     scope:bfl_goods_party = {{ set_variable = {{ name = bfl_goods_claim_slot value = {i} }} trigger_event_non_silently = bfl_goods.4 }} }}
                 else_if = {{ limit = {{ var:{p}_host ?= scope:bfl_goods_party }} bfl_enforce_goods_{i:02} = yes bfl_release_goods_{i:02} = yes }}
             }} ai_chance = {{ base = 0 }} }}\n'''
-        loc(f'bfl_custody_inspect_lot_{i:02}', f"Lot {i} · [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_browser_bank').GetCountry.MakeScope.GetVariable('{p}_quantity').GetValue|3] units: review offer or claim")
+        loc(f'bfl_custody_inspect_lot_{i:02}', f"Lot {i} Â· [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_browser_bank').GetCountry.MakeScope.GetVariable('{p}_quantity').GetValue|3] units: review offer or claim")
     events += '''option = { name = bfl_goods_previous trigger = { var:bfl_goods_browser_page > 1 }
             change_variable = { name = bfl_goods_browser_page subtract = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
         option = { name = bfl_goods_next trigger = { var:bfl_goods_browser_page < 4 }
             change_variable = { name = bfl_goods_browser_page add = 1 } trigger_event_non_silently = bfl_goods.1 ai_chance = { base = 0 } }
         option = { name = bfl_goods_close ai_chance = { base = 100 } } }
         bfl_goods.2 = { type = country_event title = bfl_goods_quote_title desc = bfl_goods_quote_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } }
+        }
+        bfl_goods.6 = { type = country_event title = bfl_goods_forward_title desc = bfl_goods_quote_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
             option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = { bfl_accept_goods_quote = yes } ai_chance = { base = 0 } }
             option = { name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = { base = 100 } }
@@ -572,7 +519,7 @@ def generate_ui(common, effect, loc, write):
     # A buyer's later acceptance authenticates the frozen seller and generation.
     transfer_offer = 'scope:actor = { save_scope_as = bfl_goods_seller } scope:recipient = { save_scope_as = bfl_goods_party }\n'
     transfer_offer += 'scope:actor.var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank\n'
-    transfer_events = ''.join(f'if = {{ limit = {{ var:bfl_goods_transfer_good = {g} }} trigger_event_non_silently = bfl_goods.{30+g} }}\n' for g in range(1,len(GOODS)+1))
+    transfer_events = 'trigger_event_non_silently = bfl_goods.5'
     transfer_accept = 'save_scope_as = bfl_goods_party\nif = { limit = { exists = var:bfl_goods_transfer_bank country_exists = var:bfl_goods_transfer_bank exists = var:bfl_goods_transfer_seller country_exists = var:bfl_goods_transfer_seller bfl_period <= var:bfl_goods_transfer_expiry }\nvar:bfl_goods_transfer_seller = { save_scope_as = bfl_goods_seller }\nvar:bfl_goods_transfer_bank = { save_scope_as = bfl_goods_bank\n'
     for i in LOTS:
         p = f'bfl_inv_{i:02}'
@@ -587,6 +534,7 @@ def generate_ui(common, effect, loc, write):
                 set_variable = {{ name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:{p}_price }}
                 set_variable = {{ name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:{p}_quantity }}
                 set_variable = {{ name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:{p}_good }}
+                set_variable = {{ name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:{p}_type }}
                 set_variable = {{ name = bfl_goods_transfer_expiry value = {{ value = bfl_period add = 1 }} }}
                 {transfer_events}
             }} }}\n'''
@@ -610,86 +558,12 @@ def generate_ui(common, effect, loc, write):
         option = { name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = { bfl_accept_goods_transfer = yes } ai_chance = { base = 0 } }
         option = { name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = { base = 100 } } }
     '''
-    for g, good in enumerate(GOODS, 1):
-        title = f'bfl_goods_transfer_{good}_title'
-        loc(title, f'{good.title()} warehouse receipt transfer')
-        events += f'''bfl_goods.{30+g} = {{ type = country_event title = {title} desc = bfl_goods_transfer_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = {{ name = bfl_goods_accept custom_tooltip = bfl_goods_accept_transfer_tip hidden_effect = {{ bfl_accept_goods_transfer = yes }} ai_chance = {{ base = 0 }} }}
-            option = {{ name = bfl_goods_decline remove_variable = bfl_goods_transfer_bank ai_chance = {{ base = 100 }} }} }}\n'''
-    for mode, base in ((1,20),(2,40)):
-      for g, good in enumerate(GOODS, 1):
-        title = f'bfl_goods_quote_{mode}_{good}'
-        loc(title, f'{good.title()} '+('warehouse receipt' if mode == 1 else 'physical forward'))
-        events += f'''bfl_goods.{base+g} = {{ type = country_event title = {title} desc = bfl_goods_quote_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = {{ name = bfl_goods_accept custom_tooltip = bfl_goods_accept_quote_tip hidden_effect = {{ bfl_accept_goods_quote = yes }} ai_chance = {{ base = 0 }} }}
-            option = {{ name = bfl_goods_decline remove_variable = bfl_goods_quote_bank ai_chance = {{ base = 100 }} }} }}\n'''
-    events += '''bfl_goods.10 = { type = country_event title = bfl_goods_menu_title desc = bfl_goods_menu_desc
-        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-    '''
-    for g, good in enumerate(GOODS, 1):
-        events += f'''option = {{ name = bfl_buy_goods_{good}
-            trigger = {{ bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = {{ bfl_can_originate_commodity_inventory = yes bfl_goods_capacity = yes }} }}
-            custom_tooltip = bfl_goods_menu_buy_{good}_tip
-            hidden_effect = {{ if = {{ limit = {{ bfl_goods_menu_authority = yes }} save_scope_as = bfl_goods_menu_actor var:bfl_goods_browser_bank = {{
-                set_variable = {{ name = bfl_goods_good value = {g} }}
-                if = {{ limit = {{ scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 1 bfl_goods_branch_access = yes }}
-                    set_variable = {{ name = bfl_goods_market value = var:bfl_goods_branch_market }} bfl_purchase_native_inventory = yes }}
-                else_if = {{ limit = {{ scope:bfl_goods_menu_actor.var:bfl_goods_menu_branch = 0 }}
-                    set_variable = {{ name = bfl_goods_market value = capital.market }} bfl_purchase_native_inventory = yes }} }} }}
-            trigger_event_non_silently = bfl_goods.10 }} ai_chance = {{ base = 0 }} }}\n'''
-        loc(f'bfl_goods_menu_buy_{good}_tip', f'Buy ten physical units of {good} at the selected bank capital or accepted Customs House market. Recheck live stock, native cost, protected free cash and custody capacity; pay native cost once and retain actual acquisition basis. No stock or cash changes if a required guard fails.')
-    events += '''option = { name = bfl_goods_use_branch trigger = { bfl_goods_menu_authority = yes var:bfl_goods_menu_branch = 0 var:bfl_goods_browser_bank = { bfl_goods_branch_access = yes } }
-            set_variable = { name = bfl_goods_menu_branch value = 1 } trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
-        option = { name = bfl_goods_use_capital trigger = { bfl_goods_menu_authority = yes var:bfl_goods_menu_branch = 1 }
-            set_variable = { name = bfl_goods_menu_branch value = 0 } trigger_event_non_silently = bfl_goods.10 ai_chance = { base = 0 } }
-        option = { name = bfl_goods_manage_lots trigger = { bfl_goods_menu_authority = yes }
-        trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
-        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
-        bfl_goods.11 = { type = country_event title = bfl_goods_lots_title desc = bfl_goods_lots_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-    '''
-    for i in LOTS:
-        p = f'bfl_inv_{i:02}'
-        events += f'''option = {{ name = bfl_custody_inspect_lot_{i:02}
-            trigger = {{ bfl_goods_menu_authority = yes var:bfl_goods_browser_page = {(i-1)//4+1}
-                var:bfl_goods_browser_bank = {{ var:{p}_active = 1 }} }}
-            if = {{ limit = {{ bfl_goods_menu_authority = yes }}
-                var:bfl_goods_browser_bank = {{ set_variable = {{ name = bfl_goods_selected value = {i} }} }}
-                set_variable = {{ name = bfl_goods_claim_slot value = {i} }}
-                trigger_event_non_silently = bfl_goods.12
-            }} ai_chance = {{ base = 0 }} }}\n'''
-    events += '''option = { name = bfl_goods_previous trigger = { var:bfl_goods_browser_page > 1 }
-            change_variable = { name = bfl_goods_browser_page subtract = 1 } trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
-        option = { name = bfl_goods_next trigger = { var:bfl_goods_browser_page < 4 }
-            change_variable = { name = bfl_goods_browser_page add = 1 } trigger_event_non_silently = bfl_goods.11 ai_chance = { base = 0 } }
-        option = { name = bfl_goods_close ai_chance = { base = 100 } } }
-        bfl_goods.12 = { type = country_event title = bfl_goods_selected_title desc = bfl_goods_selected_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-    '''
-    for key, kind in [('bfl_goods_sell','sell'),('bfl_goods_receipt','receipt'),('bfl_goods_forward','forward'),('bfl_goods_cancel','cancel')]:
-        operations = ''
-        visible = ''
-        for i in LOTS:
-            p = f'bfl_inv_{i:02}'
-            gate = (f'bfl_goods_sellable_{i:02} = yes' if kind == 'sell' else
-                    f'bfl_goods_offerable_{i:02} = yes bfl_goods_researched_collateral = yes bfl_can_originate_'+('warehouse_receipt' if kind == 'receipt' else 'commodity_forward')+' = yes' if kind in ('receipt','forward') else f'var:{p}_offer > 0')
-            visible += f'AND = {{ var:bfl_goods_selected = {i} {gate} }}\n'
-            service = (f'bfl_sell_goods_{i:02} = yes' if kind == 'sell' else
-                       f'bfl_list_goods_{1 if kind == "receipt" else 2}_{i:02} = yes' if kind in ('receipt','forward') else
-                       f'set_variable = {{ name = {p}_offer value = 0 }} change_variable = {{ name = {p}_offer_generation add = 1 }}')
-            operations += f'if = {{ limit = {{ var:bfl_goods_selected = {i} }} {service} }}\n'
-        events += f'''option = {{ name = {key} trigger = {{ bfl_goods_menu_authority = yes var:bfl_goods_browser_bank = {{ OR = {{ {visible} }} }} }}
-            if = {{ limit = {{ bfl_goods_menu_authority = yes }} var:bfl_goods_browser_bank = {{ {operations} }} }}
-            trigger_event_non_silently = bfl_goods.10 ai_chance = {{ base = 0 }} }}\n'''
-    events += '''option = { name = bfl_goods_close ai_chance = { base = 100 } } }
-    '''
     common('../events', 'goods', events)
     labels = {
         'bfl_goods_browser_title': 'Goods offers and custody claims',
         'bfl_goods_browser_desc': 'Select a physical lot to review its offer. Existing holders can request delivery; the consenting Customs House host can freeze inaccessible custody and release it after renewed access. No offer acceptance occurs at selection.',
-        'bfl_goods_quote_title': 'Review goods contract',
+        'bfl_goods_quote_title': "[ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_quote_type').Goods.GetNameWithNoTooltip] warehouse receipt",
+        'bfl_goods_forward_title': "[ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_quote_type').Goods.GetNameWithNoTooltip] physical forward",
         'bfl_goods_quote_desc': "Quantity: [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_quote_quantity').GetValue|3]. Price: [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_quote_price').GetValue|2] gold plus 1 gold custody fee. A warehouse receipt owns the goods immediately. A physical forward fully prefunds delivery in three months. Both require backed goods. Storage costs 0.1 per month; physical loss is 2% yearly. A forward keeps its fixed quantity: missing units refund pro rata plus equal seller security compensation. Delivery to another market takes two months, costs 1 gold and loses 1% of quantity. Storage and transport losses reduce receipt quantity. Invalid parties or lost access preserve goods and collateral for recovery. Accept only if these terms suit you.",
         'bfl_goods_branch_title': 'Customs House custody agreement',
         'bfl_goods_branch_desc': 'The host offers access to its capital market for 12 months at 1 gold per month, paid to the host. Native purchases retain their own cash charge; this is a separate custody service. Access requires the host own completed Customs House and peace. Unpaid access, expiry, building loss or war stops new purchases and delivery. The host may freeze local custody; no cash or goods are created. Renew with the same host to restore access.',
@@ -698,51 +572,13 @@ def generate_ui(common, effect, loc, write):
         'bfl_goods_accept_branch_tip': 'Accept the displayed twelve-month Customs House agreement. Monthly funded access fees go to the consenting host; accepting creates no stock, goods claim or immediate purchase.',
         'bfl_goods_accept': 'Accept these terms', 'bfl_goods_decline': 'Decline', 'bfl_goods_close': 'Close',
         'bfl_goods_previous': 'Previous lots', 'bfl_goods_next': 'Next lots',
-        'bfl_goods_open_menu': 'Goods Finance',
-        'bfl_goods_open_menu_tip': 'Manage physical purchases and acquired lots. Native stock, protected cash, custody, age, research and profile are checked before execution.',
-        'bfl_goods_menu_title': 'Goods Finance',
-        'bfl_goods_menu_desc': 'Buy physical goods from your bank capital market, or manage an acquired lot. Use the custody selector to switch to an accepted Customs House branch; the selector then offers a return to the bank capital. Each purchase removes actual native stock and pays the native price from bank free cash after stock, access and funding checks. The registry has sixteen lots. Warehouse receipts sell ownership of backed goods; physical forwards fully prefund delivery and seller security. Counterparties review and accept their terms separately through Goods offers and custody claims in diplomacy.',
-        'bfl_goods_use_branch': 'Switch purchases to the Customs House branch',
-        'bfl_goods_use_capital': 'Return purchases to the bank capital',
-        'bfl_goods_manage_lots': 'Manage acquired lots',
-        'bfl_goods_lots_title': 'Acquired goods and claims',
-        'bfl_goods_lots_desc': 'Choose a bank-owned custody lot. Free inventory can be sold or offered as a backed receipt or physical forward. Existing encumbered claims cannot be pledged again. Four lot slots appear per page; empty slots stay hidden.',
-        'bfl_goods_selected_title': 'Manage selected custody lot',
-        'bfl_goods_selected_desc': "Selected lot [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_claim_slot').GetValue|0]. Choose an available action. A receipt or forward offering fixes the price at 105% of carried cost for two months; the buyer pays a separate one-gold custody fee. A physical forward matures after three months, reserves full buyer consideration plus equally large seller security, and compensates missing quantity from that security. Only an unencumbered accessible lot can be sold or offered. Existing claims and collateral remain recorded when access is lost.",
         'bfl_goods_claim_title': 'Your warehouse claim',
         'bfl_goods_claim_desc': 'Request delivery of this receipt into your capital market. Delivery across markets takes two months, costs 1 gold and loses 1% of quantity. Alternatively close this window and use Offer warehouse receipt transfer in diplomacy. Transfers require Revolutions and Margining and Risk Management at the custodian; the buyer must accept a current quote.',
         'bfl_goods_deliver': 'Request physical delivery',
-        'bfl_goods_transfer_title': 'Warehouse receipt transfer',
+        'bfl_goods_transfer_title': "[ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_transfer_type').Goods.GetNameWithNoTooltip] receipt transfer",
         'bfl_goods_transfer_desc': "Price: [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_transfer_price').GetValue|2] gold. Quantity: [ROOT.GetCountry.MakeScope.GetVariable('bfl_goods_transfer_quantity').GetValue|3]. Your payment goes to the current holder. Custody stays at the bank; storage, spoilage and delivery terms continue. Acceptance rejects changed backing, holder, lot generation or price.",
         'bfl_offer_goods_transfer': 'Offer warehouse receipt transfer',
         'bfl_offer_goods_transfer_desc': 'Offer the receipt most recently selected in Goods offers and custody claims. The recipient reviews price and quantity before paying the current holder.',
-        'bfl_goods_title': 'GOODS FINANCE · Physical custody',
-        'bfl_goods_title_tip': 'Merchant Finance. Native execution, conservative carried cost and backed bilateral contracts.',
-        'bfl_goods_hint': 'Select a lot before selling or listing. Receipt and forward offers are reviewed through Goods offers and custody claims in diplomacy. Existing claims remain serviceable after research or profile access is lost.',
     }
     for key, title in labels.items(): loc(key, title)
-    body = label("Carried inventory: [Country.MakeScope.GetVariable('bfl_inventory_value').GetValue|2]@gold! · Selected lot [Country.MakeScope.GetVariable('bfl_goods_selected').GetValue|0]", 26)
-    body += 'text_multi = { text = "bfl_goods_hint" autoresize = yes layoutpolicy_horizontal = expanding }'
-    for good in GOODS:
-        body += pair(action(f'bfl_buy_goods_{good}', 'custody'), action(f'bfl_buy_branch_{good}', 'custody'))
-    body += pair(action('bfl_goods_sell', 'custody'), action('bfl_goods_cancel', 'lock'))
-    body += pair(action('bfl_goods_receipt', 'receipt'), action('bfl_goods_forward', 'forward'))
-    for i in LOTS:
-        p = f'inv_{i:02}'
-        key = f'bfl_goods_select_{i:02}'
-        loc(key, f'Select lot {i}')
-        loc(key+'_tip', 'Choose this physical lot for sale or a backed contract offer. Review its quantity, encumbrance, custodian and accepted claims before acting.')
-        details = ''
-        for g, good in enumerate(GOODS, 1):
-            details += f'''text_single = {{ visible = "[EqualTo_CFixedPoint({var(p+'_good')}, '(CFixedPoint){g}')]"
-                raw_text = "Lot {i} · {good.title()} · [{var(p+'_quantity')}|3] units · pledged [{var(p+'_encumbered')}|3]" autoresize = yes }}'''
-        for state, title in [(0,'Bank inventory'),(1,'Warehouse receipt'),(2,'Funded physical forward'),(3,'Delivered'),(4,'Host custody freeze')]:
-            details += f'''text_single = {{ visible = "[EqualTo_CFixedPoint({var(p+'_state')}, '(CFixedPoint){state}')]"
-                raw_text = "{title}" autoresize = yes }}'''
-        details += label(f"Carried cost [{var(p+'_basis')}|2]@gold! · contract price [{var(p+'_price')}|2]@gold!", 24)
-        details += label(f"Buyer escrow [{var(p+'_escrow')}|2]@gold! · seller security [{var(p+'_margin')}|2]@gold!", 24)
-        details += label(f"Matures in [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_due_{i:02}')|0] months · transit [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_transit_{i:02}')|0] months", 24)
-        details += action(key, 'custody')
-        body += f'''vbox = {{ visible = "[EqualTo_CFixedPoint({var(p+'_active')}, '(CFixedPoint)1')]"
-            layoutpolicy_horizontal = expanding spacing = 2 using = bg_text_mask_container_dark_brown {details} }}'''
-    write('in_game/gui/bfl_goods.gui', f'types BFLGoodsTypes {{ type bfl_goods_contents = vbox {{ layoutpolicy_horizontal = expanding spacing = 5 {section("bfl_goods_title", body)} }} }}')
+    # Goods policy and native inventory tooltips are emitted by generate_goods_policy.
