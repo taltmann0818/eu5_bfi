@@ -4,7 +4,9 @@ param(
     [string]$SettingsFrom,
     [switch]$PrepareOnly,
     [switch]$NormalCharter,
-    [switch]$Exchange
+    [switch]$Exchange,
+    [switch]$Commenda,
+    [ValidateSet('populated','empty','locked','offer','full')][string]$CommendaState = 'populated'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -30,6 +32,12 @@ try {
     if ($Exchange) {
         python tools/prepare_m5_ui.py --userdir $userDir --companies
         if ($LASTEXITCODE -ne 0) { throw 'Exchange UI fixture preparation failed' }
+    }
+    if ($Commenda) {
+        $taskCommendaArgs = @('tools/prepare_m7_ui.py', '--userdir', $userDir)
+        if ($CommendaState -ne 'populated') { $taskCommendaArgs += ('--' + $CommendaState) }
+        python @taskCommendaArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Commenda UI fixture preparation failed' }
     }
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse

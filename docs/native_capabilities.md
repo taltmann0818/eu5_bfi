@@ -19,3 +19,12 @@ Baseline: EUV **1.4.1**, Steam build **25905365**, branch **1.4-open-beta**; CMF
 Unimplemented adapter flags in `design/tuning.json` default false and compile into permission triggers. A save variable cannot enable them. Implemented M6 goods services use their production age/profile/research/access/backing guards; the obsolete P09 development flag cannot enable or disable them. An answered feasibility question does not implement a product; changing a flag alone is insufficient.
 
 Current-build generated documentation and installed sources are authoritative. Published modding digests corroborate source inspection; offline reference mathematics do not emulate EUV. The [native GUI baseline](native-gui-diagnostics.json) classifies only exact signatures reproduced without BFI. [Historical diagnostic/progress failures](../tests/results/2026-10-15-m0-repeatability-limitations.json) remain explicit. Local logs, saves and licensed assets are excluded from the PR and release.
+
+
+M7 now implements accepted country/company risk capital through the audited
+native route/budget and exploration boundaries. [Product rules and acceptance
+status](m7-commenda.md) distinguish controlled waterfall assertions, native
+commercial receipts, natural exploration and normal UI observations. Its
+production Commenda permission no longer uses an obsolete disabled P11 adapter;
+advanced project security retains its separate gate. Discovery callbacks record
+identity/outcome only and never create a receipt.

@@ -6,7 +6,7 @@ from pathlib import Path
 import campaign_suite as campaign
 
 
-def prepare(directory,empty=False,locked=False,offer=False):
+def prepare(directory,empty=False,locked=False,offer=False,full=False):
     directory=Path(directory).resolve();manifest=campaign.prepare(directory)
     overlay=directory/'mod/bfi_campaign_checks'
     native=Path('C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/setup/1337/10_countries.txt')
@@ -18,12 +18,13 @@ def prepare(directory,empty=False,locked=False,offer=False):
             set_variable = { name = bfl_payout_ratio value = 0 } bfl_initialize_commenda = yes }
     '''
     if not empty and not locked:
-        for target in ('GEN','VEN','PIS'):
+        targets=('GEN','VEN','PIS','LUC','SIE','PAP','NAP','SAV') if full else ('GEN','VEN','PIS')
+        for target in targets:
             setup+=f'''c:{target} = {{ set_gold = 1000 save_scope_as = bfl_operator }}
                 c:BRD = {{ bfl_propose_commenda = yes }}
                 c:{target} = {{ save_scope_value_as = {{ name = bfl_venture_quote value = var:bfl_venture_offer_generation }} bfl_accept_commenda = yes }}\n'''
     if locked:
-        setup=setup.replace('research_advance = advance_type:bfl_commenda','remove_advance = advance_type:bfl_commenda')
+        setup=setup.replace('research_advance = advance_type:bfl_commenda','')
     if offer:
         setup+='''c:FLO = { save_scope_as = bfl_operator }
             c:BRD = { bfl_propose_commenda = yes }'''
@@ -34,12 +35,12 @@ def prepare(directory,empty=False,locked=False,offer=False):
     digest=hashlib.sha256()
     for p in sorted(overlay.rglob('*')):
         if p.is_file():digest.update(p.relative_to(overlay).as_posix().encode()+b'\0'+p.read_bytes())
-    manifest.update(suite='M7 native UI fixture',fixture_sha256=digest.hexdigest(),empty=empty,locked=locked,offer=offer)
+    manifest.update(suite='M7 native UI fixture',fixture_sha256=digest.hexdigest(),empty=empty,locked=locked,offer=offer,full=full)
     (directory/'bfi_campaign_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(directory)
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--userdir',required=True,type=Path)
-    for flag in ('empty','locked','offer'):p.add_argument('--'+flag,action='store_true')
-    a=p.parse_args();prepare(a.userdir,a.empty,a.locked,a.offer)
+    for flag in ('empty','locked','offer','full'):p.add_argument('--'+flag,action='store_true')
+    a=p.parse_args();prepare(a.userdir,a.empty,a.locked,a.offer,a.full)

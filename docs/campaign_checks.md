@@ -1,5 +1,16 @@
 # Florence campaign regression checks
 
+M7 commenda is implemented and its complete acceptance gate remains open.
+[Product rules, native suites and normal-UI checklist](m7-commenda.md) distinguish
+controlled funded waterfall checks from actual native trade/exploration and
+visual inspection. Use `-Suite m7`, `m7authority`, `m7traditions`, `m7later` and
+`m7company`; the company suite includes loss-offset and actual owner-payout
+checks for deferred operator surplus. Existing accounts, treasury and goods
+regressions remain separate. `start_test_campaign.ps1 -Commenda -PrepareOnly`
+stages the normal UI fixture; omit `-PrepareOnly` only when deliberately opening
+a visible test game. Historical evidence below retains its original runtime.
+
+
 **Current stochastic-pricing acceptance:** the implemented [NAV-anchored market model](exchange-pricing.md) and [paired comparison/sensitivity](equity-pricing-ab.md) pass the pinned single-player gate. **31 pricing + 40 market + 54 ownership + 114 accounts/bond = 239 native assertions**, including twelve matched same-bank NAV/market observations and second-process saved-state checks, pass with exact per-report provenance. The 31-case pricing suite runs shipping `767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668`; 40/54/114 regressions retain `ff891754...`, differing only in the matching recapitalization-button/command guard and its tooltip localization. All financial price/value/effect files are byte-identical. The ordinary financial regression suites explicitly select pure NAV on that identical runtime; the dedicated pricing suite enables GBM. **108 offline tests**, native/CMF source pins, deterministic generation/reconstruction and **221-file staging** pass. [Exact provenance](../tests/results/2026-10-18-gbm-validation.json) preserves actual hashes, rejected development attempts, synthetic-versus-native scope and the fixture-only solvency grant for the isolated next-draw check.
 
 The offline A/B uses **2,560 paths over 120 months and five scenarios**, **130 sensitivity rows** and **54 interaction cells**. Results are controlled synthetic model outputs, not campaign earnings or release-wide economic calibration. Backend defaults select 10% annual volatility, zero independent drift, 2/year mean reversion, bounded initiating-order pressure and spreads, actual ex-dividend NAV and paid NAV issuance. Subscriptions and the sovereign recapitalization route both enforce the primary/dealer arbitrage guard. Zero NAV halts sales/reset premia; a funded recovery reanchors without a shock. Seed/period guards prevent rerolls and background inventory distribution adds no duplicate pressure.

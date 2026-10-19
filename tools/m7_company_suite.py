@@ -37,7 +37,9 @@ def fixture(token,fingerprint):
     # Explicitly controlled, funded maturity outcomes exercise company payout
     # integration after the natural exploration checks above. These are not
     # additional native trading-performance observations.
-    extra+='''c:BRD = { save_scope_as = bfl_venture_lender set_variable = { name = bfl_v_01_maturity value = bfl_period } }
+    extra+='''c:BRD = { save_scope_as = bfl_venture_lender
+        set_variable = { name = bfi_m7_natural_outcome value = var:bfl_v_01_outcome }
+        set_variable = { name = bfl_v_01_maturity value = bfl_period } }
         c:FLO.var:bfi_company = { save_scope_as = bfl_operator
             set_variable = { name = bfl_venture_pool value = { value = var:bfl_venture_remaining add = 40 } }
             set_variable = { name = bfl_venture_gross value = 0 } set_variable = { name = bfl_venture_proceeds value = 0 }
@@ -77,7 +79,8 @@ def reload_fixture(token,fingerprint):
         'reload_native_exploration_outcome_and_project_basis':'''OR = {
             c:BRD = { var:bfl_v_01_generation = 1 var:bfl_v_01_outcome > 1 var:bfl_v_01_basis > 0 var:bfl_v_01_returned > 0 var:bfl_v_01_profit = 0 }
             AND = { c:BRD = { var:bfl_v_01_generation = 2 var:bfl_v_01_state = 2 var:bfl_v_01_profit = 30 }
-                c:FLO.var:bfi_company = { has_variable = bfl_venture_commercial_opportunity } } }''',
+                OR = { c:FLO.var:bfi_company = { has_variable = bfl_venture_commercial_opportunity }
+                    c:BRD = { has_variable = bfi_m7_natural_outcome var:bfi_m7_natural_outcome > 1 } } } }''',
     }
     text=f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\n'
     for name,condition in checks.items():
