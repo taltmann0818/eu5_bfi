@@ -21,4 +21,4 @@ bfl_venture_ticket = { scope = country is_shown = { bfl_has_management = yes } i
 else_if = { limit = { var:bfl_venture_ticket = 200 } set_variable = { name = bfl_venture_ticket value = 400 } }
 else_if = { limit = { var:bfl_venture_ticket = 400 } set_variable = { name = bfl_venture_ticket value = 100 } }
  } } } }
-bfl_venture_view = { scope = country is_shown = { var:bfl_venture_open = 1 } }
+bfl_venture_view = { scope = country is_shown = { var:bfl_venture_open = 1 } }bfl_venture_offer_button = { scope = country is_valid = { bfl_commenda_command_ready = yes } }

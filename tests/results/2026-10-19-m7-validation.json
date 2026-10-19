@@ -1,13 +1,14 @@
 {
   "date": "2026-10-19",
   "pull_request": "https://github.com/taltmann0818/eu5_bfi/pull/14",
-  "m7_complete": false,
-  "status": "Implemented; native evidence passes, normal UI acceptance remains open",
-  "current_runtime_sha256": "3930ee5508b5c11f09cfd4cf2e5aeb4805d907111d31be7b3fe4368f4e1b4b88",
-  "native_assertions": 291,
+  "m7_complete": true,
+  "status": "Complete for the pinned single-player baseline; native financial and normal UI acceptance pass",
+  "current_runtime_sha256": "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6",
+  "native_assertions": 314,
   "assertions_by_runtime": {
     "056665f819773dbfa192dbed1018b5b4413c596b749aded7a21e92eb262805a4": 33,
-    "3930ee5508b5c11f09cfd4cf2e5aeb4805d907111d31be7b3fe4368f4e1b4b88": 258
+    "3930ee5508b5c11f09cfd4cf2e5aeb4805d907111d31be7b3fe4368f4e1b4b88": 258,
+    "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6": 23
   },
   "reports": [
     {
@@ -44,7 +45,12 @@
       ],
       "required_measurements": {},
       "current_runtime_differences": [
-        "in_game/common/scripted_effects/bfl_company_operations.txt"
+        "in_game/common/scripted_effects/bfl_company_operations.txt",
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
       ],
       "originating_campaign": null,
       "input_save_sha256": null
@@ -70,7 +76,12 @@
       ],
       "required_measurements": {},
       "current_runtime_differences": [
-        "in_game/common/scripted_effects/bfl_company_operations.txt"
+        "in_game/common/scripted_effects/bfl_company_operations.txt",
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
       ],
       "originating_campaign": null,
       "input_save_sha256": null
@@ -88,7 +99,13 @@
         "reload_preserves_accepted_terms_and_operator_reference"
       ],
       "required_measurements": {},
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": null,
       "input_save_sha256": null
     },
@@ -125,7 +142,13 @@
         "reload_preserves_accepted_terms_and_operator_reference"
       ],
       "required_measurements": {},
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": null,
       "input_save_sha256": null
     },
@@ -180,7 +203,13 @@
         "monthly.loss": 12,
         "monthly.stamp": 12
       },
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": null,
       "input_save_sha256": null
     },
@@ -196,7 +225,13 @@
         "reload_native_exploration_outcome_and_project_basis"
       ],
       "required_measurements": {},
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": "7319a36c83da46c485c5a282e3153247",
       "input_save_sha256": "1b44db87cd28fa5426a5c91631cd6d041f3de6e8b1dce41f9862d0f95f1fc5cd"
     },
@@ -324,7 +359,13 @@
         "reload_month_idempotent"
       ],
       "required_measurements": {},
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": null,
       "input_save_sha256": null
     },
@@ -381,7 +422,13 @@
         "reload_native_cost_and_repayment_history"
       ],
       "required_measurements": {},
-      "current_runtime_differences": [],
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
       "originating_campaign": null,
       "input_save_sha256": null
     },
@@ -438,6 +485,49 @@
         "reload_holder_and_contract_generation"
       ],
       "required_measurements": {},
+      "current_runtime_differences": [
+        "in_game/common/country_interactions/bfl_commenda.txt",
+        "in_game/common/scripted_guis/bfl_commenda.txt",
+        "in_game/common/scripted_triggers/bfl_commenda.txt",
+        "in_game/gui/bfl_commenda.gui",
+        "in_game/common/scripted_effects/bfl_commenda_offers.txt"
+      ],
+      "originating_campaign": null,
+      "input_save_sha256": null
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-final-country.json",
+      "passed": true,
+      "assertions": 23,
+      "token": "bfdf5f08c9ac484eadca0a8125846127",
+      "runtime_sha256": "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6",
+      "fixture_sha256": "40c344ea2085cd1fdc71540cdacd40d04b78117189e801521d0dc0dbab99375f",
+      "expected_cases": [
+        "missing_research_moves_no_cash",
+        "proposal_only_no_wallet_mutation",
+        "stale_offer_generation_rejected",
+        "expired_offer_rejected",
+        "unfunded_acceptance_rejected",
+        "changed_offer_terms_rejected",
+        "accepted_capital_conserved_and_not_income",
+        "acceptance_replay_and_second_project_rejected",
+        "discovery_records_opportunity_without_gold",
+        "controlled_receipts_recover_capital_first",
+        "controlled_unilateral_surplus_split",
+        "successful_closure_no_duplicate_capital",
+        "bilateral_commits_real_operator_contribution",
+        "controlled_bilateral_returns_and_equal_surplus",
+        "controlled_partial_loss_bounded_by_actual_wallet",
+        "controlled_total_loss_no_cash_manufactured",
+        "early_country_operator_before_company_unlock",
+        "merchant_cannot_originate_commenda",
+        "twelve_natural_operator_cutoffs",
+        "native_country_trade_funds_real_surplus_and_closure",
+        "natural_settlement_replay_moves_no_cash",
+        "native_receipt_cutoff_excludes_financing_and_discovery",
+        "reload_preserves_accepted_terms_and_operator_reference"
+      ],
+      "required_measurements": {},
       "current_runtime_differences": [],
       "originating_campaign": null,
       "input_save_sha256": null
@@ -451,9 +541,9 @@
   },
   "packaging": {
     "files": 253,
-    "manifest_sha256": "8eb33fdb6c42ff7622937372f9513cacb93c840e87a5289baeb0815b0bcfdc15",
-    "zip_sha256": "63c53416a0604e377c5c3ce98be2ebc8f0129fa8a429ed314b5a6e9242a10e61",
-    "note": "Local staging only; no release/tag/publication. Packaged metadata formatting is produced by stage_release.ps1."
+    "manifest_sha256": "9f47f845eda7d14f38c1482a2a16cc3f6114cacb9baade0261daab594e0f1625",
+    "zip_sha256": "b055d0ce89068bd5d7f6cc35554854387f4d4b93c68dbc73dd51de325656f491",
+    "note": "Fresh local staging of final runtime only; no release, tag or publication."
   },
   "art": {
     "mode": "built-in imagegen",
@@ -473,27 +563,21 @@
     ],
     "prompts": "assets_source/painted/commenda-generation.json",
     "master_visual_inspection": true,
-    "native_ui_inspection": false,
+    "native_ui_inspection": true,
     "runtime_exports": 64
   },
   "native_ui": {
-    "status": "not_run",
-    "observations": 0,
-    "captures": 0,
-    "reason": "Visible test-window approval is pending. Hidden launch did not expose a targetable game window.",
-    "remaining": [
-      "Collapsed/expanded future terms and correct activity figures",
-      "Normal acceptance, cancellation and stale offers",
-      "Empty and locked states",
-      "All eight scrollable project rows and exploration/closed/loss states",
-      "Both player roles and native layout/artwork inspection"
-    ]
+    "status": "passed",
+    "report": "tests/results/2026-10-19-m7-ui.json",
+    "observations": 21,
+    "captures": 21,
+    "remaining": []
   },
   "provenance_notes": [
-    "The 23 Discovery-country and 10 charter-authority assertions use 056665f8...; the only shipping difference is the company income loss-offset order in bfl_company_operations.txt. Every Commenda service/permission/GUI/art file is identical. The changed company path is exercised by 30 current-runtime company assertions plus two persisted-settlement assertions.",
+    "The original 33 Discovery/authority assertions retain 056665f8; 258 retain 3930ee55. The company loss-offset fix separates those two financial runtimes. Five final presentation paths differ: offer availability/GUI command guards, cleaned headings and a safe numeric default for offer-generation preview. Settlement, receipt arithmetic, exploration and artwork are unchanged from 3930ee55. A fresh final-runtime Discovery suite adds 23 passing assertions, including both presets, stale/expired/replayed offers, natural capital/surplus and reload. Earlier reports are not relabeled.",
     "The original combined company fixture passed all 30 first-process cases but its two reload checks incorrectly required an active agreement after controlled maturity/reinvestment. Preserve that rejected result below. The accepted core report collects only first-process assertions and numerical observations. A separate fresh-process continuation loads the same native save, tests the correct persisted closed state, and records its input-save hash. No financial services were changed for this recovery.",
     "Controlled contributed-capital/surplus/loss fixtures are actual engine wallet/effect assertions, not natural trade-performance claims. Positive country receipts, costs and surplus are measured separately; company exploration uses normal native preparation/progress and terminal callbacks.",
-    "No normal UI observations or screenshots are claimed. Neither offline tests, master-art inspection, prepared UI fixtures nor queued GitHub native workflows close that gate."
+    "Normal UI acceptance now passes 21 observations with 21 actual-game captures. Each preserves its runtime and fixture fingerprint. Deliberate display grants, controlled outcomes and expedition labels do not replace natural financial/exploration assertions. Queued CI is never counted as a pass."
   ],
   "rejected_development_attempts": [
     {

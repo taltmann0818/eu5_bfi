@@ -15,13 +15,16 @@ terms-button and event artwork has retained masters and exact
 ## Current evidence
 
 [Exact validation provenance](../tests/results/2026-10-19-m7-validation.json)
-records **291 passing native assertions**, **124 offline tests**, source/native
-pins, deterministic reconstruction and **253-file staging**. M7 remains open
-because no normal native UI observations or captures have been made.
+records **314 passing native assertion executions** (291 original checks plus a
+23-case final-runtime repeat), **124 offline tests**, source/native pins,
+deterministic reconstruction and **253-file staging**. M7 is **complete for the
+pinned single-player baseline**. [Normal UI acceptance](../tests/results/2026-10-19-m7-ui.json)
+passes **21 observations / 21 actual-game captures**; see the
+[screenshot index](screenshots/README.md#m7-commenda-partnerships).
 
 | Native path | Assertions | Scope |
 | --- | ---: | --- |
-| [Discovery country](../tests/results/2026-10-19-m7-country.json) | 23 | Actual retained trade, funded profitable maturity, preset/loss/offer guards and reload. |
+| [Discovery country](../tests/results/2026-10-19-m7-country.json) / [final repeat](../tests/results/2026-10-19-m7-final-country.json) | 23 + 23 | Actual retained trade, funded profitable maturity, preset/loss/offer guards and reload. |
 | [Charter authority](../tests/results/2026-10-19-m7-authority.json) | 10 | Controller research/transfer, accepted terms, inherited servicing and eight funded operators/capacity. |
 | [Traditions](../tests/results/2026-10-19-m7-traditions.json) / [later age](../tests/results/2026-10-19-m7-later.json) | 3 + 23 | Native age boundaries and positive later-age continuation. |
 | [Company core](../tests/results/2026-10-19-m7-companies.json) / [persisted settlement](../tests/results/2026-10-19-m7-company-persistence.json) | 30 + 2 | Twelve statements, actual native exploration, exclusive receipts/NAV, controlled loss offsets and funded owner payouts, then a read-only fresh-process save load. |
@@ -32,11 +35,15 @@ The Discovery project observed 22.32292 gold of eligible native receipts and
 contribution and paid 3.63 gold of bank surplus. It is a focused financial-path
 observation, not a return forecast or campaign balance result.
 
-258 assertions run current runtime `3930ee55...`. The 33 Discovery/authority
-assertions retain `056665f8...`; the sole shipping difference is company income
-loss-offset order, exercised separately by the current company suite. All
-Commenda services, permissions, GUI and artwork are byte-identical between them.
-Do not relabel the earlier hashes as current.
+258 assertions retain financial runtime `3930ee55...`; the original 33
+Discovery/authority assertions retain `056665f8...`. Their sole difference is
+company income loss-offset order, exercised separately by the company suite.
+The final runtime `b8855774...` adds offer-availability/command guards,
+clean operator headings and a zero default for the pre-initialization offer
+generation preview. The final 23-case Discovery repeat verifies actual accepted
+funding, both presets, stale/expired/replayed offers, natural receipts and reload.
+Settlement, receipt arithmetic, exploration and artwork are unchanged from
+`3930ee55...`. Do not relabel earlier reports or screenshots as final.
 
 The original combined company attempt passed its 30 first-process cases but
 incorrectly required an active agreement after deliberate controlled maturity
@@ -110,24 +117,23 @@ loan.
 
 ## Validation and completion gate
 
-The milestone remains **implemented / needs acceptance** until every item below
-has supporting evidence. Tests of controlled proceeds are engine wallet and
-waterfall checks, not natural trade-performance evidence.
+Every item below now has supporting evidence for the pinned baseline. Tests of
+controlled proceeds are engine wallet and waterfall checks, not natural
+trade-performance evidence. Normal UI captures remain a separate evidence class.
 
-- Dedicated native assertions: acceptance, stale/expired/changed offers,
+- **Passed — native assertions:** acceptance, stale/expired/changed offers,
   insufficient funding, exclusivity, both presets, principal/profit accounting,
   partial/total loss, discovery without gold, natural monthly cutoffs and reload.
-- A natural early-country route must deliver positive receipts and a closed
+- **Passed — natural country route:** delivers positive receipts and a closed
   profitable project before native company unlocks.
-- A later native company must execute trade and ordinary exploration, preserve
-  identity/ownership, return real receipts, avoid duplicate equity payouts and
-  persist the linked natural terminal outcome in a second process.
-- Independent and chartered authority, pre-Discovery rejection and later-age
-  continuation must pass; accounts, treasury and goods regressions must pass.
-- Normal native UI acceptance must inspect collapsed/expanded controls,
+- **Passed — later native company:** executes trade and ordinary exploration, preserves
+  identity/ownership, returns real receipts, avoids duplicate equity payouts and
+  persists the linked natural terminal outcome in a second process.
+- **Passed — roles and regression:** independent and chartered authority, pre-Discovery rejection and later-age
+  continuation pass; accounts, treasury and goods regressions pass.
+- **Passed — normal native UI:** collapsed/expanded controls,
   accepted terms/cancellation, empty/locked states, all eight scrollable rows,
-  artwork, capital/profit/loss figures and both player roles. Artwork inspection
-  and source validation alone do not close this gate.
+  artwork, capital/profit/loss figures and both player roles. The actual-game observations and captures close this part of the gate.
 
 Run the isolated harness with separately installed CMF:
 
@@ -156,3 +162,41 @@ The standard interactive launcher also supports the fixture:
 
 `empty` and `locked` are additional `-CommendaState` choices. Without
 `-PrepareOnly`, this command opens a visible, disposable game for manual QA.
+
+## Normal UI acceptance
+
+The Computer Use review used unedited native EUV 1.4.1 / CMF 2.5.0 windows at
+2560×1440, English and native default GUI scale, without debug mode. Chartered
+Florence and independent Bardi each expose the compact painted card and native
+offer selector. All eight named ledger records scroll fully. Future terms changed
+to bilateral / 24 months / 200 gold while accepted rows retained 75% / 12 months /
+100 gold and the bank retained 9200 cash / 800 basis. Full capacity, missing
+research and Merchant Finance each disable Offer; clicking it stays closed.
+
+Normal acceptance moved exactly 100 gold from bank to Florence and added one
+active project without changing total assets. Decline and selector cancellation
+left balances/basis unchanged. Empty guidance, acceptance explanations and the
+custom project/Terms/event artwork render legibly. Controlled settlement shows
+Genoa 100 returned / 18.75 profit, Venice 50 returned / 50 loss and Pisa 100 still
+at risk. The separate native campaigns prove natural trade/exploration; expedition
+status labels and the activity statement were not individually inspected here.
+
+The final cold load verifies the localized acceptance tooltip. The final native
+regression repeats accepted funding and offer/reload guards after the safe
+offer-preview default; normal acceptance/selection captures retain earlier
+runtime hashes. Every capture has its actual runtime/fixture hash in the
+[UI report](../tests/results/2026-10-19-m7-ui.json); intermediate captures remain
+labeled. The earlier locked-button and operator-heading defects were corrected
+before acceptance. Native startup diagnostics are recorded separately; this is
+not a claim of a universally clean native log or release-wide UI certification.
+
+For repeatable manual QA, `-CommendaQaControls` adds five disposable native
+decisions for empty, locked Merchant, eight-operator, controlled outcome and live
+offer states. `-CommendaIndependent` starts as Bardi; `-NoDebug` uses normal UI.
+Select the offered country/start button if the native lobby appears. These
+overlays and all grants stay outside the shipping mod.
+
+```powershell
+./tools/start_test_campaign.ps1 -Commenda -CommendaQaControls -CommendaState offer -NoDebug
+./tools/start_test_campaign.ps1 -Commenda -CommendaIndependent -NoDebug
+```

@@ -28,7 +28,12 @@ def generate(common, effect, loc, write):
         bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
         var:bfl_venture_ticket >= 100 var:bfl_venture_ticket <= 400'''
     common('scripted_triggers', 'commenda', effect('bfl_venture_capacity', capacity)
-           + effect('bfl_venture_authority', authority) + effect('bfl_venture_eligible', eligible))
+           + effect('bfl_venture_authority', authority) + effect('bfl_venture_eligible', eligible)
+           + effect('bfl_commenda_offer_ready', '''bfl_can_originate_commenda = yes
+               bfl_venture_capacity = yes bfl_free_cash >= var:bfl_venture_ticket
+               bfl_capital_headroom >= var:bfl_venture_ticket''')
+           + effect('bfl_commenda_command_ready', '''OR = { bfl_commenda_offer_ready = yes
+               AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }'''))
     values = effect('bfl_venture_operator_cash', '''value = gold min = 0
         every_loan = { subtract = remaining_debt }
         if = { limit = { bfl_is_company = yes } subtract = var:bfl_company_buffer subtract = var:bfl_company_reinvestment }
@@ -55,7 +60,8 @@ def generate(common, effect, loc, write):
             scope:bfl_operator = {
                 if = { limit = { NOT = { has_variable = bfl_venture_offer_generation } } set_variable = { name = bfl_venture_offer_generation value = 0 } }
                 change_variable = { name = bfl_venture_offer_generation add = 1 }
-                save_scope_value_as = { name = bfl_venture_quote value = var:bfl_venture_offer_generation }
+                save_scope_value_as = { name = bfl_venture_quote value = { value = 0
+                    if = { limit = { has_variable = bfl_venture_offer_generation } add = var:bfl_venture_offer_generation } } }
                 set_variable = { name = bfl_venture_offer_bank value = scope:bfl_venture_lender }
                 set_variable = { name = bfl_venture_offer_actor value = scope:bfl_venture_actor }
                 set_variable = { name = bfl_venture_offer_ticket value = scope:bfl_venture_lender.var:bfl_venture_ticket }
@@ -290,8 +296,7 @@ def ui(common, effect, loc, write):
     from generate_finance_widgets import tooltip_type, scroll_rows, row
     interaction = '''bfl_offer_commenda = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
         potential = { scope:actor = { bfl_has_management = yes } }
-        allow = { scope:actor = { OR = { bfl_can_originate_commenda = yes
-            AND = { country_type = location var:bfl_bank = { bfl_can_originate_commenda = yes } } } } }
+        allow = { scope:actor = { bfl_commenda_command_ready = yes } }
         select_trigger = { looking_for_a = country target_flag = recipient name = choose_country column = { data = name }
             visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }
             enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }
@@ -334,6 +339,7 @@ def ui(common, effect, loc, write):
             effect = {{ if = {{ limit = {{ bfl_has_management = yes }} bfl_resolve_command_bank = yes
                 scope:bfl_bank = {{ bfl_initialize_commenda = yes {body} }} }} }} }}\n'''
     commands += 'bfl_venture_view = { scope = country is_shown = { var:bfl_venture_open = 1 } }'
+    commands += 'bfl_venture_offer_button = { scope = country is_valid = { bfl_commenda_command_ready = yes } }'
     common('scripted_guis', 'commenda', commands)
     labels = dict(
         bfl_venture_title='Commenda ventures', bfl_venture_subtitle='Risk capital · realized trade receipts',
@@ -370,7 +376,7 @@ def ui(common, effect, loc, write):
         p = f'bfl_v_{i:02}'
         visible = f'visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable(\'{p}_state\').GetValue,\'(CFixedPoint)0\')]"'
         rows += f'''vbox = {{ layoutpolicy_horizontal = expanding ignoreinvisible = yes {visible}
-            text_single = {{ raw_text = "[Country.MakeScope.GetVariable('{p}_operator').GetCountry.GetName] · #{i}" autoresize = yes fontsize = 16 }}
+            text_single = {{ raw_text = "[Country.MakeScope.GetVariable('{p}_operator').GetCountry.GetName]" autoresize = yes fontsize = 16 }}
             {row('Capital at risk', f"[Country.MakeScope.GetVariable('{p}_basis').GetValue|2]@gold!", i)}
             {row('Capital returned', f"[Country.MakeScope.GetVariable('{p}_returned').GetValue|2]@gold!")}
             {row('Bank surplus share / remaining term', f"[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_venture_share_{i:02}')|%0] / [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_venture_months_{i:02}')|0] months", i)}
@@ -407,7 +413,7 @@ def ui(common, effect, loc, write):
             visible = "[GetScriptedGui('bfl_venture_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
             {controls} text_multi = {{ text = "bfl_venture_help" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }} }}
         button_regular = {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding text = "bfl_offer_commenda" tooltip = "bfl_offer_commenda_tip"
-            datacontext = "[GetPlayer]" enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
+            datacontext = "[GetPlayer]" enabled = "[GetScriptedGui('bfl_venture_offer_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             scripted_action_tooltip = {{ click_type = left click_mode = single action_name = "bfl_offer_commenda" action_direction = "offer" actor = "[GetPlayer]" }} }}'''
     write('in_game/gui/bfl_commenda.gui',f'types BFLCommendaTypes {{ {tooltip} type bfl_commenda_contents = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {panel} }} }}')
     loc('bfl_venture_state_1','Active · capital at risk')

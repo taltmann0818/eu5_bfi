@@ -6,6 +6,9 @@ param(
     [switch]$NormalCharter,
     [switch]$Exchange,
     [switch]$Commenda,
+    [switch]$CommendaQaControls,
+    [switch]$CommendaIndependent,
+    [switch]$NoDebug,
     [ValidateSet('populated','empty','locked','offer','full')][string]$CommendaState = 'populated'
 )
 $ErrorActionPreference = 'Stop'
@@ -36,6 +39,8 @@ try {
     if ($Commenda) {
         $taskCommendaArgs = @('tools/prepare_m7_ui.py', '--userdir', $userDir)
         if ($CommendaState -ne 'populated') { $taskCommendaArgs += ('--' + $CommendaState) }
+        if ($CommendaQaControls) { $taskCommendaArgs += '--controls' }
+        if ($CommendaIndependent) { $taskCommendaArgs += '--independent' }
         python @taskCommendaArgs
         if ($LASTEXITCODE -ne 0) { throw 'Commenda UI fixture preparation failed' }
     }
@@ -53,6 +58,8 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     if (-not $PrepareOnly) {
         $arguments = @('-debug_mode', '-play=FLO', "-userdir=`"$userDir`"")
+        if ($Commenda -and $CommendaIndependent) { $arguments[1] = '-play=BRD' }
+        if ($NoDebug) { $arguments = @($arguments | Where-Object { $_ -ne '-debug_mode' }) }
         $process = Start-Process -FilePath $exe -ArgumentList $arguments -WorkingDirectory (Join-Path $Game 'binaries') -WindowStyle Normal -PassThru
         $process.Id | Set-Content -LiteralPath (Join-Path $userDir '../owned-pid.txt')
         Write-Output "Fresh Florence test process: $($process.Id)"

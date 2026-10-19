@@ -15,3 +15,12 @@ exists = scope:bfl_operator country_exists = scope:bfl_operator
         bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
         var:bfl_venture_ticket >= 100 var:bfl_venture_ticket <= 400
 }
+bfl_commenda_offer_ready = {
+bfl_can_originate_commenda = yes
+               bfl_venture_capacity = yes bfl_free_cash >= var:bfl_venture_ticket
+               bfl_capital_headroom >= var:bfl_venture_ticket
+}
+bfl_commenda_command_ready = {
+OR = { bfl_commenda_offer_ready = yes
+               AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }
+}

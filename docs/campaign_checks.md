@@ -1,14 +1,17 @@
 # Florence campaign regression checks
 
-M7 commenda is implemented and its complete acceptance gate remains open.
-[Product rules, native suites and normal-UI checklist](m7-commenda.md) distinguish
-controlled funded waterfall checks from actual native trade/exploration and
-visual inspection. Use `-Suite m7`, `m7authority`, `m7traditions`, `m7later` and
-`m7company`; the company suite includes loss-offset and actual owner-payout
-checks for deferred operator surplus. Existing accounts, treasury and goods
-regressions remain separate. `start_test_campaign.ps1 -Commenda -PrepareOnly`
-stages the normal UI fixture; omit `-PrepareOnly` only when deliberately opening
-a visible test game. Historical evidence below retains its original runtime.
+M7 commenda is **complete for the pinned single-player baseline**.
+[Product rules and evidence](m7-commenda.md) record **314 native assertion
+executions** (291 original plus 23 final-runtime repeats), **21 normal UI
+observations / 21 actual-game captures**, 124 offline tests and 253-file
+staging. Controlled waterfall/display fixtures remain distinct from natural
+trade/exploration and visual inspection. [Exact provenance](../tests/results/2026-10-19-m7-validation.json)
+preserves every runtime and fixture hash. Use `-Suite m7`, `m7authority`,
+`m7traditions`, `m7later`, `m7company`, plus accounts/treasury/goods regressions.
+`start_test_campaign.ps1 -Commenda -CommendaQaControls -NoDebug` opens the
+disposable normal UI fixture; add `-CommendaIndependent` for Bardi or
+`-PrepareOnly` to stage without launching. M8–M10 remain open. Historical
+evidence below retains its original runtime.
 
 
 **Current stochastic-pricing acceptance:** the implemented [NAV-anchored market model](exchange-pricing.md) and [paired comparison/sensitivity](equity-pricing-ab.md) pass the pinned single-player gate. **31 pricing + 40 market + 54 ownership + 114 accounts/bond = 239 native assertions**, including twelve matched same-bank NAV/market observations and second-process saved-state checks, pass with exact per-report provenance. The 31-case pricing suite runs shipping `767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668`; 40/54/114 regressions retain `ff891754...`, differing only in the matching recapitalization-button/command guard and its tooltip localization. All financial price/value/effect files are byte-identical. The ordinary financial regression suites explicitly select pure NAV on that identical runtime; the dedicated pricing suite enables GBM. **108 offline tests**, native/CMF source pins, deterministic generation/reconstruction and **221-file staging** pass. [Exact provenance](../tests/results/2026-10-18-gbm-validation.json) preserves actual hashes, rejected development attempts, synthetic-versus-native scope and the fixture-only solvency grant for the isolated next-draw check.

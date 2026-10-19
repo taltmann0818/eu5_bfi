@@ -1,7 +1,6 @@
 ﻿bfl_offer_commenda = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
         potential = { scope:actor = { bfl_has_management = yes } }
-        allow = { scope:actor = { OR = { bfl_can_originate_commenda = yes
-            AND = { country_type = location var:bfl_bank = { bfl_can_originate_commenda = yes } } } } }
+        allow = { scope:actor = { bfl_commenda_command_ready = yes } }
         select_trigger = { looking_for_a = country target_flag = recipient name = choose_country column = { data = name }
             visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }
             enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }

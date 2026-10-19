@@ -326,3 +326,30 @@ The remaining four captures cold-load shipping `b9ee4eac...`. The separate empty
 - [Empty-inventory guidance](2026-10-19-m6-empty-tooltip.png)
 - [Long inventory, first eight records and signed returns](2026-10-19-m6-long-tooltip-top.png)
 - [Scrolled final eight records, through Cocoa](2026-10-19-m6-long-tooltip-bottom.png)
+
+
+## M7 commenda partnerships
+
+[Exact UI provenance](../../tests/results/2026-10-19-m7-ui.json) records **21 observations / 21 unedited captures** from EUV 1.4.1 / CMF 2.5.0 at 2560×1440, English, native default GUI scale, debug disabled. Disposable grants and controlled settlement/expedition labels test presentation; they do not establish natural profit, research or campaign balance. [Separate native evidence](../m7-commenda.md) records actual trade, exploration, payouts and persistence. Each screenshot retains its actual runtime and fixture hash; final guard/headings and safe-preview follow-ups are explicitly distinguished.
+
+- [Accepted capital](2026-10-19-m7-accepted-capital.png): Normal acceptance funds the fourth project: Bardi cash 9600, total assets 10500 unchanged, risk basis 400/four active, Florence wallet 5000 after receiving 100.
+- [Operator selector](2026-10-19-m7-operator-selector.png): Native offer selector is searchable, uses native country flags/names and explains that capital moves only on accepted terms. Opened and cancelled without funding.
+- [Empty card](2026-10-19-m7-empty-card.png): Disposable empty display state: zero basis and zero active ventures, compact card and Terms icon remain visible with an enabled offer.
+- [Empty tooltip](2026-10-19-m7-empty-tooltip.png): Empty tooltip gives next-step guidance and explains capital recovery, realized receipts and closed-row history. No phantom operator appears.
+- [Locked requirements](2026-10-19-m7-locked-requirements.png): Final build: Discovery charter without Commenda research shows a locked hint and disabled Offer. Clicking it leaves the panel closed and bank cash at 10000; readable requirements remain available.
+- [Compact card](2026-10-19-m7-compact-card.png): Final runtime: 800 capital at risk, eight active operators, 9200 bank cash; full-capacity Offer is disabled and clicking leaves the panel closed.
+- [Terms changed](2026-10-19-m7-terms-changed.png): Clicked all three future-offer controls: bilateral equal surplus, 24 months, 200 gold. Existing eight agreements remain 800 basis and bank cash 9200.
+- [Ledger top](2026-10-19-m7-ledger-top.png): Final clean operator headings; Genoa and Venice retain 100 basis, 75% bank surplus and 12 months after changing future terms; Pisa is the third entry.
+- [Ledger lucca](2026-10-19-m7-ledger-lucca.png): Fourth operator Lucca and fifth Siena remain active at 100 basis, 75% / 12 months, with zero returned/profit/loss.
+- [Ledger pisa](2026-10-19-m7-ledger-pisa.png): Third operator Pisa and fourth Lucca: 100 basis, no returns/profit/loss, original 75% / 12-month agreement.
+- [Ledger middle](2026-10-19-m7-ledger-middle.png): Fifth Siena and sixth Papal States retain original accepted terms and readable status.
+- [Ledger bottom](2026-10-19-m7-ledger-bottom.png): Seventh Naples and eighth Savoy remain accessible at the end of the native scroll area with all capital/return/term/profit/loss/status fields.
+- [Settlement capital profit loss](2026-10-19-m7-settlement-capital-profit-loss.png): Controlled UI fixture: Genoa closed with 100 returned / 18.75 profit / 0 loss; Venice closed with 50 returned / 0 profit / 50 loss; Pisa remains 100 active basis. These are seeded outcomes, not natural campaign returns.
+- [Independent bank](2026-10-19-m7-independent-bank.png): Independent Bardi player sees own bank: 9700 cash, 300 basis, three inherited active agreements, painted icons and enabled Offer.
+- [Independent selector](2026-10-19-m7-independent-selector.png): Independent bank opens native searchable operator selector with localized capital-only-on-acceptance guidance.
+- [Selector cancelled](2026-10-19-m7-selector-cancelled.png): After cancelling the independent bank selector, 9700 cash, 10500 assets and three active / 300 basis remain unchanged.
+- [Independent terms](2026-10-19-m7-independent-terms.png): Independent bank player changes its own future-offer split to bilateral; 9700 cash and three active / 300 basis stay unchanged.
+- [Locked merchant](2026-10-19-m7-locked-merchant.png): With Commenda research granted but Merchant Finance profile, Offer is gray and clicking does not open the selector; 10000 bank cash and zero active agreements.
+- [Partnership offer](2026-10-19-m7-partnership-offer.png): Final runtime normal human offer event: painted art, Bardi 100 gold / 12 months / 75%-25%, capital first, no discovery gold, three-month expiry, readable Accept and Decline buttons.
+- [Declined offer](2026-10-19-m7-declined-offer.png): Clicked Decline normally; Florence cash remains 4900, bank cash 10000, assets 10500, zero basis and zero active agreements.
+- [Acceptance tooltip](2026-10-19-m7-acceptance-tooltip.png): Final cold-loaded runtime, debug disabled: native Accept tooltip is localized and describes authority/funding rechecks without dumping implementation effects.
