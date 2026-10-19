@@ -1,6 +1,6 @@
 # M6 goods finance acceptance
 
-Status: implemented; final engine, age-gate and normal UI acceptance in progress. This note records the bounded product and its evidence; `coverage.md` remains the milestone register.
+Status: complete for the pinned EUV 1.4.1 / CMF 2.5.0 single-player pilot. This note records the bounded product and its evidence; `coverage.md` remains the milestone register.
 
 ## Delivered product
 
@@ -28,7 +28,11 @@ Economy → Credit → Investments contains Goods Finance, capital/branch purcha
 - Normal UI: `tools/prepare_m6_ui.py` grants a disposable populated charter, age, research, cash, native supply and a host Customs House. Its acquisitions and accepted contracts call production services. Staged UI is not evidence of natural research, construction or campaign balance.
 - Offline reference arithmetic and source validation remain separate from engine and visual observations. M7 investment settlement, M8 money/clearing, M9 institution-wide creditor recovery and M10 broad balance/language/performance acceptance retain their gates.
 
-Final reports and PR screenshots are linked here after those checks pass.
+[Acceptance/provenance](../tests/results/2026-10-18-m6-validation.json) records **228 engine assertions**: [43 goods](../tests/results/2026-10-18-m6-goods.json), [8 Traditions](../tests/results/2026-10-18-m6-traditions.json), [10 Discovery](../tests/results/2026-10-18-m6-discovery.json), [10 Absolutism](../tests/results/2026-10-18-m6-absolutism.json), [114 accounts/bonds](../tests/results/2026-10-18-m6-accounts.json) and [43 treasury](../tests/results/2026-10-18-m6-treasury.json), plus seven independently reconciled native numerical observations. Each campaign includes actual monthly progression and second-process save loading. **114 offline tests**, source validation (170 script/GUI/localization files, 59 graphics), deterministic generation, native/CMF pins and 230-file release staging pass.
+
+Final goods/Absolutism use runtime `8bc3a2227503fe882a6c7b9b46d2508e700c14a310aa403ff6d7cab9bcaca261`. Other accepted regressions preserve `884fb825d70a6c175bac0a5e5033d3adee0b2aa125e02d95c41581d1c1c402a0`. The exact two-file presentation delta is retained in [UI provenance](../tests/results/2026-10-18-m6-ui.json): only event acceptance tooltip wrappers and three English explanations change; all financial services, guards, interactions and GUI layouts remain byte-identical. The corrected tooltip is checked in a cold-loaded final UI.
+
+[Normal UI observations and actual-game captures](screenshots/README.md#m6-goods-finance) document purchases, lot management, backed receipts, escrow/security and separately accepted terms. The populated fixture is not evidence of natural research/building completion or release-wide balance. Rejected development runs and the final tooltip correction are summarized in the provenance record; they are not counted as passing campaigns. GitHub workflow runs are separate from these local native checks.
 
 Reproduce the dedicated engine checks with:
 

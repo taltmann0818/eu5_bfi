@@ -282,3 +282,24 @@ identical pricing/layout files. No premium/seed/history grants are used for visu
 [A/B simulation figure](../figures/equity-pricing-ab.png) is a separately labeled
 offline research plot, not a game screenshot. Native assertions and twelve
 actual same-bank NAV/market samples have their own [provenance](../../tests/results/2026-10-18-gbm-validation.json).
+
+
+## M6 goods finance
+
+[UI observations and per-capture hashes](../../tests/results/2026-10-18-m6-ui.json) separate normal controls from the populated disposable setup. EUV1.4.1/CMF2.5.0, English, 2560×1440, paused Florence; no debug overlays or console UI actions. The fixture grants a charter, research/age, cash, native supply and Venice's completed Customs House. Its acquisitions/receipt/forward use production services. This is not natural research, construction or campaign-balance evidence.
+
+Initial captures use `884fb825...`. Final cloth terms and acceptance-tooltip checks cold-load shipping `8bc3a222...`. Only event acceptance tooltip wrappers and three English explanations differ; financial effects, triggers, interactions and GUI layouts are identical. Exact file hashes are retained in the UI record. The standalone salt terms capture is a fixture-populated already accepted receipt, not a manual positive acceptance.
+
+- [Goods Finance menu and native Credit integration](m6-goods-menu.png)
+- [Normal funded wheat acquisition](m6-funded-purchase.png)
+- [Four-lot paginated browser](m6-lot-browser.png)
+- [Free-lot sale and backed-offer controls](m6-lot-actions.png)
+- [Paid salt receipt, pledged backing and released custodian basis](m6-receipt-ledger.png)
+- [Iron forward, buyer escrow, seller security and maturity](m6-forward-ledger.png)
+- [Populated salt terms](m6-receipt-terms.png)
+- [Live cloth offer with explicit price, fee and risk terms](m6-cloth-offer.png)
+- [Corrected payment tooltip on a cold-loaded final runtime](m6-acceptance-tooltip.png)
+- [Normal paid acceptance in bank accounts](m6-receipt-accepted-accounts.png)
+- [Accepted cloth claim with preserved physical backing](m6-cloth-accepted-backing.png)
+
+[Native campaign evidence](../m6-goods.md) separately verifies actual stock/cash, owner accounting, transport, compensation, branch fees/freeze, twelve months and reload. Screenshots do not substitute for those assertions.
