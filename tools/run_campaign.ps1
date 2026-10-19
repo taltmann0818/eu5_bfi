@@ -77,8 +77,9 @@ try {
         try {
             while (-not $proc.HasExited -and [DateTime]::UtcNow -lt $deadline) {
                 if (Test-Path -LiteralPath $debugPath) {
-                    $tail = Get-Content -LiteralPath $debugPath -Tail 100 -ErrorAction SilentlyContinue
-                    if ($tail -match [regex]::Escape($StopMarker)) { break }
+                    # An autosave can append hundreds of lines between polls;
+                    # the completed fixture marker must not fall out of a tail.
+                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) { break }
                 }
                 Start-Sleep -Seconds 5
                 $proc.Refresh()

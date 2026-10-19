@@ -29,9 +29,41 @@ def fixture(token,fingerprint):
     def check(name,condition):
         cases.append(name)
         return f'if = {{ limit = {{ {condition} }} debug_log = "BFI_TEST|{token}|PASS|{name}" }} else = {{ debug_log = "BFI_TEST|{token}|FAIL|{name}" }}\n'
+    setup=setup.replace('scope:bfi_company = { save_scope_as = bfl_operator }','scope:bfi_company = { save_scope_as = bfl_operator set_variable = { name = bfi_m7_nav_before value = bfl_tangible_equity } }')
+    setup+=check('funded_external_project_does_not_inflate_company_nav','scope:bfi_company = { bfl_tangible_equity = var:bfi_m7_nav_before var:bfl_venture_external_basis = 100 }')
     extra=check('commenda_keeps_native_company_and_financial_owner','c:FLO.var:bfi_company = { bfl_is_company = yes overlord = c:FLO var:bfl_company_owner = c:FLO var:bfl_venture_bank = c:BRD }')
     extra+=check('native_exploration_records_bank_project_without_discovery_gold','c:BRD = { var:bfl_v_01_outcome > 1 var:bfl_v_01_profit = 0 } c:FLO.var:bfi_company = { var:bfl_venture_exploration_cost > 0 var:bfl_venture_price_escrow = 0 }')
     extra+=check('exclusive_project_receipts_not_duplicated_as_company_dividends','c:FLO.var:bfi_company = { var:bfi_total_dividends = 0 var:bfl_company_verified_profit = 0 var:bfl_venture_receipts > 0 }')
+    # Explicitly controlled, funded maturity outcomes exercise company payout
+    # integration after the natural exploration checks above. These are not
+    # additional native trading-performance observations.
+    extra+='''c:BRD = { save_scope_as = bfl_venture_lender set_variable = { name = bfl_v_01_maturity value = bfl_period } }
+        c:FLO.var:bfi_company = { save_scope_as = bfl_operator
+            set_variable = { name = bfl_venture_pool value = { value = var:bfl_venture_remaining add = 40 } }
+            set_variable = { name = bfl_venture_gross value = 0 } set_variable = { name = bfl_venture_proceeds value = 0 }
+            set_variable = { name = bfl_company_loss value = 100 }
+            bfl_dispatch_commenda_01 = yes
+            set_variable = { name = bfl_company_income_period value = { value = bfl_period subtract = 1 } }
+            bfl_settle_company_income = yes }
+    '''
+    extra+=check('controlled_deferred_operator_surplus_offsets_company_losses','c:BRD.var:bfl_v_01_profit = 30 c:FLO.var:bfi_company = { var:bfl_venture_company_surplus = 10 var:bfl_company_loss > 0 var:bfl_company_verified_profit = 0 var:bfl_company_dividend = 0 }')
+    extra+='''c:BRD = { save_scope_as = bfl_venture_actor }
+        c:FLO.var:bfi_company = { save_scope_as = bfl_operator }
+        c:BRD = { bfl_propose_commenda = yes }
+        c:FLO.var:bfi_company = { save_scope_value_as = { name = bfl_venture_quote value = var:bfl_venture_offer_generation } bfl_accept_commenda = yes }
+        c:BRD = { save_scope_as = bfl_venture_lender set_variable = { name = bfl_v_01_maturity value = bfl_period } }
+        c:FLO = { set_variable = { name = bfi_m7_owner_before value = gold } }
+        c:FLO.var:bfi_company = { save_scope_as = bfl_operator
+            set_variable = { name = bfl_venture_pool value = { value = var:bfl_venture_remaining add = 40 } }
+            set_variable = { name = bfl_venture_gross value = 0 } set_variable = { name = bfl_venture_proceeds value = 0 }
+            set_variable = { name = bfl_company_loss value = 0 }
+            bfl_dispatch_commenda_01 = yes
+            set_variable = { name = bfl_company_income_period value = { value = bfl_period subtract = 1 } }
+            bfl_settle_company_income = yes
+            c:FLO = { set_variable = { name = bfi_m7_owner_paid value = { value = gold subtract = var:bfi_m7_owner_before } } }
+        }
+    '''
+    extra+=check('controlled_operator_surplus_funds_actual_company_owner_dividend','c:BRD.var:bfl_v_01_profit = 30 c:FLO.var:bfi_company = { var:bfl_venture_company_surplus = 10 var:bfl_company_dividend > 0 var:bfl_company_dividend = c:FLO.var:bfi_m7_owner_paid }')
     finish=finish.replace(f'debug_log = "BFI_TEST|{token}|END|',extra+f'debug_log = "BFI_TEST|{token}|END|',1)
     for old,new in [('funded_company_distribution','native_company_receipts_return_investor_capital'),('natural_exploration_terminal_outcome','natural_commenda_exploration_terminal_outcome')]:
         finish=finish.replace('|'+old+'"','|'+new+'"');cases[cases.index(old)]=new
@@ -40,8 +72,12 @@ def fixture(token,fingerprint):
 
 def reload_fixture(token,fingerprint):
     checks={
-        'reload_native_company_and_exclusive_project':'c:FLO.var:bfi_company = { bfl_is_company = yes var:bfl_venture_bank = c:BRD var:bfl_venture_slot = 1 }',
-        'reload_native_exploration_outcome_and_project_basis':'c:BRD = { var:bfl_v_01_outcome > 1 var:bfl_v_01_basis > 0 var:bfl_v_01_returned > 0 var:bfl_v_01_profit = 0 }',
+        'reload_native_company_and_exclusive_project':'''c:FLO.var:bfi_company = { bfl_is_company = yes var:bfl_company_owner = c:FLO
+            OR = { var:bfl_venture_bank ?= c:BRD AND = { NOT = { has_variable = bfl_venture_bank } c:BRD.var:bfl_v_01_generation = 2 } } }''',
+        'reload_native_exploration_outcome_and_project_basis':'''OR = {
+            c:BRD = { var:bfl_v_01_generation = 1 var:bfl_v_01_outcome > 1 var:bfl_v_01_basis > 0 var:bfl_v_01_returned > 0 var:bfl_v_01_profit = 0 }
+            AND = { c:BRD = { var:bfl_v_01_generation = 2 var:bfl_v_01_state = 2 var:bfl_v_01_profit = 30 }
+                c:FLO.var:bfi_company = { has_variable = bfl_venture_commercial_opportunity } } }''',
     }
     text=f'debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"\n'
     for name,condition in checks.items():
