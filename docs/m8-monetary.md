@@ -92,6 +92,21 @@ than a second registry.
   building/authority loss or departure from the group; admission creates no CCP
   guarantee.
 
+## Focused accepted evidence — 20 October 2026
+
+[44/44 licensed-engine assertions](../tests/results/2026-10-20-m8-monetary.json)
+pass on shipping runtime `b54cd1625c618c660be9579a12ba4cfd5a400297d88bfad31c8aaf45d5f36685`.
+This includes funded notes and par transfers, current-holder redemption,
+reserve shortfall, third-bank bill discounts, immutable accepted fees and
+surplus, matching net settlement/short-member retry, paid branch construction
+for both bank roles, duplicate prevention, natural completion, twelve separate
+monthly observations and second-process reload. The
+[validation register](../tests/results/2026-10-20-m8-validation.json) preserves
+fixture provenance and explicitly excludes rejected development attempts.
+128 offline tests, source/native pins, deterministic script/UI/asset rebuilding
+and 288-file release staging pass separately. This focused path does not close
+the full gate below. Normal UI acceptance remains pending.
+
 ## Acceptance gate and evidence boundary
 
 `tools/m8_monetary_suite.py` and `tools/run_campaign.ps1 -Suite m8` stage disposable
@@ -107,8 +122,9 @@ Required before **M8 complete**:
   net clearing, short-member preservation, replay and active-claim reload.
 - Negative age/research, profile/role, building, authority, capital relocation and
   deed-loss cases; both independent and chartered bank paths.
-- Paid independent/chartered AI branch selection, no duplicate construction,
-  natural completion and correct capital admission; native loan bypass checks.
+- **Focused positive AI path passed:** paid independent/chartered branch selection,
+  no duplicate construction and natural completion. Native interaction bypass,
+  broader capital relocation and deed-loss combinations still require acceptance.
 - Changed accounts/credit/treasury/goods/commenda regressions, with the new branch
   prerequisites supplied explicitly in fixtures rather than weakening admission.
 - Normal UI consent/decline, populated/empty/locked ledger, current setting

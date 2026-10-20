@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [accounts, m0, m1, m2, m3, m4, m5, m5market, m5pricing, m6, m6traditions, m6discovery, m6absolutism, m6policy]
+        suite: [accounts, m0, m1, m2, m3, m4, m5, m5market, m5pricing, m6, m6traditions, m6discovery, m6absolutism, m6policy, m8]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

@@ -1,0 +1,114 @@
+{
+  "reviewed": "2026-10-20",
+  "milestone": "M8",
+  "status": "Implemented; focused engine acceptance passed; full gate remains open",
+  "runtime_sha256": "b54cd1625c618c660be9579a12ba4cfd5a400297d88bfad31c8aaf45d5f36685",
+  "engine_report": "2026-10-20-m8-monetary.json",
+  "engine_assertions": 44,
+  "fixture_sha256": "afbf6c076cdaf050e508e6c5ec199851a1f00fe474542cdb4c422a594122a26e",
+  "run_token": "a3d897c15642406d88e05089420853f4",
+  "natural_monthly_observations": 12,
+  "second_process_reload": true,
+  "ai_branches": "Independent and chartered AI fund real construction; duplicate prevention and natural completion pass. Chartered banks also build under human sovereigns.",
+  "offline_tests": 128,
+  "source_validation": "passed: 219 script/GUI/localization files, 68 registered graphics",
+  "native_cmf_pins": "EUV 1.4.1 build 25905365 and CMF 2.5.0 matched",
+  "deterministic_rebuild": "scripts, native GUI/interaction reconstruction and BC3 asset export: zero changed runtime files",
+  "release_staging": {
+    "files": 288,
+    "scope": ".metadata, in_game, main_menu and thumbnail.png only"
+  },
+  "visual_acceptance": "pending normal UI inspection; generated masters inspected separately",
+  "remaining_gate": [
+    "Negative age/research and authority/capital/deed matrix",
+    "Explicit public-support and all counterparty/player-role paths",
+    "Changed accounts/credit/treasury/goods/commenda regressions with explicit branch prerequisites",
+    "Normal UI consent/decline, populated/empty/locked/scrolling and both roles"
+  ],
+  "development_attempts": [
+    {
+      "runtime_sha256": "48e4e368013cb8b7779924d65aead00445963862178264e2fcfd4d00cf696bcb",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Failed: sovereign_deposit_funded_after_branch",
+        "Failed: notes_record_funded_circulation_and_reserve",
+        "Failed: incoming_note_cash_does_not_expand_cap",
+        "Failed: lost_authority_blocks_new_notes",
+        "Failed: reserve_shortfall_preserves_note_and_reduces_confidence",
+        "Failed: bank_bill_needs_no_branch_and_preserves_equity",
+        "Failed: discount_funds_75_with_single_third_bank_pledge",
+        "Failed: pledge_cannot_fund_twice"
+      ]
+    },
+    {
+      "runtime_sha256": "db3f05c3287f131d3c6f7b8537a91f9d5d6f64bbce37911387107afbd0775265",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Failed: issuer_home_has_live_sovereign_authority",
+        "Failed: notes_record_funded_circulation_and_reserve",
+        "Failed: incoming_note_cash_does_not_expand_cap",
+        "Failed: lost_authority_blocks_new_notes",
+        "Failed: reserve_shortfall_preserves_note_and_reduces_confidence",
+        "Failed: bank_bill_needs_no_branch_and_preserves_equity",
+        "Failed: discount_funds_75_with_single_third_bank_pledge",
+        "Failed: pledge_cannot_fund_twice"
+      ]
+    },
+    {
+      "runtime_sha256": "fe74ce161580a66dfa6094afa547df6427ca7621faa7c76e7d731e8be0cfdc42",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Failed: independent_issuer_has_explicit_host_authority",
+        "Failed: notes_record_funded_circulation_and_reserve",
+        "Failed: incoming_note_cash_does_not_expand_cap",
+        "Failed: lost_authority_blocks_new_notes",
+        "Failed: note_transfer_requires_voluntary_acceptance",
+        "Failed: note_transfer_at_par_changes_holder_once",
+        "Failed: reserve_shortfall_preserves_note_and_reduces_confidence",
+        "Failed: bank_bill_needs_no_branch_and_preserves_equity"
+      ]
+    },
+    {
+      "runtime_sha256": "228e3b3d61affadb9dcfc158087e47a85d1ca90bdfe1a8cbbae718630d572237",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Missing, duplicate or stale END marker",
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: natural_month_01_reserved_note_and_closed_claims, natural_month_02_reserved_note_and_closed_claims, natural_month_03_reserved_note_and_closed_claims, natural_month_04_reserved_note_and_closed_claims, natural_month_05_reserved_note_and_closed_claims, natural_month_06_reserved_note_and_closed_claims, natural_month_07_reserved_note_and_closed_claims, natural_month_08_reserved_note_and_closed_claims, natural_month_09_reserved_note_and_closed_claims, natural_month_10_reserved_note_and_closed_claims, natural_month_11_reserved_note_and_closed_claims, natural_month_12_reserved_note_and_closed_claims, paid_ai_branches_complete_naturally, reload_monetary_claims_pledges_and_clearing",
+        "Failed: completed_capital_branch_recognized",
+        "Failed: sovereign_deposit_funded_after_branch",
+        "Failed: independent_issuer_has_explicit_host_authority",
+        "Failed: notes_record_funded_circulation_and_reserve"
+      ]
+    },
+    {
+      "runtime_sha256": "6357fe91d6ef0a767e3a1278ee4e71c209c02134ccf11ff2833d94c6fe4a4f5f",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Missing, duplicate or stale END marker",
+        "Missing, duplicate or stale RELOAD_BEGIN marker",
+        "Missing, duplicate or stale RELOAD_END marker",
+        "Missing/unexpected cases: natural_month_01_reserved_note_and_closed_claims, natural_month_02_reserved_note_and_closed_claims, natural_month_03_reserved_note_and_closed_claims, natural_month_04_reserved_note_and_closed_claims, natural_month_05_reserved_note_and_closed_claims, natural_month_06_reserved_note_and_closed_claims, natural_month_07_reserved_note_and_closed_claims, natural_month_08_reserved_note_and_closed_claims, natural_month_09_reserved_note_and_closed_claims, natural_month_10_reserved_note_and_closed_claims, natural_month_11_reserved_note_and_closed_claims, natural_month_12_reserved_note_and_closed_claims, paid_ai_branches_complete_naturally, reload_monetary_claims_pledges_and_clearing",
+        "Failed: incoming_note_cash_does_not_expand_cap",
+        "Failed: reserve_shortfall_preserves_note_and_reduces_confidence",
+        "Failed: bank_bill_needs_no_branch_and_preserves_equity",
+        "Failed: discount_funds_75_with_single_third_bank_pledge"
+      ]
+    },
+    {
+      "runtime_sha256": "9bf572931fab920dea197567024e643774a6929606b1849fc9dedd64e3ac8dde",
+      "passed": false,
+      "accepted_as_evidence": false,
+      "errors": [
+        "Failed: chartered_ai_pays_to_build_capital_branch",
+        "Failed: paid_ai_branches_complete_naturally"
+      ]
+    }
+  ]
+}
