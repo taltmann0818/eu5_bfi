@@ -2,6 +2,7 @@
 ## Core Functions
 - banks that are better capitalised should drive AI to be more likely to invest in that bank either by depositing their money there, getting loans from there, or buying its available equity
 - the ai should be able to see a bank’s performance represented as its creditworthiness score for wanting to invest with the bank
+- Bank buildings and AI behavior to build bank branches in country capitals that it thinks are best capitalized to receive credit; bank branch buildings in at least the capital required for credit/deposit interactions w/ bank
 ## Future Content
 - Laws affecting the bank: usury, ...
 - Catholic Church (international org) laws on usury
