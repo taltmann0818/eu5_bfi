@@ -30,8 +30,8 @@ Existing withdrawal, redemption, coupon and maturity claims survive a lost
 branch, relocated capital, revoked authorization or lost origination permission.
 This does not implement M9's institution-destruction workout.
 
-Both independent AI banks and banks with an AI sovereign consider capital
-branches. The score is `(24 × monthly income + cash − native/custom debt) ×
+Both independent and chartered AI banks consider capital branches, including
+chartered banks under a human sovereign. The score is `(24 × monthly income + cash − native/custom debt) ×
 creditworthiness`, floored at zero and halved during war. Native permission and
 relations checks apply. The bank pays the native construction cost from protected
 free cash and capital headroom; at most one order per quarter and no concurrent

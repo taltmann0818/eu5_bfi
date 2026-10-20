@@ -34,9 +34,7 @@ def generate(common, effect, loc, write):
     bfl_branch_budget = { value = 250 add = { value = monthly_income_total multiply = 6 } }
     ''')
     common('scripted_effects', 'branches', effect('bfl_ai_build_branches', '''
-        if = { limit = { bfl_can_conduct_business = yes
-            OR = { AND = { bfl_is_independent_bank = yes is_ai = yes }
-                AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } }
+        if = { limit = { bfl_can_conduct_business = yes is_ai = yes
             bfl_free_cash >= bfl_branch_budget bfl_capital_headroom >= bfl_branch_budget
             NOT = { any_owned_building = { building_type = building_type:banking_office building_levels_under_construction > 0 } }
             OR = { NOT = { has_variable = bfl_branch_last_order } bfl_period >= { value = var:bfl_branch_last_order add = 3 } }

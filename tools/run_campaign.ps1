@@ -58,6 +58,7 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
     if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm8') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
     # Activity assertions finish after three months, followed by a full annual
     # autosave interval. Native timed handsoff counts months, not years.

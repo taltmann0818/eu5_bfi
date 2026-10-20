@@ -152,9 +152,13 @@ def fixture(token, fingerprint):
         finish += f'if = {{ limit = {{ c:BRD.var:bfi_m8_months = {month} }}\n'
         finish += check(f'natural_month_{month:02}_reserved_note_and_closed_claims', 'c:BRD = { var:bfl_notes_outstanding = 100 var:bfl_note_01_face = 100 var:bfl_note_01_holder = c:FLO var:bfl_cash_committed = 100 var:bfl_other_payables = 0 var:bfl_con_01_active = 0 } c:ACC.var:bfl_con_01_active = 0')
         finish += '}\n'
-    finish += '''if = { limit = { c:BRD.var:bfi_m8_months >= 12 }
+    finish += '''if = { limit = { c:BRD.var:bfi_m8_months >= 12
+        OR = { AND = { c:BRD = { bfl_branch_access = { PARTY = c:FLO } }
+                      c:ACC = { bfl_branch_access = { PARTY = c:FLO } } }
+            c:BRD.var:bfi_m8_months >= 24 } }
     '''
-    finish += check('paid_ai_branches_complete_naturally', 'c:BRD = { bfl_branch_access = { PARTY = c:FLO } } c:ACC = { bfl_branch_access = { PARTY = c:FLO } }')
+    finish += check('independent_paid_branch_completes_naturally', 'c:BRD = { bfl_branch_access = { PARTY = c:FLO } }')
+    finish += check('chartered_paid_branch_completes_naturally', 'c:ACC = { bfl_branch_access = { PARTY = c:FLO } }')
     finish += '''
         c:BRD = { remove_variable = bfi_test_pending }
     ''' + f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n' + ''' }
