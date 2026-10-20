@@ -20,11 +20,13 @@ def generate(common, effect, loc, write):
     common('on_action', 'commenda', '''on_exploration_success = { on_actions = { bfl_commenda_exploration_success } }
         bfl_commenda_exploration_success = { effect = { bfl_commenda_discovery = yes } }''')
     ui(common, effect, loc, write)
+    from generate_commenda_alert import generate as alert
+    alert(common, effect, loc, write)
 
 
 def ui(common, effect, loc, write):
     from generate_finance_widgets import tooltip_type, scroll_rows, row
-    recipient = '''select_trigger = { looking_for_a = country target_flag = recipient name = choose_country column = { data = name }
+    recipient = '''select_trigger = { looking_for_a = country allow_self = yes target_flag = recipient name = choose_country column = { data = name }
         visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }
         enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }'''
     cargo = recipient + '''select_trigger = { looking_for_a = market target_flag = from name = create_trade_select_from_market
@@ -35,11 +37,19 @@ def ui(common, effect, loc, write):
             visible = { scope:from = { NOT = { is_export_banned = root }
                 market_possible_goods_trade_surplus = { goods = root country = scope:recipient value >= 10 } }
                 scope:to = { NOT = { is_import_banned = root } } } }'''
-    expedition = recipient + '''select_trigger = { looking_for_a = area source = recipient source_flags = possible_exploration_areas
-        target_flag = target name = start_exploration_select_area column = { data = name }
-        visible = { scope:recipient = { NOT = { has_discovered_area = root } } } }
-        select_trigger = { looking_for_a = location source = target source_flags = possible_launch_locations
+    # Native possible_exploration_areas/possible_launch_locations are tied to
+    # the acting country. Enumerate candidates for the selected operator here.
+    expedition = recipient + '''select_trigger = { looking_for_a = location
+            interaction_source_list = { scope:recipient = {
+                every_owned_location = { limit = { is_port = yes } add_to_list = source }
+                every_owned_building = { location = { if = { limit = { is_port = yes NOT = { owner = scope:recipient } } add_to_list = source } } } } }
             target_flag = launch_location name = start_exploration_select_launch_point column = { data = name } visible = { is_port = yes } }
+        select_trigger = { looking_for_a = area source = world
+        target_flag = target name = start_exploration_select_area column = { data = name }
+        visible = { is_area_sea = yes NOT = { is_being_explored = scope:recipient }
+            any_location_in_area = { OR = { within_naval_range_of = scope:recipient
+                AND = { scope:recipient = { bfl_is_company = yes } within_naval_range_of = scope:launch_location.owner } } }
+            scope:recipient = { modifier:may_explore = yes NOT = { has_discovered_area = root } } } }
         select_trigger = { looking_for_a = character source = recipient target_flag = character name = start_exploration_select_character
             column = { data = character_explorer } visible = { owner = scope:recipient is_valid_for_exploration = yes } }'''
     actions = ''
@@ -55,7 +65,9 @@ def ui(common, effect, loc, write):
     # A finance command must also admit the live controller as operator. Native
     # diplomacy recipient selection excludes the actor and spends a diplomat.
     # Use the same own-country target selection as the M2 operating commands.
-    commands = actions.replace('type = diplomacy category = CATEGORY_ECONOMY_ACTIONS', 'type = owncountry').replace('recipient', 'operator')
+    # Use a documented target source, without the own-country action's reserved
+    # recipient (the actor) or an unrecognized arbitrary candidate source.
+    commands = actions.replace('type = diplomacy category = CATEGORY_ECONOMY_ACTIONS', 'type = owncountry').replace('recipient', 'target_1')
     common('country_interactions', 'commenda', '# Origination uses native own-country finance commands.\n')
     followon = cargo.replace('enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } }', 'enabled = { has_variable = bfl_venture_area has_variable = bfl_venture_bank }').replace('visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }', 'visible = { has_variable = bfl_venture_bank OR = { this = scope:actor overlord = scope:actor } }').replace('recipient', 'operator')
     common('generic_actions', 'commenda', commands+'''bfl_commenda_cargo = { type = owncountry ai_tick = never
@@ -97,7 +109,7 @@ def ui(common, effect, loc, write):
         bfl_venture_duration_tip='Cycle 6, 12, 24, 60 or 120 months. Long terms accommodate native exploration. Cargo sells after two months if native access remains valid; blocked cargo stays in custody. Expedition costs without linked sale proceeds are written off at maturity.',
         bfl_venture_ticket_tip='Cycle a maximum bank authorization of 100, 200 or 400 gold. Only the activity’s actual cost is drawn. Unused cargo funding is released immediately; unused expedition funding stays reserved for an eligible discovered-area cargo until maturity. Bilateral terms require capacity for half the bank authorization from the operator.',
         bfl_commenda_expedition='Fund a named expedition', bfl_commenda_expedition_tip='Choose an operator, area, launch port and explorer before consent. Funding pays only actual native preparation cost. Preparation is non-refundable. Remaining authorization may finance cargo from a market centered in or bordering the discovered area; only its measured sale proceeds can pay returns.',
-        bfl_commenda_expedition_desc='Use an accepted venture operator’s native exploration. Native preparation, crew costs and outcome apply. The bank does not gain political control.',
+        bfl_commenda_expedition_desc='Choose an operator, its launch port, an undiscovered sea area and explorer. Sea targets must be within operator naval range; landless companies use the selected owned facility host’s range. Acceptance funds native preparation under the proposed terms. The bank gains no political control.',
         bfl_venture_help='Click a term to cycle. Each operator accepts separately. Existing agreements continue after a policy or research change.',
     )
     for key, text in labels.items(): loc(key,text)

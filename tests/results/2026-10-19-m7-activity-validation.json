@@ -1,29 +1,119 @@
 {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "pull_request": "https://github.com/taltmann0818/eu5_bfi/pull/14",
-  "status": "in_progress",
-  "m7_complete": false,
-  "current_runtime_sha256": "b08c40754576be7694861e10dc4c18f46d98d4e56bc0dac2b69eece6de275428",
-  "development_reports": [
+  "status": "complete",
+  "m7_complete": true,
+  "current_runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+  "environment": "EUV 1.4.1 Steam build 25905365 / CMF 2.5.0; pinned single-player baseline",
+  "engine_reports": [
     {
-      "report": "tests/results/2026-10-19-m7-activity-country-development.json",
-      "assertions": 30,
-      "runtime_sha256": "4fff7b16707e4f50e5d757781cf5b23302eb8d4fd44a90aef92fc237fe0c7bde",
-      "fixture_sha256": "dac081667c7823b7e43afc205dd6f8c90d9e0a17cdceeb5a59e21f895b1cadc1",
-      "scope": "Native purchase and sale of an identified ten-unit cargo; actual wallet cost, stock removal, custody, delivery, proceeds, settlement and persistence. Unrelated cash/native routes cannot feed the agreement."
+      "report": "tests/results/2026-10-20-m7-activity-country.json",
+      "assertions": 36,
+      "native_arithmetic": 6,
+      "runtime_sha256": "7c46936da79ccde81d88e73709c6efdafa8dbbb3759fa82df7c2f72a74849bb6",
+      "fixture_sha256": "9dfdae7df2a2d76f2f0477374699ada627561332a43fd8df7003665a51b91140",
+      "token": "d73fd772eea2486ca1b2d5e4fec7ddfb"
     },
     {
-      "report": "tests/results/2026-10-19-m7-activity-company-development.json",
+      "report": "tests/results/2026-10-20-m7-activity-company.json",
+      "assertions": 13,
+      "native_arithmetic": 0,
+      "runtime_sha256": "7c46936da79ccde81d88e73709c6efdafa8dbbb3759fa82df7c2f72a74849bb6",
+      "fixture_sha256": "277a2fbe041a4f4d4948f301c8730e2fd95075a8e6a63cc988b9526cb870069b",
+      "token": "79aa8f4509894aa8befbb6e67007a366"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-m7authority.json",
       "assertions": 10,
-      "runtime_sha256": "1e00a951e24bdf9c2a71124cc19b53bf5e6588079ec4dea4bd3165d1ddce796f",
-      "fixture_sha256": "e9372319fce6e56a3e25bb32e5e3b40538d5523e4fcf6f69457b1d5d31a87a88",
-      "scope": "local-m7-activity-company-crew"
+      "native_arithmetic": 0,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "a0e3b2c1e0007a9cadcf70d8845bc1a42a643652e021b9f3470eb74a0d58b33f",
+      "token": "70c793c0b25e48dc9820222d1a4f68d9"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-m7traditions.json",
+      "assertions": 3,
+      "native_arithmetic": 0,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d759ecdf1f2fb81ee17e6fd415ba5675ad64aaf467db92c6da5fc25e335ee135",
+      "token": "e7f4330e8fee4e37ad90993d1cd8ec6d"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-m7later.json",
+      "assertions": 30,
+      "native_arithmetic": 6,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "da0e448bbcb21056a452f906fb5080c0ae66dd58f9dfc0d0bfed50ee9ad21daa",
+      "token": "cdb0c2153aff4105a4ab7394a14ac3da"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-accounts.json",
+      "assertions": 114,
+      "native_arithmetic": 0,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "28d976f65ada891b5382a6fb3346ee94f33f42e791d4b56bab0278d664039ddf",
+      "token": "2fd6fef443074f74a6afdec5e6cb6f24"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-m4.json",
+      "assertions": 43,
+      "native_arithmetic": 0,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "497bbbd89660966b275a7064765eee35fe55a75206cf2da50eb6a1d0d6c31881",
+      "token": "36c601fa87fe46faa49da7508aa92583"
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-m6.json",
+      "assertions": 43,
+      "native_arithmetic": 7,
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "9368cf17fb8a784b075fcdac85e7a4924c048cc3bc3d1a24010c65188ba887a4",
+      "token": "d37193bc8d8d444faff6d09e1de29a49"
     }
   ],
+  "engine_assertions": 292,
+  "native_arithmetic": 19,
   "offline_tests": 128,
-  "source_validation": true,
+  "source_validation": {
+    "passed": true,
+    "files": 196,
+    "graphics": 64
+  },
   "native_pins_match": true,
-  "final_native_suites": "running; not yet counted",
-  "normal_ui": "final own-country command acceptance and fresh captures pending",
-  "historical_evidence": "2026-10-19-m7-validation.json: superseded country-wide commercial-book gate; not included in corrected acceptance"
+  "deterministic_generation": true,
+  "staged_files": 261,
+  "ui_report": "tests/results/2026-10-19-m7-activity-ui.json",
+  "accepted_ui_captures": 20,
+  "runtime_equivalence": {
+    "country_company": "7c46936d… reports retain their exact hashes. Shipping adds only in_game/gui/bfl_commenda_alert.gui, the direct tooltip binding verified in the normal visible campaign. Every effect, trigger, action and localization byte is identical.",
+    "retained_regressions": "494d7577… reports retain exact hashes. Changed files listed below add the alert, fix normal selector recipient/launch candidates and recheck expedition range. Existing cash, custody, sale, waterfall, NAV, company-income, accounts, goods and treasury effect files are byte-identical. New country/company native runs and normal UI exercise the changed guards and commands.",
+    "changed_since_retained_regressions": [
+      "main_menu/gui/bfl_commenda_alert_icon.gui",
+      "main_menu/localization/english/bfl_finance_l_english.yml",
+      "in_game/events/bfl_commenda_opportunity.txt",
+      "in_game/gui/bfl_commenda_alert.gui",
+      "in_game/common/generic_actions/bfl_commenda.txt",
+      "in_game/common/on_action/bfl_commenda_alert.txt",
+      "in_game/common/scripted_effects/bfl_cmf_registration.txt",
+      "in_game/common/scripted_effects/bfl_commenda_alert.txt",
+      "in_game/common/scripted_triggers/bfl_commenda.txt",
+      "in_game/common/scripted_triggers/bfl_commenda_alert.txt"
+    ]
+  },
+  "boundaries": [
+    "Cargo is a concrete ten-unit BFI delivery operation using native purchase/sale cash and stock, exclusive BFI custody and a two-month delivery interval; it is not ownership of a native trade-route object.",
+    "Expedition funding covers named native preparation and an optional geographically related acquired cargo. Operator pays ongoing native upkeep and optional spending; preparation is non-refundable and failed native starts refund atomically.",
+    "Company launch eligibility uses its selected owned coastal facility host country native range. Fixtures supply range/crew/HQ/cash/research; they establish mechanics, not natural balance.",
+    "Natural expedition progress and a terminal outcome are observed without speed/time/progress overrides. The post-discovery geographic sale boundary is a separately controlled known-area mandate; no natural discovery-to-profit performance claim.",
+    "Alert quotes are indicative cost/surplus estimates from current native prices; only actual acquired cargo sale proceeds can repay costs or pay surplus.",
+    "Twenty accepted unedited captures at 2560x1440 English default GUI scale. One intermediate expedition capture remains explicitly superseded. M10 languages/scales/AI/balance/performance and M8/M9 product gates remain separate.",
+    "Old country-wide 314-assertion/21-capture evidence is historical and excluded. Queued CI is not counted as passed."
+  ],
+  "rejected_development": [
+    "Intermediate recipient-source and foreign-facility parser attempts are excluded; normal target_1 commands and the corrected location/if branch pass current native and UI checks.",
+    "Foreign destination company quotes produced native losses and could not prove positive operator surplus. The final fixture uses the real company capital market in Fiorenza and observes production monthly settlement once.",
+    "Immediate or indefinite unrelated-native-route existence assumptions were rejected. The final fixture records a route actually observed after a native tick, without attributing any of its income to the cargo.",
+    "Canada 20-year window, interrupted pre-final runs and original empty-CString alert tooltip are excluded from the completed gate. The final Madeira suite has all thirteen assertions and fresh-process reload.",
+    "A contemplated extra company operating-cash grant was removed unused: the accepted original run already reached END at 09:09:30 before that edit. Its staged fixture hash is retained."
+  ]
 }

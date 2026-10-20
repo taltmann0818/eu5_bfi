@@ -1,9 +1,9 @@
 # Activity-bound commenda partnerships
 
-**Status: activity-attribution gate reopened; final validation in progress.**
+**Status: complete for the pinned single-player baseline — 20 October 2026.**
 PR #14 targets `dev`. The earlier country-wide commercial-book accounting did
 not establish that capital funded a particular operation. Its 314 assertions
-and 21 captures remain historical; the former M7 completion claim is withdrawn.
+and 21 captures remain historical and are excluded from the corrected gate below.
 
 ## Offers identify the operation
 
@@ -20,11 +20,34 @@ again at acceptance. It creates a concrete commercial cargo operation, using
 native market stock/cash effects and BFI custody with a two-month delivery
 interval. It does not assign an existing country-wide trade book.
 
-An expedition offer records the native target area, launch port and explorer
-before acceptance. Native exploration permission, an eligible explorer, an
-owned port or owned facility, an undiscovered target, crew and native price
-requirements apply. Acceptance starts that named native exploration. The bank
+An expedition offer records the native sea area, launch port and explorer
+before acceptance. Selection proceeds through operator, owned launch port or
+coastal facility, undiscovered sea area and eligible explorer. Candidates belong
+to the selected operator. Countries require native naval range. Landless
+companies have no territorial origin for that native trigger, so their selected
+owned coastal facility uses its host country's native naval range as the launch
+base. This explicit BFI eligibility rule does not grant territory or extend the
+host's range. Native exploration permission, crew and native price requirements
+apply; acceptance repeats the identity, ownership and range checks. Acceptance starts that named native exploration. The bank
 receives no political control over the operator.
+
+## Available-operation alert
+
+The green top-bar alert identifies one currently eligible cargo opportunity.
+It scans native goods and capital markets within native access/range, choosing
+an operator with no active agreement or pending offer. The destination is that
+operator’s capital market, matching native sale pricing. The tooltip names the
+country, ten-unit goods cargo, both markets, estimated bank contribution and
+indicative bank surplus after cost. Quotes are estimates, never credited income.
+A two-month delivery interval exposes price/access risk and loss of capital.
+
+Clicking opens a review. Sending terms still requires operator consent and the
+full execution guards. Discovery, scanning and review move no money. The alert
+refreshes monthly, validates again on review/send, disappears when no eligible
+operation or funding authority remains, and respects the CMF finance notification,
+hide and mute controls. Manual cargo and expedition selection remain available;
+the opportunity scanner advertises cargo purchases, not speculative discovery
+payouts. Its painted cargo icon uses the existing custom M7 artwork. A commenda-specific tooltip binds directly to the player country because the CMF CString tooltip context is empty on the pinned beta. Other CMF alerts retain their existing button and actions.
 
 ## Funding pays recorded costs
 
@@ -84,29 +107,48 @@ country-wide income or activity-attributed profit.
 
 ## Validation and completion gate
 
-Development evidence, retaining actual fingerprints: [provenance](../tests/results/2026-10-19-m7-activity-validation.json).
+The corrected gate passes on EUV 1.4.1 / Steam build 25905365 / CMF 2.5.0.
+[Exact report and capture provenance](../tests/results/2026-10-19-m7-activity-validation.json)
+preserves actual tokens, fixture and runtime hashes; full logs and licensed saves stay local.
 
-- [Activity country run](../tests/results/2026-10-19-m7-activity-country-development.json) `4fff7b16…`: 30 real-engine assertions and six numerical
-  reconciliations pass, including native stock/cash purchase and sale, both
-  cost-sharing presets, embargo/restoration, unnamed/stale/expired/unfunded
-  offers, unrelated-income exclusion, actual preparation/cancellation, legacy
-  runoff, controlled geographic follow-on cash boundaries and save reload.
-- [Company run](../tests/results/2026-10-19-m7-activity-company-development.json) `1e00a951…`: ten assertions pass, including actual cargo funding,
-  company NAV, loss offsets, twelve statements, positive natural exploration
-  progress and terminal outcome without speed overrides or forced completion,
-  historical ledger state and fresh-process persistence.
-- 128 offline tests and source/native pin validation pass. Offline checks do not
-  replace engine assertions or screenshots.
+| Evidence | Passed scope |
+| --- | --- |
+| [Country and alert](../tests/results/2026-10-20-m7-activity-country.json) | 36 engine assertions + six native arithmetic checks: real stock/cash purchase and sale, both presets, protected funding, consent/stale/expiry/unnamed guards, embargo/custody, unrelated income exclusion, preparation/cancellation, legacy runoff, controlled geographic follow-on, range, alert discovery/non-funding/staleness/preferences and reload. |
+| [Native company](../tests/results/2026-10-20-m7-activity-company.json) | 13 assertions: own-cost NAV, actual positive cargo surplus consumed once, prior-loss offsets, subsequent owner payout, an observed unrelated native route, named Madeira exploration preparation/progress/natural terminal after six-month financing maturity, twelve statements and fresh-process persistence. |
+| Authority and ages | 10 authority + 3 Traditions + 30 later-age assertions, plus six later-age native arithmetic checks; eight distinct real operators/ninth rejection, live authority, research/profile and persistence. |
+| Financial regressions | 114 accounts/bond + 43 treasury + 43 goods assertions, plus seven goods native arithmetic checks and reload. |
+| Normal UI | [20 accepted unedited captures](screenshots/README.md#m7-activity-attributed-financing): controller and independent bank, normal own-country cargo consent/decline, native two-month sale, named expedition/port/explorer funding, compact Terms, empty/locked/eight/eighth-row states and painted top-bar alert/review/hide. One rejected intermediate expedition capture is retained separately. |
+| Offline/package | 128 offline tests; 196 script/GUI/localization files and 64 graphics validated; native/CMF pins match; deterministic generator and Economy reconstruction; 261-file staging. |
 
-The follow-on boundary fixture seeds a known-area mandate explicitly; it does
-not establish natural discovery-to-commercial-profit performance. The company
-campaign separately proves natural exploration. Earlier rejected company
-fixtures had a concatenated token and an attempt to provide crew before native
-capacity refreshed; these runs are excluded from passing evidence.
+Total: **292 engine assertions and 19 native arithmetic reconciliations**.
+Shipping runtime is `c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add`.
+Country/company reports retain `7c46936d…`; the only later file is the directly bound
+commenda tooltip GUI, visually verified on the exact shipping bytes. Retained
+`494d7577…` regressions differ only in the alert, selector/launch-range guards and
+their presentation. Existing funding, custody, sale, waterfall, NAV, company-income,
+accounts, goods and treasury effect files are byte-identical; new native and UI
+checks exercise the changed paths. Individual hashes are never relabeled.
 
-The final frozen runtime still requires its complete activity/authority/age/
-company and accounts/treasury/goods regressions, normal acceptance and decline,
-controller and independent-bank UI checks, fresh screenshots and deterministic
-package staging. Until these finish, M7 remains in progress. Original custom
-project, terms and event artwork retains its masters and exact
-[built-in imagegen prompts](../assets_source/painted/commenda-generation.json).
+The independent-bank alert advertised Sweden’s ten livestock from Lübeck to
+Stockholm, 7.58 estimated cost and 1.15 indicative bank surplus. Normal consent
+paid 7.58 into the actual purchase. Two monthly periods later the native sale
+produced 8.91, recovered 7.58 and realized 0.99 bank surplus. The estimate did
+not become credited income. A separate normal command funded Genoa’s American
+East Coast expedition from Ajaccio with Adorn Adorn: 100 paid preparation and
+zero cargo proceeds. All operation fields are readable in the ledger.
+
+Fixtures grant research, cash/supply, facilities, crew and range. The company
+campaign applies no preparation-speed/time/progress override or forced outcome;
+natural terminal can be success or failure. The geographic post-discovery
+commercial boundary uses a separately controlled known-area mandate. This is
+mechanics/attribution acceptance, not a natural discovery-to-profit or economic
+balance claim. Cargo transport remains the explicit BFI custody/delivery
+abstraction using native market effects, rather than ownership of an existing
+native route. Native baseline/optional-message diagnostics are recorded separately;
+BFI parser/runtime failures are rejected. Earlier incomplete Canada windows,
+immediate-route assumptions and empty-CString tooltip attempts are excluded.
+
+No M7 work remains for this pinned baseline. M8 monetary services, M9 full
+workouts and M10 AI/balance/languages/scales/performance retain their separate
+gates. Queued CI is not a pass. Original custom project, Terms and event artwork
+retains editable masters and exact [imagegen prompts](../assets_source/painted/commenda-generation.json).

@@ -1,13 +1,16 @@
-> M7 status correction: activity attribution is required. Previous country-wide commercial-book tests/screenshots are historical and do not complete M7. See [current M7 gate](m7-commenda.md).
-
 # Florence testing and M0 completion
 
-M7 commenda's activity-attribution gate is **reopened and in progress**.
-The earlier 314 assertion executions and 21 UI captures exercise country-wide
-commercial-book assignment and cannot complete the corrected requirement.
-[Current product rules and gate](m7-commenda.md) require a named eligible
-expedition or acquired cargo operation, actual cost funding, activity state and
-attributable sale proceeds. New native/visual evidence is being collected.
+M7 commenda passes its corrected activity-attribution gate for the pinned
+single-player baseline: **292 engine assertions, 19 native arithmetic
+reconciliations, fresh-process reload and 20 accepted actual-game captures**.
+[Product rules and exact evidence](m7-commenda.md) cover named operations,
+actual cost funding, company income and native expedition state. A green top-bar
+alert shows country/cargo, estimated bank cost and indicative surplus, then opens
+review and requires operator consent. Shipping `c5422e23…` and each retained
+report/capture hash are recorded without relabeling. 128 offline tests, native
+pins, deterministic generation and 261-file staging pass. Historical country-wide
+314-assertion/21-capture evidence is excluded from the corrected gate.
+
 Use `-Suite m7`, `m7authority`, `m7traditions`, `m7later`, `m7company`, plus
 accounts/treasury/goods regressions. `start_test_campaign.ps1 -Commenda
 -CommendaQaControls -NoDebug` stages a disposable UI fixture; add

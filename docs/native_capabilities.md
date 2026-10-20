@@ -1,5 +1,3 @@
-> M7 status correction: activity attribution is required. Previous country-wide commercial-book tests/screenshots are historical and do not complete M7. See [current M7 gate](m7-commenda.md).
-
 # Native capability register — M0 complete
 
 Baseline: EUV **1.4.1**, Steam build **25905365**, branch **1.4-open-beta**; CMF **2.5.0**. Source hashes are pinned in [baseline.json](baseline.json). Its historical displayed checksum is not a clean-vanilla or final-runtime checksum.
@@ -30,4 +28,4 @@ need strict custody and cash guards. Sponsored preparation uses a paid native
 price and a zero refundable construction price, explicitly disclosed as
 non-refundable, so cancellation cannot put bank money into the operator's
 unrestricted wallet. Discovery changes activity metadata only. The corrected
-[native and visual acceptance gate](m7-commenda.md) remains open.
+[native and visual acceptance gate](m7-commenda.md) passes: 292 engine assertions, 19 native arithmetic reconciliations, reload and 20 accepted captures. The green top-bar cargo opportunity alert uses current native quotes for estimated cost/surplus; only the acquired cargo’s measured sale can pay realized returns.

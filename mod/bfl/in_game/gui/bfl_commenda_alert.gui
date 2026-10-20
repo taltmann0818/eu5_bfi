@@ -1,0 +1,37 @@
+﻿types BFLCommendaAlertTypes {
+        type cmf_alert = vbox {
+            layoutpolicy_vertical = expanding
+            minimumsize = { 40 90 } maximumsize = { 40 90 }
+            block "alert_button_visibility" { visible = no }
+            state = { name = cmf_cache_alert_color trigger_on_create = yes
+                on_start = "[GetVariableSystem.Set(Concatenate(Scope.GetFlagName, '_aclr'), Localize(Concatenate(Scope.GetFlagName, '_color')))]" }
+            cmf_alert_button = {
+                visible = "[Not(EqualTo_string(Scope.GetFlagName, 'bfl_commenda_available'))]"
+                block "alert_button_attributes" { using = blue_alert }
+            }
+            button = {
+                visible = "[EqualTo_string(Scope.GetFlagName, 'bfl_commenda_available')]"
+                using = green_alert
+                vbox = { set_parent_size_to_minimum = yes
+                    widget = { size = { 40 70 }
+                        icon = { parentanchor = center size = { 30 30 }
+                            texture = "gfx/interface/icons/bfl/commenda_project.dds" } }
+                    widget = { size = { 40 5 } }
+                }
+                action_tooltip = { click_type = left title = bfl_commenda_available_left_click
+                    using = snd_UI_alert_openAndCycle
+                    on_action = "[CMFAlertExecute('cmf_auto_alert_clicked', 'bfl_commenda_available')]"
+                    on_action = "[OpenLateralView('economy')]" }
+                action_tooltip = { click_type = right title = ALERT_HIDE
+                    on_action = "[CMFAlertExecute('cmf_sgui_hide_alert', 'bfl_commenda_available')]" }
+                action_tooltip = { click_type = right click_modifier = shift title = ALERT_HIDE_AND_MUTE
+                    on_action = "[CMFAlertExecute('cmf_sgui_mute_alert', 'bfl_commenda_available')]" }
+                tooltipwidget = { ContextualTooltipType = {
+                    blockoverride "title_text" { text = bfl_commenda_available_name }
+                    blockoverride "tooltip_content" { TooltipTextBlock = {
+                        blockoverride "text" { text = bfl_commenda_available_tooltip } } }
+                } }
+            }
+            expand = {}
+        }
+    }

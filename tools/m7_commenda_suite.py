@@ -1,7 +1,7 @@
-"""Native acceptance and wallet settlement, with explicitly controlled outcomes.
+"""Named activity acceptance, native costs, custody, sale and persistence.
 
-Controlled proceeds exercise the production waterfall, not native performance.
-The separate natural country campaign observes native routes/budget cutoffs.
+Native stock and wallet effects produce the recorded costs and proceeds.
+Geographic follow-on and delivery-boundary setup remain explicit fixtures.
 """
 import hashlib
 import json
@@ -40,6 +40,9 @@ def fixture(token, fingerprint):
             create_market = { builder = c:FLO location = scope:bfi_market_capital price = price:create_market instant = yes price_modifier = 0 }
             create_relation = { type = relation_type:trade_access first = c:GEN second = c:FLO } }
         c:GEN.capital.market = { add_goods_supply = { goods = goods:wheat amount = 10000 } }
+        c:GEN = { add_country_modifier = { modifier = bfi_m7_crew mode = add_and_extend } }
+        c:VEN = { research_advance = advance_type:mapmaking
+            add_country_modifier = { modifier = bfi_m7_no_range mode = add_and_extend } }
     '''
     start+=offer()+check('missing_research_cannot_offer', 'c:BRD.gold = 10000 c:FLO.gold = 1000 c:FLO = { NOT = { has_variable = bfl_venture_offer_bank } }')
     start+='c:BRD = { research_advance = advance_type:bfl_commenda }'+offer()
@@ -78,7 +81,7 @@ def fixture(token, fingerprint):
     start+='c:BRD = { set_variable = bfi_test_pending set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 3 } } }'
     instant=list(cases)
     start+=f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
-    finish=''
+    finish='if = { limit = { c:BRD = { NOT = { has_variable = bfi_activity_checks_complete } } }\n'
     if AGE>=3:
         finish+=check('activity_cargo_sold_and_closed','c:BRD = { var:bfl_v_01_outcome = 6 var:bfl_v_01_state > 1 var:bfl_v_01_receipts > 0 var:bfl_project_value = 0 var:bfl_v_01_quantity = 0 } c:FLO = { var:bfl_venture_quantity = 0 NOT = { has_variable = bfl_venture_bank } }')
         finish+='c:FLO = { set_variable = { name = bfi_m7_cash value = gold } bfl_service_commenda_operator = yes bfl_service_commenda_operator = yes }'
@@ -88,7 +91,9 @@ def fixture(token, fingerprint):
             finish+=f'''c:BRD = {{ set_variable = {{ name = bfi_m7_measure value = {expr} }} debug_log = "BFI_TEST|{token}|M7_NATIVE|{name}|[GetCountry('BRD').MakeScope.GetVariable('bfi_m7_measure').GetValue]" }}\n'''
         from m7_activity_cases import extra
         finish+=extra(check,offer,accept)
-    finish+='c:BRD = { remove_variable = bfi_test_pending }'+f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'
+        from m7_alert_cases import extra as alert_checks
+        finish+=alert_checks(check)
+    finish+='c:BRD = { set_variable = bfi_activity_checks_complete set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 13 } } } } else = { c:BRD = { remove_variable = bfi_test_pending }'+f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'+'}\n'
     return start,finish,instant,cases
 
 
@@ -147,7 +152,7 @@ def prepare(directory,token=None):
     target=overlay/'main_menu/setup/1337/10_countries.txt';target.parent.mkdir(parents=True,exist_ok=True)
     age=campaign.AGE_KEYS[AGE] if hasattr(campaign,'AGE_KEYS') else ['','age_1_traditions','age_2_renaissance','age_3_discovery','age_4_reformation','age_5_absolutism','age_6_revolutions'][AGE]
     target.write_text(native.read_text(encoding='utf-8-sig').replace('current_age = age_1_traditions',f'current_age = {age}',1),encoding='utf-8')
-    campaign.write_script(overlay/'main_menu/common/static_modifiers/bfi_m7_modifiers.txt', 'bfi_m7_crew = { max_sailors = 1 }')
+    campaign.write_script(overlay/'main_menu/common/static_modifiers/bfi_m7_modifiers.txt', 'bfi_m7_crew = { max_sailors = 1 naval_range = 10000 } bfi_m7_no_range = { naval_range = -100000 }')
     hooks=overlay/'in_game/common/on_action/zz_bfi_campaign_checks.txt'
     campaign.write_script(hooks,hooks.read_text(encoding='utf-8-sig')+'''monthly_country_pulse = { on_actions = { bfi_m7_observe } }
         bfi_m7_observe = { effect = { if = { limit = { tag = FLO has_variable = bfi_native_venture_last bfl_period > var:bfi_native_venture_last }

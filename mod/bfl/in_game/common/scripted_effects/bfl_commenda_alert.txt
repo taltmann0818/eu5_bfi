@@ -1,0 +1,85 @@
+﻿bfl_refresh_commenda_opportunity = {
+save_scope_as = bfl_opportunity_actor
+        if = { limit = { has_variable = bfl_op_country }
+            save_scope_as = bfl_opportunity_actor
+        var:bfl_op_bank = { save_scope_as = bfl_venture_lender }
+        var:bfl_op_country = { save_scope_as = bfl_operator }
+        var:bfl_op_from = { save_scope_as = from }
+        var:bfl_op_to = { save_scope_as = to }
+        var:bfl_op_good = { save_scope_as = goods }
+            if = { limit = { bfl_commenda_opportunity_valid = yes } set_variable = { name = bfl_op_cost value = { value = "scope:from.market_price(scope:goods)" multiply = 10 } }
+        set_variable = { name = bfl_op_surplus value = { value = "scope:to.market_price(scope:goods)"
+            subtract = "scope:from.market_price(scope:goods)" multiply = 10 min = 0 } }
+        if = { limit = { scope:bfl_venture_lender.var:bfl_venture_preset = 1 }
+            change_variable = { name = bfl_op_cost multiply = 0.66667 }
+            change_variable = { name = bfl_op_surplus multiply = 0.5 } }
+        else = { change_variable = { name = bfl_op_surplus multiply = 0.75 } }
+        set_variable = { name = bfl_op_period value = bfl_period } }
+            else = { cmf_remove_alert = { alert = bfl_commenda_available } remove_variable = bfl_op_country remove_variable = bfl_op_bank remove_variable = bfl_op_from remove_variable = bfl_op_to remove_variable = bfl_op_good remove_variable = bfl_op_cost remove_variable = bfl_op_surplus remove_variable = bfl_op_period } }
+        if = { limit = { bfl_has_management = yes has_global_variable = cmf_active
+            bfl_finance_notifications_enabled = yes bfl_commenda_command_ready = yes
+            NOT = { has_variable = bfl_op_country } }
+            bfl_resolve_command_bank = yes scope:bfl_bank = { save_scope_as = bfl_venture_lender }
+            every_country = { limit = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } }
+            country_exists = this exists = capital NOT = { bfl_is_bank = yes }
+            OR = { country_type = location bfl_is_company = yes }
+            within_diplomatic_range = scope:bfl_opportunity_actor
+            NOT = { has_variable = bfl_venture_bank }
+            OR = { NOT = { has_variable = bfl_venture_offer_bank } bfl_period > var:bfl_venture_offer_expiry } }
+        save_scope_as = bfl_operator capital.market = { save_scope_as = to }
+        every_country = { limit = { exists = capital scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } } }
+            capital.market = { save_scope_as = from }
+            if = { limit = { scope:from != scope:to scope:from = { in_trade_range_of = scope:bfl_operator } }
+                every_goods = { limit = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } } }
+                    save_scope_as = goods scope:bfl_opportunity_actor = {
+                        if = { limit = { bfl_commenda_opportunity_valid = yes }
+                            set_variable = { name = bfl_op_country value = scope:bfl_operator }
+                            set_variable = { name = bfl_op_bank value = scope:bfl_venture_lender }
+                            set_variable = { name = bfl_op_from value = scope:from }
+                            set_variable = { name = bfl_op_to value = scope:to }
+                            set_variable = { name = bfl_op_good value = scope:goods }
+                            set_variable = { name = bfl_op_cost value = { value = "scope:from.market_price(scope:goods)" multiply = 10 } }
+        set_variable = { name = bfl_op_surplus value = { value = "scope:to.market_price(scope:goods)"
+            subtract = "scope:from.market_price(scope:goods)" multiply = 10 min = 0 } }
+        if = { limit = { scope:bfl_venture_lender.var:bfl_venture_preset = 1 }
+            change_variable = { name = bfl_op_cost multiply = 0.66667 }
+            change_variable = { name = bfl_op_surplus multiply = 0.5 } }
+        else = { change_variable = { name = bfl_op_surplus multiply = 0.75 } }
+        set_variable = { name = bfl_op_period value = bfl_period } } } } } } } }
+        if = { limit = { has_variable = bfl_op_country }
+            cmf_set_alert_open_view = { alert = bfl_commenda_available view = economy }
+            cmf_show_alert = { alert = bfl_commenda_available } }
+        else = { cmf_remove_alert = { alert = bfl_commenda_available } }
+}
+bfl_review_commenda_opportunity = {
+if = { limit = { has_variable = bfl_op_country }
+        save_scope_as = bfl_opportunity_actor
+        var:bfl_op_bank = { save_scope_as = bfl_venture_lender }
+        var:bfl_op_country = { save_scope_as = bfl_operator }
+        var:bfl_op_from = { save_scope_as = from }
+        var:bfl_op_to = { save_scope_as = to }
+        var:bfl_op_good = { save_scope_as = goods }
+        if = { limit = { bfl_commenda_opportunity_valid = yes }
+            set_variable = { name = bfl_op_cost value = { value = "scope:from.market_price(scope:goods)" multiply = 10 } }
+        set_variable = { name = bfl_op_surplus value = { value = "scope:to.market_price(scope:goods)"
+            subtract = "scope:from.market_price(scope:goods)" multiply = 10 min = 0 } }
+        if = { limit = { scope:bfl_venture_lender.var:bfl_venture_preset = 1 }
+            change_variable = { name = bfl_op_cost multiply = 0.66667 }
+            change_variable = { name = bfl_op_surplus multiply = 0.5 } }
+        else = { change_variable = { name = bfl_op_surplus multiply = 0.75 } }
+        set_variable = { name = bfl_op_period value = bfl_period } trigger_event_non_silently = bfl_commenda_opportunity.1 }
+        else = { bfl_refresh_commenda_opportunity = yes } }
+}
+bfl_propose_commenda_opportunity = {
+if = { limit = { has_variable = bfl_op_country }
+        save_scope_as = bfl_opportunity_actor
+        var:bfl_op_bank = { save_scope_as = bfl_venture_lender }
+        var:bfl_op_country = { save_scope_as = bfl_operator }
+        var:bfl_op_from = { save_scope_as = from }
+        var:bfl_op_to = { save_scope_as = to }
+        var:bfl_op_good = { save_scope_as = goods }
+        if = { limit = { bfl_commenda_opportunity_valid = yes }
+            save_scope_as = bfl_venture_actor
+            scope:bfl_venture_lender = { set_variable = { name = bfl_venture_kind value = 1 } bfl_propose_commenda = yes } }
+        bfl_refresh_commenda_opportunity = yes }
+}

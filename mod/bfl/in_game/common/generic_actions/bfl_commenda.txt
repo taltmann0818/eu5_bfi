@@ -1,37 +1,43 @@
 ﻿bfl_offer_commenda = { type = owncountry ai_tick = never
             potential = { scope:actor = { bfl_has_management = yes } }
             allow = { scope:actor = { bfl_commenda_command_ready = yes } }
-            select_trigger = { looking_for_a = country target_flag = operator name = choose_country column = { data = name }
+            select_trigger = { looking_for_a = country allow_self = yes target_flag = target_1 name = choose_country column = { data = name }
         visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }
         enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }select_trigger = { looking_for_a = market target_flag = from name = create_trade_select_from_market
-        column = { data = name } visible = { in_trade_range_of = scope:operator } }
+        column = { data = name } visible = { in_trade_range_of = scope:target_1 } }
         select_trigger = { looking_for_a = market target_flag = to name = create_trade_select_to_market
-            column = { data = name } visible = { in_trade_range_of = scope:operator } enabled = { this != scope:from } }
+            column = { data = name } visible = { in_trade_range_of = scope:target_1 } enabled = { this != scope:from } }
         select_trigger = { looking_for_a = goods target_flag = goods name = create_trade_select_goods column = { data = name }
             visible = { scope:from = { NOT = { is_export_banned = root }
-                market_possible_goods_trade_surplus = { goods = root country = scope:operator value >= 10 } }
+                market_possible_goods_trade_surplus = { goods = root country = scope:target_1 value >= 10 } }
                 scope:to = { NOT = { is_import_banned = root } } } }
             effect = { scope:actor = { save_scope_as = bfl_venture_actor bfl_resolve_command_bank = yes }
-                scope:operator = { save_scope_as = bfl_operator }
+                scope:target_1 = { save_scope_as = bfl_operator }
                 scope:bfl_bank = { set_variable = { name = bfl_venture_kind value = 1 } bfl_propose_commenda = yes } }
             ai_will_do = { value = 0 } }bfl_commenda_expedition = { type = owncountry ai_tick = never
             potential = { scope:actor = { bfl_has_management = yes } }
             allow = { scope:actor = { bfl_commenda_command_ready = yes } }
-            select_trigger = { looking_for_a = country target_flag = operator name = choose_country column = { data = name }
+            select_trigger = { looking_for_a = country allow_self = yes target_flag = target_1 name = choose_country column = { data = name }
         visible = { OR = { country_type = location bfl_is_company = yes } NOT = { bfl_is_bank = yes } }
-        enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }select_trigger = { looking_for_a = area source = operator source_flags = possible_exploration_areas
-        target_flag = target name = start_exploration_select_area column = { data = name }
-        visible = { scope:operator = { NOT = { has_discovered_area = root } } } }
-        select_trigger = { looking_for_a = location source = target source_flags = possible_launch_locations
+        enabled = { country_exists = this NOT = { has_variable = bfl_venture_bank } } }select_trigger = { looking_for_a = location
+            interaction_source_list = { scope:target_1 = {
+                every_owned_location = { limit = { is_port = yes } add_to_list = source }
+                every_owned_building = { location = { if = { limit = { is_port = yes NOT = { owner = scope:target_1 } } add_to_list = source } } } } }
             target_flag = launch_location name = start_exploration_select_launch_point column = { data = name } visible = { is_port = yes } }
-        select_trigger = { looking_for_a = character source = operator target_flag = character name = start_exploration_select_character
-            column = { data = character_explorer } visible = { owner = scope:operator is_valid_for_exploration = yes } }
+        select_trigger = { looking_for_a = area source = world
+        target_flag = target name = start_exploration_select_area column = { data = name }
+        visible = { is_area_sea = yes NOT = { is_being_explored = scope:target_1 }
+            any_location_in_area = { OR = { within_naval_range_of = scope:target_1
+                AND = { scope:target_1 = { bfl_is_company = yes } within_naval_range_of = scope:launch_location.owner } } }
+            scope:target_1 = { modifier:may_explore = yes NOT = { has_discovered_area = root } } } }
+        select_trigger = { looking_for_a = character source = target_1 target_flag = character name = start_exploration_select_character
+            column = { data = character_explorer } visible = { owner = scope:target_1 is_valid_for_exploration = yes } }
             effect = { scope:actor = { save_scope_as = bfl_venture_actor bfl_resolve_command_bank = yes }
-                scope:operator = { save_scope_as = bfl_operator }
+                scope:target_1 = { save_scope_as = bfl_operator }
                 scope:bfl_bank = { set_variable = { name = bfl_venture_kind value = 2 } bfl_propose_commenda = yes } }
             ai_will_do = { value = 0 } }bfl_commenda_cargo = { type = owncountry ai_tick = never
         potential = { scope:actor = { OR = { has_variable = bfl_venture_area any_subject = { has_variable = bfl_venture_area } } } }
-        allow = { } select_trigger = { looking_for_a = country target_flag = operator name = choose_country column = { data = name }
+        allow = { } select_trigger = { looking_for_a = country allow_self = yes target_flag = operator name = choose_country column = { data = name }
         visible = { has_variable = bfl_venture_bank OR = { this = scope:actor overlord = scope:actor } }
         enabled = { has_variable = bfl_venture_area has_variable = bfl_venture_bank } }select_trigger = { looking_for_a = market target_flag = from name = create_trade_select_from_market
         column = { data = name } visible = { in_trade_range_of = scope:operator } }

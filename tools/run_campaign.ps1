@@ -57,7 +57,10 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
     if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
-    if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
+    # Activity assertions finish after three months, followed by a full annual
+    # autosave interval. Native timed handsoff counts months, not years.
+    if ($Suite -in @('m7', 'm7traditions', 'm7later')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5market') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5pricing') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=90', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }

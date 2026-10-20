@@ -1,0 +1,19 @@
+﻿bfl_commenda_opportunity_valid = {
+bfl_has_management = yes bfl_finance_notifications_enabled = yes
+        exists = scope:bfl_venture_lender exists = scope:bfl_operator
+        scope:bfl_venture_lender = { bfl_commenda_offer_ready = yes
+            OR = { this = scope:bfl_opportunity_actor
+                AND = { bfl_has_valid_controller = yes overlord = scope:bfl_opportunity_actor } }
+            bfl_venture_authorized_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+            bfl_venture_authorized_budget >= { value = "scope:to.market_price(scope:goods)" multiply = 10 add = 1 } }
+        scope:bfl_operator = { country_exists = this exists = capital
+            OR = { country_type = location bfl_is_company = yes }
+            NOT = { bfl_is_bank = yes } NOT = { has_variable = bfl_venture_bank }
+            NOT = { has_variable = bfl_venture_guard }
+            OR = { NOT = { has_variable = bfl_venture_offer_bank } bfl_period > var:bfl_venture_offer_expiry }
+            within_diplomatic_range = scope:bfl_opportunity_actor
+            scope:to = { this = scope:bfl_operator.capital.market } bfl_venture_cargo_valid = yes
+            OR = { scope:bfl_venture_lender.var:bfl_venture_preset = 0
+                bfl_venture_operator_cash >= { value = "scope:from.market_price(scope:goods)" multiply = 10 divide = 3 add = 1 } } }
+        "scope:to.market_price(scope:goods)" > "scope:from.market_price(scope:goods)"
+}

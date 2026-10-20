@@ -847,6 +847,7 @@ def hooks_and_commands():
         registration += f'cmm_register_bool_setting = {{ mod_id = bfl_banking_finance_companies setting_id = {setting} tab_id = presentation group_id = interface default_value = {default} }}\n'
     common('scripted_effects','cmf_registration',effect('bfl_register_cmf_presentation',registration)+'''
     bfl_refresh_alerts = {
+        bfl_refresh_commenda_opportunity = yes
         if = { limit = { has_variable = bfl_alert_active OR = {
             NOT = { bfl_has_management = yes } NOT = { bfl_finance_notifications_enabled = yes }
         } }

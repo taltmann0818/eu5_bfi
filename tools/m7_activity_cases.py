@@ -30,6 +30,12 @@ def extra(check, offer, accept):
     body += check('restored_native_access_sells_only_acquired_cargo', '''c:FLO = { var:bfl_venture_quantity = 0 NOT = { has_variable = bfl_venture_bank } }
         c:BRD = { var:bfl_v_01_receipts > 0 var:bfl_v_01_state > 1 var:bfl_project_value = 0 }''')
     # Named native expedition, real native crew and price, then native cancellation.
+    body += '''c:VEN = { set_gold = 1000 save_scope_as = bfl_operator capital = { save_scope_as = launch_location }
+        create_character = { adm = 50 dip = 50 mil = 50 age = 25 estate = estate_type:burghers_estate save_scope_as = character } }
+        area:canadian_atlantic_coast_area = { save_scope_as = target }
+        c:BRD = { set_variable = { name = bfl_venture_kind value = 2 } bfl_propose_commenda = yes }'''
+    body += check('out_of_range_expedition_cannot_be_offered', '''c:VEN = { NOT = { has_variable = bfl_venture_offer_bank } }
+        c:BRD.var:bfl_project_value = 0''')
     body += '''c:GEN = { set_gold = 1000 research_advance = advance_type:mapmaking
             add_country_modifier = { modifier = bfi_m7_crew mode = add_and_extend } add_sailors = 1
             create_character = { adm = 90 dip = 90 mil = 90 age = 25 estate = estate_type:burghers_estate save_scope_as = character }

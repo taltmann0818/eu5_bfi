@@ -25,6 +25,7 @@ def prepare(directory,empty=False,locked=False,offer=False,full=False,controls=F
         c:BRD = { set_variable = { name = bfl_venture_kind value = 1 } }
     '''
     setup+='''c:GEN = { research_advance = advance_type:mapmaking
+        add_country_modifier = { modifier = bfi_m7_ui_range mode = add_and_extend }
         create_character = { adm = 50 dip = 50 mil = 50 age = 25 estate = estate_type:burghers_estate }
         add_sailors = 1 }'''
     if not empty and not locked:
@@ -85,6 +86,7 @@ def prepare(directory,empty=False,locked=False,offer=False,full=False,controls=F
         campaign.write_script(overlay/'in_game/common/decisions/bfi_m7_ui.txt',decisions)
         locpath=overlay/'main_menu/localization/english/bfi_m7_ui_l_english.yml';locpath.parent.mkdir(parents=True,exist_ok=True)
         locpath.write_text(localization,encoding='utf-8-sig')
+    campaign.write_script(overlay/'main_menu/common/static_modifiers/bfi_m7_ui_range.txt','bfi_m7_ui_range = { naval_range = 10000 }')
     campaign.write_script(overlay/'in_game/common/scripted_effects/bfi_campaign_checks.txt','bfi_m7_ui_setup = { '+setup+' }')
     campaign.write_script(overlay/'in_game/common/on_action/zz_bfi_campaign_checks.txt','''
         on_game_started_after_lobby = { on_actions = { bfi_m7_ui_start } }

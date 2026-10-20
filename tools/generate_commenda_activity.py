@@ -40,7 +40,12 @@ def generate(common, effect):
         scope:character = { owner = prev is_valid_for_exploration = yes }
         scope:launch_location = { is_port = yes OR = { owner = scope:bfl_operator any_buildings_in_location = { owner = scope:bfl_operator } } }
         NOT = { has_discovered_area = scope:target }
-        scope:target = { NOT = { is_being_explored = prev } }'''
+        scope:target = { is_area_sea = yes NOT = { is_being_explored = prev }
+            # Landless companies have no native territorial naval-range origin.
+            # Their selected owned coastal facility supplies a host-country base.
+            any_location_in_area = { OR = { within_naval_range_of = scope:bfl_operator
+                AND = { scope:bfl_operator = { bfl_is_company = yes }
+                    within_naval_range_of = scope:launch_location.owner } } } }'''
     triggers = effect('bfl_venture_capacity', capacity) + effect('bfl_venture_authority', authority) + effect('bfl_venture_eligible', eligible)
     triggers += effect('bfl_venture_cargo_access', cargo)
     triggers += effect('bfl_venture_cargo_valid', '''bfl_venture_cargo_access = yes
