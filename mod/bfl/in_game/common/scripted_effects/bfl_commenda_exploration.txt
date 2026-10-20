@@ -1,0 +1,40 @@
+﻿bfl_start_commenda_exploration = {
+# Retired: select the expedition before the accepted funding offer.
+}
+bfl_commenda_discovery = {
+save_scope_as = bfl_operator
+        every_country = { limit = { bfl_is_bank = yes }
+        if = { limit = { var:bfl_v_01_state > 0 var:bfl_v_01_kind = 2
+            var:bfl_v_01_operator ?= scope:bfl_operator var:bfl_v_01_area ?= scope:target
+            OR = { var:bfl_v_01_outcome = 1 var:bfl_v_01_outcome = 8 } }
+            set_variable = { name = bfl_v_01_discovery value = 1 }
+            set_variable = { name = bfl_v_01_outcome value = 2 } }if = { limit = { var:bfl_v_02_state > 0 var:bfl_v_02_kind = 2
+            var:bfl_v_02_operator ?= scope:bfl_operator var:bfl_v_02_area ?= scope:target
+            OR = { var:bfl_v_02_outcome = 1 var:bfl_v_02_outcome = 8 } }
+            set_variable = { name = bfl_v_02_discovery value = 1 }
+            set_variable = { name = bfl_v_02_outcome value = 2 } }if = { limit = { var:bfl_v_03_state > 0 var:bfl_v_03_kind = 2
+            var:bfl_v_03_operator ?= scope:bfl_operator var:bfl_v_03_area ?= scope:target
+            OR = { var:bfl_v_03_outcome = 1 var:bfl_v_03_outcome = 8 } }
+            set_variable = { name = bfl_v_03_discovery value = 1 }
+            set_variable = { name = bfl_v_03_outcome value = 2 } }if = { limit = { var:bfl_v_04_state > 0 var:bfl_v_04_kind = 2
+            var:bfl_v_04_operator ?= scope:bfl_operator var:bfl_v_04_area ?= scope:target
+            OR = { var:bfl_v_04_outcome = 1 var:bfl_v_04_outcome = 8 } }
+            set_variable = { name = bfl_v_04_discovery value = 1 }
+            set_variable = { name = bfl_v_04_outcome value = 2 } }if = { limit = { var:bfl_v_05_state > 0 var:bfl_v_05_kind = 2
+            var:bfl_v_05_operator ?= scope:bfl_operator var:bfl_v_05_area ?= scope:target
+            OR = { var:bfl_v_05_outcome = 1 var:bfl_v_05_outcome = 8 } }
+            set_variable = { name = bfl_v_05_discovery value = 1 }
+            set_variable = { name = bfl_v_05_outcome value = 2 } }if = { limit = { var:bfl_v_06_state > 0 var:bfl_v_06_kind = 2
+            var:bfl_v_06_operator ?= scope:bfl_operator var:bfl_v_06_area ?= scope:target
+            OR = { var:bfl_v_06_outcome = 1 var:bfl_v_06_outcome = 8 } }
+            set_variable = { name = bfl_v_06_discovery value = 1 }
+            set_variable = { name = bfl_v_06_outcome value = 2 } }if = { limit = { var:bfl_v_07_state > 0 var:bfl_v_07_kind = 2
+            var:bfl_v_07_operator ?= scope:bfl_operator var:bfl_v_07_area ?= scope:target
+            OR = { var:bfl_v_07_outcome = 1 var:bfl_v_07_outcome = 8 } }
+            set_variable = { name = bfl_v_07_discovery value = 1 }
+            set_variable = { name = bfl_v_07_outcome value = 2 } }if = { limit = { var:bfl_v_08_state > 0 var:bfl_v_08_kind = 2
+            var:bfl_v_08_operator ?= scope:bfl_operator var:bfl_v_08_area ?= scope:target
+            OR = { var:bfl_v_08_outcome = 1 var:bfl_v_08_outcome = 8 } }
+            set_variable = { name = bfl_v_08_discovery value = 1 }
+            set_variable = { name = bfl_v_08_outcome value = 2 } } }
+}

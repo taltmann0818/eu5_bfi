@@ -1,6 +1,2 @@
 ﻿# Development adapter boundary. Reject BEFORE any native call or cash mutation.
 # See docs/native_capabilities.md and the executable reference model.
-bfl_fund_commenda = {
-set_variable = { name = bfl_blocked_probe value = flag:P11 }
-set_variable = { name = bfl_facility_blocked value = 1 }
-}

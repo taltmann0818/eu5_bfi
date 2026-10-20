@@ -19,3 +19,13 @@ Baseline: EUV **1.4.1**, Steam build **25905365**, branch **1.4-open-beta**; CMF
 Unimplemented adapter flags in `design/tuning.json` default false and compile into permission triggers. A save variable cannot enable them. Implemented M6 goods services use their production age/profile/research/access/backing guards; the obsolete P09 development flag cannot enable or disable them. An answered feasibility question does not implement a product; changing a flag alone is insufficient.
 
 Current-build generated documentation and installed sources are authoritative. Published modding digests corroborate source inspection; offline reference mathematics do not emulate EUV. The [native GUI baseline](native-gui-diagnostics.json) classifies only exact signatures reproduced without BFI. [Historical diagnostic/progress failures](../tests/results/2026-10-15-m0-repeatability-limitations.json) remain explicit. Local logs, saves and licensed assets are excluded from the PR and release.
+
+
+M7's activity-bound rewrite funds actual native preparation or a named cargo
+purchase and attributes only that cargo's native sale proceeds. Country-wide
+trade and unexplained treasury changes are excluded. Native goods effects still
+need strict custody and cash guards. Sponsored preparation uses a paid native
+price and a zero refundable construction price, explicitly disclosed as
+non-refundable, so cancellation cannot put bank money into the operator's
+unrestricted wallet. Discovery changes activity metadata only. The corrected
+[native and visual acceptance gate](m7-commenda.md) passes: 292 engine assertions, 19 native arithmetic reconciliations, reload and 20 accepted captures. The green top-bar cargo opportunity alert uses current native quotes for estimated cost/surplus; only the acquired cargo’s measured sale can pay realized returns.

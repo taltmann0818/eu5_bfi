@@ -23,7 +23,10 @@ def main():
     for row in manifest['exports']:
         source=ROOT/row['master']
         im=Image.open(source).convert('RGBA')
-        im=ImageOps.contain(im,tuple(row['size']),Image.Resampling.LANCZOS)
+        if row.get('fit'):
+            im=ImageOps.fit(im,tuple(row['size']),Image.Resampling.LANCZOS)
+        else:
+            im=ImageOps.contain(im,tuple(row['size']),Image.Resampling.LANCZOS)
         im=ImageOps.pad(im,tuple(row['size']),color=(0,0,0,0))
         export(im,MOD/row['export'],'BC3 painted illustration',row['master'],row['rights'])
     art=Image.open(ART).convert('RGB')

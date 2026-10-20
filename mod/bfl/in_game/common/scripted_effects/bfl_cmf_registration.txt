@@ -5,6 +5,7 @@ cmm_register_bool_setting = { mod_id = bfl_banking_finance_companies setting_id 
 }
 
     bfl_refresh_alerts = {
+        bfl_refresh_commenda_opportunity = yes
         if = { limit = { has_variable = bfl_alert_active OR = {
             NOT = { bfl_has_management = yes } NOT = { bfl_finance_notifications_enabled = yes }
         } }

@@ -1,0 +1,720 @@
+﻿bfl_service_commenda_operator = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank }
+        save_scope_as = bfl_operator var:bfl_venture_bank = { save_scope_as = bfl_venture_lender }
+        if = { limit = { NOT = { var:bfl_venture_activity_schema ?= 2 } } if = { limit = { var:bfl_venture_slot = 1 scope:bfl_venture_lender.var:bfl_v_01_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_01_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_01_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_01_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_01_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_01_outcome value = 7 } }
+            bfl_close_commenda_01 = yes }
+if = { limit = { var:bfl_venture_slot = 2 scope:bfl_venture_lender.var:bfl_v_02_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_02_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_02_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_02_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_02_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_02_outcome value = 7 } }
+            bfl_close_commenda_02 = yes }
+if = { limit = { var:bfl_venture_slot = 3 scope:bfl_venture_lender.var:bfl_v_03_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_03_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_03_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_03_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_03_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_03_outcome value = 7 } }
+            bfl_close_commenda_03 = yes }
+if = { limit = { var:bfl_venture_slot = 4 scope:bfl_venture_lender.var:bfl_v_04_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_04_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_04_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_04_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_04_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_04_outcome value = 7 } }
+            bfl_close_commenda_04 = yes }
+if = { limit = { var:bfl_venture_slot = 5 scope:bfl_venture_lender.var:bfl_v_05_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_05_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_05_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_05_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_05_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_05_outcome value = 7 } }
+            bfl_close_commenda_05 = yes }
+if = { limit = { var:bfl_venture_slot = 6 scope:bfl_venture_lender.var:bfl_v_06_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_06_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_06_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_06_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_06_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_06_outcome value = 7 } }
+            bfl_close_commenda_06 = yes }
+if = { limit = { var:bfl_venture_slot = 7 scope:bfl_venture_lender.var:bfl_v_07_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_07_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_07_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_07_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_07_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_07_outcome value = 7 } }
+            bfl_close_commenda_07 = yes }
+if = { limit = { var:bfl_venture_slot = 8 scope:bfl_venture_lender.var:bfl_v_08_generation = var:bfl_venture_generation
+            scope:bfl_venture_lender.var:bfl_v_08_operator = scope:bfl_operator scope:bfl_venture_lender.var:bfl_v_08_state = 1 }
+            set_variable = { name = bfl_venture_legacy_return value = { value = var:bfl_venture_pool max = var:bfl_venture_external_basis max = bfl_venture_operator_cash min = 0 } }
+            add_gold = { value = var:bfl_venture_legacy_return multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_legacy_return }
+            scope:bfl_venture_lender = { change_variable = { name = bfl_v_08_basis subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_legacy_return }
+                change_variable = { name = bfl_v_08_returned add = scope:bfl_operator.var:bfl_venture_legacy_return }
+                set_variable = { name = bfl_v_08_outcome value = 7 } }
+            bfl_close_commenda_08 = yes }
+ }
+        else_if = { limit = { bfl_period > var:bfl_venture_last_period NOT = { has_variable = bfl_venture_guard } }
+            set_variable = { name = bfl_venture_last_period value = bfl_period }
+            if = { limit = { var:bfl_venture_slot = 1 } bfl_service_commenda_01 = yes }
+if = { limit = { var:bfl_venture_slot = 2 } bfl_service_commenda_02 = yes }
+if = { limit = { var:bfl_venture_slot = 3 } bfl_service_commenda_03 = yes }
+if = { limit = { var:bfl_venture_slot = 4 } bfl_service_commenda_04 = yes }
+if = { limit = { var:bfl_venture_slot = 5 } bfl_service_commenda_05 = yes }
+if = { limit = { var:bfl_venture_slot = 6 } bfl_service_commenda_06 = yes }
+if = { limit = { var:bfl_venture_slot = 7 } bfl_service_commenda_07 = yes }
+if = { limit = { var:bfl_venture_slot = 8 } bfl_service_commenda_08 = yes }
+ } }
+}
+bfl_close_commenda_01 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
+                var:bfl_v_01_operator = scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_01_undrawn } set_variable = { name = bfl_v_01_undrawn value = 0 }
+                set_variable = { name = bfl_v_01_loss value = var:bfl_v_01_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_01_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_01_basis }
+                set_variable = { name = bfl_v_01_basis value = 0 } set_variable = { name = bfl_v_01_state value = 2 }
+                if = { limit = { var:bfl_v_01_loss > 0 } set_variable = { name = bfl_v_01_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_01_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_01_state value = 4 } set_variable = { name = bfl_v_01_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_01 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
+                var:bfl_v_01_operator = scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_01_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_01_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_01_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_01_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_01_quantity value = 0 } set_variable = { name = bfl_v_01_outcome value = 6 } }
+            bfl_close_commenda_01 = yes
+        }
+}
+bfl_service_commenda_01 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
+                var:bfl_v_01_operator = scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_01 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_01_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_01_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_01_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_01_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_01_maturity } bfl_close_commenda_01 = yes }
+            }
+        }
+}
+bfl_close_commenda_02 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
+                var:bfl_v_02_operator = scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_02_undrawn } set_variable = { name = bfl_v_02_undrawn value = 0 }
+                set_variable = { name = bfl_v_02_loss value = var:bfl_v_02_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_02_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_02_basis }
+                set_variable = { name = bfl_v_02_basis value = 0 } set_variable = { name = bfl_v_02_state value = 2 }
+                if = { limit = { var:bfl_v_02_loss > 0 } set_variable = { name = bfl_v_02_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_02_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_02_state value = 4 } set_variable = { name = bfl_v_02_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_02 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
+                var:bfl_v_02_operator = scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_02_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_02_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_02_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_02_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_02_quantity value = 0 } set_variable = { name = bfl_v_02_outcome value = 6 } }
+            bfl_close_commenda_02 = yes
+        }
+}
+bfl_service_commenda_02 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
+                var:bfl_v_02_operator = scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_02 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_02_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_02_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_02_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_02_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_02_maturity } bfl_close_commenda_02 = yes }
+            }
+        }
+}
+bfl_close_commenda_03 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
+                var:bfl_v_03_operator = scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_03_undrawn } set_variable = { name = bfl_v_03_undrawn value = 0 }
+                set_variable = { name = bfl_v_03_loss value = var:bfl_v_03_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_03_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_03_basis }
+                set_variable = { name = bfl_v_03_basis value = 0 } set_variable = { name = bfl_v_03_state value = 2 }
+                if = { limit = { var:bfl_v_03_loss > 0 } set_variable = { name = bfl_v_03_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_03_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_03_state value = 4 } set_variable = { name = bfl_v_03_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_03 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
+                var:bfl_v_03_operator = scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_03_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_03_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_03_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_03_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_03_quantity value = 0 } set_variable = { name = bfl_v_03_outcome value = 6 } }
+            bfl_close_commenda_03 = yes
+        }
+}
+bfl_service_commenda_03 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
+                var:bfl_v_03_operator = scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_03 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_03_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_03_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_03_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_03_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_03_maturity } bfl_close_commenda_03 = yes }
+            }
+        }
+}
+bfl_close_commenda_04 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
+                var:bfl_v_04_operator = scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_04_undrawn } set_variable = { name = bfl_v_04_undrawn value = 0 }
+                set_variable = { name = bfl_v_04_loss value = var:bfl_v_04_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_04_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_04_basis }
+                set_variable = { name = bfl_v_04_basis value = 0 } set_variable = { name = bfl_v_04_state value = 2 }
+                if = { limit = { var:bfl_v_04_loss > 0 } set_variable = { name = bfl_v_04_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_04_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_04_state value = 4 } set_variable = { name = bfl_v_04_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_04 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
+                var:bfl_v_04_operator = scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_04_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_04_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_04_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_04_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_04_quantity value = 0 } set_variable = { name = bfl_v_04_outcome value = 6 } }
+            bfl_close_commenda_04 = yes
+        }
+}
+bfl_service_commenda_04 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
+                var:bfl_v_04_operator = scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_04 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_04_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_04_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_04_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_04_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_04_maturity } bfl_close_commenda_04 = yes }
+            }
+        }
+}
+bfl_close_commenda_05 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
+                var:bfl_v_05_operator = scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_05_undrawn } set_variable = { name = bfl_v_05_undrawn value = 0 }
+                set_variable = { name = bfl_v_05_loss value = var:bfl_v_05_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_05_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_05_basis }
+                set_variable = { name = bfl_v_05_basis value = 0 } set_variable = { name = bfl_v_05_state value = 2 }
+                if = { limit = { var:bfl_v_05_loss > 0 } set_variable = { name = bfl_v_05_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_05_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_05_state value = 4 } set_variable = { name = bfl_v_05_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_05 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
+                var:bfl_v_05_operator = scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_05_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_05_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_05_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_05_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_05_quantity value = 0 } set_variable = { name = bfl_v_05_outcome value = 6 } }
+            bfl_close_commenda_05 = yes
+        }
+}
+bfl_service_commenda_05 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
+                var:bfl_v_05_operator = scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_05 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_05_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_05_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_05_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_05_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_05_maturity } bfl_close_commenda_05 = yes }
+            }
+        }
+}
+bfl_close_commenda_06 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
+                var:bfl_v_06_operator = scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_06_undrawn } set_variable = { name = bfl_v_06_undrawn value = 0 }
+                set_variable = { name = bfl_v_06_loss value = var:bfl_v_06_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_06_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_06_basis }
+                set_variable = { name = bfl_v_06_basis value = 0 } set_variable = { name = bfl_v_06_state value = 2 }
+                if = { limit = { var:bfl_v_06_loss > 0 } set_variable = { name = bfl_v_06_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_06_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_06_state value = 4 } set_variable = { name = bfl_v_06_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_06 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
+                var:bfl_v_06_operator = scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_06_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_06_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_06_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_06_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_06_quantity value = 0 } set_variable = { name = bfl_v_06_outcome value = 6 } }
+            bfl_close_commenda_06 = yes
+        }
+}
+bfl_service_commenda_06 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
+                var:bfl_v_06_operator = scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_06 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_06_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_06_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_06_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_06_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_06_maturity } bfl_close_commenda_06 = yes }
+            }
+        }
+}
+bfl_close_commenda_07 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
+                var:bfl_v_07_operator = scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_07_undrawn } set_variable = { name = bfl_v_07_undrawn value = 0 }
+                set_variable = { name = bfl_v_07_loss value = var:bfl_v_07_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_07_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_07_basis }
+                set_variable = { name = bfl_v_07_basis value = 0 } set_variable = { name = bfl_v_07_state value = 2 }
+                if = { limit = { var:bfl_v_07_loss > 0 } set_variable = { name = bfl_v_07_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_07_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_07_state value = 4 } set_variable = { name = bfl_v_07_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_07 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
+                var:bfl_v_07_operator = scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_07_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_07_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_07_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_07_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_07_quantity value = 0 } set_variable = { name = bfl_v_07_outcome value = 6 } }
+            bfl_close_commenda_07 = yes
+        }
+}
+bfl_service_commenda_07 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
+                var:bfl_v_07_operator = scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_07 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_07_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_07_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_07_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_07_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_07_maturity } bfl_close_commenda_07 = yes }
+            }
+        }
+}
+bfl_close_commenda_08 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
+                var:bfl_v_08_operator = scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { bfl_is_company = yes } change_variable = { name = bfl_company_loss add = {
+                value = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis min = 0 } } }
+            scope:bfl_venture_lender = {
+                change_variable = { name = bfl_cash_committed subtract = var:bfl_v_08_undrawn } set_variable = { name = bfl_v_08_undrawn value = 0 }
+                set_variable = { name = bfl_v_08_loss value = var:bfl_v_08_basis }
+                change_variable = { name = bfl_loss_carryforward add = var:bfl_v_08_basis }
+                change_variable = { name = bfl_project_value subtract = var:bfl_v_08_basis }
+                set_variable = { name = bfl_v_08_basis value = 0 } set_variable = { name = bfl_v_08_state value = 2 }
+                if = { limit = { var:bfl_v_08_loss > 0 } set_variable = { name = bfl_v_08_state value = 3 } } }
+            if = { limit = { scope:bfl_venture_lender.var:bfl_v_08_original = 0 } scope:bfl_venture_lender = {
+                set_variable = { name = bfl_v_08_state value = 4 } set_variable = { name = bfl_v_08_outcome value = 10 } } }
+            set_variable = { name = bfl_venture_remaining value = 0 } set_variable = { name = bfl_venture_external_basis value = 0 }
+            remove_variable = bfl_venture_bank
+        }
+}
+bfl_dispatch_commenda_08 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
+                var:bfl_v_08_operator = scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation }
+            has_variable = bfl_venture_sale_guard var:bfl_venture_proceeds >= 0 }
+            set_variable = { name = bfl_venture_capital value = { value = var:bfl_venture_proceeds max = var:bfl_venture_remaining } }
+            set_variable = { name = bfl_venture_return value = 0 }
+            if = { limit = { var:bfl_venture_remaining > 0 } set_variable = { name = bfl_venture_return value = { value = var:bfl_venture_capital
+                multiply = var:bfl_venture_external_basis divide = var:bfl_venture_remaining } } }
+            if = { limit = { var:bfl_venture_capital >= var:bfl_venture_remaining }
+                set_variable = { name = bfl_venture_return value = var:bfl_venture_external_basis } }
+            set_variable = { name = bfl_venture_gain value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital multiply = var:bfl_venture_profit_fraction } }
+            set_variable = { name = bfl_venture_operator_surplus value = { value = var:bfl_venture_proceeds subtract = var:bfl_venture_capital subtract = var:bfl_venture_gain } }
+            change_variable = { name = bfl_venture_company_surplus add = var:bfl_venture_operator_surplus }
+            set_variable = { name = bfl_venture_excluded_period value = bfl_period }
+            change_variable = { name = bfl_venture_remaining subtract = var:bfl_venture_capital }
+            change_variable = { name = bfl_venture_external_basis subtract = var:bfl_venture_return }
+            add_gold = { value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }
+            scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_08_returned add = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_08_basis subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }
+                change_variable = { name = bfl_v_08_profit add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_profit_ventures add = scope:bfl_operator.var:bfl_venture_gain }
+                change_variable = { name = bfl_v_08_receipts add = scope:bfl_operator.var:bfl_venture_proceeds }
+                set_variable = { name = bfl_v_08_quantity value = 0 } set_variable = { name = bfl_v_08_outcome value = 6 } }
+            bfl_close_commenda_08 = yes
+        }
+}
+bfl_service_commenda_08 = {
+if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
+                var:bfl_v_08_operator = scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 bfl_period >= var:bfl_venture_delivery }
+                var:bfl_venture_from = { save_scope_as = from } var:bfl_venture_to = { save_scope_as = to }
+                var:bfl_venture_good = { save_scope_as = goods }
+                if = { limit = { bfl_venture_cargo_access = yes }
+                    set_variable = bfl_venture_sale_guard
+                    set_variable = { name = bfl_venture_cash_before value = gold }
+                    set_variable = { name = bfl_venture_sale_stock_before value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    sell_goods_to_market = { market = scope:to goods = scope:goods amount = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_after value = "scope:to.stockpile_in_market(scope:goods)" }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    bfl_dispatch_commenda_08 = yes remove_variable = bfl_venture_sale_guard
+                } else = { scope:bfl_venture_lender = { set_variable = { name = bfl_v_08_outcome value = 5 } } }
+            } else_if = { limit = { has_variable = bfl_venture_area }
+                var:bfl_venture_area = { save_scope_as = target }
+                every_exploration_from_country = { limit = { area = scope:target exploration_time > 0 }
+                    save_scope_as = bfl_venture_exploration
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_08_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } }
+                if = { limit = { num_explorations_including_in_construction = 0 scope:target = { NOT = { is_being_explored = scope:bfl_operator } } scope:bfl_venture_lender.var:bfl_v_08_outcome = 1 }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_08_outcome value = 3 } } }
+                if = { limit = { bfl_period >= scope:bfl_venture_lender.var:bfl_v_08_maturity } bfl_close_commenda_08 = yes }
+            }
+        }
+}

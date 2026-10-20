@@ -177,7 +177,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\n'
+    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -639,7 +639,7 @@ def native_adapters():
     # These are executable fail-closed commands, not guessed engine signatures.
     blocked = {
         'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
-        'native_trade_adapter':[('bfl_fund_commenda','P11')],
+        'native_trade_adapter':[],
         'native_receipts_adapter':[('bfl_observe_native_receipts','P07')],
         'monetary':[('bfl_issue_sovereign_notes','P05'),('bfl_settle_interbank_liquidity','P04'),('bfl_run_clearing','P10')],
         'security':[('bfl_pledge_native_collateral','P04'),('bfl_enforce_native_collateral','P04')],
@@ -759,6 +759,7 @@ def treasury_and_resolution():
             bfl_observe_bank_income = yes
             bfl_accrue_deposits = yes
             bfl_process_goods = yes
+            bfl_reconcile_commenda = yes
             bfl_settle_operating_expenses = yes
             bfl_evaluate_distress = yes
             bfl_settle_dividends = yes
@@ -785,6 +786,7 @@ def hooks_and_commands():
     monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
     bfl_monthly_accounts = {
         effect = {
+            if = { limit = { has_variable = bfl_venture_bank } bfl_service_commenda_operator = yes }
             if = { limit = { country_type = location } bfl_reconcile_controller = yes }
             if = { limit = { has_variable = bfl_controller } bfl_reconcile_charter = yes }
             if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }
@@ -845,6 +847,7 @@ def hooks_and_commands():
         registration += f'cmm_register_bool_setting = {{ mod_id = bfl_banking_finance_companies setting_id = {setting} tab_id = presentation group_id = interface default_value = {default} }}\n'
     common('scripted_effects','cmf_registration',effect('bfl_register_cmf_presentation',registration)+'''
     bfl_refresh_alerts = {
+        bfl_refresh_commenda_opportunity = yes
         if = { limit = { has_variable = bfl_alert_active OR = {
             NOT = { bfl_has_management = yes } NOT = { bfl_finance_notifications_enabled = yes }
         } }
@@ -1033,6 +1036,8 @@ def main():
     generate(common,effect,loc)
     from generate_goods import generate as generate_goods
     generate_goods(common,effect,loc,write)
+    from generate_commenda import generate as generate_commenda
+    generate_commenda(common,effect,loc,write)
     from generate_bank_accounts import generate as generate_bank_accounts
     generate_bank_accounts(common,effect,loc,write,TUNE)
     from generate_bank_charts import generate as generate_bank_charts

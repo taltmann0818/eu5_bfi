@@ -1,0 +1,3 @@
+﻿cmf_on_callback = { on_actions = { bfl_commenda_alert_click } }
+        bfl_commenda_alert_click = { effect = { if = { limit = { var:cmf_callback ?= flag:bfl_commenda_available }
+            bfl_review_commenda_opportunity = yes } } }

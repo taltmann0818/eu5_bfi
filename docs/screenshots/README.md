@@ -326,3 +326,62 @@ The remaining four captures cold-load shipping `b9ee4eac...`. The separate empty
 - [Empty-inventory guidance](2026-10-19-m6-empty-tooltip.png)
 - [Long inventory, first eight records and signed returns](2026-10-19-m6-long-tooltip-top.png)
 - [Scrolled final eight records, through Cocoa](2026-10-19-m6-long-tooltip-bottom.png)
+
+
+## M7 commenda partnerships — historical country-wide design
+
+These captures predate the activity-attribution correction. They preserve the
+original observations and do not complete the current M7 gate. In particular,
+the former unrestricted capital grants and assigned country-wide receipts have
+been replaced by actual costs and attributable cargo sale proceeds.
+
+[Exact UI provenance](../../tests/results/2026-10-19-m7-ui.json) records **21 observations / 21 unedited captures** from EUV 1.4.1 / CMF 2.5.0 at 2560×1440, English, native default GUI scale, debug disabled. Disposable grants and controlled settlement/expedition labels test presentation; they do not establish natural profit, research or campaign balance. [Separate native evidence](../m7-commenda.md) records actual trade, exploration, payouts and persistence. Each screenshot retains its actual runtime and fixture hash; final guard/headings and safe-preview follow-ups are explicitly distinguished.
+
+- [Accepted capital](2026-10-19-m7-accepted-capital.png): Normal acceptance funds the fourth project: Bardi cash 9600, total assets 10500 unchanged, risk basis 400/four active, Florence wallet 5000 after receiving 100.
+- [Operator selector](2026-10-19-m7-operator-selector.png): Native offer selector is searchable, uses native country flags/names and explains that capital moves only on accepted terms. Opened and cancelled without funding.
+- [Empty card](2026-10-19-m7-empty-card.png): Disposable empty display state: zero basis and zero active ventures, compact card and Terms icon remain visible with an enabled offer.
+- [Empty tooltip](2026-10-19-m7-empty-tooltip.png): Empty tooltip gives next-step guidance and explains capital recovery, realized receipts and closed-row history. No phantom operator appears.
+- [Locked requirements](2026-10-19-m7-locked-requirements.png): Final build: Discovery charter without Commenda research shows a locked hint and disabled Offer. Clicking it leaves the panel closed and bank cash at 10000; readable requirements remain available.
+- [Compact card](2026-10-19-m7-compact-card.png): Final runtime: 800 capital at risk, eight active operators, 9200 bank cash; full-capacity Offer is disabled and clicking leaves the panel closed.
+- [Terms changed](2026-10-19-m7-terms-changed.png): Clicked all three future-offer controls: bilateral equal surplus, 24 months, 200 gold. Existing eight agreements remain 800 basis and bank cash 9200.
+- [Ledger top](2026-10-19-m7-ledger-top.png): Final clean operator headings; Genoa and Venice retain 100 basis, 75% bank surplus and 12 months after changing future terms; Pisa is the third entry.
+- [Ledger lucca](2026-10-19-m7-ledger-lucca.png): Fourth operator Lucca and fifth Siena remain active at 100 basis, 75% / 12 months, with zero returned/profit/loss.
+- [Ledger pisa](2026-10-19-m7-ledger-pisa.png): Third operator Pisa and fourth Lucca: 100 basis, no returns/profit/loss, original 75% / 12-month agreement.
+- [Ledger middle](2026-10-19-m7-ledger-middle.png): Fifth Siena and sixth Papal States retain original accepted terms and readable status.
+- [Ledger bottom](2026-10-19-m7-ledger-bottom.png): Seventh Naples and eighth Savoy remain accessible at the end of the native scroll area with all capital/return/term/profit/loss/status fields.
+- [Settlement capital profit loss](2026-10-19-m7-settlement-capital-profit-loss.png): Controlled UI fixture: Genoa closed with 100 returned / 18.75 profit / 0 loss; Venice closed with 50 returned / 0 profit / 50 loss; Pisa remains 100 active basis. These are seeded outcomes, not natural campaign returns.
+- [Independent bank](2026-10-19-m7-independent-bank.png): Independent Bardi player sees own bank: 9700 cash, 300 basis, three inherited active agreements, painted icons and enabled Offer.
+- [Independent selector](2026-10-19-m7-independent-selector.png): Independent bank opens native searchable operator selector with localized capital-only-on-acceptance guidance.
+- [Selector cancelled](2026-10-19-m7-selector-cancelled.png): After cancelling the independent bank selector, 9700 cash, 10500 assets and three active / 300 basis remain unchanged.
+- [Independent terms](2026-10-19-m7-independent-terms.png): Independent bank player changes its own future-offer split to bilateral; 9700 cash and three active / 300 basis stay unchanged.
+- [Locked merchant](2026-10-19-m7-locked-merchant.png): With Commenda research granted but Merchant Finance profile, Offer is gray and clicking does not open the selector; 10000 bank cash and zero active agreements.
+- [Partnership offer](2026-10-19-m7-partnership-offer.png): Final runtime normal human offer event: painted art, Bardi 100 gold / 12 months / 75%-25%, capital first, no discovery gold, three-month expiry, readable Accept and Decline buttons.
+- [Declined offer](2026-10-19-m7-declined-offer.png): Clicked Decline normally; Florence cash remains 4900, bank cash 10000, assets 10500, zero basis and zero active agreements.
+- [Acceptance tooltip](2026-10-19-m7-acceptance-tooltip.png): Final cold-loaded runtime, debug disabled: native Accept tooltip is localized and describes authority/funding rechecks without dumping implementation effects.
+
+
+## M7 activity-attributed financing
+
+[Current capture provenance](../../tests/results/2026-10-19-m7-activity-ui.json) records unedited 2560×1440 English captures, debug disabled. Research, starting cash/supply and QA display resets belong to a disposable test campaign. The Florence cargo is selected and accepted through the normal UI; its two-month delivery and sale use normal game time. No country-wide income is assigned to these operations. The corrected gate passes with 20 accepted captures; one intermediate expedition capture is explicitly superseded. Final alert, independent-bank and expedition captures use shipping `c5422e23…` byte for byte. Exact individual provenance is retained.
+
+- [Controller compact](2026-10-19-m7-activity-controller-compact.jpg): Controller Credit card, three fixture-funded native cargo operations; compact M6-style card and painted Terms button.
+- [Cargo offer](2026-10-19-m7-activity-cargo-offer.jpg): Normal own-country selector chose Florence, Zêna source, Fiorenza destination, wheat; human offer names ten units, funding ceiling, costs, proceeds and consent.
+- [Acceptance tooltip](2026-10-19-m7-activity-acceptance-tooltip.jpg): Localized normal Accept tooltip exposes live rechecks, without implementation-effect text.
+- [Cargo custody](2026-10-19-m7-activity-cargo-custody.jpg): Normal human acceptance adds the fourth activity; actual purchase cost and exact ten units in custody are visible.
+- [Florence funded](2026-10-19-m7-activity-florence-funded.jpg): Final Florence row shows named cargo, 9.81 actual costs, ten units in custody, zero sale proceeds.
+- [Native sale loss](2026-10-19-m7-activity-native-sale-loss.jpg): After two months of normal game time, Genoa native sale produced 1.00, returned 1.00 and recorded 8.81 loss against 9.81 cost.
+- [Florence sale](2026-10-19-m7-activity-florence-sale.jpg): After normal game time, Florence native sale produced 11.76, recovered 9.81 and paid 1.46 bank surplus; custody zero and closed state.
+- [Eight capacity](2026-10-19-m7-activity-eight-capacity.jpg): QA decision resets and actually purchases eight native cargos for display; 79.21 basis/eight active, both new funding controls disabled.
+- [Eighth row](2026-10-19-m7-activity-eighth-row.jpg): Dragged native ledger scrollbar to Savoy, the eighth operator. Named cargo/cost/custody/terms/state remain readable.
+- [Empty](2026-10-19-m7-activity-empty.jpg): QA empty ledger has zero basis and no active agreements, both funding commands available.
+- [Locked](2026-10-19-m7-activity-locked.jpg): QA Merchant Finance profile has locked hint and both funding commands disabled.
+- [Declined](2026-10-19-m7-activity-declined.jpg): QA seeded a specific offer, then normal Decline leaves 10000 bank cash, zero basis and no active activity.
+- [Terms](2026-10-19-m7-activity-terms.jpg): Normal Terms click expands three future-offer controls; preset click changes to bilateral equal surplus without funding an operation.
+
+- [Available-operation tooltip](2026-10-20-m7-alert-tooltip.jpg): Green painted top-bar alert; Sweden, ten livestock, Lübeck → Stockholm, 7.58 estimated bank cost and 1.15 indicative surplus; risks and consent readable.
+- [Operation review](2026-10-20-m7-alert-review.jpg): Normal click opens the matching review and custom artwork; no money moves before operator acceptance.
+- [Accepted cargo ledger](2026-10-20-m7-alert-funded-ledger.jpg): Sweden accepts normally; 7.58 actual bank cost, ten livestock in custody and zero proceeds/profit.
+- [Independent Terms](2026-10-20-m7-independent-terms.jpg): Native independent-bank Credit card expands preset, duration and funding ceiling.
+- [Hidden alert](2026-10-20-m7-alert-hidden.jpg): Normal CMF right click removes the opportunity icon without affecting the funded operation.
+- [Actual sale](2026-10-20-m7-alert-realized-sale.jpg): Two normal monthly periods produce 8.91 sale proceeds, 7.58 capital recovery and 0.99 bank surplus; quote was 1.15, not credited income.
+- [Named native expedition](2026-10-20-m7-expedition-funded.jpg): Final normal independent-bank command selected Genoa, Ajaccio, American East Coast and native Adorn Adorn; AI consent paid 100 preparation cost. Ledger shows identity, zero proceeds and preparation/progress state. This replaces the intermediate 19 October expedition capture.

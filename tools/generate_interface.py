@@ -278,6 +278,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     statement = ''
     for label_name, field in [('Native monthly interest (included in credit)', 'native_interest'), ('Recovered native acquisition cost (excluded)', 'principal'), ('Native payoff gain (included in credit)', 'recovery_gain'), ('Native payoff loss (included in losses)', 'recovery_loss'), ('Credit, deposit and bond receipts', 'credit'), ('Service receipts and agreed interest waivers', 'services'), ('Company and share distributions', 'company'), ('Other native net operations', 'native'), ('Costs and carried losses before offset', 'losses')]:
         statement += label(f"{label_name}: [{var('statement_'+field)}|2]@gold!", 24)
+    statement += label(f"Commenda realized surplus: [{var('statement_ventures')}|2]@gold!", 24)
     funding += section('bfl_activity_title', statement)
 
     funding+=policies('bfl_deposit_policy_title',[f'bfl_rate_{i}' for i in (0,1,2)],'deposit')
@@ -289,6 +290,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding = 'bfl_bond_contents = { }' + funding
     investments='bfl_equity_investments = { }'
     investments+='bfl_goods_contents = { }'
+    investments+='bfl_commenda_contents = { }'
     investments+=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
     investments+=action('bfl_buy_bill','note')
     for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:

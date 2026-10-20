@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-19",
+  "assets": [
+    {
+      "master": "commenda_project.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: native Europa Universalis V mod commenda investment icon, original painted raster master. Primary request: a compact Renaissance merchant partnership still life: a small walnut money coffer with a few gold coins, a furled parchment sea chart, and a single small ivory-sailed merchant carrack model rising behind it. Style: richly hand-painted realistic historical strategy game inventory artwork, natural worn wood, warm brass, cream parchment, muted sea teal accent; soft directional upper-left lighting; clear bold silhouette readable at 48 pixels. Composition: one cohesive isolated object, centered, square, generous transparent margin. Background genuinely transparent. No framing, no text, no letters, no watermark, no UI mockup, no modern objects."
+    },
+    {
+      "master": "commenda_terms.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: original Europa Universalis V historical strategy game mod partnership terms button icon. A compact Renaissance parchment partnership contract rolled open beside a brass divider compass and two small tied coin pouches, sealed with a dark teal wax seal. Rich realistic hand-painted game inventory illustration, warm ivory parchment, worn brown leather, subdued brass highlights; bold centered cohesive silhouette legible at 38 pixels. Square composition, isolated on actual transparent background with generous margins. No text, no letters, no numbers, no modern objects, no frame, no watermark."
+    },
+    {
+      "master": "commenda_agreement.png",
+      "transparent_background": false,
+      "prompt": "Use case: historical-scene. Asset type: original wide event illustration for a Renaissance merchant commenda partnership in a Europa Universalis V banking mod. Two late fifteenth-century Mediterranean merchants at a harbor counting-house table agree a voyage partnership; one places a modest wooden coin coffer beside a sealed parchment contract, the other indicates a sea chart, with a single merchant carrack visible through an arched opening. Restrained realistic oil painting in native grand strategy event-art style, warm ochre interior, muted teal sea, atmospheric daylight, period-appropriate wool and linen dress. Wide horizontal composition, coherent storytelling, no readable text, no letters, no heraldic branding, no modern objects, no watermark."
+    }
+  ],
+  "export": "tools/export_assets.py; manifest.json; deterministic BC3/DXT5 exports with preserved icon alpha; event illustration cropped to its native 1080x440 frame",
+  "review": "Masters visually inspected. This records artwork inspection, not in-game UI acceptance."
+}
