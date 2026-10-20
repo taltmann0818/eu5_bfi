@@ -185,10 +185,13 @@ class Accounting(unittest.TestCase):
             self.assertEqual((seller.cash,buyer.cash),before)
 
     def test_note_sale_proceeds_cannot_back_the_next_issue(self):
-        b=self.bank(charter=True,age=5,advances={'sovereign_banknotes'});p=Wallet(1000)
-        b.issue_notes(p,900,authorized=True)
+        b=self.bank(charter=True,age=5,advances={'sovereign_banknotes','central_bank_advance'});p=Wallet(1000)
+        cash=b.cash+p.cash;equity=b.equity;free=b.free_cash
+        b.issue_notes(p,200,authorized=True)
         with self.assertRaises(Rejected):b.issue_notes(p,100,authorized=True)
-        self.assertEqual((b.notes,b.excluded_issuance),(D(900),D(900)))
+        self.assertEqual((b.notes,b.excluded_issuance),(D(200),D(200)))
+        self.assertEqual((b.cash+p.cash,b.equity),(cash,equity))
+        self.assertLessEqual(b.free_cash,free)
 
     def test_receipt_backing_cannot_be_pledged_twice(self):
         b=self.bank(age=5,advances={'warehouse_receipts'});b.inventory['grain']={'quantity':D(10),'encumbered':D(0)}

@@ -7,7 +7,8 @@
 }
 # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
 bfl_recapitalize = {
-    if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 } }
+    if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 }
+        bfl_branch_access = { PARTY = overlord } }
         save_scope_as = bfl_bank
         overlord = { save_scope_as = bfl_party }
         set_variable = { name = bfl_equity_pool value = 0 }

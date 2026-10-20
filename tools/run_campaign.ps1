@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -41,6 +41,10 @@ try {
         'm7later' { 'tools/m7_later_suite.py' }
         'm7company' { 'tools/m7_company_suite.py' }
         'm7authority' { 'tools/m7_authority_suite.py' }
+        'm8' { 'tools/m8_monetary_suite.py' }
+        'm8traditions' { 'tools/m8_traditions_suite.py' }
+        'm8renaissance' { 'tools/m8_renaissance_suite.py' }
+        'm8absolutism' { 'tools/m8_absolutism_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId
@@ -57,6 +61,7 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
     if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm8') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
     # Activity assertions finish after three months, followed by a full annual
     # autosave interval. Native timed handsoff counts months, not years.

@@ -37,17 +37,23 @@ def generate(common,effect,loc):
     # Funded payment bill, not unsecured corporate credit or sovereign note issuance.
     # Root bank, saved payer bfl_party. Face is paid in before a bill is issued.
     bfl_issue_funded_bill = {
+        bfl_initialize_monetary = yes
         if = { limit = {
             bfl_can_originate_commercial_bill = yes bfl_valid_contract_parties = yes
+            bfl_branch_access = { PARTY = scope:bfl_party }
             bfl_has_contract_capacity = yes scope:bfl_party = { gold >= 100 }
+            scope:bfl_party = { OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 } }
         }
             save_scope_as = bfl_bank
+            scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = bfl_operation_guard
             set_variable = { name = bfl_contract_kind value = 1 }
             set_variable = { name = bfl_contract_amount value = 100 }
             set_variable = { name = bfl_contract_months value = 1 }
             bfl_allocate_contract = yes
-            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            scope:bfl_party = { add_gold = -100
+                if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+                    change_variable = { name = bfl_money_assets add = 100 } } } add_gold = 100
             change_variable = { name = bfl_other_payables add = 100 }
             change_variable = { name = bfl_cash_committed add = 100 }
             remove_variable = bfl_operation_guard
@@ -59,13 +65,16 @@ def generate(common,effect,loc):
         n=f'bfl_con_{i:02}'
         bills+=effect(f'bfl_redeem_bill_{i:02}',f'''
         if = {{ limit = {{ var:{n}_active = 1 var:{n}_kind = 1 var:{n}_state = 1
+            NOT = {{ has_variable = {n}_pledge }}
             exists = var:{n}_party country_exists = var:{n}_party var:{n}_party = scope:bfl_party
             bfl_period >= var:{n}_maturity_period gold >= var:{n}_basis
         }}
             save_scope_as = bfl_bank
             set_variable = {{ name = bfl_payment value = var:{n}_basis }}
             add_gold = bfl_negative_payment
-            scope:bfl_party = {{ add_gold = scope:bfl_bank.var:bfl_payment }}
+            scope:bfl_party = {{ add_gold = scope:bfl_bank.var:bfl_payment
+                if = {{ limit = {{ bfl_has_accounts = yes }} bfl_initialize_monetary = yes
+                    change_variable = {{ name = bfl_money_assets subtract = scope:bfl_bank.var:bfl_payment }} }} }}
             change_variable = {{ name = bfl_other_payables subtract = var:bfl_payment }}
             change_variable = {{ name = bfl_cash_committed subtract = var:bfl_payment }}
             set_variable = {{ name = {n}_state value = 3 }}

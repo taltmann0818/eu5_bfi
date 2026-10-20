@@ -1,0 +1,14 @@
+﻿bfl_join_clearing = {
+bfl_initialize_monetary = yes
+if = { limit = { bfl_can_originate_clearing = yes NOT = { has_variable = bfl_clearing_member }
+    exists = scope:bfl_clearing_operator country_exists = scope:bfl_clearing_operator
+    scope:bfl_clearing_operator = { bfl_clearing_operator = yes var:bfl_clearing_count < 4 } }
+    set_variable = { name = bfl_clearing_member value = scope:bfl_clearing_operator }
+    scope:bfl_clearing_operator = { change_variable = { name = bfl_clearing_count add = 1 } }
+}
+}
+bfl_leave_clearing = {
+if = { limit = { exists = var:bfl_clearing_member }
+        var:bfl_clearing_member = { change_variable = { name = bfl_clearing_count subtract = 1 } }
+        remove_variable = bfl_clearing_member }
+}

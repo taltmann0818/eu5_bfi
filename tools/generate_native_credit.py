@@ -20,6 +20,7 @@ def generate(common, effect, loc):
     common('scripted_triggers', 'credit_validation', '''
     bfl_credit_party_eligible = {
         exists = scope:bfl_party country_exists = scope:bfl_party
+        bfl_branch_access = { PARTY = scope:bfl_party }
         NOT = { this = scope:bfl_party }
         OR = {
             AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { country_type = location NOT = { bfl_is_company = yes } } }
@@ -51,7 +52,9 @@ def generate(common, effect, loc):
         f'var:bfl_cr_{i:02}_state != 1' for i in range(1, COUNT + 1)) + ' }'))
     common('script_values', 'credit_terms', '''
     bfl_credit_quote_rate = {
-        value = 0.03 add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
+        value = 0.03
+        if = { limit = { has_variable = bfl_lending_base } value = var:bfl_lending_base }
+        add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
         if = { limit = { scope:bfl_party = { monthly_balance < 0 } } add = 0.02 }
         if = { limit = { scope:bfl_party = { at_war = yes } } add = 0.02 }
         if = { limit = { scope:bfl_party = { total_debt > { value = monthly_income_total multiply = 12 } } } add = 0.02 }

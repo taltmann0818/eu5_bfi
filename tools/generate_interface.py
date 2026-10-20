@@ -288,7 +288,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
     funding = 'bfl_bond_contents = { }' + funding
-    investments='bfl_equity_investments = { }'
+    investments='bfl_monetary_contents = { }bfl_equity_investments = { }'
     investments+='bfl_goods_contents = { }'
     investments+='bfl_commenda_contents = { }'
     investments+=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))

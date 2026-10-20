@@ -1,17 +1,23 @@
 ﻿# Funded payment bill, not unsecured corporate credit or sovereign note issuance.
 # Root bank, saved payer bfl_party. Face is paid in before a bill is issued.
 bfl_issue_funded_bill = {
+    bfl_initialize_monetary = yes
     if = { limit = {
         bfl_can_originate_commercial_bill = yes bfl_valid_contract_parties = yes
+        bfl_branch_access = { PARTY = scope:bfl_party }
         bfl_has_contract_capacity = yes scope:bfl_party = { gold >= 100 }
+        scope:bfl_party = { OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 } }
     }
         save_scope_as = bfl_bank
+        scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
         set_variable = bfl_operation_guard
         set_variable = { name = bfl_contract_kind value = 1 }
         set_variable = { name = bfl_contract_amount value = 100 }
         set_variable = { name = bfl_contract_months value = 1 }
         bfl_allocate_contract = yes
-        scope:bfl_party = { add_gold = -100 } add_gold = 100
+        scope:bfl_party = { add_gold = -100
+            if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+                change_variable = { name = bfl_money_assets add = 100 } } } add_gold = 100
         change_variable = { name = bfl_other_payables add = 100 }
         change_variable = { name = bfl_cash_committed add = 100 }
         remove_variable = bfl_operation_guard

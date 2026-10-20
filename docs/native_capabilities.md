@@ -29,3 +29,10 @@ price and a zero refundable construction price, explicitly disclosed as
 non-refundable, so cancellation cannot put bank money into the operator's
 unrestricted wallet. Discovery changes activity metadata only. The corrected
 [native and visual acceptance gate](m7-commenda.md) passes: 292 engine assertions, 19 native arithmetic reconciliations, reload and 20 accepted captures. The green top-bar cargo opportunity alert uses current native quotes for estimated cost/surplus; only the acquired cargo’s measured sale can pay realized returns.
+
+M8 uses custom funded monetary claims over verified native gold transfers and
+country-owned records. It does not enable a native denomination, native note
+issuance or unmeasured native bank-to-bank loan adapter. The old P04/P05/P10
+product stubs are replaced by explicit reserve, third-bank bill collateral and
+atomic bill-netting services. Their [dedicated gate](m8-monetary.md) remains open;
+M0 evidence and an enabled research permission do not certify them.

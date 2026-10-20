@@ -1,5 +1,7 @@
 ﻿bfl_credit_quote_rate = {
-    value = 0.03 add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
+    value = 0.03
+    if = { limit = { has_variable = bfl_lending_base } value = var:bfl_lending_base }
+    add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
     if = { limit = { scope:bfl_party = { monthly_balance < 0 } } add = 0.02 }
     if = { limit = { scope:bfl_party = { at_war = yes } } add = 0.02 }
     if = { limit = { scope:bfl_party = { total_debt > { value = monthly_income_total multiply = 12 } } } add = 0.02 }

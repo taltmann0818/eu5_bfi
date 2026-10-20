@@ -81,6 +81,7 @@ def generate(common, effect, loc):
             scope:bfl_party = { if = { limit = { NOT = { has_variable = bfl_pool } }
                 set_variable = { name = bfl_pool value = 0 } } }
             if = { limit = { bfl_can_originate_demand_deposit = yes bfl_depositor_access = yes
+                bfl_branch_access = { PARTY = scope:bfl_party }
                 var:bfl_accept_deposits = 1 NOT = { has_variable = bfl_operation_guard }
                 scope:bfl_party = { bfl_deposit_pool_funded = yes NOT = { this = prev } }
                 OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } } }
@@ -274,6 +275,7 @@ def generate_offers(common, effect, loc):
             var:{n}_active = 1 var:{n}_state < 4 var:{n}_party ?= scope:bfl_party
             var:{n}_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:{n}_withdrawal_requested = 0 }}
             if = {{ limit = {{ scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:{n}_maturity_period
+                bfl_branch_access = {{ PARTY = scope:bfl_party }}
                 bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }}
                 set_variable = {{ name = {n}_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }}
                 set_variable = {{ name = {n}_maturity_period value = {{ value = bfl_period add = 12 }} }}

@@ -77,6 +77,9 @@ def fixture(token, fingerprint):
         '''
 
     start = f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
+    # Explicit debug-only M8 capital-branch prerequisites, before wallet baselines.
+    from m8_monetary_suite import grant
+    start += ''.join(grant("banking_office", bank, host) for bank, host in [('BRD', 'GEN'), ('BRD', 'VEN')])
     start += check('florence_exists', 'exists = c:FLO')
     start += 'c:FLO = { save_scope_as = bfl_party set_gold = 1000 }\n'
     start += 'c:BRD = { add_opinion = { target = c:FLO modifier = bfi_deposit_test_opinion }\n'
@@ -423,7 +426,7 @@ def collect(log, manifest, error_log=''):
         # Keep these diagnostics in the full local log, separately from logic errors.
         if 'message_handler' in line and 'Failed to find message type:' in line:
             continue
-        if (re.search(r'(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered|Badly read script value|Cannot read)', line, re.I)
+        if (re.search(r"(Error at|Unknown|Invalid|Failed|Could not find|does not exist|Error:|returned nullptr|already registered|Badly read script value|Cannot read|shouldn't be looking for)", line, re.I)
                 and re.search(r'(?:bfl_|bfi_|gui/(?:credit|economy_lateralview|technology_lateralview)\.gui)',line)):
             errors.append(line.split(']: ', 1)[-1])
     for block in re.findall(r'Script system error![\s\S]*?(?=\n\[|\Z)', error_log):

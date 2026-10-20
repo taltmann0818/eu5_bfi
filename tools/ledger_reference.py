@@ -129,7 +129,7 @@ class Bank(Wallet):
         # Queued claims are excluded from the reserve base; count them once.
         queued = sum((min(x.requested, x.claim) for x in self.deposits.values()), D(0))
         reserve = (self.liabilities - queued) * D('.25')
-        return max(D(0), self.cash - queued - reserve - self.buffer)
+        return max(D(0), self.cash - queued - reserve - self.buffer - self.excluded_issuance)
 
     def permitted(self, instrument, service=False):
         if service:
@@ -269,7 +269,9 @@ class Bank(Wallet):
     def issue_notes(self, recipient, amount, authorized=False):
         amount = money(amount)
         backing = max(D(0), self.cash - self.excluded_issuance - self.buffer)
-        if not authorized or not self.permitted('sovereign_note') or amount <= 0 or self.notes + amount > backing:
+        ceiling = min(max(D(0), self.equity * D('.25')), D(500))
+        if (not authorized or not self.permitted('sovereign_note') or amount <= 0
+                or amount % 100 or self.notes + amount > min(backing, ceiling)):
             raise Rejected('note authority/backing')
         # Sale of notes exchanges actual recipient cash for a redeemable liability.
         transfer(recipient, self, amount)

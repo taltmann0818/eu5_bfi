@@ -28,6 +28,9 @@ def fixture(token, fingerprint):
     def accept():
         return '''c:FLO = { save_scope_value_as = { name = bfl_venture_quote value = var:bfl_venture_offer_generation } bfl_accept_commenda = yes }'''
     start=f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
+    from m8_monetary_suite import grant
+    # Explicit admission setup, not evidence of autonomous construction.
+    start += grant('banking_office', 'BRD', 'GEN') + grant('banking_office', 'BRD', 'VEN')
     start+='''every_country = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes set_variable = { name = bfl_ai_equity_enabled value = 0 } }
         c:BRD = { overlord ?= { cancel_subject = prev } every_lent_loan = { cancel_loan = this }
             bfl_initialize_bank = yes remove_variable = bfl_legacy_servicing

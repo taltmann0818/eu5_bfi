@@ -949,28 +949,27 @@ Before last-headquarters loss or political transfer, reconcile native entity sur
 
 ### 15.1 Staged monetary services
 
-Common banking services do not unlock investment profiles. Basic mint support follows native minting prerequisites and exposed actions; observe its native fiscal effect instead of creating another mint revenue stream. Renaissance Commercial Bills supports legally permitted payment claims; Absolutism Sovereign Banknotes enables the chartered subject's authorized advanced regime.
+Common banking services do not unlock investment profiles. Basic mint support follows native minting prerequisites and exposed actions; observe its native fiscal effect instead of creating another mint revenue stream. Renaissance Commercial Bills supports funded payment claims; Absolutism Sovereign Banknotes enables an explicitly authorized issuer, independent or chartered. The [M8 contract](docs/m8-monetary.md) defines the shipping services and the canonical [coverage register](docs/coverage.md) records acceptance.
 
 Implement bills as explicit funded/accepted obligations with face, payer/issuer, holder, maturity, transfer restrictions, backing, and settlement state. Unless a tested native bill object exists, this is a mod contract, not an engine-wide new currency. New unsecured bill credit must stay within profile/borrower permissions; a bill cannot bypass corporate-credit or collateral gates.
 
-Private circulating claims require host authorization. Sovereign tender/note mandate requires the landed controller, State Chartered Bank, research, and applicable native law permissions. Independent legally authorized services remain distinct from sovereign note powers.
+Notes require explicit host authorization, the sovereign's completed Central Bank and the issuer's completed Bank Branch in the host's current capital. A chartered issuer also requires its live controller relationship. Both bank profiles retain researched common monetary services. New bank/sovereign business requires that bank's own completed current-capital branch; bank-to-bank business is exempt. Servicing old claims survives lost deeds or authority.
 
 ### 15.2 Banknote accounting and reserve provenance
 
-`bfl_issue_notes`, `bfl_redeem_notes`, `bfl_update_note_confidence`, and `bfl_set_note_authority` live in `bfl_monetary.txt`. The game wallet is native gold; note issuance is an explicit monetary abstraction whose permitted conversion into spendable gold must be recorded with a matching note liability. It is not evidence of native national denominations or universal FX markets.
+`bfl_issue_sovereign_notes`, `bfl_redeem_notes`, `bfl_update_note_confidence`, and `bfl_set_note_authority` live in `bfl_monetary.txt`. The game wallet remains native gold. The shipping contract exchanges 100 actual specie for a fully reserved note, with an identified current holder; it creates no spendable gold, seigniorage or universal vanilla currency.
 
-Issue only into an identified mod-managed payment/credit operation: increase outstanding face, record issuer liability and recipient/acceptance regime, create only the permitted spendable monetary amount once, then use the relevant separately verified native credit or custom bond service when financing a claim. For controller finance the asset remains a funded custom sovereign bond. Prevent reuse of the issuance step on command replay.
+Each issue increases bank cash, its note liability and its committed reserve by the same 100 gold. Bank holders record the matching monetary asset. Voluntary par transfer requires the new holder's acceptance and pays the old holder once. New sovereign counterparties repeat all relevant bank branch checks at execution. The incoming reserve is unavailable for lending, liquidity support or dividends and cannot expand its own issuance ceiling.
 
 ```text
-new_issue <= authorized_issue_ceiling - outstanding_face
-outstanding_face <= backing_multiple * eligible_preexisting_backing
-eligible_backing excludes own notes, new issuance cash, own shares,
-                    circular related-party claims and impaired assets
+outstanding_face + 100 <= min(25% * independent_equity, 500 gold)
+committed_note_reserve = outstanding_face
+holder_records <= 8
 ```
 
-If the engine cannot identify note provenance in vanilla spending, retain a conservative aggregate excluded-funding amount and eligibility haircut for mod operations. Never claim precise specie/note composition of every native payment. Note repayment/redemption reduces outstanding liability and retires the corresponding monetary abstraction exactly once under tested cash semantics; any coin payout is part of that same settlement, not an extra refund.
+Redemption pays the identified current holder from actual reserved cash, closes the holder asset and issuer liability/reserve once, and remains serviceable after authority or branch loss. Underfunding preserves the claim. Native payment composition is not tracked or claimed.
 
-Store redemption demand and confidence; apply calibrated `add_inflation`/verified native consequences only on issuance or specified monetary events, not every GUI display. Issuance is financing, never distributable earnings, and cannot provide its own backing. Restriction/default enters resolution; an unpaid note is not deleted merely to restore a reserve ratio.
+Fully reserved certificates apply no inflation effect. A reserve shortfall sets confidence to 25 and blocks new issuance; funded monthly assessment restores 100. Issuance is financing, never distributable earnings. Institution-wide default and recovery remain M9; no unpaid note is deleted to restore a reserve ratio.
 
 ### 15.3 Rate policy
 
@@ -984,11 +983,11 @@ Domestic transmission is a calibrated gameplay approximation using verified modi
 
 Common limited settlement liquidity is narrowly capped by amount, short duration, counterparty eligibility, and purpose. It cannot become unlimited long-term out-of-profile investment finance. Use native interbank loans only if both banks qualify as valid native lender/borrower; otherwise this bridge remains a probe, not a silently synthetic native loan.
 
-Absolutism Liquidity Facilities + Collateralization adds secured discount lending: verify solvency, haircut eligible collateral, reserve it once, price a penalty spread, and fund from actual charter-bank cash. Overlord support is a distinct paid fiscal transfer; permitted note-funded assistance follows the capped issuance service. A liquidity loan changes cash and debt but does not repair negative equity.
+Absolutism Liquidity Facilities + Collateralization adds a custom funded 75-gold, one-month advance against a separately funded 100-gold bill held at a third bank. One facility per borrower, a 25% haircut, protected cash/capital and an exclusive pledge bound exposure. Annual 6%, 9% or 12% policy is fixed at acceptance and divided by twelve, floored to cents. Early repayment releases the pledge; maturity pays the lender principal/fee first and returns actual surplus to the borrower. An underfunded issuer preserves both claims. Reserved note cash cannot fund support. Liquidity changes cash and debt without repairing negative equity.
 
 Revolutions Advanced Clearing can net **mod-managed accepted obligations** among registered participants at a shared cutoff. Calculate bilateral/net positions, reserve funded settlement capacity, pay matching debits/credits, retain residual defaults, and preserve an audit trail. It cannot net arbitrary unknown native payments or erase native loans by offsetting custom variables.
 
-Public Financial Backstops adds authorized broad crisis support and lender-of-last-resort procedure. It still requires funding, solvency/resolution distinctions, exposure caps, and instrument permissions. Equity subscriptions/loss allocation repair capital; emergency liquidity is not free recapitalization.
+Public Financial Backstops adds the same bounded secured support under a live charter, sovereign capital Central Bank and explicit current-manager consent, at at least 9% annually. Funding comes from the charter bank's free treasury. Broad guarantees, losses, institution-wide recovery and fiscal rescue remain M9. Equity subscriptions remain distinct paid capital; liquidity is not free recapitalization.
 
 ## 16. Crises and resolution
 
