@@ -1,30 +1,25 @@
 {
   "reviewed": "2026-10-20",
   "milestone": "M8",
-  "status": "Implemented; focused engine acceptance passed; full gate remains open",
-  "runtime_sha256": "b54cd1625c618c660be9579a12ba4cfd5a400297d88bfad31c8aaf45d5f36685",
+  "status": "Complete \u2014 pinned single-player baseline",
+  "runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
   "engine_report": "2026-10-20-m8-monetary.json",
-  "engine_assertions": 44,
-  "fixture_sha256": "afbf6c076cdaf050e508e6c5ec199851a1f00fe474542cdb4c422a594122a26e",
-  "run_token": "a3d897c15642406d88e05089420853f4",
+  "engine_assertions": 492,
+  "fixture_sha256": "43268367dd8219c1304f2cac99fd7f366f769adb673d9e9f1c097c371ec737ce",
+  "run_token": "f0f1cedacb6d43739995df568f769b1b",
   "natural_monthly_observations": 12,
   "second_process_reload": true,
   "ai_branches": "Independent and chartered AI fund real construction; duplicate prevention and natural completion pass. Chartered banks also build under human sovereigns.",
-  "offline_tests": 128,
-  "source_validation": "passed: 219 script/GUI/localization files, 68 registered graphics",
+  "offline_tests": 131,
+  "source_validation": "passed: 220 script/GUI/localization files, 68 registered graphics",
   "native_cmf_pins": "EUV 1.4.1 build 25905365 and CMF 2.5.0 matched",
   "deterministic_rebuild": "scripts, native GUI/interaction reconstruction and BC3 asset export: zero changed runtime files",
   "release_staging": {
-    "files": 288,
+    "files": 289,
     "scope": ".metadata, in_game, main_menu and thumbnail.png only"
   },
-  "visual_acceptance": "pending normal UI inspection; generated masters inspected separately",
-  "remaining_gate": [
-    "Negative age/research and authority/capital/deed matrix",
-    "Explicit public-support and all counterparty/player-role paths",
-    "Changed accounts/credit/treasury/goods/commenda regressions with explicit branch prerequisites",
-    "Normal UI consent/decline, populated/empty/locked/scrolling and both roles"
-  ],
+  "visual_acceptance": "2026-10-20-m8-ui.json",
+  "remaining_gate": [],
   "development_attempts": [
     {
       "runtime_sha256": "48e4e368013cb8b7779924d65aead00445963862178264e2fcfd4d00cf696bcb",
@@ -110,5 +105,148 @@
         "Failed: paid_ai_branches_complete_naturally"
       ]
     }
-  ]
+  ],
+  "m8_complete": true,
+  "engine_reports": [
+    {
+      "suite": "m8",
+      "report": "2026-10-20-m8-monetary.json",
+      "assertions": 77,
+      "runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+      "fixture_sha256": "43268367dd8219c1304f2cac99fd7f366f769adb673d9e9f1c097c371ec737ce",
+      "token": "f0f1cedacb6d43739995df568f769b1b",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m8traditions",
+      "report": "2026-10-20-m8-m8traditions.json",
+      "assertions": 9,
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "c89d9c0afdda1edbb5b65b3543c7bc1c8d29d1892819e953cc13952443c2cff3",
+      "token": "fd53df67f81e4ed9a87d193e9a3c06e3",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m8renaissance",
+      "report": "2026-10-20-m8-m8renaissance.json",
+      "assertions": 9,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "038b7e2d5aa06ccdc3e0f4d89d1fdff445bf8687e8304f8aef2106c94c908fac",
+      "token": "5ee3549a39be48a1b478bce23d1c85ce",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m8absolutism",
+      "report": "2026-10-20-m8-m8absolutism.json",
+      "assertions": 9,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "95175a703b525732b9b19b8d337b2e678a0d0019d310e92f1f7d1a6f15a3f376",
+      "token": "b82d034ba4fa4bfabd68356f5ad00da4",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "accounts",
+      "report": "2026-10-20-m8-accounts.json",
+      "assertions": 114,
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "4ea62118adab8f5784066215fc76758cb10fe2e1f6ae4184ccd86a04b0135404",
+      "token": "9f0f4630efcf46be9417342a713f57a9",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m3",
+      "report": "2026-10-20-m8-m3.json",
+      "assertions": 46,
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "9781fbc69e7f45a918718c410dfc0dada4b074c7653497fcdae2d75e6909b59c",
+      "token": "b5e7bd833edd4bdda7f93de5ebb2cc46",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m4",
+      "report": "2026-10-20-m8-m4.json",
+      "assertions": 43,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "bb3d0b23558fd6e4caa0ebd1e9196696818a89578e6e99cf77658a0e5960cec4",
+      "token": "0aed8409c6464951b4123fe263f3bc2b",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m5",
+      "report": "2026-10-20-m8-m5.json",
+      "assertions": 54,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "fce34cfb7f2e2f66df4f76c37494c2e6d7aabe2f03c1294fb5e895f086bfc5c6",
+      "token": "bd3ffff9765e45148da2388001d1e485",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m6",
+      "report": "2026-10-20-m8-m6.json",
+      "assertions": 43,
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "027c6d8df0c12dd45d36f967d8b323e8d96b2d6f4db2237fc6ca766fc593512e",
+      "token": "592971ed1ea54e30a58b1ea2afc62048",
+      "native_arithmetic": 7
+    },
+    {
+      "suite": "m6policy",
+      "report": "2026-10-20-m8-m6policy.json",
+      "assertions": 16,
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "8eaefc267aac7067104300a7802e4f9950524475430e349589628bcfec04ae55",
+      "token": "a421b94ece8b48a79533db88f254abf8",
+      "native_arithmetic": 0
+    },
+    {
+      "suite": "m7",
+      "report": "2026-10-20-m8-m7.json",
+      "assertions": 36,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "ef3ac2a38da8282af7c7e3a9ad8ef3b0ae58b64d26729a28a58ab7558533e2bc",
+      "token": "11d3bb7466d14429ab072f2020e590fb",
+      "native_arithmetic": 6
+    },
+    {
+      "suite": "m7later",
+      "report": "2026-10-20-m8-m7later.json",
+      "assertions": 36,
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "fa1236be20cb9a49775d5c2cb8c4efd425aa03848df16d7c78c62af5f82354d9",
+      "token": "ad74842562ff4d218ec404d7b0ed8028",
+      "native_arithmetic": 6
+    }
+  ],
+  "goods_catalogue_round_trips": 75,
+  "runtime_evidence_boundary": {
+    "shipping": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+    "presentation_build": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+    "prior_accounting_build": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+    "shipping_vs_presentation": [
+      "in_game/common/scripted_triggers/bfl_roles.txt"
+    ],
+    "shipping_vs_prior": [
+      "in_game/common/generic_actions/bfl_monetary.txt",
+      "in_game/common/scripted_guis/bfl_monetary.txt",
+      "in_game/common/scripted_triggers/bfl_roles.txt",
+      "in_game/gui/bfl_monetary.gui",
+      "main_menu/localization/english/bfl_finance_l_english.yml"
+    ],
+    "explanation": "All cash/claim/accounting, branch construction/admission and product permission services are byte-identical. Four UI/action-wrapper files corrected selector launch and help. The fifth file uses optional profile/state comparisons to reject uninitialized banks cleanly; initialized valid profile/state behavior is unchanged. The full 77-case monetary suite and a clean independent cold startup are repeated on shipping. Each retained regression keeps its actual runtime; no claim that all 492 assertions ran on shipping."
+  },
+  "diagnostic_boundary": "Native baseline diagnostics retained in individual reports. The economy bankrupt and maintenance concepts and Credit loan concept are separately source-verified unchanged native markup. Only their exact signature and same-location property errors are classified as native. Historical failed reports remain historical; no BFI scope/GUI error is excused.",
+  "fixture_corrections": [
+    "Required completed capital branches explicitly granted before baseline wallets in affected older suites; debug grants do not prove AI construction.",
+    "M8 persistence target corrected to the actual current bill holder before redemption; monthly claim assertions retained.",
+    "M5 controlled 12% native-loan return benchmark freezes unrelated branch AI capital spending; price/return requirements unchanged.",
+    "M7 expedition prerequisite includes bank-owned Genoa capital branch; native preparation, exploration attribution and sale assertions unchanged."
+  ],
+  "excluded_attempts": [
+    "Rejected or incomplete development runs are excluded. Passed retained regressions are identified individually in engine_reports with their actual runtime hashes and explicit source-difference boundary.",
+    "Initial expanded fixture had a missing newline; corrected fixture then exposed its stale redemption party. Both excluded.",
+    "Initial independent UI process crashed at startup with native access violation; restarted process supplies accepted observations. No failed startup counts as a pass."
+  ],
+  "scope": "M8 products and changed-product regressions at EUV 1.4.1 build 25905365 / CMF 2.5.0. M9 institution-wide recovery and M10 release-wide balance, languages, scales and performance remain separate.",
+  "visual_observations": 25,
+  "native_arithmetic_reconciliations": 19
 }

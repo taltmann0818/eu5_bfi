@@ -1,0 +1,373 @@
+{
+  "recorded": "2026-10-20",
+  "passed": true,
+  "method": "Windows computer control through computer-use skill; observed screenshots and normal mouse controls in isolated disposable campaigns",
+  "game": "EUV 1.4.1 / build 25905365",
+  "cmf": "2.5.0",
+  "display": {
+    "width": 2560,
+    "height": 1440,
+    "language": "English",
+    "scale": "native default",
+    "debug_mode": true
+  },
+  "shipping_runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+  "campaigns": {
+    "controller_transactions": {
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "suite": "M8 visual acceptance",
+      "state": "populated",
+      "role": "controller"
+    },
+    "independent_transactions": {
+      "token": "4f878be333b846a59e17891d083393b1",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "suite": "M8 visual acceptance",
+      "state": "locked",
+      "role": "independent"
+    },
+    "independent_final": {
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "suite": "M8 visual acceptance",
+      "state": "populated",
+      "role": "independent"
+    },
+    "controller_final": {
+      "token": "123aa16d02b84710a77f840e95b76ae2",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "54d7a770a6766a1c766292cd522b0d869e0b1807fbeed4a9a052dac3c32fa829",
+      "suite": "M8 visual acceptance",
+      "state": "populated",
+      "role": "controller"
+    },
+    "independent_startup": {
+      "token": "6794b26ed96b4a29ba99db0fe6481e41",
+      "runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "4df5fca16ce080cd7ea719c535cf3130a35611d70fce38f5f32c7f7c74b2531a",
+      "suite": "M8 visual acceptance",
+      "state": "populated",
+      "role": "independent"
+    }
+  },
+  "captures": [
+    {
+      "file": "docs/screenshots/2026-10-20-m8-controller-policy.jpg",
+      "sha256": "ef0a735213ea415a8ca02bbbc8aa9b0c8a4dd614a4c1e72dcc86aa16b0b259d7",
+      "source_png_sha256": "8d3bfaf266c7ba0074217e31e5dae08576d9868910ebd14f53cdfbb9ed6b53e7",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Normal Policy changes lending 3% to 6%, discount 6% to 9%, and pauses new acceptance. Bank cash remains 10125; notes remain 200.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-revoked-authority.jpg",
+      "sha256": "30ef02c328a809e7e7c17197d70ab506a9b0bdec05620f68ab53de623d81ee91",
+      "source_png_sha256": "3f61c499c68b2ca470a3be81ac86a0d28d4ad5b3f1259338e19df52bf69a5ea4",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Normal revoke disables new note acquisition; redemption remains available for existing claims.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-empty-ledger.jpg",
+      "sha256": "55de633a68a866a172aa66da91f35a95ee991a4254cb0d221e2a9c9b1ee86e85",
+      "source_png_sha256": "2f71c6155f781e87fd11cecdc1034582fa5793e6eea4a0d1454447f54280070c",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Normal redemption after revocation returns 200 to Florence: sovereign 10000, bank 9925, no notes/reserve, 75 secured monetary assets; equity unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-funded-note.jpg",
+      "sha256": "ce3f208a66940e7fb6f04ea156c5d25a995ec7dad7ed9c1226dc092797ae22fd",
+      "source_png_sha256": "ddf162f51b21be90f466c1d1c3ed394032fce4e0868f9d4fe2547c9196dae05a",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Normal authorize and acquire exchanges 100 sovereign specie for reserved notes: Florence 9900, bank 10025; equity 10400. Requirements tooltip is localized.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-public-consent.jpg",
+      "sha256": "3b482583c20a917c5594b0e79dba5d198eed4ff62ec7dd1683a2a2fe462b3898",
+      "source_png_sha256": "f2f0304055d9f103204bca4702ca5abf7aec9846cafdcb27b7b58aa336dd0cca",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Production secured-support consent dialog displays original artwork, 75-gold advance, collateral/haircut and accept/decline options.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-public-funded-ledger.jpg",
+      "sha256": "d872d7c2ea2641be056d29e98758b8681cdcf50067ead4dadf58ff87e49aba45",
+      "source_png_sha256": "ec0ae163fb923f91fdc5242ec384efca6b7e1deeb6464d0a6067d9c521837b85",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Normal consent pays 75 from bank cash (10200 to 10125), records 75 asset, and leaves sovereign 9800 and note reserve 200 unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-long-ledger.jpg",
+      "sha256": "ca70c4ede7533ac971f16b57d923309b49d7648e9c3a2cdf82bbf180f2e9956d",
+      "source_png_sha256": "3a9ebe3b99d3c73aba2d5505bb8abecfc065463736ef3b427b1b221adfb4c749",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Eight-row note-holder tooltip is readable at 2560x1440 with full row count. Explicit test-only ceiling 1000 permits 800 notes; this is capacity presentation, not production cap acceptance.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-native-bank-branch.jpg",
+      "sha256": "65cecac1e10b648fc3eadc12b3147564e1d57bc4b2bfd1bf59aa5320ff8e76b9",
+      "source_png_sha256": "c310e64ebf5020328e37d085b5456e47e7b1ffd51755e29eb279f49346904e50",
+      "campaign": "controller_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "a4303b39d48a8d9857f57cc40b20b9e59da65eb760203b5e77f3d16c4c84118d",
+      "token": "8239c3913d1a4c49a7e4a463a8a575f9",
+      "observed": "Native foreign-building tooltip reads Bank Branch in Fiorenza, level 1/1, Bardi-owned, 100/100 employment, and native maintenance 0.07.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-locked.jpg",
+      "sha256": "b527e3052cd02e8641a60bc658b867ac1dfc5407512f6154191e15cf6cfa43e3",
+      "source_png_sha256": "801307460bdeabddf2ba6c828f13d858f6d03948dd032a126620c26c9fb32bf5",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Missing-research independent scene: gray Acquire click leaves bank cash 10000. Readable tooltip explains research and sovereign role.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-clearing-locked.jpg",
+      "sha256": "c7c5506ebbea256798cb1d6ba4a25e6545250f69ae5a61026884af7b41acb42f",
+      "source_png_sha256": "8256c2a71ca537645ebd3fefdd7b139d56a41490a1669587a09e0768560301a2",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Missing-research clearing admission is disabled; clicking leaves bank cash 10000 and panel state unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-consent.jpg",
+      "sha256": "9cb550b61f9f62ebf16dfcdc7de454fbe45ce3feafbcb7c9720788474a440150",
+      "source_png_sha256": "9981c4cf8ee64866e9936514ebe59c09b89a4c434bfdc5b8cf84f29b3ca98332",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Production independent-bank secured-credit dialog displays terms and Fund/Decline after explicit test-only counterparty/collateral staging.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-declined.jpg",
+      "sha256": "8d0db1ae8125587547bd8b2619fd2b24c94e7a9514575f86a8d050c812cca57e",
+      "source_png_sha256": "c24ada44e60446a49d7d4537dc41396587a07e0899b0fe33e0489d296222265a",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Normal Decline leaves independent bank cash 10000, zero monetary assets and equity 10400.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-funded.jpg",
+      "sha256": "2bf1006c8d125c61c25ef96ab3665ac59e10136508d61b37c628eba144b56a9b",
+      "source_png_sha256": "810cd534258864480715e340ce22aa89808f8ba5d7521507426de772cbf78391",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Second production request accepted normally: bank cash 9925, secured monetary asset 75, equity 10400.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-policy.jpg",
+      "sha256": "e38821c62657b01457f7c3573f896e7f8a50de83d6a7de96de3fca096ebb9322",
+      "source_png_sha256": "58311197f481f25ecbd23e57617139a63af48e0d85f84a7dfa3bcdb9d67be87e",
+      "campaign": "independent_transactions",
+      "runtime_sha256": "bb43bba521ee3c8dfd9d5bc771507b0fd156cec6fd70116c00eecf9640f6bcc0",
+      "fixture_sha256": "d56728b5eddb62e5ad78be09dbdd3a85a4a61a6ca7d79cc2ac76f73f2399020e",
+      "token": "4f878be333b846a59e17891d083393b1",
+      "observed": "Normal lending and discount controls change future settings to 6%/9%, with cash 9925 unchanged and readable fixed-accepted-fee help.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-controller-compact-final.jpg",
+      "sha256": "f9bb1204efa701abe242a8f6460a59d8a53b4e620014e0254b1045b80b6c7823",
+      "source_png_sha256": "740232ece0f892ec6beb085055e5c5e22c859fd9b480eaf56cf1f1d3257a2ead",
+      "campaign": "controller_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "54d7a770a6766a1c766292cd522b0d869e0b1807fbeed4a9a052dac3c32fa829",
+      "token": "123aa16d02b84710a77f840e95b76ae2",
+      "observed": "Final cold-loaded Florence controller: compact Money & settlement card uses original art, shows 200 notes and 6% discount. Bank cash 10200, liabilities 300 and equity 10400 are clearly separated from sovereign cash 9800.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-controller-policy-final.jpg",
+      "sha256": "b88b3f1ef956a0c1ab57b8d93ccd7be6aae4df51fc8c93a290302a405d7dfad2",
+      "source_png_sha256": "27a66b3acb44393cac5867e3f5847c2fd3f6b58604d9c08750336d438d4b8356",
+      "campaign": "controller_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "54d7a770a6766a1c766292cd522b0d869e0b1807fbeed4a9a052dac3c32fa829",
+      "token": "123aa16d02b84710a77f840e95b76ae2",
+      "observed": "Normal final-build policy command changes new lending base 3% to 6%; bank cash remains 10200, notes 200, equity 10400. Tooltip explicitly states annual rates and unchanged accepted contracts.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-controller-selector-final.jpg",
+      "sha256": "a606ea5d6e42c9bd75e94b661315fb902935df6546f6ede1ca5fd68322581f27",
+      "source_png_sha256": "425f813c59cf67ae63315c38a3d26eb7d5509731b7dd2cbd4d2d38a94724facb",
+      "campaign": "controller_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "54d7a770a6766a1c766292cd522b0d869e0b1807fbeed4a9a052dac3c32fa829",
+      "token": "123aa16d02b84710a77f840e95b76ae2",
+      "observed": "Normal Request secured settlement credit opens the native searchable country selector with bank names and flags on the final runtime. No transaction is funded by opening it.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-controller-cancel-final.jpg",
+      "sha256": "d5a8a99248c7a76d084e581101785a27c3115d1d70bb2cbf64c6107f25980d13",
+      "source_png_sha256": "2fbdbec438df2cc8960b0eb5446b7ccb0eb4dc814e7b5b6ca53fc0982c7af6e5",
+      "campaign": "controller_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "54d7a770a6766a1c766292cd522b0d869e0b1807fbeed4a9a052dac3c32fa829",
+      "token": "123aa16d02b84710a77f840e95b76ae2",
+      "observed": "Native selector closed with its X; reopened Credit shows bank cash 10200, notes 200, equity 10400 and sovereign cash 9800 unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-policy-final.jpg",
+      "sha256": "f99583e7b2e5309f74773b963766a2b4dd10f51b02278ced016c2c9db8bfe424",
+      "source_png_sha256": "eba025420d3881777ba695bed2b90477b36a5b4d3669e9d6f739b7489e0a2aab",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "Final cold-loaded independent bank: normal discount command changes future annual rate 6% to 9%, cash remains 10200, notes 200 and equity 10400. Fixed accepted-fee tooltip is localized.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-consent-final.jpg",
+      "sha256": "cae70e4df6c5537015d4d2b45959a23e600650b33469af0fa1518c05e7157aff",
+      "source_png_sha256": "b4cc1fda745696a7168b414ab261e4726f21b549e8336f1de043be871ca3e895",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "After explicit disposable counterparty/collateral staging, production consent dialog displays original painting, 75-gold advance, funded 100-gold third-bank bill, 25% haircut, annual rate/maturity and Fund/Decline options.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-declined-final.jpg",
+      "sha256": "50881fba363efd6654580b353633f838ef6702f212ce8ec0d1566f324e3a17ca",
+      "source_png_sha256": "7d7d136bd6d423ee9de9f198c318d54c3dc63ec8d35179cb762d129513e375a5",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "Normal Decline returns to Credit with bank cash 10200, assets 10700, liabilities 300, equity 10400 and notes 200 unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-selector-final.jpg",
+      "sha256": "d19639ca90dd61074920497a835587e47573a610f8b824c5b73881e60de6da82",
+      "source_png_sha256": "5bb7306095a212089f3d22d0beb6778df237a3c9fcc240b0cec972027e6c4ca1",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "Normal secured-credit button opens the final native searchable selector with eligible Peruzzi and disabled Acciaioli after explicit fixture research/profile staging. Self is excluded by the independent actor's native selector.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-cancel-final.jpg",
+      "sha256": "0245cb080560af471273d2ed514ab45e8a81d24191877877bb677fdc75211b2d",
+      "source_png_sha256": "bbf52bc3bbd149fc6449027cbdfb22b21bdbccbb4ca1d2a92d7fa9d505a40660",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "Cancelling the independent native selector and reopening Credit leaves bank cash 10200, notes 200 and equity 10400 unchanged.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-bill-buyer-locked-final.jpg",
+      "sha256": "ff542293491caea8453f0f6fc0d1163d58432a84124481c4eae34ad08b6620b4",
+      "source_png_sha256": "b3ccbc7bac63c2f8b504624dbc38c4c07bac47c355b547c72f032c52f8cae309",
+      "campaign": "independent_final",
+      "runtime_sha256": "2025c864ce581b15424446345ab0a6261b3822da17ee1c27b33ff11c7343a15d",
+      "fixture_sha256": "bf8e01fec20301ec12e499ccc1e9cf9548b695bbf3bb0d210517f4ba033f43f7",
+      "token": "b352e45dc5134d55afbdcd18106918a7",
+      "observed": "Bill-sale issuer picker opens with localized terms. Clicking Acciaioli is blocked with native 'There are no Countries possible to select for this' because this scene has no accepting buyer. No second-stage success or transfer is claimed; par transfers have separate engine assertions.",
+      "passed": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m8-independent-startup-guard.jpg",
+      "sha256": "03a8e2fb5406c9e0e232ef51cf1d2d20cde0a03cbd709812afb813fa5af35efb",
+      "source_png_sha256": "b4f685b00fbf74a0628b506fda82aaef80667f7cbaafab370fb28b9e0a29757e",
+      "campaign": "independent_startup",
+      "runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+      "fixture_sha256": "4df5fca16ce080cd7ea719c535cf3130a35611d70fce38f5f32c7f7c74b2531a",
+      "token": "6794b26ed96b4a29ba99db0fe6481e41",
+      "observed": "Shipping cold startup: normal Merchant specialization, Credit and Policy open correctly. Discount cycles from 6% to 9%; cash stays 10200, notes 200, liabilities 300, equity 10400. Complete startup logs pass the same BFI diagnostic policy after optional profile/state guards are repaired.",
+      "passed": true
+    }
+  ],
+  "observations": 25,
+  "image_processing": "Full-resolution JPEG quality 92, no chroma subsampling; no crop, resize, redraw or compositing. Original PNG SHA-256 retained; original captures archived locally, not packaged.",
+  "fixture_boundary": "Explicit test-only age/research/funds/building grants establish scenes. Test-only decisions prepare collateral or eight-row capacity. They do not prove ordinary research, construction, profit or AI. Actual funded transactions, consent/decline, policy commands, scrolling and selector/cancel navigation use production controls. No fixture decisions ship.",
+  "runtime_boundary": "Earlier bb43 transaction/component captures retain their exact runtime and fixture hashes. Accounting, admission, collateral and AI services are byte-identical to shipping. Later UI corrections add actor-owned generic action wrappers using target_1, explicit readiness gates and localized help. Final cold starts of both roles verify corrected entry points; final engine reports independently exercise shipping accounting. The last roles-file change uses optional profile/state comparisons before initialization; initialized valid-state behavior is unchanged. The independent_startup capture and diagnostics verify this repair on shipping.",
+  "excluded": [
+    "Old controller compact capture predates accepted accounting runtime.",
+    "Intermediate 783 and b870 selectors did not open; neither is accepted as positive UI evidence. The native parser reserved recipient in owncountry actions; shipping wrappers use target_1. Collector now rejects that diagnostic.",
+    "Initial independent startup native access violation excluded; successful retry supplies transaction captures."
+  ],
+  "remaining": [],
+  "startup_check": {
+    "passed": true,
+    "runtime_sha256": "01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c",
+    "token": "6794b26ed96b4a29ba99db0fe6481e41",
+    "fixture_sha256": "4df5fca16ce080cd7ea719c535cf3130a35611d70fce38f5f32c7f7c74b2531a",
+    "bfi_errors": [],
+    "native_baseline_diagnostics": [],
+    "log_sha256": "34cda23a5d8c2a89ab8379aeaf6993673f26686d805adbf68dea97ce87aba409",
+    "scope": "Computer-controlled independent cold startup, normal Merchant specialization and Credit/Policy inspection. This is a diagnostics inspection, not a synthetic gameplay assertion or monthly/reload pass.",
+    "known_nonblocking_metadata": [
+      "Hidden specialization events 109/111/112/113 have native missing-title metadata warnings; no shown event uses those titles. Optional notification message definitions remain native diagnostics."
+    ]
+  },
+  "component_log_boundary": "Earlier independent UI scenes exposed missing profile/state diagnostics in background equity AI before bank initialization. Their captures establish the stated observed controls/transactions only. They are not clean-startup acceptance; the fresh shipping startup replaces that claim."
+}

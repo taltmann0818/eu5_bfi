@@ -1,9 +1,9 @@
 # M8 monetary services and capital Bank Branches
 
-This PR targets M8. Runtime implementation and focused engine development runs
-are distinct from full milestone acceptance. M8 remains **implemented / needs
-acceptance** until every gate below has passed on the final shipping runtime.
-Historical M0–M7 evidence does not certify these changed admission rules.
+M8 is **complete for the pinned single-player baseline**: EUV 1.4.1 / build
+25905365 with separately installed CMF 2.5.0. The [validation register](../tests/results/2026-10-20-m8-validation.json)
+separates 492 licensed-engine assertions, normal UI inspection, offline checks
+and package staging. M9 recovery and M10 release-wide integration retain their own gates.
 
 ## Player behavior
 
@@ -14,7 +14,7 @@ paired native controls for acceptance, future loan/discount rates, note authorit
 issuance/redemption, clearing admission/settlement, facility repayment and
 counterparty selection. The design follows M6's compact summary, expandable
 policy controls and scrollable hover ledger. English labels and four original
-paintings accompany the generated runtime; visual acceptance remains separate.
+paintings accompany the generated runtime; actual-game visual acceptance is recorded below.
 
 Native `banking_office` is localized as **Bank Branch**. Native construction,
 relations, foreign ownership, employment, maintenance and income stay native.
@@ -92,47 +92,85 @@ than a second registry.
   building/authority loss or departure from the group; admission creates no CCP
   guarantee.
 
-## Focused accepted evidence — 20 October 2026
+## Accepted evidence — 20 October 2026
 
-[44/44 licensed-engine assertions](../tests/results/2026-10-20-m8-monetary.json)
-pass on shipping runtime `b54cd1625c618c660be9579a12ba4cfd5a400297d88bfad31c8aaf45d5f36685`.
-This includes funded notes and par transfers, current-holder redemption,
-reserve shortfall, third-bank bill discounts, immutable accepted fees and
-surplus, matching net settlement/short-member retry, paid branch construction
-for both bank roles, duplicate prevention, natural completion, twelve separate
-monthly observations and second-process reload. The
-[validation register](../tests/results/2026-10-20-m8-validation.json) preserves
-fixture provenance and explicitly excludes rejected development attempts.
-128 offline tests, source/native pins, deterministic script/UI/asset rebuilding
-and 288-file release staging pass separately. This focused path does not close
-the full gate below. Normal UI acceptance remains pending.
+**492/492 licensed-engine assertions** pass across twelve disposable campaigns.
+Shipping runtime is `01f3a2b812221303037c156bc8d0994a62c3c9e1eeb7bf2458ef45604c1c5f4c`. The 77-case monetary suite repeats on shipping;
+retained regressions keep their actual hashes. Transaction/accounting, branch and
+permission services are byte-identical; four selector/help files and optional
+profile/state guards distinguish the earlier builds. The latter reject a bank
+before initialization without changing valid initialized behavior. Each run has
+its own token, fixture hash, natural monthly phase and second-process reload;
+the [validation register](../tests/results/2026-10-20-m8-validation.json) lists the exact
+file differences, reports and native diagnostic classifications. This is not a
+claim that all assertions ran on the same runtime.
 
-## Acceptance gate and evidence boundary
+| Campaign | Assertions | Evidence |
+| --- | ---: | --- |
+| m8 | 77 | [Report](../tests/results/2026-10-20-m8-monetary.json) |
+| m8traditions | 9 | [Report](../tests/results/2026-10-20-m8-m8traditions.json) |
+| m8renaissance | 9 | [Report](../tests/results/2026-10-20-m8-m8renaissance.json) |
+| m8absolutism | 9 | [Report](../tests/results/2026-10-20-m8-m8absolutism.json) |
+| accounts | 114 | [Report](../tests/results/2026-10-20-m8-accounts.json) |
+| m3 | 46 | [Report](../tests/results/2026-10-20-m8-m3.json) |
+| m4 | 43 | [Report](../tests/results/2026-10-20-m8-m4.json) |
+| m5 | 54 | [Report](../tests/results/2026-10-20-m8-m5.json) |
+| m6 | 43 | [Report](../tests/results/2026-10-20-m8-m6.json) |
+| m6policy | 16 | [Report](../tests/results/2026-10-20-m8-m6policy.json) |
+| m7 | 36 | [Report](../tests/results/2026-10-20-m8-m7.json) |
+| m7later | 36 | [Report](../tests/results/2026-10-20-m8-m7later.json) |
 
-`tools/m8_monetary_suite.py` and `tools/run_campaign.ps1 -Suite m8` stage disposable
-licensed-engine assertions, twelve separate natural monthly observations of an
-open reserved note, and second-process reload. Debug construction grants are
-identified in the fixture and establish transaction prerequisites only; they
-cannot establish paid AI construction or natural completion.
+The 77-case monetary campaign covers clean rejection before initialization,
+funded notes/caps/transfers/redemption,
+prospective annual rates and fixed fees, exclusive third-bank collateral,
+early repayment and lender-first maturity, live public-support consent,
+atomic two- and three-member netting, a fifth-member rejection, short-member
+preservation/retry, stale offers and authority, native Request Loan/Take Over
+execution, capital relocation/deed loss and servicing. Both independent and
+chartered AI banks pay for their selected native capital branches, prevent
+duplicate orders and complete construction naturally. Twelve distinct monthly
+observations and a second-process reload preserve a live reserved note.
 
-Required before **M8 complete**:
+Traditions, Renaissance and Absolutism campaigns exercise the negative and
+positive research/age/building/profile matrix. Accounts, credit, treasury,
+ownership, goods and Discovery/Revolutions commenda regressions pass with explicit
+capital-branch prerequisites. The policy campaign additionally executes all
+75 native goods through funded 123.45-unit round trips. Its catalogue count is
+separate from named assertions; both commenda reports preserve their six native
+arithmetic reconciliations.
 
-- Final-runtime native assertions for notes/caps/acceptance/redemption, annual
-  rates, fixed accepted fees, third-bank collateral/encumbrance, public authority,
-  net clearing, short-member preservation, replay and active-claim reload.
-- Negative age/research, profile/role, building, authority, capital relocation and
-  deed-loss cases; both independent and chartered bank paths.
-- **Focused positive AI path passed:** paid independent/chartered branch selection,
-  no duplicate construction and natural completion. Native interaction bypass,
-  broader capital relocation and deed-loss combinations still require acceptance.
-- Changed accounts/credit/treasury/goods/commenda regressions, with the new branch
-  prerequisites supplied explicitly in fixtures rather than weakening admission.
-- Normal UI consent/decline, populated/empty/locked ledger, current setting
-  feedback, both player roles, native Bank Branch naming, artwork, scrolling and
-  disabled requirements. `tools/prepare_m8_ui.py` prepares disposable scenes.
-- Source/native pins, deterministic script/GUI/asset generation, offline checks
-  and release staging. No queued CI or source inspection counts as engine/visual
-  acceptance.
+## Normal UI acceptance
 
-Development attempts are not accepted shipping evidence. The PR description and
-coverage register must identify outstanding gates when these checks are pending.
+[Capture provenance and observed actions](../tests/results/2026-10-20-m8-ui.json)
+and the [screenshot index](screenshots/README.md#m8-monetary-services-and-bank-branches)
+record computer-controlled disposable Florence-controller and independent-Bardi
+campaigns at 2560×1440 in English. Compact card, original art, expanded Policy,
+rate/acceptance feedback, empty/populated/eight-row ledgers, disabled requirements,
+native counterparty selectors, consent/decline, funded asset accounting, note
+authority/revocation/redemption and native Bank Branch naming are inspected.
+Every capture identifies its runtime and fixture. The earlier transaction captures
+precede selector/tooltip corrections; both cold-loaded player roles verify the
+corrected UI. A further fresh independent startup verifies the optional-field
+guard repair with no BFI-attributed script errors. Earlier independent captures
+establish observed controls and transactions, not clean startup logs.
+
+Fixture grants establish age, research, starting funds and completed buildings;
+they do not prove ordinary progression or AI construction. The eight-note display
+uses an explicit test-only 1000-gold ceiling override to exercise every holder row;
+the production cap remains 500. Test staging decisions are excluded from the mod.
+Consent, decline, rate changes, note commands, selector navigation and scrolling
+use normal controls. Failed startup/development attempts are excluded.
+
+## Build and evidence boundary
+
+131 offline tests, 220-file source validation, 68 registered graphics, matched
+native/CMF pins, deterministic script/GUI/BC3 rebuilding and 289-file release
+staging pass separately. No licensed assets, saves or full logs are committed.
+Exact native localized-concept diagnostics remain visible in reports and are
+classified by the documented narrow baseline; BFI errors still fail collection.
+Queued GitHub jobs are not counted as local passes.
+
+No M8 gate remains open for this pinned baseline. Fully reserved certificates do
+not replace vanilla gold payments. Broader guarantees, institutional destruction,
+creditor recovery and fiscal rescue belong to M9; release-wide AI balance,
+performance, languages and additional scales/mod combinations belong to M10.

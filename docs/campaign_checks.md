@@ -95,6 +95,13 @@ For interactive debugging, stage the scripts with `python tools/campaign_suite.p
 
 ## GitHub Actions
 
+M8 adds `m8`, `m8traditions`, `m8renaissance` and `m8absolutism` to the licensed
+runner matrix, alongside the changed-product regressions (including Discovery
+and Revolutions commenda). Run the same suites locally with
+`./tools/run_campaign.ps1 -Suite <suite>`. The [M8 acceptance record](m8-monetary.md)
+separates native assertions from computer-controlled normal UI inspection;
+`tools/prepare_m8_ui.py` stages isolated scenes with explicitly test-only grants.
+
 Every PR triggers `Florence campaign functionality`, with separate `accounts`, `m0`, `m1`, `m2`, `m3` and `m4` suite jobs. The [M1 suite](m1-charter.md) establishes the sovereign command actor, creates ten real native banks for pagination, runs production/event-option services and native AI, observes twelve periods and reloads. It passes 58 assertions on the recorded runtime. Same-repository branches run the engine job on a Windows x64 runner labeled `euv-1.4.1` and `cmf-2.5.0`. Set runner environment variables `EU5_GAME_ROOT` and `EU5_CMF_ROOT` to the local licensed installations, or use the script's standard Steam paths. Use a dedicated runner account/machine without personal data; it executes repository code. Do not expose that runner to unreviewed fork code. Fork PRs fail the eligibility check until a maintainer reviews them and runs the changes from a trusted branch.
 
 The workflow uploads `campaign.json`, JUnit `campaign.xml`, and `manifest.json`. A queued job means no matching runner is available; it is not a campaign pass. Runner registration and any required branch-protection rule must be configured in GitHub by the repository owner. No persistent runner service or account token is installed by this PR. Offline accounting, evidence-integrity, deterministic generation and source validation continue on GitHub-hosted Ubuntu runners.
