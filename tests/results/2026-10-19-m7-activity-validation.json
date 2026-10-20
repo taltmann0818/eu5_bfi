@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-19",
+  "pull_request": "https://github.com/taltmann0818/eu5_bfi/pull/14",
+  "status": "in_progress",
+  "m7_complete": false,
+  "current_runtime_sha256": "b08c40754576be7694861e10dc4c18f46d98d4e56bc0dac2b69eece6de275428",
+  "development_reports": [
+    {
+      "report": "tests/results/2026-10-19-m7-activity-country-development.json",
+      "assertions": 30,
+      "runtime_sha256": "4fff7b16707e4f50e5d757781cf5b23302eb8d4fd44a90aef92fc237fe0c7bde",
+      "fixture_sha256": "dac081667c7823b7e43afc205dd6f8c90d9e0a17cdceeb5a59e21f895b1cadc1",
+      "scope": "Native purchase and sale of an identified ten-unit cargo; actual wallet cost, stock removal, custody, delivery, proceeds, settlement and persistence. Unrelated cash/native routes cannot feed the agreement."
+    },
+    {
+      "report": "tests/results/2026-10-19-m7-activity-company-development.json",
+      "assertions": 10,
+      "runtime_sha256": "1e00a951e24bdf9c2a71124cc19b53bf5e6588079ec4dea4bd3165d1ddce796f",
+      "fixture_sha256": "e9372319fce6e56a3e25bb32e5e3b40538d5523e4fcf6f69457b1d5d31a87a88",
+      "scope": "local-m7-activity-company-crew"
+    }
+  ],
+  "offline_tests": 128,
+  "source_validation": true,
+  "native_pins_match": true,
+  "final_native_suites": "running; not yet counted",
+  "normal_ui": "final own-country command acceptance and fresh captures pending",
+  "historical_evidence": "2026-10-19-m7-validation.json: superseded country-wide commercial-book gate; not included in corrected acceptance"
+}

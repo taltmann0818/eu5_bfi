@@ -84,14 +84,14 @@ country-wide income or activity-attributed profit.
 
 ## Validation and completion gate
 
-Development evidence, retaining actual fingerprints:
+Development evidence, retaining actual fingerprints: [provenance](../tests/results/2026-10-19-m7-activity-validation.json).
 
-- Activity country run `4fff7b16…`: 30 real-engine assertions and six numerical
+- [Activity country run](../tests/results/2026-10-19-m7-activity-country-development.json) `4fff7b16…`: 30 real-engine assertions and six numerical
   reconciliations pass, including native stock/cash purchase and sale, both
   cost-sharing presets, embargo/restoration, unnamed/stale/expired/unfunded
   offers, unrelated-income exclusion, actual preparation/cancellation, legacy
   runoff, controlled geographic follow-on cash boundaries and save reload.
-- Company run `1e00a951…`: ten assertions pass, including actual cargo funding,
+- [Company run](../tests/results/2026-10-19-m7-activity-company-development.json) `1e00a951…`: ten assertions pass, including actual cargo funding,
   company NAV, loss offsets, twelve statements, positive natural exploration
   progress and terminal outcome without speed overrides or forced completion,
   historical ledger state and fresh-process persistence.
