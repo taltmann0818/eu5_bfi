@@ -69,7 +69,7 @@ def generate(common, effect, loc, write):
                 change_variable = {{ name = bfl_asset_secured add = var:bfl_asset_amount }}
                 change_variable = {{ name = bfl_custom_credit_value add = var:bfl_asset_amount }} }}
             bfl_allocate_asset_row = yes }}\n'''
-    reconcile += 'bfl_add_sovereign_bond_assets = yes\nchange_variable = { name = bfl_asset_secured add = bfl_money_assets }\n'
+    reconcile += 'bfl_add_sovereign_bond_assets = yes\nbfl_add_deposit_assets = yes\nchange_variable = { name = bfl_asset_secured add = bfl_money_assets }\n'
     reconcile += 'change_variable = { name = bfl_asset_investments add = bfl_security_carrying }\n'
     for i in range(1,17):
         reconcile += f'''if = {{ limit = {{ exists = var:bfl_pos_{i:02}_issuer }}

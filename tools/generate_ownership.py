@@ -21,12 +21,13 @@ def generate(common, effect, loc, write):
     values = effect('bfl_tangible_equity', '''value = gold
         if = { limit = { bfl_has_accounts = yes }
             add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
-            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets subtract = bfl_liabilities }
+            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets add = bfl_deposit_assets subtract = bfl_liabilities }
         else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt }
             if = { limit = { has_variable = bfl_venture_bank }
                 if = { limit = { var:bfl_venture_activity_schema ?= 2 }
                     add = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis }
                 else = { subtract = var:bfl_venture_external_basis } } }
+        if = { limit = { var:bfl_state ?= 5 } value = 0 }
     ''')
     values += effect('bfl_nav_quote', '''value = 0
         if = { limit = { var:bfl_total_units > 0 }

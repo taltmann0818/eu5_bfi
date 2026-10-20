@@ -1,0 +1,7 @@
+﻿namespace = bfl_workout
+        bfl_workout.1 = { type = country_event title = bfl_workout_title desc = bfl_workout_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_workout_haircut bfl_accept_resolution_haircut = yes ai_chance = { base = 0 } }
+            option = { name = bfl_workout_equity bfl_accept_resolution_equity = yes ai_chance = { base = 0 } }
+            option = { name = bfl_workout_decline remove_variable = bfl_workout_bank ai_chance = { base = 100 } }
+        }

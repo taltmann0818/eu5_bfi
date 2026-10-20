@@ -67,7 +67,9 @@ def generate(common, effect, loc):
             set_variable = {{ name = {n}_last_accrual value = bfl_period }}
             set_variable = {{ name = {n}_state value = var:bfl_product }} }}\n'''
     allocate += '''if = { limit = { var:bfl_slot_found = 1 }
-        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = 100 }
+        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = 100
+        scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_refresh_asset_statement = yes } }
+        save_scope_as = bfl_bank }
     '''
     common('scripted_effects', 'deposits', effect('bfl_quote_deposit', quote)
            + effect('bfl_allocate_deposit', allocate) + '''
@@ -104,7 +106,8 @@ def generate(common, effect, loc):
             var:{n}_party = {{ set_variable = {{ name = bfl_pool value = scope:bfl_bank.var:{n}_pool }} }} }}'''
         settlement += effect(f'bfl_pay_deposit_{i:02}', f'''
             save_scope_as = bfl_bank {validate}
-            if = {{ limit = {{ var:{n}_active = 1 var:{n}_withdrawal_requested > 0 {live} }}
+            if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 var:{n}_withdrawal_requested > 0 {live} }}
+                var:{n}_party = {{ save_scope_as = bfl_deposit_recipient }}
                 set_variable = {{ name = bfl_payment value = {{ value = gold subtract = 25 subtract = var:bfl_cash_committed
                     min = 0 max = var:{n}_withdrawal_requested multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = bfl_negative_payment
@@ -117,10 +120,12 @@ def generate(common, effect, loc):
                 change_variable = {{ name = {n}_principal subtract = var:bfl_payment }}
                 if = {{ limit = {{ var:{n}_principal <= 0 var:{n}_interest_due <= 0 }}
                     set_variable = {{ name = {n}_active value = 0 }} remove_variable = {n}_party }}
+                scope:bfl_deposit_recipient = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_refresh_asset_statement = yes }} }}
+                save_scope_as = bfl_bank
             }}
         ''')
         settlement += effect(f'bfl_pay_demand_interest_{i:02}', f'''
-            if = {{ limit = {{ var:{n}_active = 1 var:{n}_maturity_period = 0 var:{n}_withdrawal_requested = 0
+            if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 var:{n}_maturity_period = 0 var:{n}_withdrawal_requested = 0
                 var:{n}_interest_due > 0 {live} }}
                 set_variable = {{ name = bfl_payment value = {{ value = bfl_free_cash max = var:{n}_interest_due multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = bfl_negative_payment
@@ -130,7 +135,7 @@ def generate(common, effect, loc):
                 if = {{ limit = {{ var:{n}_pool = 0 }} var:{n}_party = {{ bfl_record_withdrawn_interest = yes }} }}
             }}
         ''')
-        accrue += f'''if = {{ limit = {{ var:{n}_active = 1 }}
+        accrue += f'''if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 }}
             {validate}
             if = {{ limit = {{ {live} }}
                 if = {{ limit = {{ var:{n}_state = 4 }} set_variable = {{ name = {n}_state value = 2 }}

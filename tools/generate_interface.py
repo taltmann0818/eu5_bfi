@@ -287,7 +287,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding+=section('bfl_safeguards_title',pair(action('bfl_recapitalize_command','liquidity'),action('bfl_suspend_command','lock')))
     funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
-    funding = 'bfl_bond_contents = { }' + funding
+    funding = 'bfl_resolution_contents = { }bfl_bond_contents = { }' + funding
     investments='bfl_monetary_contents = { }bfl_equity_investments = { }'
     investments+='bfl_goods_contents = { }'
     investments+='bfl_commenda_contents = { }'

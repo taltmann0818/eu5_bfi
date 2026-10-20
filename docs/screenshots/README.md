@@ -1,5 +1,28 @@
 # Native bank interface captures
 
+## M9 orderly bank resolution
+
+[Capture provenance](../../tests/results/2026-10-20-m9-ui.json) records six unedited
+2560×1440 English EUV 1.4.1 / CMF 2.5.0 captures, debug enabled, in a disposable
+Florence charter-controller campaign. Research/building grants and a bank cash
+shock establish the scene. A real 100-gold deposit and subsequent normal UI
+transactions establish the displayed claims and payments; this is not balance
+evidence. Florence is both creditor and guarantor, so the 10-gold guarantee call
+has matching sovereign debit and credit, with no net increase in treasury cash.
+
+The capture runtime is `ae6520ab07b9…`; shipping `18df97e0a614…` adds only incoming
+claim counting and stricter closure guards in three files. GUI/localization and
+44 checked transaction effect bodies match.
+Exact per-file and image hashes are retained in provenance. Shipping's additional
+closure guards pass the native suite. Independent-bank normal UI is not captured.
+
+- [Overview](2026-10-20-m9-overview.png): controller Credit view before resolution, 100 cash and 100 deposit liability.
+- [Resolution controls](2026-10-20-m9-resolving-controls.png): normal Begin resolution click persists the state and exposes recovery/creditor commands.
+- [Creditor consent](2026-10-20-m9-creditor-consent.png): production modal offers a 20% haircut, positive-NAV equity conversion or decline, with claim and expiry text.
+- [Declined proposal](2026-10-20-m9-creditor-declined.png): normal decline preserves 100 cash and the full 100-gold claim.
+- [Accepted loss](2026-10-20-m9-accepted-loss.png): normal acceptance reduces the claim to 80, records 20 accepted loss and a funded 10-gold guarantee call; bank cash remains 100.
+- [Funded recovery](2026-10-20-m9-funded-recovery.png): normal Pay recovery moves 80 gold to Florence; bank cash is 20, deposit liabilities zero and cumulative recoveries 80.
+
 ## M5 ownership and share trading
 
 Actual, unedited EUV 1.4.1 / build 25905365 windows with CMF 2.5.0,
