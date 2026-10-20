@@ -1,0 +1,604 @@
+﻿bfl_run_clearing = {
+bfl_initialize_monetary = yes
+        set_variable = { name = bfl_clearing_failed value = 1 }
+        if = { limit = { bfl_clearing_operator = yes bfl_period > var:bfl_clearing_last }
+            save_scope_as = bfl_clearing_operator
+            set_variable = { name = bfl_clearing_failed value = 0 }
+            every_country = { limit = { bfl_same_clearing_group = yes }
+                set_variable = { name = bfl_clear_net value = 0 }
+                set_variable = { name = bfl_clear_gross value = 0 } }
+            every_country = { limit = { bfl_same_clearing_group = yes }
+                save_scope_as = bfl_clearing_debtor
+    if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_01_state = 1
+            NOT = { has_variable = bfl_con_01_pledge } bfl_period >= var:bfl_con_01_maturity_period
+            exists = var:bfl_con_01_party country_exists = var:bfl_con_01_party
+            var:bfl_con_01_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_01_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_01_basis }
+            var:bfl_con_01_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_01_basis } }
+        }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_02_state = 1
+            NOT = { has_variable = bfl_con_02_pledge } bfl_period >= var:bfl_con_02_maturity_period
+            exists = var:bfl_con_02_party country_exists = var:bfl_con_02_party
+            var:bfl_con_02_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_02_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_02_basis }
+            var:bfl_con_02_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_02_basis } }
+        }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_03_state = 1
+            NOT = { has_variable = bfl_con_03_pledge } bfl_period >= var:bfl_con_03_maturity_period
+            exists = var:bfl_con_03_party country_exists = var:bfl_con_03_party
+            var:bfl_con_03_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_03_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_03_basis }
+            var:bfl_con_03_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_03_basis } }
+        }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_04_state = 1
+            NOT = { has_variable = bfl_con_04_pledge } bfl_period >= var:bfl_con_04_maturity_period
+            exists = var:bfl_con_04_party country_exists = var:bfl_con_04_party
+            var:bfl_con_04_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_04_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_04_basis }
+            var:bfl_con_04_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_04_basis } }
+        }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_05_state = 1
+            NOT = { has_variable = bfl_con_05_pledge } bfl_period >= var:bfl_con_05_maturity_period
+            exists = var:bfl_con_05_party country_exists = var:bfl_con_05_party
+            var:bfl_con_05_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_05_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_05_basis }
+            var:bfl_con_05_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_05_basis } }
+        }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_06_state = 1
+            NOT = { has_variable = bfl_con_06_pledge } bfl_period >= var:bfl_con_06_maturity_period
+            exists = var:bfl_con_06_party country_exists = var:bfl_con_06_party
+            var:bfl_con_06_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_06_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_06_basis }
+            var:bfl_con_06_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_06_basis } }
+        }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_07_state = 1
+            NOT = { has_variable = bfl_con_07_pledge } bfl_period >= var:bfl_con_07_maturity_period
+            exists = var:bfl_con_07_party country_exists = var:bfl_con_07_party
+            var:bfl_con_07_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_07_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_07_basis }
+            var:bfl_con_07_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_07_basis } }
+        }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_08_state = 1
+            NOT = { has_variable = bfl_con_08_pledge } bfl_period >= var:bfl_con_08_maturity_period
+            exists = var:bfl_con_08_party country_exists = var:bfl_con_08_party
+            var:bfl_con_08_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_08_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_08_basis }
+            var:bfl_con_08_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_08_basis } }
+        }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_09_state = 1
+            NOT = { has_variable = bfl_con_09_pledge } bfl_period >= var:bfl_con_09_maturity_period
+            exists = var:bfl_con_09_party country_exists = var:bfl_con_09_party
+            var:bfl_con_09_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_09_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_09_basis }
+            var:bfl_con_09_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_09_basis } }
+        }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_10_state = 1
+            NOT = { has_variable = bfl_con_10_pledge } bfl_period >= var:bfl_con_10_maturity_period
+            exists = var:bfl_con_10_party country_exists = var:bfl_con_10_party
+            var:bfl_con_10_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_10_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_10_basis }
+            var:bfl_con_10_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_10_basis } }
+        }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_11_state = 1
+            NOT = { has_variable = bfl_con_11_pledge } bfl_period >= var:bfl_con_11_maturity_period
+            exists = var:bfl_con_11_party country_exists = var:bfl_con_11_party
+            var:bfl_con_11_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_11_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_11_basis }
+            var:bfl_con_11_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_11_basis } }
+        }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_12_state = 1
+            NOT = { has_variable = bfl_con_12_pledge } bfl_period >= var:bfl_con_12_maturity_period
+            exists = var:bfl_con_12_party country_exists = var:bfl_con_12_party
+            var:bfl_con_12_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_12_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_12_basis }
+            var:bfl_con_12_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_12_basis } }
+        }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_13_state = 1
+            NOT = { has_variable = bfl_con_13_pledge } bfl_period >= var:bfl_con_13_maturity_period
+            exists = var:bfl_con_13_party country_exists = var:bfl_con_13_party
+            var:bfl_con_13_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_13_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_13_basis }
+            var:bfl_con_13_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_13_basis } }
+        }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_14_state = 1
+            NOT = { has_variable = bfl_con_14_pledge } bfl_period >= var:bfl_con_14_maturity_period
+            exists = var:bfl_con_14_party country_exists = var:bfl_con_14_party
+            var:bfl_con_14_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_14_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_14_basis }
+            var:bfl_con_14_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_14_basis } }
+        }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_15_state = 1
+            NOT = { has_variable = bfl_con_15_pledge } bfl_period >= var:bfl_con_15_maturity_period
+            exists = var:bfl_con_15_party country_exists = var:bfl_con_15_party
+            var:bfl_con_15_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_15_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_15_basis }
+            var:bfl_con_15_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_15_basis } }
+        }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_16_state = 1
+            NOT = { has_variable = bfl_con_16_pledge } bfl_period >= var:bfl_con_16_maturity_period
+            exists = var:bfl_con_16_party country_exists = var:bfl_con_16_party
+            var:bfl_con_16_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_16_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_16_basis }
+            var:bfl_con_16_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_16_basis } }
+        }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_17_state = 1
+            NOT = { has_variable = bfl_con_17_pledge } bfl_period >= var:bfl_con_17_maturity_period
+            exists = var:bfl_con_17_party country_exists = var:bfl_con_17_party
+            var:bfl_con_17_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_17_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_17_basis }
+            var:bfl_con_17_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_17_basis } }
+        }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_18_state = 1
+            NOT = { has_variable = bfl_con_18_pledge } bfl_period >= var:bfl_con_18_maturity_period
+            exists = var:bfl_con_18_party country_exists = var:bfl_con_18_party
+            var:bfl_con_18_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_18_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_18_basis }
+            var:bfl_con_18_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_18_basis } }
+        }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_19_state = 1
+            NOT = { has_variable = bfl_con_19_pledge } bfl_period >= var:bfl_con_19_maturity_period
+            exists = var:bfl_con_19_party country_exists = var:bfl_con_19_party
+            var:bfl_con_19_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_19_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_19_basis }
+            var:bfl_con_19_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_19_basis } }
+        }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_20_state = 1
+            NOT = { has_variable = bfl_con_20_pledge } bfl_period >= var:bfl_con_20_maturity_period
+            exists = var:bfl_con_20_party country_exists = var:bfl_con_20_party
+            var:bfl_con_20_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_20_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_20_basis }
+            var:bfl_con_20_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_20_basis } }
+        }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_21_state = 1
+            NOT = { has_variable = bfl_con_21_pledge } bfl_period >= var:bfl_con_21_maturity_period
+            exists = var:bfl_con_21_party country_exists = var:bfl_con_21_party
+            var:bfl_con_21_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_21_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_21_basis }
+            var:bfl_con_21_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_21_basis } }
+        }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_22_state = 1
+            NOT = { has_variable = bfl_con_22_pledge } bfl_period >= var:bfl_con_22_maturity_period
+            exists = var:bfl_con_22_party country_exists = var:bfl_con_22_party
+            var:bfl_con_22_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_22_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_22_basis }
+            var:bfl_con_22_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_22_basis } }
+        }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_23_state = 1
+            NOT = { has_variable = bfl_con_23_pledge } bfl_period >= var:bfl_con_23_maturity_period
+            exists = var:bfl_con_23_party country_exists = var:bfl_con_23_party
+            var:bfl_con_23_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_23_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_23_basis }
+            var:bfl_con_23_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_23_basis } }
+        }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_24_state = 1
+            NOT = { has_variable = bfl_con_24_pledge } bfl_period >= var:bfl_con_24_maturity_period
+            exists = var:bfl_con_24_party country_exists = var:bfl_con_24_party
+            var:bfl_con_24_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_24_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_24_basis }
+            var:bfl_con_24_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_24_basis } }
+        }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_25_state = 1
+            NOT = { has_variable = bfl_con_25_pledge } bfl_period >= var:bfl_con_25_maturity_period
+            exists = var:bfl_con_25_party country_exists = var:bfl_con_25_party
+            var:bfl_con_25_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_25_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_25_basis }
+            var:bfl_con_25_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_25_basis } }
+        }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_26_state = 1
+            NOT = { has_variable = bfl_con_26_pledge } bfl_period >= var:bfl_con_26_maturity_period
+            exists = var:bfl_con_26_party country_exists = var:bfl_con_26_party
+            var:bfl_con_26_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_26_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_26_basis }
+            var:bfl_con_26_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_26_basis } }
+        }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_27_state = 1
+            NOT = { has_variable = bfl_con_27_pledge } bfl_period >= var:bfl_con_27_maturity_period
+            exists = var:bfl_con_27_party country_exists = var:bfl_con_27_party
+            var:bfl_con_27_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_27_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_27_basis }
+            var:bfl_con_27_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_27_basis } }
+        }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_28_state = 1
+            NOT = { has_variable = bfl_con_28_pledge } bfl_period >= var:bfl_con_28_maturity_period
+            exists = var:bfl_con_28_party country_exists = var:bfl_con_28_party
+            var:bfl_con_28_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_28_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_28_basis }
+            var:bfl_con_28_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_28_basis } }
+        }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_29_state = 1
+            NOT = { has_variable = bfl_con_29_pledge } bfl_period >= var:bfl_con_29_maturity_period
+            exists = var:bfl_con_29_party country_exists = var:bfl_con_29_party
+            var:bfl_con_29_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_29_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_29_basis }
+            var:bfl_con_29_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_29_basis } }
+        }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_30_state = 1
+            NOT = { has_variable = bfl_con_30_pledge } bfl_period >= var:bfl_con_30_maturity_period
+            exists = var:bfl_con_30_party country_exists = var:bfl_con_30_party
+            var:bfl_con_30_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_30_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_30_basis }
+            var:bfl_con_30_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_30_basis } }
+        }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_31_state = 1
+            NOT = { has_variable = bfl_con_31_pledge } bfl_period >= var:bfl_con_31_maturity_period
+            exists = var:bfl_con_31_party country_exists = var:bfl_con_31_party
+            var:bfl_con_31_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_31_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_31_basis }
+            var:bfl_con_31_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_31_basis } }
+        }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_con_32_state = 1
+            NOT = { has_variable = bfl_con_32_pledge } bfl_period >= var:bfl_con_32_maturity_period
+            exists = var:bfl_con_32_party country_exists = var:bfl_con_32_party
+            var:bfl_con_32_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            change_variable = { name = bfl_clear_net add = var:bfl_con_32_basis }
+            change_variable = { name = bfl_clear_gross add = var:bfl_con_32_basis }
+            var:bfl_con_32_party = { change_variable = { name = bfl_clear_net subtract = scope:bfl_clearing_debtor.var:bfl_con_32_basis } }
+        }
+ }
+            every_country = { limit = { bfl_same_clearing_group = yes }
+                # Other reserved products and a 25-gold floor are protected.
+                if = { limit = { OR = { NOT = { bfl_has_accounts = yes }
+                    var:bfl_clear_net > { value = gold subtract = bfl_protected_cash
+                        add = { value = var:bfl_clear_gross multiply = 1.25 } } } }
+                    scope:bfl_clearing_operator = { set_variable = { name = bfl_clearing_failed value = 1 } } }
+            }
+            if = { limit = { var:bfl_clearing_failed = 0 }
+                every_country = { limit = { bfl_same_clearing_group = yes }
+                    add_gold = { value = var:bfl_clear_net multiply = -1 }
+                    save_scope_as = bfl_clearing_debtor
+    if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_01_state = 1
+            NOT = { has_variable = bfl_con_01_pledge } bfl_period >= var:bfl_con_01_maturity_period
+            exists = var:bfl_con_01_party country_exists = var:bfl_con_01_party
+            var:bfl_con_01_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_01_active value = 0 } set_variable = { name = bfl_con_01_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_01_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_01_basis }
+            var:bfl_con_01_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_01_basis } }
+            set_variable = { name = bfl_con_01_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_02_state = 1
+            NOT = { has_variable = bfl_con_02_pledge } bfl_period >= var:bfl_con_02_maturity_period
+            exists = var:bfl_con_02_party country_exists = var:bfl_con_02_party
+            var:bfl_con_02_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_02_active value = 0 } set_variable = { name = bfl_con_02_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_02_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_02_basis }
+            var:bfl_con_02_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_02_basis } }
+            set_variable = { name = bfl_con_02_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_03_state = 1
+            NOT = { has_variable = bfl_con_03_pledge } bfl_period >= var:bfl_con_03_maturity_period
+            exists = var:bfl_con_03_party country_exists = var:bfl_con_03_party
+            var:bfl_con_03_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_03_active value = 0 } set_variable = { name = bfl_con_03_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_03_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_03_basis }
+            var:bfl_con_03_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_03_basis } }
+            set_variable = { name = bfl_con_03_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_04_state = 1
+            NOT = { has_variable = bfl_con_04_pledge } bfl_period >= var:bfl_con_04_maturity_period
+            exists = var:bfl_con_04_party country_exists = var:bfl_con_04_party
+            var:bfl_con_04_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_04_active value = 0 } set_variable = { name = bfl_con_04_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_04_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_04_basis }
+            var:bfl_con_04_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_04_basis } }
+            set_variable = { name = bfl_con_04_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_05_state = 1
+            NOT = { has_variable = bfl_con_05_pledge } bfl_period >= var:bfl_con_05_maturity_period
+            exists = var:bfl_con_05_party country_exists = var:bfl_con_05_party
+            var:bfl_con_05_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_05_active value = 0 } set_variable = { name = bfl_con_05_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_05_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_05_basis }
+            var:bfl_con_05_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_05_basis } }
+            set_variable = { name = bfl_con_05_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_06_state = 1
+            NOT = { has_variable = bfl_con_06_pledge } bfl_period >= var:bfl_con_06_maturity_period
+            exists = var:bfl_con_06_party country_exists = var:bfl_con_06_party
+            var:bfl_con_06_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_06_active value = 0 } set_variable = { name = bfl_con_06_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_06_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_06_basis }
+            var:bfl_con_06_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_06_basis } }
+            set_variable = { name = bfl_con_06_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_07_state = 1
+            NOT = { has_variable = bfl_con_07_pledge } bfl_period >= var:bfl_con_07_maturity_period
+            exists = var:bfl_con_07_party country_exists = var:bfl_con_07_party
+            var:bfl_con_07_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_07_active value = 0 } set_variable = { name = bfl_con_07_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_07_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_07_basis }
+            var:bfl_con_07_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_07_basis } }
+            set_variable = { name = bfl_con_07_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_08_state = 1
+            NOT = { has_variable = bfl_con_08_pledge } bfl_period >= var:bfl_con_08_maturity_period
+            exists = var:bfl_con_08_party country_exists = var:bfl_con_08_party
+            var:bfl_con_08_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_08_active value = 0 } set_variable = { name = bfl_con_08_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_08_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_08_basis }
+            var:bfl_con_08_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_08_basis } }
+            set_variable = { name = bfl_con_08_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_09_state = 1
+            NOT = { has_variable = bfl_con_09_pledge } bfl_period >= var:bfl_con_09_maturity_period
+            exists = var:bfl_con_09_party country_exists = var:bfl_con_09_party
+            var:bfl_con_09_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_09_active value = 0 } set_variable = { name = bfl_con_09_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_09_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_09_basis }
+            var:bfl_con_09_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_09_basis } }
+            set_variable = { name = bfl_con_09_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_10_state = 1
+            NOT = { has_variable = bfl_con_10_pledge } bfl_period >= var:bfl_con_10_maturity_period
+            exists = var:bfl_con_10_party country_exists = var:bfl_con_10_party
+            var:bfl_con_10_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_10_active value = 0 } set_variable = { name = bfl_con_10_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_10_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_10_basis }
+            var:bfl_con_10_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_10_basis } }
+            set_variable = { name = bfl_con_10_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_11_state = 1
+            NOT = { has_variable = bfl_con_11_pledge } bfl_period >= var:bfl_con_11_maturity_period
+            exists = var:bfl_con_11_party country_exists = var:bfl_con_11_party
+            var:bfl_con_11_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_11_active value = 0 } set_variable = { name = bfl_con_11_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_11_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_11_basis }
+            var:bfl_con_11_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_11_basis } }
+            set_variable = { name = bfl_con_11_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_12_state = 1
+            NOT = { has_variable = bfl_con_12_pledge } bfl_period >= var:bfl_con_12_maturity_period
+            exists = var:bfl_con_12_party country_exists = var:bfl_con_12_party
+            var:bfl_con_12_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_12_active value = 0 } set_variable = { name = bfl_con_12_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_12_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_12_basis }
+            var:bfl_con_12_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_12_basis } }
+            set_variable = { name = bfl_con_12_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_13_state = 1
+            NOT = { has_variable = bfl_con_13_pledge } bfl_period >= var:bfl_con_13_maturity_period
+            exists = var:bfl_con_13_party country_exists = var:bfl_con_13_party
+            var:bfl_con_13_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_13_active value = 0 } set_variable = { name = bfl_con_13_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_13_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_13_basis }
+            var:bfl_con_13_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_13_basis } }
+            set_variable = { name = bfl_con_13_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_14_state = 1
+            NOT = { has_variable = bfl_con_14_pledge } bfl_period >= var:bfl_con_14_maturity_period
+            exists = var:bfl_con_14_party country_exists = var:bfl_con_14_party
+            var:bfl_con_14_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_14_active value = 0 } set_variable = { name = bfl_con_14_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_14_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_14_basis }
+            var:bfl_con_14_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_14_basis } }
+            set_variable = { name = bfl_con_14_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_15_state = 1
+            NOT = { has_variable = bfl_con_15_pledge } bfl_period >= var:bfl_con_15_maturity_period
+            exists = var:bfl_con_15_party country_exists = var:bfl_con_15_party
+            var:bfl_con_15_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_15_active value = 0 } set_variable = { name = bfl_con_15_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_15_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_15_basis }
+            var:bfl_con_15_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_15_basis } }
+            set_variable = { name = bfl_con_15_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_16_state = 1
+            NOT = { has_variable = bfl_con_16_pledge } bfl_period >= var:bfl_con_16_maturity_period
+            exists = var:bfl_con_16_party country_exists = var:bfl_con_16_party
+            var:bfl_con_16_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_16_active value = 0 } set_variable = { name = bfl_con_16_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_16_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_16_basis }
+            var:bfl_con_16_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_16_basis } }
+            set_variable = { name = bfl_con_16_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_17_state = 1
+            NOT = { has_variable = bfl_con_17_pledge } bfl_period >= var:bfl_con_17_maturity_period
+            exists = var:bfl_con_17_party country_exists = var:bfl_con_17_party
+            var:bfl_con_17_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_17_active value = 0 } set_variable = { name = bfl_con_17_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_17_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_17_basis }
+            var:bfl_con_17_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_17_basis } }
+            set_variable = { name = bfl_con_17_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_18_state = 1
+            NOT = { has_variable = bfl_con_18_pledge } bfl_period >= var:bfl_con_18_maturity_period
+            exists = var:bfl_con_18_party country_exists = var:bfl_con_18_party
+            var:bfl_con_18_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_18_active value = 0 } set_variable = { name = bfl_con_18_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_18_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_18_basis }
+            var:bfl_con_18_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_18_basis } }
+            set_variable = { name = bfl_con_18_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_19_state = 1
+            NOT = { has_variable = bfl_con_19_pledge } bfl_period >= var:bfl_con_19_maturity_period
+            exists = var:bfl_con_19_party country_exists = var:bfl_con_19_party
+            var:bfl_con_19_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_19_active value = 0 } set_variable = { name = bfl_con_19_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_19_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_19_basis }
+            var:bfl_con_19_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_19_basis } }
+            set_variable = { name = bfl_con_19_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_20_state = 1
+            NOT = { has_variable = bfl_con_20_pledge } bfl_period >= var:bfl_con_20_maturity_period
+            exists = var:bfl_con_20_party country_exists = var:bfl_con_20_party
+            var:bfl_con_20_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_20_active value = 0 } set_variable = { name = bfl_con_20_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_20_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_20_basis }
+            var:bfl_con_20_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_20_basis } }
+            set_variable = { name = bfl_con_20_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_21_state = 1
+            NOT = { has_variable = bfl_con_21_pledge } bfl_period >= var:bfl_con_21_maturity_period
+            exists = var:bfl_con_21_party country_exists = var:bfl_con_21_party
+            var:bfl_con_21_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_21_active value = 0 } set_variable = { name = bfl_con_21_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_21_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_21_basis }
+            var:bfl_con_21_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_21_basis } }
+            set_variable = { name = bfl_con_21_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_22_state = 1
+            NOT = { has_variable = bfl_con_22_pledge } bfl_period >= var:bfl_con_22_maturity_period
+            exists = var:bfl_con_22_party country_exists = var:bfl_con_22_party
+            var:bfl_con_22_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_22_active value = 0 } set_variable = { name = bfl_con_22_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_22_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_22_basis }
+            var:bfl_con_22_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_22_basis } }
+            set_variable = { name = bfl_con_22_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_23_state = 1
+            NOT = { has_variable = bfl_con_23_pledge } bfl_period >= var:bfl_con_23_maturity_period
+            exists = var:bfl_con_23_party country_exists = var:bfl_con_23_party
+            var:bfl_con_23_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_23_active value = 0 } set_variable = { name = bfl_con_23_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_23_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_23_basis }
+            var:bfl_con_23_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_23_basis } }
+            set_variable = { name = bfl_con_23_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_24_state = 1
+            NOT = { has_variable = bfl_con_24_pledge } bfl_period >= var:bfl_con_24_maturity_period
+            exists = var:bfl_con_24_party country_exists = var:bfl_con_24_party
+            var:bfl_con_24_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_24_active value = 0 } set_variable = { name = bfl_con_24_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_24_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_24_basis }
+            var:bfl_con_24_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_24_basis } }
+            set_variable = { name = bfl_con_24_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_25_state = 1
+            NOT = { has_variable = bfl_con_25_pledge } bfl_period >= var:bfl_con_25_maturity_period
+            exists = var:bfl_con_25_party country_exists = var:bfl_con_25_party
+            var:bfl_con_25_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_25_active value = 0 } set_variable = { name = bfl_con_25_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_25_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_25_basis }
+            var:bfl_con_25_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_25_basis } }
+            set_variable = { name = bfl_con_25_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_26_state = 1
+            NOT = { has_variable = bfl_con_26_pledge } bfl_period >= var:bfl_con_26_maturity_period
+            exists = var:bfl_con_26_party country_exists = var:bfl_con_26_party
+            var:bfl_con_26_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_26_active value = 0 } set_variable = { name = bfl_con_26_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_26_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_26_basis }
+            var:bfl_con_26_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_26_basis } }
+            set_variable = { name = bfl_con_26_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_27_state = 1
+            NOT = { has_variable = bfl_con_27_pledge } bfl_period >= var:bfl_con_27_maturity_period
+            exists = var:bfl_con_27_party country_exists = var:bfl_con_27_party
+            var:bfl_con_27_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_27_active value = 0 } set_variable = { name = bfl_con_27_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_27_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_27_basis }
+            var:bfl_con_27_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_27_basis } }
+            set_variable = { name = bfl_con_27_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_28_state = 1
+            NOT = { has_variable = bfl_con_28_pledge } bfl_period >= var:bfl_con_28_maturity_period
+            exists = var:bfl_con_28_party country_exists = var:bfl_con_28_party
+            var:bfl_con_28_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_28_active value = 0 } set_variable = { name = bfl_con_28_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_28_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_28_basis }
+            var:bfl_con_28_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_28_basis } }
+            set_variable = { name = bfl_con_28_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_29_state = 1
+            NOT = { has_variable = bfl_con_29_pledge } bfl_period >= var:bfl_con_29_maturity_period
+            exists = var:bfl_con_29_party country_exists = var:bfl_con_29_party
+            var:bfl_con_29_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_29_active value = 0 } set_variable = { name = bfl_con_29_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_29_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_29_basis }
+            var:bfl_con_29_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_29_basis } }
+            set_variable = { name = bfl_con_29_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_30_state = 1
+            NOT = { has_variable = bfl_con_30_pledge } bfl_period >= var:bfl_con_30_maturity_period
+            exists = var:bfl_con_30_party country_exists = var:bfl_con_30_party
+            var:bfl_con_30_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_30_active value = 0 } set_variable = { name = bfl_con_30_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_30_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_30_basis }
+            var:bfl_con_30_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_30_basis } }
+            set_variable = { name = bfl_con_30_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_31_state = 1
+            NOT = { has_variable = bfl_con_31_pledge } bfl_period >= var:bfl_con_31_maturity_period
+            exists = var:bfl_con_31_party country_exists = var:bfl_con_31_party
+            var:bfl_con_31_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_31_active value = 0 } set_variable = { name = bfl_con_31_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_31_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_31_basis }
+            var:bfl_con_31_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_31_basis } }
+            set_variable = { name = bfl_con_31_last_settlement value = bfl_period }
+        }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_con_32_state = 1
+            NOT = { has_variable = bfl_con_32_pledge } bfl_period >= var:bfl_con_32_maturity_period
+            exists = var:bfl_con_32_party country_exists = var:bfl_con_32_party
+            var:bfl_con_32_party = { bfl_has_accounts = yes bfl_same_clearing_group = yes } }
+            set_variable = { name = bfl_con_32_active value = 0 } set_variable = { name = bfl_con_32_state value = 3 }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_32_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_32_basis }
+            var:bfl_con_32_party = { change_variable = { name = bfl_money_assets subtract = scope:bfl_clearing_debtor.var:bfl_con_32_basis } }
+            set_variable = { name = bfl_con_32_last_settlement value = bfl_period }
+        }
+ }
+                set_variable = { name = bfl_clearing_last value = bfl_period }
+            }
+        }
+}

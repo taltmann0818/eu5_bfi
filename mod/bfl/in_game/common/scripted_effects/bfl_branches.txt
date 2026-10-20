@@ -1,0 +1,33 @@
+﻿bfl_ai_build_branches = {
+if = { limit = { bfl_can_conduct_business = yes
+    OR = { AND = { bfl_is_independent_bank = yes is_ai = yes }
+        AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } }
+    bfl_free_cash >= bfl_branch_budget bfl_capital_headroom >= bfl_branch_budget
+    NOT = { any_owned_building = { building_type = building_type:banking_office building_levels_under_construction > 0 } }
+    OR = { NOT = { has_variable = bfl_branch_last_order } bfl_period >= { value = var:bfl_branch_last_order add = 3 } }
+}
+    save_scope_as = bfl_branch_builder
+    save_scope_as = actor
+    remove_variable = bfl_branch_candidate
+    set_variable = { name = bfl_branch_best_score value = 0 }
+    # Bounded construction: one funded project per quarter. Native
+    # relations, foreign construction, costs and completion still apply.
+    every_country = { limit = { bfl_branch_site = yes }
+        if = { limit = { bfl_branch_credit_score > scope:bfl_branch_builder.var:bfl_branch_best_score }
+            save_scope_as = bfl_branch_host
+            scope:bfl_branch_builder = {
+                set_variable = { name = bfl_branch_candidate value = scope:bfl_branch_host }
+                set_variable = { name = bfl_branch_best_score value = scope:bfl_branch_host.bfl_branch_credit_score }
+            }
+        }
+    }
+    if = { limit = { exists = var:bfl_branch_candidate }
+        var:bfl_branch_candidate.capital = {
+            construct_building = { building_type = building_type:banking_office
+                owner = scope:bfl_branch_builder payer = scope:bfl_branch_builder
+                cost_multiplier = 1 cost_multiplier_reason = bfl_branch_construction }
+        }
+        set_variable = { name = bfl_branch_last_order value = bfl_period }
+    }
+}
+}

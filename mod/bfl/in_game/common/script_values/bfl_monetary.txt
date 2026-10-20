@@ -1,0 +1,11 @@
+﻿bfl_money_assets = {
+value = 0 if = { limit = { has_variable = bfl_money_assets } value = var:bfl_money_assets }
+}
+bfl_note_limit = {
+value = bfl_equity multiply = 0.25 min = 0 max = var:bfl_money_ceiling
+}
+bfl_discount_fee = {
+value = var:bfl_money_rate
+        if = { limit = { var:bfl_discount_public ?= 1 } min = 0.09 }
+        multiply = 75 divide = 12 multiply = 100 floor = yes divide = 100
+}

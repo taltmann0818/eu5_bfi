@@ -1,0 +1,31 @@
+﻿bfl_monetary_building = {
+    OR = {
+        any_owned_building = { building_type = building_type:$BUILDING$ building_level > 0 }
+        AND = { bfl_has_valid_controller = yes overlord = {
+            any_owned_building = { building_type = building_type:$BUILDING$ building_level > 0 } } }
+    }
+}
+bfl_note_authorized = {
+    bfl_can_originate_sovereign_note = yes
+    bfl_money_backed = yes
+    exists = var:bfl_note_authority country_exists = var:bfl_note_authority
+    var:bfl_note_authority = { country_type = location exists = capital
+        any_owned_building = { building_type = building_type:central_bank building_level > 0 location = prev.capital } }
+    OR = { AND = { bfl_has_valid_controller = yes overlord = var:bfl_note_authority }
+        bfl_is_independent_bank = yes }
+    bfl_branch_access = { PARTY = var:bfl_note_authority }
+}
+bfl_clearing_operator = {
+    bfl_can_originate_clearing = yes var:bfl_clearing_open = 1
+    bfl_monetary_building = { BUILDING = clearing_house }
+}
+bfl_same_clearing_group = {
+    exists = var:bfl_clearing_member country_exists = var:bfl_clearing_member
+    var:bfl_clearing_member = scope:bfl_clearing_operator
+}
+bfl_monetary_actor = {
+    exists = scope:bfl_money_actor country_exists = scope:bfl_money_actor
+    OR = { AND = { bfl_is_independent_bank = yes this = scope:bfl_money_actor }
+        AND = { bfl_has_valid_controller = yes overlord = scope:bfl_money_actor } }
+}
+bfl_money_backed = { var:bfl_money_confidence >= 50 gold >= var:bfl_cash_committed }

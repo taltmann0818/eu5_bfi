@@ -203,9 +203,9 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_sovereign_note = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
-bfl_has_valid_controller = yes
+bfl_money_backed = yes
+OR = { AND = { bfl_is_independent_bank = yes has_advance = central_bank_advance } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = central_bank_advance } } }
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_sovereign_banknotes } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_sovereign_banknotes } } }
-custom_tooltip = { text = bfl_probe_P05 always = no }
 }
 bfl_can_service_sovereign_note = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -216,8 +216,9 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_secured_liquidity = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+bfl_money_backed = yes
+OR = { has_advance = bfl_collateralization AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_collateralization } } }
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_liquidity_facilities } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_liquidity_facilities } } }
-custom_tooltip = { text = bfl_probe_P04 always = no }
 }
 bfl_can_service_secured_liquidity = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -228,8 +229,9 @@ bfl_has_accounts = yes var:bfl_state < 5
 bfl_can_originate_clearing = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_6_revolutions }
+bfl_money_backed = yes
+OR = { AND = { bfl_is_independent_bank = yes has_advance = clearing_house_advance } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = clearing_house_advance } } }
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_advanced_clearing } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_advanced_clearing } } }
-custom_tooltip = { text = bfl_probe_P10 always = no }
 }
 bfl_can_service_clearing = {
 bfl_has_accounts = yes var:bfl_state < 5
@@ -253,6 +255,8 @@ bfl_can_originate_public_backstop = {
 bfl_can_conduct_business = yes
 OR = { current_age = age_6_revolutions }
 bfl_has_valid_controller = yes
+bfl_money_backed = yes
+OR = { AND = { bfl_is_independent_bank = yes has_advance = central_bank_advance } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = central_bank_advance } } }
 OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_public_financial_backstops } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_public_financial_backstops } } }
 }
 bfl_can_service_public_backstop = {

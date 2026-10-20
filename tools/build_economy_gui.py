@@ -69,6 +69,8 @@ def build(game, pin=False):
     build_credit(game, baseline, pin)
     from build_exchange_advance import build as build_exchange_advance
     build_exchange_advance(game)
+    from generate_branches import build_native
+    build_native(game)
     print('Economy generated: Balance income rows and Credit homepage; native templates owned once.')
 
 

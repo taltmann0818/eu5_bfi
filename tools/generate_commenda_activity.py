@@ -19,6 +19,7 @@ def generate(common, effect):
     authority = '''exists = scope:bfl_venture_actor country_exists = scope:bfl_venture_actor
         OR = { this = scope:bfl_venture_actor AND = { bfl_has_valid_controller = yes overlord = scope:bfl_venture_actor } }'''
     eligible = '''exists = scope:bfl_operator country_exists = scope:bfl_operator
+        bfl_branch_access = { PARTY = scope:bfl_operator }
         NOT = { this = scope:bfl_operator }
         scope:bfl_operator = { NOT = { bfl_is_bank = yes } NOT = { has_variable = bfl_venture_bank }
             OR = { country_type = location bfl_is_company = yes } NOT = { has_variable = bfl_venture_guard } }

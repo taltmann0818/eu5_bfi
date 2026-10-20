@@ -151,3 +151,37 @@ returns release `bfl_project_value`; only actual surplus enters
 
 See [product rules and outstanding acceptance](m7-commenda.md). The native
 company's general treasury is not an engine-native isolated voyage wallet.
+
+## M8 monetary records and branch admission
+
+`bfl_money_schema = 1` initializes prospective `lending_base`/`money_rate`,
+acceptance, confidence and the 500-gold note ceiling. `bfl_money_assets` joins
+assets and tangible NAV; a once-only migration reconstructs existing bank-held
+funded bills from their authoritative issuer records before future mutation.
+Principal, notes and transfers are excluded from profits.
+
+Eight `bfl_note_NN_face/holder/authority` records belong to the issuer. Each
+100-gold issue increases both `bfl_notes_outstanding` and `bfl_cash_committed`;
+redemption releases both against actual cash. `bfl_note_authority` is live
+origination authority; the lot preserves its original sovereign for provenance.
+No reserve can be created by recognizing note sale income.
+
+A funded bill's optional `bfl_con_NN_pledge` references its secured lender;
+`discount_due` fixes principal plus one-month accepted annual fee. The borrower
+indexes its single pledged issuer/slot using `bfl_discount_issuer/slot`, books
+75 in other payables and receives actual cash. The lender books 75 in monetary
+assets. The issuer's 100-gold payable/reserve remains intact until repayment
+releases the pledge or maturity routes the actual proceeds to lender and
+borrower. Fees become earnings/loss only on paid settlement.
+
+`bfl_clearing_member` references the consented operator. Operator `clearing_count`,
+`clearing_open`, `clearing_last` and `clearing_failed` bound admission/replay.
+Per-member `clear_net/gross` are scratch snapshots of matching matured bills,
+not additional assets or obligations. A rejected batch changes no wallets or
+claims. Successful netting closes the original bill records and the same bank
+holder assets, payables and committed cash.
+
+Capital branch admission reads completed native `banking_office` deeds at the
+sovereign's current capital. It does not depend on legacy branch slots or a
+shadow building registry. AI persists only the last order period and temporary
+ranked candidate. See [M8 product/gates](m8-monetary.md).

@@ -55,6 +55,7 @@ def generate(common, effect, loc, tune):
         OR = { NOT = { has_variable = bfl_bond_last_issue } bfl_period > var:bfl_bond_last_issue }
         monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = 100 multiply = bfl_bond_new_rate divide = 12 } multiply = 4 }
         var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
+            bfl_branch_access = { PARTY = overlord }
             bfl_free_cash >= 100 bfl_capital_headroom >= 100 NOT = { has_variable = bfl_bond_guard } }
         NOT = { has_variable = bfl_bond_guard }
     }
@@ -79,6 +80,7 @@ def generate(common, effect, loc, tune):
     # Root bank. Only its live landed controller can be the primary issuer.
     bfl_underwrite_sovereign_bond = {{
         if = {{ limit = {{ bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
+            bfl_branch_access = {{ PARTY = overlord }}
             NOT = {{ has_variable = bfl_bond_guard }}
             var:bfl_bond_amount > 0 var:bfl_bond_amount <= {tune['facility_period_cap']}
             bfl_free_cash >= var:bfl_bond_amount bfl_capital_headroom >= var:bfl_bond_amount
@@ -244,9 +246,11 @@ def generate(common, effect, loc, tune):
         var:bfl_bond_offer_price > 0 bfl_period <= var:bfl_bond_offer_expiry
         NOT = { has_variable = bfl_bond_guard }
         exists = var:bfl_bond_offer_seller
-        var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes }
+        var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes
+            bfl_branch_access = { PARTY = scope:bfl_bond_buyer } }
         exists = scope:bfl_bond_buyer
         scope:bfl_bond_buyer = {
+            bfl_branch_access = { PARTY = prev.var:bfl_bond_offer_seller }
             bfl_can_trade_sovereign_bonds = yes
             NOT = { this = prev } NOT = { this = prev.var:bfl_bond_offer_seller }
             gold >= prev.var:bfl_bond_offer_price

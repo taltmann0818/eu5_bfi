@@ -13,3 +13,14 @@ The [custom sovereign bond facility](sovereign-bonds.md) defaults **off**. It tr
 AI expansion is intentionally conservative in this first build. Comprehensive yield/risk/concentration/maturity scoring is outstanding; native company and banking AI is preserved.
 
 M6's bounded goods policy is in `design/goods.json` and [the goods acceptance note](m6-goods.md): all native goods (no category/name whitelist), sixteen custody records with capital-scaled quantities and up to eight diversified bank-owned positions, 0.1 gold storage per month and 0.167% monthly physical spoilage. Receipt/forward offers fix 105% of carried cost for two months with a separate one-gold service fee. Three-month physical forwards fully prefund buyer consideration and equal seller security while preserving the new liability's liquidity reserve. Accepted foreign Customs House access lasts twelve months and costs one gold per month to the host. Cross-market delivery takes two months, one gold and 1% physical loss. The player sets allocation, risk, holding period, automatic/pause/run-off and spot/receipt/forward mandates; the bank chooses goods and quantities monthly. These policies are not release-wide yield or AI calibration; M10 retains that gate.
+
+M8 starts conservatively: 100-gold fully reserved note units; circulation at
+most min(25% of independent equity, 500); eight note holder slots; a 75-gold
+advance on a 100-gold third-bank bill (25% haircut), one outstanding facility per
+borrower; 6/9/12% annual future discount rates and at least 9% for public support.
+Four explicitly admitted banks may net actual matured bills. New lending base
+policy cycles 3/6/9% annually, preserving borrower adjustments and fixed
+accepted loans. Bank Branch AI ranks (24 months of income + cash − debt) times
+creditworthiness, halves scores at war and funds at most one construction order
+per quarter while protecting reserves/capital. These are bounded initial
+policies, not release-wide yield or crisis-balance evidence.

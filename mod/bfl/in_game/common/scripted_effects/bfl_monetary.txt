@@ -1,14 +1,337 @@
-﻿# Development adapter boundary. Reject BEFORE any native call or cash mutation.
-# See docs/native_capabilities.md and the executable reference model.
-bfl_issue_sovereign_notes = {
-set_variable = { name = bfl_blocked_probe value = flag:P05 }
-set_variable = { name = bfl_facility_blocked value = 1 }
+﻿bfl_issue_sovereign_notes = {
+bfl_initialize_monetary = yes
+        if = { limit = { bfl_note_authorized = yes bfl_valid_contract_parties = yes
+            scope:bfl_party = { gold >= 100 country_type = location }
+            scope:bfl_party = var:bfl_note_authority
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 }
+            OR = { var:bfl_note_01_face = 0 var:bfl_note_02_face = 0 var:bfl_note_03_face = 0 var:bfl_note_04_face = 0 var:bfl_note_05_face = 0 var:bfl_note_06_face = 0 var:bfl_note_07_face = 0 var:bfl_note_08_face = 0 }
+        }
+            save_scope_as = bfl_note_bank
+            set_variable = { name = bfl_note_allocated value = 0 }
+    if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_01_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_01_face value = 100 }
+            set_variable = { name = bfl_note_01_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_01_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_02_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_02_face value = 100 }
+            set_variable = { name = bfl_note_02_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_02_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_03_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_03_face value = 100 }
+            set_variable = { name = bfl_note_03_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_03_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_04_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_04_face value = 100 }
+            set_variable = { name = bfl_note_04_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_04_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_05_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_05_face value = 100 }
+            set_variable = { name = bfl_note_05_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_05_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_06_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_06_face value = 100 }
+            set_variable = { name = bfl_note_06_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_06_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_07_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_07_face value = 100 }
+            set_variable = { name = bfl_note_07_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_07_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
+if = { limit = { var:bfl_note_allocated = 0 var:bfl_note_08_face = 0 }
+            set_variable = { name = bfl_note_allocated value = 1 }
+            set_variable = { name = bfl_note_08_face value = 100 }
+            set_variable = { name = bfl_note_08_holder value = scope:bfl_party }
+            set_variable = { name = bfl_note_08_authority value = var:bfl_note_authority }
+            scope:bfl_party = { add_gold = -100 } add_gold = 100
+            change_variable = { name = bfl_notes_outstanding add = 100 }
+            change_variable = { name = bfl_cash_committed add = 100 }
+        }
 }
-bfl_settle_interbank_liquidity = {
-set_variable = { name = bfl_blocked_probe value = flag:P04 }
-set_variable = { name = bfl_facility_blocked value = 1 }
 }
-bfl_run_clearing = {
-set_variable = { name = bfl_blocked_probe value = flag:P10 }
-set_variable = { name = bfl_facility_blocked value = 1 }
+bfl_redeem_note_01 = {
+if = { limit = { var:bfl_note_01_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_01_holder ?= scope:bfl_party gold >= var:bfl_note_01_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_01_face }
+    set_variable = { name = bfl_note_01_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_01_holder
+}
+}
+bfl_redeem_note_02 = {
+if = { limit = { var:bfl_note_02_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_02_holder ?= scope:bfl_party gold >= var:bfl_note_02_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_02_face }
+    set_variable = { name = bfl_note_02_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_02_holder
+}
+}
+bfl_redeem_note_03 = {
+if = { limit = { var:bfl_note_03_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_03_holder ?= scope:bfl_party gold >= var:bfl_note_03_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_03_face }
+    set_variable = { name = bfl_note_03_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_03_holder
+}
+}
+bfl_redeem_note_04 = {
+if = { limit = { var:bfl_note_04_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_04_holder ?= scope:bfl_party gold >= var:bfl_note_04_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_04_face }
+    set_variable = { name = bfl_note_04_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_04_holder
+}
+}
+bfl_redeem_note_05 = {
+if = { limit = { var:bfl_note_05_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_05_holder ?= scope:bfl_party gold >= var:bfl_note_05_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_05_face }
+    set_variable = { name = bfl_note_05_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_05_holder
+}
+}
+bfl_redeem_note_06 = {
+if = { limit = { var:bfl_note_06_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_06_holder ?= scope:bfl_party gold >= var:bfl_note_06_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_06_face }
+    set_variable = { name = bfl_note_06_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_06_holder
+}
+}
+bfl_redeem_note_07 = {
+if = { limit = { var:bfl_note_07_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_07_holder ?= scope:bfl_party gold >= var:bfl_note_07_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_07_face }
+    set_variable = { name = bfl_note_07_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_07_holder
+}
+}
+bfl_redeem_note_08 = {
+if = { limit = { var:bfl_note_08_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+    var:bfl_note_08_holder ?= scope:bfl_party gold >= var:bfl_note_08_face }
+    save_scope_as = bfl_note_bank
+    set_variable = { name = bfl_payment value = var:bfl_note_08_face }
+    set_variable = { name = bfl_note_08_face value = 0 }
+    add_gold = bfl_negative_payment
+    scope:bfl_party = { add_gold = scope:bfl_note_bank.var:bfl_payment
+        if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes
+            change_variable = { name = bfl_money_assets subtract = scope:bfl_note_bank.var:bfl_payment } } }
+    change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+    change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+    remove_variable = bfl_note_08_holder
+}
+}
+bfl_redeem_notes = {
+bfl_redeem_note_01 = yes
+bfl_redeem_note_02 = yes
+bfl_redeem_note_03 = yes
+bfl_redeem_note_04 = yes
+bfl_redeem_note_05 = yes
+bfl_redeem_note_06 = yes
+bfl_redeem_note_07 = yes
+bfl_redeem_note_08 = yes
+}
+bfl_transfer_note = {
+set_variable = { name = bfl_note_transferred value = 0 }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_01_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_01_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_01_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_02_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_02_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_02_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_03_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_03_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_03_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_04_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_04_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_04_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_05_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_05_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_05_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_06_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_06_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_06_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_07_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_07_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_07_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
+if = { limit = { var:bfl_note_transferred = 0 var:bfl_note_08_face = 100
+            bfl_can_originate_clearing = yes
+            var:bfl_note_08_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
+            NOT = { scope:bfl_party = scope:bfl_beneficiary } NOT = { this = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
+                OR = { NOT = { bfl_is_bank = yes } bfl_free_cash >= 100 } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            set_variable = { name = bfl_note_transferred value = 1 }
+            scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
+            set_variable = { name = bfl_note_08_holder value = scope:bfl_beneficiary }
+            scope:bfl_beneficiary = { add_gold = -100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets add = 100 } } }
+            scope:bfl_party = { add_gold = 100 if = { limit = { bfl_has_accounts = yes }
+                bfl_initialize_monetary = yes change_variable = { name = bfl_money_assets subtract = 100 } } }
+        }
 }

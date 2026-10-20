@@ -16,3 +16,28 @@ acceptance event. Exact final prompts, transparency and export details are in
 `painted/commenda-generation.json`. The event crop is an explicit manifest option;
 all exports remain deterministic BC3/DXT5 with icon alpha preserved. Master-art
 inspection does not constitute native UI acceptance.
+
+## M8 monetary and Bank Branch artwork — 20 October 2026
+
+Created with the built-in image generation tool. Original source masters are
+`painted/monetary_authority.png`, `painted/monetary_notes.png`,
+`painted/monetary_clearing.png` and `painted/bank_branch.png`.
+`painted/manifest.json` registers deterministic BC3 exports: the 1080×440
+monetary consent decision image and three 128×128 UI icons. No licensed native
+images were copied. Source outputs were visually inspected before export.
+
+Final prompts (all requested no readable text, watermark or interface border):
+
+- Authority: a 17th-century Italian public counting house where a sovereign
+  treasurer and clerks inspect engraved redeemable notes, sealed ledgers and
+  specie reserves; historical oil painting, antique gold/burgundy/dark teal,
+  wide composition, soft chiaroscuro.
+- Notes: one engraved paper note diagonally across a burgundy leather ledger
+  beside a gold pouch; strong silhouette readable at 48 pixels, parchment
+  ivory and dark teal shadows, historical oil painting.
+- Clearing: three stacks of payment bills joined by central brass scales,
+  a few coins and a red wax seal on teal velvet; bold central composition
+  readable at 48 pixels, antique gold oil painting.
+- Branch: a compact Renaissance Italian stone counting house with arched
+  doorway, brass scales and red-sealed ledger at its counter; warm stone,
+  dark teal shadows and burgundy accents, readable at 48 pixels.

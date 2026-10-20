@@ -148,7 +148,7 @@ def initialize():
     for i in range(1,33):
         values += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_withdrawal_requested }}\n'
     values += '''}
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets }
     bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
@@ -178,6 +178,7 @@ def initialize():
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
     body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
+    body += 'bfl_initialize_monetary = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -229,8 +230,11 @@ def permissions():
             gate.append('bfl_has_valid_controller = yes')
         if rule.get('stock_exchange'):
             gate.append('bfl_can_trade_sovereign_bonds = yes')
-        if rule.get('advance') or rule.get('native_advance'):
-            a = rule.get('native_advance') or 'bfl_'+rule['advance']
+        if key in ('sovereign_note', 'secured_liquidity', 'clearing', 'public_backstop'):
+            gate.append('bfl_money_backed = yes')
+        if key == 'secured_liquidity':
+            gate.append('OR = { has_advance = bfl_collateralization AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_collateralization } } }')
+        for a in ([rule['native_advance']] if rule.get('native_advance') else []) + (['bfl_'+rule['advance']] if rule.get('advance') else []):
             gate.append(f'OR = {{ AND = {{ bfl_is_independent_bank = yes has_advance = {a} }} AND = {{ bfl_has_valid_controller = yes overlord ?= {{ has_advance = {a} }} }} }}')
         if rule.get('probe'):
             # No save-game switch can enable an unproved adapter. Change design + regenerate after evidence.
@@ -572,6 +576,7 @@ def native_adapters():
     bfl_originate_native_credit = {
         if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party bfl_free_cash >= 100
             bfl_credit_capacity = yes bfl_capital_headroom >= 100
+            bfl_branch_access = { PARTY = scope:bfl_party }
             scope:bfl_party = { has_variable = bfl_credit_guard var:bfl_credit_offer_bank = prev }
             OR = {
                 AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location } }
@@ -591,6 +596,7 @@ def native_adapters():
         bfl_initialize_credit = yes
         if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party country_exists = scope:bfl_party
             NOT = { this = scope:bfl_party }
+            bfl_branch_access = { PARTY = scope:bfl_party }
             scope:bfl_party = {
                 OR = { NOT = { bfl_is_company = yes } scope:bfl_bank = { bfl_can_originate_corporate_credit = yes } }
             }
@@ -641,7 +647,6 @@ def native_adapters():
         'native_bond_adapter': [('bfl_accept_native_debt_resale','P04'),('bfl_redeem_native_bond','P04')],
         'native_trade_adapter':[],
         'native_receipts_adapter':[('bfl_observe_native_receipts','P07')],
-        'monetary':[('bfl_issue_sovereign_notes','P05'),('bfl_settle_interbank_liquidity','P04'),('bfl_run_clearing','P10')],
         'security':[('bfl_pledge_native_collateral','P04'),('bfl_enforce_native_collateral','P04')],
     }
     for filename, entries in blocked.items():
@@ -724,7 +729,8 @@ def treasury_and_resolution():
     }
     # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
     bfl_recapitalize = {
-        if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 } }
+        if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 }
+            bfl_branch_access = { PARTY = overlord } }
             save_scope_as = bfl_bank
             overlord = { save_scope_as = bfl_party }
             set_variable = { name = bfl_equity_pool value = 0 }
@@ -751,6 +757,7 @@ def treasury_and_resolution():
     common('scripted_effects','monthly_settlement','''
     bfl_process_accounts = {
         if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+        bfl_service_monetary = yes
         bfl_settle_held_sovereign_bonds = yes
             save_scope_as = bfl_bank
             bfl_reconcile_charter = yes
@@ -986,7 +993,7 @@ def gui_and_localization():
     loc('bfl_debt_explanation','The chartered bank funds custom sovereign bonds. Secondary trading requires completed Stock Exchanges on both sides, including early event grants. Native credit uses accepted offers and researched debt relief with persisted claim records.')
     loc('bfl_goods_explanation','Funded native inventory, backed receipts and forwards require Merchant Finance, their advances and P09 execution/custody verification. Encumbered goods cannot back a second claim.')
     loc('bfl_ventures_explanation','Commenda starts in Discovery; native companies and company equity require Reformation. Political overlord control and financial ownership stay separate. Project capital is not a dividend.')
-    loc('bfl_monetary_explanation','Bills precede sovereign notes. Notes require an authorized charter, Absolutism research and backing that excludes note-sale cash. Secured liquidity and clearing have later research and adapter gates.')
+    loc('bfl_monetary_explanation','Exchange specie for reserved notes with sovereign authority and a completed Central Bank. Discount third-bank bills after Collateralization and Liquidity Facilities; Revolutions adds funded member netting and capped public secured support. Accepted rates stay fixed.')
     loc('bfl_dividend_explanation','Monthly net income after deposit interest, operating expenses and carried losses funds dividends. Each owner receives owned shares multiplied by the funded payout per outstanding share. Retained earnings are not distributed again next month.')
     loc('bfl_deposit_explanation','Each account stores its accepted fixed annual rate. Changing the rate affects new accounts. Term accounts mature after 12 months. Withdrawal shortages remain liabilities and suspend new commitments.')
     # Numeric statement snapshots are stored on each institution; this view reads the live actor.
@@ -1052,6 +1059,10 @@ def main():
     generate_bond_panel(common,effect,loc,write)
     from generate_ownership import generate as generate_ownership
     generate_ownership(common,effect,loc,write)
+    from generate_branches import generate as generate_branches
+    generate_branches(common,effect,loc,write)
+    from generate_monetary import generate as generate_monetary
+    generate_monetary(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

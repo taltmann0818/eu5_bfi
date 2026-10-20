@@ -2145,7 +2145,7 @@
         type bfl_credit_investment_body = scrollarea {
             size = { -1 180 } layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = { using = Scrollbar_Vertical }
-            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 bfl_equity_investments = { }bfl_goods_contents = { }bfl_commenda_contents = { }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
+            scrollwidget = { vbox = { layoutpolicy_horizontal = expanding margin = { 5 5 } spacing = 5 bfl_monetary_contents = { }bfl_equity_investments = { }bfl_goods_contents = { }bfl_commenda_contents = { }hbox = { layoutpolicy_horizontal = expanding spacing = 5 vbox = { layoutpolicy_horizontal = expanding button_regular = { name = "bfl_offer_credit_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_offer_credit"
         datacontext = "[GetPlayer]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_offer_credit_tip"
         scripted_action_tooltip = { click_type = left click_mode = single

@@ -1,0 +1,9 @@
+﻿bfl_accept_money_claims = {
+        decision_category = economy_decisions
+        image = "gfx/interface/illustrations/bfl/monetary_authority.dds"
+        potential = { country_type = location } allow = { country_type = location }
+        option = { name = bfl_money_acceptance_action effect = {
+            if = { limit = { var:bfl_money_accept ?= 1 } set_variable = { name = bfl_money_accept value = 0 } }
+            else = { set_variable = { name = bfl_money_accept value = 1 } } } }
+        ai_will_do = { value = 0 }
+    }

@@ -4,6 +4,7 @@
 bfl_originate_native_credit = {
     if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party bfl_free_cash >= 100
         bfl_credit_capacity = yes bfl_capital_headroom >= 100
+        bfl_branch_access = { PARTY = scope:bfl_party }
         scope:bfl_party = { has_variable = bfl_credit_guard var:bfl_credit_offer_bank = prev }
         OR = {
             AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { NOT = { bfl_is_company = yes } country_type = location } }
@@ -23,6 +24,7 @@ bfl_native_takeover = {
     bfl_initialize_credit = yes
     if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party country_exists = scope:bfl_party
         NOT = { this = scope:bfl_party }
+        bfl_branch_access = { PARTY = scope:bfl_party }
         scope:bfl_party = {
             OR = { NOT = { bfl_is_company = yes } scope:bfl_bank = { bfl_can_originate_corporate_credit = yes } }
         }

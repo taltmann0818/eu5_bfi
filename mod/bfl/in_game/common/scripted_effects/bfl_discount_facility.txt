@@ -1,0 +1,1527 @@
+﻿bfl_settle_interbank_liquidity = {
+bfl_initialize_monetary = yes
+        if = { limit = { bfl_can_originate_secured_liquidity = yes bfl_monetary_actor = yes
+            exists = scope:bfl_party country_exists = scope:bfl_party
+            scope:bfl_party = { bfl_can_originate_secured_liquidity = yes bfl_equity > 0
+                NOT = { has_variable = bfl_discount_issuer } }
+            var:bfl_money_accept = 1 bfl_free_cash >= 75 bfl_capital_headroom >= 75
+            NOT = { this = scope:bfl_party }
+        }
+            save_scope_as = bfl_discount_lender
+            set_variable = { name = bfl_discount_found value = 0 }
+            every_country = { limit = { bfl_has_accounts = yes NOT = { this = scope:bfl_party }
+                NOT = { this = scope:bfl_discount_lender } }
+                save_scope_as = bfl_discount_issuer
+    if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_01_state = 1 var:bfl_con_01_basis = 100
+            var:bfl_con_01_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_01_pledge } bfl_period < var:bfl_con_01_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_01_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_01_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 1 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_02_state = 1 var:bfl_con_02_basis = 100
+            var:bfl_con_02_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_02_pledge } bfl_period < var:bfl_con_02_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_02_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_02_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 2 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_03_state = 1 var:bfl_con_03_basis = 100
+            var:bfl_con_03_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_03_pledge } bfl_period < var:bfl_con_03_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_03_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_03_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 3 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_04_state = 1 var:bfl_con_04_basis = 100
+            var:bfl_con_04_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_04_pledge } bfl_period < var:bfl_con_04_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_04_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_04_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 4 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_05_state = 1 var:bfl_con_05_basis = 100
+            var:bfl_con_05_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_05_pledge } bfl_period < var:bfl_con_05_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_05_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_05_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 5 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_06_state = 1 var:bfl_con_06_basis = 100
+            var:bfl_con_06_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_06_pledge } bfl_period < var:bfl_con_06_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_06_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_06_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 6 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_07_state = 1 var:bfl_con_07_basis = 100
+            var:bfl_con_07_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_07_pledge } bfl_period < var:bfl_con_07_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_07_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_07_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 7 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_08_state = 1 var:bfl_con_08_basis = 100
+            var:bfl_con_08_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_08_pledge } bfl_period < var:bfl_con_08_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_08_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_08_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 8 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_09_state = 1 var:bfl_con_09_basis = 100
+            var:bfl_con_09_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_09_pledge } bfl_period < var:bfl_con_09_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_09_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_09_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 9 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_10_state = 1 var:bfl_con_10_basis = 100
+            var:bfl_con_10_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_10_pledge } bfl_period < var:bfl_con_10_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_10_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_10_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 10 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_11_state = 1 var:bfl_con_11_basis = 100
+            var:bfl_con_11_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_11_pledge } bfl_period < var:bfl_con_11_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_11_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_11_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 11 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_12_state = 1 var:bfl_con_12_basis = 100
+            var:bfl_con_12_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_12_pledge } bfl_period < var:bfl_con_12_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_12_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_12_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 12 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_13_state = 1 var:bfl_con_13_basis = 100
+            var:bfl_con_13_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_13_pledge } bfl_period < var:bfl_con_13_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_13_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_13_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 13 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_14_state = 1 var:bfl_con_14_basis = 100
+            var:bfl_con_14_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_14_pledge } bfl_period < var:bfl_con_14_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_14_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_14_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 14 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_15_state = 1 var:bfl_con_15_basis = 100
+            var:bfl_con_15_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_15_pledge } bfl_period < var:bfl_con_15_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_15_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_15_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 15 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_16_state = 1 var:bfl_con_16_basis = 100
+            var:bfl_con_16_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_16_pledge } bfl_period < var:bfl_con_16_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_16_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_16_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 16 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_17_state = 1 var:bfl_con_17_basis = 100
+            var:bfl_con_17_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_17_pledge } bfl_period < var:bfl_con_17_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_17_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_17_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 17 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_18_state = 1 var:bfl_con_18_basis = 100
+            var:bfl_con_18_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_18_pledge } bfl_period < var:bfl_con_18_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_18_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_18_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 18 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_19_state = 1 var:bfl_con_19_basis = 100
+            var:bfl_con_19_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_19_pledge } bfl_period < var:bfl_con_19_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_19_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_19_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 19 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_20_state = 1 var:bfl_con_20_basis = 100
+            var:bfl_con_20_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_20_pledge } bfl_period < var:bfl_con_20_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_20_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_20_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 20 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_21_state = 1 var:bfl_con_21_basis = 100
+            var:bfl_con_21_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_21_pledge } bfl_period < var:bfl_con_21_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_21_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_21_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 21 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_22_state = 1 var:bfl_con_22_basis = 100
+            var:bfl_con_22_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_22_pledge } bfl_period < var:bfl_con_22_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_22_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_22_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 22 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_23_state = 1 var:bfl_con_23_basis = 100
+            var:bfl_con_23_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_23_pledge } bfl_period < var:bfl_con_23_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_23_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_23_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 23 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_24_state = 1 var:bfl_con_24_basis = 100
+            var:bfl_con_24_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_24_pledge } bfl_period < var:bfl_con_24_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_24_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_24_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 24 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_25_state = 1 var:bfl_con_25_basis = 100
+            var:bfl_con_25_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_25_pledge } bfl_period < var:bfl_con_25_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_25_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_25_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 25 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_26_state = 1 var:bfl_con_26_basis = 100
+            var:bfl_con_26_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_26_pledge } bfl_period < var:bfl_con_26_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_26_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_26_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 26 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_27_state = 1 var:bfl_con_27_basis = 100
+            var:bfl_con_27_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_27_pledge } bfl_period < var:bfl_con_27_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_27_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_27_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 27 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_28_state = 1 var:bfl_con_28_basis = 100
+            var:bfl_con_28_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_28_pledge } bfl_period < var:bfl_con_28_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_28_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_28_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 28 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_29_state = 1 var:bfl_con_29_basis = 100
+            var:bfl_con_29_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_29_pledge } bfl_period < var:bfl_con_29_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_29_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_29_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 29 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_30_state = 1 var:bfl_con_30_basis = 100
+            var:bfl_con_30_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_30_pledge } bfl_period < var:bfl_con_30_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_30_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_30_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 30 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_31_state = 1 var:bfl_con_31_basis = 100
+            var:bfl_con_31_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_31_pledge } bfl_period < var:bfl_con_31_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_31_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_31_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 31 } }
+        }
+if = { limit = { scope:bfl_discount_lender.var:bfl_discount_found = 0
+            var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_con_32_state = 1 var:bfl_con_32_basis = 100
+            var:bfl_con_32_party ?= scope:bfl_party
+            NOT = { has_variable = bfl_con_32_pledge } bfl_period < var:bfl_con_32_maturity_period
+            gold >= var:bfl_cash_committed }
+            set_variable = { name = bfl_con_32_pledge value = scope:bfl_discount_lender }
+            set_variable = { name = bfl_con_32_discount_due value = { value = 75 add = scope:bfl_discount_lender.bfl_discount_fee } }
+            scope:bfl_discount_lender = { set_variable = { name = bfl_discount_found value = 1 }
+                add_gold = -75 change_variable = { name = bfl_money_assets add = 75 } }
+            scope:bfl_party = { bfl_initialize_monetary = yes add_gold = 75
+                change_variable = { name = bfl_other_payables add = 75 }
+                set_variable = { name = bfl_discount_issuer value = scope:bfl_discount_issuer }
+                set_variable = { name = bfl_discount_slot value = 32 } }
+        }
+} }
+}
+bfl_repay_discount = {
+if = { limit = { exists = var:bfl_discount_issuer }
+                save_scope_as = bfl_discount_borrower var:bfl_discount_issuer = { save_scope_as = bfl_discount_issuer }
+            if = { limit = { var:bfl_discount_slot = 1
+            scope:bfl_discount_issuer = { var:bfl_con_01_active = 1 var:bfl_con_01_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_01_pledge country_exists = var:bfl_con_01_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_01_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_01_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_01_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_01_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 2
+            scope:bfl_discount_issuer = { var:bfl_con_02_active = 1 var:bfl_con_02_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_02_pledge country_exists = var:bfl_con_02_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_02_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_02_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_02_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_02_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 3
+            scope:bfl_discount_issuer = { var:bfl_con_03_active = 1 var:bfl_con_03_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_03_pledge country_exists = var:bfl_con_03_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_03_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_03_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_03_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_03_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 4
+            scope:bfl_discount_issuer = { var:bfl_con_04_active = 1 var:bfl_con_04_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_04_pledge country_exists = var:bfl_con_04_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_04_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_04_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_04_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_04_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 5
+            scope:bfl_discount_issuer = { var:bfl_con_05_active = 1 var:bfl_con_05_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_05_pledge country_exists = var:bfl_con_05_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_05_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_05_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_05_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_05_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 6
+            scope:bfl_discount_issuer = { var:bfl_con_06_active = 1 var:bfl_con_06_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_06_pledge country_exists = var:bfl_con_06_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_06_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_06_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_06_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_06_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 7
+            scope:bfl_discount_issuer = { var:bfl_con_07_active = 1 var:bfl_con_07_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_07_pledge country_exists = var:bfl_con_07_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_07_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_07_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_07_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_07_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 8
+            scope:bfl_discount_issuer = { var:bfl_con_08_active = 1 var:bfl_con_08_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_08_pledge country_exists = var:bfl_con_08_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_08_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_08_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_08_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_08_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 9
+            scope:bfl_discount_issuer = { var:bfl_con_09_active = 1 var:bfl_con_09_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_09_pledge country_exists = var:bfl_con_09_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_09_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_09_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_09_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_09_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 10
+            scope:bfl_discount_issuer = { var:bfl_con_10_active = 1 var:bfl_con_10_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_10_pledge country_exists = var:bfl_con_10_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_10_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_10_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_10_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_10_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 11
+            scope:bfl_discount_issuer = { var:bfl_con_11_active = 1 var:bfl_con_11_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_11_pledge country_exists = var:bfl_con_11_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_11_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_11_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_11_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_11_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 12
+            scope:bfl_discount_issuer = { var:bfl_con_12_active = 1 var:bfl_con_12_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_12_pledge country_exists = var:bfl_con_12_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_12_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_12_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_12_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_12_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 13
+            scope:bfl_discount_issuer = { var:bfl_con_13_active = 1 var:bfl_con_13_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_13_pledge country_exists = var:bfl_con_13_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_13_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_13_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_13_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_13_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 14
+            scope:bfl_discount_issuer = { var:bfl_con_14_active = 1 var:bfl_con_14_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_14_pledge country_exists = var:bfl_con_14_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_14_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_14_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_14_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_14_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 15
+            scope:bfl_discount_issuer = { var:bfl_con_15_active = 1 var:bfl_con_15_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_15_pledge country_exists = var:bfl_con_15_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_15_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_15_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_15_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_15_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 16
+            scope:bfl_discount_issuer = { var:bfl_con_16_active = 1 var:bfl_con_16_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_16_pledge country_exists = var:bfl_con_16_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_16_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_16_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_16_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_16_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 17
+            scope:bfl_discount_issuer = { var:bfl_con_17_active = 1 var:bfl_con_17_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_17_pledge country_exists = var:bfl_con_17_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_17_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_17_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_17_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_17_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 18
+            scope:bfl_discount_issuer = { var:bfl_con_18_active = 1 var:bfl_con_18_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_18_pledge country_exists = var:bfl_con_18_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_18_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_18_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_18_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_18_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 19
+            scope:bfl_discount_issuer = { var:bfl_con_19_active = 1 var:bfl_con_19_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_19_pledge country_exists = var:bfl_con_19_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_19_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_19_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_19_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_19_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 20
+            scope:bfl_discount_issuer = { var:bfl_con_20_active = 1 var:bfl_con_20_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_20_pledge country_exists = var:bfl_con_20_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_20_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_20_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_20_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_20_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 21
+            scope:bfl_discount_issuer = { var:bfl_con_21_active = 1 var:bfl_con_21_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_21_pledge country_exists = var:bfl_con_21_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_21_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_21_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_21_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_21_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 22
+            scope:bfl_discount_issuer = { var:bfl_con_22_active = 1 var:bfl_con_22_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_22_pledge country_exists = var:bfl_con_22_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_22_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_22_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_22_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_22_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 23
+            scope:bfl_discount_issuer = { var:bfl_con_23_active = 1 var:bfl_con_23_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_23_pledge country_exists = var:bfl_con_23_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_23_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_23_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_23_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_23_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 24
+            scope:bfl_discount_issuer = { var:bfl_con_24_active = 1 var:bfl_con_24_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_24_pledge country_exists = var:bfl_con_24_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_24_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_24_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_24_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_24_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 25
+            scope:bfl_discount_issuer = { var:bfl_con_25_active = 1 var:bfl_con_25_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_25_pledge country_exists = var:bfl_con_25_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_25_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_25_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_25_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_25_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 26
+            scope:bfl_discount_issuer = { var:bfl_con_26_active = 1 var:bfl_con_26_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_26_pledge country_exists = var:bfl_con_26_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_26_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_26_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_26_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_26_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 27
+            scope:bfl_discount_issuer = { var:bfl_con_27_active = 1 var:bfl_con_27_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_27_pledge country_exists = var:bfl_con_27_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_27_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_27_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_27_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_27_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 28
+            scope:bfl_discount_issuer = { var:bfl_con_28_active = 1 var:bfl_con_28_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_28_pledge country_exists = var:bfl_con_28_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_28_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_28_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_28_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_28_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 29
+            scope:bfl_discount_issuer = { var:bfl_con_29_active = 1 var:bfl_con_29_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_29_pledge country_exists = var:bfl_con_29_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_29_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_29_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_29_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_29_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 30
+            scope:bfl_discount_issuer = { var:bfl_con_30_active = 1 var:bfl_con_30_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_30_pledge country_exists = var:bfl_con_30_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_30_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_30_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_30_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_30_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 31
+            scope:bfl_discount_issuer = { var:bfl_con_31_active = 1 var:bfl_con_31_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_31_pledge country_exists = var:bfl_con_31_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_31_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_31_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_31_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_31_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+if = { limit = { var:bfl_discount_slot = 32
+            scope:bfl_discount_issuer = { var:bfl_con_32_active = 1 var:bfl_con_32_party ?= scope:bfl_discount_borrower
+                exists = var:bfl_con_32_pledge country_exists = var:bfl_con_32_pledge }
+            gold >= scope:bfl_discount_issuer.var:bfl_con_32_discount_due }
+            set_variable = { name = bfl_payment value = scope:bfl_discount_issuer.var:bfl_con_32_discount_due }
+            add_gold = bfl_negative_payment
+            scope:bfl_discount_issuer.var:bfl_con_32_pledge = { add_gold = scope:bfl_discount_borrower.var:bfl_payment
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 } } }
+            change_variable = { name = bfl_other_payables subtract = 75 }
+            change_variable = { name = bfl_loss_carryforward add = { value = var:bfl_payment subtract = 75 } }
+            scope:bfl_discount_issuer = { remove_variable = bfl_con_32_pledge }
+            remove_variable = bfl_discount_issuer
+        }
+}
+}
+bfl_service_discount_collateral = {
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1
+            has_variable = bfl_con_01_pledge exists = var:bfl_con_01_pledge country_exists = var:bfl_con_01_pledge
+            exists = var:bfl_con_01_party country_exists = var:bfl_con_01_party
+            bfl_period >= var:bfl_con_01_maturity_period gold >= var:bfl_con_01_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_01_active value = 0 } set_variable = { name = bfl_con_01_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_01_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_01_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_01_discount_due subtract = 75 } } }
+            var:bfl_con_01_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_01_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_01_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_01_pledge
+        }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1
+            has_variable = bfl_con_02_pledge exists = var:bfl_con_02_pledge country_exists = var:bfl_con_02_pledge
+            exists = var:bfl_con_02_party country_exists = var:bfl_con_02_party
+            bfl_period >= var:bfl_con_02_maturity_period gold >= var:bfl_con_02_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_02_active value = 0 } set_variable = { name = bfl_con_02_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_02_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_02_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_02_discount_due subtract = 75 } } }
+            var:bfl_con_02_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_02_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_02_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_02_pledge
+        }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1
+            has_variable = bfl_con_03_pledge exists = var:bfl_con_03_pledge country_exists = var:bfl_con_03_pledge
+            exists = var:bfl_con_03_party country_exists = var:bfl_con_03_party
+            bfl_period >= var:bfl_con_03_maturity_period gold >= var:bfl_con_03_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_03_active value = 0 } set_variable = { name = bfl_con_03_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_03_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_03_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_03_discount_due subtract = 75 } } }
+            var:bfl_con_03_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_03_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_03_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_03_pledge
+        }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1
+            has_variable = bfl_con_04_pledge exists = var:bfl_con_04_pledge country_exists = var:bfl_con_04_pledge
+            exists = var:bfl_con_04_party country_exists = var:bfl_con_04_party
+            bfl_period >= var:bfl_con_04_maturity_period gold >= var:bfl_con_04_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_04_active value = 0 } set_variable = { name = bfl_con_04_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_04_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_04_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_04_discount_due subtract = 75 } } }
+            var:bfl_con_04_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_04_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_04_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_04_pledge
+        }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1
+            has_variable = bfl_con_05_pledge exists = var:bfl_con_05_pledge country_exists = var:bfl_con_05_pledge
+            exists = var:bfl_con_05_party country_exists = var:bfl_con_05_party
+            bfl_period >= var:bfl_con_05_maturity_period gold >= var:bfl_con_05_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_05_active value = 0 } set_variable = { name = bfl_con_05_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_05_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_05_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_05_discount_due subtract = 75 } } }
+            var:bfl_con_05_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_05_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_05_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_05_pledge
+        }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1
+            has_variable = bfl_con_06_pledge exists = var:bfl_con_06_pledge country_exists = var:bfl_con_06_pledge
+            exists = var:bfl_con_06_party country_exists = var:bfl_con_06_party
+            bfl_period >= var:bfl_con_06_maturity_period gold >= var:bfl_con_06_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_06_active value = 0 } set_variable = { name = bfl_con_06_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_06_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_06_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_06_discount_due subtract = 75 } } }
+            var:bfl_con_06_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_06_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_06_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_06_pledge
+        }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1
+            has_variable = bfl_con_07_pledge exists = var:bfl_con_07_pledge country_exists = var:bfl_con_07_pledge
+            exists = var:bfl_con_07_party country_exists = var:bfl_con_07_party
+            bfl_period >= var:bfl_con_07_maturity_period gold >= var:bfl_con_07_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_07_active value = 0 } set_variable = { name = bfl_con_07_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_07_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_07_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_07_discount_due subtract = 75 } } }
+            var:bfl_con_07_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_07_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_07_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_07_pledge
+        }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1
+            has_variable = bfl_con_08_pledge exists = var:bfl_con_08_pledge country_exists = var:bfl_con_08_pledge
+            exists = var:bfl_con_08_party country_exists = var:bfl_con_08_party
+            bfl_period >= var:bfl_con_08_maturity_period gold >= var:bfl_con_08_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_08_active value = 0 } set_variable = { name = bfl_con_08_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_08_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_08_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_08_discount_due subtract = 75 } } }
+            var:bfl_con_08_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_08_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_08_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_08_pledge
+        }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1
+            has_variable = bfl_con_09_pledge exists = var:bfl_con_09_pledge country_exists = var:bfl_con_09_pledge
+            exists = var:bfl_con_09_party country_exists = var:bfl_con_09_party
+            bfl_period >= var:bfl_con_09_maturity_period gold >= var:bfl_con_09_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_09_active value = 0 } set_variable = { name = bfl_con_09_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_09_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_09_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_09_discount_due subtract = 75 } } }
+            var:bfl_con_09_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_09_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_09_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_09_pledge
+        }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1
+            has_variable = bfl_con_10_pledge exists = var:bfl_con_10_pledge country_exists = var:bfl_con_10_pledge
+            exists = var:bfl_con_10_party country_exists = var:bfl_con_10_party
+            bfl_period >= var:bfl_con_10_maturity_period gold >= var:bfl_con_10_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_10_active value = 0 } set_variable = { name = bfl_con_10_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_10_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_10_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_10_discount_due subtract = 75 } } }
+            var:bfl_con_10_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_10_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_10_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_10_pledge
+        }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1
+            has_variable = bfl_con_11_pledge exists = var:bfl_con_11_pledge country_exists = var:bfl_con_11_pledge
+            exists = var:bfl_con_11_party country_exists = var:bfl_con_11_party
+            bfl_period >= var:bfl_con_11_maturity_period gold >= var:bfl_con_11_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_11_active value = 0 } set_variable = { name = bfl_con_11_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_11_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_11_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_11_discount_due subtract = 75 } } }
+            var:bfl_con_11_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_11_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_11_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_11_pledge
+        }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1
+            has_variable = bfl_con_12_pledge exists = var:bfl_con_12_pledge country_exists = var:bfl_con_12_pledge
+            exists = var:bfl_con_12_party country_exists = var:bfl_con_12_party
+            bfl_period >= var:bfl_con_12_maturity_period gold >= var:bfl_con_12_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_12_active value = 0 } set_variable = { name = bfl_con_12_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_12_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_12_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_12_discount_due subtract = 75 } } }
+            var:bfl_con_12_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_12_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_12_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_12_pledge
+        }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1
+            has_variable = bfl_con_13_pledge exists = var:bfl_con_13_pledge country_exists = var:bfl_con_13_pledge
+            exists = var:bfl_con_13_party country_exists = var:bfl_con_13_party
+            bfl_period >= var:bfl_con_13_maturity_period gold >= var:bfl_con_13_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_13_active value = 0 } set_variable = { name = bfl_con_13_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_13_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_13_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_13_discount_due subtract = 75 } } }
+            var:bfl_con_13_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_13_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_13_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_13_pledge
+        }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1
+            has_variable = bfl_con_14_pledge exists = var:bfl_con_14_pledge country_exists = var:bfl_con_14_pledge
+            exists = var:bfl_con_14_party country_exists = var:bfl_con_14_party
+            bfl_period >= var:bfl_con_14_maturity_period gold >= var:bfl_con_14_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_14_active value = 0 } set_variable = { name = bfl_con_14_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_14_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_14_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_14_discount_due subtract = 75 } } }
+            var:bfl_con_14_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_14_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_14_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_14_pledge
+        }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1
+            has_variable = bfl_con_15_pledge exists = var:bfl_con_15_pledge country_exists = var:bfl_con_15_pledge
+            exists = var:bfl_con_15_party country_exists = var:bfl_con_15_party
+            bfl_period >= var:bfl_con_15_maturity_period gold >= var:bfl_con_15_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_15_active value = 0 } set_variable = { name = bfl_con_15_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_15_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_15_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_15_discount_due subtract = 75 } } }
+            var:bfl_con_15_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_15_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_15_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_15_pledge
+        }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1
+            has_variable = bfl_con_16_pledge exists = var:bfl_con_16_pledge country_exists = var:bfl_con_16_pledge
+            exists = var:bfl_con_16_party country_exists = var:bfl_con_16_party
+            bfl_period >= var:bfl_con_16_maturity_period gold >= var:bfl_con_16_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_16_active value = 0 } set_variable = { name = bfl_con_16_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_16_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_16_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_16_discount_due subtract = 75 } } }
+            var:bfl_con_16_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_16_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_16_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_16_pledge
+        }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1
+            has_variable = bfl_con_17_pledge exists = var:bfl_con_17_pledge country_exists = var:bfl_con_17_pledge
+            exists = var:bfl_con_17_party country_exists = var:bfl_con_17_party
+            bfl_period >= var:bfl_con_17_maturity_period gold >= var:bfl_con_17_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_17_active value = 0 } set_variable = { name = bfl_con_17_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_17_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_17_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_17_discount_due subtract = 75 } } }
+            var:bfl_con_17_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_17_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_17_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_17_pledge
+        }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1
+            has_variable = bfl_con_18_pledge exists = var:bfl_con_18_pledge country_exists = var:bfl_con_18_pledge
+            exists = var:bfl_con_18_party country_exists = var:bfl_con_18_party
+            bfl_period >= var:bfl_con_18_maturity_period gold >= var:bfl_con_18_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_18_active value = 0 } set_variable = { name = bfl_con_18_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_18_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_18_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_18_discount_due subtract = 75 } } }
+            var:bfl_con_18_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_18_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_18_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_18_pledge
+        }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1
+            has_variable = bfl_con_19_pledge exists = var:bfl_con_19_pledge country_exists = var:bfl_con_19_pledge
+            exists = var:bfl_con_19_party country_exists = var:bfl_con_19_party
+            bfl_period >= var:bfl_con_19_maturity_period gold >= var:bfl_con_19_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_19_active value = 0 } set_variable = { name = bfl_con_19_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_19_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_19_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_19_discount_due subtract = 75 } } }
+            var:bfl_con_19_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_19_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_19_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_19_pledge
+        }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1
+            has_variable = bfl_con_20_pledge exists = var:bfl_con_20_pledge country_exists = var:bfl_con_20_pledge
+            exists = var:bfl_con_20_party country_exists = var:bfl_con_20_party
+            bfl_period >= var:bfl_con_20_maturity_period gold >= var:bfl_con_20_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_20_active value = 0 } set_variable = { name = bfl_con_20_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_20_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_20_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_20_discount_due subtract = 75 } } }
+            var:bfl_con_20_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_20_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_20_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_20_pledge
+        }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1
+            has_variable = bfl_con_21_pledge exists = var:bfl_con_21_pledge country_exists = var:bfl_con_21_pledge
+            exists = var:bfl_con_21_party country_exists = var:bfl_con_21_party
+            bfl_period >= var:bfl_con_21_maturity_period gold >= var:bfl_con_21_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_21_active value = 0 } set_variable = { name = bfl_con_21_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_21_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_21_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_21_discount_due subtract = 75 } } }
+            var:bfl_con_21_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_21_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_21_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_21_pledge
+        }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1
+            has_variable = bfl_con_22_pledge exists = var:bfl_con_22_pledge country_exists = var:bfl_con_22_pledge
+            exists = var:bfl_con_22_party country_exists = var:bfl_con_22_party
+            bfl_period >= var:bfl_con_22_maturity_period gold >= var:bfl_con_22_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_22_active value = 0 } set_variable = { name = bfl_con_22_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_22_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_22_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_22_discount_due subtract = 75 } } }
+            var:bfl_con_22_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_22_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_22_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_22_pledge
+        }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1
+            has_variable = bfl_con_23_pledge exists = var:bfl_con_23_pledge country_exists = var:bfl_con_23_pledge
+            exists = var:bfl_con_23_party country_exists = var:bfl_con_23_party
+            bfl_period >= var:bfl_con_23_maturity_period gold >= var:bfl_con_23_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_23_active value = 0 } set_variable = { name = bfl_con_23_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_23_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_23_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_23_discount_due subtract = 75 } } }
+            var:bfl_con_23_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_23_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_23_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_23_pledge
+        }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1
+            has_variable = bfl_con_24_pledge exists = var:bfl_con_24_pledge country_exists = var:bfl_con_24_pledge
+            exists = var:bfl_con_24_party country_exists = var:bfl_con_24_party
+            bfl_period >= var:bfl_con_24_maturity_period gold >= var:bfl_con_24_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_24_active value = 0 } set_variable = { name = bfl_con_24_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_24_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_24_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_24_discount_due subtract = 75 } } }
+            var:bfl_con_24_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_24_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_24_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_24_pledge
+        }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1
+            has_variable = bfl_con_25_pledge exists = var:bfl_con_25_pledge country_exists = var:bfl_con_25_pledge
+            exists = var:bfl_con_25_party country_exists = var:bfl_con_25_party
+            bfl_period >= var:bfl_con_25_maturity_period gold >= var:bfl_con_25_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_25_active value = 0 } set_variable = { name = bfl_con_25_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_25_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_25_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_25_discount_due subtract = 75 } } }
+            var:bfl_con_25_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_25_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_25_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_25_pledge
+        }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1
+            has_variable = bfl_con_26_pledge exists = var:bfl_con_26_pledge country_exists = var:bfl_con_26_pledge
+            exists = var:bfl_con_26_party country_exists = var:bfl_con_26_party
+            bfl_period >= var:bfl_con_26_maturity_period gold >= var:bfl_con_26_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_26_active value = 0 } set_variable = { name = bfl_con_26_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_26_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_26_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_26_discount_due subtract = 75 } } }
+            var:bfl_con_26_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_26_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_26_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_26_pledge
+        }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1
+            has_variable = bfl_con_27_pledge exists = var:bfl_con_27_pledge country_exists = var:bfl_con_27_pledge
+            exists = var:bfl_con_27_party country_exists = var:bfl_con_27_party
+            bfl_period >= var:bfl_con_27_maturity_period gold >= var:bfl_con_27_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_27_active value = 0 } set_variable = { name = bfl_con_27_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_27_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_27_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_27_discount_due subtract = 75 } } }
+            var:bfl_con_27_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_27_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_27_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_27_pledge
+        }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1
+            has_variable = bfl_con_28_pledge exists = var:bfl_con_28_pledge country_exists = var:bfl_con_28_pledge
+            exists = var:bfl_con_28_party country_exists = var:bfl_con_28_party
+            bfl_period >= var:bfl_con_28_maturity_period gold >= var:bfl_con_28_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_28_active value = 0 } set_variable = { name = bfl_con_28_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_28_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_28_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_28_discount_due subtract = 75 } } }
+            var:bfl_con_28_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_28_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_28_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_28_pledge
+        }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1
+            has_variable = bfl_con_29_pledge exists = var:bfl_con_29_pledge country_exists = var:bfl_con_29_pledge
+            exists = var:bfl_con_29_party country_exists = var:bfl_con_29_party
+            bfl_period >= var:bfl_con_29_maturity_period gold >= var:bfl_con_29_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_29_active value = 0 } set_variable = { name = bfl_con_29_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_29_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_29_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_29_discount_due subtract = 75 } } }
+            var:bfl_con_29_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_29_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_29_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_29_pledge
+        }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1
+            has_variable = bfl_con_30_pledge exists = var:bfl_con_30_pledge country_exists = var:bfl_con_30_pledge
+            exists = var:bfl_con_30_party country_exists = var:bfl_con_30_party
+            bfl_period >= var:bfl_con_30_maturity_period gold >= var:bfl_con_30_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_30_active value = 0 } set_variable = { name = bfl_con_30_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_30_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_30_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_30_discount_due subtract = 75 } } }
+            var:bfl_con_30_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_30_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_30_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_30_pledge
+        }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1
+            has_variable = bfl_con_31_pledge exists = var:bfl_con_31_pledge country_exists = var:bfl_con_31_pledge
+            exists = var:bfl_con_31_party country_exists = var:bfl_con_31_party
+            bfl_period >= var:bfl_con_31_maturity_period gold >= var:bfl_con_31_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_31_active value = 0 } set_variable = { name = bfl_con_31_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_31_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_31_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_31_discount_due subtract = 75 } } }
+            var:bfl_con_31_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_31_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_31_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_31_pledge
+        }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1
+            has_variable = bfl_con_32_pledge exists = var:bfl_con_32_pledge country_exists = var:bfl_con_32_pledge
+            exists = var:bfl_con_32_party country_exists = var:bfl_con_32_party
+            bfl_period >= var:bfl_con_32_maturity_period gold >= var:bfl_con_32_basis }
+            save_scope_as = bfl_discount_issuer
+            set_variable = { name = bfl_con_32_active value = 0 } set_variable = { name = bfl_con_32_state value = 3 }
+            add_gold = -100 change_variable = { name = bfl_other_payables subtract = 100 }
+            change_variable = { name = bfl_cash_committed subtract = 100 }
+            var:bfl_con_32_pledge = { add_gold = scope:bfl_discount_issuer.var:bfl_con_32_discount_due
+                change_variable = { name = bfl_money_assets subtract = 75 }
+                change_variable = { name = bfl_profit_credit add = { value = scope:bfl_discount_issuer.var:bfl_con_32_discount_due subtract = 75 } } }
+            var:bfl_con_32_party = {
+                add_gold = { value = 100 subtract = scope:bfl_discount_issuer.var:bfl_con_32_discount_due }
+                change_variable = { name = bfl_money_assets subtract = 100 }
+                change_variable = { name = bfl_other_payables subtract = 75 }
+                change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_discount_issuer.var:bfl_con_32_discount_due subtract = 75 } }
+                remove_variable = bfl_discount_issuer }
+            remove_variable = bfl_con_32_pledge
+        }
+}

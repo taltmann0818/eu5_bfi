@@ -1,0 +1,9 @@
+﻿bfl_service_monetary = {
+bfl_initialize_monetary = yes bfl_service_discount_collateral = yes
+        if = { limit = { bfl_period > var:bfl_money_last }
+            set_variable = { name = bfl_money_last value = bfl_period }
+            if = { limit = { gold < var:bfl_cash_committed }
+                set_variable = { name = bfl_money_confidence value = 25 } }
+            else = { set_variable = { name = bfl_money_confidence value = 100 } }
+        }
+}

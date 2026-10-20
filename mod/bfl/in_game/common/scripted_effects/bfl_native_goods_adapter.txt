@@ -1680,6 +1680,7 @@ if = { limit = { var:bfl_inv_01_offer > 0 bfl_goods_offerable_01 = yes
             var:bfl_inv_01_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_01_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_01_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_01_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -1891,6 +1892,7 @@ if = { limit = { var:bfl_inv_02_offer > 0 bfl_goods_offerable_02 = yes
             var:bfl_inv_02_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_02_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_02_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_02_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -2102,6 +2104,7 @@ if = { limit = { var:bfl_inv_03_offer > 0 bfl_goods_offerable_03 = yes
             var:bfl_inv_03_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_03_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_03_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_03_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -2313,6 +2316,7 @@ if = { limit = { var:bfl_inv_04_offer > 0 bfl_goods_offerable_04 = yes
             var:bfl_inv_04_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_04_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_04_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_04_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -2524,6 +2528,7 @@ if = { limit = { var:bfl_inv_05_offer > 0 bfl_goods_offerable_05 = yes
             var:bfl_inv_05_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_05_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_05_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_05_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -2735,6 +2740,7 @@ if = { limit = { var:bfl_inv_06_offer > 0 bfl_goods_offerable_06 = yes
             var:bfl_inv_06_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_06_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_06_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_06_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -2946,6 +2952,7 @@ if = { limit = { var:bfl_inv_07_offer > 0 bfl_goods_offerable_07 = yes
             var:bfl_inv_07_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_07_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_07_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_07_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -3157,6 +3164,7 @@ if = { limit = { var:bfl_inv_08_offer > 0 bfl_goods_offerable_08 = yes
             var:bfl_inv_08_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_08_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_08_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_08_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -3368,6 +3376,7 @@ if = { limit = { var:bfl_inv_09_offer > 0 bfl_goods_offerable_09 = yes
             var:bfl_inv_09_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_09_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_09_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_09_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -3579,6 +3588,7 @@ if = { limit = { var:bfl_inv_10_offer > 0 bfl_goods_offerable_10 = yes
             var:bfl_inv_10_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_10_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_10_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_10_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -3790,6 +3800,7 @@ if = { limit = { var:bfl_inv_11_offer > 0 bfl_goods_offerable_11 = yes
             var:bfl_inv_11_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_11_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_11_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_11_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -4001,6 +4012,7 @@ if = { limit = { var:bfl_inv_12_offer > 0 bfl_goods_offerable_12 = yes
             var:bfl_inv_12_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_12_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_12_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_12_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -4212,6 +4224,7 @@ if = { limit = { var:bfl_inv_13_offer > 0 bfl_goods_offerable_13 = yes
             var:bfl_inv_13_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_13_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_13_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_13_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -4423,6 +4436,7 @@ if = { limit = { var:bfl_inv_14_offer > 0 bfl_goods_offerable_14 = yes
             var:bfl_inv_14_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_14_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_14_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_14_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -4634,6 +4648,7 @@ if = { limit = { var:bfl_inv_15_offer > 0 bfl_goods_offerable_15 = yes
             var:bfl_inv_15_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_15_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_15_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_15_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes
@@ -4845,6 +4860,7 @@ if = { limit = { var:bfl_inv_16_offer > 0 bfl_goods_offerable_16 = yes
             var:bfl_inv_16_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:bfl_inv_16_offer_expiry
             country_exists = scope:bfl_goods_party NOT = { this = scope:bfl_goods_party }
+            bfl_branch_access = { PARTY = scope:bfl_goods_party }
             OR = { AND = { var:bfl_inv_16_offer = 1 bfl_can_originate_warehouse_receipt = yes }
                     AND = { var:bfl_inv_16_offer = 2 bfl_can_originate_commodity_forward = yes } }
             bfl_goods_researched_collateral = yes

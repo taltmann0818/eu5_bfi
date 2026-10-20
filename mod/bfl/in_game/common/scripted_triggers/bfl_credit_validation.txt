@@ -1,5 +1,6 @@
 ﻿bfl_credit_party_eligible = {
         exists = scope:bfl_party country_exists = scope:bfl_party
+        bfl_branch_access = { PARTY = scope:bfl_party }
         NOT = { this = scope:bfl_party }
         OR = {
             AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { country_type = location NOT = { bfl_is_company = yes } } }

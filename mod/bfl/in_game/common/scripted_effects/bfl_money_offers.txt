@@ -1,0 +1,31 @@
+﻿bfl_offer_discount = {
+    bfl_initialize_monetary = yes
+    if = { limit = { bfl_can_originate_secured_liquidity = yes var:bfl_money_accept = 1
+        exists = scope:bfl_party scope:bfl_party = { bfl_can_originate_secured_liquidity = yes }
+        OR = { NOT = { has_variable = bfl_discount_offer } bfl_period > var:bfl_discount_expiry } }
+        set_variable = { name = bfl_discount_offer value = scope:bfl_party }
+        set_variable = { name = bfl_discount_expiry value = bfl_period }
+        set_variable = { name = bfl_discount_quote_rate value = var:bfl_money_rate }
+        change_variable = { name = bfl_discount_offer_generation add = 1 }
+        save_scope_value_as = { name = bfl_discount_quote value = var:bfl_discount_offer_generation }
+        save_scope_as = bfl_money_lender
+        if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_money_manager } }
+        else = { save_scope_as = bfl_money_manager }
+        scope:bfl_money_manager = { trigger_event_non_silently = bfl_money.1 }
+    }
+}
+bfl_accept_discount_offer = {
+    save_scope_as = bfl_money_actor
+if = { limit = { exists = scope:bfl_money_lender country_exists = scope:bfl_money_lender
+        scope:bfl_money_lender = { bfl_monetary_actor = yes bfl_period <= var:bfl_discount_expiry
+            exists = scope:bfl_discount_quote var:bfl_discount_offer_generation = scope:bfl_discount_quote
+            var:bfl_discount_quote_rate = var:bfl_money_rate
+            exists = var:bfl_discount_offer country_exists = var:bfl_discount_offer } }
+        scope:bfl_money_lender = {
+            var:bfl_discount_offer = { save_scope_as = bfl_party }
+            remove_variable = bfl_discount_offer
+            if = { limit = { var:bfl_discount_offer_public ?= 1 } bfl_settle_public_backstop = yes }
+            else = { bfl_settle_interbank_liquidity = yes }
+        }
+    }
+}

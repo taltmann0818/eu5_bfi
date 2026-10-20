@@ -193,6 +193,7 @@ def generate(common, effect, loc, write):
             var:{p}_offer = scope:bfl_goods_party.var:bfl_goods_quote_mode
             bfl_period <= var:{p}_offer_expiry
             country_exists = scope:bfl_goods_party NOT = {{ this = scope:bfl_goods_party }}
+            bfl_branch_access = {{ PARTY = scope:bfl_goods_party }}
             OR = {{ AND = {{ var:{p}_offer = 1 bfl_can_originate_warehouse_receipt = yes }}
                     AND = {{ var:{p}_offer = 2 bfl_can_originate_commodity_forward = yes }} }}
             bfl_goods_researched_collateral = yes

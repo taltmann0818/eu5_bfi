@@ -102,9 +102,10 @@ bfl_sovereign_banknotes = {
 age = age_5_absolutism
 icon = bfl_sovereign_banknotes
 bfl_enable_sovereign_banknotes = yes
+requires = central_bank_advance
 requires = bfl_commercial_bills
-potential = { bfl_is_research_owner = yes country_type = location has_reform = government_reform:bfl_state_chartered_bank }
-allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } }
+potential = { bfl_is_research_owner = yes }
+allow = { OR = { current_age = age_5_absolutism current_age = age_6_revolutions } has_advance = central_bank_advance }
 ai_weight = { add = 1 }
 }
 bfl_liquidity_facilities = {

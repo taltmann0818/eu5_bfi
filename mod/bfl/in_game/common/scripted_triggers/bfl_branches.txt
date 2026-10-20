@@ -1,0 +1,20 @@
+﻿# Bank scope. Companies and bank counterparties do not require a branch.
+bfl_branch_access = {
+    exists = $PARTY$ country_exists = $PARTY$
+    save_temporary_scope_as = bfl_branch_access_bank
+    OR = {
+        NOT = { bfl_is_bank = yes }
+        $PARTY$ = { NOT = { country_type = location } }
+        $PARTY$ = { capital = { any_buildings_in_location = {
+            building_type = building_type:banking_office building_level > 0
+            owner = scope:bfl_branch_access_bank } } }
+    }
+}
+bfl_branch_site = {
+    country_exists = this country_type = location exists = capital
+    NOT = { is_at_war_with = scope:bfl_branch_builder }
+    opinion = { target = scope:bfl_branch_builder value >= 0 }
+    capital = { can_build_building = building_type:banking_office
+        NOT = { any_buildings_in_location = { building_type = building_type:banking_office
+            owner = scope:bfl_branch_builder } } }
+}

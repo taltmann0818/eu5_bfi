@@ -21,7 +21,7 @@ def generate(common, effect, loc, write):
     values = effect('bfl_tangible_equity', '''value = gold
         if = { limit = { bfl_has_accounts = yes }
             add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
-            add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
+            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets subtract = bfl_liabilities }
         else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt }
             if = { limit = { has_variable = bfl_venture_bank }
                 if = { limit = { var:bfl_venture_activity_schema ?= 2 }
@@ -225,6 +225,7 @@ def generate(common, effect, loc, write):
         NOT = { has_variable = bfl_operation_guard }
         exists = scope:bfl_party country_exists = scope:bfl_party
         OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
+        bfl_branch_access = { PARTY = scope:bfl_party }
         bfl_has_shareholder_capacity = yes bfl_tangible_equity > 0 var:bfl_total_units > 0
         bfl_equity_wallet_funded = yes bfl_equity_buyer_risk = yes
         OR = { AND = { bfl_is_bank = yes bfl_can_originate_bank_subscription = yes }

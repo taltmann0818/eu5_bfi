@@ -1,0 +1,7 @@
+﻿bfl_branch_credit_score = {
+    value = monthly_income_total multiply = 24 add = gold
+    subtract = total_debt subtract = bfl_bond_debt min = 0
+    multiply = creditworthiness
+    if = { limit = { at_war = yes } multiply = 0.5 }
+}
+bfl_branch_budget = { value = 250 add = { value = monthly_income_total multiply = 6 } }
