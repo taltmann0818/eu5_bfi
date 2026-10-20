@@ -77,6 +77,9 @@ def fixture(token, fingerprint):
         '''
 
     start = f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
+    # Explicit debug-only M8 capital-branch prerequisites, before wallet baselines.
+    from m8_monetary_suite import grant
+    start += ''.join(grant("banking_office", bank, host) for bank, host in [('BRD', 'GEN'), ('BRD', 'VEN')])
     start += check('florence_exists', 'exists = c:FLO')
     start += 'c:FLO = { save_scope_as = bfl_party set_gold = 1000 }\n'
     start += 'c:BRD = { add_opinion = { target = c:FLO modifier = bfi_deposit_test_opinion }\n'

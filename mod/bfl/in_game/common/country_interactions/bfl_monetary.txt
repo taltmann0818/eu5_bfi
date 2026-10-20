@@ -31,7 +31,13 @@ bfl_authorize_note_bank = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS
         OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
             bfl_is_independent_bank = yes } } }
             effect = {
-        scope:recipient = { set_variable = { name = bfl_note_authority value = scope:actor } }
+        scope:recipient = { if = { limit = { bfl_is_bank = yes
+            bfl_branch_access = { PARTY = scope:actor }
+            OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
+                bfl_is_independent_bank = yes }
+            scope:actor = { country_type = location exists = capital any_owned_building = {
+                building_type = building_type:central_bank building_level > 0 location = prev.capital } }
+        } set_variable = { name = bfl_note_authority value = scope:actor } } }
          } ai_will_do = { value = 0 } }
 bfl_exchange_for_notes = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
             potential = { scope:actor = { country_type = location gold >= 100 } } allow = { scope:actor = { country_type = location gold >= 100 } }

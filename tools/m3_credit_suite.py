@@ -16,6 +16,11 @@ def fixture(token, fingerprint):
             else = {{ debug_log = "BFI_TEST|{token}|FAIL|{name}" }}\n'''
 
     start = f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
+    # Native M8 prerequisite grants, before any wallet baselines. These do not
+    # establish AI branch-selection or paid-construction acceptance.
+    from m8_monetary_suite import grant
+    start += ''.join(grant('banking_office', bank, host)
+                     for bank in ('BRD', 'PRZ') for host in ('GEN', 'VEN'))
     start += '''c:FLO = { set_gold = 10000 add_reform = government_reform:bfl_state_chartered_bank
         set_variable = { name = bfl_bank value = c:BRD } save_scope_as = bfl_credit_actor }
         c:BRD = {

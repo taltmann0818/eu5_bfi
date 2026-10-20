@@ -55,15 +55,21 @@ bfl_money_revoke = { scope = country is_shown = { bfl_has_management = yes }
                 if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes remove_variable = bfl_note_authority } } } }
 bfl_money_notes = { scope = country is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location OR = { AND = { bfl_is_independent_bank = yes bfl_note_authorized = yes }
-                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_note_authorized = yes } } } } effect = {
-                if = { limit = { bfl_has_management = yes country_type = location OR = { AND = { bfl_is_independent_bank = yes bfl_note_authorized = yes }
-                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_note_authorized = yes } } } } bfl_resolve_command_bank = yes
+            is_valid = { bfl_has_management = yes country_type = location gold >= 100 OR = { AND = { bfl_is_independent_bank = yes bfl_note_authorized = yes
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_note_authorized = yes
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 } } } } } effect = {
+                if = { limit = { bfl_has_management = yes country_type = location gold >= 100 OR = { AND = { bfl_is_independent_bank = yes bfl_note_authorized = yes
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_note_authorized = yes
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 } } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes overlord = { save_scope_as = bfl_party }
         bfl_issue_sovereign_notes = yes } } } }
 bfl_money_redeem = { scope = country is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location } effect = {
-                if = { limit = { bfl_has_management = yes country_type = location } bfl_resolve_command_bank = yes
+            is_valid = { bfl_has_management = yes country_type = location OR = { AND = { bfl_is_independent_bank = yes OR = { AND = { var:bfl_note_01_face > 0 var:bfl_note_01_holder ?= overlord } AND = { var:bfl_note_02_face > 0 var:bfl_note_02_holder ?= overlord } AND = { var:bfl_note_03_face > 0 var:bfl_note_03_holder ?= overlord } AND = { var:bfl_note_04_face > 0 var:bfl_note_04_holder ?= overlord } AND = { var:bfl_note_05_face > 0 var:bfl_note_05_holder ?= overlord } AND = { var:bfl_note_06_face > 0 var:bfl_note_06_holder ?= overlord } AND = { var:bfl_note_07_face > 0 var:bfl_note_07_holder ?= overlord } AND = { var:bfl_note_08_face > 0 var:bfl_note_08_holder ?= overlord } } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { OR = { AND = { var:bfl_note_01_face > 0 var:bfl_note_01_holder ?= overlord } AND = { var:bfl_note_02_face > 0 var:bfl_note_02_holder ?= overlord } AND = { var:bfl_note_03_face > 0 var:bfl_note_03_holder ?= overlord } AND = { var:bfl_note_04_face > 0 var:bfl_note_04_holder ?= overlord } AND = { var:bfl_note_05_face > 0 var:bfl_note_05_holder ?= overlord } AND = { var:bfl_note_06_face > 0 var:bfl_note_06_holder ?= overlord } AND = { var:bfl_note_07_face > 0 var:bfl_note_07_holder ?= overlord } AND = { var:bfl_note_08_face > 0 var:bfl_note_08_holder ?= overlord } } } } } } effect = {
+                if = { limit = { bfl_has_management = yes country_type = location OR = { AND = { bfl_is_independent_bank = yes OR = { AND = { var:bfl_note_01_face > 0 var:bfl_note_01_holder ?= overlord } AND = { var:bfl_note_02_face > 0 var:bfl_note_02_holder ?= overlord } AND = { var:bfl_note_03_face > 0 var:bfl_note_03_holder ?= overlord } AND = { var:bfl_note_04_face > 0 var:bfl_note_04_holder ?= overlord } AND = { var:bfl_note_05_face > 0 var:bfl_note_05_holder ?= overlord } AND = { var:bfl_note_06_face > 0 var:bfl_note_06_holder ?= overlord } AND = { var:bfl_note_07_face > 0 var:bfl_note_07_holder ?= overlord } AND = { var:bfl_note_08_face > 0 var:bfl_note_08_holder ?= overlord } } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { OR = { AND = { var:bfl_note_01_face > 0 var:bfl_note_01_holder ?= overlord } AND = { var:bfl_note_02_face > 0 var:bfl_note_02_holder ?= overlord } AND = { var:bfl_note_03_face > 0 var:bfl_note_03_holder ?= overlord } AND = { var:bfl_note_04_face > 0 var:bfl_note_04_holder ?= overlord } AND = { var:bfl_note_05_face > 0 var:bfl_note_05_holder ?= overlord } AND = { var:bfl_note_06_face > 0 var:bfl_note_06_holder ?= overlord } AND = { var:bfl_note_07_face > 0 var:bfl_note_07_holder ?= overlord } AND = { var:bfl_note_08_face > 0 var:bfl_note_08_holder ?= overlord } } } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes overlord = { save_scope_as = bfl_party }
         bfl_redeem_notes = yes } } } }
 bfl_money_policy_view = { scope = country is_shown = { var:bfl_money_open = 1 } }

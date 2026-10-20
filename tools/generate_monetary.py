@@ -45,7 +45,8 @@ def generate(common, effect, loc, write):
             scope:bfl_beneficiary = {{ var:bfl_money_accept ?= 1 gold >= 100
                 OR = {{ NOT = {{ bfl_has_accounts = yes }} bfl_free_cash >= 100 }}
                 bfl_branch_access = {{ PARTY = scope:bfl_party }} }}
-            bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }} }}
+            bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }}
+            scope:bfl_party = {{ bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }} }} }}
             set_variable = {{ name = bfl_bill_transferred value = 1 }}
             scope:bfl_beneficiary = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_initialize_monetary = yes }} }}
             set_variable = {{ name = {n}_party value = scope:bfl_beneficiary }}
@@ -147,8 +148,10 @@ def generate(common, effect, loc, write):
             var:{n}_holder ?= scope:bfl_party exists = scope:bfl_beneficiary country_exists = scope:bfl_beneficiary
             NOT = {{ scope:bfl_party = scope:bfl_beneficiary }} NOT = {{ this = scope:bfl_beneficiary }}
             scope:bfl_beneficiary = {{ var:bfl_money_accept ?= 1 gold >= 100
-                OR = {{ NOT = {{ bfl_is_bank = yes }} bfl_free_cash >= 100 }} }}
-            bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }} }}
+                OR = {{ NOT = {{ bfl_is_bank = yes }} bfl_free_cash >= 100 }}
+                bfl_branch_access = {{ PARTY = scope:bfl_party }} }}
+            bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }}
+            scope:bfl_party = {{ bfl_branch_access = {{ PARTY = scope:bfl_beneficiary }} }} }}
             set_variable = {{ name = bfl_note_transferred value = 1 }}
             scope:bfl_beneficiary = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_initialize_monetary = yes }} }}
             set_variable = {{ name = {n}_holder value = scope:bfl_beneficiary }}
@@ -181,7 +184,7 @@ def generate(common, effect, loc, write):
     collateral = ''
     for i in BILLS:
         n = f'bfl_con_{i:02}'
-        discount += f'''if = {{ limit = {{ scope:bfl_discount_lender.var:bfl_discount_found = 0
+        discount += f'''if = {{ limit = {{ scope:bfl_discount_lender.var:bfl_discount_found ?= 0
             var:{n}_active = 1 var:{n}_kind = 1 var:{n}_state = 1 var:{n}_basis = 100
             var:{n}_party ?= scope:bfl_party
             NOT = {{ has_variable = {n}_pledge }} bfl_period < var:{n}_maturity_period
@@ -363,10 +366,12 @@ def make_interactions(common, effect, loc):
     events = '''namespace = bfl_money
     bfl_money.1 = { type = country_event title = bfl_money_offer_title desc = bfl_money_offer_desc
         image = "gfx/interface/illustrations/bfl/monetary_authority.dds" outcome = neutral
-        option = { name = bfl_money_offer_accept bfl_accept_discount_offer = yes ai_chance = { base = 0 } }
+        option = { name = bfl_money_offer_accept custom_tooltip = bfl_money_offer_accept_tip
+            hidden_effect = { bfl_accept_discount_offer = yes } ai_chance = { base = 0 } }
         option = { name = bfl_money_offer_decline
-            scope:bfl_money_lender ?= { if = { limit = { exists = scope:bfl_discount_quote
-                var:bfl_discount_offer_generation = scope:bfl_discount_quote } remove_variable = bfl_discount_offer } } ai_chance = { base = 100 } }
+            custom_tooltip = bfl_money_offer_decline_tip
+            hidden_effect = { scope:bfl_money_lender ?= { if = { limit = { exists = scope:bfl_discount_quote
+                var:bfl_discount_offer_generation = scope:bfl_discount_quote } remove_variable = bfl_discount_offer } } } ai_chance = { base = 100 } }
     }
     '''
     common('../events', 'monetary', events)
@@ -374,6 +379,8 @@ def make_interactions(common, effect, loc):
     loc('bfl_money_offer_desc', 'Advance 75 gold against a separately funded 100-gold bill held at a third bank. A 25% haircut protects the lender. The accepted annual discount rate applies for one month; public support charges at least 9%. Settlement pays the lender first and returns the remainder to the borrower. Unfunded collateral preserves both claims. This request expires this month.')
     loc('bfl_money_offer_accept', 'Fund the secured advance')
     loc('bfl_money_offer_decline', 'Decline the request')
+    loc('bfl_money_offer_accept_tip', 'Fund 75 gold from the lender’s available cash if the current manager, quote and third-bank collateral remain valid. The accepted annual rate is fixed for this facility; public support charges at least 9%.')
+    loc('bfl_money_offer_decline_tip', 'Close this request without moving gold or pledging collateral.')
     interactions = ''
     def interaction(key, visible, enabled, body, actor='bfl_has_management = yes'):
         nonlocal interactions
@@ -400,7 +407,13 @@ def make_interactions(common, effect, loc):
         bfl_branch_access = { PARTY = scope:actor }
         OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
             bfl_is_independent_bank = yes }''', '''
-        scope:recipient = { set_variable = { name = bfl_note_authority value = scope:actor } }
+        scope:recipient = { if = { limit = { bfl_is_bank = yes
+            bfl_branch_access = { PARTY = scope:actor }
+            OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
+                bfl_is_independent_bank = yes }
+            scope:actor = { country_type = location exists = capital any_owned_building = {
+                building_type = building_type:central_bank building_level > 0 location = prev.capital } }
+        } set_variable = { name = bfl_note_authority value = scope:actor } } }
         ''', '''country_type = location exists = capital any_owned_building = {
             building_type = building_type:central_bank building_level > 0 location = prev.capital }''')
     loc('bfl_authorize_note_bank', 'Authorize redeemable banknotes')
@@ -477,9 +490,12 @@ def make_interface(common, effect, loc, write):
         'country_type = location any_owned_building = { building_type = building_type:central_bank building_level > 0 location = prev.capital }')
     command('bfl_money_revoke', 'remove_variable = bfl_note_authority', 'country_type = location')
     command('bfl_money_notes', '''overlord = { save_scope_as = bfl_party }
-        bfl_issue_sovereign_notes = yes''', 'country_type = location', bank_gate='bfl_note_authorized = yes')
+        bfl_issue_sovereign_notes = yes''', 'country_type = location gold >= 100',
+        bank_gate='''bfl_note_authorized = yes
+            var:bfl_notes_outstanding <= { value = bfl_note_limit subtract = 100 }''')
     command('bfl_money_redeem', '''overlord = { save_scope_as = bfl_party }
-        bfl_redeem_notes = yes''', 'country_type = location')
+        bfl_redeem_notes = yes''', 'country_type = location', bank_gate='OR = { ' + ' '.join(
+            f'AND = {{ var:bfl_note_{i:02}_face > 0 var:bfl_note_{i:02}_holder ?= overlord }}' for i in NOTES) + ' }')
     commands += '''bfl_money_policy_view = { scope = country is_shown = { var:bfl_money_open = 1 } }'''
     common('scripted_guis', 'monetary', commands)
     labels = {
@@ -499,6 +515,17 @@ def make_interface(common, effect, loc, write):
     for k, v in labels.items():
         loc(k, v)
         loc(k + '_tip', labels['bfl_money_help'] if k not in ('bfl_money_title',) else labels['bfl_money_terms'])
+    for key, tip in {
+        'notes': 'Requires Absolutism, Central Banking and Sovereign Banknotes research, live sovereign authorization, the issuer’s completed Bank Branch and the sovereign’s completed Central Bank in the current capital, 100 treasury gold and unused note capacity. The smaller of 25% bank equity and 500 gold caps circulation.',
+        'authorize': 'The sovereign controller authorizes its chartered bank. A sovereign-owned completed Central Bank is required in the current capital. New issuance also requires the issuer’s capital Bank Branch and note research.',
+        'revoke': 'Withdraw sovereign authorization for new notes. Existing notes remain redeemable.',
+        'redeem': 'Redeem all notes held by the sovereign controller for their face value. Lost authority, research or branches do not cancel existing claims. An unpaid claim remains owed.',
+        'lending_rate': 'Cycle the annual base for future ordinary loans through 3%, 6% and 9%. Borrower adjustments still apply. Accepted loans keep their rates.',
+        'policy_rate': 'Cycle the annual rate for future secured advances through 6%, 9% and 12%. One month is charged at acceptance; existing facilities keep their fee. Public support charges at least 9%.',
+        'clear_open': 'Open or close admission to your clearing group. Requires Revolutions, Clearing House and Advanced Clearing research, and a completed Clearing House owned by the bank or its live sovereign. Four members maximum.',
+        'clear': 'Settle matching matured member bills once this month. Each member must cover its net debit while protecting other reserves. One short member preserves the entire batch. Pledged and nonmember claims are excluded.',
+        'repay': 'Repay the current secured advance plus its fixed accepted fee to release the third-bank bill pledge. Requires enough available gold.',
+    }.items(): loc('bfl_money_' + key + '_tip', tip)
     def value(key):
         return f"Country.MakeScope.GetVariable('bfl_{key}').GetValue"
     content = row('Circulation / reserved cash', f"[{value('notes_outstanding')}|2] / [{value('cash_committed')}|2]@gold!")

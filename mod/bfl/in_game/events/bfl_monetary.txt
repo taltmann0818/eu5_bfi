@@ -1,8 +1,10 @@
 ﻿namespace = bfl_money
     bfl_money.1 = { type = country_event title = bfl_money_offer_title desc = bfl_money_offer_desc
         image = "gfx/interface/illustrations/bfl/monetary_authority.dds" outcome = neutral
-        option = { name = bfl_money_offer_accept bfl_accept_discount_offer = yes ai_chance = { base = 0 } }
+        option = { name = bfl_money_offer_accept custom_tooltip = bfl_money_offer_accept_tip
+            hidden_effect = { bfl_accept_discount_offer = yes } ai_chance = { base = 0 } }
         option = { name = bfl_money_offer_decline
-            scope:bfl_money_lender ?= { if = { limit = { exists = scope:bfl_discount_quote
-                var:bfl_discount_offer_generation = scope:bfl_discount_quote } remove_variable = bfl_discount_offer } } ai_chance = { base = 100 } }
+            custom_tooltip = bfl_money_offer_decline_tip
+            hidden_effect = { scope:bfl_money_lender ?= { if = { limit = { exists = scope:bfl_discount_quote
+                var:bfl_discount_offer_generation = scope:bfl_discount_quote } remove_variable = bfl_discount_offer } } } ai_chance = { base = 100 } }
     }

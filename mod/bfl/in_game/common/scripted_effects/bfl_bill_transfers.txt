@@ -11,7 +11,8 @@ if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_01_party value = scope:bfl_beneficiary }
@@ -27,7 +28,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_02_party value = scope:bfl_beneficiary }
@@ -43,7 +45,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_03_party value = scope:bfl_beneficiary }
@@ -59,7 +62,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_04_party value = scope:bfl_beneficiary }
@@ -75,7 +79,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_05_party value = scope:bfl_beneficiary }
@@ -91,7 +96,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_06_party value = scope:bfl_beneficiary }
@@ -107,7 +113,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_07_party value = scope:bfl_beneficiary }
@@ -123,7 +130,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_08_party value = scope:bfl_beneficiary }
@@ -139,7 +147,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_09_party value = scope:bfl_beneficiary }
@@ -155,7 +164,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_10_party value = scope:bfl_beneficiary }
@@ -171,7 +181,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_11_party value = scope:bfl_beneficiary }
@@ -187,7 +198,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_12_party value = scope:bfl_beneficiary }
@@ -203,7 +215,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_13_party value = scope:bfl_beneficiary }
@@ -219,7 +232,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_14_party value = scope:bfl_beneficiary }
@@ -235,7 +249,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_15_party value = scope:bfl_beneficiary }
@@ -251,7 +266,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_16_party value = scope:bfl_beneficiary }
@@ -267,7 +283,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_17_party value = scope:bfl_beneficiary }
@@ -283,7 +300,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_18_party value = scope:bfl_beneficiary }
@@ -299,7 +317,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_19_party value = scope:bfl_beneficiary }
@@ -315,7 +334,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_20_party value = scope:bfl_beneficiary }
@@ -331,7 +351,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_21_party value = scope:bfl_beneficiary }
@@ -347,7 +368,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_22_party value = scope:bfl_beneficiary }
@@ -363,7 +385,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_23_party value = scope:bfl_beneficiary }
@@ -379,7 +402,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_24_party value = scope:bfl_beneficiary }
@@ -395,7 +419,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_25_party value = scope:bfl_beneficiary }
@@ -411,7 +436,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_26_party value = scope:bfl_beneficiary }
@@ -427,7 +453,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_27_party value = scope:bfl_beneficiary }
@@ -443,7 +470,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_28_party value = scope:bfl_beneficiary }
@@ -459,7 +487,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_29_party value = scope:bfl_beneficiary }
@@ -475,7 +504,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_30_party value = scope:bfl_beneficiary }
@@ -491,7 +521,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_31_party value = scope:bfl_beneficiary }
@@ -507,7 +538,8 @@ if = { limit = { var:bfl_bill_transferred = 0
             scope:bfl_beneficiary = { var:bfl_money_accept ?= 1 gold >= 100
                 OR = { NOT = { bfl_has_accounts = yes } bfl_free_cash >= 100 }
                 bfl_branch_access = { PARTY = scope:bfl_party } }
-            bfl_branch_access = { PARTY = scope:bfl_beneficiary } }
+            bfl_branch_access = { PARTY = scope:bfl_beneficiary }
+            scope:bfl_party = { bfl_branch_access = { PARTY = scope:bfl_beneficiary } } }
             set_variable = { name = bfl_bill_transferred value = 1 }
             scope:bfl_beneficiary = { if = { limit = { bfl_has_accounts = yes } bfl_initialize_monetary = yes } }
             set_variable = { name = bfl_con_32_party value = scope:bfl_beneficiary }

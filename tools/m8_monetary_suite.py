@@ -119,6 +119,8 @@ def fixture(token, fingerprint):
     start += check('short_member_preserves_every_claim_and_blocks_netting', 'c:BRD = { gold = 0 var:bfl_clearing_failed = 1 var:bfl_con_01_active = 1 var:bfl_other_payables = 100 } c:PRZ.var:bfl_money_assets = 100')
     start += '''c:BRD = { set_gold = 10000 bfl_run_clearing = yes }'''
     start += check('funded_retry_settles_actual_net_debit', 'c:BRD = { gold = 9900 var:bfl_con_01_active = 0 var:bfl_other_payables = 0 } c:PRZ.var:bfl_money_assets = 0')
+    from m8_acceptance_cases import cases as extra_cases
+    start += extra_cases(check, grant)
     start += '''c:FLO = { save_scope_as = bfl_party }
         c:BRD = { bfl_issue_sovereign_notes = yes
             every_owned_building = { limit = { building_type = building_type:banking_office location = c:FLO.capital }
@@ -183,6 +185,19 @@ def prepare(directory, token=None):
     manifest = base_prepare(directory, token)
     directory = Path(directory)
     overlay = directory / 'mod/bfi_campaign_checks'
+    # Execute the exact shipping native interaction bodies to test stale
+    # selection bypass. Normal selectors/transport are inspected separately.
+    from audit_native import balanced_block
+    native_effects = ''
+    for name in ('request_loan', 'take_over_loan'):
+        source = (campaign.ROOT / f'mod/bfl/in_game/common/country_interactions/{name}.txt').read_text(encoding='utf-8-sig')
+        opening = source.index('{', source.index('effect ='))
+        native_effects += f'bfi_m8_native_{name} = {{\n' + source[opening + 1:balanced_block(source, opening) - 1] + '\n}\n'
+    source = (campaign.ROOT / 'mod/bfl/in_game/common/country_interactions/bfl_monetary.txt').read_text(encoding='utf-8-sig')
+    offset = source.index('bfl_authorize_note_bank = {')
+    opening = source.index('{', source.index('effect =', offset))
+    native_effects += 'bfi_m8_native_authorize = {\n' + source[opening + 1:balanced_block(source, opening) - 1] + '\n}\n'
+    campaign.write_script(overlay / 'in_game/common/scripted_effects/bfi_m8_native_interactions.txt', native_effects)
     native = Path('C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/setup/1337/10_countries.txt')
     target = overlay / 'main_menu/setup/1337/10_countries.txt'
     target.parent.mkdir(parents=True, exist_ok=True)
