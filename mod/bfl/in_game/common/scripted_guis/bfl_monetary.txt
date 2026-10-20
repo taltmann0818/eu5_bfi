@@ -72,4 +72,34 @@ bfl_money_redeem = { scope = country is_shown = { bfl_has_management = yes }
                 AND = { exists = var:bfl_bank var:bfl_bank = { OR = { AND = { var:bfl_note_01_face > 0 var:bfl_note_01_holder ?= overlord } AND = { var:bfl_note_02_face > 0 var:bfl_note_02_holder ?= overlord } AND = { var:bfl_note_03_face > 0 var:bfl_note_03_holder ?= overlord } AND = { var:bfl_note_04_face > 0 var:bfl_note_04_holder ?= overlord } AND = { var:bfl_note_05_face > 0 var:bfl_note_05_holder ?= overlord } AND = { var:bfl_note_06_face > 0 var:bfl_note_06_holder ?= overlord } AND = { var:bfl_note_07_face > 0 var:bfl_note_07_holder ?= overlord } AND = { var:bfl_note_08_face > 0 var:bfl_note_08_holder ?= overlord } } } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes overlord = { save_scope_as = bfl_party }
         bfl_redeem_notes = yes } } } }
+bfl_request_discount_button = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_secured_liquidity = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_secured_liquidity = yes } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_secured_liquidity = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_secured_liquidity = yes } } } } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_monetary = yes  } } } }
+bfl_request_public_support_button = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_secured_liquidity = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_secured_liquidity = yes } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_secured_liquidity = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_secured_liquidity = yes } } } } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_monetary = yes  } } } }
+bfl_join_clearing_group_button = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes } } } } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_monetary = yes  } } } }
+bfl_transfer_bank_bill_button = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commercial_bill = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commercial_bill = yes } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_commercial_bill = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_commercial_bill = yes } } } } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_monetary = yes  } } } }
+bfl_transfer_bank_note_button = { scope = country is_shown = { bfl_has_management = yes }
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes } } } } bfl_resolve_command_bank = yes
+                    scope:bfl_bank = { bfl_initialize_monetary = yes  } } } }
 bfl_money_policy_view = { scope = country is_shown = { var:bfl_money_open = 1 } }

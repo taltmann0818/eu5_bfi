@@ -17,7 +17,11 @@ def fixture(token, fingerprint):
     # Explicit debug-only M8 capital-branch prerequisites, before wallet baselines.
     from m8_monetary_suite import grant
     start += ''.join(grant("banking_office", bank, host) for bank, host in [('BRD', 'GEN'), ('BRD', 'VEN'), ('PRZ', 'FLO'), ('ACC', 'FLO')])
-    start += '''every_country = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes set_variable = { name = bfl_ai_equity_enabled value = 0 } }
+    # Keep the controlled credit-return benchmark free of autonomous branch
+    # capital expenditure. Paid branch construction is accepted by M8 itself.
+    start += '''every_country = { limit = { bfl_is_bank = yes } bfl_initialize_bank = yes
+        set_variable = { name = bfl_ai_equity_enabled value = 0 }
+        set_variable = { name = bfl_branch_last_order value = { value = bfl_period add = 100 } } }
         c:FLO = { set_gold = 10000 set_variable = { name = bfl_ai_equity_enabled value = 0 } add_reform = government_reform:bfl_state_chartered_bank
         set_variable = { name = bfl_bank value = c:BRD } research_advance = advance_type:banking_advance }
         c:BRD = { make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }

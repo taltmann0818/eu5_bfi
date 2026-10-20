@@ -457,6 +457,33 @@ def make_interactions(common, effect, loc):
     loc('bfl_accept_money_claims.title', 'Toggle acceptance of bank payment claims')
     loc('bfl_accept_money_claims.desc', 'Voluntarily accept or stop accepting fully funded bills and notes offered at par through mod interactions. A transfer still requires your available treasury. Accepted claims remain redeemable after acceptance is closed. Native payments continue to use gold.')
     common('country_interactions', 'monetary', interactions)
+    # Economy buttons launch actor-owned generic actions. Diplomacy interactions
+    # need a recipient context and cannot open a country picker from Credit.
+    # Keep their production effects and diplomacy entry points unchanged.
+    own_actions = ''
+    for key in ('bfl_request_discount', 'bfl_request_public_support', 'bfl_join_clearing_group', 'bfl_transfer_bank_bill', 'bfl_transfer_bank_note'):
+        start = interactions.index(key + ' = {')
+        depth = 0
+        opened = False
+        for end in range(start, len(interactions)):
+            if interactions[end] == '{':
+                depth += 1
+                opened = True
+            elif interactions[end] == '}':
+                depth -= 1
+            if opened and depth == 0:
+                break
+        definition = interactions[start:end + 1].replace(key + ' = {', key + '_command = {', 1)
+        definition = definition.replace('type = diplomacy category = CATEGORY_ECONOMY_ACTIONS', 'type = owncountry')
+        definition = definition.replace(' default_sort = will', '').replace('data = country_diplomacy_info_loan', 'data = name')
+        # owncountry actions reserve recipient for their built-in target. A
+        # selectable counterparty must use a separate flag or the native action
+        # is rejected before its picker can open.
+        definition = definition.replace('target_flag = recipient', 'target_flag = target_1').replace('scope:recipient', 'scope:target_1')
+        own_actions += definition + '\n'
+        loc(key + '_command', '$' + key + '$')
+        loc(key + '_command_desc', '$' + key + '_desc$')
+    common('generic_actions', 'monetary', own_actions)
 
 
 def make_interface(common, effect, loc, write):
@@ -496,11 +523,24 @@ def make_interface(common, effect, loc, write):
     command('bfl_money_redeem', '''overlord = { save_scope_as = bfl_party }
         bfl_redeem_notes = yes''', 'country_type = location', bank_gate='OR = { ' + ' '.join(
             f'AND = {{ var:bfl_note_{i:02}_face > 0 var:bfl_note_{i:02}_holder ?= overlord }}' for i in NOTES) + ' }')
+    selector_gates = {
+        'bfl_request_discount': 'bfl_can_originate_secured_liquidity = yes',
+        'bfl_request_public_support': 'bfl_can_originate_secured_liquidity = yes',
+        'bfl_join_clearing_group': 'bfl_can_originate_clearing = yes',
+        'bfl_transfer_bank_bill': 'bfl_can_originate_commercial_bill = yes',
+        'bfl_transfer_bank_note': 'bfl_can_originate_clearing = yes',
+    }
+    # Native selector buttons need actor eligibility before they have a target.
+    # IsUberButtonEnabled has no recipient here and leaves the entry point gray.
+    # The interaction and financial service still validate each selected party.
+    for key, gate in selector_gates.items():
+        command(key + '_button', '', bank_gate=gate)
     commands += '''bfl_money_policy_view = { scope = country is_shown = { var:bfl_money_open = 1 } }'''
     common('scripted_guis', 'monetary', commands)
     labels = {
         'bfl_money_title': 'Money & settlement', 'bfl_money_subtitle': 'Redeemable claims · funded settlement',
         'bfl_money_hint': 'Hover for reserves, holders and settlement', 'bfl_money_settings': 'Policy',
+        'bfl_money_settings_tip': 'Show or hide monetary policy, note authority, secured credit and clearing controls.',
         'bfl_money_accept': 'Toggle acceptance & discounts', 'bfl_money_policy_rate': 'Cycle future discount rate',
         'bfl_money_lending_rate': 'New lending base',
         'bfl_money_repay': 'Repay secured facility', 'bfl_money_clear': 'Settle member bills',
@@ -526,6 +566,9 @@ def make_interface(common, effect, loc, write):
         'clear': 'Settle matching matured member bills once this month. Each member must cover its net debit while protecting other reserves. One short member preserves the entire batch. Pledged and nonmember claims are excluded.',
         'repay': 'Repay the current secured advance plus its fixed accepted fee to release the third-bank bill pledge. Requires enough available gold.',
     }.items(): loc('bfl_money_' + key + '_tip', tip)
+    loc('bfl_request_discount_tip', 'Choose a lender for a 75-gold one-month advance against your unpledged, funded 100-gold bill at a third bank. Requires Collateralization and Liquidity Facilities. The lender must consent; no Bank Branch is required between banks.')
+    loc('bfl_request_public_support_tip', 'Choose a chartered lender with Public Financial Backstops and its sovereign’s completed capital Central Bank. Its current manager must consent. The 75-gold secured advance uses bank cash and charges at least 9% annually; it creates no guarantee or recapitalization.')
+    loc('bfl_join_clearing_group_tip', 'Choose a researched clearing operator accepting members. Revolutions, Clearing House and Advanced Clearing research are required. Up to four banks join explicitly; a short member preserves all claims.')
     def value(key):
         return f"Country.MakeScope.GetVariable('bfl_{key}').GetValue"
     content = row('Circulation / reserved cash', f"[{value('notes_outstanding')}|2] / [{value('cash_committed')}|2]@gold!")
@@ -553,7 +596,11 @@ def make_interface(common, effect, loc, write):
             onclick = "[GetScriptedGui('{k}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "{k}_tip" }}'''
     from generate_interface import interaction
     for key in ('bfl_request_discount', 'bfl_request_public_support', 'bfl_join_clearing_group', 'bfl_transfer_bank_bill', 'bfl_transfer_bank_note'):
-        buttons[key] = interaction(key, 'monetary_clearing', key)
+        buttons[key] = interaction(key, 'monetary_clearing', key).replace(
+            '[PdxGuiWidget.IsUberButtonEnabled]',
+            f"[GetScriptedGui('{key}_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        ).replace(' action_direction = "offer"', '').replace(
+            f'action_name = "{key}"', f'action_name = "{key}_command"')
     controls = buttons['bfl_money_accept']
     for left, right in [('bfl_money_lending_rate', 'bfl_money_policy_rate'),
                         ('bfl_money_authorize', 'bfl_money_revoke'),
@@ -570,7 +617,7 @@ def make_interface(common, effect, loc, write):
             text_single = {{ text = "bfl_money_title" autoresize = yes fontsize = 15 }}
             text_single = {{ position = {{ 0 23 }} raw_text = "[{value('notes_outstanding')}|2]@gold! · [{value('money_rate')}|%1]" autoresize = yes fontsize = 21 }}
             text_single = {{ position = {{ 0 50 }} text = "bfl_money_hint" autoresize = yes fontsize = 11 }} }}
-        button_regular = {{ parentanchor = top|right position = {{ -8 10 }} size = {{ 62 56 }}
+        button_regular = {{ parentanchor = top|right position = {{ -8 10 }} size = {{ 62 56 }} tooltip = "bfl_money_settings_tip"
             onclick = "[GetScriptedGui('bfl_money_settings').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             icon = {{ parentanchor = top|hcenter position = {{ 0 1 }} size = {{ 38 38 }} texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }}
             text_single = {{ parentanchor = bottom|hcenter position = {{ 0 -2 }} text = "bfl_money_settings" autoresize = yes fontsize = 11 }} }} }}

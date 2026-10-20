@@ -53,6 +53,10 @@ class CampaignEvidenceTests(unittest.TestCase):
         diagnostic = '[time][jomini_script_system.cpp:256]: Script system error!\n  Error: Invalid left side\n  Script location: common/scripted_effects/bfl_deposits.txt:4\n'
         self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
 
+    def test_rejected_mod_action_target_fails_campaign(self):
+        diagnostic = "[time][generic_action.cpp:255]: Targetted action bfl_request_discount_command shouldn't be looking for a recipient"
+        self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])
+
     def test_missing_gui_script_value_fails_campaign(self):
         diagnostic = "[time][jomini_eventscope.cpp:39]: Referencing a named script value that does not exist 'bfl_bfl_dealer_units'"
         self.assertFalse(collect(self.log(), self.manifest, diagnostic)['passed'])

@@ -6,7 +6,14 @@ evidence for paid construction or natural aging.
 
 
 def cases(check, grant):
-    s = '''c:FLO = { capital = { save_scope_as = bfi_old_capital } }
+    # Generic AI actions inspect native banks before their first initialization.
+    # Missing fields must reject business without generating script errors.
+    s = 'c:ACC = { remove_variable = bfl_profile remove_variable = bfl_state }\n'
+    s += check('uninitialized_bank_rejects_business_without_scope_errors',
+               'c:ACC = { NOT = { bfl_can_conduct_business = yes } }')
+    s += '''c:ACC = { set_variable = { name = bfl_profile value = 1 }
+        set_variable = { name = bfl_state value = 0 } }
+        c:FLO = { capital = { save_scope_as = bfi_old_capital } }
         c:FLO = { set_capital = location:arezzo }
     '''
     s += check('capital_relocation_invalidates_old_branch_and_authority',
@@ -159,13 +166,15 @@ def cases(check, grant):
     s += grant('banking_office', 'BRD')
     s += 'bfi_m8_native_authorize = yes\n'
     s += check('valid_host_authorization_executes', 'c:BRD.var:bfl_note_authority = c:FLO')
-    s += '''c:GEN = { save_scope_as = actor } bfi_m8_native_authorize = yes'''
+    s += '''c:GEN = { save_scope_as = actor } bfi_m8_native_authorize = yes
+    '''
     s += check('foreign_stale_authorization_cannot_overwrite_live_host', 'c:BRD.var:bfl_note_authority = c:FLO')
     s += '''c:ACC = { bfl_transfer_funded_bill = yes
         set_variable = { name = bfl_con_01_maturity_period value = bfl_period } }
     '''
     s += check('bank_bill_sale_to_sovereign_executes_with_seller_branch', 'c:ACC.var:bfl_con_01_party = c:FLO')
-    s += 'c:ACC = { bfl_redeem_matured_bills = yes }\n'
+    s += 'c:FLO = { save_scope_as = bfl_party } c:ACC = { bfl_redeem_matured_bills = yes }\n'
+    s += check('sovereign_bill_holder_redeems_before_persistence_window', 'c:ACC.var:bfl_con_01_active = 0')
     s += '''c:GEN = { every_loan = { cancel_loan = this } set_gold = 1000 save_scope_as = actor }
         c:BRD = { save_scope_as = recipient set_variable = { name = bfi_native_before value = gold } }
         bfi_m8_native_request_loan = yes

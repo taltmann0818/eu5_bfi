@@ -48,7 +48,7 @@
             text_single = { text = "bfl_money_title" autoresize = yes fontsize = 15 }
             text_single = { position = { 0 23 } raw_text = "[Country.MakeScope.GetVariable('bfl_notes_outstanding').GetValue|2]@gold! · [Country.MakeScope.GetVariable('bfl_money_rate').GetValue|%1]" autoresize = yes fontsize = 21 }
             text_single = { position = { 0 50 } text = "bfl_money_hint" autoresize = yes fontsize = 11 } }
-        button_regular = { parentanchor = top|right position = { -8 10 } size = { 62 56 }
+        button_regular = { parentanchor = top|right position = { -8 10 } size = { 62 56 } tooltip = "bfl_money_settings_tip"
             onclick = "[GetScriptedGui('bfl_money_settings').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             icon = { parentanchor = top|hcenter position = { 0 1 } size = { 38 38 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
             text_single = { parentanchor = bottom|hcenter position = { 0 -2 } text = "bfl_money_settings" autoresize = yes fontsize = 11 } } }
@@ -77,9 +77,9 @@
             enabled = "[GetScriptedGui('bfl_money_clear_open').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_money_clear_open').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_money_clear_open_tip" } button_regular = { name = "bfl_join_clearing_group_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_join_clearing_group"
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_join_clearing_group_tip"
+        enabled = "[GetScriptedGui('bfl_join_clearing_group_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_join_clearing_group_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_join_clearing_group" action_direction = "offer" actor = "[GetPlayer]" }
+            action_name = "bfl_join_clearing_group_command" actor = "[GetPlayer]" }
         } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_money_clear"
             enabled = "[GetScriptedGui('bfl_money_clear').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_money_clear').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_money_clear_tip" } button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_money_leave"
@@ -88,24 +88,24 @@
             enabled = "[GetScriptedGui('bfl_money_repay').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_money_repay').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_money_repay_tip" } button_regular = { name = "bfl_request_discount_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_request_discount"
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_request_discount_tip"
+        enabled = "[GetScriptedGui('bfl_request_discount_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_request_discount_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_request_discount" action_direction = "offer" actor = "[GetPlayer]" }
+            action_name = "bfl_request_discount_command" actor = "[GetPlayer]" }
         } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 button_regular = { name = "bfl_transfer_bank_bill_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_transfer_bank_bill"
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_transfer_bank_bill_tip"
+        enabled = "[GetScriptedGui('bfl_transfer_bank_bill_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_transfer_bank_bill_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_transfer_bank_bill" action_direction = "offer" actor = "[GetPlayer]" }
+            action_name = "bfl_transfer_bank_bill_command" actor = "[GetPlayer]" }
         } button_regular = { name = "bfl_transfer_bank_note_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_transfer_bank_note"
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_transfer_bank_note_tip"
+        enabled = "[GetScriptedGui('bfl_transfer_bank_note_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_transfer_bank_note_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_transfer_bank_note" action_direction = "offer" actor = "[GetPlayer]" }
+            action_name = "bfl_transfer_bank_note_command" actor = "[GetPlayer]" }
         } }button_regular = { name = "bfl_request_public_support_button" size = { -1 32 } layoutpolicy_horizontal = expanding text = "bfl_request_public_support"
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_request_public_support_tip"
+        enabled = "[GetScriptedGui('bfl_request_public_support_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_request_public_support_tip"
         scripted_action_tooltip = { click_type = left click_mode = single
-            action_name = "bfl_request_public_support" action_direction = "offer" actor = "[GetPlayer]" }
+            action_name = "bfl_request_public_support_command" actor = "[GetPlayer]" }
         }
             hbox = { layoutpolicy_horizontal = expanding spacing = 5
                 icon = { size = { 28 28 } texture = "gfx/interface/icons/bfl/bank_branch.dds" }
