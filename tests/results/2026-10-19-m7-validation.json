@@ -1,8 +1,8 @@
 {
   "date": "2026-10-19",
   "pull_request": "https://github.com/taltmann0818/eu5_bfi/pull/14",
-  "m7_complete": true,
-  "status": "Complete for the pinned single-player baseline; native financial and normal UI acceptance pass",
+  "m7_complete": false,
+  "status": "reopened_activity_attribution",
   "current_runtime_sha256": "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6",
   "native_assertions": 314,
   "assertions_by_runtime": {
@@ -668,5 +668,6 @@
     }
   ],
   "financial_source_commit": "39cca5b2424d9a131dc453fe089e0648be738734",
-  "earlier_country_authority_source_commit": "2793574b96e1b0c06819a3194c94a13703e5b63f"
+  "earlier_country_authority_source_commit": "2793574b96e1b0c06819a3194c94a13703e5b63f",
+  "superseded_reason": "Historical assertions and UI captures exercised country-wide retained trade, not funding and proceeds attributable to an identified operation. Corrected activity-bound native and UI gate remains open."
 }

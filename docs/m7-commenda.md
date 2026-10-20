@@ -1,202 +1,112 @@
-# Commenda partnerships
+# Activity-bound commenda partnerships
 
-M7 implements accepted risk capital for a real landed commercial operator in
-Discovery and for native companies in later ages. It requires Overseas
-Investment, Commenda research and the live research/controller permissions.
-Merchant Finance cannot originate it. Existing agreements continue to service
-after a research, profile or controller change.
+**Status: activity-attribution gate reopened; final validation in progress.**
+PR #14 targets `dev`. The earlier country-wide commercial-book accounting did
+not establish that capital funded a particular operation. Its 314 assertions
+and 21 captures remain historical; the former M7 completion claim is withdrawn.
 
-The shipping interface follows M6: an 80-pixel investment card, complete
-scrolling hover ledger and expandable proposed terms. Native selection and
-acceptance events handle the counterparty agreement. Original painted project,
-terms-button and event artwork has retained masters and exact
-[built-in imagegen prompts](../assets_source/painted/commenda-generation.json).
+## Offers identify the operation
 
-## Current evidence
+Discovery or later, Overseas Investment and Commenda research remain required.
+The compact M6-style investment card opens native finance commands; both an
+independent bank and a charter's live controller can originate. Own-country
+selection includes the controller itself as a possible operator, without a
+spurious diplomatic charge. The country must accept the specific operation.
 
-[Exact validation provenance](../tests/results/2026-10-19-m7-validation.json)
-records **314 passing native assertion executions** (291 original checks plus a
-23-case final-runtime repeat), **124 offline tests**, source/native pins,
-deterministic reconstruction and **253-file staging**. M7 is **complete for the
-pinned single-player baseline**. [Normal UI acceptance](../tests/results/2026-10-19-m7-ui.json)
-passes **21 observations / 21 actual-game captures**; see the
-[screenshot index](screenshots/README.md#m7-commenda-partnerships).
+A cargo offer records operator, source and destination markets, goods and ten
+units. Native route availability, range, isolation exemptions, embargoes,
+export/import bans, physical stock, costs, cash, capital and capacity are checked
+again at acceptance. It creates a concrete commercial cargo operation, using
+native market stock/cash effects and BFI custody with a two-month delivery
+interval. It does not assign an existing country-wide trade book.
 
-| Native path | Assertions | Scope |
-| --- | ---: | --- |
-| [Discovery country](../tests/results/2026-10-19-m7-country.json) / [final repeat](../tests/results/2026-10-19-m7-final-country.json) | 23 + 23 | Actual retained trade, funded profitable maturity, preset/loss/offer guards and reload. |
-| [Charter authority](../tests/results/2026-10-19-m7-authority.json) | 10 | Controller research/transfer, accepted terms, inherited servicing and eight funded operators/capacity. |
-| [Traditions](../tests/results/2026-10-19-m7-traditions.json) / [later age](../tests/results/2026-10-19-m7-later.json) | 3 + 23 | Native age boundaries and positive later-age continuation. |
-| [Company core](../tests/results/2026-10-19-m7-companies.json) / [persisted settlement](../tests/results/2026-10-19-m7-company-persistence.json) | 30 + 2 | Twelve statements, actual native exploration, exclusive receipts/NAV, controlled loss offsets and funded owner payouts, then a read-only fresh-process save load. |
-| [Accounts](../tests/results/2026-10-19-m7-accounts.json) / [treasury](../tests/results/2026-10-19-m7-treasury.json) / [goods](../tests/results/2026-10-19-m7-goods.json) | 114 + 43 + 43 | Existing funded accounting, deposit/payout and custody/contract regressions. |
+An expedition offer records the native target area, launch port and explorer
+before acceptance. Native exploration permission, an eligible explorer, an
+owned port or owned facility, an undiscovered target, crew and native price
+requirements apply. Acceptance starts that named native exploration. The bank
+receives no political control over the operator.
 
-The Discovery project observed 22.32292 gold of eligible native receipts and
-17.47391 gold of negative native operating budgets, recovered its 100-gold bank
-contribution and paid 3.63 gold of bank surplus. It is a focused financial-path
-observation, not a return forecast or campaign balance result.
+## Funding pays recorded costs
 
-258 assertions retain financial runtime `3930ee55...`; the original 33
-Discovery/authority assertions retain `056665f8...`. Their sole difference is
-company income loss-offset order, exercised separately by the company suite.
-The final runtime `b8855774...` adds offer-availability/command guards,
-clean operator headings and a zero default for the pre-initialization offer
-generation preview. The final 23-case Discovery repeat verifies actual accepted
-funding, both presets, stale/expired/replayed offers, natural receipts and reload.
-Settlement, receipt arithmetic, exploration and artwork are unchanged from
-`3930ee55...`. Do not relabel earlier reports or screenshots as final.
+100/200/400 gold is a maximum bank authorization, not an unrestricted treasury
+grant. Undrawn authorization remains bank cash reserved against other uses.
+The native purchase or preparation charge executes inside an atomic isolated
+wallet; pre-existing operator cash is restored less only its actual agreed cost
+share. Unused cargo authorization is released immediately. Failed execution
+releases the reservation and retains a named, explicitly unfunded ledger row.
+Future draws cannot invade other protected cash or overdraw a distressed bank.
 
-The original combined company attempt passed its 30 first-process cases but
-incorrectly required an active agreement after deliberate controlled maturity
-and reinvestment. Its rejected reload is retained in provenance. The core report
-collects only those first-process cases; a separate fresh-process continuation
-loads the same saved campaign and verifies the actual closed state, financial
-owner and persisted exploration opportunity. Its input-save hash and fixture
-fingerprint are recorded. No financial service changed for this fixture repair.
+Unilateral terms fund all agreed gold costs and give the bank 75% of contractual
+surplus. Bilateral terms fund two thirds from the bank and one third from the
+operator, with equal surplus shares. Only actual paid cost becomes project
+basis. Financing and recovered capital are excluded from income. Company NAV
+carries only its own paid share at cost, without adding the bank's capital.
 
-## Agreement and accounting
+Expedition financing covers native preparation and an optional cargo leg. The
+operator supplies crew, ongoing native upkeep and optional expedition spending
+outside this agreement. The offer discloses this boundary. Preparation is
+explicitly non-refundable: pay the native price once and give the native
+construction a zero refundable price. Cancellation therefore cannot place bank
+money in the operator's unrestricted wallet. Failed starts refund the native
+price inside the same atomic execution.
 
-The bank proposes a 100, 200 or 400 gold contribution and 6, 12, 24, 60 or 120
-months. Long terms accommodate native exploration. The unilateral preset gives
-the bank 75% of surplus. The bilateral preset commits an additional half of the
-bank ticket from the operator, gives each party half the surplus, and allocates
-capital recovery/loss in contribution proportions. These are configurable
-historical presets, not guaranteed-interest loans.
+## Attribution and ledger
 
-Offers expire after three months and snapshot investor, commanding actor,
-terms and generation. Acceptance rechecks the live actor, research/profile/age,
-unchanged proposed terms, free cash, regulatory capital, operator contribution,
-eight-slot capacity and exclusive operator lock. Only acceptance transfers gold.
-Funding grants neither company equity nor political control. The operator
-contribution is committed from existing cash, not created by a second transfer.
+The scrolling ledger names the cargo/markets or area/port/explorer and shows
+funded costs, cargo sale proceeds, undrawn authorization, custody, native
+exploration progress/outcome, bank cost basis, capital returned, profit and
+loss. An expedition's native outcome continues updating after financial
+maturity. Closed rows remain until reused; there are eight bank-owned records
+and at most one active agreement per operator.
 
-One active agreement per operator assigns that operator's retained native
-commercial book to one project. Monthly eligible receipts are bounded by
-executed route volume/profit, native trade income, native net budget and actual
-cash after native debt and company operating reserves. Treasury growth,
-subscriptions, deposits, discovered provinces and one-off grants are not receipt
-providers. This is a deliberately conservative operator-book contract, not an
-assertion that the engine exposes a separate expedition sales wallet.
+Only the exact acquired project cargo can be sold, once, after delivery and a
+fresh native access check. Blocked cargo stays in custody at cost. Only the
+wallet delta around its native sale can enter the capital-first waterfall.
+Unrelated trade, taxes, gifts, quoted margins and discovery callbacks cannot
+become receipts. The bank receives its agreed surplus share only after recorded
+preparation and cargo costs have been recovered; unrecovered cost is impaired
+once when the operation closes. Unfunded costs remain the operator's expense,
+not invented bank income. Company surplus is consumed once before carried-loss
+offsets and funded equity payouts.
 
-The project pool begins with accepted contributions. It adds eligible native
-receipts, deducts negative native operating budgets and the actual linked
-exploration debit, and removes every capital/profit allocation. Monthly native
-receipts first recover outstanding capital; only excess can fund profit.
-At maturity, the lesser of the remaining recorded pool and available operator
-cash funds final capital recovery and surplus. Unrelated treasury cannot become
-surplus. Unrecovered bank basis is impaired once. Unspent funding is capital,
-and cannot be classified as profit merely because it remains in the wallet.
+A verified discovery unlocks an agreed follow-on funding mandate: the operator
+or its live political controller may select one cargo from a market centered in
+or bordering the explored area. Native market access still applies; discovery
+grants no treaty and pays no gold. Only the remaining accepted authorization
+can fund the new actual purchase. Its identity, costs, custody and sale then
+belong to the same record. Without a commercial sale, preparation cost cannot
+pay a financial return and remains at risk at maturity.
 
-The bank records recovered cost separately from `bfl_profit_ventures`; the
-remaining cost is included once in `bfl_project_value`. The operator's company
-NAV deducts the exact external project basis, avoiding equity duplication.
-Contribution proportions absorb cent rounding through remaining basis, with
-exact final release when all remaining capital is recovered.
-
-Company receipt settlement excludes project capital and the investor share
-before M2 equity dividends. Only the operator's earned surplus share becomes
-company earnings. Deferred surplus released at maturity is recognized once at
-that month's company cutoff. Existing bank dividend loss/cash/capital limits
-then apply to the bank's venture earnings.
-
-## Exploration and later ownership
-
-The operator or its current political controller can use **Commenda: prepare
-native exploration**. It selects the actual operator, area, port and explorer.
-Native permission, crew, price, preparation, progress and terminal callbacks
-remain authoritative. An atomic escrow protects native debt/company reserves
-from the expedition price and is returned on both success and refusal.
-
-Success matches the operator's persisted area and project generation and
-records a commercial-opportunity marker. It transfers no gold. Trade still
-requires actual native routes/access and positive retained receipts. There is
-no invented overseas access treaty. After a successful project, later company
-ownership uses a separate funded M5 subscription at NAV, with Company Equity
-research, an open issuer offering and exchange/risk limits. Unpaid commenda
-basis is never silently converted into shares or bypassed as a working-capital
-loan.
+Legacy country-wide agreements cannot acquire an activity retrospectively.
+Runoff returns only their bounded recorded capital pool, impairs the residual
+once, closes the backlink and labels the row as legacy. It assigns no further
+country-wide income or activity-attributed profit.
 
 ## Validation and completion gate
 
-Every item below now has supporting evidence for the pinned baseline. Tests of
-controlled proceeds are engine wallet and waterfall checks, not natural
-trade-performance evidence. Normal UI captures remain a separate evidence class.
+Development evidence, retaining actual fingerprints:
 
-- **Passed — native assertions:** acceptance, stale/expired/changed offers,
-  insufficient funding, exclusivity, both presets, principal/profit accounting,
-  partial/total loss, discovery without gold, natural monthly cutoffs and reload.
-- **Passed — natural country route:** delivers positive receipts and a closed
-  profitable project before native company unlocks.
-- **Passed — later native company:** executes trade and ordinary exploration, preserves
-  identity/ownership, returns real receipts, avoids duplicate equity payouts and
-  persists the linked natural terminal outcome in a second process.
-- **Passed — roles and regression:** independent and chartered authority, pre-Discovery rejection and later-age
-  continuation pass; accounts, treasury and goods regressions pass.
-- **Passed — normal native UI:** collapsed/expanded controls,
-  accepted terms/cancellation, empty/locked states, all eight scrollable rows,
-  artwork, capital/profit/loss figures and both player roles. The actual-game observations and captures close this part of the gate.
+- Activity country run `4fff7b16…`: 30 real-engine assertions and six numerical
+  reconciliations pass, including native stock/cash purchase and sale, both
+  cost-sharing presets, embargo/restoration, unnamed/stale/expired/unfunded
+  offers, unrelated-income exclusion, actual preparation/cancellation, legacy
+  runoff, controlled geographic follow-on cash boundaries and save reload.
+- Company run `1e00a951…`: ten assertions pass, including actual cargo funding,
+  company NAV, loss offsets, twelve statements, positive natural exploration
+  progress and terminal outcome without speed overrides or forced completion,
+  historical ledger state and fresh-process persistence.
+- 128 offline tests and source/native pin validation pass. Offline checks do not
+  replace engine assertions or screenshots.
 
-Run the isolated harness with separately installed CMF:
+The follow-on boundary fixture seeds a known-area mandate explicitly; it does
+not establish natural discovery-to-commercial-profit performance. The company
+campaign separately proves natural exploration. Earlier rejected company
+fixtures had a concatenated token and an attempt to provide crew before native
+capacity refreshed; these runs are excluded from passing evidence.
 
-```powershell
-./tools/run_campaign.ps1 -Suite m7 -Output tests/results/local-m7
-./tools/run_campaign.ps1 -Suite m7traditions -Output tests/results/local-m7-traditions
-./tools/run_campaign.ps1 -Suite m7later -Output tests/results/local-m7-later
-./tools/run_campaign.ps1 -Suite m7company -Output tests/results/local-m7-company
-./tools/run_campaign.ps1 -Suite m7authority -Output tests/results/local-m7-authority
-```
-
-`tools/prepare_m7_ui.py` stages disposable normal-game UI states, including
-empty, locked and a live acceptance offer. Never enable the test overlay in a
-real campaign. Full institution-destruction workouts remain M9; broad autonomous
-venture selection, localization and campaign balance remain M10. No autonomous
-bank origination is enabled by this implementation; operator AI can accept a
-valid funded offer through the same event boundary.
-
-The standard interactive launcher also supports the fixture:
-
-```powershell
-./tools/start_test_campaign.ps1 -Commenda -PrepareOnly
-./tools/start_test_campaign.ps1 -Commenda -CommendaState full
-./tools/start_test_campaign.ps1 -Commenda -CommendaState offer
-```
-
-`empty` and `locked` are additional `-CommendaState` choices. Without
-`-PrepareOnly`, this command opens a visible, disposable game for manual QA.
-
-## Normal UI acceptance
-
-The Computer Use review used unedited native EUV 1.4.1 / CMF 2.5.0 windows at
-2560×1440, English and native default GUI scale, without debug mode. Chartered
-Florence and independent Bardi each expose the compact painted card and native
-offer selector. All eight named ledger records scroll fully. Future terms changed
-to bilateral / 24 months / 200 gold while accepted rows retained 75% / 12 months /
-100 gold and the bank retained 9200 cash / 800 basis. Full capacity, missing
-research and Merchant Finance each disable Offer; clicking it stays closed.
-
-Normal acceptance moved exactly 100 gold from bank to Florence and added one
-active project without changing total assets. Decline and selector cancellation
-left balances/basis unchanged. Empty guidance, acceptance explanations and the
-custom project/Terms/event artwork render legibly. Controlled settlement shows
-Genoa 100 returned / 18.75 profit, Venice 50 returned / 50 loss and Pisa 100 still
-at risk. The separate native campaigns prove natural trade/exploration; expedition
-status labels and the activity statement were not individually inspected here.
-
-The final cold load verifies the localized acceptance tooltip. The final native
-regression repeats accepted funding and offer/reload guards after the safe
-offer-preview default; normal acceptance/selection captures retain earlier
-runtime hashes. Every capture has its actual runtime/fixture hash in the
-[UI report](../tests/results/2026-10-19-m7-ui.json); intermediate captures remain
-labeled. The earlier locked-button and operator-heading defects were corrected
-before acceptance. Native startup diagnostics are recorded separately; this is
-not a claim of a universally clean native log or release-wide UI certification.
-
-For repeatable manual QA, `-CommendaQaControls` adds five disposable native
-decisions for empty, locked Merchant, eight-operator, controlled outcome and live
-offer states. `-CommendaIndependent` starts as Bardi; `-NoDebug` uses normal UI.
-Select the offered country/start button if the native lobby appears. These
-overlays and all grants stay outside the shipping mod.
-
-```powershell
-./tools/start_test_campaign.ps1 -Commenda -CommendaQaControls -CommendaState offer -NoDebug
-./tools/start_test_campaign.ps1 -Commenda -CommendaIndependent -NoDebug
-```
+The final frozen runtime still requires its complete activity/authority/age/
+company and accounts/treasury/goods regressions, normal acceptance and decline,
+controller and independent-bank UI checks, fresh screenshots and deterministic
+package staging. Until these finish, M7 remains in progress. Original custom
+project, terms and event artwork retains its masters and exact
+[built-in imagegen prompts](../assets_source/painted/commenda-generation.json).

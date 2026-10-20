@@ -9,18 +9,41 @@ bfl_venture_eligible = {
 exists = scope:bfl_operator country_exists = scope:bfl_operator
         NOT = { this = scope:bfl_operator }
         scope:bfl_operator = { NOT = { bfl_is_bank = yes } NOT = { has_variable = bfl_venture_bank }
-            OR = { country_type = location bfl_is_company = yes }
-            NOT = { has_variable = bfl_venture_guard } }
+            OR = { country_type = location bfl_is_company = yes } NOT = { has_variable = bfl_venture_guard } }
         bfl_can_originate_commenda = yes bfl_venture_capacity = yes
         bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
         var:bfl_venture_ticket >= 100 var:bfl_venture_ticket <= 400
+        OR = { AND = { var:bfl_venture_kind = 1 scope:bfl_operator = { bfl_venture_cargo_valid = yes
+                scope:bfl_venture_lender.bfl_venture_authorized_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                scope:bfl_venture_lender.bfl_venture_authorized_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } } }
+            AND = { var:bfl_venture_kind = 2 scope:bfl_operator = { bfl_venture_expedition_valid = yes } } }
+}
+bfl_venture_cargo_access = {
+exists = scope:from exists = scope:to exists = scope:goods scope:from != scope:to
+        can_find_trade_route = { from = scope:from to = scope:to }
+        NOT = { is_embargoed_by = scope:from.owner } NOT = { is_embargoed_by = scope:to.owner }
+        scope:from = { in_trade_range_of = prev NOT = { is_export_banned = scope:goods }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_operator } } }
+        scope:to = { in_trade_range_of = prev NOT = { is_import_banned = scope:goods }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_operator } } }
+}
+bfl_venture_cargo_valid = {
+bfl_venture_cargo_access = yes
+        "scope:from.stockpile_in_market(scope:goods)" >= 10
+        "scope:from.market_price(scope:goods)" > 0
+}
+bfl_venture_expedition_valid = {
+modifier:may_explore = yes exists = scope:target exists = scope:character exists = scope:launch_location
+        scope:character = { owner = prev is_valid_for_exploration = yes }
+        scope:launch_location = { is_port = yes OR = { owner = scope:bfl_operator any_buildings_in_location = { owner = scope:bfl_operator } } }
+        NOT = { has_discovered_area = scope:target }
+        scope:target = { NOT = { is_being_explored = prev } }
 }
 bfl_commenda_offer_ready = {
-bfl_can_originate_commenda = yes
-               bfl_venture_capacity = yes bfl_free_cash >= var:bfl_venture_ticket
-               bfl_capital_headroom >= var:bfl_venture_ticket
+bfl_can_originate_commenda = yes bfl_venture_capacity = yes
+        bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
 }
 bfl_commenda_command_ready = {
 OR = { bfl_commenda_offer_ready = yes
-               AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }
+        AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }
 }

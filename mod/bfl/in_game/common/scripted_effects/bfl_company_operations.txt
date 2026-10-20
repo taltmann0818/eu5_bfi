@@ -49,6 +49,8 @@ if = { limit = { NOT = { has_variable = bfl_company_statement_count } }
             set_variable = { name = bfl_company_statement_count value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_company_income_period } }
             set_variable = { name = bfl_company_income_period value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_company_commenda_income } }
+            set_variable = { name = bfl_company_commenda_income value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_company_ownership_initialized } }
             # Ordinary landed-company ownership does not grant either bank profile
             # an unresearched/disabled M5 company-equity acquisition.
@@ -187,6 +189,7 @@ set_variable = { name = bfl_company_native_net value = monthly_balance }
 set_variable = { name = bfl_company_trade_receipts value = monthly_trade_income }
 set_variable = { name = bfl_company_dividend value = 0 }
 set_variable = { name = bfl_company_verified_profit value = 0 }
+set_variable = { name = bfl_company_commenda_income value = 0 }
 if = { limit = { var:bfl_company_native_net < 0 }
     change_variable = { name = bfl_company_loss add = { value = var:bfl_company_native_net multiply = -1 } }
 }
@@ -199,8 +202,11 @@ if = { limit = { var:bfl_company_volume > 0 }
 bfl_service_commenda_operator = yes
 if = { limit = { var:bfl_venture_excluded_period ?= bfl_period }
     change_variable = { name = bfl_company_verified_profit subtract = var:bfl_venture_excluded }
-    change_variable = { name = bfl_company_verified_profit add = var:bfl_venture_company_surplus }
     set_variable = { name = bfl_company_verified_profit value = { value = var:bfl_company_verified_profit min = 0 } } }
+if = { limit = { has_variable = bfl_venture_company_surplus var:bfl_venture_company_surplus > 0 }
+    set_variable = { name = bfl_company_commenda_income value = var:bfl_venture_company_surplus }
+    change_variable = { name = bfl_company_verified_profit add = var:bfl_venture_company_surplus }
+    set_variable = { name = bfl_venture_company_surplus value = 0 } }
 # Deferred operator surplus is company income too: apply the common
 # carried-loss offset after every eligible company receipt is included.
 set_variable = { name = bfl_company_loss_offset value = {

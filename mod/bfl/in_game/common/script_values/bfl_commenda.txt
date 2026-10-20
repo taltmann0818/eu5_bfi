@@ -1,8 +1,10 @@
-﻿bfl_venture_operator_cash = {
-value = gold min = 0
-        every_loan = { subtract = remaining_debt }
-        if = { limit = { bfl_is_company = yes } subtract = var:bfl_company_buffer subtract = var:bfl_company_reinvestment }
-        min = 0
+﻿bfl_venture_authorized_budget = {
+value = var:bfl_venture_ticket
+        if = { limit = { var:bfl_venture_preset = 1 } multiply = 1.5 }
+}
+bfl_venture_operator_cash = {
+value = gold min = 0 every_loan = { subtract = remaining_debt }
+        if = { limit = { bfl_is_company = yes } subtract = var:bfl_company_buffer subtract = var:bfl_company_reinvestment } min = 0
 }
 bfl_venture_count = {
 value = 0
@@ -58,4 +60,36 @@ if = { limit = { var:bfl_v_05_state > 0 } add = var:bfl_v_05_loss }
 if = { limit = { var:bfl_v_06_state > 0 } add = var:bfl_v_06_loss }
 if = { limit = { var:bfl_v_07_state > 0 } add = var:bfl_v_07_loss }
 if = { limit = { var:bfl_v_08_state > 0 } add = var:bfl_v_08_loss }
+}
+bfl_venture_drawable_01 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_01_undrawn min = 0 max = var:bfl_v_01_undrawn
+}
+bfl_venture_drawable_02 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_02_undrawn min = 0 max = var:bfl_v_02_undrawn
+}
+bfl_venture_drawable_03 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_03_undrawn min = 0 max = var:bfl_v_03_undrawn
+}
+bfl_venture_drawable_04 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_04_undrawn min = 0 max = var:bfl_v_04_undrawn
+}
+bfl_venture_drawable_05 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_05_undrawn min = 0 max = var:bfl_v_05_undrawn
+}
+bfl_venture_drawable_06 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_06_undrawn min = 0 max = var:bfl_v_06_undrawn
+}
+bfl_venture_drawable_07 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_07_undrawn min = 0 max = var:bfl_v_07_undrawn
+}
+bfl_venture_drawable_08 = {
+value = gold subtract = bfl_protected_cash
+            add = var:bfl_v_08_undrawn min = 0 max = var:bfl_v_08_undrawn
 }

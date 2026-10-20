@@ -17,6 +17,16 @@ def prepare(directory,empty=False,locked=False,offer=False,full=False,controls=F
         c:BRD = { set_gold = 10000 set_variable = { name = bfl_profile value = 2 }
             set_variable = { name = bfl_payout_ratio value = 0 } bfl_initialize_commenda = yes }
     '''
+    setup+='''c:FLO = { capital = { save_scope_as = bfi_market_capital }
+        create_market = { builder = c:FLO location = scope:bfi_market_capital price = price:create_market instant = yes price_modifier = 0 } }
+        c:GEN.capital.market = { save_scope_as = from add_goods_supply = { goods = goods:wheat amount = 10000 } }
+        c:FLO.capital.market = { save_scope_as = to }
+        goods:wheat = { save_scope_as = goods }
+        c:BRD = { set_variable = { name = bfl_venture_kind value = 1 } }
+    '''
+    setup+='''c:GEN = { research_advance = advance_type:mapmaking
+        create_character = { adm = 50 dip = 50 mil = 50 age = 25 estate = estate_type:burghers_estate }
+        add_sailors = 1 }'''
     if not empty and not locked:
         targets=('GEN','VEN','PIS','LUC','SIE','PAP','NAP','SAV') if full else ('GEN','VEN','PIS')
         for target in targets:
@@ -37,9 +47,9 @@ def prepare(directory,empty=False,locked=False,offer=False,full=False,controls=F
         reset=''
         for tag in ('FLO','GEN','VEN','PIS','LUC','SIE','PAP','NAP','SAV'):
             reset+=f'c:{tag} = {{ remove_variable = bfl_venture_bank remove_variable = bfl_venture_guard remove_variable = bfl_venture_offer_bank }}\n'
-        reset+='c:BRD = { set_gold = 10000 set_variable = { name = bfl_project_value value = 0 } set_variable = { name = bfl_profile value = 2 } set_variable = { name = bfl_venture_preset value = 0 } set_variable = { name = bfl_venture_duration value = 12 } set_variable = { name = bfl_venture_ticket value = 100 }\n'
+        reset+='c:GEN.capital.market = { save_scope_as = from add_goods_supply = { goods = goods:wheat amount = 10000 } } c:FLO.capital.market = { save_scope_as = to } goods:wheat = { save_scope_as = goods } c:BRD = { set_variable = { name = bfl_cash_committed value = 0 } set_variable = { name = bfl_venture_kind value = 1 } set_gold = 10000 set_variable = { name = bfl_project_value value = 0 } set_variable = { name = bfl_profile value = 2 } set_variable = { name = bfl_venture_preset value = 0 } set_variable = { name = bfl_venture_duration value = 12 } set_variable = { name = bfl_venture_ticket value = 100 }\n'
         for i in range(1,9):
-            for field in ('state','basis','returned','profit','loss','discovery','outcome'):
+            for field in ('state','basis','returned','profit','loss','discovery','outcome','undrawn','kind','cost','receipts','quantity','progress','has_cargo'):
                 reset+=f'set_variable = {{ name = bfl_v_{i:02}_{field} value = 0 }}\n'
         reset+='}\n'
         actor='BRD' if independent else 'FLO'
@@ -52,21 +62,16 @@ def prepare(directory,empty=False,locked=False,offer=False,full=False,controls=F
                     c:{tag} = {{ save_scope_value_as = {{ name = bfl_venture_quote value = var:bfl_venture_offer_generation }} bfl_accept_commenda = yes }}\n'''
             return body
         outcomes=reset+funded(('GEN','VEN','PIS'))
-        for i,tag,pool in ((1,'GEN',125),(2,'VEN',50)):
-            outcomes+=f'''c:BRD = {{ save_scope_as = bfl_venture_lender set_variable = {{ name = bfl_v_{i:02}_maturity value = bfl_period }} }}
-                c:{tag} = {{ save_scope_as = bfl_operator set_variable = {{ name = bfl_venture_pool value = {pool} }}
-                    set_variable = {{ name = bfl_venture_gross value = {pool} }} set_variable = {{ name = bfl_venture_proceeds value = {pool} }} bfl_dispatch_commenda_{i:02} = yes }}\n'''
-        # Seed all outcome labels for visual QA; these are not expedition results.
-        outcomes+='''c:BRD = {
-            set_variable = { name = bfl_v_01_outcome value = 2 }
-            set_variable = { name = bfl_v_02_outcome value = 3 }
-            set_variable = { name = bfl_v_03_outcome value = 1 }
-            bfl_record_activity_statement = yes }'''
+        for tag in ('GEN','VEN'):
+            outcomes+=f'''c:{tag} = {{ set_variable = {{ name = bfl_venture_delivery value = bfl_period }}
+                set_variable = {{ name = bfl_venture_last_period value = {{ value = bfl_period subtract = 1 }} }}
+                bfl_service_commenda_operator = yes }}'''
+        outcomes+='c:BRD = { bfl_record_activity_statement = yes }'
         variants={
             'empty':('Empty ledger',reset),
             'locked':('Locked Merchant profile',reset+'c:BRD = { set_variable = { name = bfl_profile value = 1 } }'),
             'full':('Eight funded operators',reset+funded(('GEN','VEN','PIS','LUC','SIE','PAP','NAP','SAV'))),
-            'outcomes':('Controlled capital, surplus and loss',outcomes),
+            'outcomes':('Native cargo sales and retained transit cargo',outcomes),
             'offer':('Ready bank and live offer',reset+f'c:{actor} = {{ save_scope_as = bfl_venture_actor }} c:FLO = {{ save_scope_as = bfl_operator }} c:BRD = {{ bfl_propose_commenda = yes }}'),
         }
         decisions='';localization='l_english:\n'

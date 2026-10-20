@@ -1,3 +1,5 @@
+> M7 status correction: activity attribution is required. Previous country-wide commercial-book tests/screenshots are historical and do not complete M7. See [current M7 gate](m7-commenda.md).
+
 # Native capability register — M0 complete
 
 Baseline: EUV **1.4.1**, Steam build **25905365**, branch **1.4-open-beta**; CMF **2.5.0**. Source hashes are pinned in [baseline.json](baseline.json). Its historical displayed checksum is not a clean-vanilla or final-runtime checksum.
@@ -21,10 +23,11 @@ Unimplemented adapter flags in `design/tuning.json` default false and compile in
 Current-build generated documentation and installed sources are authoritative. Published modding digests corroborate source inspection; offline reference mathematics do not emulate EUV. The [native GUI baseline](native-gui-diagnostics.json) classifies only exact signatures reproduced without BFI. [Historical diagnostic/progress failures](../tests/results/2026-10-15-m0-repeatability-limitations.json) remain explicit. Local logs, saves and licensed assets are excluded from the PR and release.
 
 
-M7 now implements accepted country/company risk capital through the audited
-native route/budget and exploration boundaries. [Product rules and acceptance
-status](m7-commenda.md) distinguish controlled waterfall assertions, native
-commercial receipts, natural exploration and normal UI observations. Its
-production Commenda permission no longer uses an obsolete disabled P11 adapter;
-advanced project security retains its separate gate. Discovery callbacks record
-identity/outcome only and never create a receipt.
+M7's activity-bound rewrite funds actual native preparation or a named cargo
+purchase and attributes only that cargo's native sale proceeds. Country-wide
+trade and unexplained treasury changes are excluded. Native goods effects still
+need strict custody and cash guards. Sponsored preparation uses a paid native
+price and a zero refundable construction price, explicitly disclosed as
+non-refundable, so cancellation cannot put bank money into the operator's
+unrestricted wallet. Discovery changes activity metadata only. The corrected
+[native and visual acceptance gate](m7-commenda.md) remains open.

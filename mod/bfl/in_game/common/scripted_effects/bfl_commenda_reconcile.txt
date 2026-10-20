@@ -1,43 +1,187 @@
 ﻿bfl_reconcile_commenda = {
 bfl_initialize_commenda = yes
 if = { limit = { var:bfl_v_01_state = 1 OR = { NOT = { exists = var:bfl_v_01_operator } NOT = { country_exists = var:bfl_v_01_operator } } }
-            set_variable = { name = bfl_v_01_loss value = var:bfl_v_01_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_01_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_01_undrawn } set_variable = { name = bfl_v_01_undrawn value = 0 }
+            set_variable = { name = bfl_v_01_loss value = var:bfl_v_01_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_01_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_01_basis }
-            set_variable = { name = bfl_v_01_basis value = 0 } set_variable = { name = bfl_v_01_state value = 3 } }
+            set_variable = { name = bfl_v_01_basis value = 0 } set_variable = { name = bfl_v_01_quantity value = 0 }
+            set_variable = { name = bfl_v_01_outcome value = 9 } set_variable = { name = bfl_v_01_state value = 3 } }
+if = { limit = { var:bfl_v_01_state > 0 var:bfl_v_01_kind = 2
+            exists = var:bfl_v_01_operator country_exists = var:bfl_v_01_operator exists = var:bfl_v_01_area
+            OR = { var:bfl_v_01_outcome = 1 var:bfl_v_01_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_01_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_01_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_01_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_01_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_01_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_01_discovery value = 1 } set_variable = { name = bfl_v_01_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_01_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_01_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_01_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_02_state = 1 OR = { NOT = { exists = var:bfl_v_02_operator } NOT = { country_exists = var:bfl_v_02_operator } } }
-            set_variable = { name = bfl_v_02_loss value = var:bfl_v_02_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_02_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_02_undrawn } set_variable = { name = bfl_v_02_undrawn value = 0 }
+            set_variable = { name = bfl_v_02_loss value = var:bfl_v_02_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_02_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_02_basis }
-            set_variable = { name = bfl_v_02_basis value = 0 } set_variable = { name = bfl_v_02_state value = 3 } }
+            set_variable = { name = bfl_v_02_basis value = 0 } set_variable = { name = bfl_v_02_quantity value = 0 }
+            set_variable = { name = bfl_v_02_outcome value = 9 } set_variable = { name = bfl_v_02_state value = 3 } }
+if = { limit = { var:bfl_v_02_state > 0 var:bfl_v_02_kind = 2
+            exists = var:bfl_v_02_operator country_exists = var:bfl_v_02_operator exists = var:bfl_v_02_area
+            OR = { var:bfl_v_02_outcome = 1 var:bfl_v_02_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_02_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_02_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_02_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_02_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_02_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_02_discovery value = 1 } set_variable = { name = bfl_v_02_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_02_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_02_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_02_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_03_state = 1 OR = { NOT = { exists = var:bfl_v_03_operator } NOT = { country_exists = var:bfl_v_03_operator } } }
-            set_variable = { name = bfl_v_03_loss value = var:bfl_v_03_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_03_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_03_undrawn } set_variable = { name = bfl_v_03_undrawn value = 0 }
+            set_variable = { name = bfl_v_03_loss value = var:bfl_v_03_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_03_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_03_basis }
-            set_variable = { name = bfl_v_03_basis value = 0 } set_variable = { name = bfl_v_03_state value = 3 } }
+            set_variable = { name = bfl_v_03_basis value = 0 } set_variable = { name = bfl_v_03_quantity value = 0 }
+            set_variable = { name = bfl_v_03_outcome value = 9 } set_variable = { name = bfl_v_03_state value = 3 } }
+if = { limit = { var:bfl_v_03_state > 0 var:bfl_v_03_kind = 2
+            exists = var:bfl_v_03_operator country_exists = var:bfl_v_03_operator exists = var:bfl_v_03_area
+            OR = { var:bfl_v_03_outcome = 1 var:bfl_v_03_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_03_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_03_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_03_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_03_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_03_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_03_discovery value = 1 } set_variable = { name = bfl_v_03_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_03_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_03_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_03_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_04_state = 1 OR = { NOT = { exists = var:bfl_v_04_operator } NOT = { country_exists = var:bfl_v_04_operator } } }
-            set_variable = { name = bfl_v_04_loss value = var:bfl_v_04_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_04_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_04_undrawn } set_variable = { name = bfl_v_04_undrawn value = 0 }
+            set_variable = { name = bfl_v_04_loss value = var:bfl_v_04_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_04_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_04_basis }
-            set_variable = { name = bfl_v_04_basis value = 0 } set_variable = { name = bfl_v_04_state value = 3 } }
+            set_variable = { name = bfl_v_04_basis value = 0 } set_variable = { name = bfl_v_04_quantity value = 0 }
+            set_variable = { name = bfl_v_04_outcome value = 9 } set_variable = { name = bfl_v_04_state value = 3 } }
+if = { limit = { var:bfl_v_04_state > 0 var:bfl_v_04_kind = 2
+            exists = var:bfl_v_04_operator country_exists = var:bfl_v_04_operator exists = var:bfl_v_04_area
+            OR = { var:bfl_v_04_outcome = 1 var:bfl_v_04_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_04_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_04_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_04_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_04_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_04_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_04_discovery value = 1 } set_variable = { name = bfl_v_04_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_04_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_04_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_04_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_05_state = 1 OR = { NOT = { exists = var:bfl_v_05_operator } NOT = { country_exists = var:bfl_v_05_operator } } }
-            set_variable = { name = bfl_v_05_loss value = var:bfl_v_05_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_05_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_05_undrawn } set_variable = { name = bfl_v_05_undrawn value = 0 }
+            set_variable = { name = bfl_v_05_loss value = var:bfl_v_05_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_05_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_05_basis }
-            set_variable = { name = bfl_v_05_basis value = 0 } set_variable = { name = bfl_v_05_state value = 3 } }
+            set_variable = { name = bfl_v_05_basis value = 0 } set_variable = { name = bfl_v_05_quantity value = 0 }
+            set_variable = { name = bfl_v_05_outcome value = 9 } set_variable = { name = bfl_v_05_state value = 3 } }
+if = { limit = { var:bfl_v_05_state > 0 var:bfl_v_05_kind = 2
+            exists = var:bfl_v_05_operator country_exists = var:bfl_v_05_operator exists = var:bfl_v_05_area
+            OR = { var:bfl_v_05_outcome = 1 var:bfl_v_05_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_05_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_05_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_05_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_05_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_05_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_05_discovery value = 1 } set_variable = { name = bfl_v_05_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_05_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_05_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_05_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_06_state = 1 OR = { NOT = { exists = var:bfl_v_06_operator } NOT = { country_exists = var:bfl_v_06_operator } } }
-            set_variable = { name = bfl_v_06_loss value = var:bfl_v_06_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_06_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_06_undrawn } set_variable = { name = bfl_v_06_undrawn value = 0 }
+            set_variable = { name = bfl_v_06_loss value = var:bfl_v_06_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_06_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_06_basis }
-            set_variable = { name = bfl_v_06_basis value = 0 } set_variable = { name = bfl_v_06_state value = 3 } }
+            set_variable = { name = bfl_v_06_basis value = 0 } set_variable = { name = bfl_v_06_quantity value = 0 }
+            set_variable = { name = bfl_v_06_outcome value = 9 } set_variable = { name = bfl_v_06_state value = 3 } }
+if = { limit = { var:bfl_v_06_state > 0 var:bfl_v_06_kind = 2
+            exists = var:bfl_v_06_operator country_exists = var:bfl_v_06_operator exists = var:bfl_v_06_area
+            OR = { var:bfl_v_06_outcome = 1 var:bfl_v_06_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_06_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_06_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_06_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_06_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_06_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_06_discovery value = 1 } set_variable = { name = bfl_v_06_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_06_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_06_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_06_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_07_state = 1 OR = { NOT = { exists = var:bfl_v_07_operator } NOT = { country_exists = var:bfl_v_07_operator } } }
-            set_variable = { name = bfl_v_07_loss value = var:bfl_v_07_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_07_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_07_undrawn } set_variable = { name = bfl_v_07_undrawn value = 0 }
+            set_variable = { name = bfl_v_07_loss value = var:bfl_v_07_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_07_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_07_basis }
-            set_variable = { name = bfl_v_07_basis value = 0 } set_variable = { name = bfl_v_07_state value = 3 } }
+            set_variable = { name = bfl_v_07_basis value = 0 } set_variable = { name = bfl_v_07_quantity value = 0 }
+            set_variable = { name = bfl_v_07_outcome value = 9 } set_variable = { name = bfl_v_07_state value = 3 } }
+if = { limit = { var:bfl_v_07_state > 0 var:bfl_v_07_kind = 2
+            exists = var:bfl_v_07_operator country_exists = var:bfl_v_07_operator exists = var:bfl_v_07_area
+            OR = { var:bfl_v_07_outcome = 1 var:bfl_v_07_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_07_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_07_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_07_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_07_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_07_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_07_discovery value = 1 } set_variable = { name = bfl_v_07_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_07_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_07_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_07_outcome value = 8 } }
+        }
 if = { limit = { var:bfl_v_08_state = 1 OR = { NOT = { exists = var:bfl_v_08_operator } NOT = { country_exists = var:bfl_v_08_operator } } }
-            set_variable = { name = bfl_v_08_loss value = var:bfl_v_08_basis }
-            change_variable = { name = bfl_loss_carryforward add = var:bfl_v_08_basis }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_v_08_undrawn } set_variable = { name = bfl_v_08_undrawn value = 0 }
+            set_variable = { name = bfl_v_08_loss value = var:bfl_v_08_basis } change_variable = { name = bfl_loss_carryforward add = var:bfl_v_08_basis }
             change_variable = { name = bfl_project_value subtract = var:bfl_v_08_basis }
-            set_variable = { name = bfl_v_08_basis value = 0 } set_variable = { name = bfl_v_08_state value = 3 } }
+            set_variable = { name = bfl_v_08_basis value = 0 } set_variable = { name = bfl_v_08_quantity value = 0 }
+            set_variable = { name = bfl_v_08_outcome value = 9 } set_variable = { name = bfl_v_08_state value = 3 } }
+if = { limit = { var:bfl_v_08_state > 0 var:bfl_v_08_kind = 2
+            exists = var:bfl_v_08_operator country_exists = var:bfl_v_08_operator exists = var:bfl_v_08_area
+            OR = { var:bfl_v_08_outcome = 1 var:bfl_v_08_outcome = 8 } }
+            save_scope_as = bfl_venture_lender
+            var:bfl_v_08_area = { save_scope_as = bfl_venture_watched_area }
+            set_variable = { name = bfl_venture_native_seen value = 0 }
+            var:bfl_v_08_operator = { every_exploration_from_country = { limit = { area = scope:bfl_venture_watched_area exploration_time > 0 }
+                save_scope_as = bfl_venture_exploration
+                scope:bfl_venture_lender = { set_variable = { name = bfl_venture_native_seen value = 1 }
+                    set_variable = { name = bfl_v_08_progress value = { value = scope:bfl_venture_exploration.exploration_progress divide = scope:bfl_venture_exploration.exploration_time min = 0 max = 1 } } } } }
+            if = { limit = { var:bfl_venture_native_seen = 1 } set_variable = { name = bfl_v_08_outcome value = 1 } }
+            else_if = { limit = { var:bfl_v_08_operator = { has_discovered_area = scope:bfl_venture_watched_area } }
+                set_variable = { name = bfl_v_08_discovery value = 1 } set_variable = { name = bfl_v_08_outcome value = 2 } }
+            else_if = { limit = { var:bfl_v_08_operator = { num_explorations_including_in_construction = 0 } }
+                set_variable = { name = bfl_v_08_outcome value = 3 } }
+            else = { set_variable = { name = bfl_v_08_outcome value = 8 } }
+        }
 }
