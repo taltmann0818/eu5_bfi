@@ -85,8 +85,7 @@ def prepare(directory, scene):
                 ai_will_do = { value = 0 }
             }
         ''')
-        campaign.write_script(overlay / 'main_menu/localization/english/bfi_m9_ui_l_english.yml', '''
-            l_english:
+        campaign.write_script(overlay / 'main_menu/localization/english/bfi_m9_ui_l_english.yml', '''l_english:
              bfi_m9_ui_quote: "QA: Request Genoese bond terms"
              bfi_m9_ui_quote_desc: "Disposable fixture: ask the production current-holder consent event to open."
              bfi_m9_ui_quote.title: "QA: Request Genoese bond terms"

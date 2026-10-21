@@ -68,3 +68,5 @@ def generate(common, effect, loc, write):
            + effect('bfl_service_bond_security', body))
     loc('bfl_workout_trade_access', 'Workout trade concession')
     loc('bfl_workout_trade_access_desc', 'Trade protection is lifted by a separately accepted bond workout for up to two years. Existing ordinary trade-access agreements are independent of this concession.')
+    loc('offer_bfl_workout_trade_access_happened_title', 'Workout Trade Concession Granted')
+    loc('offer_bfl_workout_trade_access_happened_desc', 'A bond holder accepted a two-year trade-protection concession as part of a secured restructuring. The separate revenue pledge pays unpaid coupons only from available treasury gold.')

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "token": "3eec7c9855d244e48fa13f19e81c3dea",
+  "runtime_sha256": "d4e35f7142991be8a58c827f83e894c790b175e50f0ca9f9f5b52041ce1d48eb",
+  "results": {
+    "dead_custodian_retains_funded_physical_contract": "PASS",
+    "holder_asset_scan_includes_destroyed_custodian": "PASS",
+    "zero_cost_live_physical_right_still_blocks_holder_closure": "PASS",
+    "forward_delivery_after_destruction_preserves_native_quantity": "PASS",
+    "destroyed_holder_transfers_same_receipt_for_separate_purchase_debt": "PASS",
+    "receipt_title_replay_is_neutral_and_transport_is_funded": "PASS",
+    "retained_custodian_completes_natural_transport_and_redemption": "PASS",
+    "destroyed_custody_and_holder_title_survive_reload": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "324703f16d160995da5965fded49a498666b850497dceb8a4217f137a933fb01",
+  "assertions": 8,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

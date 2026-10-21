@@ -1,5 +1,35 @@
 # Native bank interface captures
 
+## M9 institution-wide resolution
+
+The [21 October capture record](../../tests/results/2026-10-21-m9-ui.json)
+pins each actual runtime/fixture and the SHA-256 of every unedited 2560×1440 PNG.
+English/default scale, EUV 1.4.1 / Steam 25905365 / CMF 2.5.0. Independent Overseas
+controls were captured with debug enabled; the final Florence estate, Merchant
+controller and bond scenes use normal player presentation with debug disabled.
+Production transaction services are unchanged by the later compact bond-button
+and notification presentation fixes; exact per-file differences are recorded.
+The final bond-list entry scene uses the generated shipping runtime.
+
+Disposable fixtures grant research/buildings, seed accepted legacy positions and
+shock cash. The fixture-only QA decision requests the production Genoese
+current-holder consent event; accept/decline and all recoveries use normal
+production controls. These are execution/visual observations, not campaign balance
+evidence. Rejected development scenes are explicitly excluded. All accepted scenes
+have clean BFI runtime logs under the existing native diagnostic policy.
+
+- [2026-10-21-m9-independent-controls.png](2026-10-21-m9-independent-controls.png): Independent Overseas Bardi: native Credit exposes Begin resolution and creditor controls; cash 100, deposit claim 100 and equity 0. Guarantee controls are unavailable to the independent bank.
+- [2026-10-21-m9-independent-resolving.png](2026-10-21-m9-independent-resolving.png): Normal independent Overseas-bank Begin resolution changes Bardi to In resolution, keeps cash and deposit liabilities at 100, disables repeated entry and enables recovery and consented terms.
+- [2026-10-21-m9-independent-recovery.png](2026-10-21-m9-independent-recovery.png): Normal independent-bank Pay recovery pays the 100-gold deposit: cash/assets/liabilities and selected claim are now zero; state remains In resolution and further terms are disabled.
+- [2026-10-21-m9-estate-before.png](2026-10-21-m9-estate-before.png): Final clean cold load: normal Decisions opens the Peruzzi original-issuer estate for its legal trustee Florence. Separate cash 40, deposits owed 100, recoveries zero; sovereign treasury 4800.
+- [2026-10-21-m9-estate-recovery.png](2026-10-21-m9-estate-recovery.png): Final clean scene: production recovery debits estate cash 40 to zero, reduces deposit claim 100 to 60 and records 40 actual recoveries. Florence treasury rises 4800 to 4840; exhausted liquidation becomes available.
+- [2026-10-21-m9-estate-closed.png](2026-10-21-m9-estate-closed.png): Final clean scene: normal exhausted liquidation closes Peruzzi (state 5), extinguishes the 60 unpaid deposit after statutory loss accounting, retains cumulative recoveries 40, and leaves treasury at 4840. Finalization cannot be selected again.
+- [2026-10-21-m9-bond-consent.png](2026-10-21-m9-bond-consent.png): Final clean current-holder consent: Genoa offers Florence 20% principal/coupon reduction, annual coupon cut with 1% floor, optional two-year trade concession and funded revenue pledge. All text and three choices fit the native modal.
+- [2026-10-21-m9-bond-concession.png](2026-10-21-m9-bond-concession.png): Final clean scene: normal secured acceptance creates the native Workout Trade Concession Granted confirmation with fully localized title/description and market-protection effects. Separate funded revenue pledge is stated explicitly.
+- [2026-10-21-m9-controller-resolving.png](2026-10-21-m9-controller-resolving.png): Clean controller scene: normal Begin resolution changes Merchant Bardi to In resolution, keeps bank cash/liabilities at 100 and the selected deposit claim at 100, disables repeated entry and enables recovery.
+- [2026-10-21-m9-controller-recovery.png](2026-10-21-m9-controller-recovery.png): Clean controller scene: normal Pay recovery moves 100 actual bank gold to Florence (4840 to 4940); bank cash/assets/liabilities and selected deposit claim become zero, cumulative deposit recoveries 100.
+- [2026-10-21-m9-bond-issuer-controls.png](2026-10-21-m9-bond-issuer-controls.png): Generated shipping runtime: the live compact Sovereign Bonds claim row exposes Offer restructuring below the current face 100, annual coupon 3%, Genoese holder and unpaid coupons 5. The complete new action fits inside its card.
+
 ## M9 orderly bank resolution
 
 [Capture provenance](../../tests/results/2026-10-20-m9-ui.json) records six unedited
@@ -14,7 +44,7 @@ The capture runtime is `ae6520ab07b9…`; shipping `18df97e0a614…` adds only i
 claim counting and stricter closure guards in three files. GUI/localization and
 44 checked transaction effect bodies match.
 Exact per-file and image hashes are retained in provenance. Shipping's additional
-closure guards pass the native suite. Independent-bank normal UI is not captured.
+closure guards pass the native suite. This historical record did not capture independent-bank normal UI; the 21 October record above adds it.
 
 - [Overview](2026-10-20-m9-overview.png): controller Credit view before resolution, 100 cash and 100 deposit liability.
 - [Resolution controls](2026-10-20-m9-resolving-controls.png): normal Begin resolution click persists the state and exposes recovery/creditor commands.

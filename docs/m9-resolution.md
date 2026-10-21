@@ -2,9 +2,9 @@
 
 M9 now implements forced bank/company estates, asset realization, custom-bond
 workouts, negotiated security and final statutory losses as well as orderly bank
-recovery. **Completion remains pending the final native regression run and normal
-UI acceptance of the added screens.** Historical focused acceptance below is not
-a substitute for that gate.
+recovery. **Complete for the pinned single-player baseline.** [Final acceptance](../tests/results/2026-10-21-m9-validation.json)
+records 659 native assertions with exact per-run hashes, 136 offline checks,
+deterministic generation, 329-file staging and 11 new unedited normal UI captures.
 
 ## Entry and surviving estates
 
@@ -148,10 +148,16 @@ remains historical evidence for the narrower 58-assertion orderly workout and
 show controller entry, creditor consent/decline and funded recovery. They do not
 visually accept the new estate, independent-bank or secured-bond screens.
 
-Final acceptance must add normal controller and independent-bank observations,
-forced-estate administration, current-holder bond consent/security, readable
-localized controls and unedited actual-game captures embedded in the PR. Computer
-Use currently fails to initialize with `failed to write kernel assets: The system
-cannot find the path specified (os error 3)`, including after a runtime reset.
-This tool failure is a remaining visual gate, not a visual pass. Broad autonomous
-origination/balance, language/scale coverage and release-wide performance remain M10.
+The [21 October normal UI record](../tests/results/2026-10-21-m9-ui.json) and
+[unedited captures](screenshots/README.md#m9-institution-wide-resolution) add legal-trustee
+estate administration, actual recovery and finalization, current-holder bond
+consent/security and independent Overseas-bank controls. Each cold-loaded scene
+pins its actual runtime and explicit disposable fixture. Later presentation-only
+differences, including the final concession notification labels, are recorded.
+The native runs
+retain their own staged hashes; the provenance table lists the exact later file
+differences rather than attributing earlier regressions to a different runtime.
+Failed, interrupted and source-changed development runs are excluded.
+
+Broad autonomous origination/balance, language/scale coverage and release-wide
+performance remain M10.
