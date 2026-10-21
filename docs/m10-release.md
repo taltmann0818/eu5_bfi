@@ -17,7 +17,7 @@ receipt, bond and company service and the GUI are byte-identical.
 [Eight normal UI observations and five captures](../tests/results/2026-10-21-m10-ui.json)
 cover both roles, opt-in, funded natural demand placements and manual management.
 Captures retain their real earlier hashes; their GUI and localization are
-byte-identical to shipping. Four are original window PNGs; one is an unaltered
+byte-identical to shipping. Four are original window JPEGs; one is an unaltered
 bank-panel crop excluding another application. Fixture cash, branches and
 ownership are explicit setup, not measured campaign balance.
 

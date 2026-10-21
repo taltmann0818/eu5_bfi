@@ -5,19 +5,19 @@
 [Exact capture provenance](../../tests/results/2026-10-21-m10-ui.json) records
 eight normal UI observations and five actual-game captures from disposable
 Florence-controller and independent-Bardi scenes. English, 1280×720 client,
-inherited default/automatic scale; window PNGs include the native title bar.
+inherited default/automatic scale; window JPEGs include the native title bar.
 All GUI/localization bytes match shipping. Each capture retains its actual
 runtime and fixture hash; candidate traversal changes are recorded separately.
 Cash/branch/ownership grants are fixture setup, not campaign balance evidence.
 
-- [Controller manual](2026-10-21-m10-controller-manual.png): Merchant bank,
+- [Controller manual](2026-10-21-m10-controller-manual.jpg): Merchant bank,
   separate sovereign accounts, manual mandate and bank cash/assets/equity 5000.
-- [Controller delegated](2026-10-21-m10-controller-delegated.png): normal Delegate
+- [Controller delegated](2026-10-21-m10-controller-delegated.jpg): normal Delegate
   investments changes policy without moving cash; hover explains bounded review,
   cadence and transaction guards.
-- [Independent manual](2026-10-21-m10-independent-manual.png): Overseas Bardi,
+- [Independent manual](2026-10-21-m10-independent-manual.jpg): Overseas Bardi,
   preserved native loan header and the same directly accessible mandate.
-- [Independent delegated](2026-10-21-m10-independent-delegated.png): normal opt-in
+- [Independent delegated](2026-10-21-m10-independent-delegated.jpg): normal opt-in
   preserves 5000 cash and shows the financing/consent explanation.
 - [Independent funded](2026-10-21-m10-independent-funded.png): natural monthly
   passes made two demand placements. Cash 4803.69 and assets/equity 5003.69
