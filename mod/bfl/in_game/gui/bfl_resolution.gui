@@ -32,4 +32,8 @@
         tooltip = "bfl_resolution_close_command_tip" text = "bfl_resolution_close_command"
         enabled = "[GetScriptedGui('bfl_resolution_close_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('bfl_resolution_close_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-    } } } } }
+    } }button_regular = { name = "bfl_resolution_liquidate_command_button" size = { -1 32 } layoutpolicy_horizontal = expanding
+        tooltip = "bfl_resolution_liquidate_command_tip" text = "bfl_resolution_liquidate_command"
+        enabled = "[GetScriptedGui('bfl_resolution_liquidate_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_liquidate_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+    } } } }

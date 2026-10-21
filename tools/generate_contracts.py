@@ -19,9 +19,10 @@ def generate(common,effect,loc):
     allocate='set_variable = { name = bfl_contract_allocated value = 0 }\n'
     for i in range(1,33):
         n=f'bfl_con_{i:02}'
-        allocate+=f'''if = {{ limit = {{ var:bfl_contract_allocated = 0 var:{n}_active = 0 }}
+        allocate+=f'''if = {{ limit = {{ var:bfl_contract_allocated = 0 var:{n}_active = 0 NOT = {{ has_variable = {n}_pledge }} }}
             set_variable = {{ name = bfl_contract_allocated value = {i} }}
             set_variable = {{ name = {n}_active value = 1 }}
+            set_variable = {{ name = {n}_recovery_held value = 0 }}
             change_variable = {{ name = {n}_generation add = 1 }}
             set_variable = {{ name = {n}_party value = scope:bfl_party }}
             set_variable = {{ name = {n}_kind value = var:bfl_contract_kind }}
@@ -66,7 +67,7 @@ def generate(common,effect,loc):
         bills+=effect(f'bfl_redeem_bill_{i:02}',f'''
         if = {{ limit = {{ var:{n}_active = 1 var:{n}_kind = 1 var:{n}_state = 1
             NOT = {{ has_variable = {n}_pledge }}
-            exists = var:{n}_party country_exists = var:{n}_party var:{n}_party = scope:bfl_party
+            exists = var:{n}_party var:{n}_party = {{ bfl_financial_recipient = yes }} var:{n}_party = scope:bfl_party
             bfl_period >= var:{n}_maturity_period gold >= var:{n}_basis
         }}
             save_scope_as = bfl_bank

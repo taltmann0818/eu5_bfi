@@ -118,7 +118,7 @@ def generate(common, effect, loc, write):
     purchase += '} remove_variable = bfl_goods_guard } bfl_value_goods = yes\n'
     # Native purchase and sales affect treasury directly. Book only observed
     # sale proceeds less the carried purchase cost; no price-mark gains.
-    valuation = 'set_variable = { name = bfl_inventory_value value = 0 }\n'
+    valuation = 'set_variable = { name = bfl_inventory_value value = 0 }\nset_variable = { name = bfl_goods_holder_claim_count value = 0 }\n'
     services = ''
     margins = ''
     selected = ''
@@ -137,6 +137,8 @@ def generate(common, effect, loc, write):
     for i in LOTS:
         p = n(i)
         local = f'''OR = {{ AND = {{ NOT = {{ has_variable = {p}_host }} var:{p}_market ?= capital.market }}
+            AND = {{ has_variable = bfl_resolution_estate NOT = {{ has_variable = {p}_host }} exists = var:{p}_location
+                var:{p}_market ?= var:{p}_location.market }}
             AND = {{ has_variable = {p}_host bfl_goods_branch_access = yes var:{p}_host ?= var:bfl_goods_host var:{p}_market ?= var:bfl_goods_branch_market }} }}'''
         triggers += effect(f'bfl_goods_access_{i:02}', f'var:{p}_active = 1 {local} var:{p}_transit_due = 0')
         triggers += effect(f'bfl_goods_sellable_{i:02}', f'''bfl_has_accounts = yes bfl_goods_access_{i:02} = yes
@@ -295,7 +297,7 @@ def generate(common, effect, loc, write):
         # price and the buyer receives the same amount from seller security.
         services += effect(f'bfl_settle_goods_forward_{i:02}', f'''if = {{ limit = {{ var:{p}_active = 1 var:{p}_state = 2
             bfl_period >= var:{p}_due bfl_goods_access_{i:02} = yes
-            country_exists = var:{p}_holder gold >= {{ value = var:{p}_escrow add = var:{p}_margin }} }}
+            var:{p}_holder = {{ bfl_financial_recipient = yes }} gold >= {{ value = var:{p}_escrow add = var:{p}_margin }} }}
             save_scope_as = bfl_goods_bank
             set_variable = {{ name = bfl_goods_shortfall value = {{ value = 1 subtract = {{ value = var:{p}_quantity divide = var:{p}_accepted_quantity }} multiply = var:{p}_price min = 0 max = var:{p}_margin }} }}
             set_variable = {{ name = bfl_goods_refund value = {{ value = var:bfl_goods_shortfall multiply = 2 }} }}
@@ -350,7 +352,7 @@ def generate(common, effect, loc, write):
             if = {{ limit = {{ OR = {{ var:{p}_state = 1 AND = {{ var:{p}_state = 4 var:{p}_state_before_seizure = 1 }} }} var:{p}_holder_basis > 0 }}
                 set_variable = {{ name = bfl_goods_decay value = {{ value = var:{p}_holder_basis multiply = 0.00167 }} }}
                 change_variable = {{ name = {p}_holder_basis subtract = var:bfl_goods_decay }}
-                if = {{ limit = {{ country_exists = var:{p}_holder var:{p}_holder = {{ bfl_has_accounts = yes }} }}
+                if = {{ limit = {{ var:{p}_holder = {{ bfl_financial_recipient = yes bfl_has_accounts = yes }} }}
                     var:{p}_holder = {{ change_variable = {{ name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay }} }} }}
             }}
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -394,15 +396,17 @@ def generate(common, effect, loc, write):
     monthly += 'bfl_refresh_goods_marks = yes\n' + margins
     # Holder-bank assets retain paid cost; no mark-to-market income and no
     # duplicate asset remains on the issuing custodian's balance sheet.
-    valuation += 'save_scope_as = bfl_goods_value_owner\nevery_country = { limit = { has_variable = bfl_goods_schema }\n'
+    valuation += 'save_scope_as = bfl_goods_value_owner\nevery_in_global_list = { variable = bfl_resolution_institutions limit = { has_variable = bfl_goods_schema }\n'
     for i in LOTS:
         p = n(i)
         valuation += f'''if = {{ limit = {{ var:{p}_active = 1 var:{p}_holder ?= scope:bfl_goods_value_owner
             OR = {{ var:{p}_state = 1 var:{p}_state = 2 AND = {{ var:{p}_state = 4 var:{p}_state_before_seizure > 0 }} }} }}
-            scope:bfl_goods_value_owner = {{ change_variable = {{ name = bfl_inventory_value add = prev.var:{p}_holder_basis }} }} }}\n'''
+            scope:bfl_goods_value_owner = {{ change_variable = {{ name = bfl_inventory_value add = prev.var:{p}_holder_basis }}
+                change_variable = {{ name = bfl_goods_holder_claim_count add = 1 }} }} }}\n'''
     valuation += '}\n'
     common('scripted_triggers', 'goods', triggers)
-    common('script_values', 'goods', values + '''bfl_goods_quote = { value = var:bfl_goods_quote }
+    common('script_values', 'goods', values + '''bfl_goods_holder_claims = { value = 0 if = { limit = { has_variable = bfl_goods_holder_claim_count } value = var:bfl_goods_holder_claim_count } }
+        bfl_goods_quote = { value = var:bfl_goods_quote }
         bfl_goods_refund = { value = var:bfl_goods_refund }
         bfl_goods_margin_call = { value = var:bfl_goods_margin_call }
     ''')

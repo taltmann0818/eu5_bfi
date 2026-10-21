@@ -1,0 +1,5 @@
+﻿bfl_bond_security_available = {
+    country_exists = this has_advance = bfl_collateralization
+    OR = { current_age = age_5_absolutism current_age = age_6_revolutions }
+    NOT = { has_variable = bfl_revenue_bond_slot }
+}

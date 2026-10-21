@@ -1,6 +1,7 @@
 ﻿bfl_resolution_legal_succession = {
-save_scope_as = bfl_resolution_successor
-        every_country = { limit = { OR = { bfl_has_accounts = yes has_variable = bfl_bond_schema has_variable = bfl_ownership_schema } }
+if = { limit = { scope:target = { NOT = { has_variable = bfl_resolution_estate } } }
+        save_scope_as = bfl_resolution_successor
+        every_in_global_list = { variable = bfl_resolution_institutions limit = { OR = { bfl_has_accounts = yes has_variable = bfl_bond_schema has_variable = bfl_ownership_schema } }
             save_scope_as = bfl_succession_institution
     if = { limit = { var:bfl_bnd_01_active ?= 1 var:bfl_bnd_01_holder ?= scope:target }
             set_variable = { name = bfl_bnd_01_holder value = scope:bfl_resolution_successor }
@@ -306,13 +307,7 @@ if = { limit = { var:bfl_con_32_active ?= 1 var:bfl_con_32_party ?= scope:target
 if = { limit = { var:bfl_con_32_active ?= 1 var:bfl_con_32_pledge ?= scope:target }
                 set_variable = { name = bfl_con_32_pledge value = scope:bfl_resolution_successor }
                 change_variable = { name = bfl_con_32_generation add = 1 } }
-if = { limit = { var:bfl_resolution_guarantor ?= scope:target }
-        set_variable = { name = bfl_resolution_guarantor value = scope:bfl_resolution_successor }
-        scope:bfl_resolution_successor = { if = { limit = { NOT = { has_variable = bfl_guarantee_exposure } }
-            set_variable = { name = bfl_guarantee_exposure value = 0 } }
-            change_variable = { name = bfl_guarantee_exposure add = scope:bfl_succession_institution.var:bfl_resolution_guarantee_left }
-        } }
-    if = { limit = { var:bfl_resolution_guarantee_beneficiary ?= scope:target }
+if = { limit = { var:bfl_resolution_guarantee_beneficiary ?= scope:target }
             set_variable = { name = bfl_resolution_guarantee_beneficiary value = scope:bfl_resolution_successor } }
 if = { limit = { var:bfl_state_owner ?= scope:target }
             set_variable = { name = bfl_state_owner value = scope:bfl_resolution_successor } }
@@ -364,5 +359,21 @@ if = { limit = { var:bfl_shr_15_active ?= 1 var:bfl_shr_15_party ?= scope:target
 if = { limit = { var:bfl_shr_16_active ?= 1 var:bfl_shr_16_party ?= scope:target }
             set_variable = { name = bfl_shr_16_party value = scope:bfl_resolution_successor }
             change_variable = { name = bfl_shr_16_generation add = 1 } }
-}
+} }
+save_scope_as = bfl_resolution_successor
+        every_in_global_list = { variable = bfl_resolution_institutions
+            save_scope_as = bfl_succession_institution
+            if = { limit = { var:bfl_resolution_trustee ?= scope:target }
+                set_variable = { name = bfl_resolution_trustee value = scope:bfl_resolution_successor }
+                change_variable = { name = bfl_resolution_revision add = 1 } }
+            if = { limit = { var:bfl_resolution_guarantor ?= scope:target }
+                set_variable = { name = bfl_resolution_guarantor value = scope:bfl_resolution_successor }
+                scope:bfl_resolution_successor = {
+                    if = { limit = { NOT = { has_variable = bfl_guarantee_exposure } }
+                        set_variable = { name = bfl_guarantee_exposure value = 0 } }
+                    change_variable = { name = bfl_guarantee_exposure add = scope:bfl_succession_institution.var:bfl_resolution_guarantee_left }
+                }
+                scope:target = { change_variable = { name = bfl_guarantee_exposure subtract = scope:bfl_succession_institution.var:bfl_resolution_guarantee_left } }
+            }
+        }
 }

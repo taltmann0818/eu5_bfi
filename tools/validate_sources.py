@@ -78,7 +78,7 @@ def main():
             if path.suffix=='.gui' and key not in loc_set:
                 continue
             if key.startswith(('bfl_dep_','bfl_con_','bfl_inv_','bfl_offer_','bfl_shr_','bfl_branch_','bfl_candidate_')):continue
-            if re.search(r'\b(?:set_variable|change_variable|save_scope_value_as)\s*=\s*\{\s*name\s*=\s*'+re.escape(key),text):continue
+            if re.search(r'\b(?:set_variable|change_variable|set_global_variable|add_to_global_variable_list|add_to_variable_map|save_scope_value_as)\s*=\s*\{\s*name\s*=\s*'+re.escape(key),text):continue
             check(key in loc_set,f'{path}: missing localization {key}')
     declarations=set()
     for path,text in all_text:

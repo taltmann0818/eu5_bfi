@@ -1,0 +1,9 @@
+﻿bfl_native_estate_assets = {
+value = 0 if = { limit = { has_variable = bfl_native_estate_assets } value = var:bfl_native_estate_assets }
+}
+bfl_native_estate_claim_count = {
+value = 0 if = { limit = { has_variable = bfl_native_estate_claim_count } value = var:bfl_native_estate_claim_count }
+}
+bfl_resolution_native_claims = {
+value = 0 if = { limit = { has_variable = bfl_resolution_native_total } add = var:bfl_resolution_native_total } if = { limit = { has_variable = bfl_resolution_native_estate_total } add = var:bfl_resolution_native_estate_total }
+}

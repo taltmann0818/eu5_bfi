@@ -1,0 +1,192 @@
+﻿bfl_offer_bond_workout_01 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_01_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_01_active ?= 1 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder
+            NOT = { this = var:bfl_bnd_01_holder } }
+            effect = { bfl_offer_bond_workout_01 = yes } }
+bfl_offer_bond_workout_02 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_02_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_02_active ?= 1 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder
+            NOT = { this = var:bfl_bnd_02_holder } }
+            effect = { bfl_offer_bond_workout_02 = yes } }
+bfl_offer_bond_workout_03 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_03_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_03_active ?= 1 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder
+            NOT = { this = var:bfl_bnd_03_holder } }
+            effect = { bfl_offer_bond_workout_03 = yes } }
+bfl_offer_bond_workout_04 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_04_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_04_active ?= 1 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder
+            NOT = { this = var:bfl_bnd_04_holder } }
+            effect = { bfl_offer_bond_workout_04 = yes } }
+bfl_offer_bond_workout_05 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_05_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_05_active ?= 1 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder
+            NOT = { this = var:bfl_bnd_05_holder } }
+            effect = { bfl_offer_bond_workout_05 = yes } }
+bfl_offer_bond_workout_06 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_06_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_06_active ?= 1 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder
+            NOT = { this = var:bfl_bnd_06_holder } }
+            effect = { bfl_offer_bond_workout_06 = yes } }
+bfl_offer_bond_workout_07 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_07_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_07_active ?= 1 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder
+            NOT = { this = var:bfl_bnd_07_holder } }
+            effect = { bfl_offer_bond_workout_07 = yes } }
+bfl_offer_bond_workout_08 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_08_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_08_active ?= 1 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder
+            NOT = { this = var:bfl_bnd_08_holder } }
+            effect = { bfl_offer_bond_workout_08 = yes } }
+bfl_offer_bond_workout_09 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_09_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_09_active ?= 1 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder
+            NOT = { this = var:bfl_bnd_09_holder } }
+            effect = { bfl_offer_bond_workout_09 = yes } }
+bfl_offer_bond_workout_10 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_10_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_10_active ?= 1 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder
+            NOT = { this = var:bfl_bnd_10_holder } }
+            effect = { bfl_offer_bond_workout_10 = yes } }
+bfl_offer_bond_workout_11 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_11_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_11_active ?= 1 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder
+            NOT = { this = var:bfl_bnd_11_holder } }
+            effect = { bfl_offer_bond_workout_11 = yes } }
+bfl_offer_bond_workout_12 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_12_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_12_active ?= 1 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder
+            NOT = { this = var:bfl_bnd_12_holder } }
+            effect = { bfl_offer_bond_workout_12 = yes } }
+bfl_offer_bond_workout_13 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_13_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_13_active ?= 1 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder
+            NOT = { this = var:bfl_bnd_13_holder } }
+            effect = { bfl_offer_bond_workout_13 = yes } }
+bfl_offer_bond_workout_14 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_14_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_14_active ?= 1 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder
+            NOT = { this = var:bfl_bnd_14_holder } }
+            effect = { bfl_offer_bond_workout_14 = yes } }
+bfl_offer_bond_workout_15 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_15_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_15_active ?= 1 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder
+            NOT = { this = var:bfl_bnd_15_holder } }
+            effect = { bfl_offer_bond_workout_15 = yes } }
+bfl_offer_bond_workout_16 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_16_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_16_active ?= 1 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder
+            NOT = { this = var:bfl_bnd_16_holder } }
+            effect = { bfl_offer_bond_workout_16 = yes } }
+bfl_offer_bond_workout_17 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_17_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_17_active ?= 1 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder
+            NOT = { this = var:bfl_bnd_17_holder } }
+            effect = { bfl_offer_bond_workout_17 = yes } }
+bfl_offer_bond_workout_18 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_18_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_18_active ?= 1 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder
+            NOT = { this = var:bfl_bnd_18_holder } }
+            effect = { bfl_offer_bond_workout_18 = yes } }
+bfl_offer_bond_workout_19 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_19_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_19_active ?= 1 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder
+            NOT = { this = var:bfl_bnd_19_holder } }
+            effect = { bfl_offer_bond_workout_19 = yes } }
+bfl_offer_bond_workout_20 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_20_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_20_active ?= 1 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder
+            NOT = { this = var:bfl_bnd_20_holder } }
+            effect = { bfl_offer_bond_workout_20 = yes } }
+bfl_offer_bond_workout_21 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_21_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_21_active ?= 1 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder
+            NOT = { this = var:bfl_bnd_21_holder } }
+            effect = { bfl_offer_bond_workout_21 = yes } }
+bfl_offer_bond_workout_22 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_22_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_22_active ?= 1 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder
+            NOT = { this = var:bfl_bnd_22_holder } }
+            effect = { bfl_offer_bond_workout_22 = yes } }
+bfl_offer_bond_workout_23 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_23_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_23_active ?= 1 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder
+            NOT = { this = var:bfl_bnd_23_holder } }
+            effect = { bfl_offer_bond_workout_23 = yes } }
+bfl_offer_bond_workout_24 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_24_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_24_active ?= 1 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder
+            NOT = { this = var:bfl_bnd_24_holder } }
+            effect = { bfl_offer_bond_workout_24 = yes } }
+bfl_offer_bond_workout_25 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_25_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_25_active ?= 1 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder
+            NOT = { this = var:bfl_bnd_25_holder } }
+            effect = { bfl_offer_bond_workout_25 = yes } }
+bfl_offer_bond_workout_26 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_26_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_26_active ?= 1 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder
+            NOT = { this = var:bfl_bnd_26_holder } }
+            effect = { bfl_offer_bond_workout_26 = yes } }
+bfl_offer_bond_workout_27 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_27_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_27_active ?= 1 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder
+            NOT = { this = var:bfl_bnd_27_holder } }
+            effect = { bfl_offer_bond_workout_27 = yes } }
+bfl_offer_bond_workout_28 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_28_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_28_active ?= 1 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder
+            NOT = { this = var:bfl_bnd_28_holder } }
+            effect = { bfl_offer_bond_workout_28 = yes } }
+bfl_offer_bond_workout_29 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_29_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_29_active ?= 1 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder
+            NOT = { this = var:bfl_bnd_29_holder } }
+            effect = { bfl_offer_bond_workout_29 = yes } }
+bfl_offer_bond_workout_30 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_30_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_30_active ?= 1 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder
+            NOT = { this = var:bfl_bnd_30_holder } }
+            effect = { bfl_offer_bond_workout_30 = yes } }
+bfl_offer_bond_workout_31 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_31_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_31_active ?= 1 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder
+            NOT = { this = var:bfl_bnd_31_holder } }
+            effect = { bfl_offer_bond_workout_31 = yes } }
+bfl_offer_bond_workout_32 = { scope = country
+            is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_32_active ?= 1 }
+            is_valid = { bfl_financial_recipient = yes bfl_bond_workout_researched = yes
+            var:bfl_bnd_32_active ?= 1 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder
+            NOT = { this = var:bfl_bnd_32_holder } }
+            effect = { bfl_offer_bond_workout_32 = yes } }

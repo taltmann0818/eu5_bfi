@@ -1,0 +1,101 @@
+﻿bfl_liquidate_resolution_assets = {
+if = { limit = { var:bfl_state = 4 }
+        save_scope_as = bfl_liquidating_issuer
+        bfl_repay_discount = yes
+        bfl_liquidate_institution_ventures = yes
+        bfl_service_resolution_money = yes bfl_service_monetary = yes bfl_process_goods = yes bfl_reconcile_commenda = yes
+    bfl_sell_goods_01 = yes
+if = { limit = { exists = var:bfl_pos_01_issuer var:bfl_pos_01_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_01_basis }
+            set_variable = { name = bfl_pos_01_units value = 0 } set_variable = { name = bfl_pos_01_basis value = 0 }
+            remove_variable = bfl_pos_01_issuer }
+bfl_sell_goods_02 = yes
+if = { limit = { exists = var:bfl_pos_02_issuer var:bfl_pos_02_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_02_basis }
+            set_variable = { name = bfl_pos_02_units value = 0 } set_variable = { name = bfl_pos_02_basis value = 0 }
+            remove_variable = bfl_pos_02_issuer }
+bfl_sell_goods_03 = yes
+if = { limit = { exists = var:bfl_pos_03_issuer var:bfl_pos_03_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_03_basis }
+            set_variable = { name = bfl_pos_03_units value = 0 } set_variable = { name = bfl_pos_03_basis value = 0 }
+            remove_variable = bfl_pos_03_issuer }
+bfl_sell_goods_04 = yes
+if = { limit = { exists = var:bfl_pos_04_issuer var:bfl_pos_04_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_04_basis }
+            set_variable = { name = bfl_pos_04_units value = 0 } set_variable = { name = bfl_pos_04_basis value = 0 }
+            remove_variable = bfl_pos_04_issuer }
+bfl_sell_goods_05 = yes
+if = { limit = { exists = var:bfl_pos_05_issuer var:bfl_pos_05_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_05_basis }
+            set_variable = { name = bfl_pos_05_units value = 0 } set_variable = { name = bfl_pos_05_basis value = 0 }
+            remove_variable = bfl_pos_05_issuer }
+bfl_sell_goods_06 = yes
+if = { limit = { exists = var:bfl_pos_06_issuer var:bfl_pos_06_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_06_basis }
+            set_variable = { name = bfl_pos_06_units value = 0 } set_variable = { name = bfl_pos_06_basis value = 0 }
+            remove_variable = bfl_pos_06_issuer }
+bfl_sell_goods_07 = yes
+if = { limit = { exists = var:bfl_pos_07_issuer var:bfl_pos_07_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_07_basis }
+            set_variable = { name = bfl_pos_07_units value = 0 } set_variable = { name = bfl_pos_07_basis value = 0 }
+            remove_variable = bfl_pos_07_issuer }
+bfl_sell_goods_08 = yes
+if = { limit = { exists = var:bfl_pos_08_issuer var:bfl_pos_08_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_08_basis }
+            set_variable = { name = bfl_pos_08_units value = 0 } set_variable = { name = bfl_pos_08_basis value = 0 }
+            remove_variable = bfl_pos_08_issuer }
+bfl_sell_goods_09 = yes
+if = { limit = { exists = var:bfl_pos_09_issuer var:bfl_pos_09_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_09_basis }
+            set_variable = { name = bfl_pos_09_units value = 0 } set_variable = { name = bfl_pos_09_basis value = 0 }
+            remove_variable = bfl_pos_09_issuer }
+bfl_sell_goods_10 = yes
+if = { limit = { exists = var:bfl_pos_10_issuer var:bfl_pos_10_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_10_basis }
+            set_variable = { name = bfl_pos_10_units value = 0 } set_variable = { name = bfl_pos_10_basis value = 0 }
+            remove_variable = bfl_pos_10_issuer }
+bfl_sell_goods_11 = yes
+if = { limit = { exists = var:bfl_pos_11_issuer var:bfl_pos_11_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_11_basis }
+            set_variable = { name = bfl_pos_11_units value = 0 } set_variable = { name = bfl_pos_11_basis value = 0 }
+            remove_variable = bfl_pos_11_issuer }
+bfl_sell_goods_12 = yes
+if = { limit = { exists = var:bfl_pos_12_issuer var:bfl_pos_12_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_12_basis }
+            set_variable = { name = bfl_pos_12_units value = 0 } set_variable = { name = bfl_pos_12_basis value = 0 }
+            remove_variable = bfl_pos_12_issuer }
+bfl_sell_goods_13 = yes
+if = { limit = { exists = var:bfl_pos_13_issuer var:bfl_pos_13_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_13_basis }
+            set_variable = { name = bfl_pos_13_units value = 0 } set_variable = { name = bfl_pos_13_basis value = 0 }
+            remove_variable = bfl_pos_13_issuer }
+bfl_sell_goods_14 = yes
+if = { limit = { exists = var:bfl_pos_14_issuer var:bfl_pos_14_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_14_basis }
+            set_variable = { name = bfl_pos_14_units value = 0 } set_variable = { name = bfl_pos_14_basis value = 0 }
+            remove_variable = bfl_pos_14_issuer }
+bfl_sell_goods_15 = yes
+if = { limit = { exists = var:bfl_pos_15_issuer var:bfl_pos_15_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_15_basis }
+            set_variable = { name = bfl_pos_15_units value = 0 } set_variable = { name = bfl_pos_15_basis value = 0 }
+            remove_variable = bfl_pos_15_issuer }
+bfl_sell_goods_16 = yes
+if = { limit = { exists = var:bfl_pos_16_issuer var:bfl_pos_16_issuer = { var:bfl_state ?= 5 } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_pos_16_basis }
+            set_variable = { name = bfl_pos_16_units value = 0 } set_variable = { name = bfl_pos_16_basis value = 0 }
+            remove_variable = bfl_pos_16_issuer }
+save_scope_as = bfl_party
+        every_in_global_list = { variable = bfl_resolution_institutions
+            limit = { bfl_has_accounts = yes NOT = { this = scope:bfl_liquidating_issuer } }
+            bfl_request_all_withdrawals = yes
+        }
+        scope:bfl_liquidating_issuer = { save_scope_as = bfl_party }
+        every_in_global_list = { variable = bfl_resolution_institutions
+            limit = { bfl_has_accounts = yes NOT = { this = scope:bfl_liquidating_issuer } }
+            bfl_redeem_notes = yes bfl_redeem_matured_bills = yes
+        }
+        scope:bfl_liquidating_issuer = {
+            bfl_reconcile_native_assets = yes bfl_refresh_asset_statement = yes
+        }
+    }
+}

@@ -1,0 +1,468 @@
+﻿bfl_next_estate_bond = {
+if = { limit = { bfl_valid_estate_selection = yes }
+        var:bfl_managed_estate = {
+            if = { limit = { NOT = { has_variable = bfl_estate_bond_selected } }
+                set_variable = { name = bfl_estate_bond_selected value = 0 } }
+            set_variable = { name = bfl_estate_bond_after value = var:bfl_estate_bond_selected }
+            set_variable = { name = bfl_estate_bond_found value = 0 }
+    if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_01_active ?= 1 var:bfl_estate_bond_after < 1 }
+                set_variable = { name = bfl_estate_bond_selected value = 1 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_02_active ?= 1 var:bfl_estate_bond_after < 2 }
+                set_variable = { name = bfl_estate_bond_selected value = 2 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_03_active ?= 1 var:bfl_estate_bond_after < 3 }
+                set_variable = { name = bfl_estate_bond_selected value = 3 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_04_active ?= 1 var:bfl_estate_bond_after < 4 }
+                set_variable = { name = bfl_estate_bond_selected value = 4 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_05_active ?= 1 var:bfl_estate_bond_after < 5 }
+                set_variable = { name = bfl_estate_bond_selected value = 5 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_06_active ?= 1 var:bfl_estate_bond_after < 6 }
+                set_variable = { name = bfl_estate_bond_selected value = 6 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_07_active ?= 1 var:bfl_estate_bond_after < 7 }
+                set_variable = { name = bfl_estate_bond_selected value = 7 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_08_active ?= 1 var:bfl_estate_bond_after < 8 }
+                set_variable = { name = bfl_estate_bond_selected value = 8 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_09_active ?= 1 var:bfl_estate_bond_after < 9 }
+                set_variable = { name = bfl_estate_bond_selected value = 9 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_10_active ?= 1 var:bfl_estate_bond_after < 10 }
+                set_variable = { name = bfl_estate_bond_selected value = 10 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_11_active ?= 1 var:bfl_estate_bond_after < 11 }
+                set_variable = { name = bfl_estate_bond_selected value = 11 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_12_active ?= 1 var:bfl_estate_bond_after < 12 }
+                set_variable = { name = bfl_estate_bond_selected value = 12 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_13_active ?= 1 var:bfl_estate_bond_after < 13 }
+                set_variable = { name = bfl_estate_bond_selected value = 13 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_14_active ?= 1 var:bfl_estate_bond_after < 14 }
+                set_variable = { name = bfl_estate_bond_selected value = 14 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_15_active ?= 1 var:bfl_estate_bond_after < 15 }
+                set_variable = { name = bfl_estate_bond_selected value = 15 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_16_active ?= 1 var:bfl_estate_bond_after < 16 }
+                set_variable = { name = bfl_estate_bond_selected value = 16 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_17_active ?= 1 var:bfl_estate_bond_after < 17 }
+                set_variable = { name = bfl_estate_bond_selected value = 17 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_18_active ?= 1 var:bfl_estate_bond_after < 18 }
+                set_variable = { name = bfl_estate_bond_selected value = 18 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_19_active ?= 1 var:bfl_estate_bond_after < 19 }
+                set_variable = { name = bfl_estate_bond_selected value = 19 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_20_active ?= 1 var:bfl_estate_bond_after < 20 }
+                set_variable = { name = bfl_estate_bond_selected value = 20 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_21_active ?= 1 var:bfl_estate_bond_after < 21 }
+                set_variable = { name = bfl_estate_bond_selected value = 21 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_22_active ?= 1 var:bfl_estate_bond_after < 22 }
+                set_variable = { name = bfl_estate_bond_selected value = 22 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_23_active ?= 1 var:bfl_estate_bond_after < 23 }
+                set_variable = { name = bfl_estate_bond_selected value = 23 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_24_active ?= 1 var:bfl_estate_bond_after < 24 }
+                set_variable = { name = bfl_estate_bond_selected value = 24 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_25_active ?= 1 var:bfl_estate_bond_after < 25 }
+                set_variable = { name = bfl_estate_bond_selected value = 25 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_26_active ?= 1 var:bfl_estate_bond_after < 26 }
+                set_variable = { name = bfl_estate_bond_selected value = 26 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_27_active ?= 1 var:bfl_estate_bond_after < 27 }
+                set_variable = { name = bfl_estate_bond_selected value = 27 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_28_active ?= 1 var:bfl_estate_bond_after < 28 }
+                set_variable = { name = bfl_estate_bond_selected value = 28 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_29_active ?= 1 var:bfl_estate_bond_after < 29 }
+                set_variable = { name = bfl_estate_bond_selected value = 29 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_30_active ?= 1 var:bfl_estate_bond_after < 30 }
+                set_variable = { name = bfl_estate_bond_selected value = 30 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_31_active ?= 1 var:bfl_estate_bond_after < 31 }
+                set_variable = { name = bfl_estate_bond_selected value = 31 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_32_active ?= 1 var:bfl_estate_bond_after < 32 }
+                set_variable = { name = bfl_estate_bond_selected value = 32 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_01_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 1 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_02_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 2 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_03_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 3 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_04_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 4 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_05_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 5 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_06_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 6 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_07_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 7 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_08_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 8 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_09_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 9 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_10_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 10 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_11_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 11 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_12_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 12 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_13_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 13 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_14_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 14 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_15_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 15 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_16_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 16 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_17_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 17 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_18_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 18 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_19_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 19 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_20_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 20 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_21_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 21 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_22_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 22 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_23_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 23 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_24_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 24 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_25_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 25 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_26_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 26 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_27_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 27 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_28_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 28 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_29_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 29 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_30_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 30 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_31_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 31 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+if = { limit = { var:bfl_estate_bond_found = 0 var:bfl_bnd_32_active ?= 1  }
+                set_variable = { name = bfl_estate_bond_selected value = 32 }
+                set_variable = { name = bfl_estate_bond_found value = 1 } }
+} }
+}
+bfl_review_estate_bond = {
+if = { limit = { bfl_valid_estate_selection = yes }
+        save_scope_as = bfl_estate_actor
+        var:bfl_managed_estate = { save_scope_as = bfl_estate_bond_issuer
+    if = { limit = { var:bfl_estate_bond_selected = 1 var:bfl_bnd_01_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_01_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_01_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_01_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 2 var:bfl_bnd_02_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_02_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_02_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_02_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 3 var:bfl_bnd_03_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_03_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_03_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_03_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 4 var:bfl_bnd_04_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_04_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_04_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_04_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 5 var:bfl_bnd_05_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_05_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_05_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_05_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 6 var:bfl_bnd_06_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_06_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_06_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_06_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 7 var:bfl_bnd_07_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_07_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_07_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_07_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 8 var:bfl_bnd_08_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_08_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_08_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_08_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 9 var:bfl_bnd_09_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_09_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_09_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_09_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 10 var:bfl_bnd_10_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_10_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_10_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_10_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 11 var:bfl_bnd_11_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_11_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_11_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_11_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 12 var:bfl_bnd_12_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_12_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_12_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_12_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 13 var:bfl_bnd_13_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_13_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_13_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_13_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 14 var:bfl_bnd_14_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_14_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_14_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_14_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 15 var:bfl_bnd_15_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_15_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_15_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_15_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 16 var:bfl_bnd_16_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_16_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_16_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_16_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 17 var:bfl_bnd_17_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_17_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_17_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_17_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 18 var:bfl_bnd_18_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_18_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_18_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_18_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 19 var:bfl_bnd_19_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_19_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_19_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_19_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 20 var:bfl_bnd_20_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_20_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_20_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_20_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 21 var:bfl_bnd_21_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_21_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_21_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_21_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 22 var:bfl_bnd_22_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_22_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_22_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_22_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 23 var:bfl_bnd_23_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_23_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_23_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_23_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 24 var:bfl_bnd_24_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_24_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_24_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_24_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 25 var:bfl_bnd_25_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_25_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_25_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_25_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 26 var:bfl_bnd_26_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_26_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_26_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_26_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 27 var:bfl_bnd_27_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_27_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_27_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_27_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 28 var:bfl_bnd_28_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_28_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_28_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_28_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 29 var:bfl_bnd_29_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_29_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_29_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_29_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 30 var:bfl_bnd_30_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_30_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_30_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_30_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 31 var:bfl_bnd_31_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_31_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_31_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_31_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+if = { limit = { var:bfl_estate_bond_selected = 32 var:bfl_bnd_32_active ?= 1 }
+            scope:bfl_estate_actor = {
+                set_variable = { name = bfl_estate_bond_face value = scope:bfl_estate_bond_issuer.var:bfl_bnd_32_face }
+                set_variable = { name = bfl_estate_bond_due value = scope:bfl_estate_bond_issuer.var:bfl_bnd_32_due }
+                set_variable = { name = bfl_estate_bond_holder value = scope:bfl_estate_bond_issuer.var:bfl_bnd_32_holder }
+                trigger_event_non_silently = bfl_estate_review.2
+            } }
+} }
+}
+bfl_offer_estate_bond_terms = {
+if = { limit = { bfl_valid_estate_selection = yes }
+        var:bfl_managed_estate = {
+    if = { limit = { var:bfl_estate_bond_selected = 1 } bfl_offer_bond_workout_01 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 2 } bfl_offer_bond_workout_02 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 3 } bfl_offer_bond_workout_03 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 4 } bfl_offer_bond_workout_04 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 5 } bfl_offer_bond_workout_05 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 6 } bfl_offer_bond_workout_06 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 7 } bfl_offer_bond_workout_07 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 8 } bfl_offer_bond_workout_08 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 9 } bfl_offer_bond_workout_09 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 10 } bfl_offer_bond_workout_10 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 11 } bfl_offer_bond_workout_11 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 12 } bfl_offer_bond_workout_12 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 13 } bfl_offer_bond_workout_13 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 14 } bfl_offer_bond_workout_14 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 15 } bfl_offer_bond_workout_15 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 16 } bfl_offer_bond_workout_16 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 17 } bfl_offer_bond_workout_17 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 18 } bfl_offer_bond_workout_18 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 19 } bfl_offer_bond_workout_19 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 20 } bfl_offer_bond_workout_20 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 21 } bfl_offer_bond_workout_21 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 22 } bfl_offer_bond_workout_22 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 23 } bfl_offer_bond_workout_23 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 24 } bfl_offer_bond_workout_24 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 25 } bfl_offer_bond_workout_25 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 26 } bfl_offer_bond_workout_26 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 27 } bfl_offer_bond_workout_27 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 28 } bfl_offer_bond_workout_28 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 29 } bfl_offer_bond_workout_29 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 30 } bfl_offer_bond_workout_30 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 31 } bfl_offer_bond_workout_31 = yes }
+if = { limit = { var:bfl_estate_bond_selected = 32 } bfl_offer_bond_workout_32 = yes }
+} }
+}

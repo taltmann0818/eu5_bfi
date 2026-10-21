@@ -1,6 +1,6 @@
 ﻿bfl_start_commenda_cargo = {
 save_scope_as = bfl_operator
-        if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+        if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_activity_schema ?= 2 has_variable = bfl_venture_area var:bfl_venture_quantity = 0
             OR = { this = scope:actor overlord = scope:actor }
             has_discovered_area = var:bfl_venture_area

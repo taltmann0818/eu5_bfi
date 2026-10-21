@@ -1,123 +1,157 @@
-# M9 — orderly bank resolution
+# M9 — institution-wide resolution
 
-This PR implements a bounded, persistent workout for an existing bank. M9 is
-**not complete**: forced issuer destruction and the broader security/contract
-workouts below still need their own implementation and native campaigns.
+M9 now implements forced bank/company estates, asset realization, custom-bond
+workouts, negotiated security and final statutory losses as well as orderly bank
+recovery. **Completion remains pending the final native regression run and normal
+UI acceptance of the added screens.** Historical focused acceptance below is not
+a substitute for that gate.
 
-## Delivered behavior
+## Entry and surviving estates
 
-Credit → Deposits & Funding opens **Resolution & creditor recovery** for either
-an independent bank or the live controller of a Chartered Bank. Entering
-resolution is explicit. It suspends new commitments, deposits, share offerings,
-scheduled bond draws and dividends, leaves the clearing group, and pauses new
-goods purchases. Existing monetary, physical and credit servicing continues.
-Monthly distress checks, old suspension commands, duplicate-charter demotion
-and paid recapitalization cannot erase resolving/closed states.
+Credit → Funding & Debt offers explicit resolution for an independent bank or a
+Chartered Bank's live controller. Resolution freezes new deposits, equity offers,
+facility draws, dividends, goods purchases and new company mandates. Existing
+claim servicing continues. Paid recapitalization can restore a surviving bank;
+a destroyed institution cannot resume business. Financial closure is permanent.
 
-Recovery uses actual native gold. Cash committed to monetary/custody contracts,
-other payables and native borrowing stays reserved. Remaining cash is allocated
-proportionately to **all deposit principal plus credited interest**, irrespective
-of account order, country/estate pool, maturity or an earlier withdrawal request.
-Each allocation rounds down to cents; residual cents stay in the estate. Missing
-creditors and invalid estate wallets keep their claims and individual reserved
-allocations. Repeating a recovery cannot redistribute their cash to other
-creditors. A repaired legal recipient can collect its allocation later.
+Native annexation and loss of the last building preserve the original issuer's
+country-owned ledger. Before annexation, actual positive cash is sequestered and
+then restored to that separate estate. It never becomes the annexer's national
+cash. The legal trustee can use **Administer inherited financial estates** in
+Decisions to service assets, review deposit and bond creditors, propose voluntary
+terms, conclude an exhausted liquidation or close a fully settled estate. Trustee
+authority follows the native legal-successor signal; country identity alone does
+not make another country the recipient of a missing claim.
 
-Expenses are junior to deposits and existing protected obligations. A resolution
-does not incur a new BFI operating charge; native maintenance is unchanged.
-Residual shareholders receive actual cash only after every liability and
-non-cash financial asset is cleared. Unsettled loans, custom bonds, projects,
-inventory, monetary claims, guarantees and unavailable owners block closure.
-Closure retains its final ledger, makes share NAV zero and cannot reopen. A
-closed charter returns to the native State Bank relationship and releases the
-controller's charter binding, so it does not consume the active one-bank cap.
-This is financial closure; the native country and its buildings are not deleted.
+A national custom-bond issuer also leaves a separate, original issuer estate on
+annexation. Its accepted principal and coupons are paid before any residual goes
+to the native successor. No 32-slot debt ledger is merged into another issuer's
+ledger. Native bankruptcy reconciles native credit cancellations before freezing
+new commitments; it does not authorize an operating country to impose statutory
+losses through the destroyed-estate command.
 
-## Voluntary terms and guarantees
+## Asset realization and native creditors
 
-Renaissance Debt Restructuring permits a quote for one selected **treasury**
-depositor. Estate claims cannot be waived by their sovereign through this UI.
-The creditor can decline, waive 20% of its remaining claim, or convert the claim
-into shares. Conversion additionally requires native Banking, positive tangible
-NAV, a non-bank creditor and shareholder capacity. Issuance uses pre-conversion
-NAV, increases actual issued units and removes the converted liability without
-moving cash or recognizing subscription proceeds as profit. Conversion of an
-insolvent bank at zero/negative NAV is deliberately rejected.
+Native loans owned by a disappearing institution transfer as actual native loan
+title to a live receiver. The estate receives a separate purchase receivable,
+not invented sale gold. Actual receiver funding pays that receivable, including
+partial payments. Deposits, custom bonds, notes, unpledged bills, pledge-creditor
+rights, accepted warehouse receipts/forwards and external equity transfer with their original terms and recorded cost;
+share units are preserved and duplicate receiver rows merge. Unavailable equity
+capacity preserves the old claim until it can be serviced. Receiver purchase debt
+and legal trustee authority are separate references: another annexation cannot
+silently move a private purchaser's debt to a national treasury.
 
-Quotes record creditor identity, account generation, bank revision, creditor
-revision and expiry. Recovery, a competing accepted quote, account mutation,
-expired terms, lost authority/research and replay invalidate acceptance. Basic
-cash recovery remains available in every age without a new research gate.
+Before native destruction cancels borrowed loans, the estate snapshots each
+actual country creditor, contractual payoff, acquisition basis and carrying value.
+Country-keyed maps have no 32-creditor limit. The original loan is cancelled only
+after that replacement obligation is recorded, and the old bank credit metadata
+is closed so it cannot also record a native default. Banking-estate loans retain
+an aggregate claim serviced through the legal trustee's native banking-estate
+wallet distribution. These are frozen liquidation claims, not new interest-bearing
+native loans. Creditor title can transfer and merge through another destruction
+without duplicating the obligation. Only actual recoveries recognize earnings;
+unpaid cost is lost once at final liquidation.
+
+**Realize available assets** sells accessible unencumbered inventory through the
+existing native market service, collects matured deposits, bills and notes, and
+services recourse borrowing. Physical stock and actual gold determine sale
+receipts; NAV is never credited as cash. Accepted commenda cargo is sold from its
+actual source/destination custody and applies the existing capital-first service.
+An expedition without acquired cargo releases undrawn funding and records its
+actual funded risk. Unavailable positions remain recorded. Zero-cost incoming physical rights also block closure until delivery or legal title transfer. A financially closed
+equity issuer's remaining paid cost is written off once; a live zero-NAV issuer
+still retains its shareholder rights and blocks closure.
+
+## Predictable recovery and final loss
+
+The priority is monetary/custody backing and enforceable security, native borrowed
+claims, proportional unsecured deposits and custom bonds, operating arrears,
+then shareholders. Receiver purchase obligations retain protected actual funding.
+Each pass snapshots its cash budget and denominator. Country and estate wallets
+receive actual gold. Missing recipients and immature reserved claims retain their
+individual allocation; replay cannot redistribute it. Whole-cent rounding leaves
+residual specie in the ledger. Fully funded native payoffs preserve the engine's
+sub-cent contractual fraction rather than creating an immortal tiny loan.
+
+Impaired bills and notes pay only actual backing. A pledged bill pays its discount
+lender before its holder. Principal, paid fees and holder proceeds are separate;
+partial backing preserves the unpaid claims. Default of the collateral issuer
+leaves the borrower's independent discount debt serviceable even after that
+issuer's estate closes. A bill tombstone carrying recourse cannot be reused.
+
+A destroyed estate can **conclude liquidation** only when its cash is below one
+cent, all realizable assets/incoming claims are gone, physical custody and projects
+are settled, reserved allocations are clear and no guarantee call is pending.
+Remaining native/deposit/bond/note/bill creditor costs are then written off once,
+with original default amounts retained for audit. Junior unpaid expenses are
+extinguished; no shareholder receives fictional proceeds. If a private receiver
+itself defaults, its unpaid purchase obligation is lost once at the selling estate.
+A live bank cannot invoke this mandatory-loss path instead of obtaining consent.
+
+Closure still requires every liability and non-cash right to clear, registered
+owners to reconcile and residual recipients to be available. It retains ownership,
+final totals and sub-cent residue. A closed charter reverts to native State Bank
+status and releases the active one-bank binding without deleting buildings.
+
+## Voluntary terms, security and fiscal backing
+
+Renaissance Debt Restructuring permits explicit 20% deposit haircuts. Treasury
+creditors decide for themselves; each of the four estate pools additionally needs
+its enacted **Estate workout mandate**, and revocation invalidates pending terms.
+Positive tangible NAV, Banking, available shareholder capacity and a non-bank
+creditor are required for debt-to-equity conversion. Conversion issues real units
+at pre-conversion NAV without subscription cash or manufactured earnings. It is
+unavailable for a destroyed estate. Quotes expire this month and snapshot the
+claim, generation, revisions and current authority. Recovery, control changes,
+research loss, a changed claim and replay invalidate acceptance.
+
+Each Sovereign Bonds card also offers a current-holder restructuring proposal:
+a 20% principal/unpaid-coupon reduction and a one percentage point annual coupon
+cut, with a 1% floor. No money moves merely by proposing or accepting a reduction.
+The holder may separately accept an exclusive 24-month pledge of up to 10% of
+actual monthly income for unpaid coupons and a distinct native trade-protection
+concession. This requires Absolutism and Collateralization. There is one revenue
+pledge per issuer, funded enforcement is bounded by actual cash and happens once
+per period, and expiry removes only the workout concession. Ordinary native trade
+access is independent. Redemption/final liquidation releases the pledge.
 
 A live charter controller with Revolutions Public Financial Backstops and a
-completed Central Bank in its current capital may explicitly authorize a
-guarantee before resolution. It covers 50% of subsequent **accepted deposit
-haircuts**, up to 100 gold in total. Authorization records contingent sovereign
-exposure and transfers no money. A call debits the recorded guarantor and pays
-the creditor directly; it does not increase bank cash or cancel native debt.
-Unfunded calls remain pending, block a new quoted loss and block closure. A paid
-call consumes the lifetime ceiling once. Unused exposure expires at closure.
-Guarantees do not retroactively insure earlier losses or secure ordinary loans.
+completed capital Central Bank may authorize a guarantee before resolution. It
+covers half of subsequent **accepted deposit haircuts**, up to 100 gold over its
+lifetime. This is the explicit contract; it is not retroactive insurance of every
+mandatory default. Authorization records contingent exposure without moving cash.
+Calls debit the recorded sovereign and pay the actual creditor. Unfunded calls
+remain pending and block further quoted losses and closure. Control loss does not
+replace the recorded payer; native legal succession transfers its remaining fiscal
+exposure once. Paid calls consume the ceiling; later losses cannot reset it.
 
-## Contagion and legal succession
+All basic servicing and mandatory default accounting remain available in every
+age. Later research granted early cannot bypass minimum-age checks. Existing
+out-of-profile claims remain serviceable without enabling prohibited origination.
 
-Bank-held deposits carry principal once as an unsecured asset in the balance
-sheet and issuer-keyed asset donut. Credited but unpaid interest is not an asset
-or earned income. Principal recovery replaces that asset with cash. An accepted
-principal haircut reduces the holder's asset, records its loss once and reruns
-distress, so a bank creditor can itself become insolvent. Funded guarantee
-recoveries enter its credit earnings and offset losses through the normal close.
+## Evidence and acceptance boundary
 
-The native annexation successor signal transfers recorded custom-bond holders,
-bill holders/pledge creditors, note holders, guarantee parties and share owners.
-Accepted coupons, face, acquisition basis, secured terms and pending deposit
-allocations survive; generations invalidate old selections. Existing M4 deposit
-succession remains authoritative for deposit recipients. A missing reference
-without that native signal is not permission to substitute another country.
+The final candidate uses EUV 1.4.1 / Steam build 25905365 and CMF 2.5.0. The native
+suites are `m9`, `m9overseas`, `m9estate`, `m9assets`, `m9workouts`, `m9default` and
+`m9receiver`, `m9custody` and `m9projects`; affected accounts, credit, treasury, ownership, goods, company and
+monetary regressions run separately. Fixtures explicitly grant research/buildings,
+seed accepted legacy positions and apply cash shocks. They are execution evidence,
+not campaign balance evidence. Each campaign records its own runtime/fixture hash,
+token, assertions, original autosave and separate-process reload. Failed or stale
+runs are excluded from acceptance. Known native/CMF diagnostics are classified
+separately; no BFI diagnostics are accepted.
 
-## Validation and evidence
+The [20 October focused record](../tests/results/2026-10-20-m9-validation.json)
+remains historical evidence for the narrower 58-assertion orderly workout and
+114-assertion accounts regression. Its [six original normal UI captures](screenshots/README.md#m9-orderly-bank-resolution)
+show controller entry, creditor consent/decline and funded recovery. They do not
+visually accept the new estate, independent-bank or secured-bond screens.
 
-`tools/m9_resolution_suite.py` runs production services in an isolated licensed
-EUV 1.4.1 / CMF 2.5.0 Florence campaign, with explicit fixture cash shocks and
-research/building grants. It tests real country/estate wallets, pro-rata priority,
-missing-recipient allocations, consent/replay, conversion, funded and unfunded
-guarantee calls, creditor-bank contagion, guarded closure, native holder
-annexation/coupons, twelve monthly closed/open-estate observations and a separate
-process loading the campaign's own autosave. The fixture is not balance evidence.
-
-The [final acceptance record](../tests/results/2026-10-20-m9-validation.json)
-contains **58 resolution + 114 accounts engine assertions**, all on shipping
-runtime `18df97e0a614…`, plus 136 offline tests and 298-file staging. Earlier
-failed development attempts are excluded from passes. Native/CMF baseline GUI
-diagnostics remain separately classified; no BFI runtime errors are accepted.
-
-[Six normal controller-UI captures](screenshots/README.md#m9-orderly-bank-resolution)
-show entry, consent, decline, a 20-gold accepted loss and 80 gold actually paid
-from the bank. Florence is both creditor and guarantor: the 10-gold guarantee
-call records a real debit and credit with zero net sovereign cash. The screenshot
-fixture is `tools/prepare_m9_ui.py`; it never ships in the mod. Research/building
-grants and a cash shock are explicit test setup, not balance evidence.
-
-[UI provenance](../tests/results/2026-10-20-m9-ui.json) separately pins its earlier
-runtime `ae6520ab07b9…`. Shipping differs only in three files adding incoming
-claim counting and stricter closure blockers for zero-valued shares/bonds and
-interest-only claims. GUI/localization and 44 checked transaction effect bodies are unchanged. Shipping closure guards
-pass the native suite; these screenshots do not visually exercise those guards.
-Independent-bank normal UI remains unverified.
-
-## Remaining M9 completion gates
-
-- An issuer bank/company losing its last building or being annexed needs a
-  separately accounted surviving estate/trustee. Holder succession alone does
-  not implement that transfer. Do not merge the failed bank's cash into an
-  unrelated national account or discard its outstanding issuer ledger.
-- Realize or transfer every remaining native/custom credit, physical/custody,
-  project and equity position through verified execution; current closure waits
-  for them to settle. A carrying-value snapshot is not liquidation proceeds.
-- Extend consensual workouts to custom sovereign bonds and company liabilities,
-  negotiated security/revenue/concession enforcement and all creditor classes.
-  The existing M8 third-bank secured-bill waterfall remains separate.
-- Prove integrated default/destruction campaigns for both roles and profiles,
-  including estate creditor consent, impaired secured backing, exhausted fiscal
-  guarantees, controller changes during a pending quote/call and inherited issuer
-  obligations. The focused bank workout is not the full M9 acceptance gate.
+Final acceptance must add normal controller and independent-bank observations,
+forced-estate administration, current-holder bond consent/security, readable
+localized controls and unedited actual-game captures embedded in the PR. Computer
+Use currently fails to initialize with `failed to write kernel assets: The system
+cannot find the path specified (os error 3)`, including after a runtime reset.
+This tool failure is a remaining visual gate, not a visual pass. Broad autonomous
+origination/balance, language/scale coverage and release-wide performance remain M10.

@@ -16,14 +16,14 @@ def generate(common, effect, loc, tune):
     for i in range(1, COUNT + 1):
         for field in ('active', 'generation', 'face', 'basis', 'rate', 'due', 'remainder', 'last_accrual'):
             init += f'set_variable = {{ name = bfl_bnd_{i:02}_{field} value = 0 }}\n'
-    init += '}\n'
+    init += '}\nbfl_register_resolution_institution = yes\n'
     common('scripted_effects', 'bond_initialization', effect('bfl_initialize_bonds', init))
     values = ''
     for key, field in [('debt', 'face'), ('arrears', 'due'), ('count', None)]:
         values += effect(f'bfl_bond_{key}', 'value = 0\n' + ''.join(
             f'if = {{ limit = {{ var:bfl_bnd_{i:02}_active ?= 1 }} add = {"1" if field is None else f"var:bfl_bnd_{i:02}_{field}"} }}\n'
             for i in range(1, COUNT + 1)))
-    values += effect('bfl_bond_capacity', f'value = monthly_income_total multiply = {tune["bond_income_multiple"]} min = {tune["bond_min_capacity"]} subtract = bfl_bond_debt subtract = total_debt min = 0')
+    values += effect('bfl_bond_capacity', f'value = monthly_income_total multiply = {tune["bond_income_multiple"]} min = {tune["bond_min_capacity"]} subtract = bfl_bond_debt subtract = total_debt subtract = bfl_estate_liabilities min = 0')
     values += effect('bfl_bond_new_rate', f'value = {tune["bond_annual_rate"]} if = {{ limit = {{ has_variable = bfl_bond_rate }} value = var:bfl_bond_rate }}')
     values += effect('bfl_custom_bond_financing_received', 'value = 0 if = { limit = { bfl_has_valid_controller = yes } value = overlord.bfl_bond_financing_display }')
     values += effect('bfl_bond_monthly_coupon', 'value = 0\n' + ''.join(
@@ -137,11 +137,11 @@ def generate(common, effect, loc, tune):
     trading = ''
     offers = 'set_variable = { name = bfl_bond_offer_selected value = 0 }\n'
     accept = ''
-    assets = 'save_scope_as = bfl_bond_asset_owner\nevery_country = { limit = { has_variable = bfl_bond_schema } save_scope_as = bfl_bond_asset_issuer\n'
-    held = 'save_scope_as = bfl_bond_processing_holder\nevery_country = { limit = { has_variable = bfl_bond_schema }\n'
+    assets = 'save_scope_as = bfl_bond_asset_owner\nevery_in_global_list = { variable = bfl_resolution_institutions limit = { has_variable = bfl_bond_schema } save_scope_as = bfl_bond_asset_issuer\n'
+    held = 'save_scope_as = bfl_bond_processing_holder\nevery_in_global_list = { variable = bfl_resolution_institutions limit = { has_variable = bfl_bond_schema }\n'
     for i in range(1, COUNT + 1):
         n = f'bfl_bnd_{i:02}'
-        accrue = f'''if = {{ limit = {{ var:{n}_active = 1 bfl_period > var:{n}_last_accrual }}
+        accrue = f'''if = {{ limit = {{ var:{n}_active = 1 NOT = {{ var:bfl_state ?= 4 }} bfl_period > var:{n}_last_accrual }}
             set_variable = {{ name = bfl_bond_payment value = {{ value = bfl_period subtract = var:{n}_last_accrual multiply = var:{n}_face multiply = var:{n}_rate add = var:{n}_remainder }} }}
             set_variable = {{ name = {n}_remainder value = var:bfl_bond_payment }}
             set_variable = {{ name = bfl_bond_payment value = {{ value = var:bfl_bond_payment divide = 12 multiply = 100 floor = yes divide = 100 }} }}
@@ -151,8 +151,9 @@ def generate(common, effect, loc, tune):
         }}\n'''
         settlement += effect(f'bfl_accrue_bond_{i:02}', accrue)
         settlement += effect(f'bfl_service_bond_{i:02}', f'''
+            bfl_service_bond_security = yes
             bfl_accrue_bond_{i:02} = yes
-            if = {{ limit = {{ country_exists = this var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_due > 0
+            if = {{ limit = {{ bfl_financial_recipient = yes NOT = {{ var:bfl_state ?= 4 }} var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }} var:{n}_due > 0
                 NOT = {{ has_variable = bfl_bond_guard }} }}
                 save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
                 var:{n}_holder = {{ save_scope_as = bfl_bond_holder bfl_initialize_bonds = yes }}
@@ -174,7 +175,7 @@ def generate(common, effect, loc, tune):
         ''')
         settlement += effect(f'bfl_redeem_sovereign_bond_{i:02}', f'''
             bfl_accrue_bond_{i:02} = yes
-            if = {{ limit = {{ country_exists = this var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder
+            if = {{ limit = {{ bfl_financial_recipient = yes NOT = {{ var:bfl_state ?= 4 }} var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }}
                 NOT = {{ has_variable = bfl_bond_guard }}
                 gold >= {{ value = var:{n}_face add = var:{n}_due }} }}
                 save_scope_as = bfl_bond_issuer
@@ -183,6 +184,7 @@ def generate(common, effect, loc, tune):
                 set_variable = {{ name = bfl_bond_payment value = var:{n}_face }}
                 set_variable = {{ name = bfl_bond_gain value = {{ value = var:{n}_face subtract = var:{n}_basis }} }}
                 set_variable = {{ name = {n}_active value = 0 }}
+                if = {{ limit = {{ var:bfl_revenue_bond_slot ?= {i} }} bfl_release_bond_security = yes }}
                 set_variable = {{ name = {n}_due value = 0 }}
                 if = {{ limit = {{ var:bfl_bond_offer_slot = {i} }} set_variable = {{ name = bfl_bond_offer_slot value = 0 }} }}
                 add_gold = {{ value = var:bfl_bond_payment multiply = -1 }}
@@ -196,7 +198,7 @@ def generate(common, effect, loc, tune):
                 remove_variable = bfl_bond_guard
             }}
         ''')
-        offers += f'''if = {{ limit = {{ var:bfl_bond_offer_selected = 0 var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder
+        offers += f'''if = {{ limit = {{ var:bfl_bond_offer_selected = 0 var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }}
             OR = {{ NOT = {{ has_variable = bfl_bond_requested_slot }} var:bfl_bond_requested_slot = {i} }}
             var:{n}_holder = scope:bfl_bond_underwriter var:{n}_due = 0 }}
             set_variable = {{ name = bfl_bond_offer_selected value = 1 }}
@@ -208,7 +210,7 @@ def generate(common, effect, loc, tune):
         }}\n'''
         accept += f'''if = {{ limit = {{ bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = {i}
             var:{n}_active = 1 var:{n}_generation = var:bfl_bond_offer_generation
-            exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = var:bfl_bond_offer_seller var:{n}_due = 0
+            exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }} var:{n}_holder = var:bfl_bond_offer_seller var:{n}_due = 0
         }}
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:{n}_holder = {{ save_scope_as = bfl_bond_seller }}
@@ -225,7 +227,7 @@ def generate(common, effect, loc, tune):
             scope:bfl_bond_buyer = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_refresh_asset_statement = yes }} }}
             remove_variable = bfl_bond_guard
         }}\n'''
-        assets += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_asset_owner }}
+        assets += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }} var:{n}_holder = scope:bfl_bond_asset_owner }}
             scope:bfl_bond_asset_owner = {{
                 set_variable = {{ name = bfl_asset_amount value = scope:bfl_bond_asset_issuer.var:{n}_basis }}
                 set_variable = {{ name = bfl_asset_kind value = 1 }}
@@ -234,7 +236,7 @@ def generate(common, effect, loc, tune):
                 change_variable = {{ name = bfl_custom_credit_value add = var:bfl_asset_amount }}
                 scope:bfl_bond_asset_issuer = {{ save_scope_as = bfl_asset_party }}
                 bfl_allocate_asset_row = yes }} }}\n'''
-        held += f'if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder country_exists = var:{n}_holder var:{n}_holder = scope:bfl_bond_processing_holder }} bfl_service_bond_{i:02} = yes }}\n'
+        held += f'if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }} var:{n}_holder = scope:bfl_bond_processing_holder }} bfl_service_bond_{i:02} = yes }}\n'
     common('scripted_effects', 'bond_settlement', settlement
            + effect('bfl_service_sovereign_bonds', '\n'.join(f'bfl_service_bond_{i:02} = yes' for i in range(1, COUNT + 1)))
            + effect('bfl_settle_held_sovereign_bonds', held + '}'))

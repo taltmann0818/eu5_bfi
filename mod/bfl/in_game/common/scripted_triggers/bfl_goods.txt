@@ -23,6 +23,8 @@
     }
     bfl_goods_access_01 = {
 var:bfl_inv_01_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_01_host } var:bfl_inv_01_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_01_host } exists = var:bfl_inv_01_location
+                var:bfl_inv_01_market ?= var:bfl_inv_01_location.market }
             AND = { has_variable = bfl_inv_01_host bfl_goods_branch_access = yes var:bfl_inv_01_host ?= var:bfl_goods_host var:bfl_inv_01_market ?= var:bfl_goods_branch_market } } var:bfl_inv_01_transit_due = 0
 }
 bfl_goods_sellable_01 = {
@@ -36,6 +38,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_01 = yes
 }
 bfl_goods_access_02 = {
 var:bfl_inv_02_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_02_host } var:bfl_inv_02_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_02_host } exists = var:bfl_inv_02_location
+                var:bfl_inv_02_market ?= var:bfl_inv_02_location.market }
             AND = { has_variable = bfl_inv_02_host bfl_goods_branch_access = yes var:bfl_inv_02_host ?= var:bfl_goods_host var:bfl_inv_02_market ?= var:bfl_goods_branch_market } } var:bfl_inv_02_transit_due = 0
 }
 bfl_goods_sellable_02 = {
@@ -49,6 +53,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_02 = yes
 }
 bfl_goods_access_03 = {
 var:bfl_inv_03_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_03_host } var:bfl_inv_03_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_03_host } exists = var:bfl_inv_03_location
+                var:bfl_inv_03_market ?= var:bfl_inv_03_location.market }
             AND = { has_variable = bfl_inv_03_host bfl_goods_branch_access = yes var:bfl_inv_03_host ?= var:bfl_goods_host var:bfl_inv_03_market ?= var:bfl_goods_branch_market } } var:bfl_inv_03_transit_due = 0
 }
 bfl_goods_sellable_03 = {
@@ -62,6 +68,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_03 = yes
 }
 bfl_goods_access_04 = {
 var:bfl_inv_04_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_04_host } var:bfl_inv_04_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_04_host } exists = var:bfl_inv_04_location
+                var:bfl_inv_04_market ?= var:bfl_inv_04_location.market }
             AND = { has_variable = bfl_inv_04_host bfl_goods_branch_access = yes var:bfl_inv_04_host ?= var:bfl_goods_host var:bfl_inv_04_market ?= var:bfl_goods_branch_market } } var:bfl_inv_04_transit_due = 0
 }
 bfl_goods_sellable_04 = {
@@ -75,6 +83,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_04 = yes
 }
 bfl_goods_access_05 = {
 var:bfl_inv_05_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_05_host } var:bfl_inv_05_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_05_host } exists = var:bfl_inv_05_location
+                var:bfl_inv_05_market ?= var:bfl_inv_05_location.market }
             AND = { has_variable = bfl_inv_05_host bfl_goods_branch_access = yes var:bfl_inv_05_host ?= var:bfl_goods_host var:bfl_inv_05_market ?= var:bfl_goods_branch_market } } var:bfl_inv_05_transit_due = 0
 }
 bfl_goods_sellable_05 = {
@@ -88,6 +98,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_05 = yes
 }
 bfl_goods_access_06 = {
 var:bfl_inv_06_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_06_host } var:bfl_inv_06_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_06_host } exists = var:bfl_inv_06_location
+                var:bfl_inv_06_market ?= var:bfl_inv_06_location.market }
             AND = { has_variable = bfl_inv_06_host bfl_goods_branch_access = yes var:bfl_inv_06_host ?= var:bfl_goods_host var:bfl_inv_06_market ?= var:bfl_goods_branch_market } } var:bfl_inv_06_transit_due = 0
 }
 bfl_goods_sellable_06 = {
@@ -101,6 +113,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_06 = yes
 }
 bfl_goods_access_07 = {
 var:bfl_inv_07_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_07_host } var:bfl_inv_07_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_07_host } exists = var:bfl_inv_07_location
+                var:bfl_inv_07_market ?= var:bfl_inv_07_location.market }
             AND = { has_variable = bfl_inv_07_host bfl_goods_branch_access = yes var:bfl_inv_07_host ?= var:bfl_goods_host var:bfl_inv_07_market ?= var:bfl_goods_branch_market } } var:bfl_inv_07_transit_due = 0
 }
 bfl_goods_sellable_07 = {
@@ -114,6 +128,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_07 = yes
 }
 bfl_goods_access_08 = {
 var:bfl_inv_08_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_08_host } var:bfl_inv_08_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_08_host } exists = var:bfl_inv_08_location
+                var:bfl_inv_08_market ?= var:bfl_inv_08_location.market }
             AND = { has_variable = bfl_inv_08_host bfl_goods_branch_access = yes var:bfl_inv_08_host ?= var:bfl_goods_host var:bfl_inv_08_market ?= var:bfl_goods_branch_market } } var:bfl_inv_08_transit_due = 0
 }
 bfl_goods_sellable_08 = {
@@ -127,6 +143,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_08 = yes
 }
 bfl_goods_access_09 = {
 var:bfl_inv_09_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_09_host } var:bfl_inv_09_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_09_host } exists = var:bfl_inv_09_location
+                var:bfl_inv_09_market ?= var:bfl_inv_09_location.market }
             AND = { has_variable = bfl_inv_09_host bfl_goods_branch_access = yes var:bfl_inv_09_host ?= var:bfl_goods_host var:bfl_inv_09_market ?= var:bfl_goods_branch_market } } var:bfl_inv_09_transit_due = 0
 }
 bfl_goods_sellable_09 = {
@@ -140,6 +158,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_09 = yes
 }
 bfl_goods_access_10 = {
 var:bfl_inv_10_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_10_host } var:bfl_inv_10_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_10_host } exists = var:bfl_inv_10_location
+                var:bfl_inv_10_market ?= var:bfl_inv_10_location.market }
             AND = { has_variable = bfl_inv_10_host bfl_goods_branch_access = yes var:bfl_inv_10_host ?= var:bfl_goods_host var:bfl_inv_10_market ?= var:bfl_goods_branch_market } } var:bfl_inv_10_transit_due = 0
 }
 bfl_goods_sellable_10 = {
@@ -153,6 +173,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_10 = yes
 }
 bfl_goods_access_11 = {
 var:bfl_inv_11_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_11_host } var:bfl_inv_11_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_11_host } exists = var:bfl_inv_11_location
+                var:bfl_inv_11_market ?= var:bfl_inv_11_location.market }
             AND = { has_variable = bfl_inv_11_host bfl_goods_branch_access = yes var:bfl_inv_11_host ?= var:bfl_goods_host var:bfl_inv_11_market ?= var:bfl_goods_branch_market } } var:bfl_inv_11_transit_due = 0
 }
 bfl_goods_sellable_11 = {
@@ -166,6 +188,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_11 = yes
 }
 bfl_goods_access_12 = {
 var:bfl_inv_12_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_12_host } var:bfl_inv_12_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_12_host } exists = var:bfl_inv_12_location
+                var:bfl_inv_12_market ?= var:bfl_inv_12_location.market }
             AND = { has_variable = bfl_inv_12_host bfl_goods_branch_access = yes var:bfl_inv_12_host ?= var:bfl_goods_host var:bfl_inv_12_market ?= var:bfl_goods_branch_market } } var:bfl_inv_12_transit_due = 0
 }
 bfl_goods_sellable_12 = {
@@ -179,6 +203,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_12 = yes
 }
 bfl_goods_access_13 = {
 var:bfl_inv_13_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_13_host } var:bfl_inv_13_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_13_host } exists = var:bfl_inv_13_location
+                var:bfl_inv_13_market ?= var:bfl_inv_13_location.market }
             AND = { has_variable = bfl_inv_13_host bfl_goods_branch_access = yes var:bfl_inv_13_host ?= var:bfl_goods_host var:bfl_inv_13_market ?= var:bfl_goods_branch_market } } var:bfl_inv_13_transit_due = 0
 }
 bfl_goods_sellable_13 = {
@@ -192,6 +218,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_13 = yes
 }
 bfl_goods_access_14 = {
 var:bfl_inv_14_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_14_host } var:bfl_inv_14_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_14_host } exists = var:bfl_inv_14_location
+                var:bfl_inv_14_market ?= var:bfl_inv_14_location.market }
             AND = { has_variable = bfl_inv_14_host bfl_goods_branch_access = yes var:bfl_inv_14_host ?= var:bfl_goods_host var:bfl_inv_14_market ?= var:bfl_goods_branch_market } } var:bfl_inv_14_transit_due = 0
 }
 bfl_goods_sellable_14 = {
@@ -205,6 +233,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_14 = yes
 }
 bfl_goods_access_15 = {
 var:bfl_inv_15_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_15_host } var:bfl_inv_15_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_15_host } exists = var:bfl_inv_15_location
+                var:bfl_inv_15_market ?= var:bfl_inv_15_location.market }
             AND = { has_variable = bfl_inv_15_host bfl_goods_branch_access = yes var:bfl_inv_15_host ?= var:bfl_goods_host var:bfl_inv_15_market ?= var:bfl_goods_branch_market } } var:bfl_inv_15_transit_due = 0
 }
 bfl_goods_sellable_15 = {
@@ -218,6 +248,8 @@ bfl_can_originate_commodity_inventory = yes bfl_goods_access_15 = yes
 }
 bfl_goods_access_16 = {
 var:bfl_inv_16_active = 1 OR = { AND = { NOT = { has_variable = bfl_inv_16_host } var:bfl_inv_16_market ?= capital.market }
+            AND = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_inv_16_host } exists = var:bfl_inv_16_location
+                var:bfl_inv_16_market ?= var:bfl_inv_16_location.market }
             AND = { has_variable = bfl_inv_16_host bfl_goods_branch_access = yes var:bfl_inv_16_host ?= var:bfl_goods_host var:bfl_inv_16_market ?= var:bfl_goods_branch_market } } var:bfl_inv_16_transit_due = 0
 }
 bfl_goods_sellable_16 = {

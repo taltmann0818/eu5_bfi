@@ -1,6 +1,6 @@
 ﻿bfl_resolution_other_reserves = {
 value = var:bfl_cash_committed
-        add = var:bfl_other_payables subtract = bfl_resolution_bill_payables
+        add = var:bfl_other_payables subtract = bfl_resolution_bill_payables add = bfl_estate_liabilities add = bfl_resolution_native_claims
         every_loan = { add = remaining_debt } min = 0
 }
 bfl_resolution_bill_payables = {
@@ -41,40 +41,72 @@ if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 } add = var:b
 bfl_resolution_held = {
 value = 0
 add = var:bfl_dep_01_recovery_held
+if = { limit = { var:bfl_bnd_01_active ?= 1 } add = var:bfl_bnd_01_recovery_held }
 add = var:bfl_dep_02_recovery_held
+if = { limit = { var:bfl_bnd_02_active ?= 1 } add = var:bfl_bnd_02_recovery_held }
 add = var:bfl_dep_03_recovery_held
+if = { limit = { var:bfl_bnd_03_active ?= 1 } add = var:bfl_bnd_03_recovery_held }
 add = var:bfl_dep_04_recovery_held
+if = { limit = { var:bfl_bnd_04_active ?= 1 } add = var:bfl_bnd_04_recovery_held }
 add = var:bfl_dep_05_recovery_held
+if = { limit = { var:bfl_bnd_05_active ?= 1 } add = var:bfl_bnd_05_recovery_held }
 add = var:bfl_dep_06_recovery_held
+if = { limit = { var:bfl_bnd_06_active ?= 1 } add = var:bfl_bnd_06_recovery_held }
 add = var:bfl_dep_07_recovery_held
+if = { limit = { var:bfl_bnd_07_active ?= 1 } add = var:bfl_bnd_07_recovery_held }
 add = var:bfl_dep_08_recovery_held
+if = { limit = { var:bfl_bnd_08_active ?= 1 } add = var:bfl_bnd_08_recovery_held }
 add = var:bfl_dep_09_recovery_held
+if = { limit = { var:bfl_bnd_09_active ?= 1 } add = var:bfl_bnd_09_recovery_held }
 add = var:bfl_dep_10_recovery_held
+if = { limit = { var:bfl_bnd_10_active ?= 1 } add = var:bfl_bnd_10_recovery_held }
 add = var:bfl_dep_11_recovery_held
+if = { limit = { var:bfl_bnd_11_active ?= 1 } add = var:bfl_bnd_11_recovery_held }
 add = var:bfl_dep_12_recovery_held
+if = { limit = { var:bfl_bnd_12_active ?= 1 } add = var:bfl_bnd_12_recovery_held }
 add = var:bfl_dep_13_recovery_held
+if = { limit = { var:bfl_bnd_13_active ?= 1 } add = var:bfl_bnd_13_recovery_held }
 add = var:bfl_dep_14_recovery_held
+if = { limit = { var:bfl_bnd_14_active ?= 1 } add = var:bfl_bnd_14_recovery_held }
 add = var:bfl_dep_15_recovery_held
+if = { limit = { var:bfl_bnd_15_active ?= 1 } add = var:bfl_bnd_15_recovery_held }
 add = var:bfl_dep_16_recovery_held
+if = { limit = { var:bfl_bnd_16_active ?= 1 } add = var:bfl_bnd_16_recovery_held }
 add = var:bfl_dep_17_recovery_held
+if = { limit = { var:bfl_bnd_17_active ?= 1 } add = var:bfl_bnd_17_recovery_held }
 add = var:bfl_dep_18_recovery_held
+if = { limit = { var:bfl_bnd_18_active ?= 1 } add = var:bfl_bnd_18_recovery_held }
 add = var:bfl_dep_19_recovery_held
+if = { limit = { var:bfl_bnd_19_active ?= 1 } add = var:bfl_bnd_19_recovery_held }
 add = var:bfl_dep_20_recovery_held
+if = { limit = { var:bfl_bnd_20_active ?= 1 } add = var:bfl_bnd_20_recovery_held }
 add = var:bfl_dep_21_recovery_held
+if = { limit = { var:bfl_bnd_21_active ?= 1 } add = var:bfl_bnd_21_recovery_held }
 add = var:bfl_dep_22_recovery_held
+if = { limit = { var:bfl_bnd_22_active ?= 1 } add = var:bfl_bnd_22_recovery_held }
 add = var:bfl_dep_23_recovery_held
+if = { limit = { var:bfl_bnd_23_active ?= 1 } add = var:bfl_bnd_23_recovery_held }
 add = var:bfl_dep_24_recovery_held
+if = { limit = { var:bfl_bnd_24_active ?= 1 } add = var:bfl_bnd_24_recovery_held }
 add = var:bfl_dep_25_recovery_held
+if = { limit = { var:bfl_bnd_25_active ?= 1 } add = var:bfl_bnd_25_recovery_held }
 add = var:bfl_dep_26_recovery_held
+if = { limit = { var:bfl_bnd_26_active ?= 1 } add = var:bfl_bnd_26_recovery_held }
 add = var:bfl_dep_27_recovery_held
+if = { limit = { var:bfl_bnd_27_active ?= 1 } add = var:bfl_bnd_27_recovery_held }
 add = var:bfl_dep_28_recovery_held
+if = { limit = { var:bfl_bnd_28_active ?= 1 } add = var:bfl_bnd_28_recovery_held }
 add = var:bfl_dep_29_recovery_held
+if = { limit = { var:bfl_bnd_29_active ?= 1 } add = var:bfl_bnd_29_recovery_held }
 add = var:bfl_dep_30_recovery_held
+if = { limit = { var:bfl_bnd_30_active ?= 1 } add = var:bfl_bnd_30_recovery_held }
 add = var:bfl_dep_31_recovery_held
+if = { limit = { var:bfl_bnd_31_active ?= 1 } add = var:bfl_bnd_31_recovery_held }
 add = var:bfl_dep_32_recovery_held
+if = { limit = { var:bfl_bnd_32_active ?= 1 } add = var:bfl_bnd_32_recovery_held }
 }
 bfl_resolution_unallocated_claims = {
-value = bfl_deposit_liabilities subtract = bfl_resolution_held min = 0
+value = bfl_deposit_liabilities add = bfl_bond_debt add = bfl_bond_arrears subtract = bfl_resolution_held min = 0
 }
 bfl_resolution_available = {
 value = gold subtract = bfl_resolution_other_reserves subtract = bfl_resolution_held
@@ -86,7 +118,11 @@ value = bfl_resolution_available max = bfl_resolution_unallocated_claims
 bfl_resolution_remaining_assets = {
 value = var:bfl_native_credit_value
         add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value
-        add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets
+        add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets
+}
+bfl_pending_guarantee_claims = {
+value = 0 every_in_global_list = { variable = bfl_resolution_institutions
+        limit = { var:bfl_resolution_guarantee_beneficiary ?= prev has_variable = bfl_resolution_guarantee_due var:bfl_resolution_guarantee_due > 0 } add = 1 }
 }
 bfl_deposit_assets = {
 value = 0 if = { limit = { has_variable = bfl_deposit_assets } value = var:bfl_deposit_assets }

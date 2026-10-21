@@ -207,7 +207,9 @@ def generate(common, effect, loc, write):
             {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 38)} }}
             widget = {{ position = {{ 256 146 }} size = {{ 224 38 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]"
             {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 38)} }}'''
-        rows += card(200, f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue, '(CFixedPoint)0')]" {body}''')
+        body += f'''widget = {{ position = {{ 16 196 }} size = {{ 464 38 }} visible = "[{shown(f'bfl_offer_bond_workout_{i:02}')}]"
+            {button(f'bfl_offer_bond_workout_{i:02}', f'bfl_offer_bond_workout_{i:02}', 38)} }}'''
+        rows += card(250, f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue, '(CFixedPoint)0')]" {body}''')
     loc('bfl_bond_selected_name', '[Country.GetName]')
     loc('bfl_bond_market_quote', "Ask: [Country.MakeScope.GetVariable('bfl_bond_offer_price').GetValue|2]@gold! | Seller: [Country.MakeScope.GetVariable('bfl_bond_offer_seller').GetCountry.GetName]")
     loc('bfl_bond_financing_tab', 'Financing')

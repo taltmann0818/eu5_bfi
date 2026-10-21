@@ -908,6 +908,7 @@ if = { limit = { var:bfl_goods_selected = 16 } bfl_sell_goods_16 = yes }
 }
 bfl_value_goods = {
 set_variable = { name = bfl_inventory_value value = 0 }
+set_variable = { name = bfl_goods_holder_claim_count value = 0 }
 if = { limit = { var:bfl_inv_01_active = 1 NOT = { var:bfl_inv_01_state = 1 } } change_variable = { name = bfl_inventory_value add = var:bfl_inv_01_basis } }
 if = { limit = { var:bfl_inv_02_active = 1 NOT = { var:bfl_inv_02_state = 1 } } change_variable = { name = bfl_inventory_value add = var:bfl_inv_02_basis } }
 if = { limit = { var:bfl_inv_03_active = 1 NOT = { var:bfl_inv_03_state = 1 } } change_variable = { name = bfl_inventory_value add = var:bfl_inv_03_basis } }
@@ -925,55 +926,71 @@ if = { limit = { var:bfl_inv_14_active = 1 NOT = { var:bfl_inv_14_state = 1 } } 
 if = { limit = { var:bfl_inv_15_active = 1 NOT = { var:bfl_inv_15_state = 1 } } change_variable = { name = bfl_inventory_value add = var:bfl_inv_15_basis } }
 if = { limit = { var:bfl_inv_16_active = 1 NOT = { var:bfl_inv_16_state = 1 } } change_variable = { name = bfl_inventory_value add = var:bfl_inv_16_basis } }
 save_scope_as = bfl_goods_value_owner
-every_country = { limit = { has_variable = bfl_goods_schema }
+every_in_global_list = { variable = bfl_resolution_institutions limit = { has_variable = bfl_goods_schema }
 if = { limit = { var:bfl_inv_01_active = 1 var:bfl_inv_01_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_01_state = 1 var:bfl_inv_01_state = 2 AND = { var:bfl_inv_01_state = 4 var:bfl_inv_01_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_01_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_01_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_02_active = 1 var:bfl_inv_02_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_02_state = 1 var:bfl_inv_02_state = 2 AND = { var:bfl_inv_02_state = 4 var:bfl_inv_02_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_02_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_02_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_03_active = 1 var:bfl_inv_03_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_03_state = 1 var:bfl_inv_03_state = 2 AND = { var:bfl_inv_03_state = 4 var:bfl_inv_03_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_03_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_03_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_04_active = 1 var:bfl_inv_04_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_04_state = 1 var:bfl_inv_04_state = 2 AND = { var:bfl_inv_04_state = 4 var:bfl_inv_04_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_04_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_04_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_05_active = 1 var:bfl_inv_05_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_05_state = 1 var:bfl_inv_05_state = 2 AND = { var:bfl_inv_05_state = 4 var:bfl_inv_05_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_05_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_05_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_06_active = 1 var:bfl_inv_06_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_06_state = 1 var:bfl_inv_06_state = 2 AND = { var:bfl_inv_06_state = 4 var:bfl_inv_06_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_06_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_06_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_07_active = 1 var:bfl_inv_07_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_07_state = 1 var:bfl_inv_07_state = 2 AND = { var:bfl_inv_07_state = 4 var:bfl_inv_07_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_07_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_07_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_08_active = 1 var:bfl_inv_08_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_08_state = 1 var:bfl_inv_08_state = 2 AND = { var:bfl_inv_08_state = 4 var:bfl_inv_08_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_08_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_08_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_09_active = 1 var:bfl_inv_09_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_09_state = 1 var:bfl_inv_09_state = 2 AND = { var:bfl_inv_09_state = 4 var:bfl_inv_09_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_09_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_09_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_10_active = 1 var:bfl_inv_10_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_10_state = 1 var:bfl_inv_10_state = 2 AND = { var:bfl_inv_10_state = 4 var:bfl_inv_10_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_10_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_10_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_11_active = 1 var:bfl_inv_11_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_11_state = 1 var:bfl_inv_11_state = 2 AND = { var:bfl_inv_11_state = 4 var:bfl_inv_11_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_11_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_11_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_12_active = 1 var:bfl_inv_12_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_12_state = 1 var:bfl_inv_12_state = 2 AND = { var:bfl_inv_12_state = 4 var:bfl_inv_12_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_12_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_12_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_13_active = 1 var:bfl_inv_13_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_13_state = 1 var:bfl_inv_13_state = 2 AND = { var:bfl_inv_13_state = 4 var:bfl_inv_13_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_13_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_13_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_14_active = 1 var:bfl_inv_14_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_14_state = 1 var:bfl_inv_14_state = 2 AND = { var:bfl_inv_14_state = 4 var:bfl_inv_14_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_14_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_14_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_15_active = 1 var:bfl_inv_15_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_15_state = 1 var:bfl_inv_15_state = 2 AND = { var:bfl_inv_15_state = 4 var:bfl_inv_15_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_15_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_15_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 if = { limit = { var:bfl_inv_16_active = 1 var:bfl_inv_16_holder ?= scope:bfl_goods_value_owner
             OR = { var:bfl_inv_16_state = 1 var:bfl_inv_16_state = 2 AND = { var:bfl_inv_16_state = 4 var:bfl_inv_16_state_before_seizure > 0 } } }
-            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_16_holder_basis } } }
+            scope:bfl_goods_value_owner = { change_variable = { name = bfl_inventory_value add = prev.var:bfl_inv_16_holder_basis }
+                change_variable = { name = bfl_goods_holder_claim_count add = 1 } } }
 }
 bfl_refresh_goods_marks = yes
 }
@@ -1006,7 +1023,7 @@ bfl_initialize_goods = yes save_scope_as = bfl_goods_bank
             if = { limit = { OR = { var:bfl_inv_01_state = 1 AND = { var:bfl_inv_01_state = 4 var:bfl_inv_01_state_before_seizure = 1 } } var:bfl_inv_01_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_01_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_01_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_01_holder var:bfl_inv_01_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_01_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_01_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1044,7 +1061,7 @@ if = { limit = { var:bfl_inv_02_active = 1 bfl_period > var:bfl_inv_02_last_peri
             if = { limit = { OR = { var:bfl_inv_02_state = 1 AND = { var:bfl_inv_02_state = 4 var:bfl_inv_02_state_before_seizure = 1 } } var:bfl_inv_02_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_02_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_02_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_02_holder var:bfl_inv_02_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_02_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_02_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1082,7 +1099,7 @@ if = { limit = { var:bfl_inv_03_active = 1 bfl_period > var:bfl_inv_03_last_peri
             if = { limit = { OR = { var:bfl_inv_03_state = 1 AND = { var:bfl_inv_03_state = 4 var:bfl_inv_03_state_before_seizure = 1 } } var:bfl_inv_03_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_03_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_03_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_03_holder var:bfl_inv_03_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_03_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_03_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1120,7 +1137,7 @@ if = { limit = { var:bfl_inv_04_active = 1 bfl_period > var:bfl_inv_04_last_peri
             if = { limit = { OR = { var:bfl_inv_04_state = 1 AND = { var:bfl_inv_04_state = 4 var:bfl_inv_04_state_before_seizure = 1 } } var:bfl_inv_04_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_04_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_04_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_04_holder var:bfl_inv_04_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_04_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_04_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1158,7 +1175,7 @@ if = { limit = { var:bfl_inv_05_active = 1 bfl_period > var:bfl_inv_05_last_peri
             if = { limit = { OR = { var:bfl_inv_05_state = 1 AND = { var:bfl_inv_05_state = 4 var:bfl_inv_05_state_before_seizure = 1 } } var:bfl_inv_05_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_05_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_05_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_05_holder var:bfl_inv_05_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_05_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_05_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1196,7 +1213,7 @@ if = { limit = { var:bfl_inv_06_active = 1 bfl_period > var:bfl_inv_06_last_peri
             if = { limit = { OR = { var:bfl_inv_06_state = 1 AND = { var:bfl_inv_06_state = 4 var:bfl_inv_06_state_before_seizure = 1 } } var:bfl_inv_06_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_06_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_06_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_06_holder var:bfl_inv_06_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_06_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_06_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1234,7 +1251,7 @@ if = { limit = { var:bfl_inv_07_active = 1 bfl_period > var:bfl_inv_07_last_peri
             if = { limit = { OR = { var:bfl_inv_07_state = 1 AND = { var:bfl_inv_07_state = 4 var:bfl_inv_07_state_before_seizure = 1 } } var:bfl_inv_07_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_07_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_07_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_07_holder var:bfl_inv_07_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_07_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_07_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1272,7 +1289,7 @@ if = { limit = { var:bfl_inv_08_active = 1 bfl_period > var:bfl_inv_08_last_peri
             if = { limit = { OR = { var:bfl_inv_08_state = 1 AND = { var:bfl_inv_08_state = 4 var:bfl_inv_08_state_before_seizure = 1 } } var:bfl_inv_08_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_08_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_08_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_08_holder var:bfl_inv_08_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_08_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_08_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1310,7 +1327,7 @@ if = { limit = { var:bfl_inv_09_active = 1 bfl_period > var:bfl_inv_09_last_peri
             if = { limit = { OR = { var:bfl_inv_09_state = 1 AND = { var:bfl_inv_09_state = 4 var:bfl_inv_09_state_before_seizure = 1 } } var:bfl_inv_09_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_09_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_09_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_09_holder var:bfl_inv_09_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_09_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_09_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1348,7 +1365,7 @@ if = { limit = { var:bfl_inv_10_active = 1 bfl_period > var:bfl_inv_10_last_peri
             if = { limit = { OR = { var:bfl_inv_10_state = 1 AND = { var:bfl_inv_10_state = 4 var:bfl_inv_10_state_before_seizure = 1 } } var:bfl_inv_10_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_10_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_10_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_10_holder var:bfl_inv_10_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_10_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_10_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1386,7 +1403,7 @@ if = { limit = { var:bfl_inv_11_active = 1 bfl_period > var:bfl_inv_11_last_peri
             if = { limit = { OR = { var:bfl_inv_11_state = 1 AND = { var:bfl_inv_11_state = 4 var:bfl_inv_11_state_before_seizure = 1 } } var:bfl_inv_11_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_11_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_11_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_11_holder var:bfl_inv_11_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_11_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_11_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1424,7 +1441,7 @@ if = { limit = { var:bfl_inv_12_active = 1 bfl_period > var:bfl_inv_12_last_peri
             if = { limit = { OR = { var:bfl_inv_12_state = 1 AND = { var:bfl_inv_12_state = 4 var:bfl_inv_12_state_before_seizure = 1 } } var:bfl_inv_12_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_12_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_12_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_12_holder var:bfl_inv_12_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_12_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_12_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1462,7 +1479,7 @@ if = { limit = { var:bfl_inv_13_active = 1 bfl_period > var:bfl_inv_13_last_peri
             if = { limit = { OR = { var:bfl_inv_13_state = 1 AND = { var:bfl_inv_13_state = 4 var:bfl_inv_13_state_before_seizure = 1 } } var:bfl_inv_13_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_13_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_13_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_13_holder var:bfl_inv_13_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_13_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_13_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1500,7 +1517,7 @@ if = { limit = { var:bfl_inv_14_active = 1 bfl_period > var:bfl_inv_14_last_peri
             if = { limit = { OR = { var:bfl_inv_14_state = 1 AND = { var:bfl_inv_14_state = 4 var:bfl_inv_14_state_before_seizure = 1 } } var:bfl_inv_14_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_14_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_14_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_14_holder var:bfl_inv_14_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_14_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_14_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1538,7 +1555,7 @@ if = { limit = { var:bfl_inv_15_active = 1 bfl_period > var:bfl_inv_15_last_peri
             if = { limit = { OR = { var:bfl_inv_15_state = 1 AND = { var:bfl_inv_15_state = 4 var:bfl_inv_15_state_before_seizure = 1 } } var:bfl_inv_15_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_15_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_15_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_15_holder var:bfl_inv_15_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_15_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_15_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1576,7 +1593,7 @@ if = { limit = { var:bfl_inv_16_active = 1 bfl_period > var:bfl_inv_16_last_peri
             if = { limit = { OR = { var:bfl_inv_16_state = 1 AND = { var:bfl_inv_16_state = 4 var:bfl_inv_16_state_before_seizure = 1 } } var:bfl_inv_16_holder_basis > 0 }
                 set_variable = { name = bfl_goods_decay value = { value = var:bfl_inv_16_holder_basis multiply = 0.00167 } }
                 change_variable = { name = bfl_inv_16_holder_basis subtract = var:bfl_goods_decay }
-                if = { limit = { country_exists = var:bfl_inv_16_holder var:bfl_inv_16_holder = { bfl_has_accounts = yes } }
+                if = { limit = { var:bfl_inv_16_holder = { bfl_financial_recipient = yes bfl_has_accounts = yes } }
                     var:bfl_inv_16_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_goods_bank.var:bfl_goods_decay } } }
             }
             # Warehouse operating cost is 0.1 gold per lot per month. For
@@ -1779,7 +1796,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_01 = {
 if = { limit = { var:bfl_inv_01_active = 1 var:bfl_inv_01_state = 2
             bfl_period >= var:bfl_inv_01_due bfl_goods_access_01 = yes
-            country_exists = var:bfl_inv_01_holder gold >= { value = var:bfl_inv_01_escrow add = var:bfl_inv_01_margin } }
+            var:bfl_inv_01_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_01_escrow add = var:bfl_inv_01_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_01_quantity divide = var:bfl_inv_01_accepted_quantity } multiply = var:bfl_inv_01_price min = 0 max = var:bfl_inv_01_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -1991,7 +2008,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_02 = {
 if = { limit = { var:bfl_inv_02_active = 1 var:bfl_inv_02_state = 2
             bfl_period >= var:bfl_inv_02_due bfl_goods_access_02 = yes
-            country_exists = var:bfl_inv_02_holder gold >= { value = var:bfl_inv_02_escrow add = var:bfl_inv_02_margin } }
+            var:bfl_inv_02_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_02_escrow add = var:bfl_inv_02_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_02_quantity divide = var:bfl_inv_02_accepted_quantity } multiply = var:bfl_inv_02_price min = 0 max = var:bfl_inv_02_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -2203,7 +2220,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_03 = {
 if = { limit = { var:bfl_inv_03_active = 1 var:bfl_inv_03_state = 2
             bfl_period >= var:bfl_inv_03_due bfl_goods_access_03 = yes
-            country_exists = var:bfl_inv_03_holder gold >= { value = var:bfl_inv_03_escrow add = var:bfl_inv_03_margin } }
+            var:bfl_inv_03_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_03_escrow add = var:bfl_inv_03_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_03_quantity divide = var:bfl_inv_03_accepted_quantity } multiply = var:bfl_inv_03_price min = 0 max = var:bfl_inv_03_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -2415,7 +2432,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_04 = {
 if = { limit = { var:bfl_inv_04_active = 1 var:bfl_inv_04_state = 2
             bfl_period >= var:bfl_inv_04_due bfl_goods_access_04 = yes
-            country_exists = var:bfl_inv_04_holder gold >= { value = var:bfl_inv_04_escrow add = var:bfl_inv_04_margin } }
+            var:bfl_inv_04_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_04_escrow add = var:bfl_inv_04_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_04_quantity divide = var:bfl_inv_04_accepted_quantity } multiply = var:bfl_inv_04_price min = 0 max = var:bfl_inv_04_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -2627,7 +2644,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_05 = {
 if = { limit = { var:bfl_inv_05_active = 1 var:bfl_inv_05_state = 2
             bfl_period >= var:bfl_inv_05_due bfl_goods_access_05 = yes
-            country_exists = var:bfl_inv_05_holder gold >= { value = var:bfl_inv_05_escrow add = var:bfl_inv_05_margin } }
+            var:bfl_inv_05_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_05_escrow add = var:bfl_inv_05_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_05_quantity divide = var:bfl_inv_05_accepted_quantity } multiply = var:bfl_inv_05_price min = 0 max = var:bfl_inv_05_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -2839,7 +2856,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_06 = {
 if = { limit = { var:bfl_inv_06_active = 1 var:bfl_inv_06_state = 2
             bfl_period >= var:bfl_inv_06_due bfl_goods_access_06 = yes
-            country_exists = var:bfl_inv_06_holder gold >= { value = var:bfl_inv_06_escrow add = var:bfl_inv_06_margin } }
+            var:bfl_inv_06_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_06_escrow add = var:bfl_inv_06_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_06_quantity divide = var:bfl_inv_06_accepted_quantity } multiply = var:bfl_inv_06_price min = 0 max = var:bfl_inv_06_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -3051,7 +3068,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_07 = {
 if = { limit = { var:bfl_inv_07_active = 1 var:bfl_inv_07_state = 2
             bfl_period >= var:bfl_inv_07_due bfl_goods_access_07 = yes
-            country_exists = var:bfl_inv_07_holder gold >= { value = var:bfl_inv_07_escrow add = var:bfl_inv_07_margin } }
+            var:bfl_inv_07_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_07_escrow add = var:bfl_inv_07_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_07_quantity divide = var:bfl_inv_07_accepted_quantity } multiply = var:bfl_inv_07_price min = 0 max = var:bfl_inv_07_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -3263,7 +3280,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_08 = {
 if = { limit = { var:bfl_inv_08_active = 1 var:bfl_inv_08_state = 2
             bfl_period >= var:bfl_inv_08_due bfl_goods_access_08 = yes
-            country_exists = var:bfl_inv_08_holder gold >= { value = var:bfl_inv_08_escrow add = var:bfl_inv_08_margin } }
+            var:bfl_inv_08_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_08_escrow add = var:bfl_inv_08_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_08_quantity divide = var:bfl_inv_08_accepted_quantity } multiply = var:bfl_inv_08_price min = 0 max = var:bfl_inv_08_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -3475,7 +3492,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_09 = {
 if = { limit = { var:bfl_inv_09_active = 1 var:bfl_inv_09_state = 2
             bfl_period >= var:bfl_inv_09_due bfl_goods_access_09 = yes
-            country_exists = var:bfl_inv_09_holder gold >= { value = var:bfl_inv_09_escrow add = var:bfl_inv_09_margin } }
+            var:bfl_inv_09_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_09_escrow add = var:bfl_inv_09_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_09_quantity divide = var:bfl_inv_09_accepted_quantity } multiply = var:bfl_inv_09_price min = 0 max = var:bfl_inv_09_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -3687,7 +3704,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_10 = {
 if = { limit = { var:bfl_inv_10_active = 1 var:bfl_inv_10_state = 2
             bfl_period >= var:bfl_inv_10_due bfl_goods_access_10 = yes
-            country_exists = var:bfl_inv_10_holder gold >= { value = var:bfl_inv_10_escrow add = var:bfl_inv_10_margin } }
+            var:bfl_inv_10_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_10_escrow add = var:bfl_inv_10_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_10_quantity divide = var:bfl_inv_10_accepted_quantity } multiply = var:bfl_inv_10_price min = 0 max = var:bfl_inv_10_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -3899,7 +3916,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_11 = {
 if = { limit = { var:bfl_inv_11_active = 1 var:bfl_inv_11_state = 2
             bfl_period >= var:bfl_inv_11_due bfl_goods_access_11 = yes
-            country_exists = var:bfl_inv_11_holder gold >= { value = var:bfl_inv_11_escrow add = var:bfl_inv_11_margin } }
+            var:bfl_inv_11_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_11_escrow add = var:bfl_inv_11_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_11_quantity divide = var:bfl_inv_11_accepted_quantity } multiply = var:bfl_inv_11_price min = 0 max = var:bfl_inv_11_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -4111,7 +4128,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_12 = {
 if = { limit = { var:bfl_inv_12_active = 1 var:bfl_inv_12_state = 2
             bfl_period >= var:bfl_inv_12_due bfl_goods_access_12 = yes
-            country_exists = var:bfl_inv_12_holder gold >= { value = var:bfl_inv_12_escrow add = var:bfl_inv_12_margin } }
+            var:bfl_inv_12_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_12_escrow add = var:bfl_inv_12_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_12_quantity divide = var:bfl_inv_12_accepted_quantity } multiply = var:bfl_inv_12_price min = 0 max = var:bfl_inv_12_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -4323,7 +4340,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_13 = {
 if = { limit = { var:bfl_inv_13_active = 1 var:bfl_inv_13_state = 2
             bfl_period >= var:bfl_inv_13_due bfl_goods_access_13 = yes
-            country_exists = var:bfl_inv_13_holder gold >= { value = var:bfl_inv_13_escrow add = var:bfl_inv_13_margin } }
+            var:bfl_inv_13_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_13_escrow add = var:bfl_inv_13_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_13_quantity divide = var:bfl_inv_13_accepted_quantity } multiply = var:bfl_inv_13_price min = 0 max = var:bfl_inv_13_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -4535,7 +4552,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_14 = {
 if = { limit = { var:bfl_inv_14_active = 1 var:bfl_inv_14_state = 2
             bfl_period >= var:bfl_inv_14_due bfl_goods_access_14 = yes
-            country_exists = var:bfl_inv_14_holder gold >= { value = var:bfl_inv_14_escrow add = var:bfl_inv_14_margin } }
+            var:bfl_inv_14_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_14_escrow add = var:bfl_inv_14_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_14_quantity divide = var:bfl_inv_14_accepted_quantity } multiply = var:bfl_inv_14_price min = 0 max = var:bfl_inv_14_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -4747,7 +4764,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_15 = {
 if = { limit = { var:bfl_inv_15_active = 1 var:bfl_inv_15_state = 2
             bfl_period >= var:bfl_inv_15_due bfl_goods_access_15 = yes
-            country_exists = var:bfl_inv_15_holder gold >= { value = var:bfl_inv_15_escrow add = var:bfl_inv_15_margin } }
+            var:bfl_inv_15_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_15_escrow add = var:bfl_inv_15_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_15_quantity divide = var:bfl_inv_15_accepted_quantity } multiply = var:bfl_inv_15_price min = 0 max = var:bfl_inv_15_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }
@@ -4959,7 +4976,7 @@ save_scope_as = bfl_goods_bank
 bfl_settle_goods_forward_16 = {
 if = { limit = { var:bfl_inv_16_active = 1 var:bfl_inv_16_state = 2
             bfl_period >= var:bfl_inv_16_due bfl_goods_access_16 = yes
-            country_exists = var:bfl_inv_16_holder gold >= { value = var:bfl_inv_16_escrow add = var:bfl_inv_16_margin } }
+            var:bfl_inv_16_holder = { bfl_financial_recipient = yes } gold >= { value = var:bfl_inv_16_escrow add = var:bfl_inv_16_margin } }
             save_scope_as = bfl_goods_bank
             set_variable = { name = bfl_goods_shortfall value = { value = 1 subtract = { value = var:bfl_inv_16_quantity divide = var:bfl_inv_16_accepted_quantity } multiply = var:bfl_inv_16_price min = 0 max = var:bfl_inv_16_margin } }
             set_variable = { name = bfl_goods_refund value = { value = var:bfl_goods_shortfall multiply = 2 } }

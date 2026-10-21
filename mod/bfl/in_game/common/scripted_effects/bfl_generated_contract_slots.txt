@@ -1,8 +1,9 @@
 ﻿bfl_allocate_contract = {
 set_variable = { name = bfl_contract_allocated value = 0 }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_01_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_01_active = 0 NOT = { has_variable = bfl_con_01_pledge } }
             set_variable = { name = bfl_contract_allocated value = 1 }
             set_variable = { name = bfl_con_01_active value = 1 }
+            set_variable = { name = bfl_con_01_recovery_held value = 0 }
             change_variable = { name = bfl_con_01_generation add = 1 }
             set_variable = { name = bfl_con_01_party value = scope:bfl_party }
             set_variable = { name = bfl_con_01_kind value = var:bfl_contract_kind }
@@ -13,9 +14,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_01_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_01_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_01_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_02_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_02_active = 0 NOT = { has_variable = bfl_con_02_pledge } }
             set_variable = { name = bfl_contract_allocated value = 2 }
             set_variable = { name = bfl_con_02_active value = 1 }
+            set_variable = { name = bfl_con_02_recovery_held value = 0 }
             change_variable = { name = bfl_con_02_generation add = 1 }
             set_variable = { name = bfl_con_02_party value = scope:bfl_party }
             set_variable = { name = bfl_con_02_kind value = var:bfl_contract_kind }
@@ -26,9 +28,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_02_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_02_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_02_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_03_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_03_active = 0 NOT = { has_variable = bfl_con_03_pledge } }
             set_variable = { name = bfl_contract_allocated value = 3 }
             set_variable = { name = bfl_con_03_active value = 1 }
+            set_variable = { name = bfl_con_03_recovery_held value = 0 }
             change_variable = { name = bfl_con_03_generation add = 1 }
             set_variable = { name = bfl_con_03_party value = scope:bfl_party }
             set_variable = { name = bfl_con_03_kind value = var:bfl_contract_kind }
@@ -39,9 +42,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_03_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_03_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_03_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_04_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_04_active = 0 NOT = { has_variable = bfl_con_04_pledge } }
             set_variable = { name = bfl_contract_allocated value = 4 }
             set_variable = { name = bfl_con_04_active value = 1 }
+            set_variable = { name = bfl_con_04_recovery_held value = 0 }
             change_variable = { name = bfl_con_04_generation add = 1 }
             set_variable = { name = bfl_con_04_party value = scope:bfl_party }
             set_variable = { name = bfl_con_04_kind value = var:bfl_contract_kind }
@@ -52,9 +56,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_04_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_04_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_04_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_05_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_05_active = 0 NOT = { has_variable = bfl_con_05_pledge } }
             set_variable = { name = bfl_contract_allocated value = 5 }
             set_variable = { name = bfl_con_05_active value = 1 }
+            set_variable = { name = bfl_con_05_recovery_held value = 0 }
             change_variable = { name = bfl_con_05_generation add = 1 }
             set_variable = { name = bfl_con_05_party value = scope:bfl_party }
             set_variable = { name = bfl_con_05_kind value = var:bfl_contract_kind }
@@ -65,9 +70,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_05_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_05_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_05_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_06_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_06_active = 0 NOT = { has_variable = bfl_con_06_pledge } }
             set_variable = { name = bfl_contract_allocated value = 6 }
             set_variable = { name = bfl_con_06_active value = 1 }
+            set_variable = { name = bfl_con_06_recovery_held value = 0 }
             change_variable = { name = bfl_con_06_generation add = 1 }
             set_variable = { name = bfl_con_06_party value = scope:bfl_party }
             set_variable = { name = bfl_con_06_kind value = var:bfl_contract_kind }
@@ -78,9 +84,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_06_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_06_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_06_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_07_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_07_active = 0 NOT = { has_variable = bfl_con_07_pledge } }
             set_variable = { name = bfl_contract_allocated value = 7 }
             set_variable = { name = bfl_con_07_active value = 1 }
+            set_variable = { name = bfl_con_07_recovery_held value = 0 }
             change_variable = { name = bfl_con_07_generation add = 1 }
             set_variable = { name = bfl_con_07_party value = scope:bfl_party }
             set_variable = { name = bfl_con_07_kind value = var:bfl_contract_kind }
@@ -91,9 +98,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_07_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_07_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_07_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_08_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_08_active = 0 NOT = { has_variable = bfl_con_08_pledge } }
             set_variable = { name = bfl_contract_allocated value = 8 }
             set_variable = { name = bfl_con_08_active value = 1 }
+            set_variable = { name = bfl_con_08_recovery_held value = 0 }
             change_variable = { name = bfl_con_08_generation add = 1 }
             set_variable = { name = bfl_con_08_party value = scope:bfl_party }
             set_variable = { name = bfl_con_08_kind value = var:bfl_contract_kind }
@@ -104,9 +112,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_08_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_08_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_08_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_09_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_09_active = 0 NOT = { has_variable = bfl_con_09_pledge } }
             set_variable = { name = bfl_contract_allocated value = 9 }
             set_variable = { name = bfl_con_09_active value = 1 }
+            set_variable = { name = bfl_con_09_recovery_held value = 0 }
             change_variable = { name = bfl_con_09_generation add = 1 }
             set_variable = { name = bfl_con_09_party value = scope:bfl_party }
             set_variable = { name = bfl_con_09_kind value = var:bfl_contract_kind }
@@ -117,9 +126,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_09_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_09_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_09_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_10_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_10_active = 0 NOT = { has_variable = bfl_con_10_pledge } }
             set_variable = { name = bfl_contract_allocated value = 10 }
             set_variable = { name = bfl_con_10_active value = 1 }
+            set_variable = { name = bfl_con_10_recovery_held value = 0 }
             change_variable = { name = bfl_con_10_generation add = 1 }
             set_variable = { name = bfl_con_10_party value = scope:bfl_party }
             set_variable = { name = bfl_con_10_kind value = var:bfl_contract_kind }
@@ -130,9 +140,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_10_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_10_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_10_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_11_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_11_active = 0 NOT = { has_variable = bfl_con_11_pledge } }
             set_variable = { name = bfl_contract_allocated value = 11 }
             set_variable = { name = bfl_con_11_active value = 1 }
+            set_variable = { name = bfl_con_11_recovery_held value = 0 }
             change_variable = { name = bfl_con_11_generation add = 1 }
             set_variable = { name = bfl_con_11_party value = scope:bfl_party }
             set_variable = { name = bfl_con_11_kind value = var:bfl_contract_kind }
@@ -143,9 +154,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_11_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_11_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_11_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_12_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_12_active = 0 NOT = { has_variable = bfl_con_12_pledge } }
             set_variable = { name = bfl_contract_allocated value = 12 }
             set_variable = { name = bfl_con_12_active value = 1 }
+            set_variable = { name = bfl_con_12_recovery_held value = 0 }
             change_variable = { name = bfl_con_12_generation add = 1 }
             set_variable = { name = bfl_con_12_party value = scope:bfl_party }
             set_variable = { name = bfl_con_12_kind value = var:bfl_contract_kind }
@@ -156,9 +168,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_12_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_12_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_12_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_13_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_13_active = 0 NOT = { has_variable = bfl_con_13_pledge } }
             set_variable = { name = bfl_contract_allocated value = 13 }
             set_variable = { name = bfl_con_13_active value = 1 }
+            set_variable = { name = bfl_con_13_recovery_held value = 0 }
             change_variable = { name = bfl_con_13_generation add = 1 }
             set_variable = { name = bfl_con_13_party value = scope:bfl_party }
             set_variable = { name = bfl_con_13_kind value = var:bfl_contract_kind }
@@ -169,9 +182,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_13_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_13_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_13_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_14_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_14_active = 0 NOT = { has_variable = bfl_con_14_pledge } }
             set_variable = { name = bfl_contract_allocated value = 14 }
             set_variable = { name = bfl_con_14_active value = 1 }
+            set_variable = { name = bfl_con_14_recovery_held value = 0 }
             change_variable = { name = bfl_con_14_generation add = 1 }
             set_variable = { name = bfl_con_14_party value = scope:bfl_party }
             set_variable = { name = bfl_con_14_kind value = var:bfl_contract_kind }
@@ -182,9 +196,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_14_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_14_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_14_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_15_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_15_active = 0 NOT = { has_variable = bfl_con_15_pledge } }
             set_variable = { name = bfl_contract_allocated value = 15 }
             set_variable = { name = bfl_con_15_active value = 1 }
+            set_variable = { name = bfl_con_15_recovery_held value = 0 }
             change_variable = { name = bfl_con_15_generation add = 1 }
             set_variable = { name = bfl_con_15_party value = scope:bfl_party }
             set_variable = { name = bfl_con_15_kind value = var:bfl_contract_kind }
@@ -195,9 +210,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_15_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_15_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_15_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_16_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_16_active = 0 NOT = { has_variable = bfl_con_16_pledge } }
             set_variable = { name = bfl_contract_allocated value = 16 }
             set_variable = { name = bfl_con_16_active value = 1 }
+            set_variable = { name = bfl_con_16_recovery_held value = 0 }
             change_variable = { name = bfl_con_16_generation add = 1 }
             set_variable = { name = bfl_con_16_party value = scope:bfl_party }
             set_variable = { name = bfl_con_16_kind value = var:bfl_contract_kind }
@@ -208,9 +224,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_16_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_16_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_16_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_17_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_17_active = 0 NOT = { has_variable = bfl_con_17_pledge } }
             set_variable = { name = bfl_contract_allocated value = 17 }
             set_variable = { name = bfl_con_17_active value = 1 }
+            set_variable = { name = bfl_con_17_recovery_held value = 0 }
             change_variable = { name = bfl_con_17_generation add = 1 }
             set_variable = { name = bfl_con_17_party value = scope:bfl_party }
             set_variable = { name = bfl_con_17_kind value = var:bfl_contract_kind }
@@ -221,9 +238,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_17_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_17_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_17_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_18_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_18_active = 0 NOT = { has_variable = bfl_con_18_pledge } }
             set_variable = { name = bfl_contract_allocated value = 18 }
             set_variable = { name = bfl_con_18_active value = 1 }
+            set_variable = { name = bfl_con_18_recovery_held value = 0 }
             change_variable = { name = bfl_con_18_generation add = 1 }
             set_variable = { name = bfl_con_18_party value = scope:bfl_party }
             set_variable = { name = bfl_con_18_kind value = var:bfl_contract_kind }
@@ -234,9 +252,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_18_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_18_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_18_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_19_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_19_active = 0 NOT = { has_variable = bfl_con_19_pledge } }
             set_variable = { name = bfl_contract_allocated value = 19 }
             set_variable = { name = bfl_con_19_active value = 1 }
+            set_variable = { name = bfl_con_19_recovery_held value = 0 }
             change_variable = { name = bfl_con_19_generation add = 1 }
             set_variable = { name = bfl_con_19_party value = scope:bfl_party }
             set_variable = { name = bfl_con_19_kind value = var:bfl_contract_kind }
@@ -247,9 +266,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_19_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_19_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_19_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_20_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_20_active = 0 NOT = { has_variable = bfl_con_20_pledge } }
             set_variable = { name = bfl_contract_allocated value = 20 }
             set_variable = { name = bfl_con_20_active value = 1 }
+            set_variable = { name = bfl_con_20_recovery_held value = 0 }
             change_variable = { name = bfl_con_20_generation add = 1 }
             set_variable = { name = bfl_con_20_party value = scope:bfl_party }
             set_variable = { name = bfl_con_20_kind value = var:bfl_contract_kind }
@@ -260,9 +280,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_20_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_20_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_20_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_21_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_21_active = 0 NOT = { has_variable = bfl_con_21_pledge } }
             set_variable = { name = bfl_contract_allocated value = 21 }
             set_variable = { name = bfl_con_21_active value = 1 }
+            set_variable = { name = bfl_con_21_recovery_held value = 0 }
             change_variable = { name = bfl_con_21_generation add = 1 }
             set_variable = { name = bfl_con_21_party value = scope:bfl_party }
             set_variable = { name = bfl_con_21_kind value = var:bfl_contract_kind }
@@ -273,9 +294,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_21_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_21_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_21_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_22_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_22_active = 0 NOT = { has_variable = bfl_con_22_pledge } }
             set_variable = { name = bfl_contract_allocated value = 22 }
             set_variable = { name = bfl_con_22_active value = 1 }
+            set_variable = { name = bfl_con_22_recovery_held value = 0 }
             change_variable = { name = bfl_con_22_generation add = 1 }
             set_variable = { name = bfl_con_22_party value = scope:bfl_party }
             set_variable = { name = bfl_con_22_kind value = var:bfl_contract_kind }
@@ -286,9 +308,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_22_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_22_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_22_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_23_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_23_active = 0 NOT = { has_variable = bfl_con_23_pledge } }
             set_variable = { name = bfl_contract_allocated value = 23 }
             set_variable = { name = bfl_con_23_active value = 1 }
+            set_variable = { name = bfl_con_23_recovery_held value = 0 }
             change_variable = { name = bfl_con_23_generation add = 1 }
             set_variable = { name = bfl_con_23_party value = scope:bfl_party }
             set_variable = { name = bfl_con_23_kind value = var:bfl_contract_kind }
@@ -299,9 +322,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_23_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_23_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_23_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_24_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_24_active = 0 NOT = { has_variable = bfl_con_24_pledge } }
             set_variable = { name = bfl_contract_allocated value = 24 }
             set_variable = { name = bfl_con_24_active value = 1 }
+            set_variable = { name = bfl_con_24_recovery_held value = 0 }
             change_variable = { name = bfl_con_24_generation add = 1 }
             set_variable = { name = bfl_con_24_party value = scope:bfl_party }
             set_variable = { name = bfl_con_24_kind value = var:bfl_contract_kind }
@@ -312,9 +336,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_24_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_24_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_24_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_25_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_25_active = 0 NOT = { has_variable = bfl_con_25_pledge } }
             set_variable = { name = bfl_contract_allocated value = 25 }
             set_variable = { name = bfl_con_25_active value = 1 }
+            set_variable = { name = bfl_con_25_recovery_held value = 0 }
             change_variable = { name = bfl_con_25_generation add = 1 }
             set_variable = { name = bfl_con_25_party value = scope:bfl_party }
             set_variable = { name = bfl_con_25_kind value = var:bfl_contract_kind }
@@ -325,9 +350,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_25_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_25_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_25_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_26_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_26_active = 0 NOT = { has_variable = bfl_con_26_pledge } }
             set_variable = { name = bfl_contract_allocated value = 26 }
             set_variable = { name = bfl_con_26_active value = 1 }
+            set_variable = { name = bfl_con_26_recovery_held value = 0 }
             change_variable = { name = bfl_con_26_generation add = 1 }
             set_variable = { name = bfl_con_26_party value = scope:bfl_party }
             set_variable = { name = bfl_con_26_kind value = var:bfl_contract_kind }
@@ -338,9 +364,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_26_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_26_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_26_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_27_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_27_active = 0 NOT = { has_variable = bfl_con_27_pledge } }
             set_variable = { name = bfl_contract_allocated value = 27 }
             set_variable = { name = bfl_con_27_active value = 1 }
+            set_variable = { name = bfl_con_27_recovery_held value = 0 }
             change_variable = { name = bfl_con_27_generation add = 1 }
             set_variable = { name = bfl_con_27_party value = scope:bfl_party }
             set_variable = { name = bfl_con_27_kind value = var:bfl_contract_kind }
@@ -351,9 +378,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_27_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_27_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_27_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_28_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_28_active = 0 NOT = { has_variable = bfl_con_28_pledge } }
             set_variable = { name = bfl_contract_allocated value = 28 }
             set_variable = { name = bfl_con_28_active value = 1 }
+            set_variable = { name = bfl_con_28_recovery_held value = 0 }
             change_variable = { name = bfl_con_28_generation add = 1 }
             set_variable = { name = bfl_con_28_party value = scope:bfl_party }
             set_variable = { name = bfl_con_28_kind value = var:bfl_contract_kind }
@@ -364,9 +392,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_28_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_28_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_28_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_29_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_29_active = 0 NOT = { has_variable = bfl_con_29_pledge } }
             set_variable = { name = bfl_contract_allocated value = 29 }
             set_variable = { name = bfl_con_29_active value = 1 }
+            set_variable = { name = bfl_con_29_recovery_held value = 0 }
             change_variable = { name = bfl_con_29_generation add = 1 }
             set_variable = { name = bfl_con_29_party value = scope:bfl_party }
             set_variable = { name = bfl_con_29_kind value = var:bfl_contract_kind }
@@ -377,9 +406,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_29_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_29_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_29_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_30_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_30_active = 0 NOT = { has_variable = bfl_con_30_pledge } }
             set_variable = { name = bfl_contract_allocated value = 30 }
             set_variable = { name = bfl_con_30_active value = 1 }
+            set_variable = { name = bfl_con_30_recovery_held value = 0 }
             change_variable = { name = bfl_con_30_generation add = 1 }
             set_variable = { name = bfl_con_30_party value = scope:bfl_party }
             set_variable = { name = bfl_con_30_kind value = var:bfl_contract_kind }
@@ -390,9 +420,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_30_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_30_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_30_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_31_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_31_active = 0 NOT = { has_variable = bfl_con_31_pledge } }
             set_variable = { name = bfl_contract_allocated value = 31 }
             set_variable = { name = bfl_con_31_active value = 1 }
+            set_variable = { name = bfl_con_31_recovery_held value = 0 }
             change_variable = { name = bfl_con_31_generation add = 1 }
             set_variable = { name = bfl_con_31_party value = scope:bfl_party }
             set_variable = { name = bfl_con_31_kind value = var:bfl_contract_kind }
@@ -403,9 +434,10 @@ if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_31_active = 0 }
             if = { limit = { var:bfl_contract_kind = 2 } set_variable = { name = bfl_con_31_collateral value = var:bfl_contract_backing } }
             set_variable = { name = bfl_con_31_last_settlement value = 0 }
         }
-if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_32_active = 0 }
+if = { limit = { var:bfl_contract_allocated = 0 var:bfl_con_32_active = 0 NOT = { has_variable = bfl_con_32_pledge } }
             set_variable = { name = bfl_contract_allocated value = 32 }
             set_variable = { name = bfl_con_32_active value = 1 }
+            set_variable = { name = bfl_con_32_recovery_held value = 0 }
             change_variable = { name = bfl_con_32_generation add = 1 }
             set_variable = { name = bfl_con_32_party value = scope:bfl_party }
             set_variable = { name = bfl_con_32_kind value = var:bfl_contract_kind }

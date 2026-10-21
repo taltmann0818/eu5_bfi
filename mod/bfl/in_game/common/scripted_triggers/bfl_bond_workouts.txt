@@ -1,0 +1,8 @@
+﻿bfl_bond_workout_researched = {
+    OR = { current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation
+        current_age = age_5_absolutism current_age = age_6_revolutions }
+    OR = { AND = { country_exists = this has_advance = bfl_debt_restructuring }
+        bfl_resolution_researched = yes
+        AND = { has_variable = bfl_resolution_estate var:bfl_resolution_inherited_research ?= 1
+            exists = var:bfl_resolution_trustee country_exists = var:bfl_resolution_trustee } }
+}

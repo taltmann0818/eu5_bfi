@@ -1,0 +1,8 @@
+﻿bfl_resolution_liquidate_command = { scope = country
+    is_shown = { bfl_has_management = yes }
+    is_valid = { bfl_has_management = yes OR = {
+        AND = { bfl_is_independent_bank = yes var:bfl_state = 4 }
+        AND = { country_type = location var:bfl_bank = { var:bfl_state = 4 } } } }
+    effect = { if = { limit = { bfl_has_management = yes }
+        bfl_resolve_command_bank = yes scope:bfl_bank = { bfl_liquidate_resolution_assets = yes } } }
+}

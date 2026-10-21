@@ -1,0 +1,212 @@
+﻿bfl_liquidate_resolution_operator = {
+save_scope_as = bfl_operator
+        if = { limit = { exists = var:bfl_venture_bank var:bfl_venture_bank = { bfl_financial_recipient = yes } }
+            var:bfl_venture_bank = { save_scope_as = bfl_venture_lender }
+    if = { limit = { var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
+            var:bfl_v_01_operator ?= scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_01 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_01 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
+            var:bfl_v_02_operator ?= scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_02 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_02 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
+            var:bfl_v_03_operator ?= scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_03 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_03 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
+            var:bfl_v_04_operator ?= scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_04 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_04 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
+            var:bfl_v_05_operator ?= scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_05 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_05 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
+            var:bfl_v_06_operator ?= scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_06 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_06 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
+            var:bfl_v_07_operator ?= scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_07 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_07 = yes }
+        }
+if = { limit = { var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
+            var:bfl_v_08_operator ?= scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation } }
+            if = { limit = { var:bfl_venture_quantity > 0 exists = var:bfl_venture_from exists = var:bfl_venture_good }
+                var:bfl_venture_from = { save_scope_as = bfl_venture_liquidation_market }
+                var:bfl_venture_good = { save_scope_as = bfl_venture_liquidation_good }
+                if = { limit = { bfl_period >= var:bfl_venture_delivery exists = var:bfl_venture_to }
+                    var:bfl_venture_to = { save_scope_as = bfl_venture_liquidation_market } }
+                set_variable = { name = bfl_venture_cash_before value = gold }
+                set_variable = { name = bfl_venture_liquidation_stock value = "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" }
+                set_variable = { name = bfl_venture_liquidation_expected value = { value = var:bfl_venture_liquidation_stock add = var:bfl_venture_quantity } }
+                sell_goods_to_market = { market = scope:bfl_venture_liquidation_market goods = scope:bfl_venture_liquidation_good amount = var:bfl_venture_quantity }
+                if = { limit = { "scope:bfl_venture_liquidation_market.stockpile_in_market(scope:bfl_venture_liquidation_good)" = var:bfl_venture_liquidation_expected }
+                    set_variable = { name = bfl_venture_proceeds value = { value = gold subtract = var:bfl_venture_cash_before min = 0 } }
+                    set_variable = { name = bfl_venture_sold value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_sale_stock_before value = var:bfl_venture_liquidation_stock }
+                    set_variable = { name = bfl_venture_sale_stock_after value = var:bfl_venture_liquidation_expected }
+                    change_variable = { name = bfl_venture_receipts add = var:bfl_venture_proceeds }
+                    set_variable = { name = bfl_venture_quantity value = 0 }
+                    set_variable = bfl_venture_sale_guard
+                    bfl_dispatch_commenda_08 = yes
+                    remove_variable = bfl_venture_sale_guard
+                }
+            }
+            if = { limit = { var:bfl_venture_quantity <= 0 } bfl_close_commenda_08 = yes }
+        }
+}
+}
+bfl_liquidate_institution_ventures = {
+if = { limit = { has_variable = bfl_venture_bank } bfl_liquidate_resolution_operator = yes }
+save_scope_as = bfl_venture_liquidating_lender
+every_country = { limit = { var:bfl_venture_bank ?= scope:bfl_venture_liquidating_lender }
+    bfl_liquidate_resolution_operator = yes }
+}

@@ -1,8 +1,10 @@
 ﻿bfl_resolution_researched = {
 OR = { current_age = age_2_renaissance current_age = age_3_discovery
         current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-        OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_debt_restructuring }
+        OR = { OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_debt_restructuring }
         AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_debt_restructuring } } }
+            AND = { has_variable = bfl_resolution_estate var:bfl_resolution_inherited_research ?= 1
+                exists = var:bfl_resolution_trustee country_exists = var:bfl_resolution_trustee } }
 }
 bfl_resolution_guarantee_authority = {
 bfl_has_valid_controller = yes
@@ -17,6 +19,7 @@ var:bfl_state = 4
         OR = { var:bfl_total_units > 0 gold < 0.01 }
         bfl_liabilities = 0 bfl_resolution_remaining_assets = 0
         bfl_deposit_asset_claims = 0 var:bfl_custom_bond_count = 0
+        bfl_native_estate_claim_count = 0 bfl_pending_guarantee_claims = 0 bfl_goods_holder_claims = 0
         var:bfl_cash_committed = 0 var:bfl_resolution_guarantee_due = 0
         num_loans = 0 bfl_bond_debt = 0
         NOT = { has_variable = bfl_discount_issuer }

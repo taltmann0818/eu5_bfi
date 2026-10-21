@@ -148,8 +148,8 @@ def initialize():
     for i in range(1,33):
         values += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_withdrawal_requested }}\n'
     values += '''}
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets }
-    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears add = bfl_estate_liabilities add = bfl_bond_debt add = bfl_bond_arrears add = bfl_resolution_native_claims every_loan = { add = remaining_debt } }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
         value = bfl_liabilities subtract = bfl_withdrawals_due min = 0
@@ -178,7 +178,7 @@ def initialize():
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
     body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
-    body += 'bfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\n'
+    body += 'bfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\nbfl_register_resolution_institution = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -1069,6 +1069,22 @@ def main():
     generate_monetary(common,effect,loc,write)
     from generate_resolution import generate as generate_resolution
     generate_resolution(common,effect,loc,write)
+    from generate_resolution_estates import generate as generate_estates
+    generate_estates(common,effect,loc,write)
+    from generate_bond_workouts import generate as generate_bond_workouts
+    generate_bond_workouts(common,effect,loc,write)
+    from generate_estate_interface import generate as generate_estate_interface
+    generate_estate_interface(common,effect,loc,write)
+    from generate_resolution_assets import generate as generate_resolution_assets
+    generate_resolution_assets(common,effect,loc,write)
+    from generate_resolution_money import generate as generate_resolution_money
+    generate_resolution_money(common,effect,loc,write)
+    from generate_resolution_transfers import generate as generate_resolution_transfers
+    generate_resolution_transfers(common,effect,loc,write)
+    from generate_resolution_native_debt import generate as generate_resolution_native_debt
+    generate_resolution_native_debt(common,effect,loc,write)
+    from generate_resolution_default import generate as generate_resolution_default
+    generate_resolution_default(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

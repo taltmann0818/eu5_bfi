@@ -1,0 +1,89 @@
+﻿bfl_resolution_money_claims = {
+value = 0
+if = { limit = { var:bfl_note_01_face > 0 } add = var:bfl_note_01_face }
+if = { limit = { var:bfl_note_02_face > 0 } add = var:bfl_note_02_face }
+if = { limit = { var:bfl_note_03_face > 0 } add = var:bfl_note_03_face }
+if = { limit = { var:bfl_note_04_face > 0 } add = var:bfl_note_04_face }
+if = { limit = { var:bfl_note_05_face > 0 } add = var:bfl_note_05_face }
+if = { limit = { var:bfl_note_06_face > 0 } add = var:bfl_note_06_face }
+if = { limit = { var:bfl_note_07_face > 0 } add = var:bfl_note_07_face }
+if = { limit = { var:bfl_note_08_face > 0 } add = var:bfl_note_08_face }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 } add = var:bfl_con_01_basis }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 } add = var:bfl_con_02_basis }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 } add = var:bfl_con_03_basis }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 } add = var:bfl_con_04_basis }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 } add = var:bfl_con_05_basis }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 } add = var:bfl_con_06_basis }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 } add = var:bfl_con_07_basis }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 } add = var:bfl_con_08_basis }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 } add = var:bfl_con_09_basis }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 } add = var:bfl_con_10_basis }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 } add = var:bfl_con_11_basis }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 } add = var:bfl_con_12_basis }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 } add = var:bfl_con_13_basis }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 } add = var:bfl_con_14_basis }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 } add = var:bfl_con_15_basis }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 } add = var:bfl_con_16_basis }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 } add = var:bfl_con_17_basis }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 } add = var:bfl_con_18_basis }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 } add = var:bfl_con_19_basis }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 } add = var:bfl_con_20_basis }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 } add = var:bfl_con_21_basis }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 } add = var:bfl_con_22_basis }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 } add = var:bfl_con_23_basis }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 } add = var:bfl_con_24_basis }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 } add = var:bfl_con_25_basis }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 } add = var:bfl_con_26_basis }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 } add = var:bfl_con_27_basis }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 } add = var:bfl_con_28_basis }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 } add = var:bfl_con_29_basis }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 } add = var:bfl_con_30_basis }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 } add = var:bfl_con_31_basis }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 } add = var:bfl_con_32_basis }
+}
+bfl_resolution_money_held = {
+value = 0
+if = { limit = { var:bfl_note_01_face > 0 } add = var:bfl_note_01_recovery_held }
+if = { limit = { var:bfl_note_02_face > 0 } add = var:bfl_note_02_recovery_held }
+if = { limit = { var:bfl_note_03_face > 0 } add = var:bfl_note_03_recovery_held }
+if = { limit = { var:bfl_note_04_face > 0 } add = var:bfl_note_04_recovery_held }
+if = { limit = { var:bfl_note_05_face > 0 } add = var:bfl_note_05_recovery_held }
+if = { limit = { var:bfl_note_06_face > 0 } add = var:bfl_note_06_recovery_held }
+if = { limit = { var:bfl_note_07_face > 0 } add = var:bfl_note_07_recovery_held }
+if = { limit = { var:bfl_note_08_face > 0 } add = var:bfl_note_08_recovery_held }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 } add = var:bfl_con_01_recovery_held }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 } add = var:bfl_con_02_recovery_held }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 } add = var:bfl_con_03_recovery_held }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 } add = var:bfl_con_04_recovery_held }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 } add = var:bfl_con_05_recovery_held }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 } add = var:bfl_con_06_recovery_held }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 } add = var:bfl_con_07_recovery_held }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 } add = var:bfl_con_08_recovery_held }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 } add = var:bfl_con_09_recovery_held }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 } add = var:bfl_con_10_recovery_held }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 } add = var:bfl_con_11_recovery_held }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 } add = var:bfl_con_12_recovery_held }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 } add = var:bfl_con_13_recovery_held }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 } add = var:bfl_con_14_recovery_held }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 } add = var:bfl_con_15_recovery_held }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 } add = var:bfl_con_16_recovery_held }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 } add = var:bfl_con_17_recovery_held }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 } add = var:bfl_con_18_recovery_held }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 } add = var:bfl_con_19_recovery_held }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 } add = var:bfl_con_20_recovery_held }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 } add = var:bfl_con_21_recovery_held }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 } add = var:bfl_con_22_recovery_held }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 } add = var:bfl_con_23_recovery_held }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 } add = var:bfl_con_24_recovery_held }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 } add = var:bfl_con_25_recovery_held }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 } add = var:bfl_con_26_recovery_held }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 } add = var:bfl_con_27_recovery_held }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 } add = var:bfl_con_28_recovery_held }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 } add = var:bfl_con_29_recovery_held }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 } add = var:bfl_con_30_recovery_held }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 } add = var:bfl_con_31_recovery_held }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 } add = var:bfl_con_32_recovery_held }
+}
+bfl_resolution_custody_reserve = {
+value = var:bfl_cash_committed subtract = bfl_resolution_money_claims min = 0
+}
