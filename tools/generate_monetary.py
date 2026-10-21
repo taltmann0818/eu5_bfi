@@ -18,22 +18,23 @@ def generate(common, effect, loc, write):
     init += ''.join(f'set_variable = {{ name = bfl_{k} value = {v} }}\n' for k, v in defaults.items())
     for i in NOTES:
         init += f'set_variable = {{ name = bfl_note_{i:02}_face value = 0 }}\n'
-    init += 'bfl_reconcile_monetary_assets = yes\n}\n'
-    reconcile = '''set_variable = { name = bfl_money_assets value = 0 }
+    init += 'bfl_reconcile_monetary_assets = yes\n}\nbfl_initialize_resolution_money = yes\n'
+    reconcile = '''bfl_initialize_resolution_money = yes
+        set_variable = { name = bfl_money_assets value = 0 }
         save_scope_as = bfl_money_owner
-        every_country = { limit = { bfl_has_accounts = yes }
+        every_in_global_list = { variable = bfl_resolution_institutions limit = { bfl_has_accounts = yes }
             save_scope_as = bfl_money_issuer
     '''
     for i in BILLS:
         n = f'bfl_con_{i:02}'
         reconcile += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_kind = 1 var:{n}_party ?= scope:bfl_money_owner }}
             scope:bfl_money_owner = {{ change_variable = {{ name = bfl_money_assets add = scope:bfl_money_issuer.var:{n}_basis }} }} }}
-            if = {{ limit = {{ var:{n}_active = 1 var:{n}_pledge ?= scope:bfl_money_owner }}
-                scope:bfl_money_owner = {{ change_variable = {{ name = bfl_money_assets add = 75 }} }} }}\n'''
+            if = {{ limit = {{ has_variable = {n}_discount_principal var:{n}_discount_principal > 0 var:{n}_pledge ?= scope:bfl_money_owner }}
+                scope:bfl_money_owner = {{ change_variable = {{ name = bfl_money_assets add = scope:bfl_money_issuer.var:{n}_discount_principal }} }} }}\n'''
     for i in NOTES:
         n = f'bfl_note_{i:02}'
-        reconcile += f'''if = {{ limit = {{ var:{n}_face ?= 100 var:{n}_holder ?= scope:bfl_money_owner }}
-            scope:bfl_money_owner = {{ change_variable = {{ name = bfl_money_assets add = 100 }} }} }}\n'''
+        reconcile += f'''if = {{ limit = {{ has_variable = {n}_face var:{n}_face > 0 var:{n}_holder ?= scope:bfl_money_owner }}
+            scope:bfl_money_owner = {{ change_variable = {{ name = bfl_money_assets add = scope:bfl_money_issuer.var:{n}_face }} }} }}\n'''
     common('scripted_effects', 'money_migration', effect('bfl_reconcile_monetary_assets', reconcile + '}'))
     common('scripted_effects', 'money_initialization', effect('bfl_initialize_monetary', init))
     transfers = ''
@@ -121,6 +122,7 @@ def generate(common, effect, loc, write):
         issue += f'''if = {{ limit = {{ var:bfl_note_allocated = 0 var:{n}_face = 0 }}
             set_variable = {{ name = bfl_note_allocated value = 1 }}
             set_variable = {{ name = {n}_face value = 100 }}
+            set_variable = {{ name = {n}_recovery_held value = 0 }}
             set_variable = {{ name = {n}_holder value = scope:bfl_party }}
             set_variable = {{ name = {n}_authority value = var:bfl_note_authority }}
             scope:bfl_party = {{ add_gold = -100 }} add_gold = 100
@@ -128,7 +130,7 @@ def generate(common, effect, loc, write):
             change_variable = {{ name = bfl_cash_committed add = 100 }}
         }}\n'''
         redemption += effect(f'bfl_redeem_note_{i:02}', f'''
-            if = {{ limit = {{ var:{n}_face > 0 exists = scope:bfl_party country_exists = scope:bfl_party
+            if = {{ limit = {{ var:{n}_face > 0 exists = scope:bfl_party scope:bfl_party = {{ bfl_financial_recipient = yes }}
                 var:{n}_holder ?= scope:bfl_party gold >= var:{n}_face }}
                 save_scope_as = bfl_note_bank
                 set_variable = {{ name = bfl_payment value = var:{n}_face }}
@@ -190,6 +192,7 @@ def generate(common, effect, loc, write):
             NOT = {{ has_variable = {n}_pledge }} bfl_period < var:{n}_maturity_period
             gold >= var:bfl_cash_committed }}
             set_variable = {{ name = {n}_pledge value = scope:bfl_discount_lender }}
+            set_variable = {{ name = {n}_discount_principal value = 75 }}
             set_variable = {{ name = {n}_discount_due value = {{ value = 75 add = scope:bfl_discount_lender.bfl_discount_fee }} }}
             scope:bfl_discount_lender = {{ set_variable = {{ name = bfl_discount_found value = 1 }}
                 add_gold = -75 change_variable = {{ name = bfl_money_assets add = 75 }} }}
@@ -199,23 +202,25 @@ def generate(common, effect, loc, write):
                 set_variable = {{ name = bfl_discount_slot value = {i} }} }}
         }}\n'''
         repay += f'''if = {{ limit = {{ var:bfl_discount_slot = {i}
-            scope:bfl_discount_issuer = {{ var:{n}_active = 1 var:{n}_party ?= scope:bfl_discount_borrower
-                exists = var:{n}_pledge country_exists = var:{n}_pledge }}
-            gold >= scope:bfl_discount_issuer.var:{n}_discount_due }}
+            scope:bfl_discount_issuer = {{ var:{n}_discount_due > 0 var:{n}_party ?= scope:bfl_discount_borrower
+                exists = var:{n}_pledge var:{n}_pledge = {{ bfl_financial_recipient = yes }} }}
+            gold >= scope:bfl_discount_issuer.var:{n}_discount_due
+            OR = {{ var:bfl_state != 4 gold >= {{ value = scope:bfl_discount_issuer.var:{n}_discount_due
+                add = var:bfl_cash_committed add = bfl_resolution_held add = bfl_resolution_native_claims }} }} }}
             set_variable = {{ name = bfl_payment value = scope:bfl_discount_issuer.var:{n}_discount_due }}
             add_gold = bfl_negative_payment
             scope:bfl_discount_issuer.var:{n}_pledge = {{ add_gold = scope:bfl_discount_borrower.var:bfl_payment
-                change_variable = {{ name = bfl_money_assets subtract = 75 }}
-                change_variable = {{ name = bfl_profit_credit add = {{ value = scope:bfl_discount_borrower.var:bfl_payment subtract = 75 }} }} }}
-            change_variable = {{ name = bfl_other_payables subtract = 75 }}
-            change_variable = {{ name = bfl_loss_carryforward add = {{ value = var:bfl_payment subtract = 75 }} }}
+                change_variable = {{ name = bfl_money_assets subtract = scope:bfl_discount_issuer.var:{n}_discount_principal }}
+                change_variable = {{ name = bfl_profit_credit add = {{ value = scope:bfl_discount_borrower.var:bfl_payment subtract = scope:bfl_discount_issuer.var:{n}_discount_principal }} }} }}
+            change_variable = {{ name = bfl_other_payables subtract = scope:bfl_discount_issuer.var:{n}_discount_principal }}
+            change_variable = {{ name = bfl_loss_carryforward add = {{ value = var:bfl_payment subtract = scope:bfl_discount_issuer.var:{n}_discount_principal }} }}
             scope:bfl_discount_issuer = {{ remove_variable = {n}_pledge }}
             remove_variable = bfl_discount_issuer
         }}\n'''
         collateral += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_kind = 1
             has_variable = {n}_pledge exists = var:{n}_pledge country_exists = var:{n}_pledge
             exists = var:{n}_party country_exists = var:{n}_party
-            bfl_period >= var:{n}_maturity_period gold >= var:{n}_basis }}
+            bfl_period >= var:{n}_maturity_period var:{n}_basis = 100 gold >= var:{n}_basis }}
             save_scope_as = bfl_discount_issuer
             set_variable = {{ name = {n}_active value = 0 }} set_variable = {{ name = {n}_state value = 3 }}
             add_gold = -100 change_variable = {{ name = bfl_other_payables subtract = 100 }}

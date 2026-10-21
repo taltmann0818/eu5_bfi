@@ -1,0 +1,41 @@
+﻿on_bankruptcy = { on_actions = { bfl_resolution_native_bankruptcy } }
+bfl_resolution_native_bankruptcy = { effect = {
+    if = { limit = { bfl_has_accounts = yes var:bfl_state < 4 }
+        bfl_reconcile_native_assets = yes bfl_begin_resolution = yes }
+    if = { limit = { has_variable = bfl_company_schema }
+        set_variable = { name = bfl_company_mandate value = 0 } }
+} }
+on_annex = { on_actions = { bfl_resolution_before_annex } }
+bfl_resolution_before_annex = { effect = { save_scope_as = bfl_estate_legal_receiver scope:target = {
+    if = { limit = { bfl_resolution_institution = yes }
+        set_variable = { name = bfl_resolution_trustee value = root } }
+    bfl_sequester_resolution_estate = yes
+    if = { limit = { has_variable = bfl_resolution_estate }
+        set_variable = { name = bfl_resolution_trustee value = root }
+        bfl_transfer_estate_native_credit = yes }
+    bfl_transfer_estate_financial_claims = yes
+} } }
+on_annexed = { on_actions = { bfl_resolution_after_annex } }
+bfl_resolution_after_annex = { effect = { bfl_reconcile_native_borrower_successor = yes scope:target = {
+    bfl_restore_estate_specie = yes
+} } }
+on_building_destroyed = { on_actions = { bfl_resolution_last_building } }
+bfl_resolution_last_building = { effect = {
+    location.owner ?= { save_scope_as = bfl_estate_host }
+    location.owner ?= { save_scope_as = bfl_estate_legal_receiver }
+    owner ?= {
+    if = { limit = { bfl_resolution_institution = yes
+        NOT = { any_owned_building = { building_level > 0 } } }
+        if = { limit = { NOT = { exists = var:bfl_resolution_trustee } exists = var:bfl_resolution_domicile country_exists = var:bfl_resolution_domicile }
+            set_variable = { name = bfl_resolution_trustee value = var:bfl_resolution_domicile } }
+        if = { limit = { NOT = { exists = var:bfl_resolution_trustee } exists = scope:bfl_estate_host }
+            set_variable = { name = bfl_resolution_trustee value = scope:bfl_estate_host } }
+        bfl_sequester_resolution_estate = yes
+        if = { limit = { NOT = { exists = var:bfl_resolution_trustee } exists = scope:bfl_estate_host }
+            set_variable = { name = bfl_resolution_trustee value = scope:bfl_estate_host } }
+        bfl_transfer_estate_native_credit = yes
+        bfl_transfer_estate_financial_claims = yes
+    }
+} } }
+monthly_country_pulse = { on_actions = { bfl_resolution_estate_pulse } }
+bfl_resolution_estate_pulse = { effect = { bfl_process_resolution_estates = yes } }

@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -41,6 +41,15 @@ try {
         'm7later' { 'tools/m7_later_suite.py' }
         'm7company' { 'tools/m7_company_suite.py' }
         'm7authority' { 'tools/m7_authority_suite.py' }
+        'm9' { 'tools/m9_resolution_suite.py' }
+        'm9estate' { 'tools/m9_estate_suite.py' }
+        'm9workouts' { 'tools/m9_workout_suite.py' }
+        'm9assets' { 'tools/m9_assets_suite.py' }
+        'm9default' { 'tools/m9_default_suite.py' }
+        'm9overseas' { 'tools/m9_overseas_suite.py' }
+        'm9receiver' { 'tools/m9_receiver_suite.py' }
+        'm9custody' { 'tools/m9_custody_suite.py' }
+        'm9projects' { 'tools/m9_projects_suite.py' }
         'm8' { 'tools/m8_monetary_suite.py' }
         'm8traditions' { 'tools/m8_traditions_suite.py' }
         'm8renaissance' { 'tools/m8_renaissance_suite.py' }

@@ -1,0 +1,1491 @@
+﻿bfl_initialize_resolution_money = {
+if = { limit = { NOT = { has_variable = bfl_note_01_recovery_held } } set_variable = { name = bfl_note_01_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_02_recovery_held } } set_variable = { name = bfl_note_02_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_03_recovery_held } } set_variable = { name = bfl_note_03_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_04_recovery_held } } set_variable = { name = bfl_note_04_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_05_recovery_held } } set_variable = { name = bfl_note_05_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_06_recovery_held } } set_variable = { name = bfl_note_06_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_07_recovery_held } } set_variable = { name = bfl_note_07_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_note_08_recovery_held } } set_variable = { name = bfl_note_08_recovery_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_con_01_recovery_held } } set_variable = { name = bfl_con_01_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_01_pledge NOT = { has_variable = bfl_con_01_discount_principal } }
+                    set_variable = { name = bfl_con_01_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_02_recovery_held } } set_variable = { name = bfl_con_02_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_02_pledge NOT = { has_variable = bfl_con_02_discount_principal } }
+                    set_variable = { name = bfl_con_02_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_03_recovery_held } } set_variable = { name = bfl_con_03_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_03_pledge NOT = { has_variable = bfl_con_03_discount_principal } }
+                    set_variable = { name = bfl_con_03_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_04_recovery_held } } set_variable = { name = bfl_con_04_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_04_pledge NOT = { has_variable = bfl_con_04_discount_principal } }
+                    set_variable = { name = bfl_con_04_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_05_recovery_held } } set_variable = { name = bfl_con_05_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_05_pledge NOT = { has_variable = bfl_con_05_discount_principal } }
+                    set_variable = { name = bfl_con_05_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_06_recovery_held } } set_variable = { name = bfl_con_06_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_06_pledge NOT = { has_variable = bfl_con_06_discount_principal } }
+                    set_variable = { name = bfl_con_06_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_07_recovery_held } } set_variable = { name = bfl_con_07_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_07_pledge NOT = { has_variable = bfl_con_07_discount_principal } }
+                    set_variable = { name = bfl_con_07_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_08_recovery_held } } set_variable = { name = bfl_con_08_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_08_pledge NOT = { has_variable = bfl_con_08_discount_principal } }
+                    set_variable = { name = bfl_con_08_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_09_recovery_held } } set_variable = { name = bfl_con_09_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_09_pledge NOT = { has_variable = bfl_con_09_discount_principal } }
+                    set_variable = { name = bfl_con_09_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_10_recovery_held } } set_variable = { name = bfl_con_10_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_10_pledge NOT = { has_variable = bfl_con_10_discount_principal } }
+                    set_variable = { name = bfl_con_10_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_11_recovery_held } } set_variable = { name = bfl_con_11_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_11_pledge NOT = { has_variable = bfl_con_11_discount_principal } }
+                    set_variable = { name = bfl_con_11_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_12_recovery_held } } set_variable = { name = bfl_con_12_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_12_pledge NOT = { has_variable = bfl_con_12_discount_principal } }
+                    set_variable = { name = bfl_con_12_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_13_recovery_held } } set_variable = { name = bfl_con_13_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_13_pledge NOT = { has_variable = bfl_con_13_discount_principal } }
+                    set_variable = { name = bfl_con_13_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_14_recovery_held } } set_variable = { name = bfl_con_14_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_14_pledge NOT = { has_variable = bfl_con_14_discount_principal } }
+                    set_variable = { name = bfl_con_14_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_15_recovery_held } } set_variable = { name = bfl_con_15_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_15_pledge NOT = { has_variable = bfl_con_15_discount_principal } }
+                    set_variable = { name = bfl_con_15_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_16_recovery_held } } set_variable = { name = bfl_con_16_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_16_pledge NOT = { has_variable = bfl_con_16_discount_principal } }
+                    set_variable = { name = bfl_con_16_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_17_recovery_held } } set_variable = { name = bfl_con_17_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_17_pledge NOT = { has_variable = bfl_con_17_discount_principal } }
+                    set_variable = { name = bfl_con_17_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_18_recovery_held } } set_variable = { name = bfl_con_18_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_18_pledge NOT = { has_variable = bfl_con_18_discount_principal } }
+                    set_variable = { name = bfl_con_18_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_19_recovery_held } } set_variable = { name = bfl_con_19_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_19_pledge NOT = { has_variable = bfl_con_19_discount_principal } }
+                    set_variable = { name = bfl_con_19_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_20_recovery_held } } set_variable = { name = bfl_con_20_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_20_pledge NOT = { has_variable = bfl_con_20_discount_principal } }
+                    set_variable = { name = bfl_con_20_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_21_recovery_held } } set_variable = { name = bfl_con_21_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_21_pledge NOT = { has_variable = bfl_con_21_discount_principal } }
+                    set_variable = { name = bfl_con_21_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_22_recovery_held } } set_variable = { name = bfl_con_22_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_22_pledge NOT = { has_variable = bfl_con_22_discount_principal } }
+                    set_variable = { name = bfl_con_22_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_23_recovery_held } } set_variable = { name = bfl_con_23_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_23_pledge NOT = { has_variable = bfl_con_23_discount_principal } }
+                    set_variable = { name = bfl_con_23_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_24_recovery_held } } set_variable = { name = bfl_con_24_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_24_pledge NOT = { has_variable = bfl_con_24_discount_principal } }
+                    set_variable = { name = bfl_con_24_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_25_recovery_held } } set_variable = { name = bfl_con_25_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_25_pledge NOT = { has_variable = bfl_con_25_discount_principal } }
+                    set_variable = { name = bfl_con_25_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_26_recovery_held } } set_variable = { name = bfl_con_26_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_26_pledge NOT = { has_variable = bfl_con_26_discount_principal } }
+                    set_variable = { name = bfl_con_26_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_27_recovery_held } } set_variable = { name = bfl_con_27_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_27_pledge NOT = { has_variable = bfl_con_27_discount_principal } }
+                    set_variable = { name = bfl_con_27_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_28_recovery_held } } set_variable = { name = bfl_con_28_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_28_pledge NOT = { has_variable = bfl_con_28_discount_principal } }
+                    set_variable = { name = bfl_con_28_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_29_recovery_held } } set_variable = { name = bfl_con_29_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_29_pledge NOT = { has_variable = bfl_con_29_discount_principal } }
+                    set_variable = { name = bfl_con_29_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_30_recovery_held } } set_variable = { name = bfl_con_30_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_30_pledge NOT = { has_variable = bfl_con_30_discount_principal } }
+                    set_variable = { name = bfl_con_30_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_31_recovery_held } } set_variable = { name = bfl_con_31_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_31_pledge NOT = { has_variable = bfl_con_31_discount_principal } }
+                    set_variable = { name = bfl_con_31_discount_principal value = 75 } }
+if = { limit = { NOT = { has_variable = bfl_con_32_recovery_held } } set_variable = { name = bfl_con_32_recovery_held value = 0 } }
+if = { limit = { has_variable = bfl_con_32_pledge NOT = { has_variable = bfl_con_32_discount_principal } }
+                    set_variable = { name = bfl_con_32_discount_principal value = 75 } }
+}
+bfl_service_resolution_money = {
+bfl_initialize_resolution_money = yes
+        if = { limit = { var:bfl_state = 4 bfl_resolution_money_claims > 0 }
+            save_scope_as = bfl_money_estate
+            set_variable = { name = bfl_money_pool value = { value = bfl_resolution_money_claims subtract = bfl_resolution_money_held min = 0 } }
+            set_variable = { name = bfl_money_budget value = { value = gold subtract = bfl_resolution_custody_reserve
+                subtract = bfl_resolution_money_held min = 0 max = var:bfl_money_pool } }
+    if = { limit = { var:bfl_note_01_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_01_recovery_held add = { value = var:bfl_note_01_face
+                    subtract = var:bfl_note_01_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_02_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_02_recovery_held add = { value = var:bfl_note_02_face
+                    subtract = var:bfl_note_02_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_03_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_03_recovery_held add = { value = var:bfl_note_03_face
+                    subtract = var:bfl_note_03_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_04_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_04_recovery_held add = { value = var:bfl_note_04_face
+                    subtract = var:bfl_note_04_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_05_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_05_recovery_held add = { value = var:bfl_note_05_face
+                    subtract = var:bfl_note_05_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_06_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_06_recovery_held add = { value = var:bfl_note_06_face
+                    subtract = var:bfl_note_06_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_07_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_07_recovery_held add = { value = var:bfl_note_07_face
+                    subtract = var:bfl_note_07_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_08_face > 0 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_note_08_recovery_held add = { value = var:bfl_note_08_face
+                    subtract = var:bfl_note_08_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_01_recovery_held add = { value = var:bfl_con_01_basis
+                    subtract = var:bfl_con_01_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_02_recovery_held add = { value = var:bfl_con_02_basis
+                    subtract = var:bfl_con_02_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_03_recovery_held add = { value = var:bfl_con_03_basis
+                    subtract = var:bfl_con_03_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_04_recovery_held add = { value = var:bfl_con_04_basis
+                    subtract = var:bfl_con_04_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_05_recovery_held add = { value = var:bfl_con_05_basis
+                    subtract = var:bfl_con_05_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_06_recovery_held add = { value = var:bfl_con_06_basis
+                    subtract = var:bfl_con_06_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_07_recovery_held add = { value = var:bfl_con_07_basis
+                    subtract = var:bfl_con_07_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_08_recovery_held add = { value = var:bfl_con_08_basis
+                    subtract = var:bfl_con_08_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_09_recovery_held add = { value = var:bfl_con_09_basis
+                    subtract = var:bfl_con_09_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_10_recovery_held add = { value = var:bfl_con_10_basis
+                    subtract = var:bfl_con_10_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_11_recovery_held add = { value = var:bfl_con_11_basis
+                    subtract = var:bfl_con_11_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_12_recovery_held add = { value = var:bfl_con_12_basis
+                    subtract = var:bfl_con_12_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_13_recovery_held add = { value = var:bfl_con_13_basis
+                    subtract = var:bfl_con_13_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_14_recovery_held add = { value = var:bfl_con_14_basis
+                    subtract = var:bfl_con_14_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_15_recovery_held add = { value = var:bfl_con_15_basis
+                    subtract = var:bfl_con_15_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_16_recovery_held add = { value = var:bfl_con_16_basis
+                    subtract = var:bfl_con_16_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_17_recovery_held add = { value = var:bfl_con_17_basis
+                    subtract = var:bfl_con_17_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_18_recovery_held add = { value = var:bfl_con_18_basis
+                    subtract = var:bfl_con_18_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_19_recovery_held add = { value = var:bfl_con_19_basis
+                    subtract = var:bfl_con_19_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_20_recovery_held add = { value = var:bfl_con_20_basis
+                    subtract = var:bfl_con_20_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_21_recovery_held add = { value = var:bfl_con_21_basis
+                    subtract = var:bfl_con_21_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_22_recovery_held add = { value = var:bfl_con_22_basis
+                    subtract = var:bfl_con_22_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_23_recovery_held add = { value = var:bfl_con_23_basis
+                    subtract = var:bfl_con_23_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_24_recovery_held add = { value = var:bfl_con_24_basis
+                    subtract = var:bfl_con_24_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_25_recovery_held add = { value = var:bfl_con_25_basis
+                    subtract = var:bfl_con_25_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_26_recovery_held add = { value = var:bfl_con_26_basis
+                    subtract = var:bfl_con_26_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_27_recovery_held add = { value = var:bfl_con_27_basis
+                    subtract = var:bfl_con_27_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_28_recovery_held add = { value = var:bfl_con_28_basis
+                    subtract = var:bfl_con_28_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_29_recovery_held add = { value = var:bfl_con_29_basis
+                    subtract = var:bfl_con_29_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_30_recovery_held add = { value = var:bfl_con_30_basis
+                    subtract = var:bfl_con_30_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_31_recovery_held add = { value = var:bfl_con_31_basis
+                    subtract = var:bfl_con_31_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_money_pool > 0 var:bfl_money_budget > 0 }
+                change_variable = { name = bfl_con_32_recovery_held add = { value = var:bfl_con_32_basis
+                    subtract = var:bfl_con_32_recovery_held multiply = var:bfl_money_budget divide = var:bfl_money_pool
+                    multiply = 100 floor = yes divide = 100 } } }
+if = { limit = { var:bfl_note_01_face > 0 var:bfl_note_01_recovery_held > 0
+            exists = var:bfl_note_01_holder var:bfl_note_01_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_01_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_01_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_01_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_01_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_01_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_02_face > 0 var:bfl_note_02_recovery_held > 0
+            exists = var:bfl_note_02_holder var:bfl_note_02_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_02_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_02_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_02_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_02_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_02_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_03_face > 0 var:bfl_note_03_recovery_held > 0
+            exists = var:bfl_note_03_holder var:bfl_note_03_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_03_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_03_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_03_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_03_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_03_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_04_face > 0 var:bfl_note_04_recovery_held > 0
+            exists = var:bfl_note_04_holder var:bfl_note_04_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_04_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_04_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_04_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_04_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_04_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_05_face > 0 var:bfl_note_05_recovery_held > 0
+            exists = var:bfl_note_05_holder var:bfl_note_05_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_05_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_05_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_05_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_05_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_05_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_06_face > 0 var:bfl_note_06_recovery_held > 0
+            exists = var:bfl_note_06_holder var:bfl_note_06_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_06_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_06_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_06_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_06_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_06_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_07_face > 0 var:bfl_note_07_recovery_held > 0
+            exists = var:bfl_note_07_holder var:bfl_note_07_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_07_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_07_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_07_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_07_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_07_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_note_08_face > 0 var:bfl_note_08_recovery_held > 0
+            exists = var:bfl_note_08_holder var:bfl_note_08_holder = { bfl_financial_recipient = yes }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_note_08_recovery_held }
+            add_gold = bfl_negative_payment
+            var:bfl_note_08_holder = { add_gold = scope:bfl_money_estate.var:bfl_payment }
+            change_variable = { name = bfl_note_08_face subtract = var:bfl_payment }
+            set_variable = { name = bfl_note_08_recovery_held value = 0 }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            var:bfl_note_08_holder = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 var:bfl_con_01_recovery_held > 0
+            bfl_period >= var:bfl_con_01_maturity_period exists = var:bfl_con_01_party var:bfl_con_01_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_01_pledge } AND = { exists = var:bfl_con_01_pledge var:bfl_con_01_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_01_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_01_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_01_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_01_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_01_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_01_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_01_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_01_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_01_discount_due <= 0 }
+                    var:bfl_con_01_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_01_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_01_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_01_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_01_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_01_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_01_basis <= 0 } set_variable = { name = bfl_con_01_active value = 0 } set_variable = { name = bfl_con_01_state value = 3 } }
+            var:bfl_con_01_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_01_pledge } var:bfl_con_01_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 var:bfl_con_02_recovery_held > 0
+            bfl_period >= var:bfl_con_02_maturity_period exists = var:bfl_con_02_party var:bfl_con_02_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_02_pledge } AND = { exists = var:bfl_con_02_pledge var:bfl_con_02_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_02_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_02_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_02_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_02_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_02_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_02_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_02_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_02_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_02_discount_due <= 0 }
+                    var:bfl_con_02_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_02_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_02_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_02_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_02_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_02_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_02_basis <= 0 } set_variable = { name = bfl_con_02_active value = 0 } set_variable = { name = bfl_con_02_state value = 3 } }
+            var:bfl_con_02_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_02_pledge } var:bfl_con_02_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 var:bfl_con_03_recovery_held > 0
+            bfl_period >= var:bfl_con_03_maturity_period exists = var:bfl_con_03_party var:bfl_con_03_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_03_pledge } AND = { exists = var:bfl_con_03_pledge var:bfl_con_03_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_03_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_03_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_03_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_03_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_03_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_03_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_03_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_03_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_03_discount_due <= 0 }
+                    var:bfl_con_03_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_03_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_03_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_03_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_03_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_03_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_03_basis <= 0 } set_variable = { name = bfl_con_03_active value = 0 } set_variable = { name = bfl_con_03_state value = 3 } }
+            var:bfl_con_03_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_03_pledge } var:bfl_con_03_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 var:bfl_con_04_recovery_held > 0
+            bfl_period >= var:bfl_con_04_maturity_period exists = var:bfl_con_04_party var:bfl_con_04_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_04_pledge } AND = { exists = var:bfl_con_04_pledge var:bfl_con_04_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_04_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_04_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_04_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_04_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_04_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_04_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_04_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_04_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_04_discount_due <= 0 }
+                    var:bfl_con_04_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_04_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_04_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_04_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_04_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_04_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_04_basis <= 0 } set_variable = { name = bfl_con_04_active value = 0 } set_variable = { name = bfl_con_04_state value = 3 } }
+            var:bfl_con_04_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_04_pledge } var:bfl_con_04_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 var:bfl_con_05_recovery_held > 0
+            bfl_period >= var:bfl_con_05_maturity_period exists = var:bfl_con_05_party var:bfl_con_05_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_05_pledge } AND = { exists = var:bfl_con_05_pledge var:bfl_con_05_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_05_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_05_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_05_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_05_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_05_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_05_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_05_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_05_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_05_discount_due <= 0 }
+                    var:bfl_con_05_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_05_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_05_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_05_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_05_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_05_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_05_basis <= 0 } set_variable = { name = bfl_con_05_active value = 0 } set_variable = { name = bfl_con_05_state value = 3 } }
+            var:bfl_con_05_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_05_pledge } var:bfl_con_05_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 var:bfl_con_06_recovery_held > 0
+            bfl_period >= var:bfl_con_06_maturity_period exists = var:bfl_con_06_party var:bfl_con_06_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_06_pledge } AND = { exists = var:bfl_con_06_pledge var:bfl_con_06_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_06_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_06_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_06_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_06_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_06_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_06_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_06_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_06_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_06_discount_due <= 0 }
+                    var:bfl_con_06_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_06_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_06_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_06_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_06_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_06_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_06_basis <= 0 } set_variable = { name = bfl_con_06_active value = 0 } set_variable = { name = bfl_con_06_state value = 3 } }
+            var:bfl_con_06_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_06_pledge } var:bfl_con_06_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 var:bfl_con_07_recovery_held > 0
+            bfl_period >= var:bfl_con_07_maturity_period exists = var:bfl_con_07_party var:bfl_con_07_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_07_pledge } AND = { exists = var:bfl_con_07_pledge var:bfl_con_07_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_07_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_07_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_07_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_07_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_07_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_07_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_07_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_07_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_07_discount_due <= 0 }
+                    var:bfl_con_07_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_07_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_07_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_07_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_07_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_07_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_07_basis <= 0 } set_variable = { name = bfl_con_07_active value = 0 } set_variable = { name = bfl_con_07_state value = 3 } }
+            var:bfl_con_07_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_07_pledge } var:bfl_con_07_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 var:bfl_con_08_recovery_held > 0
+            bfl_period >= var:bfl_con_08_maturity_period exists = var:bfl_con_08_party var:bfl_con_08_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_08_pledge } AND = { exists = var:bfl_con_08_pledge var:bfl_con_08_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_08_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_08_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_08_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_08_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_08_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_08_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_08_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_08_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_08_discount_due <= 0 }
+                    var:bfl_con_08_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_08_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_08_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_08_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_08_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_08_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_08_basis <= 0 } set_variable = { name = bfl_con_08_active value = 0 } set_variable = { name = bfl_con_08_state value = 3 } }
+            var:bfl_con_08_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_08_pledge } var:bfl_con_08_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 var:bfl_con_09_recovery_held > 0
+            bfl_period >= var:bfl_con_09_maturity_period exists = var:bfl_con_09_party var:bfl_con_09_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_09_pledge } AND = { exists = var:bfl_con_09_pledge var:bfl_con_09_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_09_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_09_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_09_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_09_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_09_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_09_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_09_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_09_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_09_discount_due <= 0 }
+                    var:bfl_con_09_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_09_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_09_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_09_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_09_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_09_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_09_basis <= 0 } set_variable = { name = bfl_con_09_active value = 0 } set_variable = { name = bfl_con_09_state value = 3 } }
+            var:bfl_con_09_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_09_pledge } var:bfl_con_09_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 var:bfl_con_10_recovery_held > 0
+            bfl_period >= var:bfl_con_10_maturity_period exists = var:bfl_con_10_party var:bfl_con_10_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_10_pledge } AND = { exists = var:bfl_con_10_pledge var:bfl_con_10_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_10_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_10_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_10_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_10_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_10_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_10_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_10_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_10_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_10_discount_due <= 0 }
+                    var:bfl_con_10_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_10_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_10_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_10_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_10_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_10_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_10_basis <= 0 } set_variable = { name = bfl_con_10_active value = 0 } set_variable = { name = bfl_con_10_state value = 3 } }
+            var:bfl_con_10_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_10_pledge } var:bfl_con_10_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 var:bfl_con_11_recovery_held > 0
+            bfl_period >= var:bfl_con_11_maturity_period exists = var:bfl_con_11_party var:bfl_con_11_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_11_pledge } AND = { exists = var:bfl_con_11_pledge var:bfl_con_11_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_11_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_11_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_11_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_11_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_11_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_11_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_11_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_11_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_11_discount_due <= 0 }
+                    var:bfl_con_11_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_11_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_11_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_11_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_11_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_11_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_11_basis <= 0 } set_variable = { name = bfl_con_11_active value = 0 } set_variable = { name = bfl_con_11_state value = 3 } }
+            var:bfl_con_11_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_11_pledge } var:bfl_con_11_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 var:bfl_con_12_recovery_held > 0
+            bfl_period >= var:bfl_con_12_maturity_period exists = var:bfl_con_12_party var:bfl_con_12_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_12_pledge } AND = { exists = var:bfl_con_12_pledge var:bfl_con_12_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_12_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_12_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_12_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_12_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_12_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_12_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_12_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_12_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_12_discount_due <= 0 }
+                    var:bfl_con_12_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_12_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_12_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_12_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_12_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_12_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_12_basis <= 0 } set_variable = { name = bfl_con_12_active value = 0 } set_variable = { name = bfl_con_12_state value = 3 } }
+            var:bfl_con_12_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_12_pledge } var:bfl_con_12_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 var:bfl_con_13_recovery_held > 0
+            bfl_period >= var:bfl_con_13_maturity_period exists = var:bfl_con_13_party var:bfl_con_13_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_13_pledge } AND = { exists = var:bfl_con_13_pledge var:bfl_con_13_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_13_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_13_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_13_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_13_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_13_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_13_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_13_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_13_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_13_discount_due <= 0 }
+                    var:bfl_con_13_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_13_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_13_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_13_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_13_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_13_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_13_basis <= 0 } set_variable = { name = bfl_con_13_active value = 0 } set_variable = { name = bfl_con_13_state value = 3 } }
+            var:bfl_con_13_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_13_pledge } var:bfl_con_13_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 var:bfl_con_14_recovery_held > 0
+            bfl_period >= var:bfl_con_14_maturity_period exists = var:bfl_con_14_party var:bfl_con_14_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_14_pledge } AND = { exists = var:bfl_con_14_pledge var:bfl_con_14_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_14_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_14_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_14_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_14_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_14_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_14_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_14_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_14_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_14_discount_due <= 0 }
+                    var:bfl_con_14_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_14_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_14_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_14_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_14_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_14_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_14_basis <= 0 } set_variable = { name = bfl_con_14_active value = 0 } set_variable = { name = bfl_con_14_state value = 3 } }
+            var:bfl_con_14_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_14_pledge } var:bfl_con_14_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 var:bfl_con_15_recovery_held > 0
+            bfl_period >= var:bfl_con_15_maturity_period exists = var:bfl_con_15_party var:bfl_con_15_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_15_pledge } AND = { exists = var:bfl_con_15_pledge var:bfl_con_15_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_15_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_15_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_15_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_15_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_15_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_15_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_15_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_15_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_15_discount_due <= 0 }
+                    var:bfl_con_15_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_15_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_15_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_15_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_15_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_15_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_15_basis <= 0 } set_variable = { name = bfl_con_15_active value = 0 } set_variable = { name = bfl_con_15_state value = 3 } }
+            var:bfl_con_15_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_15_pledge } var:bfl_con_15_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 var:bfl_con_16_recovery_held > 0
+            bfl_period >= var:bfl_con_16_maturity_period exists = var:bfl_con_16_party var:bfl_con_16_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_16_pledge } AND = { exists = var:bfl_con_16_pledge var:bfl_con_16_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_16_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_16_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_16_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_16_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_16_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_16_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_16_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_16_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_16_discount_due <= 0 }
+                    var:bfl_con_16_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_16_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_16_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_16_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_16_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_16_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_16_basis <= 0 } set_variable = { name = bfl_con_16_active value = 0 } set_variable = { name = bfl_con_16_state value = 3 } }
+            var:bfl_con_16_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_16_pledge } var:bfl_con_16_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 var:bfl_con_17_recovery_held > 0
+            bfl_period >= var:bfl_con_17_maturity_period exists = var:bfl_con_17_party var:bfl_con_17_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_17_pledge } AND = { exists = var:bfl_con_17_pledge var:bfl_con_17_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_17_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_17_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_17_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_17_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_17_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_17_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_17_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_17_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_17_discount_due <= 0 }
+                    var:bfl_con_17_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_17_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_17_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_17_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_17_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_17_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_17_basis <= 0 } set_variable = { name = bfl_con_17_active value = 0 } set_variable = { name = bfl_con_17_state value = 3 } }
+            var:bfl_con_17_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_17_pledge } var:bfl_con_17_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 var:bfl_con_18_recovery_held > 0
+            bfl_period >= var:bfl_con_18_maturity_period exists = var:bfl_con_18_party var:bfl_con_18_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_18_pledge } AND = { exists = var:bfl_con_18_pledge var:bfl_con_18_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_18_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_18_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_18_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_18_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_18_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_18_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_18_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_18_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_18_discount_due <= 0 }
+                    var:bfl_con_18_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_18_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_18_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_18_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_18_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_18_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_18_basis <= 0 } set_variable = { name = bfl_con_18_active value = 0 } set_variable = { name = bfl_con_18_state value = 3 } }
+            var:bfl_con_18_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_18_pledge } var:bfl_con_18_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 var:bfl_con_19_recovery_held > 0
+            bfl_period >= var:bfl_con_19_maturity_period exists = var:bfl_con_19_party var:bfl_con_19_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_19_pledge } AND = { exists = var:bfl_con_19_pledge var:bfl_con_19_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_19_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_19_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_19_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_19_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_19_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_19_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_19_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_19_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_19_discount_due <= 0 }
+                    var:bfl_con_19_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_19_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_19_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_19_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_19_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_19_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_19_basis <= 0 } set_variable = { name = bfl_con_19_active value = 0 } set_variable = { name = bfl_con_19_state value = 3 } }
+            var:bfl_con_19_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_19_pledge } var:bfl_con_19_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 var:bfl_con_20_recovery_held > 0
+            bfl_period >= var:bfl_con_20_maturity_period exists = var:bfl_con_20_party var:bfl_con_20_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_20_pledge } AND = { exists = var:bfl_con_20_pledge var:bfl_con_20_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_20_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_20_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_20_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_20_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_20_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_20_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_20_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_20_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_20_discount_due <= 0 }
+                    var:bfl_con_20_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_20_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_20_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_20_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_20_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_20_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_20_basis <= 0 } set_variable = { name = bfl_con_20_active value = 0 } set_variable = { name = bfl_con_20_state value = 3 } }
+            var:bfl_con_20_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_20_pledge } var:bfl_con_20_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 var:bfl_con_21_recovery_held > 0
+            bfl_period >= var:bfl_con_21_maturity_period exists = var:bfl_con_21_party var:bfl_con_21_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_21_pledge } AND = { exists = var:bfl_con_21_pledge var:bfl_con_21_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_21_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_21_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_21_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_21_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_21_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_21_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_21_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_21_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_21_discount_due <= 0 }
+                    var:bfl_con_21_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_21_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_21_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_21_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_21_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_21_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_21_basis <= 0 } set_variable = { name = bfl_con_21_active value = 0 } set_variable = { name = bfl_con_21_state value = 3 } }
+            var:bfl_con_21_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_21_pledge } var:bfl_con_21_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 var:bfl_con_22_recovery_held > 0
+            bfl_period >= var:bfl_con_22_maturity_period exists = var:bfl_con_22_party var:bfl_con_22_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_22_pledge } AND = { exists = var:bfl_con_22_pledge var:bfl_con_22_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_22_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_22_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_22_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_22_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_22_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_22_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_22_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_22_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_22_discount_due <= 0 }
+                    var:bfl_con_22_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_22_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_22_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_22_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_22_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_22_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_22_basis <= 0 } set_variable = { name = bfl_con_22_active value = 0 } set_variable = { name = bfl_con_22_state value = 3 } }
+            var:bfl_con_22_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_22_pledge } var:bfl_con_22_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 var:bfl_con_23_recovery_held > 0
+            bfl_period >= var:bfl_con_23_maturity_period exists = var:bfl_con_23_party var:bfl_con_23_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_23_pledge } AND = { exists = var:bfl_con_23_pledge var:bfl_con_23_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_23_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_23_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_23_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_23_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_23_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_23_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_23_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_23_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_23_discount_due <= 0 }
+                    var:bfl_con_23_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_23_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_23_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_23_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_23_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_23_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_23_basis <= 0 } set_variable = { name = bfl_con_23_active value = 0 } set_variable = { name = bfl_con_23_state value = 3 } }
+            var:bfl_con_23_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_23_pledge } var:bfl_con_23_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 var:bfl_con_24_recovery_held > 0
+            bfl_period >= var:bfl_con_24_maturity_period exists = var:bfl_con_24_party var:bfl_con_24_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_24_pledge } AND = { exists = var:bfl_con_24_pledge var:bfl_con_24_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_24_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_24_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_24_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_24_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_24_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_24_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_24_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_24_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_24_discount_due <= 0 }
+                    var:bfl_con_24_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_24_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_24_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_24_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_24_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_24_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_24_basis <= 0 } set_variable = { name = bfl_con_24_active value = 0 } set_variable = { name = bfl_con_24_state value = 3 } }
+            var:bfl_con_24_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_24_pledge } var:bfl_con_24_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 var:bfl_con_25_recovery_held > 0
+            bfl_period >= var:bfl_con_25_maturity_period exists = var:bfl_con_25_party var:bfl_con_25_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_25_pledge } AND = { exists = var:bfl_con_25_pledge var:bfl_con_25_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_25_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_25_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_25_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_25_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_25_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_25_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_25_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_25_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_25_discount_due <= 0 }
+                    var:bfl_con_25_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_25_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_25_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_25_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_25_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_25_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_25_basis <= 0 } set_variable = { name = bfl_con_25_active value = 0 } set_variable = { name = bfl_con_25_state value = 3 } }
+            var:bfl_con_25_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_25_pledge } var:bfl_con_25_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 var:bfl_con_26_recovery_held > 0
+            bfl_period >= var:bfl_con_26_maturity_period exists = var:bfl_con_26_party var:bfl_con_26_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_26_pledge } AND = { exists = var:bfl_con_26_pledge var:bfl_con_26_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_26_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_26_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_26_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_26_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_26_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_26_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_26_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_26_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_26_discount_due <= 0 }
+                    var:bfl_con_26_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_26_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_26_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_26_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_26_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_26_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_26_basis <= 0 } set_variable = { name = bfl_con_26_active value = 0 } set_variable = { name = bfl_con_26_state value = 3 } }
+            var:bfl_con_26_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_26_pledge } var:bfl_con_26_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 var:bfl_con_27_recovery_held > 0
+            bfl_period >= var:bfl_con_27_maturity_period exists = var:bfl_con_27_party var:bfl_con_27_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_27_pledge } AND = { exists = var:bfl_con_27_pledge var:bfl_con_27_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_27_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_27_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_27_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_27_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_27_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_27_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_27_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_27_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_27_discount_due <= 0 }
+                    var:bfl_con_27_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_27_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_27_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_27_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_27_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_27_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_27_basis <= 0 } set_variable = { name = bfl_con_27_active value = 0 } set_variable = { name = bfl_con_27_state value = 3 } }
+            var:bfl_con_27_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_27_pledge } var:bfl_con_27_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 var:bfl_con_28_recovery_held > 0
+            bfl_period >= var:bfl_con_28_maturity_period exists = var:bfl_con_28_party var:bfl_con_28_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_28_pledge } AND = { exists = var:bfl_con_28_pledge var:bfl_con_28_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_28_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_28_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_28_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_28_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_28_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_28_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_28_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_28_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_28_discount_due <= 0 }
+                    var:bfl_con_28_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_28_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_28_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_28_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_28_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_28_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_28_basis <= 0 } set_variable = { name = bfl_con_28_active value = 0 } set_variable = { name = bfl_con_28_state value = 3 } }
+            var:bfl_con_28_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_28_pledge } var:bfl_con_28_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 var:bfl_con_29_recovery_held > 0
+            bfl_period >= var:bfl_con_29_maturity_period exists = var:bfl_con_29_party var:bfl_con_29_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_29_pledge } AND = { exists = var:bfl_con_29_pledge var:bfl_con_29_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_29_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_29_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_29_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_29_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_29_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_29_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_29_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_29_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_29_discount_due <= 0 }
+                    var:bfl_con_29_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_29_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_29_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_29_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_29_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_29_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_29_basis <= 0 } set_variable = { name = bfl_con_29_active value = 0 } set_variable = { name = bfl_con_29_state value = 3 } }
+            var:bfl_con_29_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_29_pledge } var:bfl_con_29_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 var:bfl_con_30_recovery_held > 0
+            bfl_period >= var:bfl_con_30_maturity_period exists = var:bfl_con_30_party var:bfl_con_30_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_30_pledge } AND = { exists = var:bfl_con_30_pledge var:bfl_con_30_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_30_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_30_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_30_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_30_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_30_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_30_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_30_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_30_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_30_discount_due <= 0 }
+                    var:bfl_con_30_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_30_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_30_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_30_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_30_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_30_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_30_basis <= 0 } set_variable = { name = bfl_con_30_active value = 0 } set_variable = { name = bfl_con_30_state value = 3 } }
+            var:bfl_con_30_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_30_pledge } var:bfl_con_30_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 var:bfl_con_31_recovery_held > 0
+            bfl_period >= var:bfl_con_31_maturity_period exists = var:bfl_con_31_party var:bfl_con_31_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_31_pledge } AND = { exists = var:bfl_con_31_pledge var:bfl_con_31_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_31_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_31_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_31_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_31_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_31_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_31_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_31_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_31_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_31_discount_due <= 0 }
+                    var:bfl_con_31_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_31_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_31_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_31_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_31_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_31_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_31_basis <= 0 } set_variable = { name = bfl_con_31_active value = 0 } set_variable = { name = bfl_con_31_state value = 3 } }
+            var:bfl_con_31_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_31_pledge } var:bfl_con_31_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 var:bfl_con_32_recovery_held > 0
+            bfl_period >= var:bfl_con_32_maturity_period exists = var:bfl_con_32_party var:bfl_con_32_party = { bfl_financial_recipient = yes }
+            OR = { NOT = { has_variable = bfl_con_32_pledge } AND = { exists = var:bfl_con_32_pledge var:bfl_con_32_pledge = { bfl_financial_recipient = yes } } }
+            gold >= { value = bfl_resolution_custody_reserve add = bfl_resolution_money_held } }
+            set_variable = { name = bfl_payment value = var:bfl_con_32_recovery_held }
+            set_variable = { name = bfl_money_holder_payment value = var:bfl_payment }
+            if = { limit = { has_variable = bfl_con_32_pledge }
+                set_variable = { name = bfl_money_lender_payment value = { value = var:bfl_payment max = var:bfl_con_32_discount_due } }
+                set_variable = { name = bfl_money_principal_payment value = { value = var:bfl_money_lender_payment max = var:bfl_con_32_discount_principal } }
+                change_variable = { name = bfl_money_holder_payment subtract = var:bfl_money_lender_payment }
+                add_gold = { value = var:bfl_money_lender_payment multiply = -1 }
+                var:bfl_con_32_pledge = { add_gold = scope:bfl_money_estate.var:bfl_money_lender_payment
+                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                var:bfl_con_32_party = { change_variable = { name = bfl_other_payables subtract = scope:bfl_money_estate.var:bfl_money_principal_payment }
+                    change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_money_estate.var:bfl_money_lender_payment
+                        subtract = scope:bfl_money_estate.var:bfl_money_principal_payment } } }
+                change_variable = { name = bfl_con_32_discount_principal subtract = var:bfl_money_principal_payment }
+                change_variable = { name = bfl_con_32_discount_due subtract = var:bfl_money_lender_payment }
+                if = { limit = { var:bfl_con_32_discount_due <= 0 }
+                    var:bfl_con_32_party = { remove_variable = bfl_discount_issuer }
+                    var:bfl_con_32_pledge = { bfl_reconcile_monetary_assets = yes }
+                    remove_variable = bfl_con_32_pledge
+                }
+            }
+            add_gold = { value = var:bfl_money_holder_payment multiply = -1 }
+            var:bfl_con_32_party = { add_gold = scope:bfl_money_estate.var:bfl_money_holder_payment }
+            change_variable = { name = bfl_con_32_basis subtract = var:bfl_payment }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_payment }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_payment }
+            set_variable = { name = bfl_con_32_recovery_held value = 0 }
+            if = { limit = { var:bfl_con_32_basis <= 0 } set_variable = { name = bfl_con_32_active value = 0 } set_variable = { name = bfl_con_32_state value = 3 } }
+            var:bfl_con_32_party = { if = { limit = { bfl_has_accounts = yes } bfl_reconcile_monetary_assets = yes } }
+            if = { limit = { exists = var:bfl_con_32_pledge } var:bfl_con_32_pledge = { bfl_reconcile_monetary_assets = yes } }
+        }
+}
+}

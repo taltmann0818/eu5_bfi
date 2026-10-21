@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "token": "0b61a4446e794869b8a07db0adfc8761",
+  "runtime_sha256": "d4e35f7142991be8a58c827f83e894c790b175e50f0ca9f9f5b52041ce1d48eb",
+  "results": {
+    "traditions_grant_cannot_authorize_advanced_workout": "PASS",
+    "live_issuer_cannot_impose_statutory_losses": "PASS",
+    "actual_destroyed_estate_pays_reserved_claims_first": "PASS",
+    "native_and_custom_creditor_costs_default_once": "PASS",
+    "failed_collateral_keeps_independent_recourse_debt": "PASS",
+    "exhausted_estate_closes_without_shareholder_payment": "PASS",
+    "recourse_repayment_works_after_collateral_issuer_closes": "PASS",
+    "statutory_default_stays_closed_next_month": "PASS",
+    "statutory_default_and_recourse_survive_reload": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "f6c4dcadf776563f2222b97b6a94d2b8a035d1aafae1e0481657b67b6c7b6413",
+  "assertions": 9,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

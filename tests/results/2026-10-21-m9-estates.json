@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "token": "8ecd841821b64174a5ecfb7b5fd4ba5d",
+  "runtime_sha256": "b73c609c414ce44789082f034e1351bcfac20de28d0ed678d112531baf057cd2",
+  "results": {
+    "native_annexation_really_removes_issuer": "PASS",
+    "only_legal_trustee_can_administer_inherited_estate": "PASS",
+    "trustee_selection_resolves_original_destroyed_issuer": "PASS",
+    "annexer_does_not_receive_escrow_cash": "PASS",
+    "native_loan_transfers_to_live_receiver_for_recorded_price": "PASS",
+    "estate_receivable_replaces_native_asset_without_double_counting": "PASS",
+    "partial_receiver_payment_uses_real_currency": "PASS",
+    "unfunded_receiver_debt_survives_replay": "PASS",
+    "dead_estate_pays_original_depositor_once": "PASS",
+    "dead_estate_recovery_replay_is_cash_neutral": "PASS",
+    "last_building_loss_creates_frozen_estate": "PASS",
+    "last_building_loss_preserves_exact_specie": "PASS",
+    "global_estate_pulse_retains_destroyed_ledgers": "PASS",
+    "surviving_estates_reload_without_duplicate_claims": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "cb4f188619a9752d7fc0b2de667b82c4fee19f49d0aaff1395dce8a597164451",
+  "assertions": 14,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

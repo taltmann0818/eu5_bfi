@@ -172,7 +172,7 @@ def generate(common, effect):
     reconciliation = 'bfl_initialize_commenda = yes\n'
     for i in SLOTS:
         p = f'bfl_v_{i:02}'
-        identity = f'''exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+        identity = f'''exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = {i} scope:bfl_venture_lender = {{ var:{p}_state = 1
                 var:{p}_operator = scope:bfl_operator var:{p}_generation = scope:bfl_operator.var:bfl_venture_generation }}'''
         # Inject only the authorized budget; escrow pre-existing treasury for the
@@ -351,7 +351,7 @@ def generate(common, effect):
             bfl_close_commenda_{i:02} = yes }}\n'''
     common('scripted_effects', 'commenda_execution', execution)
     followon = '''save_scope_as = bfl_operator
-        if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+        if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_activity_schema ?= 2 has_variable = bfl_venture_area var:bfl_venture_quantity = 0
             OR = { this = scope:actor overlord = scope:actor }
             has_discovered_area = var:bfl_venture_area
@@ -375,7 +375,7 @@ def generate(common, effect):
                 set_variable = {{ name = bfl_venture_offer_kind value = 1 }} bfl_execute_commenda_{i:02} = yes
             }} }}\n'''
     common('scripted_effects', 'commenda_followon', effect('bfl_start_commenda_cargo',followon+' }'))
-    operator = '''if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank }
+    operator = '''if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes }
         save_scope_as = bfl_operator var:bfl_venture_bank = { save_scope_as = bfl_venture_lender }
         if = { limit = { NOT = { var:bfl_venture_activity_schema ?= 2 } } '''+legacy+''' }
         else_if = { limit = { bfl_period > var:bfl_venture_last_period NOT = { has_variable = bfl_venture_guard } }

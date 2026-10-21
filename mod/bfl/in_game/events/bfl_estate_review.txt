@@ -1,0 +1,40 @@
+﻿namespace = bfl_estate_review
+        bfl_estate_review.1 = { type = country_event title = bfl_estate_review_title desc = bfl_estate_review_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_estate_review_service
+                custom_tooltip = bfl_estate_service_tip
+                hidden_effect = { bfl_service_managed_estate = yes bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_terms
+                trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { var:bfl_state = 4 bfl_resolution_researched = yes } }
+                custom_tooltip = bfl_estate_terms_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_offer_resolution_terms = yes } } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_creditor
+                custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_resolution_next_account = yes }
+                bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_bonds
+                trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_bond_count > 0 } }
+                custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_next_estate_bond = yes bfl_review_estate_bond = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_default
+                trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_can_conclude_liquidation = yes } }
+                custom_tooltip = bfl_estate_default_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_conclude_liquidation = yes bfl_close_resolution = yes }
+                bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_close
+                trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_can_close_resolution = yes } }
+                custom_tooltip = bfl_estate_close_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_close_resolution = yes } bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_next custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_leave ai_chance = { base = 100 } }
+        }
+        bfl_estate_review.2 = { type = country_event title = bfl_estate_bond_title desc = bfl_estate_bond_desc
+            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            option = { name = bfl_estate_review_terms custom_tooltip = bfl_estate_terms_tip
+                hidden_effect = { bfl_offer_estate_bond_terms = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_bond_next custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_next_estate_bond = yes bfl_review_estate_bond = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_bond_back custom_tooltip = bfl_estate_open_tip
+                hidden_effect = { bfl_show_managed_estate = yes } ai_chance = { base = 100 } }
+        }

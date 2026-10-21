@@ -207,7 +207,9 @@ def generate(common, effect, loc, write):
             {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 38)} }}
             widget = {{ position = {{ 256 146 }} size = {{ 224 38 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]"
             {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 38)} }}'''
-        rows += card(200, f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue, '(CFixedPoint)0')]" {body}''')
+        body += f'''widget = {{ position = {{ 16 196 }} size = {{ 464 38 }} visible = "[{shown(f'bfl_offer_bond_workout_{i:02}')}]"
+            {button(f'bfl_offer_bond_workout_{i:02}', f'bfl_offer_bond_workout_{i:02}', 38)} }}'''
+        rows += card(250, f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue, '(CFixedPoint)0')]" {body}''')
     loc('bfl_bond_selected_name', '[Country.GetName]')
     loc('bfl_bond_market_quote', "Ask: [Country.MakeScope.GetVariable('bfl_bond_offer_price').GetValue|2]@gold! | Seller: [Country.MakeScope.GetVariable('bfl_bond_offer_seller').GetCountry.GetName]")
     loc('bfl_bond_financing_tab', 'Financing')
@@ -242,13 +244,14 @@ def generate(common, effect, loc, write):
     compact_rows = ''
     for i in range(1,33):
         n=f'bfl_bnd_{i:02}'
-        compact_rows += f'''widget = {{ size = {{ -1 112 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+        compact_rows += f'''widget = {{ size = {{ -1 152 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue,'(CFixedPoint)0')]"
             text_single = {{ position = {{ 10 5 }} text = "bfl_bond_card_{i:02}" autoresize = yes fontsize = 16 }}
             text_single = {{ position = {{ 10 30 }} text = "bfl_bond_holder_{i:02}" autoresize = yes fontsize = 14 }}
             text_single = {{ position = {{ 10 53 }} text = "bfl_bond_arrears_{i:02}" autoresize = yes fontsize = 13 }}
             widget = {{ position = {{ 10 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_list_selected_bond_{i:02}')}]" {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 28)} }}
             widget = {{ position = {{ 252 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]" {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 28)} }}
+            widget = {{ position = {{ 10 112 }} size = {{ 472 32 }} visible = "[{shown(f'bfl_offer_bond_workout_{i:02}')}]" {button(f'bfl_offer_bond_workout_{i:02}', height=32)} }}
         }}'''
     compact = '''hbox = { layoutpolicy_horizontal = expanding spacing = 8
         icon = { size = { 28 28 } texture = "[GetConceptTexture('government_bond')]" }

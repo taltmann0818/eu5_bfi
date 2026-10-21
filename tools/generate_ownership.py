@@ -21,12 +21,13 @@ def generate(common, effect, loc, write):
     values = effect('bfl_tangible_equity', '''value = gold
         if = { limit = { bfl_has_accounts = yes }
             add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
-            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets subtract = bfl_liabilities }
+            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets subtract = bfl_liabilities }
         else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt }
             if = { limit = { has_variable = bfl_venture_bank }
                 if = { limit = { var:bfl_venture_activity_schema ?= 2 }
                     add = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis }
                 else = { subtract = var:bfl_venture_external_basis } } }
+        if = { limit = { var:bfl_state ?= 5 } value = 0 }
     ''')
     values += effect('bfl_nav_quote', '''value = 0
         if = { limit = { var:bfl_total_units > 0 }
@@ -42,6 +43,8 @@ def generate(common, effect, loc, write):
         n = s(i)
         owned += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_pool = 0 var:{n}_party = scope:bfl_equity_buyer }} add = var:{n}_units }}\n'''
         basis += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_pool = 0 var:{n}_party = scope:bfl_equity_buyer }} add = var:{n}_basis }}\n'''
+    owned += 'if = { limit = { var:bfl_state ?= 5 } value = 0 }\n'
+    basis += 'if = { limit = { var:bfl_state ?= 5 } value = 0 }\n'
     values += effect('bfl_equity_buyer_units', owned) + effect('bfl_equity_buyer_basis', basis)
     values += effect('bfl_position_owner_units', owned.replace('scope:bfl_equity_buyer', 'scope:bfl_position_owner'))
     values += effect('bfl_position_owner_basis', basis.replace('scope:bfl_equity_buyer', 'scope:bfl_position_owner'))

@@ -142,6 +142,7 @@ value = var:bfl_inv_16_due subtract = bfl_period min = 0
 bfl_goods_transit_16 = {
 value = var:bfl_inv_16_transit_due subtract = bfl_period min = 0
 }
-bfl_goods_quote = { value = var:bfl_goods_quote }
+bfl_goods_holder_claims = { value = 0 if = { limit = { has_variable = bfl_goods_holder_claim_count } value = var:bfl_goods_holder_claim_count } }
+        bfl_goods_quote = { value = var:bfl_goods_quote }
         bfl_goods_refund = { value = var:bfl_goods_refund }
         bfl_goods_margin_call = { value = var:bfl_goods_margin_call }

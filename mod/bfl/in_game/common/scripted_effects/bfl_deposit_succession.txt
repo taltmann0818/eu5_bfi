@@ -1,6 +1,6 @@
 ﻿bfl_transfer_annexed_deposits = {
-save_scope_as = bfl_deposit_successor
-every_country = { limit = { bfl_has_accounts = yes }
+if = { limit = { scope:target = { NOT = { has_variable = bfl_resolution_estate } } } save_scope_as = bfl_deposit_successor
+every_in_global_list = { variable = bfl_resolution_institutions limit = { bfl_has_accounts = yes }
 if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_party ?= scope:target }
             set_variable = { name = bfl_dep_01_party value = scope:bfl_deposit_successor }
             change_variable = { name = bfl_dep_01_generation add = 1 } }
@@ -97,5 +97,5 @@ if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_party ?= scope:target 
 if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_party ?= scope:target }
             set_variable = { name = bfl_dep_32_party value = scope:bfl_deposit_successor }
             change_variable = { name = bfl_dep_32_generation add = 1 } }
-}
+} }
 }

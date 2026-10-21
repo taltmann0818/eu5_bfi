@@ -13,6 +13,7 @@ def generate(common, effect, loc, write):
         'commenda_income': 0,
     }
     registration = '''if = { limit = { bfl_is_company = yes }
+        bfl_register_resolution_institution = yes
         # Schema 1 saves acquire fields without resetting their cash or policy.
     '''
     for field, value in defaults.items():
@@ -41,6 +42,7 @@ def generate(common, effect, loc, write):
         NOT = { has_variable = bfl_company_guard }
     ''')
     triggers += effect('bfl_company_operating', '''bfl_company_authority = yes
+        NOT = { var:bfl_state ?= 4 } NOT = { var:bfl_state ?= 5 }
         var:bfl_company_mandate > 0
         any_owned_building = { building_type = building_type:trade_company_headquarters }
         gold > var:bfl_company_buffer

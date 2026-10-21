@@ -1,0 +1,72 @@
+﻿bfl_transfer_native_estate_claims = {
+save_scope_as = bfl_native_old_creditor
+        if = { limit = { exists = var:bfl_resolution_receiver }
+            var:bfl_resolution_receiver = { save_scope_as = bfl_native_new_creditor bfl_initialize_native_resolution = yes }
+            every_in_global_list = { variable = bfl_resolution_institutions
+                limit = { has_variable_map = bfl_native_claim_due }
+                save_scope_as = bfl_native_claim_issuer
+                set_variable = { name = bfl_native_old_due value = 0 }
+                set_variable = { name = bfl_native_new_due value = 0 }
+                set_variable = { name = bfl_native_new_basis value = 0 }
+                set_variable = { name = bfl_native_new_carry value = 0 }
+                set_variable = { name = bfl_native_new_held value = 0 }
+                every_key_in_variable_map = { variable = bfl_native_claim_due
+                    if = { limit = { this = scope:bfl_native_old_creditor }
+                        scope:bfl_native_claim_issuer = {
+    set_variable = { name = bfl_native_old_due value = "variable_map(bfl_native_claim_due|scope:bfl_native_old_creditor)" }
+set_variable = { name = bfl_native_old_basis value = "variable_map(bfl_native_claim_basis|scope:bfl_native_old_creditor)" }
+set_variable = { name = bfl_native_old_carrying value = "variable_map(bfl_native_claim_carrying|scope:bfl_native_old_creditor)" }
+set_variable = { name = bfl_native_old_held value = "variable_map(bfl_native_claim_held|scope:bfl_native_old_creditor)" }
+} }
+                    if = { limit = { this = scope:bfl_native_new_creditor }
+                        scope:bfl_native_claim_issuer = {
+    set_variable = { name = bfl_native_new_due value = "variable_map(bfl_native_claim_due|scope:bfl_native_new_creditor)" }
+set_variable = { name = bfl_native_new_basis value = "variable_map(bfl_native_claim_basis|scope:bfl_native_new_creditor)" }
+set_variable = { name = bfl_native_new_carry value = "variable_map(bfl_native_claim_carrying|scope:bfl_native_new_creditor)" }
+set_variable = { name = bfl_native_new_held value = "variable_map(bfl_native_claim_held|scope:bfl_native_new_creditor)" }
+} }
+                }
+                if = { limit = { var:bfl_native_old_due > 0 }
+                    scope:bfl_native_old_creditor = {
+                        change_variable = { name = bfl_resolution_receiver_due add = scope:bfl_native_claim_issuer.var:bfl_native_old_carrying }
+                        change_variable = { name = bfl_native_estate_assets subtract = scope:bfl_native_claim_issuer.var:bfl_native_old_carrying }
+                        change_variable = { name = bfl_native_estate_claim_count subtract = 1 }
+                        change_variable = { name = bfl_loss_carryforward add = { value = scope:bfl_native_claim_issuer.var:bfl_native_old_basis subtract = scope:bfl_native_claim_issuer.var:bfl_native_old_carrying min = 0 } }
+                    }
+                    scope:bfl_native_new_creditor = {
+                        change_variable = { name = bfl_native_estate_assets add = scope:bfl_native_claim_issuer.var:bfl_native_old_carrying }
+                        if = { limit = { scope:bfl_native_claim_issuer.var:bfl_native_new_due = 0 }
+                            change_variable = { name = bfl_native_estate_claim_count add = 1 } }
+                    }
+    change_variable = { name = bfl_native_new_due add = var:bfl_native_old_due }
+            add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_native_new_creditor value = var:bfl_native_new_due }
+            add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_native_old_creditor value = 0 }
+change_variable = { name = bfl_native_new_basis add = var:bfl_native_old_carrying }
+            add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_native_new_creditor value = var:bfl_native_new_basis }
+            add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_native_old_creditor value = 0 }
+change_variable = { name = bfl_native_new_carry add = var:bfl_native_old_carrying }
+            add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_native_new_creditor value = var:bfl_native_new_carry }
+            add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_native_old_creditor value = 0 }
+change_variable = { name = bfl_native_new_held add = var:bfl_native_old_held }
+            add_to_variable_map = { name = bfl_native_claim_held key = scope:bfl_native_new_creditor value = var:bfl_native_new_held }
+            add_to_variable_map = { name = bfl_native_claim_held key = scope:bfl_native_old_creditor value = 0 }
+} } }
+}
+bfl_add_native_estate_assets = {
+save_scope_as = bfl_native_claim_owner
+        every_in_global_list = { variable = bfl_resolution_institutions
+            limit = { has_variable_map = bfl_native_claim_due }
+            save_scope_as = bfl_native_claim_issuer
+            every_key_in_variable_map = { variable = bfl_native_claim_due
+                limit = { this = scope:bfl_native_claim_owner }
+                scope:bfl_native_claim_owner = {
+                    set_variable = { name = bfl_asset_amount value = "scope:bfl_native_claim_issuer.variable_map(bfl_native_claim_carrying|scope:bfl_native_claim_owner)" }
+                    if = { limit = { var:bfl_asset_amount > 0 }
+                        change_variable = { name = bfl_asset_unsecured add = var:bfl_asset_amount }
+                        scope:bfl_native_claim_issuer = { save_scope_as = bfl_asset_party }
+                        set_variable = { name = bfl_asset_kind value = 2 } bfl_allocate_asset_row = yes
+                    }
+                }
+            }
+        }
+}

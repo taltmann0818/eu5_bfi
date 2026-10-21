@@ -148,8 +148,8 @@ def initialize():
     for i in range(1,33):
         values += f'if = {{ limit = {{ var:bfl_dep_{i:02}_active = 1 }} add = var:bfl_dep_{i:02}_withdrawal_requested }}\n'
     values += '''}
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets }
-    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears add = bfl_estate_liabilities add = bfl_bond_debt add = bfl_bond_arrears add = bfl_resolution_native_claims every_loan = { add = remaining_debt } }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
         value = bfl_liabilities subtract = bfl_withdrawals_due min = 0
@@ -178,7 +178,7 @@ def initialize():
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
     body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
-    body += 'bfl_initialize_monetary = yes\n'
+    body += 'bfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\nbfl_register_resolution_institution = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -431,7 +431,7 @@ def charter():
                 if = { limit = { NOT = { scope:bfl_lifecycle_controller = { var:bfl_bank ?= prev } } }
                     change_subject_type = subject_type:state_bank
                     set_variable = bfl_legacy_servicing
-                    set_variable = { name = bfl_state value = 2 }
+                    if = { limit = { var:bfl_state < 4 } set_variable = { name = bfl_state value = 2 } }
                     remove_variable = bfl_controller
                     remove_variable = bfl_profile_offered_to
                 }
@@ -721,15 +721,17 @@ def treasury_and_resolution():
     common('scripted_effects','treasury_payments',effect('bfl_settle_dividends',dividends))
     common('scripted_effects','resolution','''
     bfl_evaluate_distress = {
+        if = { limit = { var:bfl_state < 4 }
         set_variable = { name = bfl_state value = 0 }
         if = { limit = { bfl_free_cash <= 0 } set_variable = { name = bfl_state value = 1 } }
         if = { limit = { bfl_withdrawals_due > 0 } set_variable = { name = bfl_state value = 2 } }
         if = { limit = { var:bfl_expense_arrears > 0 } set_variable = { name = bfl_state value = 2 } }
         if = { limit = { bfl_equity < 0 } set_variable = { name = bfl_state value = 3 } }
+        }
     }
     # Root bank; explicit sovereign capital subscription, never a free guarantee/mint.
     bfl_recapitalize = {
-        if = { limit = { bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 }
+        if = { limit = { var:bfl_state < 5 bfl_has_valid_controller = yes bfl_primary_price_safe = yes overlord = { gold >= 100 }
             bfl_branch_access = { PARTY = overlord } }
             save_scope_as = bfl_bank
             overlord = { save_scope_as = bfl_party }
@@ -752,11 +754,12 @@ def treasury_and_resolution():
             }
         }
     }
-    bfl_suspend_new_business = { set_variable = { name = bfl_accept_deposits value = 0 } set_variable = { name = bfl_state value = 2 } }
+    bfl_suspend_new_business = { if = { limit = { var:bfl_state < 4 }
+        set_variable = { name = bfl_accept_deposits value = 0 } set_variable = { name = bfl_state value = 2 } } }
     ''')
     common('scripted_effects','monthly_settlement','''
     bfl_process_accounts = {
-        if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+        if = { limit = { bfl_has_accounts = yes var:bfl_state < 5 bfl_period > var:bfl_last_period }
         bfl_service_monetary = yes
         bfl_settle_held_sovereign_bonds = yes
             save_scope_as = bfl_bank
@@ -764,10 +767,11 @@ def treasury_and_resolution():
             bfl_reconcile_native_assets = yes
             set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
             bfl_observe_bank_income = yes
-            bfl_accrue_deposits = yes
+            if = { limit = { var:bfl_state < 4 } bfl_accrue_deposits = yes }
             bfl_process_goods = yes
             bfl_reconcile_commenda = yes
-            bfl_settle_operating_expenses = yes
+            if = { limit = { var:bfl_state < 4 } bfl_settle_operating_expenses = yes }
+            if = { limit = { var:bfl_state = 4 } bfl_distribute_resolution_cash = yes bfl_pay_resolution_guarantee = yes }
             bfl_evaluate_distress = yes
             bfl_settle_dividends = yes
             if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
@@ -1063,6 +1067,24 @@ def main():
     generate_branches(common,effect,loc,write)
     from generate_monetary import generate as generate_monetary
     generate_monetary(common,effect,loc,write)
+    from generate_resolution import generate as generate_resolution
+    generate_resolution(common,effect,loc,write)
+    from generate_resolution_estates import generate as generate_estates
+    generate_estates(common,effect,loc,write)
+    from generate_bond_workouts import generate as generate_bond_workouts
+    generate_bond_workouts(common,effect,loc,write)
+    from generate_estate_interface import generate as generate_estate_interface
+    generate_estate_interface(common,effect,loc,write)
+    from generate_resolution_assets import generate as generate_resolution_assets
+    generate_resolution_assets(common,effect,loc,write)
+    from generate_resolution_money import generate as generate_resolution_money
+    generate_resolution_money(common,effect,loc,write)
+    from generate_resolution_transfers import generate as generate_resolution_transfers
+    generate_resolution_transfers(common,effect,loc,write)
+    from generate_resolution_native_debt import generate as generate_resolution_native_debt
+    generate_resolution_native_debt(common,effect,loc,write)
+    from generate_resolution_default import generate as generate_resolution_default
+    generate_resolution_default(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

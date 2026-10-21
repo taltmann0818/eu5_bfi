@@ -1,0 +1,4 @@
+﻿bfl_financial_recipient = { OR = { country_exists = this has_variable = bfl_resolution_estate } }
+bfl_resolution_institution = { OR = { bfl_has_accounts = yes has_variable = bfl_company_schema
+    AND = { has_variable = bfl_bond_schema bfl_bond_debt > 0 } } }
+bfl_venture_lender_available = { exists = var:bfl_venture_bank var:bfl_venture_bank = { bfl_financial_recipient = yes } }

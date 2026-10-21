@@ -1,5 +1,6 @@
 ﻿bfl_register_company = {
 if = { limit = { bfl_is_company = yes }
+        bfl_register_resolution_institution = yes
         # Schema 1 saves acquire fields without resetting their cash or policy.
     if = { limit = { NOT = { has_variable = bfl_company_buffer } }
             set_variable = { name = bfl_company_buffer value = 100 } }

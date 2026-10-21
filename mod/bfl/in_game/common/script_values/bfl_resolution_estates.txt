@@ -1,0 +1,7 @@
+﻿bfl_estate_receivable = { value = 0 if = { limit = { has_variable = bfl_resolution_receiver_due }
+    value = var:bfl_resolution_receiver_due } }
+bfl_estate_liabilities = { value = 0
+    every_in_global_list = { variable = bfl_resolution_institutions
+        limit = { var:bfl_resolution_receiver ?= prev has_variable = bfl_resolution_receiver_due }
+        add = var:bfl_resolution_receiver_due }
+}

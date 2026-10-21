@@ -63,7 +63,7 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_cancel_selected_bond_offer').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } } }
-        widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+        widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_01_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_01" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_01" autoresize = yes fontsize = 14 }
@@ -86,7 +86,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_01').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_01').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_01_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_01').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_01').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_01_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_01" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_01').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_02_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_02" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_02" autoresize = yes fontsize = 14 }
@@ -109,7 +118,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_02').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_02').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_02_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_02').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_02').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_02_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_02" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_02').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_03_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_03" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_03" autoresize = yes fontsize = 14 }
@@ -132,7 +150,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_03').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_03').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_03_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_03').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_03').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_03_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_03" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_03').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_04_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_04" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_04" autoresize = yes fontsize = 14 }
@@ -155,7 +182,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_04').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_04').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_04_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_04').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_04').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_04_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_04" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_04').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_05_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_05" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_05" autoresize = yes fontsize = 14 }
@@ -178,7 +214,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_05').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_05').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_05_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_05').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_05').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_05_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_05" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_05').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_06_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_06" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_06" autoresize = yes fontsize = 14 }
@@ -201,7 +246,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_06').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_06').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_06_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_06').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_06').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_06_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_06" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_06').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_07_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_07" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_07" autoresize = yes fontsize = 14 }
@@ -224,7 +278,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_07').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_07').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_07_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_07').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_07').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_07_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_07" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_07').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_08_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_08" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_08" autoresize = yes fontsize = 14 }
@@ -247,7 +310,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_08').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_08').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_08_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_08').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_08').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_08_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_08" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_08').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_09_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_09" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_09" autoresize = yes fontsize = 14 }
@@ -270,7 +342,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_09').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_09').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_09_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_09').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_09').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_09_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_09" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_09').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_10_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_10" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_10" autoresize = yes fontsize = 14 }
@@ -293,7 +374,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_10').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_10').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_10_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_10').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_10').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_10_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_10" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_10').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_11_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_11" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_11" autoresize = yes fontsize = 14 }
@@ -316,7 +406,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_11').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_11').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_11_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_11').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_11').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_11_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_11" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_11').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_12_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_12" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_12" autoresize = yes fontsize = 14 }
@@ -339,7 +438,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_12').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_12').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_12_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_12').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_12').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_12_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_12" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_12').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_13_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_13" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_13" autoresize = yes fontsize = 14 }
@@ -362,7 +470,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_13').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_13').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_13_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_13').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_13').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_13_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_13" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_13').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_14_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_14" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_14" autoresize = yes fontsize = 14 }
@@ -385,7 +502,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_14').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_14').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_14_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_14').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_14').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_14_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_14" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_14').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_15_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_15" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_15" autoresize = yes fontsize = 14 }
@@ -408,7 +534,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_15').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_15').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_15_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_15').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_15').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_15_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_15" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_15').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_16_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_16" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_16" autoresize = yes fontsize = 14 }
@@ -431,7 +566,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_16').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_16').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_16_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_16').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_16').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_16_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_16" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_16').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_17_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_17" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_17" autoresize = yes fontsize = 14 }
@@ -454,7 +598,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_17').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_17').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_17_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_17').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_17').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_17_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_17" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_17').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_18_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_18" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_18" autoresize = yes fontsize = 14 }
@@ -477,7 +630,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_18').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_18').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_18_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_18').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_18').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_18_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_18" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_18').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_19_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_19" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_19" autoresize = yes fontsize = 14 }
@@ -500,7 +662,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_19').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_19').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_19_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_19').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_19').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_19_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_19" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_19').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_20_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_20" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_20" autoresize = yes fontsize = 14 }
@@ -523,7 +694,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_20').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_20').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_20_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_20').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_20').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_20_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_20" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_20').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_21_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_21" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_21" autoresize = yes fontsize = 14 }
@@ -546,7 +726,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_21').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_21').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_21_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_21').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_21').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_21_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_21" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_21').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_22_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_22" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_22" autoresize = yes fontsize = 14 }
@@ -569,7 +758,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_22').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_22').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_22_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_22').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_22').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_22_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_22" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_22').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_23_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_23" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_23" autoresize = yes fontsize = 14 }
@@ -592,7 +790,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_23').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_23').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_23_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_23').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_23').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_23_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_23" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_23').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_24_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_24" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_24" autoresize = yes fontsize = 14 }
@@ -615,7 +822,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_24').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_24').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_24_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_24').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_24').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_24_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_24" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_24').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_25_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_25" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_25" autoresize = yes fontsize = 14 }
@@ -638,7 +854,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_25').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_25_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_25').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_25_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_25" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_25').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_26_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_26" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_26" autoresize = yes fontsize = 14 }
@@ -661,7 +886,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_26').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_26').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_26_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_26').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_26').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_26_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_26" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_26').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_27_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_27" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_27" autoresize = yes fontsize = 14 }
@@ -684,7 +918,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_27').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_27').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_27_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_27').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_27').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_27_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_27" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_27').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_28_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_28" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_28" autoresize = yes fontsize = 14 }
@@ -707,7 +950,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_28').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_28').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_28_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_28').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_28').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_28_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_28" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_28').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_29_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_29" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_29" autoresize = yes fontsize = 14 }
@@ -730,7 +982,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_29').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_29').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_29_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_29').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_29').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_29_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_29" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_29').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_30_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_30" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_30" autoresize = yes fontsize = 14 }
@@ -753,7 +1014,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_30').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_30').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_30_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_30').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_30').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_30_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_30" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_30').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_31_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_31" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_31" autoresize = yes fontsize = 14 }
@@ -776,7 +1046,16 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_31').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
-        }widget = { size = { -1 112 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_31').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_31_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_31').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_31').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_31_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_31" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_31').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+        }widget = { size = { -1 152 } layoutpolicy_horizontal = expanding using = bg_card_header_01
             visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bnd_32_active').GetValue,'(CFixedPoint)0')]"
             text_single = { position = { 10 5 } text = "bfl_bond_card_32" autoresize = yes fontsize = 16 }
             text_single = { position = { 10 30 } text = "bfl_bond_holder_32" autoresize = yes fontsize = 14 }
@@ -799,6 +1078,15 @@
             icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
                 color = { 0 0 0 0.55 } alwaystransparent = yes
                 visible = "[Not(GetScriptedGui('bfl_redeem_selected_bond_32').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
+            widget = { position = { 10 112 } size = { 472 32 } visible = "[GetScriptedGui('bfl_offer_bond_workout_32').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" button = { name = "bfl_offer_bond_workout_32_panel_button" size = { 100% 32 }
+            layoutpolicy_horizontal = expanding using = bg_card_header_01
+            enabled = "[GetScriptedGui('bfl_offer_bond_workout_32').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            onclick = "[GetScriptedGui('bfl_offer_bond_workout_32').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            tooltip = "bfl_offer_bond_workout_32_tip"
+            text_single = { parentanchor = center text = "bfl_offer_bond_workout_32" autoresize = yes fontsize = 15 }
+            icon = { size = { 100% 100% } texture = "gfx/interface/colors/white.dds"
+                color = { 0 0 0 0.55 } alwaystransparent = yes
+                visible = "[Not(GetScriptedGui('bfl_offer_bond_workout_32').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" } } }
         }
     }
     }

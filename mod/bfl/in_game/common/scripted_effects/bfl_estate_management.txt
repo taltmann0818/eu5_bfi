@@ -1,0 +1,42 @@
+﻿bfl_select_next_estate = {
+if = { limit = { NOT = { has_variable = bfl_estate_index } } set_variable = { name = bfl_estate_index value = 0 } }
+change_variable = { name = bfl_estate_index add = 1 }
+set_variable = { name = bfl_estate_count value = 0 }
+remove_variable = bfl_managed_estate save_scope_as = bfl_estate_actor
+every_in_global_list = { variable = bfl_resolution_institutions
+    limit = { has_variable = bfl_resolution_estate var:bfl_resolution_trustee ?= scope:bfl_estate_actor }
+    save_scope_as = bfl_estate_candidate
+    scope:bfl_estate_actor = {
+        change_variable = { name = bfl_estate_count add = 1 }
+        if = { limit = { var:bfl_estate_count = var:bfl_estate_index }
+            set_variable = { name = bfl_managed_estate value = scope:bfl_estate_candidate } }
+    }
+}
+if = { limit = { NOT = { has_variable = bfl_managed_estate } }
+    set_variable = { name = bfl_estate_index value = 1 }
+    every_in_global_list = { variable = bfl_resolution_institutions
+        limit = { has_variable = bfl_resolution_estate var:bfl_resolution_trustee ?= scope:bfl_estate_actor }
+        if = { limit = { scope:bfl_estate_actor = { NOT = { has_variable = bfl_managed_estate } } }
+            scope:bfl_estate_actor = { set_variable = { name = bfl_managed_estate value = prev } } }
+    }
+}
+}
+bfl_show_managed_estate = {
+if = { limit = { bfl_valid_estate_selection = yes }
+    set_variable = { name = bfl_estate_cash_display value = var:bfl_managed_estate.gold }
+    set_variable = { name = bfl_estate_deposits_display value = var:bfl_managed_estate.bfl_deposit_liabilities }
+    set_variable = { name = bfl_estate_receiver_display value = var:bfl_managed_estate.bfl_estate_receivable }
+    set_variable = { name = bfl_estate_recovered_display value = var:bfl_managed_estate.var:bfl_resolution_paid }
+    set_variable = { name = bfl_estate_state_display value = var:bfl_managed_estate.var:bfl_state }
+    trigger_event_non_silently = bfl_estate_review.1
+}
+}
+bfl_service_managed_estate = {
+if = { limit = { bfl_valid_estate_selection = yes }
+    var:bfl_managed_estate = {
+        bfl_restore_estate_specie = yes bfl_pay_estate_receiver_debt = yes
+        bfl_liquidate_resolution_assets = yes
+        bfl_distribute_resolution_cash = yes bfl_pay_resolution_guarantee = yes
+    }
+}
+}

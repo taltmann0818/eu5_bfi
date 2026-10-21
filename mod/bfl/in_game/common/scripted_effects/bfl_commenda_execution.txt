@@ -1,6 +1,6 @@
 ﻿bfl_execute_commenda_01 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
                 var:bfl_v_01_operator = scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -67,7 +67,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_02 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
                 var:bfl_v_02_operator = scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -134,7 +134,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_03 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
                 var:bfl_v_03_operator = scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -201,7 +201,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_04 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
                 var:bfl_v_04_operator = scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -268,7 +268,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_05 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
                 var:bfl_v_05_operator = scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -335,7 +335,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_06 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
                 var:bfl_v_06_operator = scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -402,7 +402,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_07 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
                 var:bfl_v_07_operator = scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard
@@ -469,7 +469,7 @@ save_scope_as = bfl_operator
 }
 bfl_execute_commenda_08 = {
 save_scope_as = bfl_operator
-            if = { limit = { exists = var:bfl_venture_bank country_exists = var:bfl_venture_bank
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
             var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
                 var:bfl_v_08_operator = scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
                 set_variable = bfl_venture_guard

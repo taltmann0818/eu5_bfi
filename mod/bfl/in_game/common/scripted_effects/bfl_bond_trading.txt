@@ -1,7 +1,7 @@
 ﻿bfl_accept_sovereign_bond_offer = {
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 1
             var:bfl_bnd_01_active = 1 var:bfl_bnd_01_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = var:bfl_bond_offer_seller var:bfl_bnd_01_due = 0
+            exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = { bfl_financial_recipient = yes } var:bfl_bnd_01_holder = var:bfl_bond_offer_seller var:bfl_bnd_01_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_01_holder = { save_scope_as = bfl_bond_seller }
@@ -20,7 +20,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 1
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 2
             var:bfl_bnd_02_active = 1 var:bfl_bnd_02_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = var:bfl_bond_offer_seller var:bfl_bnd_02_due = 0
+            exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = { bfl_financial_recipient = yes } var:bfl_bnd_02_holder = var:bfl_bond_offer_seller var:bfl_bnd_02_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_02_holder = { save_scope_as = bfl_bond_seller }
@@ -39,7 +39,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 2
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 3
             var:bfl_bnd_03_active = 1 var:bfl_bnd_03_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = var:bfl_bond_offer_seller var:bfl_bnd_03_due = 0
+            exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = { bfl_financial_recipient = yes } var:bfl_bnd_03_holder = var:bfl_bond_offer_seller var:bfl_bnd_03_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_03_holder = { save_scope_as = bfl_bond_seller }
@@ -58,7 +58,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 3
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 4
             var:bfl_bnd_04_active = 1 var:bfl_bnd_04_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = var:bfl_bond_offer_seller var:bfl_bnd_04_due = 0
+            exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = { bfl_financial_recipient = yes } var:bfl_bnd_04_holder = var:bfl_bond_offer_seller var:bfl_bnd_04_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_04_holder = { save_scope_as = bfl_bond_seller }
@@ -77,7 +77,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 4
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 5
             var:bfl_bnd_05_active = 1 var:bfl_bnd_05_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = var:bfl_bond_offer_seller var:bfl_bnd_05_due = 0
+            exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = { bfl_financial_recipient = yes } var:bfl_bnd_05_holder = var:bfl_bond_offer_seller var:bfl_bnd_05_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_05_holder = { save_scope_as = bfl_bond_seller }
@@ -96,7 +96,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 5
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 6
             var:bfl_bnd_06_active = 1 var:bfl_bnd_06_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = var:bfl_bond_offer_seller var:bfl_bnd_06_due = 0
+            exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = { bfl_financial_recipient = yes } var:bfl_bnd_06_holder = var:bfl_bond_offer_seller var:bfl_bnd_06_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_06_holder = { save_scope_as = bfl_bond_seller }
@@ -115,7 +115,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 6
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 7
             var:bfl_bnd_07_active = 1 var:bfl_bnd_07_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = var:bfl_bond_offer_seller var:bfl_bnd_07_due = 0
+            exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = { bfl_financial_recipient = yes } var:bfl_bnd_07_holder = var:bfl_bond_offer_seller var:bfl_bnd_07_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_07_holder = { save_scope_as = bfl_bond_seller }
@@ -134,7 +134,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 7
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 8
             var:bfl_bnd_08_active = 1 var:bfl_bnd_08_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = var:bfl_bond_offer_seller var:bfl_bnd_08_due = 0
+            exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = { bfl_financial_recipient = yes } var:bfl_bnd_08_holder = var:bfl_bond_offer_seller var:bfl_bnd_08_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_08_holder = { save_scope_as = bfl_bond_seller }
@@ -153,7 +153,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 8
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 9
             var:bfl_bnd_09_active = 1 var:bfl_bnd_09_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = var:bfl_bond_offer_seller var:bfl_bnd_09_due = 0
+            exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = { bfl_financial_recipient = yes } var:bfl_bnd_09_holder = var:bfl_bond_offer_seller var:bfl_bnd_09_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_09_holder = { save_scope_as = bfl_bond_seller }
@@ -172,7 +172,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 9
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 10
             var:bfl_bnd_10_active = 1 var:bfl_bnd_10_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = var:bfl_bond_offer_seller var:bfl_bnd_10_due = 0
+            exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = { bfl_financial_recipient = yes } var:bfl_bnd_10_holder = var:bfl_bond_offer_seller var:bfl_bnd_10_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_10_holder = { save_scope_as = bfl_bond_seller }
@@ -191,7 +191,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 10
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 11
             var:bfl_bnd_11_active = 1 var:bfl_bnd_11_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = var:bfl_bond_offer_seller var:bfl_bnd_11_due = 0
+            exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = { bfl_financial_recipient = yes } var:bfl_bnd_11_holder = var:bfl_bond_offer_seller var:bfl_bnd_11_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_11_holder = { save_scope_as = bfl_bond_seller }
@@ -210,7 +210,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 11
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 12
             var:bfl_bnd_12_active = 1 var:bfl_bnd_12_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = var:bfl_bond_offer_seller var:bfl_bnd_12_due = 0
+            exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = { bfl_financial_recipient = yes } var:bfl_bnd_12_holder = var:bfl_bond_offer_seller var:bfl_bnd_12_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_12_holder = { save_scope_as = bfl_bond_seller }
@@ -229,7 +229,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 12
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 13
             var:bfl_bnd_13_active = 1 var:bfl_bnd_13_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = var:bfl_bond_offer_seller var:bfl_bnd_13_due = 0
+            exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = { bfl_financial_recipient = yes } var:bfl_bnd_13_holder = var:bfl_bond_offer_seller var:bfl_bnd_13_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_13_holder = { save_scope_as = bfl_bond_seller }
@@ -248,7 +248,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 13
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 14
             var:bfl_bnd_14_active = 1 var:bfl_bnd_14_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = var:bfl_bond_offer_seller var:bfl_bnd_14_due = 0
+            exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = { bfl_financial_recipient = yes } var:bfl_bnd_14_holder = var:bfl_bond_offer_seller var:bfl_bnd_14_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_14_holder = { save_scope_as = bfl_bond_seller }
@@ -267,7 +267,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 14
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 15
             var:bfl_bnd_15_active = 1 var:bfl_bnd_15_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = var:bfl_bond_offer_seller var:bfl_bnd_15_due = 0
+            exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = { bfl_financial_recipient = yes } var:bfl_bnd_15_holder = var:bfl_bond_offer_seller var:bfl_bnd_15_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_15_holder = { save_scope_as = bfl_bond_seller }
@@ -286,7 +286,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 15
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 16
             var:bfl_bnd_16_active = 1 var:bfl_bnd_16_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = var:bfl_bond_offer_seller var:bfl_bnd_16_due = 0
+            exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = { bfl_financial_recipient = yes } var:bfl_bnd_16_holder = var:bfl_bond_offer_seller var:bfl_bnd_16_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_16_holder = { save_scope_as = bfl_bond_seller }
@@ -305,7 +305,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 16
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 17
             var:bfl_bnd_17_active = 1 var:bfl_bnd_17_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = var:bfl_bond_offer_seller var:bfl_bnd_17_due = 0
+            exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = { bfl_financial_recipient = yes } var:bfl_bnd_17_holder = var:bfl_bond_offer_seller var:bfl_bnd_17_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_17_holder = { save_scope_as = bfl_bond_seller }
@@ -324,7 +324,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 17
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 18
             var:bfl_bnd_18_active = 1 var:bfl_bnd_18_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = var:bfl_bond_offer_seller var:bfl_bnd_18_due = 0
+            exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = { bfl_financial_recipient = yes } var:bfl_bnd_18_holder = var:bfl_bond_offer_seller var:bfl_bnd_18_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_18_holder = { save_scope_as = bfl_bond_seller }
@@ -343,7 +343,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 18
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 19
             var:bfl_bnd_19_active = 1 var:bfl_bnd_19_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = var:bfl_bond_offer_seller var:bfl_bnd_19_due = 0
+            exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = { bfl_financial_recipient = yes } var:bfl_bnd_19_holder = var:bfl_bond_offer_seller var:bfl_bnd_19_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_19_holder = { save_scope_as = bfl_bond_seller }
@@ -362,7 +362,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 19
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 20
             var:bfl_bnd_20_active = 1 var:bfl_bnd_20_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = var:bfl_bond_offer_seller var:bfl_bnd_20_due = 0
+            exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = { bfl_financial_recipient = yes } var:bfl_bnd_20_holder = var:bfl_bond_offer_seller var:bfl_bnd_20_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_20_holder = { save_scope_as = bfl_bond_seller }
@@ -381,7 +381,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 20
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 21
             var:bfl_bnd_21_active = 1 var:bfl_bnd_21_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = var:bfl_bond_offer_seller var:bfl_bnd_21_due = 0
+            exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = { bfl_financial_recipient = yes } var:bfl_bnd_21_holder = var:bfl_bond_offer_seller var:bfl_bnd_21_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_21_holder = { save_scope_as = bfl_bond_seller }
@@ -400,7 +400,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 21
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 22
             var:bfl_bnd_22_active = 1 var:bfl_bnd_22_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = var:bfl_bond_offer_seller var:bfl_bnd_22_due = 0
+            exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = { bfl_financial_recipient = yes } var:bfl_bnd_22_holder = var:bfl_bond_offer_seller var:bfl_bnd_22_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_22_holder = { save_scope_as = bfl_bond_seller }
@@ -419,7 +419,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 22
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 23
             var:bfl_bnd_23_active = 1 var:bfl_bnd_23_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = var:bfl_bond_offer_seller var:bfl_bnd_23_due = 0
+            exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = { bfl_financial_recipient = yes } var:bfl_bnd_23_holder = var:bfl_bond_offer_seller var:bfl_bnd_23_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_23_holder = { save_scope_as = bfl_bond_seller }
@@ -438,7 +438,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 23
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 24
             var:bfl_bnd_24_active = 1 var:bfl_bnd_24_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = var:bfl_bond_offer_seller var:bfl_bnd_24_due = 0
+            exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = { bfl_financial_recipient = yes } var:bfl_bnd_24_holder = var:bfl_bond_offer_seller var:bfl_bnd_24_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_24_holder = { save_scope_as = bfl_bond_seller }
@@ -457,7 +457,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 24
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 25
             var:bfl_bnd_25_active = 1 var:bfl_bnd_25_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = var:bfl_bond_offer_seller var:bfl_bnd_25_due = 0
+            exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = { bfl_financial_recipient = yes } var:bfl_bnd_25_holder = var:bfl_bond_offer_seller var:bfl_bnd_25_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_25_holder = { save_scope_as = bfl_bond_seller }
@@ -476,7 +476,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 25
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 26
             var:bfl_bnd_26_active = 1 var:bfl_bnd_26_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = var:bfl_bond_offer_seller var:bfl_bnd_26_due = 0
+            exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = { bfl_financial_recipient = yes } var:bfl_bnd_26_holder = var:bfl_bond_offer_seller var:bfl_bnd_26_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_26_holder = { save_scope_as = bfl_bond_seller }
@@ -495,7 +495,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 26
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 27
             var:bfl_bnd_27_active = 1 var:bfl_bnd_27_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = var:bfl_bond_offer_seller var:bfl_bnd_27_due = 0
+            exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = { bfl_financial_recipient = yes } var:bfl_bnd_27_holder = var:bfl_bond_offer_seller var:bfl_bnd_27_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_27_holder = { save_scope_as = bfl_bond_seller }
@@ -514,7 +514,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 27
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 28
             var:bfl_bnd_28_active = 1 var:bfl_bnd_28_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = var:bfl_bond_offer_seller var:bfl_bnd_28_due = 0
+            exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = { bfl_financial_recipient = yes } var:bfl_bnd_28_holder = var:bfl_bond_offer_seller var:bfl_bnd_28_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_28_holder = { save_scope_as = bfl_bond_seller }
@@ -533,7 +533,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 28
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 29
             var:bfl_bnd_29_active = 1 var:bfl_bnd_29_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = var:bfl_bond_offer_seller var:bfl_bnd_29_due = 0
+            exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = { bfl_financial_recipient = yes } var:bfl_bnd_29_holder = var:bfl_bond_offer_seller var:bfl_bnd_29_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_29_holder = { save_scope_as = bfl_bond_seller }
@@ -552,7 +552,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 29
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 30
             var:bfl_bnd_30_active = 1 var:bfl_bnd_30_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = var:bfl_bond_offer_seller var:bfl_bnd_30_due = 0
+            exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = { bfl_financial_recipient = yes } var:bfl_bnd_30_holder = var:bfl_bond_offer_seller var:bfl_bnd_30_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_30_holder = { save_scope_as = bfl_bond_seller }
@@ -571,7 +571,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 30
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 31
             var:bfl_bnd_31_active = 1 var:bfl_bnd_31_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = var:bfl_bond_offer_seller var:bfl_bnd_31_due = 0
+            exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = { bfl_financial_recipient = yes } var:bfl_bnd_31_holder = var:bfl_bond_offer_seller var:bfl_bnd_31_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_31_holder = { save_scope_as = bfl_bond_seller }
@@ -590,7 +590,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 31
         }
 if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 32
             var:bfl_bnd_32_active = 1 var:bfl_bnd_32_generation = var:bfl_bond_offer_generation
-            exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = var:bfl_bond_offer_seller var:bfl_bnd_32_due = 0
+            exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = { bfl_financial_recipient = yes } var:bfl_bnd_32_holder = var:bfl_bond_offer_seller var:bfl_bnd_32_due = 0
         }
             save_scope_as = bfl_bond_issuer set_variable = bfl_bond_guard
             var:bfl_bnd_32_holder = { save_scope_as = bfl_bond_seller }
@@ -619,7 +619,7 @@ if = { limit = { bfl_valid_bond_offer = yes var:bfl_bond_offer_slot = 32
             bfl_initialize_bonds = yes
             bfl_service_sovereign_bonds = yes
     set_variable = { name = bfl_bond_offer_selected value = 0 }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_01_active = 1 exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 1 }
             var:bfl_bnd_01_holder = scope:bfl_bond_underwriter var:bfl_bnd_01_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -629,7 +629,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_01_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_01_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_02_active = 1 exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 2 }
             var:bfl_bnd_02_holder = scope:bfl_bond_underwriter var:bfl_bnd_02_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -639,7 +639,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_02_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_02_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_03_active = 1 exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 3 }
             var:bfl_bnd_03_holder = scope:bfl_bond_underwriter var:bfl_bnd_03_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -649,7 +649,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_03_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_03_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_04_active = 1 exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 4 }
             var:bfl_bnd_04_holder = scope:bfl_bond_underwriter var:bfl_bnd_04_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -659,7 +659,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_04_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_04_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_05_active = 1 exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 5 }
             var:bfl_bnd_05_holder = scope:bfl_bond_underwriter var:bfl_bnd_05_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -669,7 +669,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_05_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_05_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_06_active = 1 exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 6 }
             var:bfl_bnd_06_holder = scope:bfl_bond_underwriter var:bfl_bnd_06_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -679,7 +679,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_06_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_06_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_07_active = 1 exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 7 }
             var:bfl_bnd_07_holder = scope:bfl_bond_underwriter var:bfl_bnd_07_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -689,7 +689,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_07_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_07_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_08_active = 1 exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 8 }
             var:bfl_bnd_08_holder = scope:bfl_bond_underwriter var:bfl_bnd_08_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -699,7 +699,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_08_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_08_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_09_active = 1 exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 9 }
             var:bfl_bnd_09_holder = scope:bfl_bond_underwriter var:bfl_bnd_09_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -709,7 +709,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_09_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_09_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_10_active = 1 exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 10 }
             var:bfl_bnd_10_holder = scope:bfl_bond_underwriter var:bfl_bnd_10_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -719,7 +719,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_10_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_10_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_11_active = 1 exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 11 }
             var:bfl_bnd_11_holder = scope:bfl_bond_underwriter var:bfl_bnd_11_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -729,7 +729,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_11_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_11_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_12_active = 1 exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 12 }
             var:bfl_bnd_12_holder = scope:bfl_bond_underwriter var:bfl_bnd_12_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -739,7 +739,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_12_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_12_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_13_active = 1 exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 13 }
             var:bfl_bnd_13_holder = scope:bfl_bond_underwriter var:bfl_bnd_13_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -749,7 +749,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_13_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_13_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_14_active = 1 exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 14 }
             var:bfl_bnd_14_holder = scope:bfl_bond_underwriter var:bfl_bnd_14_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -759,7 +759,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_14_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_14_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_15_active = 1 exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 15 }
             var:bfl_bnd_15_holder = scope:bfl_bond_underwriter var:bfl_bnd_15_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -769,7 +769,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_15_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_15_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_16_active = 1 exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 16 }
             var:bfl_bnd_16_holder = scope:bfl_bond_underwriter var:bfl_bnd_16_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -779,7 +779,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_16_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_16_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_17_active = 1 exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 17 }
             var:bfl_bnd_17_holder = scope:bfl_bond_underwriter var:bfl_bnd_17_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -789,7 +789,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_17_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_17_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_18_active = 1 exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 18 }
             var:bfl_bnd_18_holder = scope:bfl_bond_underwriter var:bfl_bnd_18_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -799,7 +799,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_18_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_18_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_19_active = 1 exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 19 }
             var:bfl_bnd_19_holder = scope:bfl_bond_underwriter var:bfl_bnd_19_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -809,7 +809,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_19_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_19_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_20_active = 1 exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 20 }
             var:bfl_bnd_20_holder = scope:bfl_bond_underwriter var:bfl_bnd_20_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -819,7 +819,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_20_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_20_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_21_active = 1 exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 21 }
             var:bfl_bnd_21_holder = scope:bfl_bond_underwriter var:bfl_bnd_21_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -829,7 +829,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_21_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_21_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_22_active = 1 exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 22 }
             var:bfl_bnd_22_holder = scope:bfl_bond_underwriter var:bfl_bnd_22_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -839,7 +839,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_22_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_22_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_23_active = 1 exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 23 }
             var:bfl_bnd_23_holder = scope:bfl_bond_underwriter var:bfl_bnd_23_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -849,7 +849,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_23_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_23_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_24_active = 1 exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 24 }
             var:bfl_bnd_24_holder = scope:bfl_bond_underwriter var:bfl_bnd_24_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -859,7 +859,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_24_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_24_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_25_active = 1 exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 25 }
             var:bfl_bnd_25_holder = scope:bfl_bond_underwriter var:bfl_bnd_25_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -869,7 +869,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_25_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_25_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_26_active = 1 exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 26 }
             var:bfl_bnd_26_holder = scope:bfl_bond_underwriter var:bfl_bnd_26_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -879,7 +879,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_26_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_26_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_27_active = 1 exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 27 }
             var:bfl_bnd_27_holder = scope:bfl_bond_underwriter var:bfl_bnd_27_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -889,7 +889,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_27_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_27_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_28_active = 1 exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 28 }
             var:bfl_bnd_28_holder = scope:bfl_bond_underwriter var:bfl_bnd_28_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -899,7 +899,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_28_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_28_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_29_active = 1 exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 29 }
             var:bfl_bnd_29_holder = scope:bfl_bond_underwriter var:bfl_bnd_29_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -909,7 +909,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_29_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_29_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_30_active = 1 exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 30 }
             var:bfl_bnd_30_holder = scope:bfl_bond_underwriter var:bfl_bnd_30_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -919,7 +919,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_30_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_30_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_31_active = 1 exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 31 }
             var:bfl_bnd_31_holder = scope:bfl_bond_underwriter var:bfl_bnd_31_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }
@@ -929,7 +929,7 @@ if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_31_active = 1 exist
             set_variable = { name = bfl_bond_offer_price value = { value = var:bfl_bnd_31_face multiply = 0.98 multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_bond_offer_expiry value = { value = bfl_period add = 3 } }
         }
-if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder
+if = { limit = { var:bfl_bond_offer_selected = 0 var:bfl_bnd_32_active = 1 exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = { bfl_financial_recipient = yes }
             OR = { NOT = { has_variable = bfl_bond_requested_slot } var:bfl_bond_requested_slot = 32 }
             var:bfl_bnd_32_holder = scope:bfl_bond_underwriter var:bfl_bnd_32_due = 0 }
             set_variable = { name = bfl_bond_offer_selected value = 1 }

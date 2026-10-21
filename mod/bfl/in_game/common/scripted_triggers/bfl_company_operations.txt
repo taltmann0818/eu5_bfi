@@ -6,6 +6,7 @@ bfl_is_company = yes
 }
 bfl_company_operating = {
 bfl_company_authority = yes
+        NOT = { var:bfl_state ?= 4 } NOT = { var:bfl_state ?= 5 }
         var:bfl_company_mandate > 0
         any_owned_building = { building_type = building_type:trade_company_headquarters }
         gold > var:bfl_company_buffer
