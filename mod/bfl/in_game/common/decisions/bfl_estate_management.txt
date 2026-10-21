@@ -2,8 +2,9 @@
     decision_category = economy_decisions
     image = "gfx/interface/illustrations/bfl/charter.dds"
     potential = { country_type = location bfl_has_managed_estate = yes }
-    allow = { bfl_has_managed_estate = yes }
+    allow = { custom_tooltip = { text = bfl_estate_trustee_tip bfl_has_managed_estate = yes } }
     option = { name = bfl_administer_estates
-        effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } }
+        effect = { custom_tooltip = bfl_estate_open_tip
+            hidden_effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } } }
     ai_will_do = { value = 0 }
 }

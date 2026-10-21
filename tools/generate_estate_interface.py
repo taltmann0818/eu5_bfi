@@ -57,9 +57,10 @@ def generate(common, effect, loc, write):
             decision_category = economy_decisions
             image = "gfx/interface/illustrations/bfl/charter.dds"
             potential = { country_type = location bfl_has_managed_estate = yes }
-            allow = { bfl_has_managed_estate = yes }
+            allow = { custom_tooltip = { text = bfl_estate_trustee_tip bfl_has_managed_estate = yes } }
             option = { name = bfl_administer_estates
-                effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } }
+                effect = { custom_tooltip = bfl_estate_open_tip
+                    hidden_effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } } }
             ai_will_do = { value = 0 }
         }
     ''')
@@ -100,36 +101,55 @@ def generate(common, effect, loc, write):
         bfl_estate_review.1 = { type = country_event title = bfl_estate_review_title desc = bfl_estate_review_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
             option = { name = bfl_estate_review_service
-                bfl_service_managed_estate = yes bfl_show_managed_estate = yes ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_service_tip
+                hidden_effect = { bfl_service_managed_estate = yes bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_terms
                 trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { var:bfl_state = 4 bfl_resolution_researched = yes } }
-                var:bfl_managed_estate = { bfl_offer_resolution_terms = yes } ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_terms_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_offer_resolution_terms = yes } } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_creditor
-                var:bfl_managed_estate = { bfl_resolution_next_account = yes }
-                bfl_show_managed_estate = yes ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_resolution_next_account = yes }
+                bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_bonds
                 trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_bond_count > 0 } }
-                bfl_next_estate_bond = yes bfl_review_estate_bond = yes ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_next_estate_bond = yes bfl_review_estate_bond = yes } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_default
                 trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_can_conclude_liquidation = yes } }
-                var:bfl_managed_estate = { bfl_conclude_liquidation = yes bfl_close_resolution = yes }
-                bfl_show_managed_estate = yes ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_default_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_conclude_liquidation = yes bfl_close_resolution = yes }
+                bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_close
                 trigger = { bfl_valid_estate_selection = yes var:bfl_managed_estate = { bfl_can_close_resolution = yes } }
-                var:bfl_managed_estate = { bfl_close_resolution = yes } bfl_show_managed_estate = yes ai_chance = { base = 0 } }
-            option = { name = bfl_estate_review_next bfl_select_next_estate = yes bfl_show_managed_estate = yes ai_chance = { base = 0 } }
+                custom_tooltip = bfl_estate_close_tip
+                hidden_effect = { var:bfl_managed_estate = { bfl_close_resolution = yes } bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_review_next custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } ai_chance = { base = 0 } }
             option = { name = bfl_estate_review_leave ai_chance = { base = 100 } }
         }
         bfl_estate_review.2 = { type = country_event title = bfl_estate_bond_title desc = bfl_estate_bond_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = { name = bfl_estate_review_terms bfl_offer_estate_bond_terms = yes ai_chance = { base = 0 } }
-            option = { name = bfl_estate_bond_next bfl_next_estate_bond = yes bfl_review_estate_bond = yes ai_chance = { base = 0 } }
-            option = { name = bfl_estate_bond_back bfl_show_managed_estate = yes ai_chance = { base = 100 } }
+            option = { name = bfl_estate_review_terms custom_tooltip = bfl_estate_terms_tip
+                hidden_effect = { bfl_offer_estate_bond_terms = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_bond_next custom_tooltip = bfl_estate_select_tip
+                hidden_effect = { bfl_next_estate_bond = yes bfl_review_estate_bond = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_estate_bond_back custom_tooltip = bfl_estate_open_tip
+                hidden_effect = { bfl_show_managed_estate = yes } ai_chance = { base = 100 } }
         }
     ''')
     for key, title in {
         'bfl_administer_estates': 'Administer inherited financial estates',
         'bfl_administer_estates_desc': 'Review separately held cash and obligations of a destroyed institution. Trustee authority never makes its cash part of the national treasury.',
+        'bfl_administer_estates.title': 'Administer inherited financial estates',
+        'bfl_administer_estates.desc': 'Review separately held cash and obligations of a destroyed institution. Trustee authority never makes its cash part of the national treasury.',
+        'bfl_estate_trustee_tip': 'We are the legal trustee of a retained financial estate.',
+        'bfl_estate_open_tip': 'Review the original institution\'s separate estate. Opening this review moves no cash.',
+        'bfl_estate_service_tip': 'Realize accessible assets and pay recoveries from actual estate cash, respecting reserves and creditor priority. Unavailable claims remain recorded.',
+        'bfl_estate_terms_tip': 'Ask the selected current creditor to review voluntary terms. No reduction occurs without valid consent.',
+        'bfl_estate_select_tip': 'Review the next available creditor or estate. Selection moves no cash and changes no claims.',
+        'bfl_estate_default_tip': 'Finalize this exhausted destroyed institution: record unpaid creditor losses once and extinguish junior expenses. No shareholder receives proceeds.',
+        'bfl_estate_close_tip': 'Close this fully settled estate permanently after rechecking all obligations, non-cash rights and owners.',
         'bfl_estate_review_title': 'Financial estate administration',
         'bfl_estate_review_desc': "Estate: [ROOT.GetCountry.MakeScope.GetVariable('bfl_managed_estate').GetCountry.GetName]. Financial state [ROOT.GetCountry.MakeScope.GetVariable('bfl_estate_state_display').GetValue|0] (4 resolving, 5 closed). Separate cash: [ROOT.GetCountry.MakeScope.GetVariable('bfl_estate_cash_display').GetValue|2] gold. Deposits still owed: [ROOT.GetCountry.MakeScope.GetVariable('bfl_estate_deposits_display').GetValue|2]. Receiver compensation still owed: [ROOT.GetCountry.MakeScope.GetVariable('bfl_estate_receiver_display').GetValue|2]. Deposit recoveries paid: [ROOT.GetCountry.MakeScope.GetVariable('bfl_estate_recovered_display').GetValue|2]. Servicing uses actual sale proceeds and repayments. Unavailable claims remain recorded; closure requires every obligation and non-cash position to clear.",
         'bfl_estate_review_service': 'Realize available assets and pay recoveries',

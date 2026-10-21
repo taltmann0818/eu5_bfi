@@ -81,7 +81,7 @@ def prepare(directory, scene):
                 decision_category = economy_decisions
                 image = "gfx/interface/illustrations/bfl/charter.dds"
                 potential = { tag = FLO } allow = { tag = FLO }
-                option = { name = bfi_m9_ui_quote effect = { c:GEN = { bfl_offer_bond_workout_01 = yes } } }
+                option = { name = bfi_m9_ui_quote effect = { hidden_effect = { c:GEN = { bfl_offer_bond_workout_01 = yes } } } }
                 ai_will_do = { value = 0 }
             }
         ''')
@@ -89,6 +89,8 @@ def prepare(directory, scene):
             l_english:
              bfi_m9_ui_quote: "QA: Request Genoese bond terms"
              bfi_m9_ui_quote_desc: "Disposable fixture: ask the production current-holder consent event to open."
+             bfi_m9_ui_quote.title: "QA: Request Genoese bond terms"
+             bfi_m9_ui_quote.desc: "Disposable fixture: ask the production current-holder consent event to open."
         ''')
     campaign.write_script(overlay / 'in_game/common/scripted_effects/bfi_m9_complete_ui.txt',
                           'bfi_m9_complete_ui_setup = { ' + extra + ' }')

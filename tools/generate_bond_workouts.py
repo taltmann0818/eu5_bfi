@@ -93,15 +93,21 @@ def generate(common, effect, loc, write):
     common('../events', 'bond_workout', '''namespace = bfl_bond_workout
         bfl_bond_workout.1 = { type = country_event title = bfl_bond_workout_title desc = bfl_bond_workout_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = { name = bfl_bond_workout_accept bfl_accept_bond_workout = yes ai_chance = { base = 0 } }
+            option = { name = bfl_bond_workout_accept custom_tooltip = bfl_bond_accept_tip
+                hidden_effect = { bfl_accept_bond_workout = yes } ai_chance = { base = 0 } }
             option = { name = bfl_bond_workout_secured
                 trigger = { exists = var:bfl_bond_workout_issuer var:bfl_bond_workout_issuer = { bfl_bond_security_available = yes } }
-                bfl_accept_secured_bond_workout = yes ai_chance = { base = 0 } }
-            option = { name = bfl_workout_decline remove_variable = bfl_bond_workout_issuer ai_chance = { base = 100 } }
+                custom_tooltip = bfl_bond_secured_accept_tip
+                hidden_effect = { bfl_accept_secured_bond_workout = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_workout_decline custom_tooltip = bfl_bond_decline_tip
+                hidden_effect = { remove_variable = bfl_bond_workout_issuer } ai_chance = { base = 100 } }
         }''')
     loc('bfl_bond_workout_title', 'Bond restructuring proposal')
     loc('bfl_bond_workout_desc', "[ROOT.GetCountry.MakeScope.GetVariable('bfl_bond_workout_issuer').GetCountry.GetName] asks you, the current holder, to waive 20% of this bond's principal and unpaid coupons and reduce its annual coupon by one percentage point, with a 1% floor. Declining preserves all terms. The proposal expires this month; payment, transfer or another change invalidates it. Ordinary acceptance provides no new security. Where offered, secured acceptance adds a two-year trade-protection concession and an exclusive pledge of up to 10% of monthly income for unpaid coupons. Enforcement uses available treasury gold only, before other custom-bond coupons; it creates no guarantee or principal payment.")
     loc('bfl_bond_workout_accept', 'Accept the bond restructuring')
     loc('bfl_bond_workout_secured', 'Accept with a two-year trade concession and revenue pledge')
+    loc('bfl_bond_accept_tip', 'Accept the quoted principal/coupon reduction and annual rate cut after rechecking the current holder, claim and authority. No new security or cash payment.')
+    loc('bfl_bond_secured_accept_tip', 'Accept the quoted reduction together with the exclusive two-year revenue pledge and trade-protection concession. Actual enforcement remains limited by available issuer cash.')
+    loc('bfl_bond_decline_tip', 'Keep the full existing bond claim and its accepted terms. No cash moves.')
     from generate_bond_security import generate as generate_security
     generate_security(common, effect, loc, write)

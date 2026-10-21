@@ -496,15 +496,21 @@ def make_consent(common, effect, loc):
     common('../events', 'workout', '''namespace = bfl_workout
         bfl_workout.1 = { type = country_event title = bfl_workout_title desc = bfl_workout_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = { name = bfl_workout_haircut bfl_accept_resolution_haircut = yes ai_chance = { base = 0 } }
-            option = { name = bfl_workout_equity bfl_accept_resolution_equity = yes ai_chance = { base = 0 } }
-            option = { name = bfl_workout_decline remove_variable = bfl_workout_bank ai_chance = { base = 100 } }
+            option = { name = bfl_workout_haircut custom_tooltip = bfl_deposit_haircut_tip
+                hidden_effect = { bfl_accept_resolution_haircut = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_workout_equity custom_tooltip = bfl_deposit_equity_tip
+                hidden_effect = { bfl_accept_resolution_equity = yes } ai_chance = { base = 0 } }
+            option = { name = bfl_workout_decline custom_tooltip = bfl_deposit_decline_tip
+                hidden_effect = { remove_variable = bfl_workout_bank } ai_chance = { base = 100 } }
         }''')
     loc('bfl_workout_title', 'Creditor workout proposal')
     loc('bfl_workout_desc', "[ROOT.GetCountry.MakeScope.GetVariable('bfl_workout_bank').GetCountry.GetName] proposes terms for your deposit of [ROOT.GetCountry.MakeScope.GetVariable('bfl_workout_claim').GetValue|2] gold. You may waive 20% of the remaining claim, convert the entire claim into newly issued shares at pre-conversion tangible NAV, or retain your claim. Conversion requires positive NAV and shareholder capacity and is unavailable to bank creditors. Creditor pool [ROOT.GetCountry.MakeScope.GetVariable('bfl_workout_pool').GetValue|0]: 0 treasury, 1 burghers, 2 nobles, 3 clergy, 4 peasants. Estate terms require that estate's enacted Workout Mandate. The quote expires this month; recovery or a change of management invalidates it.")
     loc('bfl_workout_haircut', 'Accept a 20% reduction')
     loc('bfl_workout_equity', 'Convert the claim into shares (positive NAV required)')
     loc('bfl_workout_decline', 'Keep the full claim')
+    loc('bfl_deposit_haircut_tip', 'Accept the quoted 20% reduction after rechecking the creditor, remaining claim, research and authority. A recorded public guarantee remains separately funded.')
+    loc('bfl_deposit_equity_tip', 'Convert the quoted claim into real shares only if the surviving bank has positive tangible NAV and shareholder capacity. No subscription cash or earnings are created.')
+    loc('bfl_deposit_decline_tip', 'Retain the full deposit claim. No cash moves and no shares are issued.')
 
 
 def make_interface(common, effect, loc, write):
