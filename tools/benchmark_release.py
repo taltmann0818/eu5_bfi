@@ -43,6 +43,7 @@ def run(game, cmf, label, blocks, warmup, timeout):
     (overlay / '.metadata/metadata.json').write_text(json.dumps({
         'name': 'BFI disposable timing', 'id': 'bfi_timing', 'version': '0.0.1',
         'game_id': 'eu5', 'supported_game_version': '1.4.1', 'relationships': [],
+        'short_description': 'Disposable native performance instrumentation; excluded from releases.',
         'tags': ['Utilities'], 'game_custom_data': {}}))
     counts = '''save_scope_as = bfi_timing_observer
         set_variable = { name = bfi_timing_countries value = 0 }
@@ -127,12 +128,16 @@ def run(game, cmf, label, blocks, warmup, timeout):
         raise ValueError('Missing or duplicate native entity/contract count snapshot')
     measured_counts = dict(zip(('countries', 'native_banks', 'native_lent_loans', 'active_custom_deposit_contract_bond_inventory_venture_records'),
                                map(float, count_match[0].split('|'))))
+    fixture_digest = hashlib.sha256()
+    for path in sorted(overlay.rglob('*')):
+        if path.is_file():
+            fixture_digest.update(path.relative_to(overlay).as_posix().encode() + b'\0' + path.read_bytes())
     return {'label': label, 'token': token, 'warmup_months': warmup,
             'monthly_observations': len(native), 'measured_native_months': native[warmup:warmup + blocks * 12],
             'median_seconds_per_month': statistics.median(measurements),
             'measured_entity_counts': measured_counts,
             'timing_log_sha256': hashlib.sha256(timer_files[0].read_bytes()).hexdigest(),
-            'fixture_sha256': hashlib.sha256(script.encode()).hexdigest(),
+            'fixture_sha256': fixture_digest.hexdigest(),
             'errors': bfi_errors, 'local_user_directory': str(user)}
 
 
