@@ -1,0 +1,6 @@
+﻿bfl_strategy_enable = { scope = country is_shown = { bfl_has_management = yes }
+    is_valid = { bfl_has_management = yes } effect = { bfl_resolve_command_bank = yes
+        scope:bfl_bank = { bfl_initialize_strategy = yes set_variable = { name = bfl_strategy_mode value = 1 } } } }
+bfl_strategy_disable = { scope = country is_shown = { bfl_has_management = yes }
+    is_valid = { bfl_has_management = yes } effect = { bfl_resolve_command_bank = yes
+        scope:bfl_bank = { bfl_initialize_strategy = yes set_variable = { name = bfl_strategy_mode value = 0 } } } }

@@ -4,7 +4,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -23,6 +23,7 @@ try {
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
     $suiteScript = switch ($Suite) {
+        'm10' { 'tools/m10_strategy_suite.py' }
         'm0' { 'tools/m0_probe_suite.py' }
         'm1' { 'tools/m1_charter_suite.py' }
         'm2' { 'tools/m2_company_suite.py' }

@@ -1,5 +1,33 @@
 # Native bank interface captures
 
+## M10 investment mandate
+
+[Exact capture provenance](../../tests/results/2026-10-21-m10-ui.json) records
+eight normal UI observations and five actual-game captures from disposable
+Florence-controller and independent-Bardi scenes. English, 1280×720 client,
+inherited default/automatic scale; window PNGs include the native title bar.
+All GUI/localization bytes match shipping. Each capture retains its actual
+runtime and fixture hash; candidate traversal changes are recorded separately.
+Cash/branch/ownership grants are fixture setup, not campaign balance evidence.
+
+- [Controller manual](2026-10-21-m10-controller-manual.png): Merchant bank,
+  separate sovereign accounts, manual mandate and bank cash/assets/equity 5000.
+- [Controller delegated](2026-10-21-m10-controller-delegated.png): normal Delegate
+  investments changes policy without moving cash; hover explains bounded review,
+  cadence and transaction guards.
+- [Independent manual](2026-10-21-m10-independent-manual.png): Overseas Bardi,
+  preserved native loan header and the same directly accessible mandate.
+- [Independent delegated](2026-10-21-m10-independent-delegated.png): normal opt-in
+  preserves 5000 cash and shows the financing/consent explanation.
+- [Independent funded](2026-10-21-m10-independent-funded.png): natural monthly
+  passes made two demand placements. Cash 4803.69 and assets/equity 5003.69
+  reconcile to a 200-gold receivable. This is an original-pixel crop of the bank
+  panel excluding another application; its source and crop hashes are recorded.
+
+Normal Manage investments subsequently returns to manual management while the
+200-gold claim remains. These scenes accept the named controls and presentation,
+not every language, resolution or the full M10 campaign gate.
+
 ## M9 institution-wide resolution
 
 The [21 October capture record](../../tests/results/2026-10-21-m9-ui.json)

@@ -1,0 +1,66 @@
+{
+  "accepted": false,
+  "attempts": [
+    {
+      "token": "44dc5a95f7d5472e96f78a38f324e514",
+      "runtime_sha256": "045bca908cad2e73daf02715b191ea326662bf70010a88b699899250c40a17ca",
+      "reason": "Rejected: initial 9% rate/12-month-income cutoffs prevented qualifying native credit; the deposit boundary expectation ignored a real expense liability.",
+      "failed_assertions": [
+        "placement_cannot_cross_ten_percent_equity_cap",
+        "independent_profile_1_ranks_and_offers_credit",
+        "independent_profile_1_funded_credit_has_native_title",
+        "independent_profile_2_ranks_and_offers_credit",
+        "independent_profile_2_funded_credit_has_native_title",
+        "chartered_profile_1_ranks_and_offers_credit",
+        "chartered_profile_1_funded_credit_has_native_title",
+        "chartered_profile_2_ranks_and_offers_credit",
+        "chartered_profile_2_funded_credit_has_native_title"
+      ]
+    },
+    {
+      "token": "8582cde0263c4ba4b092483b7a429e60",
+      "runtime_sha256": "045bca908cad2e73daf02715b191ea326662bf70010a88b699899250c40a17ca",
+      "reason": "Diagnostic rejected run; measured native rates, income and 999-equity boundary before correction.",
+      "failed_assertions": [
+        "placement_cannot_cross_ten_percent_equity_cap",
+        "independent_profile_1_ranks_and_offers_credit",
+        "independent_profile_1_borrower_meets_scoring_gate",
+        "independent_profile_1_lender_meets_funding_gate",
+        "independent_profile_1_funded_credit_has_native_title",
+        "independent_profile_2_ranks_and_offers_credit",
+        "independent_profile_2_borrower_meets_scoring_gate",
+        "independent_profile_2_funded_credit_has_native_title",
+        "chartered_profile_1_ranks_and_offers_credit",
+        "chartered_profile_1_borrower_meets_scoring_gate",
+        "chartered_profile_1_funded_credit_has_native_title",
+        "chartered_profile_2_ranks_and_offers_credit",
+        "chartered_profile_2_borrower_meets_scoring_gate",
+        "chartered_profile_2_funded_credit_has_native_title"
+      ]
+    },
+    {
+      "token": "798e6064e03c4a688c89fb9e1b30e470",
+      "runtime_sha256": "49b5e17a77144c9f550668cef21acb168c1209f15857ee6ed710c40ea74d3361",
+      "reason": "Rejected fixture: reusing Genoa after taking credit reduced native creditworthiness below the unchanged 0.50 threshold.",
+      "failed_assertions": [
+        "independent_profile_2_ranks_and_offers_credit",
+        "independent_profile_2_funded_credit_has_native_title",
+        "chartered_profile_1_ranks_and_offers_credit",
+        "chartered_profile_1_funded_credit_has_native_title",
+        "chartered_profile_2_ranks_and_offers_credit",
+        "chartered_profile_2_funded_credit_has_native_title"
+      ]
+    },
+    {
+      "token": "c9a9b824590c483d81c40af4dc55c7f7",
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "reason": "Rejected positive fixture: Venice income did not support 100-gold native credit. Correct production rejection; Castile replaces this positive lane.",
+      "failed_assertions": [
+        "independent_profile_2_ranks_and_offers_credit",
+        "independent_profile_2_borrower_accepts_affordable_terms",
+        "independent_profile_2_lender_meets_funding_gate",
+        "independent_profile_2_funded_credit_has_native_title"
+      ]
+    }
+  ]
+}

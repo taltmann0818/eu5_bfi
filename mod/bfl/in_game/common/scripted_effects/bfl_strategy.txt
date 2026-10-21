@@ -1,0 +1,142 @@
+﻿bfl_strategy_consider_credit = {
+save_scope_as = bfl_party
+        if = { limit = { bfl_strategy_credit_need = yes
+            scope:bfl_strategy_bank = { bfl_credit_funding_available = yes
+                bfl_strategy_party_exposure <= { value = bfl_equity multiply = 0.25 }
+                bfl_credit_quote_rate <= 0.15
+                scope:bfl_party.monthly_income_total >= { value = bfl_credit_quote_rate multiply = 100 divide = 12 multiply = 4 } }
+            bfl_strategy_credit_score > scope:bfl_strategy_bank.var:bfl_strategy_score }
+            save_scope_as = bfl_strategy_candidate
+            scope:bfl_strategy_bank = {
+                set_variable = { name = bfl_strategy_target value = scope:bfl_strategy_candidate }
+                set_variable = { name = bfl_strategy_score value = scope:bfl_strategy_candidate.bfl_strategy_credit_score }
+            }
+        }
+}
+bfl_strategy_recall = {
+if = { limit = { exists = var:bfl_strategy_depository }
+    var:bfl_strategy_depository = { save_scope_as = bfl_strategy_depository }
+    if = { limit = { bfl_free_cash < 200
+        OR = { scope:bfl_strategy_depository.bfl_strategy_deposit_exposure > 0 } }
+        save_scope_as = bfl_party
+        scope:bfl_strategy_depository = { bfl_request_all_withdrawals = yes }
+        set_variable = { name = bfl_strategy_action value = 3 }
+        change_variable = { name = bfl_strategy_recalls add = 1 }
+    }
+    else_if = { limit = { scope:bfl_strategy_depository = { var:bfl_state >= 2 }
+        scope:bfl_strategy_depository.bfl_strategy_deposit_exposure > 0 }
+        save_scope_as = bfl_party
+        scope:bfl_strategy_depository = { bfl_request_all_withdrawals = yes }
+        set_variable = { name = bfl_strategy_action value = 3 }
+        change_variable = { name = bfl_strategy_recalls add = 1 }
+    }
+}
+}
+bfl_strategy_place_deposit = {
+if = { limit = { bfl_free_cash >= 600 bfl_capital_headroom >= 100
+    bfl_deposit_assets <= { value = bfl_equity multiply = 0.10 subtract = 100 }
+    bfl_deposit_assets < 200 }
+    remove_variable = bfl_strategy_target
+    set_variable = { name = bfl_strategy_score value = 0 }
+    every_in_global_list = { variable = bfl_resolution_institutions limit = { bfl_strategy_deposit_target = yes
+        scope:bfl_strategy_bank.var:bfl_strategy_reviewed < 12 }
+        scope:bfl_strategy_bank = { change_variable = { name = bfl_strategy_reviewed add = 1 } }
+        if = { limit = { bfl_strategy_deposit_exposure < 200
+            OR = { scope:bfl_strategy_bank = { NOT = { exists = var:bfl_strategy_depository } }
+                this = scope:bfl_strategy_bank.var:bfl_strategy_depository }
+            var:bfl_demand_rate > scope:bfl_strategy_bank.var:bfl_strategy_score }
+            save_scope_as = bfl_strategy_candidate
+            scope:bfl_strategy_bank = {
+                set_variable = { name = bfl_strategy_target value = scope:bfl_strategy_candidate }
+                set_variable = { name = bfl_strategy_score value = scope:bfl_strategy_candidate.var:bfl_demand_rate }
+            }
+        }
+    }
+    if = { limit = { exists = var:bfl_strategy_target }
+        save_scope_as = bfl_party
+        set_variable = { name = bfl_strategy_before value = bfl_deposit_assets }
+        var:bfl_strategy_target = { set_variable = { name = bfl_product value = 1 } bfl_open_deposit = yes }
+        if = { limit = { bfl_deposit_assets > var:bfl_strategy_before }
+            set_variable = { name = bfl_strategy_depository value = var:bfl_strategy_target }
+            set_variable = { name = bfl_strategy_action value = 2 }
+            change_variable = { name = bfl_strategy_placements add = 1 }
+        }
+    }
+}
+}
+bfl_run_strategy = {
+bfl_initialize_strategy = yes
+if = { limit = { bfl_strategy_authorized = yes bfl_period > var:bfl_strategy_last }
+    # Stamp before offers/events; re-entry and reload cannot run again.
+    set_variable = { name = bfl_strategy_last value = bfl_period }
+    change_variable = { name = bfl_strategy_cycles add = 1 }
+    set_variable = { name = bfl_strategy_action value = 0 }
+    set_variable = { name = bfl_strategy_reviewed value = 0 }
+    set_variable = { name = bfl_strategy_score value = 0 }
+    remove_variable = bfl_strategy_target
+    save_scope_as = bfl_strategy_bank
+    bfl_strategy_recall = yes
+    if = { limit = { var:bfl_strategy_action = 0 bfl_free_cash >= 200 bfl_capital_headroom >= 100
+        OR = { NOT = { has_variable = bfl_strategy_credit_after } bfl_period >= var:bfl_strategy_credit_after } }
+        # A completed owned current-capital branch is an existing client
+        # connection. Other cities, unfinished deeds and duplicate levels
+        # cannot create extra candidate reviews.
+        every_owned_building = { limit = { building_type = building_type:banking_office building_level > 0
+            location = location.owner.capital scope:bfl_strategy_bank.var:bfl_strategy_reviewed < 12 }
+            location.owner = { if = { limit = { is_ai = yes bfl_strategy_credit_need = yes
+                bfl_strategy_branch_candidate = yes }
+                scope:bfl_strategy_bank = { change_variable = { name = bfl_strategy_reviewed add = 1 } }
+                bfl_strategy_consider_credit = yes
+            } }
+        }
+        # Merchant company credit is local to the bank's native market.
+        # The shared product service still enforces the profile/advance.
+        every_in_global_list = { variable = bfl_resolution_institutions
+            limit = { bfl_is_company = yes is_ai = yes exists = capital
+                scope:bfl_strategy_bank = { exists = capital }
+                capital.market = { this = scope:bfl_strategy_bank.capital.market }
+                bfl_strategy_credit_need = yes scope:bfl_strategy_bank.var:bfl_strategy_reviewed < 12 }
+            scope:bfl_strategy_bank = { change_variable = { name = bfl_strategy_reviewed add = 1 } }
+            bfl_strategy_consider_credit = yes
+        }
+        if = { limit = { exists = var:bfl_strategy_target }
+            save_scope_as = bfl_credit_actor
+            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_credit_actor } }
+            var:bfl_strategy_target = { save_scope_as = bfl_party }
+            bfl_offer_native_credit = yes
+            if = { limit = { scope:bfl_party.var:bfl_credit_offer_bank ?= this }
+                set_variable = { name = bfl_strategy_action value = 1 }
+                change_variable = { name = bfl_strategy_offers add = 1 }
+                set_variable = { name = bfl_strategy_credit_after value = { value = bfl_period add = 3 } }
+            }
+        }
+    }
+    if = { limit = { var:bfl_strategy_action = 0 }
+        set_variable = { name = bfl_strategy_reviewed value = 0 }
+        bfl_strategy_place_deposit = yes
+    }
+    bfl_refresh_asset_statement = yes
+}
+}
+bfl_run_company_strategy = {
+if = { limit = { bfl_is_company = yes is_ai = yes exists = overlord
+    NOT = { var:bfl_strategy_mode ?= 0 }
+    overlord = { is_ai = yes country_type = location }
+    NOT = { var:bfl_state ?= 4 } NOT = { var:bfl_state ?= 5 }
+    OR = { NOT = { has_variable = bfl_company_strategy_last } bfl_period > var:bfl_company_strategy_last } }
+    set_variable = { name = bfl_company_strategy_last value = bfl_period }
+    overlord = { save_scope_as = bfl_company_actor }
+    bfl_register_company = yes
+    if = { limit = { NOT = { has_variable = bfl_company_strategy_initialized } }
+        scope:bfl_company_actor = { set_variable = { name = bfl_company_requested_mandate value = 1 } }
+        bfl_company_set_mandate = yes
+        set_variable = bfl_company_strategy_initialized
+    }
+    if = { limit = { gold < { value = var:bfl_company_buffer add = var:bfl_company_reinvestment }
+        scope:bfl_company_actor = { gold >= 600 monthly_balance >= 0 }
+        OR = { NOT = { has_variable = bfl_company_strategy_funded } bfl_period >= { value = var:bfl_company_strategy_funded add = 3 } } }
+        bfl_company_capitalize = yes
+        set_variable = { name = bfl_company_strategy_funded value = bfl_period }
+    }
+}
+}

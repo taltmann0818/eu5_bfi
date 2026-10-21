@@ -336,11 +336,13 @@ def generate(common, effect, loc):
     for number, title, description, accept, reject in [
         (1, 'Credit offer', 'A bank offers 100 gold for 60 months at the quoted annual rate. Acceptance rechecks funding, authority, debt capacity and your eligibility. Principal is financing, not income.', 'bfl_accept_native_credit', 'bfl_reject_native_credit'),
         (2, 'Debt relief offer', 'Your lender offers a 20% principal reduction and a one percentage-point annual rate reduction (minimum 1%). This changes the existing unsecured loan only. Its maturity stays unchanged.', 'bfl_accept_native_restructuring', 'bfl_reject_native_restructuring')]:
+        accept_chance = 'base = 0 modifier = { add = 100 bfl_strategy_accept_credit = yes }' if number == 1 else 'base = 100'
+        reject_chance = 'base = 100 modifier = { factor = 0 bfl_strategy_accept_credit = yes }' if number == 1 else 'base = 0'
         events += f'''bfl_credit.{number} = {{ type = country_event
             title = bfl_credit_{number}_title desc = bfl_credit_{number}_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = {{ name = bfl_credit_accept {accept} = yes ai_chance = {{ base = 100 }} }}
-            option = {{ name = bfl_credit_reject {reject} = yes ai_chance = {{ base = 0 }} }}
+            option = {{ name = bfl_credit_accept {accept} = yes ai_chance = {{ {accept_chance} }} }}
+            option = {{ name = bfl_credit_reject {reject} = yes ai_chance = {{ {reject_chance} }} }}
         '''
         if number == 2:
             events += '''option = { name = bfl_credit_partial

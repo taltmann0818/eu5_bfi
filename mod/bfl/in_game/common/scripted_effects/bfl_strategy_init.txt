@@ -1,0 +1,22 @@
+﻿bfl_initialize_strategy = {
+if = { limit = { NOT = { has_variable = bfl_strategy_mode } }
+        set_variable = { name = bfl_strategy_mode value = -1 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_last } }
+        set_variable = { name = bfl_strategy_last value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_action } }
+        set_variable = { name = bfl_strategy_action value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_reviewed } }
+        set_variable = { name = bfl_strategy_reviewed value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_score } }
+        set_variable = { name = bfl_strategy_score value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_offers } }
+        set_variable = { name = bfl_strategy_offers value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_placements } }
+        set_variable = { name = bfl_strategy_placements value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_recalls } }
+        set_variable = { name = bfl_strategy_recalls value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_ventures } }
+        set_variable = { name = bfl_strategy_ventures value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_cycles } }
+        set_variable = { name = bfl_strategy_cycles value = 0 } }
+}

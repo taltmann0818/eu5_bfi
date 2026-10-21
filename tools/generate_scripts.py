@@ -178,7 +178,7 @@ def initialize():
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
     body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
-    body += 'bfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\nbfl_register_resolution_institution = yes\n'
+    body += 'bfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\nbfl_register_resolution_institution = yes\nbfl_initialize_strategy = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -778,6 +778,7 @@ def treasury_and_resolution():
                 bfl_run_controller_bond_facility = yes
             }
             bfl_autonomous_takeover = yes
+            bfl_run_strategy = yes
             bfl_record_history = yes
             bfl_record_exchange_history = yes
             if = { limit = { bfl_is_independent_bank = yes } bfl_record_portfolio_history = yes }
@@ -992,7 +993,7 @@ def gui_and_localization():
     loc('bfl_monetary','Monetary policy and liquidity')
     loc('bfl_distress','Distress and development gates')
     loc('bfl_no_bank','Charter an existing State Bank through Decisions, or play an independent banking country. Your country must own its capital market to charter a bank.')
-    loc('bfl_dev_notice','Sovereign bonds use funded custom claims with fixed annual coupons. Physical goods, company receipts and advanced native adapters remain under development.')
+    loc('bfl_dev_notice','Funded credit, sovereign bonds, company investment, goods, commenda and monetary services follow their research, profile and building requirements. Release-wide campaign balance and compatibility remain under validation.')
     loc('bfl_accounts_explanation','Native treasury is cash. Deposits and notes are liabilities. Lending exchanges cash for an asset; principal, subscriptions and issuance are not profit.')
     loc('bfl_debt_explanation','The chartered bank funds custom sovereign bonds. Secondary trading requires completed Stock Exchanges on both sides, including early event grants. Native credit uses accepted offers and researched debt relief with persisted claim records.')
     loc('bfl_goods_explanation','Funded native inventory, backed receipts and forwards require Merchant Finance, their advances and P09 execution/custody verification. Encumbered goods cannot back a second claim.')
@@ -1085,6 +1086,8 @@ def main():
     generate_resolution_native_debt(common,effect,loc,write)
     from generate_resolution_default import generate as generate_resolution_default
     generate_resolution_default(common,effect,loc,write)
+    from generate_strategy import generate as generate_strategy
+    generate_strategy(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

@@ -238,6 +238,7 @@ def generate(common, effect, loc, write):
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
             set_variable = { name = bfl_company_last_period value = bfl_period }
             bfl_observe_company_operations = yes bfl_settle_company_income = yes
+            bfl_run_company_strategy = yes
             bfl_record_exchange_history = yes
             change_variable = { name = bfl_company_statement_count add = 1 }
             if = { limit = { var:bfl_company_project_state = 1

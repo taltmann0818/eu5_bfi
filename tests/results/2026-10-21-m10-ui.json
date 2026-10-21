@@ -1,0 +1,98 @@
+{
+  "suite": "M10 normal player controls",
+  "passed": true,
+  "observation_count": 8,
+  "observations": [
+    "Florence controller opens Merchant bank Credit and the Investment mandate in Lending & Investments.",
+    "Initial controller policy is manual; bank cash/assets/equity are 5000, with zero strategy counters.",
+    "Normal controller Delegate investments changes policy to delegated; bank cash stays 5000.",
+    "Normal mandate hover displays evaluation/cadence/funding/research/branch rules without clipping at the recorded size.",
+    "Independent Bardi opens Overseas Credit with native loan header and the same manual mandate.",
+    "Normal independent Delegate investments changes policy to delegated; cash stays 5000.",
+    "Natural monthly passes produce two 100-gold placements: cash 4803.69, assets/equity 5003.69, placements 2 and a 200-gold receivable.",
+    "Normal Manage investments returns to manual; the 200-gold receivable remains (subsequent native month shows cash 4805.37 and assets 5005.37)."
+  ],
+  "client_resolution": [
+    1280,
+    720
+  ],
+  "window_resolution": [
+    1282,
+    752
+  ],
+  "gui_scale": "Inherited default/automatic; not separately measured",
+  "game_version": "1.4.1",
+  "cmf_version": "2.5.0",
+  "language": "English",
+  "captures": [
+    {
+      "file": "2026-10-21-m10-controller-manual.png",
+      "sha256": "31b2a20ec1dd295fd83d4704673adb4e4c06499c1fd8a043f3d8bce738eb6a06",
+      "width": 1282,
+      "height": 752,
+      "role": "controller",
+      "runtime_sha256": "49b5e17a77144c9f550668cef21acb168c1209f15857ee6ed710c40ea74d3361",
+      "fixture_sha256": "1d0e2d9a91da3be8b5dc4d65372a711937c20d9ca015f7adf60fee1dcc46f580",
+      "transformation": "None; original window PNG",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt",
+        "in_game/common/scripted_triggers/bfl_strategy.txt"
+      ]
+    },
+    {
+      "file": "2026-10-21-m10-controller-delegated.png",
+      "sha256": "ed911dfb238d25cb0d8b981409111696453cb8cf8a85591d4da5802be39b10e1",
+      "width": 1282,
+      "height": 752,
+      "role": "controller",
+      "runtime_sha256": "49b5e17a77144c9f550668cef21acb168c1209f15857ee6ed710c40ea74d3361",
+      "fixture_sha256": "1d0e2d9a91da3be8b5dc4d65372a711937c20d9ca015f7adf60fee1dcc46f580",
+      "transformation": "None; original window PNG",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt",
+        "in_game/common/scripted_triggers/bfl_strategy.txt"
+      ]
+    },
+    {
+      "file": "2026-10-21-m10-independent-manual.png",
+      "sha256": "3671c8be2d360e50d9230913bbcf82f084e24b2d76547da22bd66e10e01ff75b",
+      "width": 1282,
+      "height": 752,
+      "role": "independent",
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "fixture_sha256": "b6715b631fdb00e0135693c139e7bafc34bc63da8274c3df09cc229d79bf3cbd",
+      "transformation": "None; original window PNG",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt"
+      ]
+    },
+    {
+      "file": "2026-10-21-m10-independent-delegated.png",
+      "sha256": "e0043fcfb643679ce4ccee4e982c60c5b8520bca5b68816385d7813b0a0351d5",
+      "width": 1282,
+      "height": 752,
+      "role": "independent",
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "fixture_sha256": "b6715b631fdb00e0135693c139e7bafc34bc63da8274c3df09cc229d79bf3cbd",
+      "transformation": "None; original window PNG",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt"
+      ]
+    },
+    {
+      "file": "2026-10-21-m10-independent-funded.png",
+      "sha256": "722e8705eec50aa36baf59a6c1f5e1d222d34a34cc43bc5639bc14c90b09dbbc",
+      "width": 342,
+      "height": 752,
+      "role": "independent",
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "fixture_sha256": "b6715b631fdb00e0135693c139e7bafc34bc63da8274c3df09cc229d79bf3cbd",
+      "source_sha256": "94e4ce0829644b24a630c511bccf8dda6293c0c0376d9c6d301b1b904a6e6f42",
+      "transformation": "Original pixels cropped to x=0..341, y=0..751; no visual content altered. Other applications excluded.",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt"
+      ]
+    }
+  ],
+  "boundary": "Earlier runtime captures retain their real hashes. All shipping GUI/localization files are byte-identical; only strategy candidate traversal/binding changed. Fixture cash, branches and bank ownership are explicit setup, not campaign balance."
+}

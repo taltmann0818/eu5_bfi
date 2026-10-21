@@ -18,6 +18,7 @@
             bfl_run_controller_bond_facility = yes
         }
         bfl_autonomous_takeover = yes
+        bfl_run_strategy = yes
         bfl_record_history = yes
         bfl_record_exchange_history = yes
         if = { limit = { bfl_is_independent_bank = yes } bfl_record_portfolio_history = yes }

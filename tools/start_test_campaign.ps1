@@ -8,6 +8,8 @@ param(
     [switch]$Commenda,
     [switch]$CommendaQaControls,
     [switch]$CommendaIndependent,
+    [switch]$Strategy,
+    [switch]$StrategyIndependent,
     [switch]$NoDebug,
     [ValidateSet('populated','empty','locked','offer','full')][string]$CommendaState = 'populated'
 )
@@ -44,8 +46,16 @@ try {
         python @taskCommendaArgs
         if ($LASTEXITCODE -ne 0) { throw 'Commenda UI fixture preparation failed' }
     }
+    if ($Strategy) {
+        $taskStrategyArgs = @('tools/prepare_m10_ui.py', '--userdir', $userDir)
+        if ($StrategyIndependent) { $taskStrategyArgs += '--independent' }
+        python @taskStrategyArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Strategy UI fixture preparation failed' }
+    }
     $bfi = Join-Path $userDir 'mod/bfi'
-    Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
+    if (-not (Test-Path -LiteralPath $bfi)) {
+        Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
+    }
     if ($SettingsFrom) {
         Copy-Item -LiteralPath (Join-Path $SettingsFrom 'pdx_settings.json') -Destination $userDir
     }
@@ -59,6 +69,7 @@ try {
     if (-not $PrepareOnly) {
         $arguments = @('-debug_mode', '-play=FLO', "-userdir=`"$userDir`"")
         if ($Commenda -and $CommendaIndependent) { $arguments[1] = '-play=BRD' }
+        if ($Strategy -and $StrategyIndependent) { $arguments[1] = '-play=BRD' }
         if ($NoDebug) { $arguments = @($arguments | Where-Object { $_ -ne '-debug_mode' }) }
         $process = Start-Process -FilePath $exe -ArgumentList $arguments -WorkingDirectory (Join-Path $Game 'binaries') -WindowStyle Normal -PassThru
         $process.Id | Set-Content -LiteralPath (Join-Path $userDir '../owned-pid.txt')

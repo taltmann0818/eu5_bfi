@@ -1,0 +1,59 @@
+{
+  "milestone": "M10",
+  "complete": false,
+  "shipping_runtime_sha256": "f59f4d34ba5445d97302ea52a8a5b7191e3a9770faa18885e17c04bd7a5861fd",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "engine_runs": [
+    {
+      "suite": "strategy",
+      "report": "2026-10-21-m10-strategy.json",
+      "assertions": 53,
+      "runtime_sha256": "f59f4d34ba5445d97302ea52a8a5b7191e3a9770faa18885e17c04bd7a5861fd",
+      "fixture_sha256": "b415407ad20e048ca29841db2bc5dffb37a4736e93c4528dac12f00e086c8cfc",
+      "token": "1d9a9bc366474380a9ffadacb6b9feb3",
+      "differences_from_shipping": []
+    },
+    {
+      "suite": "accounts",
+      "report": "2026-10-21-m10-accounts.json",
+      "assertions": 114,
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "fixture_sha256": "2f15f082009d14f2270bea3faa0205988012241bae7c2563b6d19d8bbba7c508",
+      "token": "8fce5677935d4203ab615204c13d85aa",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt"
+      ]
+    },
+    {
+      "suite": "credit",
+      "report": "2026-10-21-m10-credit.json",
+      "assertions": 46,
+      "runtime_sha256": "ee2a4c1b39a204e7a921a8fee46db8f02077b3f6cd4d782ef192d0841f973110",
+      "fixture_sha256": "0481cd4714d0661ca8dfe404ed1ff8bb780c2a2fd632194d7ac4863ea7eea221",
+      "token": "3d7ce38dc7c24143878f4ec162977041",
+      "differences_from_shipping": [
+        "in_game/common/scripted_effects/bfl_strategy.txt"
+      ]
+    }
+  ],
+  "native_assertions": 213,
+  "regression_provenance": "Accounts and credit retain their actual earlier hashes. Only the bank strategy traversal differs, and those controlled suites explicitly disable the new strategy. Their financial/receipt/bond/company services and GUI are byte-identical. The 53-case strategy suite executes the shipping traversal and six company controller guards.",
+  "offline": {
+    "tests": 140,
+    "passed": true,
+    "scope": "Offline/evidence parsing; not native gameplay"
+  },
+  "source_validation": {
+    "passed": true,
+    "script_gui_localization_files": 266,
+    "graphics": 68
+  },
+  "native_and_cmf_pins": true,
+  "deterministic_generation": true,
+  "economy_reconstruction": true,
+  "ui_report": "2026-10-21-m10-ui.json",
+  "release_staging_files": 335,
+  "remaining": "Full integrated campaigns, debt-led treasury balance, broader venture/company strategy, translations/art/FX/layout matrix and release-scale compatibility/performance remain in docs/coverage.md. Queued CI is not a pass."
+}
