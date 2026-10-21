@@ -31,6 +31,9 @@ def fixture(token, fingerprint):
         set_variable = { name = bfi_estate_sentinel value = 731 }
     } c:GEN = { set_gold = 50 annex_country = { country = c:PRZ } }'''
     start += check('native_annexation_really_removes_issuer', 'NOT = { country_exists = c:PRZ }')
+    start += check('only_legal_trustee_can_administer_inherited_estate', 'c:GEN = { bfl_has_managed_estate = yes } c:FLO = { bfl_has_managed_estate = no }')
+    start += 'c:GEN = { bfl_select_next_estate = yes }'
+    start += check('trustee_selection_resolves_original_destroyed_issuer', 'c:GEN = { bfl_valid_estate_selection = yes var:bfl_managed_estate = c:PRZ }')
     start += check('annexer_does_not_receive_escrow_cash', 'c:GEN.gold = 50 c:PRZ = { gold = 123 var:bfl_resolution_estate_cash = 0 var:bfl_state = 4 has_variable = bfl_resolution_estate }')
     start += check('native_loan_transfers_to_live_receiver_for_recorded_price', 'c:GEN = { any_lent_loan = { borrower = c:FLO loan_amount = 100 } bfl_estate_liabilities = 100 } c:PRZ.bfl_estate_receivable = 100')
     start += check('estate_receivable_replaces_native_asset_without_double_counting', 'c:PRZ = { bfl_assets = 223 var:bfl_native_credit_value = 0 }')
@@ -57,7 +60,7 @@ def fixture(token, fingerprint):
     start += '''c:ACC = { bfl_restore_estate_specie = yes }'''
     start += check('last_building_loss_preserves_exact_specie', 'c:ACC.gold = 234')
     start += '''c:BRD = { set_variable = { name = bfi_test_pending value = 1 }
-        set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 1 } } }'''
+        set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 12 } } }'''
     instant = list(cases)
     start += f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
     finish = check('global_estate_pulse_retains_destroyed_ledgers', 'c:PRZ = { var:bfi_estate_sentinel = 731 var:bfl_state = 4 } c:ACC = { var:bfi_estate_sentinel = 812 var:bfl_state = 4 }')

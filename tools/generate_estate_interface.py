@@ -52,11 +52,14 @@ def generate(common, effect, loc, write):
             }
         }
     '''))
-    common('country_decisions', 'estate_management', '''
+    common('decisions', 'estate_management', '''
         bfl_administer_estates = {
+            decision_category = economy_decisions
+            image = "gfx/interface/illustrations/bfl/charter.dds"
             potential = { country_type = location bfl_has_managed_estate = yes }
             allow = { bfl_has_managed_estate = yes }
-            effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes }
+            option = { name = bfl_administer_estates
+                effect = { bfl_select_next_estate = yes bfl_show_managed_estate = yes } }
             ai_will_do = { value = 0 }
         }
     ''')

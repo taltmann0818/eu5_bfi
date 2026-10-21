@@ -2,7 +2,9 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
+import shutil
 import campaign_suite as campaign
 from prepare_m9_ui import prepare as base_prepare
 
@@ -11,6 +13,16 @@ def prepare(directory, scene):
     directory = Path(directory).resolve()
     manifest = base_prepare(directory, independent=scene == 'independent')
     overlay = directory / 'mod/bfi_campaign_checks'
+    runtime = directory / 'mod/bfi'
+    shutil.copytree(campaign.ROOT / 'mod/bfl', runtime, dirs_exist_ok=True)
+    cmf = Path(os.environ.get('EU5_CMF_ROOT', 'C:/Program Files (x86)/Steam/steamapps/workshop/content/3450310/3692202776'))
+    if not (cmf / '.metadata/metadata.json').is_file():
+        raise FileNotFoundError('Installed CMF is required for the native UI fixture')
+    playset = {'file_version': '1.0.0', 'playsets': [{
+        'name': 'BFI_M9_VISUAL_DISPOSABLE', 'isActive': True, 'isAutomaticallySorted': False,
+        'orderedListMods': [{'path': p.as_posix() + '/', 'isEnabled': True} for p in (cmf, runtime, overlay)],
+        'DLC': []}]}
+    (directory / 'playsets.json').write_text(json.dumps(playset, indent=2), encoding='utf-8')
     extra = ''
     if scene == 'independent':
         extra += '''c:BRD = { set_variable = { name = bfl_profile value = 2 } }
@@ -51,6 +63,33 @@ def prepare(directory, scene):
         '''
         if scene == 'bond-creditor':
             extra += f'c:{issuer} = {{ bfl_offer_bond_workout_01 = yes }}'
+    if scene == 'estate':
+        for issuer, holder in [('FLO', 'GEN'), ('GEN', 'FLO')]:
+            extra += f'''c:{issuer} = {{ bfl_initialize_bonds = yes
+                research_advance = advance_type:bfl_debt_restructuring
+                research_advance = advance_type:bfl_collateralization
+                set_variable = {{ name = bfl_bnd_01_active value = 1 }}
+                set_variable = {{ name = bfl_bnd_01_face value = 100 }}
+                set_variable = {{ name = bfl_bnd_01_basis value = 100 }}
+                set_variable = {{ name = bfl_bnd_01_due value = 5 }}
+                set_variable = {{ name = bfl_bnd_01_rate value = 0.03 }}
+                set_variable = {{ name = bfl_bnd_01_holder value = c:{holder} }}
+                set_variable = {{ name = bfl_bnd_01_last_accrual value = bfl_period }}
+                set_variable = {{ name = bfl_bond_selected_issuer value = this }} }}'''
+        campaign.write_script(overlay / 'in_game/common/decisions/bfi_m9_ui_quote.txt', '''
+            bfi_m9_ui_quote = {
+                decision_category = economy_decisions
+                image = "gfx/interface/illustrations/bfl/charter.dds"
+                potential = { tag = FLO } allow = { tag = FLO }
+                option = { name = bfi_m9_ui_quote effect = { c:GEN = { bfl_offer_bond_workout_01 = yes } } }
+                ai_will_do = { value = 0 }
+            }
+        ''')
+        campaign.write_script(overlay / 'main_menu/localization/english/bfi_m9_ui_l_english.yml', '''
+            l_english:
+             bfi_m9_ui_quote: "QA: Request Genoese bond terms"
+             bfi_m9_ui_quote_desc: "Disposable fixture: ask the production current-holder consent event to open."
+        ''')
     campaign.write_script(overlay / 'in_game/common/scripted_effects/bfi_m9_complete_ui.txt',
                           'bfi_m9_complete_ui_setup = { ' + extra + ' }')
     campaign.write_script(overlay / 'in_game/common/on_action/zz_bfi_campaign_checks.txt', '''
