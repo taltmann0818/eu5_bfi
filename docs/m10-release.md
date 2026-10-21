@@ -9,8 +9,8 @@ It does not relabel focused fixtures as full campaigns.
 **53 strategy + 114 accounts/bond + 46 credit = 213 native assertions**, twelve
 monthly settlements and fresh-process reload, **140 offline tests**, native/CMF
 pins, deterministic generation, Economy reconstruction and **335-file staging**.
-The strategy suite runs shipping `f59f4d34…`. Accounts and credit regressions
-retain their actual `ee2a4c1b…` hashes: only bank strategy traversal differs, and
+The strategy suite runs shipping `f59f4d34â€¦`. Accounts and credit regressions
+retain their actual `ee2a4c1bâ€¦` hashes: only bank strategy traversal differs, and
 those controlled suites explicitly keep it manual. Every underlying financial,
 receipt, bond and company service and the GUI are byte-identical.
 
@@ -23,7 +23,7 @@ ownership are explicit setup, not measured campaign balance.
 
 ## Investment mandate
 
-Economy → Credit → Lending & Investments starts with **Investment mandate**.
+Economy â†’ Credit â†’ Lending & Investments starts with **Investment mandate**.
 Players choose **Delegate investments** or **Manage investments**. Existing saves
 acquire counters without resetting accounts, cash, profiles or accepted contracts.
 An independent AI bank delegates automatically; a chartered AI bank does so only
@@ -73,6 +73,8 @@ the transfer. It does not become income. Human controller mandates are preserved
 Native route and exploration AI remain native; this controller does not invent
 trade receipts or grant sailors, research, buildings or exploration progress.
 
+**Fresh-1337 performance:** [Native timing evidence](../tests/results/2026-10-21-m10-performance.json) passes the predeclared 10% threshold: 2.271999 seconds/month with CMF and 2.314047 with CMF+BFI (**+1.85%**), using 36 measured native Month rows per arm after twelve warmup months. Both arms have no BFI-attributed errors. Three native banks and zero active custom-product records at the snapshot limit this to a fresh population; emergent AI histories differ. This does not close the populated late-game or full M10 performance gate.
+
 ## Reproduction and evidence boundaries
 
 ```powershell
@@ -106,7 +108,7 @@ with their real runtime/fixture hashes. A queued CI job is not accepted evidence
 ## Remaining M10 gate
 
 - Both player roles and profiles through full integrated campaigns, covering
-  natural age/research progression and later-age continuation of M1–M9 products.
+  natural age/research progression and later-age continuation of M1â€“M9 products.
 - Recorded sustainable debt-led treasury scenarios with actual outside earnings,
   funding sources, losses, debt service and liquidity; no fixture cash refills.
 - Broader venture origination/negotiation and company investment strategy and

@@ -62,5 +62,15 @@
         "independent_profile_2_funded_credit_has_native_title"
       ]
     }
+  ],
+  "performance_attempts": [
+    {
+      "accepted": false,
+      "runtime_sha256": "f59f4d34ba5445d97302ea52a8a5b7191e3a9770faa18885e17c04bd7a5861fd",
+      "baseline_token": "2b05d2cf66e6455c9ebe2fc46a839726",
+      "bfi_token": "3768bedc91ed47119046132d191a4125",
+      "report_sha256": "8c3c848c9e73538c569f4bb2edce7bd96b8bbea65941fbd137e6dd6c067603a1",
+      "reason": "Rejected: disposable timing metadata omitted required short_description. No timing pass is claimed from this run. The repaired harness fingerprints all overlay files and must rerun both arms."
+    }
   ]
 }
