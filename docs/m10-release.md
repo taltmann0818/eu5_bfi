@@ -1,122 +1,70 @@
 # M10 release integration
 
-M10 remains **partial**. The canonical status and completion gate are in
-[coverage.md](coverage.md). This change integrates conservative monthly credit
-and deposit strategy, AI company policy and inspectable release measurements.
-It does not relabel focused fixtures as full campaigns.
+M10 is **partial**. [coverage.md](coverage.md) owns its status and completion gate. This branch integrates bank and company strategy, release presentation and reproducible native evidence. Focused fixtures and an abbreviated campaign are not full-campaign acceptance.
 
-[Acceptance provenance](../tests/results/2026-10-21-m10-validation.json) records
-**53 strategy + 114 accounts/bond + 46 credit = 213 native assertions**, twelve
-monthly settlements and fresh-process reload, **140 offline tests**, native/CMF
-pins, deterministic generation, Economy reconstruction and **335-file staging**.
-The strategy suite runs shipping `f59f4d34…`. Accounts and credit regressions
-retain their actual `ee2a4c1b…` hashes: only bank strategy traversal differs, and
-those controlled suites explicitly keep it manual. Every underlying financial,
-receipt, bond and company service and the GUI are byte-identical.
+## Accepted evidence and current boundary
 
-[Eight normal UI observations and five captures](../tests/results/2026-10-21-m10-ui.json)
-cover both roles, opt-in, funded natural demand placements and manual management.
-Captures retain their real earlier hashes; their GUI and localization are
-byte-identical to shipping. Four are original window JPEGs; one is an unaltered
-bank-panel crop excluding another application. Fixture cash, branches and
-ownership are explicit setup, not measured campaign balance.
+| Evidence | Actual runtime | Result and scope |
+| --- | --- | --- |
+| [Strategy and liquidity resale](../tests/results/2026-10-22-m10-strategy-resale.json) | `8dd9780b…` | 71 native assertions, twelve periods and reload, including paid current-holder secondary transfer, two-gold realized resale loss and quote reentry. |
+| [Native loan interactions](../tests/results/2026-10-22-m10-native-transport.json) | `8dd9780b…` | 14 native assertions: actual quote paid, exact acquisition basis/title, reserve and manual-policy negatives, funded native request and exact claim persistence/reload. Controlled takeover pricing is a transport fixture, not natural yield evidence. |
+| [Integrated strategy](../tests/results/2026-10-22-m10-integrated-strategy.json) | `d52831f5…` | 64 native assertions, twelve periods and reload: both bank roles/profiles, credit, deposits, cargo consent, company funding limits and new-charter AI defaults. |
+| [CMF/bootstrap](../tests/results/2026-10-22-m10-cmf-dispatch.json) | `d52831f5…` | 58 native assertions and 20 native numerical checks. Shared CMF callback dispatch, static-setting visibility maps, accounting primitives and reload pass. Normal Mod Menu rendering is a separate visual check. |
+| [Additional-mod strategy](../tests/results/2026-10-22-m10-expanded-strategy.json) | `54acadd4…` | 61 assertions with National Destinies, Royal Courts Expanded and Baroque & Classical Music; [exact inventories](../tests/results/2026-10-22-m10-expanded-strategy-additional-mods.json). No overlapping BFI replacement files were found. This does not certify every combination or the latest candidate. |
+| [Company distribution](../tests/results/2026-10-22-m10-company.json) | `a5d13542…` | 28 native assertions, twelve measured settlements, fractional-unit cash distributions, natural exploration terminal outcome and reload. |
+| [Company commenda](../tests/results/2026-10-22-m10-company-commenda.json) | `c0186e1c…` | 13 native assertions on the recorded earlier source. |
+| [Earlier player controls](../tests/results/2026-10-22-m10-ui.json) | `c0186e1c…` | Five observations and four actual-game captures; inherited human authority, delegation, funded placements and returning to manual. |
+| [Fresh native performance](../tests/results/2026-10-21-m10-performance.json) | `f59f4d34…` | 36 measured months per arm after twelve warmup months: 2.271999 to 2.314047 seconds/month (+1.85%). Three banks and zero custom-product records do not establish populated late-game performance. |
 
-## Investment mandate
+All reports retain their executed runtime and fixture identities. Earlier focused accounts/credit and UI evidence remains in [the validation register](../tests/results/2026-10-22-m10-validation.json); it is not relabeled to newer source. Queued licensed-runner jobs are not passes.
 
-Economy → Credit → Lending & Investments starts with **Investment mandate**.
-Players choose **Delegate investments** or **Manage investments**. Existing saves
-acquire counters without resetting accounts, cash, profiles or accepted contracts.
-An independent AI bank delegates automatically; a chartered AI bank does so only
-when its live controller is also AI. Explicit manual policy persists after reload.
+The latest worktree additionally changes native loan-interaction funding, bounded takeover reviews, branch discovery, bond resale strategy and prospective AI funding/payout policy. The 71-case strategy/resale and 14-case native transport checks pass on `8dd9780b…`; positive company construction, prospective financial policy and full campaign acceptance remain in progress. [Development notes](../tests/results/2026-10-22-m10-development-notes.json) retain rejected runs, including invalid test syntax and incorrect assumptions about AI authority or early repayment.
 
-The strategy runs after settlement, expenses, dividends and the sovereign bond
-facility. It stamps the period before dispatch. It considers up to twelve
-credit candidates reached through owned completed current-capital branches and
-registered companies in the bank's native market. When no credit offer is made,
-it considers up to twelve accepting independent banks in the existing financial
-institution register. It does not scan the world country registry per bank.
-Register/building traversal still scales with its size; the evaluated-candidate
-caps are not a claim of constant time independent of institution count.
+## Investment policy
 
-Credit is a 100-gold, 60-month production offer, shared by both profiles for
-sovereigns and restricted to Merchant Finance for companies. Candidate scoring
-uses creditworthiness, current debt, income and operating balance. War, lack of
-need, excessive rates, funding/capital shortfalls, missing branches and excessive
-single-party exposure reject new business. Prospective annual rates must be at
-most 15%; the new monthly coupon must fit within 25% of native monthly income.
-Combined debt uses the existing 24-month income ceiling. New exposure, including
-existing native claims, is capped at 25% of bank equity. A sent offer starts a
-three-month cooldown. Offers move no cash until the normal acceptance service
-rechecks the transaction. AI borrowers decline unnecessary or expensive credit.
+Economy → Credit → Lending & Investments exposes **Delegate investments** and **Manage investments**. Independent AI banks inherit automatic policy; a charter needs a live AI controller for inherited automation. Human authority remains manual until explicitly delegated. Migration fills missing policy fields without resetting cash, claims or immutable profiles.
 
-The alternative is one 100-gold on-demand placement. It requires at least 600
-free cash and 100 capital headroom, a positive offered rate, +50 admission
-opinion, a solvent accepting independent bank and no reciprocal deposit chain.
-Total deposit assets may not exceed 200 gold or 10% of current equity. A single
-recorded depository prevents spreading small placements across an unbounded
-number of banks. Low available cash or recipient distress requests normal
-withdrawal; shortages remain claims under the existing recovery rules.
+New credit reviews at most twelve connected candidates. Sovereigns require a completed bank-owned branch in their current capital; Merchant corporate credit uses registered local-market companies. Offers use creditworthiness, income, debt, budget and need, with a 15% annual rate ceiling, new monthly coupons within 25% of income and borrower exposure within 25% of bank equity. Ordinary consent services recheck funding and accepted terms. One credit or cargo offer, or one 100-gold demand placement, is considered each month; offers cool down for three months.
 
-The card shows policy, candidate count, score, last action and cumulative offers,
-placements and recalls. A policy click neither spends money nor runs another
-monthly settlement. Manual policy stops new strategy business; the product
-services continue to service accepted claims. Other independently authorized
-goods, equity, branch and monetary policies retain their own services.
+Demand placements retain 500 free cash, stop at 200 gold or 10% of equity, require positive rates and +50 admission opinion, and reject reciprocal funding chains. A recorded depository bounds placements. Liquidity pressure or recipient distress requests an ordinary withdrawal; an unpaid withdrawal remains a claim.
 
-## Company controller
+Cargo reviews at most twelve connected operators and four source markets per operator, using the finite native goods catalogue. It requires a quoted margin of at least 10%, at least one gold of indicative bank surplus, current research/profile/range/access, 500 remaining free cash, no more than two active agreements and venture exposure within 25% of equity. Quotes are estimates. Only acquired cargo's actual sale receipts can return capital or realize profit. AI declines unpriced expedition risk.
 
-A native AI company with a live AI landed controller receives a trade mandate
-once. A funded 100-gold controller contribution is considered at most quarterly
-when company reserves are low and the controller retains at least 500 gold and
-has a nonnegative budget. The existing contribution/authority service executes
-the transfer. It does not become income. Human controller mandates are preserved.
-Native route and exploration AI remain native; this controller does not invent
-trade receipts or grant sailors, research, buildings or exploration progress.
+Automatic purchases of existing native loans use completed capital-branch clients, at most twelve reviewed borrowers and one purchase per month. The latest candidate also checks borrower liquidity need, positive budget, creditworthiness, debt capacity, a 100-gold remaining cash reserve, at least 0.10 gold of estimated monthly margin after acquisition premium, a conservative servicing allowance and funding costs, a 25% premium ceiling and 25% borrower concentration. Manual purchases still use the funded production service. Native interaction entry points must preserve the same accounting and authority boundaries; they are not a second unguarded purchase path.
 
-**Fresh-1337 performance:** [Native timing evidence](../tests/results/2026-10-21-m10-performance.json) passes the predeclared 10% threshold: 2.271999 seconds/month with CMF and 2.314047 with CMF+BFI (**+1.85%**), using 36 measured native Month rows per arm after twelve warmup months. Both arms have no BFI-attributed errors. Three native banks and zero active custom-product records at the snapshot limit this to a fresh population; emergent AI histories differ. This does not close the populated late-game or full M10 performance gate.
+At low liquidity, the latest candidate can list one owned sovereign bond through the existing 98%-of-face, three-month consent service. It reviews at most twelve registered issuers, requires a completed Stock Exchange, preserves existing offers and waits for a real buyer. The issuer receives no new financing from resale. The seller can realize a loss.
 
-## Reproduction and evidence boundaries
+## Sovereign and company policies
 
-```powershell
-python tools/generate_scripts.py
-python -m unittest discover -s tests -q
-python tools/validate_sources.py
-python tools/audit_native.py --compare
-./tools/run_campaign.ps1 -Suite m10 -Output tests/results/local-m10
-python tools/benchmark_release.py --output tests/results/local-m10-performance.json
-python tools/prepare_m10_ui.py --userdir dist/interactive-m10/user
-```
+A newly paid AI charter may initialize Debt first and a prospective 6% sovereign coupon preset once. It initializes the issuer ledger before setting that rate. It does not change a human's policy, reprice accepted bonds or reset an existing charter's later decisions. Funding still needs real bank cash, capital, branch access, issuer debt/coupon capacity and the monthly issuance guard.
 
-The M10 engine suite exercises both management roles and profiles, cash/title
-conservation, concentration, consent and replay boundaries, twelve consecutive
-settlements and fresh-process reload. Existing financial suites explicitly keep
-the new strategy manual so they remain controlled product regressions. The
-dedicated strategy suite explicitly enables it. Fixture grants and cash shocks
-are recorded test setup, never campaign balance evidence.
+Inherited live-AI financial authority reviews prospective policy quarterly. Baseline demand interest is 1%; healthy banks with at least 500 equity, 100 capital headroom, positive closing net income and low liquidity may offer 2%. Healthy liquidity permits a 25% future payout; losses, distress or confidence below 75 stop payouts and return new demand rates to 1%. Accepted deposits retain their original terms. Manual and explicitly delegated human financial choices remain intact.
 
-The benchmark runs CMF alone and CMF+BFI sequentially with identical fresh-1337
-settings and no debug grants. It excludes twelve warmup months, retains 72 native
-`gametimer` Month measurements per arm and reports machine, source and fixture
-identity. The predeclared threshold is a median monthly ratio of at most 1.10.
-Fresh populations and different emergent AI histories do not establish populated
-late-game performance or identical-save causality. Run without concurrent game
-processes. Failed, incomplete or changed-source runs cannot pass.
+A live AI sovereign may place one real 100-gold ordinary deposit quarterly, up to 200 of its own principal, only when native/custom debt plus 1100 is covered by cash. This preserves 1000 of unborrowed cash after placement. Low sovereign cash or a negative budget requests ordinary withdrawal of that sovereign's claim; queues and old owners' claims remain intact. Funding principal is never income. Controlled native decision fixtures are separate from full-campaign funding evidence.
 
-Actual-game UI observations and accepted native results are recorded separately
-with their real runtime/fixture hashes. A queued CI job is not accepted evidence.
+AI company controllers choose the ordinary trade mandate once. A real 100-gold controller contribution may occur quarterly while the controller retains 500 gold and a nonnegative budget. Rescue stops above 100 carried losses or after four funded contributions. Losses or nonpositive native net income stop dividends. Trade budgets use available reserves; a profitable, well-funded company may place one ordinary paid native construction order annually. Positive construction and broader campaign economics require their own evidence. No controller creates free research, crew, buildings, exploration progress or discovery income.
 
-## Remaining M10 gate
+Branch expansion prioritizes a valid charter's missing controller-capital connection. Other expansion requires positive reported earnings. A shared quarterly native-country catalogue replaces a separate world scan per bank, and each bank scores at most twelve eligible sites. Native cost, permissions, employment, maintenance and construction time remain native. Catalogue traversal still scales with its size; candidate caps do not imply constant time independent of the registry.
 
-- Both player roles and profiles through full integrated campaigns, covering
-  natural age/research progression and later-age continuation of M1–M9 products.
-- Recorded sustainable debt-led treasury scenarios with actual outside earnings,
-  funding sources, losses, debt service and liquidity; no fixture cash refills.
-- Broader venture origination/negotiation and company investment strategy and
-  release-wide calibration of opportunity, maturity and portfolio decisions.
-- Full language/translation coverage, additional responsive layouts, populated
-  long ledgers, advance/outcome art and animation/FX acceptance.
-- Populated late-game scale/performance and compatibility with additional mods;
-  narrow native override reconstruction and patch/CMF source pins remain required.
+## Presentation
 
-These remain release gates. Neither the strategy fixture nor the fresh-1337
-benchmark certifies all of M10 or changes the supported EUV/CMF versions.
+All eleven native localization directories are generated from cached public UI prose. Engine expressions, formatting, icons, original numbers and CMF identifiers are preserved; rendering needs no network. Native implicit interaction, notification and relation labels are included. Machine provenance is recorded; semantic and native layout review remain separate from key coverage.
+
+Six original paintings and sixteen distinct editable advance glyphs accompany their exports. [Prompts and master hashes](../assets_source/painted/m10-generation.json) identify the generated paintings. An asset preview does not establish in-game placement or reduced-size readability.
+
+Receipts describe committed transactions. Highlights never move cash or run settlement. Reduced motion defaults on and retains receipts and warnings. Brief native GUI states, directional payment amounts, liquidity/facility warnings and a final closure notice are implemented; actual animation, language, full-ledger and responsive-view acceptance remains under review. Early visual attempts with unset goods policy or missing Mod Menu entries are explicitly excluded.
+
+## Campaign and release gate
+
+[The natural campaign observer](../tools/release_campaign.py) records native dates, bank statements, actual financing/debt service and research. It does not refill wallets during observation. Opening political relationships and explicit policy choices are declared scenario assumptions; the normal charter still costs real treasury gold. The final native date is extended by one month only to observe December's terminal settlement.
+
+Initial Bardi/Peruzzi histories are retained as [Merchant](../tests/results/2026-10-22-m10-historical-bankruptcy-merchant.json) and [Overseas](../tests/results/2026-10-22-m10-historical-bankruptcy-overseas.json) development evidence. Native `flavor_flo.53` can force AI banks with those tags into bankruptcy irrespective of their later controller. Those abbreviated histories do not establish sustained full campaigns. Subsequent scenarios use native ACC, preserve starting wealth/claims/buildings and leave historical events unchanged.
+
+M10 closes only after all of the following pass:
+
+- Full integrated campaigns for both player roles and both profile feature sets, natural age/research progression and later-age M1–M9 continuation.
+- Viable constrained debt-led finance with actual outside earnings/funding, debt service, losses, liquidity and no observation-time refills.
+- Current-source financial regressions and meaningful positive/negative native strategy cases, including ordinary construction and native interaction transport.
+- Native language, art, full-ledger, responsive-view, animation and reduced-motion review with unedited captures.
+- Additional-mod acceptance and populated late-game timing within the predeclared 10% median native Month limit, with entity/contract counts and a matching baseline.
+- Deterministic generation, source pins, appropriate offline checks, release staging and a PR description containing actual embedded feature screenshots.

@@ -68,6 +68,7 @@ def generate(common, effect, loc):
             set_variable = {{ name = {n}_state value = var:bfl_product }} }}\n'''
     allocate += '''if = { limit = { var:bfl_slot_found = 1 }
         scope:bfl_party = { bfl_debit_depositor = yes } add_gold = 100
+        bfl_record_feedback = { KIND = 2 AMOUNT = 100 }
         scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_refresh_asset_statement = yes } }
         save_scope_as = bfl_bank }
     '''
@@ -112,6 +113,8 @@ def generate(common, effect, loc):
                     min = 0 max = var:{n}_withdrawal_requested multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = bfl_negative_payment
                 var:{n}_party = {{ bfl_credit_depositor = yes }}
+                if = {{ limit = {{ var:bfl_payment > 0 }}
+                    bfl_record_feedback = {{ KIND = 3 AMOUNT = var:bfl_payment }} }}
                 set_variable = {{ name = bfl_interest_paid value = {{ value = var:bfl_payment max = var:{n}_interest_due }} }}
                 if = {{ limit = {{ var:{n}_pool = 0 }} var:{n}_party = {{ bfl_record_withdrawn_interest = yes }} }}
                 change_variable = {{ name = {n}_interest_due subtract = var:bfl_interest_paid }}
@@ -315,7 +318,7 @@ def generate_offers(common, effect, loc):
     events = 'namespace = bfl_deposits\n'
     for number, title in [(1, 'Renew matured term deposit'), (2, 'Early term withdrawal offer')]:
         events += f'''bfl_deposits.{number} = {{ type = country_event title = bfl_term_offer_{number}_title desc = bfl_term_offer_{number}_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            image = "gfx/interface/illustrations/bfl/m10_{"bank_run" if number == 2 else "merchant_finance"}.dds" outcome = neutral
             option = {{ name = bfl_term_accept bfl_accept_deposit_offer = yes ai_chance = {{ base = 0 }} }}
             option = {{ name = bfl_term_decline bfl_decline_deposit_offer = yes ai_chance = {{ base = 100 }} }}
         }}'''

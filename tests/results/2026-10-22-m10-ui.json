@@ -1,0 +1,76 @@
+{
+  "suite": "M10 inherited policy and final player controls",
+  "date": "2026-10-22",
+  "passed": true,
+  "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+  "fixture_sha256": "5f01102f0a1516cdab4102373e755985b3e0b32b1d8873ed7b63c86638cec63a",
+  "token": "361a715105204e7cb175e707deb95825",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "language": "English",
+  "client_resolution": [
+    1280,
+    720
+  ],
+  "window_resolution": [
+    1282,
+    752
+  ],
+  "gui_scale": "Inherited default/automatic; not separately measured",
+  "debug_mode": false,
+  "cold_start": true,
+  "observation_count": 5,
+  "observations": [
+    "Florence opens Economy, Credit and Lending & Investments normally, with separate bank and sovereign accounts.",
+    "On 1 April 1337, inherited policy -1 on an AI bank under a human controller correctly displays Investment mandate · manual; cash/assets/equity 5000 and zero offers/placements/recalls.",
+    "Normal Delegate investments displays delegated and leaves cash/assets/equity at 5000; the localized funding/consent tooltip is readable.",
+    "By 21 June 1337, normal monthly passes have made two demand placements. Cash 4706.39 plus the 200-gold receivable equals assets/equity 4906.39; the statement records two placements, zero offers and zero recalls. Native war/faction activity also occurred; this is not a profitability claim.",
+    "Normal Manage investments returns to manual with cash 4706.39, assets/equity 4906.39 and the 200-gold claim preserved; the tooltip explains continued servicing."
+  ],
+  "bfi_attributed_errors": [],
+  "captures": [
+    {
+      "file": "2026-10-22-m10-inherited-manual.jpg",
+      "sha256": "e8f7e03666d356bda33b0b625026e2918078e3e8bf6f77bce8f85b134b08e9c9",
+      "width": 1282,
+      "height": 752,
+      "transformation": "None; original window JPEG",
+      "role": "controller",
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "5f01102f0a1516cdab4102373e755985b3e0b32b1d8873ed7b63c86638cec63a"
+    },
+    {
+      "file": "2026-10-22-m10-controller-delegated.jpg",
+      "sha256": "c0c6a7075d4cd8cc9ad91e5a6f65016ab8c2d58cad37e1596c155cccbb886f97",
+      "width": 1282,
+      "height": 752,
+      "transformation": "None; original window JPEG",
+      "role": "controller",
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "5f01102f0a1516cdab4102373e755985b3e0b32b1d8873ed7b63c86638cec63a"
+    },
+    {
+      "file": "2026-10-22-m10-controller-funded.jpg",
+      "sha256": "3c6d70321ee373fc739aa2b52d88b702fa3463fdeb69e8f86de041441a0509ac",
+      "width": 1282,
+      "height": 752,
+      "transformation": "None; original window JPEG",
+      "role": "controller",
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "5f01102f0a1516cdab4102373e755985b3e0b32b1d8873ed7b63c86638cec63a"
+    },
+    {
+      "file": "2026-10-22-m10-controller-manual-retained.jpg",
+      "sha256": "26ff98371a9309d1a4a588aa47e768acf30d04e66188f685b8424cc8c5399e2e",
+      "width": 1282,
+      "height": 752,
+      "transformation": "None; original window JPEG",
+      "role": "controller",
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "5f01102f0a1516cdab4102373e755985b3e0b32b1d8873ed7b63c86638cec63a"
+    }
+  ],
+  "fixture_boundary": "Starting cash, ownership and branch are explicit disposable setup. Other bank/company strategy is manual. No fixture action dispatches a strategy review, refills cash during observation or creates placements. Native gameplay continues. This focused controller presentation follow-up does not complete M10; independent-role acceptance retains its real earlier report.",
+  "previous_ui_report": "2026-10-21-m10-ui.json"
+}

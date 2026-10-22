@@ -1679,104 +1679,106 @@ save_scope_as = bfl_bank
         set_variable = { name = bfl_company_dividend value = 0 }
         if = { limit = { var:bfl_total_units > 0 }
     if = { limit = { var:bfl_shr_01_active = 1 exists = var:bfl_shr_01_party country_exists = var:bfl_shr_01_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_01_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_01_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 1 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_02_active = 1 exists = var:bfl_shr_02_party country_exists = var:bfl_shr_02_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_02_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_02_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 2 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_03_active = 1 exists = var:bfl_shr_03_party country_exists = var:bfl_shr_03_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_03_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_03_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 3 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_04_active = 1 exists = var:bfl_shr_04_party country_exists = var:bfl_shr_04_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_04_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_04_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 4 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_05_active = 1 exists = var:bfl_shr_05_party country_exists = var:bfl_shr_05_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_05_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_05_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 5 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_06_active = 1 exists = var:bfl_shr_06_party country_exists = var:bfl_shr_06_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_06_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_06_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 6 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_07_active = 1 exists = var:bfl_shr_07_party country_exists = var:bfl_shr_07_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_07_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_07_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 7 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_08_active = 1 exists = var:bfl_shr_08_party country_exists = var:bfl_shr_08_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_08_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_08_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 8 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_09_active = 1 exists = var:bfl_shr_09_party country_exists = var:bfl_shr_09_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_09_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_09_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 9 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_10_active = 1 exists = var:bfl_shr_10_party country_exists = var:bfl_shr_10_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_10_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_10_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 10 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_11_active = 1 exists = var:bfl_shr_11_party country_exists = var:bfl_shr_11_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_11_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_11_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 11 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_12_active = 1 exists = var:bfl_shr_12_party country_exists = var:bfl_shr_12_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_12_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_12_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 12 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_13_active = 1 exists = var:bfl_shr_13_party country_exists = var:bfl_shr_13_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_13_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_13_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 13 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_14_active = 1 exists = var:bfl_shr_14_party country_exists = var:bfl_shr_14_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_14_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_14_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 14 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_15_active = 1 exists = var:bfl_shr_15_party country_exists = var:bfl_shr_15_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_15_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_15_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 15 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 if = { limit = { var:bfl_shr_16_active = 1 exists = var:bfl_shr_16_party country_exists = var:bfl_shr_16_party }
-            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_shr_16_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = 100 multiply = var:bfl_shr_16_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_payment multiply = -1 }
             set_variable = { name = bfl_receipt_slot value = 16 } bfl_pay_equity_holder = yes
             change_variable = { name = bfl_company_dividend add = var:bfl_payment }
         }
 bfl_pay_dealer_dividend = yes
-change_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }
-}
+        change_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }
+        if = { limit = { var:bfl_company_dividend > 0 }
+            bfl_record_feedback = { KIND = 4 AMOUNT = var:bfl_company_dividend } }
+    }
 }
 bfl_prepare_silent_equity_order = {
 save_scope_as = bfl_issuer

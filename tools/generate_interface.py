@@ -288,7 +288,7 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     funding+=action('bfl_streamline_bank','accounts')
     funding+=action('bfl_select_profile','merchant_finance')
     funding = 'bfl_resolution_contents = { }bfl_bond_contents = { }' + funding
-    investments='bfl_strategy_contents = { }bfl_monetary_contents = { }bfl_equity_investments = { }'
+    investments='bfl_feedback = { }bfl_strategy_contents = { }bfl_monetary_contents = { }bfl_equity_investments = { }'
     investments+='bfl_goods_contents = { }'
     investments+='bfl_commenda_contents = { }'
     investments+=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
@@ -304,12 +304,12 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         investments+=section(title,''.join(pair(cards[i],cards[i+1] if i+1<len(cards) else '') for i in range(0,len(cards),2)))
     def controls(name,content):
         return f'''type bfl_credit_{name}_body = scrollarea {{
-            size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+            size = {{ -1 320 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
             scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding margin = {{ 5 5 }} spacing = 5 {content} }} }}
         }}
         type bfl_credit_{name} = vbox {{
-            visible = "[{MANAGED}]" size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+            visible = "[{MANAGED}]" size = {{ -1 320 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
             {contexts(f'bfl_credit_{name}_body')}
         }}'''
     loc('bfl_sovereign_accounts', 'Sovereign accounts — separate from bank assets')
@@ -369,7 +369,10 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         {sovereign_tooltips}
         type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} {sovereign_accounts} }}
         type bfl_credit_overview = widget {{ size = {{ -1 350 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
-            background = {{ texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }}
+            background = {{ texture = "gfx/interface/illustrations/bfl/m10_merchant_finance.dds" fittype = centercrop alpha = 0.35
+                visible = "[Not(GetScriptedGui('bfl_background_overseas').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }}
+            background = {{ texture = "gfx/interface/illustrations/bfl/m10_overseas_investment.dds" fittype = centercrop alpha = 0.35
+                visible = "[GetScriptedGui('bfl_background_overseas').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }}
             {contexts('bfl_bank_overview')}
         }}
         {controls('funding',funding)}

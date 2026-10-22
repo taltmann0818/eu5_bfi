@@ -43,9 +43,20 @@ def generate(common, effect, loc, write):
             save_scope_as = actor
             remove_variable = bfl_branch_candidate
             set_variable = { name = bfl_branch_best_score value = 0 }
-            # Bounded construction: one funded project per quarter. Native
-            # relations, foreign construction, costs and completion still apply.
-            every_country = { limit = { bfl_branch_site = yes }
+            set_variable = { name = bfl_branch_reviewed value = 0 }
+            # A live charter needs its controller's capital connection before
+            # expanding elsewhere. All native construction guards still apply.
+            if = { limit = { bfl_has_valid_controller = yes overlord = { bfl_branch_site = yes } }
+                overlord = { save_scope_as = bfl_branch_host }
+                set_variable = { name = bfl_branch_candidate value = scope:bfl_branch_host }
+            }
+            else_if = { limit = { has_variable = bfl_monthly_net_income var:bfl_monthly_net_income > 1 }
+            # Refresh one shared catalogue per quarter, rather than scanning
+            # every country separately for every bank. Score at most 12 sites.
+            bfl_refresh_branch_hosts = yes
+            every_in_global_list = { variable = bfl_branch_hosts
+                limit = { scope:bfl_branch_builder.var:bfl_branch_reviewed < 12 bfl_branch_site = yes }
+                scope:bfl_branch_builder = { change_variable = { name = bfl_branch_reviewed add = 1 } }
                 if = { limit = { bfl_branch_credit_score > scope:bfl_branch_builder.var:bfl_branch_best_score }
                     save_scope_as = bfl_branch_host
                     scope:bfl_branch_builder = {
@@ -53,6 +64,7 @@ def generate(common, effect, loc, write):
                         set_variable = { name = bfl_branch_best_score value = scope:bfl_branch_host.bfl_branch_credit_score }
                     }
                 }
+            }
             }
             if = { limit = { exists = var:bfl_branch_candidate }
                 var:bfl_branch_candidate.capital = {
@@ -64,6 +76,32 @@ def generate(common, effect, loc, write):
             }
         }
     '''))
+    common('scripted_effects', 'branch_hosts', effect('bfl_refresh_branch_hosts', '''
+        if = { limit = { OR = { NOT = { has_global_variable = bfl_branch_hosts_period }
+            bfl_period >= { value = global_var:bfl_branch_hosts_period add = 3 } } }
+            set_global_variable = { name = bfl_branch_hosts_period value = bfl_period }
+            clear_global_variable_list = bfl_branch_hosts
+            every_country = { limit = { country_exists = this country_type = location exists = capital
+                monthly_income_total > 0 creditworthiness > 0 }
+                add_to_global_variable_list = { name = bfl_branch_hosts target = this }
+            }
+        }
+    '''))
+    common('script_values', 'native_request', effect('bfl_native_request_amount', '''
+        value = monthly_income_total
+        max = { value = scope:actor.monthly_income_trade_and_tax multiply = 2 }
+    '''))
+    common('scripted_triggers', 'native_request', '''
+        bfl_native_request_funded = {
+            OR = { NOT = { bfl_has_accounts = yes }
+                AND = { bfl_can_originate_sovereign_credit = yes bfl_credit_capacity = yes
+                    bfl_native_request_amount > 0
+                    bfl_free_cash >= bfl_native_request_amount
+                    bfl_capital_headroom >= bfl_native_request_amount
+                    OR = { scope:actor = { NOT = { bfl_is_company = yes } }
+                        bfl_can_originate_corporate_credit = yes } } }
+        }
+    ''')
     common('on_action', 'branches', '''monthly_country_pulse = { on_actions = { bfl_branch_construction_pulse } }
         bfl_branch_construction_pulse = { effect = { bfl_ai_build_branches = yes } }''')
     # Narrow localization override: keep the native database key and behavior.
@@ -91,11 +129,53 @@ def build_native(game):
         text = source.read_text(encoding='utf-8-sig')
         guard = ('bfl_branch_access = { PARTY = scope:actor }' if name == 'request_loan'
                  else 'scope:actor = { bfl_branch_access = { PARTY = scope:recipient } }')
+        if name == 'request_loan':
+            guard += ' bfl_native_request_funded = yes'
         text = text.replace('enabled = {', 'enabled = {\n            ' + guard, 1)
         if name == 'request_loan':
             pos = text.index('scope:recipient ?= {') + len('scope:recipient ?= ')
         else:
             pos = text.index('{', text.index('\teffect ='))
         end = balanced_block(text, pos)
-        text = text[:pos+1] + '\n        if = { limit = { ' + guard + ' }\n' + text[pos+1:end-1] + '\n        }\n' + text[end-1:]
+        body = text[pos+1:end-1]
+        if name == 'request_loan':
+            body += '\n if = { limit = { bfl_has_accounts = yes } bfl_reconcile_native_assets = yes }\n'
+        if name == 'take_over_loan':
+            body = '''if = { limit = { scope:actor = { bfl_has_accounts = yes } }
+                scope:recipient = { save_scope_as = bfl_party }
+                scope:actor = { save_scope_as = bfl_bank
+                    if = { limit = { is_ai = yes }
+                        if = { limit = { bfl_strategy_authorized = yes bfl_period > var:bfl_last_takeover_period
+                            scope:bfl_party = { bfl_ai_takeover_candidate = yes } }
+                            set_variable = { name = bfl_takeover_done value = 0 }
+                            set_variable = bfl_takeover_ai_review bfl_native_takeover = yes
+                            remove_variable = bfl_takeover_ai_review
+                            if = { limit = { var:bfl_takeover_done = 1 }
+                                set_variable = { name = bfl_last_takeover_period value = bfl_period } } }
+                    }
+                    else = { bfl_native_takeover = yes }
+                }
+            } else = { ''' + body + ' }'
+        text = text[:pos+1] + '\n        if = { limit = { ' + guard + ' }\n' + body + '\n        }\n' + text[end-1:]
+        if name == 'take_over_loan':
+            # Keep vanilla actors' original behavior. BFI actors use actual
+            # purchase cost and production bookkeeping, not remaining debt as
+            # a misleading proxy for the required payment.
+            native_funding = 'scope:actor.gold > remaining_debt'
+            text = text.replace(native_funding, native_funding + '''
+                OR = { scope:actor = { NOT = { bfl_has_accounts = yes } }
+                    AND = { scope:actor = { bfl_can_originate_native_takeover = yes }
+                        scope:actor.bfl_free_cash >= bank_loan_takeover_cost
+                        OR = { scope:actor = { is_ai = no } bfl_ai_takeover_viable = yes } } }''', 1)
+            ai_start = text.index('ai_will_do =')
+            ai_open = text.index('{', ai_start)
+            ai_end = balanced_block(text, ai_open)
+            native_ai = text[ai_open+1:ai_end-1]
+            text = text[:ai_start] + '''ai_will_do = { value = 0
+                if = { limit = { scope:actor = { bfl_has_accounts = yes } }
+                    if = { limit = { scope:actor = { bfl_strategy_authorized = yes bfl_free_cash >= 200
+                            bfl_period > var:bfl_last_takeover_period }
+                        scope:recipient = { bfl_ai_takeover_candidate = yes } } add = 5 }
+                }
+                else = { ''' + native_ai + ' } }' + text[ai_end:]
         write(MOD / relative, text)

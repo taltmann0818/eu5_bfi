@@ -9,7 +9,7 @@ import campaign_suite as campaign
 from m8_monetary_suite import grant
 
 
-def prepare(directory, independent=False):
+def prepare(directory, independent=False, populated=False):
     directory = Path(directory).resolve()
     manifest = campaign.prepare(directory)
     overlay = directory / 'mod/bfi_campaign_checks'
@@ -20,7 +20,7 @@ def prepare(directory, independent=False):
             make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
             remove_variable = bfl_schema remove_variable = bfl_accounts_revision
             bfl_initialize_bank = yes set_variable = { name = bfl_profile value = 1 }
-            set_variable = { name = bfl_strategy_mode value = 0 }
+            set_variable = { name = bfl_strategy_mode value = -1 }
             set_variable = { name = bfl_state_owner value = c:FLO }
             set_variable = { name = bfl_state_units value = 5000 }
             set_variable = { name = bfl_founder_units value = 0 }
@@ -40,10 +40,32 @@ def prepare(directory, independent=False):
         setup += '''c:BRD = { overlord ?= { cancel_subject = prev } remove_variable = bfl_legacy_servicing
             set_variable = { name = bfl_profile value = 2 } }
             c:FLO = { remove_variable = bfl_bank remove_reform = government_reform:bfl_state_chartered_bank }'''
+    if populated:
+        setup += '''c:FLO = { set_gold = 10000
+            add_opinion = { target = c:BRD modifier = bfi_deposit_test_opinion }
+            save_scope_as = bfl_party }
+            c:BRD = { set_variable = { name = bfl_product value = 1 } }'''
+        setup += grant('banking_office', 'BRD', 'FLO')
+        # Visual setup only. Thirty-two funded subscriptions with distinct
+        # immutable accepted rates fill the actual ledger, never placeholder UI.
+        for slot in range(32):
+            setup += f'''c:BRD = {{ set_variable = {{ name = bfl_demand_rate value = {0.01+slot*0.001:.3f} }}
+                bfl_open_deposit = yes }}'''
+        setup += 'c:BRD = { set_variable = { name = bfl_demand_rate value = 0.01 } }'
     campaign.write_script(overlay / 'in_game/common/scripted_effects/bfi_m10_ui.txt', 'bfi_m10_ui_setup = { ' + setup + ' }')
     campaign.write_script(overlay / 'in_game/common/on_action/zz_bfi_campaign_checks.txt', '''
         on_game_started_after_lobby = { on_actions = { bfi_m10_ui_start } }
         bfi_m10_ui_start = { effect = { bfi_m10_ui_setup = yes } }
+        monthly_country_pulse = { on_actions = { bfi_m10_ui_registration_audit } }
+        bfi_m10_ui_registration_audit = { effect = {
+            if = { limit = { is_ai = no NOT = { has_variable = bfi_ui_registration_checked } }
+                set_variable = bfi_ui_registration_checked
+                if = { limit = { is_target_in_variable_list = {
+                    name = cmm_registered_mod_ids target = flag:bfl_banking_finance_companies } }
+                    debug_log = "BFI_UI|NORMAL_CMF_REGISTRATION|PASS" }
+                else = { debug_log = "BFI_UI|NORMAL_CMF_REGISTRATION|FAIL" }
+            }
+        } }
     ''')
     # No test action performs a strategy review. The normal monthly pass must do it.
     runtime = directory / 'mod/bfi'
@@ -60,6 +82,7 @@ def prepare(directory, independent=False):
     manifest.update(suite='M10 visual fixture', role='independent' if independent else 'controller',
                     player='BRD' if independent else 'FLO', fixture_sha256=digest.hexdigest(),
                     cases=[], instant_cases=[], reload_cases=[], visual_acceptance=False)
+    manifest['visual_population'] = '32 actual 100-gold demand lots, distinct accepted rates; 10000 opening depositor cash; no observation-time refills' if populated else 'Unpopulated mandate scene'
     (directory / 'bfi_campaign_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     return manifest
 
@@ -68,5 +91,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--userdir', type=Path, required=True)
     parser.add_argument('--independent', action='store_true')
+    parser.add_argument('--populated', action='store_true')
     args = parser.parse_args()
-    print(json.dumps(prepare(args.userdir, args.independent), indent=2))
+    print(json.dumps(prepare(args.userdir, args.independent, args.populated), indent=2))

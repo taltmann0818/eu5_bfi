@@ -1,10 +1,11 @@
 param(
     [string]$Game = $env:EU5_GAME_ROOT,
     [string]$Cmf = $env:EU5_CMF_ROOT,
+    [string[]]$AdditionalMods = @(),
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -23,6 +24,8 @@ try {
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
     $suiteScript = switch ($Suite) {
+        'm10takeover' { 'tools/m10_takeover_suite.py' }
+        'm10finance' { 'tools/m10_finance_suite.py' }
         'm10' { 'tools/m10_strategy_suite.py' }
         'm0' { 'tools/m0_probe_suite.py' }
         'm1' { 'tools/m1_charter_suite.py' }
@@ -62,7 +65,8 @@ try {
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
     $overlay = Join-Path $userDir 'mod/bfi_campaign_checks'
-    $mods = @($Cmf, $bfi, $overlay) | ForEach-Object {
+    $modPaths = @($Cmf) + $AdditionalMods + @($bfi, $overlay)
+    $mods = $modPaths | ForEach-Object {
         @{path = ($_.Replace('\','/') + '/'); isEnabled = $true}
     }
     @{file_version = '1.0.0'; playsets = @(@{
@@ -81,6 +85,12 @@ try {
     if (-not $Graphics) { $arguments += '-nographics' }
     $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
     New-Item -ItemType Directory -Path $outPath -Force | Out-Null
+    if ($AdditionalMods.Count -gt 0) {
+        $inventoryArgs = @('tools/audit_compatibility.py', '--output', (Join-Path $outPath 'additional-mods.json'))
+        foreach ($additionalMod in $AdditionalMods) { $inventoryArgs += @('--mod', $additionalMod) }
+        & python @inventoryArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Unsupported additional-mod replacement; see inventory.' }
+    }
     Copy-Item -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Destination (Join-Path $outPath 'manifest.json') -Force
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     $debugPath = Join-Path $userDir 'logs/debug.log'

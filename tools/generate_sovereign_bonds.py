@@ -129,6 +129,20 @@ def generate(common, effect, loc, tune):
             set_variable = {{ name = bfl_facility_requested value = var:bfl_bond_amount }}
             bfl_underwrite_sovereign_bond = yes
         }}
+        set_variable = {{ name = bfl_facility_reason value = 0 }}
+        if = {{ limit = {{ var:bfl_facility_requested > var:bfl_facility_paid }}
+            set_variable = {{ name = bfl_facility_reason value = 1 }}
+            if = {{ limit = {{ bfl_free_cash < var:bfl_facility_requested }} set_variable = {{ name = bfl_facility_reason value = 2 }} }}
+            else_if = {{ limit = {{ bfl_capital_headroom < var:bfl_facility_requested }} set_variable = {{ name = bfl_facility_reason value = 3 }} }}
+            else_if = {{ limit = {{ overlord.bfl_bond_capacity < var:bfl_facility_requested }} set_variable = {{ name = bfl_facility_reason value = 4 }} }}
+            else_if = {{ limit = {{ overlord.bfl_bond_arrears > 0 }} set_variable = {{ name = bfl_facility_reason value = 5 }} }}
+            else_if = {{ limit = {{ overlord.var:bfl_bond_last_issue = bfl_period }} set_variable = {{ name = bfl_facility_reason value = 6 }} }}
+            else_if = {{ limit = {{ overlord = {{ NOT = {{ bfl_has_bond_slot = yes }} }} }} set_variable = {{ name = bfl_facility_reason value = 7 }} }}
+            if = {{ limit = {{ NOT = {{ var:bfl_facility_last_reason ?= var:bfl_facility_reason }} }}
+                set_variable = {{ name = bfl_feedback_shortfall value = {{ value = var:bfl_facility_requested subtract = var:bfl_facility_paid }} }}
+                bfl_record_feedback = {{ KIND = 9 AMOUNT = var:bfl_feedback_shortfall }} }}
+        }}
+        set_variable = {{ name = bfl_facility_last_reason value = var:bfl_facility_reason }}
     }}
     ''')
     # One issuer owns each obligation. Current holder receives cash exactly once;
@@ -217,6 +231,7 @@ def generate(common, effect, loc, tune):
             set_variable = {{ name = bfl_bond_gain value = {{ value = var:bfl_bond_offer_price subtract = var:{n}_basis }} }}
             scope:bfl_bond_buyer = {{ add_gold = {{ value = scope:bfl_bond_issuer.var:bfl_bond_offer_price multiply = -1 }} }}
             scope:bfl_bond_seller = {{ add_gold = scope:bfl_bond_issuer.var:bfl_bond_offer_price }}
+            scope:bfl_bond_seller = {{ bfl_record_feedback = {{ KIND = 5 AMOUNT = scope:bfl_bond_issuer.var:bfl_bond_offer_price }} }}
             set_variable = {{ name = {n}_holder value = scope:bfl_bond_buyer }}
             set_variable = {{ name = {n}_basis value = var:bfl_bond_offer_price }}
             set_variable = {{ name = bfl_bond_offer_slot value = 0 }}

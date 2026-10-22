@@ -8,11 +8,26 @@ world country registry. Candidate evaluation is capped per review.
 
 def generate(common, effect, loc, write):
     defaults = dict(mode=-1, last=0, action=0, reviewed=0, score=0, offers=0,
-                    placements=0, recalls=0, ventures=0, cycles=0)
+                    placements=0, recalls=0, ventures=0, cycles=0, takeovers=0, resales=0,
+                    finance_last=0, policy_last=0)
     init = ''.join(f'''if = {{ limit = {{ NOT = {{ has_variable = bfl_strategy_{key} }} }}
         set_variable = {{ name = bfl_strategy_{key} value = {value} }} }}\n'''
                    for key, value in defaults.items())
     common('scripted_effects', 'strategy_init', effect('bfl_initialize_strategy', init))
+    # Called only by a newly paid charter. Do not reinterpret an existing save's
+    # manual/off policy or a human controller's borrowing authority.
+    common('scripted_effects', 'strategy_charter', effect('bfl_initialize_ai_charter_policy', '''
+        if = { limit = { bfl_has_valid_controller = yes is_ai = yes
+            overlord = { is_ai = yes }
+            var:bfl_strategy_mode < 0
+            NOT = { has_variable = bfl_ai_charter_policy_initialized } }
+            set_variable = bfl_ai_charter_policy_initialized
+            set_variable = { name = bfl_facility_mode value = 1 }
+            # Small perpetual issues must cover per-record servicing costs.
+            # This prospective preset never reprices an accepted obligation.
+            overlord = { bfl_initialize_bonds = yes set_variable = { name = bfl_bond_rate value = 0.06 } }
+        }
+    '''))
     common('scripted_triggers', 'strategy', '''
     bfl_strategy_authorized = {
         bfl_can_conduct_business = yes
@@ -135,8 +150,39 @@ def generate(common, effect, loc, write):
             }
         }
     ''')
+    services += effect('bfl_strategy_originate_venture', '''
+        if = { limit = { bfl_commenda_offer_ready = yes bfl_venture_count < 2
+            bfl_free_cash >= { value = var:bfl_venture_ticket add = 500 }
+            bfl_venture_basis <= { value = bfl_equity multiply = 0.25 subtract = var:bfl_venture_ticket }
+            OR = { NOT = { has_variable = bfl_strategy_venture_after } bfl_period >= var:bfl_strategy_venture_after } }
+            save_scope_as = bfl_venture_lender save_scope_as = bfl_venture_actor
+            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_venture_actor } }
+            scope:bfl_venture_actor = { set_variable = bfl_op_strategy_search
+                bfl_find_commenda_opportunity = yes
+                remove_variable = bfl_op_strategy_search
+                if = { limit = { has_variable = bfl_op_country }
+                    bfl_restore_commenda_opportunity = yes
+                    # A quote is a risk screen, never a receipt or guaranteed yield.
+                    if = { limit = { scope:bfl_operator = { is_ai = yes }
+                        "scope:to.market_price(scope:goods)" >= { value = "scope:from.market_price(scope:goods)" multiply = 1.10 }
+                        var:bfl_op_surplus >= 1 }
+                        scope:bfl_venture_lender = {
+                            set_variable = { name = bfl_venture_kind value = 1 }
+                            bfl_propose_commenda = yes
+                            if = { limit = { scope:bfl_operator.var:bfl_venture_offer_bank ?= this }
+                                set_variable = { name = bfl_strategy_action value = 4 }
+                                change_variable = { name = bfl_strategy_ventures add = 1 }
+                                set_variable = { name = bfl_strategy_venture_after value = { value = bfl_period add = 3 } }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ''')
     services += effect('bfl_run_strategy', '''
         bfl_initialize_strategy = yes
+        bfl_apply_ai_finance_policy = yes
         if = { limit = { bfl_strategy_authorized = yes bfl_period > var:bfl_strategy_last }
             # Stamp before offers/events; re-entry and reload cannot run again.
             set_variable = { name = bfl_strategy_last value = bfl_period }
@@ -147,6 +193,7 @@ def generate(common, effect, loc, write):
             remove_variable = bfl_strategy_target
             save_scope_as = bfl_strategy_bank
             bfl_strategy_recall = yes
+            if = { limit = { var:bfl_strategy_action = 0 } bfl_strategy_resell_bond = yes }
             if = { limit = { var:bfl_strategy_action = 0 bfl_free_cash >= 200 bfl_capital_headroom >= 100
                 OR = { NOT = { has_variable = bfl_strategy_credit_after } bfl_period >= var:bfl_strategy_credit_after } }
                 # A completed owned current-capital branch is an existing client
@@ -183,6 +230,9 @@ def generate(common, effect, loc, write):
                 }
             }
             if = { limit = { var:bfl_strategy_action = 0 }
+                bfl_strategy_originate_venture = yes
+            }
+            if = { limit = { var:bfl_strategy_action = 0 }
                 set_variable = { name = bfl_strategy_reviewed value = 0 }
                 bfl_strategy_place_deposit = yes
             }
@@ -200,23 +250,67 @@ def generate(common, effect, loc, write):
             set_variable = { name = bfl_company_strategy_last value = bfl_period }
             overlord = { save_scope_as = bfl_company_actor }
             bfl_register_company = yes
+            if = { limit = { NOT = { has_variable = bfl_company_strategy_injections } }
+                set_variable = { name = bfl_company_strategy_injections value = 0 } }
             if = { limit = { NOT = { has_variable = bfl_company_strategy_initialized } }
                 scope:bfl_company_actor = { set_variable = { name = bfl_company_requested_mandate value = 1 } }
                 bfl_company_set_mandate = yes
                 set_variable = bfl_company_strategy_initialized
             }
             if = { limit = { gold < { value = var:bfl_company_buffer add = var:bfl_company_reinvestment }
+                var:bfl_company_loss <= 100 var:bfl_company_strategy_injections < 4
                 scope:bfl_company_actor = { gold >= 600 monthly_balance >= 0 }
                 OR = { NOT = { has_variable = bfl_company_strategy_funded } bfl_period >= { value = var:bfl_company_strategy_funded add = 3 } } }
                 bfl_company_capitalize = yes
+                change_variable = { name = bfl_company_strategy_injections add = 1 }
                 set_variable = { name = bfl_company_strategy_funded value = bfl_period }
+            }
+            # Reserve pressure changes only an AI controller's future budget.
+            # Carried losses must be recovered before distributing earnings.
+            set_variable = { name = bfl_company_payout_ratio value = 0 }
+            if = { limit = { var:bfl_company_loss = 0 var:bfl_company_native_net > 0 }
+                set_variable = { name = bfl_company_payout_ratio value = 0.25 } }
+            set_variable = { name = bfl_company_trade_budget value = { value = bfl_company_available multiply = 0.10 max = 100 } }
+            if = { limit = { bfl_company_available >= 1000 var:bfl_company_native_net > 0
+                var:bfl_company_loss = 0
+                NOT = { any_owned_building = { building_levels_under_construction > 0 } }
+                OR = { NOT = { has_variable = bfl_company_strategy_built }
+                    bfl_period >= { value = var:bfl_company_strategy_built add = 12 } } }
+                save_scope_as = bfl_company_builder save_scope_as = actor
+                if = { limit = { capital = { can_build_building = building_type:trade_company_local_venture } }
+                    # Native cost, employment, maintenance and completion apply.
+                    # A construction order is neither a receipt nor a return.
+                    capital = { construct_building = { building_type = building_type:trade_company_local_venture
+                        owner = scope:bfl_company_builder payer = scope:bfl_company_builder
+                        cost_multiplier = 1 cost_multiplier_reason = bfl_company_strategy_construction } }
+                    set_variable = { name = bfl_company_strategy_built value = bfl_period }
+                }
             }
         }
     ''')
     common('scripted_effects', 'strategy', services)
+    from generate_strategy_resale import generate as generate_resale
+    generate_resale(common, effect, loc)
+    from generate_strategy_finance import generate as generate_finance
+    generate_finance(common, effect, loc)
+    loc('bfl_company_strategy_construction', 'Reinvest company reserves in a native trading facility')
     # Integrate after settlement in the existing account pass, not an unordered
     # second monthly hook. Company strategy similarly follows its own settlement.
     common('scripted_guis', 'strategy', '''
+    # Inherited policy is automatic only with live AI authority. Human banks
+    # and AI subjects of a human controller remain manual until delegated.
+    bfl_strategy_automatic_view = { scope = country is_shown = {
+        var:bfl_strategy_mode < 0 is_ai = yes
+        OR = { bfl_is_independent_bank = yes
+            AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } }
+    } }
+    bfl_strategy_manual_view = { scope = country is_shown = {
+        OR = { var:bfl_strategy_mode = 0
+            AND = { var:bfl_strategy_mode < 0
+                NOT = { AND = { is_ai = yes
+                    OR = { bfl_is_independent_bank = yes
+                        AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } } } } } }
+    } }
     bfl_strategy_enable = { scope = country is_shown = { bfl_has_management = yes }
         is_valid = { bfl_has_management = yes } effect = { bfl_resolve_command_bank = yes
             scope:bfl_bank = { bfl_initialize_strategy = yes set_variable = { name = bfl_strategy_mode value = 1 } } } }
@@ -225,13 +319,15 @@ def generate(common, effect, loc, write):
             scope:bfl_bank = { bfl_initialize_strategy = yes set_variable = { name = bfl_strategy_mode value = 0 } } } }
     ''')
     loc('bfl_strategy_title', 'Investment mandate')
-    loc('bfl_strategy_title_tip', 'A conservative monthly mandate. Review up to twelve eligible credit candidates and twelve independent deposit banks. At most one credit offer or 100-gold demand placement per month. Credit offers cool down for three months. Accepted loans retain their terms. Protected cash, research, branches and profile permissions still apply.')
+    loc('bfl_strategy_title_tip', 'A conservative monthly mandate. Review up to twelve credit candidates, twelve connected venture operators with four source markets each, or twelve deposit banks. At most one credit offer, cargo offer or 100-gold demand placement monthly. Credit and cargo offers cool down for three months. Cargo requires a quoted margin of at least 10% and one gold bank surplus, retains 500 free cash, and is capped at two active agreements and 25% equity. Quotes can change; losses remain possible. Protected cash, research, branches and profile permissions still apply.')
     loc('bfl_strategy_enable', 'Delegate investments')
     loc('bfl_strategy_disable', 'Manage investments')
-    loc('bfl_strategy_enable_tip', 'Authorize the bank to offer eligible AI borrowers funded credit, or place excess cash in a qualifying independent bank. No policy changes to sovereign borrowing, dividends, goods or monetary authority. Offers require counterparty consent. New business stops in resolution.')
-    loc('bfl_strategy_disable_tip', 'Stop new strategy offers and deposits. Existing loans, deposits and queued claims continue to be serviced. Other explicitly authorized goods, share and branch mandates remain in effect.')
+    loc('bfl_strategy_enable_tip', 'Authorize scored purchases of existing native loans, credit and cargo offers to eligible AI counterparties, and excess-cash demand placements. Low liquidity may list one owned sovereign bond at 98% of face; an accepted resale can realize a loss. Cargo uses your current Terms and ordinary consent and physical settlement. Sovereign borrowing, dividends, goods and monetary authority retain their separate policies. New business stops in resolution.')
+    loc('bfl_strategy_disable_tip', 'Stop automatic loan purchases, new strategy offers and demand placements. Existing loans, deposits and queued claims continue to be serviced. Goods, share and branch policies remain separate.')
     loc('bfl_strategy_statement', 'Monthly reviews: [Country.MakeScope.GetVariable(\'bfl_strategy_reviewed\').GetValue|0]/12  ·  Score: [Country.MakeScope.GetVariable(\'bfl_strategy_score\').GetValue|2]\\nCredit offers: [Country.MakeScope.GetVariable(\'bfl_strategy_offers\').GetValue|0]  ·  Deposits placed: [Country.MakeScope.GetVariable(\'bfl_strategy_placements\').GetValue|0]  ·  Recalls: [Country.MakeScope.GetVariable(\'bfl_strategy_recalls\').GetValue|0]')
-    for key, title in [('automatic', 'AI mandate · automatic'), ('delegated', 'Investment mandate · delegated'), ('manual', 'Investment mandate · manual'), ('idle', 'Last review: retained liquidity'), ('credit', 'Last review: credit offered for consent'), ('deposit', 'Last review: 100 gold placed on demand'), ('recall', 'Last review: deposit recall requested')]:
+    loc('bfl_strategy_secondary_statement', "Automatic native-loan purchases: [Country.MakeScope.GetVariable('bfl_strategy_takeovers').GetValue|0] · Bond resale quotes: [Country.MakeScope.GetVariable('bfl_strategy_resales').GetValue|0]")
+    loc('bfl_strategy_secondary_tip', 'Existing-loan purchases review at most twelve completed capital-branch clients. The borrower needs liquidity, peace, a nonnegative budget and at least 0.50 creditworthiness. Purchases retain 100 free cash, cap the acquisition premium at 25% of remaining principal and total borrower exposure at 25% of equity. Expected monthly margin must be at least 0.10 gold after the premium, a servicing allowance and conservative funding costs. This is an estimate; early repayment and default can still cause a loss. Low liquidity may quote one owned sovereign bond at 98% of face through a completed Stock Exchange. No resale proceeds are booked before funded buyer consent.')
+    for key, title in [('automatic', 'AI mandate · automatic'), ('delegated', 'Investment mandate · delegated'), ('manual', 'Investment mandate · manual'), ('idle', 'Last review: retained liquidity'), ('credit', 'Last review: credit offered for consent'), ('deposit', 'Last review: 100 gold placed on demand'), ('recall', 'Last review: deposit recall requested'), ('venture', 'Last review: cargo partnership offered for consent'), ('resale', 'Last review: an owned bond is offered for liquidity')]:
         loc('bfl_strategy_' + key, title)
     write('in_game/gui/bfl_strategy.gui', '''types BFLStrategyTypes {
         type bfl_strategy_contents = vbox { layoutpolicy_horizontal = expanding spacing = 4
@@ -239,19 +335,20 @@ def generate(common, effect, loc, write):
             widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
                 text_single = { parentanchor = center text = "bfl_strategy_title" autoresize = yes } }
             text_multi = { text = "bfl_strategy_automatic" autoresize = yes layoutpolicy_horizontal = expanding
-                visible = "[LessThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)0')]" }
+                visible = "[GetScriptedGui('bfl_strategy_automatic_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }
             text_multi = { text = "bfl_strategy_delegated" autoresize = yes layoutpolicy_horizontal = expanding
                 visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)1')]" }
             text_multi = { text = "bfl_strategy_manual" autoresize = yes layoutpolicy_horizontal = expanding
-                visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)0')]" }
+                visible = "[GetScriptedGui('bfl_strategy_manual_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }
             text_multi = { text = "bfl_strategy_statement" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }
+            text_multi = { text = "bfl_strategy_secondary_statement" tooltip = "bfl_strategy_secondary_tip" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }
             ACTIONS
             hbox = { layoutpolicy_horizontal = expanding spacing = 6
                 BUTTONS }
         }
     }'''.replace('ACTIONS', '\n'.join(f'''text_multi = {{ text = "bfl_strategy_{key}" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
         visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint){i}')]" }}'''
-                                       for i, key in enumerate(('idle', 'credit', 'deposit', 'recall'))))
+                                       for i, key in enumerate(('idle', 'credit', 'deposit', 'recall', 'venture', 'resale'))))
         .replace('BUTTONS', '\n'.join(f'''button_regular = {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding
             text = "bfl_strategy_{key}" tooltip = "bfl_strategy_{key}_tip"
             enabled = "[GetScriptedGui('bfl_strategy_{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

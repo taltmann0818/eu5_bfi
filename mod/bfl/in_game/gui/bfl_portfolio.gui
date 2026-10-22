@@ -9,50 +9,50 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         blockoverride "block_title" { visible = yes text = "bfl_security_price_heading" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Tangible NAV per share" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_5c62ef542ecff127" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_nav_quote')|3]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Market price" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_5899bc04ea778394" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_equity_quote')|3]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Premium / discount to NAV" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_227219ca5b270fe4" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_price_premium')|%1+=]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Dealer spread" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_cdc7922b95178543" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_price_spread')|%1]" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GetScriptedGui('bfl_portfolio_has_reference').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Previous recorded month" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_6adfb2f9d92c2e99" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_price_change')|%1+=]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Issued shares" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_a85486beff582088" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_total_units').GetValue|3]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Last traded price" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_47513efc872a3a0e" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_equity_last_price').GetValue|3]@gold!" autoresize = yes align = right|nobaseline } } } }TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_security_financial_heading" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Treasury cash" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_5c02991607bfd6f1" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_cash')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Loan and bond assets" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_da402393776c9e54" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_credit')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Goods and ventures" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_01e08a51183fee78" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_productive_assets')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Liabilities" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_526b05cbee90011b" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_liabilities')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Tangible net assets" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_3e3c203a93b0f973" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_tangible_equity')|2]@gold!" autoresize = yes align = right|nobaseline } } } }TooltipListBase = { visible = "[GetScriptedGui('bfl_portfolio_bank_financials').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
         blockoverride "block_title" { visible = yes text = "bfl_security_bank_results" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Net income" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_7561c934f60f784f" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_last_income')|2+=]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Operating expenses" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_cca657cde3032c16" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_issuer_last_costs')|2]@gold!" autoresize = yes align = right|nobaseline } } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_security_price_math" } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_security_primary_note" } } } }
     }type bfl_share_portfolio_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
@@ -64,7 +64,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_total_heading" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Value / unrealized" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_d9278aa74147134f" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes align = right|nobaseline } } } }TooltipListBase = { visible = "[GetScriptedGui('bfl_treasury_portfolio_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_treasury_heading" }
         widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GetScriptedGui('bfl_treasury_portfolio_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" background = { using = tooltip_table_field_texture }
@@ -75,7 +75,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_treasury_portfolio_market')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_state_units').GetValue|3] shares · basis [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_treasury_portfolio_basis')|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_treasury_portfolio_return')|%1+=]" autoresize = yes fontsize = 13 } } } } }vbox = { layoutpolicy_horizontal = expanding set_parent_dimension_to_minimum = height ignoreinvisible = yes
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_6a3d95d926d4677b" autoresize = yes fontsize = 13 } } } } }vbox = { layoutpolicy_horizontal = expanding set_parent_dimension_to_minimum = height ignoreinvisible = yes
             datacontext = "[GetPlayer]" visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_bank_heading" }
@@ -90,7 +90,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_01')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_01_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_01')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_13af3a1809d8dffd" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -98,7 +98,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_02')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_02_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_02')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_d68ade147aa416c5" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -106,7 +106,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_03')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_03_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_03')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_efb3e6c8086320f0" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -114,7 +114,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_04')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_04_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_04')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_7ef7ce2b2b73d6cd" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -122,7 +122,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_05')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_05_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_05')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_07959fc99961af1a" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -130,7 +130,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_06')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_06_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_06')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_7738ddd99286286b" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -138,7 +138,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_07')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_07_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_07')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_20dbd3c863b836ac" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -146,7 +146,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_08')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_08_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_08')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_402b26e792cf8945" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -154,7 +154,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_09')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_09_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_09')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_290705e3922ca5a9" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -162,7 +162,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_10')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_10_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_10')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_828c0e2f9c995c40" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -170,7 +170,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_11')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_11_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_11')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_82719b1feef52b0c" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -178,7 +178,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_12')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_12_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_12')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_74963d9ff8c130ab" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -186,7 +186,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_13')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_13_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_13')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_11a167f131210eed" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -194,7 +194,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_14')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_14_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_14')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_ee84af16133993f1" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -202,7 +202,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_15')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_15_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_15')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_aa0f9d2d0c6935d8" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -210,7 +210,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_16')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_16_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_16')|%1+=]" autoresize = yes fontsize = 13 } } } } } } } } }vbox = { layoutpolicy_horizontal = expanding set_parent_dimension_to_minimum = height ignoreinvisible = yes
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_31619ba0ef05aa2d" autoresize = yes fontsize = 13 } } } } } } } } }vbox = { layoutpolicy_horizontal = expanding set_parent_dimension_to_minimum = height ignoreinvisible = yes
             datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]" visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_bank_heading" }
@@ -225,7 +225,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_01')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_01_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_01')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_13af3a1809d8dffd" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -233,7 +233,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_02')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_02_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_02')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_d68ade147aa416c5" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -241,7 +241,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_03')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_03_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_03')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_efb3e6c8086320f0" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -249,7 +249,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_04')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_04_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_04')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_7ef7ce2b2b73d6cd" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -257,7 +257,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_05')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_05_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_05')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_07959fc99961af1a" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -265,7 +265,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_06')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_06_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_06')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_7738ddd99286286b" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -273,7 +273,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_07')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_07_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_07')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_20dbd3c863b836ac" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -281,7 +281,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_08')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_08_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_08')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_402b26e792cf8945" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -289,7 +289,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_09')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_09_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_09')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_290705e3922ca5a9" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -297,7 +297,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_10')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_10_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_10')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_828c0e2f9c995c40" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -305,7 +305,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_11')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_11_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_11')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_82719b1feef52b0c" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -313,7 +313,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_12')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_12_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_12')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_74963d9ff8c130ab" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -321,7 +321,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_13')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_13_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_13')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_11a167f131210eed" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -329,7 +329,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_14')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_14_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_14')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]"
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_ee84af16133993f1" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -337,7 +337,7 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_15')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_15_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_15')|%1+=]" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_aa0f9d2d0c6935d8" autoresize = yes fontsize = 13 } } } }widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -345,12 +345,12 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         color = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetMapColor]" }
                 text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetName]" autoresize = yes fontsize = 17 } expand = { }
                 text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_16')|2]@gold!" autoresize = yes fontsize = 17 } }
-            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue|3] shares · basis [Country.MakeScope.GetVariable('bfl_pos_16_basis').GetValue|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_return_16')|%1+=]" autoresize = yes fontsize = 13 } } } } } } } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+            hbox = { size = { 395 20 } layoutpolicy_horizontal = expanding margin_left = 22 text_single = { text = "bfl_ui_31619ba0ef05aa2d" autoresize = yes fontsize = 13 } } } } } } } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Realized result" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_75904e9512f059a0" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_realized')|2+=]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Bank dividends received" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_00de672ff7d4ec61" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_exchange_dividends')|2]@gold!" autoresize = yes align = right|nobaseline } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_portfolio_owner_note" } }TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_history_title" }
         vbox = { margin = { 8 5 } spacing = 2

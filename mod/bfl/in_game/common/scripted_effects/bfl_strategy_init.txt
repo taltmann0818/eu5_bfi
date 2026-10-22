@@ -19,4 +19,12 @@ if = { limit = { NOT = { has_variable = bfl_strategy_ventures } }
         set_variable = { name = bfl_strategy_ventures value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_strategy_cycles } }
         set_variable = { name = bfl_strategy_cycles value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_takeovers } }
+        set_variable = { name = bfl_strategy_takeovers value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_resales } }
+        set_variable = { name = bfl_strategy_resales value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_finance_last } }
+        set_variable = { name = bfl_strategy_finance_last value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_strategy_policy_last } }
+        set_variable = { name = bfl_strategy_policy_last value = 0 } }
 }

@@ -1,13 +1,36 @@
 # Native bank interface captures
 
+## M10 final mandate authority
+
+[22 October final-runtime provenance](../../tests/results/2026-10-22-m10-ui.json)
+records five normal observations and four unedited window JPEGs on shipping
+`c0186e1c…`, English, 1280×720 client, inherited default scale, debug disabled.
+The cold startup uses inherited policy rather than preselecting manual.
+
+- [Inherited manual](2026-10-22-m10-inherited-manual.jpg): the AI bank under a
+  human controller correctly displays manual; bank cash/assets/equity are 5000.
+- [Delegated](2026-10-22-m10-controller-delegated.jpg): normal player delegation
+  changes policy with no cash movement and readable consent/funding help.
+- [Funded statement](2026-10-22-m10-controller-funded.jpg): two natural monthly
+  placements create a 200-gold receivable. Cash 4706.39 plus that claim equals
+  assets/equity 4906.39. Native war/faction activity also occurred; these values
+  are not a campaign profitability claim.
+- [Manual with claim](2026-10-22-m10-controller-manual-retained.jpg): normal
+  Manage investments stops new strategy business without changing those balances.
+
+The fixture grants starting cash, ownership and a branch; it does not dispatch
+reviews, refill cash during observation or create placements. The earlier
+independent-role observations below retain their actual provenance.
+
 ## M10 investment mandate
 
 [Exact capture provenance](../../tests/results/2026-10-21-m10-ui.json) records
 eight normal UI observations and five actual-game captures from disposable
 Florence-controller and independent-Bardi scenes. English, 1280×720 client,
 inherited default/automatic scale; window JPEGs include the native title bar.
-All GUI/localization bytes match shipping. Each capture retains its actual
-runtime and fixture hash; candidate traversal changes are recorded separately.
+Each capture retains its actual runtime and fixture hash. Candidate traversal
+changes and the final read-only mandate visibility correction are recorded
+separately; these earlier captures do not verify the inherited-human label fix.
 Cash/branch/ownership grants are fixture setup, not campaign balance evidence.
 
 - [Controller manual](2026-10-21-m10-controller-manual.jpg): Merchant bank,

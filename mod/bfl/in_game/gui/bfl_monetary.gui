@@ -6,13 +6,13 @@
         blockoverride "tooltip_content" { vbox = { size = { 420 0 }
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Circulation / reserved cash" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_52d246b314893f59" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_notes_outstanding').GetValue|2] / [Country.MakeScope.GetVariable('bfl_cash_committed').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Monetary assets / confidence" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_54e607aa1c7bbb0c" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_money_assets').GetValue|2]@gold! / [Country.MakeScope.GetVariable('bfl_money_confidence').GetValue|0]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Future discount rate / latest clearing blocked" autoresize = yes } expand = { }
+             text_single = { text = "bfl_ui_ecc2db28f6c3d1e8" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_money_rate').GetValue|%1] / [Country.MakeScope.GetVariable('bfl_clearing_failed').GetValue|0]" autoresize = yes align = right|nobaseline } } }TooltipListScrollArea = {
         blockoverride "block_scrollarea" { maximumsize = { 420 240 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
@@ -54,10 +54,10 @@
             text_single = { parentanchor = bottom|hcenter position = { 0 -2 } text = "bfl_money_settings" autoresize = yes fontsize = 11 } } }
         vbox = { layoutpolicy_horizontal = expanding spacing = 3 ignoreinvisible = yes
             visible = "[GetScriptedGui('bfl_money_policy_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
-            text_single = { raw_text = "Lending [Country.MakeScope.GetVariable('bfl_lending_base').GetValue|%1] · Discount [Country.MakeScope.GetVariable('bfl_money_rate').GetValue|%1]" autoresize = yes fontsize = 13 }
-            text_single = { raw_text = "Accepting claims & discount requests" autoresize = yes fontsize = 13
+            text_single = { text = "bfl_ui_77203b33c026b544" autoresize = yes fontsize = 13 }
+            text_single = { text = "bfl_ui_07a8fd504f9665d3" autoresize = yes fontsize = 13
                 visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_money_accept').GetValue,'(CFixedPoint)1')]" }
-            text_single = { raw_text = "New acceptance & discount requests paused" autoresize = yes fontsize = 13
+            text_single = { text = "bfl_ui_36229de4218b517d" autoresize = yes fontsize = 13
                 visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_money_accept').GetValue,'(CFixedPoint)0')]" }
             button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_money_accept"
             enabled = "[GetScriptedGui('bfl_money_accept').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"

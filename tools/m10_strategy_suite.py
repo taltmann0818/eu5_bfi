@@ -32,13 +32,15 @@ def fixture(token, fingerprint):
             set_variable = { name = bfl_profile value = 1 } set_variable = { name = bfl_state value = 0 }
             set_variable = { name = bfl_accept_deposits value = 1 }
             set_variable = { name = bfl_demand_rate value = 0.02 }
-            add_opinion = { target = c:BRD modifier = bfi_deposit_test_opinion } set_gold = 5000 }
+            add_opinion = { target = c:BRD modifier = bfi_m10_strategy_opinion } set_gold = 5000 }
     '''
     start += check('manual_policy_blocks_ai_despite_surplus', 'c:BRD = { NOT = { bfl_strategy_authorized = yes } }')
     start += '''c:BRD = { bfl_run_strategy = yes }'''
     start += check('manual_review_moves_no_money', 'c:BRD = { gold = 5000 var:bfl_strategy_cycles = 0 }')
     start += '''c:BRD = { set_variable = { name = bfl_strategy_mode value = -1 } }'''
     start += check('independent_ai_inherits_automatic_mandate', 'c:BRD = { bfl_strategy_authorized = yes }')
+    start += 'c:BRD = { save_scope_as = bfl_strategy_bank }'
+    start += check('controlled_deposit_recipient_meets_admission', 'c:ACC = { bfl_strategy_deposit_target = yes }')
     start += '''c:BRD = { set_variable = { name = bfl_strategy_mode value = 1 }
         save_scope_as = bfl_strategy_bank bfl_strategy_place_deposit = yes }'''
     start += check('funded_demand_placement_conserves_cash', 'c:BRD = { gold = 4900 bfl_deposit_assets = 100 var:bfl_strategy_action = 2 } c:ACC = { gold = 5100 bfl_deposit_liabilities = 100 }')
@@ -83,6 +85,26 @@ def fixture(token, fingerprint):
                 c:BRD = { make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
                     set_variable = { name = bfl_controller value = c:FLO } }
             '''
+            start += '''c:BRD = { set_variable = { name = bfl_strategy_mode value = 0 }
+                set_variable = { name = bfl_facility_mode value = 0 }
+                bfl_initialize_ai_charter_policy = yes }'''
+            start += check('manual_charter_keeps_borrowing_off', 'c:BRD.var:bfl_facility_mode = 0')
+            start += '''c:FRA = { add_reform = government_reform:bfl_state_chartered_bank
+                    set_variable = { name = bfl_bank value = c:BRD } }
+                c:BRD = { make_subject_of = { target = c:FRA type = subject_type:bfl_chartered_bank }
+                    set_variable = { name = bfl_controller value = c:FRA }
+                    remove_variable = bfl_ai_charter_policy_initialized
+                    set_variable = { name = bfl_strategy_mode value = -1 }
+                bfl_initialize_ai_charter_policy = yes }'''
+            start += check('new_ai_charter_selects_debt_first_without_issuing', 'c:BRD = { var:bfl_facility_mode = 1 has_variable = bfl_ai_charter_policy_initialized } c:FRA.var:bfl_bond_rate = 0.06')
+            start += '''c:BRD = { set_variable = { name = bfl_facility_mode value = 0 }
+                bfl_initialize_ai_charter_policy = yes }'''
+            start += check('ai_charter_default_does_not_override_later_policy', 'c:BRD.var:bfl_facility_mode = 0')
+            start += '''c:BRD = { make_subject_of = { target = c:FLO type = subject_type:bfl_chartered_bank }
+                    set_variable = { name = bfl_controller value = c:FLO }
+                    set_variable = { name = bfl_strategy_mode value = 1 } }
+                c:FLO = { add_reform = government_reform:bfl_state_chartered_bank
+                    set_variable = { name = bfl_bank value = c:BRD } }'''
         for profile in (1, 2):
             lane_offset = len(start)
             borrower = {('independent', 1): 'GEN', ('independent', 2): 'CAS',
@@ -128,6 +150,56 @@ def fixture(token, fingerprint):
         set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 1 } } }
         c:GEN = { set_gold = 10000 }
     '''
+    start += grant('banking_office', 'BRD', 'FLO')
+    start += """c:FLO = { research_advance = advance_type:bfl_commenda
+        capital = { save_scope_as = bfi_market_capital }
+        create_market = { builder = c:FLO location = scope:bfi_market_capital price = price:create_market instant = yes price_modifier = 0 }
+        create_relation = { type = relation_type:trade_access first = c:GEN second = c:FLO } }
+        c:GEN.capital.market = { add_goods_supply = { goods = goods:wheat amount = 10000 } }
+        c:BRD = { set_variable = { name = bfl_strategy_credit_after value = { value = bfl_period add = 100 } }
+            set_variable = { name = bfl_strategy_last value = 0 }
+            set_variable = { name = bfi_venture_cash value = gold }
+            bfl_run_strategy = yes }
+    """
+    start += check('overseas_strategy_finds_bounded_profitable_cargo', """c:BRD = { var:bfl_strategy_action = 4 var:bfl_strategy_ventures = 1 }
+        c:FLO = { has_variable = bfl_op_country var:bfl_op_reviewed <= 12 var:bfl_op_markets <= 4
+            var:bfl_op_country = { var:bfl_venture_offer_bank = c:BRD } }""")
+    start += check('venture_offer_moves_no_cash_or_basis_before_consent', 'c:BRD = { gold = var:bfi_venture_cash bfl_venture_basis = 0 }')
+    start += """c:FLO.var:bfl_op_country = { save_scope_as = bfi_strategy_operator
+        save_scope_value_as = { name = bfl_venture_quote value = var:bfl_venture_offer_generation }
+        bfl_accept_commenda = yes }
+        c:BRD = { set_variable = { name = bfi_venture_basis value = bfl_venture_basis }
+            bfl_run_strategy = yes }
+    """
+    start += check('venture_consent_funds_only_real_native_cargo_cost', 'c:BRD = { bfl_venture_basis > 0 gold < var:bfi_venture_cash bfl_venture_count = 1 }')
+    start += check('venture_reentry_retains_one_agreement_and_cooldown', 'c:BRD = { bfl_venture_basis = var:bfi_venture_basis var:bfl_strategy_ventures = 1 var:bfl_strategy_venture_after > bfl_period }')
+    start += """scope:bfi_strategy_operator = { set_variable = { name = bfl_venture_offer_kind value = 2 } }"""
+    start += check('ai_does_not_accept_unpriced_expedition_risk', 'scope:bfi_strategy_operator = { NOT = { bfl_ai_accept_venture = yes } }')
+    start += '''c:BRD = { set_gold = 5000 set_variable = { name = bfl_bond_amount value = 100 }
+        bfl_underwrite_sovereign_bond = yes set_gold = 150
+        set_variable = { name = bfl_strategy_action value = 0 } }
+    '''
+    start += check('resale_fixture_has_funded_original_bond', 'c:FLO = { var:bfl_bnd_01_active = 1 var:bfl_bnd_01_holder = c:BRD var:bfl_bnd_01_face = 100 }')
+    start += 'c:BRD = { bfl_strategy_resell_bond = yes }'
+    start += check('liquidity_resale_still_requires_completed_exchange', 'c:FLO.var:bfl_bond_offer_slot = 0 c:BRD.gold = 150')
+    start += grant('stock_exchange', 'FLO') + grant('stock_exchange', 'ACC')
+    start += '''c:BRD = { set_variable = { name = bfl_strategy_mode value = 0 }
+        bfl_strategy_resell_bond = yes }'''
+    start += check('manual_policy_blocks_automatic_bond_listing', 'c:FLO.var:bfl_bond_offer_slot = 0 c:BRD.gold = 150')
+    start += '''c:BRD = { set_variable = { name = bfl_strategy_mode value = 1 }
+        bfl_strategy_resell_bond = yes }'''
+    start += check('liquidity_resale_quotes_real_owned_claim_without_cash', '''c:BRD = { gold = 150 var:bfl_strategy_action = 5 var:bfl_strategy_resales = 1 }
+        c:FLO = { var:bfl_bond_offer_price = 98 var:bfl_bond_offer_seller = c:BRD var:bfl_bnd_01_holder = c:BRD }''')
+    start += 'c:BRD = { bfl_strategy_resell_bond = yes bfl_strategy_resell_bond = yes }'
+    start += check('pending_liquidity_offer_is_not_relisted_on_reentry', 'c:BRD = { gold = 150 var:bfl_strategy_resales = 1 var:bfl_strategy_resale_after > bfl_period var:bfl_strategy_bond_reviewed <= 12 }')
+    start += '''c:BRD = { set_variable = { name = bfi_expected_resale_loss value = { value = var:bfl_loss_carryforward add = 2 } } }
+        c:ACC = { set_gold = 5000 save_scope_as = bfl_bond_buyer }
+        c:FLO = { bfl_accept_sovereign_bond_offer = yes }
+    '''
+    start += check('funded_secondary_buyer_pays_seller_and_preserves_debt', '''c:ACC.gold = 4902 c:BRD.gold = 248
+        c:FLO = { bfl_bond_debt = 100 var:bfl_bnd_01_holder = c:ACC var:bfl_bnd_01_basis = 98 var:bfl_bond_offer_slot = 0 }''')
+    start += check('liquidity_resale_books_real_two_gold_loss_once', 'c:BRD = { var:bfl_loss_carryforward = var:bfi_expected_resale_loss }')
+    start += 'c:BRD = { set_gold = 5000 }'
     start += '''c:FLO = { research_advance = advance_type:trade_companies_advance }
         c:GEN.capital = { construct_building = { building_type = building_type:trade_company_headquarters
             owner = c:FLO instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_money_title } }
@@ -137,38 +209,88 @@ def fixture(token, fingerprint):
     finish = 'c:BRD = { change_variable = { name = bfi_m10_months add = 1 } }\n'
     for month in range(1, 13):
         finish += f'if = {{ limit = {{ c:BRD.var:bfi_m10_months = {month} }}\n'
-        if month == 1:
+        if month == 2:
+            # Native instant construction still needs ordinary game ticks to
+            # complete. Give it two monthly boundaries, and choose an actually
+            # solvent AI controller rather than assuming a cash grant makes
+            # Florence's native investment budget nonnegative.
             finish += '''c:FLO = { every_subject = { limit = { bfl_is_company = yes }
-                save_scope_as = bfi_strategy_company } set_gold = 1000 }
+                save_scope_as = bfi_strategy_company } }
+                c:BRD = { set_variable = { name = bfi_m10_controller_found value = 0 } }
+                every_country = { limit = { country_exists = this exists = capital country_type = location is_ai = yes monthly_balance >= 0
+                    gold >= 1000 c:BRD.var:bfi_m10_controller_found = 0 }
+                    save_scope_as = bfi_strategy_controller
+                    c:BRD = { set_variable = { name = bfi_m10_controller_found value = 1 }
+                        set_variable = { name = bfi_m10_company_controller value = scope:bfi_strategy_controller } }
+                }
+                scope:bfi_strategy_company = { make_subject_of = { target = scope:bfi_strategy_controller type = subject_type:trade_company } }
+                scope:bfi_strategy_controller = { set_gold = 1000 }
             '''
             finish += check('native_company_controller_preconditions', '''exists = scope:bfi_strategy_company
-                c:FLO = { is_ai = yes monthly_balance >= 0 }
-                scope:bfi_strategy_company = { is_ai = yes overlord = c:FLO }''')
+                scope:bfi_strategy_controller = { is_ai = yes monthly_balance >= 0 }
+                scope:bfi_strategy_company = { is_ai = yes overlord = scope:bfi_strategy_controller }''')
             finish += '''scope:bfi_strategy_company = {
                 bfl_register_company = yes set_gold = 100
                 set_variable = { name = bfl_strategy_mode value = -1 }
                 remove_variable = bfl_company_strategy_initialized remove_variable = bfl_company_strategy_funded
                 set_variable = { name = bfl_company_strategy_last value = 0 }
                 set_variable = { name = bfl_company_funding value = 0 }
+                set_variable = { name = bfl_company_strategy_injections value = 0 }
+                set_variable = { name = bfl_company_loss value = 0 }
                 set_variable = { name = bfi_company_profit_before value = var:bfl_company_verified_profit }
                 bfl_run_company_strategy = yes }
             '''
             finish += check('company_ai_sets_trade_and_funds_from_real_controller', '''scope:bfi_strategy_company = {
                 var:bfl_company_mandate = 1 gold = 200 var:bfl_company_funding = 100
-                var:bfl_company_verified_profit = var:bfi_company_profit_before } c:FLO.gold = 900''')
+                var:bfl_company_verified_profit = var:bfi_company_profit_before } scope:bfi_strategy_controller.gold = 900''')
             finish += 'scope:bfi_strategy_company = { bfl_run_company_strategy = yes }'
-            finish += check('company_ai_same_period_reentry_is_safe', 'scope:bfi_strategy_company = { gold = 200 var:bfl_company_funding = 100 } c:FLO.gold = 900')
+            finish += check('company_ai_same_period_reentry_is_safe', 'scope:bfi_strategy_company = { gold = 200 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 900')
             finish += '''scope:bfi_strategy_company = { set_gold = 100
                 set_variable = { name = bfl_company_strategy_last value = 0 } bfl_run_company_strategy = yes }'''
-            finish += check('company_funding_quarterly_cooldown_holds', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } c:FLO.gold = 900')
+            finish += check('company_funding_quarterly_cooldown_holds', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 900')
             finish += '''scope:bfi_strategy_company = { remove_variable = bfl_company_strategy_funded
                 set_variable = { name = bfl_company_strategy_last value = 0 }
                 set_variable = { name = bfl_strategy_mode value = 0 } bfl_run_company_strategy = yes }'''
-            finish += check('company_manual_policy_blocks_contribution', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } c:FLO.gold = 900')
-            finish += '''c:FLO = { set_gold = 599 }
+            finish += check('company_manual_policy_blocks_contribution', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 900')
+            finish += '''scope:bfi_strategy_controller = { set_gold = 599 }
                 scope:bfi_strategy_company = { set_variable = { name = bfl_strategy_mode value = -1 }
                     bfl_run_company_strategy = yes }'''
-            finish += check('company_contribution_preserves_controller_cash_floor', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } c:FLO.gold = 599')
+            finish += check('company_contribution_preserves_controller_cash_floor', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 599')
+            finish += """scope:bfi_strategy_controller = { set_gold = 1000 }
+                scope:bfi_strategy_company = { set_variable = { name = bfl_company_strategy_last value = 0 }
+                    remove_variable = bfl_company_strategy_funded
+                    set_variable = { name = bfl_company_loss value = 101 } bfl_run_company_strategy = yes }"""
+            finish += check('company_losses_stop_repeated_rescue_and_dividends', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 var:bfl_company_payout_ratio = 0 } scope:bfi_strategy_controller.gold = 1000')
+            finish += """scope:bfi_strategy_company = { set_variable = { name = bfl_company_strategy_last value = 0 }
+                    set_variable = { name = bfl_company_loss value = 0 }
+                    set_variable = { name = bfl_company_strategy_injections value = 4 } bfl_run_company_strategy = yes }"""
+            finish += check('company_rescue_stops_after_four_funded_contributions', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 1000')
+            # Controlled investment opening. Native foreign access and cash
+            # are explicit fixtures; the order still pays normal cost/time.
+            finish += '''scope:bfi_strategy_controller = {
+                create_relation = { type = relation_type:trade_access first = c:GEN second = this } }
+                scope:bfi_strategy_company = { set_gold = 2000
+                    set_variable = { name = bfl_company_native_net value = 10 }
+                    set_variable = { name = bfl_company_loss value = 0 }
+                    set_variable = { name = bfl_company_strategy_last value = 0 }
+                    set_variable = { name = bfl_strategy_mode value = 0 }
+                    remove_variable = bfl_company_strategy_built
+                    save_scope_as = actor bfl_run_company_strategy = yes }'''
+            finish += check('company_manual_policy_blocks_native_construction', '''scope:bfi_strategy_company = {
+                gold = 2000 NOT = { has_variable = bfl_company_strategy_built } }''')
+            finish += '''scope:bfi_strategy_company = { set_variable = { name = bfl_strategy_mode value = -1 }
+                save_scope_as = actor }'''
+            finish += check('company_investment_fixture_meets_native_building_permissions', '''scope:bfi_strategy_company = {
+                bfl_company_available >= 1000 capital = { can_build_building = building_type:trade_company_local_venture } }''')
+            finish += 'scope:bfi_strategy_company = { bfl_run_company_strategy = yes }'
+            finish += check('company_ai_pays_for_real_native_construction_order', '''scope:bfi_strategy_company = {
+                gold < 2000 var:bfl_company_strategy_built = bfl_period
+                any_owned_building = { building_type = building_type:trade_company_local_venture
+                    building_levels_under_construction > 0 } }''')
+            finish += '''scope:bfi_strategy_company = { set_variable = { name = bfi_company_construction_cash value = gold }
+                bfl_run_company_strategy = yes }'''
+            finish += check('company_construction_reentry_never_spends_twice', '''scope:bfi_strategy_company = {
+                gold = var:bfi_company_construction_cash }''')
         finish += check(f'month_{month:02}_bounded_servicing', '''c:BRD = {
             var:bfl_strategy_reviewed <= 12 bfl_deposit_assets <= 200
             var:bfl_strategy_mode = 1 bfl_has_valid_controller = yes
@@ -199,6 +321,8 @@ def prepare(directory, token=None):
     manifest = base_prepare(directory, token)
     directory = Path(directory)
     overlay = directory / 'mod/bfi_campaign_checks'
+    campaign.write_script(overlay/'in_game/common/biases/bfi_m10_strategy.txt',
+        'bfi_m10_strategy_opinion = { value = 400 yearly_decay = 0 }')
     native = Path('C:/Program Files (x86)/Steam/steamapps/common/Europa Universalis V/game/main_menu/setup/1337/10_countries.txt')
     target = overlay / 'main_menu/setup/1337/10_countries.txt'
     target.parent.mkdir(parents=True, exist_ok=True)

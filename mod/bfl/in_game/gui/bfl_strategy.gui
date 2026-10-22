@@ -4,12 +4,13 @@
             widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
                 text_single = { parentanchor = center text = "bfl_strategy_title" autoresize = yes } }
             text_multi = { text = "bfl_strategy_automatic" autoresize = yes layoutpolicy_horizontal = expanding
-                visible = "[LessThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)0')]" }
+                visible = "[GetScriptedGui('bfl_strategy_automatic_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }
             text_multi = { text = "bfl_strategy_delegated" autoresize = yes layoutpolicy_horizontal = expanding
                 visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)1')]" }
             text_multi = { text = "bfl_strategy_manual" autoresize = yes layoutpolicy_horizontal = expanding
-                visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_mode').GetValue, '(CFixedPoint)0')]" }
+                visible = "[GetScriptedGui('bfl_strategy_manual_view').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }
             text_multi = { text = "bfl_strategy_statement" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }
+            text_multi = { text = "bfl_strategy_secondary_statement" tooltip = "bfl_strategy_secondary_tip" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }
             text_multi = { text = "bfl_strategy_idle" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
         visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint)0')]" }
 text_multi = { text = "bfl_strategy_credit" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
@@ -18,6 +19,10 @@ text_multi = { text = "bfl_strategy_deposit" autoresize = yes layoutpolicy_horiz
         visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint)2')]" }
 text_multi = { text = "bfl_strategy_recall" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
         visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint)3')]" }
+text_multi = { text = "bfl_strategy_venture" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
+        visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint)4')]" }
+text_multi = { text = "bfl_strategy_resale" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12
+        visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_strategy_action').GetValue, '(CFixedPoint)5')]" }
             hbox = { layoutpolicy_horizontal = expanding spacing = 6
                 button_regular = { size = { -1 30 } layoutpolicy_horizontal = expanding
             text = "bfl_strategy_enable" tooltip = "bfl_strategy_enable_tip"

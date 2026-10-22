@@ -450,12 +450,16 @@ def generate(common, effect, loc, write):
     for i in HOLDERS:
         n = s(i)
         distribution += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_party country_exists = var:{n}_party }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = var:{n}_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
+            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = 100 multiply = var:{n}_units divide = var:bfl_total_units floor = yes divide = 100 }} }}
             add_gold = {{ value = var:bfl_payment multiply = -1 }}
             set_variable = {{ name = bfl_receipt_slot value = {i} }} bfl_pay_equity_holder = yes
             change_variable = {{ name = bfl_company_dividend add = var:bfl_payment }}
         }}\n'''
-    distribution += 'bfl_pay_dealer_dividend = yes\nchange_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }\n}'
+    distribution += '''bfl_pay_dealer_dividend = yes
+        change_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }
+        if = { limit = { var:bfl_company_dividend > 0 }
+            bfl_record_feedback = { KIND = 4 AMOUNT = var:bfl_company_dividend } }
+    }'''
     services += effect('bfl_distribute_company_equity_income', distribution)
     # The market maker uses exactly the same quote snapshot and settlement
     # guards, without opening an AI confirmation dialog.

@@ -36,6 +36,11 @@ def fixture(token, fingerprint):
     # Services run after native HQ creation, not against an invented proxy country.
     setup = '''c:FLO = { every_subject = { limit = { bfl_is_company = yes }
         save_scope_as = bfi_company set_gold = 1000 bfl_register_company = yes
+        set_variable = { name = bfl_strategy_mode value = 0 }
+        # This controlled opening statement starts after native HQ creation.
+        # Exclude any prior AI mandate/contribution from its seeded baseline.
+        set_variable = { name = bfl_company_mandate value = 0 }
+        set_variable = { name = bfl_company_funding value = 0 }
         set_variable = { name = bfi_capital value = capital }
         set_variable = { name = bfi_home value = var:trade_company_home_region }
         set_variable = { name = bfi_cash value = gold }

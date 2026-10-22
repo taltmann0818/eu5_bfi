@@ -65,6 +65,22 @@ def main():
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)
+    from translate_localization import LOCALES, ENTRY, ENGINE, structural
+    english = MOD/'main_menu/localization/english'
+    for locale in LOCALES:
+        for source in english.rglob('*.yml'):
+            target = english.parent/locale/source.relative_to(english).as_posix().replace('_l_english','_l_'+locale)
+            check(target.exists(),f'Missing {locale} localization: {target}')
+            if not target.exists():
+                continue
+            original = {m[2]:m[3] for line in source.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            translated = {m[2]:m[3] for line in target.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            check(original.keys()==translated.keys(),f'{target}: localized key set differs from English')
+            check(target.read_text(encoding='utf-8-sig').startswith('l_'+locale+':'),f'{target}: invalid language header')
+            for key in original.keys() & translated.keys():
+                check(ENGINE.findall(original[key])==ENGINE.findall(translated[key]),f'{target}: engine controls changed in {key}')
+                if structural(key):
+                    check(original[key]==translated[key],f'{target}: CMF machine identifier was translated: {key}')
     for path,text in all_text:
         if path.suffix=='.yml':continue
         if 'decisions' in path.parts:
