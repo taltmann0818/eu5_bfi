@@ -1931,6 +1931,10 @@ if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind >= 3 exists = var
                 change_variable = { name = bfl_custom_credit_value add = var:bfl_asset_amount } }
             bfl_allocate_asset_row = yes }
 bfl_add_sovereign_bond_assets = yes
+bfl_add_deposit_assets = yes
+bfl_add_estate_receivable_asset = yes
+bfl_add_native_estate_assets = yes
+change_variable = { name = bfl_asset_secured add = bfl_money_assets }
 change_variable = { name = bfl_asset_investments add = bfl_security_carrying }
 if = { limit = { exists = var:bfl_pos_01_issuer }
             var:bfl_pos_01_issuer = { save_scope_as = bfl_asset_party }

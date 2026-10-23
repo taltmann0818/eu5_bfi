@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-19",
+  "status": "complete",
+  "environment": "EUV 1.4.1 / CMF 2.5.0; 2560x1440 English native default GUI scale; debug disabled",
+  "scope": "Direct observation and unedited native captures via computer-use. Disposable research/cash/supply grants and QA display resets are explicitly disclosed; no natural-profit/balance claim.",
+  "screenshots": [
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-controller-compact.jpg",
+      "sha256": "9edb38a6f9b3c313af46553ee060bed62b8300a5db3ce1b14d7dc89eaa9f5304",
+      "observation": "Controller Credit card, three fixture-funded native cargo operations; compact M6-style card and painted Terms button.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-cargo-offer.jpg",
+      "sha256": "8abfcad2f1bd8ae517b98915b2618bf8999d311d3eb107799d986254d6fe3b3f",
+      "observation": "Normal own-country selector chose Florence, Zêna source, Fiorenza destination, wheat; human offer names ten units, funding ceiling, costs, proceeds and consent.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-acceptance-tooltip.jpg",
+      "sha256": "cf4faf371cf5f5090efe52eefa2f5edd7d8a8ab263b57721c996b58c7deaacd3",
+      "observation": "Localized normal Accept tooltip exposes live rechecks, without implementation-effect text.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-cargo-custody.jpg",
+      "sha256": "16b9a098ce2fafc2a70608a55f22dbe0fa34ab3d03d27f6eef04fa4c62a692f7",
+      "observation": "Normal human acceptance adds the fourth activity; actual purchase cost and exact ten units in custody are visible.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-florence-funded.jpg",
+      "sha256": "2b4ea25984624f81ff4d80bff31ff594243e3aedb9d416111df054a7a867f78a",
+      "observation": "Final Florence row shows named cargo, 9.81 actual costs, ten units in custody, zero sale proceeds.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-native-sale-loss.jpg",
+      "sha256": "bc39c24bb09c468d8391d7d2c9ace5d309ee6584b7a30c5c0b6859e90fb1fe1f",
+      "observation": "After two months of normal game time, Genoa native sale produced 1.00, returned 1.00 and recorded 8.81 loss against 9.81 cost.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-florence-sale.jpg",
+      "sha256": "d1a075432c284acd3a7027c86eb6e4952629f0a29b79119d82f629580331f49c",
+      "observation": "After normal game time, Florence native sale produced 11.76, recovered 9.81 and paid 1.46 bank surplus; custody zero and closed state.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-eight-capacity.jpg",
+      "sha256": "9e07a911f488a46e7e43dcd4699b2e8e765ab758b05df4953af97f0803aabb3d",
+      "observation": "QA decision resets and actually purchases eight native cargos for display; 79.21 basis/eight active, both new funding controls disabled.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-eighth-row.jpg",
+      "sha256": "0700d4b3c33d736f7954b7ad3fb33d40e40052967d6d69f9c30ad49774faa275",
+      "observation": "Dragged native ledger scrollbar to Savoy, the eighth operator. Named cargo/cost/custody/terms/state remain readable.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-empty.jpg",
+      "sha256": "f4126358dc20528a9eae232a5effe0895027d96b9bad0aa8bba7450c8a68f7b1",
+      "observation": "QA empty ledger has zero basis and no active agreements, both funding commands available.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-locked.jpg",
+      "sha256": "0fb7d33390778e62cfb1290ab5b555212ebae114a2923bebe1b74b76084e2367",
+      "observation": "QA Merchant Finance profile has locked hint and both funding commands disabled.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-declined.jpg",
+      "sha256": "612667a9c0630351c63b76a7550cf5dc3d040dbc29be4323993842a8ed2a10ca",
+      "observation": "QA seeded a specific offer, then normal Decline leaves 10000 bank cash, zero basis and no active activity.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-terms.jpg",
+      "sha256": "adac932219e082f12faad5f1d05528f3d070ffa8838ff77f557159c1aafa5de1",
+      "observation": "Normal Terms click expands three future-offer controls; preset click changes to bilateral equal surplus without funding an operation.",
+      "runtime_sha256": "494d75773373fad8570d31ca31dddaa0051ab63e72d1900ea3fcac90dbab1401",
+      "fixture_sha256": "d1179965a4dfc6b8e3cc1335264400f79edc8cba118805dd8394043c5198452e",
+      "token": "c099f8e887074c6aa0e992dc4b622a4a",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-19-m7-activity-expedition-funded.jpg",
+      "sha256": "808cdf042b2f61c570d93edc12f5614f0820285b895d319657bab43f95411691",
+      "observation": "Normal controller command selected Genoa, Canadian Atlantic Coast, owned Ajaccio launch port and Adorn Adorn. Native AI accepted after time resumed: bank cash 10000 to 9900, actual preparation cost/basis 100, named native expedition active, zero cargo/proceeds/profit. Fixture grants mapmaking, naval range 10000, sailor and 50-skill candidate; selected explorer was a native character. This intermediate runtime had a rejected parser diagnostic in the foreign-facility selector branch; that branch is subsequently corrected and tested separately.",
+      "runtime_sha256": "f1cb83e529bb11158e6e9c9ea9f6348045282cceb7e803d815a12eb1a913112c",
+      "fixture_sha256": "18139964adeb700720b18d98418c1cab2d129004510e877b04463a470adac468",
+      "token": "fec5b45ca4ff43c8b75151723557be4e",
+      "accepted_for_current_gate": false,
+      "superseded_by": "docs/screenshots/2026-10-20-m7-expedition-funded.jpg"
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-alert-tooltip.jpg",
+      "sha256": "fe07b14c00fa5fd96b14d3eb9d185a58f9c0d5484203eb2408f05cb0a6746e22",
+      "observation": "Monthly green painted top-bar alert: Sweden, ten livestock, Lübeck to Stockholm, estimated bank cost 7.58 and indicative surplus 1.15 excluding recovered capital; full price/access/capital risk and consent explanation readable.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-alert-review.jpg",
+      "sha256": "20d9085aeb3f76ad24881f905c13d446278f97135680a1dbf9603e5c7e663e40",
+      "observation": "Normal left click opens the matching named-operation review with custom painted artwork. Review moves no cash and offers Send terms or Consider later.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-alert-funded-ledger.jpg",
+      "sha256": "848e79585a5c5fb9b95574250af2d358f86fd445d334d0828ea75978f4b15df4",
+      "observation": "Normal Send terms followed by AI consent: actual bank cash falls by 7.58; ledger shows Sweden, same livestock/markets, 7.58 cost, exact ten units in custody and zero proceeds/profit.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-independent-terms.jpg",
+      "sha256": "6328647a4039fb0ca56bf61dd8dc05d7c6d03873b4ed807271c79525893afcfc",
+      "observation": "Independent Bardi player opens compact Terms to show preset, duration and funding ceiling. Existing Sweden agreement retains original 75% share and actual basis.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-alert-hidden.jpg",
+      "sha256": "600152397af53502dea7f74fd3ae8efdd28fb76ee636366c5d8fbf0d00db4f64",
+      "observation": "Normal right click hides the green commenda alert; funded operation and cash remain unchanged. Standard CMF controls are retained.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-alert-realized-sale.jpg",
+      "sha256": "8175009d044030dabb41d6abac5455da56950b531abab1029fab9c334dd654bc",
+      "observation": "Two normal monthly periods sell the same Sweden cargo natively: 8.91 measured proceeds, 7.58 recovered capital, 0.99 realized bank surplus, zero custody and closed record. Earlier 1.15 forecast is never credited as income.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    },
+    {
+      "file": "docs/screenshots/2026-10-20-m7-expedition-funded.jpg",
+      "sha256": "95ad206278c9bd0840db93c22c27dbf0f5ff6ea098e76a101561c619842d4d14",
+      "observation": "Normal independent-bank command selects Genoa, its Ajaccio port, American East Coast and native explorer Adorn Adorn. Native AI accepts; bank pays 100 actual preparation cost. Ledger preserves all names, zero cargo/proceeds/profit and preparation/progress state. Fixture grants research, cash, supply, crew and range; native preparation is not accelerated.",
+      "runtime_sha256": "c5422e239e60bc471a4cea025d3b69ce0597b9134c64c3cd73b8fae8f59a2add",
+      "fixture_sha256": "31e8c1e66d8ca162f9d5591dae0fe1d66b717dc461f92f9b1e92b4c8a4001911",
+      "token": "fe3f93b624234c06ae31fb654d9500ff",
+      "accepted_for_current_gate": true
+    }
+  ],
+  "remaining": [],
+  "last_reviewed": "2026-10-20",
+  "accepted_capture_count": 20,
+  "historical_capture_count": 1,
+  "shipping_ui_errors": [],
+  "shipping_match": "All files in the cold-loaded isolated UI mod match shipping runtime byte for byte; the direct-tooltip prototype already had the exact generated bytes."
+}

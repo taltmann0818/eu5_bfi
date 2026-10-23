@@ -24,6 +24,7 @@ SOURCES=[
  'main_menu/gfx/interface/illustrations/institutions/banking.dds',
  'in_game/common/advances/0_age_of_renaissance.txt','in_game/common/scripted_guis/scripted_guis.info',
  'in_game/common/advances/0_age_of_reformation.txt',
+ 'in_game/common/goods/00_raw_materials.txt','in_game/common/goods/02_produced_goods.txt',
  'in_game/common/goods/03_food.txt','in_game/common/prices/00_hardcoded.txt',
  'in_game/common/script_values/building_caps.txt',
  'in_game/common/scripted_relations/trade_access.txt',
@@ -108,6 +109,9 @@ def main(game, cmf, compare):
             ('in_game/gui/technology_lateralview.gui','Use the chartered-bank badge for BFI advances; retain other native badges','in_game/gui/technology_lateralview.gui'),
             ('in_game/common/advances/bfl_banking_unlocks.txt','INJECT two permissions into banking_advance; preserve its native effects and institution gate','in_game/common/advances/0_age_of_renaissance.txt'),
             ('in_game/common/advances/1_building_unlocks.txt','Move only Stock Exchange to Reformation after Banking; preserve every other native unlock and bond-slot bonus','in_game/common/advances/1_building_unlocks.txt'),
+            ('in_game/common/advances/bfl_exchange_ai_priorities.txt','Inject bank-only Banking AI priority; preserve native effects','in_game/common/advances/0_age_of_renaissance.txt'),
+            ('in_game/common/country_interactions/request_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/request_loan.txt'),
+            ('in_game/common/country_interactions/take_over_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/take_over_loan.txt'),
         ]:
             w.writerow([path,why,current[source],'1.4.4'])
     print('Pinned installed evidence and generated two narrow native integrations.')

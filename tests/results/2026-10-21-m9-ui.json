@@ -1,0 +1,247 @@
+{
+  "date": "2026-10-21",
+  "resolution": [
+    2560,
+    1440
+  ],
+  "language": "English",
+  "scale": "default",
+  "debug": "Recorded per scene",
+  "unedited": true,
+  "fixture_disclosure": "Disposable native campaigns grant research/buildings, fund legacy positions and apply cash shocks. The QA bond decision only requests the production holder-consent dialog. All reported recoveries and accept/decline actions use normal production controls.",
+  "screenshots": [
+    {
+      "file": "2026-10-21-m9-independent-controls.png",
+      "sha256": "a14e0372dd299913b4a1818474d82c8b21bf223ecb4bd6dc65349129c13a35c7",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:07:22.363Z",
+      "scene": "independent",
+      "note": "Independent Overseas Bardi: native Credit exposes Begin resolution and creditor controls; cash 100, deposit claim 100 and equity 0. Guarantee controls are unavailable to the independent bank."
+    },
+    {
+      "file": "2026-10-21-m9-independent-resolving.png",
+      "sha256": "ab6e47c6c69e845094a1a622cb106eba0730bef440798106617027839d1978e8",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:08:05.799Z",
+      "scene": "independent",
+      "note": "Normal independent Overseas-bank Begin resolution changes Bardi to In resolution, keeps cash and deposit liabilities at 100, disables repeated entry and enables recovery and consented terms."
+    },
+    {
+      "file": "2026-10-21-m9-independent-recovery.png",
+      "sha256": "b23d735bc5af4a71839ff4cc5ff761ef0147bd73cdd2701475ed438685a9b77d",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:09:11.211Z",
+      "scene": "independent",
+      "note": "Normal independent-bank Pay recovery pays the 100-gold deposit: cash/assets/liabilities and selected claim are now zero; state remains In resolution and further terms are disabled."
+    },
+    {
+      "file": "2026-10-21-m9-estate-before.png",
+      "sha256": "44c15d2633258f2b461a3be7c74896a434d0e33c4561763419fcdaea8f86965e",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:29:39.780Z",
+      "scene": "final",
+      "note": "Final clean cold load: normal Decisions opens the Peruzzi original-issuer estate for its legal trustee Florence. Separate cash 40, deposits owed 100, recoveries zero; sovereign treasury 4800."
+    },
+    {
+      "file": "2026-10-21-m9-estate-recovery.png",
+      "sha256": "3af9e9cb49ca9a4c2a7f580a19e4df6db419658a9fd642259f19f8e4de31f61e",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:29:59.127Z",
+      "scene": "final",
+      "note": "Final clean scene: production recovery debits estate cash 40 to zero, reduces deposit claim 100 to 60 and records 40 actual recoveries. Florence treasury rises 4800 to 4840; exhausted liquidation becomes available."
+    },
+    {
+      "file": "2026-10-21-m9-estate-closed.png",
+      "sha256": "fe61c32eba58ecbb4c66cd46b02a54161c782e1faad9bda82d7e001ddac5e609",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:30:16.900Z",
+      "scene": "final",
+      "note": "Final clean scene: normal exhausted liquidation closes Peruzzi (state 5), extinguishes the 60 unpaid deposit after statutory loss accounting, retains cumulative recoveries 40, and leaves treasury at 4840. Finalization cannot be selected again."
+    },
+    {
+      "file": "2026-10-21-m9-bond-consent.png",
+      "sha256": "74cfbf895327db4397923d54fc4b2cbac69bf10f295189e7259e8397801ff6db",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:30:53.497Z",
+      "scene": "final",
+      "note": "Final clean current-holder consent: Genoa offers Florence 20% principal/coupon reduction, annual coupon cut with 1% floor, optional two-year trade concession and funded revenue pledge. All text and three choices fit the native modal."
+    },
+    {
+      "file": "2026-10-21-m9-bond-concession.png",
+      "sha256": "99b926a306ea095aaba233718053b068de07ebf32f2fda5e2a5b511180e509c8",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:33:26.654Z",
+      "scene": "final",
+      "note": "Final clean scene: normal secured acceptance creates the native Workout Trade Concession Granted confirmation with fully localized title/description and market-protection effects. Separate funded revenue pledge is stated explicitly."
+    },
+    {
+      "file": "2026-10-21-m9-controller-resolving.png",
+      "sha256": "b7297ba05bfe0e62c60194b0e82767d36ecf381ad686cf6d3667d40ab94fc5ca",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:43:24.664Z",
+      "scene": "final",
+      "note": "Clean controller scene: normal Begin resolution changes Merchant Bardi to In resolution, keeps bank cash/liabilities at 100 and the selected deposit claim at 100, disables repeated entry and enables recovery."
+    },
+    {
+      "file": "2026-10-21-m9-controller-recovery.png",
+      "sha256": "13be67e5aa2d03c1ec9ce986de0639a5d9314f8bcfec2886f03fdb289d0927ec",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:44:38.426Z",
+      "scene": "final",
+      "note": "Clean controller scene: normal Pay recovery moves 100 actual bank gold to Florence (4840 to 4940); bank cash/assets/liabilities and selected deposit claim become zero, cumulative deposit recoveries 100."
+    },
+    {
+      "file": "2026-10-21-m9-bond-issuer-controls.png",
+      "sha256": "b0d1f5b505b7c1d306df751987ce53d72b488e6cd17f49bfe5745349784a9864",
+      "screenshot_id": "screenshot-0",
+      "captured_at": "2026-10-21T18:54:08.615Z",
+      "scene": "entry",
+      "note": "Generated shipping runtime: the live compact Sovereign Bonds claim row exposes Offer restructuring below the current face 100, annual coupon 3%, Genoese holder and unpaid coupons 5. The complete new action fits inside its card."
+    }
+  ],
+  "observations": [
+    "Independent Overseas Bardi: native Credit exposes Begin resolution and creditor controls; cash 100, deposit claim 100 and equity 0. Guarantee controls are unavailable to the independent bank.",
+    "Normal independent Overseas-bank Begin resolution changes Bardi to In resolution, keeps cash and deposit liabilities at 100, disables repeated entry and enables recovery and consented terms.",
+    "Normal independent-bank Pay recovery pays the 100-gold deposit: cash/assets/liabilities and selected claim are now zero; state remains In resolution and further terms are disabled.",
+    "Clicked Keep the full claim in production current-holder bond consent; proposal dismissed. Numeric preservation is covered by native workout suite, not inferred from this dismissed modal.",
+    "Secured acceptance created a native trade-protection concession notification. Missing offer notification localization discovered here and repaired before final acceptance; this raw-key notification is excluded from accepted screenshots.",
+    "Final clean cold load: normal Decisions opens the Peruzzi original-issuer estate for its legal trustee Florence. Separate cash 40, deposits owed 100, recoveries zero; sovereign treasury 4800.",
+    "Final clean scene: production recovery debits estate cash 40 to zero, reduces deposit claim 100 to 60 and records 40 actual recoveries. Florence treasury rises 4800 to 4840; exhausted liquidation becomes available.",
+    "Final clean scene: normal exhausted liquidation closes Peruzzi (state 5), extinguishes the 60 unpaid deposit after statutory loss accounting, retains cumulative recoveries 40, and leaves treasury at 4840. Finalization cannot be selected again.",
+    "Final clean current-holder consent: Genoa offers Florence 20% principal/coupon reduction, annual coupon cut with 1% floor, optional two-year trade concession and funded revenue pledge. All text and three choices fit the native modal.",
+    "Final clean scene: clicked Keep the full claim; production modal dismissed. Native workout assertions separately verify unchanged financial terms.",
+    "Final clean scene: normal secured acceptance creates the native Workout Trade Concession Granted confirmation with fully localized title/description and market-protection effects. Separate funded revenue pledge is stated explicitly.",
+    "Clean controller scene: normal Begin resolution changes Merchant Bardi to In resolution, keeps bank cash/liabilities at 100 and the selected deposit claim at 100, disables repeated entry and enables recovery.",
+    "Clean controller scene: normal Pay recovery moves 100 actual bank gold to Florence (4840 to 4940); bank cash/assets/liabilities and selected deposit claim become zero, cumulative deposit recoveries 100.",
+    "Generated shipping runtime: the live compact Sovereign Bonds claim row exposes Offer restructuring below the current face 100, annual coupon 3%, Genoese holder and unpaid coupons 5. The complete new action fits inside its card."
+  ],
+  "shipping_runtime_sha256": "9f900a468762fde0873aa06720257fef46dfb5255a505c34e2cb347241335efe",
+  "runtime_differences": {
+    "independent": [
+      {
+        "path": "in_game/common/decisions/bfl_estate_management.txt",
+        "capture_sha256": "7384468477b9c1424df0947f8451241f547fb118d905cafb8c98ea68a9d643d1",
+        "shipping_sha256": "683f2093427f040dc955155e1d71e83f1ab9da48be297021e7215a9b5ef01ba4"
+      },
+      {
+        "path": "in_game/events/bfl_bond_workout.txt",
+        "capture_sha256": "f44f29c97fa3d0b647cd884dbef9505fe3cedba603d2f27ce56bed0eeb645298",
+        "shipping_sha256": "d8b764386d6c2e7eb01d1e9d923cca2c8ea12cb374b00b606a5e9e63c868f1a3"
+      },
+      {
+        "path": "in_game/events/bfl_estate_review.txt",
+        "capture_sha256": "8a57d6c453a176eda148e54076105ea578f05df4f937a0255dbff63d0ace5d49",
+        "shipping_sha256": "a0f76e34be5967ee06e6726c3e22278a93f6211c37971f0fb008d5ac39b50acc"
+      },
+      {
+        "path": "in_game/events/bfl_workout.txt",
+        "capture_sha256": "f60dddc9b7961521172cb730293722542e0a47f491c123a52b90c3be01cb9df2",
+        "shipping_sha256": "4bbaa1d00df040911cdf7cd675cac28d65dc0c31916f8c98210b452cecb4a2fe"
+      },
+      {
+        "path": "in_game/gui/bfl_sovereign_bonds.gui",
+        "capture_sha256": "2a31a561ec5753c5f8acc42a7879c455d81f297090f94e5cd971c0c9a8c40753",
+        "shipping_sha256": "4e22a369cac0d177c61181636df534b5930e7b0517b73910dd1ded6d35b09e3c"
+      },
+      {
+        "path": "main_menu/localization/english/bfl_finance_l_english.yml",
+        "capture_sha256": "50018c38b8555e436e65235f21004d0fd69088b6fa34ba65180b624a3f883ce0",
+        "shipping_sha256": "39763a791c6ad1607e4f38ac9c3d095b2226cf348450e402f7bd2e6deb15e3e3"
+      }
+    ],
+    "final": [
+      {
+        "path": "in_game/gui/bfl_sovereign_bonds.gui",
+        "capture_sha256": "2a31a561ec5753c5f8acc42a7879c455d81f297090f94e5cd971c0c9a8c40753",
+        "shipping_sha256": "4e22a369cac0d177c61181636df534b5930e7b0517b73910dd1ded6d35b09e3c"
+      },
+      {
+        "path": "main_menu/localization/english/bfl_finance_l_english.yml",
+        "capture_sha256": "3e23dca76b5ba8870931504f0cf9b6ca58edbd669e30770d7576d154c4475290",
+        "shipping_sha256": "39763a791c6ad1607e4f38ac9c3d095b2226cf348450e402f7bd2e6deb15e3e3"
+      }
+    ],
+    "entry": []
+  },
+  "diagnostics": {
+    "independent": {
+      "bfi_script_diagnostics": 0,
+      "errors": [],
+      "native_baseline_count": 0
+    },
+    "final": {
+      "bfi_script_diagnostics": 0,
+      "errors": [],
+      "native_baseline_count": 0
+    },
+    "entry": {
+      "bfi_script_diagnostics": 0,
+      "errors": [],
+      "native_baseline_count": 0
+    }
+  },
+  "excluded_development_scenes": [
+    {
+      "scene": "m9-ui-accepted-estate",
+      "reason": "Missing mod playset; no accepted captures."
+    },
+    {
+      "scene": "m9-ui-accepted-estate-v2 / m9-ui-final-accepted-estate",
+      "reason": "Debug tooltip evaluation generated temporary-variable diagnostics; excluded. Normal player events use explicit localized previews."
+    },
+    {
+      "scene": "m9-ui-normal-estate",
+      "reason": "Production financial actions worked with zero BFI runtime errors, but fixture localization-header warning and missing concession-notification labels were discovered. Replaced by clean cold-loaded final captures after repair."
+    },
+    {
+      "scene": "m9-ui-normal-final",
+      "reason": "Interrupted during loading to correct the disposable fixture localization header; excluded."
+    }
+  ],
+  "scenes": {
+    "independent": {
+      "token": "9856e52acf2641c7bb0168e3ffbb7c49",
+      "runtime_sha256": "b73c609c414ce44789082f034e1351bcfac20de28d0ed678d112531baf057cd2",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "f526f0e299a71018c6fece70b98bb0c2af9af9d7c3a6786b58e81f3019476473",
+      "suite": "M9 complete visual fixture",
+      "role": "independent",
+      "scene": "independent",
+      "player": "BRD",
+      "visual_acceptance": true,
+      "debug": true
+    },
+    "final": {
+      "token": "65f40e02fa594ab78d04fa82e959755c",
+      "runtime_sha256": "35d3adfd86c968aed9a4a696ea03867604ba4cd915d39767c505d173298bfbe0",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "88cbd6c12e4b24fb1fbbbe66036ca060ae45f4216f68cf95a44c1423e77c0fe7",
+      "suite": "M9 complete visual fixture",
+      "role": "controller",
+      "scene": "estate",
+      "player": "FLO",
+      "visual_acceptance": true,
+      "debug": false
+    },
+    "entry": {
+      "token": "c32f4528b7bd400dab235ff32e95cf59",
+      "runtime_sha256": "9f900a468762fde0873aa06720257fef46dfb5255a505c34e2cb347241335efe",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "456cb334847775cb1e1ebb3b68b359be9cddcc87504114c195564bb5ffd2f33d",
+      "suite": "M9 complete visual fixture",
+      "role": "controller",
+      "scene": "bond-issuer",
+      "player": "FLO",
+      "visual_acceptance": true,
+      "debug": false
+    }
+  },
+  "passed": true,
+  "scope": "Pinned single-player English/default-scale actual game UI. Debug state is recorded per scene; no console is used for the observed transactions. Fixtures are execution evidence, not campaign balance evidence."
+}

@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "token": "8f20591c2fac4d09b364f900d015c6e2",
+  "runtime_sha256": "d4e35f7142991be8a58c827f83e894c790b175e50f0ca9f9f5b52041ce1d48eb",
+  "results": {
+    "first_destruction_retains_two_distinct_country_creditors": "PASS",
+    "destroyed_lender_claim_merges_with_existing_receiver_title": "PASS",
+    "native_claim_transfer_replay_creates_no_second_obligation": "PASS",
+    "merged_native_claim_receives_actual_payoff_once": "PASS",
+    "national_issuer_annexation_preserves_separate_bond_estate": "PASS",
+    "inherited_bond_is_paid_before_national_estate_residual": "PASS",
+    "incoming_unfunded_fiscal_call_blocks_beneficiary_estate_closure": "PASS",
+    "funded_call_can_pay_original_destroyed_private_beneficiary": "PASS",
+    "receiver_and_national_estate_survive_next_month": "PASS",
+    "receiver_title_and_national_estate_survive_reload": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "8b856650eab2b21eed6e8f35008c4c2317b16835251b682de361c36b703d1a40",
+  "assertions": 10,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

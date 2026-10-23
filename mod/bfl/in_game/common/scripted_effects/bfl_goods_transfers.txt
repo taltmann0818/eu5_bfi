@@ -1,0 +1,71 @@
+﻿bfl_accept_goods_transfer = {
+save_scope_as = bfl_goods_party
+if = { limit = { exists = var:bfl_goods_transfer_bank country_exists = var:bfl_goods_transfer_bank exists = var:bfl_goods_transfer_seller country_exists = var:bfl_goods_transfer_seller bfl_period <= var:bfl_goods_transfer_expiry }
+var:bfl_goods_transfer_seller = { save_scope_as = bfl_goods_seller }
+var:bfl_goods_transfer_bank = { save_scope_as = bfl_goods_bank
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 1
+            var:bfl_inv_01_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_01_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_01_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_01 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 2
+            var:bfl_inv_02_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_02_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_02_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_02 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 3
+            var:bfl_inv_03_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_03_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_03_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_03 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 4
+            var:bfl_inv_04_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_04_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_04_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_04 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 5
+            var:bfl_inv_05_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_05_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_05_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_05 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 6
+            var:bfl_inv_06_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_06_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_06_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_06 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 7
+            var:bfl_inv_07_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_07_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_07_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_07 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 8
+            var:bfl_inv_08_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_08_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_08_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_08 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 9
+            var:bfl_inv_09_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_09_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_09_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_09 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 10
+            var:bfl_inv_10_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_10_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_10_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_10 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 11
+            var:bfl_inv_11_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_11_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_11_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_11 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 12
+            var:bfl_inv_12_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_12_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_12_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_12 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 13
+            var:bfl_inv_13_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_13_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_13_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_13 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 14
+            var:bfl_inv_14_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_14_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_14_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_14 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 15
+            var:bfl_inv_15_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_15_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_15_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_15 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_transfer_slot = 16
+            var:bfl_inv_16_generation = scope:bfl_goods_party.var:bfl_goods_transfer_generation
+            var:bfl_inv_16_price = scope:bfl_goods_party.var:bfl_goods_transfer_price
+            var:bfl_inv_16_quantity = scope:bfl_goods_party.var:bfl_goods_transfer_quantity } bfl_transfer_goods_16 = yes }
+} remove_variable = bfl_goods_transfer_bank }
+}

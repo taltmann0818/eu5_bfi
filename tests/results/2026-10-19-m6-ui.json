@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-19",
+  "game_version": "1.4.1",
+  "cmf_version": "2.5.0",
+  "resolution": [
+    2560,
+    1440
+  ],
+  "shipping_runtime_sha256": "b9ee4eac796c1fa6d31f32361b901e3e2a08f991e65a42f5b742386c5978f081",
+  "mode": "Actual unedited native windows; normal mouse controls; disposable Florence. Debug-mode launch enables diagnostics; no console commands or product debug controls are used for these observations.",
+  "fixtures": [
+    {
+      "token": "dca27b4714724043931315c021b4fe18",
+      "runtime_sha256": "11859e20e7bde480c37b89515f805010479b1f405d5e4e75c1340431b4c53a84",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "82170ea30437ca71c4725ef8091333ac9702e8bb9c759c28a76ee367407c1049",
+      "suite": "M6 populated UI",
+      "scope": "Granted charter, research, cash and native supply for all goods. Two production AI policy passes populate scaled, bank-selected inventory; same-period gate reset is a visual setup grant. Native acceptance and natural monthly operation have separate engine evidence."
+    },
+    {
+      "token": "ad58b2ada9f64d3b979f8b2534142a4f",
+      "runtime_sha256": "b9ee4eac796c1fa6d31f32361b901e3e2a08f991e65a42f5b742386c5978f081",
+      "instant_cases": [],
+      "cases": [],
+      "reload_cases": [],
+      "fixture_sha256": "bdd71c678036d1c1f2ed71a43aa71a37cbe5f24770c996d229e2bfc1c29660cf",
+      "suite": "M6 UI",
+      "scope": "Granted charter and cash; empty inventory; Commodity Investments deliberately unresearched. At the first native monthly pulse, grant research/supply/cash and acquire sixteen different native goods through production services. Two deliberately adjusted cost bases test positive/negative return rendering only, not economic performance. Native acceptance and natural monthly operation have separate engine evidence."
+    }
+  ],
+  "populated_runtime_provenance": {
+    "initial_runtime_sha256": "11859e20e7bde480c37b89515f805010479b1f405d5e4e75c1340431b4c53a84",
+    "reload": "Targeted reload of these three files, ending at the exact shipping runtime before accepted captures. This is not a cold-load claim.",
+    "files": [
+      {
+        "path": "main_menu/localization/english/bfl_finance_l_english.yml",
+        "before_sha256": "6eefa2a79111dc4800f892cf5a1743f36339e3c9a92ff48984c0fe9654b50a7e",
+        "after_sha256": "9ad230298e7b220cf413afa60a8f1b2f23be0d5cf2b6a297ef0331d0687b9d7f"
+      },
+      {
+        "path": "in_game/gui/bfl_goods.gui",
+        "before_sha256": "187fa684ead2a05aebf6678f1cfdb87ab1fc425c69979fccfb6e647fc7c086c5",
+        "after_sha256": "41a9ed31f57dcf130f05ef0b423fe1d53be121c82b7b7b68a75a1acf3cf31b78"
+      },
+      {
+        "path": "in_game/common/scripted_effects/bfl_goods_marks.txt",
+        "before_sha256": "4635d69d568d48f26362dfbea39cebe549e0598621dedd3b7b7b5f27156935dc",
+        "after_sha256": "7e141153e5805d485beea5151fea82a1351d6eca97d95b2d86bb82b4fed53ce6"
+      }
+    ]
+  },
+  "cold_runtime_provenance": "Empty/locked and sixteen-position top/bottom captures cold-load shipping b9ee4eac. Staged mod bytes match the source tree exactly. The visual fixture grants research/supply/cash at the first monthly pulse, acquires sixteen different goods with production native purchases, pauses discretion, and deliberately changes two bases for return formatting. Native time progresses to 11 June 1337; physical spoilage and marks are subsequently serviced normally.",
+  "observations": [
+    {
+      "id": "integrated_card",
+      "passed": true,
+      "observation": "Compact Goods inventory value/return card follows the stock portfolio controls in Lending & Investments. Generated chest and compass icons render.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-inventory-card.png"
+      ]
+    },
+    {
+      "id": "native_icons_and_scaled_quantities",
+      "passed": true,
+      "observation": "Eight bank-selected holdings show native names/icons, quantity, value and return. Quantities range from hundreds of units; no buy/sell micromanagement controls.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-inventory-tooltip.png"
+      ]
+    },
+    {
+      "id": "expanded_policy",
+      "passed": true,
+      "observation": "Policy expands in the same sub-tab with five readable settings in two columns and a full-width contract choice.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-policy.png"
+      ]
+    },
+    {
+      "id": "risk_control_and_help",
+      "passed": true,
+      "observation": "Normal risk click changes Balanced to Adventurous; its hover explains all three profit/loss thresholds and monthly execution.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-risk-setting.png"
+      ]
+    },
+    {
+      "id": "all_settings_execute",
+      "passed": true,
+      "observation": "Normal clicks change Automatic to Run off, 50% to 0%, Balanced to Adventurous, 12 to 24 months, and Spot only to Offer receipts. Bank cash stays 50000.34 while paused.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-policy-changed.png"
+      ]
+    },
+    {
+      "id": "locked_inventory",
+      "passed": true,
+      "observation": "Cold-loaded final runtime with Commodity Investments unresearched shows zero value/return and the Trading locked hint while retaining the Policy button.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-locked-empty.png"
+      ]
+    },
+    {
+      "id": "empty_tooltip",
+      "passed": true,
+      "observation": "Empty tooltip shows No goods in custody and next eligible monthly-close guidance; no phantom positions.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-empty-tooltip.png"
+      ]
+    },
+    {
+      "id": "full_custody_scrolling",
+      "passed": true,
+      "observation": "Cold-loaded final runtime; sixteen distinct production-acquired records remain inspectable. Native wheel/scrollbar reaches final Cocoa row, with names, icons, quantities, values and returns throughout.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-long-tooltip-top.png",
+        "docs/screenshots/2026-10-19-m6-long-tooltip-bottom.png"
+      ]
+    },
+    {
+      "id": "signed_returns",
+      "passed": true,
+      "observation": "Horses/Clay deliberately adjusted cost bases demonstrate red negative/green positive formatting. Other records retain actual costs and subsequent native monthly marks (e.g. Iron +7.6%, Copper -2.8%). This display fixture is not a campaign-performance claim.",
+      "screenshots": [
+        "docs/screenshots/2026-10-19-m6-long-tooltip-top.png",
+        "docs/screenshots/2026-10-19-m6-long-tooltip-bottom.png"
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/screenshots/2026-10-19-m6-empty-tooltip.png",
+      "sha256": "258f004bfd7cb7eec968683c825947de3ff089c1889b3af8452c7fae48d8fe89"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-inventory-card.png",
+      "sha256": "e395d543399d0f3e076d6a2abf65d5f1285ff2f175bd2f418fd2c6ca20ff2d0f"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-inventory-tooltip.png",
+      "sha256": "56047815f4f17a4e7b03ef1d162b27e0cf7bf7eaffb7676fbf6eaf44c70e3d3b"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-locked-empty.png",
+      "sha256": "913b4bcbb8de7c5fb80a6aa8602bf2278101d309cec060d2b06909bd11e78b57"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-long-tooltip-bottom.png",
+      "sha256": "5a85a858894141947860727dbf13aa57f9a3109527d2187abd5732dd6ba06304"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-long-tooltip-top.png",
+      "sha256": "6cebbbb33cd833b4e451d585407ef2247c6d3fa16eb529574b141e86e9397f98"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-policy-changed.png",
+      "sha256": "b6e13a3ee80cf0465cdc6659bf22e05a3f2eca0bc4db4f02197a9afe0d6db0de"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-policy.png",
+      "sha256": "34b5e9cda1d99fe90ad7798cc6907283c6d888ba9d1b5de1fcc386ecec1ba3ab"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m6-risk-setting.png",
+      "sha256": "a38c3180924a7fc3c697704fd75a2fcb64ad33b4f5f2f14cd580d737c4140e35"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "token": "4a60f5d778d24c27b6d61c0dc18feece",
+  "runtime_sha256": "b73c609c414ce44789082f034e1351bcfac20de28d0ed678d112531baf057cd2",
+  "results": {
+    "every_available_good_has_native_funded_123_45_unit_roundtrip": "PASS",
+    "ai_selects_four_distinct_goods_and_capital_scaled_quantities": "PASS",
+    "receipt_mandate_automatically_lists_backed_free_stock": "PASS",
+    "monthly_policy_replay_moves_no_cash_or_goods": "PASS",
+    "inventory_marks_preserve_outer_contract_custodian_scope": "PASS",
+    "display_marks_do_not_create_income": "PASS",
+    "paused_mandate_preserves_free_positions": "PASS",
+    "runoff_sells_owned_inventory_without_replacement": "PASS",
+    "zero_allocation_stops_automatic_buying": "PASS",
+    "automatic_buying_rechecks_profile": "PASS",
+    "automatic_buying_cannot_overdraw": "PASS",
+    "forward_mandate_automatically_lists_without_unfunded_acceptance": "PASS",
+    "controlled_cost_profit_and_loss_limits_trigger_native_exits": "PASS",
+    "natural_monthly_ai_rebalances_and_expires_positions": "PASS",
+    "natural_policy_keeps_protected_cash_and_owned_basis": "PASS",
+    "reload_preserves_policy_native_good_references_and_scaled_inventory": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "72d037ef1ce59454f76ec1cea0dbd38f5b9dad0bef39242e768ca75d0f790aae",
+  "assertions": 16,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted",
+  "catalogue_goods": 75,
+  "catalogue_round_trips": 75,
+  "reporter_provenance": "Recollected with the unchanged b37933e reporter and verified original staged b73 runtime bytes; original checkout report rejected only the later UI presentation hash change. Both native phases and all 16 assertions/75 round trips are retained."
+}

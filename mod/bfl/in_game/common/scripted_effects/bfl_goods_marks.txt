@@ -1,0 +1,66 @@
+﻿bfl_refresh_goods_marks = {
+set_variable = { name = bfl_inv_01_mark value = 0 }
+            if = { limit = { var:bfl_inv_01_active = 1 exists = var:bfl_inv_01_type exists = capital }
+                var:bfl_inv_01_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_01_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_01_quantity } } }
+set_variable = { name = bfl_inv_02_mark value = 0 }
+            if = { limit = { var:bfl_inv_02_active = 1 exists = var:bfl_inv_02_type exists = capital }
+                var:bfl_inv_02_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_02_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_02_quantity } } }
+set_variable = { name = bfl_inv_03_mark value = 0 }
+            if = { limit = { var:bfl_inv_03_active = 1 exists = var:bfl_inv_03_type exists = capital }
+                var:bfl_inv_03_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_03_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_03_quantity } } }
+set_variable = { name = bfl_inv_04_mark value = 0 }
+            if = { limit = { var:bfl_inv_04_active = 1 exists = var:bfl_inv_04_type exists = capital }
+                var:bfl_inv_04_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_04_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_04_quantity } } }
+set_variable = { name = bfl_inv_05_mark value = 0 }
+            if = { limit = { var:bfl_inv_05_active = 1 exists = var:bfl_inv_05_type exists = capital }
+                var:bfl_inv_05_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_05_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_05_quantity } } }
+set_variable = { name = bfl_inv_06_mark value = 0 }
+            if = { limit = { var:bfl_inv_06_active = 1 exists = var:bfl_inv_06_type exists = capital }
+                var:bfl_inv_06_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_06_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_06_quantity } } }
+set_variable = { name = bfl_inv_07_mark value = 0 }
+            if = { limit = { var:bfl_inv_07_active = 1 exists = var:bfl_inv_07_type exists = capital }
+                var:bfl_inv_07_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_07_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_07_quantity } } }
+set_variable = { name = bfl_inv_08_mark value = 0 }
+            if = { limit = { var:bfl_inv_08_active = 1 exists = var:bfl_inv_08_type exists = capital }
+                var:bfl_inv_08_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_08_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_08_quantity } } }
+set_variable = { name = bfl_inv_09_mark value = 0 }
+            if = { limit = { var:bfl_inv_09_active = 1 exists = var:bfl_inv_09_type exists = capital }
+                var:bfl_inv_09_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_09_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_09_quantity } } }
+set_variable = { name = bfl_inv_10_mark value = 0 }
+            if = { limit = { var:bfl_inv_10_active = 1 exists = var:bfl_inv_10_type exists = capital }
+                var:bfl_inv_10_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_10_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_10_quantity } } }
+set_variable = { name = bfl_inv_11_mark value = 0 }
+            if = { limit = { var:bfl_inv_11_active = 1 exists = var:bfl_inv_11_type exists = capital }
+                var:bfl_inv_11_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_11_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_11_quantity } } }
+set_variable = { name = bfl_inv_12_mark value = 0 }
+            if = { limit = { var:bfl_inv_12_active = 1 exists = var:bfl_inv_12_type exists = capital }
+                var:bfl_inv_12_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_12_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_12_quantity } } }
+set_variable = { name = bfl_inv_13_mark value = 0 }
+            if = { limit = { var:bfl_inv_13_active = 1 exists = var:bfl_inv_13_type exists = capital }
+                var:bfl_inv_13_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_13_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_13_quantity } } }
+set_variable = { name = bfl_inv_14_mark value = 0 }
+            if = { limit = { var:bfl_inv_14_active = 1 exists = var:bfl_inv_14_type exists = capital }
+                var:bfl_inv_14_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_14_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_14_quantity } } }
+set_variable = { name = bfl_inv_15_mark value = 0 }
+            if = { limit = { var:bfl_inv_15_active = 1 exists = var:bfl_inv_15_type exists = capital }
+                var:bfl_inv_15_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_15_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_15_quantity } } }
+set_variable = { name = bfl_inv_16_mark value = 0 }
+            if = { limit = { var:bfl_inv_16_active = 1 exists = var:bfl_inv_16_type exists = capital }
+                var:bfl_inv_16_type = { save_scope_as = bfl_goods_mark_type }
+                set_variable = { name = bfl_inv_16_mark value = { value = "capital.market.market_price(scope:bfl_goods_mark_type)" multiply = var:bfl_inv_16_quantity } } }
+}

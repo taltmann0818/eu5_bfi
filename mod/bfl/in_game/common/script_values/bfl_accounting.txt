@@ -76,8 +76,8 @@ if = { limit = { var:bfl_dep_30_active = 1 } add = var:bfl_dep_30_withdrawal_req
 if = { limit = { var:bfl_dep_31_active = 1 } add = var:bfl_dep_31_withdrawal_requested }
 if = { limit = { var:bfl_dep_32_active = 1 } add = var:bfl_dep_32_withdrawal_requested }
 }
-    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying }
-    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears }
+    bfl_assets = { value = gold add = var:bfl_native_credit_value add = var:bfl_custom_credit_value add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_security_carrying add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets }
+    bfl_liabilities = { value = bfl_deposit_liabilities add = var:bfl_notes_outstanding add = var:bfl_other_payables add = var:bfl_expense_arrears add = bfl_estate_liabilities add = bfl_bond_debt add = bfl_bond_arrears add = bfl_resolution_native_claims every_loan = { add = remaining_debt } }
     bfl_equity = { value = bfl_assets subtract = bfl_liabilities }
     bfl_protected_cash = {
         value = bfl_liabilities subtract = bfl_withdrawals_due min = 0

@@ -33,7 +33,7 @@ def row(left, right, index=0, visible='', color=None, art=None):
     if art:
         leading += f'icon = {{ size = {{ 20 20 }} texture = "{icon_texture(art)}" }}'
     return f'''widget = {{ {visible} size = {{ -1 30 }} layoutpolicy_horizontal = expanding
-        {background} hbox = {{ layoutpolicy_horizontal = expanding margin = {{ 10 2 }} spacing = 8
+        {background} hbox = {{ size = {{ 100% 100% }} margin = {{ 10 2 }} spacing = 8
             {leading} text_single = {{ raw_text = "{left}" autoresize = yes }} expand = {{ }}
             text_single = {{ raw_text = "{right}" autoresize = yes align = right|nobaseline }} }} }}'''
 

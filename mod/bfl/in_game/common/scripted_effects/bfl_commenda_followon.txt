@@ -1,0 +1,101 @@
+﻿bfl_start_commenda_cargo = {
+save_scope_as = bfl_operator
+        if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_activity_schema ?= 2 has_variable = bfl_venture_area var:bfl_venture_quantity = 0
+            OR = { this = scope:actor overlord = scope:actor }
+            has_discovered_area = var:bfl_venture_area
+            exists = scope:from scope:from.location = { OR = {
+                area = scope:bfl_operator.var:bfl_venture_area
+                any_neighbor_location = { area = scope:bfl_operator.var:bfl_venture_area }
+            } } bfl_venture_cargo_valid = yes }
+            var:bfl_venture_bank = { save_scope_as = bfl_venture_lender }
+    if = { limit = { var:bfl_venture_slot = 1
+            scope:bfl_venture_lender = { var:bfl_v_01_state = 1 var:bfl_v_01_operator = scope:bfl_operator
+                var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_01_discovery = 1
+                var:bfl_v_01_undrawn > 0 bfl_period < var:bfl_v_01_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_01 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_01 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 2
+            scope:bfl_venture_lender = { var:bfl_v_02_state = 1 var:bfl_v_02_operator = scope:bfl_operator
+                var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_02_discovery = 1
+                var:bfl_v_02_undrawn > 0 bfl_period < var:bfl_v_02_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_02 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_02 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 3
+            scope:bfl_venture_lender = { var:bfl_v_03_state = 1 var:bfl_v_03_operator = scope:bfl_operator
+                var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_03_discovery = 1
+                var:bfl_v_03_undrawn > 0 bfl_period < var:bfl_v_03_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_03 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_03 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 4
+            scope:bfl_venture_lender = { var:bfl_v_04_state = 1 var:bfl_v_04_operator = scope:bfl_operator
+                var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_04_discovery = 1
+                var:bfl_v_04_undrawn > 0 bfl_period < var:bfl_v_04_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_04 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_04 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 5
+            scope:bfl_venture_lender = { var:bfl_v_05_state = 1 var:bfl_v_05_operator = scope:bfl_operator
+                var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_05_discovery = 1
+                var:bfl_v_05_undrawn > 0 bfl_period < var:bfl_v_05_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_05 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_05 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 6
+            scope:bfl_venture_lender = { var:bfl_v_06_state = 1 var:bfl_v_06_operator = scope:bfl_operator
+                var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_06_discovery = 1
+                var:bfl_v_06_undrawn > 0 bfl_period < var:bfl_v_06_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_06 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_06 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 7
+            scope:bfl_venture_lender = { var:bfl_v_07_state = 1 var:bfl_v_07_operator = scope:bfl_operator
+                var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_07_discovery = 1
+                var:bfl_v_07_undrawn > 0 bfl_period < var:bfl_v_07_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_07 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_07 = yes
+            } }
+if = { limit = { var:bfl_venture_slot = 8
+            scope:bfl_venture_lender = { var:bfl_v_08_state = 1 var:bfl_v_08_operator = scope:bfl_operator
+                var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation var:bfl_v_08_discovery = 1
+                var:bfl_v_08_undrawn > 0 bfl_period < var:bfl_v_08_maturity } }
+            set_variable = { name = bfl_venture_followon_budget value = scope:bfl_venture_lender.bfl_venture_drawable_08 }
+            if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_followon_budget multiply = 1.5 } }
+            if = { limit = { var:bfl_venture_followon_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                var:bfl_venture_followon_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 }
+                OR = { var:bfl_venture_offer_preset = 0 bfl_venture_operator_cash >= { value = var:bfl_venture_followon_budget divide = 3 } } }
+                set_variable = { name = bfl_venture_offer_kind value = 1 } bfl_execute_commenda_08 = yes
+            } }
+ }
+}

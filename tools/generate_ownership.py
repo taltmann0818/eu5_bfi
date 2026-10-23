@@ -21,8 +21,13 @@ def generate(common, effect, loc, write):
     values = effect('bfl_tangible_equity', '''value = gold
         if = { limit = { bfl_has_accounts = yes }
             add = var:bfl_native_credit_value add = var:bfl_custom_credit_value
-            add = var:bfl_inventory_value add = var:bfl_project_value subtract = bfl_liabilities }
-        else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt } }
+            add = var:bfl_inventory_value add = var:bfl_project_value add = bfl_money_assets add = bfl_deposit_assets add = bfl_estate_receivable add = bfl_native_estate_assets subtract = bfl_liabilities }
+        else_if = { limit = { bfl_is_company = yes } every_loan = { subtract = remaining_debt }
+            if = { limit = { has_variable = bfl_venture_bank }
+                if = { limit = { var:bfl_venture_activity_schema ?= 2 }
+                    add = var:bfl_venture_remaining subtract = var:bfl_venture_external_basis }
+                else = { subtract = var:bfl_venture_external_basis } } }
+        if = { limit = { var:bfl_state ?= 5 } value = 0 }
     ''')
     values += effect('bfl_nav_quote', '''value = 0
         if = { limit = { var:bfl_total_units > 0 }
@@ -38,6 +43,8 @@ def generate(common, effect, loc, write):
         n = s(i)
         owned += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_pool = 0 var:{n}_party = scope:bfl_equity_buyer }} add = var:{n}_units }}\n'''
         basis += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_pool = 0 var:{n}_party = scope:bfl_equity_buyer }} add = var:{n}_basis }}\n'''
+    owned += 'if = { limit = { var:bfl_state ?= 5 } value = 0 }\n'
+    basis += 'if = { limit = { var:bfl_state ?= 5 } value = 0 }\n'
     values += effect('bfl_equity_buyer_units', owned) + effect('bfl_equity_buyer_basis', basis)
     values += effect('bfl_position_owner_units', owned.replace('scope:bfl_equity_buyer', 'scope:bfl_position_owner'))
     values += effect('bfl_position_owner_basis', basis.replace('scope:bfl_equity_buyer', 'scope:bfl_position_owner'))
@@ -221,6 +228,7 @@ def generate(common, effect, loc, write):
         NOT = { has_variable = bfl_operation_guard }
         exists = scope:bfl_party country_exists = scope:bfl_party
         OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
+        bfl_branch_access = { PARTY = scope:bfl_party }
         bfl_has_shareholder_capacity = yes bfl_tangible_equity > 0 var:bfl_total_units > 0
         bfl_equity_wallet_funded = yes bfl_equity_buyer_risk = yes
         OR = { AND = { bfl_is_bank = yes bfl_can_originate_bank_subscription = yes }
@@ -445,12 +453,16 @@ def generate(common, effect, loc, write):
     for i in HOLDERS:
         n = s(i)
         distribution += f'''if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_party country_exists = var:{n}_party }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = var:{n}_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
+            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_funded_dividend multiply = 100 multiply = var:{n}_units divide = var:bfl_total_units floor = yes divide = 100 }} }}
             add_gold = {{ value = var:bfl_payment multiply = -1 }}
             set_variable = {{ name = bfl_receipt_slot value = {i} }} bfl_pay_equity_holder = yes
             change_variable = {{ name = bfl_company_dividend add = var:bfl_payment }}
         }}\n'''
-    distribution += 'bfl_pay_dealer_dividend = yes\nchange_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }\n}'
+    distribution += '''bfl_pay_dealer_dividend = yes
+        change_variable = { name = bfl_company_dividend add = var:bfl_dealer_payment }
+        if = { limit = { var:bfl_company_dividend > 0 }
+            bfl_record_feedback = { KIND = 4 AMOUNT = var:bfl_company_dividend } }
+    }'''
     services += effect('bfl_distribute_company_equity_income', distribution)
     # The market maker uses exactly the same quote snapshot and settlement
     # guards, without opening an AI confirmation dialog.

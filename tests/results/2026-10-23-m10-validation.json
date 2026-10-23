@@ -1,0 +1,150 @@
+{
+  "milestone": "M10",
+  "complete": false,
+  "candidate_runtime_sha256": "2e53b85e891eb7ba05356c161fc599201546f753faf0b7507b6a4283efe74998",
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "date": "2026-10-23",
+  "accepted_engine_runs": [
+    {
+      "suite": "commenda-slots",
+      "report": "2026-10-23-m10-commenda-slots.json",
+      "assertions": 37,
+      "runtime_sha256": "2e53b85e891eb7ba05356c161fc599201546f753faf0b7507b6a4283efe74998",
+      "fixture_sha256": "2b0739ed197943428eced9e605fb50e6f7d1cde592f2d18c6f68c8481543b8bf",
+      "token": "f871f762289948038c44228f246af308",
+      "current_runtime": true
+    },
+    {
+      "suite": "bootstrap",
+      "report": "2026-10-23-m10-bootstrap.json",
+      "assertions": 58,
+      "runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832",
+      "fixture_sha256": "d42ef0f118484bb628104734bf48d7b6a023864fe0941e6bae25b0d74433b1bf",
+      "token": "ec743da892b341c69da2d518b451263f",
+      "current_runtime": false
+    },
+    {
+      "suite": "finance-policy",
+      "report": "2026-10-23-m10-finance-policy.json",
+      "assertions": 15,
+      "runtime_sha256": "8dd9780be6dfa4900d4bd6c21a6d6a32edc15484e6309211380ee74ff6f4a142",
+      "fixture_sha256": "cd5066edba6b1ba01659d7ad22834c5b63c4fa11a2fdf1c31cd7f36a82757d17",
+      "token": "7ddaaacfb128466bbb4e6c184bbb385b",
+      "current_runtime": false
+    },
+    {
+      "suite": "strategy-resale",
+      "report": "2026-10-22-m10-strategy-resale.json",
+      "assertions": 71,
+      "runtime_sha256": "8dd9780be6dfa4900d4bd6c21a6d6a32edc15484e6309211380ee74ff6f4a142",
+      "fixture_sha256": "e0146411a90fd0f5aa88ba24d747cc19b4a502a97e5312f7c9338ce54c7b8867",
+      "token": "70b98bd0c30744cfae54d682bf45f997",
+      "current_runtime": false
+    },
+    {
+      "suite": "native-transport",
+      "report": "2026-10-22-m10-native-transport.json",
+      "assertions": 14,
+      "runtime_sha256": "8dd9780be6dfa4900d4bd6c21a6d6a32edc15484e6309211380ee74ff6f4a142",
+      "fixture_sha256": "574e19dd9059311b7f5d5f785f183aee07fac6c88f2007806ed6e2c24f5c729c",
+      "token": "48afcfc68c66474389542d6c94b4f6de",
+      "current_runtime": false
+    },
+    {
+      "suite": "integrated-strategy",
+      "report": "2026-10-22-m10-integrated-strategy.json",
+      "assertions": 64,
+      "runtime_sha256": "d52831f5d8c9f2882114aaa5da9471f6d6473ffafe0675557b0eba58e12ea417",
+      "fixture_sha256": "393efa7e4417b5212f40a2ac2f3c4fcdd0300adc88c4da296077762646078d97",
+      "token": "257bf4fe08e84100b6dddcd7df631b4b",
+      "current_runtime": false
+    },
+    {
+      "suite": "cmf-dispatch",
+      "report": "2026-10-22-m10-cmf-dispatch.json",
+      "assertions": 58,
+      "runtime_sha256": "d52831f5d8c9f2882114aaa5da9471f6d6473ffafe0675557b0eba58e12ea417",
+      "fixture_sha256": "0dba2f9d8a0b1466719484d1445e88cfc367ddf3542906c31457e54e35b8cbfc",
+      "token": "28882ac8b07c4ffea569cebe7a64ffd8",
+      "current_runtime": false
+    },
+    {
+      "suite": "expanded-strategy",
+      "report": "2026-10-22-m10-expanded-strategy.json",
+      "assertions": 61,
+      "runtime_sha256": "54acadd47e73523a13022908d71e0443551c42da18c2a79b25fcec620f560509",
+      "fixture_sha256": "9e496b0cd4b20c2897ddcdb05f3d3009886f162044870c0bd109040cb7de2b62",
+      "token": "836e92027c564bfdb8ecbeb053ecabe6",
+      "current_runtime": false
+    },
+    {
+      "suite": "company",
+      "report": "2026-10-22-m10-company.json",
+      "assertions": 28,
+      "runtime_sha256": "a5d13542e24364bf151ad323db604f804846fce1f0605b982f1dc2be263a74eb",
+      "fixture_sha256": "8ec3af61d63c50d2c3d139105308152690f79f753a91cd2a75d015f0269b9760",
+      "token": "c75a43b2a1d14080a54c8862536f6548",
+      "current_runtime": false
+    },
+    {
+      "suite": "company-commenda",
+      "report": "2026-10-22-m10-company-commenda.json",
+      "assertions": 13,
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "a18ee5dc8d22abdb6a8ff6c1bd819be784d4e27c4171370edf8f49f73c7c2c50",
+      "token": "d455d8a2cfab4853a6279bf2b54e7214",
+      "current_runtime": false
+    },
+    {
+      "suite": "bootstrap",
+      "report": "2026-10-22-m10-bootstrap.json",
+      "assertions": 56,
+      "runtime_sha256": "7055407ed359ca8b3662b807996863ae9efb25c34b1c6b6fae44231b7adab66e",
+      "fixture_sha256": "5489903863b1b7736c353b79f01e2e461b74189b8901f27479ee5a69fe8e7ddf",
+      "token": "c3353b10b57848899964d75d8692cf46",
+      "current_runtime": false
+    },
+    {
+      "suite": "strategy",
+      "report": "2026-10-22-m10-strategy.json",
+      "assertions": 53,
+      "runtime_sha256": "c0186e1c2ab07d46b78ba3f2cc9a4b55f091a96103ff7d35c72beffeb8a76839",
+      "fixture_sha256": "89498fe28360645581449f0e52cef9c60e93308aed5f11e1ca26ba73689bd696",
+      "token": "ed3367f470a647159e0e478a55b66495",
+      "current_runtime": false
+    }
+  ],
+  "native_assertions_current_runtime": 37,
+  "provenance": "Each run retains its actual runtime/fixture identity. Older focused passes do not certify later financial changes. Native CMF/bootstrap arithmetic and normal UI are separate checks. No focused assertion sum establishes the full milestone gate.",
+  "offline": {
+    "tests": 150,
+    "passed": true,
+    "scope": "Current candidate structural, arithmetic and evidence-parser checks; not native gameplay"
+  },
+  "source_validation": {
+    "passed": true,
+    "script_gui_localization_files": 302,
+    "graphics": 72
+  },
+  "native_and_cmf_pins": true,
+  "deterministic_generation": "Pending final candidate comparison; earlier accepted identities remain historical.",
+  "release_staging": "Pending final candidate package.",
+  "ui_report": "2026-10-23-m10-ui.json",
+  "ui_boundary": "Current 2e53b85e normal cold-start CMF row/tab/group/three preference controls accepted at 1920x1080. Merchant painting/committed receipt/mandate observation retains a6591f2e. Full art, actual animation, eleven languages, full ledger and responsive scales remain open.",
+  "fresh_1337_performance": {
+    "report": "2026-10-21-m10-performance.json",
+    "boundary": "Earlier f59f4d34 timing with three banks/zero custom records; does not certify current or late population performance."
+  },
+  "remaining": [
+    "Positive native company construction and affected financial regressions",
+    "Full natural role/profile campaigns and later-age product continuation",
+    "Viable real funding, earnings, liquidity and debt service",
+    "Native eleven-language, art, FX/reduced-motion, responsive and full-ledger review",
+    "Current additional-mod acceptance and populated late-game <=10% median native timing",
+    "Deterministic generation, final staging and embedded screenshots in the PR"
+  ],
+  "previous_validation": "2026-10-22-m10-validation.json",
+  "natural_campaign_boundary": "Both immutable 8dd9780b campaigns have reached natural Discovery in 1498. Overseas callback diagnostics reject clean campaign acceptance; a missing-slot guard and dedicated regression are under validation. Neither campaign is complete."
+}

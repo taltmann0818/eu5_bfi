@@ -23,6 +23,7 @@ def generate(common, effect, loc):
     common('scripted_triggers', 'credit_validation', '''
     bfl_credit_party_eligible = {
         exists = scope:bfl_party country_exists = scope:bfl_party
+        bfl_branch_access = { PARTY = scope:bfl_party }
         NOT = { this = scope:bfl_party }
         OR = {
             AND = { bfl_can_originate_sovereign_credit = yes scope:bfl_party = { country_type = location NOT = { bfl_is_company = yes } } }
@@ -54,7 +55,9 @@ def generate(common, effect, loc):
         f'var:bfl_cr_{i:02}_state != 1' for i in range(1, COUNT + 1)) + ' }'))
     common('script_values', 'credit_terms', '''
     bfl_credit_quote_rate = {
-        value = 0.03 add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
+        value = 0.03
+        if = { limit = { has_variable = bfl_lending_base } value = var:bfl_lending_base }
+        add = scope:bfl_party.modifier:bank_interest min = 0.03 max = 0.15
         if = { limit = { scope:bfl_party = { monthly_balance < 0 } } add = 0.02 }
         if = { limit = { scope:bfl_party = { at_war = yes } } add = 0.02 }
         if = { limit = { scope:bfl_party = { total_debt > { value = monthly_income_total multiply = 12 } } } add = 0.02 }
@@ -344,11 +347,13 @@ def generate(common, effect, loc):
     for number, title, description, accept, reject in [
         (1, 'Credit offer', 'A bank offers 100 gold for 60 months at the quoted annual rate. Acceptance rechecks funding, authority, debt capacity and your eligibility. Principal is financing, not income.', 'bfl_accept_native_credit', 'bfl_reject_native_credit'),
         (2, 'Debt relief offer', 'Your lender offers a 20% principal reduction and a one percentage-point annual rate reduction (minimum 1%). This changes the existing unsecured loan only. Its maturity stays unchanged.', 'bfl_accept_native_restructuring', 'bfl_reject_native_restructuring')]:
+        accept_chance = 'base = 0 modifier = { add = 100 bfl_strategy_accept_credit = yes }' if number == 1 else 'base = 100'
+        reject_chance = 'base = 100 modifier = { factor = 0 bfl_strategy_accept_credit = yes }' if number == 1 else 'base = 0'
         events += f'''bfl_credit.{number} = {{ type = country_event
             title = bfl_credit_{number}_title desc = bfl_credit_{number}_desc
             image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
-            option = {{ name = bfl_credit_accept {accept} = yes ai_chance = {{ base = 100 }} }}
-            option = {{ name = bfl_credit_reject {reject} = yes ai_chance = {{ base = 0 }} }}
+            option = {{ name = bfl_credit_accept {accept} = yes ai_chance = {{ {accept_chance} }} }}
+            option = {{ name = bfl_credit_reject {reject} = yes ai_chance = {{ {reject_chance} }} }}
         '''
         if number == 2:
             events += '''option = { name = bfl_credit_partial

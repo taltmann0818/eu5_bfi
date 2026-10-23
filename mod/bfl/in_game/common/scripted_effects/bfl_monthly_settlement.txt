@@ -1,14 +1,19 @@
 ﻿bfl_process_accounts = {
-    if = { limit = { bfl_has_accounts = yes bfl_period > var:bfl_last_period }
+    if = { limit = { bfl_has_accounts = yes var:bfl_state < 5 bfl_period > var:bfl_last_period }
+    bfl_service_monetary = yes
     bfl_settle_held_sovereign_bonds = yes
         save_scope_as = bfl_bank
         bfl_reconcile_charter = yes
         bfl_reconcile_native_assets = yes
         set_variable = { name = bfl_opening_productive_assets value = { value = var:bfl_native_credit_value add = var:bfl_inventory_value add = var:bfl_project_value } }
         bfl_observe_bank_income = yes
-        bfl_accrue_deposits = yes
-        bfl_settle_operating_expenses = yes
+        if = { limit = { var:bfl_state < 4 } bfl_accrue_deposits = yes }
+        bfl_process_goods = yes
+        bfl_reconcile_commenda = yes
+        if = { limit = { var:bfl_state < 4 } bfl_settle_operating_expenses = yes }
+        if = { limit = { var:bfl_state = 4 } bfl_distribute_resolution_cash = yes bfl_pay_resolution_guarantee = yes }
         bfl_evaluate_distress = yes
+        bfl_automatic_resolution = yes
         bfl_settle_dividends = yes
         bfl_close_activity_sources = yes
         bfl_record_credit_report = yes

@@ -1,0 +1,407 @@
+﻿bfl_manage_goods_policy = {
+bfl_initialize_goods = yes
+        if = { limit = { bfl_period > var:bfl_goods_policy_period }
+            set_variable = { name = bfl_goods_policy_period value = bfl_period }
+            save_scope_as = bfl_goods_bank
+    if = { limit = { bfl_goods_sellable_01 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_01 >= bfl_goods_take_profit
+                    bfl_goods_return_01 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_01_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_01 = yes }
+if = { limit = { bfl_goods_sellable_02 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_02 >= bfl_goods_take_profit
+                    bfl_goods_return_02 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_02_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_02 = yes }
+if = { limit = { bfl_goods_sellable_03 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_03 >= bfl_goods_take_profit
+                    bfl_goods_return_03 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_03_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_03 = yes }
+if = { limit = { bfl_goods_sellable_04 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_04 >= bfl_goods_take_profit
+                    bfl_goods_return_04 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_04_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_04 = yes }
+if = { limit = { bfl_goods_sellable_05 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_05 >= bfl_goods_take_profit
+                    bfl_goods_return_05 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_05_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_05 = yes }
+if = { limit = { bfl_goods_sellable_06 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_06 >= bfl_goods_take_profit
+                    bfl_goods_return_06 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_06_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_06 = yes }
+if = { limit = { bfl_goods_sellable_07 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_07 >= bfl_goods_take_profit
+                    bfl_goods_return_07 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_07_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_07 = yes }
+if = { limit = { bfl_goods_sellable_08 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_08 >= bfl_goods_take_profit
+                    bfl_goods_return_08 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_08_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_08 = yes }
+if = { limit = { bfl_goods_sellable_09 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_09 >= bfl_goods_take_profit
+                    bfl_goods_return_09 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_09_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_09 = yes }
+if = { limit = { bfl_goods_sellable_10 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_10 >= bfl_goods_take_profit
+                    bfl_goods_return_10 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_10_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_10 = yes }
+if = { limit = { bfl_goods_sellable_11 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_11 >= bfl_goods_take_profit
+                    bfl_goods_return_11 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_11_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_11 = yes }
+if = { limit = { bfl_goods_sellable_12 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_12 >= bfl_goods_take_profit
+                    bfl_goods_return_12 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_12_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_12 = yes }
+if = { limit = { bfl_goods_sellable_13 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_13 >= bfl_goods_take_profit
+                    bfl_goods_return_13 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_13_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_13 = yes }
+if = { limit = { bfl_goods_sellable_14 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_14 >= bfl_goods_take_profit
+                    bfl_goods_return_14 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_14_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_14 = yes }
+if = { limit = { bfl_goods_sellable_15 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_15 >= bfl_goods_take_profit
+                    bfl_goods_return_15 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_15_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_15 = yes }
+if = { limit = { bfl_goods_sellable_16 = yes var:bfl_goods_mandate > 0 OR = {
+                var:bfl_goods_mandate = 2 bfl_goods_owned_basis > bfl_goods_target
+                bfl_free_cash < 1
+                AND = { var:bfl_goods_mandate = 1 OR = {
+                    bfl_goods_return_16 >= bfl_goods_take_profit
+                    bfl_goods_return_16 <= bfl_goods_stop_loss
+                    bfl_period >= { value = var:bfl_inv_16_acquired_period add = var:bfl_goods_turnover } } } } }
+            bfl_sell_goods_16 = yes }
+if = { limit = { var:bfl_goods_mandate = 1 bfl_can_originate_commodity_inventory = yes
+            var:bfl_goods_allocation > 0 }
+            set_variable = { name = bfl_goods_market value = capital.market }
+            if = { limit = { bfl_goods_branch_access = yes }
+                set_variable = { name = bfl_goods_market value = var:bfl_goods_branch_market } }
+    if = { limit = { bfl_goods_capacity = yes bfl_goods_positions < 8
+            bfl_goods_owned_basis < bfl_goods_target bfl_free_cash > 2 }
+    remove_variable = bfl_goods_type
+        set_variable = { name = bfl_goods_best_depth value = 0 }
+        every_goods = { save_scope_as = bfl_candidate
+            scope:bfl_goods_bank = {
+                if = { limit = { NOT = { OR = { AND = { var:bfl_inv_01_active = 1 var:bfl_inv_01_type ?= scope:bfl_candidate } AND = { var:bfl_inv_02_active = 1 var:bfl_inv_02_type ?= scope:bfl_candidate } AND = { var:bfl_inv_03_active = 1 var:bfl_inv_03_type ?= scope:bfl_candidate } AND = { var:bfl_inv_04_active = 1 var:bfl_inv_04_type ?= scope:bfl_candidate } AND = { var:bfl_inv_05_active = 1 var:bfl_inv_05_type ?= scope:bfl_candidate } AND = { var:bfl_inv_06_active = 1 var:bfl_inv_06_type ?= scope:bfl_candidate } AND = { var:bfl_inv_07_active = 1 var:bfl_inv_07_type ?= scope:bfl_candidate } AND = { var:bfl_inv_08_active = 1 var:bfl_inv_08_type ?= scope:bfl_candidate } AND = { var:bfl_inv_09_active = 1 var:bfl_inv_09_type ?= scope:bfl_candidate } AND = { var:bfl_inv_10_active = 1 var:bfl_inv_10_type ?= scope:bfl_candidate } AND = { var:bfl_inv_11_active = 1 var:bfl_inv_11_type ?= scope:bfl_candidate } AND = { var:bfl_inv_12_active = 1 var:bfl_inv_12_type ?= scope:bfl_candidate } AND = { var:bfl_inv_13_active = 1 var:bfl_inv_13_type ?= scope:bfl_candidate } AND = { var:bfl_inv_14_active = 1 var:bfl_inv_14_type ?= scope:bfl_candidate } AND = { var:bfl_inv_15_active = 1 var:bfl_inv_15_type ?= scope:bfl_candidate } AND = { var:bfl_inv_16_active = 1 var:bfl_inv_16_type ?= scope:bfl_candidate }  } }
+                    "var:bfl_goods_market.market_price(scope:bfl_candidate)" > 0
+                    "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)" > 1 }
+                    set_variable = { name = bfl_goods_depth value = {
+                        value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)"
+                        multiply = "var:bfl_goods_market.market_price(scope:bfl_candidate)" } }
+                    if = { limit = { var:bfl_goods_depth > var:bfl_goods_best_depth }
+                        set_variable = { name = bfl_goods_best_depth value = var:bfl_goods_depth }
+                        set_variable = { name = bfl_goods_type value = scope:bfl_candidate } } } } }
+        if = { limit = { exists = var:bfl_goods_type }
+            var:bfl_goods_type = { save_scope_as = bfl_goods_execution }
+            set_variable = { name = bfl_goods_good value = 0 }
+            set_variable = { name = bfl_goods_spend value = { value = bfl_goods_target divide = 8
+                max = { value = bfl_goods_target subtract = bfl_goods_owned_basis }
+                max = { value = bfl_free_cash subtract = 2 } min = 0 } }
+            set_variable = { name = bfl_goods_amount value = { value = var:bfl_goods_spend
+                divide = "var:bfl_goods_market.market_price(scope:bfl_goods_execution)"
+                max = { value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" multiply = 0.05 }
+                multiply = 100 floor = yes divide = 100 } }
+            if = { limit = { var:bfl_goods_amount >= 0.01 } bfl_purchase_native_inventory = yes } }}
+if = { limit = { bfl_goods_capacity = yes bfl_goods_positions < 8
+            bfl_goods_owned_basis < bfl_goods_target bfl_free_cash > 2 }
+    remove_variable = bfl_goods_type
+        set_variable = { name = bfl_goods_best_depth value = 0 }
+        every_goods = { save_scope_as = bfl_candidate
+            scope:bfl_goods_bank = {
+                if = { limit = { NOT = { OR = { AND = { var:bfl_inv_01_active = 1 var:bfl_inv_01_type ?= scope:bfl_candidate } AND = { var:bfl_inv_02_active = 1 var:bfl_inv_02_type ?= scope:bfl_candidate } AND = { var:bfl_inv_03_active = 1 var:bfl_inv_03_type ?= scope:bfl_candidate } AND = { var:bfl_inv_04_active = 1 var:bfl_inv_04_type ?= scope:bfl_candidate } AND = { var:bfl_inv_05_active = 1 var:bfl_inv_05_type ?= scope:bfl_candidate } AND = { var:bfl_inv_06_active = 1 var:bfl_inv_06_type ?= scope:bfl_candidate } AND = { var:bfl_inv_07_active = 1 var:bfl_inv_07_type ?= scope:bfl_candidate } AND = { var:bfl_inv_08_active = 1 var:bfl_inv_08_type ?= scope:bfl_candidate } AND = { var:bfl_inv_09_active = 1 var:bfl_inv_09_type ?= scope:bfl_candidate } AND = { var:bfl_inv_10_active = 1 var:bfl_inv_10_type ?= scope:bfl_candidate } AND = { var:bfl_inv_11_active = 1 var:bfl_inv_11_type ?= scope:bfl_candidate } AND = { var:bfl_inv_12_active = 1 var:bfl_inv_12_type ?= scope:bfl_candidate } AND = { var:bfl_inv_13_active = 1 var:bfl_inv_13_type ?= scope:bfl_candidate } AND = { var:bfl_inv_14_active = 1 var:bfl_inv_14_type ?= scope:bfl_candidate } AND = { var:bfl_inv_15_active = 1 var:bfl_inv_15_type ?= scope:bfl_candidate } AND = { var:bfl_inv_16_active = 1 var:bfl_inv_16_type ?= scope:bfl_candidate }  } }
+                    "var:bfl_goods_market.market_price(scope:bfl_candidate)" > 0
+                    "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)" > 1 }
+                    set_variable = { name = bfl_goods_depth value = {
+                        value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)"
+                        multiply = "var:bfl_goods_market.market_price(scope:bfl_candidate)" } }
+                    if = { limit = { var:bfl_goods_depth > var:bfl_goods_best_depth }
+                        set_variable = { name = bfl_goods_best_depth value = var:bfl_goods_depth }
+                        set_variable = { name = bfl_goods_type value = scope:bfl_candidate } } } } }
+        if = { limit = { exists = var:bfl_goods_type }
+            var:bfl_goods_type = { save_scope_as = bfl_goods_execution }
+            set_variable = { name = bfl_goods_good value = 0 }
+            set_variable = { name = bfl_goods_spend value = { value = bfl_goods_target divide = 8
+                max = { value = bfl_goods_target subtract = bfl_goods_owned_basis }
+                max = { value = bfl_free_cash subtract = 2 } min = 0 } }
+            set_variable = { name = bfl_goods_amount value = { value = var:bfl_goods_spend
+                divide = "var:bfl_goods_market.market_price(scope:bfl_goods_execution)"
+                max = { value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" multiply = 0.05 }
+                multiply = 100 floor = yes divide = 100 } }
+            if = { limit = { var:bfl_goods_amount >= 0.01 } bfl_purchase_native_inventory = yes } }}
+if = { limit = { bfl_goods_capacity = yes bfl_goods_positions < 8
+            bfl_goods_owned_basis < bfl_goods_target bfl_free_cash > 2 }
+    remove_variable = bfl_goods_type
+        set_variable = { name = bfl_goods_best_depth value = 0 }
+        every_goods = { save_scope_as = bfl_candidate
+            scope:bfl_goods_bank = {
+                if = { limit = { NOT = { OR = { AND = { var:bfl_inv_01_active = 1 var:bfl_inv_01_type ?= scope:bfl_candidate } AND = { var:bfl_inv_02_active = 1 var:bfl_inv_02_type ?= scope:bfl_candidate } AND = { var:bfl_inv_03_active = 1 var:bfl_inv_03_type ?= scope:bfl_candidate } AND = { var:bfl_inv_04_active = 1 var:bfl_inv_04_type ?= scope:bfl_candidate } AND = { var:bfl_inv_05_active = 1 var:bfl_inv_05_type ?= scope:bfl_candidate } AND = { var:bfl_inv_06_active = 1 var:bfl_inv_06_type ?= scope:bfl_candidate } AND = { var:bfl_inv_07_active = 1 var:bfl_inv_07_type ?= scope:bfl_candidate } AND = { var:bfl_inv_08_active = 1 var:bfl_inv_08_type ?= scope:bfl_candidate } AND = { var:bfl_inv_09_active = 1 var:bfl_inv_09_type ?= scope:bfl_candidate } AND = { var:bfl_inv_10_active = 1 var:bfl_inv_10_type ?= scope:bfl_candidate } AND = { var:bfl_inv_11_active = 1 var:bfl_inv_11_type ?= scope:bfl_candidate } AND = { var:bfl_inv_12_active = 1 var:bfl_inv_12_type ?= scope:bfl_candidate } AND = { var:bfl_inv_13_active = 1 var:bfl_inv_13_type ?= scope:bfl_candidate } AND = { var:bfl_inv_14_active = 1 var:bfl_inv_14_type ?= scope:bfl_candidate } AND = { var:bfl_inv_15_active = 1 var:bfl_inv_15_type ?= scope:bfl_candidate } AND = { var:bfl_inv_16_active = 1 var:bfl_inv_16_type ?= scope:bfl_candidate }  } }
+                    "var:bfl_goods_market.market_price(scope:bfl_candidate)" > 0
+                    "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)" > 1 }
+                    set_variable = { name = bfl_goods_depth value = {
+                        value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)"
+                        multiply = "var:bfl_goods_market.market_price(scope:bfl_candidate)" } }
+                    if = { limit = { var:bfl_goods_depth > var:bfl_goods_best_depth }
+                        set_variable = { name = bfl_goods_best_depth value = var:bfl_goods_depth }
+                        set_variable = { name = bfl_goods_type value = scope:bfl_candidate } } } } }
+        if = { limit = { exists = var:bfl_goods_type }
+            var:bfl_goods_type = { save_scope_as = bfl_goods_execution }
+            set_variable = { name = bfl_goods_good value = 0 }
+            set_variable = { name = bfl_goods_spend value = { value = bfl_goods_target divide = 8
+                max = { value = bfl_goods_target subtract = bfl_goods_owned_basis }
+                max = { value = bfl_free_cash subtract = 2 } min = 0 } }
+            set_variable = { name = bfl_goods_amount value = { value = var:bfl_goods_spend
+                divide = "var:bfl_goods_market.market_price(scope:bfl_goods_execution)"
+                max = { value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" multiply = 0.05 }
+                multiply = 100 floor = yes divide = 100 } }
+            if = { limit = { var:bfl_goods_amount >= 0.01 } bfl_purchase_native_inventory = yes } }}
+if = { limit = { bfl_goods_capacity = yes bfl_goods_positions < 8
+            bfl_goods_owned_basis < bfl_goods_target bfl_free_cash > 2 }
+    remove_variable = bfl_goods_type
+        set_variable = { name = bfl_goods_best_depth value = 0 }
+        every_goods = { save_scope_as = bfl_candidate
+            scope:bfl_goods_bank = {
+                if = { limit = { NOT = { OR = { AND = { var:bfl_inv_01_active = 1 var:bfl_inv_01_type ?= scope:bfl_candidate } AND = { var:bfl_inv_02_active = 1 var:bfl_inv_02_type ?= scope:bfl_candidate } AND = { var:bfl_inv_03_active = 1 var:bfl_inv_03_type ?= scope:bfl_candidate } AND = { var:bfl_inv_04_active = 1 var:bfl_inv_04_type ?= scope:bfl_candidate } AND = { var:bfl_inv_05_active = 1 var:bfl_inv_05_type ?= scope:bfl_candidate } AND = { var:bfl_inv_06_active = 1 var:bfl_inv_06_type ?= scope:bfl_candidate } AND = { var:bfl_inv_07_active = 1 var:bfl_inv_07_type ?= scope:bfl_candidate } AND = { var:bfl_inv_08_active = 1 var:bfl_inv_08_type ?= scope:bfl_candidate } AND = { var:bfl_inv_09_active = 1 var:bfl_inv_09_type ?= scope:bfl_candidate } AND = { var:bfl_inv_10_active = 1 var:bfl_inv_10_type ?= scope:bfl_candidate } AND = { var:bfl_inv_11_active = 1 var:bfl_inv_11_type ?= scope:bfl_candidate } AND = { var:bfl_inv_12_active = 1 var:bfl_inv_12_type ?= scope:bfl_candidate } AND = { var:bfl_inv_13_active = 1 var:bfl_inv_13_type ?= scope:bfl_candidate } AND = { var:bfl_inv_14_active = 1 var:bfl_inv_14_type ?= scope:bfl_candidate } AND = { var:bfl_inv_15_active = 1 var:bfl_inv_15_type ?= scope:bfl_candidate } AND = { var:bfl_inv_16_active = 1 var:bfl_inv_16_type ?= scope:bfl_candidate }  } }
+                    "var:bfl_goods_market.market_price(scope:bfl_candidate)" > 0
+                    "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)" > 1 }
+                    set_variable = { name = bfl_goods_depth value = {
+                        value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_candidate)"
+                        multiply = "var:bfl_goods_market.market_price(scope:bfl_candidate)" } }
+                    if = { limit = { var:bfl_goods_depth > var:bfl_goods_best_depth }
+                        set_variable = { name = bfl_goods_best_depth value = var:bfl_goods_depth }
+                        set_variable = { name = bfl_goods_type value = scope:bfl_candidate } } } } }
+        if = { limit = { exists = var:bfl_goods_type }
+            var:bfl_goods_type = { save_scope_as = bfl_goods_execution }
+            set_variable = { name = bfl_goods_good value = 0 }
+            set_variable = { name = bfl_goods_spend value = { value = bfl_goods_target divide = 8
+                max = { value = bfl_goods_target subtract = bfl_goods_owned_basis }
+                max = { value = bfl_free_cash subtract = 2 } min = 0 } }
+            set_variable = { name = bfl_goods_amount value = { value = var:bfl_goods_spend
+                divide = "var:bfl_goods_market.market_price(scope:bfl_goods_execution)"
+                max = { value = "var:bfl_goods_market.stockpile_in_market(scope:bfl_goods_execution)" multiply = 0.05 }
+                multiply = 100 floor = yes divide = 100 } }
+            if = { limit = { var:bfl_goods_amount >= 0.01 } bfl_purchase_native_inventory = yes } }}
+}
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_01_state = 0 var:bfl_inv_01_offer > 0 }
+                set_variable = { name = bfl_inv_01_offer value = 0 } change_variable = { name = bfl_inv_01_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_01 = yes }
+            if = { limit = { var:bfl_inv_01_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_01_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_01_offer value = 0 } change_variable = { name = bfl_inv_01_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_01_offer = 0 bfl_period > var:bfl_inv_01_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_01 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_01 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_02_state = 0 var:bfl_inv_02_offer > 0 }
+                set_variable = { name = bfl_inv_02_offer value = 0 } change_variable = { name = bfl_inv_02_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_02 = yes }
+            if = { limit = { var:bfl_inv_02_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_02_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_02_offer value = 0 } change_variable = { name = bfl_inv_02_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_02_offer = 0 bfl_period > var:bfl_inv_02_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_02 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_02 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_03_state = 0 var:bfl_inv_03_offer > 0 }
+                set_variable = { name = bfl_inv_03_offer value = 0 } change_variable = { name = bfl_inv_03_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_03 = yes }
+            if = { limit = { var:bfl_inv_03_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_03_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_03_offer value = 0 } change_variable = { name = bfl_inv_03_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_03_offer = 0 bfl_period > var:bfl_inv_03_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_03 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_03 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_04_state = 0 var:bfl_inv_04_offer > 0 }
+                set_variable = { name = bfl_inv_04_offer value = 0 } change_variable = { name = bfl_inv_04_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_04 = yes }
+            if = { limit = { var:bfl_inv_04_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_04_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_04_offer value = 0 } change_variable = { name = bfl_inv_04_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_04_offer = 0 bfl_period > var:bfl_inv_04_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_04 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_04 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_05_state = 0 var:bfl_inv_05_offer > 0 }
+                set_variable = { name = bfl_inv_05_offer value = 0 } change_variable = { name = bfl_inv_05_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_05 = yes }
+            if = { limit = { var:bfl_inv_05_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_05_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_05_offer value = 0 } change_variable = { name = bfl_inv_05_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_05_offer = 0 bfl_period > var:bfl_inv_05_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_05 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_05 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_06_state = 0 var:bfl_inv_06_offer > 0 }
+                set_variable = { name = bfl_inv_06_offer value = 0 } change_variable = { name = bfl_inv_06_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_06 = yes }
+            if = { limit = { var:bfl_inv_06_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_06_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_06_offer value = 0 } change_variable = { name = bfl_inv_06_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_06_offer = 0 bfl_period > var:bfl_inv_06_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_06 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_06 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_07_state = 0 var:bfl_inv_07_offer > 0 }
+                set_variable = { name = bfl_inv_07_offer value = 0 } change_variable = { name = bfl_inv_07_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_07 = yes }
+            if = { limit = { var:bfl_inv_07_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_07_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_07_offer value = 0 } change_variable = { name = bfl_inv_07_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_07_offer = 0 bfl_period > var:bfl_inv_07_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_07 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_07 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_08_state = 0 var:bfl_inv_08_offer > 0 }
+                set_variable = { name = bfl_inv_08_offer value = 0 } change_variable = { name = bfl_inv_08_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_08 = yes }
+            if = { limit = { var:bfl_inv_08_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_08_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_08_offer value = 0 } change_variable = { name = bfl_inv_08_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_08_offer = 0 bfl_period > var:bfl_inv_08_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_08 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_08 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_09_state = 0 var:bfl_inv_09_offer > 0 }
+                set_variable = { name = bfl_inv_09_offer value = 0 } change_variable = { name = bfl_inv_09_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_09 = yes }
+            if = { limit = { var:bfl_inv_09_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_09_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_09_offer value = 0 } change_variable = { name = bfl_inv_09_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_09_offer = 0 bfl_period > var:bfl_inv_09_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_09 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_09 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_10_state = 0 var:bfl_inv_10_offer > 0 }
+                set_variable = { name = bfl_inv_10_offer value = 0 } change_variable = { name = bfl_inv_10_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_10 = yes }
+            if = { limit = { var:bfl_inv_10_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_10_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_10_offer value = 0 } change_variable = { name = bfl_inv_10_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_10_offer = 0 bfl_period > var:bfl_inv_10_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_10 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_10 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_11_state = 0 var:bfl_inv_11_offer > 0 }
+                set_variable = { name = bfl_inv_11_offer value = 0 } change_variable = { name = bfl_inv_11_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_11 = yes }
+            if = { limit = { var:bfl_inv_11_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_11_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_11_offer value = 0 } change_variable = { name = bfl_inv_11_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_11_offer = 0 bfl_period > var:bfl_inv_11_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_11 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_11 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_12_state = 0 var:bfl_inv_12_offer > 0 }
+                set_variable = { name = bfl_inv_12_offer value = 0 } change_variable = { name = bfl_inv_12_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_12 = yes }
+            if = { limit = { var:bfl_inv_12_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_12_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_12_offer value = 0 } change_variable = { name = bfl_inv_12_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_12_offer = 0 bfl_period > var:bfl_inv_12_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_12 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_12 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_13_state = 0 var:bfl_inv_13_offer > 0 }
+                set_variable = { name = bfl_inv_13_offer value = 0 } change_variable = { name = bfl_inv_13_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_13 = yes }
+            if = { limit = { var:bfl_inv_13_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_13_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_13_offer value = 0 } change_variable = { name = bfl_inv_13_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_13_offer = 0 bfl_period > var:bfl_inv_13_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_13 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_13 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_14_state = 0 var:bfl_inv_14_offer > 0 }
+                set_variable = { name = bfl_inv_14_offer value = 0 } change_variable = { name = bfl_inv_14_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_14 = yes }
+            if = { limit = { var:bfl_inv_14_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_14_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_14_offer value = 0 } change_variable = { name = bfl_inv_14_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_14_offer = 0 bfl_period > var:bfl_inv_14_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_14 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_14 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_15_state = 0 var:bfl_inv_15_offer > 0 }
+                set_variable = { name = bfl_inv_15_offer value = 0 } change_variable = { name = bfl_inv_15_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_15 = yes }
+            if = { limit = { var:bfl_inv_15_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_15_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_15_offer value = 0 } change_variable = { name = bfl_inv_15_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_15_offer = 0 bfl_period > var:bfl_inv_15_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_15 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_15 = yes } } }
+if = { limit = { NOT = { var:bfl_goods_mandate = 1 } var:bfl_inv_16_state = 0 var:bfl_inv_16_offer > 0 }
+                set_variable = { name = bfl_inv_16_offer value = 0 } change_variable = { name = bfl_inv_16_offer_generation add = 1 } }
+            if = { limit = { var:bfl_goods_mandate = 1 bfl_goods_offerable_16 = yes }
+            if = { limit = { var:bfl_inv_16_offer > 0 OR = { var:bfl_goods_contracts = 0
+                    NOT = { var:bfl_inv_16_offer = var:bfl_goods_contracts } } }
+                set_variable = { name = bfl_inv_16_offer value = 0 } change_variable = { name = bfl_inv_16_offer_generation add = 1 } }
+            if = { limit = { OR = { var:bfl_inv_16_offer = 0 bfl_period > var:bfl_inv_16_offer_expiry } }
+                if = { limit = { var:bfl_goods_contracts = 1 } bfl_list_goods_1_16 = yes }
+                else_if = { limit = { var:bfl_goods_contracts = 2 } bfl_list_goods_2_16 = yes } } }
+} bfl_value_goods = yes
+}
+bfl_clear_goods_offers = {
+if = { limit = { var:bfl_inv_01_state = 0 var:bfl_inv_01_offer > 0 } set_variable = { name = bfl_inv_01_offer value = 0 } change_variable = { name = bfl_inv_01_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_02_state = 0 var:bfl_inv_02_offer > 0 } set_variable = { name = bfl_inv_02_offer value = 0 } change_variable = { name = bfl_inv_02_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_03_state = 0 var:bfl_inv_03_offer > 0 } set_variable = { name = bfl_inv_03_offer value = 0 } change_variable = { name = bfl_inv_03_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_04_state = 0 var:bfl_inv_04_offer > 0 } set_variable = { name = bfl_inv_04_offer value = 0 } change_variable = { name = bfl_inv_04_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_05_state = 0 var:bfl_inv_05_offer > 0 } set_variable = { name = bfl_inv_05_offer value = 0 } change_variable = { name = bfl_inv_05_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_06_state = 0 var:bfl_inv_06_offer > 0 } set_variable = { name = bfl_inv_06_offer value = 0 } change_variable = { name = bfl_inv_06_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_07_state = 0 var:bfl_inv_07_offer > 0 } set_variable = { name = bfl_inv_07_offer value = 0 } change_variable = { name = bfl_inv_07_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_08_state = 0 var:bfl_inv_08_offer > 0 } set_variable = { name = bfl_inv_08_offer value = 0 } change_variable = { name = bfl_inv_08_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_09_state = 0 var:bfl_inv_09_offer > 0 } set_variable = { name = bfl_inv_09_offer value = 0 } change_variable = { name = bfl_inv_09_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_10_state = 0 var:bfl_inv_10_offer > 0 } set_variable = { name = bfl_inv_10_offer value = 0 } change_variable = { name = bfl_inv_10_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_11_state = 0 var:bfl_inv_11_offer > 0 } set_variable = { name = bfl_inv_11_offer value = 0 } change_variable = { name = bfl_inv_11_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_12_state = 0 var:bfl_inv_12_offer > 0 } set_variable = { name = bfl_inv_12_offer value = 0 } change_variable = { name = bfl_inv_12_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_13_state = 0 var:bfl_inv_13_offer > 0 } set_variable = { name = bfl_inv_13_offer value = 0 } change_variable = { name = bfl_inv_13_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_14_state = 0 var:bfl_inv_14_offer > 0 } set_variable = { name = bfl_inv_14_offer value = 0 } change_variable = { name = bfl_inv_14_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_15_state = 0 var:bfl_inv_15_offer > 0 } set_variable = { name = bfl_inv_15_offer value = 0 } change_variable = { name = bfl_inv_15_offer_generation add = 1 } }
+if = { limit = { var:bfl_inv_16_state = 0 var:bfl_inv_16_offer > 0 } set_variable = { name = bfl_inv_16_offer value = 0 } change_variable = { name = bfl_inv_16_offer_generation add = 1 } }
+}

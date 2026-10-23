@@ -70,3 +70,5 @@ Run source validation and the relevant accounting/behavior tests. Then inspect t
 The four overview figures use compact framed native cells and structured calculation tooltips. Bond amounts use a native amount selector bounded by live capacity. Bond lists offer ownership, arrears and sale filters. Debt Facility appears on Balance as financing received; it must never be added to earned income.
 
 Asset rows use native paper cards, stable flag scopes, aligned columns and one packed scrolling body. Hide inactive entries without reserving blank rows. Expenses funding runs monthly independently of the current state cash balance; Cash buffer remains a top-up policy.
+
+PR 17 preserves Goods and Trade finance as Lending & Investments views and Monetary services under Funding & Debt. Monthly bank servicing owns routine recovery, independent of new-business automation. Never waive claims outside existing consent/default guards.

@@ -1,7 +1,7 @@
 ﻿namespace = bfl_finance
     bfl_finance.100 = {
         type = country_event title = bfl_finance.100.title desc = bfl_finance.100.desc
-        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        image = "gfx/interface/illustrations/bfl/m10_merchant_finance.dds" outcome = neutral
     option = {
             name = bfl_finance.100.merchant
             ai_chance = { base = 50 }
@@ -21,7 +21,7 @@ option = {
 }
     bfl_finance.110 = {
         type = country_event title = bfl_finance.110.title desc = bfl_finance.110.desc
-        image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+        image = "gfx/interface/illustrations/bfl/m10_charter.dds" outcome = neutral
     option = { name = bfl_finance.110.bank_01
             trigger = { var:bfl_candidate_01 ?= { bfl_is_charter_candidate = yes is_subject_of = root } }
             ai_chance = { base = 10 }

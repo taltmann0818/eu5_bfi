@@ -1,0 +1,1334 @@
+﻿bfl_conclude_liquidation = {
+if = { limit = { bfl_has_accounts = yes } bfl_reconcile_native_assets = yes bfl_refresh_asset_statement = yes }
+        if = { limit = { bfl_can_conclude_liquidation = yes }
+        save_scope_as = bfl_default_issuer
+        if = { limit = { NOT = { has_variable = bfl_resolution_statutory_loss } }
+            set_variable = { name = bfl_resolution_statutory_loss value = 0 } }
+    if = { limit = { var:bfl_dep_01_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due } }
+            if = { limit = { var:bfl_dep_01_pool = 0 exists = var:bfl_dep_01_party var:bfl_dep_01_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_01_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_01_principal } } }
+            set_variable = { name = bfl_dep_01_default_principal value = var:bfl_dep_01_principal }
+            set_variable = { name = bfl_dep_01_default_interest value = var:bfl_dep_01_interest_due }
+            set_variable = { name = bfl_dep_01_principal value = 0 } set_variable = { name = bfl_dep_01_interest_due value = 0 }
+            set_variable = { name = bfl_dep_01_active value = 0 } change_variable = { name = bfl_dep_01_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_01_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_01_face add = var:bfl_bnd_01_due } }
+            if = { limit = { exists = var:bfl_bnd_01_holder var:bfl_bnd_01_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_01_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_01_basis } } }
+            set_variable = { name = bfl_bnd_01_default_face value = var:bfl_bnd_01_face }
+            set_variable = { name = bfl_bnd_01_default_due value = var:bfl_bnd_01_due }
+            set_variable = { name = bfl_bnd_01_active value = 0 } set_variable = { name = bfl_bnd_01_basis value = 0 }
+            change_variable = { name = bfl_bnd_01_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_01_active = 1 var:bfl_con_01_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_01_basis }
+            if = { limit = { exists = var:bfl_con_01_party var:bfl_con_01_party = { bfl_has_accounts = yes } }
+                var:bfl_con_01_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_01_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_01_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_01_basis }
+            set_variable = { name = bfl_con_01_default_basis value = var:bfl_con_01_basis }
+            set_variable = { name = bfl_con_01_basis value = 0 } set_variable = { name = bfl_con_01_state value = 4 }
+            set_variable = { name = bfl_con_01_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_02_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due } }
+            if = { limit = { var:bfl_dep_02_pool = 0 exists = var:bfl_dep_02_party var:bfl_dep_02_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_02_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_02_principal } } }
+            set_variable = { name = bfl_dep_02_default_principal value = var:bfl_dep_02_principal }
+            set_variable = { name = bfl_dep_02_default_interest value = var:bfl_dep_02_interest_due }
+            set_variable = { name = bfl_dep_02_principal value = 0 } set_variable = { name = bfl_dep_02_interest_due value = 0 }
+            set_variable = { name = bfl_dep_02_active value = 0 } change_variable = { name = bfl_dep_02_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_02_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_02_face add = var:bfl_bnd_02_due } }
+            if = { limit = { exists = var:bfl_bnd_02_holder var:bfl_bnd_02_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_02_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_02_basis } } }
+            set_variable = { name = bfl_bnd_02_default_face value = var:bfl_bnd_02_face }
+            set_variable = { name = bfl_bnd_02_default_due value = var:bfl_bnd_02_due }
+            set_variable = { name = bfl_bnd_02_active value = 0 } set_variable = { name = bfl_bnd_02_basis value = 0 }
+            change_variable = { name = bfl_bnd_02_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_02_active = 1 var:bfl_con_02_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_02_basis }
+            if = { limit = { exists = var:bfl_con_02_party var:bfl_con_02_party = { bfl_has_accounts = yes } }
+                var:bfl_con_02_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_02_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_02_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_02_basis }
+            set_variable = { name = bfl_con_02_default_basis value = var:bfl_con_02_basis }
+            set_variable = { name = bfl_con_02_basis value = 0 } set_variable = { name = bfl_con_02_state value = 4 }
+            set_variable = { name = bfl_con_02_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_03_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due } }
+            if = { limit = { var:bfl_dep_03_pool = 0 exists = var:bfl_dep_03_party var:bfl_dep_03_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_03_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_03_principal } } }
+            set_variable = { name = bfl_dep_03_default_principal value = var:bfl_dep_03_principal }
+            set_variable = { name = bfl_dep_03_default_interest value = var:bfl_dep_03_interest_due }
+            set_variable = { name = bfl_dep_03_principal value = 0 } set_variable = { name = bfl_dep_03_interest_due value = 0 }
+            set_variable = { name = bfl_dep_03_active value = 0 } change_variable = { name = bfl_dep_03_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_03_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_03_face add = var:bfl_bnd_03_due } }
+            if = { limit = { exists = var:bfl_bnd_03_holder var:bfl_bnd_03_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_03_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_03_basis } } }
+            set_variable = { name = bfl_bnd_03_default_face value = var:bfl_bnd_03_face }
+            set_variable = { name = bfl_bnd_03_default_due value = var:bfl_bnd_03_due }
+            set_variable = { name = bfl_bnd_03_active value = 0 } set_variable = { name = bfl_bnd_03_basis value = 0 }
+            change_variable = { name = bfl_bnd_03_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_03_active = 1 var:bfl_con_03_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_03_basis }
+            if = { limit = { exists = var:bfl_con_03_party var:bfl_con_03_party = { bfl_has_accounts = yes } }
+                var:bfl_con_03_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_03_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_03_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_03_basis }
+            set_variable = { name = bfl_con_03_default_basis value = var:bfl_con_03_basis }
+            set_variable = { name = bfl_con_03_basis value = 0 } set_variable = { name = bfl_con_03_state value = 4 }
+            set_variable = { name = bfl_con_03_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_04_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due } }
+            if = { limit = { var:bfl_dep_04_pool = 0 exists = var:bfl_dep_04_party var:bfl_dep_04_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_04_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_04_principal } } }
+            set_variable = { name = bfl_dep_04_default_principal value = var:bfl_dep_04_principal }
+            set_variable = { name = bfl_dep_04_default_interest value = var:bfl_dep_04_interest_due }
+            set_variable = { name = bfl_dep_04_principal value = 0 } set_variable = { name = bfl_dep_04_interest_due value = 0 }
+            set_variable = { name = bfl_dep_04_active value = 0 } change_variable = { name = bfl_dep_04_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_04_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_04_face add = var:bfl_bnd_04_due } }
+            if = { limit = { exists = var:bfl_bnd_04_holder var:bfl_bnd_04_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_04_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_04_basis } } }
+            set_variable = { name = bfl_bnd_04_default_face value = var:bfl_bnd_04_face }
+            set_variable = { name = bfl_bnd_04_default_due value = var:bfl_bnd_04_due }
+            set_variable = { name = bfl_bnd_04_active value = 0 } set_variable = { name = bfl_bnd_04_basis value = 0 }
+            change_variable = { name = bfl_bnd_04_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_04_active = 1 var:bfl_con_04_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_04_basis }
+            if = { limit = { exists = var:bfl_con_04_party var:bfl_con_04_party = { bfl_has_accounts = yes } }
+                var:bfl_con_04_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_04_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_04_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_04_basis }
+            set_variable = { name = bfl_con_04_default_basis value = var:bfl_con_04_basis }
+            set_variable = { name = bfl_con_04_basis value = 0 } set_variable = { name = bfl_con_04_state value = 4 }
+            set_variable = { name = bfl_con_04_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_05_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due } }
+            if = { limit = { var:bfl_dep_05_pool = 0 exists = var:bfl_dep_05_party var:bfl_dep_05_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_05_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_05_principal } } }
+            set_variable = { name = bfl_dep_05_default_principal value = var:bfl_dep_05_principal }
+            set_variable = { name = bfl_dep_05_default_interest value = var:bfl_dep_05_interest_due }
+            set_variable = { name = bfl_dep_05_principal value = 0 } set_variable = { name = bfl_dep_05_interest_due value = 0 }
+            set_variable = { name = bfl_dep_05_active value = 0 } change_variable = { name = bfl_dep_05_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_05_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_05_face add = var:bfl_bnd_05_due } }
+            if = { limit = { exists = var:bfl_bnd_05_holder var:bfl_bnd_05_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_05_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_05_basis } } }
+            set_variable = { name = bfl_bnd_05_default_face value = var:bfl_bnd_05_face }
+            set_variable = { name = bfl_bnd_05_default_due value = var:bfl_bnd_05_due }
+            set_variable = { name = bfl_bnd_05_active value = 0 } set_variable = { name = bfl_bnd_05_basis value = 0 }
+            change_variable = { name = bfl_bnd_05_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_05_active = 1 var:bfl_con_05_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_05_basis }
+            if = { limit = { exists = var:bfl_con_05_party var:bfl_con_05_party = { bfl_has_accounts = yes } }
+                var:bfl_con_05_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_05_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_05_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_05_basis }
+            set_variable = { name = bfl_con_05_default_basis value = var:bfl_con_05_basis }
+            set_variable = { name = bfl_con_05_basis value = 0 } set_variable = { name = bfl_con_05_state value = 4 }
+            set_variable = { name = bfl_con_05_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_06_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due } }
+            if = { limit = { var:bfl_dep_06_pool = 0 exists = var:bfl_dep_06_party var:bfl_dep_06_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_06_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_06_principal } } }
+            set_variable = { name = bfl_dep_06_default_principal value = var:bfl_dep_06_principal }
+            set_variable = { name = bfl_dep_06_default_interest value = var:bfl_dep_06_interest_due }
+            set_variable = { name = bfl_dep_06_principal value = 0 } set_variable = { name = bfl_dep_06_interest_due value = 0 }
+            set_variable = { name = bfl_dep_06_active value = 0 } change_variable = { name = bfl_dep_06_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_06_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_06_face add = var:bfl_bnd_06_due } }
+            if = { limit = { exists = var:bfl_bnd_06_holder var:bfl_bnd_06_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_06_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_06_basis } } }
+            set_variable = { name = bfl_bnd_06_default_face value = var:bfl_bnd_06_face }
+            set_variable = { name = bfl_bnd_06_default_due value = var:bfl_bnd_06_due }
+            set_variable = { name = bfl_bnd_06_active value = 0 } set_variable = { name = bfl_bnd_06_basis value = 0 }
+            change_variable = { name = bfl_bnd_06_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_06_active = 1 var:bfl_con_06_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_06_basis }
+            if = { limit = { exists = var:bfl_con_06_party var:bfl_con_06_party = { bfl_has_accounts = yes } }
+                var:bfl_con_06_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_06_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_06_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_06_basis }
+            set_variable = { name = bfl_con_06_default_basis value = var:bfl_con_06_basis }
+            set_variable = { name = bfl_con_06_basis value = 0 } set_variable = { name = bfl_con_06_state value = 4 }
+            set_variable = { name = bfl_con_06_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_07_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due } }
+            if = { limit = { var:bfl_dep_07_pool = 0 exists = var:bfl_dep_07_party var:bfl_dep_07_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_07_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_07_principal } } }
+            set_variable = { name = bfl_dep_07_default_principal value = var:bfl_dep_07_principal }
+            set_variable = { name = bfl_dep_07_default_interest value = var:bfl_dep_07_interest_due }
+            set_variable = { name = bfl_dep_07_principal value = 0 } set_variable = { name = bfl_dep_07_interest_due value = 0 }
+            set_variable = { name = bfl_dep_07_active value = 0 } change_variable = { name = bfl_dep_07_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_07_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_07_face add = var:bfl_bnd_07_due } }
+            if = { limit = { exists = var:bfl_bnd_07_holder var:bfl_bnd_07_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_07_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_07_basis } } }
+            set_variable = { name = bfl_bnd_07_default_face value = var:bfl_bnd_07_face }
+            set_variable = { name = bfl_bnd_07_default_due value = var:bfl_bnd_07_due }
+            set_variable = { name = bfl_bnd_07_active value = 0 } set_variable = { name = bfl_bnd_07_basis value = 0 }
+            change_variable = { name = bfl_bnd_07_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_07_active = 1 var:bfl_con_07_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_07_basis }
+            if = { limit = { exists = var:bfl_con_07_party var:bfl_con_07_party = { bfl_has_accounts = yes } }
+                var:bfl_con_07_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_07_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_07_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_07_basis }
+            set_variable = { name = bfl_con_07_default_basis value = var:bfl_con_07_basis }
+            set_variable = { name = bfl_con_07_basis value = 0 } set_variable = { name = bfl_con_07_state value = 4 }
+            set_variable = { name = bfl_con_07_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_08_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due } }
+            if = { limit = { var:bfl_dep_08_pool = 0 exists = var:bfl_dep_08_party var:bfl_dep_08_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_08_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_08_principal } } }
+            set_variable = { name = bfl_dep_08_default_principal value = var:bfl_dep_08_principal }
+            set_variable = { name = bfl_dep_08_default_interest value = var:bfl_dep_08_interest_due }
+            set_variable = { name = bfl_dep_08_principal value = 0 } set_variable = { name = bfl_dep_08_interest_due value = 0 }
+            set_variable = { name = bfl_dep_08_active value = 0 } change_variable = { name = bfl_dep_08_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_08_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_08_face add = var:bfl_bnd_08_due } }
+            if = { limit = { exists = var:bfl_bnd_08_holder var:bfl_bnd_08_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_08_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_08_basis } } }
+            set_variable = { name = bfl_bnd_08_default_face value = var:bfl_bnd_08_face }
+            set_variable = { name = bfl_bnd_08_default_due value = var:bfl_bnd_08_due }
+            set_variable = { name = bfl_bnd_08_active value = 0 } set_variable = { name = bfl_bnd_08_basis value = 0 }
+            change_variable = { name = bfl_bnd_08_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_08_active = 1 var:bfl_con_08_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_08_basis }
+            if = { limit = { exists = var:bfl_con_08_party var:bfl_con_08_party = { bfl_has_accounts = yes } }
+                var:bfl_con_08_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_08_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_08_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_08_basis }
+            set_variable = { name = bfl_con_08_default_basis value = var:bfl_con_08_basis }
+            set_variable = { name = bfl_con_08_basis value = 0 } set_variable = { name = bfl_con_08_state value = 4 }
+            set_variable = { name = bfl_con_08_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_09_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due } }
+            if = { limit = { var:bfl_dep_09_pool = 0 exists = var:bfl_dep_09_party var:bfl_dep_09_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_09_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_09_principal } } }
+            set_variable = { name = bfl_dep_09_default_principal value = var:bfl_dep_09_principal }
+            set_variable = { name = bfl_dep_09_default_interest value = var:bfl_dep_09_interest_due }
+            set_variable = { name = bfl_dep_09_principal value = 0 } set_variable = { name = bfl_dep_09_interest_due value = 0 }
+            set_variable = { name = bfl_dep_09_active value = 0 } change_variable = { name = bfl_dep_09_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_09_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_09_face add = var:bfl_bnd_09_due } }
+            if = { limit = { exists = var:bfl_bnd_09_holder var:bfl_bnd_09_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_09_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_09_basis } } }
+            set_variable = { name = bfl_bnd_09_default_face value = var:bfl_bnd_09_face }
+            set_variable = { name = bfl_bnd_09_default_due value = var:bfl_bnd_09_due }
+            set_variable = { name = bfl_bnd_09_active value = 0 } set_variable = { name = bfl_bnd_09_basis value = 0 }
+            change_variable = { name = bfl_bnd_09_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_09_active = 1 var:bfl_con_09_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_09_basis }
+            if = { limit = { exists = var:bfl_con_09_party var:bfl_con_09_party = { bfl_has_accounts = yes } }
+                var:bfl_con_09_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_09_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_09_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_09_basis }
+            set_variable = { name = bfl_con_09_default_basis value = var:bfl_con_09_basis }
+            set_variable = { name = bfl_con_09_basis value = 0 } set_variable = { name = bfl_con_09_state value = 4 }
+            set_variable = { name = bfl_con_09_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_10_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due } }
+            if = { limit = { var:bfl_dep_10_pool = 0 exists = var:bfl_dep_10_party var:bfl_dep_10_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_10_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_10_principal } } }
+            set_variable = { name = bfl_dep_10_default_principal value = var:bfl_dep_10_principal }
+            set_variable = { name = bfl_dep_10_default_interest value = var:bfl_dep_10_interest_due }
+            set_variable = { name = bfl_dep_10_principal value = 0 } set_variable = { name = bfl_dep_10_interest_due value = 0 }
+            set_variable = { name = bfl_dep_10_active value = 0 } change_variable = { name = bfl_dep_10_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_10_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_10_face add = var:bfl_bnd_10_due } }
+            if = { limit = { exists = var:bfl_bnd_10_holder var:bfl_bnd_10_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_10_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_10_basis } } }
+            set_variable = { name = bfl_bnd_10_default_face value = var:bfl_bnd_10_face }
+            set_variable = { name = bfl_bnd_10_default_due value = var:bfl_bnd_10_due }
+            set_variable = { name = bfl_bnd_10_active value = 0 } set_variable = { name = bfl_bnd_10_basis value = 0 }
+            change_variable = { name = bfl_bnd_10_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_10_active = 1 var:bfl_con_10_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_10_basis }
+            if = { limit = { exists = var:bfl_con_10_party var:bfl_con_10_party = { bfl_has_accounts = yes } }
+                var:bfl_con_10_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_10_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_10_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_10_basis }
+            set_variable = { name = bfl_con_10_default_basis value = var:bfl_con_10_basis }
+            set_variable = { name = bfl_con_10_basis value = 0 } set_variable = { name = bfl_con_10_state value = 4 }
+            set_variable = { name = bfl_con_10_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_11_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due } }
+            if = { limit = { var:bfl_dep_11_pool = 0 exists = var:bfl_dep_11_party var:bfl_dep_11_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_11_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_11_principal } } }
+            set_variable = { name = bfl_dep_11_default_principal value = var:bfl_dep_11_principal }
+            set_variable = { name = bfl_dep_11_default_interest value = var:bfl_dep_11_interest_due }
+            set_variable = { name = bfl_dep_11_principal value = 0 } set_variable = { name = bfl_dep_11_interest_due value = 0 }
+            set_variable = { name = bfl_dep_11_active value = 0 } change_variable = { name = bfl_dep_11_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_11_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_11_face add = var:bfl_bnd_11_due } }
+            if = { limit = { exists = var:bfl_bnd_11_holder var:bfl_bnd_11_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_11_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_11_basis } } }
+            set_variable = { name = bfl_bnd_11_default_face value = var:bfl_bnd_11_face }
+            set_variable = { name = bfl_bnd_11_default_due value = var:bfl_bnd_11_due }
+            set_variable = { name = bfl_bnd_11_active value = 0 } set_variable = { name = bfl_bnd_11_basis value = 0 }
+            change_variable = { name = bfl_bnd_11_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_11_active = 1 var:bfl_con_11_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_11_basis }
+            if = { limit = { exists = var:bfl_con_11_party var:bfl_con_11_party = { bfl_has_accounts = yes } }
+                var:bfl_con_11_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_11_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_11_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_11_basis }
+            set_variable = { name = bfl_con_11_default_basis value = var:bfl_con_11_basis }
+            set_variable = { name = bfl_con_11_basis value = 0 } set_variable = { name = bfl_con_11_state value = 4 }
+            set_variable = { name = bfl_con_11_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_12_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due } }
+            if = { limit = { var:bfl_dep_12_pool = 0 exists = var:bfl_dep_12_party var:bfl_dep_12_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_12_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_12_principal } } }
+            set_variable = { name = bfl_dep_12_default_principal value = var:bfl_dep_12_principal }
+            set_variable = { name = bfl_dep_12_default_interest value = var:bfl_dep_12_interest_due }
+            set_variable = { name = bfl_dep_12_principal value = 0 } set_variable = { name = bfl_dep_12_interest_due value = 0 }
+            set_variable = { name = bfl_dep_12_active value = 0 } change_variable = { name = bfl_dep_12_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_12_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_12_face add = var:bfl_bnd_12_due } }
+            if = { limit = { exists = var:bfl_bnd_12_holder var:bfl_bnd_12_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_12_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_12_basis } } }
+            set_variable = { name = bfl_bnd_12_default_face value = var:bfl_bnd_12_face }
+            set_variable = { name = bfl_bnd_12_default_due value = var:bfl_bnd_12_due }
+            set_variable = { name = bfl_bnd_12_active value = 0 } set_variable = { name = bfl_bnd_12_basis value = 0 }
+            change_variable = { name = bfl_bnd_12_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_12_active = 1 var:bfl_con_12_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_12_basis }
+            if = { limit = { exists = var:bfl_con_12_party var:bfl_con_12_party = { bfl_has_accounts = yes } }
+                var:bfl_con_12_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_12_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_12_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_12_basis }
+            set_variable = { name = bfl_con_12_default_basis value = var:bfl_con_12_basis }
+            set_variable = { name = bfl_con_12_basis value = 0 } set_variable = { name = bfl_con_12_state value = 4 }
+            set_variable = { name = bfl_con_12_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_13_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due } }
+            if = { limit = { var:bfl_dep_13_pool = 0 exists = var:bfl_dep_13_party var:bfl_dep_13_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_13_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_13_principal } } }
+            set_variable = { name = bfl_dep_13_default_principal value = var:bfl_dep_13_principal }
+            set_variable = { name = bfl_dep_13_default_interest value = var:bfl_dep_13_interest_due }
+            set_variable = { name = bfl_dep_13_principal value = 0 } set_variable = { name = bfl_dep_13_interest_due value = 0 }
+            set_variable = { name = bfl_dep_13_active value = 0 } change_variable = { name = bfl_dep_13_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_13_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_13_face add = var:bfl_bnd_13_due } }
+            if = { limit = { exists = var:bfl_bnd_13_holder var:bfl_bnd_13_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_13_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_13_basis } } }
+            set_variable = { name = bfl_bnd_13_default_face value = var:bfl_bnd_13_face }
+            set_variable = { name = bfl_bnd_13_default_due value = var:bfl_bnd_13_due }
+            set_variable = { name = bfl_bnd_13_active value = 0 } set_variable = { name = bfl_bnd_13_basis value = 0 }
+            change_variable = { name = bfl_bnd_13_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_13_active = 1 var:bfl_con_13_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_13_basis }
+            if = { limit = { exists = var:bfl_con_13_party var:bfl_con_13_party = { bfl_has_accounts = yes } }
+                var:bfl_con_13_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_13_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_13_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_13_basis }
+            set_variable = { name = bfl_con_13_default_basis value = var:bfl_con_13_basis }
+            set_variable = { name = bfl_con_13_basis value = 0 } set_variable = { name = bfl_con_13_state value = 4 }
+            set_variable = { name = bfl_con_13_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_14_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due } }
+            if = { limit = { var:bfl_dep_14_pool = 0 exists = var:bfl_dep_14_party var:bfl_dep_14_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_14_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_14_principal } } }
+            set_variable = { name = bfl_dep_14_default_principal value = var:bfl_dep_14_principal }
+            set_variable = { name = bfl_dep_14_default_interest value = var:bfl_dep_14_interest_due }
+            set_variable = { name = bfl_dep_14_principal value = 0 } set_variable = { name = bfl_dep_14_interest_due value = 0 }
+            set_variable = { name = bfl_dep_14_active value = 0 } change_variable = { name = bfl_dep_14_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_14_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_14_face add = var:bfl_bnd_14_due } }
+            if = { limit = { exists = var:bfl_bnd_14_holder var:bfl_bnd_14_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_14_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_14_basis } } }
+            set_variable = { name = bfl_bnd_14_default_face value = var:bfl_bnd_14_face }
+            set_variable = { name = bfl_bnd_14_default_due value = var:bfl_bnd_14_due }
+            set_variable = { name = bfl_bnd_14_active value = 0 } set_variable = { name = bfl_bnd_14_basis value = 0 }
+            change_variable = { name = bfl_bnd_14_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_14_active = 1 var:bfl_con_14_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_14_basis }
+            if = { limit = { exists = var:bfl_con_14_party var:bfl_con_14_party = { bfl_has_accounts = yes } }
+                var:bfl_con_14_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_14_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_14_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_14_basis }
+            set_variable = { name = bfl_con_14_default_basis value = var:bfl_con_14_basis }
+            set_variable = { name = bfl_con_14_basis value = 0 } set_variable = { name = bfl_con_14_state value = 4 }
+            set_variable = { name = bfl_con_14_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_15_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due } }
+            if = { limit = { var:bfl_dep_15_pool = 0 exists = var:bfl_dep_15_party var:bfl_dep_15_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_15_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_15_principal } } }
+            set_variable = { name = bfl_dep_15_default_principal value = var:bfl_dep_15_principal }
+            set_variable = { name = bfl_dep_15_default_interest value = var:bfl_dep_15_interest_due }
+            set_variable = { name = bfl_dep_15_principal value = 0 } set_variable = { name = bfl_dep_15_interest_due value = 0 }
+            set_variable = { name = bfl_dep_15_active value = 0 } change_variable = { name = bfl_dep_15_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_15_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_15_face add = var:bfl_bnd_15_due } }
+            if = { limit = { exists = var:bfl_bnd_15_holder var:bfl_bnd_15_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_15_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_15_basis } } }
+            set_variable = { name = bfl_bnd_15_default_face value = var:bfl_bnd_15_face }
+            set_variable = { name = bfl_bnd_15_default_due value = var:bfl_bnd_15_due }
+            set_variable = { name = bfl_bnd_15_active value = 0 } set_variable = { name = bfl_bnd_15_basis value = 0 }
+            change_variable = { name = bfl_bnd_15_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_15_active = 1 var:bfl_con_15_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_15_basis }
+            if = { limit = { exists = var:bfl_con_15_party var:bfl_con_15_party = { bfl_has_accounts = yes } }
+                var:bfl_con_15_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_15_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_15_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_15_basis }
+            set_variable = { name = bfl_con_15_default_basis value = var:bfl_con_15_basis }
+            set_variable = { name = bfl_con_15_basis value = 0 } set_variable = { name = bfl_con_15_state value = 4 }
+            set_variable = { name = bfl_con_15_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_16_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due } }
+            if = { limit = { var:bfl_dep_16_pool = 0 exists = var:bfl_dep_16_party var:bfl_dep_16_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_16_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_16_principal } } }
+            set_variable = { name = bfl_dep_16_default_principal value = var:bfl_dep_16_principal }
+            set_variable = { name = bfl_dep_16_default_interest value = var:bfl_dep_16_interest_due }
+            set_variable = { name = bfl_dep_16_principal value = 0 } set_variable = { name = bfl_dep_16_interest_due value = 0 }
+            set_variable = { name = bfl_dep_16_active value = 0 } change_variable = { name = bfl_dep_16_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_16_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_16_face add = var:bfl_bnd_16_due } }
+            if = { limit = { exists = var:bfl_bnd_16_holder var:bfl_bnd_16_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_16_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_16_basis } } }
+            set_variable = { name = bfl_bnd_16_default_face value = var:bfl_bnd_16_face }
+            set_variable = { name = bfl_bnd_16_default_due value = var:bfl_bnd_16_due }
+            set_variable = { name = bfl_bnd_16_active value = 0 } set_variable = { name = bfl_bnd_16_basis value = 0 }
+            change_variable = { name = bfl_bnd_16_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_16_active = 1 var:bfl_con_16_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_16_basis }
+            if = { limit = { exists = var:bfl_con_16_party var:bfl_con_16_party = { bfl_has_accounts = yes } }
+                var:bfl_con_16_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_16_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_16_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_16_basis }
+            set_variable = { name = bfl_con_16_default_basis value = var:bfl_con_16_basis }
+            set_variable = { name = bfl_con_16_basis value = 0 } set_variable = { name = bfl_con_16_state value = 4 }
+            set_variable = { name = bfl_con_16_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_17_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due } }
+            if = { limit = { var:bfl_dep_17_pool = 0 exists = var:bfl_dep_17_party var:bfl_dep_17_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_17_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_17_principal } } }
+            set_variable = { name = bfl_dep_17_default_principal value = var:bfl_dep_17_principal }
+            set_variable = { name = bfl_dep_17_default_interest value = var:bfl_dep_17_interest_due }
+            set_variable = { name = bfl_dep_17_principal value = 0 } set_variable = { name = bfl_dep_17_interest_due value = 0 }
+            set_variable = { name = bfl_dep_17_active value = 0 } change_variable = { name = bfl_dep_17_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_17_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_17_face add = var:bfl_bnd_17_due } }
+            if = { limit = { exists = var:bfl_bnd_17_holder var:bfl_bnd_17_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_17_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_17_basis } } }
+            set_variable = { name = bfl_bnd_17_default_face value = var:bfl_bnd_17_face }
+            set_variable = { name = bfl_bnd_17_default_due value = var:bfl_bnd_17_due }
+            set_variable = { name = bfl_bnd_17_active value = 0 } set_variable = { name = bfl_bnd_17_basis value = 0 }
+            change_variable = { name = bfl_bnd_17_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_17_active = 1 var:bfl_con_17_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_17_basis }
+            if = { limit = { exists = var:bfl_con_17_party var:bfl_con_17_party = { bfl_has_accounts = yes } }
+                var:bfl_con_17_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_17_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_17_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_17_basis }
+            set_variable = { name = bfl_con_17_default_basis value = var:bfl_con_17_basis }
+            set_variable = { name = bfl_con_17_basis value = 0 } set_variable = { name = bfl_con_17_state value = 4 }
+            set_variable = { name = bfl_con_17_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_18_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due } }
+            if = { limit = { var:bfl_dep_18_pool = 0 exists = var:bfl_dep_18_party var:bfl_dep_18_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_18_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_18_principal } } }
+            set_variable = { name = bfl_dep_18_default_principal value = var:bfl_dep_18_principal }
+            set_variable = { name = bfl_dep_18_default_interest value = var:bfl_dep_18_interest_due }
+            set_variable = { name = bfl_dep_18_principal value = 0 } set_variable = { name = bfl_dep_18_interest_due value = 0 }
+            set_variable = { name = bfl_dep_18_active value = 0 } change_variable = { name = bfl_dep_18_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_18_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_18_face add = var:bfl_bnd_18_due } }
+            if = { limit = { exists = var:bfl_bnd_18_holder var:bfl_bnd_18_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_18_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_18_basis } } }
+            set_variable = { name = bfl_bnd_18_default_face value = var:bfl_bnd_18_face }
+            set_variable = { name = bfl_bnd_18_default_due value = var:bfl_bnd_18_due }
+            set_variable = { name = bfl_bnd_18_active value = 0 } set_variable = { name = bfl_bnd_18_basis value = 0 }
+            change_variable = { name = bfl_bnd_18_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_18_active = 1 var:bfl_con_18_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_18_basis }
+            if = { limit = { exists = var:bfl_con_18_party var:bfl_con_18_party = { bfl_has_accounts = yes } }
+                var:bfl_con_18_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_18_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_18_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_18_basis }
+            set_variable = { name = bfl_con_18_default_basis value = var:bfl_con_18_basis }
+            set_variable = { name = bfl_con_18_basis value = 0 } set_variable = { name = bfl_con_18_state value = 4 }
+            set_variable = { name = bfl_con_18_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_19_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due } }
+            if = { limit = { var:bfl_dep_19_pool = 0 exists = var:bfl_dep_19_party var:bfl_dep_19_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_19_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_19_principal } } }
+            set_variable = { name = bfl_dep_19_default_principal value = var:bfl_dep_19_principal }
+            set_variable = { name = bfl_dep_19_default_interest value = var:bfl_dep_19_interest_due }
+            set_variable = { name = bfl_dep_19_principal value = 0 } set_variable = { name = bfl_dep_19_interest_due value = 0 }
+            set_variable = { name = bfl_dep_19_active value = 0 } change_variable = { name = bfl_dep_19_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_19_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_19_face add = var:bfl_bnd_19_due } }
+            if = { limit = { exists = var:bfl_bnd_19_holder var:bfl_bnd_19_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_19_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_19_basis } } }
+            set_variable = { name = bfl_bnd_19_default_face value = var:bfl_bnd_19_face }
+            set_variable = { name = bfl_bnd_19_default_due value = var:bfl_bnd_19_due }
+            set_variable = { name = bfl_bnd_19_active value = 0 } set_variable = { name = bfl_bnd_19_basis value = 0 }
+            change_variable = { name = bfl_bnd_19_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_19_active = 1 var:bfl_con_19_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_19_basis }
+            if = { limit = { exists = var:bfl_con_19_party var:bfl_con_19_party = { bfl_has_accounts = yes } }
+                var:bfl_con_19_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_19_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_19_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_19_basis }
+            set_variable = { name = bfl_con_19_default_basis value = var:bfl_con_19_basis }
+            set_variable = { name = bfl_con_19_basis value = 0 } set_variable = { name = bfl_con_19_state value = 4 }
+            set_variable = { name = bfl_con_19_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_20_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due } }
+            if = { limit = { var:bfl_dep_20_pool = 0 exists = var:bfl_dep_20_party var:bfl_dep_20_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_20_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_20_principal } } }
+            set_variable = { name = bfl_dep_20_default_principal value = var:bfl_dep_20_principal }
+            set_variable = { name = bfl_dep_20_default_interest value = var:bfl_dep_20_interest_due }
+            set_variable = { name = bfl_dep_20_principal value = 0 } set_variable = { name = bfl_dep_20_interest_due value = 0 }
+            set_variable = { name = bfl_dep_20_active value = 0 } change_variable = { name = bfl_dep_20_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_20_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_20_face add = var:bfl_bnd_20_due } }
+            if = { limit = { exists = var:bfl_bnd_20_holder var:bfl_bnd_20_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_20_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_20_basis } } }
+            set_variable = { name = bfl_bnd_20_default_face value = var:bfl_bnd_20_face }
+            set_variable = { name = bfl_bnd_20_default_due value = var:bfl_bnd_20_due }
+            set_variable = { name = bfl_bnd_20_active value = 0 } set_variable = { name = bfl_bnd_20_basis value = 0 }
+            change_variable = { name = bfl_bnd_20_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_20_active = 1 var:bfl_con_20_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_20_basis }
+            if = { limit = { exists = var:bfl_con_20_party var:bfl_con_20_party = { bfl_has_accounts = yes } }
+                var:bfl_con_20_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_20_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_20_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_20_basis }
+            set_variable = { name = bfl_con_20_default_basis value = var:bfl_con_20_basis }
+            set_variable = { name = bfl_con_20_basis value = 0 } set_variable = { name = bfl_con_20_state value = 4 }
+            set_variable = { name = bfl_con_20_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_21_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due } }
+            if = { limit = { var:bfl_dep_21_pool = 0 exists = var:bfl_dep_21_party var:bfl_dep_21_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_21_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_21_principal } } }
+            set_variable = { name = bfl_dep_21_default_principal value = var:bfl_dep_21_principal }
+            set_variable = { name = bfl_dep_21_default_interest value = var:bfl_dep_21_interest_due }
+            set_variable = { name = bfl_dep_21_principal value = 0 } set_variable = { name = bfl_dep_21_interest_due value = 0 }
+            set_variable = { name = bfl_dep_21_active value = 0 } change_variable = { name = bfl_dep_21_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_21_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_21_face add = var:bfl_bnd_21_due } }
+            if = { limit = { exists = var:bfl_bnd_21_holder var:bfl_bnd_21_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_21_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_21_basis } } }
+            set_variable = { name = bfl_bnd_21_default_face value = var:bfl_bnd_21_face }
+            set_variable = { name = bfl_bnd_21_default_due value = var:bfl_bnd_21_due }
+            set_variable = { name = bfl_bnd_21_active value = 0 } set_variable = { name = bfl_bnd_21_basis value = 0 }
+            change_variable = { name = bfl_bnd_21_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_21_active = 1 var:bfl_con_21_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_21_basis }
+            if = { limit = { exists = var:bfl_con_21_party var:bfl_con_21_party = { bfl_has_accounts = yes } }
+                var:bfl_con_21_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_21_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_21_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_21_basis }
+            set_variable = { name = bfl_con_21_default_basis value = var:bfl_con_21_basis }
+            set_variable = { name = bfl_con_21_basis value = 0 } set_variable = { name = bfl_con_21_state value = 4 }
+            set_variable = { name = bfl_con_21_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_22_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due } }
+            if = { limit = { var:bfl_dep_22_pool = 0 exists = var:bfl_dep_22_party var:bfl_dep_22_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_22_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_22_principal } } }
+            set_variable = { name = bfl_dep_22_default_principal value = var:bfl_dep_22_principal }
+            set_variable = { name = bfl_dep_22_default_interest value = var:bfl_dep_22_interest_due }
+            set_variable = { name = bfl_dep_22_principal value = 0 } set_variable = { name = bfl_dep_22_interest_due value = 0 }
+            set_variable = { name = bfl_dep_22_active value = 0 } change_variable = { name = bfl_dep_22_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_22_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_22_face add = var:bfl_bnd_22_due } }
+            if = { limit = { exists = var:bfl_bnd_22_holder var:bfl_bnd_22_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_22_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_22_basis } } }
+            set_variable = { name = bfl_bnd_22_default_face value = var:bfl_bnd_22_face }
+            set_variable = { name = bfl_bnd_22_default_due value = var:bfl_bnd_22_due }
+            set_variable = { name = bfl_bnd_22_active value = 0 } set_variable = { name = bfl_bnd_22_basis value = 0 }
+            change_variable = { name = bfl_bnd_22_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_22_active = 1 var:bfl_con_22_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_22_basis }
+            if = { limit = { exists = var:bfl_con_22_party var:bfl_con_22_party = { bfl_has_accounts = yes } }
+                var:bfl_con_22_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_22_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_22_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_22_basis }
+            set_variable = { name = bfl_con_22_default_basis value = var:bfl_con_22_basis }
+            set_variable = { name = bfl_con_22_basis value = 0 } set_variable = { name = bfl_con_22_state value = 4 }
+            set_variable = { name = bfl_con_22_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_23_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due } }
+            if = { limit = { var:bfl_dep_23_pool = 0 exists = var:bfl_dep_23_party var:bfl_dep_23_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_23_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_23_principal } } }
+            set_variable = { name = bfl_dep_23_default_principal value = var:bfl_dep_23_principal }
+            set_variable = { name = bfl_dep_23_default_interest value = var:bfl_dep_23_interest_due }
+            set_variable = { name = bfl_dep_23_principal value = 0 } set_variable = { name = bfl_dep_23_interest_due value = 0 }
+            set_variable = { name = bfl_dep_23_active value = 0 } change_variable = { name = bfl_dep_23_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_23_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_23_face add = var:bfl_bnd_23_due } }
+            if = { limit = { exists = var:bfl_bnd_23_holder var:bfl_bnd_23_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_23_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_23_basis } } }
+            set_variable = { name = bfl_bnd_23_default_face value = var:bfl_bnd_23_face }
+            set_variable = { name = bfl_bnd_23_default_due value = var:bfl_bnd_23_due }
+            set_variable = { name = bfl_bnd_23_active value = 0 } set_variable = { name = bfl_bnd_23_basis value = 0 }
+            change_variable = { name = bfl_bnd_23_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_23_active = 1 var:bfl_con_23_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_23_basis }
+            if = { limit = { exists = var:bfl_con_23_party var:bfl_con_23_party = { bfl_has_accounts = yes } }
+                var:bfl_con_23_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_23_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_23_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_23_basis }
+            set_variable = { name = bfl_con_23_default_basis value = var:bfl_con_23_basis }
+            set_variable = { name = bfl_con_23_basis value = 0 } set_variable = { name = bfl_con_23_state value = 4 }
+            set_variable = { name = bfl_con_23_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_24_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due } }
+            if = { limit = { var:bfl_dep_24_pool = 0 exists = var:bfl_dep_24_party var:bfl_dep_24_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_24_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_24_principal } } }
+            set_variable = { name = bfl_dep_24_default_principal value = var:bfl_dep_24_principal }
+            set_variable = { name = bfl_dep_24_default_interest value = var:bfl_dep_24_interest_due }
+            set_variable = { name = bfl_dep_24_principal value = 0 } set_variable = { name = bfl_dep_24_interest_due value = 0 }
+            set_variable = { name = bfl_dep_24_active value = 0 } change_variable = { name = bfl_dep_24_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_24_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_24_face add = var:bfl_bnd_24_due } }
+            if = { limit = { exists = var:bfl_bnd_24_holder var:bfl_bnd_24_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_24_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_24_basis } } }
+            set_variable = { name = bfl_bnd_24_default_face value = var:bfl_bnd_24_face }
+            set_variable = { name = bfl_bnd_24_default_due value = var:bfl_bnd_24_due }
+            set_variable = { name = bfl_bnd_24_active value = 0 } set_variable = { name = bfl_bnd_24_basis value = 0 }
+            change_variable = { name = bfl_bnd_24_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_24_active = 1 var:bfl_con_24_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_24_basis }
+            if = { limit = { exists = var:bfl_con_24_party var:bfl_con_24_party = { bfl_has_accounts = yes } }
+                var:bfl_con_24_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_24_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_24_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_24_basis }
+            set_variable = { name = bfl_con_24_default_basis value = var:bfl_con_24_basis }
+            set_variable = { name = bfl_con_24_basis value = 0 } set_variable = { name = bfl_con_24_state value = 4 }
+            set_variable = { name = bfl_con_24_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_25_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due } }
+            if = { limit = { var:bfl_dep_25_pool = 0 exists = var:bfl_dep_25_party var:bfl_dep_25_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_25_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_25_principal } } }
+            set_variable = { name = bfl_dep_25_default_principal value = var:bfl_dep_25_principal }
+            set_variable = { name = bfl_dep_25_default_interest value = var:bfl_dep_25_interest_due }
+            set_variable = { name = bfl_dep_25_principal value = 0 } set_variable = { name = bfl_dep_25_interest_due value = 0 }
+            set_variable = { name = bfl_dep_25_active value = 0 } change_variable = { name = bfl_dep_25_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_25_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_25_face add = var:bfl_bnd_25_due } }
+            if = { limit = { exists = var:bfl_bnd_25_holder var:bfl_bnd_25_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_25_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_25_basis } } }
+            set_variable = { name = bfl_bnd_25_default_face value = var:bfl_bnd_25_face }
+            set_variable = { name = bfl_bnd_25_default_due value = var:bfl_bnd_25_due }
+            set_variable = { name = bfl_bnd_25_active value = 0 } set_variable = { name = bfl_bnd_25_basis value = 0 }
+            change_variable = { name = bfl_bnd_25_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_25_active = 1 var:bfl_con_25_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_25_basis }
+            if = { limit = { exists = var:bfl_con_25_party var:bfl_con_25_party = { bfl_has_accounts = yes } }
+                var:bfl_con_25_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_25_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_25_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_25_basis }
+            set_variable = { name = bfl_con_25_default_basis value = var:bfl_con_25_basis }
+            set_variable = { name = bfl_con_25_basis value = 0 } set_variable = { name = bfl_con_25_state value = 4 }
+            set_variable = { name = bfl_con_25_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_26_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due } }
+            if = { limit = { var:bfl_dep_26_pool = 0 exists = var:bfl_dep_26_party var:bfl_dep_26_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_26_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_26_principal } } }
+            set_variable = { name = bfl_dep_26_default_principal value = var:bfl_dep_26_principal }
+            set_variable = { name = bfl_dep_26_default_interest value = var:bfl_dep_26_interest_due }
+            set_variable = { name = bfl_dep_26_principal value = 0 } set_variable = { name = bfl_dep_26_interest_due value = 0 }
+            set_variable = { name = bfl_dep_26_active value = 0 } change_variable = { name = bfl_dep_26_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_26_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_26_face add = var:bfl_bnd_26_due } }
+            if = { limit = { exists = var:bfl_bnd_26_holder var:bfl_bnd_26_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_26_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_26_basis } } }
+            set_variable = { name = bfl_bnd_26_default_face value = var:bfl_bnd_26_face }
+            set_variable = { name = bfl_bnd_26_default_due value = var:bfl_bnd_26_due }
+            set_variable = { name = bfl_bnd_26_active value = 0 } set_variable = { name = bfl_bnd_26_basis value = 0 }
+            change_variable = { name = bfl_bnd_26_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_26_active = 1 var:bfl_con_26_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_26_basis }
+            if = { limit = { exists = var:bfl_con_26_party var:bfl_con_26_party = { bfl_has_accounts = yes } }
+                var:bfl_con_26_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_26_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_26_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_26_basis }
+            set_variable = { name = bfl_con_26_default_basis value = var:bfl_con_26_basis }
+            set_variable = { name = bfl_con_26_basis value = 0 } set_variable = { name = bfl_con_26_state value = 4 }
+            set_variable = { name = bfl_con_26_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_27_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due } }
+            if = { limit = { var:bfl_dep_27_pool = 0 exists = var:bfl_dep_27_party var:bfl_dep_27_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_27_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_27_principal } } }
+            set_variable = { name = bfl_dep_27_default_principal value = var:bfl_dep_27_principal }
+            set_variable = { name = bfl_dep_27_default_interest value = var:bfl_dep_27_interest_due }
+            set_variable = { name = bfl_dep_27_principal value = 0 } set_variable = { name = bfl_dep_27_interest_due value = 0 }
+            set_variable = { name = bfl_dep_27_active value = 0 } change_variable = { name = bfl_dep_27_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_27_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_27_face add = var:bfl_bnd_27_due } }
+            if = { limit = { exists = var:bfl_bnd_27_holder var:bfl_bnd_27_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_27_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_27_basis } } }
+            set_variable = { name = bfl_bnd_27_default_face value = var:bfl_bnd_27_face }
+            set_variable = { name = bfl_bnd_27_default_due value = var:bfl_bnd_27_due }
+            set_variable = { name = bfl_bnd_27_active value = 0 } set_variable = { name = bfl_bnd_27_basis value = 0 }
+            change_variable = { name = bfl_bnd_27_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_27_active = 1 var:bfl_con_27_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_27_basis }
+            if = { limit = { exists = var:bfl_con_27_party var:bfl_con_27_party = { bfl_has_accounts = yes } }
+                var:bfl_con_27_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_27_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_27_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_27_basis }
+            set_variable = { name = bfl_con_27_default_basis value = var:bfl_con_27_basis }
+            set_variable = { name = bfl_con_27_basis value = 0 } set_variable = { name = bfl_con_27_state value = 4 }
+            set_variable = { name = bfl_con_27_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_28_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due } }
+            if = { limit = { var:bfl_dep_28_pool = 0 exists = var:bfl_dep_28_party var:bfl_dep_28_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_28_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_28_principal } } }
+            set_variable = { name = bfl_dep_28_default_principal value = var:bfl_dep_28_principal }
+            set_variable = { name = bfl_dep_28_default_interest value = var:bfl_dep_28_interest_due }
+            set_variable = { name = bfl_dep_28_principal value = 0 } set_variable = { name = bfl_dep_28_interest_due value = 0 }
+            set_variable = { name = bfl_dep_28_active value = 0 } change_variable = { name = bfl_dep_28_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_28_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_28_face add = var:bfl_bnd_28_due } }
+            if = { limit = { exists = var:bfl_bnd_28_holder var:bfl_bnd_28_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_28_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_28_basis } } }
+            set_variable = { name = bfl_bnd_28_default_face value = var:bfl_bnd_28_face }
+            set_variable = { name = bfl_bnd_28_default_due value = var:bfl_bnd_28_due }
+            set_variable = { name = bfl_bnd_28_active value = 0 } set_variable = { name = bfl_bnd_28_basis value = 0 }
+            change_variable = { name = bfl_bnd_28_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_28_active = 1 var:bfl_con_28_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_28_basis }
+            if = { limit = { exists = var:bfl_con_28_party var:bfl_con_28_party = { bfl_has_accounts = yes } }
+                var:bfl_con_28_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_28_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_28_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_28_basis }
+            set_variable = { name = bfl_con_28_default_basis value = var:bfl_con_28_basis }
+            set_variable = { name = bfl_con_28_basis value = 0 } set_variable = { name = bfl_con_28_state value = 4 }
+            set_variable = { name = bfl_con_28_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_29_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due } }
+            if = { limit = { var:bfl_dep_29_pool = 0 exists = var:bfl_dep_29_party var:bfl_dep_29_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_29_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_29_principal } } }
+            set_variable = { name = bfl_dep_29_default_principal value = var:bfl_dep_29_principal }
+            set_variable = { name = bfl_dep_29_default_interest value = var:bfl_dep_29_interest_due }
+            set_variable = { name = bfl_dep_29_principal value = 0 } set_variable = { name = bfl_dep_29_interest_due value = 0 }
+            set_variable = { name = bfl_dep_29_active value = 0 } change_variable = { name = bfl_dep_29_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_29_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_29_face add = var:bfl_bnd_29_due } }
+            if = { limit = { exists = var:bfl_bnd_29_holder var:bfl_bnd_29_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_29_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_29_basis } } }
+            set_variable = { name = bfl_bnd_29_default_face value = var:bfl_bnd_29_face }
+            set_variable = { name = bfl_bnd_29_default_due value = var:bfl_bnd_29_due }
+            set_variable = { name = bfl_bnd_29_active value = 0 } set_variable = { name = bfl_bnd_29_basis value = 0 }
+            change_variable = { name = bfl_bnd_29_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_29_active = 1 var:bfl_con_29_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_29_basis }
+            if = { limit = { exists = var:bfl_con_29_party var:bfl_con_29_party = { bfl_has_accounts = yes } }
+                var:bfl_con_29_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_29_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_29_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_29_basis }
+            set_variable = { name = bfl_con_29_default_basis value = var:bfl_con_29_basis }
+            set_variable = { name = bfl_con_29_basis value = 0 } set_variable = { name = bfl_con_29_state value = 4 }
+            set_variable = { name = bfl_con_29_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_30_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due } }
+            if = { limit = { var:bfl_dep_30_pool = 0 exists = var:bfl_dep_30_party var:bfl_dep_30_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_30_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_30_principal } } }
+            set_variable = { name = bfl_dep_30_default_principal value = var:bfl_dep_30_principal }
+            set_variable = { name = bfl_dep_30_default_interest value = var:bfl_dep_30_interest_due }
+            set_variable = { name = bfl_dep_30_principal value = 0 } set_variable = { name = bfl_dep_30_interest_due value = 0 }
+            set_variable = { name = bfl_dep_30_active value = 0 } change_variable = { name = bfl_dep_30_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_30_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_30_face add = var:bfl_bnd_30_due } }
+            if = { limit = { exists = var:bfl_bnd_30_holder var:bfl_bnd_30_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_30_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_30_basis } } }
+            set_variable = { name = bfl_bnd_30_default_face value = var:bfl_bnd_30_face }
+            set_variable = { name = bfl_bnd_30_default_due value = var:bfl_bnd_30_due }
+            set_variable = { name = bfl_bnd_30_active value = 0 } set_variable = { name = bfl_bnd_30_basis value = 0 }
+            change_variable = { name = bfl_bnd_30_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_30_active = 1 var:bfl_con_30_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_30_basis }
+            if = { limit = { exists = var:bfl_con_30_party var:bfl_con_30_party = { bfl_has_accounts = yes } }
+                var:bfl_con_30_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_30_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_30_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_30_basis }
+            set_variable = { name = bfl_con_30_default_basis value = var:bfl_con_30_basis }
+            set_variable = { name = bfl_con_30_basis value = 0 } set_variable = { name = bfl_con_30_state value = 4 }
+            set_variable = { name = bfl_con_30_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_31_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due } }
+            if = { limit = { var:bfl_dep_31_pool = 0 exists = var:bfl_dep_31_party var:bfl_dep_31_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_31_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_31_principal } } }
+            set_variable = { name = bfl_dep_31_default_principal value = var:bfl_dep_31_principal }
+            set_variable = { name = bfl_dep_31_default_interest value = var:bfl_dep_31_interest_due }
+            set_variable = { name = bfl_dep_31_principal value = 0 } set_variable = { name = bfl_dep_31_interest_due value = 0 }
+            set_variable = { name = bfl_dep_31_active value = 0 } change_variable = { name = bfl_dep_31_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_31_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_31_face add = var:bfl_bnd_31_due } }
+            if = { limit = { exists = var:bfl_bnd_31_holder var:bfl_bnd_31_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_31_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_31_basis } } }
+            set_variable = { name = bfl_bnd_31_default_face value = var:bfl_bnd_31_face }
+            set_variable = { name = bfl_bnd_31_default_due value = var:bfl_bnd_31_due }
+            set_variable = { name = bfl_bnd_31_active value = 0 } set_variable = { name = bfl_bnd_31_basis value = 0 }
+            change_variable = { name = bfl_bnd_31_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_31_active = 1 var:bfl_con_31_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_31_basis }
+            if = { limit = { exists = var:bfl_con_31_party var:bfl_con_31_party = { bfl_has_accounts = yes } }
+                var:bfl_con_31_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_31_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_31_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_31_basis }
+            set_variable = { name = bfl_con_31_default_basis value = var:bfl_con_31_basis }
+            set_variable = { name = bfl_con_31_basis value = 0 } set_variable = { name = bfl_con_31_state value = 4 }
+            set_variable = { name = bfl_con_31_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_dep_32_active = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due } }
+            if = { limit = { var:bfl_dep_32_pool = 0 exists = var:bfl_dep_32_party var:bfl_dep_32_party = { bfl_has_accounts = yes } }
+                var:bfl_dep_32_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_dep_32_principal } } }
+            set_variable = { name = bfl_dep_32_default_principal value = var:bfl_dep_32_principal }
+            set_variable = { name = bfl_dep_32_default_interest value = var:bfl_dep_32_interest_due }
+            set_variable = { name = bfl_dep_32_principal value = 0 } set_variable = { name = bfl_dep_32_interest_due value = 0 }
+            set_variable = { name = bfl_dep_32_active value = 0 } change_variable = { name = bfl_dep_32_generation add = 1 }
+        }
+if = { limit = { var:bfl_bnd_32_active ?= 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = { value = var:bfl_bnd_32_face add = var:bfl_bnd_32_due } }
+            if = { limit = { exists = var:bfl_bnd_32_holder var:bfl_bnd_32_holder = { bfl_has_accounts = yes } }
+                var:bfl_bnd_32_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_bnd_32_basis } } }
+            set_variable = { name = bfl_bnd_32_default_face value = var:bfl_bnd_32_face }
+            set_variable = { name = bfl_bnd_32_default_due value = var:bfl_bnd_32_due }
+            set_variable = { name = bfl_bnd_32_active value = 0 } set_variable = { name = bfl_bnd_32_basis value = 0 }
+            change_variable = { name = bfl_bnd_32_generation add = 1 }
+        }
+if = { limit = { var:bfl_con_32_active = 1 var:bfl_con_32_kind = 1 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_con_32_basis }
+            if = { limit = { exists = var:bfl_con_32_party var:bfl_con_32_party = { bfl_has_accounts = yes } }
+                var:bfl_con_32_party = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_con_32_basis } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_con_32_basis }
+            change_variable = { name = bfl_other_payables subtract = var:bfl_con_32_basis }
+            set_variable = { name = bfl_con_32_default_basis value = var:bfl_con_32_basis }
+            set_variable = { name = bfl_con_32_basis value = 0 } set_variable = { name = bfl_con_32_state value = 4 }
+            set_variable = { name = bfl_con_32_active value = 0 }
+            # The borrower's separate discounted debt survives collateral loss.
+        }
+if = { limit = { var:bfl_note_01_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_01_face }
+            if = { limit = { exists = var:bfl_note_01_holder var:bfl_note_01_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_01_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_01_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_01_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_01_face }
+            set_variable = { name = bfl_note_01_default_face value = var:bfl_note_01_face } set_variable = { name = bfl_note_01_face value = 0 }
+        }
+if = { limit = { var:bfl_note_02_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_02_face }
+            if = { limit = { exists = var:bfl_note_02_holder var:bfl_note_02_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_02_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_02_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_02_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_02_face }
+            set_variable = { name = bfl_note_02_default_face value = var:bfl_note_02_face } set_variable = { name = bfl_note_02_face value = 0 }
+        }
+if = { limit = { var:bfl_note_03_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_03_face }
+            if = { limit = { exists = var:bfl_note_03_holder var:bfl_note_03_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_03_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_03_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_03_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_03_face }
+            set_variable = { name = bfl_note_03_default_face value = var:bfl_note_03_face } set_variable = { name = bfl_note_03_face value = 0 }
+        }
+if = { limit = { var:bfl_note_04_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_04_face }
+            if = { limit = { exists = var:bfl_note_04_holder var:bfl_note_04_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_04_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_04_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_04_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_04_face }
+            set_variable = { name = bfl_note_04_default_face value = var:bfl_note_04_face } set_variable = { name = bfl_note_04_face value = 0 }
+        }
+if = { limit = { var:bfl_note_05_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_05_face }
+            if = { limit = { exists = var:bfl_note_05_holder var:bfl_note_05_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_05_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_05_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_05_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_05_face }
+            set_variable = { name = bfl_note_05_default_face value = var:bfl_note_05_face } set_variable = { name = bfl_note_05_face value = 0 }
+        }
+if = { limit = { var:bfl_note_06_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_06_face }
+            if = { limit = { exists = var:bfl_note_06_holder var:bfl_note_06_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_06_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_06_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_06_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_06_face }
+            set_variable = { name = bfl_note_06_default_face value = var:bfl_note_06_face } set_variable = { name = bfl_note_06_face value = 0 }
+        }
+if = { limit = { var:bfl_note_07_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_07_face }
+            if = { limit = { exists = var:bfl_note_07_holder var:bfl_note_07_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_07_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_07_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_07_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_07_face }
+            set_variable = { name = bfl_note_07_default_face value = var:bfl_note_07_face } set_variable = { name = bfl_note_07_face value = 0 }
+        }
+if = { limit = { var:bfl_note_08_face > 0 }
+            change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_note_08_face }
+            if = { limit = { exists = var:bfl_note_08_holder var:bfl_note_08_holder = { bfl_has_accounts = yes } }
+                var:bfl_note_08_holder = { change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_note_08_face } } }
+            change_variable = { name = bfl_cash_committed subtract = var:bfl_note_08_face }
+            change_variable = { name = bfl_notes_outstanding subtract = var:bfl_note_08_face }
+            set_variable = { name = bfl_note_08_default_face value = var:bfl_note_08_face } set_variable = { name = bfl_note_08_face value = 0 }
+        }
+if = { limit = { has_variable_map = bfl_native_claim_due }
+        every_key_in_variable_map = { variable = bfl_native_claim_due save_scope_as = bfl_default_creditor
+            scope:bfl_default_issuer = {
+                set_variable = { name = bfl_default_native_due value = "variable_map(bfl_native_claim_due|scope:bfl_default_creditor)" }
+                set_variable = { name = bfl_default_native_basis value = "variable_map(bfl_native_claim_basis|scope:bfl_default_creditor)" }
+                set_variable = { name = bfl_default_native_carry value = "variable_map(bfl_native_claim_carrying|scope:bfl_default_creditor)" }
+                if = { limit = { var:bfl_default_native_due > 0 }
+                    change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_default_native_due }
+                    scope:bfl_default_creditor = {
+                        change_variable = { name = bfl_native_estate_assets subtract = scope:bfl_default_issuer.var:bfl_default_native_carry }
+                        change_variable = { name = bfl_native_estate_claim_count subtract = 1 }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_loss_carryforward add = scope:bfl_default_issuer.var:bfl_default_native_basis } }
+                    }
+                    add_to_variable_map = { name = bfl_native_claim_default key = scope:bfl_default_creditor value = var:bfl_default_native_due }
+                    add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_default_creditor value = 0 }
+                    add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_default_creditor value = 0 }
+                    add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_default_creditor value = 0 }
+                }
+            }
+        }
+    }
+    change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_resolution_native_estate_total }
+    set_variable = { name = bfl_resolution_native_total value = 0 }
+    set_variable = { name = bfl_resolution_native_estate_total value = 0 }
+    every_in_global_list = { variable = bfl_resolution_institutions
+        if = { limit = { var:bfl_resolution_receiver ?= scope:bfl_default_issuer bfl_estate_receivable > 0 }
+            scope:bfl_default_issuer = { change_variable = { name = bfl_resolution_statutory_loss add = prev.var:bfl_resolution_receiver_due } }
+            change_variable = { name = bfl_loss_carryforward add = var:bfl_resolution_receiver_due }
+            set_variable = { name = bfl_resolution_receiver_default value = var:bfl_resolution_receiver_due }
+            set_variable = { name = bfl_resolution_receiver_due value = 0 }
+        }
+    }
+    bfl_default_discount_borrower = yes
+    # Unfunded operating expenses are junior and never become shareholder cash.
+    change_variable = { name = bfl_resolution_statutory_loss add = var:bfl_expense_arrears }
+    set_variable = { name = bfl_expense_arrears value = 0 }
+    bfl_release_bond_security = yes
+    change_variable = { name = bfl_resolution_revision add = 1 }
+    every_in_global_list = { variable = bfl_resolution_institutions limit = { bfl_has_accounts = yes }
+        bfl_refresh_asset_statement = yes bfl_evaluate_distress = yes }
+    }
+}
+bfl_default_discount_borrower = {
+if = { limit = { exists = var:bfl_discount_issuer }
+        save_scope_as = bfl_default_borrower var:bfl_discount_issuer = {
+    if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 1
+            var:bfl_con_01_party ?= scope:bfl_default_borrower exists = var:bfl_con_01_pledge }
+            var:bfl_con_01_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_01_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_01_discount_principal } }
+            set_variable = { name = bfl_con_01_discount_default value = var:bfl_con_01_discount_due }
+            set_variable = { name = bfl_con_01_discount_due value = 0 } set_variable = { name = bfl_con_01_discount_principal value = 0 }
+            remove_variable = bfl_con_01_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 2
+            var:bfl_con_02_party ?= scope:bfl_default_borrower exists = var:bfl_con_02_pledge }
+            var:bfl_con_02_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_02_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_02_discount_principal } }
+            set_variable = { name = bfl_con_02_discount_default value = var:bfl_con_02_discount_due }
+            set_variable = { name = bfl_con_02_discount_due value = 0 } set_variable = { name = bfl_con_02_discount_principal value = 0 }
+            remove_variable = bfl_con_02_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 3
+            var:bfl_con_03_party ?= scope:bfl_default_borrower exists = var:bfl_con_03_pledge }
+            var:bfl_con_03_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_03_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_03_discount_principal } }
+            set_variable = { name = bfl_con_03_discount_default value = var:bfl_con_03_discount_due }
+            set_variable = { name = bfl_con_03_discount_due value = 0 } set_variable = { name = bfl_con_03_discount_principal value = 0 }
+            remove_variable = bfl_con_03_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 4
+            var:bfl_con_04_party ?= scope:bfl_default_borrower exists = var:bfl_con_04_pledge }
+            var:bfl_con_04_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_04_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_04_discount_principal } }
+            set_variable = { name = bfl_con_04_discount_default value = var:bfl_con_04_discount_due }
+            set_variable = { name = bfl_con_04_discount_due value = 0 } set_variable = { name = bfl_con_04_discount_principal value = 0 }
+            remove_variable = bfl_con_04_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 5
+            var:bfl_con_05_party ?= scope:bfl_default_borrower exists = var:bfl_con_05_pledge }
+            var:bfl_con_05_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_05_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_05_discount_principal } }
+            set_variable = { name = bfl_con_05_discount_default value = var:bfl_con_05_discount_due }
+            set_variable = { name = bfl_con_05_discount_due value = 0 } set_variable = { name = bfl_con_05_discount_principal value = 0 }
+            remove_variable = bfl_con_05_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 6
+            var:bfl_con_06_party ?= scope:bfl_default_borrower exists = var:bfl_con_06_pledge }
+            var:bfl_con_06_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_06_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_06_discount_principal } }
+            set_variable = { name = bfl_con_06_discount_default value = var:bfl_con_06_discount_due }
+            set_variable = { name = bfl_con_06_discount_due value = 0 } set_variable = { name = bfl_con_06_discount_principal value = 0 }
+            remove_variable = bfl_con_06_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 7
+            var:bfl_con_07_party ?= scope:bfl_default_borrower exists = var:bfl_con_07_pledge }
+            var:bfl_con_07_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_07_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_07_discount_principal } }
+            set_variable = { name = bfl_con_07_discount_default value = var:bfl_con_07_discount_due }
+            set_variable = { name = bfl_con_07_discount_due value = 0 } set_variable = { name = bfl_con_07_discount_principal value = 0 }
+            remove_variable = bfl_con_07_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 8
+            var:bfl_con_08_party ?= scope:bfl_default_borrower exists = var:bfl_con_08_pledge }
+            var:bfl_con_08_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_08_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_08_discount_principal } }
+            set_variable = { name = bfl_con_08_discount_default value = var:bfl_con_08_discount_due }
+            set_variable = { name = bfl_con_08_discount_due value = 0 } set_variable = { name = bfl_con_08_discount_principal value = 0 }
+            remove_variable = bfl_con_08_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 9
+            var:bfl_con_09_party ?= scope:bfl_default_borrower exists = var:bfl_con_09_pledge }
+            var:bfl_con_09_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_09_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_09_discount_principal } }
+            set_variable = { name = bfl_con_09_discount_default value = var:bfl_con_09_discount_due }
+            set_variable = { name = bfl_con_09_discount_due value = 0 } set_variable = { name = bfl_con_09_discount_principal value = 0 }
+            remove_variable = bfl_con_09_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 10
+            var:bfl_con_10_party ?= scope:bfl_default_borrower exists = var:bfl_con_10_pledge }
+            var:bfl_con_10_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_10_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_10_discount_principal } }
+            set_variable = { name = bfl_con_10_discount_default value = var:bfl_con_10_discount_due }
+            set_variable = { name = bfl_con_10_discount_due value = 0 } set_variable = { name = bfl_con_10_discount_principal value = 0 }
+            remove_variable = bfl_con_10_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 11
+            var:bfl_con_11_party ?= scope:bfl_default_borrower exists = var:bfl_con_11_pledge }
+            var:bfl_con_11_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_11_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_11_discount_principal } }
+            set_variable = { name = bfl_con_11_discount_default value = var:bfl_con_11_discount_due }
+            set_variable = { name = bfl_con_11_discount_due value = 0 } set_variable = { name = bfl_con_11_discount_principal value = 0 }
+            remove_variable = bfl_con_11_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 12
+            var:bfl_con_12_party ?= scope:bfl_default_borrower exists = var:bfl_con_12_pledge }
+            var:bfl_con_12_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_12_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_12_discount_principal } }
+            set_variable = { name = bfl_con_12_discount_default value = var:bfl_con_12_discount_due }
+            set_variable = { name = bfl_con_12_discount_due value = 0 } set_variable = { name = bfl_con_12_discount_principal value = 0 }
+            remove_variable = bfl_con_12_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 13
+            var:bfl_con_13_party ?= scope:bfl_default_borrower exists = var:bfl_con_13_pledge }
+            var:bfl_con_13_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_13_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_13_discount_principal } }
+            set_variable = { name = bfl_con_13_discount_default value = var:bfl_con_13_discount_due }
+            set_variable = { name = bfl_con_13_discount_due value = 0 } set_variable = { name = bfl_con_13_discount_principal value = 0 }
+            remove_variable = bfl_con_13_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 14
+            var:bfl_con_14_party ?= scope:bfl_default_borrower exists = var:bfl_con_14_pledge }
+            var:bfl_con_14_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_14_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_14_discount_principal } }
+            set_variable = { name = bfl_con_14_discount_default value = var:bfl_con_14_discount_due }
+            set_variable = { name = bfl_con_14_discount_due value = 0 } set_variable = { name = bfl_con_14_discount_principal value = 0 }
+            remove_variable = bfl_con_14_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 15
+            var:bfl_con_15_party ?= scope:bfl_default_borrower exists = var:bfl_con_15_pledge }
+            var:bfl_con_15_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_15_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_15_discount_principal } }
+            set_variable = { name = bfl_con_15_discount_default value = var:bfl_con_15_discount_due }
+            set_variable = { name = bfl_con_15_discount_due value = 0 } set_variable = { name = bfl_con_15_discount_principal value = 0 }
+            remove_variable = bfl_con_15_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 16
+            var:bfl_con_16_party ?= scope:bfl_default_borrower exists = var:bfl_con_16_pledge }
+            var:bfl_con_16_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_16_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_16_discount_principal } }
+            set_variable = { name = bfl_con_16_discount_default value = var:bfl_con_16_discount_due }
+            set_variable = { name = bfl_con_16_discount_due value = 0 } set_variable = { name = bfl_con_16_discount_principal value = 0 }
+            remove_variable = bfl_con_16_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 17
+            var:bfl_con_17_party ?= scope:bfl_default_borrower exists = var:bfl_con_17_pledge }
+            var:bfl_con_17_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_17_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_17_discount_principal } }
+            set_variable = { name = bfl_con_17_discount_default value = var:bfl_con_17_discount_due }
+            set_variable = { name = bfl_con_17_discount_due value = 0 } set_variable = { name = bfl_con_17_discount_principal value = 0 }
+            remove_variable = bfl_con_17_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 18
+            var:bfl_con_18_party ?= scope:bfl_default_borrower exists = var:bfl_con_18_pledge }
+            var:bfl_con_18_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_18_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_18_discount_principal } }
+            set_variable = { name = bfl_con_18_discount_default value = var:bfl_con_18_discount_due }
+            set_variable = { name = bfl_con_18_discount_due value = 0 } set_variable = { name = bfl_con_18_discount_principal value = 0 }
+            remove_variable = bfl_con_18_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 19
+            var:bfl_con_19_party ?= scope:bfl_default_borrower exists = var:bfl_con_19_pledge }
+            var:bfl_con_19_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_19_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_19_discount_principal } }
+            set_variable = { name = bfl_con_19_discount_default value = var:bfl_con_19_discount_due }
+            set_variable = { name = bfl_con_19_discount_due value = 0 } set_variable = { name = bfl_con_19_discount_principal value = 0 }
+            remove_variable = bfl_con_19_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 20
+            var:bfl_con_20_party ?= scope:bfl_default_borrower exists = var:bfl_con_20_pledge }
+            var:bfl_con_20_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_20_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_20_discount_principal } }
+            set_variable = { name = bfl_con_20_discount_default value = var:bfl_con_20_discount_due }
+            set_variable = { name = bfl_con_20_discount_due value = 0 } set_variable = { name = bfl_con_20_discount_principal value = 0 }
+            remove_variable = bfl_con_20_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 21
+            var:bfl_con_21_party ?= scope:bfl_default_borrower exists = var:bfl_con_21_pledge }
+            var:bfl_con_21_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_21_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_21_discount_principal } }
+            set_variable = { name = bfl_con_21_discount_default value = var:bfl_con_21_discount_due }
+            set_variable = { name = bfl_con_21_discount_due value = 0 } set_variable = { name = bfl_con_21_discount_principal value = 0 }
+            remove_variable = bfl_con_21_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 22
+            var:bfl_con_22_party ?= scope:bfl_default_borrower exists = var:bfl_con_22_pledge }
+            var:bfl_con_22_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_22_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_22_discount_principal } }
+            set_variable = { name = bfl_con_22_discount_default value = var:bfl_con_22_discount_due }
+            set_variable = { name = bfl_con_22_discount_due value = 0 } set_variable = { name = bfl_con_22_discount_principal value = 0 }
+            remove_variable = bfl_con_22_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 23
+            var:bfl_con_23_party ?= scope:bfl_default_borrower exists = var:bfl_con_23_pledge }
+            var:bfl_con_23_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_23_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_23_discount_principal } }
+            set_variable = { name = bfl_con_23_discount_default value = var:bfl_con_23_discount_due }
+            set_variable = { name = bfl_con_23_discount_due value = 0 } set_variable = { name = bfl_con_23_discount_principal value = 0 }
+            remove_variable = bfl_con_23_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 24
+            var:bfl_con_24_party ?= scope:bfl_default_borrower exists = var:bfl_con_24_pledge }
+            var:bfl_con_24_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_24_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_24_discount_principal } }
+            set_variable = { name = bfl_con_24_discount_default value = var:bfl_con_24_discount_due }
+            set_variable = { name = bfl_con_24_discount_due value = 0 } set_variable = { name = bfl_con_24_discount_principal value = 0 }
+            remove_variable = bfl_con_24_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 25
+            var:bfl_con_25_party ?= scope:bfl_default_borrower exists = var:bfl_con_25_pledge }
+            var:bfl_con_25_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_25_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_25_discount_principal } }
+            set_variable = { name = bfl_con_25_discount_default value = var:bfl_con_25_discount_due }
+            set_variable = { name = bfl_con_25_discount_due value = 0 } set_variable = { name = bfl_con_25_discount_principal value = 0 }
+            remove_variable = bfl_con_25_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 26
+            var:bfl_con_26_party ?= scope:bfl_default_borrower exists = var:bfl_con_26_pledge }
+            var:bfl_con_26_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_26_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_26_discount_principal } }
+            set_variable = { name = bfl_con_26_discount_default value = var:bfl_con_26_discount_due }
+            set_variable = { name = bfl_con_26_discount_due value = 0 } set_variable = { name = bfl_con_26_discount_principal value = 0 }
+            remove_variable = bfl_con_26_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 27
+            var:bfl_con_27_party ?= scope:bfl_default_borrower exists = var:bfl_con_27_pledge }
+            var:bfl_con_27_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_27_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_27_discount_principal } }
+            set_variable = { name = bfl_con_27_discount_default value = var:bfl_con_27_discount_due }
+            set_variable = { name = bfl_con_27_discount_due value = 0 } set_variable = { name = bfl_con_27_discount_principal value = 0 }
+            remove_variable = bfl_con_27_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 28
+            var:bfl_con_28_party ?= scope:bfl_default_borrower exists = var:bfl_con_28_pledge }
+            var:bfl_con_28_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_28_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_28_discount_principal } }
+            set_variable = { name = bfl_con_28_discount_default value = var:bfl_con_28_discount_due }
+            set_variable = { name = bfl_con_28_discount_due value = 0 } set_variable = { name = bfl_con_28_discount_principal value = 0 }
+            remove_variable = bfl_con_28_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 29
+            var:bfl_con_29_party ?= scope:bfl_default_borrower exists = var:bfl_con_29_pledge }
+            var:bfl_con_29_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_29_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_29_discount_principal } }
+            set_variable = { name = bfl_con_29_discount_default value = var:bfl_con_29_discount_due }
+            set_variable = { name = bfl_con_29_discount_due value = 0 } set_variable = { name = bfl_con_29_discount_principal value = 0 }
+            remove_variable = bfl_con_29_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 30
+            var:bfl_con_30_party ?= scope:bfl_default_borrower exists = var:bfl_con_30_pledge }
+            var:bfl_con_30_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_30_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_30_discount_principal } }
+            set_variable = { name = bfl_con_30_discount_default value = var:bfl_con_30_discount_due }
+            set_variable = { name = bfl_con_30_discount_due value = 0 } set_variable = { name = bfl_con_30_discount_principal value = 0 }
+            remove_variable = bfl_con_30_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 31
+            var:bfl_con_31_party ?= scope:bfl_default_borrower exists = var:bfl_con_31_pledge }
+            var:bfl_con_31_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_31_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_31_discount_principal } }
+            set_variable = { name = bfl_con_31_discount_default value = var:bfl_con_31_discount_due }
+            set_variable = { name = bfl_con_31_discount_due value = 0 } set_variable = { name = bfl_con_31_discount_principal value = 0 }
+            remove_variable = bfl_con_31_pledge
+        }
+if = { limit = { scope:bfl_default_borrower.var:bfl_discount_slot = 32
+            var:bfl_con_32_party ?= scope:bfl_default_borrower exists = var:bfl_con_32_pledge }
+            var:bfl_con_32_pledge = { if = { limit = { bfl_has_accounts = yes }
+                change_variable = { name = bfl_loss_carryforward add = prev.var:bfl_con_32_discount_principal } } }
+            scope:bfl_default_borrower = { change_variable = { name = bfl_other_payables subtract = prev.var:bfl_con_32_discount_principal } }
+            set_variable = { name = bfl_con_32_discount_default value = var:bfl_con_32_discount_due }
+            set_variable = { name = bfl_con_32_discount_due value = 0 } set_variable = { name = bfl_con_32_discount_principal value = 0 }
+            remove_variable = bfl_con_32_pledge
+        }
+} remove_variable = bfl_discount_issuer }
+}

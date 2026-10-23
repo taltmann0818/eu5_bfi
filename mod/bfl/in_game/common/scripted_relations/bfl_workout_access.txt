@@ -1,0 +1,5 @@
+﻿bfl_workout_trade_access = { type = diplomacy relation_type = oneway
+    break_on_war = yes lifts_trade_protection = yes category = { offer = CATEGORY_ECONOMY_ACTIONS
+        request = CATEGORY_ECONOMY_ACTIONS cancellation = CATEGORY_ECONOMY_ACTIONS break = CATEGORY_ECONOMY_ACTIONS }
+    offer_enabled = { always = no } request_enabled = { always = no }
+}

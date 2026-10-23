@@ -144,15 +144,63 @@ def generate(common, effect, loc, write, tune):
     }'''
     common('scripted_effects', 'bank_operations', effect('bfl_settle_operating_expenses', operating)
            + effect('bfl_observe_bank_income', income))
-    autonomous = '''if = { limit = { bfl_can_originate_native_takeover = yes bfl_period > var:bfl_last_takeover_period }
+    common('scripted_triggers', 'takeover_strategy', '''
+        bfl_ai_takeover_candidate = {
+            country_exists = this country_type = location at_war = no
+            monthly_income_total > 0 monthly_balance >= 0 creditworthiness >= 0.50
+            total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt }
+            gold <= total_debt
+        }
+        # Loan scope; native actor is the purchasing bank. Quotes are risk
+        # estimates, never booked income. Keep a funded operating reserve.
+        bfl_ai_takeover_viable = {
+            scope:actor.bfl_free_cash >= { value = bank_loan_takeover_cost add = 100 }
+            bank_loan_takeover_cost <= { value = remaining_debt multiply = 1.25 }
+            bfl_takeover_monthly_margin >= 0.10
+        }
+    ''')
+    funding_rate = 'value = 0\n'
+    for i in range(1, 33):
+        funding_rate += f'''if = {{ limit = {{ var:bfl_dep_{i:02}_active ?= 1 }} min = var:bfl_dep_{i:02}_annual_rate }}
+            if = {{ limit = {{ var:bfl_bnd_{i:02}_active ?= 1 }} min = var:bfl_bnd_{i:02}_rate }}\n'''
+    funding_rate += 'every_loan = { min = loan_interest }\n'
+    common('script_values', 'takeover_strategy', effect('bfl_takeover_funding_rate', funding_rate) + '''
+        bfl_takeover_service_allowance = { value = 0.10
+            if = { limit = { var:bfl_native_credit_value <= 0 } add = 0.25 } }
+        bfl_takeover_monthly_margin = {
+            value = loan_amount multiply = loan_interest divide = 12
+            subtract = scope:actor.bfl_takeover_service_allowance
+            subtract = { value = bank_loan_takeover_cost multiply = scope:actor.bfl_takeover_funding_rate divide = 12 }
+            subtract = { value = bank_loan_takeover_cost subtract = remaining_debt min = 0 divide = months_left }
+        }
+        bfl_takeover_existing_exposure = { value = 0
+            every_lent_loan = { limit = { borrower = scope:bfl_party } add = remaining_debt }
+        }
+        bfl_takeover_prospective_exposure = { value = remaining_debt add = scope:actor.bfl_takeover_existing_exposure }
+    ''')
+    autonomous = '''if = { limit = { bfl_can_originate_native_takeover = yes
+        bfl_strategy_authorized = yes bfl_free_cash >= 100
+        bfl_period > var:bfl_last_takeover_period }
         save_scope_as = bfl_bank
         if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party } scope:bfl_party = { save_scope_as = bfl_saved_takeover_party } }
         set_variable = { name = bfl_last_takeover_period value = bfl_period }
         set_variable = { name = bfl_takeover_done value = 0 }
-        every_country = {
-            limit = { country_type = location num_loans > 0 NOT = { this = scope:bfl_bank } scope:bfl_bank = { var:bfl_takeover_done = 0 } }
-            save_scope_as = bfl_party
-            scope:bfl_bank = { if = { limit = { var:bfl_takeover_done = 0 } bfl_native_takeover = yes } }
+        set_variable = { name = bfl_takeover_reviewed value = 0 }
+        every_owned_building = {
+            limit = { building_type = building_type:banking_office building_level > 0
+                location = location.owner.capital
+                scope:bfl_bank.var:bfl_takeover_reviewed < 12
+                scope:bfl_bank.var:bfl_takeover_done = 0 }
+            location.owner = {
+                if = { limit = { num_loans > 0 bfl_ai_takeover_candidate = yes }
+                    save_scope_as = bfl_party
+                    scope:bfl_bank = {
+                        change_variable = { name = bfl_takeover_reviewed add = 1 }
+                        set_variable = bfl_takeover_ai_review bfl_native_takeover = yes
+                        remove_variable = bfl_takeover_ai_review
+                    }
+                }
+            }
         }
         if = { limit = { exists = scope:bfl_saved_takeover_party } scope:bfl_saved_takeover_party = { save_scope_as = bfl_party } }
     }'''

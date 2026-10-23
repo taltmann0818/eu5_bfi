@@ -9,7 +9,7 @@ def generate(common, effect, loc, write):
         gate = 'demand_deposit' if product == 1 else 'term_deposit'
         actions += f'''{key} = {{ type = owncountry ai_tick = never show_message = no
             potential = {{ scope:actor = {{ gold >= 1 }} }} allow = {{ scope:actor = {{ gold >= 1 }} }}
-            select_trigger = {{ looking_for_a = country target_flag = recipient name = choose_country
+            select_trigger = {{ looking_for_a = country target_flag = bfl_deposit_target name = choose_country
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ bfl_is_bank = yes NOT = {{ this = scope:actor }} }}
                 enabled = {{ bfl_can_originate_{gate} = yes var:bfl_accept_deposits = 1
@@ -18,7 +18,7 @@ def generate(common, effect, loc, write):
             select_trigger = {{ looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label
                 min = 1 max = scope:actor.gold step = 1 default = {{ value = 100 max = scope:actor.gold }} }}
             effect = {{ scope:actor = {{ save_scope_as = bfl_party }}
-                scope:recipient = {{ set_variable = {{ name = bfl_deposit_amount value = scope:deposit_amount }}
+                scope:bfl_deposit_target = {{ set_variable = {{ name = bfl_deposit_amount value = scope:deposit_amount }}
                     set_variable = {{ name = bfl_product value = {product} }}
                     scope:bfl_party = {{ set_variable = {{ name = bfl_pool value = 0 }} }}
                     bfl_commit_deposit = yes
@@ -77,25 +77,38 @@ def generate(common, effect, loc, write):
             }
         }
     }'''))
+    # Preserve the entry point for existing saves and focused checks. The M10
+    # strategy owns bounded branch/client selection, risk and the offer cadence.
     common('scripted_effects','automatic_credit_offers',effect('bfl_autonomous_credit_offer','''
-        if = { limit = { bfl_credit_management_enabled = yes bfl_can_originate_sovereign_credit = yes
-            bfl_free_cash >= 200 bfl_capital_headroom >= 100
+        if = { limit = { bfl_credit_management_enabled = yes
             OR = { NOT = { has_variable = bfl_auto_offer_period } bfl_period > var:bfl_auto_offer_period } }
             set_variable = { name = bfl_auto_offer_period value = bfl_period }
             set_variable = { name = bfl_auto_offer_sent value = 0 }
-            save_scope_as = bfl_auto_bank save_scope_as = bfl_credit_actor
-            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = bfl_credit_actor } }
-            every_country = {
-                limit = { is_ai = yes country_exists = this NOT = { this = scope:bfl_auto_bank }
-                    OR = { country_type = location bfl_is_company = yes }
-                    monthly_income_total > 0
-                    OR = { monthly_balance < 0 gold < { value = monthly_income_total subtract = monthly_balance multiply = 3 } }
-                    OR = { NOT = { has_variable = bfl_credit_offer_bank } bfl_period > var:bfl_credit_offer_expiry }
-                    NOT = { any_loan = { exists = owner owner = scope:bfl_auto_bank } }
-                    scope:bfl_auto_bank = { var:bfl_auto_offer_sent = 0 } }
-                save_scope_as = bfl_party
-                scope:bfl_auto_bank = { if = { limit = { var:bfl_auto_offer_sent = 0 bfl_credit_funding_available = yes }
-                    bfl_offer_native_credit = yes set_variable = { name = bfl_auto_offer_sent value = 1 } } }
+            bfl_run_strategy = yes
+            if = { limit = { var:bfl_strategy_action = 1 }
+                set_variable = { name = bfl_auto_offer_sent value = 1 } }
+        }
+    '''))
+    # Recovery services remain available after automation is switched off.
+    # Enter a workout only after insolvency persists into a later month.
+    common('scripted_effects','automatic_resolution',effect('bfl_automatic_resolution','''
+        if = { limit = { bfl_is_bank = yes var:bfl_state < 5
+            OR = { NOT = { has_variable = bfl_recovery_review_period } bfl_period > var:bfl_recovery_review_period } }
+            set_variable = { name = bfl_recovery_review_period value = bfl_period }
+            if = { limit = { var:bfl_state = 3 bfl_equity < 0 }
+                if = { limit = { has_variable = bfl_insolvent_since bfl_period > var:bfl_insolvent_since }
+                    bfl_begin_resolution = yes }
+                else_if = { limit = { NOT = { has_variable = bfl_insolvent_since } }
+                    set_variable = { name = bfl_insolvent_since value = bfl_period } }
+            }
+            else = { remove_variable = bfl_insolvent_since }
+            if = { limit = { var:bfl_state = 4 }
+                bfl_liquidate_resolution_assets = yes
+                bfl_distribute_resolution_cash = yes
+                bfl_pay_resolution_guarantee = yes
+                bfl_resume_after_resolution = yes
+                if = { limit = { bfl_can_conclude_liquidation = yes } bfl_conclude_liquidation = yes }
+                if = { limit = { bfl_can_close_resolution = yes } bfl_close_resolution = yes }
             }
         }
     '''))

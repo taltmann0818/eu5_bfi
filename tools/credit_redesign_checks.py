@@ -2,6 +2,7 @@
 
 
 def checks(check):
+    from m8_monetary_suite import grant
     body = ''.join(f'c:FLO = {{ bfl_redeem_sovereign_bond_{i:02} = yes }}\n' for i in range(1,33))
     body += '''c:FLO = { set_gold = 10000 bfl_initialize_bonds = yes
         set_variable = { name = bfl_bond_financing value = 0 }
@@ -71,8 +72,13 @@ def checks(check):
         set_variable = { name = bfl_cash_committed value = 0 }
         set_variable = { name = bfl_state value = 0 }
         set_variable = { name = bfl_profile value = 1 }
-        remove_variable = bfl_auto_offer_period }
+        remove_variable = bfl_auto_offer_period
+        bfl_initialize_strategy = yes
+        set_variable = { name = bfl_strategy_last value = 0 }
+        remove_variable = bfl_strategy_credit_after }
     '''
+    # M10 selects existing branch clients rather than scanning the world.
+    body += grant('banking_office', 'PRZ', 'GEN')
     body += check('automatic_lender_fixture_has_authority_and_capacity','c:PRZ = { bfl_credit_management_enabled = yes bfl_can_originate_sovereign_credit = yes bfl_credit_funding_available = yes bfl_free_cash >= 200 }')
     body += 'c:PRZ = { bfl_autonomous_credit_offer = yes }\n'
     body += '''c:PRZ = { set_variable = { name = bfi_auto_debug_cash value = gold } }
@@ -86,4 +92,15 @@ def checks(check):
     body += check('automatic_offer_creates_native_loan_after_consent','c:PRZ = { gold = 9900 any_lent_loan = { loan_amount = 100 is_bond = no } }')
     body += 'c:PRZ = { bfl_autonomous_credit_offer = yes }\n'
     body += check('automatic_offers_are_bounded_per_month','c:PRZ = { gold = 9900 } NOT = { any_country = { exists = var:bfl_credit_offer_bank var:bfl_credit_offer_bank = c:PRZ } }')
+    body += '''c:ACC = { set_gold = 0 set_variable = { name = bfl_other_payables value = 20000 }
+        set_variable = { name = bfl_state value = 3 }
+        set_variable = { name = bfl_insolvent_since value = { value = bfl_period subtract = 1 } }
+        remove_variable = bfl_recovery_review_period
+        bfl_automatic_resolution = yes }
+    '''
+    body += check('persistent_insolvency_enters_automatic_workout_without_forgiving_claims',
+        'c:ACC = { var:bfl_state = 4 gold = 0 var:bfl_other_payables = 20000 var:bfl_accept_deposits = 0 }')
+    body += 'c:ACC = { bfl_automatic_resolution = yes }\n'
+    body += check('automatic_recovery_replay_preserves_unfunded_claims',
+        'c:ACC = { var:bfl_state = 4 gold = 0 var:bfl_other_payables = 20000 }')
     return body

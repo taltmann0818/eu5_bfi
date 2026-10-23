@@ -1,0 +1,43 @@
+﻿bfl_ai_build_branches = {
+if = { limit = { bfl_can_conduct_business = yes is_ai = yes
+    bfl_free_cash >= bfl_branch_budget bfl_capital_headroom >= bfl_branch_budget
+    NOT = { any_owned_building = { building_type = building_type:banking_office building_levels_under_construction > 0 } }
+    OR = { NOT = { has_variable = bfl_branch_last_order } bfl_period >= { value = var:bfl_branch_last_order add = 3 } }
+}
+    save_scope_as = bfl_branch_builder
+    save_scope_as = actor
+    remove_variable = bfl_branch_candidate
+    set_variable = { name = bfl_branch_best_score value = 0 }
+    set_variable = { name = bfl_branch_reviewed value = 0 }
+    # A live charter needs its controller's capital connection before
+    # expanding elsewhere. All native construction guards still apply.
+    if = { limit = { bfl_has_valid_controller = yes overlord = { bfl_branch_site = yes } }
+        overlord = { save_scope_as = bfl_branch_host }
+        set_variable = { name = bfl_branch_candidate value = scope:bfl_branch_host }
+    }
+    else_if = { limit = { has_variable = bfl_monthly_net_income var:bfl_monthly_net_income > 1 }
+    # Refresh one shared catalogue per quarter, rather than scanning
+    # every country separately for every bank. Score at most 12 sites.
+    bfl_refresh_branch_hosts = yes
+    every_in_global_list = { variable = bfl_branch_hosts
+        limit = { scope:bfl_branch_builder.var:bfl_branch_reviewed < 12 bfl_branch_site = yes }
+        scope:bfl_branch_builder = { change_variable = { name = bfl_branch_reviewed add = 1 } }
+        if = { limit = { bfl_branch_credit_score > scope:bfl_branch_builder.var:bfl_branch_best_score }
+            save_scope_as = bfl_branch_host
+            scope:bfl_branch_builder = {
+                set_variable = { name = bfl_branch_candidate value = scope:bfl_branch_host }
+                set_variable = { name = bfl_branch_best_score value = scope:bfl_branch_host.bfl_branch_credit_score }
+            }
+        }
+    }
+    }
+    if = { limit = { exists = var:bfl_branch_candidate }
+        var:bfl_branch_candidate.capital = {
+            construct_building = { building_type = building_type:banking_office
+                owner = scope:bfl_branch_builder payer = scope:bfl_branch_builder
+                cost_multiplier = 1 cost_multiplier_reason = bfl_branch_construction }
+        }
+        set_variable = { name = bfl_branch_last_order value = bfl_period }
+    }
+}
+}

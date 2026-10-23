@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "token": "bc73fa5310804094ba5574d36de3007b",
+  "runtime_sha256": "d4e35f7142991be8a58c827f83e894c790b175e50f0ca9f9f5b52041ce1d48eb",
+  "results": {
+    "forced_project_has_actual_paid_native_cargo": "PASS",
+    "accepted_operator_identity_is_registered": "PASS",
+    "pre_delivery_liquidation_returns_actual_cargo_to_source_market": "PASS",
+    "capital_recovery_and_loss_equal_actual_acquisition_cost": "PASS",
+    "liquidation_releases_operation_identity_and_sale_authority": "PASS",
+    "forced_project_liquidation_cannot_replay_cash_or_stock": "PASS",
+    "forced_project_stays_settled_next_month": "PASS",
+    "forced_project_cost_and_settlement_survive_reload": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "d4cbb1d0bfcd3baa18fea641a00b0a580f8718603e4e823807beba688f2514ac",
+  "assertions": 8,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

@@ -10,8 +10,10 @@ def generate(common, effect, loc, write):
         'trade_receipts': 0, 'facility_count': 0, 'project_state': 0,
         'project_cost': 0, 'project_progress': 0, 'opening_equity': 0,
         'last_trade': 0, 'statement_count': 0, 'income_period': 0,
+        'commenda_income': 0,
     }
     registration = '''if = { limit = { bfl_is_company = yes }
+        bfl_register_resolution_institution = yes
         # Schema 1 saves acquire fields without resetting their cash or policy.
     '''
     for field, value in defaults.items():
@@ -40,6 +42,7 @@ def generate(common, effect, loc, write):
         NOT = { has_variable = bfl_company_guard }
     ''')
     triggers += effect('bfl_company_operating', '''bfl_company_authority = yes
+        NOT = { var:bfl_state ?= 4 } NOT = { var:bfl_state ?= 5 }
         var:bfl_company_mandate > 0
         any_owned_building = { building_type = building_type:trade_company_headquarters }
         gold > var:bfl_company_buffer
@@ -82,6 +85,7 @@ def generate(common, effect, loc, write):
     common('scripted_triggers', 'company_operations', triggers)
     values = effect('bfl_company_available', '''value = gold subtract = var:bfl_company_buffer
         subtract = var:bfl_company_reinvestment
+        if = { limit = { has_variable = bfl_venture_bank NOT = { var:bfl_venture_activity_schema ?= 2 } } subtract = var:bfl_venture_remaining }
         # Reserve the complete remaining native claim, not only this month's coupon.
         every_loan = { subtract = remaining_debt }
         if = { limit = { var:bfl_company_project_state = 1 } subtract = var:bfl_company_venture_budget }
@@ -205,6 +209,7 @@ def generate(common, effect, loc, write):
         set_variable = { name = bfl_company_trade_receipts value = monthly_trade_income }
         set_variable = { name = bfl_company_dividend value = 0 }
         set_variable = { name = bfl_company_verified_profit value = 0 }
+        set_variable = { name = bfl_company_commenda_income value = 0 }
         if = { limit = { var:bfl_company_native_net < 0 }
             change_variable = { name = bfl_company_loss add = { value = var:bfl_company_native_net multiply = -1 } }
         }
@@ -213,6 +218,17 @@ def generate(common, effect, loc, write):
                 value = var:bfl_company_route_profit max = var:bfl_company_trade_receipts
                 max = var:bfl_company_native_net min = 0 } }
         }
+        # One exclusive retained-trade cutoff before any equity distribution.
+        bfl_service_commenda_operator = yes
+        if = { limit = { var:bfl_venture_excluded_period ?= bfl_period }
+            change_variable = { name = bfl_company_verified_profit subtract = var:bfl_venture_excluded }
+            set_variable = { name = bfl_company_verified_profit value = { value = var:bfl_company_verified_profit min = 0 } } }
+        if = { limit = { has_variable = bfl_venture_company_surplus var:bfl_venture_company_surplus > 0 }
+            set_variable = { name = bfl_company_commenda_income value = var:bfl_venture_company_surplus }
+            change_variable = { name = bfl_company_verified_profit add = var:bfl_venture_company_surplus }
+            set_variable = { name = bfl_venture_company_surplus value = 0 } }
+        # Deferred operator surplus is company income too: apply the common
+        # carried-loss offset after every eligible company receipt is included.
         set_variable = { name = bfl_company_loss_offset value = {
             value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
         change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
@@ -239,6 +255,7 @@ def generate(common, effect, loc, write):
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
             set_variable = { name = bfl_company_last_period value = bfl_period }
             bfl_observe_company_operations = yes bfl_settle_company_income = yes
+            bfl_run_company_strategy = yes
             bfl_record_exchange_history = yes
             change_variable = { name = bfl_company_statement_count add = 1 }
             if = { limit = { var:bfl_company_project_state = 1

@@ -1,0 +1,8 @@
+﻿bfl_record_feedback = {
+if = { limit = { NOT = { has_variable = bfl_feedback_sequence } }
+    set_variable = { name = bfl_feedback_sequence value = 0 } }
+change_variable = { name = bfl_feedback_sequence add = 1 }
+set_variable = { name = bfl_feedback_kind value = $KIND$ }
+set_variable = { name = bfl_feedback_amount value = $AMOUNT$ }
+set_variable = { name = bfl_feedback_period value = bfl_period }
+}

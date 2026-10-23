@@ -3,9 +3,45 @@
   "game_version": "1.4.1",
   "steam_build": "25905365",
   "cmf_version": "2.5.0",
-  "scope": "Fresh isolated CMF-only native Florence startup, no BFI or test overlay. Same 32 localized-text signatures occur with BFI. Source hashes are pinned in baseline.json. This is a narrowly scoped startup diagnostic baseline, not a compatibility or gameplay pass.",
+  "scope": "The original 32 signatures come from fresh isolated CMF-only native Florence startup, no BFI or test overlay. Three additional concepts (economy bankrupt/maintenance and Credit loan) are source-verified as unchanged native markup; see source_verified_additions and per-signature source_verified annotations. Source hashes are pinned in baseline.json. This is a narrowly scoped native diagnostic baseline, not a compatibility or gameplay pass.",
+  "source_verified_additions": [
+    {
+      "recorded": "2026-10-20",
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[bankrupt|e]",
+      "native_line": 880,
+      "generated_line": 536,
+      "reason": "Exact unchanged native concept_link markup and GetConceptTexture('bankrupt') block; observed in final-runtime M6 policy campaign 821c1eedeed3463ba731b9f719a97e25. Only the exact localized-text signature and its same-location property diagnostic are classified as native."
+    },
+    {
+      "recorded": "2026-10-20",
+      "file": "gui/credit.gui",
+      "localized_text": "[loan|e]",
+      "reason": "2026-10-20: native credit.gui:265 and generated credit.gui:266, unchanged concept_link markup. Observed M5 bd3ffff9765e45148da2388001d1e485; historical unbaselined occurrence remains documented in 2026-10-15-m0-repeatability-limitations.json."
+    },
+    {
+      "recorded": "2026-10-20",
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[maintenance|E]",
+      "reason": "2026-10-20: native economy_lateralview.gui:2454 and generated economy_lateralview.gui:2125, unchanged concept_link markup. Observed M5 bd3ffff9765e45148da2388001d1e485."
+    }
+  ],
   "log_sha256": "9769062ce1976c8838aecea6cdadede1628a2a0871b1e33dd9b0e55c4dd68430",
   "signatures": [
+    {
+      "file": "gui/credit.gui",
+      "localized_text": "[loan|e]",
+      "source_verified": "2026-10-20: native credit.gui:265 and generated credit.gui:266, unchanged concept_link markup. Observed M5 bd3ffff9765e45148da2388001d1e485; historical unbaselined occurrence remains documented in 2026-10-15-m0-repeatability-limitations.json."
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[maintenance|E]",
+      "source_verified": "2026-10-20: native economy_lateralview.gui:2454 and generated economy_lateralview.gui:2125, unchanged concept_link markup. Observed M5 bd3ffff9765e45148da2388001d1e485."
+    },
+    {
+      "file": "gui/economy_lateralview.gui",
+      "localized_text": "[bankrupt|e]"
+    },
     {
       "file": "gui/credit.gui",
       "localized_text": "LOANS_SCROLL_LIST_EMPTY"

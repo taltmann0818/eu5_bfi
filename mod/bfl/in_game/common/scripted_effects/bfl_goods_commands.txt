@@ -1,0 +1,43 @@
+﻿bfl_accept_goods_quote = {
+if = { limit = { exists = var:bfl_goods_quote_bank country_exists = var:bfl_goods_quote_bank }
+        save_scope_as = bfl_goods_party var:bfl_goods_quote_bank = { save_scope_as = bfl_goods_bank
+    if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 1 } bfl_accept_goods_01 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 2 } bfl_accept_goods_02 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 3 } bfl_accept_goods_03 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 4 } bfl_accept_goods_04 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 5 } bfl_accept_goods_05 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 6 } bfl_accept_goods_06 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 7 } bfl_accept_goods_07 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 8 } bfl_accept_goods_08 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 9 } bfl_accept_goods_09 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 10 } bfl_accept_goods_10 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 11 } bfl_accept_goods_11 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 12 } bfl_accept_goods_12 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 13 } bfl_accept_goods_13 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 14 } bfl_accept_goods_14 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 15 } bfl_accept_goods_15 = yes }
+if = { limit = { scope:bfl_goods_party.var:bfl_goods_quote_slot = 16 } bfl_accept_goods_16 = yes }
+} }
+}
+
+        bfl_accept_goods_branch = { if = { limit = { exists = var:bfl_goods_branch_bank
+            country_exists = var:bfl_goods_branch_bank
+            OR = { var:bfl_goods_branch_bank = this AND = { bfl_has_management = yes var:bfl_bank = var:bfl_goods_branch_bank } } }
+            var:bfl_goods_branch_bank = { if = { limit = {
+                exists = var:bfl_goods_host_offer country_exists = var:bfl_goods_host_offer
+                NOT = { is_at_war_with = var:bfl_goods_host_offer }
+                var:bfl_goods_host_offer = { any_owned_building = { building_type = building_type:customs_house building_level > 0 } }
+                OR = { NOT = { exists = var:bfl_goods_host } var:bfl_goods_host = var:bfl_goods_host_offer }
+            }
+                bfl_initialize_goods = yes
+                set_variable = { name = bfl_goods_host value = var:bfl_goods_host_offer }
+                set_variable = { name = bfl_goods_branch_market value = var:bfl_goods_host.capital.market }
+                set_variable = { name = bfl_goods_branch_due value = { value = bfl_period add = 12 } }
+                set_variable = { name = bfl_branch_01_active value = 1 }
+                set_variable = { name = bfl_branch_01_host value = var:bfl_goods_host }
+                set_variable = { name = bfl_branch_01_market value = var:bfl_goods_branch_market }
+                set_variable = { name = bfl_branch_01_fee value = 1 }
+                set_variable = { name = bfl_branch_01_state value = 1 }
+                remove_variable = bfl_goods_host_offer
+            } }
+        } }

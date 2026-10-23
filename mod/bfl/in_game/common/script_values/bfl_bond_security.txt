@@ -1,0 +1,4 @@
+﻿bfl_revenue_available = { value = gold
+    if = { limit = { bfl_has_accounts = yes }
+        subtract = bfl_resolution_other_reserves subtract = bfl_resolution_held }
+    min = 0 }

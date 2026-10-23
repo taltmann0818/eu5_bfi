@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "token": "5adcb43d10574623b71c069ba19b9064",
+  "runtime_sha256": "d4e35f7142991be8a58c827f83e894c790b175e50f0ca9f9f5b52041ce1d48eb",
+  "results": {
+    "legacy_inventory_is_backed_by_actual_native_purchase": "PASS",
+    "destroyed_inventory_keeps_its_legal_receiver": "PASS",
+    "retained_inventory_custody_is_accessible": "PASS",
+    "direct_native_sale_can_settle_dead_country_custody": "PASS",
+    "destroyed_bank_sells_actual_stock_without_origination_research": "PASS",
+    "physical_liquidation_replay_cannot_create_proceeds": "PASS",
+    "receiver_gets_same_deposit_and_bond_terms": "PASS",
+    "equity_transfer_preserves_total_units_and_holder_rights": "PASS",
+    "all_transferred_assets_have_one_separate_receiver_obligation": "PASS",
+    "asset_transfer_replay_cannot_duplicate_receiver_debt": "PASS",
+    "receiver_pays_actual_cash_for_transferred_assets": "PASS",
+    "native_company_has_real_hq_and_registered_owners": "PASS",
+    "company_last_building_preserves_cash_and_owner_units": "PASS",
+    "company_native_lender_survives_as_one_estate_claim": "PASS",
+    "native_creditor_is_paid_before_company_shareholders": "PASS",
+    "settled_company_estate_closes_with_funded_owner_distribution": "PASS",
+    "company_closure_replay_cannot_pay_owners_twice": "PASS",
+    "destroyed_bank_and_company_remain_separate_next_month": "PASS",
+    "asset_receivers_and_closed_company_survive_reload": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "209ab9f2d375479c1f2c1426ab9efd62f60b22a0d88f79782d2f09f273b31c81",
+  "assertions": 19,
+  "reload_assertions": 1,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

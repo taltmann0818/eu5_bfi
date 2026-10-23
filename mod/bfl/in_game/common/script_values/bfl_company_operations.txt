@@ -1,6 +1,7 @@
 ﻿bfl_company_available = {
 value = gold subtract = var:bfl_company_buffer
         subtract = var:bfl_company_reinvestment
+        if = { limit = { has_variable = bfl_venture_bank NOT = { var:bfl_venture_activity_schema ?= 2 } } subtract = var:bfl_venture_remaining }
         # Reserve the complete remaining native claim, not only this month's coupon.
         every_loan = { subtract = remaining_debt }
         if = { limit = { var:bfl_company_project_state = 1 } subtract = var:bfl_company_venture_budget }

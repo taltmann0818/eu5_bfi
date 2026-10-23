@@ -1,0 +1,261 @@
+{
+  "date": "2026-10-19",
+  "passed": true,
+  "game_version": "1.4.1",
+  "steam_build": "25905365",
+  "cmf_version": "2.5.0",
+  "resolution": [
+    2560,
+    1440
+  ],
+  "language": "English",
+  "gui_scale": "Native default (GUI settings empty)",
+  "debug_mode": false,
+  "current_runtime_sha256": "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6",
+  "observations": 21,
+  "captures": 21,
+  "checks": [
+    {
+      "path": "docs/screenshots/2026-10-19-m7-accepted-capital.png",
+      "note": "Normal acceptance funds the fourth project: Bardi cash 9600, total assets 10500 unchanged, risk basis 400/four active, Florence wallet 5000 after receiving 100.",
+      "sha256": "f89868bedd4881339bda892b06c1ddf005a500eaceb4f3acb701be79d88c44c4",
+      "captured_at": "2026-10-19T19:14:59.860Z",
+      "runtime_sha256": "0f381f7417a375a46971d7265a9410e94c33a0f94d911c1b357d1403c0569ad4",
+      "fixture_token": "e6effe63831743a1ab077895449d72d0",
+      "fixture_sha256": "77cc51f8f146b32277e213af5ad1b652c36f6a3ab6b6748ea5ef580ff9fe42c6",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-operator-selector.png",
+      "note": "Native offer selector is searchable, uses native country flags/names and explains that capital moves only on accepted terms. Opened and cancelled without funding.",
+      "sha256": "f9bc71b87f732724d3e5f7f2913aefcb18266fca4fa04dc759043af797c2c4d8",
+      "captured_at": "2026-10-19T19:15:12.199Z",
+      "runtime_sha256": "0f381f7417a375a46971d7265a9410e94c33a0f94d911c1b357d1403c0569ad4",
+      "fixture_token": "e6effe63831743a1ab077895449d72d0",
+      "fixture_sha256": "77cc51f8f146b32277e213af5ad1b652c36f6a3ab6b6748ea5ef580ff9fe42c6",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-empty-card.png",
+      "note": "Disposable empty display state: zero basis and zero active ventures, compact card and Terms icon remain visible with an enabled offer.",
+      "sha256": "de7772f92dc4bcb80ed00af22c9c5356598e3229b29143455658fff9aa6719a8",
+      "captured_at": "2026-10-19T19:16:43.530Z",
+      "runtime_sha256": "0f381f7417a375a46971d7265a9410e94c33a0f94d911c1b357d1403c0569ad4",
+      "fixture_token": "e6effe63831743a1ab077895449d72d0",
+      "fixture_sha256": "77cc51f8f146b32277e213af5ad1b652c36f6a3ab6b6748ea5ef580ff9fe42c6",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-empty-tooltip.png",
+      "note": "Empty tooltip gives next-step guidance and explains capital recovery, realized receipts and closed-row history. No phantom operator appears.",
+      "sha256": "0b7b5f371a439d5f5b6e1e9bb0d636a511fa2c2cee025c483e4562828ca56b91",
+      "captured_at": "2026-10-19T19:16:56.441Z",
+      "runtime_sha256": "0f381f7417a375a46971d7265a9410e94c33a0f94d911c1b357d1403c0569ad4",
+      "fixture_token": "e6effe63831743a1ab077895449d72d0",
+      "fixture_sha256": "77cc51f8f146b32277e213af5ad1b652c36f6a3ab6b6748ea5ef580ff9fe42c6",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-locked-requirements.png",
+      "note": "Final build: Discovery charter without Commenda research shows a locked hint and disabled Offer. Clicking it leaves the panel closed and bank cash at 10000; readable requirements remain available.",
+      "sha256": "dbdbb2afce632c6bd7be2a4f490617fb160d6c191bd369056cc3c2c69270f219",
+      "captured_at": "2026-10-19T19:28:33.890Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-compact-card.png",
+      "note": "Final runtime: 800 capital at risk, eight active operators, 9200 bank cash; full-capacity Offer is disabled and clicking leaves the panel closed.",
+      "sha256": "8e94c38d0a066813158b4b25fe4bb92d03c8c4a5d7a66a7d6adb705bbee6f2ca",
+      "captured_at": "2026-10-19T19:32:20.719Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-terms-changed.png",
+      "note": "Clicked all three future-offer controls: bilateral equal surplus, 24 months, 200 gold. Existing eight agreements remain 800 basis and bank cash 9200.",
+      "sha256": "5f939c9f1de6180e36b02e0e82bfcbed841977d9a2b6c1c11e5a3ccdaebde4a9",
+      "captured_at": "2026-10-19T19:33:26.534Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-ledger-top.png",
+      "note": "Final clean operator headings; Genoa and Venice retain 100 basis, 75% bank surplus and 12 months after changing future terms; Pisa is the third entry.",
+      "sha256": "49b4f9ef5aeee527e79a7ac210a16f3bbc71c789188629c19c803cf0e3f98830",
+      "captured_at": "2026-10-19T19:33:43.520Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-ledger-lucca.png",
+      "note": "Fourth operator Lucca and fifth Siena remain active at 100 basis, 75% / 12 months, with zero returned/profit/loss.",
+      "sha256": "44bb65b1e7f140d0f3c340d67b2df0f8ae18a86704b7fe4a1cf3a9cd7902858b",
+      "captured_at": "2026-10-19T19:34:02.554Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-ledger-pisa.png",
+      "note": "Third operator Pisa and fourth Lucca: 100 basis, no returns/profit/loss, original 75% / 12-month agreement.",
+      "sha256": "fb49518280c9d6ead5540beac73a0e2356fd87095a55aac11da910a1823ff44f",
+      "captured_at": "2026-10-19T19:34:14.255Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-ledger-middle.png",
+      "note": "Fifth Siena and sixth Papal States retain original accepted terms and readable status.",
+      "sha256": "69fa1cc2dad12103dbb8bd563499075aa3bceff11b5e70d0007ad572d740f415",
+      "captured_at": "2026-10-19T19:34:24.625Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-ledger-bottom.png",
+      "note": "Seventh Naples and eighth Savoy remain accessible at the end of the native scroll area with all capital/return/term/profit/loss/status fields.",
+      "sha256": "e1124ef1ac63961e6bd4a75c2ffef0e7c9208fb39b9fdbb69b12e96f05a79208",
+      "captured_at": "2026-10-19T19:34:35.416Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-settlement-capital-profit-loss.png",
+      "note": "Controlled UI fixture: Genoa closed with 100 returned / 18.75 profit / 0 loss; Venice closed with 50 returned / 0 profit / 50 loss; Pisa remains 100 active basis. These are seeded outcomes, not natural campaign returns.",
+      "sha256": "4c346a82064ee4df1870196a38211a481b1a481bcdd7d7e5f31aa1cb45fbeb5b",
+      "captured_at": "2026-10-19T19:35:51.688Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-independent-bank.png",
+      "note": "Independent Bardi player sees own bank: 9700 cash, 300 basis, three inherited active agreements, painted icons and enabled Offer.",
+      "sha256": "ae9ccb2a9093d03ab6a0f7b403dd399fc996cd9e925f22c1e8e383b3700ce389",
+      "captured_at": "2026-10-19T19:37:17.743Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "47a9cd25df0140d5bd0029f0dbf54df0",
+      "fixture_sha256": "31f7993b13df45656da2cce0cc6479d7ce635d7a1ae3979a7c85d57ab249a891",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-independent-selector.png",
+      "note": "Independent bank opens native searchable operator selector with localized capital-only-on-acceptance guidance.",
+      "sha256": "f7552e425ffb826263f29dd71bf7de6339b826c61b535384c4ac98bfee919882",
+      "captured_at": "2026-10-19T19:37:28.724Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "47a9cd25df0140d5bd0029f0dbf54df0",
+      "fixture_sha256": "31f7993b13df45656da2cce0cc6479d7ce635d7a1ae3979a7c85d57ab249a891",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-selector-cancelled.png",
+      "note": "After cancelling the independent bank selector, 9700 cash, 10500 assets and three active / 300 basis remain unchanged.",
+      "sha256": "a58880c53cbd90e88e23f93ca8524c33ec092bd2d53c8bc6f807b32e312943f4",
+      "captured_at": "2026-10-19T19:37:55.790Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "47a9cd25df0140d5bd0029f0dbf54df0",
+      "fixture_sha256": "31f7993b13df45656da2cce0cc6479d7ce635d7a1ae3979a7c85d57ab249a891",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-independent-terms.png",
+      "note": "Independent bank player changes its own future-offer split to bilateral; 9700 cash and three active / 300 basis stay unchanged.",
+      "sha256": "162d7d21c3caa7de84aa8373d9e151b787de95da6fd9605b3095dd77bef159e4",
+      "captured_at": "2026-10-19T19:38:18.661Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "47a9cd25df0140d5bd0029f0dbf54df0",
+      "fixture_sha256": "31f7993b13df45656da2cce0cc6479d7ce635d7a1ae3979a7c85d57ab249a891",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-locked-merchant.png",
+      "note": "With Commenda research granted but Merchant Finance profile, Offer is gray and clicking does not open the selector; 10000 bank cash and zero active agreements.",
+      "sha256": "d2940fd74f9b01418c6de5fd15e633d93c5de5b9fc433614e4529cc8f6f927fd",
+      "captured_at": "2026-10-19T19:39:58.921Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-partnership-offer.png",
+      "note": "Final runtime normal human offer event: painted art, Bardi 100 gold / 12 months / 75%-25%, capital first, no discovery gold, three-month expiry, readable Accept and Decline buttons.",
+      "sha256": "087db25103343f62936c51ed90a6e24ddbdd25a3a6665bf1450c956fcdbe269d",
+      "captured_at": "2026-10-19T19:40:47.014Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-declined-offer.png",
+      "note": "Clicked Decline normally; Florence cash remains 4900, bank cash 10000, assets 10500, zero basis and zero active agreements.",
+      "sha256": "32e72b07eed91ee1f749cb0acc7016c8d016e9f7cfa5067d53ad83ff4ca3bf3a",
+      "captured_at": "2026-10-19T19:41:18.639Z",
+      "runtime_sha256": "889708534d06fd599590e1734a6edf5ec80ef76c34268e4c634d337e97c14d01",
+      "fixture_token": "1137524e78334ec685a5a0721f607a35",
+      "fixture_sha256": "aab0b6fc89b3624a1148c997067ce7caadaf5f5c9dbf3a18e2ad92ad3fa5a516",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    },
+    {
+      "path": "docs/screenshots/2026-10-19-m7-acceptance-tooltip.png",
+      "note": "Final cold-loaded runtime, debug disabled: native Accept tooltip is localized and describes authority/funding rechecks without dumping implementation effects.",
+      "sha256": "1c751dae4159895ca6390a76422f4852e6f1d74fda3e987d51c12fef8f67bd7c",
+      "captured_at": "2026-10-19T19:53:11.163Z",
+      "runtime_sha256": "b8855774c25f571891cc7f37bf566c2abc7da814b9d91c246229ae6367451fd6",
+      "fixture_token": "7121595d12be4d7d92706e8353a9f210",
+      "fixture_sha256": "f899890cb3ec39541aae42c3bdc65bbe5284b855174c27df8e5bf6b74b6ccc89",
+      "result": "PASS",
+      "method": "Observed native window; normal mouse actions; unedited PNG"
+    }
+  ],
+  "scope_notes": [
+    "Disposable charter/research/cash and controlled settlement fixtures; not natural research, balance or profit evidence.",
+    "Chartered Florence and independent Bardi were entered as separate normal player roles. Existing independent agreements were funded under the earlier Florence controller before detachment.",
+    "Eight accepted operators and immutable terms were inspected by scrolling the native ledger. Future terms were changed with ordinary controls.",
+    "Native human Accept, Decline and selector cancellation were clicked normally. Stale/expired offer rejections are native assertion evidence, not separately reproduced manual UI observations.",
+    "Capital/profit/loss are controlled display fixtures; natural exploration and trade receipts are evidenced separately in the engine reports.",
+    "Intermediate captures retain their actual hashes. Final source changes after 88970853 are only a safe numeric default in offer-generation preview; financial settlement, accounting, layout and art remain identical.",
+    "The initial 3930ee55 UI revealed a blue locked Offer and a swallowed # suffix. The final guard and clean headings were cold-loaded and inspected. Superseded development screenshots are not included.",
+    "Preview diagnostics were reviewed separately from baseline startup warnings. No claim is made that all native startup diagnostics are absent.",
+    "Other languages, resolutions/scales and release-wide campaigns retain M10 gates."
+  ]
+}

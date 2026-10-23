@@ -81,9 +81,12 @@ def layout(loc, ledger, statement):
     tooltips = tooltip_type('bfl_deposit_ledger_tooltip', 'bfl_deposit_ledger_title',
                             'bfl_deposit_ledger_subtitle', 'deposit', scroll_rows(ledger, height=340, fixed_width=True))
     nav = ''
-    for key, tab in [('bfl_bonds_short', 'bonds'), ('bfl_funding_title', 'deposits')]:
-        selected = "CreditLateralView.Vars.HasValue('funding_section','deposits')"
-        if tab == 'bonds': selected = f'Not({selected})'
+    loc('bfl_view_monetary', 'Monetary services')
+    loc('bfl_view_monetary_tip', 'Bank notes, secured liquidity and clearing.')
+    funding_default = "Not(Or(CreditLateralView.Vars.HasValue('funding_section','deposits'),CreditLateralView.Vars.HasValue('funding_section','monetary')))"
+    for key, tab in [('bfl_bonds_short', 'bonds'), ('bfl_funding_title', 'deposits'), ('bfl_view_monetary', 'monetary')]:
+        selected = f"CreditLateralView.Vars.HasValue('funding_section','{tab}')"
+        if tab == 'bonds': selected = funding_default
         nav += f'''button_secondary_tab_alt = {{ layoutpolicy_horizontal = expanding tooltip = "{key}_tip"
             blockoverride "tab_text" {{ text = "{key}" }} down = "[{selected}]"
             onclick = "[CreditLateralView.Vars.Set('funding_section','{tab}')]" }}'''
@@ -109,16 +112,23 @@ def layout(loc, ledger, statement):
     loc('bfl_offering_open','Open')
     loc('bfl_offering_closed','Closed')
     funding = toolbar(nav)
-    funding += '''vbox = { ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding visible = "[Not(CreditLateralView.Vars.HasValue('funding_section','deposits'))]" bfl_bond_contents = { } }'''
+    funding += f'''vbox = {{ ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding visible = "[{funding_default}]" bfl_bond_contents = {{ }} }}'''
     funding += f'''vbox = {{ layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 6
         visible = "[CreditLateralView.Vars.HasValue('funding_section','deposits')]" {deposits} }}'''
+    funding += '''vbox = { ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding
+        visible = "[CreditLateralView.Vars.HasValue('funding_section','monetary')]" bfl_monetary_contents = { } }'''
     investment_nav = ''
-    for tab,title in [('loans','Loans'),('shares','Shares'),('companies','Companies')]:
+    investment_tabs = [('loans','Loans'),('shares','Shares'),('companies','Companies'),('goods','Goods'),('trade','Trade finance')]
+    others = [f"CreditLateralView.Vars.HasValue('investment_section','{tab}')" for tab, _ in investment_tabs[1:]]
+    other_test = others[0]
+    for test in others[1:]: other_test = f'Or({other_test},{test})'
+    lending_default = f'Not({other_test})'
+    for tab,title in investment_tabs:
         loc(f'bfl_view_{tab}',title)
         selected = f"CreditLateralView.Vars.HasValue('investment_section','{tab}')"
-        if tab == 'loans': selected = "Not(Or(CreditLateralView.Vars.HasValue('investment_section','shares'),CreditLateralView.Vars.HasValue('investment_section','companies')))"
+        if tab == 'loans': selected = lending_default
         investment_nav += f'''button_secondary_tab_alt = {{ layoutpolicy_horizontal = expanding
-            blockoverride "tab_text" {{ text = "bfl_view_{tab}" }} down = "[{selected}]"
+            blockoverride "tab_text" {{ text = "bfl_view_{tab}" fontsize = 13 }} down = "[{selected}]"
             onclick = "[CreditLateralView.Vars.Set('investment_section','{tab}')]" }}'''
     lending = heading('bfl_investment_title', interaction('bfl_offer_credit','loan','bfl_offer_credit')
                             + interaction('bfl_purchase_native_loan','takeover','bfl_loan_button')
@@ -126,11 +136,14 @@ def layout(loc, ledger, statement):
     lending += loan_register(loc)
     investments = toolbar(investment_nav)
     investments += f'''vbox = {{ ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 4
-        visible = "[Not(Or(CreditLateralView.Vars.HasValue('investment_section','shares'),CreditLateralView.Vars.HasValue('investment_section','companies')))]" {lending} }}
+        visible = "[{lending_default}]" {lending} }}
         vbox = {{ ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding
             visible = "[CreditLateralView.Vars.HasValue('investment_section','shares')]" bfl_equity_investments = {{ }} }}
         vbox = {{ ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding
             visible = "[CreditLateralView.Vars.HasValue('investment_section','companies')]" bfl_company_controls = {{ }} }}'''
+    for tab, widget in [('goods','bfl_goods_contents'),('trade','bfl_commenda_contents')]:
+        investments += f'''vbox = {{ ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding
+            visible = "[CreditLateralView.Vars.HasValue('investment_section','{tab}')]" {widget} = {{ }} }}'''
     return funding, investments, tooltips
 
 

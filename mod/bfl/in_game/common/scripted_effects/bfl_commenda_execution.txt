@@ -1,0 +1,536 @@
+﻿bfl_execute_commenda_01 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 1 scope:bfl_venture_lender = { var:bfl_v_01_state = 1
+                var:bfl_v_01_operator = scope:bfl_operator var:bfl_v_01_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_01 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_01_from value = scope:from }
+                        set_variable = { name = bfl_v_01_to value = scope:to } set_variable = { name = bfl_v_01_good value = scope:goods }
+                        set_variable = { name = bfl_v_01_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_01_has_cargo value = 1 } set_variable = { name = bfl_v_01_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_01_area value = scope:target }
+                            set_variable = { name = bfl_v_01_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_01_explorer value = scope:character } set_variable = { name = bfl_v_01_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_01_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_01_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_01_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_01_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_01 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_01_undrawn } set_variable = { name = bfl_v_01_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_02 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 2 scope:bfl_venture_lender = { var:bfl_v_02_state = 1
+                var:bfl_v_02_operator = scope:bfl_operator var:bfl_v_02_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_02 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_02_from value = scope:from }
+                        set_variable = { name = bfl_v_02_to value = scope:to } set_variable = { name = bfl_v_02_good value = scope:goods }
+                        set_variable = { name = bfl_v_02_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_02_has_cargo value = 1 } set_variable = { name = bfl_v_02_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_02_area value = scope:target }
+                            set_variable = { name = bfl_v_02_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_02_explorer value = scope:character } set_variable = { name = bfl_v_02_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_02_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_02_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_02_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_02_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_02 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_02_undrawn } set_variable = { name = bfl_v_02_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_03 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 3 scope:bfl_venture_lender = { var:bfl_v_03_state = 1
+                var:bfl_v_03_operator = scope:bfl_operator var:bfl_v_03_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_03 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_03_from value = scope:from }
+                        set_variable = { name = bfl_v_03_to value = scope:to } set_variable = { name = bfl_v_03_good value = scope:goods }
+                        set_variable = { name = bfl_v_03_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_03_has_cargo value = 1 } set_variable = { name = bfl_v_03_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_03_area value = scope:target }
+                            set_variable = { name = bfl_v_03_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_03_explorer value = scope:character } set_variable = { name = bfl_v_03_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_03_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_03_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_03_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_03_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_03 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_03_undrawn } set_variable = { name = bfl_v_03_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_04 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 4 scope:bfl_venture_lender = { var:bfl_v_04_state = 1
+                var:bfl_v_04_operator = scope:bfl_operator var:bfl_v_04_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_04 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_04_from value = scope:from }
+                        set_variable = { name = bfl_v_04_to value = scope:to } set_variable = { name = bfl_v_04_good value = scope:goods }
+                        set_variable = { name = bfl_v_04_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_04_has_cargo value = 1 } set_variable = { name = bfl_v_04_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_04_area value = scope:target }
+                            set_variable = { name = bfl_v_04_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_04_explorer value = scope:character } set_variable = { name = bfl_v_04_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_04_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_04_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_04_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_04_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_04 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_04_undrawn } set_variable = { name = bfl_v_04_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_05 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 5 scope:bfl_venture_lender = { var:bfl_v_05_state = 1
+                var:bfl_v_05_operator = scope:bfl_operator var:bfl_v_05_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_05 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_05_from value = scope:from }
+                        set_variable = { name = bfl_v_05_to value = scope:to } set_variable = { name = bfl_v_05_good value = scope:goods }
+                        set_variable = { name = bfl_v_05_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_05_has_cargo value = 1 } set_variable = { name = bfl_v_05_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_05_area value = scope:target }
+                            set_variable = { name = bfl_v_05_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_05_explorer value = scope:character } set_variable = { name = bfl_v_05_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_05_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_05_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_05_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_05_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_05 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_05_undrawn } set_variable = { name = bfl_v_05_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_06 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 6 scope:bfl_venture_lender = { var:bfl_v_06_state = 1
+                var:bfl_v_06_operator = scope:bfl_operator var:bfl_v_06_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_06 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_06_from value = scope:from }
+                        set_variable = { name = bfl_v_06_to value = scope:to } set_variable = { name = bfl_v_06_good value = scope:goods }
+                        set_variable = { name = bfl_v_06_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_06_has_cargo value = 1 } set_variable = { name = bfl_v_06_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_06_area value = scope:target }
+                            set_variable = { name = bfl_v_06_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_06_explorer value = scope:character } set_variable = { name = bfl_v_06_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_06_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_06_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_06_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_06_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_06 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_06_undrawn } set_variable = { name = bfl_v_06_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_07 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 7 scope:bfl_venture_lender = { var:bfl_v_07_state = 1
+                var:bfl_v_07_operator = scope:bfl_operator var:bfl_v_07_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_07 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_07_from value = scope:from }
+                        set_variable = { name = bfl_v_07_to value = scope:to } set_variable = { name = bfl_v_07_good value = scope:goods }
+                        set_variable = { name = bfl_v_07_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_07_has_cargo value = 1 } set_variable = { name = bfl_v_07_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_07_area value = scope:target }
+                            set_variable = { name = bfl_v_07_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_07_explorer value = scope:character } set_variable = { name = bfl_v_07_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_07_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_07_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_07_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_07_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_07 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_07_undrawn } set_variable = { name = bfl_v_07_undrawn value = 0 } } }
+            }
+}
+bfl_execute_commenda_08 = {
+save_scope_as = bfl_operator
+            if = { limit = { exists = var:bfl_venture_bank bfl_venture_lender_available = yes
+            var:bfl_venture_slot = 8 scope:bfl_venture_lender = { var:bfl_v_08_state = 1
+                var:bfl_v_08_operator = scope:bfl_operator var:bfl_v_08_generation = scope:bfl_operator.var:bfl_venture_generation } NOT = { has_variable = bfl_venture_guard } }
+                set_variable = bfl_venture_guard
+                set_variable = { name = bfl_venture_budget value = scope:bfl_venture_lender.bfl_venture_drawable_08 }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_budget multiply = 1.5 } }
+                set_variable = { name = bfl_venture_escrow value = gold }
+                add_gold = { value = var:bfl_venture_escrow multiply = -1 }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.var:bfl_venture_escrow
+                    add_gold = { value = scope:bfl_operator.var:bfl_venture_budget multiply = -1 } }
+                add_gold = var:bfl_venture_budget
+                set_variable = { name = bfl_venture_cost value = 0 }
+                if = { limit = { var:bfl_venture_offer_kind = 1 bfl_venture_cargo_valid = yes
+                    gold >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                    gold >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } }
+                    set_variable = { name = bfl_venture_stock_before value = "scope:from.stockpile_in_market(scope:goods)" }
+                    buy_goods_from_market = { market = scope:from goods = scope:goods amount = 10 }
+                    set_variable = { name = bfl_venture_quantity value = { value = var:bfl_venture_stock_before subtract = "scope:from.stockpile_in_market(scope:goods)" } }
+                    set_variable = { name = bfl_venture_acquired value = var:bfl_venture_quantity }
+                    set_variable = { name = bfl_venture_from value = scope:from } set_variable = { name = bfl_venture_to value = scope:to }
+                    set_variable = { name = bfl_venture_good value = scope:goods }
+                    set_variable = { name = bfl_venture_delivery value = { value = bfl_period add = 2 } }
+                    scope:bfl_venture_lender = { set_variable = { name = bfl_v_08_from value = scope:from }
+                        set_variable = { name = bfl_v_08_to value = scope:to } set_variable = { name = bfl_v_08_good value = scope:goods }
+                        set_variable = { name = bfl_v_08_quantity value = scope:bfl_operator.var:bfl_venture_quantity }
+                        set_variable = { name = bfl_v_08_has_cargo value = 1 } set_variable = { name = bfl_v_08_outcome value = 4 } }
+                } else_if = { limit = { var:bfl_venture_offer_kind = 2 bfl_venture_expedition_valid = yes can_pay_price = price:start_exploration_sea }
+                    set_variable = { name = bfl_venture_before value = num_explorations_including_in_construction }
+                    # Pay the real native preparation price once. Sponsored
+                    # preparation is contractually non-refundable: recording a
+                    # zero construction price prevents native cancellation from
+                    # refunding investor money to the operator's general wallet.
+                    pay_price = price:start_exploration_sea
+                    start_exploration = { area = scope:target location = scope:launch_location character = scope:character price = price:start_exploration_sea price_modifier = 0 }
+                    if = { limit = { num_explorations_including_in_construction > var:bfl_venture_before }
+                        set_variable = { name = bfl_venture_area value = scope:target }
+                        scope:bfl_venture_lender = { set_variable = { name = bfl_v_08_area value = scope:target }
+                            set_variable = { name = bfl_v_08_port value = scope:launch_location }
+                            set_variable = { name = bfl_v_08_explorer value = scope:character } set_variable = { name = bfl_v_08_outcome value = 1 } } }
+                    else = { refund_price = price:start_exploration_sea }
+                }
+                set_variable = { name = bfl_venture_cost value = { value = var:bfl_venture_budget subtract = gold min = 0 } }
+                set_variable = { name = bfl_venture_bank_cost value = var:bfl_venture_cost }
+                if = { limit = { var:bfl_venture_offer_preset = 1 } change_variable = { name = bfl_venture_bank_cost divide = 1.5 } }
+                set_variable = { name = bfl_venture_operator_cost value = { value = var:bfl_venture_cost subtract = var:bfl_venture_bank_cost } }
+                scope:bfl_venture_lender = { add_gold = scope:bfl_operator.gold }
+                set_gold = 0
+                scope:bfl_venture_lender = { add_gold = { value = scope:bfl_operator.var:bfl_venture_escrow
+                    subtract = scope:bfl_operator.var:bfl_venture_operator_cost multiply = -1 }
+                    change_variable = { name = bfl_v_08_undrawn subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_cash_committed subtract = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_08_basis add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_08_original add = scope:bfl_operator.var:bfl_venture_bank_cost }
+                    change_variable = { name = bfl_v_08_cost add = scope:bfl_operator.var:bfl_venture_cost }
+                    change_variable = { name = bfl_project_value add = scope:bfl_operator.var:bfl_venture_bank_cost } }
+                add_gold = { value = var:bfl_venture_escrow subtract = var:bfl_venture_operator_cost }
+                change_variable = { name = bfl_venture_remaining add = var:bfl_venture_cost }
+                change_variable = { name = bfl_venture_external_basis add = var:bfl_venture_bank_cost }
+                if = { limit = { var:bfl_venture_offer_kind = 2 } change_variable = { name = bfl_venture_exploration_cost add = var:bfl_venture_cost } }
+                remove_variable = bfl_venture_guard
+                if = { limit = { var:bfl_venture_remaining = 0 } bfl_close_commenda_08 = yes }
+                else_if = { limit = { var:bfl_venture_offer_kind = 1 var:bfl_venture_cost > 0 } scope:bfl_venture_lender = {
+                    change_variable = { name = bfl_cash_committed subtract = var:bfl_v_08_undrawn } set_variable = { name = bfl_v_08_undrawn value = 0 } } }
+            }
+}

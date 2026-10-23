@@ -1,0 +1,9 @@
+﻿bfl_settle_public_backstop = {
+if = { limit = { bfl_can_originate_public_backstop = yes bfl_has_valid_controller = yes
+    overlord = { exists = capital any_owned_building = { building_type = building_type:central_bank
+        building_level > 0 location = prev.capital } } }
+    set_variable = { name = bfl_discount_public value = 1 }
+    bfl_settle_interbank_liquidity = yes
+    set_variable = { name = bfl_discount_public value = 0 }
+}
+}

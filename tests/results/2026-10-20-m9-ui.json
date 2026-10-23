@@ -1,0 +1,257 @@
+{
+  "runtime_sha256": "ae6520ab07b9dd8764889aa67cc8bfb76420f10e835e53f4b2dba94c770e352d",
+  "fixture_sha256": "c759f27bde3452150e41676091dff8d8189452c44464fd24fce2016f913f41f3",
+  "role": "Florence live charter controller",
+  "resolution": [
+    2560,
+    1440
+  ],
+  "language": "English",
+  "debug": true,
+  "unedited": true,
+  "screenshots": [
+    {
+      "file": "2026-10-20-m9-overview.png",
+      "sha256": "815013a82383bf0bfa359ebba9c5c6fbc18a31e87fce81dc38dab56c0e40e839",
+      "note": "Corrected tooltip build, Florence controller: Bardi cash 100, deposit liability 100, equity zero. New resolution section in native Credit; explicit fixture research/buildings/cash shock."
+    },
+    {
+      "file": "2026-10-20-m9-resolving-controls.png",
+      "sha256": "e7f25d2708e1882bcfbc2f6746070424441947781b739dd42c9a302f4e9fa26a",
+      "note": "Normal Begin resolution sets In resolution, preserves cash and the 100-gold deposit claim, disables a second begin and enables creditor terms/recovery."
+    },
+    {
+      "file": "2026-10-20-m9-creditor-consent.png",
+      "sha256": "f61878aa405155ec78ce8a14a506a86d6e3eb2038690e332c7ba6032347b446b",
+      "note": "Normal creditor proposal: Bardi, actual 100-gold deposit, 20% waiver, NAV conversion and Keep the full claim. Complete terms fit with no overlapping controls; debug event ID is visible."
+    },
+    {
+      "file": "2026-10-20-m9-creditor-declined.png",
+      "sha256": "71f38fffb1eabe55b3a923d5a8b346d1e299b3c6a98b20fb3dcdb89286315ddf",
+      "note": "Normal Keep the full claim closes the proposal. Bank cash 100, deposit liability 100 and equity zero are unchanged; state remains In resolution."
+    },
+    {
+      "file": "2026-10-20-m9-accepted-loss.png",
+      "sha256": "6ff4a0d59ade7420e6f42e6213d6eadd950baaac5629af00a6ea7ade018b906e",
+      "note": "Normal 20% acceptance leaves bank cash 100, reduces the deposit liability from 100 to 80 and raises equity from 0 to 20. The funded public guarantee records 10 paid; guarantor and creditor are both Florence, so its net treasury cash is unchanged."
+    },
+    {
+      "file": "2026-10-20-m9-funded-recovery.png",
+      "sha256": "3636be89b718d060bd906eda5c160b0b39d15e277f5279449ecc8df469dfdfe3",
+      "note": "After normal Pay recovery click: 80 gold returned to Florence, bank cash 20, deposit liabilities 0, accepted losses 20, public guarantee paid 10. Florence is creditor and guarantor; guarantee call is a real debit and credit with zero net sovereign cash."
+    }
+  ],
+  "observations": [
+    "Open Credit and inspect orderly resolution controls",
+    "Begin resolution normally; 100 cash and 100 deposit claim",
+    "Open production creditor consent modal with safe tooltip previews",
+    "Decline normally; no cash or claim change",
+    "Accept a fresh 20% haircut; claim 80, accepted losses 20, guarantee paid 10",
+    "Click Pay recovery normally; 80 gold paid, bank cash 20 and deposit claim zero"
+  ],
+  "fixture_disclosure": "Disposable campaign grants charter/research/capital buildings and shocks bank cash to 100. Real 100-gold sovereign deposit and normal UI transactions. Florence is creditor and guarantor; guarantee debit and credit net to zero in its treasury. No balance evidence.",
+  "limitations": [
+    "No independent-bank normal UI capture",
+    "Final shipping adds three-file closure safeguards; this capture runtime is separately identified.",
+    "Native financial closure is not country/building destruction."
+  ],
+  "shipping_runtime_sha256": "18df97e0a614f984485d994fc4b6692dde1b8609fa3cf9270d4bd4be0cc4f593",
+  "shipping_differences": [
+    {
+      "path": "in_game/common/script_values/bfl_resolution.txt",
+      "ui_sha256": "6744be20a7a41337e1852dbb8fdaa15ea0e7f183ea435486b72ce47f04a62264",
+      "shipping_sha256": "e049bcc9a0293bca8566083cd6bb46309f927907ef8734db016822fb2e3bcb34"
+    },
+    {
+      "path": "in_game/common/scripted_effects/bfl_resolution_services.txt",
+      "ui_sha256": "3fc7b73ea11437419d0255576443e93245589f109e1c9450247ddaeb905f8300",
+      "shipping_sha256": "747a96f909aeebe8d1383deafc37280a310e87018cbe7f6508fd2a9f02efc418"
+    },
+    {
+      "path": "in_game/common/scripted_triggers/bfl_resolution.txt",
+      "ui_sha256": "0ee1f06113241fbd142944eb0026222c728b78d3923f589f28bd590e12311ad6",
+      "shipping_sha256": "f2b557066f59dd6f4a0b65340054b4892f5e989ac3dde898984886e11fdfd53c"
+    }
+  ],
+  "unchanged_production_effects": [
+    {
+      "effect": "bfl_initialize_resolution",
+      "normalized_text_sha256": "f97a74b1266eff866b32891e1466b50d0942a6ee08c3f97a4cc646c0f2779eff"
+    },
+    {
+      "effect": "bfl_begin_resolution",
+      "normalized_text_sha256": "1b9ab4fd67e118b468c0da526694f617cb97986132bf2811de0290998f8751db"
+    },
+    {
+      "effect": "bfl_resolution_pay_01",
+      "normalized_text_sha256": "7e441bc61dadbc8d48de6ff317cbd68594d0771e71468ae68bdec5bf54991161"
+    },
+    {
+      "effect": "bfl_resolution_pay_02",
+      "normalized_text_sha256": "dc80906ab41f7c630e327028367170e5447cf4e43cde00c35a6d782d935c5f3b"
+    },
+    {
+      "effect": "bfl_resolution_pay_03",
+      "normalized_text_sha256": "cb129969e0af3dfbf393d5d0f1a56a7cc2baf06fb69665abb90e172ef013d7c4"
+    },
+    {
+      "effect": "bfl_resolution_pay_04",
+      "normalized_text_sha256": "bbf1cd3adea1cc671eca1c76a2bc46ab25a090f8bf91fb80205d4c05037427a6"
+    },
+    {
+      "effect": "bfl_resolution_pay_05",
+      "normalized_text_sha256": "3d046623122e5489b45b58fb78d365f671a9e6b5f8a51dc56517202cf53e5b8a"
+    },
+    {
+      "effect": "bfl_resolution_pay_06",
+      "normalized_text_sha256": "2e08187810fd2fb9ffd28948226e92e11dc0598b7e4dd4080612b60296aef9da"
+    },
+    {
+      "effect": "bfl_resolution_pay_07",
+      "normalized_text_sha256": "d099045ed33076d78332f5e8f64f54c435b9b78a53b787cb750bf4d36542bb4c"
+    },
+    {
+      "effect": "bfl_resolution_pay_08",
+      "normalized_text_sha256": "10af6a18502bd14acfc90c7428c82fe95fefcc9cc0449bc26900b6a3697da825"
+    },
+    {
+      "effect": "bfl_resolution_pay_09",
+      "normalized_text_sha256": "cdaccbf2d8946512eed0432a26ace9298aa69c6acad4c8f56ea9c4de8eeb82cc"
+    },
+    {
+      "effect": "bfl_resolution_pay_10",
+      "normalized_text_sha256": "6d4221c5c4ba46719d8456d4c3d127d0bf9df792d9359e7ae11499035b9d91f1"
+    },
+    {
+      "effect": "bfl_resolution_pay_11",
+      "normalized_text_sha256": "e2c310216d7abc98aca29ef715d89cd37e7fee9f793ee1cbfd1f7ee03846c4c7"
+    },
+    {
+      "effect": "bfl_resolution_pay_12",
+      "normalized_text_sha256": "074e3a057493faa9a46ff1a712520b3da2a912c930998a3a1b3d22544d4d4a3c"
+    },
+    {
+      "effect": "bfl_resolution_pay_13",
+      "normalized_text_sha256": "cad9dfaa6ffcb09f178b859e7d7a13ea50e2dff9b8008220a06d77a253767209"
+    },
+    {
+      "effect": "bfl_resolution_pay_14",
+      "normalized_text_sha256": "783b7c3a6f2901100ee99a6ba3cdb47a56aaf4c3fa3023d0d8d4748726a0773e"
+    },
+    {
+      "effect": "bfl_resolution_pay_15",
+      "normalized_text_sha256": "65ccc04d3fffc50e53813530fed2537f72529ee3b65fbb8dedc1c2190902b02b"
+    },
+    {
+      "effect": "bfl_resolution_pay_16",
+      "normalized_text_sha256": "8770cca41134dfe19eff11aca1db5ca38969405e519735ba2945cfe68d55f40e"
+    },
+    {
+      "effect": "bfl_resolution_pay_17",
+      "normalized_text_sha256": "246879622e3ebb4b53768dfff17d84cccaff47dd4302118620d4cb00cce65b6b"
+    },
+    {
+      "effect": "bfl_resolution_pay_18",
+      "normalized_text_sha256": "229c4bbec1350b6da14e58ede5ee424c6067a27f3998f47edb5ee9e481ab736e"
+    },
+    {
+      "effect": "bfl_resolution_pay_19",
+      "normalized_text_sha256": "9b5c9d58f7900bd733c44e70beb78555ecdf613b9b02c61338358397be6320b5"
+    },
+    {
+      "effect": "bfl_resolution_pay_20",
+      "normalized_text_sha256": "aad9f817f1ea67a64d28fcce6dee81f96dec4ad812d8151311b1f42aa48d35d4"
+    },
+    {
+      "effect": "bfl_resolution_pay_21",
+      "normalized_text_sha256": "141db918e3fac8b673a06875afa0c53e49fae55048781259f42c554bf615be62"
+    },
+    {
+      "effect": "bfl_resolution_pay_22",
+      "normalized_text_sha256": "5d060842d541e3d6cf4efaccf8811bd337ec6793fe43e6925ea622cf6afc1baa"
+    },
+    {
+      "effect": "bfl_resolution_pay_23",
+      "normalized_text_sha256": "17d00ffdee77d700d69c317643273a32612308b494ac8236319e69e63c53047c"
+    },
+    {
+      "effect": "bfl_resolution_pay_24",
+      "normalized_text_sha256": "20092dd6e58a1387cb63a7aa756db1b954c6237fa271577e31f43562dd6c2432"
+    },
+    {
+      "effect": "bfl_resolution_pay_25",
+      "normalized_text_sha256": "107669d85874e30cb01826b85b66331cd5c231530bb931ff69cdc047bc0248a9"
+    },
+    {
+      "effect": "bfl_resolution_pay_26",
+      "normalized_text_sha256": "13794608d7e2a71c8dd996ff61555dca88d22115cf20f0ba8721cbdc6e65c553"
+    },
+    {
+      "effect": "bfl_resolution_pay_27",
+      "normalized_text_sha256": "f85bd12cff9dae8c10a2731d0faa12caca60f12f3654ce6b5a8d3003b31d0c8a"
+    },
+    {
+      "effect": "bfl_resolution_pay_28",
+      "normalized_text_sha256": "b30f3cc7dcb17baaf6a28c6e4abc62f28eeda179a5002eb166c184cbdab891c8"
+    },
+    {
+      "effect": "bfl_resolution_pay_29",
+      "normalized_text_sha256": "9e376da9174f8a2d30f19af857992c97b26f57b9659600ff6a545ec8163e0ea4"
+    },
+    {
+      "effect": "bfl_resolution_pay_30",
+      "normalized_text_sha256": "13c9cf0ca08eb5c709ef551268c516a55750b0281d267ddc412b6b9de6f50e4c"
+    },
+    {
+      "effect": "bfl_resolution_pay_31",
+      "normalized_text_sha256": "abd0d2dcb231cd33f4cb3710daeeeb57803ea079cd1e4f065a66211c5fe33a20"
+    },
+    {
+      "effect": "bfl_resolution_pay_32",
+      "normalized_text_sha256": "88ad45b70342d274917d883042a10bf5e863c0bba50d0550661b4c0061a23443"
+    },
+    {
+      "effect": "bfl_distribute_resolution_cash",
+      "normalized_text_sha256": "4cae188202b616b3154d1df78a7344bdfe7f9d4549ed0ce32f8ebfc7b862eb48"
+    },
+    {
+      "effect": "bfl_resume_after_resolution",
+      "normalized_text_sha256": "009ac088c3a9bb950ed1e2cc6e4fa69078b191d112587456a5b543fd0c05b00f"
+    },
+    {
+      "effect": "bfl_close_resolution",
+      "normalized_text_sha256": "f45bd66d65b976df387f1bf3c1334ede22bc759f1e6f5081afe2276beab60392"
+    },
+    {
+      "effect": "bfl_resolution_next_account",
+      "normalized_text_sha256": "27ba44b0dbc53046c97950576006d1bbc9d6bfafb465b811d3f9a01cf551ac09"
+    },
+    {
+      "effect": "bfl_authorize_resolution_guarantee",
+      "normalized_text_sha256": "4b5b12e06e7a6490b640d536cecb1e10e2c467c807a666a46ea237cea415522f"
+    },
+    {
+      "effect": "bfl_pay_resolution_guarantee",
+      "normalized_text_sha256": "2612beb8fbf52d4b1603766a5b6f34e7183ffd7b619ccc68d27e856ef31fe2ff"
+    },
+    {
+      "effect": "bfl_offer_resolution_terms",
+      "normalized_text_sha256": "a934e21e5b840ec504a9849062df37d9ad64e7d192a77fc85f8d956607ff59e6"
+    },
+    {
+      "effect": "bfl_accept_resolution_terms",
+      "normalized_text_sha256": "96aec879cf5f9f06004e458b3919da7e900fb5b665e0303c7e14ffb6e688e314"
+    },
+    {
+      "effect": "bfl_accept_resolution_haircut",
+      "normalized_text_sha256": "50d16f70609b28e6fee534a4a1247fbb01088c492d1689fdeb473e9dcadc6508"
+    },
+    {
+      "effect": "bfl_accept_resolution_equity",
+      "normalized_text_sha256": "56a745c42eb40fd3cbc5b5bbaa35f1ee28d78add085385a186c536d6810fbd2b"
+    }
+  ],
+  "difference_scope": "Only stricter closure blockers and incoming deposit claim counting changed. GUI/localization and begin/recovery/consent/guarantee/close effect bodies are unchanged. Captures do not visually exercise the additional closure guards; the shipping 58-case native suite does.",
+  "bfi_diagnostic_errors": [],
+  "diagnostic_scope": "Normal UI interaction logs only; missing scripted harness markers are not UI assertions. Known native/CMF GUI signatures remain separately classified by campaign_suite."
+}

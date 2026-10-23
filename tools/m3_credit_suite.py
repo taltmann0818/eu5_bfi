@@ -16,6 +16,11 @@ def fixture(token, fingerprint):
             else = {{ debug_log = "BFI_TEST|{token}|FAIL|{name}" }}\n'''
 
     start = f'debug_log = "BFI_TEST|{token}|BEGIN|{fingerprint}"\n'
+    # Native M8 prerequisite grants, before any wallet baselines. These do not
+    # establish AI branch-selection or paid-construction acceptance.
+    from m8_monetary_suite import grant
+    start += ''.join(grant('banking_office', bank, host)
+                     for bank in ('BRD', 'PRZ') for host in ('GEN', 'VEN'))
     start += '''c:FLO = { set_gold = 10000 add_reform = government_reform:bfl_state_chartered_bank
         set_variable = { name = bfl_bank value = c:BRD } save_scope_as = bfl_credit_actor }
         c:BRD = {
@@ -210,7 +215,12 @@ def fixture(token, fingerprint):
     '''
     finish += check('overseas_company_restructuring_rejected', 'scope:bfl_party = { NOT = { has_variable = bfl_restructure_bank } }')
     finish += check('twelve_consecutive_periods', 'var:bfi_m3_periods = 12 NOT = { has_variable = bfi_m3_period_gap }')
-    finish += '''remove_variable = bfi_test_pending }
+    # Final company origination can reuse a closed native-credit slot. Capture
+    # the reload identity after that mutation, not from the preceding month.
+    finish += '''set_variable = { name = bfi_m3_saved_generation value = var:bfl_cr_01_generation }
+        set_variable = { name = bfi_m3_saved_party value = var:bfl_cr_01_party }
+        set_variable = { name = bfi_m3_saved_defaults value = var:bfl_credit_defaults }
+        remove_variable = bfi_test_pending }
     '''
     finish += f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'
     return start, finish, instant, cases

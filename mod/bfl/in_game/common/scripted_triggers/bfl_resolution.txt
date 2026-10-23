@@ -1,0 +1,67 @@
+﻿bfl_resolution_researched = {
+OR = { current_age = age_2_renaissance current_age = age_3_discovery
+        current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+        OR = { OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_debt_restructuring }
+        AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_debt_restructuring } } }
+            AND = { has_variable = bfl_resolution_estate var:bfl_resolution_inherited_research ?= 1
+                exists = var:bfl_resolution_trustee country_exists = var:bfl_resolution_trustee } }
+}
+bfl_resolution_guarantee_authority = {
+bfl_has_valid_controller = yes
+        OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_public_financial_backstops }
+        AND = { bfl_has_valid_controller = yes overlord = { has_advance = bfl_public_financial_backstops } } }
+        current_age = age_6_revolutions
+        overlord = { exists = capital any_owned_building = { building_type = building_type:central_bank
+            building_level > 0 location = prev.capital } }
+}
+bfl_can_close_resolution = {
+var:bfl_state = 4
+        OR = { var:bfl_total_units > 0 gold < 0.01 }
+        bfl_liabilities = 0 bfl_resolution_remaining_assets = 0
+        bfl_deposit_asset_claims = 0 var:bfl_custom_bond_count = 0
+        bfl_native_estate_claim_count = 0 bfl_pending_guarantee_claims = 0 bfl_goods_holder_claims = 0
+        var:bfl_cash_committed = 0 var:bfl_resolution_guarantee_due = 0
+        num_loans = 0 bfl_bond_debt = 0
+        NOT = { has_variable = bfl_discount_issuer }
+        NOT = { has_variable = bfl_venture_bank }
+    var:bfl_inv_01_active = 0
+var:bfl_inv_02_active = 0
+var:bfl_inv_03_active = 0
+var:bfl_inv_04_active = 0
+var:bfl_inv_05_active = 0
+var:bfl_inv_06_active = 0
+var:bfl_inv_07_active = 0
+var:bfl_inv_08_active = 0
+var:bfl_inv_09_active = 0
+var:bfl_inv_10_active = 0
+var:bfl_inv_11_active = 0
+var:bfl_inv_12_active = 0
+var:bfl_inv_13_active = 0
+var:bfl_inv_14_active = 0
+var:bfl_inv_15_active = 0
+var:bfl_inv_16_active = 0
+var:bfl_v_01_state != 1
+var:bfl_v_02_state != 1
+var:bfl_v_03_state != 1
+var:bfl_v_04_state != 1
+var:bfl_v_05_state != 1
+var:bfl_v_06_state != 1
+var:bfl_v_07_state != 1
+var:bfl_v_08_state != 1
+var:bfl_pos_01_units = 0
+var:bfl_pos_02_units = 0
+var:bfl_pos_03_units = 0
+var:bfl_pos_04_units = 0
+var:bfl_pos_05_units = 0
+var:bfl_pos_06_units = 0
+var:bfl_pos_07_units = 0
+var:bfl_pos_08_units = 0
+var:bfl_pos_09_units = 0
+var:bfl_pos_10_units = 0
+var:bfl_pos_11_units = 0
+var:bfl_pos_12_units = 0
+var:bfl_pos_13_units = 0
+var:bfl_pos_14_units = 0
+var:bfl_pos_15_units = 0
+var:bfl_pos_16_units = 0
+}

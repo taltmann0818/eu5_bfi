@@ -65,6 +65,27 @@ def main():
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)
+    cmm_ids = {'bfl_banking_finance_companies'} | {
+        'bfl_banking_finance_companies__' + suffix for suffix in
+        ('presentation', 'interface', 'presentation__interface', 'reduced_motion',
+         'expanded_details', 'finance_notifications')}
+    check(not (loc_set & cmm_ids), 'Bare CMF flag localization replaces machine identifiers; use _name/_desc')
+    from translate_localization import LOCALES, ENTRY, ENGINE, structural
+    english = MOD/'main_menu/localization/english'
+    for locale in LOCALES:
+        for source in english.rglob('*.yml'):
+            target = english.parent/locale/source.relative_to(english).as_posix().replace('_l_english','_l_'+locale)
+            check(target.exists(),f'Missing {locale} localization: {target}')
+            if not target.exists():
+                continue
+            original = {m[2]:m[3] for line in source.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            translated = {m[2]:m[3] for line in target.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            check(original.keys()==translated.keys(),f'{target}: localized key set differs from English')
+            check(target.read_text(encoding='utf-8-sig').startswith('l_'+locale+':'),f'{target}: invalid language header')
+            for key in original.keys() & translated.keys():
+                check(ENGINE.findall(original[key])==ENGINE.findall(translated[key]),f'{target}: engine controls changed in {key}')
+                if structural(key):
+                    check(original[key]==translated[key],f'{target}: CMF machine identifier was translated: {key}')
     for path,text in all_text:
         if path.suffix == '.gui':
             for key in re.findall(r'\b(?:tooltip|text)\s*=\s*"(bfl_[\w.]+)"',text):
@@ -82,7 +103,7 @@ def main():
             if path.suffix=='.gui' and key not in loc_set:
                 continue
             if key.startswith(('bfl_dep_','bfl_con_','bfl_inv_','bfl_offer_','bfl_shr_','bfl_branch_','bfl_candidate_')):continue
-            if re.search(r'\b(?:set_variable|change_variable|save_scope_value_as)\s*=\s*\{\s*name\s*=\s*'+re.escape(key),text):continue
+            if re.search(r'\b(?:set_variable|change_variable|set_global_variable|add_to_global_variable_list|add_to_variable_map|save_scope_value_as)\s*=\s*\{\s*name\s*=\s*'+re.escape(key),text):continue
             check(key in loc_set,f'{path}: missing localization {key}')
     declarations=set()
     for path,text in all_text:

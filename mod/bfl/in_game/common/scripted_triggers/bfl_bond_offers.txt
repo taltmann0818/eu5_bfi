@@ -4,9 +4,11 @@
     var:bfl_bond_offer_price > 0 bfl_period <= var:bfl_bond_offer_expiry
     NOT = { has_variable = bfl_bond_guard }
     exists = var:bfl_bond_offer_seller
-    var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes }
+    var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes
+        bfl_branch_access = { PARTY = scope:bfl_bond_buyer } }
     exists = scope:bfl_bond_buyer
     scope:bfl_bond_buyer = {
+        bfl_branch_access = { PARTY = prev.var:bfl_bond_offer_seller }
         bfl_can_trade_sovereign_bonds = yes
         NOT = { this = prev } NOT = { this = prev.var:bfl_bond_offer_seller }
         gold >= prev.var:bfl_bond_offer_price

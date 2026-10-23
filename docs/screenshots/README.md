@@ -1,5 +1,132 @@
 # Native bank interface captures
 
+## M10 CMF preferences
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records a clean,
+non-debug cold startup on `2e53b85e…`, English, 1920×1080. The runtime contains no
+diagnostic widgets. [Actual CMF panel](m10-cmf-presentation.jpg) shows the BFI row,
+Presentation tab, Interface group and three native preferences. Reduced motion
+and notifications default on; expanded details defaults off. Ordinary clicks
+change all three preferences. Actual animation and the full language/scale
+matrix remain separate gates.
+
+## M10 Merchant painting and transaction receipt
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records one
+unedited 1920×1080 normal-window observation on `a6591f2e…`, English, debug off.
+The fixture pays 32 real 100-gold demand deposits from its declared opening
+wallet; it does not establish campaign balance.
+
+- [Merchant receipt and mandate](m10-merchant-receipt.jpg): original Merchant
+  painting, bank cash/assets 8200, liabilities 3200, equity 5000, a committed
+  +100 deposit receipt and manual/delegate controls. Opening the view creates no
+  BFI localization/context diagnostic. Other paintings, FX, CMF visibility,
+  languages, scales and the end of the populated ledger remain under review.
+
+## M10 final mandate authority
+
+[22 October final-runtime provenance](../../tests/results/2026-10-22-m10-ui.json)
+records five normal observations and four unedited window JPEGs on shipping
+`c0186e1c…`, English, 1280×720 client, inherited default scale, debug disabled.
+The cold startup uses inherited policy rather than preselecting manual.
+
+- [Inherited manual](2026-10-22-m10-inherited-manual.jpg): the AI bank under a
+  human controller correctly displays manual; bank cash/assets/equity are 5000.
+- [Delegated](2026-10-22-m10-controller-delegated.jpg): normal player delegation
+  changes policy with no cash movement and readable consent/funding help.
+- [Funded statement](2026-10-22-m10-controller-funded.jpg): two natural monthly
+  placements create a 200-gold receivable. Cash 4706.39 plus that claim equals
+  assets/equity 4906.39. Native war/faction activity also occurred; these values
+  are not a campaign profitability claim.
+- [Manual with claim](2026-10-22-m10-controller-manual-retained.jpg): normal
+  Manage investments stops new strategy business without changing those balances.
+
+The fixture grants starting cash, ownership and a branch; it does not dispatch
+reviews, refill cash during observation or create placements. The earlier
+independent-role observations below retain their actual provenance.
+
+## M10 investment mandate
+
+[Exact capture provenance](../../tests/results/2026-10-21-m10-ui.json) records
+eight normal UI observations and five actual-game captures from disposable
+Florence-controller and independent-Bardi scenes. English, 1280×720 client,
+inherited default/automatic scale; window JPEGs include the native title bar.
+Each capture retains its actual runtime and fixture hash. Candidate traversal
+changes and the final read-only mandate visibility correction are recorded
+separately; these earlier captures do not verify the inherited-human label fix.
+Cash/branch/ownership grants are fixture setup, not campaign balance evidence.
+
+- [Controller manual](2026-10-21-m10-controller-manual.jpg): Merchant bank,
+  separate sovereign accounts, manual mandate and bank cash/assets/equity 5000.
+- [Controller delegated](2026-10-21-m10-controller-delegated.jpg): normal Delegate
+  investments changes policy without moving cash; hover explains bounded review,
+  cadence and transaction guards.
+- [Independent manual](2026-10-21-m10-independent-manual.jpg): Overseas Bardi,
+  preserved native loan header and the same directly accessible mandate.
+- [Independent delegated](2026-10-21-m10-independent-delegated.jpg): normal opt-in
+  preserves 5000 cash and shows the financing/consent explanation.
+- [Independent funded](2026-10-21-m10-independent-funded.png): natural monthly
+  passes made two demand placements. Cash 4803.69 and assets/equity 5003.69
+  reconcile to a 200-gold receivable. This is an original-pixel crop of the bank
+  panel excluding another application; its source and crop hashes are recorded.
+
+Normal Manage investments subsequently returns to manual management while the
+200-gold claim remains. These scenes accept the named controls and presentation,
+not every language, resolution or the full M10 campaign gate.
+
+## M9 institution-wide resolution
+
+The [21 October capture record](../../tests/results/2026-10-21-m9-ui.json)
+pins each actual runtime/fixture and the SHA-256 of every unedited 2560×1440 PNG.
+English/default scale, EUV 1.4.1 / Steam 25905365 / CMF 2.5.0. Independent Overseas
+controls were captured with debug enabled; the final Florence estate, Merchant
+controller and bond scenes use normal player presentation with debug disabled.
+Production transaction services are unchanged by the later compact bond-button
+and notification presentation fixes; exact per-file differences are recorded.
+The final bond-list entry scene uses the generated shipping runtime.
+
+Disposable fixtures grant research/buildings, seed accepted legacy positions and
+shock cash. The fixture-only QA decision requests the production Genoese
+current-holder consent event; accept/decline and all recoveries use normal
+production controls. These are execution/visual observations, not campaign balance
+evidence. Rejected development scenes are explicitly excluded. All accepted scenes
+have clean BFI runtime logs under the existing native diagnostic policy.
+
+- [2026-10-21-m9-independent-controls.png](2026-10-21-m9-independent-controls.png): Independent Overseas Bardi: native Credit exposes Begin resolution and creditor controls; cash 100, deposit claim 100 and equity 0. Guarantee controls are unavailable to the independent bank.
+- [2026-10-21-m9-independent-resolving.png](2026-10-21-m9-independent-resolving.png): Normal independent Overseas-bank Begin resolution changes Bardi to In resolution, keeps cash and deposit liabilities at 100, disables repeated entry and enables recovery and consented terms.
+- [2026-10-21-m9-independent-recovery.png](2026-10-21-m9-independent-recovery.png): Normal independent-bank Pay recovery pays the 100-gold deposit: cash/assets/liabilities and selected claim are now zero; state remains In resolution and further terms are disabled.
+- [2026-10-21-m9-estate-before.png](2026-10-21-m9-estate-before.png): Final clean cold load: normal Decisions opens the Peruzzi original-issuer estate for its legal trustee Florence. Separate cash 40, deposits owed 100, recoveries zero; sovereign treasury 4800.
+- [2026-10-21-m9-estate-recovery.png](2026-10-21-m9-estate-recovery.png): Final clean scene: production recovery debits estate cash 40 to zero, reduces deposit claim 100 to 60 and records 40 actual recoveries. Florence treasury rises 4800 to 4840; exhausted liquidation becomes available.
+- [2026-10-21-m9-estate-closed.png](2026-10-21-m9-estate-closed.png): Final clean scene: normal exhausted liquidation closes Peruzzi (state 5), extinguishes the 60 unpaid deposit after statutory loss accounting, retains cumulative recoveries 40, and leaves treasury at 4840. Finalization cannot be selected again.
+- [2026-10-21-m9-bond-consent.png](2026-10-21-m9-bond-consent.png): Final clean current-holder consent: Genoa offers Florence 20% principal/coupon reduction, annual coupon cut with 1% floor, optional two-year trade concession and funded revenue pledge. All text and three choices fit the native modal.
+- [2026-10-21-m9-bond-concession.png](2026-10-21-m9-bond-concession.png): Final clean scene: normal secured acceptance creates the native Workout Trade Concession Granted confirmation with fully localized title/description and market-protection effects. Separate funded revenue pledge is stated explicitly.
+- [2026-10-21-m9-controller-resolving.png](2026-10-21-m9-controller-resolving.png): Clean controller scene: normal Begin resolution changes Merchant Bardi to In resolution, keeps bank cash/liabilities at 100 and the selected deposit claim at 100, disables repeated entry and enables recovery.
+- [2026-10-21-m9-controller-recovery.png](2026-10-21-m9-controller-recovery.png): Clean controller scene: normal Pay recovery moves 100 actual bank gold to Florence (4840 to 4940); bank cash/assets/liabilities and selected deposit claim become zero, cumulative deposit recoveries 100.
+- [2026-10-21-m9-bond-issuer-controls.png](2026-10-21-m9-bond-issuer-controls.png): Generated shipping runtime: the live compact Sovereign Bonds claim row exposes Offer restructuring below the current face 100, annual coupon 3%, Genoese holder and unpaid coupons 5. The complete new action fits inside its card.
+
+## M9 orderly bank resolution
+
+[Capture provenance](../../tests/results/2026-10-20-m9-ui.json) records six unedited
+2560×1440 English EUV 1.4.1 / CMF 2.5.0 captures, debug enabled, in a disposable
+Florence charter-controller campaign. Research/building grants and a bank cash
+shock establish the scene. A real 100-gold deposit and subsequent normal UI
+transactions establish the displayed claims and payments; this is not balance
+evidence. Florence is both creditor and guarantor, so the 10-gold guarantee call
+has matching sovereign debit and credit, with no net increase in treasury cash.
+
+The capture runtime is `ae6520ab07b9…`; shipping `18df97e0a614…` adds only incoming
+claim counting and stricter closure guards in three files. GUI/localization and
+44 checked transaction effect bodies match.
+Exact per-file and image hashes are retained in provenance. Shipping's additional
+closure guards pass the native suite. This historical record did not capture independent-bank normal UI; the 21 October record above adds it.
+
+- [Overview](2026-10-20-m9-overview.png): controller Credit view before resolution, 100 cash and 100 deposit liability.
+- [Resolution controls](2026-10-20-m9-resolving-controls.png): normal Begin resolution click persists the state and exposes recovery/creditor commands.
+- [Creditor consent](2026-10-20-m9-creditor-consent.png): production modal offers a 20% haircut, positive-NAV equity conversion or decline, with claim and expiry text.
+- [Declined proposal](2026-10-20-m9-creditor-declined.png): normal decline preserves 100 cash and the full 100-gold claim.
+- [Accepted loss](2026-10-20-m9-accepted-loss.png): normal acceptance reduces the claim to 80, records 20 accepted loss and a funded 10-gold guarantee call; bank cash remains 100.
+- [Funded recovery](2026-10-20-m9-funded-recovery.png): normal Pay recovery moves 80 gold to Florence; bank cash is 20, deposit liabilities zero and cumulative recoveries 80.
+
 ## M5 ownership and share trading
 
 Actual, unedited EUV 1.4.1 / build 25905365 windows with CMF 2.5.0,
@@ -282,3 +409,136 @@ identical pricing/layout files. No premium/seed/history grants are used for visu
 [A/B simulation figure](../figures/equity-pricing-ab.png) is a separately labeled
 offline research plot, not a game screenshot. Native assertions and twelve
 actual same-bank NAV/market samples have their own [provenance](../../tests/results/2026-10-18-gbm-validation.json).
+
+
+## M6 goods finance
+
+These 18 October captures document the retired manual pilot. The revised automatic interface has current captures below.
+
+[UI observations and per-capture hashes](../../tests/results/2026-10-18-m6-ui.json) separate normal controls from the populated disposable setup. EUV1.4.1/CMF2.5.0, English, 2560×1440, paused Florence; no debug overlays or console UI actions. The fixture grants a charter, research/age, cash, native supply and Venice's completed Customs House. Its acquisitions/receipt/forward use production services. This is not natural research, construction or campaign-balance evidence.
+
+Initial captures use `884fb825...`. Final cloth terms and acceptance-tooltip checks cold-load shipping `8bc3a222...`. Only event acceptance tooltip wrappers and three English explanations differ; financial effects, triggers, interactions and GUI layouts are identical. Exact file hashes are retained in the UI record. The standalone salt terms capture is a fixture-populated already accepted receipt, not a manual positive acceptance.
+
+- [Goods Finance menu and native Credit integration](m6-goods-menu.png)
+- [Normal funded wheat acquisition](m6-funded-purchase.png)
+- [Four-lot paginated browser](m6-lot-browser.png)
+- [Free-lot sale and backed-offer controls](m6-lot-actions.png)
+- [Paid salt receipt, pledged backing and released custodian basis](m6-receipt-ledger.png)
+- [Iron forward, buyer escrow, seller security and maturity](m6-forward-ledger.png)
+- [Populated salt terms](m6-receipt-terms.png)
+- [Live cloth offer with explicit price, fee and risk terms](m6-cloth-offer.png)
+- [Corrected payment tooltip on a cold-loaded final runtime](m6-acceptance-tooltip.png)
+- [Normal paid acceptance in bank accounts](m6-receipt-accepted-accounts.png)
+- [Accepted cloth claim with preserved physical backing](m6-cloth-accepted-backing.png)
+
+[Native campaign evidence](../m6-goods.md) separately verifies actual stock/cash, owner accounting, transport, compensation, branch fees/freeze, twelve months and reload. Screenshots do not substitute for those assertions.
+
+
+## M6 automatic goods inventory
+
+[Current UI provenance](../../tests/results/2026-10-19-m6-ui.json) records actual, unedited EUV 1.4.1 / CMF 2.5.0 windows at 2560×1440 in English. The generated inventory chest and policy compass use original transparent source art; [generation prompts and runtime paths](../../assets_source/painted/goods-generation.json) are included.
+
+The populated setup grants a charter, research/age, cash and native supply. Two production AI passes select eight different goods; the setup resets their monthly cutoff deliberately. It does not prove natural research, construction or balance. Its window originally loaded `11859e20...`, then reloaded the exact goods GUI, English localization and scope-preserving mark effect to shipping `b9ee4eac...`. The provenance record distinguishes the later cold-loaded empty/long-list fixture.
+
+- [Compact inventory below the stock portfolio](2026-10-19-m6-inventory-card.png): bank-owned value and return beside the generated Policy button.
+- [Complete eight-good hover inventory](2026-10-19-m6-inventory-tooltip.png): native icons and names, quantities in the hundreds, value and return.
+- [Expanded policy](2026-10-19-m6-policy.png): mandate, allocation, risk, holding period and automatic contract policy.
+- [Risk setting and explanation](2026-10-19-m6-risk-setting.png): actual UI click changes Balanced to Adventurous.
+- [All five settings changed through normal controls](2026-10-19-m6-policy-changed.png): Run off, 0%, Adventurous, 24 months and Offer receipts. Paused game cash remains 50000.34 throughout these configuration changes.
+
+
+The remaining four captures cold-load shipping `b9ee4eac...`. The separate empty/locked fixture grants research, supply and cash at its first native monthly pulse, acquires sixteen distinct goods through production services and pauses discretionary trading. Two bases are deliberately adjusted for signed return formatting. Native time then reaches 11 June 1337; the other fourteen bases remain actual acquisition costs and monthly physical loss/marks run normally. These grants are display tests, not campaign-performance evidence.
+
+- [Locked and empty inventory card](2026-10-19-m6-locked-empty.png)
+- [Empty-inventory guidance](2026-10-19-m6-empty-tooltip.png)
+- [Long inventory, first eight records and signed returns](2026-10-19-m6-long-tooltip-top.png)
+- [Scrolled final eight records, through Cocoa](2026-10-19-m6-long-tooltip-bottom.png)
+
+
+## M7 commenda partnerships — historical country-wide design
+
+These captures predate the activity-attribution correction. They preserve the
+original observations and do not complete the current M7 gate. In particular,
+the former unrestricted capital grants and assigned country-wide receipts have
+been replaced by actual costs and attributable cargo sale proceeds.
+
+[Exact UI provenance](../../tests/results/2026-10-19-m7-ui.json) records **21 observations / 21 unedited captures** from EUV 1.4.1 / CMF 2.5.0 at 2560×1440, English, native default GUI scale, debug disabled. Disposable grants and controlled settlement/expedition labels test presentation; they do not establish natural profit, research or campaign balance. [Separate native evidence](../m7-commenda.md) records actual trade, exploration, payouts and persistence. Each screenshot retains its actual runtime and fixture hash; final guard/headings and safe-preview follow-ups are explicitly distinguished.
+
+- [Accepted capital](2026-10-19-m7-accepted-capital.png): Normal acceptance funds the fourth project: Bardi cash 9600, total assets 10500 unchanged, risk basis 400/four active, Florence wallet 5000 after receiving 100.
+- [Operator selector](2026-10-19-m7-operator-selector.png): Native offer selector is searchable, uses native country flags/names and explains that capital moves only on accepted terms. Opened and cancelled without funding.
+- [Empty card](2026-10-19-m7-empty-card.png): Disposable empty display state: zero basis and zero active ventures, compact card and Terms icon remain visible with an enabled offer.
+- [Empty tooltip](2026-10-19-m7-empty-tooltip.png): Empty tooltip gives next-step guidance and explains capital recovery, realized receipts and closed-row history. No phantom operator appears.
+- [Locked requirements](2026-10-19-m7-locked-requirements.png): Final build: Discovery charter without Commenda research shows a locked hint and disabled Offer. Clicking it leaves the panel closed and bank cash at 10000; readable requirements remain available.
+- [Compact card](2026-10-19-m7-compact-card.png): Final runtime: 800 capital at risk, eight active operators, 9200 bank cash; full-capacity Offer is disabled and clicking leaves the panel closed.
+- [Terms changed](2026-10-19-m7-terms-changed.png): Clicked all three future-offer controls: bilateral equal surplus, 24 months, 200 gold. Existing eight agreements remain 800 basis and bank cash 9200.
+- [Ledger top](2026-10-19-m7-ledger-top.png): Final clean operator headings; Genoa and Venice retain 100 basis, 75% bank surplus and 12 months after changing future terms; Pisa is the third entry.
+- [Ledger lucca](2026-10-19-m7-ledger-lucca.png): Fourth operator Lucca and fifth Siena remain active at 100 basis, 75% / 12 months, with zero returned/profit/loss.
+- [Ledger pisa](2026-10-19-m7-ledger-pisa.png): Third operator Pisa and fourth Lucca: 100 basis, no returns/profit/loss, original 75% / 12-month agreement.
+- [Ledger middle](2026-10-19-m7-ledger-middle.png): Fifth Siena and sixth Papal States retain original accepted terms and readable status.
+- [Ledger bottom](2026-10-19-m7-ledger-bottom.png): Seventh Naples and eighth Savoy remain accessible at the end of the native scroll area with all capital/return/term/profit/loss/status fields.
+- [Settlement capital profit loss](2026-10-19-m7-settlement-capital-profit-loss.png): Controlled UI fixture: Genoa closed with 100 returned / 18.75 profit / 0 loss; Venice closed with 50 returned / 0 profit / 50 loss; Pisa remains 100 active basis. These are seeded outcomes, not natural campaign returns.
+- [Independent bank](2026-10-19-m7-independent-bank.png): Independent Bardi player sees own bank: 9700 cash, 300 basis, three inherited active agreements, painted icons and enabled Offer.
+- [Independent selector](2026-10-19-m7-independent-selector.png): Independent bank opens native searchable operator selector with localized capital-only-on-acceptance guidance.
+- [Selector cancelled](2026-10-19-m7-selector-cancelled.png): After cancelling the independent bank selector, 9700 cash, 10500 assets and three active / 300 basis remain unchanged.
+- [Independent terms](2026-10-19-m7-independent-terms.png): Independent bank player changes its own future-offer split to bilateral; 9700 cash and three active / 300 basis stay unchanged.
+- [Locked merchant](2026-10-19-m7-locked-merchant.png): With Commenda research granted but Merchant Finance profile, Offer is gray and clicking does not open the selector; 10000 bank cash and zero active agreements.
+- [Partnership offer](2026-10-19-m7-partnership-offer.png): Final runtime normal human offer event: painted art, Bardi 100 gold / 12 months / 75%-25%, capital first, no discovery gold, three-month expiry, readable Accept and Decline buttons.
+- [Declined offer](2026-10-19-m7-declined-offer.png): Clicked Decline normally; Florence cash remains 4900, bank cash 10000, assets 10500, zero basis and zero active agreements.
+- [Acceptance tooltip](2026-10-19-m7-acceptance-tooltip.png): Final cold-loaded runtime, debug disabled: native Accept tooltip is localized and describes authority/funding rechecks without dumping implementation effects.
+
+
+## M7 activity-attributed financing
+
+[Current capture provenance](../../tests/results/2026-10-19-m7-activity-ui.json) records unedited 2560×1440 English captures, debug disabled. Research, starting cash/supply and QA display resets belong to a disposable test campaign. The Florence cargo is selected and accepted through the normal UI; its two-month delivery and sale use normal game time. No country-wide income is assigned to these operations. The corrected gate passes with 20 accepted captures; one intermediate expedition capture is explicitly superseded. Final alert, independent-bank and expedition captures use shipping `c5422e23…` byte for byte. Exact individual provenance is retained.
+
+- [Controller compact](2026-10-19-m7-activity-controller-compact.jpg): Controller Credit card, three fixture-funded native cargo operations; compact M6-style card and painted Terms button.
+- [Cargo offer](2026-10-19-m7-activity-cargo-offer.jpg): Normal own-country selector chose Florence, Zêna source, Fiorenza destination, wheat; human offer names ten units, funding ceiling, costs, proceeds and consent.
+- [Acceptance tooltip](2026-10-19-m7-activity-acceptance-tooltip.jpg): Localized normal Accept tooltip exposes live rechecks, without implementation-effect text.
+- [Cargo custody](2026-10-19-m7-activity-cargo-custody.jpg): Normal human acceptance adds the fourth activity; actual purchase cost and exact ten units in custody are visible.
+- [Florence funded](2026-10-19-m7-activity-florence-funded.jpg): Final Florence row shows named cargo, 9.81 actual costs, ten units in custody, zero sale proceeds.
+- [Native sale loss](2026-10-19-m7-activity-native-sale-loss.jpg): After two months of normal game time, Genoa native sale produced 1.00, returned 1.00 and recorded 8.81 loss against 9.81 cost.
+- [Florence sale](2026-10-19-m7-activity-florence-sale.jpg): After normal game time, Florence native sale produced 11.76, recovered 9.81 and paid 1.46 bank surplus; custody zero and closed state.
+- [Eight capacity](2026-10-19-m7-activity-eight-capacity.jpg): QA decision resets and actually purchases eight native cargos for display; 79.21 basis/eight active, both new funding controls disabled.
+- [Eighth row](2026-10-19-m7-activity-eighth-row.jpg): Dragged native ledger scrollbar to Savoy, the eighth operator. Named cargo/cost/custody/terms/state remain readable.
+- [Empty](2026-10-19-m7-activity-empty.jpg): QA empty ledger has zero basis and no active agreements, both funding commands available.
+- [Locked](2026-10-19-m7-activity-locked.jpg): QA Merchant Finance profile has locked hint and both funding commands disabled.
+- [Declined](2026-10-19-m7-activity-declined.jpg): QA seeded a specific offer, then normal Decline leaves 10000 bank cash, zero basis and no active activity.
+- [Terms](2026-10-19-m7-activity-terms.jpg): Normal Terms click expands three future-offer controls; preset click changes to bilateral equal surplus without funding an operation.
+
+- [Available-operation tooltip](2026-10-20-m7-alert-tooltip.jpg): Green painted top-bar alert; Sweden, ten livestock, Lübeck → Stockholm, 7.58 estimated bank cost and 1.15 indicative surplus; risks and consent readable.
+- [Operation review](2026-10-20-m7-alert-review.jpg): Normal click opens the matching review and custom artwork; no money moves before operator acceptance.
+- [Accepted cargo ledger](2026-10-20-m7-alert-funded-ledger.jpg): Sweden accepts normally; 7.58 actual bank cost, ten livestock in custody and zero proceeds/profit.
+- [Independent Terms](2026-10-20-m7-independent-terms.jpg): Native independent-bank Credit card expands preset, duration and funding ceiling.
+- [Hidden alert](2026-10-20-m7-alert-hidden.jpg): Normal CMF right click removes the opportunity icon without affecting the funded operation.
+- [Actual sale](2026-10-20-m7-alert-realized-sale.jpg): Two normal monthly periods produce 8.91 sale proceeds, 7.58 capital recovery and 0.99 bank surplus; quote was 1.15, not credited income.
+- [Named native expedition](2026-10-20-m7-expedition-funded.jpg): Final normal independent-bank command selected Genoa, Ajaccio, American East Coast and native Adorn Adorn; AI consent paid 100 preparation cost. Ledger shows identity, zero proceeds and preparation/progress state. This replaces the intermediate 19 October expedition capture.
+
+## M8 monetary services and Bank Branches
+
+[Exact capture provenance](../../tests/results/2026-10-20-m8-ui.json) records 25 observed scenes from disposable independent-Bardi and Florence-controller campaigns. EUV 1.4.1 / CMF 2.5.0, English, 2560×1440, default scale, debug enabled. Full-resolution JPEG derivatives preserve the original PNG hashes. Transaction captures retain their original runtime; both cold-loaded roles verify corrected selectors on the presentation build. A final independent cold startup verifies the optional-field guard repair on shipping with no BFI script errors; earlier independent captures do not establish clean startup logs. Fixture grants and the explicit eight-note ceiling override test presentation only; paid AI construction and production caps have separate native assertions.
+
+- [Controller policy](2026-10-20-m8-controller-policy.jpg): Normal Policy changes lending 3% to 6%, discount 6% to 9%, and pauses new acceptance. Bank cash remains 10125; notes remain 200.
+- [Revoked authority](2026-10-20-m8-revoked-authority.jpg): Normal revoke disables new note acquisition; redemption remains available for existing claims.
+- [Empty ledger](2026-10-20-m8-empty-ledger.jpg): Normal redemption after revocation returns 200 to Florence: sovereign 10000, bank 9925, no notes/reserve, 75 secured monetary assets; equity unchanged.
+- [Funded note](2026-10-20-m8-funded-note.jpg): Normal authorize and acquire exchanges 100 sovereign specie for reserved notes: Florence 9900, bank 10025; equity 10400. Requirements tooltip is localized.
+- [Public consent](2026-10-20-m8-public-consent.jpg): Production secured-support consent dialog displays original artwork, 75-gold advance, collateral/haircut and accept/decline options.
+- [Public funded ledger](2026-10-20-m8-public-funded-ledger.jpg): Normal consent pays 75 from bank cash (10200 to 10125), records 75 asset, and leaves sovereign 9800 and note reserve 200 unchanged.
+- [Long ledger](2026-10-20-m8-long-ledger.jpg): Eight-row note-holder tooltip is readable at 2560x1440 with full row count. Explicit test-only ceiling 1000 permits 800 notes; this is capacity presentation, not production cap acceptance.
+- [Native bank branch](2026-10-20-m8-native-bank-branch.jpg): Native foreign-building tooltip reads Bank Branch in Fiorenza, level 1/1, Bardi-owned, 100/100 employment, and native maintenance 0.07.
+- [Independent locked](2026-10-20-m8-independent-locked.jpg): Missing-research independent scene: gray Acquire click leaves bank cash 10000. Readable tooltip explains research and sovereign role.
+- [Clearing locked](2026-10-20-m8-clearing-locked.jpg): Missing-research clearing admission is disabled; clicking leaves bank cash 10000 and panel state unchanged.
+- [Independent consent](2026-10-20-m8-independent-consent.jpg): Production independent-bank secured-credit dialog displays terms and Fund/Decline after explicit test-only counterparty/collateral staging.
+- [Independent declined](2026-10-20-m8-independent-declined.jpg): Normal Decline leaves independent bank cash 10000, zero monetary assets and equity 10400.
+- [Independent funded](2026-10-20-m8-independent-funded.jpg): Second production request accepted normally: bank cash 9925, secured monetary asset 75, equity 10400.
+- [Independent policy](2026-10-20-m8-independent-policy.jpg): Normal lending and discount controls change future settings to 6%/9%, with cash 9925 unchanged and readable fixed-accepted-fee help.
+- [Controller compact final](2026-10-20-m8-controller-compact-final.jpg): Final cold-loaded Florence controller: compact Money & settlement card uses original art, shows 200 notes and 6% discount. Bank cash 10200, liabilities 300 and equity 10400 are clearly separated from sovereign cash 9800.
+- [Controller policy final](2026-10-20-m8-controller-policy-final.jpg): Normal final-build policy command changes new lending base 3% to 6%; bank cash remains 10200, notes 200, equity 10400. Tooltip explicitly states annual rates and unchanged accepted contracts.
+- [Controller selector final](2026-10-20-m8-controller-selector-final.jpg): Normal Request secured settlement credit opens the native searchable country selector with bank names and flags on the final runtime. No transaction is funded by opening it.
+- [Controller cancel final](2026-10-20-m8-controller-cancel-final.jpg): Native selector closed with its X; reopened Credit shows bank cash 10200, notes 200, equity 10400 and sovereign cash 9800 unchanged.
+- [Independent policy final](2026-10-20-m8-independent-policy-final.jpg): Final cold-loaded independent bank: normal discount command changes future annual rate 6% to 9%, cash remains 10200, notes 200 and equity 10400. Fixed accepted-fee tooltip is localized.
+- [Independent consent final](2026-10-20-m8-independent-consent-final.jpg): After explicit disposable counterparty/collateral staging, production consent dialog displays original painting, 75-gold advance, funded 100-gold third-bank bill, 25% haircut, annual rate/maturity and Fund/Decline options.
+- [Independent declined final](2026-10-20-m8-independent-declined-final.jpg): Normal Decline returns to Credit with bank cash 10200, assets 10700, liabilities 300, equity 10400 and notes 200 unchanged.
+- [Independent selector final](2026-10-20-m8-independent-selector-final.jpg): Normal secured-credit button opens the final native searchable selector with eligible Peruzzi and disabled Acciaioli after explicit fixture research/profile staging. Self is excluded by the independent actor's native selector.
+- [Independent cancel final](2026-10-20-m8-independent-cancel-final.jpg): Cancelling the independent native selector and reopening Credit leaves bank cash 10200, notes 200 and equity 10400 unchanged.
+- [Bill buyer locked final](2026-10-20-m8-bill-buyer-locked-final.jpg): Bill-sale issuer picker opens with localized terms. Clicking Acciaioli is blocked with native 'There are no Countries possible to select for this' because this scene has no accepting buyer. No second-stage success or transfer is claimed; par transfers have separate engine assertions.
+- [Independent startup guard](2026-10-20-m8-independent-startup-guard.jpg): Shipping cold startup: normal Merchant specialization, Credit and Policy open correctly. Discount cycles from 6% to 9%; cash stays 10200, notes 200, liabilities 300, equity 10400. Complete startup logs pass the same BFI diagnostic policy after optional profile/state guards are repaired.

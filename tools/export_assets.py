@@ -1,6 +1,8 @@
 """Reproducible BC3 exports of reviewed paintings and attributed community art."""
 import csv
 import json
+import re
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 ROOT=Path(__file__).resolve().parents[1]
@@ -9,6 +11,39 @@ GFX=MOD/'main_menu/gfx/interface'
 ART=ROOT/'assets_source/illustrations/counting_house.png'
 REG=[]
 
+
+def render_svg(path, size=(256,256)):
+    """Render the deliberately small, editable glyph vocabulary at 4x size.
+
+    Unsupported SVG elements fail instead of silently losing artwork. Native
+    export has no font, browser, network or platform graphics dependency.
+    """
+    scale = 8
+    image = Image.new('RGBA', (128*scale,128*scale))
+    draw = ImageDraw.Draw(image)
+    for element in ET.parse(path).getroot():
+        tag = element.tag.rsplit('}',1)[-1]
+        a = element.attrib
+        fill = None if a.get('fill','none') == 'none' else a['fill']
+        stroke = a.get('stroke')
+        width = round(float(a.get('stroke-width',1))*scale)
+        n = lambda key: float(a[key])*scale
+        if tag in ('circle','ellipse'):
+            rx = n('r') if tag == 'circle' else n('rx')
+            ry = n('r') if tag == 'circle' else n('ry')
+            draw.ellipse((n('cx')-rx,n('cy')-ry,n('cx')+rx,n('cy')+ry),fill=fill,outline=stroke,width=width)
+        elif tag == 'rect':
+            draw.rectangle((n('x'),n('y'),n('x')+n('width'),n('y')+n('height')),fill=fill,outline=stroke,width=width)
+        elif tag == 'polyline':
+            numbers = [float(x)*scale for x in re.findall(r'-?\d+(?:\.\d+)?',a['points'])]
+            points = list(zip(numbers[::2],numbers[1::2]))
+            if fill:
+                draw.polygon(points,fill=fill)
+            draw.line(points,fill=stroke,width=width,joint='curve')
+        else:
+            raise ValueError(f'Unsupported SVG element {tag}: {path}')
+    return image.resize(size,Image.Resampling.LANCZOS)
+
 def export(im,path,kind,master,rights='Original BFI painting; generated with the built-in image tool'):
     path.parent.mkdir(parents=True,exist_ok=True)
     if path.suffix=='.dds': im.convert('RGBA').save(path,pixel_format='DXT5')
@@ -16,13 +51,28 @@ def export(im,path,kind,master,rights='Original BFI painting; generated with the
     REG.append([path.relative_to(ROOT).as_posix(),master,im.width,im.height,kind,rights])
 
 def main():
+    from PIL import __version__
+    if int(__version__.split('.')[0]) < 11:
+        raise SystemExit('BC3 export requires Pillow 11 or newer; use the bundled workspace Python runtime.')
     manifest=json.loads((ROOT/'assets_source/painted/manifest.json').read_text())
     for row in manifest['exports']:
+        if '/advance/bfl_' in row['export']:
+            continue  # All sixteen advances use their distinct editable glyph.
         source=ROOT/row['master']
         im=Image.open(source).convert('RGBA')
-        im=ImageOps.contain(im,tuple(row['size']),Image.Resampling.LANCZOS)
+        if row.get('fit'):
+            im=ImageOps.fit(im,tuple(row['size']),Image.Resampling.LANCZOS)
+        else:
+            im=ImageOps.contain(im,tuple(row['size']),Image.Resampling.LANCZOS)
         im=ImageOps.pad(im,tuple(row['size']),color=(0,0,0,0))
         export(im,MOD/row['export'],'BC3 painted illustration',row['master'],row['rights'])
+    advances=json.loads((ROOT/'design/advances.json').read_text())
+    for advance in advances:
+        if advance.get('integrated_into'):
+            continue
+        master=f'assets_source/icons/bfl_{advance["id"]}.svg'
+        export(render_svg(ROOT/master),GFX/f'advance/bfl_{advance["id"]}.dds',
+               'BC3 vector glyph',master,'Original BFI code-authored SVG')
     art=Image.open(ART).convert('RGB')
     export(ImageOps.fit(art,(1080,440)),GFX/'illustrations/bfl/charter.dds','BC3 painting',ART.relative_to(ROOT).as_posix())
     thumb=ImageOps.fit(art,(1024,1024))

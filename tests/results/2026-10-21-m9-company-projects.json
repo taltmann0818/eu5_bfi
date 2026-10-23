@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "token": "cfaccb36584140749e8e7f2441c1c440",
+  "runtime_sha256": "1673ad9c6dc9c842682c51fa2b72b3259a70efd6793fa88a5b62fe4a16e2d60f",
+  "results": {
+    "native_company_activity_funding_preserves_financial_owner": "PASS",
+    "own_cost_share_at_cost_does_not_inflate_company_nav": "PASS",
+    "company_cargo_sale_has_attributable_native_proceeds": "PASS",
+    "company_surplus_offsets_prior_losses_before_owner_payment": "PASS",
+    "only_operator_surplus_recognized_once_as_company_income": "PASS",
+    "second_actual_cargo_surplus_can_fund_owner_payout": "PASS",
+    "company_expedition_acceptance_starts_named_native_activity": "PASS",
+    "unrelated_native_company_route_observed": "PASS",
+    "native_expedition_positive_progress_and_natural_terminal": "PASS",
+    "ledger_preserves_native_expedition_after_financing_maturity": "PASS",
+    "twelve_company_statements_continue_after_native_book_creation": "PASS",
+    "reload_native_company_and_owner": "PASS",
+    "reload_expedition_identity_and_actual_costs": "PASS"
+  },
+  "errors": [],
+  "fixture_sha256": "24f49c789a8c9db305ef34714e990d0a3605e5d2ce4309a85c080f25b2e33a6c",
+  "assertions": 13,
+  "reload_assertions": 2,
+  "native_baseline_diagnostic_count": 128,
+  "baseline_policy": "tools/campaign_suite.py; no BFI diagnostics accepted"
+}

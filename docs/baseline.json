@@ -32,6 +32,8 @@
     "in_game/common/advances/0_age_of_renaissance.txt": "b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705",
     "in_game/common/scripted_guis/scripted_guis.info": "d890908b3e579243b00198ce84572ec9e812e6bc73314742b878cd391ee2257c",
     "in_game/common/advances/0_age_of_reformation.txt": "79a594c1ae48e26d2ce083b23f05d8eed7e0734d37e7dbe3fbdaf8ff5a43e31e",
+    "in_game/common/goods/00_raw_materials.txt": "55d6cf2460aadfb81b02895e69965a39d694f0950a9174952f4c067ae7902685",
+    "in_game/common/goods/02_produced_goods.txt": "633744c87ae66fdb12397c2f917ea769d1ae8f55edec2d266a108d004488e49c",
     "in_game/common/goods/03_food.txt": "f713a8c330c5b9130e2168d4676463708b97010a271fd0e414163f8773e6ef71",
     "in_game/common/prices/00_hardcoded.txt": "c463bd5f70d4211e95fa3781d83beff9a1d8bc85b0fea497b3f97a5ffbfe6511",
     "in_game/common/script_values/building_caps.txt": "92f24b2499b5120dc30d4e6ad694e43599420c76d077db1ebb9a1c05723959a7",
@@ -55,5 +57,16 @@
     "in_game/common/scripted_guis/cmm_settings_scripted_gui.txt": "b5230b8aebc96926d5aed0a0c2c3865d607e5f4bd65827bd99a2ca4067f62126"
   },
   "graphics_reference_commit": "52fac49f3c189f50a04204b743f19335887f88ad",
-  "audit_extensions_recorded": "2026-10-15"
+  "audit_extensions_recorded": "2026-10-15",
+  "m6_goods_source_extension": {
+    "reviewed": "2026-10-18",
+    "goods": [
+      "wheat",
+      "salt",
+      "iron",
+      "cloth",
+      "pepper"
+    ],
+    "scope": "Add the raw-material and produced-goods source pins for the M6 pilot. Existing source pins and historical M0 evidence are preserved."
+  }
 }

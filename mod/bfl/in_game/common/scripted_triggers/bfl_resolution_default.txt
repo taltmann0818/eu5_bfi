@@ -1,0 +1,66 @@
+﻿bfl_can_conclude_liquidation = {
+has_variable = bfl_resolution_estate var:bfl_state = 4
+        gold < 0.01 bfl_resolution_remaining_assets = 0
+        bfl_deposit_asset_claims = 0 var:bfl_custom_bond_count = 0
+        bfl_native_estate_claim_count = 0 bfl_pending_guarantee_claims = 0 bfl_goods_holder_claims = 0 num_loans = 0
+        bfl_resolution_held = 0 bfl_resolution_money_held = 0
+        var:bfl_resolution_native_held = 0 var:bfl_resolution_native_estate_held = 0
+        var:bfl_resolution_guarantee_due = 0
+        NOT = { has_variable = bfl_venture_bank }
+    var:bfl_inv_01_active = 0 var:bfl_pos_01_units = 0
+var:bfl_inv_02_active = 0 var:bfl_pos_02_units = 0
+var:bfl_inv_03_active = 0 var:bfl_pos_03_units = 0
+var:bfl_inv_04_active = 0 var:bfl_pos_04_units = 0
+var:bfl_inv_05_active = 0 var:bfl_pos_05_units = 0
+var:bfl_inv_06_active = 0 var:bfl_pos_06_units = 0
+var:bfl_inv_07_active = 0 var:bfl_pos_07_units = 0
+var:bfl_inv_08_active = 0 var:bfl_pos_08_units = 0
+var:bfl_inv_09_active = 0 var:bfl_pos_09_units = 0
+var:bfl_inv_10_active = 0 var:bfl_pos_10_units = 0
+var:bfl_inv_11_active = 0 var:bfl_pos_11_units = 0
+var:bfl_inv_12_active = 0 var:bfl_pos_12_units = 0
+var:bfl_inv_13_active = 0 var:bfl_pos_13_units = 0
+var:bfl_inv_14_active = 0 var:bfl_pos_14_units = 0
+var:bfl_inv_15_active = 0 var:bfl_pos_15_units = 0
+var:bfl_inv_16_active = 0 var:bfl_pos_16_units = 0
+var:bfl_v_01_state != 1
+var:bfl_v_02_state != 1
+var:bfl_v_03_state != 1
+var:bfl_v_04_state != 1
+var:bfl_v_05_state != 1
+var:bfl_v_06_state != 1
+var:bfl_v_07_state != 1
+var:bfl_v_08_state != 1
+OR = { var:bfl_con_01_active = 0 var:bfl_con_01_kind = 1 }
+OR = { var:bfl_con_02_active = 0 var:bfl_con_02_kind = 1 }
+OR = { var:bfl_con_03_active = 0 var:bfl_con_03_kind = 1 }
+OR = { var:bfl_con_04_active = 0 var:bfl_con_04_kind = 1 }
+OR = { var:bfl_con_05_active = 0 var:bfl_con_05_kind = 1 }
+OR = { var:bfl_con_06_active = 0 var:bfl_con_06_kind = 1 }
+OR = { var:bfl_con_07_active = 0 var:bfl_con_07_kind = 1 }
+OR = { var:bfl_con_08_active = 0 var:bfl_con_08_kind = 1 }
+OR = { var:bfl_con_09_active = 0 var:bfl_con_09_kind = 1 }
+OR = { var:bfl_con_10_active = 0 var:bfl_con_10_kind = 1 }
+OR = { var:bfl_con_11_active = 0 var:bfl_con_11_kind = 1 }
+OR = { var:bfl_con_12_active = 0 var:bfl_con_12_kind = 1 }
+OR = { var:bfl_con_13_active = 0 var:bfl_con_13_kind = 1 }
+OR = { var:bfl_con_14_active = 0 var:bfl_con_14_kind = 1 }
+OR = { var:bfl_con_15_active = 0 var:bfl_con_15_kind = 1 }
+OR = { var:bfl_con_16_active = 0 var:bfl_con_16_kind = 1 }
+OR = { var:bfl_con_17_active = 0 var:bfl_con_17_kind = 1 }
+OR = { var:bfl_con_18_active = 0 var:bfl_con_18_kind = 1 }
+OR = { var:bfl_con_19_active = 0 var:bfl_con_19_kind = 1 }
+OR = { var:bfl_con_20_active = 0 var:bfl_con_20_kind = 1 }
+OR = { var:bfl_con_21_active = 0 var:bfl_con_21_kind = 1 }
+OR = { var:bfl_con_22_active = 0 var:bfl_con_22_kind = 1 }
+OR = { var:bfl_con_23_active = 0 var:bfl_con_23_kind = 1 }
+OR = { var:bfl_con_24_active = 0 var:bfl_con_24_kind = 1 }
+OR = { var:bfl_con_25_active = 0 var:bfl_con_25_kind = 1 }
+OR = { var:bfl_con_26_active = 0 var:bfl_con_26_kind = 1 }
+OR = { var:bfl_con_27_active = 0 var:bfl_con_27_kind = 1 }
+OR = { var:bfl_con_28_active = 0 var:bfl_con_28_kind = 1 }
+OR = { var:bfl_con_29_active = 0 var:bfl_con_29_kind = 1 }
+OR = { var:bfl_con_30_active = 0 var:bfl_con_30_kind = 1 }
+OR = { var:bfl_con_31_active = 0 var:bfl_con_31_kind = 1 }
+OR = { var:bfl_con_32_active = 0 var:bfl_con_32_kind = 1 }
+}

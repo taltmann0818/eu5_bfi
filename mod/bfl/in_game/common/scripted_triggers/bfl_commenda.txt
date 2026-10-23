@@ -1,0 +1,69 @@
+﻿bfl_venture_capacity = {
+OR = { var:bfl_v_01_state != 1 var:bfl_v_02_state != 1 var:bfl_v_03_state != 1 var:bfl_v_04_state != 1 var:bfl_v_05_state != 1 var:bfl_v_06_state != 1 var:bfl_v_07_state != 1 var:bfl_v_08_state != 1 }
+}
+bfl_venture_authority = {
+exists = scope:bfl_venture_actor country_exists = scope:bfl_venture_actor
+        OR = { this = scope:bfl_venture_actor AND = { bfl_has_valid_controller = yes overlord = scope:bfl_venture_actor } }
+}
+bfl_venture_eligible = {
+exists = scope:bfl_operator country_exists = scope:bfl_operator
+        bfl_branch_access = { PARTY = scope:bfl_operator }
+        NOT = { this = scope:bfl_operator }
+        scope:bfl_operator = { NOT = { bfl_is_bank = yes } NOT = { has_variable = bfl_venture_bank }
+            OR = { country_type = location bfl_is_company = yes } NOT = { has_variable = bfl_venture_guard } }
+        bfl_can_originate_commenda = yes bfl_venture_capacity = yes
+        bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
+        var:bfl_venture_ticket >= 100 var:bfl_venture_ticket <= 400
+        OR = { AND = { var:bfl_venture_kind = 1 scope:bfl_operator = { bfl_venture_cargo_valid = yes
+                scope:bfl_venture_lender.bfl_venture_authorized_budget >= { value = "scope:from.market_price(scope:goods)" multiply = 10 add = 1 }
+                scope:bfl_venture_lender.bfl_venture_authorized_budget >= { value = "capital.market.market_price(scope:goods)" multiply = 10 add = 1 } } }
+            AND = { var:bfl_venture_kind = 2 scope:bfl_operator = { bfl_venture_expedition_valid = yes } } }
+}
+bfl_venture_cargo_access = {
+exists = scope:from exists = scope:to exists = scope:goods scope:from != scope:to
+        can_find_trade_route = { from = scope:from to = scope:to }
+        NOT = { is_embargoed_by = scope:from.owner } NOT = { is_embargoed_by = scope:to.owner }
+        scope:from = { in_trade_range_of = prev NOT = { is_export_banned = scope:goods }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_operator } } }
+        scope:to = { in_trade_range_of = prev NOT = { is_import_banned = scope:goods }
+            owner = { OR = { modifier:trade_isolation = no gives_isolation_exemption_to = scope:bfl_operator } } }
+}
+bfl_venture_cargo_valid = {
+bfl_venture_cargo_access = yes
+        "scope:from.stockpile_in_market(scope:goods)" >= 10
+        "scope:from.market_price(scope:goods)" > 0
+}
+bfl_venture_expedition_valid = {
+modifier:may_explore = yes exists = scope:target exists = scope:character exists = scope:launch_location
+        scope:character = { owner = prev is_valid_for_exploration = yes }
+        scope:launch_location = { is_port = yes OR = { owner = scope:bfl_operator any_buildings_in_location = { owner = scope:bfl_operator } } }
+        NOT = { has_discovered_area = scope:target }
+        scope:target = { is_area_sea = yes NOT = { is_being_explored = prev }
+            # Landless companies have no native territorial naval-range origin.
+            # Their selected owned coastal facility supplies a host-country base.
+            any_location_in_area = { OR = { within_naval_range_of = scope:bfl_operator
+                AND = { scope:bfl_operator = { bfl_is_company = yes }
+                    within_naval_range_of = scope:launch_location.owner } } } }
+}
+bfl_commenda_offer_ready = {
+bfl_can_originate_commenda = yes bfl_venture_capacity = yes
+        bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket
+}
+bfl_commenda_command_ready = {
+OR = { bfl_commenda_offer_ready = yes
+        AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }
+}
+bfl_ai_accept_venture = {
+country_exists = this at_war = no
+        exists = var:bfl_venture_offer_bank bfl_period <= var:bfl_venture_offer_expiry
+        # Automated consent is limited to quoted cargo; an expedition with no
+        # attributable commercial return requires the operator's explicit choice.
+        var:bfl_venture_offer_kind = 1
+        var:bfl_venture_offer_from = { save_temporary_scope_as = bfl_ai_from }
+        var:bfl_venture_offer_to = { save_temporary_scope_as = bfl_ai_to }
+        var:bfl_venture_offer_good = { save_temporary_scope_as = bfl_ai_good }
+        "scope:bfl_ai_to.market_price(scope:bfl_ai_good)" >= { value = "scope:bfl_ai_from.market_price(scope:bfl_ai_good)" multiply = 1.10 }
+        OR = { var:bfl_venture_offer_preset = 0
+            bfl_venture_operator_cash >= { value = var:bfl_venture_offer_ticket divide = 2 add = 100 } }
+        monthly_balance >= 0
+}

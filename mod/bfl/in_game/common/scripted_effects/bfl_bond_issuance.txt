@@ -389,6 +389,7 @@ if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
     # Root bank. Only its live landed controller can be the primary issuer.
     bfl_underwrite_sovereign_bond = {
         if = { limit = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
+            bfl_branch_access = { PARTY = overlord }
             NOT = { has_variable = bfl_bond_guard }
             var:bfl_bond_amount > 0
             bfl_free_cash >= var:bfl_bond_amount bfl_capital_headroom >= var:bfl_bond_amount
@@ -446,4 +447,18 @@ if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
                 if = { limit = { NOT = { has_variable = bfl_facility_draws } } set_variable = { name = bfl_facility_draws value = 0 } }
                 change_variable = { name = bfl_facility_draws add = 1 } }
         }
+        set_variable = { name = bfl_facility_reason value = 0 }
+        if = { limit = { var:bfl_facility_requested > var:bfl_facility_paid }
+            set_variable = { name = bfl_facility_reason value = 1 }
+            if = { limit = { bfl_free_cash < var:bfl_facility_requested } set_variable = { name = bfl_facility_reason value = 2 } }
+            else_if = { limit = { bfl_capital_headroom < var:bfl_facility_requested } set_variable = { name = bfl_facility_reason value = 3 } }
+            else_if = { limit = { overlord.bfl_bond_capacity < var:bfl_facility_requested } set_variable = { name = bfl_facility_reason value = 4 } }
+            else_if = { limit = { overlord.bfl_bond_arrears > 0 } set_variable = { name = bfl_facility_reason value = 5 } }
+            else_if = { limit = { overlord.var:bfl_bond_last_issue = bfl_period } set_variable = { name = bfl_facility_reason value = 6 } }
+            else_if = { limit = { overlord = { NOT = { bfl_has_bond_slot = yes } } } set_variable = { name = bfl_facility_reason value = 7 } }
+            if = { limit = { NOT = { var:bfl_facility_last_reason ?= var:bfl_facility_reason } }
+                set_variable = { name = bfl_feedback_shortfall value = { value = var:bfl_facility_requested subtract = var:bfl_facility_paid } }
+                bfl_record_feedback = { KIND = 9 AMOUNT = var:bfl_feedback_shortfall } }
+        }
+        set_variable = { name = bfl_facility_last_reason value = var:bfl_facility_reason }
     }

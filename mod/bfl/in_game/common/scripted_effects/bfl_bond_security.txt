@@ -1,0 +1,910 @@
+﻿bfl_release_bond_security = {
+if = { limit = { has_variable = bfl_revenue_concession_holder }
+        if = { limit = { country_exists = this country_exists = var:bfl_revenue_concession_holder }
+            remove_relation = { type = relation_type:bfl_workout_trade_access first = this second = var:bfl_revenue_concession_holder } }
+        remove_variable = bfl_revenue_concession_holder }
+        remove_variable = bfl_revenue_bond_slot
+}
+bfl_service_bond_security = {
+if = { limit = { has_variable = bfl_revenue_bond_slot }
+        save_scope_as = bfl_revenue_issuer
+        if = { limit = { bfl_period > var:bfl_revenue_bond_expiry } bfl_release_bond_security = yes }
+        else = {
+    if = { limit = { var:bfl_revenue_bond_slot = 1 }
+            if = { limit = { var:bfl_bnd_01_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_01 = yes
+                if = { limit = { var:bfl_bnd_01_due > 0 exists = var:bfl_bnd_01_holder country_exists = var:bfl_bnd_01_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_01_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_01_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_01_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 2 }
+            if = { limit = { var:bfl_bnd_02_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_02 = yes
+                if = { limit = { var:bfl_bnd_02_due > 0 exists = var:bfl_bnd_02_holder country_exists = var:bfl_bnd_02_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_02_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_02_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_02_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 3 }
+            if = { limit = { var:bfl_bnd_03_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_03 = yes
+                if = { limit = { var:bfl_bnd_03_due > 0 exists = var:bfl_bnd_03_holder country_exists = var:bfl_bnd_03_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_03_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_03_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_03_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 4 }
+            if = { limit = { var:bfl_bnd_04_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_04 = yes
+                if = { limit = { var:bfl_bnd_04_due > 0 exists = var:bfl_bnd_04_holder country_exists = var:bfl_bnd_04_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_04_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_04_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_04_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 5 }
+            if = { limit = { var:bfl_bnd_05_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_05 = yes
+                if = { limit = { var:bfl_bnd_05_due > 0 exists = var:bfl_bnd_05_holder country_exists = var:bfl_bnd_05_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_05_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_05_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_05_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 6 }
+            if = { limit = { var:bfl_bnd_06_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_06 = yes
+                if = { limit = { var:bfl_bnd_06_due > 0 exists = var:bfl_bnd_06_holder country_exists = var:bfl_bnd_06_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_06_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_06_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_06_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 7 }
+            if = { limit = { var:bfl_bnd_07_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_07 = yes
+                if = { limit = { var:bfl_bnd_07_due > 0 exists = var:bfl_bnd_07_holder country_exists = var:bfl_bnd_07_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_07_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_07_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_07_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 8 }
+            if = { limit = { var:bfl_bnd_08_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_08 = yes
+                if = { limit = { var:bfl_bnd_08_due > 0 exists = var:bfl_bnd_08_holder country_exists = var:bfl_bnd_08_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_08_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_08_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_08_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 9 }
+            if = { limit = { var:bfl_bnd_09_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_09 = yes
+                if = { limit = { var:bfl_bnd_09_due > 0 exists = var:bfl_bnd_09_holder country_exists = var:bfl_bnd_09_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_09_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_09_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_09_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 10 }
+            if = { limit = { var:bfl_bnd_10_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_10 = yes
+                if = { limit = { var:bfl_bnd_10_due > 0 exists = var:bfl_bnd_10_holder country_exists = var:bfl_bnd_10_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_10_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_10_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_10_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 11 }
+            if = { limit = { var:bfl_bnd_11_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_11 = yes
+                if = { limit = { var:bfl_bnd_11_due > 0 exists = var:bfl_bnd_11_holder country_exists = var:bfl_bnd_11_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_11_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_11_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_11_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 12 }
+            if = { limit = { var:bfl_bnd_12_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_12 = yes
+                if = { limit = { var:bfl_bnd_12_due > 0 exists = var:bfl_bnd_12_holder country_exists = var:bfl_bnd_12_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_12_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_12_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_12_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 13 }
+            if = { limit = { var:bfl_bnd_13_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_13 = yes
+                if = { limit = { var:bfl_bnd_13_due > 0 exists = var:bfl_bnd_13_holder country_exists = var:bfl_bnd_13_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_13_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_13_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_13_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 14 }
+            if = { limit = { var:bfl_bnd_14_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_14 = yes
+                if = { limit = { var:bfl_bnd_14_due > 0 exists = var:bfl_bnd_14_holder country_exists = var:bfl_bnd_14_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_14_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_14_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_14_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 15 }
+            if = { limit = { var:bfl_bnd_15_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_15 = yes
+                if = { limit = { var:bfl_bnd_15_due > 0 exists = var:bfl_bnd_15_holder country_exists = var:bfl_bnd_15_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_15_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_15_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_15_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 16 }
+            if = { limit = { var:bfl_bnd_16_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_16 = yes
+                if = { limit = { var:bfl_bnd_16_due > 0 exists = var:bfl_bnd_16_holder country_exists = var:bfl_bnd_16_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_16_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_16_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_16_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 17 }
+            if = { limit = { var:bfl_bnd_17_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_17 = yes
+                if = { limit = { var:bfl_bnd_17_due > 0 exists = var:bfl_bnd_17_holder country_exists = var:bfl_bnd_17_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_17_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_17_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_17_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 18 }
+            if = { limit = { var:bfl_bnd_18_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_18 = yes
+                if = { limit = { var:bfl_bnd_18_due > 0 exists = var:bfl_bnd_18_holder country_exists = var:bfl_bnd_18_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_18_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_18_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_18_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 19 }
+            if = { limit = { var:bfl_bnd_19_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_19 = yes
+                if = { limit = { var:bfl_bnd_19_due > 0 exists = var:bfl_bnd_19_holder country_exists = var:bfl_bnd_19_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_19_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_19_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_19_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 20 }
+            if = { limit = { var:bfl_bnd_20_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_20 = yes
+                if = { limit = { var:bfl_bnd_20_due > 0 exists = var:bfl_bnd_20_holder country_exists = var:bfl_bnd_20_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_20_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_20_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_20_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 21 }
+            if = { limit = { var:bfl_bnd_21_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_21 = yes
+                if = { limit = { var:bfl_bnd_21_due > 0 exists = var:bfl_bnd_21_holder country_exists = var:bfl_bnd_21_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_21_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_21_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_21_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 22 }
+            if = { limit = { var:bfl_bnd_22_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_22 = yes
+                if = { limit = { var:bfl_bnd_22_due > 0 exists = var:bfl_bnd_22_holder country_exists = var:bfl_bnd_22_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_22_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_22_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_22_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 23 }
+            if = { limit = { var:bfl_bnd_23_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_23 = yes
+                if = { limit = { var:bfl_bnd_23_due > 0 exists = var:bfl_bnd_23_holder country_exists = var:bfl_bnd_23_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_23_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_23_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_23_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 24 }
+            if = { limit = { var:bfl_bnd_24_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_24 = yes
+                if = { limit = { var:bfl_bnd_24_due > 0 exists = var:bfl_bnd_24_holder country_exists = var:bfl_bnd_24_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_24_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_24_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_24_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 25 }
+            if = { limit = { var:bfl_bnd_25_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_25 = yes
+                if = { limit = { var:bfl_bnd_25_due > 0 exists = var:bfl_bnd_25_holder country_exists = var:bfl_bnd_25_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_25_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_25_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_25_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 26 }
+            if = { limit = { var:bfl_bnd_26_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_26 = yes
+                if = { limit = { var:bfl_bnd_26_due > 0 exists = var:bfl_bnd_26_holder country_exists = var:bfl_bnd_26_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_26_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_26_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_26_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 27 }
+            if = { limit = { var:bfl_bnd_27_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_27 = yes
+                if = { limit = { var:bfl_bnd_27_due > 0 exists = var:bfl_bnd_27_holder country_exists = var:bfl_bnd_27_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_27_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_27_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_27_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 28 }
+            if = { limit = { var:bfl_bnd_28_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_28 = yes
+                if = { limit = { var:bfl_bnd_28_due > 0 exists = var:bfl_bnd_28_holder country_exists = var:bfl_bnd_28_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_28_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_28_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_28_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 29 }
+            if = { limit = { var:bfl_bnd_29_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_29 = yes
+                if = { limit = { var:bfl_bnd_29_due > 0 exists = var:bfl_bnd_29_holder country_exists = var:bfl_bnd_29_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_29_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_29_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_29_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 30 }
+            if = { limit = { var:bfl_bnd_30_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_30 = yes
+                if = { limit = { var:bfl_bnd_30_due > 0 exists = var:bfl_bnd_30_holder country_exists = var:bfl_bnd_30_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_30_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_30_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_30_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 31 }
+            if = { limit = { var:bfl_bnd_31_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_31 = yes
+                if = { limit = { var:bfl_bnd_31_due > 0 exists = var:bfl_bnd_31_holder country_exists = var:bfl_bnd_31_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_31_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_31_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_31_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+if = { limit = { var:bfl_revenue_bond_slot = 32 }
+            if = { limit = { var:bfl_bnd_32_active = 0 } bfl_release_bond_security = yes }
+            else = {
+                bfl_accrue_bond_32 = yes
+                if = { limit = { var:bfl_bnd_32_due > 0 exists = var:bfl_bnd_32_holder country_exists = var:bfl_bnd_32_holder
+                    OR = { NOT = { has_variable = bfl_revenue_payment_period } bfl_period > var:bfl_revenue_payment_period } }
+                    set_variable = { name = bfl_revenue_payment_period value = bfl_period }
+                    set_variable = { name = bfl_bond_payment value = { value = monthly_income_total multiply = 0.10
+                        min = 0 max = bfl_revenue_available max = var:bfl_bnd_32_due multiply = 100 floor = yes divide = 100 } }
+                    add_gold = { value = var:bfl_bond_payment multiply = -1 }
+                    change_variable = { name = bfl_bnd_32_due subtract = var:bfl_bond_payment }
+                    if = { limit = { NOT = { has_variable = bfl_revenue_paid } } set_variable = { name = bfl_revenue_paid value = 0 } }
+                    change_variable = { name = bfl_revenue_paid add = var:bfl_bond_payment }
+                    if = { limit = { var:bfl_bond_cost_period != bfl_period }
+                        set_variable = { name = bfl_bond_cost_period value = bfl_period }
+                        set_variable = { name = bfl_bond_cost_paid value = 0 } }
+                    change_variable = { name = bfl_bond_cost_paid add = var:bfl_bond_payment }
+                    var:bfl_bnd_32_holder = { add_gold = scope:bfl_revenue_issuer.var:bfl_bond_payment
+                        bfl_initialize_bonds = yes
+                        if = { limit = { var:bfl_bond_receipt_period != bfl_period }
+                            set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
+                        change_variable = { name = bfl_bond_receipts add = scope:bfl_revenue_issuer.var:bfl_bond_payment }
+                        if = { limit = { bfl_has_accounts = yes }
+                            change_variable = { name = bfl_profit_credit add = scope:bfl_revenue_issuer.var:bfl_bond_payment } }
+                    }
+                }
+            }
+        }
+} }
+}

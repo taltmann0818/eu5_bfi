@@ -1,5 +1,22 @@
 # Florence campaign regression checks
 
+M7 commenda passes its corrected activity-attribution gate for the pinned
+single-player baseline: **292 engine assertions, 19 native arithmetic
+reconciliations, fresh-process reload and 20 accepted actual-game captures**.
+[Product rules and exact evidence](m7-commenda.md) cover named operations,
+actual cost funding, company income and native expedition state. A green top-bar
+alert shows country/cargo, estimated bank cost and indicative surplus, then opens
+review and requires operator consent. Shipping `c5422e23…` and each retained
+report/capture hash are recorded without relabeling. 128 offline tests, native
+pins, deterministic generation and 261-file staging pass. Historical country-wide
+314-assertion/21-capture evidence is excluded from the corrected gate.
+
+Use `-Suite m7`, `m7authority`, `m7traditions`, `m7later`, `m7company`, plus
+accounts/treasury/goods regressions. `start_test_campaign.ps1 -Commenda
+-CommendaQaControls -NoDebug` stages a disposable UI fixture; add
+`-CommendaIndependent` for Bardi or `-PrepareOnly` to stage without launching.
+Historical evidence below retains its original runtime and scope.
+
 **Current stochastic-pricing acceptance:** the implemented [NAV-anchored market model](exchange-pricing.md) and [paired comparison/sensitivity](equity-pricing-ab.md) pass the pinned single-player gate. **31 pricing + 40 market + 54 ownership + 114 accounts/bond = 239 native assertions**, including twelve matched same-bank NAV/market observations and second-process saved-state checks, pass with exact per-report provenance. The 31-case pricing suite runs shipping `767c813df67b78fb81cabe2a5b16a5a8d89ce459a16bae935824976d56d86668`; 40/54/114 regressions retain `ff891754...`, differing only in the matching recapitalization-button/command guard and its tooltip localization. All financial price/value/effect files are byte-identical. The ordinary financial regression suites explicitly select pure NAV on that identical runtime; the dedicated pricing suite enables GBM. **108 offline tests**, native/CMF source pins, deterministic generation/reconstruction and **221-file staging** pass. [Exact provenance](../tests/results/2026-10-18-gbm-validation.json) preserves actual hashes, rejected development attempts, synthetic-versus-native scope and the fixture-only solvency grant for the isolated next-draw check.
 
 The offline A/B uses **2,560 paths over 120 months and five scenarios**, **130 sensitivity rows** and **54 interaction cells**. Results are controlled synthetic model outputs, not campaign earnings or release-wide economic calibration. Backend defaults select 10% annual volatility, zero independent drift, 2/year mean reversion, bounded initiating-order pressure and spreads, actual ex-dividend NAV and paid NAV issuance. Subscriptions and the sovereign recapitalization route both enforce the primary/dealer arbitrage guard. Zero NAV halts sales/reset premia; a funded recovery reanchors without a shock. Seed/period guards prevent rerolls and background inventory distribution adds no duplicate pressure.
@@ -77,6 +94,13 @@ The charter authority is deliberately established by the fixture. This does **no
 For interactive debugging, stage the scripts with `python tools/campaign_suite.py prepare --userdir '<EUV user directory>'`, then use the native console: `run bfi_begin.txt`, `run_months 12`, `run bfi_finish.txt`. Save and reload that disposable campaign, then `run bfi_reload.txt`. Preparing scripts alone does not enable the test overlay in a normal playset. Never execute these wallet-resetting fixtures in a personal campaign.
 
 ## GitHub Actions
+
+M8 adds `m8`, `m8traditions`, `m8renaissance` and `m8absolutism` to the licensed
+runner matrix, alongside the changed-product regressions (including Discovery
+and Revolutions commenda). Run the same suites locally with
+`./tools/run_campaign.ps1 -Suite <suite>`. The [M8 acceptance record](m8-monetary.md)
+separates native assertions from computer-controlled normal UI inspection;
+`tools/prepare_m8_ui.py` stages isolated scenes with explicitly test-only grants.
 
 Every PR triggers `Florence campaign functionality`, with separate `accounts`, `m0`, `m1`, `m2`, `m3` and `m4` suite jobs. The [M1 suite](m1-charter.md) establishes the sovereign command actor, creates ten real native banks for pagination, runs production/event-option services and native AI, observes twelve periods and reloads. It passes 58 assertions on the recorded runtime. Same-repository branches run the engine job on a Windows x64 runner labeled `euv-1.4.1` and `cmf-2.5.0`. Set runner environment variables `EU5_GAME_ROOT` and `EU5_CMF_ROOT` to the local licensed installations, or use the script's standard Steam paths. Use a dedicated runner account/machine without personal data; it executes repository code. Do not expose that runner to unreviewed fork code. Fork PRs fail the eligibility check until a maintainer reviews them and runs the changes from a trusted branch.
 

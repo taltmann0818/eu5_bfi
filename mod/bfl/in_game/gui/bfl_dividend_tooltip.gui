@@ -5,11 +5,11 @@
         blockoverride "concept_link" { text = "bfl_dividend_breakdown_subtitle" }
         blockoverride "tooltip_content" { vbox = { size = { 420 0 }
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Last monthly bank dividends" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_25cca1a5b2fa1195" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bank_dividend_latest')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Annual rate (monthly × 12)" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_3740c8cc83e9881d" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bank_dividend_annual')|2]@gold!" autoresize = yes align = right|nobaseline } } }vbox = { layoutpolicy_horizontal = expanding
         visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]" TooltipListBase = {
@@ -18,58 +18,58 @@
         blockoverride "block_scrollarea" { minimumsize = { 420 0 } maximumsize = { 420 340 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
             size = { 420 0 } minimumsize = { 420 0 } layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height spacing = 0 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Credit income" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_630117b8793315d2" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_credit').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Services" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_604dce445e326d95" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_services').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Company dividends" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_0d3187e78a48f246" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_company').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Other bank income" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_58475912ca574ab6" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_native').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Trading" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_fde20a1b46218890" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_trading').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Goods" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_36574fcce3922cde" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_goods').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Ventures" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_3a62725216bf064a" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_ventures').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Controller income" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_1a8099cdd8cc6ed4" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_controller').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Deposit interest (part of costs)" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_e6223687de460dbc" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_deposit_cost').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Operating costs (part of costs)" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_c8ac13056b2d85ae" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_operating_cost').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Total costs and losses" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_4755cf499581be20" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_losses').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Eligible profit" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_323a0f6922043eca" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_eligible').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Funded payout" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_6a2bbf991804e0b4" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_funded').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Paid to all owners" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_b5f5ceeb9e5817a0" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_paid').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Paid to the state" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_767afca8b8e0b4f2" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_state_dividend_paid').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Payout rate" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_22a09027a211df4b" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_ratio').GetValue|%0]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "State shares" autoresize = yes } expand = { }
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_52cf47bc81cf530a" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_state_units').GetValue|3]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Total shares" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_b006e79cc5991180" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_dividend_total_units').GetValue|3]" autoresize = yes align = right|nobaseline } } } } } } } }TooltipTextBlock = { blockoverride "text" { text = "bfl_dividend_rate_note" } } } }
     } }

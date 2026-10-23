@@ -1,0 +1,28 @@
+﻿bfl_initialize_monetary = {
+if = { limit = { NOT = { has_variable = bfl_money_schema } }
+set_variable = { name = bfl_money_schema value = 1 }
+set_variable = { name = bfl_money_assets value = 0 }
+set_variable = { name = bfl_money_open value = 0 }
+set_variable = { name = bfl_money_accept value = 0 }
+set_variable = { name = bfl_money_rate value = 0.06 }
+set_variable = { name = bfl_discount_offer_generation value = 0 }
+set_variable = { name = bfl_money_confidence value = 100 }
+set_variable = { name = bfl_money_last value = 0 }
+set_variable = { name = bfl_money_ceiling value = 500 }
+set_variable = { name = bfl_lending_base value = 0.03 }
+set_variable = { name = bfl_clearing_open value = 0 }
+set_variable = { name = bfl_clearing_last value = 0 }
+set_variable = { name = bfl_clearing_failed value = 0 }
+set_variable = { name = bfl_clearing_count value = 0 }
+set_variable = { name = bfl_note_01_face value = 0 }
+set_variable = { name = bfl_note_02_face value = 0 }
+set_variable = { name = bfl_note_03_face value = 0 }
+set_variable = { name = bfl_note_04_face value = 0 }
+set_variable = { name = bfl_note_05_face value = 0 }
+set_variable = { name = bfl_note_06_face value = 0 }
+set_variable = { name = bfl_note_07_face value = 0 }
+set_variable = { name = bfl_note_08_face value = 0 }
+bfl_reconcile_monetary_assets = yes
+}
+bfl_initialize_resolution_money = yes
+}

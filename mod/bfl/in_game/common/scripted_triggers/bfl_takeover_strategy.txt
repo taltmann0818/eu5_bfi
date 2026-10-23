@@ -1,0 +1,13 @@
+﻿bfl_ai_takeover_candidate = {
+    country_exists = this country_type = location at_war = no
+    monthly_income_total > 0 monthly_balance >= 0 creditworthiness >= 0.50
+    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt }
+    gold <= total_debt
+}
+# Loan scope; native actor is the purchasing bank. Quotes are risk
+# estimates, never booked income. Keep a funded operating reserve.
+bfl_ai_takeover_viable = {
+    scope:actor.bfl_free_cash >= { value = bank_loan_takeover_cost add = 100 }
+    bank_loan_takeover_cost <= { value = remaining_debt multiply = 1.25 }
+    bfl_takeover_monthly_margin >= 0.10
+}

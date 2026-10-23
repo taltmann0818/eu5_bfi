@@ -1,0 +1,268 @@
+﻿bfl_browse_goods = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { country_exists = this } }
+            allow = { scope:actor = { country_exists = this  } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes } enabled = { bfl_has_accounts = yes } }
+            effect = { scope:actor = {
+            set_variable = { name = bfl_goods_browser_bank value = scope:recipient }
+            set_variable = { name = bfl_goods_browser_page value = 1 }
+            trigger_event_non_silently = bfl_goods.1 } } ai_will_do = { value = 0 } }
+bfl_grant_goods_branch = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+            potential = { scope:actor = { country_exists = this } }
+            allow = { scope:actor = { country_exists = this any_owned_building = { building_type = building_type:customs_house building_level > 0 } } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                column = { data = country_diplomacy_info_loan } visible = { bfl_is_bank = yes } enabled = { bfl_can_originate_commodity_inventory = yes } }
+            effect = { scope:actor = { save_scope_as = bfl_goods_party }
+            scope:recipient = { set_variable = { name = bfl_goods_host_offer value = scope:actor }
+                if = { limit = { bfl_has_valid_controller = yes } overlord = { set_variable = { name = bfl_goods_branch_bank value = scope:recipient } trigger_event_non_silently = bfl_goods.3 } }
+                else = { set_variable = { name = bfl_goods_branch_bank value = this } trigger_event_non_silently = bfl_goods.3 } } } ai_will_do = { value = 0 } }
+bfl_offer_goods_transfer = { type = diplomacy category = CATEGORY_ECONOMY_ACTIONS ai_tick = never
+        potential = { scope:actor = { exists = var:bfl_goods_browser_bank has_variable = bfl_goods_claim_slot } }
+        allow = { scope:actor = { country_exists = this } }
+        select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+            column = { data = name } visible = { country_exists = this NOT = { this = scope:actor } }
+            enabled = { gold > 0 country_exists = this } }
+        effect = { scope:actor = { save_scope_as = bfl_goods_seller } scope:recipient = { save_scope_as = bfl_goods_party }
+scope:actor.var:bfl_goods_browser_bank = { save_scope_as = bfl_goods_bank
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 1
+            var:bfl_inv_01_active = 1 var:bfl_inv_01_state = 1 var:bfl_inv_01_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_01 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 1 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_01_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_01_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_01_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_01_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_01_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 2
+            var:bfl_inv_02_active = 1 var:bfl_inv_02_state = 1 var:bfl_inv_02_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_02 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 2 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_02_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_02_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_02_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_02_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_02_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 3
+            var:bfl_inv_03_active = 1 var:bfl_inv_03_state = 1 var:bfl_inv_03_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_03 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 3 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_03_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_03_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_03_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_03_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_03_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 4
+            var:bfl_inv_04_active = 1 var:bfl_inv_04_state = 1 var:bfl_inv_04_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_04 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 4 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_04_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_04_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_04_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_04_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_04_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 5
+            var:bfl_inv_05_active = 1 var:bfl_inv_05_state = 1 var:bfl_inv_05_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_05 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 5 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_05_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_05_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_05_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_05_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_05_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 6
+            var:bfl_inv_06_active = 1 var:bfl_inv_06_state = 1 var:bfl_inv_06_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_06 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 6 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_06_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_06_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_06_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_06_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_06_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 7
+            var:bfl_inv_07_active = 1 var:bfl_inv_07_state = 1 var:bfl_inv_07_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_07 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 7 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_07_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_07_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_07_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_07_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_07_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 8
+            var:bfl_inv_08_active = 1 var:bfl_inv_08_state = 1 var:bfl_inv_08_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_08 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 8 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_08_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_08_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_08_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_08_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_08_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 9
+            var:bfl_inv_09_active = 1 var:bfl_inv_09_state = 1 var:bfl_inv_09_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_09 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 9 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_09_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_09_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_09_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_09_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_09_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 10
+            var:bfl_inv_10_active = 1 var:bfl_inv_10_state = 1 var:bfl_inv_10_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_10 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 10 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_10_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_10_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_10_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_10_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_10_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 11
+            var:bfl_inv_11_active = 1 var:bfl_inv_11_state = 1 var:bfl_inv_11_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_11 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 11 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_11_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_11_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_11_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_11_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_11_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 12
+            var:bfl_inv_12_active = 1 var:bfl_inv_12_state = 1 var:bfl_inv_12_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_12 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 12 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_12_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_12_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_12_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_12_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_12_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 13
+            var:bfl_inv_13_active = 1 var:bfl_inv_13_state = 1 var:bfl_inv_13_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_13 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 13 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_13_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_13_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_13_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_13_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_13_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 14
+            var:bfl_inv_14_active = 1 var:bfl_inv_14_state = 1 var:bfl_inv_14_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_14 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 14 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_14_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_14_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_14_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_14_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_14_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 15
+            var:bfl_inv_15_active = 1 var:bfl_inv_15_state = 1 var:bfl_inv_15_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_15 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 15 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_15_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_15_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_15_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_15_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_15_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+if = { limit = { scope:bfl_goods_seller.var:bfl_goods_claim_slot = 16
+            var:bfl_inv_16_active = 1 var:bfl_inv_16_state = 1 var:bfl_inv_16_holder = scope:bfl_goods_seller
+            bfl_can_originate_margining = yes bfl_goods_access_16 = yes }
+            scope:bfl_goods_party = {
+                set_variable = { name = bfl_goods_transfer_bank value = scope:bfl_goods_bank }
+                set_variable = { name = bfl_goods_transfer_seller value = scope:bfl_goods_seller }
+                set_variable = { name = bfl_goods_transfer_slot value = 16 }
+                set_variable = { name = bfl_goods_transfer_generation value = scope:bfl_goods_bank.var:bfl_inv_16_generation }
+                set_variable = { name = bfl_goods_transfer_price value = scope:bfl_goods_bank.var:bfl_inv_16_price }
+                set_variable = { name = bfl_goods_transfer_quantity value = scope:bfl_goods_bank.var:bfl_inv_16_quantity }
+                set_variable = { name = bfl_goods_transfer_good value = scope:bfl_goods_bank.var:bfl_inv_16_good }
+                set_variable = { name = bfl_goods_transfer_type value = scope:bfl_goods_bank.var:bfl_inv_16_type }
+                set_variable = { name = bfl_goods_transfer_expiry value = { value = bfl_period add = 1 } }
+                trigger_event_non_silently = bfl_goods.5
+            } }
+}
+ } ai_will_do = { value = 0 } }

@@ -1,10 +1,11 @@
 param(
     [string]$Game = $env:EU5_GAME_ROOT,
     [string]$Cmf = $env:EU5_CMF_ROOT,
+    [string[]]$AdditionalMods = @(),
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing')][string]$Suite = 'accounts'
+    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -23,6 +24,9 @@ try {
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
     $suiteScript = switch ($Suite) {
+        'm10takeover' { 'tools/m10_takeover_suite.py' }
+        'm10finance' { 'tools/m10_finance_suite.py' }
+        'm10' { 'tools/m10_strategy_suite.py' }
         'm0' { 'tools/m0_probe_suite.py' }
         'm1' { 'tools/m1_charter_suite.py' }
         'm2' { 'tools/m2_company_suite.py' }
@@ -31,6 +35,29 @@ try {
         'm5' { 'tools/m5_ownership_suite.py' }
         'm5market' { 'tools/m5_market_suite.py' }
         'm5pricing' { 'tools/m5_pricing_suite.py' }
+        'm6' { 'tools/m6_goods_suite.py' }
+        'm6policy' { 'tools/m6_policy_suite.py' }
+        'm6traditions' { 'tools/m6_traditions_suite.py' }
+        'm6discovery' { 'tools/m6_discovery_suite.py' }
+        'm6absolutism' { 'tools/m6_absolutism_suite.py' }
+        'm7' { 'tools/m7_commenda_suite.py' }
+        'm7traditions' { 'tools/m7_traditions_suite.py' }
+        'm7later' { 'tools/m7_later_suite.py' }
+        'm7company' { 'tools/m7_company_suite.py' }
+        'm7authority' { 'tools/m7_authority_suite.py' }
+        'm9' { 'tools/m9_resolution_suite.py' }
+        'm9estate' { 'tools/m9_estate_suite.py' }
+        'm9workouts' { 'tools/m9_workout_suite.py' }
+        'm9assets' { 'tools/m9_assets_suite.py' }
+        'm9default' { 'tools/m9_default_suite.py' }
+        'm9overseas' { 'tools/m9_overseas_suite.py' }
+        'm9receiver' { 'tools/m9_receiver_suite.py' }
+        'm9custody' { 'tools/m9_custody_suite.py' }
+        'm9projects' { 'tools/m9_projects_suite.py' }
+        'm8' { 'tools/m8_monetary_suite.py' }
+        'm8traditions' { 'tools/m8_traditions_suite.py' }
+        'm8renaissance' { 'tools/m8_renaissance_suite.py' }
+        'm8absolutism' { 'tools/m8_absolutism_suite.py' }
         default { 'tools/campaign_suite.py' }
     }
     python $suiteScript prepare --userdir $userDir --token $runId
@@ -38,7 +65,8 @@ try {
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
     $overlay = Join-Path $userDir 'mod/bfi_campaign_checks'
-    $mods = @($Cmf, $bfi, $overlay) | ForEach-Object {
+    $modPaths = @($Cmf) + $AdditionalMods + @($bfi, $overlay)
+    $mods = $modPaths | ForEach-Object {
         @{path = ($_.Replace('\','/') + '/'); isEnabled = $true}
     }
     @{file_version = '1.0.0'; playsets = @(@{
@@ -47,11 +75,22 @@ try {
     })} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $userDir 'playsets.json') -Encoding utf8
     $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=15', "-userdir=`"$userDir`"")
     if ($Suite -eq 'm2') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=122', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm8') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
+    if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
+    # Activity assertions finish after three months, followed by a full annual
+    # autosave interval. Native timed handsoff counts months, not years.
+    if ($Suite -in @('m7', 'm7traditions', 'm7later')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5market') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5pricing') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=90', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }
     $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
     New-Item -ItemType Directory -Path $outPath -Force | Out-Null
+    if ($AdditionalMods.Count -gt 0) {
+        $inventoryArgs = @('tools/audit_compatibility.py', '--output', (Join-Path $outPath 'additional-mods.json'))
+        foreach ($additionalMod in $AdditionalMods) { $inventoryArgs += @('--mod', $additionalMod) }
+        & python @inventoryArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Unsupported additional-mod replacement; see inventory.' }
+    }
     Copy-Item -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Destination (Join-Path $outPath 'manifest.json') -Force
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     $debugPath = Join-Path $userDir 'logs/debug.log'
@@ -66,8 +105,9 @@ try {
         try {
             while (-not $proc.HasExited -and [DateTime]::UtcNow -lt $deadline) {
                 if (Test-Path -LiteralPath $debugPath) {
-                    $tail = Get-Content -LiteralPath $debugPath -Tail 100 -ErrorAction SilentlyContinue
-                    if ($tail -match [regex]::Escape($StopMarker)) { break }
+                    # An autosave can append hundreds of lines between polls;
+                    # the completed fixture marker must not fall out of a tail.
+                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) { break }
                 }
                 Start-Sleep -Seconds 5
                 $proc.Refresh()

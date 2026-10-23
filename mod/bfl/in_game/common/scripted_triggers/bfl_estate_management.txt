@@ -1,0 +1,8 @@
+﻿bfl_has_managed_estate = {
+    any_in_global_list = { variable = bfl_resolution_institutions
+        has_variable = bfl_resolution_estate var:bfl_resolution_trustee ?= prev }
+}
+bfl_valid_estate_selection = {
+    exists = var:bfl_managed_estate
+    var:bfl_managed_estate = { has_variable = bfl_resolution_estate var:bfl_resolution_trustee ?= prev }
+}

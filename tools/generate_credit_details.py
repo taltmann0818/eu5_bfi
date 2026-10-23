@@ -134,10 +134,11 @@ def generate(common, effect, loc, write):
     common('script_values', 'credit_report', values)
     stocks = {
         'cash': ('Cash','liquidity',[('Cash','gold'),('Reserved for obligations','bfl_protected_cash'),('Available to invest','bfl_free_cash')]),
-        'assets': ('Assets','accounts',[('Cash','gold'),('Loans and bonds','var:bfl_native_credit_value'),('Other credit','var:bfl_custom_credit_value'),('Goods','var:bfl_inventory_value'),('Ventures','var:bfl_project_value'),('Shares at carrying value','bfl_security_carrying'),('Total assets','bfl_assets')]),
-        'liabilities': ('Liabilities','debt',[('Deposits and interest','bfl_deposit_liabilities'),('Notes','var:bfl_notes_outstanding'),('Other payables','var:bfl_other_payables'),('Unpaid administration','var:bfl_expense_arrears'),('Total liabilities','bfl_liabilities')]),
+        'assets': ('Assets','accounts',[('Cash','gold'),('Loans and bonds','var:bfl_native_credit_value'),('Other credit','var:bfl_custom_credit_value'),('Goods','var:bfl_inventory_value'),('Ventures','var:bfl_project_value'),('Shares at carrying value','bfl_security_carrying'),('Monetary claims','bfl_money_assets'),('Deposits in other banks','bfl_deposit_assets'),('Estate recoveries owed','bfl_estate_receivable'),('Native estate claims','bfl_native_estate_assets'),('Total assets','bfl_assets')]),
+        'liabilities': ('Liabilities','debt',[('Deposits and interest','bfl_deposit_liabilities'),('Notes','var:bfl_notes_outstanding'),('Other payables','var:bfl_other_payables'),('Unpaid administration','var:bfl_expense_arrears'),('Estate liabilities','bfl_estate_liabilities'),('Bank bond principal','bfl_bond_debt'),('Bank bond interest owed','bfl_bond_arrears'),('Preserved native creditors','bfl_resolution_native_claims'),('Native bank borrowing','bfl_stock_native_borrowing'),('Total liabilities','bfl_liabilities')]),
         'equity': ('Equity','subscribe',[('Assets','bfl_assets'),('Less liabilities','bfl_liabilities'),('Net equity','bfl_equity'),('Available capital','bfl_capital_headroom')]),
     }
+    common('script_values','stock_native_borrowing',effect('bfl_stock_native_borrowing','value = 0 every_loan = { add = remaining_debt }'))
     loc('bfl_balance_sheet_subtitle','Current bank accounts')
     for kind,(title,art,items) in stocks.items():
         loc(f'bfl_{kind}_detail_title',f'{title} of [Country.GetName]')

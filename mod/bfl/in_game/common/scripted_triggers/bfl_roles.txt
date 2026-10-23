@@ -21,8 +21,8 @@ bfl_can_conduct_business = {
     OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes }
     NOT = { has_variable = bfl_legacy_servicing }
     has_variable = bfl_schema
-    OR = { var:bfl_profile = 1 var:bfl_profile = 2 }
-    var:bfl_state < 2
+    OR = { var:bfl_profile ?= 1 var:bfl_profile ?= 2 }
+    OR = { var:bfl_state ?= 0 var:bfl_state ?= 1 }
     NOT = { has_variable = bfl_operation_guard }
 }
 bfl_has_management = {

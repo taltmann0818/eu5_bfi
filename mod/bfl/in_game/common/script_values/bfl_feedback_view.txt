@@ -1,0 +1,28 @@
+﻿bfl_player_feedback_sequence = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes has_variable = bfl_feedback_sequence }
+                add = var:bfl_feedback_sequence }
+            else_if = { limit = { bfl_has_management = yes var:bfl_bank ?= { has_variable = bfl_feedback_sequence } }
+                add = var:bfl_bank.var:bfl_feedback_sequence }
+}
+bfl_player_feedback_period = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes has_variable = bfl_feedback_period }
+                add = var:bfl_feedback_period }
+            else_if = { limit = { bfl_has_management = yes var:bfl_bank ?= { has_variable = bfl_feedback_period } }
+                add = var:bfl_bank.var:bfl_feedback_period }
+}
+bfl_player_feedback_kind = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes has_variable = bfl_feedback_kind }
+                add = var:bfl_feedback_kind }
+            else_if = { limit = { bfl_has_management = yes var:bfl_bank ?= { has_variable = bfl_feedback_kind } }
+                add = var:bfl_bank.var:bfl_feedback_kind }
+}
+bfl_player_feedback_amount = {
+value = 0
+            if = { limit = { bfl_is_independent_bank = yes has_variable = bfl_feedback_amount }
+                add = var:bfl_feedback_amount }
+            else_if = { limit = { bfl_has_management = yes var:bfl_bank ?= { has_variable = bfl_feedback_amount } }
+                add = var:bfl_bank.var:bfl_feedback_amount }
+}

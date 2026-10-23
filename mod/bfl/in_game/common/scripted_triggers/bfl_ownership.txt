@@ -38,6 +38,7 @@ bfl_equity_issuer = yes bfl_primary_price_safe = yes
         NOT = { has_variable = bfl_operation_guard }
         exists = scope:bfl_party country_exists = scope:bfl_party
         OR = { var:bfl_accept_equity = 1 AND = { bfl_has_valid_controller = yes overlord = scope:bfl_party } }
+        bfl_branch_access = { PARTY = scope:bfl_party }
         bfl_has_shareholder_capacity = yes bfl_tangible_equity > 0 var:bfl_total_units > 0
         bfl_equity_wallet_funded = yes bfl_equity_buyer_risk = yes
         OR = { AND = { bfl_is_bank = yes bfl_can_originate_bank_subscription = yes }

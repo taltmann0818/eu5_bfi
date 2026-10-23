@@ -651,7 +651,10 @@ if = { limit = { var:bfl_slot_found = 0 var:bfl_dep_32_active = 0 }
             set_variable = { name = bfl_dep_32_last_accrual value = bfl_period }
             set_variable = { name = bfl_dep_32_state value = var:bfl_product } }
 if = { limit = { var:bfl_slot_found = 1 }
-        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = var:bfl_deposit_amount }
+        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = var:bfl_deposit_amount
+        bfl_record_feedback = { KIND = 2 AMOUNT = var:bfl_deposit_amount }
+        scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_refresh_asset_statement = yes } }
+        save_scope_as = bfl_bank }
 }
 
     bfl_open_deposit = {
@@ -666,6 +669,7 @@ if = { limit = { var:bfl_slot_found = 1 }
             scope:bfl_party = { if = { limit = { NOT = { has_variable = bfl_pool } }
                 set_variable = { name = bfl_pool value = 0 } } }
             if = { limit = { var:bfl_deposit_amount > 0 bfl_can_originate_demand_deposit = yes bfl_depositor_access = yes
+                bfl_branch_access = { PARTY = scope:bfl_party }
                 var:bfl_accept_deposits = 1 NOT = { has_variable = bfl_operation_guard }
                 scope:bfl_party = { bfl_deposit_pool_funded = yes NOT = { this = prev } }
                 OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } } }

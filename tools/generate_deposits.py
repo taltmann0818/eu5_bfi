@@ -67,7 +67,10 @@ def generate(common, effect, loc):
             set_variable = {{ name = {n}_last_accrual value = bfl_period }}
             set_variable = {{ name = {n}_state value = var:bfl_product }} }}\n'''
     allocate += '''if = { limit = { var:bfl_slot_found = 1 }
-        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = var:bfl_deposit_amount }
+        scope:bfl_party = { bfl_debit_depositor = yes } add_gold = var:bfl_deposit_amount
+        bfl_record_feedback = { KIND = 2 AMOUNT = var:bfl_deposit_amount }
+        scope:bfl_party = { if = { limit = { bfl_has_accounts = yes } bfl_refresh_asset_statement = yes } }
+        save_scope_as = bfl_bank }
     '''
     common('scripted_effects', 'deposits', effect('bfl_quote_deposit', quote)
            + effect('bfl_allocate_deposit', allocate) + '''
@@ -83,6 +86,7 @@ def generate(common, effect, loc):
             scope:bfl_party = { if = { limit = { NOT = { has_variable = bfl_pool } }
                 set_variable = { name = bfl_pool value = 0 } } }
             if = { limit = { var:bfl_deposit_amount > 0 bfl_can_originate_demand_deposit = yes bfl_depositor_access = yes
+                bfl_branch_access = { PARTY = scope:bfl_party }
                 var:bfl_accept_deposits = 1 NOT = { has_variable = bfl_operation_guard }
                 scope:bfl_party = { bfl_deposit_pool_funded = yes NOT = { this = prev } }
                 OR = { var:bfl_product = 1 AND = { var:bfl_product = 2 bfl_can_originate_term_deposit = yes } } }
@@ -103,18 +107,21 @@ def generate(common, effect, loc):
     withdraw = 'bfl_initialize_deposits = yes\nsave_scope_as = bfl_bank\n'
     for i in range(1, 33):
         n = f'bfl_dep_{i:02}'
-        live = f'''exists = var:{n}_party country_exists = var:{n}_party
+        live = f'''exists = var:{n}_party var:{n}_party = {{ bfl_financial_recipient = yes }}
             var:{n}_party = {{ bfl_valid_deposit_pool = yes }}'''
         # Pool validity is tested with the record's pool, not a caller's UI choice.
-        validate = f'''if = {{ limit = {{ exists = var:{n}_party country_exists = var:{n}_party }}
+        validate = f'''if = {{ limit = {{ exists = var:{n}_party var:{n}_party = {{ bfl_financial_recipient = yes }} }}
             var:{n}_party = {{ set_variable = {{ name = bfl_pool value = scope:bfl_bank.var:{n}_pool }} }} }}'''
         settlement += effect(f'bfl_pay_deposit_{i:02}', f'''
             save_scope_as = bfl_bank {validate}
-            if = {{ limit = {{ var:{n}_active = 1 var:{n}_withdrawal_requested > 0 {live} }}
+            if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 var:{n}_withdrawal_requested > 0 {live} }}
+                var:{n}_party = {{ save_scope_as = bfl_deposit_recipient }}
                 set_variable = {{ name = bfl_payment value = {{ value = gold subtract = 25 subtract = var:bfl_cash_committed
                     min = 0 max = var:{n}_withdrawal_requested multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = bfl_negative_payment
                 var:{n}_party = {{ bfl_credit_depositor = yes }}
+                if = {{ limit = {{ var:bfl_payment > 0 }}
+                    bfl_record_feedback = {{ KIND = 3 AMOUNT = var:bfl_payment }} }}
                 set_variable = {{ name = bfl_interest_paid value = {{ value = var:bfl_payment max = var:{n}_interest_due }} }}
                 if = {{ limit = {{ var:{n}_pool = 0 }} var:{n}_party = {{ bfl_record_withdrawn_interest = yes }} }}
                 change_variable = {{ name = {n}_interest_due subtract = var:bfl_interest_paid }}
@@ -123,10 +130,12 @@ def generate(common, effect, loc):
                 change_variable = {{ name = {n}_principal subtract = var:bfl_payment }}
                 if = {{ limit = {{ var:{n}_principal <= 0 var:{n}_interest_due <= 0 }}
                     set_variable = {{ name = {n}_active value = 0 }} remove_variable = {n}_party }}
+                scope:bfl_deposit_recipient = {{ if = {{ limit = {{ bfl_has_accounts = yes }} bfl_refresh_asset_statement = yes }} }}
+                save_scope_as = bfl_bank
             }}
         ''')
         settlement += effect(f'bfl_pay_demand_interest_{i:02}', f'''
-            if = {{ limit = {{ var:{n}_active = 1 var:{n}_maturity_period = 0 var:{n}_withdrawal_requested = 0
+            if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 var:{n}_maturity_period = 0 var:{n}_withdrawal_requested = 0
                 var:{n}_interest_due > 0 {live} }}
                 set_variable = {{ name = bfl_payment value = {{ value = bfl_free_cash max = var:{n}_interest_due multiply = 100 floor = yes divide = 100 }} }}
                 add_gold = bfl_negative_payment
@@ -136,7 +145,7 @@ def generate(common, effect, loc):
                 if = {{ limit = {{ var:{n}_pool = 0 }} var:{n}_party = {{ bfl_record_withdrawn_interest = yes }} }}
             }}
         ''')
-        accrue += f'''if = {{ limit = {{ var:{n}_active = 1 }}
+        accrue += f'''if = {{ limit = {{ var:bfl_state < 4 var:{n}_active = 1 }}
             {validate}
             if = {{ limit = {{ {live} }}
                 if = {{ limit = {{ var:{n}_state = 4 }} set_variable = {{ name = {n}_state value = 2 }}
@@ -158,7 +167,7 @@ def generate(common, effect, loc):
             }} else = {{ set_variable = {{ name = {n}_state value = 4 }}
                 set_variable = {{ name = {n}_last_accrual value = bfl_period }} }}
         }}\n'''
-        withdraw += f'''if = {{ limit = {{ var:{n}_active = 1 exists = scope:bfl_party country_exists = scope:bfl_party
+        withdraw += f'''if = {{ limit = {{ var:{n}_active = 1 exists = scope:bfl_party scope:bfl_party = {{ bfl_financial_recipient = yes }}
             var:{n}_party ?= scope:bfl_party bfl_period >= var:{n}_maturity_period }}
             set_variable = {{ name = {n}_withdrawal_requested value = {{ value = var:{n}_principal add = var:{n}_interest_due }} }}
             set_variable = {{ name = {n}_state value = 3 }}
@@ -177,7 +186,7 @@ def generate_controls(common, effect, loc):
     for i in range(1, 33):
         n = f'bfl_dep_{i:02}'
         commands += f'''{n}_party_visible = {{ scope = country is_shown = {{
-            exists = var:{n}_party country_exists = var:{n}_party }} }}\n'''
+            exists = var:{n}_party var:{n}_party = {{ bfl_financial_recipient = yes }} }} }}\n'''
         values += effect(f'{n}_months_left', f'value = var:{n}_maturity_period subtract = bfl_period min = 0')
     common('script_values', 'deposit_display', values)
     eligible = ''
@@ -238,13 +247,13 @@ def generate_controls(common, effect, loc):
     common('country_interactions', 'deposit_servicing', interactions)
     # Native annexation is the authoritative successor signal. Missing signals
     # quarantine claims; no controller or unrelated country can claim them.
-    transfer = 'save_scope_as = bfl_deposit_successor\nevery_country = { limit = { bfl_has_accounts = yes }\n'
+    transfer = 'if = { limit = { scope:target = { NOT = { has_variable = bfl_resolution_estate } } } save_scope_as = bfl_deposit_successor\nevery_in_global_list = { variable = bfl_resolution_institutions limit = { bfl_has_accounts = yes }\n'
     for i in range(1, 33):
         n = f'bfl_dep_{i:02}'
         transfer += f'''if = {{ limit = {{ var:{n}_active = 1 var:{n}_party ?= scope:target }}
             set_variable = {{ name = {n}_party value = scope:bfl_deposit_successor }}
             change_variable = {{ name = {n}_generation add = 1 }} }}\n'''
-    common('scripted_effects', 'deposit_succession', effect('bfl_transfer_annexed_deposits', transfer + '}'))
+    common('scripted_effects', 'deposit_succession', effect('bfl_transfer_annexed_deposits', transfer + '} }'))
     common('on_action', 'deposit_succession', '''on_annexed = { on_actions = { bfl_deposit_annexed } }
         bfl_deposit_annexed = { effect = { bfl_transfer_annexed_deposits = yes } }''')
 
@@ -284,6 +293,7 @@ def generate_offers(common, effect, loc):
             var:{n}_active = 1 var:{n}_state < 4 var:{n}_party ?= scope:bfl_party
             var:{n}_generation = scope:bfl_party.var:bfl_deposit_offer_generation var:{n}_withdrawal_requested = 0 }}
             if = {{ limit = {{ scope:bfl_party.var:bfl_deposit_offer_mode = 1 bfl_period >= var:{n}_maturity_period
+                bfl_branch_access = {{ PARTY = scope:bfl_party }}
                 bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1 bfl_depositor_access = yes }}
                 set_variable = {{ name = {n}_annual_rate value = scope:bfl_party.var:bfl_deposit_offer_rate }}
                 set_variable = {{ name = {n}_maturity_period value = {{ value = bfl_period add = 12 }} }}
@@ -318,7 +328,7 @@ def generate_offers(common, effect, loc):
     events = 'namespace = bfl_deposits\n'
     for number, title in [(1, 'Renew matured term deposit'), (2, 'Early term withdrawal offer')]:
         events += f'''bfl_deposits.{number} = {{ type = country_event title = bfl_term_offer_{number}_title desc = bfl_term_offer_{number}_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            image = "gfx/interface/illustrations/bfl/m10_{"bank_run" if number == 2 else "merchant_finance"}.dds" outcome = neutral
             option = {{ name = bfl_term_accept bfl_accept_deposit_offer = yes ai_chance = {{ base = 0 }} }}
             option = {{ name = bfl_term_decline bfl_decline_deposit_offer = yes ai_chance = {{ base = 100 }} }}
         }}'''

@@ -1,0 +1,34 @@
+{
+  "status": "Focused orderly bank workout passed; full M9 remains partial",
+  "runs": [
+    {
+      "suite": "resolution",
+      "report": "2026-10-20-m9-resolution.json",
+      "assertions": 58,
+      "runtime_sha256": "18df97e0a614f984485d994fc4b6692dde1b8609fa3cf9270d4bd4be0cc4f593",
+      "fixture_sha256": "fe9793f78ff1a81f0f3705ba8dbe5a80068eb5e98ccc89e200f46d8679a11fb5",
+      "token": "1114994d9f0a4d079fc432914e074d16"
+    },
+    {
+      "suite": "accounts",
+      "report": "2026-10-20-m9-accounts.json",
+      "assertions": 114,
+      "runtime_sha256": "18df97e0a614f984485d994fc4b6692dde1b8609fa3cf9270d4bd4be0cc4f593",
+      "fixture_sha256": "77dab54f5ec90bedf52bbeaf9915b30412beeb7c73326b7b0cde8523e0665647",
+      "token": "982436e8065e4d1c9d849d65b606ffa8"
+    }
+  ],
+  "engine_assertions": 172,
+  "offline_tests": 136,
+  "staged_files": 298,
+  "ui_report": "2026-10-20-m9-ui.json",
+  "accepted_screenshots": 6,
+  "source_validation": "229 script/GUI/localization files; 68 graphics; native/CMF source pins match",
+  "scope": "EUV 1.4.1 / CMF 2.5.0 single-player baseline; explicit fixture cash shocks/grants; not balance or full institution-destruction acceptance",
+  "remaining": [
+    "Forced issuer/last-building destruction with separately accounted estate/trustee",
+    "Full realization/transfer of non-cash assets and all creditor classes",
+    "Company/custom-bond/security/revenue/concession workouts",
+    "Integrated both-role/profile default/destruction campaigns"
+  ]
+}

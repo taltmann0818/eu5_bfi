@@ -12,7 +12,7 @@
   {"id":"warehouse_receipts","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},
   {"id":"commodity_forwards","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},
   {"id":"project_security","age":5,"profile":2,"requires":["commenda","collateralization"]},
-  {"id":"sovereign_banknotes","age":5,"profile":0,"charter":true,"requires":["commercial_bills"]},
+  {"id":"sovereign_banknotes","age":5,"profile":0,"native_requires":["central_bank_advance"],"requires":["commercial_bills"]},
   {"id":"liquidity_facilities","age":5,"profile":0,"requires":["collateralization"]},
   {"id":"advanced_clearing","age":6,"profile":0,"requires":["liquidity_facilities"]},
   {"id":"margining_and_risk_management","age":6,"profile":1,"requires":["commodity_forwards"]},

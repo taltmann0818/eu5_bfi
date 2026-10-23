@@ -8,7 +8,7 @@ The [M0 storage probe](m0-probes.md) verifies country-owned references/maps acro
 
 M4 deposit slots add numeric `pool` (0 treasury; 1 burghers; 2 nobles; 3 clergy; 4 peasants) and `last_accrual`. Migration initializes absent fields without backfill. Identical accepted terms aggregate; any top-up, renewal, withdrawal or native successor transfer increments the slot generation. Term offers additionally snapshot a depositor-owned monotonically increasing revision, slot, generation, rate/penalty and current-month expiry. Deposit states are separate from institution states: 1 demand, 2 term, 3 withdrawal requested, 4 quarantined. Quarantined liabilities remain active; native annexation transfers them to the signalled legal successor. Estate pools always use native estate wallets. See [M4 services and cutoffs](m4-treasury.md).
 
-Profiles: 0 pending, 1 Merchant, 2 Overseas. States: 0 operating, 1 stressed, 2 restricted, 3 insolvent, 4 resolving, 5 closed. Current runtime transitions cover 0–3; full resolution/closure remains acceptance and development work. Servicing permissions are independent of new-business research/profile gates.
+Profiles: 0 pending, 1 Merchant, 2 Overseas. States: 0 operating, 1 stressed, 2 restricted, 3 insolvent, 4 resolving, 5 closed. M9 adds persistent, explicit resolving/closed transitions and guarded resumption. Monthly distress and legacy suspension/demotion cannot reset states 4–5. Servicing permissions are independent of new-business research/profile gates. [Resolution services and remaining gates](m9-resolution.md) distinguish orderly bank closure from forced institution destruction.
 
 M1 adds `bfl_profile_revision = 1` for once-only migration of obsolete profile 3 to pending; valid 1/2 choices persist. Pending offers store `bfl_profile_offered_to` and execution checks the live independent-bank/controller authority. `bfl_controller` is reconciled from the current overlord. Duplicate demotion adds `bfl_legacy_servicing`, which blocks new expanded business independently of liquidity recovery while keeping account and holder slots intact. M5 separates monetary authority from financial ownership: `bfl_state_owner` preserves the original sovereign's paid units through political transfer. External shareholder records persist too.
 
@@ -110,3 +110,155 @@ fixture overrides, not new player settings. Backend `design/equity_pricing.json`
 compiles default model, impact/liquidity/spreads, dividend/issuance/default rules,
 limits and draw policy. [Acceptance and exact evidence](m5-ownership.md) distinguish
 saved-state assertions, controlled offline sensitivity and real UI inspection.
+
+
+### M6 physical custody
+
+`bfl_goods_schema = 1` initializes sixteen `bfl_inv_01..16` lots without replacing core registry data. Each lot persists active/generation/legacy-good-ID, native goods-scope `type`, acquired_period, indicative `mark`, quantity, basis, market/location/host, holder/holder_basis, encumbered quantity, state, fixed price, buyer escrow, seller margin, due/transit_due, storage_due, last_period and offer identity/expiry. State 0 is free inventory, 1 a paid receipt, 2 a funded physical forward, 3 delivered and 4 a host freeze; the freeze preserves its prior state. Offer and lot generations reject stale recipient snapshots.
+
+Custodian free inventory and forward backing carry actual native acquisition cost. A paid receipt removes that asset from the custodian; a bank holder's paid claim cost is included through a bounded cross-custodian scan. Buyer principal increases other payables and committed cash, while seller performance security increases committed cash only. Delivery removes both protections exactly once; proportional missing-quantity principal and security compensation are actual bilateral cash movements. Only net realized proceeds less cost/compensation become goods earnings. Monthly physical loss reduces the owner's cost; storage is funded or retained as an obligation.
+
+Branch host/market/expiry/last-fee-period, per-lot custody references and holder delivery/transfer quote snapshots persist separately from financial claims. The same monthly account owner processes goods before operating costs, distress and dividends. [M6 behavior and acceptance](m6-goods.md) define the fixed pilot policies and distinguish native execution, offline checks and UI evidence.
+
+M6 automatic trading persists `bfl_goods_allocation`, `risk`, `turnover`, `mandate`, `contracts`, `policy_period` and the presentation-only `policy_open` (each prefixed `bfl_goods_`). Existing five-good IDs migrate to native goods references without resetting quantity, cost, encumbrance, security or holders. New goods use native scopes directly. `policy_period` rejects same-month trading replays; native custody servicing keeps its own cutoff. Marks refresh from native seller-capital quotes after transactions and monthly physical loss, and never enter income or carried assets. Paused/run-off and contract-policy UI changes invalidate outstanding unaccepted offers while accepted obligations persist. [The current product note](m6-goods.md) records the revised gate separately from historical manual-pilot evidence.
+
+
+## M7 accepted commenda records
+
+`bfl_venture_schema = 1` initializes metadata without cash or backfill. Each bank
+owns eight `bfl_v_XX` records: state (unused/active/closed/loss), generation,
+operator, accepted preset, original/remaining bank basis, maturity, cumulative
+capital returned, realized profit/loss and discovery outcome. Offers live on the
+operator and snapshot bank, command actor, generation, ticket, preset, term and
+expiry. No GUI supplies a settlement amount.
+
+The exclusive operator backlink stores investor, slot and generation; total
+remaining capital, exact external bank basis, contribution/profit proportions,
+recorded project pool, last cutoff, observed receipts and linked exploration
+area/cost. Contributions initialize the pool, native retained trade increases
+it, negative native budgets/exploration costs reduce it, and every capital or
+surplus allocation removes its full amount (including the operator share that
+stays in the treasury). Available cash and the recorded pool both cap maturity
+settlement. Missing operators cause one bank-basis impairment; full institution
+succession/recovery remains M9.
+
+Company operating availability reserves the outstanding project capital.
+Company NAV deducts exact external project basis. M2 income excludes capital
+and the investor's share, and can distribute only earned operator surplus.
+Deferred operator surplus is recognized at the maturity cutoff. Investor
+returns release `bfl_project_value`; only actual surplus enters
+`bfl_profit_ventures` and the persisted `bfl_statement_ventures`.
+
+See [product rules and outstanding acceptance](m7-commenda.md). The native
+company's general treasury is not an engine-native isolated voyage wallet.
+
+## M8 monetary records and branch admission
+
+`bfl_money_schema = 1` initializes prospective `lending_base`/`money_rate`,
+acceptance, confidence and the 500-gold note ceiling. `bfl_money_assets` joins
+assets and tangible NAV; a once-only migration reconstructs existing bank-held
+funded bills from their authoritative issuer records before future mutation.
+Principal, notes and transfers are excluded from profits.
+
+Eight `bfl_note_NN_face/holder/authority` records belong to the issuer. Each
+100-gold issue increases both `bfl_notes_outstanding` and `bfl_cash_committed`;
+redemption releases both against actual cash. `bfl_note_authority` is live
+origination authority; the lot preserves its original sovereign for provenance.
+No reserve can be created by recognizing note sale income.
+
+A funded bill's optional `bfl_con_NN_pledge` references its secured lender;
+`discount_due` fixes principal plus one-month accepted annual fee. The borrower
+indexes its single pledged issuer/slot using `bfl_discount_issuer/slot`, books
+75 in other payables and receives actual cash. The lender books 75 in monetary
+assets. The issuer's 100-gold payable/reserve remains intact until repayment
+releases the pledge or maturity routes the actual proceeds to lender and
+borrower. Fees become earnings/loss only on paid settlement.
+
+`bfl_clearing_member` references the consented operator. Operator `clearing_count`,
+`clearing_open`, `clearing_last` and `clearing_failed` bound admission/replay.
+Per-member `clear_net/gross` are scratch snapshots of matching matured bills,
+not additional assets or obligations. A rejected batch changes no wallets or
+claims. Successful netting closes the original bill records and the same bank
+holder assets, payables and committed cash.
+
+Capital branch admission reads completed native `banking_office` deeds at the
+sovereign's current capital. It does not depend on legacy branch slots or a
+shadow building registry. AI persists only the last order period and temporary
+ranked candidate. See [M8 product/gates](m8-monetary.md).
+
+## M9 resolution schema 1
+
+`bfl_resolution_schema = 1` initializes revisions, recovery/waiver/conversion/
+expense/equity totals, the selected account and guarantee balances without cash
+or backfill. Each deposit adds `recovery_held`, a cash allocation that remains
+part of the original claim until paid. Recovery snapshots unallocated liabilities
+and available cash once per pass; reserved allocations cannot be redistributed
+on replay. Ordinary withdrawals/accrual stop during resolution. Current principal
+held at other banks is rebuilt from issuer-owned records as `bfl_deposit_assets`,
+included once in tangible equity and the unsecured asset donut; unpaid interest
+is excluded. `bfl_deposit_asset_claims` separately counts live incoming claims,
+so an interest-only deposit still blocks closure even when its carrying value is
+zero. Zero-basis custom bonds and live share units also block closure.
+
+Creditor-owned `bfl_workout_*` quote fields capture bank, both revisions, deposit
+slot/generation, claim and current-period expiry. A quote moves no cash. Accepted
+treasury haircuts consume only that claim; only the principal component impairs
+a bank creditor. Paid guarantee recoveries enter realized credit earnings.
+Conversion issues NAV-priced units and removes the accepted liability without
+a cash flow.
+
+A bank records `bfl_resolution_guarantor`, remaining lifetime coverage, paid/due
+amounts, pending beneficiary and wallet pool. The sovereign separately records
+contingent `bfl_guarantee_exposure`. An authorized guarantee covers half of accepted
+losses up to 100 gold total; each call requires actual sovereign funding. Closing
+releases unused exposure and keeps an inspectable final ledger. Native legal
+succession updates holder/guarantee references; issuer destruction now retains an original, separately funded estate as below.
+
+
+## M9 destroyed estates and native replacement claims
+
+`bfl_resolution_institutions` is a global list of original issuer Country objects,
+including retained native objects after destruction. `bfl_resolution_registered`
+prevents duplicate registration. `bfl_resolution_estate`, `estate_cash`, `domicile`
+and `trustee` record forced resolution and its legal administrator. `receiver`
+and `receiver_due` separately record the actual purchaser of transferred assets
+and its unpaid purchase price. Trustee succession does not move that private debt.
+Native asset titles transfer before destruction; actual gold is sequestered before
+annexation and restored to the same original issuer ledger afterward. One global
+`bfl_estates_period` stamp bounds monthly servicing.
+
+On the borrower estate, Country-keyed `bfl_native_claim_due/basis/carrying/held`
+maps preserve native contractual payoff, paid cost, conservative asset value and
+quarantined cash. Creditor `bfl_native_estate_assets` and `claim_count` record its
+asset/count once; a zero-valued incoming right still blocks closure. Native credit
+slot `resolution_debtor` and state 2 close the old registry without a second loss.
+`resolution_native_total/held` and `resolution_native_estate_total/held` distinguish
+country creditors from the native banking-estate aggregate. Transfer merges actual
+map keys and updates both creditor totals without changing the debtor obligation.
+
+Notes/bills add `recovery_held`. Bill `discount_principal` is outstanding paid cost,
+separate from contractual `discount_due`; legacy pledged bills initialize it to75.
+Partial collateral receipts reduce the original records. A defaulted bill's state4
+and inactive tombstone can retain its independent borrower recourse; allocation
+cannot reuse it until its pledge is released. Full recourse repayment works through
+the original ledger even if that collateral issuer is financially closed.
+
+Final statutory losses retain `default_principal/interest`, bond `default_face/due`,
+note `default_face`, bill `default_basis` and native `bfl_native_claim_default` audit
+values. Active claims and carrying costs clear once; `resolution_statutory_loss`
+aggregates the recorded unpaid obligations, without a cash flow. Missing cash,
+noncash rights, custody, pending guarantees and held allocations guard finalization.
+
+Current-holder `bfl_bond_workout_*` terms snapshot issuer, slot/generation,
+face/due/rate, revision, expiry and current authority. `bfl_revenue_bond_slot`,
+`expiry`, `payment_period`, `paid` and `concession_holder` represent one accepted
+revenue pledge, not additional principal or an up-front collateral asset. Its
+native `bfl_workout_trade_access` relation is separate from ordinary trade access.
+
+`bfl_goods_holder_claim_count` separately counts incoming accepted physical rights,
+even at zero paid cost. Global issuer scans include retained custodians. Forced
+receipt/forward transfer preserves quantities, escrow, seller security and holder
+basis, then rebuilds both cached monetary and goods assets before recording the
+receiver receivable. Pending incoming guarantees similarly count as rights through
+`bfl_pending_guarantee_claims`; unfunded promises do not become earned cash, and
+a private beneficiary estate cannot close before its pending call is resolved.

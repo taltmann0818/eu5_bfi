@@ -1,0 +1,253 @@
+﻿bfl_initialize_native_resolution = {
+if = { limit = { NOT = { has_variable = bfl_native_estate_assets } } set_variable = { name = bfl_native_estate_assets value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_native_estate_claim_count } } set_variable = { name = bfl_native_estate_claim_count value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_resolution_native_total } } set_variable = { name = bfl_resolution_native_total value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_resolution_native_estate_total } } set_variable = { name = bfl_resolution_native_estate_total value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_resolution_native_held } } set_variable = { name = bfl_resolution_native_held value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_resolution_native_estate_held } } set_variable = { name = bfl_resolution_native_estate_held value = 0 } }
+}
+bfl_snapshot_native_resolution_debt = {
+bfl_initialize_native_resolution = yes
+        if = { limit = { has_variable = bfl_resolution_estate NOT = { has_variable = bfl_native_debt_snapshotted } }
+            set_variable = bfl_native_debt_snapshotted save_scope_as = bfl_native_estate_debtor
+            # First initialize every actual country-creditor key, then aggregate.
+            # No speculative read of an absent map key or finite slot fallback.
+            every_loan = { limit = { is_bond = no exists = owner }
+                owner = { save_scope_as = bfl_native_estate_creditor }
+                scope:bfl_native_estate_debtor = {
+    add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_native_estate_creditor value = 0 }
+add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_native_estate_creditor value = 0 }
+add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_native_estate_creditor value = 0 }
+add_to_variable_map = { name = bfl_native_claim_held key = scope:bfl_native_estate_creditor value = 0 }
+} }
+        every_loan = { limit = { is_bond = no }
+            save_scope_as = bfl_native_snapshot_loan
+            if = { limit = { exists = owner }
+                owner = { save_scope_as = bfl_native_estate_creditor bfl_initialize_native_resolution = yes }
+                scope:bfl_native_estate_debtor = {
+                    set_variable = { name = bfl_native_snapshot_basis value = { value = scope:bfl_native_snapshot_loan.loan_amount max = scope:bfl_native_snapshot_loan.remaining_debt } }
+                }
+                scope:bfl_native_estate_creditor = {
+                    if = { limit = { has_variable = bfl_credit_schema }
+    if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_01_basis } }
+            set_variable = { name = bfl_cr_01_state value = 2 } set_variable = { name = bfl_cr_01_basis value = 0 }
+            set_variable = { name = bfl_cr_01_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_02_basis } }
+            set_variable = { name = bfl_cr_02_state value = 2 } set_variable = { name = bfl_cr_02_basis value = 0 }
+            set_variable = { name = bfl_cr_02_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_03_basis } }
+            set_variable = { name = bfl_cr_03_state value = 2 } set_variable = { name = bfl_cr_03_basis value = 0 }
+            set_variable = { name = bfl_cr_03_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_04_basis } }
+            set_variable = { name = bfl_cr_04_state value = 2 } set_variable = { name = bfl_cr_04_basis value = 0 }
+            set_variable = { name = bfl_cr_04_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_05_basis } }
+            set_variable = { name = bfl_cr_05_state value = 2 } set_variable = { name = bfl_cr_05_basis value = 0 }
+            set_variable = { name = bfl_cr_05_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_06_basis } }
+            set_variable = { name = bfl_cr_06_state value = 2 } set_variable = { name = bfl_cr_06_basis value = 0 }
+            set_variable = { name = bfl_cr_06_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_07_basis } }
+            set_variable = { name = bfl_cr_07_state value = 2 } set_variable = { name = bfl_cr_07_basis value = 0 }
+            set_variable = { name = bfl_cr_07_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_08_basis } }
+            set_variable = { name = bfl_cr_08_state value = 2 } set_variable = { name = bfl_cr_08_basis value = 0 }
+            set_variable = { name = bfl_cr_08_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_09_basis } }
+            set_variable = { name = bfl_cr_09_state value = 2 } set_variable = { name = bfl_cr_09_basis value = 0 }
+            set_variable = { name = bfl_cr_09_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_10_basis } }
+            set_variable = { name = bfl_cr_10_state value = 2 } set_variable = { name = bfl_cr_10_basis value = 0 }
+            set_variable = { name = bfl_cr_10_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_11_basis } }
+            set_variable = { name = bfl_cr_11_state value = 2 } set_variable = { name = bfl_cr_11_basis value = 0 }
+            set_variable = { name = bfl_cr_11_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_12_basis } }
+            set_variable = { name = bfl_cr_12_state value = 2 } set_variable = { name = bfl_cr_12_basis value = 0 }
+            set_variable = { name = bfl_cr_12_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_13_basis } }
+            set_variable = { name = bfl_cr_13_state value = 2 } set_variable = { name = bfl_cr_13_basis value = 0 }
+            set_variable = { name = bfl_cr_13_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_14_basis } }
+            set_variable = { name = bfl_cr_14_state value = 2 } set_variable = { name = bfl_cr_14_basis value = 0 }
+            set_variable = { name = bfl_cr_14_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_15_basis } }
+            set_variable = { name = bfl_cr_15_state value = 2 } set_variable = { name = bfl_cr_15_basis value = 0 }
+            set_variable = { name = bfl_cr_15_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_16_basis } }
+            set_variable = { name = bfl_cr_16_state value = 2 } set_variable = { name = bfl_cr_16_basis value = 0 }
+            set_variable = { name = bfl_cr_16_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_17_basis } }
+            set_variable = { name = bfl_cr_17_state value = 2 } set_variable = { name = bfl_cr_17_basis value = 0 }
+            set_variable = { name = bfl_cr_17_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_18_basis } }
+            set_variable = { name = bfl_cr_18_state value = 2 } set_variable = { name = bfl_cr_18_basis value = 0 }
+            set_variable = { name = bfl_cr_18_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_19_basis } }
+            set_variable = { name = bfl_cr_19_state value = 2 } set_variable = { name = bfl_cr_19_basis value = 0 }
+            set_variable = { name = bfl_cr_19_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_20_basis } }
+            set_variable = { name = bfl_cr_20_state value = 2 } set_variable = { name = bfl_cr_20_basis value = 0 }
+            set_variable = { name = bfl_cr_20_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_21_basis } }
+            set_variable = { name = bfl_cr_21_state value = 2 } set_variable = { name = bfl_cr_21_basis value = 0 }
+            set_variable = { name = bfl_cr_21_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_22_basis } }
+            set_variable = { name = bfl_cr_22_state value = 2 } set_variable = { name = bfl_cr_22_basis value = 0 }
+            set_variable = { name = bfl_cr_22_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_23_basis } }
+            set_variable = { name = bfl_cr_23_state value = 2 } set_variable = { name = bfl_cr_23_basis value = 0 }
+            set_variable = { name = bfl_cr_23_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_24_basis } }
+            set_variable = { name = bfl_cr_24_state value = 2 } set_variable = { name = bfl_cr_24_basis value = 0 }
+            set_variable = { name = bfl_cr_24_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_25_basis } }
+            set_variable = { name = bfl_cr_25_state value = 2 } set_variable = { name = bfl_cr_25_basis value = 0 }
+            set_variable = { name = bfl_cr_25_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_26_basis } }
+            set_variable = { name = bfl_cr_26_state value = 2 } set_variable = { name = bfl_cr_26_basis value = 0 }
+            set_variable = { name = bfl_cr_26_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_27_basis } }
+            set_variable = { name = bfl_cr_27_state value = 2 } set_variable = { name = bfl_cr_27_basis value = 0 }
+            set_variable = { name = bfl_cr_27_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_28_basis } }
+            set_variable = { name = bfl_cr_28_state value = 2 } set_variable = { name = bfl_cr_28_basis value = 0 }
+            set_variable = { name = bfl_cr_28_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_29_basis } }
+            set_variable = { name = bfl_cr_29_state value = 2 } set_variable = { name = bfl_cr_29_basis value = 0 }
+            set_variable = { name = bfl_cr_29_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_30_basis } }
+            set_variable = { name = bfl_cr_30_state value = 2 } set_variable = { name = bfl_cr_30_basis value = 0 }
+            set_variable = { name = bfl_cr_30_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_31_basis } }
+            set_variable = { name = bfl_cr_31_state value = 2 } set_variable = { name = bfl_cr_31_basis value = 0 }
+            set_variable = { name = bfl_cr_31_resolution_debtor value = scope:bfl_native_estate_debtor } }
+if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_loan ?= scope:bfl_native_snapshot_loan }
+            scope:bfl_native_estate_debtor = { set_variable = { name = bfl_native_snapshot_basis value = scope:bfl_native_estate_creditor.var:bfl_cr_32_basis } }
+            set_variable = { name = bfl_cr_32_state value = 2 } set_variable = { name = bfl_cr_32_basis value = 0 }
+            set_variable = { name = bfl_cr_32_resolution_debtor value = scope:bfl_native_estate_debtor } }
+} }
+                scope:bfl_native_estate_debtor = {
+                    set_variable = { name = bfl_native_snapshot_carrying value = { value = var:bfl_native_snapshot_basis
+                        max = scope:bfl_native_snapshot_loan.loan_amount max = scope:bfl_native_snapshot_loan.remaining_debt } }
+                    if = { limit = { "variable_map(bfl_native_claim_due|scope:bfl_native_estate_creditor)" = 0 }
+                        scope:bfl_native_estate_creditor = { change_variable = { name = bfl_native_estate_claim_count add = 1 } } }
+    set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_due|scope:bfl_native_estate_creditor)" add = scope:bfl_native_snapshot_loan.remaining_debt } }
+            add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_basis|scope:bfl_native_estate_creditor)" add = var:bfl_native_snapshot_basis } }
+            add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_carrying|scope:bfl_native_estate_creditor)" add = var:bfl_native_snapshot_carrying } }
+            add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+change_variable = { name = bfl_resolution_native_total add = scope:bfl_native_snapshot_loan.remaining_debt }
+                    scope:bfl_native_estate_creditor = { change_variable = { name = bfl_native_estate_assets add = scope:bfl_native_estate_debtor.var:bfl_native_snapshot_carrying } }
+                }
+            } else = {
+                scope:bfl_native_estate_debtor = { change_variable = { name = bfl_resolution_native_estate_total add = scope:bfl_native_snapshot_loan.remaining_debt } }
+            }
+            cancel_loan = this
+        }
+        if = { limit = { has_variable_map = bfl_native_claim_due }
+            every_key_in_variable_map = { variable = bfl_native_claim_due
+                if = { limit = { bfl_has_accounts = yes } bfl_reconcile_native_assets = yes } }
+        }
+    }
+}
+bfl_pay_native_resolution_debt = {
+bfl_initialize_native_resolution = yes
+        if = { limit = { bfl_resolution_native_claims > 0 }
+            save_scope_as = bfl_native_estate_debtor
+            set_variable = { name = bfl_native_pool value = { value = bfl_resolution_native_claims
+                subtract = var:bfl_resolution_native_held subtract = var:bfl_resolution_native_estate_held min = 0 } }
+            set_variable = { name = bfl_native_budget value = { value = gold subtract = var:bfl_cash_committed
+                subtract = var:bfl_other_payables add = bfl_resolution_bill_payables
+                subtract = var:bfl_resolution_native_held subtract = var:bfl_resolution_native_estate_held min = 0 max = var:bfl_native_pool } }
+            if = { limit = { has_variable_map = bfl_native_claim_due }
+                every_key_in_variable_map = { variable = bfl_native_claim_due save_scope_as = bfl_native_estate_creditor
+                    scope:bfl_native_estate_debtor = {
+                        set_variable = { name = bfl_native_due value = "variable_map(bfl_native_claim_due|scope:bfl_native_estate_creditor)" }
+                        set_variable = { name = bfl_native_allocated value = "variable_map(bfl_native_claim_held|scope:bfl_native_estate_creditor)" }
+                        if = { limit = { var:bfl_native_pool > 0 }
+                            set_variable = { name = bfl_native_new_allocation value = { value = var:bfl_native_due subtract = var:bfl_native_allocated
+                                multiply = var:bfl_native_budget divide = var:bfl_native_pool multiply = 100 floor = yes divide = 100 } }
+                            if = { limit = { var:bfl_native_budget >= var:bfl_native_pool }
+                                set_variable = { name = bfl_native_new_allocation value = { value = var:bfl_native_due subtract = var:bfl_native_allocated } } }
+                            change_variable = { name = bfl_native_allocated add = var:bfl_native_new_allocation }
+                            change_variable = { name = bfl_resolution_native_held add = var:bfl_native_new_allocation }
+                            add_to_variable_map = { name = bfl_native_claim_held key = scope:bfl_native_estate_creditor value = var:bfl_native_allocated }
+                        }
+                        if = { limit = { var:bfl_native_allocated > 0 scope:bfl_native_estate_creditor = { bfl_financial_recipient = yes }
+                            gold >= { value = var:bfl_cash_committed add = var:bfl_resolution_native_held add = var:bfl_resolution_native_estate_held } }
+                            set_variable = { name = bfl_native_basis_release value = { value = "variable_map(bfl_native_claim_basis|scope:bfl_native_estate_creditor)"
+                                multiply = var:bfl_native_allocated divide = var:bfl_native_due } }
+                            set_variable = { name = bfl_native_carry_release value = { value = "variable_map(bfl_native_claim_carrying|scope:bfl_native_estate_creditor)"
+                                multiply = var:bfl_native_allocated divide = var:bfl_native_due } }
+                            add_gold = { value = var:bfl_native_allocated multiply = -1 }
+                            scope:bfl_native_estate_creditor = {
+                                add_gold = scope:bfl_native_estate_debtor.var:bfl_native_allocated
+                                change_variable = { name = bfl_native_estate_assets subtract = scope:bfl_native_estate_debtor.var:bfl_native_carry_release }
+                                if = { limit = { bfl_has_accounts = yes }
+                                    change_variable = { name = bfl_profit_credit add = { value = scope:bfl_native_estate_debtor.var:bfl_native_allocated subtract = scope:bfl_native_estate_debtor.var:bfl_native_basis_release } } }
+                                if = { limit = { scope:bfl_native_estate_debtor.var:bfl_native_allocated >= scope:bfl_native_estate_debtor.var:bfl_native_due }
+                                    change_variable = { name = bfl_native_estate_claim_count subtract = 1 } }
+                            }
+    set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_due|scope:bfl_native_estate_creditor)" subtract = var:bfl_native_allocated } }
+            add_to_variable_map = { name = bfl_native_claim_due key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_basis|scope:bfl_native_estate_creditor)" subtract = var:bfl_native_basis_release } }
+            add_to_variable_map = { name = bfl_native_claim_basis key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+set_variable = { name = bfl_native_map_value value = { value = "variable_map(bfl_native_claim_carrying|scope:bfl_native_estate_creditor)" subtract = var:bfl_native_carry_release } }
+            add_to_variable_map = { name = bfl_native_claim_carrying key = scope:bfl_native_estate_creditor value = var:bfl_native_map_value }
+change_variable = { name = bfl_resolution_native_total subtract = var:bfl_native_allocated }
+                            change_variable = { name = bfl_resolution_native_held subtract = var:bfl_native_allocated }
+                            add_to_variable_map = { name = bfl_native_claim_held key = scope:bfl_native_estate_creditor value = 0 }
+                        }
+                    }
+                }
+            }
+            if = { limit = { var:bfl_native_pool > 0 var:bfl_resolution_native_estate_total > 0 }
+                set_variable = { name = bfl_native_new_allocation value = { value = var:bfl_resolution_native_estate_total
+                    subtract = var:bfl_resolution_native_estate_held multiply = var:bfl_native_budget divide = var:bfl_native_pool
+                    multiply = 100 floor = yes divide = 100 } }
+                if = { limit = { var:bfl_native_budget >= var:bfl_native_pool }
+                    set_variable = { name = bfl_native_new_allocation value = { value = var:bfl_resolution_native_estate_total subtract = var:bfl_resolution_native_estate_held } } }
+                change_variable = { name = bfl_resolution_native_estate_held add = var:bfl_native_new_allocation }
+            }
+            if = { limit = { var:bfl_resolution_native_estate_held > 0 exists = var:bfl_resolution_trustee country_exists = var:bfl_resolution_trustee
+                gold >= { value = var:bfl_cash_committed add = var:bfl_resolution_native_held add = var:bfl_resolution_native_estate_held } }
+                add_gold = { value = var:bfl_resolution_native_estate_held multiply = -1 }
+                var:bfl_resolution_trustee = { distribute_gold_to_banking_estates = scope:bfl_native_estate_debtor.var:bfl_resolution_native_estate_held }
+                change_variable = { name = bfl_resolution_native_estate_total subtract = var:bfl_resolution_native_estate_held }
+                set_variable = { name = bfl_resolution_native_estate_held value = 0 }
+            }
+        }
+}

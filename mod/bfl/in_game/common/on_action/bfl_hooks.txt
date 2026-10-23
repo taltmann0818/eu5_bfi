@@ -1,10 +1,11 @@
 ﻿on_game_started_after_lobby = { on_actions = { bfl_start_discovery } }
 on_game_load_after_lobby = { on_actions = { bfl_load_discovery } }
-bfl_start_discovery = { effect = { bfl_discover_institutions = yes } }
-bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
+bfl_start_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
+bfl_load_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
 monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
 bfl_monthly_accounts = {
     effect = {
+        if = { limit = { has_variable = bfl_venture_bank } bfl_service_commenda_operator = yes }
         if = { limit = { country_type = location } bfl_reconcile_controller = yes }
         if = { limit = { has_variable = bfl_controller } bfl_reconcile_charter = yes }
         if = { limit = { has_variable = bfl_bond_schema } bfl_service_sovereign_bonds = yes }

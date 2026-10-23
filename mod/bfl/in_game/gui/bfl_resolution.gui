@@ -1,0 +1,48 @@
+﻿types BFLResolutionTypes { type bfl_resolution_contents = vbox { layoutpolicy_horizontal = expanding spacing = 4 vbox = { layoutpolicy_horizontal = expanding spacing = 4 tooltip = "bfl_resolution_heading_tip"
+        widget = { size = { -1 30 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+             text_single = { parentanchor = center text = "bfl_resolution_heading" autoresize = yes } } text_multi = { text = "bfl_resolution_help" autoresize = yes layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_ed1b7e0c93ee053d" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_9202a77bd8a94705" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_f53d31112bf1a3d0" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_2788c4ade17f8583" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_b7521aa820bf6d2a" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_ec224b1e3f1e6cf3" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_05eadbe25c89e780" size = { -1 22 } layoutpolicy_horizontal = expanding }text_single = { text = "bfl_ui_e440cd7e7df2f371" size = { -1 24 } layoutpolicy_horizontal = expanding }hbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { name = "bfl_resolution_begin_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_begin_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_begin_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_begin_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    }button_regular = { name = "bfl_resolution_pay_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_pay_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_pay_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_pay_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { name = "bfl_resolution_next_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_next_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_next_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_next_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    }button_regular = { name = "bfl_resolution_offer_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_offer_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_offer_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_offer_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { name = "bfl_resolution_guarantee_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_guarantee_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_guarantee_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_guarantee_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    }button_regular = { name = "bfl_resolution_call_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_call_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_call_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_call_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    } }hbox = { layoutpolicy_horizontal = expanding spacing = 4 button_regular = { name = "bfl_resolution_resume_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_resume_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_resume_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_resume_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    }button_regular = { name = "bfl_resolution_close_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_close_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_close_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_close_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    } }button_regular = { name = "bfl_resolution_liquidate_command_button" size = { 36 36 }
+        tooltip = "bfl_resolution_liquidate_command_tip"
+        enabled = "[GetScriptedGui('bfl_resolution_liquidate_command').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_resolution_liquidate_command').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" }
+    } } } }

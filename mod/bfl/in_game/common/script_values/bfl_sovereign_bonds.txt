@@ -104,7 +104,7 @@ if = { limit = { var:bfl_bnd_31_active ?= 1 } add = 1 }
 if = { limit = { var:bfl_bnd_32_active ?= 1 } add = 1 }
 }
 bfl_bond_capacity = {
-value = monthly_income_total multiply = 24 min = 500 subtract = bfl_bond_debt subtract = total_debt min = 0
+value = monthly_income_total multiply = 24 min = 500 subtract = bfl_bond_debt subtract = total_debt subtract = bfl_estate_liabilities min = 0
 }
 bfl_bond_new_rate = {
 value = 0.03 if = { limit = { has_variable = bfl_bond_rate } value = var:bfl_bond_rate }
