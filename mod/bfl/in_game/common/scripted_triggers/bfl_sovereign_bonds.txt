@@ -16,7 +16,7 @@
         bfl_has_management = yes country_type = location
         monthly_income_total > 0 bfl_bond_capacity >= 100 bfl_bond_arrears = 0
         OR = { NOT = { has_variable = bfl_bond_schema } bfl_has_bond_slot = yes }
-        OR = { NOT = { has_variable = bfl_bond_last_issue } bfl_period > var:bfl_bond_last_issue }
+        bfl_bond_remaining_monthly >= 100
         monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = 100 multiply = bfl_bond_new_rate divide = 12 } multiply = 4 }
         var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
             bfl_branch_access = { PARTY = overlord }

@@ -218,7 +218,7 @@ def generate(effect):
         set_variable = { name = bfl_dealer_payment value = 0 }
         if = { limit = { var:bfl_dealer_units > 0 var:bfl_total_units > 0 }
             set_variable = { name = bfl_dealer_payment value = { value = var:bfl_funded_dividend
-                multiply = var:bfl_dealer_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+                multiply = 100 multiply = var:bfl_dealer_units divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = { value = var:bfl_dealer_payment multiply = -1 }
             change_variable = { name = bfl_dealer_cash add = var:bfl_dealer_payment }
             change_variable = { name = bfl_dealer_dividends add = var:bfl_dealer_payment }

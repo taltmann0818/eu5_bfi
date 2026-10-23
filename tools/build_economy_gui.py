@@ -38,11 +38,15 @@ def build(game, pin=False):
         raise ValueError('Native template manifest changed')
     anchor = '\t\t\t\t\t\t\t\t\t\t\t#tariff income'
     insert_pos = view.index(anchor)
-    # Financing belongs in Credit's debt statement, never among earned income.
+    # Display funded borrowing separately; never change the native income total.
     insertion = '''
         bfl_income_dividends = {
             name = "bfl_income_dividends" datacontext = "[GetPlayer]"
-            visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_share_income_display'), '(CFixedPoint)0'))]"
+            visible = "[Or(GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End), GreaterThan_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bank_dividend_annual'), '(CFixedPoint)0'))]"
+        }
+        bfl_income_facility = {
+            name = "bfl_income_facility" datacontext = "[GetPlayer]"
+            visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         }
         bfl_income_interest = {
             name = "bfl_income_interest" datacontext = "[GetPlayer]"

@@ -11,11 +11,12 @@ def generate(common, effect, loc, write):
     activity(common, effect)
     discovery = '''save_scope_as = bfl_operator
         every_country = { limit = { bfl_is_bank = yes }
-        '''+''.join(f'''if = {{ limit = {{ var:bfl_v_{i:02}_state > 0 var:bfl_v_{i:02}_kind = 2
+        '''+''.join(f'''if = {{ limit = {{ has_variable = bfl_v_{i:02}_state }}
+            if = {{ limit = {{ var:bfl_v_{i:02}_state > 0 var:bfl_v_{i:02}_kind = 2
             var:bfl_v_{i:02}_operator ?= scope:bfl_operator var:bfl_v_{i:02}_area ?= scope:target
             OR = {{ var:bfl_v_{i:02}_outcome = 1 var:bfl_v_{i:02}_outcome = 8 }} }}
             set_variable = {{ name = bfl_v_{i:02}_discovery value = 1 }}
-            set_variable = {{ name = bfl_v_{i:02}_outcome value = 2 }} }}''' for i in SLOTS)+''' }'''
+            set_variable = {{ name = bfl_v_{i:02}_outcome value = 2 }} }} }}''' for i in SLOTS)+''' }'''
     common('scripted_effects', 'commenda_exploration', effect('bfl_start_commenda_exploration', '# Retired: select the expedition before the accepted funding offer.')+effect('bfl_commenda_discovery', discovery))
     common('on_action', 'commenda', '''on_exploration_success = { on_actions = { bfl_commenda_exploration_success } }
         bfl_commenda_exploration_success = { effect = { bfl_commenda_discovery = yes } }''')
@@ -76,9 +77,11 @@ def ui(common, effect, loc, write):
     events = 'namespace = bfl_commenda\n'
     for preset in (0, 1, 2, 3):
         events += f'''bfl_commenda.{preset+1} = {{ type = country_event title = bfl_venture_offer_title desc = bfl_venture_offer_desc_{preset}
-            image = "gfx/interface/illustrations/bfl/commenda.dds" outcome = neutral
-            option = {{ name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = {{ bfl_accept_commenda = yes }} ai_chance = {{ base = 100 }} }}
-            option = {{ name = bfl_venture_decline hidden_effect = {{ bfl_decline_commenda = yes }} ai_chance = {{ base = 0 }} }} }}'''
+            image = "gfx/interface/illustrations/bfl/m10_company_venture.dds" outcome = neutral
+            option = {{ name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = {{ bfl_accept_commenda = yes }}
+                ai_chance = {{ base = 0 modifier = {{ add = 100 bfl_ai_accept_venture = yes }} }} }}
+            option = {{ name = bfl_venture_decline hidden_effect = {{ bfl_decline_commenda = yes }}
+                ai_chance = {{ base = 100 modifier = {{ factor = 0 bfl_ai_accept_venture = yes }} }} }} }}'''
     common('../events', 'commenda', events)
     commands = ''
     cycles = dict(preset=[0, 1], duration=[6, 12, 24, 60, 120], ticket=[100, 200, 400])

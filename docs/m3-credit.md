@@ -1,5 +1,9 @@
 # M3 sovereign credit and bond acceptance
 
+Current source adds income-scaled custom-bond amounts, recurring Expenses funding regardless of state cash, and a bounded automatic loan-offer step controlled by native Credit Management. The loan amount remains 100 for native ordinary loans; custom sovereign bonds use the chosen amount. See [current follow-up verification](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026).
+
+**23 October redesign:** Current UI, funding-cap, deposit-amount, dividend-presentation and automation changes are tracked in [coverage](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026). Evidence below remains historical for its exact runtime. See [UI steering](ui-steering.md).
+
 M3 adds accepted native sovereign credit for both profiles, Merchant corporate
 credit, acquisition-cost and default records, and researched consensual debt
 relief. Sovereign Bonds is integrated into Economy > Credit.

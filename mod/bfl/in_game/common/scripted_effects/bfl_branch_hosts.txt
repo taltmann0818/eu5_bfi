@@ -1,0 +1,11 @@
+﻿bfl_refresh_branch_hosts = {
+if = { limit = { OR = { NOT = { has_global_variable = bfl_branch_hosts_period }
+    bfl_period >= { value = global_var:bfl_branch_hosts_period add = 3 } } }
+    set_global_variable = { name = bfl_branch_hosts_period value = bfl_period }
+    clear_global_variable_list = bfl_branch_hosts
+    every_country = { limit = { country_exists = this country_type = location exists = capital
+        monthly_income_total > 0 creditworthiness > 0 }
+        add_to_global_variable_list = { name = bfl_branch_hosts target = this }
+    }
+}
+}

@@ -1,0 +1,272 @@
+﻿bfl_initialize_report = {
+if = { limit = { NOT = { has_variable = bfl_native_monthly_net } } set_variable = { name = bfl_native_monthly_net value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_dividend_eligible } } set_variable = { name = bfl_dividend_eligible value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_credit } } set_variable = { name = bfl_statement_credit value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_services } } set_variable = { name = bfl_statement_services value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_company } } set_variable = { name = bfl_statement_company value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_controller } } set_variable = { name = bfl_statement_controller value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_trading } } set_variable = { name = bfl_statement_trading value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_goods } } set_variable = { name = bfl_statement_goods value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_ventures } } set_variable = { name = bfl_statement_ventures value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_native_gross } } set_variable = { name = bfl_statement_native_gross value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_deposit_cost } } set_variable = { name = bfl_statement_deposit_cost value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_operating_cost } } set_variable = { name = bfl_statement_operating_cost value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_native_cost } } set_variable = { name = bfl_statement_native_cost value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_recovery_loss } } set_variable = { name = bfl_statement_recovery_loss value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_impairment } } set_variable = { name = bfl_statement_impairment value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_principal } } set_variable = { name = bfl_statement_principal value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_losses } } set_variable = { name = bfl_statement_losses value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_dividend_paid } } set_variable = { name = bfl_statement_dividend_paid value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_retained_profit } } set_variable = { name = bfl_statement_retained_profit value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_native_interest } } set_variable = { name = bfl_statement_native_interest value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_native_total } } set_variable = { name = bfl_statement_native_total value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_native_balance } } set_variable = { name = bfl_statement_native_balance value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_base } } set_variable = { name = bfl_statement_cost_base value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_accounts } } set_variable = { name = bfl_statement_cost_accounts value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_contracts } } set_variable = { name = bfl_statement_cost_contracts value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_branches } } set_variable = { name = bfl_statement_cost_branches value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_asset_types } } set_variable = { name = bfl_statement_cost_asset_types value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_cost_reduction } } set_variable = { name = bfl_statement_cost_reduction value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_report_count } } set_variable = { name = bfl_report_count value = 0 } set_variable = { name = bfl_report_period value = 0 }
+set_variable = { name = bfl_report_credit_01 value = 0 }
+set_variable = { name = bfl_report_credit_02 value = 0 }
+set_variable = { name = bfl_report_credit_03 value = 0 }
+set_variable = { name = bfl_report_credit_04 value = 0 }
+set_variable = { name = bfl_report_credit_05 value = 0 }
+set_variable = { name = bfl_report_credit_06 value = 0 }
+set_variable = { name = bfl_report_credit_07 value = 0 }
+set_variable = { name = bfl_report_credit_08 value = 0 }
+set_variable = { name = bfl_report_credit_09 value = 0 }
+set_variable = { name = bfl_report_credit_10 value = 0 }
+set_variable = { name = bfl_report_credit_11 value = 0 }
+set_variable = { name = bfl_report_credit_12 value = 0 }
+set_variable = { name = bfl_report_services_01 value = 0 }
+set_variable = { name = bfl_report_services_02 value = 0 }
+set_variable = { name = bfl_report_services_03 value = 0 }
+set_variable = { name = bfl_report_services_04 value = 0 }
+set_variable = { name = bfl_report_services_05 value = 0 }
+set_variable = { name = bfl_report_services_06 value = 0 }
+set_variable = { name = bfl_report_services_07 value = 0 }
+set_variable = { name = bfl_report_services_08 value = 0 }
+set_variable = { name = bfl_report_services_09 value = 0 }
+set_variable = { name = bfl_report_services_10 value = 0 }
+set_variable = { name = bfl_report_services_11 value = 0 }
+set_variable = { name = bfl_report_services_12 value = 0 }
+set_variable = { name = bfl_report_company_01 value = 0 }
+set_variable = { name = bfl_report_company_02 value = 0 }
+set_variable = { name = bfl_report_company_03 value = 0 }
+set_variable = { name = bfl_report_company_04 value = 0 }
+set_variable = { name = bfl_report_company_05 value = 0 }
+set_variable = { name = bfl_report_company_06 value = 0 }
+set_variable = { name = bfl_report_company_07 value = 0 }
+set_variable = { name = bfl_report_company_08 value = 0 }
+set_variable = { name = bfl_report_company_09 value = 0 }
+set_variable = { name = bfl_report_company_10 value = 0 }
+set_variable = { name = bfl_report_company_11 value = 0 }
+set_variable = { name = bfl_report_company_12 value = 0 }
+set_variable = { name = bfl_report_controller_01 value = 0 }
+set_variable = { name = bfl_report_controller_02 value = 0 }
+set_variable = { name = bfl_report_controller_03 value = 0 }
+set_variable = { name = bfl_report_controller_04 value = 0 }
+set_variable = { name = bfl_report_controller_05 value = 0 }
+set_variable = { name = bfl_report_controller_06 value = 0 }
+set_variable = { name = bfl_report_controller_07 value = 0 }
+set_variable = { name = bfl_report_controller_08 value = 0 }
+set_variable = { name = bfl_report_controller_09 value = 0 }
+set_variable = { name = bfl_report_controller_10 value = 0 }
+set_variable = { name = bfl_report_controller_11 value = 0 }
+set_variable = { name = bfl_report_controller_12 value = 0 }
+set_variable = { name = bfl_report_trading_01 value = 0 }
+set_variable = { name = bfl_report_trading_02 value = 0 }
+set_variable = { name = bfl_report_trading_03 value = 0 }
+set_variable = { name = bfl_report_trading_04 value = 0 }
+set_variable = { name = bfl_report_trading_05 value = 0 }
+set_variable = { name = bfl_report_trading_06 value = 0 }
+set_variable = { name = bfl_report_trading_07 value = 0 }
+set_variable = { name = bfl_report_trading_08 value = 0 }
+set_variable = { name = bfl_report_trading_09 value = 0 }
+set_variable = { name = bfl_report_trading_10 value = 0 }
+set_variable = { name = bfl_report_trading_11 value = 0 }
+set_variable = { name = bfl_report_trading_12 value = 0 }
+set_variable = { name = bfl_report_goods_01 value = 0 }
+set_variable = { name = bfl_report_goods_02 value = 0 }
+set_variable = { name = bfl_report_goods_03 value = 0 }
+set_variable = { name = bfl_report_goods_04 value = 0 }
+set_variable = { name = bfl_report_goods_05 value = 0 }
+set_variable = { name = bfl_report_goods_06 value = 0 }
+set_variable = { name = bfl_report_goods_07 value = 0 }
+set_variable = { name = bfl_report_goods_08 value = 0 }
+set_variable = { name = bfl_report_goods_09 value = 0 }
+set_variable = { name = bfl_report_goods_10 value = 0 }
+set_variable = { name = bfl_report_goods_11 value = 0 }
+set_variable = { name = bfl_report_goods_12 value = 0 }
+set_variable = { name = bfl_report_ventures_01 value = 0 }
+set_variable = { name = bfl_report_ventures_02 value = 0 }
+set_variable = { name = bfl_report_ventures_03 value = 0 }
+set_variable = { name = bfl_report_ventures_04 value = 0 }
+set_variable = { name = bfl_report_ventures_05 value = 0 }
+set_variable = { name = bfl_report_ventures_06 value = 0 }
+set_variable = { name = bfl_report_ventures_07 value = 0 }
+set_variable = { name = bfl_report_ventures_08 value = 0 }
+set_variable = { name = bfl_report_ventures_09 value = 0 }
+set_variable = { name = bfl_report_ventures_10 value = 0 }
+set_variable = { name = bfl_report_ventures_11 value = 0 }
+set_variable = { name = bfl_report_ventures_12 value = 0 }
+set_variable = { name = bfl_report_native_gross_01 value = 0 }
+set_variable = { name = bfl_report_native_gross_02 value = 0 }
+set_variable = { name = bfl_report_native_gross_03 value = 0 }
+set_variable = { name = bfl_report_native_gross_04 value = 0 }
+set_variable = { name = bfl_report_native_gross_05 value = 0 }
+set_variable = { name = bfl_report_native_gross_06 value = 0 }
+set_variable = { name = bfl_report_native_gross_07 value = 0 }
+set_variable = { name = bfl_report_native_gross_08 value = 0 }
+set_variable = { name = bfl_report_native_gross_09 value = 0 }
+set_variable = { name = bfl_report_native_gross_10 value = 0 }
+set_variable = { name = bfl_report_native_gross_11 value = 0 }
+set_variable = { name = bfl_report_native_gross_12 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_01 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_02 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_03 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_04 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_05 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_06 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_07 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_08 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_09 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_10 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_11 value = 0 }
+set_variable = { name = bfl_report_deposit_cost_12 value = 0 }
+set_variable = { name = bfl_report_operating_cost_01 value = 0 }
+set_variable = { name = bfl_report_operating_cost_02 value = 0 }
+set_variable = { name = bfl_report_operating_cost_03 value = 0 }
+set_variable = { name = bfl_report_operating_cost_04 value = 0 }
+set_variable = { name = bfl_report_operating_cost_05 value = 0 }
+set_variable = { name = bfl_report_operating_cost_06 value = 0 }
+set_variable = { name = bfl_report_operating_cost_07 value = 0 }
+set_variable = { name = bfl_report_operating_cost_08 value = 0 }
+set_variable = { name = bfl_report_operating_cost_09 value = 0 }
+set_variable = { name = bfl_report_operating_cost_10 value = 0 }
+set_variable = { name = bfl_report_operating_cost_11 value = 0 }
+set_variable = { name = bfl_report_operating_cost_12 value = 0 }
+set_variable = { name = bfl_report_native_cost_01 value = 0 }
+set_variable = { name = bfl_report_native_cost_02 value = 0 }
+set_variable = { name = bfl_report_native_cost_03 value = 0 }
+set_variable = { name = bfl_report_native_cost_04 value = 0 }
+set_variable = { name = bfl_report_native_cost_05 value = 0 }
+set_variable = { name = bfl_report_native_cost_06 value = 0 }
+set_variable = { name = bfl_report_native_cost_07 value = 0 }
+set_variable = { name = bfl_report_native_cost_08 value = 0 }
+set_variable = { name = bfl_report_native_cost_09 value = 0 }
+set_variable = { name = bfl_report_native_cost_10 value = 0 }
+set_variable = { name = bfl_report_native_cost_11 value = 0 }
+set_variable = { name = bfl_report_native_cost_12 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_01 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_02 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_03 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_04 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_05 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_06 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_07 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_08 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_09 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_10 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_11 value = 0 }
+set_variable = { name = bfl_report_recovery_loss_12 value = 0 }
+set_variable = { name = bfl_report_impairment_01 value = 0 }
+set_variable = { name = bfl_report_impairment_02 value = 0 }
+set_variable = { name = bfl_report_impairment_03 value = 0 }
+set_variable = { name = bfl_report_impairment_04 value = 0 }
+set_variable = { name = bfl_report_impairment_05 value = 0 }
+set_variable = { name = bfl_report_impairment_06 value = 0 }
+set_variable = { name = bfl_report_impairment_07 value = 0 }
+set_variable = { name = bfl_report_impairment_08 value = 0 }
+set_variable = { name = bfl_report_impairment_09 value = 0 }
+set_variable = { name = bfl_report_impairment_10 value = 0 }
+set_variable = { name = bfl_report_impairment_11 value = 0 }
+set_variable = { name = bfl_report_impairment_12 value = 0 }
+set_variable = { name = bfl_report_principal_01 value = 0 }
+set_variable = { name = bfl_report_principal_02 value = 0 }
+set_variable = { name = bfl_report_principal_03 value = 0 }
+set_variable = { name = bfl_report_principal_04 value = 0 }
+set_variable = { name = bfl_report_principal_05 value = 0 }
+set_variable = { name = bfl_report_principal_06 value = 0 }
+set_variable = { name = bfl_report_principal_07 value = 0 }
+set_variable = { name = bfl_report_principal_08 value = 0 }
+set_variable = { name = bfl_report_principal_09 value = 0 }
+set_variable = { name = bfl_report_principal_10 value = 0 }
+set_variable = { name = bfl_report_principal_11 value = 0 }
+set_variable = { name = bfl_report_principal_12 value = 0 }
+set_variable = { name = bfl_report_losses_01 value = 0 }
+set_variable = { name = bfl_report_losses_02 value = 0 }
+set_variable = { name = bfl_report_losses_03 value = 0 }
+set_variable = { name = bfl_report_losses_04 value = 0 }
+set_variable = { name = bfl_report_losses_05 value = 0 }
+set_variable = { name = bfl_report_losses_06 value = 0 }
+set_variable = { name = bfl_report_losses_07 value = 0 }
+set_variable = { name = bfl_report_losses_08 value = 0 }
+set_variable = { name = bfl_report_losses_09 value = 0 }
+set_variable = { name = bfl_report_losses_10 value = 0 }
+set_variable = { name = bfl_report_losses_11 value = 0 }
+set_variable = { name = bfl_report_losses_12 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_01 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_02 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_03 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_04 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_05 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_06 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_07 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_08 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_09 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_10 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_11 value = 0 }
+set_variable = { name = bfl_report_dividend_paid_12 value = 0 }
+set_variable = { name = bfl_report_retained_profit_01 value = 0 }
+set_variable = { name = bfl_report_retained_profit_02 value = 0 }
+set_variable = { name = bfl_report_retained_profit_03 value = 0 }
+set_variable = { name = bfl_report_retained_profit_04 value = 0 }
+set_variable = { name = bfl_report_retained_profit_05 value = 0 }
+set_variable = { name = bfl_report_retained_profit_06 value = 0 }
+set_variable = { name = bfl_report_retained_profit_07 value = 0 }
+set_variable = { name = bfl_report_retained_profit_08 value = 0 }
+set_variable = { name = bfl_report_retained_profit_09 value = 0 }
+set_variable = { name = bfl_report_retained_profit_10 value = 0 }
+set_variable = { name = bfl_report_retained_profit_11 value = 0 }
+set_variable = { name = bfl_report_retained_profit_12 value = 0 }
+set_variable = { name = bfl_report_gross_income_01 value = 0 }
+set_variable = { name = bfl_report_gross_income_02 value = 0 }
+set_variable = { name = bfl_report_gross_income_03 value = 0 }
+set_variable = { name = bfl_report_gross_income_04 value = 0 }
+set_variable = { name = bfl_report_gross_income_05 value = 0 }
+set_variable = { name = bfl_report_gross_income_06 value = 0 }
+set_variable = { name = bfl_report_gross_income_07 value = 0 }
+set_variable = { name = bfl_report_gross_income_08 value = 0 }
+set_variable = { name = bfl_report_gross_income_09 value = 0 }
+set_variable = { name = bfl_report_gross_income_10 value = 0 }
+set_variable = { name = bfl_report_gross_income_11 value = 0 }
+set_variable = { name = bfl_report_gross_income_12 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_01 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_02 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_03 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_04 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_05 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_06 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_07 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_08 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_09 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_10 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_11 value = 0 }
+set_variable = { name = bfl_report_gross_expenses_12 value = 0 }
+set_variable = { name = bfl_report_period_01 value = 0 }
+set_variable = { name = bfl_report_period_02 value = 0 }
+set_variable = { name = bfl_report_period_03 value = 0 }
+set_variable = { name = bfl_report_period_04 value = 0 }
+set_variable = { name = bfl_report_period_05 value = 0 }
+set_variable = { name = bfl_report_period_06 value = 0 }
+set_variable = { name = bfl_report_period_07 value = 0 }
+set_variable = { name = bfl_report_period_08 value = 0 }
+set_variable = { name = bfl_report_period_09 value = 0 }
+set_variable = { name = bfl_report_period_10 value = 0 }
+set_variable = { name = bfl_report_period_11 value = 0 }
+set_variable = { name = bfl_report_period_12 value = 0 }
+}
+}

@@ -1,0 +1,10 @@
+﻿bfl_autonomous_credit_offer = {
+if = { limit = { bfl_credit_management_enabled = yes
+    OR = { NOT = { has_variable = bfl_auto_offer_period } bfl_period > var:bfl_auto_offer_period } }
+    set_variable = { name = bfl_auto_offer_period value = bfl_period }
+    set_variable = { name = bfl_auto_offer_sent value = 0 }
+    bfl_run_strategy = yes
+    if = { limit = { var:bfl_strategy_action = 1 }
+        set_variable = { name = bfl_auto_offer_sent value = 1 } }
+}
+}

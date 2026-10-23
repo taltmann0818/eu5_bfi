@@ -43,35 +43,55 @@ bfl_exchange_cancel = { scope = country is_shown = { bfl_has_management = yes } 
         var:bfl_exchange_selected = { if = { limit = { var:bfl_equity_offer_seller = scope:bfl_bank }
             set_variable = { name = bfl_equity_offer_active value = 0 } } } } } }
 bfl_equity_vote_payout_0 = { scope = country is_shown = { bfl_has_management = yes } is_valid = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } }
             effect = { if = { limit = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } bfl_apply_equity_vote_payout_0 = yes } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } } bfl_apply_equity_vote_payout_0 = yes } } }
 bfl_equity_vote_payout_25 = { scope = country is_shown = { bfl_has_management = yes } is_valid = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } }
             effect = { if = { limit = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } bfl_apply_equity_vote_payout_25 = yes } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } } bfl_apply_equity_vote_payout_25 = yes } } }
 bfl_equity_vote_payout_50 = { scope = country is_shown = { bfl_has_management = yes } is_valid = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } }
             effect = { if = { limit = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } } bfl_apply_equity_vote_payout_50 = yes } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } } bfl_apply_equity_vote_payout_50 = yes } } }
 bfl_equity_vote_reserve_100 = { scope = country is_shown = { bfl_has_management = yes } is_valid = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } var:bfl_exchange_selected = { bfl_is_company = yes } }
             effect = { if = { limit = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } } bfl_apply_equity_vote_reserve_100 = yes } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } var:bfl_exchange_selected = { bfl_is_company = yes } } bfl_apply_equity_vote_reserve_100 = yes } } }
 bfl_equity_vote_reserve_200 = { scope = country is_shown = { bfl_has_management = yes } is_valid = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } var:bfl_exchange_selected = { bfl_is_company = yes } }
             effect = { if = { limit = { country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } } var:bfl_exchange_selected = { bfl_is_company = yes } } bfl_apply_equity_vote_reserve_200 = yes } } }
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } } var:bfl_exchange_selected = { bfl_is_company = yes } } bfl_apply_equity_vote_reserve_200 = yes } } }
 bfl_bank_equity_subscribe = { scope = country is_shown = { bfl_has_management = yes } is_valid = { bfl_has_management = yes exists = var:bfl_exchange_selected
         bfl_exchange_cash >= 100 bfl_exchange_capital >= 100
         var:bfl_exchange_selected = { var:bfl_accept_equity = 1

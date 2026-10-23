@@ -5,7 +5,7 @@
                 column = { data = bfl_equity_market }
                 bottom_widget = bfl_buy_quantity_widget move_to_next_section_on_click = no
                 interaction_source_list = { scope:actor = { every_country = { limit = { bfl_market_buy_visible = yes } add_to_list = source } } }
-                visible = { bfl_market_buy_visible = yes } enabled = { bfl_market_buy_visible = yes NOT = { has_cooldown = bfl_share_trade } } }
+                visible = { bfl_market_buy_visible = yes } enabled = { bfl_market_buy_eligible = yes NOT = { has_cooldown = bfl_share_trade } } }
             select_trigger = { looking_for_a = value target_flag = share_quantity name = bfl_share_quantity
                 min = 0.001 max = 1000000 step = 0.001 default = 1 }
             effect = { scope:actor = { trigger_event_silently = bfl_market.11 } }

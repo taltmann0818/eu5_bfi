@@ -1,0 +1,25 @@
+﻿bfl_manage_credit = {
+if = { limit = { bfl_credit_management_enabled = yes }
+        bfl_autonomous_takeover = yes
+        bfl_autonomous_credit_offer = yes
+        if = { limit = { bfl_equity_exchange_access = yes bfl_free_cash > 500 bfl_capital_headroom > 500
+            OR = { AND = { bfl_is_independent_bank = yes num_of_diplomats >= 1 } AND = { bfl_has_valid_controller = yes overlord = { num_of_diplomats >= 1 } } } }
+            save_scope_as = bfl_equity_buyer save_scope_as = bfl_party
+            save_scope_as = bfl_equity_actor save_scope_as = bfl_market_actor save_scope_as = actor
+            if = { limit = { bfl_has_valid_controller = yes } overlord = {
+                save_scope_as = bfl_equity_actor save_scope_as = bfl_market_actor save_scope_as = actor } }
+            random_country = { limit = { bfl_market_dealer_buy_eligible = yes bfl_dealer_units > 0 NOT = { has_cooldown = bfl_share_trade }
+                NOT = { this = scope:bfl_equity_buyer } }
+                save_scope_as = bfl_issuer
+                set_variable = { name = bfl_equity_pool value = 0 }
+                set_variable = { name = bfl_market_units value = { value = 100 divide = bfl_dealer_ask max = bfl_market_dealer_buy_max multiply = 1000 floor = yes divide = 1000 } }
+                set_variable = { name = bfl_market_price value = { value = var:bfl_market_units multiply = bfl_dealer_ask multiply = 100 ceiling = yes divide = 100 } }
+                scope:bfl_market_actor = { set_variable = { name = bfl_market_unit_price value = scope:bfl_issuer.bfl_dealer_ask }
+                    set_variable = { name = bfl_market_issuer value = scope:bfl_issuer }
+                    set_variable = { name = bfl_market_result value = 0 } }
+                bfl_buy_dealer_inventory = yes
+                scope:bfl_market_actor = { bfl_market_finish_trade = yes remove_variable = bfl_market_issuer }
+            }
+        }
+    }
+}

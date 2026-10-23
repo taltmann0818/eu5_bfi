@@ -57,6 +57,19 @@ def generate(common, effect):
         bfl_free_cash >= var:bfl_venture_ticket bfl_capital_headroom >= var:bfl_venture_ticket''')
     triggers += effect('bfl_commenda_command_ready', '''OR = { bfl_commenda_offer_ready = yes
         AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }''')
+    triggers += effect('bfl_ai_accept_venture', '''country_exists = this at_war = no
+        exists = var:bfl_venture_offer_bank bfl_period <= var:bfl_venture_offer_expiry
+        # Automated consent is limited to quoted cargo; an expedition with no
+        # attributable commercial return requires the operator's explicit choice.
+        var:bfl_venture_offer_kind = 1
+        var:bfl_venture_offer_from = { save_temporary_scope_as = bfl_ai_from }
+        var:bfl_venture_offer_to = { save_temporary_scope_as = bfl_ai_to }
+        var:bfl_venture_offer_good = { save_temporary_scope_as = bfl_ai_good }
+        "scope:bfl_ai_to.market_price(scope:bfl_ai_good)" >= { value = "scope:bfl_ai_from.market_price(scope:bfl_ai_good)" multiply = 1.10 }
+        OR = { var:bfl_venture_offer_preset = 0
+            bfl_venture_operator_cash >= { value = var:bfl_venture_offer_ticket divide = 2 add = 100 } }
+        monthly_balance >= 0
+    ''')
     common('scripted_triggers', 'commenda', triggers)
     values = effect('bfl_venture_authorized_budget', '''value = var:bfl_venture_ticket
         if = { limit = { var:bfl_venture_preset = 1 } multiply = 1.5 }''')
@@ -274,6 +287,9 @@ def generate(common, effect):
             change_variable = {{ name = bfl_venture_external_basis subtract = var:bfl_venture_return }}
             add_gold = {{ value = var:bfl_venture_return add = var:bfl_venture_gain multiply = -1 }}
             scope:bfl_venture_lender = {{ add_gold = {{ value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }}
+                set_variable = {{ name = bfl_feedback_total value = {{ value = scope:bfl_operator.var:bfl_venture_return add = scope:bfl_operator.var:bfl_venture_gain }} }}
+                if = {{ limit = {{ var:bfl_feedback_total > 0 }}
+                    bfl_record_feedback = {{ KIND = 6 AMOUNT = var:bfl_feedback_total }} }}
                 change_variable = {{ name = {p}_returned add = scope:bfl_operator.var:bfl_venture_return }}
                 change_variable = {{ name = {p}_basis subtract = scope:bfl_operator.var:bfl_venture_return }}
                 change_variable = {{ name = bfl_project_value subtract = scope:bfl_operator.var:bfl_venture_return }}

@@ -47,7 +47,7 @@ def main():
     tuning=json.loads((ROOT/'design/tuning.json').read_text())
     check(metadata['version']==tuning['version'],'Development metadata version must match tuning')
     check(metadata['game_id']=='eu5','Wrong game id')
-    check(metadata['supported_game_version']=='1.4.1','Game pin changed')
+    check(metadata['supported_game_version']=='1.4.4','Game pin changed')
     check(metadata['relationships'][0]['id']=='community_mod_framework','CMF dependency missing')
     all_text=[]
     for path in MOD.rglob('*'):
@@ -65,6 +65,31 @@ def main():
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)
+    cmm_ids = {'bfl_banking_finance_companies'} | {
+        'bfl_banking_finance_companies__' + suffix for suffix in
+        ('presentation', 'interface', 'presentation__interface', 'reduced_motion',
+         'expanded_details', 'finance_notifications')}
+    check(not (loc_set & cmm_ids), 'Bare CMF flag localization replaces machine identifiers; use _name/_desc')
+    from translate_localization import LOCALES, ENTRY, ENGINE, structural
+    english = MOD/'main_menu/localization/english'
+    for locale in LOCALES:
+        for source in english.rglob('*.yml'):
+            target = english.parent/locale/source.relative_to(english).as_posix().replace('_l_english','_l_'+locale)
+            check(target.exists(),f'Missing {locale} localization: {target}')
+            if not target.exists():
+                continue
+            original = {m[2]:m[3] for line in source.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            translated = {m[2]:m[3] for line in target.read_text(encoding='utf-8-sig').splitlines() if (m:=ENTRY.fullmatch(line))}
+            check(original.keys()==translated.keys(),f'{target}: localized key set differs from English')
+            check(target.read_text(encoding='utf-8-sig').startswith('l_'+locale+':'),f'{target}: invalid language header')
+            for key in original.keys() & translated.keys():
+                check(ENGINE.findall(original[key])==ENGINE.findall(translated[key]),f'{target}: engine controls changed in {key}')
+                if structural(key):
+                    check(original[key]==translated[key],f'{target}: CMF machine identifier was translated: {key}')
+    for path,text in all_text:
+        if path.suffix == '.gui':
+            for key in re.findall(r'\b(?:tooltip|text)\s*=\s*"(bfl_[\w.]+)"',text):
+                check(key in loc_set,f'{path}: missing visible text or tooltip localization {key}')
     for path,text in all_text:
         if path.suffix=='.yml':continue
         if 'decisions' in path.parts:
@@ -118,7 +143,11 @@ def main():
     interface=(MOD/'in_game/gui/bfl_economy_finance.gui').read_text(encoding='utf-8-sig')
     tooltip_keys=set(re.findall(r'\btooltip\s*=\s*"(bfl_[\w]+)"',interface))
     check(tooltip_keys <= loc_set,f'Missing Credit/Balance tooltips: {sorted(tooltip_keys-loc_set)}')
-    check('using = bg_paper_card' not in interface,'BFI controls must use native button states')
+    from audit_native import balanced_block
+    for match in re.finditer(r'\bbutton(?:_regular)?\s*=\s*\{',interface):
+        end=balanced_block(interface,interface.index('{',match.start()))
+        check('using = bg_paper_card' not in interface[match.start():end],
+              'BFI action buttons must use native button states; paper cards are for data rows')
     # Assert every recorded export is a real, correctly sized runtime texture.
     with (ROOT/'docs/asset_register.csv').open(newline='') as f:
         rows=list(csv.DictReader(f))

@@ -92,7 +92,7 @@ def generate(common, effect, loc, write):
     common('scripted_guis', 'bond_workouts', guis)
     common('../events', 'bond_workout', '''namespace = bfl_bond_workout
         bfl_bond_workout.1 = { type = country_event title = bfl_bond_workout_title desc = bfl_bond_workout_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            image = "gfx/interface/illustrations/bfl/m10_resolution.dds" outcome = neutral
             option = { name = bfl_bond_workout_accept custom_tooltip = bfl_bond_accept_tip
                 hidden_effect = { bfl_accept_bond_workout = yes } ai_chance = { base = 0 } }
             option = { name = bfl_bond_workout_secured

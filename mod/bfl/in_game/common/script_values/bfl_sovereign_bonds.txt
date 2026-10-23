@@ -104,7 +104,7 @@ if = { limit = { var:bfl_bnd_31_active ?= 1 } add = 1 }
 if = { limit = { var:bfl_bnd_32_active ?= 1 } add = 1 }
 }
 bfl_bond_capacity = {
-value = monthly_income_total multiply = 24 min = 100 subtract = bfl_bond_debt subtract = total_debt subtract = bfl_estate_liabilities min = 0
+value = monthly_income_total multiply = 24 min = 500 subtract = bfl_bond_debt subtract = total_debt subtract = bfl_estate_liabilities min = 0
 }
 bfl_bond_new_rate = {
 value = 0.03 if = { limit = { has_variable = bfl_bond_rate } value = var:bfl_bond_rate }
@@ -158,4 +158,22 @@ value = 0 if = { limit = { var:bfl_bond_financing_period ?= bfl_period } value =
 }
 bfl_bond_redemption_display = {
 value = 0 if = { limit = { var:bfl_bond_redemption_period ?= bfl_period } value = var:bfl_bond_redemption_paid }
+}
+bfl_bond_monthly_limit = {
+value = monthly_income_total multiply = 6 min = 1000
+}
+bfl_bond_remaining_monthly = {
+value = bfl_bond_monthly_limit if = { limit = { var:bfl_bond_financing_period ?= bfl_period } subtract = var:bfl_bond_financing } min = 0
+}
+bfl_bond_draw_max = {
+value = 0
+        if = { limit = { bfl_has_management = yes country_type = location monthly_income_total > 0
+            bfl_bond_arrears = 0 bfl_bond_new_rate > 0
+            OR = { NOT = { has_variable = bfl_bond_schema } bfl_has_bond_slot = yes }
+            var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes NOT = { has_variable = bfl_bond_guard } }
+            NOT = { has_variable = bfl_bond_guard } }
+            value = monthly_income_total multiply = 0.25 subtract = bfl_bond_monthly_coupon
+            multiply = 12 divide = bfl_bond_new_rate
+            max = bfl_bond_capacity max = bfl_bond_remaining_monthly
+            max = var:bfl_bank.bfl_free_cash max = var:bfl_bank.bfl_capital_headroom min = 0 floor = yes }
 }

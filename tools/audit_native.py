@@ -79,11 +79,11 @@ def main(game, cmf, compare):
         print('All pinned native and CMF source hashes match.');return
     manifest=(game.parent.parent.parent/'appmanifest_3450310.acf').read_text()
     # Steam manifest is two ancestors above common/game's installation root.
-    baseline.update({'recorded':'2026-10-14','game_version':'1.4.1','version_evidence':'Historical installed debug.log reports matched game version 1.4.1; UI confirmation pending.',
+    baseline.update({'recorded':'2026-10-23','game_version':'1.4.4','version_evidence':'Installed debug.log reports 1.4.4; native overrides reviewed for Steam build 26142040.',
       'steam_build':re.search(r'"buildid"\s+"(\d+)"',manifest).group(1),
       'steam_branch':re.search(r'"BetaKey"\s+"([^"]+)"',manifest).group(1),
       'checksum_file':(game.parent/'binaries/checksum.txt').read_text().strip(),
-      'displayed_checksum':None,'cmf_version':'2.5.0','runtime_probes':'NOT RUN — user requested stop before in-game testing',
+      'displayed_checksum':None,'cmf_version':'2.5.0','runtime_probes':baseline.get('runtime_probes','Not run; source pinning does not establish runtime acceptance.'),
       'game_sources':current,'cmf_sources':cmf_current,'graphics_reference_commit':'52fac49f3c189f50a04204b743f19335887f88ad'})
     baseline_path.parent.mkdir(parents=True,exist_ok=True)
     baseline_path.write_text(json.dumps(baseline,indent=2)+'\n')
@@ -105,12 +105,15 @@ def main(game, cmf, compare):
         for path,why,source in [
             ('in_game/gui/economy_lateralview.gui','Add funded bank income rows; preserve native Balance controls and shared types once','in_game/gui/economy_lateralview.gui'),
             ('in_game/common/country_interactions/siphon_income.txt','Exclude chartered bank at selection and execution; preserve every other native branch','in_game/common/country_interactions/siphon_income.txt'),
-            ('in_game/gui/credit.gui','Unify bank accounts and native state loans; retain native loan actors and templates','in_game/gui/credit.gui'),
+            ('in_game/gui/credit.gui','Redesign bank Credit; remove native loan lists; retain native repayment/bankruptcy actors and confirmations','in_game/gui/credit.gui'),
             ('in_game/gui/technology_lateralview.gui','Use the chartered-bank badge for BFI advances; retain other native badges','in_game/gui/technology_lateralview.gui'),
             ('in_game/common/advances/bfl_banking_unlocks.txt','INJECT two permissions into banking_advance; preserve its native effects and institution gate','in_game/common/advances/0_age_of_renaissance.txt'),
             ('in_game/common/advances/1_building_unlocks.txt','Move only Stock Exchange to Reformation after Banking; preserve every other native unlock and bond-slot bonus','in_game/common/advances/1_building_unlocks.txt'),
+            ('in_game/common/advances/bfl_exchange_ai_priorities.txt','Inject bank-only Banking AI priority; preserve native effects','in_game/common/advances/0_age_of_renaissance.txt'),
+            ('in_game/common/country_interactions/request_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/request_loan.txt'),
+            ('in_game/common/country_interactions/take_over_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/take_over_loan.txt'),
         ]:
-            w.writerow([path,why,current[source],'1.4.1'])
+            w.writerow([path,why,current[source],'1.4.4'])
     print('Pinned installed evidence and generated two narrow native integrations.')
 
 

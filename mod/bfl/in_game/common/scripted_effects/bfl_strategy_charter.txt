@@ -1,0 +1,12 @@
+﻿bfl_initialize_ai_charter_policy = {
+if = { limit = { bfl_has_valid_controller = yes is_ai = yes
+    overlord = { is_ai = yes }
+    var:bfl_strategy_mode < 0
+    NOT = { has_variable = bfl_ai_charter_policy_initialized } }
+    set_variable = bfl_ai_charter_policy_initialized
+    set_variable = { name = bfl_facility_mode value = 1 }
+    # Small perpetual issues must cover per-record servicing costs.
+    # This prospective preset never reprices an accepted obligation.
+    overlord = { bfl_initialize_bonds = yes set_variable = { name = bfl_bond_rate value = 0.06 } }
+}
+}

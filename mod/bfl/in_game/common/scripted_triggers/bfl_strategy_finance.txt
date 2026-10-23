@@ -1,0 +1,5 @@
+﻿bfl_ai_finance_authority = {
+    bfl_is_bank = yes var:bfl_state < 4 is_ai = yes var:bfl_strategy_mode < 0
+    OR = { bfl_is_independent_bank = yes
+        AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } }
+}

@@ -1,0 +1,254 @@
+﻿bfl_report_gross_income = {
+value = var:bfl_statement_native_gross
+add = { value = var:bfl_statement_credit min = 0 }
+add = { value = var:bfl_statement_services min = 0 }
+add = { value = var:bfl_statement_company min = 0 }
+add = { value = var:bfl_statement_controller min = 0 }
+add = { value = var:bfl_statement_trading min = 0 }
+add = { value = var:bfl_statement_goods min = 0 }
+add = { value = var:bfl_statement_ventures min = 0 }
+}
+bfl_report_gross_expenses = {
+value = var:bfl_statement_native_cost add = var:bfl_statement_operating_cost add = var:bfl_statement_deposit_cost add = var:bfl_statement_recovery_loss add = var:bfl_statement_impairment
+add = { value = var:bfl_statement_credit max = 0 multiply = -1 }
+add = { value = var:bfl_statement_services max = 0 multiply = -1 }
+add = { value = var:bfl_statement_company max = 0 multiply = -1 }
+add = { value = var:bfl_statement_controller max = 0 multiply = -1 }
+add = { value = var:bfl_statement_trading max = 0 multiply = -1 }
+add = { value = var:bfl_statement_goods max = 0 multiply = -1 }
+add = { value = var:bfl_statement_ventures max = 0 multiply = -1 }
+}
+bfl_report_net_income = {
+value = bfl_report_gross_income subtract = bfl_report_gross_expenses
+}
+bfl_report_chart_max = {
+value = 1
+min = var:bfl_report_gross_income_01
+min = var:bfl_report_gross_income_02
+min = var:bfl_report_gross_income_03
+min = var:bfl_report_gross_income_04
+min = var:bfl_report_gross_income_05
+min = var:bfl_report_gross_income_06
+min = var:bfl_report_gross_income_07
+min = var:bfl_report_gross_income_08
+min = var:bfl_report_gross_income_09
+min = var:bfl_report_gross_income_10
+min = var:bfl_report_gross_income_11
+min = var:bfl_report_gross_income_12
+min = var:bfl_report_gross_expenses_01
+min = var:bfl_report_gross_expenses_02
+min = var:bfl_report_gross_expenses_03
+min = var:bfl_report_gross_expenses_04
+min = var:bfl_report_gross_expenses_05
+min = var:bfl_report_gross_expenses_06
+min = var:bfl_report_gross_expenses_07
+min = var:bfl_report_gross_expenses_08
+min = var:bfl_report_gross_expenses_09
+min = var:bfl_report_gross_expenses_10
+min = var:bfl_report_gross_expenses_11
+min = var:bfl_report_gross_expenses_12
+}
+bfl_report_gross_income_y_01 = {
+value = var:bfl_report_gross_income_01 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_01 = {
+value = bfl_report_gross_income_y_01 max = bfl_report_gross_income_y_02
+}
+bfl_report_gross_income_height_01 = {
+value = bfl_report_gross_income_y_01 min = bfl_report_gross_income_y_02 subtract = bfl_report_gross_income_top_01 min = 1
+}
+bfl_report_gross_income_y_02 = {
+value = var:bfl_report_gross_income_02 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_02 = {
+value = bfl_report_gross_income_y_02 max = bfl_report_gross_income_y_03
+}
+bfl_report_gross_income_height_02 = {
+value = bfl_report_gross_income_y_02 min = bfl_report_gross_income_y_03 subtract = bfl_report_gross_income_top_02 min = 1
+}
+bfl_report_gross_income_y_03 = {
+value = var:bfl_report_gross_income_03 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_03 = {
+value = bfl_report_gross_income_y_03 max = bfl_report_gross_income_y_04
+}
+bfl_report_gross_income_height_03 = {
+value = bfl_report_gross_income_y_03 min = bfl_report_gross_income_y_04 subtract = bfl_report_gross_income_top_03 min = 1
+}
+bfl_report_gross_income_y_04 = {
+value = var:bfl_report_gross_income_04 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_04 = {
+value = bfl_report_gross_income_y_04 max = bfl_report_gross_income_y_05
+}
+bfl_report_gross_income_height_04 = {
+value = bfl_report_gross_income_y_04 min = bfl_report_gross_income_y_05 subtract = bfl_report_gross_income_top_04 min = 1
+}
+bfl_report_gross_income_y_05 = {
+value = var:bfl_report_gross_income_05 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_05 = {
+value = bfl_report_gross_income_y_05 max = bfl_report_gross_income_y_06
+}
+bfl_report_gross_income_height_05 = {
+value = bfl_report_gross_income_y_05 min = bfl_report_gross_income_y_06 subtract = bfl_report_gross_income_top_05 min = 1
+}
+bfl_report_gross_income_y_06 = {
+value = var:bfl_report_gross_income_06 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_06 = {
+value = bfl_report_gross_income_y_06 max = bfl_report_gross_income_y_07
+}
+bfl_report_gross_income_height_06 = {
+value = bfl_report_gross_income_y_06 min = bfl_report_gross_income_y_07 subtract = bfl_report_gross_income_top_06 min = 1
+}
+bfl_report_gross_income_y_07 = {
+value = var:bfl_report_gross_income_07 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_07 = {
+value = bfl_report_gross_income_y_07 max = bfl_report_gross_income_y_08
+}
+bfl_report_gross_income_height_07 = {
+value = bfl_report_gross_income_y_07 min = bfl_report_gross_income_y_08 subtract = bfl_report_gross_income_top_07 min = 1
+}
+bfl_report_gross_income_y_08 = {
+value = var:bfl_report_gross_income_08 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_08 = {
+value = bfl_report_gross_income_y_08 max = bfl_report_gross_income_y_09
+}
+bfl_report_gross_income_height_08 = {
+value = bfl_report_gross_income_y_08 min = bfl_report_gross_income_y_09 subtract = bfl_report_gross_income_top_08 min = 1
+}
+bfl_report_gross_income_y_09 = {
+value = var:bfl_report_gross_income_09 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_09 = {
+value = bfl_report_gross_income_y_09 max = bfl_report_gross_income_y_10
+}
+bfl_report_gross_income_height_09 = {
+value = bfl_report_gross_income_y_09 min = bfl_report_gross_income_y_10 subtract = bfl_report_gross_income_top_09 min = 1
+}
+bfl_report_gross_income_y_10 = {
+value = var:bfl_report_gross_income_10 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_10 = {
+value = bfl_report_gross_income_y_10 max = bfl_report_gross_income_y_11
+}
+bfl_report_gross_income_height_10 = {
+value = bfl_report_gross_income_y_10 min = bfl_report_gross_income_y_11 subtract = bfl_report_gross_income_top_10 min = 1
+}
+bfl_report_gross_income_y_11 = {
+value = var:bfl_report_gross_income_11 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_income_top_11 = {
+value = bfl_report_gross_income_y_11 max = bfl_report_gross_income_y_12
+}
+bfl_report_gross_income_height_11 = {
+value = bfl_report_gross_income_y_11 min = bfl_report_gross_income_y_12 subtract = bfl_report_gross_income_top_11 min = 1
+}
+bfl_report_gross_income_y_12 = {
+value = var:bfl_report_gross_income_12 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_y_01 = {
+value = var:bfl_report_gross_expenses_01 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_01 = {
+value = bfl_report_gross_expenses_y_01 max = bfl_report_gross_expenses_y_02
+}
+bfl_report_gross_expenses_height_01 = {
+value = bfl_report_gross_expenses_y_01 min = bfl_report_gross_expenses_y_02 subtract = bfl_report_gross_expenses_top_01 min = 1
+}
+bfl_report_gross_expenses_y_02 = {
+value = var:bfl_report_gross_expenses_02 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_02 = {
+value = bfl_report_gross_expenses_y_02 max = bfl_report_gross_expenses_y_03
+}
+bfl_report_gross_expenses_height_02 = {
+value = bfl_report_gross_expenses_y_02 min = bfl_report_gross_expenses_y_03 subtract = bfl_report_gross_expenses_top_02 min = 1
+}
+bfl_report_gross_expenses_y_03 = {
+value = var:bfl_report_gross_expenses_03 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_03 = {
+value = bfl_report_gross_expenses_y_03 max = bfl_report_gross_expenses_y_04
+}
+bfl_report_gross_expenses_height_03 = {
+value = bfl_report_gross_expenses_y_03 min = bfl_report_gross_expenses_y_04 subtract = bfl_report_gross_expenses_top_03 min = 1
+}
+bfl_report_gross_expenses_y_04 = {
+value = var:bfl_report_gross_expenses_04 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_04 = {
+value = bfl_report_gross_expenses_y_04 max = bfl_report_gross_expenses_y_05
+}
+bfl_report_gross_expenses_height_04 = {
+value = bfl_report_gross_expenses_y_04 min = bfl_report_gross_expenses_y_05 subtract = bfl_report_gross_expenses_top_04 min = 1
+}
+bfl_report_gross_expenses_y_05 = {
+value = var:bfl_report_gross_expenses_05 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_05 = {
+value = bfl_report_gross_expenses_y_05 max = bfl_report_gross_expenses_y_06
+}
+bfl_report_gross_expenses_height_05 = {
+value = bfl_report_gross_expenses_y_05 min = bfl_report_gross_expenses_y_06 subtract = bfl_report_gross_expenses_top_05 min = 1
+}
+bfl_report_gross_expenses_y_06 = {
+value = var:bfl_report_gross_expenses_06 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_06 = {
+value = bfl_report_gross_expenses_y_06 max = bfl_report_gross_expenses_y_07
+}
+bfl_report_gross_expenses_height_06 = {
+value = bfl_report_gross_expenses_y_06 min = bfl_report_gross_expenses_y_07 subtract = bfl_report_gross_expenses_top_06 min = 1
+}
+bfl_report_gross_expenses_y_07 = {
+value = var:bfl_report_gross_expenses_07 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_07 = {
+value = bfl_report_gross_expenses_y_07 max = bfl_report_gross_expenses_y_08
+}
+bfl_report_gross_expenses_height_07 = {
+value = bfl_report_gross_expenses_y_07 min = bfl_report_gross_expenses_y_08 subtract = bfl_report_gross_expenses_top_07 min = 1
+}
+bfl_report_gross_expenses_y_08 = {
+value = var:bfl_report_gross_expenses_08 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_08 = {
+value = bfl_report_gross_expenses_y_08 max = bfl_report_gross_expenses_y_09
+}
+bfl_report_gross_expenses_height_08 = {
+value = bfl_report_gross_expenses_y_08 min = bfl_report_gross_expenses_y_09 subtract = bfl_report_gross_expenses_top_08 min = 1
+}
+bfl_report_gross_expenses_y_09 = {
+value = var:bfl_report_gross_expenses_09 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_09 = {
+value = bfl_report_gross_expenses_y_09 max = bfl_report_gross_expenses_y_10
+}
+bfl_report_gross_expenses_height_09 = {
+value = bfl_report_gross_expenses_y_09 min = bfl_report_gross_expenses_y_10 subtract = bfl_report_gross_expenses_top_09 min = 1
+}
+bfl_report_gross_expenses_y_10 = {
+value = var:bfl_report_gross_expenses_10 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_10 = {
+value = bfl_report_gross_expenses_y_10 max = bfl_report_gross_expenses_y_11
+}
+bfl_report_gross_expenses_height_10 = {
+value = bfl_report_gross_expenses_y_10 min = bfl_report_gross_expenses_y_11 subtract = bfl_report_gross_expenses_top_10 min = 1
+}
+bfl_report_gross_expenses_y_11 = {
+value = var:bfl_report_gross_expenses_11 divide = bfl_report_chart_max multiply = -96 add = 96
+}
+bfl_report_gross_expenses_top_11 = {
+value = bfl_report_gross_expenses_y_11 max = bfl_report_gross_expenses_y_12
+}
+bfl_report_gross_expenses_height_11 = {
+value = bfl_report_gross_expenses_y_11 min = bfl_report_gross_expenses_y_12 subtract = bfl_report_gross_expenses_top_11 min = 1
+}
+bfl_report_gross_expenses_y_12 = {
+value = var:bfl_report_gross_expenses_12 divide = bfl_report_chart_max multiply = -96 add = 96
+}

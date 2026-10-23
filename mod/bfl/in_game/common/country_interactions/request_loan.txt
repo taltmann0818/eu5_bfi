@@ -34,7 +34,7 @@
 			has_reform = government_reform:banking_country
 		}
         enabled = {
-            bfl_branch_access = { PARTY = scope:actor }
+            bfl_branch_access = { PARTY = scope:actor } bfl_native_request_funded = yes
 			gold > monthly_income_total
 		}
 	}
@@ -42,7 +42,7 @@
 	effect = {
 	
 		scope:recipient ?= {
-        if = { limit = { bfl_branch_access = { PARTY = scope:actor } }
+        if = { limit = { bfl_branch_access = { PARTY = scope:actor } bfl_native_request_funded = yes }
 	
 			give_loan = {
 				target = scope:actor
@@ -57,6 +57,8 @@
 				months = 60
 			}
 		
+ if = { limit = { bfl_has_accounts = yes } bfl_reconcile_native_assets = yes }
+
         }
 }
 	}

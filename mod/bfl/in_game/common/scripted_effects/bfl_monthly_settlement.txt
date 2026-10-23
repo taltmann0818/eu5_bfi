@@ -13,11 +13,14 @@
         if = { limit = { var:bfl_state < 4 } bfl_settle_operating_expenses = yes }
         if = { limit = { var:bfl_state = 4 } bfl_distribute_resolution_cash = yes bfl_pay_resolution_guarantee = yes }
         bfl_evaluate_distress = yes
+        bfl_automatic_resolution = yes
         bfl_settle_dividends = yes
+        bfl_close_activity_sources = yes
+        bfl_record_credit_report = yes
         if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
             bfl_run_controller_bond_facility = yes
         }
-        bfl_autonomous_takeover = yes
+        bfl_manage_credit = yes
         bfl_record_history = yes
         bfl_record_exchange_history = yes
         if = { limit = { bfl_is_independent_bank = yes } bfl_record_portfolio_history = yes }

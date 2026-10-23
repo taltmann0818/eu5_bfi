@@ -140,7 +140,10 @@ def generate(common, effect, loc, write):
         bank_blocks += f'''vbox = {{ layoutpolicy_horizontal = expanding set_parent_dimension_to_minimum = height ignoreinvisible = yes
             datacontext = "[{context}]" visible = "[GetScriptedGui('{gate}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             {list_block('bfl_portfolio_bank_heading',scroll_rows(position_rows,420,215))} }}'''
-    content = list_block('bfl_portfolio_total_heading',row('Value / unrealized',f"[{val('bfl_portfolio_market')}|2]@gold! · [{val('bfl_portfolio_return')}|%1+=]"))
+    summary = row('Current market value',f"[{val('bfl_portfolio_market')}|2]@gold!")
+    summary += row('Amount invested',f"[{val('bfl_portfolio_basis')}|2]@gold!",1)
+    summary += row('Unrealized return',f"[{val('bfl_portfolio_return')}|%1+=]",2)
+    content = list_block('bfl_portfolio_total_heading',summary)
     content += treasury+bank_blocks
     content += row('Realized result',f"[{val('bfl_portfolio_realized')}|2+=]@gold!")
     content += row('Bank dividends received',f"[{val('bfl_exchange_dividends')}|2]@gold!",1)

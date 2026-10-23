@@ -1,7 +1,7 @@
 ﻿on_game_started_after_lobby = { on_actions = { bfl_start_discovery } }
 on_game_load_after_lobby = { on_actions = { bfl_load_discovery } }
-bfl_start_discovery = { effect = { bfl_discover_institutions = yes } }
-bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
+bfl_start_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
+bfl_load_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
 monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
 bfl_monthly_accounts = {
     effect = {

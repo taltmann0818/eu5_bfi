@@ -14,7 +14,12 @@ def instant(check):
     body += check('custom_bond_primary_funded', 'gold = 900 c:FLO = { gold = 1100 bfl_bond_debt = 100 var:bfl_bnd_01_holder = c:BRD var:bfl_bnd_01_rate = 0.03 var:bfl_bnd_01_basis = 100 }')
     body += check('custom_bond_principal_not_profit', 'var:bfl_profit_credit = 0 bfl_assets = 1000 var:bfl_asset_bonds = 100 var:bfl_custom_credit_value = 100')
     body += 'bfl_underwrite_sovereign_bond = yes\n'
-    body += check('custom_bond_same_month_issue_rejected', 'gold = 900 c:FLO = { gold = 1100 bfl_bond_count = 1 }')
+    body += "set_variable = { name = bfi_debug_bank_cash value = gold } c:FLO = { set_variable = { name = bfi_debug_debt value = bfl_bond_debt } set_variable = { name = bfi_debug_cap value = bfl_bond_capacity } set_variable = { name = bfi_debug_income value = monthly_income_total } }\n"
+    body += '''debug_log = "BFI_BOND_DEBUG|cash=[GetCountry('BRD').MakeScope.GetVariable('bfi_debug_bank_cash').GetValue]|debt=[GetCountry('FLO').MakeScope.GetVariable('bfi_debug_debt').GetValue]|capacity=[GetCountry('FLO').MakeScope.GetVariable('bfi_debug_cap').GetValue]|income=[GetCountry('FLO').MakeScope.GetVariable('bfi_debug_income').GetValue]"\n'''
+    body += check('custom_bond_multiple_funded_issues', 'gold = 800 c:FLO = { gold = 1200 bfl_bond_count = 2 bfl_bond_financing_display = 200 bfl_bond_remaining_monthly = 800 }')
+    body += 'c:FLO = { bfl_redeem_sovereign_bond_02 = yes set_variable = { name = bfl_bond_financing value = 1000 } } bfl_underwrite_sovereign_bond = yes\n'
+    body += check('custom_bond_shared_monthly_cap_rejects', 'gold = 900 c:FLO = { gold = 1100 bfl_bond_count = 1 bfl_bond_remaining_monthly = 0 }')
+    body += 'c:FLO = { set_variable = { name = bfl_bond_financing value = 200 } }\n'
     body += '''c:FLO = { set_variable = { name = bfl_bnd_01_last_accrual value = { value = bfl_period subtract = 1 } }
         bfl_service_sovereign_bonds = yes }
     '''
@@ -95,7 +100,7 @@ def instant(check):
         bfl_underwrite_sovereign_bond = yes
     '''
     body += check('custom_bond_both_profiles_and_slot_generation', 'gold = 900 c:FLO = { gold = 1000 bfl_bond_debt = 100 var:bfl_bnd_01_generation = 2 var:bfl_bnd_01_rate = 0.03 }')
-    body += '''c:FLO = { bfl_redeem_sovereign_bond_01 = yes set_gold = 0 set_variable = { name = bfl_bond_last_issue value = 0 } }
+    body += '''c:FLO = { bfl_redeem_sovereign_bond_01 = yes set_gold = 0 set_variable = { name = bfl_bond_last_issue value = 0 } set_variable = { name = bfl_bond_financing value = 900 } }
         set_gold = 1000 set_variable = { name = bfl_facility_mode value = 2 }
         bfl_run_controller_bond_facility = yes
     '''

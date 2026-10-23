@@ -1,0 +1,77 @@
+﻿bfl_strategy_credit_score = {
+value = creditworthiness multiply = 100
+        subtract = { value = total_debt add = bfl_bond_debt divide = monthly_income_total multiply = 2 }
+        if = { limit = { monthly_balance >= 0 } add = 25 }
+        if = { limit = { bfl_is_company = yes } add = 10 }
+}
+bfl_strategy_deposit_exposure = {
+value = 0
+if = { limit = { var:bfl_dep_01_active = 1 var:bfl_dep_01_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_01_pool = 0 } add = var:bfl_dep_01_principal }
+if = { limit = { var:bfl_dep_02_active = 1 var:bfl_dep_02_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_02_pool = 0 } add = var:bfl_dep_02_principal }
+if = { limit = { var:bfl_dep_03_active = 1 var:bfl_dep_03_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_03_pool = 0 } add = var:bfl_dep_03_principal }
+if = { limit = { var:bfl_dep_04_active = 1 var:bfl_dep_04_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_04_pool = 0 } add = var:bfl_dep_04_principal }
+if = { limit = { var:bfl_dep_05_active = 1 var:bfl_dep_05_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_05_pool = 0 } add = var:bfl_dep_05_principal }
+if = { limit = { var:bfl_dep_06_active = 1 var:bfl_dep_06_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_06_pool = 0 } add = var:bfl_dep_06_principal }
+if = { limit = { var:bfl_dep_07_active = 1 var:bfl_dep_07_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_07_pool = 0 } add = var:bfl_dep_07_principal }
+if = { limit = { var:bfl_dep_08_active = 1 var:bfl_dep_08_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_08_pool = 0 } add = var:bfl_dep_08_principal }
+if = { limit = { var:bfl_dep_09_active = 1 var:bfl_dep_09_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_09_pool = 0 } add = var:bfl_dep_09_principal }
+if = { limit = { var:bfl_dep_10_active = 1 var:bfl_dep_10_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_10_pool = 0 } add = var:bfl_dep_10_principal }
+if = { limit = { var:bfl_dep_11_active = 1 var:bfl_dep_11_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_11_pool = 0 } add = var:bfl_dep_11_principal }
+if = { limit = { var:bfl_dep_12_active = 1 var:bfl_dep_12_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_12_pool = 0 } add = var:bfl_dep_12_principal }
+if = { limit = { var:bfl_dep_13_active = 1 var:bfl_dep_13_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_13_pool = 0 } add = var:bfl_dep_13_principal }
+if = { limit = { var:bfl_dep_14_active = 1 var:bfl_dep_14_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_14_pool = 0 } add = var:bfl_dep_14_principal }
+if = { limit = { var:bfl_dep_15_active = 1 var:bfl_dep_15_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_15_pool = 0 } add = var:bfl_dep_15_principal }
+if = { limit = { var:bfl_dep_16_active = 1 var:bfl_dep_16_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_16_pool = 0 } add = var:bfl_dep_16_principal }
+if = { limit = { var:bfl_dep_17_active = 1 var:bfl_dep_17_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_17_pool = 0 } add = var:bfl_dep_17_principal }
+if = { limit = { var:bfl_dep_18_active = 1 var:bfl_dep_18_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_18_pool = 0 } add = var:bfl_dep_18_principal }
+if = { limit = { var:bfl_dep_19_active = 1 var:bfl_dep_19_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_19_pool = 0 } add = var:bfl_dep_19_principal }
+if = { limit = { var:bfl_dep_20_active = 1 var:bfl_dep_20_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_20_pool = 0 } add = var:bfl_dep_20_principal }
+if = { limit = { var:bfl_dep_21_active = 1 var:bfl_dep_21_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_21_pool = 0 } add = var:bfl_dep_21_principal }
+if = { limit = { var:bfl_dep_22_active = 1 var:bfl_dep_22_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_22_pool = 0 } add = var:bfl_dep_22_principal }
+if = { limit = { var:bfl_dep_23_active = 1 var:bfl_dep_23_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_23_pool = 0 } add = var:bfl_dep_23_principal }
+if = { limit = { var:bfl_dep_24_active = 1 var:bfl_dep_24_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_24_pool = 0 } add = var:bfl_dep_24_principal }
+if = { limit = { var:bfl_dep_25_active = 1 var:bfl_dep_25_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_25_pool = 0 } add = var:bfl_dep_25_principal }
+if = { limit = { var:bfl_dep_26_active = 1 var:bfl_dep_26_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_26_pool = 0 } add = var:bfl_dep_26_principal }
+if = { limit = { var:bfl_dep_27_active = 1 var:bfl_dep_27_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_27_pool = 0 } add = var:bfl_dep_27_principal }
+if = { limit = { var:bfl_dep_28_active = 1 var:bfl_dep_28_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_28_pool = 0 } add = var:bfl_dep_28_principal }
+if = { limit = { var:bfl_dep_29_active = 1 var:bfl_dep_29_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_29_pool = 0 } add = var:bfl_dep_29_principal }
+if = { limit = { var:bfl_dep_30_active = 1 var:bfl_dep_30_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_30_pool = 0 } add = var:bfl_dep_30_principal }
+if = { limit = { var:bfl_dep_31_active = 1 var:bfl_dep_31_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_31_pool = 0 } add = var:bfl_dep_31_principal }
+if = { limit = { var:bfl_dep_32_active = 1 var:bfl_dep_32_party ?= scope:bfl_strategy_bank
+            var:bfl_dep_32_pool = 0 } add = var:bfl_dep_32_principal }
+}
+bfl_strategy_party_exposure = {
+value = 100
+        every_lent_loan = { limit = { borrower = scope:bfl_party } add = remaining_debt }
+}

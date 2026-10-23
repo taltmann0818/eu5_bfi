@@ -4,5 +4,13 @@ if = { limit = { NOT = { has_variable = bfl_share_income_period } } set_variable
             set_variable = { name = bfl_share_income value = 0 }
             set_variable = { name = bfl_share_income_period value = bfl_period } }
         change_variable = { name = bfl_share_income add = scope:bfl_bank.var:bfl_payment }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment } }
+        if = { limit = { scope:bfl_bank = { bfl_is_bank = yes } }
+            if = { limit = { OR = { NOT = { has_variable = bfl_bank_dividend_period } bfl_period > var:bfl_bank_dividend_period } }
+                set_variable = { name = bfl_bank_dividend_period value = bfl_period }
+                set_variable = { name = bfl_bank_dividend_income value = 0 } }
+            change_variable = { name = bfl_bank_dividend_income add = scope:bfl_bank.var:bfl_payment }
+        }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_payment } bfl_source_add_company = yes }
 }

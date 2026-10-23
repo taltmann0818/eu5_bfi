@@ -1,10 +1,10 @@
 path,reason,source_sha256,game_version
-in_game/gui/economy_lateralview.gui,Add share dividends and deposit interest plus gated facility receipts; preserve native Balance controls and shared types once,675763819de9c0f368761dec5d01541553c78d9a9e25ea68135a5667bb2d621d,1.4.1
-in_game/common/country_interactions/siphon_income.txt,Exclude chartered bank at selection and execution; preserve every other native branch,2527ac28a5709b1d125a6e5f8314f173ad72e7abffb6c992f4aebb86b02141fd,1.4.1
-in_game/gui/credit.gui,Unify bank accounts and native state loans; route managed Take over loan controls to the live bank and preserve unmanaged native controls,9e53368c3fda0e0d3a37654565d7acf24f3c770361029988199fea0daaa010a6,1.4.1
-in_game/gui/technology_lateralview.gui,Use the chartered-bank reform badge for BFI advances; retain all other native advance badges,266056e24bc159e77de1e37408b97dff834548debb99429449325b4ff419ece8,1.4.1
-in_game/common/advances/bfl_banking_unlocks.txt,INJECT two permissions into banking_advance; preserve its native effects and institution gate,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.1
-in_game/common/advances/1_building_unlocks.txt,Move only Stock Exchange to Reformation after Banking and prioritize banking AI research; preserve other unlocks and bond-slot bonus,16cf96d54d506411b3baeb1c50df322cfb987ffe16244bdfd4a9d864563de16a,1.4.1
-in_game/common/advances/bfl_exchange_ai_priorities.txt,INJECT bank-only additive Banking AI priority while a completed exchange is missing; preserve native effects,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.1
-in_game/common/country_interactions/request_loan.txt,Require the bank-owned completed sovereign-capital branch at selection and execution; preserve native loan cash effects,49c960f1f055ed0739128fdd99706ff0dd25bc72c3c230bfa03bfa7253bdefb2,1.4.1
-in_game/common/country_interactions/take_over_loan.txt,Require the bank-owned completed sovereign-capital branch at selection and execution; preserve native loan cash effects,710176339e75cde1b0caecee499b28b6435c29997889707c0153da08e4f3b6fe,1.4.1
+in_game/gui/economy_lateralview.gui,Add funded bank income rows; preserve native Balance controls and shared types once,675763819de9c0f368761dec5d01541553c78d9a9e25ea68135a5667bb2d621d,1.4.4
+in_game/common/country_interactions/siphon_income.txt,Exclude chartered bank at selection and execution; preserve every other native branch,ff2aa93499f12114f1b11df339192fe0a351d87374b86a8b0a12aef9a9eb3cc9,1.4.4
+in_game/gui/credit.gui,Redesign bank Credit; remove native loan lists; retain native repayment/bankruptcy actors and confirmations,9e53368c3fda0e0d3a37654565d7acf24f3c770361029988199fea0daaa010a6,1.4.4
+in_game/gui/technology_lateralview.gui,Use the chartered-bank badge for BFI advances; retain other native badges,266056e24bc159e77de1e37408b97dff834548debb99429449325b4ff419ece8,1.4.4
+in_game/common/advances/bfl_banking_unlocks.txt,INJECT two permissions into banking_advance; preserve its native effects and institution gate,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.4
+in_game/common/advances/1_building_unlocks.txt,Move only Stock Exchange to Reformation after Banking; preserve every other native unlock and bond-slot bonus,1b59388d9ba9ae87acbadb1dc35e71e25055b807e8a8d0d36d7a11d2c779cb16,1.4.4
+in_game/common/advances/bfl_exchange_ai_priorities.txt,Inject bank-only Banking AI priority; preserve native effects,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.4
+in_game/common/country_interactions/request_loan.txt,Require the owned completed capital branch; preserve native cash effects,49c960f1f055ed0739128fdd99706ff0dd25bc72c3c230bfa03bfa7253bdefb2,1.4.4
+in_game/common/country_interactions/take_over_loan.txt,Require the owned completed capital branch; preserve native cash effects,710176339e75cde1b0caecee499b28b6435c29997889707c0153da08e4f3b6fe,1.4.4

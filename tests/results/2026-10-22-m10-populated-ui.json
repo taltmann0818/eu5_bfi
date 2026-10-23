@@ -1,0 +1,35 @@
+{
+  "runtime_sha256": "064c2778ef27e7b689c53852ceba0c24ffc810ba9ea52738d585966e7b791ffc",
+  "fixture_sha256": "e0d5a9b0a4fafc058f9175a4f1685b5cc7fb829722e41a23996d35ce05c130ab",
+  "fixture_token": "02e992fecc1c4cebb5960324d40db447",
+  "observations": [
+    {
+      "passed": true,
+      "case": "merchant_scene_visible_with_funded_account_totals",
+      "notes": "Normal Credit view shows the new merchant counting-house painting, 8200 cash/assets, 3200 deposit liabilities and 5000 equity. Artist preview is not counted."
+    },
+    {
+      "passed": true,
+      "case": "all_32_actual_deposit_lots_reachable",
+      "notes": "Dragged native scrollbar through ledger to final 5.0% and 5.1% accepted-rate rows. Each 100-gold principal is an actual funded demand liability; initial test depositor cash 10000, remaining6800. No observation-time cash refill."
+    },
+    {
+      "passed": true,
+      "case": "static_committed_receipt",
+      "notes": "Lending & Investments displays Deposit received /100 gold from actual setup transfer. Motion is not accepted from this static observation."
+    }
+  ],
+  "captures": [
+    {
+      "path": "docs/screenshots/2026-10-22-m10-full-deposit-ledger.jpg",
+      "sha256": "7d2396de1caec34b381a4ddbbd286c96e6fcfb6e1410ca26ce09e57278d8ecdc",
+      "width": 1282,
+      "height": 752,
+      "format": "JPEG",
+      "edited": false
+    }
+  ],
+  "scope": "Focused earlier-candidate English/1280x720 observations; later contrast/layout/localization changes require new review; no full M10 claim.",
+  "accepted": false,
+  "reason": "Visual facts observed, but early paused Credit opening emits BFI script errors for uninitialized bfl_goods_policy_open. Goods initialization now runs during bank bootstrap; recapture and clean engine-log review required."
+}

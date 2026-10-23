@@ -1,5 +1,7 @@
 # M9 — institution-wide resolution
 
+**23 October redesign:** The [PR 17 integration](coverage.md#pr-17-integration-and-fresh-live-review---23-october-2026) supersedes investment-mandate and manual recovery panels. Native Credit Management controls new strategy; monthly recovery servicing continues independently. Historical assertions and captures below retain their recorded source identities and do not certify this new orchestration.
+
 M9 now implements forced bank/company estates, asset realization, custom-bond
 workouts, negotiated security and final statutory losses as well as orderly bank
 recovery. **Complete for the pinned single-player baseline.** [Final acceptance](../tests/results/2026-10-21-m9-validation.json)

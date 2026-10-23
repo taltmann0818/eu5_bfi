@@ -217,12 +217,18 @@ def fixture(token, fingerprint):
         c:FLO = {
     '''
     start += check('P12_unregistered_presentation_defaults_are_safe', 'c:SIE = { NOT = { has_variable_map = cmm } bfl_finance_notifications_enabled = yes NOT = { bfl_expanded_details_enabled = yes } }')
-    start += '''bfl_register_cmf_presentation = yes
+    start += '''trigger_event_silently = { on_action = cmf_on_mod_registration }
+    '''
+    start += '''c:FLO = { add_to_variable_map = { name = cmm_dropdown_multiselector key = flag:cmm_init value = 0 } }
+        _cmm_run_registration_pass = yes
     '''
     start += check('P12_CMM_preferences_registered', '"variable_map(cmm|flag:bfl_banking_finance_companies__reduced_motion)" = 1 "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 0 "variable_map(cmm|flag:bfl_banking_finance_companies__finance_notifications)" = 1')
     start += '''add_to_variable_map = { name = cmm key = flag:bfl_banking_finance_companies__expanded_details value = 1 }
-        bfl_register_cmf_presentation = yes
+        clear_variable_list = cmm_registered_mod_ids
+        trigger_event_silently = { on_action = cmf_on_mod_registration }
     '''
+    start += check('P12_shared_CMF_registration_dispatches_BFI', 'is_target_in_variable_list = { name = cmm_registered_mod_ids target = flag:bfl_banking_finance_companies }')
+    start += check('P12_static_settings_keep_mod_and_group_visible', 'is_key_in_variable_map = { name = cmm_mod_nonempty target = flag:bfl_banking_finance_companies } "variable_map(cmm_group_visible_count|flag:bfl_banking_finance_companies__presentation__interface)" = 3')
     start += check('P12_CMM_registration_preserves_preference_and_cash', '"variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 1 gold = 9500')
     start += measure('P07.controller.cash_at_start', 'gold') + measure('P07.controller.budget_at_start', 'monthly_balance')
     start += '''}
@@ -318,6 +324,14 @@ def prepare(directory, token=None):
                 save_scope_as = bfi_company
                 set_gold = 1000
                 bfl_register_company = yes
+                # Start this native discovery probe from an explicit manual
+                # opening statement, after native HQ creation. An earlier AI
+                # review may legitimately have selected a trading mandate.
+                set_variable = { name = bfl_strategy_mode value = 0 }
+                c:FLO = { save_scope_as = bfl_company_actor
+                    set_variable = { name = bfl_company_requested_mandate value = 0 } }
+                bfl_company_set_mandate = yes
+                set_variable = { name = bfl_company_dividend value = 0 }
                 create_trade = { from = c:GEN.capital.market to = c:FLO.capital.market merchant = c:GEN.capital.market goods = goods:wheat desired = 0.1 locked = yes }
                 research_advance = advance_type:mapmaking
                 add_country_modifier = { modifier = bfi_m0_exploration_preparation months = 24 mode = add_and_extend }

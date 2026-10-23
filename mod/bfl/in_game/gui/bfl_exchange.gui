@@ -71,9 +71,9 @@
                 min = "[Min_float('(float)1',FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_buy_selection_max')))]" max = "[FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_buy_selection_max'))]"
                 step = "[SelectInteractionTargetGlue.GetStep]" value = "[SelectInteractionTargetGlue.GetValue]"
                 onvaluechanged = "[SelectInteractionTargetGlue.OnValueChanged]" }
-            button_regular = { position = { 350 45 } size = { 160 40 } text = "bfl_review_trade"
+            button_regular = { position = { 350 45 } size = { 36 36 }
                 enabled = "[And(SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.IsValid,GreaterThan_CFixedPoint(SelectInteractionTargetGlue.GetValue,'(CFixedPoint)0'))]" tooltip = "bfl_review_trade_tip"
-                onclick = "[SelectInteractionTargetView.Confirm]" }
+                onclick = "[SelectInteractionTargetView.Confirm]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/share_transfer.dds" } }
         }
         type bfl_sell_quantity_widget = widget { size = { -1 118 } layoutpolicy_horizontal = expanding
             datacontext = "[SelectInteractionTargetView.GetValueGlue('share_quantity')]"
@@ -84,43 +84,242 @@
                 min = "[Min_float('(float)1',FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_sell_selection_max')))]" max = "[FixedPointToFloat(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('actor',GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_sell_selection_max'))]"
                 step = "[SelectInteractionTargetGlue.GetStep]" value = "[SelectInteractionTargetGlue.GetValue]"
                 onvaluechanged = "[SelectInteractionTargetGlue.OnValueChanged]" }
-            button_regular = { position = { 350 45 } size = { 160 40 } text = "bfl_review_trade"
+            button_regular = { position = { 350 45 } size = { 36 36 }
                 enabled = "[And(And(SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.IsValid,GreaterThan_CFixedPoint(SelectInteractionTargetGlue.GetValue,'(CFixedPoint)0')),GreaterThanOrEqualTo_CFixedPoint(Multiply_CFixedPoint(SelectInteractionTargetGlue.GetValue,GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('security',SelectInteractionTargetView.GetCurrentParams.GetTargetObjectFromFlag('security').GetCountry.MakeScope).ScriptValue('bfl_market_sell_selection_price')),'(CFixedPoint)0.005'))]" tooltip = "bfl_review_trade_tip"
-                onclick = "[SelectInteractionTargetView.Confirm]" }
+                onclick = "[SelectInteractionTargetView.Confirm]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/share_transfer.dds" } }
         }
 
-        type bfl_equity_investments = vbox { layoutpolicy_horizontal = expanding spacing = 8
-            hbox = { layoutpolicy_horizontal = expanding spacing = 10 button_regular = { size = { -1 64 } layoutpolicy_horizontal = expanding
-            datacontext = "[GetGenericAction('bfl_buy_shares')]" enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_buy_shares_tip"
-            scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_buy_shares" actor = "[GetPlayer]" }
-            icon = { position = { 8 6 } size = { 52 52 } texture = "gfx/interface/icons/bfl/buy_shares.dds" }
-            text_single = { position = { 66 21 } text = "bfl_buy_shares" autoresize = yes fontsize = 19 }
-        }button_regular = { size = { -1 64 } layoutpolicy_horizontal = expanding
-            datacontext = "[GetGenericAction('bfl_sell_shares')]" enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_sell_shares_tip"
-            scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_sell_shares" actor = "[GetPlayer]" }
-            icon = { position = { 8 6 } size = { 52 52 } texture = "gfx/interface/icons/bfl/sell_shares.dds" }
-            text_single = { position = { 66 21 } text = "bfl_sell_shares" autoresize = yes fontsize = 19 }
-        } }
-            widget = { size = { -1 74 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+        type bfl_equity_investments = vbox { ignoreinvisible = yes layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 6 hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
+        text_single = { text = "bfl_shares_heading" autoresize = yes } expand = { } button_regular = { name = "bfl_buy_shares_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        datacontext = "[GetGenericAction('bfl_buy_shares')]" tooltip = "bfl_buy_shares_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
+        scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_buy_shares" actor = "[GetPlayer]" }
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/buy_shares.dds" } }button_regular = { name = "bfl_sell_shares_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        datacontext = "[GetGenericAction('bfl_sell_shares')]" tooltip = "bfl_sell_shares_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
+        scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_sell_shares" actor = "[GetPlayer]" }
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/sell_shares.dds" } }button_regular = { name = "bfl_new_capital_subscription_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        datacontext = "[GetGenericAction('bfl_new_capital_subscription')]" tooltip = "bfl_new_capital_subscription_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
+        scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_new_capital_subscription" actor = "[GetPlayer]" }
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/subscribe.dds" } }button_regular = { name = "bfl_manage_shareholdings_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        datacontext = "[GetGenericAction('bfl_manage_shareholdings')]" tooltip = "bfl_manage_shareholdings_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
+        scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_manage_shareholdings" actor = "[GetPlayer]" }
+        icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/accounts.dds" } } }widget = { size = { -1 56 } layoutpolicy_horizontal = expanding using = bg_text_mask_container_dark_brown
             datacontext = "[GetPlayer]" visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             tooltipwidget = { bfl_share_portfolio_tooltip = { } }
-            icon = { position = { 10 14 } size = { 40 40 } texture = "gfx/interface/icons/bfl/share_transfer.dds" }
+            icon = { position = { 10 10 } size = { 32 32 } texture = "gfx/interface/icons/bfl/share_transfer.dds" }
             text_single = { position = { 60 8 } text = "bfl_share_value_label" autoresize = yes fontsize = 15 }
-            text_single = { position = { 60 30 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold!  [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes fontsize = 21 }
-            text_single = { position = { 60 57 } text = "bfl_share_portfolio_hint" autoresize = yes fontsize = 11 }
-        }widget = { size = { -1 74 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            text_single = { position = { 60 29 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold!  [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes fontsize = 17 }
+
+        }widget = { size = { -1 56 } layoutpolicy_horizontal = expanding using = bg_text_mask_container_dark_brown
             datacontext = "[GetPlayer]" visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             tooltipwidget = { bfl_share_portfolio_tooltip = { } }
-            icon = { position = { 10 14 } size = { 40 40 } texture = "gfx/interface/icons/bfl/share_transfer.dds" }
+            icon = { position = { 10 10 } size = { 32 32 } texture = "gfx/interface/icons/bfl/share_transfer.dds" }
             text_single = { position = { 60 8 } text = "bfl_share_value_label" autoresize = yes fontsize = 15 }
-            text_single = { position = { 60 30 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold!  [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes fontsize = 21 }
-            text_single = { position = { 60 57 } text = "bfl_share_portfolio_hint" autoresize = yes fontsize = 11 }
-        }
-            button_regular = { size = { -1 30 } layoutpolicy_horizontal = expanding text = "bfl_new_capital_subscription"
-                datacontext = "[GetGenericAction('bfl_new_capital_subscription')]" tooltip = "bfl_new_capital_subscription_tip"
-                enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_new_capital_subscription" actor = "[GetPlayer]" } }
-            button_regular = { size = { -1 30 } layoutpolicy_horizontal = expanding text = "bfl_manage_shareholdings"
-                datacontext = "[GetGenericAction('bfl_manage_shareholdings')]" tooltip = "bfl_manage_shareholdings_desc"
-                enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_manage_shareholdings" actor = "[GetPlayer]" } }
-        }
+            text_single = { position = { 60 29 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold!  [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes fontsize = 17 }
+
+        }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
+        text_single = { text = "bfl_bank_holdings" autoresize = yes } expand = { }  }vbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed ignoreinvisible = yes
+            datacontext = "[GetPlayer]" visible = "[GetScriptedGui('bfl_independent_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            flowcontainer = { wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_01')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_02')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_03')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_04')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_05')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_06')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_07')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_08')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_09')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_10')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_11')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_12')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_13')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_14')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_15')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_16')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } } }
+            text_single = { text = "bfl_no_bank_holdings" autoresize = yes
+                visible = "[EqualTo_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_security_carrying'),'(CFixedPoint)0')]" } }vbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed ignoreinvisible = yes
+            datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]" visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            flowcontainer = { wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_01')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_02_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_02_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_02')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_03_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_03_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_03')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_04_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_04_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_04')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_05_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_05_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_05')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_06_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_06_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_06')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_07_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_07_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_07')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_08_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_08_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_08')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_09_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_09_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_09')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_10_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_10_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_10')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_11_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_11_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_11')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_12_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_12_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_12')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_13_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_13_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_13')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_14_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_14_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_14')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_15_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_15_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_15')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } }widget = { size = { 510 42 } visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue,'(CFixedPoint)0')]" using = bg_paper_card tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" } }
+        hbox = { size = { 100% 100% } margin = { 6 3 } spacing = 6
+            country_flag_small = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry]" }
+            text_single = { raw_text = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_16_issuer').GetCountry.GetName]" size = { 172 30 } align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }
+            expand = { layoutpolicy_vertical = fixed } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_pos_16_units').GetValue|3]" size = { 80 30 } align = right|vcenter fontsize = 13 }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_position_market_16')|2]@gold!" size = { 100 30 } align = right|vcenter fontsize = 13 }  } } }
+            text_single = { text = "bfl_no_bank_holdings" autoresize = yes
+                visible = "[EqualTo_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_security_carrying'),'(CFixedPoint)0')]" } } }
     }

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-23",
+  "game": "1.4.4 / Steam26142040",
+  "cmf": "2.5.0",
+  "runtime_sha256": "2fdfceeda20baf172b3d72ce3c78af8b6857b70f77ec10a2147ec2d490b8a1a6",
+  "focused_report": "2026-10-23-net-income-shipping-clean/campaign.json",
+  "focused_checks": 34,
+  "focused_passed": true,
+  "focused_bfi_errors": [],
+  "facility_observation": [
+    "draws=2|request=2.93|paid=2.93|max=387|debt=112.89"
+  ],
+  "fixture_scope": "Native monthly expense20 and cash10000, granted later-age research/buildings, five natural months. Dedicated attribution arithmetic is seeded. No long-run balance claim.",
+  "m3_report": "2026-10-23-net-income-final-m3/campaign.json",
+  "m3_checks": 46,
+  "m3_passed": true,
+  "m3_runtime_sha256": "c8a074f919136f7d049101cf79732d046d9881e9411145fefabdb59dc2a8efc9",
+  "shipping_difference_from_m3": [
+    "in_game/common/scripted_effects/bfl_report_initialization.txt"
+  ],
+  "shipping_difference_scope": "Only safe empty-history and eligible-profit initialization; financial transaction code is identical. Current focused checks exercise the shipping initializer.",
+  "offline_tests": 108,
+  "source_validation": "195 script/GUI/localization files; 59 graphics",
+  "deterministic_runtime_files": 255,
+  "package": "dist/bfi-credit-net-income-review-20261023-verified-source.zip",
+  "package_sha256": "edd01647346a13d9599d8a807dae48234d7de5fc669f971005c49d73189bdbbe",
+  "package_byte_identical_to_source": true,
+  "visual_verification": {
+    "passed": false,
+    "reason": "Computer Use recovery failed: foreground window did not report a process id. No current-build screenshot or flag/share-page visual acceptance claimed."
+  },
+  "rejected_reports": [
+    "2026-10-23-net-income-facility",
+    "2026-10-23-net-income-facility-corrected",
+    "2026-10-23-net-income-facility-traced",
+    "2026-10-23-net-income-facility-funded",
+    "2026-10-23-recurring-expense-getter",
+    "2026-10-23-live-forecast-facility"
+  ],
+  "notes": "Rejected reports preserved; unsupported monthly_expense experimental binding was removed."
+}

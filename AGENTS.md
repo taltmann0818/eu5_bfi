@@ -2,6 +2,8 @@
 
 Follow [CONTRIBUTING.md](CONTRIBUTING.md) for feature branches, PRs and release conventions.
 
+Before creating or editing UI, read [docs/ui-steering.md](docs/ui-steering.md). It records the user's trade-screen reference, native UI sources, information hierarchy and verification requirements.
+
 ## Living implementation plan
 
 - `docs/coverage.md` is the canonical implementation plan and M0–M10 progress register.

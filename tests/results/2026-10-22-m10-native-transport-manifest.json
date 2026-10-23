@@ -1,0 +1,39 @@
+{
+  "token": "48afcfc68c66474389542d6c94b4f6de",
+  "runtime_sha256": "8dd9780be6dfa4900d4bd6c21a6d6a32edc15484e6309211380ee74ff6f4a142",
+  "instant_cases": [
+    "native_takeover_fixture_has_eligible_borrower",
+    "native_ai_interaction_respects_manual_policy",
+    "reserve_test_has_sufficient_equity_for_target_exposure",
+    "native_ai_interaction_retains_operating_reserve",
+    "native_interaction_pays_actual_quote_for_same_claim",
+    "native_interaction_records_actual_acquisition_basis",
+    "native_ai_success_stamps_shared_monthly_limit",
+    "native_interaction_reentry_cannot_buy_twice",
+    "native_request_rejects_protected_cash_even_with_positive_treasury",
+    "rejected_native_request_moves_neither_wallet_nor_debt",
+    "native_request_has_real_funded_quote",
+    "funded_native_request_conserves_cash_and_creates_one_loan"
+  ],
+  "cases": [
+    "native_takeover_fixture_has_eligible_borrower",
+    "native_ai_interaction_respects_manual_policy",
+    "reserve_test_has_sufficient_equity_for_target_exposure",
+    "native_ai_interaction_retains_operating_reserve",
+    "native_interaction_pays_actual_quote_for_same_claim",
+    "native_interaction_records_actual_acquisition_basis",
+    "native_ai_success_stamps_shared_monthly_limit",
+    "native_interaction_reentry_cannot_buy_twice",
+    "native_request_rejects_protected_cash_even_with_positive_treasury",
+    "rejected_native_request_moves_neither_wallet_nor_debt",
+    "native_request_has_real_funded_quote",
+    "funded_native_request_conserves_cash_and_creates_one_loan",
+    "native_transport_retains_live_or_actually_repaid_claim_after_year",
+    "native_transport_reload_preserves_exact_claim_and_policy"
+  ],
+  "reload_cases": [
+    "native_transport_reload_preserves_exact_claim_and_policy"
+  ],
+  "fixture_sha256": "574e19dd9059311b7f5d5f785f183aee07fac6c88f2007806ed6e2c24f5c729c",
+  "fixture_hash_scope": "All staged overlay files, including native-cost controls and callback definitions."
+}

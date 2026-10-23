@@ -1,0 +1,11 @@
+﻿bfl_bank_dividend_latest = {
+value = 0
+        if = { limit = { has_variable = bfl_bank_dividend_period bfl_period <= { value = var:bfl_bank_dividend_period add = 1 } }
+            value = var:bfl_bank_dividend_income }
+}
+bfl_bank_dividend_annual = {
+value = bfl_bank_dividend_latest multiply = 12
+}
+bfl_retained_profit = {
+value = var:bfl_dividend_eligible subtract = var:bfl_dividend_paid min = 0
+}
