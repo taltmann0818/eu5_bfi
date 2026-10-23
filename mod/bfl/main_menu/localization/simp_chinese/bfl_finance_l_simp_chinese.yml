@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "决议结束·记录的损失仍然可见"
  bfl_feedback_9: "#O 设施目标未获得资助#!"
  bfl_feedback_note: "最新承诺交易 · 金额已被预订。打开此视图不会重播过去的效果。减少运动保留相同的收据和警告。发现本身不会产生支付指标。"
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "选择一个永久专业。两者都服务于主权信贷和存款。 Merchant Finance 开发商品和企业信贷工具；海外投资发展公司股权。研究和年龄限制继续适用。"
  bfl_finance.100.merchant: "商业金融"
  bfl_finance.100.overseas: "海外投资"

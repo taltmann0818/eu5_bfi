@@ -86,7 +86,9 @@ def fixture(token, fingerprint):
     for field, expression in [('debt_cash', 'scope:bfi_debt_controller.gold'), ('debt_principal', 'scope:bfi_debt_controller.total_debt'), ('debt_budget', 'scope:bfi_debt_controller.monthly_balance')]:
         start += f'''c:BRD = {{ set_variable = {{ name = bfi_finance_debug value = {expression} }} }}
             debug_log = "BFI_FINANCE_DEBUG|{field}|[GetCountry('BRD').MakeScope.GetVariable('bfi_finance_debug').GetValue]"\n'''
-    start += check('borrowed_cash_fixture_other_deposit_guards_pass', '''scope:bfi_debt_controller = { gold = 1600 total_debt = 1500 monthly_balance >= 0 }
+    start += check('borrowed_cash_fixture_other_deposit_guards_pass', '''scope:bfi_debt_controller = { gold = 1600
+        total_debt >= 1500 monthly_balance >= 0
+        any_loan = { NOT = { exists = owner } loan_amount = 1500 } }
         c:BRD = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
             bfl_strategy_controller_deposits = 0 bfl_free_cash < 500 }''')
     start += 'c:BRD = { bfl_apply_ai_finance_policy = yes }'

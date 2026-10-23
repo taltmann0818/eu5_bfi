@@ -1,5 +1,18 @@
 # Native bank interface captures
 
+## M10 Merchant painting and transaction receipt
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records one
+unedited 1920×1080 normal-window observation on `a6591f2e…`, English, debug off.
+The fixture pays 32 real 100-gold demand deposits from its declared opening
+wallet; it does not establish campaign balance.
+
+- [Merchant receipt and mandate](m10-merchant-receipt.jpg): original Merchant
+  painting, bank cash/assets 8200, liabilities 3200, equity 5000, a committed
+  +100 deposit receipt and manual/delegate controls. Opening the view creates no
+  BFI localization/context diagnostic. Other paintings, FX, CMF visibility,
+  languages, scales and the end of the populated ledger remain under review.
+
 ## M10 final mandate authority
 
 [22 October final-runtime provenance](../../tests/results/2026-10-22-m10-ui.json)

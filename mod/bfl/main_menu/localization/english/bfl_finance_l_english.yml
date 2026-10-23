@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "Resolution closed · recorded losses remain visible"
  bfl_feedback_9: "#O Facility target was not funded#!"
  bfl_feedback_note: "Latest committed transaction · the amount is already booked. Opening this view does not replay past effects. Reduced motion retains the same receipt and warnings. Discovery alone produces no payment indicator."
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "Choose one permanent specialization. Both serve sovereign credit and deposits. Merchant Finance develops commodity and corporate credit instruments; Overseas Investment develops commenda and company equity. Research and age gates continue to apply."
  bfl_finance.100.merchant: "Merchant Finance"
  bfl_finance.100.overseas: "Overseas Investment"

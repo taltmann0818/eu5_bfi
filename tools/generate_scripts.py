@@ -819,8 +819,8 @@ def hooks_and_commands():
     common('on_action','hooks','''
     on_game_started_after_lobby = { on_actions = { bfl_start_discovery } }
     on_game_load_after_lobby = { on_actions = { bfl_load_discovery } }
-    bfl_start_discovery = { effect = { bfl_discover_institutions = yes } }
-    bfl_load_discovery = { effect = { bfl_discover_institutions = yes } }
+    bfl_start_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
+    bfl_load_discovery = { effect = { bfl_discover_institutions = yes bfl_register_human_presentation = yes } }
     monthly_country_pulse = { on_actions = { bfl_monthly_accounts } }
     bfl_monthly_accounts = {
         effect = {
@@ -891,6 +891,14 @@ def hooks_and_commands():
     # have no conditional-setting GUI probe to invalidate an earlier rollup.
     registration += '_cmm_recompute_rollup = yes\n'
     common('scripted_effects','cmf_registration',effect('bfl_register_cmf_presentation',registration)+'''
+    # Enter through an on_action so country roots remain explicit even when the
+    # global new-game/load callback has no country root. Preserve existing prefs.
+    bfl_register_human_presentation = {
+        every_country = { limit = { is_ai = no NOT = { tag = CMF } }
+            trigger_event_silently = { on_action = bfl_on_cmf_registration }
+        }
+    }
+
     bfl_refresh_alerts = {
         bfl_refresh_commenda_opportunity = yes
         if = { limit = { has_variable = bfl_alert_active OR = {

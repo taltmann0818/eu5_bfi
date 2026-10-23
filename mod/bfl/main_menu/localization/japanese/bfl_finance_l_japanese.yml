@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "解決は完了しましたが、記録された損失は依然として目に見えています"
  bfl_feedback_9: "#O 施設目標には資金が提供されませんでした#!"
  bfl_feedback_note: "最新のコミットされたトランザクション · 金額はすでに予約されています。このビューを開いても、過去の効果は再生されません。動作を減らしても、同じ受信と警告が維持されます。 Discovery だけでは支払いインジケーターは生成されません。"
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "永続的な専門分野を 1 つ選択します。どちらもソブリン信用と預金の役割を果たします。 Merchant Finance は商品および企業信用商品を開発しています。海外投資は報酬と会社の資本を発展させます。研究と年齢ゲートは引き続き適用されます。"
  bfl_finance.100.merchant: "マーチャントファイナンス"
  bfl_finance.100.overseas: "海外投資"

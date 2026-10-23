@@ -219,6 +219,9 @@ def fixture(token, fingerprint):
     start += check('P12_unregistered_presentation_defaults_are_safe', 'c:SIE = { NOT = { has_variable_map = cmm } bfl_finance_notifications_enabled = yes NOT = { bfl_expanded_details_enabled = yes } }')
     start += '''trigger_event_silently = { on_action = cmf_on_mod_registration }
     '''
+    start += '''c:FLO = { add_to_variable_map = { name = cmm_dropdown_multiselector key = flag:cmm_init value = 0 } }
+        _cmm_run_registration_pass = yes
+    '''
     start += check('P12_CMM_preferences_registered', '"variable_map(cmm|flag:bfl_banking_finance_companies__reduced_motion)" = 1 "variable_map(cmm|flag:bfl_banking_finance_companies__expanded_details)" = 0 "variable_map(cmm|flag:bfl_banking_finance_companies__finance_notifications)" = 1')
     start += '''add_to_variable_map = { name = cmm key = flag:bfl_banking_finance_companies__expanded_details value = 1 }
         clear_variable_list = cmm_registered_mod_ids

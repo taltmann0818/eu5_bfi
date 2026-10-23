@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "Rezolucja zamknięta · odnotowane straty pozostają widoczne"
  bfl_feedback_9: "#O Cel instrumentu nie został sfinansowany#!"
  bfl_feedback_note: "Ostatnia potwierdzona transakcja · kwota jest już zaksięgowana. Otwarcie tego widoku nie odtwarza wcześniejszych efektów. Zmniejszony ruch zachowuje ten sam paragon i ostrzeżenia. Samo odkrycie nie generuje żadnego wskaźnika płatności."
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "Wybierz jedną stałą specjalizację. Obydwa służą państwowym kredytom i depozytom. Merchant Finance opracowuje towarowe i korporacyjne instrumenty kredytowe; Overseas Investment rozwija rekomendacje i kapitał spółki. Badania i bramy wiekowe nadal obowiązują."
  bfl_finance.100.merchant: "Finanse handlowe"
  bfl_finance.100.overseas: "Inwestycje zagraniczne"

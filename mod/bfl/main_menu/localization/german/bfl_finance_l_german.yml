@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "Auflösung abgeschlossen · erfasste Verluste bleiben sichtbar"
  bfl_feedback_9: "#O Das Ziel der Einrichtung wurde nicht finanziert#!"
  bfl_feedback_note: "Letzte festgeschriebene Transaktion · Der Betrag ist bereits gebucht. Beim Öffnen dieser Ansicht werden vergangene Effekte nicht wiedergegeben. Bei reduzierter Bewegung bleiben derselbe Empfang und die gleichen Warnungen erhalten. Die Entdeckung allein ergibt keinen Zahlungsindikator."
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "Wählen Sie eine dauerhafte Spezialisierung. Beide bedienen staatliche Kredite und Einlagen. Merchant Finance entwickelt Rohstoff- und Unternehmenskreditinstrumente; Overseas Investment entwickelt Commenda und Unternehmenseigenkapital. Es gelten weiterhin Forschungs- und Altersgrenzen."
  bfl_finance.100.merchant: "Handelsfinanzierung"
  bfl_finance.100.overseas: "Auslandsinvestitionen"

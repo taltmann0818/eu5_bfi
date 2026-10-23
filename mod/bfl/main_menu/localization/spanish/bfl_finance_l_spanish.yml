@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "Resolución cerrada · las pérdidas registradas siguen siendo visibles"
  bfl_feedback_9: "#O El objetivo de instalación no fue financiado#!"
  bfl_feedback_note: "Última transacción comprometida · el importe ya está reservado. Al abrir esta vista no se reproducen efectos pasados. El movimiento reducido conserva el mismo recibo y advertencias. El descubrimiento por sí solo no produce ningún indicador de pago."
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "Elija una especialización permanente. Ambos atienden al crédito y a los depósitos soberanos. Merchant Finance desarrolla instrumentos de crédito corporativo y para productos básicos; Overseas Investment desarrolla elogios y capital social de la empresa. Las puertas de investigación y edad continúan aplicándose."
  bfl_finance.100.merchant: "Finanzas mercantiles"
  bfl_finance.100.overseas: "Inversión en el extranjero"

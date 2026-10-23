@@ -265,6 +265,9 @@ def fixture(token, fingerprint):
                     set_variable = { name = bfl_company_loss value = 0 }
                     set_variable = { name = bfl_company_strategy_injections value = 4 } bfl_run_company_strategy = yes }"""
             finish += check('company_rescue_stops_after_four_funded_contributions', 'scope:bfi_strategy_company = { gold = 100 var:bfl_company_funding = 100 } scope:bfi_strategy_controller.gold = 1000')
+        if month == 3:
+            finish += '''c:BRD.var:bfi_m10_company_controller = { save_scope_as = bfi_strategy_controller
+                every_subject = { limit = { bfl_is_company = yes } save_scope_as = bfi_strategy_company } }'''
             # Controlled investment opening. Native foreign access and cash
             # are explicit fixtures; the order still pays normal cost/time.
             finish += '''scope:bfi_strategy_controller = {
@@ -280,6 +283,15 @@ def fixture(token, fingerprint):
                 gold = 2000 NOT = { has_variable = bfl_company_strategy_built } }''')
             finish += '''scope:bfi_strategy_company = { set_variable = { name = bfl_strategy_mode value = -1 }
                 save_scope_as = actor }'''
+            finish += '''scope:bfi_strategy_company = {
+                set_variable = { name = bfi_company_satellite_cap value = overlord.modifier:number_of_satellite_trade_buildings }
+                set_variable = { name = bfi_company_hq_levels value = total_effective_building_levels:trade_company_headquarters }
+                c:BRD = {
+                    set_variable = { name = bfi_company_cap value = scope:bfi_strategy_company.var:bfi_company_satellite_cap }
+                    set_variable = { name = bfi_company_hq value = scope:bfi_strategy_company.var:bfi_company_hq_levels }
+                    set_variable = { name = bfi_company_available value = scope:bfi_strategy_company.bfl_company_available }
+                    debug_log = "BFI_COMPANY_BUILD|[GetCountry('BRD').MakeScope.GetVariable('bfi_company_cap').GetValue]|[GetCountry('BRD').MakeScope.GetVariable('bfi_company_hq').GetValue]|[GetCountry('BRD').MakeScope.GetVariable('bfi_company_available').GetValue]"
+                } }'''
             finish += check('company_investment_fixture_meets_native_building_permissions', '''scope:bfi_strategy_company = {
                 bfl_company_available >= 1000 capital = { can_build_building = building_type:trade_company_local_venture } }''')
             finish += 'scope:bfi_strategy_company = { bfl_run_company_strategy = yes }'

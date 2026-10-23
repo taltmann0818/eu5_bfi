@@ -1,0 +1,41 @@
+{
+  "token": "7ddaaacfb128466bbb4e6c184bbb385b",
+  "runtime_sha256": "8dd9780be6dfa4900d4bd6c21a6d6a32edc15484e6309211380ee74ff6f4a142",
+  "instant_cases": [
+    "finance_fixture_has_ai_authority_and_real_capital",
+    "scarce_cash_raises_only_prospective_rate_and_stops_payout",
+    "ai_sovereign_placement_conserves_cash_and_equity",
+    "funding_principal_is_not_income",
+    "controller_lot_locks_accepted_rate",
+    "monthly_finance_review_is_idempotent",
+    "explicit_manual_finance_policy_survives_ai_review",
+    "real_credit_loss_reduces_equity_and_prospective_policy",
+    "loss_does_not_reprice_accepted_deposit",
+    "borrowed_cash_fixture_other_deposit_guards_pass",
+    "sovereign_cannot_recycle_borrowed_cash_as_deposit_funding",
+    "fiscal_pressure_recalls_only_live_sovereign_claim",
+    "sovereign_recall_cannot_pay_twice"
+  ],
+  "cases": [
+    "finance_fixture_has_ai_authority_and_real_capital",
+    "scarce_cash_raises_only_prospective_rate_and_stops_payout",
+    "ai_sovereign_placement_conserves_cash_and_equity",
+    "funding_principal_is_not_income",
+    "controller_lot_locks_accepted_rate",
+    "monthly_finance_review_is_idempotent",
+    "explicit_manual_finance_policy_survives_ai_review",
+    "real_credit_loss_reduces_equity_and_prospective_policy",
+    "loss_does_not_reprice_accepted_deposit",
+    "borrowed_cash_fixture_other_deposit_guards_pass",
+    "sovereign_cannot_recycle_borrowed_cash_as_deposit_funding",
+    "fiscal_pressure_recalls_only_live_sovereign_claim",
+    "sovereign_recall_cannot_pay_twice",
+    "finance_policy_persists_without_rewriting_manual_choice",
+    "finance_policy_reload_preserves_controller_and_manual_authority"
+  ],
+  "reload_cases": [
+    "finance_policy_reload_preserves_controller_and_manual_authority"
+  ],
+  "fixture_sha256": "cd5066edba6b1ba01659d7ad22834c5b63c4fa11a2fdf1c31cd7f36a82757d17",
+  "fixture_hash_scope": "All staged overlay files, including native-cost controls and callback definitions."
+}

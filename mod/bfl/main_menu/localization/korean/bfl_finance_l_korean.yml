@@ -1376,7 +1376,7 @@
  bfl_feedback_8: "결의안 처리 완료 · 기록된 손실이 계속 표시됨"
  bfl_feedback_9: "#O 시설 대상에 자금이 지원되지 않았습니다.#!"
  bfl_feedback_note: "최근 약정된 거래 · 금액이 이미 예약되었습니다. 이 보기를 열면 과거 효과가 재생되지 않습니다. 모션 감소는 동일한 수신 및 경고를 유지합니다. 발견만으로는 지불 지표가 생성되지 않습니다."
- bfl_feedback_signature: "[Country.GetTag]:[Country.MakeScope.GetVariable('bfl_feedback_sequence').GetValue|0]"
+ bfl_feedback_signature: "[GetPlayer.GetTag]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_period')|0]:[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_player_feedback_sequence')|0]"
  bfl_finance.100.desc: "하나의 영구 전문화를 선택하십시오. 둘 다 국가 신용과 예금을 제공합니다. Merchant Finance는 상품 및 기업 신용 상품을 개발합니다. 해외 투자는 코멘다와 회사 자산을 개발합니다. 연구 및 연령 제한은 계속 적용됩니다."
  bfl_finance.100.merchant: "판매자 금융"
  bfl_finance.100.overseas: "해외투자"

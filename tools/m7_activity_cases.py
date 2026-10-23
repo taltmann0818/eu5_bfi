@@ -54,10 +54,14 @@ def extra(check, offer, accept):
         gold = 1000 var:bfl_venture_exploration_cost > 0 }
         c:BRD = { var:bfl_v_01_kind = 2 var:bfl_v_01_cost > 0 var:bfl_v_01_cost < 200
             var:bfl_v_01_undrawn > 0 var:bfl_cash_committed = var:bfl_v_01_undrawn var:bfl_v_01_profit = 0 }''')
-    body += '''c:BRD = { set_variable = { name = bfi_exp_cash value = gold } }
+    body += '''c:PRZ = { remove_variable = bfl_v_08_state
+            set_variable = { name = bfi_uninitialized_discovery_cash value = gold } }
+        c:BRD = { set_variable = { name = bfi_exp_cash value = gold } }
         c:GEN = { set_variable = { name = bfi_exp_cash value = gold }
             bfl_commenda_discovery = yes bfl_commenda_discovery = yes }
     '''
+    body += check('discovery_ignores_bank_without_initialized_venture_slot', '''c:PRZ = {
+        NOT = { has_variable = bfl_v_08_state } gold = var:bfi_uninitialized_discovery_cash }''')
     body += check('controlled_matching_discovery_callback_never_creates_cash', '''c:GEN.gold = c:GEN.var:bfi_exp_cash
         c:BRD = { gold = var:bfi_exp_cash var:bfl_v_01_discovery = 1 var:bfl_v_01_profit = 0 var:bfl_v_01_receipts = 0 }''')
     body += '''c:GEN = { save_scope_as = actor }
