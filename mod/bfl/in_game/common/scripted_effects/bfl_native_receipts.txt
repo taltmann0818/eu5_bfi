@@ -15,6 +15,8 @@ if = { limit = { var:bfl_cr_01_state = 1 exists = var:bfl_cr_01_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_01_observed_remaining
                     subtract = var:bfl_cr_01_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_01_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_01_observed_remaining value = var:bfl_cr_01_loan.remaining_debt }
             set_variable = { name = bfl_cr_01_observed_face value = var:bfl_cr_01_loan.loan_amount }
@@ -34,6 +36,8 @@ if = { limit = { var:bfl_cr_02_state = 1 exists = var:bfl_cr_02_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_02_observed_remaining
                     subtract = var:bfl_cr_02_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_02_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_02_observed_remaining value = var:bfl_cr_02_loan.remaining_debt }
             set_variable = { name = bfl_cr_02_observed_face value = var:bfl_cr_02_loan.loan_amount }
@@ -53,6 +57,8 @@ if = { limit = { var:bfl_cr_03_state = 1 exists = var:bfl_cr_03_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_03_observed_remaining
                     subtract = var:bfl_cr_03_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_03_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_03_observed_remaining value = var:bfl_cr_03_loan.remaining_debt }
             set_variable = { name = bfl_cr_03_observed_face value = var:bfl_cr_03_loan.loan_amount }
@@ -72,6 +78,8 @@ if = { limit = { var:bfl_cr_04_state = 1 exists = var:bfl_cr_04_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_04_observed_remaining
                     subtract = var:bfl_cr_04_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_04_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_04_observed_remaining value = var:bfl_cr_04_loan.remaining_debt }
             set_variable = { name = bfl_cr_04_observed_face value = var:bfl_cr_04_loan.loan_amount }
@@ -91,6 +99,8 @@ if = { limit = { var:bfl_cr_05_state = 1 exists = var:bfl_cr_05_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_05_observed_remaining
                     subtract = var:bfl_cr_05_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_05_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_05_observed_remaining value = var:bfl_cr_05_loan.remaining_debt }
             set_variable = { name = bfl_cr_05_observed_face value = var:bfl_cr_05_loan.loan_amount }
@@ -110,6 +120,8 @@ if = { limit = { var:bfl_cr_06_state = 1 exists = var:bfl_cr_06_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_06_observed_remaining
                     subtract = var:bfl_cr_06_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_06_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_06_observed_remaining value = var:bfl_cr_06_loan.remaining_debt }
             set_variable = { name = bfl_cr_06_observed_face value = var:bfl_cr_06_loan.loan_amount }
@@ -129,6 +141,8 @@ if = { limit = { var:bfl_cr_07_state = 1 exists = var:bfl_cr_07_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_07_observed_remaining
                     subtract = var:bfl_cr_07_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_07_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_07_observed_remaining value = var:bfl_cr_07_loan.remaining_debt }
             set_variable = { name = bfl_cr_07_observed_face value = var:bfl_cr_07_loan.loan_amount }
@@ -148,6 +162,8 @@ if = { limit = { var:bfl_cr_08_state = 1 exists = var:bfl_cr_08_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_08_observed_remaining
                     subtract = var:bfl_cr_08_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_08_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_08_observed_remaining value = var:bfl_cr_08_loan.remaining_debt }
             set_variable = { name = bfl_cr_08_observed_face value = var:bfl_cr_08_loan.loan_amount }
@@ -167,6 +183,8 @@ if = { limit = { var:bfl_cr_09_state = 1 exists = var:bfl_cr_09_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_09_observed_remaining
                     subtract = var:bfl_cr_09_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_09_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_09_observed_remaining value = var:bfl_cr_09_loan.remaining_debt }
             set_variable = { name = bfl_cr_09_observed_face value = var:bfl_cr_09_loan.loan_amount }
@@ -186,6 +204,8 @@ if = { limit = { var:bfl_cr_10_state = 1 exists = var:bfl_cr_10_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_10_observed_remaining
                     subtract = var:bfl_cr_10_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_10_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_10_observed_remaining value = var:bfl_cr_10_loan.remaining_debt }
             set_variable = { name = bfl_cr_10_observed_face value = var:bfl_cr_10_loan.loan_amount }
@@ -205,6 +225,8 @@ if = { limit = { var:bfl_cr_11_state = 1 exists = var:bfl_cr_11_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_11_observed_remaining
                     subtract = var:bfl_cr_11_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_11_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_11_observed_remaining value = var:bfl_cr_11_loan.remaining_debt }
             set_variable = { name = bfl_cr_11_observed_face value = var:bfl_cr_11_loan.loan_amount }
@@ -224,6 +246,8 @@ if = { limit = { var:bfl_cr_12_state = 1 exists = var:bfl_cr_12_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_12_observed_remaining
                     subtract = var:bfl_cr_12_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_12_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_12_observed_remaining value = var:bfl_cr_12_loan.remaining_debt }
             set_variable = { name = bfl_cr_12_observed_face value = var:bfl_cr_12_loan.loan_amount }
@@ -243,6 +267,8 @@ if = { limit = { var:bfl_cr_13_state = 1 exists = var:bfl_cr_13_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_13_observed_remaining
                     subtract = var:bfl_cr_13_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_13_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_13_observed_remaining value = var:bfl_cr_13_loan.remaining_debt }
             set_variable = { name = bfl_cr_13_observed_face value = var:bfl_cr_13_loan.loan_amount }
@@ -262,6 +288,8 @@ if = { limit = { var:bfl_cr_14_state = 1 exists = var:bfl_cr_14_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_14_observed_remaining
                     subtract = var:bfl_cr_14_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_14_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_14_observed_remaining value = var:bfl_cr_14_loan.remaining_debt }
             set_variable = { name = bfl_cr_14_observed_face value = var:bfl_cr_14_loan.loan_amount }
@@ -281,6 +309,8 @@ if = { limit = { var:bfl_cr_15_state = 1 exists = var:bfl_cr_15_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_15_observed_remaining
                     subtract = var:bfl_cr_15_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_15_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_15_observed_remaining value = var:bfl_cr_15_loan.remaining_debt }
             set_variable = { name = bfl_cr_15_observed_face value = var:bfl_cr_15_loan.loan_amount }
@@ -300,6 +330,8 @@ if = { limit = { var:bfl_cr_16_state = 1 exists = var:bfl_cr_16_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_16_observed_remaining
                     subtract = var:bfl_cr_16_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_16_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_16_observed_remaining value = var:bfl_cr_16_loan.remaining_debt }
             set_variable = { name = bfl_cr_16_observed_face value = var:bfl_cr_16_loan.loan_amount }
@@ -319,6 +351,8 @@ if = { limit = { var:bfl_cr_17_state = 1 exists = var:bfl_cr_17_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_17_observed_remaining
                     subtract = var:bfl_cr_17_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_17_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_17_observed_remaining value = var:bfl_cr_17_loan.remaining_debt }
             set_variable = { name = bfl_cr_17_observed_face value = var:bfl_cr_17_loan.loan_amount }
@@ -338,6 +372,8 @@ if = { limit = { var:bfl_cr_18_state = 1 exists = var:bfl_cr_18_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_18_observed_remaining
                     subtract = var:bfl_cr_18_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_18_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_18_observed_remaining value = var:bfl_cr_18_loan.remaining_debt }
             set_variable = { name = bfl_cr_18_observed_face value = var:bfl_cr_18_loan.loan_amount }
@@ -357,6 +393,8 @@ if = { limit = { var:bfl_cr_19_state = 1 exists = var:bfl_cr_19_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_19_observed_remaining
                     subtract = var:bfl_cr_19_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_19_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_19_observed_remaining value = var:bfl_cr_19_loan.remaining_debt }
             set_variable = { name = bfl_cr_19_observed_face value = var:bfl_cr_19_loan.loan_amount }
@@ -376,6 +414,8 @@ if = { limit = { var:bfl_cr_20_state = 1 exists = var:bfl_cr_20_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_20_observed_remaining
                     subtract = var:bfl_cr_20_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_20_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_20_observed_remaining value = var:bfl_cr_20_loan.remaining_debt }
             set_variable = { name = bfl_cr_20_observed_face value = var:bfl_cr_20_loan.loan_amount }
@@ -395,6 +435,8 @@ if = { limit = { var:bfl_cr_21_state = 1 exists = var:bfl_cr_21_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_21_observed_remaining
                     subtract = var:bfl_cr_21_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_21_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_21_observed_remaining value = var:bfl_cr_21_loan.remaining_debt }
             set_variable = { name = bfl_cr_21_observed_face value = var:bfl_cr_21_loan.loan_amount }
@@ -414,6 +456,8 @@ if = { limit = { var:bfl_cr_22_state = 1 exists = var:bfl_cr_22_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_22_observed_remaining
                     subtract = var:bfl_cr_22_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_22_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_22_observed_remaining value = var:bfl_cr_22_loan.remaining_debt }
             set_variable = { name = bfl_cr_22_observed_face value = var:bfl_cr_22_loan.loan_amount }
@@ -433,6 +477,8 @@ if = { limit = { var:bfl_cr_23_state = 1 exists = var:bfl_cr_23_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_23_observed_remaining
                     subtract = var:bfl_cr_23_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_23_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_23_observed_remaining value = var:bfl_cr_23_loan.remaining_debt }
             set_variable = { name = bfl_cr_23_observed_face value = var:bfl_cr_23_loan.loan_amount }
@@ -452,6 +498,8 @@ if = { limit = { var:bfl_cr_24_state = 1 exists = var:bfl_cr_24_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_24_observed_remaining
                     subtract = var:bfl_cr_24_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_24_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_24_observed_remaining value = var:bfl_cr_24_loan.remaining_debt }
             set_variable = { name = bfl_cr_24_observed_face value = var:bfl_cr_24_loan.loan_amount }
@@ -471,6 +519,8 @@ if = { limit = { var:bfl_cr_25_state = 1 exists = var:bfl_cr_25_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_25_observed_remaining
                     subtract = var:bfl_cr_25_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_25_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_25_observed_remaining value = var:bfl_cr_25_loan.remaining_debt }
             set_variable = { name = bfl_cr_25_observed_face value = var:bfl_cr_25_loan.loan_amount }
@@ -490,6 +540,8 @@ if = { limit = { var:bfl_cr_26_state = 1 exists = var:bfl_cr_26_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_26_observed_remaining
                     subtract = var:bfl_cr_26_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_26_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_26_observed_remaining value = var:bfl_cr_26_loan.remaining_debt }
             set_variable = { name = bfl_cr_26_observed_face value = var:bfl_cr_26_loan.loan_amount }
@@ -509,6 +561,8 @@ if = { limit = { var:bfl_cr_27_state = 1 exists = var:bfl_cr_27_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_27_observed_remaining
                     subtract = var:bfl_cr_27_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_27_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_27_observed_remaining value = var:bfl_cr_27_loan.remaining_debt }
             set_variable = { name = bfl_cr_27_observed_face value = var:bfl_cr_27_loan.loan_amount }
@@ -528,6 +582,8 @@ if = { limit = { var:bfl_cr_28_state = 1 exists = var:bfl_cr_28_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_28_observed_remaining
                     subtract = var:bfl_cr_28_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_28_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_28_observed_remaining value = var:bfl_cr_28_loan.remaining_debt }
             set_variable = { name = bfl_cr_28_observed_face value = var:bfl_cr_28_loan.loan_amount }
@@ -547,6 +603,8 @@ if = { limit = { var:bfl_cr_29_state = 1 exists = var:bfl_cr_29_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_29_observed_remaining
                     subtract = var:bfl_cr_29_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_29_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_29_observed_remaining value = var:bfl_cr_29_loan.remaining_debt }
             set_variable = { name = bfl_cr_29_observed_face value = var:bfl_cr_29_loan.loan_amount }
@@ -566,6 +624,8 @@ if = { limit = { var:bfl_cr_30_state = 1 exists = var:bfl_cr_30_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_30_observed_remaining
                     subtract = var:bfl_cr_30_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_30_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_30_observed_remaining value = var:bfl_cr_30_loan.remaining_debt }
             set_variable = { name = bfl_cr_30_observed_face value = var:bfl_cr_30_loan.loan_amount }
@@ -585,6 +645,8 @@ if = { limit = { var:bfl_cr_31_state = 1 exists = var:bfl_cr_31_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_31_observed_remaining
                     subtract = var:bfl_cr_31_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_31_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_31_observed_remaining value = var:bfl_cr_31_loan.remaining_debt }
             set_variable = { name = bfl_cr_31_observed_face value = var:bfl_cr_31_loan.loan_amount }
@@ -604,6 +666,8 @@ if = { limit = { var:bfl_cr_32_state = 1 exists = var:bfl_cr_32_loan
                 set_variable = { name = bfl_native_coupon value = { value = var:bfl_cr_32_observed_remaining
                     subtract = var:bfl_cr_32_loan.remaining_debt } }
                 change_variable = { name = bfl_native_interest add = var:bfl_native_coupon }
+                var:bfl_cr_32_party = { save_scope_as = bfl_source_party }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_coupon } bfl_source_add_credit = yes
             }
             set_variable = { name = bfl_cr_32_observed_remaining value = var:bfl_cr_32_loan.remaining_debt }
             set_variable = { name = bfl_cr_32_observed_face value = var:bfl_cr_32_loan.loan_amount }
@@ -779,385 +843,513 @@ bfl_open_receipt_period = yes
 if = { limit = { var:bfl_cr_01_state = 1 var:bfl_cr_01_repaid = 1 NOT = { exists = var:bfl_cr_01_loan } has_variable = bfl_cr_01_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_01_basis max = var:bfl_cr_01_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_01_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_01_receipt subtract = var:bfl_cr_01_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_01_receipt
         }
 if = { limit = { var:bfl_cr_02_state = 1 var:bfl_cr_02_repaid = 1 NOT = { exists = var:bfl_cr_02_loan } has_variable = bfl_cr_02_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_02_basis max = var:bfl_cr_02_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_02_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_02_receipt subtract = var:bfl_cr_02_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_02_receipt
         }
 if = { limit = { var:bfl_cr_03_state = 1 var:bfl_cr_03_repaid = 1 NOT = { exists = var:bfl_cr_03_loan } has_variable = bfl_cr_03_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_03_basis max = var:bfl_cr_03_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_03_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_03_receipt subtract = var:bfl_cr_03_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_03_receipt
         }
 if = { limit = { var:bfl_cr_04_state = 1 var:bfl_cr_04_repaid = 1 NOT = { exists = var:bfl_cr_04_loan } has_variable = bfl_cr_04_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_04_basis max = var:bfl_cr_04_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_04_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_04_receipt subtract = var:bfl_cr_04_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_04_receipt
         }
 if = { limit = { var:bfl_cr_05_state = 1 var:bfl_cr_05_repaid = 1 NOT = { exists = var:bfl_cr_05_loan } has_variable = bfl_cr_05_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_05_basis max = var:bfl_cr_05_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_05_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_05_receipt subtract = var:bfl_cr_05_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_05_receipt
         }
 if = { limit = { var:bfl_cr_06_state = 1 var:bfl_cr_06_repaid = 1 NOT = { exists = var:bfl_cr_06_loan } has_variable = bfl_cr_06_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_06_basis max = var:bfl_cr_06_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_06_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_06_receipt subtract = var:bfl_cr_06_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_06_receipt
         }
 if = { limit = { var:bfl_cr_07_state = 1 var:bfl_cr_07_repaid = 1 NOT = { exists = var:bfl_cr_07_loan } has_variable = bfl_cr_07_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_07_basis max = var:bfl_cr_07_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_07_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_07_receipt subtract = var:bfl_cr_07_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_07_receipt
         }
 if = { limit = { var:bfl_cr_08_state = 1 var:bfl_cr_08_repaid = 1 NOT = { exists = var:bfl_cr_08_loan } has_variable = bfl_cr_08_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_08_basis max = var:bfl_cr_08_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_08_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_08_receipt subtract = var:bfl_cr_08_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_08_receipt
         }
 if = { limit = { var:bfl_cr_09_state = 1 var:bfl_cr_09_repaid = 1 NOT = { exists = var:bfl_cr_09_loan } has_variable = bfl_cr_09_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_09_basis max = var:bfl_cr_09_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_09_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_09_receipt subtract = var:bfl_cr_09_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_09_receipt
         }
 if = { limit = { var:bfl_cr_10_state = 1 var:bfl_cr_10_repaid = 1 NOT = { exists = var:bfl_cr_10_loan } has_variable = bfl_cr_10_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_10_basis max = var:bfl_cr_10_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_10_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_10_receipt subtract = var:bfl_cr_10_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_10_receipt
         }
 if = { limit = { var:bfl_cr_11_state = 1 var:bfl_cr_11_repaid = 1 NOT = { exists = var:bfl_cr_11_loan } has_variable = bfl_cr_11_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_11_basis max = var:bfl_cr_11_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_11_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_11_receipt subtract = var:bfl_cr_11_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_11_receipt
         }
 if = { limit = { var:bfl_cr_12_state = 1 var:bfl_cr_12_repaid = 1 NOT = { exists = var:bfl_cr_12_loan } has_variable = bfl_cr_12_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_12_basis max = var:bfl_cr_12_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_12_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_12_receipt subtract = var:bfl_cr_12_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_12_receipt
         }
 if = { limit = { var:bfl_cr_13_state = 1 var:bfl_cr_13_repaid = 1 NOT = { exists = var:bfl_cr_13_loan } has_variable = bfl_cr_13_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_13_basis max = var:bfl_cr_13_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_13_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_13_receipt subtract = var:bfl_cr_13_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_13_receipt
         }
 if = { limit = { var:bfl_cr_14_state = 1 var:bfl_cr_14_repaid = 1 NOT = { exists = var:bfl_cr_14_loan } has_variable = bfl_cr_14_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_14_basis max = var:bfl_cr_14_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_14_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_14_receipt subtract = var:bfl_cr_14_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_14_receipt
         }
 if = { limit = { var:bfl_cr_15_state = 1 var:bfl_cr_15_repaid = 1 NOT = { exists = var:bfl_cr_15_loan } has_variable = bfl_cr_15_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_15_basis max = var:bfl_cr_15_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_15_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_15_receipt subtract = var:bfl_cr_15_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_15_receipt
         }
 if = { limit = { var:bfl_cr_16_state = 1 var:bfl_cr_16_repaid = 1 NOT = { exists = var:bfl_cr_16_loan } has_variable = bfl_cr_16_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_16_basis max = var:bfl_cr_16_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_16_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_16_receipt subtract = var:bfl_cr_16_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_16_receipt
         }
 if = { limit = { var:bfl_cr_17_state = 1 var:bfl_cr_17_repaid = 1 NOT = { exists = var:bfl_cr_17_loan } has_variable = bfl_cr_17_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_17_basis max = var:bfl_cr_17_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_17_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_17_receipt subtract = var:bfl_cr_17_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_17_receipt
         }
 if = { limit = { var:bfl_cr_18_state = 1 var:bfl_cr_18_repaid = 1 NOT = { exists = var:bfl_cr_18_loan } has_variable = bfl_cr_18_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_18_basis max = var:bfl_cr_18_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_18_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_18_receipt subtract = var:bfl_cr_18_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_18_receipt
         }
 if = { limit = { var:bfl_cr_19_state = 1 var:bfl_cr_19_repaid = 1 NOT = { exists = var:bfl_cr_19_loan } has_variable = bfl_cr_19_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_19_basis max = var:bfl_cr_19_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_19_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_19_receipt subtract = var:bfl_cr_19_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_19_receipt
         }
 if = { limit = { var:bfl_cr_20_state = 1 var:bfl_cr_20_repaid = 1 NOT = { exists = var:bfl_cr_20_loan } has_variable = bfl_cr_20_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_20_basis max = var:bfl_cr_20_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_20_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_20_receipt subtract = var:bfl_cr_20_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_20_receipt
         }
 if = { limit = { var:bfl_cr_21_state = 1 var:bfl_cr_21_repaid = 1 NOT = { exists = var:bfl_cr_21_loan } has_variable = bfl_cr_21_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_21_basis max = var:bfl_cr_21_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_21_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_21_receipt subtract = var:bfl_cr_21_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_21_receipt
         }
 if = { limit = { var:bfl_cr_22_state = 1 var:bfl_cr_22_repaid = 1 NOT = { exists = var:bfl_cr_22_loan } has_variable = bfl_cr_22_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_22_basis max = var:bfl_cr_22_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_22_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_22_receipt subtract = var:bfl_cr_22_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_22_receipt
         }
 if = { limit = { var:bfl_cr_23_state = 1 var:bfl_cr_23_repaid = 1 NOT = { exists = var:bfl_cr_23_loan } has_variable = bfl_cr_23_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_23_basis max = var:bfl_cr_23_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_23_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_23_receipt subtract = var:bfl_cr_23_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_23_receipt
         }
 if = { limit = { var:bfl_cr_24_state = 1 var:bfl_cr_24_repaid = 1 NOT = { exists = var:bfl_cr_24_loan } has_variable = bfl_cr_24_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_24_basis max = var:bfl_cr_24_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_24_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_24_receipt subtract = var:bfl_cr_24_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_24_receipt
         }
 if = { limit = { var:bfl_cr_25_state = 1 var:bfl_cr_25_repaid = 1 NOT = { exists = var:bfl_cr_25_loan } has_variable = bfl_cr_25_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_25_basis max = var:bfl_cr_25_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_25_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_25_receipt subtract = var:bfl_cr_25_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_25_receipt
         }
 if = { limit = { var:bfl_cr_26_state = 1 var:bfl_cr_26_repaid = 1 NOT = { exists = var:bfl_cr_26_loan } has_variable = bfl_cr_26_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_26_basis max = var:bfl_cr_26_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_26_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_26_receipt subtract = var:bfl_cr_26_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_26_receipt
         }
 if = { limit = { var:bfl_cr_27_state = 1 var:bfl_cr_27_repaid = 1 NOT = { exists = var:bfl_cr_27_loan } has_variable = bfl_cr_27_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_27_basis max = var:bfl_cr_27_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_27_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_27_receipt subtract = var:bfl_cr_27_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_27_receipt
         }
 if = { limit = { var:bfl_cr_28_state = 1 var:bfl_cr_28_repaid = 1 NOT = { exists = var:bfl_cr_28_loan } has_variable = bfl_cr_28_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_28_basis max = var:bfl_cr_28_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_28_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_28_receipt subtract = var:bfl_cr_28_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_28_receipt
         }
 if = { limit = { var:bfl_cr_29_state = 1 var:bfl_cr_29_repaid = 1 NOT = { exists = var:bfl_cr_29_loan } has_variable = bfl_cr_29_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_29_basis max = var:bfl_cr_29_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_29_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_29_receipt subtract = var:bfl_cr_29_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_29_receipt
         }
 if = { limit = { var:bfl_cr_30_state = 1 var:bfl_cr_30_repaid = 1 NOT = { exists = var:bfl_cr_30_loan } has_variable = bfl_cr_30_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_30_basis max = var:bfl_cr_30_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_30_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_30_receipt subtract = var:bfl_cr_30_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_30_receipt
         }
 if = { limit = { var:bfl_cr_31_state = 1 var:bfl_cr_31_repaid = 1 NOT = { exists = var:bfl_cr_31_loan } has_variable = bfl_cr_31_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_31_basis max = var:bfl_cr_31_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_31_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_31_receipt subtract = var:bfl_cr_31_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_31_receipt
         }
 if = { limit = { var:bfl_cr_32_state = 1 var:bfl_cr_32_repaid = 1 NOT = { exists = var:bfl_cr_32_loan } has_variable = bfl_cr_32_receipt }
             set_variable = { name = bfl_released_native_basis value = { value = var:bfl_cr_32_basis max = var:bfl_cr_32_receipt } }
             change_variable = { name = bfl_native_principal add = var:bfl_released_native_basis }
+            var:bfl_cr_32_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_released_native_basis } bfl_source_add_principal = yes
             set_variable = { name = bfl_native_gain value = { value = var:bfl_cr_32_receipt subtract = var:bfl_cr_32_basis } }
             if = { limit = { var:bfl_native_gain >= 0 }
                 change_variable = { name = bfl_profit_credit add = var:bfl_native_gain }
                 change_variable = { name = bfl_native_recovery_gain add = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = var:bfl_native_gain } bfl_source_add_credit = yes
             } else = {
                 change_variable = { name = bfl_loss_carryforward subtract = var:bfl_native_gain }
-                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain } }
+                change_variable = { name = bfl_native_recovery_loss subtract = var:bfl_native_gain }
+                set_variable = { name = bfl_source_amount value = { value = var:bfl_native_gain multiply = -1 } } bfl_source_add_recovery_loss = yes }
             remove_variable = bfl_cr_32_receipt
         }
 }

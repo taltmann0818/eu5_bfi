@@ -48,10 +48,14 @@ def fixture(token, fingerprint):
     setup += '''bfl_register_company = yes
     '''
     setup += check('migration_and_initialization_no_cash_grant', 'gold = 1000 var:bfl_company_opening_equity = var:bfi_opening_equity var:bfl_company_schema = 2')
-    setup += '''c:GEN = { save_scope_as = bfl_company_actor }
+    # Monthly Credit Management may already have selected an operating policy.
+    # A rejected outsider action must preserve that policy, not force it to zero.
+    setup += '''set_variable = { name = bfi_mandate_before_wrong_actor value = var:bfl_company_mandate }
+        c:GEN = { save_scope_as = bfl_company_actor
+            set_variable = { name = bfl_company_requested_mandate value = 0 } }
         bfl_company_capitalize = yes bfl_company_set_mandate = yes
     '''
-    setup += check('wrong_controller_rejected', 'gold = 1000 var:bfl_company_mandate = 0')
+    setup += check('wrong_controller_rejected', 'gold = 1000 var:bfl_company_mandate = var:bfi_mandate_before_wrong_actor')
     setup += '''c:FLO = { save_scope_as = bfl_company_actor set_gold = 99 }
         bfl_company_capitalize = yes
     '''

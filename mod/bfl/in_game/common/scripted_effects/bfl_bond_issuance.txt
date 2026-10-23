@@ -390,7 +390,7 @@ if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
     bfl_underwrite_sovereign_bond = {
         if = { limit = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
             NOT = { has_variable = bfl_bond_guard }
-            var:bfl_bond_amount > 0 var:bfl_bond_amount <= 100
+            var:bfl_bond_amount > 0
             bfl_free_cash >= var:bfl_bond_amount bfl_capital_headroom >= var:bfl_bond_amount
         }
             save_scope_as = bfl_bond_underwriter
@@ -399,7 +399,7 @@ if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
                 country_type = location monthly_income_total > 0 bfl_has_bond_slot = yes bfl_bond_arrears = 0
                 monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = scope:bfl_bond_underwriter.var:bfl_bond_amount multiply = var:bfl_bond_rate divide = 12 } multiply = 4 }
                 bfl_bond_capacity >= scope:bfl_bond_underwriter.var:bfl_bond_amount
-                bfl_period > var:bfl_bond_last_issue NOT = { has_variable = bfl_bond_guard }
+                bfl_bond_remaining_monthly >= scope:bfl_bond_underwriter.var:bfl_bond_amount NOT = { has_variable = bfl_bond_guard }
                 var:bfl_bond_rate >= 0.01 var:bfl_bond_rate <= 0.06
             } }
                 set_variable = bfl_bond_guard
@@ -425,16 +425,25 @@ if = { limit = { var:bfl_bond_allocated = 0 var:bfl_bnd_32_active = 0 }
     bfl_run_controller_bond_facility = {
         set_variable = { name = bfl_facility_paid value = 0 }
         set_variable = { name = bfl_facility_blocked value = 1 }
-        if = { limit = { bfl_has_valid_controller = yes var:bfl_facility_mode > 0 }
+        if = { limit = { bfl_has_valid_controller = yes var:bfl_facility_mode > 0
+            OR = { NOT = { has_variable = bfl_facility_last_period } bfl_period > var:bfl_facility_last_period } }
+            set_variable = { name = bfl_facility_last_period value = bfl_period }
             save_scope_as = bfl_bond_underwriter
             overlord = {
-                set_variable = { name = bfl_bond_target value = { value = monthly_income_total subtract = monthly_balance min = 0 multiply = 0.6 } }
+                # Native monthly_balance is LAST realized balance. Sample the
+                # live forecast once here, never in a mass-evaluated AI weight.
+                set_variable = { name = bfl_fiscal_forecast value = tutorial_balance }
+                set_variable = { name = bfl_bond_target value = { value = monthly_income_total subtract = var:bfl_fiscal_forecast min = 0 multiply = 0.6 } }
                 if = { limit = { scope:bfl_bond_underwriter.var:bfl_facility_mode = 2 }
-                    set_variable = { name = bfl_bond_target value = { value = 200 subtract = gold subtract = monthly_balance min = 0 } } }
-                if = { limit = { gold >= 500 } set_variable = { name = bfl_bond_target value = 0 } }
+                    set_variable = { name = bfl_bond_target value = { value = 200 subtract = gold subtract = var:bfl_fiscal_forecast min = 0 } } }
             }
-            set_variable = { name = bfl_bond_amount value = { value = overlord.var:bfl_bond_target max = 100 multiply = 100 floor = yes divide = 100 } }
+            # Size down to live underwriting capacity instead of rejecting a
+            # whole recurring request when only a smaller draw is affordable.
+            set_variable = { name = bfl_bond_amount value = { value = overlord.var:bfl_bond_target max = overlord.bfl_bond_draw_max multiply = 100 floor = yes divide = 100 } }
             set_variable = { name = bfl_facility_requested value = var:bfl_bond_amount }
             bfl_underwrite_sovereign_bond = yes
+            if = { limit = { var:bfl_facility_paid > 0 }
+                if = { limit = { NOT = { has_variable = bfl_facility_draws } } set_variable = { name = bfl_facility_draws value = 0 } }
+                change_variable = { name = bfl_facility_draws add = 1 } }
         }
     }

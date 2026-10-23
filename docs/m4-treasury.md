@@ -1,5 +1,9 @@
 # M4 treasury payouts and deposits
 
+Current source replaces Monthly result with green/red Net income, adds nested counterparty/calculation detail and a gross-income/expense chart beside the twelve-month table, and restores the Debt Facility financing row to Balance. The current validation status is in [coverage](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026); the historical acceptance below does not certify the new layout.
+
+**23 October redesign:** Current UI, funding-cap, deposit-amount, dividend-presentation and automation changes are tracked in [coverage](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026). Evidence below remains historical for its exact runtime. See [UI steering](ui-steering.md).
+
 M4 completes the funded deposit and monthly bank-income loop for the pinned
 single-player baseline: EUV 1.4.1 / Steam build 25905365 and CMF 2.5.0.
 Engine assertions, visual observations and offline checks have separate records.

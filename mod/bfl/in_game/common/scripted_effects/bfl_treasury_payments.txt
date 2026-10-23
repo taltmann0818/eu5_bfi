@@ -2,21 +2,29 @@
 if = { limit = { bfl_is_bank = yes bfl_period > var:bfl_last_dividend_period }
     set_variable = { name = bfl_dividend_paid value = 0 }
     set_variable = { name = bfl_state_dividend_paid value = 0 }
+    set_variable = { name = bfl_funded_dividend value = 0 }
+    set_variable = { name = bfl_dividend_funded value = 0 }
+    set_variable = { name = bfl_dividend_ratio value = var:bfl_payout_ratio }
+    set_variable = { name = bfl_dividend_state_units value = var:bfl_state_units }
+    set_variable = { name = bfl_dividend_total_units value = var:bfl_total_units }
         save_scope_as = bfl_bank
         set_variable = { name = bfl_last_dividend_period value = bfl_period }
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_record_activity_statement = yes
         bfl_offset_losses = yes
+        set_variable = { name = bfl_dividend_eligible value = { value = var:bfl_monthly_net_income min = 0 } }
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 bfl_registered_units <= var:bfl_total_units }
         set_variable = { name = bfl_funded_dividend value = {
             value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller
             add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native
             multiply = var:bfl_payout_ratio max = bfl_free_cash max = bfl_capital_headroom
         } }
+        set_variable = { name = bfl_dividend_funded value = var:bfl_funded_dividend }
         if = { limit = { exists = var:bfl_state_owner country_exists = var:bfl_state_owner var:bfl_state_units > 0 }
             set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_state_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
-            var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }
+            var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
             set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }

@@ -32,6 +32,19 @@ def generate(common, effect, loc, tune):
     for label, field in [('income_display', 'receipts'), ('cost_display', 'cost_paid'), ('financing_display', 'financing'), ('redemption_display', 'redemption_paid')]:
         period = {'receipts': 'receipt', 'cost_paid': 'cost', 'financing': 'financing', 'redemption_paid': 'redemption'}[field]
         values += effect('bfl_bond_' + label, f'value = 0 if = {{ limit = {{ var:bfl_bond_{period}_period ?= bfl_period }} value = var:bfl_bond_{field} }}')
+    values += effect('bfl_bond_monthly_limit', f'value = monthly_income_total multiply = 6 min = {tune["facility_period_cap"]}')
+    values += effect('bfl_bond_remaining_monthly', 'value = bfl_bond_monthly_limit if = { limit = { var:bfl_bond_financing_period ?= bfl_period } subtract = var:bfl_bond_financing } min = 0')
+    values += effect('bfl_bond_draw_max', '''value = 0
+        if = { limit = { bfl_has_management = yes country_type = location monthly_income_total > 0
+            bfl_bond_arrears = 0 bfl_bond_new_rate > 0
+            OR = { NOT = { has_variable = bfl_bond_schema } bfl_has_bond_slot = yes }
+            var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes NOT = { has_variable = bfl_bond_guard } }
+            NOT = { has_variable = bfl_bond_guard } }
+            value = monthly_income_total multiply = 0.25 subtract = bfl_bond_monthly_coupon
+            multiply = 12 divide = bfl_bond_new_rate
+            max = bfl_bond_capacity max = bfl_bond_remaining_monthly
+            max = var:bfl_bank.bfl_free_cash max = var:bfl_bank.bfl_capital_headroom min = 0 floor = yes }
+    ''')
     common('script_values', 'sovereign_bonds', values)
     common('scripted_triggers', 'sovereign_bonds', '''
     # A charter trades through its live research/controller country. Independent
@@ -52,7 +65,7 @@ def generate(common, effect, loc, tune):
         bfl_has_management = yes country_type = location
         monthly_income_total > 0 bfl_bond_capacity >= 100 bfl_bond_arrears = 0
         OR = { NOT = { has_variable = bfl_bond_schema } bfl_has_bond_slot = yes }
-        OR = { NOT = { has_variable = bfl_bond_last_issue } bfl_period > var:bfl_bond_last_issue }
+        bfl_bond_remaining_monthly >= 100
         monthly_income_total >= { value = bfl_bond_monthly_coupon add = { value = 100 multiply = bfl_bond_new_rate divide = 12 } multiply = 4 }
         var:bfl_bank = { bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
             bfl_free_cash >= 100 bfl_capital_headroom >= 100 NOT = { has_variable = bfl_bond_guard } }
@@ -80,7 +93,7 @@ def generate(common, effect, loc, tune):
     bfl_underwrite_sovereign_bond = {{
         if = {{ limit = {{ bfl_can_originate_bond_underwriting = yes bfl_has_valid_controller = yes
             NOT = {{ has_variable = bfl_bond_guard }}
-            var:bfl_bond_amount > 0 var:bfl_bond_amount <= {tune['facility_period_cap']}
+            var:bfl_bond_amount > 0
             bfl_free_cash >= var:bfl_bond_amount bfl_capital_headroom >= var:bfl_bond_amount
         }}
             save_scope_as = bfl_bond_underwriter
@@ -89,7 +102,7 @@ def generate(common, effect, loc, tune):
                 country_type = location monthly_income_total > 0 bfl_has_bond_slot = yes bfl_bond_arrears = 0
                 monthly_income_total >= {{ value = bfl_bond_monthly_coupon add = {{ value = scope:bfl_bond_underwriter.var:bfl_bond_amount multiply = var:bfl_bond_rate divide = 12 }} multiply = 4 }}
                 bfl_bond_capacity >= scope:bfl_bond_underwriter.var:bfl_bond_amount
-                bfl_period > var:bfl_bond_last_issue NOT = {{ has_variable = bfl_bond_guard }}
+                bfl_bond_remaining_monthly >= scope:bfl_bond_underwriter.var:bfl_bond_amount NOT = {{ has_variable = bfl_bond_guard }}
                 var:bfl_bond_rate >= 0.01 var:bfl_bond_rate <= 0.06
             }} }}
                 set_variable = bfl_bond_guard
@@ -115,20 +128,43 @@ def generate(common, effect, loc, tune):
     bfl_run_controller_bond_facility = {{
         set_variable = {{ name = bfl_facility_paid value = 0 }}
         set_variable = {{ name = bfl_facility_blocked value = 1 }}
-        if = {{ limit = {{ bfl_has_valid_controller = yes var:bfl_facility_mode > 0 }}
+        if = {{ limit = {{ bfl_has_valid_controller = yes var:bfl_facility_mode > 0
+            OR = {{ NOT = {{ has_variable = bfl_facility_last_period }} bfl_period > var:bfl_facility_last_period }} }}
+            set_variable = {{ name = bfl_facility_last_period value = bfl_period }}
             save_scope_as = bfl_bond_underwriter
             overlord = {{
-                set_variable = {{ name = bfl_bond_target value = {{ value = monthly_income_total subtract = monthly_balance min = 0 multiply = {tune['facility_spending_fraction']} }} }}
+                # Native monthly_balance is LAST realized balance. Sample the
+                # live forecast once here, never in a mass-evaluated AI weight.
+                set_variable = {{ name = bfl_fiscal_forecast value = tutorial_balance }}
+                set_variable = {{ name = bfl_bond_target value = {{ value = monthly_income_total subtract = var:bfl_fiscal_forecast min = 0 multiply = {tune['facility_spending_fraction']} }} }}
                 if = {{ limit = {{ scope:bfl_bond_underwriter.var:bfl_facility_mode = 2 }}
-                    set_variable = {{ name = bfl_bond_target value = {{ value = {tune['facility_buffer']} subtract = gold subtract = monthly_balance min = 0 }} }} }}
-                if = {{ limit = {{ gold >= {tune['facility_treasury_ceiling']} }} set_variable = {{ name = bfl_bond_target value = 0 }} }}
+                    set_variable = {{ name = bfl_bond_target value = {{ value = {tune['facility_buffer']} subtract = gold subtract = var:bfl_fiscal_forecast min = 0 }} }} }}
             }}
-            set_variable = {{ name = bfl_bond_amount value = {{ value = overlord.var:bfl_bond_target max = {tune['facility_period_cap']} multiply = 100 floor = yes divide = 100 }} }}
+            # Size down to live underwriting capacity instead of rejecting a
+            # whole recurring request when only a smaller draw is affordable.
+            set_variable = {{ name = bfl_bond_amount value = {{ value = overlord.var:bfl_bond_target max = overlord.bfl_bond_draw_max multiply = 100 floor = yes divide = 100 }} }}
             set_variable = {{ name = bfl_facility_requested value = var:bfl_bond_amount }}
             bfl_underwrite_sovereign_bond = yes
+            if = {{ limit = {{ var:bfl_facility_paid > 0 }}
+                if = {{ limit = {{ NOT = {{ has_variable = bfl_facility_draws }} }} set_variable = {{ name = bfl_facility_draws value = 0 }} }}
+                change_variable = {{ name = bfl_facility_draws add = 1 }} }}
         }}
     }}
     ''')
+    common('generic_actions', 'bond_amount', '''bfl_borrow_amount = { type = owncountry ai_tick = never show_message = no
+        potential = { scope:actor = { bfl_has_management = yes country_type = location } }
+        allow = { scope:actor = { bfl_bond_draw_max >= 1 } }
+        select_trigger = { looking_for_a = value target_flag = bond_amount name = bfl_borrow_amount
+            min = 1 max = scope:actor.bfl_bond_draw_max step = 1 default = { value = 100 max = scope:actor.bfl_bond_draw_max } }
+        effect = { scope:actor = { if = { limit = { bfl_has_management = yes country_type = location
+                scope:bond_amount > 0 bfl_bond_draw_max >= scope:bond_amount }
+            var:bfl_bank = { set_variable = { name = bfl_bond_amount value = scope:bond_amount }
+                bfl_underwrite_sovereign_bond = yes } } } }
+        ai_will_do = { value = 0 } }
+    ''')
+    loc('bfl_borrow_amount', 'Borrow from the bank')
+    loc('bfl_borrow_amount_desc', 'Choose the principal of a new sovereign bond. The bank pays the state and holds the bond. Interest is paid monthly. Cash, capital, debt capacity and the shared monthly limit are checked when you confirm.')
+    loc('bfl_borrow_amount_tip', 'Choose how much to borrow. Available now: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue(\'bfl_bond_draw_max\')|0]@gold!. The monthly limit scales with state income. Each funded issue creates one bond.')
     # One issuer owns each obligation. Current holder receives cash exactly once;
     # unpaid coupons remain due and do not become bank earnings until paid.
     settlement = ''
@@ -165,7 +201,9 @@ def generate(common, effect, loc, tune):
                     if = {{ limit = {{ var:bfl_bond_receipt_period != bfl_period }}
                         set_variable = {{ name = bfl_bond_receipt_period value = bfl_period }} set_variable = {{ name = bfl_bond_receipts value = 0 }} }}
                     change_variable = {{ name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }}
-                    if = {{ limit = {{ bfl_has_accounts = yes }} change_variable = {{ name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }} }}
+                    if = {{ limit = {{ bfl_has_accounts = yes }} change_variable = {{ name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }}
+                        scope:bfl_bond_issuer = {{ save_scope_as = bfl_source_party }}
+                        set_variable = {{ name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment }} bfl_source_add_credit = yes }}
                 }}
                 remove_variable = bfl_bond_guard
             }}
@@ -276,7 +314,7 @@ def generate(common, effect, loc, tune):
     ''')
     guis = ''
     for key, valid, body in [
-        ('bfl_draw_bond', 'bfl_can_draw_custom_bond = yes', f'var:bfl_bank = {{ set_variable = {{ name = bfl_bond_amount value = {tune["facility_period_cap"]} }} bfl_underwrite_sovereign_bond = yes }}'),
+        ('bfl_draw_bond', 'bfl_can_draw_custom_bond = yes', f'var:bfl_bank = {{ set_variable = {{ name = bfl_bond_amount value = 100 }} bfl_underwrite_sovereign_bond = yes }}'),
         ('bfl_offer_bond', 'bfl_has_management = yes country_type = location bfl_owns_stock_exchange = yes', 'bfl_offer_sovereign_bond = yes'),
         ('bfl_close_bond_offer', 'has_variable = bfl_bond_schema country_type = location', 'set_variable = { name = bfl_bond_offer_slot value = 0 }')]:
         guis += f'{key} = {{ scope = country is_shown = {{ {valid} }} is_valid = {{ {valid} }} effect = {{ if = {{ limit = {{ {valid} }} {body} }} }} }}\n'
@@ -326,7 +364,7 @@ def generate(common, effect, loc, tune):
     ''')
     labels = {
         'bfl_draw_bond': 'Borrow 100 from the bank',
-        'bfl_draw_bond_tip': 'The chartered bank pays 100 gold for a perpetual sovereign bond. One issue per month, subject to protected cash, capital and issuer debt capacity. Proceeds are financing. Repay face value to its current holder to retire it.',
+        'bfl_draw_bond_tip': 'The chartered bank pays 100 gold for a perpetual sovereign bond. Several issues can be funded each month, up to 1,000 gold in total. The bank must keep enough cash and capital, and the state must afford the interest. Proceeds are financing. Repay face value to its current holder to retire it.',
         'bfl_offer_bond': 'Offer a bank-held sovereign bond',
         'bfl_offer_bond_tip': 'List the oldest bank-held bond for three months at 98% of face value. Selling and buying both require an owned completed Stock Exchange building. Acceptance rechecks the seller, current holder, generation, funds and expiry. Arrears block trading.',
         'bfl_close_bond_offer': 'Close bond offering', 'bfl_close_bond_offer_tip': 'Withdraw the current secondary offering. Outstanding debt and coupons remain owed.',
@@ -337,7 +375,7 @@ def generate(common, effect, loc, tune):
         'bfl_offer_held_sovereign_bond_desc': 'Select an issuer and list one of your sovereign bonds at 98% of face value. Requires an owned completed Stock Exchange building.',
         'bfl_offer_held_sovereign_bond_tip': 'List an existing bond you own for three months. You retain the claim until a funded buyer accepts; coupons and redemption then follow that buyer.',
         'bfl_custom_bonds_title': 'Sovereign bonds',
-        'bfl_custom_bonds_title_tip': 'The bank funds custom perpetual sovereign bonds. Current holders receive monthly coupons and face-value redemption. Combined custom and native debt capacity is 24 months of native income with a 100-gold minimum; custom coupons may consume at most 25% of native income. Unpaid coupons block new issuance and resale.',
+        'bfl_custom_bonds_title_tip': f'The bank lends cash to the state and receives a bond. Its owner receives monthly interest and repayment. Total borrowing is limited to 24 months of native income, with a {tune["bond_min_capacity"]}-gold starting allowance. Bond interest may use at most 25% of native income. Unpaid interest blocks new bonds and sales.',
         'bfl_custom_bond_totals': "Outstanding: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_debt')|2]@gold! · monthly coupon: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_monthly_coupon')|2]@gold! · unpaid: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_arrears')|2]@gold!",
         'bfl_custom_bond_flows': "This month: issued [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_financing_display')|2]@gold! · coupons paid [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_cost_display')|2]@gold! · redeemed [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_redemption_display')|2]@gold!",
         'bfl_custom_bond_terms': 'Coupons on new bonds',

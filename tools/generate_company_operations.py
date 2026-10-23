@@ -185,6 +185,16 @@ def generate(common, effect, loc, write):
             }
         }
     ''')
+    # Settlement owns the once-per-period cutoff and loss offset. This payment
+    # step only distributes its verified earnings under the financial policy.
+    services += effect('bfl_pay_company_earned_income', '''
+        if = { limit = { bfl_is_company = yes var:bfl_total_units > 0 }
+            set_variable = { name = bfl_company_dividend value = {
+                value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
+                max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
+            bfl_distribute_company_equity_income = yes
+        }
+    ''')
     services += effect('bfl_settle_company_income', '''
         if = { limit = { bfl_is_company = yes bfl_period > var:bfl_company_income_period }
         set_variable = { name = bfl_company_income_period value = bfl_period }
@@ -207,16 +217,23 @@ def generate(common, effect, loc, write):
             value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
         change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
         change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
-        if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
-            set_variable = { name = bfl_company_dividend value = {
-                value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
-                max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
-            bfl_distribute_company_equity_income = yes
-        }
+        # Shareholder payout policy applies to earned income even when the
+        # controller pauses new operations or turns Credit Management off.
+        # A zero payout ratio remains the explicit retain-all policy.
+        bfl_pay_company_earned_income = yes
         }
     ''')
     services += effect('bfl_process_company', '''if = { limit = { bfl_is_company = yes }
         bfl_register_company = yes
+        if = { limit = { overlord = { OR = { is_ai = yes is_system_automated = credit } } }
+            set_variable = { name = bfl_company_mandate value = 1 }
+            if = { limit = { modifier:may_explore = yes } set_variable = { name = bfl_company_mandate value = 2 } }
+            set_variable = bfl_company_automated
+        }
+        else_if = { limit = { has_variable = bfl_company_automated }
+            set_variable = { name = bfl_company_mandate value = 0 }
+            remove_variable = bfl_company_automated
+        }
         bfl_company_refresh_capacity = yes
         if = { limit = { bfl_period > var:bfl_company_last_period }
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.
@@ -249,7 +266,7 @@ def generate(common, effect, loc, write):
         enabled = { bfl_is_company = yes is_subject_of = scope:actor }
     }'''
     for name, title, body in [
-        ('retain', 'Company mandate: retain earnings', 'set_variable = { name = bfl_company_requested_mandate value = 0 }'),
+        ('retain', 'Company mandate: pause new operations', 'set_variable = { name = bfl_company_requested_mandate value = 0 }'),
         ('trade', 'Company mandate: trade', 'set_variable = { name = bfl_company_requested_mandate value = 1 }'),
         ('explore', 'Company mandate: trade and exploration', 'set_variable = { name = bfl_company_requested_mandate value = 2 }'),
         ('fund', 'Contribute 100 gold to company capital', ''),
@@ -260,7 +277,8 @@ def generate(common, effect, loc, write):
         loc(key + '_tip', 'Manage a native company you currently control. Capital contributions are financing. Company distributions use retained trade earnings after native costs, carried losses, debt reserves and cash buffers. The political overlord and financial owner are separate.')
         loc(key + '_desc', 'Manage a native company you currently control. Funded capital is excluded from operating income.')
         command = {'fund': 'bfl_company_capitalize', 'crew': 'bfl_company_provide_crew'}.get(name, 'bfl_company_set_mandate')
-        interactions += f'''{key} = {{ type = owncountry ai_tick = never
+        hidden = 'show_in_gui_list = no' if name in ('retain','trade','explore') else ''
+        interactions += f'''{key} = {{ type = owncountry ai_tick = never {hidden}
             potential = {{ scope:actor = {{ any_subject = {{ bfl_is_company = yes }} }} }}
             allow = {{ scope:actor = {{ any_subject = {{ bfl_is_company = yes }} }} }}
             {selection}
@@ -319,6 +337,7 @@ def generate(common, effect, loc, write):
     }}\n'''
     common('generic_actions', 'company_operations', interactions)
     common('scripted_guis', 'company_operations', '''
+        bfl_company_row = { scope = country is_shown = { bfl_is_company = yes } }
         bfl_company_view = { scope = country is_shown = { any_subject = { bfl_is_company = yes } } }
         bfl_company_selected_view = { scope = country is_shown = {
             var:bfl_selected_company ?= { bfl_is_company = yes is_subject_of = prev }
@@ -327,33 +346,32 @@ def generate(common, effect, loc, write):
 
 
 def company_panel(loc):
-    def internal_action(key):
-        return f'''button_regular = {{ name = "{key}_button" size = {{ -1 32 }}
-            layoutpolicy_horizontal = expanding text = "{key}" datacontext = "[GetGenericAction('{key}')]"
-            enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "{key}_tip"
-            scripted_action_tooltip = {{ click_type = left click_mode = single
-                action_name = "{key}" actor = "[GetPlayer]" }}
-        }}'''
-    loc('bfl_company_select_tip', 'Select a native company you currently control. Selection and statement display do not move cash or close a month.')
+    from generate_credit_redesign import heading, generic
+    from generate_finance_widgets import row, tooltip_type
     loc('bfl_company_panel', 'Operating companies')
-    loc('bfl_company_panel_tip', 'Company treasuries and political control remain separate from bank accounts. Native HQ owner income, HQ direct-overlord income and native subject payments remain with their native recipients. Only executed retained trade net of native costs can fund an additional owner distribution. Capital and discovery are excluded.')
-    loc('bfl_company_statement', 'Cash: [Country.GetFixedPointCurrencyValue(\'gold\')|2]@gold!   Reserved buffer: [Country.MakeScope.GetVariable(\'bfl_company_buffer\').GetValue|2]@gold!\nNative trade: [Country.MakeScope.GetVariable(\'bfl_company_trade_receipts\').GetValue|2]   Net budget: [Country.MakeScope.GetVariable(\'bfl_company_native_net\').GetValue|2]\nEligible earnings: [Country.MakeScope.GetVariable(\'bfl_company_verified_profit\').GetValue|2]   Paid to owner: [Country.MakeScope.GetVariable(\'bfl_company_dividend\').GetValue|2]@gold!\nFacilities: [Country.MakeScope.GetVariable(\'bfl_company_facility_count\').GetValue|0]   Routes: [Country.MakeScope.GetVariable(\'bfl_company_route_count\').GetValue|0]   Executed volume: [Country.MakeScope.GetVariable(\'bfl_company_volume\').GetValue|2]\nTrade budget: 50   Reinvestment reserve: 100   Venture budget: 100   Owner payout: 25%')
-    loc('bfl_company_native_channels', 'Native HQ income and subject payments remain in the native budget. Company equity markets, bank corporate credit and commenda use their separate research and delivery gates.')
-    buttons = ''.join(internal_action('bfl_company_' + name) for name in ['select', 'retain', 'trade', 'explore', 'fund', 'crew', 'route', 'expedition']) + internal_action('bfl_company_list_equity')
-    return f'''type bfl_company_controls = scrollarea {{
-        visible = "[GetScriptedGui('bfl_company_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        size = {{ -1 180 }} layoutpolicy_horizontal = expanding scrollbarpolicy_horizontal = always_off
-        scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-        scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding spacing = 5 margin = {{ 8 5 }}
-            tooltip = "bfl_company_panel_tip"
-            text_single = {{ text = "bfl_company_panel" autoresize = yes }}
-            vbox = {{ layoutpolicy_horizontal = expanding
-                visible = "[GetScriptedGui('bfl_company_selected_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-                datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_selected_company').GetCountry]"
-                text_single = {{ raw_text = "[Country.GetName]" autoresize = yes }}
-                text_multi = {{ text = "bfl_company_statement" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 12 }}
-            }}
-            {buttons}
-            text_multi = {{ text = "bfl_company_native_channels" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 11 }}
-        }} }}
+    loc('bfl_companies_empty', 'No operating companies under your control.')
+    loc('bfl_company_overview_title', '[Country.GetName]')
+    loc('bfl_company_overview_subtitle', 'Company accounts · last settlement')
+    loc('bfl_company_overview_note', 'Company cash belongs to the company. Credit Management runs its trade and exploration. Owner dividends use funded earnings after reserves; new capital and discoveries are excluded.')
+    loc('bfl_company_select_tip', 'Inspect a company under your control.')
+    body = row('Cash', "[Country.GetFixedPointCurrencyValue('gold')|2]@gold!")
+    for i, (label, field) in enumerate([('Trade receipts','trade_receipts'),('Native net budget','native_net'),('Earned profit','verified_profit'),('Owner dividend','dividend'),('Cash buffer','buffer'),('Reinvestment reserve','reinvestment'),('Facilities','facility_count'),('Trade routes','route_count')]):
+        body += row(label, f"[Country.MakeScope.GetVariable('bfl_company_{field}').GetValue|2]", i)
+    body += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_company_overview_note" } }'
+    tip = tooltip_type('bfl_company_overview_tooltip','bfl_company_overview_title','bfl_company_overview_subtitle','companies',body)
+    return tip + f'''type bfl_company_controls = vbox {{ ignoreinvisible = yes
+        layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 4
+        {heading('bfl_company_panel', generic('bfl_company_fund','subscribe') + generic('bfl_company_list_equity','share_transfer'))}
+        text_multi = {{ text = "bfl_companies_empty" autoresize = yes layoutpolicy_horizontal = expanding
+            visible = "[Not(GetScriptedGui('bfl_company_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }}
+        flowcontainer = {{ wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding
+            datamodel = "[GetPlayer.GetDiplomacy.GetSubjects]"
+            item = {{ widget = {{ size = {{ 510 64 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+                visible = "[GetScriptedGui('bfl_company_row').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+                tooltipwidget = {{ bfl_company_overview_tooltip = {{ }} }}
+                country_flag_small = {{ position = {{ 8 10 }} }}
+                text_single = {{ position = {{ 42 8 }} size = {{ 300 24 }} raw_text = "[Country.GetName]" elide = right fontsize = 16 }}
+                text_single = {{ position = {{ 42 34 }} raw_text = "[Country.GetFixedPointCurrencyValue('gold')|2]@gold!" autoresize = yes }}
+                text_single = {{ position = {{ 300 34 }} raw_text = "[Country.MakeScope.GetVariable('bfl_company_dividend').GetValue|2]@income!" autoresize = yes }}
+            }} }} }}
     }}'''

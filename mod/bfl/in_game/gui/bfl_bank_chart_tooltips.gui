@@ -8,9 +8,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_share_legend_title" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_state_units').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_state_owner').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -96,9 +96,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_cash_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.GetMapColor]" } text_single = { raw_text = "[Country.GetName]" autoresize = yes } expand = { }
@@ -112,9 +112,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_bonds_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_bonds').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_bonds').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -384,9 +384,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_unsecured_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_unsecured').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_unsecured').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -656,9 +656,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_secured_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_secured').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_secured').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -928,9 +928,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_commodities_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_commodities').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_commodities').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetName]" autoresize = yes } expand = { }
@@ -1200,9 +1200,9 @@ type bfl_share_ownership_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_asset_investments_summary" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 270 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 270 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_investments').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_asset_01_investments').GetValue, '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
             icon = { size = { 14 22 } texture = "gfx/interface/component_tiles/bookmark_white.dds"
         color = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetMapColor]" } text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_asset_01_party').GetCountry.GetName]" autoresize = yes } expand = { }

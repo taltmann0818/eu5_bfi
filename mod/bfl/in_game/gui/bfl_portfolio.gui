@@ -64,8 +64,14 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_total_heading" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Value / unrealized" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes align = right|nobaseline } } } }TooltipListBase = { visible = "[GetScriptedGui('bfl_treasury_portfolio_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
+             text_single = { raw_text = "Current market value" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_market')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+             text_single = { raw_text = "Amount invested" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_basis')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+             text_single = { raw_text = "Unrealized return" autoresize = yes } expand = { }
+            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_portfolio_return')|%1+=]" autoresize = yes align = right|nobaseline } } } }TooltipListBase = { visible = "[GetScriptedGui('bfl_treasury_portfolio_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_treasury_heading" }
         widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GetScriptedGui('bfl_treasury_portfolio_visible').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" background = { using = tooltip_table_field_texture }
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]" } }
@@ -80,9 +86,9 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
             TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_bank_heading" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 215 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 215 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]"
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding
@@ -215,9 +221,9 @@ type bfl_security_financial_tooltip = ContextualTooltipType {
             TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_portfolio_bank_heading" }
         TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 215 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 215 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]"
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 54 } layoutpolicy_horizontal = expanding visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_01_units').GetValue,'(CFixedPoint)0')]"
             tooltipwidget = { bfl_security_financial_tooltip = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope.GetVariable('bfl_pos_01_issuer').GetCountry]" } }
             vbox = { position = { 10 3 } size = { 395 48 } spacing = 4 layoutpolicy_horizontal = expanding
             hbox = { size = { 395 22 } spacing = 8 layoutpolicy_horizontal = expanding

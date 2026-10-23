@@ -177,6 +177,14 @@ save_scope_as = bfl_operating_company
             }
         }
 }
+bfl_pay_company_earned_income = {
+if = { limit = { bfl_is_company = yes var:bfl_total_units > 0 }
+    set_variable = { name = bfl_company_dividend value = {
+        value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
+        max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
+    bfl_distribute_company_equity_income = yes
+}
+}
 bfl_settle_company_income = {
 if = { limit = { bfl_is_company = yes bfl_period > var:bfl_company_income_period }
 set_variable = { name = bfl_company_income_period value = bfl_period }
@@ -199,17 +207,24 @@ set_variable = { name = bfl_company_loss_offset value = {
     value = var:bfl_company_loss max = var:bfl_company_verified_profit } }
 change_variable = { name = bfl_company_loss subtract = var:bfl_company_loss_offset }
 change_variable = { name = bfl_company_verified_profit subtract = var:bfl_company_loss_offset }
-if = { limit = { var:bfl_company_mandate > 0 var:bfl_total_units > 0 }
-    set_variable = { name = bfl_company_dividend value = {
-        value = var:bfl_company_verified_profit multiply = var:bfl_company_payout_ratio
-        max = bfl_company_available multiply = 100 floor = yes divide = 100 } }
-    bfl_distribute_company_equity_income = yes
-}
+# Shareholder payout policy applies to earned income even when the
+# controller pauses new operations or turns Credit Management off.
+# A zero payout ratio remains the explicit retain-all policy.
+bfl_pay_company_earned_income = yes
 }
 }
 bfl_process_company = {
 if = { limit = { bfl_is_company = yes }
         bfl_register_company = yes
+        if = { limit = { overlord = { OR = { is_ai = yes is_system_automated = credit } } }
+            set_variable = { name = bfl_company_mandate value = 1 }
+            if = { limit = { modifier:may_explore = yes } set_variable = { name = bfl_company_mandate value = 2 } }
+            set_variable = bfl_company_automated
+        }
+        else_if = { limit = { has_variable = bfl_company_automated }
+            set_variable = { name = bfl_company_mandate value = 0 }
+            remove_variable = bfl_company_automated
+        }
         bfl_company_refresh_capacity = yes
         if = { limit = { bfl_period > var:bfl_company_last_period }
             # Stamp before dispatch; load/discovery and GUI refresh do not settle.

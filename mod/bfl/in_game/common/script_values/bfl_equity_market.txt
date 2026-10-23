@@ -90,6 +90,14 @@ value = 0
             else = { max = bfl_dealer_units }
             min = 0 multiply = 1000 floor = yes divide = 1000 }
 }
+bfl_market_dealer_buy_max = {
+value = 0
+        if = { limit = { bfl_dealer_ask > 0 }
+            value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
+            multiply = 100 floor = yes divide = 100 divide = bfl_dealer_ask
+            max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
+            max = bfl_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
+}
 bfl_market_chart_max = {
 value = 0.001
 min = var:bfl_quote_01_price

@@ -1416,7 +1416,9 @@ if = { limit = { var:bfl_shr_01_pool = 4 } var:bfl_shr_01_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_01_pool = 5 } var:bfl_shr_01_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_01_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 2 }
             if = { limit = { NOT = { has_variable = bfl_shr_02_pool } } set_variable = { name = bfl_shr_02_pool value = 0 } }
             if = { limit = { var:bfl_shr_02_pool = 0 }
@@ -1433,7 +1435,9 @@ if = { limit = { var:bfl_shr_02_pool = 4 } var:bfl_shr_02_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_02_pool = 5 } var:bfl_shr_02_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_02_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 3 }
             if = { limit = { NOT = { has_variable = bfl_shr_03_pool } } set_variable = { name = bfl_shr_03_pool value = 0 } }
             if = { limit = { var:bfl_shr_03_pool = 0 }
@@ -1450,7 +1454,9 @@ if = { limit = { var:bfl_shr_03_pool = 4 } var:bfl_shr_03_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_03_pool = 5 } var:bfl_shr_03_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_03_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 4 }
             if = { limit = { NOT = { has_variable = bfl_shr_04_pool } } set_variable = { name = bfl_shr_04_pool value = 0 } }
             if = { limit = { var:bfl_shr_04_pool = 0 }
@@ -1467,7 +1473,9 @@ if = { limit = { var:bfl_shr_04_pool = 4 } var:bfl_shr_04_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_04_pool = 5 } var:bfl_shr_04_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_04_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 5 }
             if = { limit = { NOT = { has_variable = bfl_shr_05_pool } } set_variable = { name = bfl_shr_05_pool value = 0 } }
             if = { limit = { var:bfl_shr_05_pool = 0 }
@@ -1484,7 +1492,9 @@ if = { limit = { var:bfl_shr_05_pool = 4 } var:bfl_shr_05_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_05_pool = 5 } var:bfl_shr_05_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_05_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 6 }
             if = { limit = { NOT = { has_variable = bfl_shr_06_pool } } set_variable = { name = bfl_shr_06_pool value = 0 } }
             if = { limit = { var:bfl_shr_06_pool = 0 }
@@ -1501,7 +1511,9 @@ if = { limit = { var:bfl_shr_06_pool = 4 } var:bfl_shr_06_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_06_pool = 5 } var:bfl_shr_06_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_06_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 7 }
             if = { limit = { NOT = { has_variable = bfl_shr_07_pool } } set_variable = { name = bfl_shr_07_pool value = 0 } }
             if = { limit = { var:bfl_shr_07_pool = 0 }
@@ -1518,7 +1530,9 @@ if = { limit = { var:bfl_shr_07_pool = 4 } var:bfl_shr_07_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_07_pool = 5 } var:bfl_shr_07_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_07_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 8 }
             if = { limit = { NOT = { has_variable = bfl_shr_08_pool } } set_variable = { name = bfl_shr_08_pool value = 0 } }
             if = { limit = { var:bfl_shr_08_pool = 0 }
@@ -1535,7 +1549,9 @@ if = { limit = { var:bfl_shr_08_pool = 4 } var:bfl_shr_08_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_08_pool = 5 } var:bfl_shr_08_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_08_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 9 }
             if = { limit = { NOT = { has_variable = bfl_shr_09_pool } } set_variable = { name = bfl_shr_09_pool value = 0 } }
             if = { limit = { var:bfl_shr_09_pool = 0 }
@@ -1552,7 +1568,9 @@ if = { limit = { var:bfl_shr_09_pool = 4 } var:bfl_shr_09_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_09_pool = 5 } var:bfl_shr_09_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_09_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 10 }
             if = { limit = { NOT = { has_variable = bfl_shr_10_pool } } set_variable = { name = bfl_shr_10_pool value = 0 } }
             if = { limit = { var:bfl_shr_10_pool = 0 }
@@ -1569,7 +1587,9 @@ if = { limit = { var:bfl_shr_10_pool = 4 } var:bfl_shr_10_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_10_pool = 5 } var:bfl_shr_10_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_10_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 11 }
             if = { limit = { NOT = { has_variable = bfl_shr_11_pool } } set_variable = { name = bfl_shr_11_pool value = 0 } }
             if = { limit = { var:bfl_shr_11_pool = 0 }
@@ -1586,7 +1606,9 @@ if = { limit = { var:bfl_shr_11_pool = 4 } var:bfl_shr_11_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_11_pool = 5 } var:bfl_shr_11_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_11_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 12 }
             if = { limit = { NOT = { has_variable = bfl_shr_12_pool } } set_variable = { name = bfl_shr_12_pool value = 0 } }
             if = { limit = { var:bfl_shr_12_pool = 0 }
@@ -1603,7 +1625,9 @@ if = { limit = { var:bfl_shr_12_pool = 4 } var:bfl_shr_12_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_12_pool = 5 } var:bfl_shr_12_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_12_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 13 }
             if = { limit = { NOT = { has_variable = bfl_shr_13_pool } } set_variable = { name = bfl_shr_13_pool value = 0 } }
             if = { limit = { var:bfl_shr_13_pool = 0 }
@@ -1620,7 +1644,9 @@ if = { limit = { var:bfl_shr_13_pool = 4 } var:bfl_shr_13_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_13_pool = 5 } var:bfl_shr_13_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_13_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 14 }
             if = { limit = { NOT = { has_variable = bfl_shr_14_pool } } set_variable = { name = bfl_shr_14_pool value = 0 } }
             if = { limit = { var:bfl_shr_14_pool = 0 }
@@ -1637,7 +1663,9 @@ if = { limit = { var:bfl_shr_14_pool = 4 } var:bfl_shr_14_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_14_pool = 5 } var:bfl_shr_14_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_14_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 15 }
             if = { limit = { NOT = { has_variable = bfl_shr_15_pool } } set_variable = { name = bfl_shr_15_pool value = 0 } }
             if = { limit = { var:bfl_shr_15_pool = 0 }
@@ -1654,7 +1682,9 @@ if = { limit = { var:bfl_shr_15_pool = 4 } var:bfl_shr_15_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_15_pool = 5 } var:bfl_shr_15_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_15_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 if = { limit = { var:bfl_receipt_slot = 16 }
             if = { limit = { NOT = { has_variable = bfl_shr_16_pool } } set_variable = { name = bfl_shr_16_pool value = 0 } }
             if = { limit = { var:bfl_shr_16_pool = 0 }
@@ -1671,7 +1701,9 @@ if = { limit = { var:bfl_shr_16_pool = 4 } var:bfl_shr_16_party = {
                 "estate(estate_type:peasants_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
 if = { limit = { var:bfl_shr_16_pool = 5 } var:bfl_shr_16_party = {
                 "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } } }
-}
+if = { limit = { bfl_is_bank = yes }
+            var:bfl_shr_16_party = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes }}
 }
 bfl_distribute_company_equity_income = {
 save_scope_as = bfl_bank

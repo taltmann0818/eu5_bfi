@@ -167,4 +167,6 @@ set_variable = { name = bfl_cr_32_basis value = 0 }
 set_variable = { name = bfl_cr_32_face value = 0 }
 set_variable = { name = bfl_cr_32_repaid value = 0 }
 }
+        if = { limit = { NOT = { has_variable = bfl_reported_impairments } }
+            set_variable = { name = bfl_reported_impairments value = var:bfl_credit_impairments } }
 }

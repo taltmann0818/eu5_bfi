@@ -432,6 +432,9 @@ def generate(common, effect, loc, write):
         for pool, estate in POOLS.items():
             pay += f'''if = {{ limit = {{ var:{n}_pool = {pool} }} var:{n}_party = {{
                 "estate(estate_type:{estate})" = {{ estate_add_gold = {{ value = scope:bfl_bank.var:bfl_payment }} }} }} }}\n'''
+        pay += f'''if = {{ limit = {{ bfl_is_bank = yes }}
+            var:{n}_party = {{ save_scope_as = bfl_source_party }}
+            set_variable = {{ name = bfl_source_amount value = var:bfl_payment }} bfl_source_add_dividend_paid = yes }}'''
         pay += '}\n'
     services += effect('bfl_pay_equity_holder', pay)
     distribution = '''save_scope_as = bfl_bank
@@ -589,14 +592,16 @@ def generate_commands(common, effect, loc, write):
             OR = {{ var:{n}_party = prev AND = {{ prev = {{ bfl_has_management = yes country_type = location }} var:{n}_party ?= prev.var:bfl_bank }} }} }} add = var:{n}_units }}\n'''
     common('script_values', 'equity_governance', effect('bfl_previous_equity_votes', votes))
     governance = '''country_exists = this exists = var:bfl_exchange_selected
-        var:bfl_exchange_selected = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
-            bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }'''
+        var:bfl_exchange_selected = { OR = {
+            AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes }
+                bfl_previous_equity_votes > { value = var:bfl_total_units multiply = 0.5 } }
+            AND = { bfl_has_valid_controller = yes overlord = prev } } }'''
     governance_services=''
     for ratio in (0,25,50):
         key=f'bfl_equity_vote_payout_{ratio}'
         body=f'''var:bfl_exchange_selected = {{
             if = {{ limit = {{ bfl_is_company = yes }} set_variable = {{ name = bfl_company_payout_ratio value = {ratio/100} }} }}
-            else_if = {{ limit = {{ bfl_has_valid_controller = no }} set_variable = {{ name = bfl_payout_ratio value = {ratio/100} }} }}
+            else = {{ set_variable = {{ name = bfl_payout_ratio value = {ratio/100} }} }}
         }}'''
         governance_services += effect(f'bfl_apply_equity_vote_payout_{ratio}',f'if = {{ limit = {{ {governance} }} {body} }}')
         command(key,governance,f'bfl_apply_equity_vote_payout_{ratio} = yes')

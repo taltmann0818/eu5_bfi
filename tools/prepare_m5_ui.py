@@ -27,6 +27,7 @@ def prepare(directory,locked=False,companies=False,charter_inventory=False):
             remove_variable = bfl_legacy_servicing set_variable = { name = bfl_state value = 0 }
             set_variable = { name = bfl_expense_arrears value = 0 } set_gold = 5000
             set_variable = { name = bfl_profile value = 2 }
+            set_variable = { name = bfl_accept_deposits value = 1 }
             bfl_assign_charter_ownership = yes set_variable = { name = bfl_equity_listed value = 1 }
             set_variable = { name = bfl_accept_equity value = 1 }
             set_variable = { name = bfl_last_takeover_period value = { value = bfl_period add = 100 } }

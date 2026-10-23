@@ -25,7 +25,9 @@ if = { limit = { country_exists = this var:bfl_bnd_01_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -81,7 +83,9 @@ if = { limit = { country_exists = this var:bfl_bnd_02_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -137,7 +141,9 @@ if = { limit = { country_exists = this var:bfl_bnd_03_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -193,7 +199,9 @@ if = { limit = { country_exists = this var:bfl_bnd_04_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -249,7 +257,9 @@ if = { limit = { country_exists = this var:bfl_bnd_05_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -305,7 +315,9 @@ if = { limit = { country_exists = this var:bfl_bnd_06_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -361,7 +373,9 @@ if = { limit = { country_exists = this var:bfl_bnd_07_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -417,7 +431,9 @@ if = { limit = { country_exists = this var:bfl_bnd_08_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -473,7 +489,9 @@ if = { limit = { country_exists = this var:bfl_bnd_09_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -529,7 +547,9 @@ if = { limit = { country_exists = this var:bfl_bnd_10_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -585,7 +605,9 @@ if = { limit = { country_exists = this var:bfl_bnd_11_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -641,7 +663,9 @@ if = { limit = { country_exists = this var:bfl_bnd_12_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -697,7 +721,9 @@ if = { limit = { country_exists = this var:bfl_bnd_13_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -753,7 +779,9 @@ if = { limit = { country_exists = this var:bfl_bnd_14_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -809,7 +837,9 @@ if = { limit = { country_exists = this var:bfl_bnd_15_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -865,7 +895,9 @@ if = { limit = { country_exists = this var:bfl_bnd_16_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -921,7 +953,9 @@ if = { limit = { country_exists = this var:bfl_bnd_17_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -977,7 +1011,9 @@ if = { limit = { country_exists = this var:bfl_bnd_18_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1033,7 +1069,9 @@ if = { limit = { country_exists = this var:bfl_bnd_19_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1089,7 +1127,9 @@ if = { limit = { country_exists = this var:bfl_bnd_20_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1145,7 +1185,9 @@ if = { limit = { country_exists = this var:bfl_bnd_21_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1201,7 +1243,9 @@ if = { limit = { country_exists = this var:bfl_bnd_22_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1257,7 +1301,9 @@ if = { limit = { country_exists = this var:bfl_bnd_23_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1313,7 +1359,9 @@ if = { limit = { country_exists = this var:bfl_bnd_24_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1369,7 +1417,9 @@ if = { limit = { country_exists = this var:bfl_bnd_25_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1425,7 +1475,9 @@ if = { limit = { country_exists = this var:bfl_bnd_26_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1481,7 +1533,9 @@ if = { limit = { country_exists = this var:bfl_bnd_27_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1537,7 +1591,9 @@ if = { limit = { country_exists = this var:bfl_bnd_28_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1593,7 +1649,9 @@ if = { limit = { country_exists = this var:bfl_bnd_29_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1649,7 +1707,9 @@ if = { limit = { country_exists = this var:bfl_bnd_30_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1705,7 +1765,9 @@ if = { limit = { country_exists = this var:bfl_bnd_31_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }
@@ -1761,7 +1823,9 @@ if = { limit = { country_exists = this var:bfl_bnd_32_active = 1 exists = var:bf
         if = { limit = { var:bfl_bond_receipt_period != bfl_period }
             set_variable = { name = bfl_bond_receipt_period value = bfl_period } set_variable = { name = bfl_bond_receipts value = 0 } }
         change_variable = { name = bfl_bond_receipts add = scope:bfl_bond_issuer.var:bfl_bond_payment }
-        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment } }
+        if = { limit = { bfl_has_accounts = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bond_issuer.var:bfl_bond_payment }
+            scope:bfl_bond_issuer = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bond_issuer.var:bfl_bond_payment } bfl_source_add_credit = yes }
     }
     remove_variable = bfl_bond_guard
 }

@@ -33,22 +33,22 @@ def icon(key, size=32):
 
 def action(key, art, title=None, height=32, selected=None):
     selection = f'down = "[{selected}]"' if selected else ''
-    button = f'''button_regular = {{ name = "{key}_button" size = {{ -1 {height} }} layoutpolicy_horizontal = expanding
-        tooltip = "{key}_tip" text = "{title or key}" {selection}
+    button = f'''button_regular = {{ name = "{key}_button" size = {{ 36 36 }}
+        tooltip = "{key}_tip" {selection}
         enabled = "[GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         onclick = "[GetScriptedGui('{key}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        icon = {{ parentanchor = center size = {{ 26 26 }} texture = "{icon_texture(art)}" }}
     }}'''
-    if art == 'bond':
-        return f'hbox = {{ layoutpolicy_horizontal = expanding spacing = 3 {icon("bond",18)} {button} }}'
     return button
 
 
 def interaction(key, art, title):
-    return f'''button_regular = {{ name = "{key}_button" size = {{ -1 32 }} layoutpolicy_horizontal = expanding text = "{title}"
+    return f'''button_regular = {{ name = "{key}_button" size = {{ 36 36 }}
         datacontext = "[GetPlayer]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "{key}_tip"
         scripted_action_tooltip = {{ click_type = left click_mode = single
             action_name = "{key}" action_direction = "offer" actor = "[GetPlayer]" }}
+        icon = {{ parentanchor = center size = {{ 26 26 }} texture = "{icon_texture(art)}" }}
         }}'''
 
 
@@ -60,9 +60,12 @@ def section(title, body, art=None):
 
 
 def metric(title, expr, art):
-    return f'''vbox = {{ size = {{ -1 70 }} spacing = 5 layoutpolicy_horizontal = expanding tooltip = "{title}_tip"
-        hbox = {{ spacing = 4 {icon(art,18)} text_single = {{ text = "{title}" autoresize = yes fontsize = 12 }} }}
-        text_single = {{ raw_text = "[{expr}|2]@gold!" autoresize = yes fontsize = 17 }} }}'''
+    kind = {'bfl_cash':'cash','bfl_assets_label':'assets','bfl_liabilities_label':'liabilities','bfl_equity_label':'equity'}[title]
+    return f'''widget = {{ size = {{ 112 66 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        using = bg_text_mask_container_dark_brown tooltipwidget = {{ bfl_{kind}_detail_tooltip = {{ }} }}
+        vbox = {{ margin = {{ 6 5 }} spacing = 4 layoutpolicy_horizontal = expanding
+            hbox = {{ spacing = 4 {icon(art,18)} text_single = {{ text = "{title}" autoresize = yes fontsize = 12 }} }}
+            text_single = {{ raw_text = "[{expr}|2]@gold!" autoresize = yes fontsize = 17 }} }} }}'''
 
 
 def contexts(typename):
@@ -105,12 +108,13 @@ def graph():
 
 def generate(common, effect, loc, write, tune, advances, instruments):
     loc('bfl_finance_title','Banking & Finance')
+    loc('bfl_no_bank_short','No chartered bank')
     labels = {
-        'bank_dividends':'Bank Dividends','deposit_interest':'Deposit Interest','debt_facility':'Debt Facility',
+        'bank_dividends':'Bank Dividends (yearly)','deposit_interest':'Deposit Interest','debt_facility':'Debt Facility',
         'equity_debt':'Bank equity & debt','twelve_months':'12 monthly settlements · oldest → latest',
         'history_empty':'History begins at the next monthly settlement.',
-        'cash':'Treasury cash','free_cash_label':'Available cash','assets_label':'Total assets',
-        'deposits_label':'Deposit claims','liabilities_label':'Bank liabilities','equity_label':'Bank equity',
+        'cash':'Cash','free_cash_label':'Available cash','assets_label':'Assets',
+        'deposits_label':'Deposit claims','liabilities_label':'Liabilities','equity_label':'Equity',
         'protected_label':'Protected cash','native_credit_label':'Loan portfolio',
         'funding_tab':'Deposits & Funding','investment_tab':'Lending & Investment',
         'native_tab':'State loans','back_to_bank':'Bank accounts','funding_title':'Deposits & capital',
@@ -202,34 +206,37 @@ def generate(common, effect, loc, write, tune, advances, instruments):
         sv += effect('bfl_'+field,body)
     common('script_values','interface_values',sv)
     balance_types=''
-    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('share_income_display'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',value('custom_bond_financing_received'),'bond','facility_tip'),('bond_coupons','bond_coupons',value('bond_income_display'),'bond','bond_income_tip')]:
-        balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding tooltip = "bfl_{tip}"
+    for kind,title,expression,art,tip in [('dividends','bank_dividends',value('bank_dividend_annual'),'dividend','balance_paid_tip'),('interest','deposit_interest',value('deposit_income_display'),'deposit','deposit_income_tip'),('facility','debt_facility',value('bond_financing_display'),'bond','facility_tip'),('bond_coupons','bond_coupons',value('bond_income_display'),'bond','bond_income_tip')]:
+        dividend_tooltip = 'tooltipwidget = { bfl_balance_dividend_tooltip = { } }' if kind == 'dividends' else ''
+        balance_types+=f'''type bfl_income_{kind} = budget_card {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding {dividend_tooltip} tooltip = "bfl_{tip}"
             blockoverride "icon_texture" {{ texture = "{icon_texture(art)}" }}
             blockoverride "label" {{ text = "bfl_{title}" }}
             blockoverride "income_text" {{ raw_text = "[{expression}|2+=]@income!" }} }}'''
     status=''.join(f'text_single = {{ text = "bfl_status_{i}" autoresize = yes visible = "[EqualTo_CFixedPoint({var("state")}, \'(CFixedPoint){i}\')]" }}' for i in range(6))
-    profile=''.join(f'text_single = {{ text = "bfl_profile_{i}" autoresize = yes visible = "[EqualTo_CFixedPoint({var("profile")}, \'(CFixedPoint){i}\')]" }}' for i in range(3))
+    profile=''.join(f'text_single = {{ text = "bfl_profile_{i}" autoresize = yes fontsize = 12 visible = "[EqualTo_CFixedPoint({var("profile")}, \'(CFixedPoint){i}\')]" }}' for i in range(3))
     from generate_bank_charts import charts
-    overview=f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 8 margin = {{ 10 6 }}
-        hbox = {{ spacing = 8 {icon('accounts',32)} vbox = {{ layoutpolicy_horizontal = expanding tooltip = "bfl_bank_identity_tip" {label('[Country.GetName]')} {profile} }}
-            vbox = {{ tooltip = "bfl_bank_status_tip" {status} }} }}
+    overview=f'''vbox = {{ layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 4 margin = {{ 10 6 }}
+        hbox = {{ layoutpolicy_vertical = fixed size = {{ -1 40 }} spacing = 8 {icon('accounts',32)} vbox = {{ ignoreinvisible = yes layoutpolicy_horizontal = expanding tooltip = "bfl_bank_identity_tip" {label('[Country.GetName]')} {profile} }}
+            vbox = {{ ignoreinvisible = yes tooltip = "bfl_bank_status_tip" {status} }} }}
         hbox = {{ spacing = 8 layoutpolicy_horizontal = expanding
-            vbox = {{ size = {{ 230 180 }} spacing = 0
+            vbox = {{ size = {{ 236 145 }} spacing = 0
                 hbox = {{ layoutpolicy_horizontal = expanding spacing = 10
                     vbox = {{ layoutpolicy_horizontal = expanding {metric('bfl_cash',"Country.GetFixedPointCurrencyValue('gold')",'liquidity')}
                         {metric('bfl_liabilities_label',value('liabilities'),'debt')} }}
                     vbox = {{ layoutpolicy_horizontal = expanding {metric('bfl_assets_label',value('assets'),'accounts')}
                         {metric('bfl_equity_label',value('equity'),'subscribe')} }} }}
-                text_multi = {{ text = "bfl_overview_hint" size = {{ -1 35 }} layoutpolicy_horizontal = expanding fontsize = 11 }} }}
+                }}
             {charts(var,value)} }}
-        hbox = {{ spacing = 8 tooltipwidget = {{ bfl_operating_cost_tooltip = {{ }} }}
-            text_single = {{ text = "bfl_operating_costs" autoresize = yes fontsize = 12 }}
-            text_single = {{ raw_text = "[{value('operating_expense')}|2]@gold!" autoresize = yes fontsize = 12 }} }} }}'''
+        hbox = {{ layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = {{ -1 30 }} spacing = 10
+            hbox = {{ spacing = 4 tooltipwidget = {{ bfl_monthly_statement_tooltip = {{ }} }}
+                {icon('accounts',18)} text_single = {{ text = "bfl_activity_title" autoresize = yes fontsize = 12 }}
+                text_single = {{ raw_text = "[{value('report_net_income')}|2+=]@gold!" autoresize = yes fontsize = 14 }} }}
+            expand = {{ }}
+            hbox = {{ spacing = 4 tooltipwidget = {{ bfl_operating_cost_tooltip = {{ }} }}
+                text_single = {{ text = "bfl_operating_costs" autoresize = yes fontsize = 12 }}
+                text_single = {{ raw_text = "[{value('operating_expense')}|2]@gold!" autoresize = yes fontsize = 14 }} }} }} }}'''
     # Preference belongs to the human viewing country, including a landed controller.
     loc('bfl_expanded_accounting_detail', 'Cash transfers settle once. Financing and principal are excluded from earned income; unpaid obligations remain recorded.')
-    overview += '''text_multi = { text = "bfl_expanded_accounting_detail" autoresize = yes fontsize = 11
-        layoutpolicy_horizontal = expanding
-        visible = "[GetScriptedGui('bfl_presentation_details').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" }'''
     loc('bfl_funding_tab','Funding & Debt')
     loc('bfl_investment_tab','Lending & Investments')
     loc('bfl_financial_advance','Banking advance')
@@ -237,19 +244,6 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     loc('bfl_state_credit','State credit')
     for key,title in [('bfl_rate_0','0%'),('bfl_rate_1','1%'),('bfl_rate_2','2%'),('bfl_payout_0','Retain'),('bfl_payout_25','25%'),('bfl_payout_50','50%'),('bfl_facility_0','Off'),('bfl_facility_1','Debt first'),('bfl_facility_2','Buffer')]:
         loc(key+'_short',title)
-    def pair(a,b):
-        return f'hbox = {{ layoutpolicy_horizontal = expanding spacing = 5 vbox = {{ layoutpolicy_horizontal = expanding {a} }} vbox = {{ layoutpolicy_horizontal = expanding {b} }} }}'
-    def policies(title,keys,art):
-        field = {'bfl_deposit_policy_title':'demand_rate','bfl_distribution_title':'payout_ratio','bfl_facility_title':'facility_mode'}[title]
-        settings = {'bfl_deposit_policy_title':[0,0.01,0.02],'bfl_distribution_title':[0,0.25,0.5],'bfl_facility_title':[0,1,2]}[title]
-        buttons = ''.join(action(k,art,k+'_short',30,f"EqualTo_CFixedPoint({var(field)}, '(CFixedPoint){setting}')") for k,setting in zip(keys,settings))
-        return f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 8 tooltip = "{title}_tip"
-            text_single = {{ text = "{title}" size = {{ 155 30 }} autoresize = no fontsize = 13 }} {buttons} }}'''
-    funding=section('bfl_funding_title',pair(action('bfl_deposit_1','deposit'),action('bfl_deposit_2','deposit'))
-        +pair(action('bfl_withdraw','withdraw'),action('bfl_invite_equity_capital','subscribe')))
-    funding += pair(action('bfl_term_service_1','deposit'), action('bfl_term_service_2','withdraw'))
-    for pool in range(1,5):
-        funding += pair(action(f'bfl_estate_deposit_{pool}','deposit'), action(f'bfl_estate_term_{pool}','deposit'))
     ledger = text('bfl_deposit_ledger_help')
     for i in range(1,33):
         prefix = f'dep_{i:02}'
@@ -273,46 +267,29 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             using = bg_text_mask_container_dark_brown {details} }}'''
     loc('bfl_deposit_ledger_title', 'Deposit ledger and servicing')
     loc('bfl_deposit_ledger_title_tip', 'Bank liabilities, accepted terms and unpaid claims. Servicing never depends on continuing diplomatic admission.')
-    loc('bfl_deposit_ledger_help', 'Each lot retains its accepted rate. Matching deposits aggregate; term deposits mature after 12 months. Quarantined claims remain owed and stop accruing until a valid recipient is available. Estate principal and interest return to the same pool.')
-    funding += section('bfl_deposit_ledger_title', ledger)
+    loc('bfl_deposit_ledger_help', 'Each account keeps its agreed interest rate. Term deposits last twelve months. Money and interest return to the depositor.')
+    from generate_finance_widgets import row
     statement = ''
-    for label_name, field in [('Native monthly interest (included in credit)', 'native_interest'), ('Recovered native acquisition cost (excluded)', 'principal'), ('Native payoff gain (included in credit)', 'recovery_gain'), ('Native payoff loss (included in losses)', 'recovery_loss'), ('Credit, deposit and bond receipts', 'credit'), ('Service receipts and agreed interest waivers', 'services'), ('Company and share distributions', 'company'), ('Other native net operations', 'native'), ('Costs and carried losses before offset', 'losses')]:
-        statement += label(f"{label_name}: [{var('statement_'+field)}|2]@gold!", 24)
-    funding += section('bfl_activity_title', statement)
-
-    funding+=policies('bfl_deposit_policy_title',[f'bfl_rate_{i}' for i in (0,1,2)],'deposit')
-    funding+=policies('bfl_distribution_title',[f'bfl_payout_{i}' for i in (0,25,50)],'dividend')
-    funding+=pair(action('bfl_offer_bank_shares','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)1')"),action('bfl_close_bank_offering','subscribe',selected=f"EqualTo_CFixedPoint({var('accept_equity')}, '(CFixedPoint)0')"))
-    funding+=section('bfl_safeguards_title',pair(action('bfl_recapitalize_command','liquidity'),action('bfl_suspend_command','lock')))
-    funding+=action('bfl_streamline_bank','accounts')
-    funding+=action('bfl_select_profile','merchant_finance')
-    funding = 'bfl_bond_contents = { }' + funding
-    investments='bfl_equity_investments = { }'
-    investments+=pair(interaction('bfl_offer_credit','loan','bfl_offer_credit'),interaction('bfl_offer_restructuring','debt','bfl_offer_restructuring'))
-    investments+=action('bfl_buy_bill','note')
-    for title,keys in [('bfl_debt',['sovereign_credit','bond_underwriting','sovereign_restructuring','corporate_credit','debt_resale']),('bfl_goods',['commodity_inventory','warehouse_receipt','commodity_forward','margining']),('bfl_ventures',['commenda','company_equity','project_security','bank_share_transfer']),('bfl_monetary',['sovereign_note','secured_liquidity','clearing','public_backstop'])]:
-        cards=[]
-        for k in keys:
-            art={'bond_underwriting':'bond','debt_resale':'bond','commodity_inventory':'custody','warehouse_receipt':'receipt','commodity_forward':'forward','commenda':'commenda','company_equity':'companies','project_security':'collateral','sovereign_note':'note','secured_liquidity':'liquidity','clearing':'accounts','public_backstop':'collateral'}.get(k,'loan')
-            cards.append(f'''hbox = {{ spacing = 5 layoutpolicy_horizontal = expanding tooltip = "bfl_{k}_tip" {icon(art,24)}
-                text_single = {{ text = "bfl_{k}" autoresize = yes fontsize = 13 }} expand = {{ }}
-                icon = {{ size = {{ 16 16 }} texture = "gfx/interface/icons/bfl/lock.dds"
-                    visible = "[Not(GetScriptedGui('bfl_permission_{k}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }} }}''')
-        investments+=section(title,''.join(pair(cards[i],cards[i+1] if i+1<len(cards) else '') for i in range(0,len(cards),2)))
+    for i, (label_name, field) in enumerate([('Loan interest', 'native_interest'), ('Loan principal returned', 'principal'), ('Gain on repayment', 'recovery_gain'), ('Loss on repayment', 'recovery_loss'), ('Credit income', 'credit'), ('Service income', 'services'), ('Company dividends', 'company'), ('Other income', 'native'), ('Costs and past losses', 'losses')]):
+        statement += row(label_name, f"[{var('statement_'+field)}|2]@gold!", i)
+    statement += row('Eligible profit', f"[{var('dividend_eligible')}|2]@gold!", 1)
+    statement += row('Dividends paid', f"[{var('dividend_paid')}|2]@gold!", 0)
+    statement += row('Retained profit', f"[{value('retained_profit')}|2]@gold!", 1)
     def controls(name,content):
         return f'''type bfl_credit_{name}_body = scrollarea {{
-            size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+            size = {{ -1 0 }} minimumsize = {{ 0 0 }} using = layoutpolicy_expanding
             scrollbarpolicy_horizontal = always_off scrollbar_vertical = {{ using = Scrollbar_Vertical }}
-            scrollwidget = {{ vbox = {{ layoutpolicy_horizontal = expanding margin = {{ 5 5 }} spacing = 5 {content} }} }}
+            scrollwidget = {{ vbox = {{ ignoreinvisible = yes layoutpolicy_horizontal = expanding margin = {{ 5 5 }} spacing = 5 {content}
+                expand = {{ layoutpolicy_vertical = growing }} }} }}
         }}
-        type bfl_credit_{name} = vbox {{
-            visible = "[{MANAGED}]" size = {{ -1 180 }} layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        type bfl_credit_{name} = vbox {{ ignoreinvisible = yes
+            visible = "[{MANAGED}]" using = layoutpolicy_expanding
             {contexts(f'bfl_credit_{name}_body')}
         }}'''
     loc('bfl_sovereign_accounts', 'Sovereign accounts — separate from bank assets')
     loc('bfl_sovereign_debt', 'Sovereign debt')
     loc('bfl_sovereign_receivables', 'Sovereign receivables')
-    loc('bfl_sovereign_accounts_tip', 'These native debts and receivables belong to the sovereign, not its bank. Bank-owned loans are included in the asset donut; bank liabilities include deposits and unpaid operating expenses. Native borrowing, repayment and loan lists keep the sovereign as actor.')
+    loc('bfl_sovereign_accounts_tip', 'These native debts and receivables belong to the sovereign, not its bank. Bank-owned loans are included in the asset donut; bank liabilities include deposits and unpaid operating expenses. Native repayment keeps the sovereign as actor.')
     from generate_finance_widgets import tooltip_type
     sovereign_tooltips = ''
     for kind, model, color, name, amount in [
@@ -337,18 +314,17 @@ def generate(common, effect, loc, write, tune, advances, instruments):
             TooltipTextBlock = {{ visible = "[IsDataModelEmpty(CreditLateralView.{model})]"
                 blockoverride "text" {{ text = "{"NO_LOANS_TAKEN" if kind == "debt" else "NO_LOANS_GIVEN"}" }} }}'''
         sovereign_tooltips += tooltip_type(f'bfl_sovereign_{kind}_tooltip', f'bfl_sovereign_{kind}_heading', 'bfl_sovereign_accounts_subtitle', 'debt', content)
-    sovereign_accounts = f'''vbox = {{ spacing = 2 margin = {{ 10 0 }} layoutpolicy_horizontal = expanding
-        visible = "[GetScriptedGui('bfl_charter_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        tooltip = "bfl_sovereign_accounts_tip"
-        text_single = {{ text = "bfl_sovereign_accounts" autoresize = yes fontsize = 11 }}
-        hbox = {{ layoutpolicy_horizontal = expanding spacing = 12
-            vbox = {{ spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = {{ bfl_sovereign_debt_tooltip = {{ }} }}
-                text_single = {{ text = "bfl_sovereign_debt" autoresize = yes fontsize = 12 }}
-                text_single = {{ raw_text = "[GetPlayer.GetEconomy.GetTotalDebt|2]@gold! (#R [CreditLateralView.GetTotalLoansTakenMonthlyCost|2]#!@expense!)" autoresize = yes fontsize = 12 }} }}
-            expand = {{ }}
-            vbox = {{ spacing = 1 datacontext = "[GetPlayer]" tooltipwidget = {{ bfl_sovereign_receivables_tooltip = {{ }} }}
-                text_single = {{ text = "bfl_sovereign_receivables" autoresize = yes fontsize = 12 }}
-                text_single = {{ raw_text = "[CreditLateralView.GetTotalLoansGiven|2]@gold! ([CreditLateralView.GetTotalLoansGivenMonthlyCost|2+=]@income!)" autoresize = yes fontsize = 12 }} }} }} }}'''
+    from generate_credit_redesign import native_tools
+    sovereign_accounts = f'''hbox = {{ name = "bfl_sovereign_accounts_row" layoutpolicy_horizontal = expanding
+        layoutpolicy_vertical = fixed size = {{ -1 46 }} margin = {{ 10 0 }} spacing = 8 datacontext = "[GetPlayer]"
+        vbox = {{ layoutpolicy_horizontal = expanding spacing = 1 tooltipwidget = {{ bfl_sovereign_debt_tooltip = {{ }} }}
+            text_single = {{ text = "bfl_sovereign_debt" autoresize = yes fontsize = 12 }}
+            text_single = {{ raw_text = "[GetPlayer.GetEconomy.GetTotalDebt|2]@gold!" autoresize = yes fontsize = 12 }} }}
+        {native_tools()}
+        vbox = {{ layoutpolicy_horizontal = expanding spacing = 1 tooltipwidget = {{ bfl_sovereign_receivables_tooltip = {{ }} }}
+            text_single = {{ text = "bfl_sovereign_receivables" autoresize = yes align = right|nobaseline fontsize = 12 }}
+            text_single = {{ raw_text = "[CreditLateralView.GetTotalLoansGiven|2]@gold!" autoresize = yes align = right|nobaseline fontsize = 12 }} }}
+    }}'''
     native_stats=f'''hbox = {{ layoutpolicy_horizontal = expanding spacing = 14 margin = {{ 10 0 }}
         hbox = {{ spacing = 4 datacontext = "[GetPlayer]" tooltipwidget = {{ using = CreditworthinessTooltip }}
             {icon('collateral',18)} text_single = {{ text = "bfl_state_credit_value" autoresize = yes fontsize = 12 }} }}
@@ -360,12 +336,15 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     }}'''
     from generate_company_operations import company_panel
     company_controls = company_panel(loc)
+    from generate_credit_redesign import layout, stat, native_tools
+    funding, investments, detail_tooltips = layout(loc, ledger, statement)
     write('in_game/gui/bfl_economy_finance.gui',f'''types BFLFinanceTypes {{
         {company_controls}
         {balance_types}
         {sovereign_tooltips}
-        type bfl_bank_overview = vbox {{ layoutpolicy_horizontal = expanding spacing = 4 {overview} {native_stats} {sovereign_accounts} }}
-        type bfl_credit_overview = widget {{ size = {{ -1 350 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
+        {detail_tooltips}
+        type bfl_bank_overview = vbox {{ ignoreinvisible = yes layoutpolicy_horizontal = expanding spacing = 4 {overview} {sovereign_accounts} }}
+        type bfl_credit_overview = widget {{ size = {{ -1 300 }} layoutpolicy_horizontal = expanding using = bg_age_event_frame
             background = {{ texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.65 }}
             {contexts('bfl_bank_overview')}
         }}
@@ -395,40 +374,36 @@ def build_credit(game, baseline, pin=False):
     changes.append((original, replacement))
     view = view[:header_start] + replacement + view[header_end:]
     # Replace only the illustrated overview for managed banks. State debt totals,
-    # borrowing actions, native loan lists and their original actor bindings remain.
+    # native confirmation templates and the unrelated overview remain intact.
     anchor='\t\t\twidget = {\n\t\t\t\tlayoutpolicy_horizontal = expanding\n\t\t\t\tlayoutpolicy_vertical = fixed\n\t\t\t\tsize = { -1 220 }'
     pos=view.index(anchor);end=balanced_block(view,view.index('{',pos))
     original=view[pos:end]
     replacement=original.replace('size = { -1 220 }',f'size = {{ -1 220 }}\n visible = "[Not({MANAGED})]"',1)
     replacement+=f'\n bfl_credit_overview = {{ visible = "[{MANAGED}]" }}\n'
     changes.append((original,replacement));view=view[:pos]+replacement+view[end:]
-    for marker,kind in [('# loans taken','funding'),('# loans given','investment')]:
-        start=view.index(marker)
-        at=view.index('blockoverride "image"',start)
-        end=balanced_block(view,view.index('{',at))
-        insertion=f'\n bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}\n'
-        if kind == 'investment':
-            insertion += '\n bfl_company_controls = { name = "bfl_company_controls" }\n'
-        view=view[:end]+insertion+view[end:]
-        changes.append(('',insertion))
-    search_at=0
-    while True:
-        action_at=view.find('action_name = "take_over_loan"',search_at)
-        if action_at < 0:
-            break
-        button_at=max(view.rfind(widget+' = {',0,action_at) for widget in ('button_regular','header_button_left'))
-        button_end=balanced_block(view,view.index('{',button_at))
-        original=view[button_at:button_end]
-        if 'action_name = "take_over_loan"' not in original:
-            raise ValueError('Takeover action must be inside its expected native button')
-        opening=original.index('{')+1
-        replacement=original[:opening]+f' visible = "[Not({MANAGED})]"'+original[opening:]
-        replacement+=f'\n vbox = {{ layoutpolicy_horizontal = expanding visible = "[{MANAGED}]" {interaction("bfl_purchase_native_loan","takeover","bfl_loan_button")} }}'
-        view=view[:button_at]+replacement+view[button_end:]
-        changes.append((original,replacement))
-        search_at=button_at+len(replacement)
+    # Replace the native button/list bodies as a unit, retaining their templates.
+    # No invisible native list reserves layout space or keeps duplicate actions.
+    for marker, kind in [('# loans taken', 'funding'), ('# loans given', 'investment')]:
+        start = view.index(marker)
+        at = view.index('vbox = {', start)
+        end = balanced_block(view, view.index('{', at))
+        original = view[at:end]
+        tab = 'loans_taken' if kind == 'funding' else 'loans_given'
+        replacement = f'''vbox = {{ using = layoutpolicy_expanding using = bg_secondary_inner_alt
+            visible = "[CreditLateralView.Vars.HasValue('subtab','{tab}')]"
+            bfl_credit_{kind} = {{ name = "bfl_credit_{kind}" }}
+            text_single = {{ text = "bfl_no_bank_short" tooltip = "bfl_no_bank" autoresize = yes
+                visible = "[Not({MANAGED})]" }}
+        }}'''
+        changes.append((original, replacement))
+        view = view[:at] + replacement + view[end:]
+    original = '\t\t\tvbox = {\n\t\t\t\tusing = layoutpolicy_expanding\n\t\t\t\theader_secondary_tabs = {'
+    replacement = original.replace('using = layoutpolicy_expanding', 'using = layoutpolicy_expanding\n                ignoreinvisible = yes', 1)
+    assert view.count(original) == 1
+    view = view.replace(original, replacement, 1)
+    changes.append((original, replacement))
     # Keep the two native tabs. Bonds belong to Funding & Debt; shares to
-    # Lending & Investments. Native borrowing/loan lists retain their actors.
+    # Lending & Investments. The native loan-list bodies are deliberately removed.
     at=view.index('header_secondary_tabs = {')
     header_end=balanced_block(view,view.index('{',at))
     original=view[at:header_end]

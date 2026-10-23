@@ -1,0 +1,34 @@
+﻿bfl_deposit_amount = { type = owncountry ai_tick = never show_message = no
+            potential = { scope:actor = { gold >= 1 } } allow = { scope:actor = { gold >= 1 } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_is_bank = yes NOT = { this = scope:actor } }
+                enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                    OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
+                        AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } } } } }
+            select_trigger = { looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label
+                min = 1 max = scope:actor.gold step = 1 default = { value = 100 max = scope:actor.gold } }
+            effect = { scope:actor = { save_scope_as = bfl_party }
+                scope:recipient = { set_variable = { name = bfl_deposit_amount value = scope:deposit_amount }
+                    set_variable = { name = bfl_product value = 1 }
+                    scope:bfl_party = { set_variable = { name = bfl_pool value = 0 } }
+                    bfl_commit_deposit = yes
+                    set_variable = { name = bfl_deposit_amount value = 100 } } }
+            ai_will_do = { value = 0 } }
+bfl_term_amount = { type = owncountry ai_tick = never show_message = no
+            potential = { scope:actor = { gold >= 1 } } allow = { scope:actor = { gold >= 1 } }
+            select_trigger = { looking_for_a = country target_flag = recipient name = choose_country
+                column = { data = country_diplomacy_info_loan }
+                visible = { bfl_is_bank = yes NOT = { this = scope:actor } }
+                enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                    OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
+                        AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } } } } }
+            select_trigger = { looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label
+                min = 1 max = scope:actor.gold step = 1 default = { value = 100 max = scope:actor.gold } }
+            effect = { scope:actor = { save_scope_as = bfl_party }
+                scope:recipient = { set_variable = { name = bfl_deposit_amount value = scope:deposit_amount }
+                    set_variable = { name = bfl_product value = 2 }
+                    scope:bfl_party = { set_variable = { name = bfl_pool value = 0 } }
+                    bfl_commit_deposit = yes
+                    set_variable = { name = bfl_deposit_amount value = 100 } } }
+            ai_will_do = { value = 0 } }

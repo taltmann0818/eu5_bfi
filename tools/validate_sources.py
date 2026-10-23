@@ -47,7 +47,7 @@ def main():
     tuning=json.loads((ROOT/'design/tuning.json').read_text())
     check(metadata['version']==tuning['version'],'Development metadata version must match tuning')
     check(metadata['game_id']=='eu5','Wrong game id')
-    check(metadata['supported_game_version']=='1.4.1','Game pin changed')
+    check(metadata['supported_game_version']=='1.4.4','Game pin changed')
     check(metadata['relationships'][0]['id']=='community_mod_framework','CMF dependency missing')
     all_text=[]
     for path in MOD.rglob('*'):
@@ -65,6 +65,10 @@ def main():
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)
+    for path,text in all_text:
+        if path.suffix == '.gui':
+            for key in re.findall(r'\b(?:tooltip|text)\s*=\s*"(bfl_[\w.]+)"',text):
+                check(key in loc_set,f'{path}: missing visible text or tooltip localization {key}')
     for path,text in all_text:
         if path.suffix=='.yml':continue
         if 'decisions' in path.parts:
@@ -118,7 +122,11 @@ def main():
     interface=(MOD/'in_game/gui/bfl_economy_finance.gui').read_text(encoding='utf-8-sig')
     tooltip_keys=set(re.findall(r'\btooltip\s*=\s*"(bfl_[\w]+)"',interface))
     check(tooltip_keys <= loc_set,f'Missing Credit/Balance tooltips: {sorted(tooltip_keys-loc_set)}')
-    check('using = bg_paper_card' not in interface,'BFI controls must use native button states')
+    from audit_native import balanced_block
+    for match in re.finditer(r'\bbutton(?:_regular)?\s*=\s*\{',interface):
+        end=balanced_block(interface,interface.index('{',match.start()))
+        check('using = bg_paper_card' not in interface[match.start():end],
+              'BFI action buttons must use native button states; paper cards are for data rows')
     # Assert every recorded export is a real, correctly sized runtime texture.
     with (ROOT/'docs/asset_register.csv').open(newline='') as f:
         rows=list(csv.DictReader(f))

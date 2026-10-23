@@ -16,7 +16,10 @@ def generate(common, effect, loc):
     for i in range(1, COUNT + 1):
         for field in ('state', 'generation', 'basis', 'face', 'repaid'):
             init += f'set_variable = {{ name = bfl_cr_{i:02}_{field} value = 0 }}\n'
-    common('scripted_effects', 'credit_initialization', effect('bfl_initialize_credit', init + '}'))
+    common('scripted_effects', 'credit_initialization', effect('bfl_initialize_credit', init + '''}
+        if = { limit = { NOT = { has_variable = bfl_reported_impairments } }
+            set_variable = { name = bfl_reported_impairments value = var:bfl_credit_impairments } }
+    '''))
     common('scripted_triggers', 'credit_validation', '''
     bfl_credit_party_eligible = {
         exists = scope:bfl_party country_exists = scope:bfl_party
@@ -170,15 +173,21 @@ def generate(common, effect, loc):
                     set_variable = {{ name = {n}_state value = 3 }}
                     change_variable = {{ name = bfl_credit_defaults add = 1 }}
                     change_variable = {{ name = bfl_credit_impairments add = var:{n}_basis }}
+                    var:{n}_party = {{ save_scope_as = bfl_source_party }}
+                    set_variable = {{ name = bfl_source_amount value = var:{n}_basis }} bfl_source_add_impairment = yes
                     change_variable = {{ name = bfl_loss_carryforward add = var:{n}_basis }}
                 }}
             }} else_if = {{ limit = {{ NOT = {{ country_exists = var:{n}_party }} }}
                 set_variable = {{ name = {n}_state value = 4 }}
                 change_variable = {{ name = bfl_credit_impairments add = var:{n}_basis }}
+                    var:{n}_party = {{ save_scope_as = bfl_source_party }}
+                    set_variable = {{ name = bfl_source_amount value = var:{n}_basis }} bfl_source_add_impairment = yes
                 change_variable = {{ name = bfl_loss_carryforward add = var:{n}_basis }}
             }} else_if = {{ limit = {{ var:{n}_loan = {{ NOT = {{ owner = scope:bfl_credit_review_bank }} }} }}
                 set_variable = {{ name = {n}_state value = 4 }}
                 change_variable = {{ name = bfl_credit_impairments add = var:{n}_basis }}
+                    var:{n}_party = {{ save_scope_as = bfl_source_party }}
+                    set_variable = {{ name = bfl_source_amount value = var:{n}_basis }} bfl_source_add_impairment = yes
                 change_variable = {{ name = bfl_loss_carryforward add = var:{n}_basis }}
             }} else_if = {{ limit = {{ var:{n}_face > 0 var:{n}_face > var:{n}_loan.loan_amount }}
                 # Compare the current face with the recorded face, not cost.
@@ -189,6 +198,8 @@ def generate(common, effect, loc):
                 change_variable = {{ name = {n}_basis subtract = var:bfl_credit_external_haircut }}
                 set_variable = {{ name = {n}_face value = var:{n}_loan.loan_amount }}
                 change_variable = {{ name = bfl_credit_impairments add = var:bfl_credit_external_haircut }}
+                var:{n}_party = {{ save_scope_as = bfl_source_party }}
+                set_variable = {{ name = bfl_source_amount value = var:bfl_credit_external_haircut }} bfl_source_add_impairment = yes
                 change_variable = {{ name = bfl_loss_carryforward add = var:bfl_credit_external_haircut }}
             }}
         }}\n'''

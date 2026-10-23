@@ -67,7 +67,9 @@ def generate(common, effect, loc, write, tune):
             set_variable = { name = bfl_deposit_income value = 0 }
             set_variable = { name = bfl_interest_period value = bfl_period } }
         change_variable = { name = bfl_deposit_income add = scope:bfl_bank.var:bfl_interest_paid }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid } }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_interest_paid } bfl_source_add_credit = yes }
     }'''
     common('scripted_effects', 'withdrawn_interest', effect('bfl_record_withdrawn_interest', withdrawn_interest))
     share_income = '''if = { limit = { NOT = { has_variable = bfl_share_income_period } } set_variable = { name = bfl_share_income_period value = 0 } }
@@ -75,7 +77,15 @@ def generate(common, effect, loc, write, tune):
             set_variable = { name = bfl_share_income value = 0 }
             set_variable = { name = bfl_share_income_period value = bfl_period } }
         change_variable = { name = bfl_share_income add = scope:bfl_bank.var:bfl_payment }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment } }
+        if = { limit = { scope:bfl_bank = { bfl_is_bank = yes } }
+            if = { limit = { OR = { NOT = { has_variable = bfl_bank_dividend_period } bfl_period > var:bfl_bank_dividend_period } }
+                set_variable = { name = bfl_bank_dividend_period value = bfl_period }
+                set_variable = { name = bfl_bank_dividend_income value = 0 } }
+            change_variable = { name = bfl_bank_dividend_income add = scope:bfl_bank.var:bfl_payment }
+        }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_payment } bfl_source_add_company = yes }
     '''
     common('scripted_effects', 'share_income', effect('bfl_record_share_income', share_income))
     components = [('accounts', 'dep', 32, 'operating_account'),
@@ -142,7 +152,7 @@ def generate(common, effect, loc, write, tune):
         every_country = {
             limit = { country_type = location num_loans > 0 NOT = { this = scope:bfl_bank } scope:bfl_bank = { var:bfl_takeover_done = 0 } }
             save_scope_as = bfl_party
-            scope:bfl_bank = { bfl_native_takeover = yes }
+            scope:bfl_bank = { if = { limit = { var:bfl_takeover_done = 0 } bfl_native_takeover = yes } }
         }
         if = { limit = { exists = scope:bfl_saved_takeover_party } scope:bfl_saved_takeover_party = { save_scope_as = bfl_party } }
     }'''

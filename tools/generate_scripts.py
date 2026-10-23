@@ -45,7 +45,7 @@ def initialize():
     metadata = {
         'name':'Banking, Finance and Trade Companies',
         'id':'bfl_banking_finance_companies','version':TUNE['version'],'game_id':'eu5',
-        'supported_game_version':'1.4.1',
+        'supported_game_version':'1.4.4',
         'short_description':'Development banking, chartered sovereign finance and native trade-company investment. Requires CMF 2.5.0.',
         'tags':['Trade and Economics','Government and Estates','Gameplay'],
         'relationships':[{'rel_type':'dependency','id':'community_mod_framework','display_name':'Community Mod Framework','resource_type':'mod','version':'2.5.0'}],
@@ -177,7 +177,7 @@ def initialize():
             for fld in fields:
                 if fld not in scopes:
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
-    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\n'
+    body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_activity_sources = yes\nbfl_initialize_report = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\n'
     common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
@@ -670,21 +670,29 @@ def treasury_and_resolution():
     if = { limit = { bfl_is_bank = yes bfl_period > var:bfl_last_dividend_period }
     set_variable = { name = bfl_dividend_paid value = 0 }
     set_variable = { name = bfl_state_dividend_paid value = 0 }
+    set_variable = { name = bfl_funded_dividend value = 0 }
+    set_variable = { name = bfl_dividend_funded value = 0 }
+    set_variable = { name = bfl_dividend_ratio value = var:bfl_payout_ratio }
+    set_variable = { name = bfl_dividend_state_units value = var:bfl_state_units }
+    set_variable = { name = bfl_dividend_total_units value = var:bfl_total_units }
         save_scope_as = bfl_bank
         set_variable = { name = bfl_last_dividend_period value = bfl_period }
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_record_activity_statement = yes
         bfl_offset_losses = yes
+        set_variable = { name = bfl_dividend_eligible value = { value = var:bfl_monthly_net_income min = 0 } }
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 bfl_registered_units <= var:bfl_total_units }
         set_variable = { name = bfl_funded_dividend value = {
             value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller
             add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native
             multiply = var:bfl_payout_ratio max = bfl_free_cash max = bfl_capital_headroom
         } }
+        set_variable = { name = bfl_dividend_funded value = var:bfl_funded_dividend }
         if = { limit = { exists = var:bfl_state_owner country_exists = var:bfl_state_owner var:bfl_state_units > 0 }
             set_variable = { name = bfl_payment value = { value = var:bfl_funded_dividend multiply = var:bfl_state_units divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
-            var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes }
+            var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment bfl_record_share_income = yes save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = var:bfl_payment } bfl_source_add_dividend_paid = yes
             change_variable = { name = bfl_dividend_paid add = var:bfl_payment }
             set_variable = { name = bfl_state_dividend_paid value = var:bfl_payment }
         }
@@ -762,10 +770,12 @@ def treasury_and_resolution():
             bfl_settle_operating_expenses = yes
             bfl_evaluate_distress = yes
             bfl_settle_dividends = yes
+            bfl_close_activity_sources = yes
+            bfl_record_credit_report = yes
             if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
                 bfl_run_controller_bond_facility = yes
             }
-            bfl_autonomous_takeover = yes
+            bfl_manage_credit = yes
             bfl_record_history = yes
             bfl_record_exchange_history = yes
             if = { limit = { bfl_is_independent_bank = yes } bfl_record_portfolio_history = yes }
@@ -1045,6 +1055,12 @@ def main():
     generate_bond_panel(common,effect,loc,write)
     from generate_ownership import generate as generate_ownership
     generate_ownership(common,effect,loc,write)
+    from generate_credit_controls import generate as generate_credit_controls
+    generate_credit_controls(common,effect,loc,write)
+    from generate_credit_details import generate as generate_credit_details
+    generate_credit_details(common,effect,loc,write)
+    from generate_activity_sources import generate as generate_activity_sources
+    generate_activity_sources(common,effect)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

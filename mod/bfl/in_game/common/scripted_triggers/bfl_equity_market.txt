@@ -1,5 +1,6 @@
 ﻿bfl_market_charter_buyback = {
-trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor }
+trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor
+        scope:actor = { country_type = location bfl_has_management = yes exists = var:bfl_bank } }
         scope:actor = { country_type = location bfl_has_management = yes }
         this = scope:actor.var:bfl_bank var:bfl_state_owner ?= scope:actor
         bfl_has_valid_controller = yes overlord = scope:actor }

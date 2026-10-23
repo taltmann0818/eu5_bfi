@@ -1,4 +1,4 @@
-﻿bfl_company_retain = { type = owncountry ai_tick = never
+﻿bfl_company_retain = { type = owncountry ai_tick = never show_in_gui_list = no
             potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             select_trigger = { looking_for_a = country target_flag = company name = choose_country
@@ -11,7 +11,7 @@
                 scope:company = { bfl_company_set_mandate = yes } }
             ai_will_do = { value = 0 }
         }
-bfl_company_trade = { type = owncountry ai_tick = never
+bfl_company_trade = { type = owncountry ai_tick = never show_in_gui_list = no
             potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             select_trigger = { looking_for_a = country target_flag = company name = choose_country
@@ -24,7 +24,7 @@ bfl_company_trade = { type = owncountry ai_tick = never
                 scope:company = { bfl_company_set_mandate = yes } }
             ai_will_do = { value = 0 }
         }
-bfl_company_explore = { type = owncountry ai_tick = never
+bfl_company_explore = { type = owncountry ai_tick = never show_in_gui_list = no
             potential = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             allow = { scope:actor = { any_subject = { bfl_is_company = yes } } }
             select_trigger = { looking_for_a = country target_flag = company name = choose_country

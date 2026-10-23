@@ -88,6 +88,13 @@ def fixture(token, fingerprint):
     start += check('initialization_idempotent', 'var:bfl_paid_in_capital = 777')
     start += 'remove_variable = bfl_state_dividend_paid bfl_initialize_bank = yes\n'
     start += check('legacy_bank_gets_state_dividend_field','var:bfl_state_dividend_paid = 0 var:bfl_paid_in_capital = 777')
+    start += "c:FLO = { set_gold = 2000 save_scope_as = bfl_party } set_variable = { name = bfl_product value = 1 } set_variable = { name = bfl_deposit_amount value = 1500 } bfl_open_deposit = yes\n"
+    start += check('sized_deposit_conserves_large_cash', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500 bfl_liabilities = 1500')
+    start += 'set_variable = { name = bfl_deposit_amount value = 600 } bfl_open_deposit = yes\n'
+    start += check('sized_deposit_rechecks_wallet', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500')
+    start += 'set_variable = { name = bfl_deposit_amount value = -1 } bfl_open_deposit = yes\n'
+    start += check('sized_deposit_rejects_negative_cash', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500')
+    start += reset() + 'set_variable = { name = bfl_deposit_amount value = 100 } c:FLO = { set_gold = 1000 save_scope_as = bfl_party }\n'
     start += check('demand_permission', 'bfl_can_originate_demand_deposit = yes')
     start += check('term_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes }')
     start += check('bill_age_gate', 'NOT = { bfl_can_originate_commercial_bill = yes }')
@@ -185,6 +192,8 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_profit_services value = 100.95 } bfl_settle_dividends = yes\n'
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
+    start += check('balance_bank_dividend_annualized_without_transfer', 'c:FLO = { bfl_bank_dividend_latest = 12.5 bfl_bank_dividend_annual = 150 gold = 1012.5 }')
+    start += check('dividend_breakdown_survives_profit_reset', 'var:bfl_dividend_eligible = 100 var:bfl_dividend_funded = 25 var:bfl_dividend_state_units = 500 var:bfl_dividend_total_units = 1000 var:bfl_profit_services = 0')
     start += 'bfl_recapitalize = yes\n'
     start += check('recapitalization_funded', 'gold = 1086.55 c:FLO = { gold = 912.5 } var:bfl_state_units > 600 var:bfl_total_units > 1100 var:bfl_profit_services = 0')
     start += '''set_variable = { name = bfl_total_units value = 1000 }

@@ -7,7 +7,7 @@ if = { limit = { bfl_can_originate_native_takeover = yes bfl_period > var:bfl_la
         every_country = {
             limit = { country_type = location num_loans > 0 NOT = { this = scope:bfl_bank } scope:bfl_bank = { var:bfl_takeover_done = 0 } }
             save_scope_as = bfl_party
-            scope:bfl_bank = { bfl_native_takeover = yes }
+            scope:bfl_bank = { if = { limit = { var:bfl_takeover_done = 0 } bfl_native_takeover = yes } }
         }
         if = { limit = { exists = scope:bfl_saved_takeover_party } scope:bfl_saved_takeover_party = { save_scope_as = bfl_party } }
     }
