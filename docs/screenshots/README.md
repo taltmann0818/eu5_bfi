@@ -1,5 +1,15 @@
 # Native bank interface captures
 
+## M10 CMF preferences
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records a clean,
+non-debug cold startup on `2e53b85e…`, English, 1920×1080. The runtime contains no
+diagnostic widgets. [Actual CMF panel](m10-cmf-presentation.jpg) shows the BFI row,
+Presentation tab, Interface group and three native preferences. Reduced motion
+and notifications default on; expanded details defaults off. Ordinary clicks
+change all three preferences. Actual animation and the full language/scale
+matrix remain separate gates.
+
 ## M10 Merchant painting and transaction receipt
 
 [23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records one

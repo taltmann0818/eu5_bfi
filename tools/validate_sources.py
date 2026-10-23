@@ -65,6 +65,11 @@ def main():
     keys=re.findall(r'^\s+(bfl_[\w.]+):',localization,re.M)
     check(len(keys)==len(set(keys)),'Duplicate localization keys')
     loc_set=set(keys)
+    cmm_ids = {'bfl_banking_finance_companies'} | {
+        'bfl_banking_finance_companies__' + suffix for suffix in
+        ('presentation', 'interface', 'presentation__interface', 'reduced_motion',
+         'expanded_details', 'finance_notifications')}
+    check(not (loc_set & cmm_ids), 'Bare CMF flag localization replaces machine identifiers; use _name/_desc')
     from translate_localization import LOCALES, ENTRY, ENGINE, structural
     english = MOD/'main_menu/localization/english'
     for locale in LOCALES:

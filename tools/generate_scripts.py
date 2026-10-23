@@ -1058,11 +1058,10 @@ def gui_and_localization():
         'bfl_banking_finance_companies__finance_notifications':'Finance notifications',
         'bfl_banking_finance_companies__finance_notifications_desc':'Notification presentation preference; obligations are never canceled by muting.'
     }
-    LOC.update(cmm)
-    # CMM's release-matched naming convention includes the _name suffix.
-    for key,value in list(cmm.items()):
-        if not key.endswith('_desc'):
-            LOC[key+'_name'] = value
+    # Scope.GetFlagName localizes a flag when its bare key exists. CMM uses
+    # that result as a map key, so human labels belong only in _name/_desc.
+    for key,value in cmm.items():
+        LOC[key if key.endswith('_desc') else key+'_name'] = value
     loc('bfl_banking_finance_companies__presentation__interface_name','Interface')
     # Native modifier cards use an implicit NAME/DESC alias, in addition to
     # direct localization consumers. Include inactive migration definitions.

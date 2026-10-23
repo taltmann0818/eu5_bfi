@@ -1,12 +1,21 @@
 {
   "milestone": "M10",
   "complete": false,
-  "candidate_runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832",
+  "candidate_runtime_sha256": "2e53b85e891eb7ba05356c161fc599201546f753faf0b7507b6a4283efe74998",
   "game_version": "1.4.1",
   "steam_build": "25905365",
   "cmf_version": "2.5.0",
   "date": "2026-10-23",
   "accepted_engine_runs": [
+    {
+      "suite": "commenda-slots",
+      "report": "2026-10-23-m10-commenda-slots.json",
+      "assertions": 37,
+      "runtime_sha256": "2e53b85e891eb7ba05356c161fc599201546f753faf0b7507b6a4283efe74998",
+      "fixture_sha256": "2b0739ed197943428eced9e605fb50e6f7d1cde592f2d18c6f68c8481543b8bf",
+      "token": "f871f762289948038c44228f246af308",
+      "current_runtime": true
+    },
     {
       "suite": "bootstrap",
       "report": "2026-10-23-m10-bootstrap.json",
@@ -14,7 +23,7 @@
       "runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832",
       "fixture_sha256": "d42ef0f118484bb628104734bf48d7b6a023864fe0941e6bae25b0d74433b1bf",
       "token": "ec743da892b341c69da2d518b451263f",
-      "current_runtime": true
+      "current_runtime": false
     },
     {
       "suite": "finance-policy",
@@ -107,7 +116,7 @@
       "current_runtime": false
     }
   ],
-  "native_assertions_current_runtime": 58,
+  "native_assertions_current_runtime": 37,
   "provenance": "Each run retains its actual runtime/fixture identity. Older focused passes do not certify later financial changes. Native CMF/bootstrap arithmetic and normal UI are separate checks. No focused assertion sum establishes the full milestone gate.",
   "offline": {
     "tests": 150,
@@ -123,13 +132,13 @@
   "deterministic_generation": "Pending final candidate comparison; earlier accepted identities remain historical.",
   "release_staging": "Pending final candidate package.",
   "ui_report": "2026-10-23-m10-ui.json",
-  "ui_boundary": "One current normal 1920x1080 Merchant painting/committed receipt/mandate observation. Earlier player controls retain c0186e1c identity. Normal CMM, other art, animation, full ledger, languages and scales remain open.",
+  "ui_boundary": "Current 2e53b85e normal cold-start CMF row/tab/group/three preference controls accepted at 1920x1080. Merchant painting/committed receipt/mandate observation retains a6591f2e. Full art, actual animation, eleven languages, full ledger and responsive scales remain open.",
   "fresh_1337_performance": {
     "report": "2026-10-21-m10-performance.json",
     "boundary": "Earlier f59f4d34 timing with three banks/zero custom records; does not certify current or late population performance."
   },
   "remaining": [
-    "Native commenda callback regression, positive company construction and affected financial regressions",
+    "Positive native company construction and affected financial regressions",
     "Full natural role/profile campaigns and later-age product continuation",
     "Viable real funding, earnings, liquidity and debt service",
     "Native eleven-language, art, FX/reduced-motion, responsive and full-ledger review",
