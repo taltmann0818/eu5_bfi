@@ -62,6 +62,15 @@ Receipts describe committed transactions. Highlights never move cash or run sett
 
 Initial Bardi/Peruzzi histories are retained as [Merchant](../tests/results/2026-10-22-m10-historical-bankruptcy-merchant.json) and [Overseas](../tests/results/2026-10-22-m10-historical-bankruptcy-overseas.json) development evidence. Native `flavor_flo.53` can force AI banks with those tags into bankruptcy irrespective of their later controller. Those abbreviated histories do not establish sustained full campaigns. Subsequent scenarios use native ACC, preserve starting wealth/claims/buildings and leave historical events unchanged.
 
+Interrupted native campaigns can resume their original immutable runtime/observer
+from an actual autosave. The harness archives source logs and the selected save,
+records its hash and reports overlapping monthly boundaries without counting them
+twice. Completion and economic acceptance remain separate. The new
+[same-save benchmark harness](../tools/benchmark_snapshot.py) is not yet executed:
+it requires a naturally late-world snapshot and a declared, real funded full
+ledger; its baseline retains save definitions while disabling BFI simulation.
+This is a resident-definition baseline, not a CMF-only claim.
+
 M10 closes only after all of the following pass:
 
 - Full integrated campaigns for both player roles and both profile feature sets, natural age/research progression and later-age M1–M9 continuation.

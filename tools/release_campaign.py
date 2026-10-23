@@ -220,20 +220,35 @@ def prepare(user, profile, end_year=1837, role='independent', funded_independent
 
 def report(user, output, reason):
     manifest = json.loads((user / 'bfi_release_manifest.json').read_text(encoding='utf-8'))
-    text = (user / 'logs/debug.log').read_text(encoding='utf-8-sig', errors='replace')
+    segments = sorted((user / 'release-history').glob('*/logs')) + [user / 'logs']
+    text = '\n'.join((directory / 'debug.log').read_text(encoding='utf-8-sig', errors='replace')
+                     for directory in segments if (directory / 'debug.log').exists())
     token = manifest['token']
     samples = []
     for tag, values in re.findall(r'BFI_RELEASE\|' + token + r'\|ROW\|(BRD|PRZ|ACC|CHARTER)\|([^\r\n]+)', text):
         fields = values.split('|')
         if len(fields) == len(manifest['fields']):
             samples.append({'tag': tag, **dict(zip(manifest['fields'], map(float, fields)))})
+    # Reloading a save may revisit its last observed boundary. Keep one row
+    # per actual period, while retaining overlap diagnostics and original logs.
+    by_period = {}
+    overlaps = []
+    for sample in samples:
+        key = sample['tag'], sample['period']
+        if key in by_period:
+            overlaps.append({'tag': key[0], 'period': key[1],
+                             'changed_fields': [field for field in sample
+                                                if sample[field] != by_period[key][field]]})
+        by_period[key] = sample
+    samples = sorted(by_period.values(), key=lambda sample: (sample['period'], sample['tag']))
     errors = campaign.collect('', {'token': token, 'runtime_sha256': '', 'cases': []},
-                              campaign.engine_errors(user / 'logs'))['errors']
+                              '\n'.join(campaign.engine_errors(directory) for directory in segments))['errors']
     errors = [e for e in errors if not e.startswith('Missing, duplicate or stale')]
     complete = f'BFI_RELEASE|{token}|END|{manifest["runtime_sha256"]}' in text
     result = {**manifest, 'complete': complete, 'stop_reason': reason,
               'passed': False, 'samples': samples, 'errors': errors,
-              'ticks_observed': text.count(f'BFI_RELEASE|{token}|TICK|'),
+              'ticks_observed': len(set(re.findall(r'BFI_RELEASE\|' + token + r'\|TICK\|([^\r\n]+)', text))),
+              'reload_overlaps': overlaps,
               'charter_executed': f'BFI_RELEASE|{token}|CHARTER|' in text,
               'opening_cash': dict((tag, float(value)) for tag, value in re.findall(
                   r'BFI_RELEASE\|' + token + r'\|OPENING_CASH\|(BRD|PRZ|ACC|FRA)\|([^\r\n]+)', text)),
@@ -254,25 +269,55 @@ def run(args):
         result = report(user, args.output, 'Read-only evidence collection')
         print(json.dumps({k: result[k] for k in ('complete', 'ticks_observed', 'last_tick', 'errors')}))
         return
-    manifest = prepare(user, args.profile, args.end_year, args.role, args.funded_independent)
+    load = None
+    if args.resume:
+        manifest = json.loads((user / 'bfi_release_manifest.json').read_text(encoding='utf-8'))
+        if digest_tree(user / 'mod/bfi') != manifest['runtime_sha256']:
+            raise ValueError('Saved campaign runtime changed; cannot resume as the same evidence')
+        if digest_tree(user / 'mod/bfi_release_observer') != manifest['fixture_sha256']:
+            raise ValueError('Saved campaign observer changed; cannot resume as the same evidence')
+        saves = sorted((user / 'save games').glob('*.eu5'), key=lambda path: path.stat().st_mtime)
+        if not saves:
+            raise ValueError('No native save to resume')
+        load = saves[-1]
+        history = user / 'release-history'
+        segment = history / f'segment-{len(list(history.glob("*")))+1:03}'
+        # Copy owned disposable logs before the native engine replaces them.
+        # Preserve every source file and never modify the saved financial state.
+        shutil.copytree(user / 'logs', segment / 'logs')
+        shutil.copy2(load, segment / load.name)
+        (segment / 'resume.json').write_text(json.dumps({'save': load.name,
+            'save_sha256': hashlib.sha256(load.read_bytes()).hexdigest(),
+            'runtime_sha256': manifest['runtime_sha256']}, indent=2)+'\n', encoding='utf-8')
+        settings_path = user / 'pdx_settings.json'
+        settings = json.loads(settings_path.read_text(encoding='utf-8-sig'))
+        settings.setdefault('Graphics', {})['maximize_tick_speed'] = True
+        settings_path.write_text(json.dumps(settings), encoding='utf-8')
+    else:
+        manifest = prepare(user, args.profile, args.end_year, args.role, args.funded_independent)
     exe = args.game / 'binaries/eu5.exe'
     startup = subprocess.STARTUPINFO()
     startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     startup.wShowWindow = 0
-    player = 'ACC' if args.role == 'independent' else 'FRA'
-    proc = subprocess.Popen([str(exe), '-debug_mode', '-nographics', '-play=' + player, '-handsoff',
+    player = 'ACC' if manifest['role'] == 'independent' else 'FRA'
+    opening = ['-loadsavehandsoff=' + load.stem] if load else ['-play=' + player, '-handsoff']
+    proc = subprocess.Popen([str(exe), '-debug_mode', '-nographics', *opening,
         '-timed_handsoff=6003', f'-userdir={user}'], cwd=exe.parent, startupinfo=startup)
     (user / 'owned-process.json').write_text(json.dumps({'pid': proc.pid, 'userdir': str(user)}), encoding='utf-8')
-    print(f'Native natural campaign process {proc.pid}; profile {args.profile}; {user}', flush=True)
+    print(f'Native natural campaign process {proc.pid}; profile {manifest["bank_profiles"]["ACC"]}; {user}', flush=True)
     deadline = time.monotonic() + args.timeout
     log = user / 'logs/debug.log'
     count = 0
+    archived_ticks = set()
+    for archived in (user / 'release-history').glob('*/logs/debug.log'):
+        archived_ticks.update(re.findall(r'BFI_RELEASE\|' + manifest['token'] + r'\|TICK\|([^\r\n]+)',
+                                        archived.read_text(encoding='utf-8-sig', errors='replace')))
     reason = 'Timeout; incomplete evidence'
     try:
         while time.monotonic() < deadline:
             if log.exists():
                 text = log.read_text(encoding='utf-8-sig', errors='replace')
-                ticks = text.count(f'BFI_RELEASE|{manifest["token"]}|TICK|')
+                ticks = len(archived_ticks | set(re.findall(r'BFI_RELEASE\|' + manifest['token'] + r'\|TICK\|([^\r\n]+)', text)))
                 if ticks >= count + 60:
                     result = report(user, args.output, 'In progress')
                     print(f'{ticks} months; {result["last_tick"]}; BFI errors {len(result["errors"])}', flush=True)
@@ -303,6 +348,7 @@ if __name__ == '__main__':
     parser.add_argument('--end-year', type=int, default=1837, help='Earlier values are smoke tests, never full-campaign acceptance.')
     parser.add_argument('--timeout', type=int, default=86400)
     parser.add_argument('--report-only', action='store_true')
+    parser.add_argument('--resume', action='store_true', help='Continue the latest native save with its original immutable runtime and observer; retain earlier logs.')
     arguments = parser.parse_args()
     if arguments.funded_independent and arguments.role != 'independent':
         parser.error('--funded-independent requires the independent role')
