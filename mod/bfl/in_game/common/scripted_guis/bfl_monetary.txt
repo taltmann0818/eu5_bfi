@@ -33,10 +33,10 @@ bfl_money_clear = { scope = country is_shown = { bfl_has_management = yes }
                 AND = { exists = var:bfl_bank var:bfl_bank = { bfl_clearing_operator = yes } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes bfl_run_clearing = yes } } } }
 bfl_money_clear_open = { scope = country is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes bfl_monetary_building = { BUILDING = clearing_house } }
-                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes bfl_monetary_building = { BUILDING = clearing_house } } } } } effect = {
-                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes bfl_monetary_building = { BUILDING = clearing_house } }
-                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes bfl_monetary_building = { BUILDING = clearing_house } } } } } bfl_resolve_command_bank = yes
+            is_valid = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes OR = { bfl_monetary_building = { BUILDING = clearing_house } bfl_has_bank_headquarters = yes } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes OR = { bfl_monetary_building = { BUILDING = clearing_house } bfl_has_bank_headquarters = yes } } } } } effect = {
+                if = { limit = { bfl_has_management = yes  OR = { AND = { bfl_is_independent_bank = yes bfl_can_originate_clearing = yes OR = { bfl_monetary_building = { BUILDING = clearing_house } bfl_has_bank_headquarters = yes } }
+                AND = { exists = var:bfl_bank var:bfl_bank = { bfl_can_originate_clearing = yes OR = { bfl_monetary_building = { BUILDING = clearing_house } bfl_has_bank_headquarters = yes } } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes if = { limit = { var:bfl_clearing_open = 0 } set_variable = { name = bfl_clearing_open value = 1 } }
         else = { set_variable = { name = bfl_clearing_open value = 0 } } } } } }
 bfl_money_leave = { scope = country is_shown = { bfl_has_management = yes }
@@ -46,8 +46,8 @@ bfl_money_leave = { scope = country is_shown = { bfl_has_management = yes }
                 AND = { exists = var:bfl_bank var:bfl_bank = { exists = var:bfl_clearing_member } } } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes bfl_leave_clearing = yes } } } }
 bfl_money_authorize = { scope = country is_shown = { bfl_has_management = yes }
-            is_valid = { bfl_has_management = yes country_type = location any_owned_building = { building_type = building_type:central_bank building_level > 0 location = prev.capital } } effect = {
-                if = { limit = { bfl_has_management = yes country_type = location any_owned_building = { building_type = building_type:central_bank building_level > 0 location = prev.capital } } bfl_resolve_command_bank = yes
+            is_valid = { bfl_has_management = yes country_type = location any_owned_building = { OR = { building_type = building_type:central_bank building_type = building_type:wisselbank building_type = building_type:riksbank building_type = building_type:bfl_banco_mediceo building_type = building_type:bfl_banco_del_giro building_type = building_type:bfl_llotja_de_mar building_type = building_type:bfl_palace_saint_george } building_level > 0 location = prev.capital } } effect = {
+                if = { limit = { bfl_has_management = yes country_type = location any_owned_building = { OR = { building_type = building_type:central_bank building_type = building_type:wisselbank building_type = building_type:riksbank building_type = building_type:bfl_banco_mediceo building_type = building_type:bfl_banco_del_giro building_type = building_type:bfl_llotja_de_mar building_type = building_type:bfl_palace_saint_george } building_level > 0 location = prev.capital } } bfl_resolve_command_bank = yes
                     scope:bfl_bank = { bfl_initialize_monetary = yes overlord = { save_scope_as = bfl_note_sovereign }
         set_variable = { name = bfl_note_authority value = scope:bfl_note_sovereign } } } } }
 bfl_money_revoke = { scope = country is_shown = { bfl_has_management = yes }

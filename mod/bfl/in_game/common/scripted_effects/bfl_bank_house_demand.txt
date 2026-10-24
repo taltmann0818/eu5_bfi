@@ -1,0 +1,8 @@
+﻿bfl_refresh_bank_house_demand = {
+if = { limit = { building_type = building_type:bfl_fuggerhauser building_level > 0 }
+            location.market = { if = { limit = { NOT = { has_temporary_demand = demand:bfl_fugger_copper_demand } }
+                add_temporary_demand = { type = demand:bfl_fugger_copper_demand scale = 1 months = 1 } } } }
+if = { limit = { building_type = building_type:bfl_palazzo_peruzzi building_level > 0 }
+            location.market = { if = { limit = { NOT = { has_temporary_demand = demand:bfl_peruzzi_cloth_demand } }
+                add_temporary_demand = { type = demand:bfl_peruzzi_cloth_demand scale = 1 months = 1 } } } }
+}

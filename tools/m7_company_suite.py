@@ -33,6 +33,7 @@ def fixture(token,fingerprint):
     start+=f'debug_log = "BFI_TEST|{token}|READY|{fingerprint}"\n'
     setup='''c:FLO = { every_subject = { limit = { bfl_is_company = yes }
             save_scope_as = bfi_company set_gold = 1000 bfl_register_company = yes
+            set_variable = { name = bfl_strategy_mode value = 0 }
             create_relation = { type = relation_type:trade_access first = c:GEN second = this }
             create_relation = { type = relation_type:trade_access first = c:FLO second = this }
             set_variable = { name = bfi_nav_before value = bfl_tangible_equity }

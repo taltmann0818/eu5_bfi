@@ -1,0 +1,6 @@
+﻿bfl_credit_management_enabled = {
+OR = {
+        AND = { bfl_is_independent_bank = yes OR = { is_ai = yes is_system_automated = credit } }
+        AND = { bfl_has_valid_controller = yes overlord = { OR = { is_ai = yes is_system_automated = credit } } }
+    }
+}

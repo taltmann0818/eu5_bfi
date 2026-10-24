@@ -77,6 +77,7 @@ bfl_equity_quote = {
 value = bfl_nav_quote
         if = { limit = { bfl_price_model = 1 } multiply = bfl_price_factor
             if = { limit = { bfl_price_distress = 1 } multiply = 0.85 } }
+        multiply = { value = 1 add = bfl_building_share_price_bonus add = modifier:bfl_base_share_value_modifier }
         multiply = 1000 floor = yes divide = 1000
 }
 bfl_price_premium = {

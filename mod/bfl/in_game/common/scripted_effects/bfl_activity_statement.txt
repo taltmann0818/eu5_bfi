@@ -5,6 +5,22 @@ set_variable = { name = bfl_statement_period value = bfl_period }
         set_variable = { name = bfl_statement_recovery_gain value = var:bfl_native_recovery_gain }
         set_variable = { name = bfl_statement_recovery_loss value = var:bfl_native_recovery_loss }
         set_variable = { name = bfl_statement_losses value = var:bfl_loss_carryforward }
+        set_variable = { name = bfl_statement_deposit_cost value = var:bfl_deposit_interest_cost }
+        set_variable = { name = bfl_statement_operating_cost value = var:bfl_expense_due }
+        # Recognized native surplus/deficit is a net channel, not a fabricated
+        # gross native budget reconstructed from a different month's forecast.
+        set_variable = { name = bfl_statement_native_gross value = var:bfl_profit_native }
+        set_variable = { name = bfl_statement_native_total value = monthly_income_total }
+        set_variable = { name = bfl_statement_native_balance value = monthly_balance }
+        set_variable = { name = bfl_statement_cost_base value = bfl_operating_base_cost }
+        set_variable = { name = bfl_statement_cost_accounts value = bfl_operating_accounts_cost }
+        set_variable = { name = bfl_statement_cost_contracts value = bfl_operating_contracts_cost }
+        set_variable = { name = bfl_statement_cost_branches value = bfl_operating_branches_cost }
+        set_variable = { name = bfl_statement_cost_asset_types value = bfl_operating_asset_types_cost }
+        set_variable = { name = bfl_statement_cost_reduction value = bfl_operating_total_reduction }
+        set_variable = { name = bfl_statement_native_cost value = { value = var:bfl_native_monthly_net max = 0 multiply = -1 } }
+        set_variable = { name = bfl_statement_impairment value = { value = var:bfl_credit_impairments subtract = var:bfl_reported_impairments min = 0 } }
+        set_variable = { name = bfl_reported_impairments value = var:bfl_credit_impairments }
     set_variable = { name = bfl_statement_services value = var:bfl_profit_services }
 set_variable = { name = bfl_statement_credit value = var:bfl_profit_credit }
 set_variable = { name = bfl_statement_controller value = var:bfl_profit_controller }
@@ -13,7 +29,11 @@ set_variable = { name = bfl_statement_goods value = var:bfl_profit_goods }
 set_variable = { name = bfl_statement_ventures value = var:bfl_profit_ventures }
 set_variable = { name = bfl_statement_company value = var:bfl_profit_company }
 set_variable = { name = bfl_statement_native value = var:bfl_profit_native }
-set_variable = { name = bfl_native_interest value = 0 }
+set_variable = { name = bfl_statement_loss_opening value = var:bfl_loss_opening }
+        set_variable = { name = bfl_statement_loss_costs value = bfl_report_gross_expenses }
+        set_variable = { name = bfl_statement_loss_adjustments value = {
+            value = var:bfl_statement_losses subtract = var:bfl_statement_loss_opening subtract = var:bfl_statement_loss_costs } }
+    set_variable = { name = bfl_native_interest value = 0 }
 set_variable = { name = bfl_native_principal value = 0 }
 set_variable = { name = bfl_native_recovery_gain value = 0 }
 set_variable = { name = bfl_native_recovery_loss value = 0 }

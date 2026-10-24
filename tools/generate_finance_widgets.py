@@ -13,13 +13,27 @@ def swatch(color):
         color = {color} }}'''
 
 
+def asset_list(content):
+    # Native market/loan rows use paper cards and a single, vertically packed list.
+    return f'flowcontainer = {{ wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding {content} }}'
+
+
+def asset_row(party, name, columns, visible='', tooltip='', actions=''):
+    return f'''widget = {{ size = {{ 510 42 }} {visible} using = bg_paper_card {tooltip}
+        hbox = {{ size = {{ 100% 100% }} margin = {{ 6 3 }} spacing = 6
+            country_flag_small = {{ datacontext = "[{party}]" }}
+            text_single = {{ raw_text = "{name}" size = {{ 172 30 }} align = left|vcenter elide = right
+                default_format = "#yellow_titles" fontsize = 14 }}
+            expand = {{ layoutpolicy_vertical = fixed }} {columns} {actions} }} }}'''
+
+
 def row(left, right, index=0, visible='', color=None, art=None):
     background = 'background = { using = tooltip_table_field_texture }' if index % 2 == 0 else ''
     leading = swatch(color) if color else ''
     if art:
         leading += f'icon = {{ size = {{ 20 20 }} texture = "{icon_texture(art)}" }}'
     return f'''widget = {{ {visible} size = {{ -1 30 }} layoutpolicy_horizontal = expanding
-        {background} hbox = {{ layoutpolicy_horizontal = expanding margin = {{ 10 2 }} spacing = 8
+        {background} hbox = {{ size = {{ 100% 100% }} margin = {{ 10 2 }} spacing = 8
             {leading} text_single = {{ raw_text = "{left}" autoresize = yes }} expand = {{ }}
             text_single = {{ raw_text = "{right}" autoresize = yes align = right|nobaseline }} }} }}'''
 
@@ -30,19 +44,22 @@ def list_block(title, content, visible=''):
         {content} }}'''
 
 
-def scroll_rows(content, width=420, height=270):
+def scroll_rows(content, width=420, height=270, fixed_width=False):
+    dimensions = f'size = {{ {width} 0 }} minimumsize = {{ {width} 0 }} layoutpolicy_horizontal = fixed' if fixed_width else ''
+    viewport = f'minimumsize = {{ {width} 0 }}' if fixed_width else ''
     return f'''TooltipListScrollArea = {{
-        blockoverride "block_scrollarea" {{ maximumsize = {{ {width} {height} }} }}
+        blockoverride "block_scrollarea" {{ {viewport} maximumsize = {{ {width} {height} }} }}
         blockoverride "scrollarea_content" {{ TooltipContentSection = {{
-            set_parent_dimension_to_minimum = height spacing = 0 {content} }} }} }}'''
+            {dimensions} set_parent_dimension_to_minimum = height spacing = 0 {content} }} }} }}'''
 
 
-def tooltip_type(name, title, subtitle, art, content):
+def tooltip_type(name, title, subtitle, art, content, width=420, fixed_width=False):
+    sizing = 'layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height' if fixed_width else 'set_parent_size_to_minimum = yes'
     return f'''type {name} = ContextualTooltipType {{
         blockoverride "title_icon" {{ icon = {{ using = tooltip_title_icon_size
             texture = "{icon_texture(art)}" }} }}
         blockoverride "title_text" {{ text = "{title}" }}
         blockoverride "concept_link" {{ text = "{subtitle}" }}
-        blockoverride "tooltip_content" {{ vbox = {{ size = {{ 420 0 }}
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 {content} }} }}
+        blockoverride "tooltip_content" {{ vbox = {{ size = {{ {width} 0 }}
+            {sizing} ignoreinvisible = yes spacing = 6 {content} }} }}
     }}'''

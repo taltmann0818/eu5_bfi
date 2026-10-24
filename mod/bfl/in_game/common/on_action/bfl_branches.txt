@@ -1,2 +1,5 @@
 ﻿monthly_country_pulse = { on_actions = { bfl_branch_construction_pulse } }
-        bfl_branch_construction_pulse = { effect = { bfl_ai_build_branches = yes } }
+        bfl_branch_construction_pulse = { effect = { bfl_ai_build_branches = yes bfl_deliver_sovereign_branches = yes } }
+        # Native hardcoded hook: root is the completed building.
+        on_building_built = { on_actions = { bfl_deliver_completed_branch } }
+        bfl_deliver_completed_branch = { effect = { bfl_deliver_sovereign_branch = yes } }

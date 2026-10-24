@@ -30,6 +30,16 @@ def generate(common, effect, loc, write):
             else = { max = bfl_dealer_units }
             min = 0 multiply = 1000 floor = yes divide = 1000 }
     ''')
+    # Dealer automation must not inherit an unrelated shareholder offer's
+    # price or inventory. Round the available cash down before sizing units so
+    # the settlement's upward cent rounding cannot cross the cash limit.
+    values += effect('bfl_market_dealer_buy_max', '''value = 0
+        if = { limit = { bfl_dealer_ask > 0 }
+            value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
+            multiply = 100 floor = yes divide = 100 divide = bfl_dealer_ask
+            max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
+            max = bfl_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
+    ''')
     # Honest per-security sparklines. Samples are actual monthly market-price observations;
     # there is no synthetic history before an institution is listed.
     values += effect('bfl_market_chart_max', 'value = 0.001\n' + '\n'.join(f'min = var:bfl_quote_{i:02}_price' for i in range(1, 13)))
@@ -60,7 +70,8 @@ def generate(common, effect, loc, write):
     values += effect('bfl_order_bid_factor', 'value = 0.98 if = { limit = { exists = var:bfl_market_issuer } value = var:bfl_market_issuer.bfl_price_bid_factor }')
     common('script_values', 'equity_market', values)
 
-    common('scripted_triggers', 'equity_market', effect('bfl_market_charter_buyback', '''trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor }
+    common('scripted_triggers', 'equity_market', effect('bfl_market_charter_buyback', '''trigger_if = { limit = { has_variable = bfl_ownership_schema exists = scope:actor
+        scope:actor = { country_type = location bfl_has_management = yes exists = var:bfl_bank } }
         scope:actor = { country_type = location bfl_has_management = yes }
         this = scope:actor.var:bfl_bank var:bfl_state_owner ?= scope:actor
         bfl_has_valid_controller = yes overlord = scope:actor }
@@ -152,7 +163,8 @@ def generate(common, effect, loc, write):
     for side in ('buy', 'sell'):
         visible = '''bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
             NOT = { this = scope:actor }
-            OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } }
+            trigger_if = { limit = { exists = scope:actor.var:bfl_bank }
+                OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } } }
             OR = { bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }''' if side == 'buy' else 'bfl_equity_issuer = yes bfl_market_sell_units > 0'
         visibility_triggers += effect(f'bfl_market_{side}_visible', f'''trigger_if = {{ limit = {{ has_variable = bfl_ownership_schema }} {visible} }}
             trigger_else = {{ always = no }}''')
@@ -165,12 +177,42 @@ def generate(common, effect, loc, write):
                 column = {{ data = bfl_equity_market }}
                 bottom_widget = bfl_{side}_quantity_widget move_to_next_section_on_click = no
                 interaction_source_list = {{ scope:actor = {{ every_country = {{ limit = {{ {visible} }} add_to_list = source }} }} }}
-                visible = {{ {visible} }} enabled = {{ {visible} NOT = {{ has_cooldown = bfl_share_trade }} }} }}
+                visible = {{ {visible} }} enabled = {{ bfl_market_{side}_{'eligible' if side == 'buy' else 'visible'} = yes NOT = {{ has_cooldown = bfl_share_trade }} }} }}
             select_trigger = {{ looking_for_a = value target_flag = share_quantity name = bfl_share_quantity
                 min = 0.001 max = 1000000 step = 0.001 default = 1 }}
             effect = {{ scope:actor = {{ trigger_event_silently = bfl_market.{11 if side == 'buy' else 12} }} }}
             ai_will_do = {{ value = 0 }} }}\n'''
     common('generic_actions', 'share_market', actions)
+    # The picker has only issuer and actor scopes; transaction scopes such as
+    # bfl_party/bfl_issuer may be missing or left over from an earlier action.
+    # Resolve the actual buyer directly and retain issuer as prev when entering
+    # its portfolio, without mutating any saved transaction scope.
+    holder_branches = []
+    portfolio_branches = []
+    for buyer, authority in [
+        ('scope:actor', 'scope:actor = { bfl_is_independent_bank = yes }'),
+        ('scope:actor.var:bfl_bank', 'scope:actor = { country_type = location bfl_has_management = yes exists = var:bfl_bank }'),
+    ]:
+        holders = ' '.join(f'''var:bfl_shr_{i:02}_active = 0
+            AND = {{ var:bfl_shr_{i:02}_active = 1 var:bfl_shr_{i:02}_pool = 0 var:bfl_shr_{i:02}_party = {buyer} }}''' for i in range(1, 17))
+        positions = ' '.join(f'NOT = {{ exists = var:bfl_pos_{i:02}_issuer }} var:bfl_pos_{i:02}_issuer ?= prev' for i in range(1, 17))
+        holder_branches.append(f'AND = {{ {authority} OR = {{ var:bfl_state_owner ?= {buyer} {holders} }} }}')
+        portfolio_branches.append(f'AND = {{ {authority} {buyer} = {{ OR = {{ {positions} }} }} }}')
+    visibility_triggers += effect('bfl_market_holder_capacity', 'OR = { bfl_market_charter_buyback = yes ' + ' '.join(holder_branches) + ' }')
+    visibility_triggers += effect('bfl_market_portfolio_capacity', 'OR = { bfl_market_charter_buyback = yes ' + ' '.join(portfolio_branches) + ' }')
+    visibility_triggers += effect('bfl_market_company_access', """OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+            OR = { AND = { scope:actor = { bfl_is_independent_bank = yes bfl_can_originate_company_equity = yes } }
+                AND = { scope:actor = { bfl_has_management = yes country_type = location
+                    var:bfl_bank = { bfl_can_originate_company_equity = yes } } } } } }
+    """)
+    for key, maximum in [('bfl_market_buy_eligible', 'bfl_market_buy_max'),
+                         ('bfl_market_dealer_buy_eligible', 'bfl_market_dealer_buy_max')]:
+        visibility_triggers += effect(key, f'''bfl_market_buy_visible = yes
+            custom_tooltip = {{ text = bfl_market_funds_requirement {maximum} >= 0.001 }}
+            custom_tooltip = {{ text = bfl_market_holder_requirement bfl_market_holder_capacity = yes }}
+            custom_tooltip = {{ text = bfl_market_portfolio_requirement bfl_market_portfolio_capacity = yes }}
+            custom_tooltip = {{ text = bfl_market_company_requirement bfl_market_company_access = yes }}
+        ''')
     common('scripted_triggers', 'equity_market_visibility', visibility_triggers)
     common('generic_actions','capital_subscription', '''bfl_new_capital_subscription = { type = owncountry ai_tick = never show_message = no
         potential = { scope:actor = { bfl_has_management = yes } }
@@ -190,10 +232,13 @@ def generate(common, effect, loc, write):
         select_trigger = { looking_for_a = country target_flag = security name = bfl_manage_shareholdings
             column = { data = bfl_equity_market } allow_self = yes
             visible = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
-                OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
+                OR = { AND = { OR = { bfl_is_company = yes bfl_is_independent_bank = yes } bfl_market_actor_votes > 0 }
+                    AND = { bfl_has_valid_controller = yes overlord = scope:actor } } }
                 trigger_else = { always = no } }
             enabled = { trigger_if = { limit = { has_variable = bfl_ownership_schema }
-                bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 } }
+                custom_tooltip = { text = bfl_share_policy_authority
+                    OR = { bfl_market_actor_votes > { value = var:bfl_total_units multiply = 0.5 }
+                        AND = { bfl_has_valid_controller = yes overlord = scope:actor } } } }
                 trigger_else = { always = no } } }
         effect = { scope:actor = { set_variable = { name = bfl_exchange_selected value = scope:security }
             trigger_event_non_silently = bfl_market.6 } } ai_will_do = { value = 0 }
@@ -334,12 +379,18 @@ def generate(common, effect, loc, write):
         'bfl_treasury_stake': 'Your treasury stake',
         'bfl_equity_market': 'Share price and history',
         'bfl_manage_shareholdings': 'Shareholder decisions',
-        'bfl_manage_shareholdings_desc': 'Select a financial holding. More than half of the issued votes may set independent-bank dividends or company payout and reinvestment policy. A live controller may exercise its managed bank\'s votes. Chartered monetary policy and political overlordship remain separate.',
+        'bfl_share_policy_authority': 'Requires a majority of financial votes, or control of your chartered bank.',
+        'bfl_manage_shareholdings_tip': 'Choose a company or bank to set dividends. Requires a majority of financial votes, or control of your chartered bank. Minority holdings remain visible with their unmet requirement.',
+        'bfl_manage_shareholdings_desc': 'Set dividends for [ROOT.GetCountry.MakeScope.GetVariable(\'bfl_exchange_selected\').GetCountry.GetName]. A majority of financial votes controls company and independent-bank payouts. The state controls its own chartered bank. Company reserve choices leave political control unchanged.',
         'bfl_invite_equity_capital': 'Add bank equity capital',
         'bfl_invite_equity_capital_tip': 'Choose the treasury or an estate wallet to subscribe 100 gold at the bank\'s current NAV. New shares dilute existing holders; the bank receives the payment.',
         'bfl_invite_equity_capital_desc': "Subscribe 100 gold to [ROOT.GetCountry.MakeScope.GetVariable('bfl_capital_issuer').GetCountry.GetName] from the selected treasury or estate wallet. The subscriber receives new shares at the market quote. Estate wallets retain at least 25 gold. Financial ownership, future dividends and dilution follow the paid shares.",
     }
     for key, text in labels.items(): loc(key, text)
+    loc('bfl_market_funds_requirement', 'Your bank can afford shares within its cash, capital and ownership limits.')
+    loc('bfl_market_holder_requirement', 'The issuer has a free shareholder slot or already records your buying bank as a shareholder.')
+    loc('bfl_market_portfolio_requirement', 'Your buying bank has a free portfolio slot or already holds this security.')
+    loc('bfl_market_company_requirement', 'Company shares require Overseas Investment and Company Equity research. Bank shares use Share Dealing.')
     for side in ('buy','sell'):
         loc(f'bfl_{side}_shares_tip', labels[f'bfl_{side}_shares_desc'] + "\nRequires a completed exchange, Share Dealing and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_available_trade_diplomats')|2]. Orders must have a cash value of at least 0.01 gold.")
     from generate_portfolio import generate as generate_portfolio
@@ -370,13 +421,13 @@ def gui(loc, write):
         }}'''
     portfolio = ''
     for context, condition in [('GetPlayer', 'bfl_independent_view'), ("GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry", 'bfl_charter_view')]:
-        portfolio += f'''widget = {{ size = {{ -1 74 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+        portfolio += f'''widget = {{ size = {{ -1 56 }} layoutpolicy_horizontal = expanding using = bg_text_mask_container_dark_brown
             datacontext = "[GetPlayer]" visible = "[GetScriptedGui('{condition}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             tooltipwidget = {{ bfl_share_portfolio_tooltip = {{ }} }}
-            icon = {{ position = {{ 10 14 }} size = {{ 40 40 }} texture = "gfx/interface/icons/bfl/share_transfer.dds" }}
+            icon = {{ position = {{ 10 10 }} size = {{ 32 32 }} texture = "gfx/interface/icons/bfl/share_transfer.dds" }}
             text_single = {{ position = {{ 60 8 }} text = "bfl_share_value_label" autoresize = yes fontsize = 15 }}
-            text_single = {{ position = {{ 60 30 }} raw_text = "[{val('bfl_portfolio_market')}|2]@gold!  [{val('bfl_portfolio_return')}|%1+=]" autoresize = yes fontsize = 21 }}
-            text_single = {{ position = {{ 60 57 }} text = "bfl_share_portfolio_hint" autoresize = yes fontsize = 11 }}
+            text_single = {{ position = {{ 60 29 }} raw_text = "[{val('bfl_portfolio_market')}|2]@gold!  [{val('bfl_portfolio_return')}|%1+=]" autoresize = yes fontsize = 17 }}
+
         }}'''
     quantity_widgets = ''
     for side in ('buy','sell'):
@@ -394,11 +445,34 @@ def gui(loc, write):
                 min = "[Min_float('(float)1',{selection_max})]" max = "[{selection_max}]"
                 step = "[SelectInteractionTargetGlue.GetStep]" value = "[SelectInteractionTargetGlue.GetValue]"
                 onvaluechanged = "[SelectInteractionTargetGlue.OnValueChanged]" }}
-            button_regular = {{ position = {{ 350 45 }} size = {{ 160 40 }} text = "bfl_review_trade"
+            button_regular = {{ position = {{ 350 45 }} size = {{ 36 36 }}
                 enabled = "[{review_enabled}]" tooltip = "bfl_review_trade_tip"
-                onclick = "[SelectInteractionTargetView.Confirm]" }}
+                onclick = "[SelectInteractionTargetView.Confirm]" icon = {{ parentanchor = center size = {{ 26 26 }} texture = "gfx/interface/icons/bfl/share_transfer.dds" }} }}
         }}
 '''
+    from generate_credit_redesign import heading, generic
+    loc('bfl_shares_heading', 'Shares')
+    investments = heading('bfl_shares_heading', generic('bfl_buy_shares','buy_shares') + generic('bfl_sell_shares','sell_shares')
+                          + generic('bfl_new_capital_subscription','subscribe') + generic('bfl_manage_shareholdings','accounts')) + portfolio
+    loc('bfl_bank_holdings','Bank investments')
+    loc('bfl_no_bank_holdings','No shares held by the bank.')
+    investments += heading('bfl_bank_holdings')
+    from generate_finance_widgets import asset_list, asset_row
+    holdings = ''
+    for i in range(1,17):
+        issuer = f"BFI_BANK_CONTEXT.MakeScope.GetVariable('bfl_pos_{i:02}_issuer').GetCountry"
+        columns = f'''text_single = {{ raw_text = "[Country.MakeScope.GetVariable('bfl_pos_{i:02}_units').GetValue|3]" size = {{ 80 30 }} align = right|vcenter fontsize = 13 }}
+            text_single = {{ raw_text = "[{val(f'bfl_position_market_{i:02}')}|2]@gold!" size = {{ 100 30 }} align = right|vcenter fontsize = 13 }}'''
+        holdings += asset_row(issuer,f'[{issuer}.GetName]',columns,
+            f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_pos_{i:02}_units').GetValue,'(CFixedPoint)0')]"''',
+            f'''tooltipwidget = {{ bfl_security_financial_tooltip = {{ datacontext = "[{issuer}]" }} }}''')
+    for context, gate in [('GetPlayer','bfl_independent_view'),("GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry",'bfl_charter_view')]:
+        rows=asset_list(holdings.replace('BFI_BANK_CONTEXT',context))
+        investments += f'''vbox = {{ layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed ignoreinvisible = yes
+            datacontext = "[{context}]" visible = "[GetScriptedGui('{gate}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+            {rows}
+            text_single = {{ text = "bfl_no_bank_holdings" autoresize = yes
+                visible = "[EqualTo_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_security_carrying'),'(CFixedPoint)0')]" }} }}'''
     write('in_game/gui/bfl_exchange.gui', f'''types BFLShareMarketTypes {{
         {tooltip}
         type bfl_equity_market_row = widget {{ size = {{ 530 92 }} allow_outside = yes
@@ -419,14 +493,5 @@ def gui(loc, write):
             }}
         }}
         {quantity_widgets}
-        type bfl_equity_investments = vbox {{ layoutpolicy_horizontal = expanding spacing = 8
-            hbox = {{ layoutpolicy_horizontal = expanding spacing = 10 {buttons} }}
-            {portfolio}
-            button_regular = {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding text = "bfl_new_capital_subscription"
-                datacontext = "[GetGenericAction('bfl_new_capital_subscription')]" tooltip = "bfl_new_capital_subscription_tip"
-                enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = {{ click_type = left click_mode = single action_name = "bfl_new_capital_subscription" actor = "[GetPlayer]" }} }}
-            button_regular = {{ size = {{ -1 30 }} layoutpolicy_horizontal = expanding text = "bfl_manage_shareholdings"
-                datacontext = "[GetGenericAction('bfl_manage_shareholdings')]" tooltip = "bfl_manage_shareholdings_desc"
-                enabled = "[PdxGuiWidget.IsUberButtonEnabled]" scripted_action_tooltip = {{ click_type = left click_mode = single action_name = "bfl_manage_shareholdings" actor = "[GetPlayer]" }} }}
-        }}
+        type bfl_equity_investments = vbox {{ ignoreinvisible = yes layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 6 {investments} }}
     }}''')

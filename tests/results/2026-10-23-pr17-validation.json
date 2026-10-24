@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-23",
+  "runtime_sha256": "8c0549ff7463a81fb05e86ceeda7bc9a13619bff099f2ab30e42eb0f7788f742",
+  "game": "1.4.4 / Steam26142040",
+  "cmf": "2.5.0",
+  "runtime_files": 432,
+  "source_validation_files": 357,
+  "offline_tests": 150,
+  "deterministic_generation": true,
+  "engine_reports": {
+    "credit": {
+      "path": "tests/results/2026-10-23-pr17-credit-verified/campaign.json",
+      "checks": 36,
+      "passed": true,
+      "sha256": "f063ff734a9a8b957542eb47ced657f45448427ab290bf8a3940b66fae46c9a0"
+    },
+    "m3": {
+      "path": "tests/results/2026-10-23-pr17-m3/campaign.json",
+      "checks": 46,
+      "passed": true,
+      "sha256": "6b96f7f68c454480cccd18e7b681a822d2f894dc610e64dc607703b9e108059f"
+    },
+    "m9": {
+      "path": "tests/results/2026-10-23-pr17-m9/campaign.json",
+      "checks": 58,
+      "passed": true,
+      "sha256": "6866448ebcd3119b616c78115bdfe639e2204c7741de0eb229cfec0c628bceeb"
+    }
+  },
+  "engine_checks": 140,
+  "screenshots": {
+    "pr17-balance.jpg": "dac5e8ff5a2798cf323b11b88c1700444a5b28059b467484a292a26afc0ef3ce",
+    "pr17-companies.jpg": "dc724152cff71da17aece15612cd1793605668894dca1bde40d6c27015a49f48",
+    "pr17-deposit-funded.jpg": "a62ef1c7a5089da9c7c24988e6670e14ee4cb8a7ecbb5c181dec8f46b09f8ded",
+    "pr17-deposit-slider.jpg": "7e62e725bf264eb41ce38867f13d246f53f29be5165d7820694535e61f7bef2b",
+    "pr17-deposits.jpg": "5921ee3c99d6d6a0f2fbe190382c49d40184a855aaee1fdfb53df9a031db81f5",
+    "pr17-income-empty.jpg": "7160740a232c8dba138f7f9c3211999f3c246f8dc64f49b2faf02c235b264ac4",
+    "pr17-income-history.jpg": "5ac9b0447207ca2251ba317836ca9565568e4294f3649a22c35233578f0b56d8",
+    "pr17-income-source.jpg": "43c54ebca2e3078b869ce08f3bb7e3c0a14198fc2b0c10805dad212df3c92df6",
+    "pr17-portfolio.jpg": "2ea19044088712d0b9c5103a6326685aefa7b58db0f2d734fe9d178b999e03b8",
+    "pr17-shares.jpg": "181dc9747ba3441d0430db20d51235efd072d693dce42e4ef63e600ce887a060"
+  },
+  "visual_scope": "Fresh Florence 2560x1440, granted Reformation/research/buildings/wallets, advanced 1 April to 1 June1337. Balance facility row, compact deposits, actual2500deposit, populated gross-income/expense chart with history at left, nested Florence0.25receipt, company and share rows, portfolio tooltip. Small seeded scene only. Native Automation on/off captures retain pre-integration2fdfceed source identity.",
+  "visual_remaining": [
+    "Other resolutions/scales and roles",
+    "Long populated ledgers",
+    "Current non-English visual QA",
+    "Natural long-run balance and release-scale performance/compatibility"
+  ],
+  "rejected_reports": {
+    "2026-10-23-pr17-credit-integration": "34 numeric checks passed, but two owncountry actions incorrectly used reserved recipient target flag. Fixed to bfl_deposit_target before accepted run.",
+    "2026-10-23-pr17-m3-stale-fixture": "Reload fixture compared a snapshot made before final company origination reused a closed credit slot. Snapshot moved after final mutation; all46pass on unchanged production runtime."
+  },
+  "m10_boundary": "The legacy M10/manual-mandate headless fixtures need porting to native Credit Management authority. Not run or claimed passed on this runtime. Historical M10 evidence remains scoped to original builds. Licensed CI requires the1.4.4runner and is not counted as passed."
+}

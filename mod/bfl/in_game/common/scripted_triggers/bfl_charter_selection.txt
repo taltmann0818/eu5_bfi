@@ -1,6 +1,6 @@
 ﻿bfl_is_charter_candidate = {
     country_exists = this is_subject_type = state_bank country_type = building
-    has_reform = government_reform:banking_country
+    OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
     NOT = { has_variable = bfl_operation_guard }
     OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
 }

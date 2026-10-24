@@ -1,0 +1,6 @@
+﻿on_building_built = { on_actions = { bfl_bank_house_built } }
+bfl_bank_house_built = { effect = { bfl_refresh_bank_house_demand = yes } }
+monthly_country_pulse = { on_actions = { bfl_bank_house_monthly } }
+bfl_bank_house_monthly = { effect = { every_owned_building = {
+    limit = { OR = { building_type = building_type:bfl_fuggerhauser building_type = building_type:bfl_palazzo_peruzzi } building_level > 0 }
+    bfl_refresh_bank_house_demand = yes } } }

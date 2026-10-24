@@ -1,0 +1,14 @@
+﻿bfl_deliver_sovereign_branch = {
+if = { limit = { building_type = building_type:banking_office building_level > 0
+    owner = { country_type = location bfl_has_management = yes
+        var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev } } }
+    owner = { var:bfl_bank = { save_scope_as = bfl_branch_deed_bank } }
+    change_building_owner = scope:bfl_branch_deed_bank
+}
+}
+bfl_deliver_sovereign_branches = {
+if = { limit = { country_type = location bfl_has_management = yes }
+    every_owned_building = { limit = { building_type = building_type:banking_office building_level > 0 }
+        bfl_deliver_sovereign_branch = yes }
+}
+}

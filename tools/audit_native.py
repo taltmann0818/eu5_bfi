@@ -33,8 +33,18 @@ SOURCES=[
  'in_game/common/generic_actions/create_building_subject.txt',
  'in_game/common/on_action/country_monthly.txt',
  'in_game/common/on_action/exploration_mission_monthly.txt',
- 'in_game/common/on_action/_hardcoded.txt','main_menu/common/modifier_type_definitions/00_modifier_types.txt'
+ 'in_game/common/on_action/_hardcoded.txt','main_menu/common/modifier_type_definitions/00_modifier_types.txt',
+ 'in_game/events/DHE/flavor_ENG.txt',
+ 'in_game/events/DHE/flavor_hol.txt','in_game/events/DHE/flavor_SWE.txt',
+ 'in_game/common/building_types/event_only_buildings.txt',
+ 'in_game/events/economy/banking.txt',
+ 'in_game/events/DHE/flavor_flo.txt','in_game/events/DHE/flavor_por.txt',
+ 'in_game/events/DHE/flavor_HAM.txt','in_game/events/DHE/flavor_VEN.txt',
+ 'in_game/events/DHE/flavor_ARA.txt','in_game/events/DHE/flavor_SIE.txt','in_game/events/DHE/flavor_GEN.txt',
+ 'in_game/common/customizable_localization/country_name_construction.txt'
 ]
+from generate_bank_reforms import NATIVE_CHECK_FILES
+SOURCES=list(dict.fromkeys(SOURCES+NATIVE_CHECK_FILES+['in_game/common/government_reforms/country_specific.txt']))
 CMF_SOURCES=['.metadata/metadata.json','in_game/common/on_action/cmf_on_actions.txt',
  'in_game/common/scripted_effects/cmf_alert_effects.txt','in_game/common/scripted_effects/cmf_log_effects.txt',
  'in_game/common/scripted_effects/cmm_core_bool_setting_effects.txt',
@@ -79,11 +89,11 @@ def main(game, cmf, compare):
         print('All pinned native and CMF source hashes match.');return
     manifest=(game.parent.parent.parent/'appmanifest_3450310.acf').read_text()
     # Steam manifest is two ancestors above common/game's installation root.
-    baseline.update({'recorded':'2026-10-14','game_version':'1.4.1','version_evidence':'Historical installed debug.log reports matched game version 1.4.1; UI confirmation pending.',
+    baseline.update({'recorded':'2026-10-23','game_version':'1.4.4','version_evidence':'Installed debug.log reports 1.4.4; native overrides reviewed for Steam build 26142040.',
       'steam_build':re.search(r'"buildid"\s+"(\d+)"',manifest).group(1),
       'steam_branch':re.search(r'"BetaKey"\s+"([^"]+)"',manifest).group(1),
       'checksum_file':(game.parent/'binaries/checksum.txt').read_text().strip(),
-      'displayed_checksum':None,'cmf_version':'2.5.0','runtime_probes':'NOT RUN — user requested stop before in-game testing',
+      'displayed_checksum':None,'cmf_version':'2.5.0','runtime_probes':baseline.get('runtime_probes','Not run; source pinning does not establish runtime acceptance.'),
       'game_sources':current,'cmf_sources':cmf_current,'graphics_reference_commit':'52fac49f3c189f50a04204b743f19335887f88ad'})
     baseline_path.parent.mkdir(parents=True,exist_ok=True)
     baseline_path.write_text(json.dumps(baseline,indent=2)+'\n')
@@ -100,17 +110,39 @@ def main(game, cmf, compare):
     end=balanced_block(siphon,siphon.index('{',match.start()))
     siphon=siphon[:match.end()]+'\n\t\tif = { limit = { scope:recipient = { NOT = { is_subject_type = bfl_chartered_bank } } }'+siphon[match.end():end-1]+'\n\t\t}\n\t'+siphon[end-1:]
     write(MOD/'in_game/common/country_interactions/siphon_income.txt',siphon)
+    from build_bank_of_england import build as build_bank_of_england
+    build_bank_of_england(game)
+    from generate_family_banks import build_native as build_family_banks
+    build_family_banks(game)
+    from generate_bank_catalogue import build_native as build_bank_catalogue
+    build_bank_catalogue(game)
+    from generate_bank_reforms import build_native as build_bank_reforms
+    build_bank_reforms(game)
     with (ROOT/'docs/overrides.csv').open('w',newline='') as f:
         w=csv.writer(f);w.writerow(['path','reason','source_sha256','game_version'])
         for path,why,source in [
             ('in_game/gui/economy_lateralview.gui','Add funded bank income rows; preserve native Balance controls and shared types once','in_game/gui/economy_lateralview.gui'),
             ('in_game/common/country_interactions/siphon_income.txt','Exclude chartered bank at selection and execution; preserve every other native branch','in_game/common/country_interactions/siphon_income.txt'),
-            ('in_game/gui/credit.gui','Unify bank accounts and native state loans; retain native loan actors and templates','in_game/gui/credit.gui'),
+            ('in_game/gui/credit.gui','Redesign bank Credit; remove native loan lists; retain native repayment/bankruptcy actors and confirmations','in_game/gui/credit.gui'),
             ('in_game/gui/technology_lateralview.gui','Use the chartered-bank badge for BFI advances; retain other native badges','in_game/gui/technology_lateralview.gui'),
             ('in_game/common/advances/bfl_banking_unlocks.txt','INJECT two permissions into banking_advance; preserve its native effects and institution gate','in_game/common/advances/0_age_of_renaissance.txt'),
-            ('in_game/common/advances/1_building_unlocks.txt','Move only Stock Exchange to Reformation after Banking; preserve every other native unlock and bond-slot bonus','in_game/common/advances/1_building_unlocks.txt'),
+            ('in_game/common/advances/1_building_unlocks.txt','Move Stock Exchange to Reformation after Global Trade; preserve other native effects','in_game/common/advances/1_building_unlocks.txt'),
+            ('in_game/common/advances/0_age_of_absolutism.txt','Move Central Banking to Reformation after Stock Exchange; preserve other native effects','in_game/common/advances/0_age_of_absolutism.txt'),
+            ('in_game/common/building_types/unique_buildings.txt','Allow sovereign-funded Bank Branch construction and prevent duplicate bank branches','in_game/common/building_types/unique_buildings.txt'),
+            ('in_game/common/advances/bfl_exchange_ai_priorities.txt','Inject bank-only Banking AI priority; preserve native effects','in_game/common/advances/0_age_of_renaissance.txt'),
+            ('in_game/common/country_interactions/request_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/request_loan.txt'),
+            ('in_game/common/country_interactions/take_over_loan.txt','Require the owned completed capital branch; preserve native cash effects','in_game/common/country_interactions/take_over_loan.txt'),
+            ('in_game/events/DHE/flavor_ENG.txt','Create the chartered Bank of England and use custom artwork; preserve other events','in_game/events/DHE/flavor_ENG.txt'),
+            ('in_game/events/economy/banking.txt','Add Fuggerhauser and Welserhaus to their native founding options; preserve other effects','in_game/events/economy/banking.txt'),
+            ('in_game/events/DHE/flavor_hol.txt','Create Wisselbank, add NED eligibility and original art; preserve other events','in_game/events/DHE/flavor_hol.txt'),
+            ('in_game/events/DHE/flavor_SWE.txt','Create Sveriges Riksbank with original art; preserve other events','in_game/events/DHE/flavor_SWE.txt'),
+            *[(f'in_game/events/DHE/{name}', 'Integrate native historical bank charters and exclusive choices; preserve unrelated events', f'in_game/events/DHE/{name}') for name in ['flavor_flo.txt','flavor_por.txt','flavor_HAM.txt','flavor_VEN.txt','flavor_ARA.txt','flavor_SIE.txt','flavor_GEN.txt']],
+            ('in_game/common/building_types/capital_buildings.txt','Expose and apply Central Bank administration reduction through a native building modifier','in_game/common/building_types/capital_buildings.txt'),
+            ('in_game/common/building_types/event_only_buildings.txt','Expose and apply native unique bank headquarters administration reductions','in_game/common/building_types/event_only_buildings.txt'),
+            ('in_game/common/customizable_localization/country_name_construction.txt','Use the complete Bank of England name without adding a second Bank of prefix','in_game/common/customizable_localization/country_name_construction.txt'),
+            *[(path,'Accept Banking Company alongside Banking Family in native bank checks',path) for path in NATIVE_CHECK_FILES if not path.endswith(('unique_buildings.txt','request_loan.txt'))],
         ]:
-            w.writerow([path,why,current[source],'1.4.1'])
+            w.writerow([path,why,current[source],'1.4.4'])
     print('Pinned installed evidence and generated two narrow native integrations.')
 
 

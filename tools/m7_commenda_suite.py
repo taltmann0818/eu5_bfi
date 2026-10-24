@@ -11,6 +11,7 @@ from pathlib import Path
 import campaign_suite as campaign
 
 AGE = 3
+SURPLUS_FRACTION = Decimal('.75')
 
 
 def fixture(token, fingerprint):
@@ -48,7 +49,7 @@ def fixture(token, fingerprint):
             add_country_modifier = { modifier = bfi_m7_no_range mode = add_and_extend } }
     '''
     start+=offer()+check('missing_research_cannot_offer', 'c:BRD.gold = 10000 c:FLO.gold = 1000 c:FLO = { NOT = { has_variable = bfl_venture_offer_bank } }')
-    start+='c:BRD = { research_advance = advance_type:bfl_commenda }'+offer()
+    start+='c:BRD = { research_advance = advance_type:basic_financial_instruments research_advance = advance_type:bfl_commenda }'+offer()
     if AGE<3:
         start+=check('traditions_rejects_future_research','c:FLO = { NOT = { has_variable = bfl_venture_offer_bank } } c:BRD.gold = 10000')
     else:
@@ -96,7 +97,10 @@ def fixture(token, fingerprint):
         finish+=extra(check,offer,accept)
         from m7_alert_cases import extra as alert_checks
         finish+=alert_checks(check)
-    finish+='c:BRD = { set_variable = bfi_activity_checks_complete set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 13 } } } } else = { c:BRD = { remove_variable = bfi_test_pending }'+f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'+'}\n'
+    # Native Credit Management now owns new business; the old strategy_mode=0
+    # fixture flag does not disable AI origination. Keep accepted servicing
+    # active, but prevent an unrelated later offer from reusing the saved slot.
+    finish+='c:BRD = { set_variable = bfi_activity_checks_complete set_variable = { name = bfl_strategy_venture_after value = { value = bfl_period add = 1200 } } set_variable = { name = bfi_test_target_period value = { value = bfl_period add = 13 } } } } else = { c:BRD = { remove_variable = bfi_test_pending }'+f'debug_log = "BFI_TEST|{token}|END|{fingerprint}"\n'+'}\n'
     return start,finish,instant,cases
 
 
@@ -133,7 +137,7 @@ def collect(log,manifest,error_log=''):
         v=values
         result['native_arithmetic']={
             'closed_capital_return_plus_impairment_equals_paid_basis':v['returned']+v['loss']==v['original'],
-            'profit_equals_net_operation_surplus_share':abs(v['profit']-max(v['receipts']-v['cost'],0)*Decimal('.75'))<=Decimal('.0001'),
+            'profit_equals_net_operation_surplus_share':abs(v['profit']-max(v['receipts']-v['cost'],0)*SURPLUS_FRACTION)<=Decimal('.0001'),
             'no_exploration_or_discovery_cash_in_trading_project':v['exploration_cost']==0,
             'invested_basis_equals_actual_operation_cost':v['cost']==v['original'],
             'custody_equals_native_stock_removed':v['source_open']-v['source_after']==v['acquired']==10,

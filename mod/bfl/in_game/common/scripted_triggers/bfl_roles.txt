@@ -4,14 +4,14 @@ bfl_is_chartered_bank = {
     country_exists = this
     NOT = { bfl_is_company = yes }
     country_type = building
-    has_reform = government_reform:banking_country
+    OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
     is_subject_type = bfl_chartered_bank
 }
 bfl_is_independent_bank = {
     country_exists = this
     NOT = { bfl_is_company = yes }
     country_type = building
-    has_reform = government_reform:banking_country
+    OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
     is_subject = no
 }
 bfl_is_bank = { OR = { bfl_is_chartered_bank = yes bfl_is_independent_bank = yes } }

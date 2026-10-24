@@ -31,13 +31,31 @@
 				months_left > 40
 				loan_interest > scope:actor.modifier:bank_interest
 				scope:actor.gold > remaining_debt
+                OR = { scope:actor = { NOT = { bfl_has_accounts = yes } }
+                    AND = { scope:actor = { bfl_can_originate_native_takeover = yes }
+                        scope:actor.bfl_free_cash >= bank_loan_takeover_cost
+                        OR = { scope:actor = { is_ai = no } bfl_ai_takeover_viable = yes } } }
 			}
 		}
 	}
 
 	effect = {
         if = { limit = { scope:actor = { bfl_branch_access = { PARTY = scope:recipient } } }
-
+if = { limit = { scope:actor = { bfl_has_accounts = yes } }
+                scope:recipient = { save_scope_as = bfl_party }
+                scope:actor = { save_scope_as = bfl_bank
+                    if = { limit = { is_ai = yes }
+                        if = { limit = { bfl_strategy_authorized = yes bfl_period > var:bfl_last_takeover_period
+                            scope:bfl_party = { bfl_ai_takeover_candidate = yes } }
+                            set_variable = { name = bfl_takeover_done value = 0 }
+                            set_variable = bfl_takeover_ai_review bfl_native_takeover = yes
+                            remove_variable = bfl_takeover_ai_review
+                            if = { limit = { var:bfl_takeover_done = 1 }
+                                set_variable = { name = bfl_last_takeover_period value = bfl_period } } }
+                    }
+                    else = { bfl_native_takeover = yes }
+                }
+            } else = { 
 		scope:recipient = {
 			ordered_loan = {
 				limit = {
@@ -67,13 +85,19 @@
 				change_loan_owner = scope:actor
 			}
 		}	
-	
+	 }
         }
 }
 
-	ai_will_do = {
+	ai_will_do = { value = 0
+                if = { limit = { scope:actor = { bfl_has_accounts = yes } }
+                    if = { limit = { scope:actor = { bfl_strategy_authorized = yes bfl_free_cash >= 200
+                            bfl_period > var:bfl_last_takeover_period }
+                        scope:recipient = { bfl_ai_takeover_candidate = yes } } add = 5 }
+                }
+                else = { 
 		#Ignore smaller countries for performance
 		add = -20
 		add = scope:recipient.country_tax_base
-	}
+	 } }
 }	

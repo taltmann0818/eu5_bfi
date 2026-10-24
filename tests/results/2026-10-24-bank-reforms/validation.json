@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-24",
+  "runtime_sha256": "3c74768373116132b8ab450de4a54d5e1ea71f32e10efa59b6466487a74f6801",
+  "engine": {
+    "bank_reforms": {
+      "report": "campaign.json",
+      "manifest": "manifest.json",
+      "assertions": 94,
+      "passed": true
+    },
+    "native_commenda": {
+      "report": "commenda-campaign.json",
+      "manifest": "commenda-manifest.json",
+      "assertions": 38,
+      "passed": true,
+      "native_arithmetic_checks": 6
+    }
+  },
+  "offline": {
+    "unit_tests": 150,
+    "source_files": 460,
+    "graphics": 97,
+    "native_pins": "EUV 1.4.4 Steam 26142040; CMF 2.5.0",
+    "native_override_reconstruction": true
+  },
+  "limits": [
+    "The exact Global Trade unlock is tested negatively in the early fixture; a test-only reform availability override permits effect and persistence checks. Natural institution adoption is not claimed.",
+    "The commenda fixture uses native costs, stock transfers and measured sale proceeds; the fixture controls delivery timing and exploration boundary cases. A long origination cooldown preserves the final operation for reload while servicing remains active.",
+    "Final current-scale visual inspection was interrupted by physical Escape. Source assets were reviewed, but current reform/building tooltips and enlarged flags are not claimed visually verified.",
+    "Other scales, semantic translation review, full natural campaigns, balance and late-game compatibility remain M10 work."
+  ]
+}

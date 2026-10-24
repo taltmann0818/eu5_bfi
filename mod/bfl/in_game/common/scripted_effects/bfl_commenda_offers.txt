@@ -16,6 +16,10 @@ bfl_initialize_commenda = yes save_scope_as = bfl_venture_lender
                 set_variable = { name = bfl_venture_offer_preset value = scope:bfl_venture_lender.var:bfl_venture_preset }
                 set_variable = { name = bfl_venture_offer_duration value = scope:bfl_venture_lender.var:bfl_venture_duration }
                 set_variable = { name = bfl_venture_offer_expiry value = { value = bfl_period add = 3 } }
+                set_variable = { name = bfl_venture_offer_expertise value = { value = scope:bfl_venture_lender.modifier:bfl_commenda_expertise min = 0 max = 1 } }
+                set_variable = { name = bfl_venture_offer_profit_fraction value = { value = 0.75
+                    if = { limit = { var:bfl_venture_offer_preset = 1 } value = 0.5 }
+                    multiply = { value = 1 add = var:bfl_venture_offer_expertise } max = 0.95 } }
                 set_variable = { name = bfl_venture_offer_kind value = scope:bfl_venture_lender.var:bfl_venture_kind }
         if = { limit = { var:bfl_venture_offer_kind = 1 }
             set_variable = { name = bfl_venture_offer_from value = scope:from }
@@ -57,6 +61,7 @@ if = { limit = { country_exists = this exists = var:bfl_venture_offer_bank count
             set_variable = { name = bfl_v_01_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_01_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_01_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_01_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_01_from value = scope:from } set_variable = { name = bfl_v_01_to value = scope:to }
                 set_variable = { name = bfl_v_01_good value = scope:goods }
@@ -91,8 +96,7 @@ set_variable = { name = bfl_v_01_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -107,6 +111,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_02_state != 1 }
             set_variable = { name = bfl_v_02_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_02_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_02_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_02_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_02_from value = scope:from } set_variable = { name = bfl_v_02_to value = scope:to }
                 set_variable = { name = bfl_v_02_good value = scope:goods }
@@ -141,8 +146,7 @@ set_variable = { name = bfl_v_02_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -157,6 +161,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_03_state != 1 }
             set_variable = { name = bfl_v_03_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_03_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_03_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_03_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_03_from value = scope:from } set_variable = { name = bfl_v_03_to value = scope:to }
                 set_variable = { name = bfl_v_03_good value = scope:goods }
@@ -191,8 +196,7 @@ set_variable = { name = bfl_v_03_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -207,6 +211,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_04_state != 1 }
             set_variable = { name = bfl_v_04_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_04_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_04_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_04_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_04_from value = scope:from } set_variable = { name = bfl_v_04_to value = scope:to }
                 set_variable = { name = bfl_v_04_good value = scope:goods }
@@ -241,8 +246,7 @@ set_variable = { name = bfl_v_04_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -257,6 +261,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_05_state != 1 }
             set_variable = { name = bfl_v_05_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_05_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_05_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_05_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_05_from value = scope:from } set_variable = { name = bfl_v_05_to value = scope:to }
                 set_variable = { name = bfl_v_05_good value = scope:goods }
@@ -291,8 +296,7 @@ set_variable = { name = bfl_v_05_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -307,6 +311,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_06_state != 1 }
             set_variable = { name = bfl_v_06_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_06_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_06_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_06_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_06_from value = scope:from } set_variable = { name = bfl_v_06_to value = scope:to }
                 set_variable = { name = bfl_v_06_good value = scope:goods }
@@ -341,8 +346,7 @@ set_variable = { name = bfl_v_06_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -357,6 +361,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_07_state != 1 }
             set_variable = { name = bfl_v_07_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_07_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_07_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_07_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_07_from value = scope:from } set_variable = { name = bfl_v_07_to value = scope:to }
                 set_variable = { name = bfl_v_07_good value = scope:goods }
@@ -391,8 +396,7 @@ set_variable = { name = bfl_v_07_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }
@@ -407,6 +411,7 @@ if = { limit = { var:bfl_venture_allocated = 0 var:bfl_v_08_state != 1 }
             set_variable = { name = bfl_v_08_operator value = scope:bfl_operator }
             set_variable = { name = bfl_v_08_preset value = var:bfl_venture_preset }
             set_variable = { name = bfl_v_08_kind value = var:bfl_venture_kind }
+            set_variable = { name = bfl_v_08_profit_fraction value = scope:bfl_operator.bfl_venture_offered_profit_fraction }
             if = { limit = { var:bfl_venture_kind = 1 }
                 set_variable = { name = bfl_v_08_from value = scope:from } set_variable = { name = bfl_v_08_to value = scope:to }
                 set_variable = { name = bfl_v_08_good value = scope:goods }
@@ -441,8 +446,7 @@ set_variable = { name = bfl_v_08_has_cargo value = 0 }
                 set_variable = { name = bfl_venture_sold value = 0 }
                 set_variable = { name = bfl_venture_exploration_cost value = 0 }
                 set_variable = { name = bfl_venture_receipts value = 0 }
-                set_variable = { name = bfl_venture_profit_fraction value = 0.75 }
-                if = { limit = { var:bfl_venture_offer_preset = 1 } set_variable = { name = bfl_venture_profit_fraction value = 0.5 } }
+                set_variable = { name = bfl_venture_profit_fraction value = bfl_venture_offered_profit_fraction }
                 set_variable = { name = bfl_venture_last_period value = bfl_period }
                 set_variable = { name = bfl_venture_company_surplus value = 0 }
                 set_variable = { name = bfl_venture_excluded value = 0 }

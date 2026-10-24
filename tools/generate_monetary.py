@@ -91,7 +91,8 @@ def generate(common, effect, loc, write):
     }
     bfl_clearing_operator = {
         bfl_can_originate_clearing = yes var:bfl_clearing_open = 1
-        bfl_monetary_building = { BUILDING = clearing_house }
+        OR = { bfl_monetary_building = { BUILDING = clearing_house }
+            bfl_monetary_building = { BUILDING = central_bank } }
     }
     bfl_same_clearing_group = {
         exists = var:bfl_clearing_member country_exists = var:bfl_clearing_member
@@ -515,7 +516,7 @@ def make_interface(common, effect, loc, write):
     command('bfl_money_repay', 'bfl_repay_discount = yes', bank_gate='exists = var:bfl_discount_issuer')
     command('bfl_money_clear', 'bfl_run_clearing = yes', bank_gate='bfl_clearing_operator = yes')
     command('bfl_money_clear_open', '''if = { limit = { var:bfl_clearing_open = 0 } set_variable = { name = bfl_clearing_open value = 1 } }
-        else = { set_variable = { name = bfl_clearing_open value = 0 } }''', bank_gate='bfl_can_originate_clearing = yes bfl_monetary_building = { BUILDING = clearing_house }')
+        else = { set_variable = { name = bfl_clearing_open value = 0 } }''', bank_gate='bfl_can_originate_clearing = yes OR = { bfl_monetary_building = { BUILDING = clearing_house } bfl_monetary_building = { BUILDING = central_bank } }')
     command('bfl_money_leave', 'bfl_leave_clearing = yes', bank_gate='exists = var:bfl_clearing_member')
     command('bfl_money_authorize', '''overlord = { save_scope_as = bfl_note_sovereign }
         set_variable = { name = bfl_note_authority value = scope:bfl_note_sovereign }''',

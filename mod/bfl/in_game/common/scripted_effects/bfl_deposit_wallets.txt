@@ -10,13 +10,13 @@ if = { limit = { var:bfl_pool = 4 } "estate(estate_type:peasants_estate)" = {
             estate_add_gold = { value = { value = scope:bfl_bank.var:bfl_payment  } } } }
 }
 bfl_debit_depositor = {
-if = { limit = { var:bfl_pool = 0 } add_gold = { value = 100 multiply = -1 } }
+if = { limit = { var:bfl_pool = 0 } add_gold = { value = scope:bfl_bank.var:bfl_deposit_amount multiply = -1 } }
 if = { limit = { var:bfl_pool = 1 } "estate(estate_type:burghers_estate)" = {
-            estate_add_gold = { value = { value = 100 multiply = -1 } } } }
+            estate_add_gold = { value = { value = scope:bfl_bank.var:bfl_deposit_amount multiply = -1 } } } }
 if = { limit = { var:bfl_pool = 2 } "estate(estate_type:nobles_estate)" = {
-            estate_add_gold = { value = { value = 100 multiply = -1 } } } }
+            estate_add_gold = { value = { value = scope:bfl_bank.var:bfl_deposit_amount multiply = -1 } } } }
 if = { limit = { var:bfl_pool = 3 } "estate(estate_type:clergy_estate)" = {
-            estate_add_gold = { value = { value = 100 multiply = -1 } } } }
+            estate_add_gold = { value = { value = scope:bfl_bank.var:bfl_deposit_amount multiply = -1 } } } }
 if = { limit = { var:bfl_pool = 4 } "estate(estate_type:peasants_estate)" = {
-            estate_add_gold = { value = { value = 100 multiply = -1 } } } }
+            estate_add_gold = { value = { value = scope:bfl_bank.var:bfl_deposit_amount multiply = -1 } } } }
 }

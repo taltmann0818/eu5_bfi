@@ -1,0 +1,21 @@
+﻿bfl_automatic_resolution = {
+if = { limit = { bfl_is_bank = yes var:bfl_state < 5
+    OR = { NOT = { has_variable = bfl_recovery_review_period } bfl_period > var:bfl_recovery_review_period } }
+    set_variable = { name = bfl_recovery_review_period value = bfl_period }
+    if = { limit = { var:bfl_state = 3 bfl_equity < 0 }
+        if = { limit = { has_variable = bfl_insolvent_since bfl_period > var:bfl_insolvent_since }
+            bfl_begin_resolution = yes }
+        else_if = { limit = { NOT = { has_variable = bfl_insolvent_since } }
+            set_variable = { name = bfl_insolvent_since value = bfl_period } }
+    }
+    else = { remove_variable = bfl_insolvent_since }
+    if = { limit = { var:bfl_state = 4 }
+        bfl_liquidate_resolution_assets = yes
+        bfl_distribute_resolution_cash = yes
+        bfl_pay_resolution_guarantee = yes
+        bfl_resume_after_resolution = yes
+        if = { limit = { bfl_can_conclude_liquidation = yes } bfl_conclude_liquidation = yes }
+        if = { limit = { bfl_can_close_resolution = yes } bfl_close_resolution = yes }
+    }
+}
+}

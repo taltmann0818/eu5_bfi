@@ -4,16 +4,16 @@
     allow = { scope:actor = { bfl_has_management = yes } }
     select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
         column = { data = country_diplomacy_info_loan }
-        visible = { num_loans > 0 }
-        enabled = {
-            scope:actor = { OR = { bfl_is_independent_bank = yes var:bfl_bank ?= { bfl_can_originate_native_takeover = yes } } }
-            any_loan = { is_bond = no NOT = { exists = owner } months_left > 40 }
-        }
+        visible = { country_type = location num_loans > 0 }
+        enabled = { bfl_managed_takeover_target = yes }
     }
     effect = {
-        scope:recipient = { save_scope_as = bfl_party }
-        scope:actor = { bfl_resolve_command_bank = yes }
-        scope:bfl_bank = { bfl_native_takeover = yes }
+        custom_tooltip = bfl_native_takeover_result_tt
+        hidden_effect = {
+            scope:recipient = { save_scope_as = bfl_party }
+            scope:actor = { bfl_resolve_command_bank = yes }
+            scope:bfl_bank = { bfl_native_takeover = yes }
+        }
     }
     ai_will_do = { value = 0 }
 }

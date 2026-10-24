@@ -1,10 +1,11 @@
 param(
     [string]$Game = $env:EU5_GAME_ROOT,
     [string]$Cmf = $env:EU5_CMF_ROOT,
+    [string[]]$AdditionalMods = @(),
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects')][string]$Suite = 'accounts'
+    [ValidateSet('investmentcommenda', 'reforms', 'catalogue', 'family', 'historical', 'boe', 'accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -23,6 +24,15 @@ try {
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
     $suiteScript = switch ($Suite) {
+        'investmentcommenda' { 'tools/investment_commenda_suite.py' }
+        'reforms' { 'tools/bank_reforms_suite.py' }
+        'catalogue' { 'tools/bank_catalogue_suite.py' }
+        'family' { 'tools/family_banks_suite.py' }
+        'historical' { 'tools/historical_banks_suite.py' }
+        'boe' { 'tools/boe_suite.py' }
+        'm10takeover' { 'tools/m10_takeover_suite.py' }
+        'm10finance' { 'tools/m10_finance_suite.py' }
+        'm10' { 'tools/m10_strategy_suite.py' }
         'm0' { 'tools/m0_probe_suite.py' }
         'm1' { 'tools/m1_charter_suite.py' }
         'm2' { 'tools/m2_company_suite.py' }
@@ -61,7 +71,8 @@ try {
     $bfi = Join-Path $userDir 'mod/bfi'
     Copy-Item -LiteralPath (Join-Path $repo 'mod/bfl') -Destination $bfi -Recurse
     $overlay = Join-Path $userDir 'mod/bfi_campaign_checks'
-    $mods = @($Cmf, $bfi, $overlay) | ForEach-Object {
+    $modPaths = @($Cmf) + $AdditionalMods + @($bfi, $overlay)
+    $mods = $modPaths | ForEach-Object {
         @{path = ($_.Replace('\','/') + '/'); isEnabled = $true}
     }
     @{file_version = '1.0.0'; playsets = @(@{
@@ -74,12 +85,18 @@ try {
     if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
     # Activity assertions finish after three months, followed by a full annual
     # autosave interval. Native timed handsoff counts months, not years.
-    if ($Suite -in @('m7', 'm7traditions', 'm7later')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
+    if ($Suite -in @('m7', 'm7traditions', 'm7later', 'investmentcommenda')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5market') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5pricing') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=90', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }
     $outPath = [System.IO.Path]::GetFullPath((Join-Path $repo $Output))
     New-Item -ItemType Directory -Path $outPath -Force | Out-Null
+    if ($AdditionalMods.Count -gt 0) {
+        $inventoryArgs = @('tools/audit_compatibility.py', '--output', (Join-Path $outPath 'additional-mods.json'))
+        foreach ($additionalMod in $AdditionalMods) { $inventoryArgs += @('--mod', $additionalMod) }
+        & python @inventoryArgs
+        if ($LASTEXITCODE -ne 0) { throw 'Unsupported additional-mod replacement; see inventory.' }
+    }
     Copy-Item -LiteralPath (Join-Path $userDir 'bfi_campaign_manifest.json') -Destination (Join-Path $outPath 'manifest.json') -Force
     $deadline = [DateTime]::UtcNow.AddSeconds($TimeoutSeconds)
     $debugPath = Join-Path $userDir 'logs/debug.log'
@@ -96,7 +113,12 @@ try {
                 if (Test-Path -LiteralPath $debugPath) {
                     # An autosave can append hundreds of lines between polls;
                     # the completed fixture marker must not fall out of a tail.
-                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) { break }
+                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) {
+                        # Buffered logs can expose END during the annual save's
+                        # write. Do not kill our process before its reload file exists.
+                        $hasReloadSave = Get-ChildItem -LiteralPath (Join-Path $userDir 'save games') -Filter '*.eu5' -File -ErrorAction SilentlyContinue | Where-Object Length -GT 0 | Select-Object -First 1
+                        if ($StopMarker.Contains('|RELOAD_END|') -or $hasReloadSave) { break }
+                    }
                 }
                 Start-Sleep -Seconds 5
                 $proc.Refresh()

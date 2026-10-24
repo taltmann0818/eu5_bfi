@@ -1,5 +1,8 @@
 # Florence testing and M0 completion
 
+The 23 October second Credit redesign is in verification. Current source behavior, engine checks and outstanding live inspection are tracked in [coverage](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026). Historical milestone passes below apply to their recorded runtimes, not automatically to this pass.
+
+**23 October redesign:** Current UI, funding-cap, deposit-amount, dividend-presentation and automation changes are tracked in [coverage](coverage.md#net-income-recurring-funding-and-asset-list-follow-up---23-october-2026). Evidence below remains historical for its exact runtime. See [UI steering](ui-steering.md).
 M7 commenda passes its corrected activity-attribution gate for the pinned
 single-player baseline: **292 engine assertions, 19 native arithmetic
 reconciliations, fresh-process reload and 20 accepted actual-game captures**.

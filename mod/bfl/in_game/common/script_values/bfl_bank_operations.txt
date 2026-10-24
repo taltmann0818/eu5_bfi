@@ -123,6 +123,12 @@ value = 0 if = { limit = { OR = { has_advance = bfl_advanced_clearing overlord ?
 bfl_operating_reduction_administration = {
 value = 0 if = { limit = { var:bfl_cost_program = 1 } add = 0.1 }
 }
+bfl_operating_reduction_central_bank = {
+value = bfl_building_headquarters_reduction
+}
+bfl_operating_reduction_family_palace = {
+value = bfl_building_admin_reduction
+}
 bfl_operating_complexity = {
 value = bfl_operating_base_cost
 add = bfl_operating_accounts_cost
@@ -130,16 +136,21 @@ add = bfl_operating_contracts_cost
 add = bfl_operating_branches_cost
 add = bfl_operating_asset_types_cost
 }
-bfl_operating_multiplier = {
+bfl_operating_standard_multiplier = {
 value = 1
 subtract = bfl_operating_reduction_charter
 subtract = bfl_operating_reduction_banking
 subtract = bfl_operating_reduction_clearing
 subtract = bfl_operating_reduction_administration
+subtract = bfl_operating_reduction_central_bank
+subtract = bfl_operating_reduction_family_palace
 min = 0.25
 }
+bfl_operating_multiplier = {
+value = bfl_operating_standard_multiplier multiply = bfl_bank_expense_factor
+}
 bfl_operating_total_reduction = {
-value = 1 subtract = bfl_operating_multiplier
+value = 1 subtract = bfl_operating_standard_multiplier
 }
 bfl_operating_expense = {
 value = bfl_operating_complexity multiply = bfl_operating_multiplier multiply = 100 round = yes divide = 100

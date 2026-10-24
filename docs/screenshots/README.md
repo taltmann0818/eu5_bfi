@@ -1,5 +1,79 @@
 # Native bank interface captures
 
+## M10 CMF preferences
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records a clean,
+non-debug cold startup on `2e53b85e…`, English, 1920×1080. The runtime contains no
+diagnostic widgets. [Actual CMF panel](m10-cmf-presentation.jpg) shows the BFI row,
+Presentation tab, Interface group and three native preferences. Reduced motion
+and notifications default on; expanded details defaults off. Ordinary clicks
+change all three preferences. Actual animation and the full language/scale
+matrix remain separate gates.
+
+## M10 Merchant painting and transaction receipt
+
+[23 October provenance](../../tests/results/2026-10-23-m10-ui.json) records one
+unedited 1920×1080 normal-window observation on `a6591f2e…`, English, debug off.
+The fixture pays 32 real 100-gold demand deposits from its declared opening
+wallet; it does not establish campaign balance.
+
+- [Merchant receipt and mandate](m10-merchant-receipt.jpg): original Merchant
+  painting, bank cash/assets 8200, liabilities 3200, equity 5000, a committed
+  +100 deposit receipt and manual/delegate controls. Opening the view creates no
+  BFI localization/context diagnostic. Other paintings, FX, CMF visibility,
+  languages, scales and the end of the populated ledger remain under review.
+
+## M10 final mandate authority
+
+[22 October final-runtime provenance](../../tests/results/2026-10-22-m10-ui.json)
+records five normal observations and four unedited window JPEGs on shipping
+`c0186e1c…`, English, 1280×720 client, inherited default scale, debug disabled.
+The cold startup uses inherited policy rather than preselecting manual.
+
+- [Inherited manual](2026-10-22-m10-inherited-manual.jpg): the AI bank under a
+  human controller correctly displays manual; bank cash/assets/equity are 5000.
+- [Delegated](2026-10-22-m10-controller-delegated.jpg): normal player delegation
+  changes policy with no cash movement and readable consent/funding help.
+- [Funded statement](2026-10-22-m10-controller-funded.jpg): two natural monthly
+  placements create a 200-gold receivable. Cash 4706.39 plus that claim equals
+  assets/equity 4906.39. Native war/faction activity also occurred; these values
+  are not a campaign profitability claim.
+- [Manual with claim](2026-10-22-m10-controller-manual-retained.jpg): normal
+  Manage investments stops new strategy business without changing those balances.
+
+The fixture grants starting cash, ownership and a branch; it does not dispatch
+reviews, refill cash during observation or create placements. The earlier
+independent-role observations below retain their actual provenance.
+
+## M10 investment mandate
+
+[Exact capture provenance](../../tests/results/2026-10-21-m10-ui.json) records
+eight normal UI observations and five actual-game captures from disposable
+Florence-controller and independent-Bardi scenes. English, 1280×720 client,
+inherited default/automatic scale; window JPEGs include the native title bar.
+Each capture retains its actual runtime and fixture hash. Candidate traversal
+changes and the final read-only mandate visibility correction are recorded
+separately; these earlier captures do not verify the inherited-human label fix.
+Cash/branch/ownership grants are fixture setup, not campaign balance evidence.
+
+- [Controller manual](2026-10-21-m10-controller-manual.jpg): Merchant bank,
+  separate sovereign accounts, manual mandate and bank cash/assets/equity 5000.
+- [Controller delegated](2026-10-21-m10-controller-delegated.jpg): normal Delegate
+  investments changes policy without moving cash; hover explains bounded review,
+  cadence and transaction guards.
+- [Independent manual](2026-10-21-m10-independent-manual.jpg): Overseas Bardi,
+  preserved native loan header and the same directly accessible mandate.
+- [Independent delegated](2026-10-21-m10-independent-delegated.jpg): normal opt-in
+  preserves 5000 cash and shows the financing/consent explanation.
+- [Independent funded](2026-10-21-m10-independent-funded.png): natural monthly
+  passes made two demand placements. Cash 4803.69 and assets/equity 5003.69
+  reconcile to a 200-gold receivable. This is an original-pixel crop of the bank
+  panel excluding another application; its source and crop hashes are recorded.
+
+Normal Manage investments subsequently returns to manual management while the
+200-gold claim remains. These scenes accept the named controls and presentation,
+not every language, resolution or the full M10 campaign gate.
+
 ## M9 institution-wide resolution
 
 The [21 October capture record](../../tests/results/2026-10-21-m9-ui.json)

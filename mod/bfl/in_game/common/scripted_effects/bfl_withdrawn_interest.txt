@@ -5,6 +5,8 @@ if = { limit = { scope:bfl_bank.var:bfl_interest_paid > 0 }
             set_variable = { name = bfl_deposit_income value = 0 }
             set_variable = { name = bfl_interest_period value = bfl_period } }
         change_variable = { name = bfl_deposit_income add = scope:bfl_bank.var:bfl_interest_paid }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid } }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_interest_paid } bfl_source_add_credit = yes }
     }
 }

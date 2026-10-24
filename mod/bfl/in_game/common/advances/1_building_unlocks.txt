@@ -736,7 +736,7 @@ training_fields_advance = {
 	age = age_3_discovery
 	requires = matchlock_gun
 	
-	ai_weight = { add = 500 }
+	ai_weight = { add = 1000 }
 	
 	unlock_building = training_fields
 }
@@ -970,6 +970,8 @@ castle_advance = {
 	requires = feudalism_advance
 	
 	unlock_building = castle
+	unlock_estate_privilege = clergy_military_orders
+	unlock_estate_privilege = noble_fortification_licenses
 	starting_technology_level = 3
 
 	ai_weight = { add = 2 }
@@ -1247,7 +1249,7 @@ customs_house_advance = {
 stock_exchange_advance = {
 	age = age_4_reformation
 
-	requires = banking_advance
+	requires = global_trade_advance
 
 	ai_weight = {
         if = { limit = { bfl_has_management = yes NOT = { bfl_owns_stock_exchange = yes } } add = 20000 } 

@@ -1,0 +1,46 @@
+{
+  "runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832",
+  "fixture": {
+    "token": "74d5316eadc240b49642831ed1ecd6c8",
+    "runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832",
+    "instant_cases": [],
+    "cases": [],
+    "reload_cases": [],
+    "fixture_sha256": "6e9f0de59faf996fd81f61e6550d5099f7e96dc554ff03b393b7fd36f3d98650",
+    "fixture_hash_scope": "All staged overlay files, including native-cost controls and callback definitions.",
+    "suite": "M10 visual fixture",
+    "role": "controller",
+    "player": "FLO",
+    "visual_acceptance": false,
+    "visual_population": "32 actual 100-gold demand lots, distinct accepted rates; 10000 opening depositor cash; no observation-time refills"
+  },
+  "passed_observations": [
+    {
+      "name": "Merchant Finance painting and committed receipt at 1920x1080",
+      "screenshot": "docs/screenshots/m10-merchant-receipt.jpg",
+      "sha256": "097974e655ef6a1080405063fa1be1ca995fa29e7d96679f264dbb71070c5aa6",
+      "observed": "Actual native Credit/Lending & Investments shows the Merchant painting, funded 8200 cash/3200 liabilities/5000 equity, a +100 committed deposit receipt and manual/delegate controls. Opening the view generated no new BFI localization/context error.",
+      "runtime_sha256": "a6591f2ece9a78045e5ee491a2152ae7029dc97923c45d13b5afeae37eb83832"
+    },
+    {
+      "name": "Cold-start CMF registration, labels and preference controls",
+      "runtime_sha256": "2e53b85e891eb7ba05356c161fc599201546f753faf0b7507b6a4283efe74998",
+      "fixture_sha256": "6e9f0de59faf996fd81f61e6550d5099f7e96dc554ff03b393b7fd36f3d98650",
+      "screenshot": "docs/screenshots/m10-cmf-presentation.jpg",
+      "sha256": "68a07ce7ebf1fe3fd3dd19cf871d0a1803df86b137346eb43dcafc9a5b0e5627",
+      "observed": "Normal non-debug cold startup, English, 1920x1080. BFI row, Presentation tab, Interface group and all three localized preferences are visible. Reduced motion and finance notifications default on; expanded details defaults off. Normal clicks turn motion/notifications off and expanded details on. No diagnostic widgets remain in this runtime. Persistence/reset and actual FX acceptance remain separate. Closing and reopening the Mod Menu preserves all three changed preferences. Reset Mod to Defaults restores reduced motion/notifications on and expanded details off; the game remains paused on 1 April."
+    }
+  ],
+  "full_visual_gate_passed": false,
+  "remaining": [
+    "All six paintings and sixteen glyphs",
+    "Animation and reduced motion",
+    "All eleven languages",
+    "Responsive layouts and full ledger"
+  ],
+  "normal_cmf_attempt": {
+    "accepted": false,
+    "observed": "BFI settings remain absent on first paused opening after explicit human-country start/load registration was added; a first ordinary month is being checked. No cause is yet established.",
+    "superseded_by": "Accepted cold-start observation on 2e53b85e after removing bare CMF flag-key localization."
+  }
+}

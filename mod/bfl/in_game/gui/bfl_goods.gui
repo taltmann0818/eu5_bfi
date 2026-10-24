@@ -5,16 +5,16 @@
         blockoverride "concept_link" { text = "bfl_goods_inventory_subtitle" }
         blockoverride "tooltip_content" { vbox = { size = { 420 0 }
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
-             text_single = { raw_text = "Bank-owned value / return" autoresize = yes } expand = { }
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_ae067e992c2cc196" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_market_value')|2]@gold! · [GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_portfolio_return')|%1+=]" autoresize = yes align = right|nobaseline } } }TooltipListScrollArea = {
-        blockoverride "block_scrollarea" { maximumsize = { 420 360 } }
+        blockoverride "block_scrollarea" {  maximumsize = { 420 360 } }
         blockoverride "scrollarea_content" { TooltipContentSection = {
-            set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 44 } layoutpolicy_horizontal = expanding background = { using = tooltip_table_field_texture }
+             set_parent_dimension_to_minimum = height spacing = 0 widget = { size = { -1 44 } layoutpolicy_horizontal = expanding background = { using = tooltip_table_field_texture }
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_01_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_01_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_01_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_01_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_f2036d67c2ae102c" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_01')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -22,7 +22,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_02_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_02_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_02_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_02_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_2982fbe86668207e" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_02')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -30,7 +30,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_03_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_03_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_03_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_03_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_8f4e7cd96b8e3ce6" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_03')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -38,7 +38,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_04_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_04_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_04_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_04_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_cdd51f348d917100" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_04')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -46,7 +46,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_05_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_05_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_05_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_05_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_98758d4e4197e240" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_05')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -54,7 +54,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_06_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_06_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_06_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_06_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_441911d770808f5d" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_06')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -62,7 +62,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_07_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_07_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_07_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_07_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_1df7321172847824" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_07')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -70,7 +70,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_08_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_08_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_08_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_08_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_5d3fe7d886845327" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_08')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -78,7 +78,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_09_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_09_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_09_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_09_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_a8e538584e17e0ff" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_09')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -86,7 +86,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_10_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_10_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_10_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_10_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_fab06c812cf55016" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_10')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -94,7 +94,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_11_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_11_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_11_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_11_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_e8da7f994b476704" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_11')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -102,7 +102,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_12_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_12_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_12_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_12_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_183e05f82787d14e" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_12')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -110,7 +110,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_13_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_13_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_13_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_13_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_74cad432049a6214" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_13')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -118,7 +118,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_14_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_14_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_14_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_14_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_21adde7c708a5f9e" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_14')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -126,7 +126,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_15_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_15_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_15_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_15_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_0b60b13eb62e1659" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_15')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline
@@ -134,7 +134,7 @@
             visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_inv_16_active').GetValue,'(CFixedPoint)1')]"
             icon = { position = { 8 6 } size = { 32 32 } texture = "[GetGoodsIcon(Country.MakeScope.GetVariable('bfl_inv_16_type').Goods)]" }
             text_single = { position = { 48 3 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_16_type').Goods.GetNameWithNoTooltip]" autoresize = yes fontsize = 17 }
-            text_single = { position = { 48 24 } raw_text = "[Country.MakeScope.GetVariable('bfl_inv_16_quantity').GetValue|2] units" autoresize = yes fontsize = 13 }
+            text_single = { position = { 48 24 } text = "bfl_ui_41e71f5ef3c10293" autoresize = yes fontsize = 13 }
             text_single = { parentanchor = top|right position = { -8 3 } align = right|nobaseline
                 raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_goods_mark_16')|2]@gold!" autoresize = yes fontsize = 17 }
             text_single = { parentanchor = top|right position = { -8 24 } align = right|nobaseline

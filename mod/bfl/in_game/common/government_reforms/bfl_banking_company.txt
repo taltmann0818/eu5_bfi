@@ -1,0 +1,26 @@
+﻿bfl_banking_company = {
+	major = yes
+
+	potential = {
+        OR = { tag = SAGEO tag = TAUBL tag = BERBE tag = HBURG tag = BRIKS tag = BWISS tag = BOENG }
+		country_type = building
+		NOT = { has_reform = government_reform:japanese_clan }
+		NOT = { is_subject_type = trade_company }
+	}
+	allow = {
+	}
+	locked = {
+		is_locked_mechanic = {
+			mechanic = government_reform
+			type = banking_country
+		}
+	}
+	country_modifier = {
+        bfl_bank_operating_expenses_modifier = -0.05
+		bank_interest = -0.01
+		monthly_loan_capacity_investment = 10.0
+		monthly_diplomats = 0.4
+		max_diplomats = 4
+		burghers_estate_can_participate_in_parliament = yes
+	}
+}

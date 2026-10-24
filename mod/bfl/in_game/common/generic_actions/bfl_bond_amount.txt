@@ -1,0 +1,10 @@
+﻿bfl_borrow_amount = { type = owncountry ai_tick = never show_message = no
+        potential = { scope:actor = { bfl_has_management = yes country_type = location } }
+        allow = { scope:actor = { bfl_bond_draw_max >= 1 } }
+        select_trigger = { looking_for_a = value target_flag = bond_amount name = bfl_borrow_amount
+            min = 1 max = scope:actor.bfl_bond_draw_max step = 1 default = { value = 100 max = scope:actor.bfl_bond_draw_max } }
+        effect = { scope:actor = { if = { limit = { bfl_has_management = yes country_type = location
+                scope:bond_amount > 0 bfl_bond_draw_max >= scope:bond_amount }
+            var:bfl_bank = { set_variable = { name = bfl_bond_amount value = scope:bond_amount }
+                bfl_underwrite_sovereign_bond = yes } } } }
+        ai_will_do = { value = 0 } }

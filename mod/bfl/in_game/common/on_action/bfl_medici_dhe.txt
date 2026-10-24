@@ -1,0 +1,8 @@
+﻿monthly_country_pulse = { on_actions = { bfl_medici_historical_pulse } }
+bfl_medici_historical_pulse = { trigger = {
+    country_type = location owns = location:milano
+    current_date >= 1459.1.1 current_date < 1501.1.1
+    NOT = { has_global_variable = bfl_medici_dhe_fired }
+}
+    effect = { random = { chance = 10 trigger_event_non_silently = bfl_historical_banks.1 } }
+}

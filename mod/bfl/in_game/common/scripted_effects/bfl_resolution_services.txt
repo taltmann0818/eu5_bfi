@@ -2407,148 +2407,148 @@ OR = { var:bfl_shr_16_active = 0 AND = { exists = var:bfl_shr_16_party country_e
         set_variable = { name = bfl_resolution_residual value = { value = gold min = 0 } }
         if = { limit = { var:bfl_total_units > 0 }
     if = { limit = { var:bfl_state_units > 0 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_state_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_state_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
         var:bfl_state_owner = { add_gold = scope:bfl_bank.var:bfl_payment } }
 if = { limit = { var:bfl_founder_units > 0 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_founder_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_founder_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
         "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_bank.var:bfl_payment } } }
 if = { limit = { var:bfl_shr_01_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_01_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_01_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_01_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_01_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_02_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_02_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_02_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_02_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_02_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_03_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_03_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_03_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_03_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_03_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_04_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_04_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_04_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_04_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_04_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_05_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_05_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_05_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_05_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_05_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_06_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_06_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_06_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_06_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_06_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_07_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_07_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_07_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_07_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_07_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_08_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_08_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_08_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_08_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_08_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_09_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_09_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_09_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_09_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_09_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_10_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_10_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_10_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_10_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_10_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_11_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_11_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_11_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_11_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_11_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_12_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_12_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_12_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_12_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_12_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_13_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_13_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_13_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_13_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_13_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_14_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_14_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_14_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_14_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_14_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_15_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_15_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_15_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_15_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_15_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { var:bfl_shr_16_active = 1 }
-            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = var:bfl_shr_16_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+            set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = var:bfl_shr_16_units
+                divide = var:bfl_total_units floor = yes divide = 100 } }
             add_gold = bfl_negative_payment
             change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment }
             var:bfl_shr_16_party = { set_variable = { name = bfl_pool value = scope:bfl_bank.var:bfl_shr_16_pool }
                 if = { limit = { var:bfl_pool = 5 } set_variable = { name = bfl_pool value = 1 } }
                 bfl_credit_depositor = yes } }
 if = { limit = { bfl_dealer_units > 0 }
-        set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = bfl_dealer_units
-            divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+        set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = bfl_dealer_units
+            divide = var:bfl_total_units floor = yes divide = 100 } }
         add_gold = bfl_negative_payment change_variable = { name = bfl_dealer_cash add = var:bfl_payment }
         change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment } }
         }
@@ -2557,10 +2557,18 @@ if = { limit = { bfl_dealer_units > 0 }
                 subtract = scope:bfl_bank.var:bfl_resolution_guarantee_left } }
             set_variable = { name = bfl_resolution_guarantee_left value = 0 } }
         set_variable = { name = bfl_state value = 5 }
+        bfl_record_feedback = { KIND = 8 AMOUNT = 0 }
         change_variable = { name = bfl_resolution_revision add = 1 }
         set_variable = { name = bfl_resolution_closed value = bfl_period }
+        save_scope_as = bfl_closed_institution
+        if = { limit = { is_ai = no bfl_finance_notifications_enabled = yes }
+            set_variable = { name = bfl_notice_bank value = this }
+            trigger_event_non_silently = bfl_resolution_notice.1 }
         if = { limit = { bfl_has_valid_controller = yes }
             overlord = { save_scope_as = bfl_resolution_controller }
+            overlord = { if = { limit = { is_ai = no bfl_finance_notifications_enabled = yes }
+                set_variable = { name = bfl_notice_bank value = scope:bfl_closed_institution }
+                trigger_event_non_silently = bfl_resolution_notice.1 } }
             change_subject_type = subject_type:state_bank
             set_variable = bfl_legacy_servicing
             remove_variable = bfl_controller

@@ -1,0 +1,10 @@
+﻿bfl_investment_bank = {
+    major = no
+    potential = { country_type = building bfl_has_banking_constitution = yes }
+    allow = { has_embraced_institution = institution:global_trade }
+    country_modifier = {
+        bfl_global_bank_access = yes bfl_commenda_expertise = 0.10
+        bfl_bank_operating_expenses_modifier = 0.10
+        bfl_loan_profitability_modifier = 0.05 bfl_base_share_value_modifier = 0.05
+    }
+}

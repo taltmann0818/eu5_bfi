@@ -67,7 +67,9 @@ def generate(common, effect, loc, write, tune):
             set_variable = { name = bfl_deposit_income value = 0 }
             set_variable = { name = bfl_interest_period value = bfl_period } }
         change_variable = { name = bfl_deposit_income add = scope:bfl_bank.var:bfl_interest_paid }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid } }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_credit add = scope:bfl_bank.var:bfl_interest_paid }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_interest_paid } bfl_source_add_credit = yes }
     }'''
     common('scripted_effects', 'withdrawn_interest', effect('bfl_record_withdrawn_interest', withdrawn_interest))
     share_income = '''if = { limit = { NOT = { has_variable = bfl_share_income_period } } set_variable = { name = bfl_share_income_period value = 0 } }
@@ -75,7 +77,15 @@ def generate(common, effect, loc, write, tune):
             set_variable = { name = bfl_share_income value = 0 }
             set_variable = { name = bfl_share_income_period value = bfl_period } }
         change_variable = { name = bfl_share_income add = scope:bfl_bank.var:bfl_payment }
-        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment } }
+        if = { limit = { scope:bfl_bank = { bfl_is_bank = yes } }
+            if = { limit = { OR = { NOT = { has_variable = bfl_bank_dividend_period } bfl_period > var:bfl_bank_dividend_period } }
+                set_variable = { name = bfl_bank_dividend_period value = bfl_period }
+                set_variable = { name = bfl_bank_dividend_income value = 0 } }
+            change_variable = { name = bfl_bank_dividend_income add = scope:bfl_bank.var:bfl_payment }
+        }
+        if = { limit = { bfl_is_bank = yes } change_variable = { name = bfl_profit_company add = scope:bfl_bank.var:bfl_payment }
+            scope:bfl_bank = { save_scope_as = bfl_source_party }
+            set_variable = { name = bfl_source_amount value = scope:bfl_bank.var:bfl_payment } bfl_source_add_company = yes }
     '''
     common('scripted_effects', 'share_income', effect('bfl_record_share_income', share_income))
     components = [('accounts', 'dep', 32, 'operating_account'),
@@ -101,15 +111,21 @@ def generate(common, effect, loc, write, tune):
     reductions = [('charter', 0.05, 'bfl_has_valid_controller = yes'),
                   ('banking', 0.10, 'OR = { has_advance = banking_advance overlord ?= { has_advance = banking_advance } }'),
                   ('clearing', 0.15, 'OR = { has_advance = bfl_advanced_clearing overlord ?= { has_advance = bfl_advanced_clearing } }'),
-                  ('administration', 0.10, 'var:bfl_cost_program = 1')]
+                  ('administration', 0.10, 'var:bfl_cost_program = 1'),
+                  ('central_bank', 0.15, 'bfl_monetary_building = { BUILDING = central_bank }'),
+                  ('family_palace', 0, 'always = yes')]
     reduction = 'value = 1\n'
     for name, amount, condition in reductions:
-        operations += effect(f'bfl_operating_reduction_{name}', f'value = 0 if = {{ limit = {{ {condition} }} add = {amount} }}')
+        body=('value = bfl_building_admin_reduction' if name=='family_palace' else
+              'value = bfl_building_headquarters_reduction' if name=='central_bank' else
+              f'value = 0 if = {{ limit = {{ {condition} }} add = {amount} }}')
+        operations += effect(f'bfl_operating_reduction_{name}',body)
         reduction += f'subtract = bfl_operating_reduction_{name}\n'
     reduction += 'min = 0.25'
     common('script_values', 'bank_operations', operations + effect('bfl_operating_complexity', complexity)
-           + effect('bfl_operating_multiplier', reduction)
-           + effect('bfl_operating_total_reduction', 'value = 1 subtract = bfl_operating_multiplier')
+           + effect('bfl_operating_standard_multiplier', reduction)
+           + effect('bfl_operating_multiplier', 'value = bfl_operating_standard_multiplier multiply = bfl_bank_expense_factor')
+           + effect('bfl_operating_total_reduction', 'value = 1 subtract = bfl_operating_standard_multiplier')
            + effect('bfl_operating_expense', 'value = bfl_operating_complexity multiply = bfl_operating_multiplier multiply = 100 round = yes divide = 100')
            + effect('bfl_deposit_income_display', 'value = 0 if = { limit = { has_variable = bfl_interest_period var:bfl_interest_period = bfl_period } value = var:bfl_deposit_income }')
            + effect('bfl_share_income_display', 'value = 0 if = { limit = { has_variable = bfl_share_income_period var:bfl_share_income_period = bfl_period } value = var:bfl_share_income }'))
@@ -134,15 +150,63 @@ def generate(common, effect, loc, write, tune):
     }'''
     common('scripted_effects', 'bank_operations', effect('bfl_settle_operating_expenses', operating)
            + effect('bfl_observe_bank_income', income))
-    autonomous = '''if = { limit = { bfl_can_originate_native_takeover = yes bfl_period > var:bfl_last_takeover_period }
+    common('scripted_triggers', 'takeover_strategy', '''
+        bfl_ai_takeover_candidate = {
+            country_exists = this country_type = location at_war = no
+            monthly_income_total > 0 monthly_balance >= 0 creditworthiness >= 0.50
+            total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt }
+            gold <= total_debt
+        }
+        # Loan scope; native actor is the purchasing bank. Quotes are risk
+        # estimates, never booked income. Keep a funded operating reserve.
+        bfl_ai_takeover_viable = {
+            scope:actor.bfl_free_cash >= { value = bank_loan_takeover_cost add = 100 }
+            bank_loan_takeover_cost <= { value = remaining_debt multiply = 1.25 }
+            bfl_takeover_monthly_margin >= 0.10
+        }
+    ''')
+    funding_rate = 'value = 0\n'
+    for i in range(1, 33):
+        funding_rate += f'''if = {{ limit = {{ var:bfl_dep_{i:02}_active ?= 1 }} min = var:bfl_dep_{i:02}_annual_rate }}
+            if = {{ limit = {{ var:bfl_bnd_{i:02}_active ?= 1 }} min = var:bfl_bnd_{i:02}_rate }}\n'''
+    funding_rate += 'every_loan = { min = loan_interest }\n'
+    common('script_values', 'takeover_strategy', effect('bfl_takeover_funding_rate', funding_rate) + '''
+        bfl_takeover_service_allowance = { value = 0.10
+            if = { limit = { var:bfl_native_credit_value <= 0 } add = 0.25 } }
+        bfl_takeover_monthly_margin = {
+            value = loan_amount multiply = loan_interest divide = 12
+            subtract = scope:actor.bfl_takeover_service_allowance
+            subtract = { value = bank_loan_takeover_cost multiply = scope:actor.bfl_takeover_funding_rate divide = 12 }
+            subtract = { value = bank_loan_takeover_cost subtract = remaining_debt min = 0 divide = months_left }
+        }
+        bfl_takeover_existing_exposure = { value = 0
+            every_lent_loan = { limit = { borrower = scope:bfl_party } add = remaining_debt }
+        }
+        bfl_takeover_prospective_exposure = { value = remaining_debt add = scope:actor.bfl_takeover_existing_exposure }
+    ''')
+    autonomous = '''if = { limit = { bfl_can_originate_native_takeover = yes
+        bfl_strategy_authorized = yes bfl_free_cash >= 100
+        bfl_period > var:bfl_last_takeover_period }
         save_scope_as = bfl_bank
         if = { limit = { exists = scope:bfl_party country_exists = scope:bfl_party } scope:bfl_party = { save_scope_as = bfl_saved_takeover_party } }
         set_variable = { name = bfl_last_takeover_period value = bfl_period }
         set_variable = { name = bfl_takeover_done value = 0 }
-        every_country = {
-            limit = { country_type = location num_loans > 0 NOT = { this = scope:bfl_bank } scope:bfl_bank = { var:bfl_takeover_done = 0 } }
-            save_scope_as = bfl_party
-            scope:bfl_bank = { bfl_native_takeover = yes }
+        set_variable = { name = bfl_takeover_reviewed value = 0 }
+        every_owned_building = {
+            limit = { building_type = building_type:banking_office building_level > 0
+                location = location.owner.capital
+                scope:bfl_bank.var:bfl_takeover_reviewed < 12
+                scope:bfl_bank.var:bfl_takeover_done = 0 }
+            location.owner = {
+                if = { limit = { num_loans > 0 bfl_ai_takeover_candidate = yes }
+                    save_scope_as = bfl_party
+                    scope:bfl_bank = {
+                        change_variable = { name = bfl_takeover_reviewed add = 1 }
+                        set_variable = bfl_takeover_ai_review bfl_native_takeover = yes
+                        remove_variable = bfl_takeover_ai_review
+                    }
+                }
+            }
         }
         if = { limit = { exists = scope:bfl_saved_takeover_party } scope:bfl_saved_takeover_party = { save_scope_as = bfl_party } }
     }'''
@@ -165,7 +229,7 @@ def generate(common, effect, loc, write, tune):
     loc('bfl_streamline_bank', 'Streamline administration · 100 gold')
     loc('bfl_streamline_bank_tip', 'Pay 100 state gold once to reduce fixed bank operating expenses by 10%. The charter reform, Banking and Advanced Clearing provide additional reductions. This decision does not create bank profit.')
     loc('bfl_operating_costs', 'Monthly operating expenses')
-    loc('bfl_operating_costs_tip', 'Fixed monthly costs scale with active deposit accounts, contracts, branches and asset classes. The State Chartered Bank reform reduces costs by 5%, Banking by 10%, Advanced Clearing by 15%, and streamlined administration by 10%. Unpaid costs remain liabilities and block dividends.')
+    loc('bfl_operating_costs_tip', 'Fixed monthly costs scale with active deposit accounts, contracts, branches and asset classes. The State Chartered Bank reform reduces costs by 5%, Banking by 10%, Advanced Clearing by 15%, streamlined administration by 10%, a completed bank headquarters by 15%, and an owned Florentine banking palace by 10%. The total reduction remains capped at 75%. Unpaid costs remain liabilities and block dividends.')
     generate_operating_tooltip(loc, write, tune)
 
 
@@ -195,18 +259,22 @@ def generate_operating_tooltip(loc, write, tune):
     for index, (name, title, art) in enumerate([('charter', 'State Chartered Bank', 'accounts'),
                                                ('banking', 'Banking', 'deposit'),
                                                ('clearing', 'Advanced Clearing', 'accounts'),
-                                               ('administration', 'Streamlined administration', 'accounts')]):
+                                               ('administration', 'Streamlined administration', 'accounts'),
+                                                ('central_bank', 'Central Bank', 'accounts'),
+                                                ('family_palace', 'Florentine banking palace', 'accounts')]):
         visible = f'''visible = "[GreaterThan_CFixedPoint({value('reduction_' + name)}, '(CFixedPoint)0')]"'''
         reductions += cost_row(f'bfl_cost_reduction_{name}', title, f'#G −[{value("reduction_" + name)}|%0]#!', index, visible, art)
     loc('bfl_cost_reductions', f'Base cost {amount("complexity")} is reduced by #G −[{value("total_reduction")}|%0]#! due to:')
     content += list_block('bfl_cost_reductions', reductions,
                           f'''visible = "[GreaterThan_CFixedPoint({value('total_reduction')}, '(CFixedPoint)0')]"''')
+    loc('bfl_cost_constitution','Banking constitution')
+    content += list_block('bfl_cost_constitution',cost_row('bfl_cost_constitution_factor','Administration multiplier',"×[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bank_expense_factor')|2]",art='accounts'))
     settlement = ''
     for index, (name, title) in enumerate([('due', 'Expense assessed'), ('paid', 'Cash paid (including arrears)'), ('arrears', 'Unpaid expenses')]):
         settlement += cost_row(f'bfl_cost_settlement_{name}', title, f"[Country.MakeScope.GetVariable('bfl_expense_{name}').GetValue|2]@gold!", index)
     loc('bfl_cost_settlement_title', 'Last monthly settlement')
     content += list_block('bfl_cost_settlement_title', settlement)
-    loc('bfl_cost_payment_detail', 'Costs scale with complexity, not asset value. Charged once monthly above protected reserves; unpaid expenses restrict dividends. Deposit interest and native expenses are separate. Reductions add together; the total is rounded to cents.')
+    loc('bfl_cost_payment_detail', 'Costs scale with complexity, not asset value. Charged once monthly above protected reserves; unpaid expenses restrict dividends. Deposit interest and native expenses are separate. Ordinary reductions add together, then the banking constitution’s expense multiplier applies. The total is rounded to cents.')
     content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_cost_payment_detail" } }'
     content += expense_graph()
     loc('bfl_cost_title', "Operating expenses of [Country.GetName]")

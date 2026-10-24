@@ -11,11 +11,12 @@ def generate(common, effect, loc, write):
     activity(common, effect)
     discovery = '''save_scope_as = bfl_operator
         every_country = { limit = { bfl_is_bank = yes }
-        '''+''.join(f'''if = {{ limit = {{ var:bfl_v_{i:02}_state > 0 var:bfl_v_{i:02}_kind = 2
+        '''+''.join(f'''if = {{ limit = {{ has_variable = bfl_v_{i:02}_state }}
+            if = {{ limit = {{ var:bfl_v_{i:02}_state > 0 var:bfl_v_{i:02}_kind = 2
             var:bfl_v_{i:02}_operator ?= scope:bfl_operator var:bfl_v_{i:02}_area ?= scope:target
             OR = {{ var:bfl_v_{i:02}_outcome = 1 var:bfl_v_{i:02}_outcome = 8 }} }}
             set_variable = {{ name = bfl_v_{i:02}_discovery value = 1 }}
-            set_variable = {{ name = bfl_v_{i:02}_outcome value = 2 }} }}''' for i in SLOTS)+''' }'''
+            set_variable = {{ name = bfl_v_{i:02}_outcome value = 2 }} }} }}''' for i in SLOTS)+''' }'''
     common('scripted_effects', 'commenda_exploration', effect('bfl_start_commenda_exploration', '# Retired: select the expedition before the accepted funding offer.')+effect('bfl_commenda_discovery', discovery))
     common('on_action', 'commenda', '''on_exploration_success = { on_actions = { bfl_commenda_exploration_success } }
         bfl_commenda_exploration_success = { effect = { bfl_commenda_discovery = yes } }''')
@@ -76,9 +77,11 @@ def ui(common, effect, loc, write):
     events = 'namespace = bfl_commenda\n'
     for preset in (0, 1, 2, 3):
         events += f'''bfl_commenda.{preset+1} = {{ type = country_event title = bfl_venture_offer_title desc = bfl_venture_offer_desc_{preset}
-            image = "gfx/interface/illustrations/bfl/commenda.dds" outcome = neutral
-            option = {{ name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = {{ bfl_accept_commenda = yes }} ai_chance = {{ base = 100 }} }}
-            option = {{ name = bfl_venture_decline hidden_effect = {{ bfl_decline_commenda = yes }} ai_chance = {{ base = 0 }} }} }}'''
+            image = "gfx/interface/illustrations/bfl/m10_company_venture.dds" outcome = neutral
+            option = {{ name = bfl_venture_accept custom_tooltip = bfl_venture_accept_tip hidden_effect = {{ bfl_accept_commenda = yes }}
+                ai_chance = {{ base = 0 modifier = {{ add = 100 bfl_ai_accept_venture = yes }} }} }}
+            option = {{ name = bfl_venture_decline hidden_effect = {{ bfl_decline_commenda = yes }}
+                ai_chance = {{ base = 100 modifier = {{ factor = 0 bfl_ai_accept_venture = yes }} }} }} }}'''
     common('../events', 'commenda', events)
     commands = ''
     cycles = dict(preset=[0, 1], duration=[6, 12, 24, 60, 120], ticket=[100, 200, 400])
@@ -120,12 +123,13 @@ def ui(common, effect, loc, write):
     introduction = "[ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_bank').GetCountry.GetName] authorizes up to [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_ticket').GetValue|0] gold of bank funding for [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_duration').GetValue|0] months. "
     cargo_name = "Buy 10 [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_good').Goods.GetNameWithNoTooltip] in [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_from').GetMarket.GetName], carry them for two months, then sell in [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_to').GetMarket.GetName]. "
     caution = '\n\nOnly actual native costs are drawn. Unused funding stays at the bank. Capital is recovered before surplus; losses follow contributions. Only this cargo’s measured sale proceeds settle this agreement. Unrelated income and discovery pay nothing. Offer expires in three months.'
-    loc('bfl_venture_offer_desc_0', introduction+cargo_name+'The bank funds all costs and receives 75% of surplus.'+caution)
-    loc('bfl_venture_offer_desc_1', introduction+cargo_name+'The bank funds two thirds of costs; you pay one third. Surplus is split equally.'+caution)
+    share="[GuiScope.SetRoot(ROOT.GetCountry.MakeScope).ScriptValue('bfl_venture_offered_profit_fraction')|%1]"
+    loc('bfl_venture_offer_desc_0', introduction+cargo_name+f'The bank funds all costs and receives {share} of surplus. You keep the remainder.'+caution)
+    loc('bfl_venture_offer_desc_1', introduction+cargo_name+f'The bank funds two thirds of costs; you pay one third. The bank receives {share} of surplus and you keep the remainder.'+caution)
     expedition_name = "Prepare native exploration of [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_area').GetArea.GetName] from [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_port').GetLocation.GetName] with [ROOT.GetCountry.MakeScope.GetVariable('bfl_venture_offer_explorer').GetCharacter.GetName]. "
     expedition_terms = "Preparation is non-refundable, including cancellation. You provide crew, native upkeep and optional expedition spending outside this funding agreement. Remaining bank authorization may fund one ten-unit cargo from a market centered in or bordering the discovered area, subject to native access. Only that cargo’s measured sales, less the recorded preparation and cargo costs, can pay contractual surplus. Discovery and unrelated trade pay nothing. The offer expires in three months. "
-    loc('bfl_venture_offer_desc_2', introduction+expedition_name+'The bank funds all agreed gold costs and receives 75% of contractual surplus. '+expedition_terms)
-    loc('bfl_venture_offer_desc_3', introduction+expedition_name+'The bank funds two thirds of agreed gold costs; you pay one third. Contractual surplus is split equally. '+expedition_terms)
+    loc('bfl_venture_offer_desc_2', introduction+expedition_name+f'The bank funds all agreed gold costs and receives {share} of contractual surplus. You keep the remainder. '+expedition_terms)
+    loc('bfl_venture_offer_desc_3', introduction+expedition_name+f'The bank funds two thirds of agreed gold costs; you pay one third. The bank receives {share} of contractual surplus and you keep the remainder. '+expedition_terms)
     loc('bfl_commenda_cargo', 'Commenda: ship discovered-area cargo')
     loc('bfl_commenda_cargo_desc', 'Select the sponsored operator and a ten-unit cargo from a market centered in or bordering its discovered area. Only unused accepted funding can pay its native purchase cost. No discovery payout or unrelated trade attribution.')
     loc('bfl_commenda_cargo_tip', 'Requires the accepted expedition’s verified discovery, remaining authorization, native market access and stock. Operator or political controller commands the voyage.')

@@ -1,11 +1,70 @@
 ﻿bfl_market_buy_visible = {
 trigger_if = { limit = { has_variable = bfl_ownership_schema } bfl_equity_issuer = yes var:bfl_equity_listed = 1 bfl_tangible_equity > 0
             NOT = { this = scope:actor }
-            OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } }
+            trigger_if = { limit = { exists = scope:actor.var:bfl_bank }
+                OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } } }
             OR = { bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } } }
             trigger_else = { always = no }
 }
 bfl_market_sell_visible = {
 trigger_if = { limit = { has_variable = bfl_ownership_schema } bfl_equity_issuer = yes bfl_market_sell_units > 0 }
             trigger_else = { always = no }
+}
+bfl_market_holder_capacity = {
+OR = { bfl_market_charter_buyback = yes AND = { scope:actor = { bfl_is_independent_bank = yes } OR = { var:bfl_state_owner ?= scope:actor var:bfl_shr_01_active = 0
+            AND = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:actor } var:bfl_shr_02_active = 0
+            AND = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:actor } var:bfl_shr_03_active = 0
+            AND = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:actor } var:bfl_shr_04_active = 0
+            AND = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:actor } var:bfl_shr_05_active = 0
+            AND = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:actor } var:bfl_shr_06_active = 0
+            AND = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:actor } var:bfl_shr_07_active = 0
+            AND = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:actor } var:bfl_shr_08_active = 0
+            AND = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:actor } var:bfl_shr_09_active = 0
+            AND = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:actor } var:bfl_shr_10_active = 0
+            AND = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:actor } var:bfl_shr_11_active = 0
+            AND = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:actor } var:bfl_shr_12_active = 0
+            AND = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:actor } var:bfl_shr_13_active = 0
+            AND = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:actor } var:bfl_shr_14_active = 0
+            AND = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:actor } var:bfl_shr_15_active = 0
+            AND = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:actor } var:bfl_shr_16_active = 0
+            AND = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:actor } } } AND = { scope:actor = { country_type = location bfl_has_management = yes exists = var:bfl_bank } OR = { var:bfl_state_owner ?= scope:actor.var:bfl_bank var:bfl_shr_01_active = 0
+            AND = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:actor.var:bfl_bank } var:bfl_shr_02_active = 0
+            AND = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:actor.var:bfl_bank } var:bfl_shr_03_active = 0
+            AND = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:actor.var:bfl_bank } var:bfl_shr_04_active = 0
+            AND = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:actor.var:bfl_bank } var:bfl_shr_05_active = 0
+            AND = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:actor.var:bfl_bank } var:bfl_shr_06_active = 0
+            AND = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:actor.var:bfl_bank } var:bfl_shr_07_active = 0
+            AND = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:actor.var:bfl_bank } var:bfl_shr_08_active = 0
+            AND = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:actor.var:bfl_bank } var:bfl_shr_09_active = 0
+            AND = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:actor.var:bfl_bank } var:bfl_shr_10_active = 0
+            AND = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:actor.var:bfl_bank } var:bfl_shr_11_active = 0
+            AND = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:actor.var:bfl_bank } var:bfl_shr_12_active = 0
+            AND = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:actor.var:bfl_bank } var:bfl_shr_13_active = 0
+            AND = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:actor.var:bfl_bank } var:bfl_shr_14_active = 0
+            AND = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:actor.var:bfl_bank } var:bfl_shr_15_active = 0
+            AND = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:actor.var:bfl_bank } var:bfl_shr_16_active = 0
+            AND = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:actor.var:bfl_bank } } } }
+}
+bfl_market_portfolio_capacity = {
+OR = { bfl_market_charter_buyback = yes AND = { scope:actor = { bfl_is_independent_bank = yes } scope:actor = { OR = { NOT = { exists = var:bfl_pos_01_issuer } var:bfl_pos_01_issuer ?= prev NOT = { exists = var:bfl_pos_02_issuer } var:bfl_pos_02_issuer ?= prev NOT = { exists = var:bfl_pos_03_issuer } var:bfl_pos_03_issuer ?= prev NOT = { exists = var:bfl_pos_04_issuer } var:bfl_pos_04_issuer ?= prev NOT = { exists = var:bfl_pos_05_issuer } var:bfl_pos_05_issuer ?= prev NOT = { exists = var:bfl_pos_06_issuer } var:bfl_pos_06_issuer ?= prev NOT = { exists = var:bfl_pos_07_issuer } var:bfl_pos_07_issuer ?= prev NOT = { exists = var:bfl_pos_08_issuer } var:bfl_pos_08_issuer ?= prev NOT = { exists = var:bfl_pos_09_issuer } var:bfl_pos_09_issuer ?= prev NOT = { exists = var:bfl_pos_10_issuer } var:bfl_pos_10_issuer ?= prev NOT = { exists = var:bfl_pos_11_issuer } var:bfl_pos_11_issuer ?= prev NOT = { exists = var:bfl_pos_12_issuer } var:bfl_pos_12_issuer ?= prev NOT = { exists = var:bfl_pos_13_issuer } var:bfl_pos_13_issuer ?= prev NOT = { exists = var:bfl_pos_14_issuer } var:bfl_pos_14_issuer ?= prev NOT = { exists = var:bfl_pos_15_issuer } var:bfl_pos_15_issuer ?= prev NOT = { exists = var:bfl_pos_16_issuer } var:bfl_pos_16_issuer ?= prev } } } AND = { scope:actor = { country_type = location bfl_has_management = yes exists = var:bfl_bank } scope:actor.var:bfl_bank = { OR = { NOT = { exists = var:bfl_pos_01_issuer } var:bfl_pos_01_issuer ?= prev NOT = { exists = var:bfl_pos_02_issuer } var:bfl_pos_02_issuer ?= prev NOT = { exists = var:bfl_pos_03_issuer } var:bfl_pos_03_issuer ?= prev NOT = { exists = var:bfl_pos_04_issuer } var:bfl_pos_04_issuer ?= prev NOT = { exists = var:bfl_pos_05_issuer } var:bfl_pos_05_issuer ?= prev NOT = { exists = var:bfl_pos_06_issuer } var:bfl_pos_06_issuer ?= prev NOT = { exists = var:bfl_pos_07_issuer } var:bfl_pos_07_issuer ?= prev NOT = { exists = var:bfl_pos_08_issuer } var:bfl_pos_08_issuer ?= prev NOT = { exists = var:bfl_pos_09_issuer } var:bfl_pos_09_issuer ?= prev NOT = { exists = var:bfl_pos_10_issuer } var:bfl_pos_10_issuer ?= prev NOT = { exists = var:bfl_pos_11_issuer } var:bfl_pos_11_issuer ?= prev NOT = { exists = var:bfl_pos_12_issuer } var:bfl_pos_12_issuer ?= prev NOT = { exists = var:bfl_pos_13_issuer } var:bfl_pos_13_issuer ?= prev NOT = { exists = var:bfl_pos_14_issuer } var:bfl_pos_14_issuer ?= prev NOT = { exists = var:bfl_pos_15_issuer } var:bfl_pos_15_issuer ?= prev NOT = { exists = var:bfl_pos_16_issuer } var:bfl_pos_16_issuer ?= prev } } } }
+}
+bfl_market_company_access = {
+OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+            OR = { AND = { scope:actor = { bfl_is_independent_bank = yes bfl_can_originate_company_equity = yes } }
+                AND = { scope:actor = { bfl_has_management = yes country_type = location
+                    var:bfl_bank = { bfl_can_originate_company_equity = yes } } } } } }
+}
+bfl_market_buy_eligible = {
+bfl_market_buy_visible = yes
+            custom_tooltip = { text = bfl_market_funds_requirement bfl_market_buy_max >= 0.001 }
+            custom_tooltip = { text = bfl_market_holder_requirement bfl_market_holder_capacity = yes }
+            custom_tooltip = { text = bfl_market_portfolio_requirement bfl_market_portfolio_capacity = yes }
+            custom_tooltip = { text = bfl_market_company_requirement bfl_market_company_access = yes }
+}
+bfl_market_dealer_buy_eligible = {
+bfl_market_buy_visible = yes
+            custom_tooltip = { text = bfl_market_funds_requirement bfl_market_dealer_buy_max >= 0.001 }
+            custom_tooltip = { text = bfl_market_holder_requirement bfl_market_holder_capacity = yes }
+            custom_tooltip = { text = bfl_market_portfolio_requirement bfl_market_portfolio_capacity = yes }
+            custom_tooltip = { text = bfl_market_company_requirement bfl_market_company_access = yes }
 }

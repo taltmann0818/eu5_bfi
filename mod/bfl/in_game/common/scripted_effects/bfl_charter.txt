@@ -56,6 +56,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
                 add_gold = scope:bfl_controller.var:bfl_payment
                 change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
                 change_subject_type = subject_type:bfl_chartered_bank
+                bfl_record_feedback = { KIND = 1 AMOUNT = scope:bfl_controller.var:bfl_payment }
                 set_variable = { name = bfl_controller value = scope:bfl_controller }
                 remove_variable = bfl_legacy_servicing
                 remove_variable = bfl_profile_offered_to
@@ -68,7 +69,7 @@ if = { limit = { var:bfl_candidate_count = 8 } set_variable = { name = bfl_candi
             remove_variable = bfl_operation_guard
             cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
             bfl_clear_charter_selector = yes
-            scope:bfl_bank = { bfl_offer_profile = yes }
+            scope:bfl_bank = { bfl_initialize_ai_charter_policy = yes bfl_offer_profile = yes }
         }
         else_if = { limit = { bfl_can_begin_charter = yes }
             # A stale price/selection must be confirmed again; never charge a new amount silently.

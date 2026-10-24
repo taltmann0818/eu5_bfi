@@ -1,0 +1,95 @@
+﻿bfl_owns_mortzenhaus = {
+any_owned_building = { building_type = building_type:bfl_mortzenhaus building_level > 0 }
+}
+bfl_owns_banco_del_giro = {
+any_owned_building = { building_type = building_type:bfl_banco_del_giro building_level > 0 }
+}
+bfl_owns_llotja_de_mar = {
+any_owned_building = { building_type = building_type:bfl_llotja_de_mar building_level > 0 }
+}
+bfl_owns_palazzo_salimbeni = {
+any_owned_building = { building_type = building_type:bfl_palazzo_salimbeni building_level > 0 }
+}
+bfl_owns_palace_saint_george = {
+any_owned_building = { building_type = building_type:bfl_palace_saint_george building_level > 0 }
+}
+bfl_can_charter_mendes = {
+country_type = location owns = location:lisbon
+            country_exists = c:MNDES
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:MNDES = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } }
+}
+bfl_can_charter_berenberg = {
+country_type = location owns = location:hamburg
+            country_exists = c:BERBE
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:BERBE = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_berenberg_historical_charter }
+}
+bfl_can_charter_hamburger = {
+country_type = location owns = location:hamburg
+            country_exists = c:HBURG
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:HBURG = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_berenberg_historical_charter }
+}
+bfl_can_charter_banco_giro = {
+country_type = location owns = location:venice
+            country_exists = c:BGIRO
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:BGIRO = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } }
+}
+bfl_can_charter_taula = {
+country_type = location owns = location:barcelona
+            country_exists = c:TAUBL
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:TAUBL = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } }
+}
+bfl_can_charter_monte_paschi = {
+country_type = location owns = location:siena
+            country_exists = c:MTPSC
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:MTPSC = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } }
+}
+bfl_can_charter_saint_george = {
+country_type = location owns = location:genoa
+            country_exists = c:SAGEO
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:SAGEO = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_genoan_historical_charter }
+}
+bfl_can_charter_grimaldi = {
+country_type = location owns = location:genoa
+            country_exists = c:GRIML
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:GRIML = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_genoan_historical_charter }
+}
+bfl_can_charter_spinola = {
+country_type = location owns = location:genoa
+            country_exists = c:SPINL
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:SPINL = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_genoan_historical_charter }
+}
+bfl_can_charter_pallavicino = {
+country_type = location owns = location:genoa
+            country_exists = c:PALLV
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            c:PALLV = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank } } NOT = { has_variable = bfl_genoan_historical_charter }
+}

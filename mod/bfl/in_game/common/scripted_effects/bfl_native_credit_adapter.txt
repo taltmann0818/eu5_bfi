@@ -21,7 +21,9 @@ bfl_originate_native_credit = {
 # Native regular-bank operation copied minimally; actor is ALWAYS paying bank.
 # Preserve native eligibility, ordering, price and estate compensation.
 bfl_native_takeover = {
+    save_scope_as = bfl_takeover_buyer
     bfl_initialize_credit = yes
+    bfl_initialize_strategy = yes
     if = { limit = { bfl_can_originate_native_takeover = yes exists = scope:bfl_party country_exists = scope:bfl_party
         NOT = { this = scope:bfl_party }
         bfl_branch_access = { PARTY = scope:bfl_party }
@@ -34,23 +36,13 @@ bfl_native_takeover = {
             save_scope_as = recipient
             ordered_loan = {
                 limit = {
-                    is_bond = no NOT = { exists = owner } months_left > 40
-                    loan_interest > scope:actor.modifier:bank_interest
-                    scope:actor.gold > remaining_debt
-                    scope:actor.bfl_free_cash >= bank_loan_takeover_cost
-                    scope:actor.bfl_capital_headroom > 0
-                    scope:actor = { bfl_credit_capacity = yes }
+                    bfl_native_takeover_loan_eligible = yes
+                    OR = { scope:actor = { NOT = { has_variable = bfl_takeover_ai_review } }
+                        AND = { bfl_ai_takeover_viable = yes
+                            bfl_takeover_prospective_exposure <= { value = scope:actor.bfl_equity multiply = 0.25 } } }
                 }
                 order_by = remaining_debt max = 1
-                save_scope_as = bfl_claim
-                scope:actor = {
-                    set_variable = { name = bfl_payment value = scope:bfl_claim.bank_loan_takeover_cost }
-                    add_gold = bfl_negative_payment
-                }
-                scope:recipient = { distribute_gold_to_banking_estates = scope:actor.var:bfl_payment }
-                change_loan_owner = scope:actor
-                scope:actor = { set_variable = { name = bfl_credit_basis value = var:bfl_payment } bfl_register_native_claim = yes }
-                scope:actor = { set_variable = { name = bfl_takeover_done value = 1 } }
+                bfl_execute_estate_loan_purchase = yes
             }
         }
         bfl_reconcile_native_assets = yes

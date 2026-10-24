@@ -1,0 +1,16 @@
+﻿bfl_building_admin_reduction = {
+value = modifier:bfl_bank_palace_cost_reduction
+            if = { limit = { bfl_has_valid_controller = yes } add = overlord.modifier:bfl_bank_palace_cost_reduction } min = 0 max = 0.75
+}
+bfl_building_loan_yield_bonus = {
+value = modifier:bfl_bank_loan_yield_bonus
+            if = { limit = { bfl_has_valid_controller = yes } add = overlord.modifier:bfl_bank_loan_yield_bonus } min = 0 max = 0.02
+}
+bfl_building_share_price_bonus = {
+value = modifier:bfl_bank_share_price_bonus
+            if = { limit = { bfl_has_valid_controller = yes } add = overlord.modifier:bfl_bank_share_price_bonus } min = 0 max = 0.05
+}
+bfl_building_headquarters_reduction = {
+value = 0
+        if = { limit = { OR = { bfl_monetary_building = { BUILDING = central_bank } bfl_monetary_building = { BUILDING = wisselbank } bfl_monetary_building = { BUILDING = riksbank } bfl_monetary_building = { BUILDING = bfl_banco_mediceo } } } value = 0.15 }
+}

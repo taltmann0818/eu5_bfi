@@ -1,0 +1,35 @@
+﻿bfl_strategy_authorized = {
+    bfl_can_conduct_business = yes
+    bfl_credit_management_enabled = yes
+}
+# Borrower scope. A bank's offer is not a reason to borrow without need.
+bfl_strategy_credit_need = {
+    country_exists = this exists = capital NOT = { bfl_is_bank = yes }
+    OR = { country_type = location bfl_is_company = yes }
+    at_war = no monthly_income_total > 0 creditworthiness >= 0.50
+    gold < { value = monthly_income_total multiply = 3 add = 100 }
+    monthly_balance >= { value = monthly_income_total multiply = -0.25 }
+    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt subtract = 100 }
+    OR = { NOT = { has_variable = bfl_credit_offer_bank } bfl_period > var:bfl_credit_offer_expiry }
+}
+bfl_strategy_accept_credit = {
+    country_exists = this at_war = no monthly_income_total > 0
+    gold < { value = monthly_income_total multiply = 3 add = 100 }
+    monthly_balance >= { value = monthly_income_total multiply = -0.25 }
+    var:bfl_credit_offer_rate <= 0.15
+    monthly_income_total >= { value = var:bfl_credit_offer_rate multiply = 100 divide = 12 multiply = 4 }
+    total_debt <= { value = monthly_income_total multiply = 24 subtract = bfl_bond_debt subtract = 100 }
+}
+bfl_strategy_deposit_target = {
+    bfl_is_independent_bank = yes bfl_can_conduct_business = yes var:bfl_state = 0
+    var:bfl_accept_deposits = 1 var:bfl_demand_rate > 0
+    bfl_equity >= 500 bfl_deposit_liabilities <= bfl_equity
+    # No reciprocal placement chains as a source of lending capital.
+    bfl_deposit_assets = 0
+    opinion = { target = scope:bfl_strategy_bank value >= 50 }
+    NOT = { this = scope:bfl_strategy_bank }
+}
+bfl_strategy_branch_candidate = {
+    save_temporary_scope_as = bfl_strategy_prospect
+    scope:bfl_strategy_bank = { bfl_branch_access = { PARTY = scope:bfl_strategy_prospect } }
+}

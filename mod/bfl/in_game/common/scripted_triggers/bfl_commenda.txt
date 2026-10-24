@@ -53,3 +53,17 @@ bfl_commenda_command_ready = {
 OR = { bfl_commenda_offer_ready = yes
         AND = { country_type = location var:bfl_bank = { bfl_commenda_offer_ready = yes } } }
 }
+bfl_ai_accept_venture = {
+country_exists = this at_war = no
+        exists = var:bfl_venture_offer_bank bfl_period <= var:bfl_venture_offer_expiry
+        # Automated consent is limited to quoted cargo; an expedition with no
+        # attributable commercial return requires the operator's explicit choice.
+        var:bfl_venture_offer_kind = 1
+        var:bfl_venture_offer_from = { save_temporary_scope_as = bfl_ai_from }
+        var:bfl_venture_offer_to = { save_temporary_scope_as = bfl_ai_to }
+        var:bfl_venture_offer_good = { save_temporary_scope_as = bfl_ai_good }
+        "scope:bfl_ai_to.market_price(scope:bfl_ai_good)" >= { value = "scope:bfl_ai_from.market_price(scope:bfl_ai_good)" multiply = bfl_venture_ai_margin_multiplier }
+        OR = { var:bfl_venture_offer_preset = 0
+            bfl_venture_operator_cash >= { value = var:bfl_venture_offer_ticket divide = 2 add = 100 } }
+        monthly_balance >= 0
+}

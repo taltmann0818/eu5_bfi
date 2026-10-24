@@ -1,0 +1,10 @@
+﻿bfl_can_fund_medici = {
+    country_type = location owns = location:milano gold >= 2000
+    NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+    NOT = { has_variable = bfl_operation_guard }
+    OR = { NOT = { exists = c:MEDIC }
+        c:MEDIC ?= { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+            OR = { is_subject = no is_subject_type = state_bank }
+            OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+            NOT = { has_variable = bfl_operation_guard } } }
+}

@@ -2,7 +2,9 @@
 
 Search does not create an offer, reserve capital, buy goods or recognize income.
 Destination is the operator's capital market, matching native sale pricing.
-Only one candidate is retained; subsequent scans stop once one is found.
+Review at most twelve connected operators and four source markets per operator.
+Native goods enumeration is finite; stop when the first valid cargo is found.
+No country registry or nested world-market search runs for each bank.
 """
 
 
@@ -15,7 +17,7 @@ def generate(common, effect, loc, write):
         var:bfl_op_good = { save_scope_as = goods }'''
     clear = ' '.join('remove_variable = bfl_op_'+f for f in
                      ('country', 'bank', 'from', 'to', 'good', 'cost', 'surplus', 'period'))
-    valid = '''bfl_has_management = yes bfl_finance_notifications_enabled = yes
+    valid = '''
         exists = scope:bfl_venture_lender exists = scope:bfl_operator
         scope:bfl_venture_lender = { bfl_commenda_offer_ready = yes
             OR = { this = scope:bfl_opportunity_actor
@@ -31,8 +33,12 @@ def generate(common, effect, loc, write):
             scope:to = { this = scope:bfl_operator.capital.market } bfl_venture_cargo_valid = yes
             OR = { scope:bfl_venture_lender.var:bfl_venture_preset = 0
                 bfl_venture_operator_cash >= { value = "scope:from.market_price(scope:goods)" multiply = 10 divide = 3 add = 1 } } }
-        "scope:to.market_price(scope:goods)" > "scope:from.market_price(scope:goods)"'''
-    common('scripted_triggers', 'commenda_alert', effect('bfl_commenda_opportunity_valid', valid))
+        "scope:to.market_price(scope:goods)" > "scope:from.market_price(scope:goods)"
+        OR = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_strategy_search } }
+            AND = { "scope:to.market_price(scope:goods)" >= { value = "scope:from.market_price(scope:goods)" multiply = 1.10 }
+                "scope:to.market_price(scope:goods)" >= { value = "scope:from.market_price(scope:goods)" add = 0.20 } } }'''
+    common('scripted_triggers', 'commenda_alert', effect('bfl_commenda_candidate_valid', valid)
+        +effect('bfl_commenda_opportunity_valid', 'bfl_has_management = yes bfl_finance_notifications_enabled = yes bfl_commenda_candidate_valid = yes'))
     quote = '''set_variable = { name = bfl_op_cost value = { value = "scope:from.market_price(scope:goods)" multiply = 10 } }
         set_variable = { name = bfl_op_surplus value = { value = "scope:to.market_price(scope:goods)"
             subtract = "scope:from.market_price(scope:goods)" multiply = 10 min = 0 } }
@@ -41,25 +47,50 @@ def generate(common, effect, loc, write):
             change_variable = { name = bfl_op_surplus multiply = 0.5 } }
         else = { change_variable = { name = bfl_op_surplus multiply = 0.75 } }
         set_variable = { name = bfl_op_period value = bfl_period }'''
-    search = '''every_country = { limit = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } }
-            country_exists = this exists = capital NOT = { bfl_is_bank = yes }
-            OR = { country_type = location bfl_is_company = yes }
+    goods = """if = { limit = { scope:from != scope:to scope:from = { in_trade_range_of = scope:bfl_operator }
+            scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } var:bfl_op_markets < 4 } }
+        scope:bfl_opportunity_actor = { change_variable = { name = bfl_op_markets add = 1 } }
+        every_goods = { limit = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } } }
+            save_scope_as = goods scope:bfl_opportunity_actor = {
+                if = { limit = { bfl_commenda_candidate_valid = yes }
+                    set_variable = { name = bfl_op_country value = scope:bfl_operator }
+                    set_variable = { name = bfl_op_bank value = scope:bfl_venture_lender }
+                    set_variable = { name = bfl_op_from value = scope:from }
+                    set_variable = { name = bfl_op_to value = scope:to }
+                    set_variable = { name = bfl_op_good value = scope:goods }
+                    """+quote+""" } } } }"""
+    consider = """if = { limit = { country_exists = this exists = capital
+            NOT = { bfl_is_bank = yes } OR = { country_type = location bfl_is_company = yes }
+            NOT = { has_variable = bfl_venture_bank } NOT = { has_variable = bfl_venture_guard }
             within_diplomatic_range = scope:bfl_opportunity_actor
-            NOT = { has_variable = bfl_venture_bank }
-            OR = { NOT = { has_variable = bfl_venture_offer_bank } bfl_period > var:bfl_venture_offer_expiry } }
+            OR = { NOT = { has_variable = bfl_venture_offer_bank } bfl_period > var:bfl_venture_offer_expiry }
+            scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } var:bfl_op_reviewed < 12 } }
         save_scope_as = bfl_operator capital.market = { save_scope_as = to }
-        every_country = { limit = { exists = capital scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } } }
+        scope:bfl_opportunity_actor = { change_variable = { name = bfl_op_reviewed add = 1 }
+            set_variable = { name = bfl_op_markets value = 0 } }
+        scope:bfl_venture_lender = {
             capital.market = { save_scope_as = from }
-            if = { limit = { scope:from != scope:to scope:from = { in_trade_range_of = scope:bfl_operator } }
-                every_goods = { limit = { scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } } }
-                    save_scope_as = goods scope:bfl_opportunity_actor = {
-                        if = { limit = { bfl_commenda_opportunity_valid = yes }
-                            set_variable = { name = bfl_op_country value = scope:bfl_operator }
-                            set_variable = { name = bfl_op_bank value = scope:bfl_venture_lender }
-                            set_variable = { name = bfl_op_from value = scope:from }
-                            set_variable = { name = bfl_op_to value = scope:to }
-                            set_variable = { name = bfl_op_good value = scope:goods }
-                            '''+quote+''' } } } } } }'''
+            """+goods+"""
+            every_owned_building = { limit = { building_type = building_type:banking_office building_level > 0
+                    location = location.owner.capital
+                    scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } var:bfl_op_markets < 4 } }
+                location.market = { save_scope_as = from }
+                """+goods+""" } } }"""
+    search = """set_variable = { name = bfl_op_reviewed value = 0 }
+        set_variable = { name = bfl_op_markets value = 0 }
+        scope:bfl_venture_lender = {
+            every_owned_building = { limit = { building_type = building_type:banking_office building_level > 0
+                    location = location.owner.capital
+                    scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } var:bfl_op_reviewed < 12 } }
+                location.owner = { """+consider+""" } }
+            every_in_global_list = { variable = bfl_resolution_institutions
+                limit = { bfl_is_company = yes exists = capital
+                    capital.market = { this = scope:bfl_venture_lender.capital.market }
+                    scope:bfl_opportunity_actor = { NOT = { has_variable = bfl_op_country } var:bfl_op_reviewed < 12 } }
+                """+consider+""" } }"""
+    finder = """save_scope_as = bfl_opportunity_actor
+        """+clear+"""
+        """+search
     refresh = '''save_scope_as = bfl_opportunity_actor
         if = { limit = { has_variable = bfl_op_country }
             '''+restore+'''
@@ -67,7 +98,8 @@ def generate(common, effect, loc, write):
             else = { cmf_remove_alert = { alert = bfl_commenda_available } '''+clear+''' } }
         if = { limit = { bfl_has_management = yes has_global_variable = cmf_active
             bfl_finance_notifications_enabled = yes bfl_commenda_command_ready = yes
-            NOT = { has_variable = bfl_op_country } }
+            NOT = { has_variable = bfl_op_country }
+            OR = { is_ai = no var:bfl_strategy_mode ?= 0 } }
             bfl_resolve_command_bank = yes scope:bfl_bank = { save_scope_as = bfl_venture_lender }
             '''+search+''' }
         if = { limit = { has_variable = bfl_op_country }
@@ -86,6 +118,8 @@ def generate(common, effect, loc, write):
             scope:bfl_venture_lender = { set_variable = { name = bfl_venture_kind value = 1 } bfl_propose_commenda = yes } }
         bfl_refresh_commenda_opportunity = yes }'''
     common('scripted_effects', 'commenda_alert',
+           effect('bfl_find_commenda_opportunity', finder)+
+           effect('bfl_restore_commenda_opportunity', restore)+
            effect('bfl_refresh_commenda_opportunity', refresh)+
            effect('bfl_review_commenda_opportunity', review)+
            effect('bfl_propose_commenda_opportunity', propose))
@@ -94,7 +128,7 @@ def generate(common, effect, loc, write):
             bfl_review_commenda_opportunity = yes } } }''')
     common('../events', 'commenda_opportunity', '''namespace = bfl_commenda_opportunity
         bfl_commenda_opportunity.1 = { type = country_event title = bfl_commenda_available_name
-            desc = bfl_commenda_opportunity_review image = "gfx/interface/illustrations/bfl/commenda.dds" outcome = neutral
+            desc = bfl_commenda_opportunity_review image = "gfx/interface/illustrations/bfl/m10_overseas_investment.dds" outcome = neutral
             option = { name = bfl_commenda_opportunity_propose custom_tooltip = bfl_commenda_opportunity_consent
                 hidden_effect = { bfl_propose_commenda_opportunity = yes } ai_chance = { base = 0 } }
             option = { name = bfl_commenda_opportunity_later ai_chance = { base = 100 } } }''')

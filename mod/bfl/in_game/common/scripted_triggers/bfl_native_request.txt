@@ -1,0 +1,9 @@
+﻿bfl_native_request_funded = {
+    OR = { NOT = { bfl_has_accounts = yes }
+        AND = { bfl_can_originate_sovereign_credit = yes bfl_credit_capacity = yes
+            bfl_native_request_amount > 0
+            bfl_free_cash >= bfl_native_request_amount
+            bfl_capital_headroom >= bfl_native_request_amount
+            OR = { scope:actor = { NOT = { bfl_is_company = yes } }
+                bfl_can_originate_corporate_credit = yes } } }
+}

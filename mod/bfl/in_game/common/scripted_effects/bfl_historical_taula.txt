@@ -1,0 +1,33 @@
+﻿bfl_charter_taula = {
+if = { limit = { bfl_can_charter_taula = yes }
+            show_as_tooltip = {
+            add_gold = { value = bfl_bank_of_england_capital multiply = -1 }
+            c:TAUBL = { make_subject_of = { target = root type = subject_type:bfl_chartered_bank } }
+            add_reform = government_reform:bfl_state_chartered_bank
+        location:barcelona = { change_building_level_in_location = { building = building_type:bfl_llotja_de_mar value = 1 owner = c:TAUBL } }
+}
+
+            hidden_effect = {
+                save_scope_as = bfl_controller set_variable = bfl_operation_guard
+                set_variable = { name = bfl_payment value = bfl_bank_of_england_capital }
+                c:TAUBL = { save_scope_as = bfl_bank
+                    make_subject_of = { target = scope:bfl_controller type = subject_type:bfl_chartered_bank }
+                    bfl_initialize_bank = yes
+                    set_variable = { name = bfl_opening_equity value = bfl_equity }
+                    bfl_assign_charter_ownership = yes
+                    add_gold = scope:bfl_controller.var:bfl_payment
+                    change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
+                    set_variable = { name = bfl_controller value = scope:bfl_controller }
+                    remove_variable = bfl_legacy_servicing
+                }
+                add_gold = bfl_negative_payment
+                set_variable = { name = bfl_bank value = c:TAUBL }
+                add_reform = government_reform:bfl_state_chartered_bank bfl_grant_charter_traditions = yes
+                location:barcelona = { if = { limit = { NOT = { has_building = building_type:bfl_llotja_de_mar } }
+                change_building_level_in_location = { building = building_type:bfl_llotja_de_mar value = 1 owner = c:TAUBL } } }
+
+                remove_variable = bfl_operation_guard
+                c:TAUBL = { bfl_initialize_ai_charter_policy = yes bfl_offer_profile = yes }
+            }
+        }
+}

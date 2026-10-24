@@ -231,8 +231,8 @@ def generate(common, effect, loc, write):
     # Reuse the actual holder wallet services, excluding ordinary dividend income.
     for units, owner, pool in [('bfl_state_units', 'var:bfl_state_owner', 0), ('bfl_founder_units', 'this', 1)]:
         close += f'''if = {{ limit = {{ var:{units} > 0 }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_resolution_residual multiply = var:{units}
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
+            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_resolution_residual multiply = 100 multiply = var:{units}
+                divide = var:bfl_total_units floor = yes divide = 100 }} }}
             add_gold = bfl_negative_payment
             change_variable = {{ name = bfl_resolution_equity_paid add = var:bfl_payment }}
         '''
@@ -243,16 +243,16 @@ def generate(common, effect, loc, write):
     for i in range(1, 17):
         n = f'bfl_shr_{i:02}'
         close += f'''if = {{ limit = {{ var:{n}_active = 1 }}
-            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_resolution_residual multiply = var:{n}_units
-                divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 }} }}
+            set_variable = {{ name = bfl_payment value = {{ value = var:bfl_resolution_residual multiply = 100 multiply = var:{n}_units
+                divide = var:bfl_total_units floor = yes divide = 100 }} }}
             add_gold = bfl_negative_payment
             change_variable = {{ name = bfl_resolution_equity_paid add = var:bfl_payment }}
             var:{n}_party = {{ set_variable = {{ name = bfl_pool value = scope:bfl_bank.var:{n}_pool }}
                 if = {{ limit = {{ var:bfl_pool = 5 }} set_variable = {{ name = bfl_pool value = 1 }} }}
                 bfl_credit_depositor = yes }} }}\n'''
     close += '''if = { limit = { bfl_dealer_units > 0 }
-        set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = bfl_dealer_units
-            divide = var:bfl_total_units multiply = 100 floor = yes divide = 100 } }
+        set_variable = { name = bfl_payment value = { value = var:bfl_resolution_residual multiply = 100 multiply = bfl_dealer_units
+            divide = var:bfl_total_units floor = yes divide = 100 } }
         add_gold = bfl_negative_payment change_variable = { name = bfl_dealer_cash add = var:bfl_payment }
         change_variable = { name = bfl_resolution_equity_paid add = var:bfl_payment } }
         }
@@ -261,10 +261,18 @@ def generate(common, effect, loc, write):
                 subtract = scope:bfl_bank.var:bfl_resolution_guarantee_left } }
             set_variable = { name = bfl_resolution_guarantee_left value = 0 } }
         set_variable = { name = bfl_state value = 5 }
+        bfl_record_feedback = { KIND = 8 AMOUNT = 0 }
         change_variable = { name = bfl_resolution_revision add = 1 }
         set_variable = { name = bfl_resolution_closed value = bfl_period }
+        save_scope_as = bfl_closed_institution
+        if = { limit = { is_ai = no bfl_finance_notifications_enabled = yes }
+            set_variable = { name = bfl_notice_bank value = this }
+            trigger_event_non_silently = bfl_resolution_notice.1 }
         if = { limit = { bfl_has_valid_controller = yes }
             overlord = { save_scope_as = bfl_resolution_controller }
+            overlord = { if = { limit = { is_ai = no bfl_finance_notifications_enabled = yes }
+                set_variable = { name = bfl_notice_bank value = scope:bfl_closed_institution }
+                trigger_event_non_silently = bfl_resolution_notice.1 } }
             change_subject_type = subject_type:state_bank
             set_variable = bfl_legacy_servicing
             remove_variable = bfl_controller
@@ -495,7 +503,7 @@ def make_consent(common, effect, loc):
         + effect('bfl_accept_resolution_equity', 'set_variable = { name = bfl_workout_mode value = 2 } bfl_accept_resolution_terms = yes'))
     common('../events', 'workout', '''namespace = bfl_workout
         bfl_workout.1 = { type = country_event title = bfl_workout_title desc = bfl_workout_desc
-            image = "gfx/interface/illustrations/bfl/charter.dds" outcome = neutral
+            image = "gfx/interface/illustrations/bfl/m10_resolution.dds" outcome = neutral
             option = { name = bfl_workout_haircut custom_tooltip = bfl_deposit_haircut_tip
                 hidden_effect = { bfl_accept_resolution_haircut = yes } ai_chance = { base = 0 } }
             option = { name = bfl_workout_equity custom_tooltip = bfl_deposit_equity_tip

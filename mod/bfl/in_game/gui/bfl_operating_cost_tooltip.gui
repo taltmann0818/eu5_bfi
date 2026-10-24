@@ -8,44 +8,55 @@ type bfl_operating_cost_tooltip = ContextualTooltipType {
             set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_cost_current" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_base')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_base_cost')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_accounts_count'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/deposit.dds" } text_single = { raw_text = "[Localize('bfl_cost_accounts')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_accounts_cost')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_contracts_count'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_contracts')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_contracts_cost')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_branches_count'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_branches')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_branches_cost')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_asset_types_count'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_asset_types')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_asset_types_cost')|2]@gold!" autoresize = yes align = right|nobaseline } } } }TooltipListBase = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_total_reduction'), '(CFixedPoint)0')]"
         blockoverride "block_title" { visible = yes text = "bfl_cost_reductions" }
         widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_charter'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_charter')]" autoresize = yes } expand = { }
             text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_charter')|%0]#!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_banking'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/deposit.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_banking')]" autoresize = yes } expand = { }
             text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_banking')|%0]#!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_clearing'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_clearing')]" autoresize = yes } expand = { }
             text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_clearing')|%0]#!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_administration'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
             icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_administration')]" autoresize = yes } expand = { }
-            text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_administration')|%0]#!" autoresize = yes align = right|nobaseline } } } }TooltipListBase = {
+            text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_administration')|%0]#!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_central_bank'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+            icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_central_bank')]" autoresize = yes } expand = { }
+            text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_central_bank')|%0]#!" autoresize = yes align = right|nobaseline } } }widget = { visible = "[GreaterThan_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_family_palace'), '(CFixedPoint)0')]" size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+            icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_reduction_family_palace')]" autoresize = yes } expand = { }
+            text_single = { raw_text = "#G −[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_operating_reduction_family_palace')|%0]#!" autoresize = yes align = right|nobaseline } } } }TooltipListBase = {
+        blockoverride "block_title" { visible = yes text = "bfl_cost_constitution" }
+        widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+            icon = { size = { 20 20 } texture = "gfx/interface/icons/bfl/accounts.dds" } text_single = { raw_text = "[Localize('bfl_cost_constitution_factor')]" autoresize = yes } expand = { }
+            text_single = { raw_text = "×[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bank_expense_factor')|2]" autoresize = yes align = right|nobaseline } } } }TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_cost_settlement_title" }
         widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { raw_text = "[Localize('bfl_cost_settlement_due')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_expense_due').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { raw_text = "[Localize('bfl_cost_settlement_paid')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_expense_paid').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { layoutpolicy_horizontal = expanding margin = { 10 2 } spacing = 8
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { raw_text = "[Localize('bfl_cost_settlement_arrears')]" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_expense_arrears').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_cost_payment_detail" } }TooltipListBase = {
         blockoverride "block_title" { visible = yes text = "bfl_expense_history_title" }

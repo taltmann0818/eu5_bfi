@@ -91,6 +91,13 @@ def fixture(token, fingerprint):
     start += check('initialization_idempotent', 'var:bfl_paid_in_capital = 777')
     start += 'remove_variable = bfl_state_dividend_paid bfl_initialize_bank = yes\n'
     start += check('legacy_bank_gets_state_dividend_field','var:bfl_state_dividend_paid = 0 var:bfl_paid_in_capital = 777')
+    start += "c:FLO = { set_gold = 2000 save_scope_as = bfl_party } set_variable = { name = bfl_product value = 1 } set_variable = { name = bfl_deposit_amount value = 1500 } bfl_open_deposit = yes\n"
+    start += check('sized_deposit_conserves_large_cash', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500 bfl_liabilities = 1500')
+    start += 'set_variable = { name = bfl_deposit_amount value = 600 } bfl_open_deposit = yes\n'
+    start += check('sized_deposit_rechecks_wallet', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500')
+    start += 'set_variable = { name = bfl_deposit_amount value = -1 } bfl_open_deposit = yes\n'
+    start += check('sized_deposit_rejects_negative_cash', 'gold = 2500 c:FLO = { gold = 500 } var:bfl_dep_01_principal = 1500')
+    start += reset() + 'set_variable = { name = bfl_deposit_amount value = 100 } c:FLO = { set_gold = 1000 save_scope_as = bfl_party }\n'
     start += check('demand_permission', 'bfl_can_originate_demand_deposit = yes')
     start += check('term_age_gate', 'NOT = { bfl_can_originate_term_deposit = yes }')
     start += check('bill_age_gate', 'NOT = { bfl_can_originate_commercial_bill = yes }')
@@ -188,6 +195,8 @@ def fixture(token, fingerprint):
     start += 'set_variable = { name = bfl_profit_services value = 100.95 } bfl_settle_dividends = yes\n'
     start += check('dividend_offsets_loss_and_ownership', 'var:bfl_dividend_paid = 12.5 gold = 986.55 c:FLO = { gold = 1012.5 } var:bfl_loss_carryforward = 0 var:bfl_profit_services = 0')
     start += check('balance_state_dividend_is_funded', 'var:bfl_state_dividend_paid = 12.5')
+    start += check('balance_bank_dividend_annualized_without_transfer', 'c:FLO = { bfl_bank_dividend_latest = 12.5 bfl_bank_dividend_annual = 150 gold = 1012.5 }')
+    start += check('dividend_breakdown_survives_profit_reset', 'var:bfl_dividend_eligible = 100 var:bfl_dividend_funded = 25 var:bfl_dividend_state_units = 500 var:bfl_dividend_total_units = 1000 var:bfl_profit_services = 0')
     start += 'bfl_recapitalize = yes\n'
     start += check('recapitalization_funded', 'gold = 1086.55 c:FLO = { gold = 912.5 } var:bfl_state_units > 600 var:bfl_total_units > 1100 var:bfl_profit_services = 0')
     start += '''set_variable = { name = bfl_total_units value = 1000 }
@@ -222,12 +231,18 @@ def fixture(token, fingerprint):
     start += check('manual_takeover_bank_owns_same_loan', 'scope:bfi_takeover_claim = { owner = c:BRD borrower = c:VEN } c:FLO = { gold = var:bfi_takeover_state_cash } var:bfl_native_credit_value >= 100 var:bfl_asset_unsecured >= 100')
     start += check('asset_tooltip_counterparty_is_borrower','var:bfl_asset_01_party = c:VEN var:bfl_asset_01_unsecured >= 100')
     start += '''set_variable = { name = bfl_last_takeover_period value = 0 }
-        c:GEN = { create_estate_loan = { amount = 100 interest = 0.25 months = 60 } }
+        # Controlled no-premium quote: isolate funded autonomous transport
+        # from the separate natural-price/prepayment-risk campaign gate.
+        add_country_modifier = { modifier = bfi_takeover_cost_control months = 1 mode = add_and_extend }
+        c:GEN = { set_gold = 0 create_estate_loan = { amount = 100 interest = 0.25 months = 60 } }
+        set_variable = { name = bfl_strategy_mode value = 1 }
         bfl_autonomous_takeover = yes
     '''
     start += check('bank_autonomous_takeover_funded','var:bfl_takeover_done = 1 var:bfl_last_takeover_period = bfl_period')
     start += 'set_variable = { name = bfi_takeover_bank_cash value = gold } bfl_autonomous_takeover = yes\n'
     start += check('autonomous_takeover_monthly_limit','gold = var:bfi_takeover_bank_cash')
+    start += 'set_variable = { name = bfl_strategy_mode value = 0 }\n'
+    start += 'remove_country_modifier = bfi_takeover_cost_control\n'
     start += 'every_lent_loan = { cancel_loan = this }\n'
     start += reset() + '''set_gold = 50 set_variable = { name = bfl_notes_outstanding value = 200 }
         remove_variable = bfl_history_count bfl_initialize_history = yes bfl_record_history = yes
@@ -332,7 +347,7 @@ def prepare(directory, token=None):
     reload_body, reload_cases = reload_fixture(token, fingerprint)
     # Legacy financial regressions deliberately retain the pure NAV backend.
     # The dedicated pricing suite explicitly enables matched GBM issuers.
-    start = 'every_country = { set_variable = { name = bfl_price_model_override value = 0 } set_variable = { name = bfl_goods_mandate value = 0 } }\n' + start
+    start = 'every_country = { set_variable = { name = bfl_price_model_override value = 0 } set_variable = { name = bfl_goods_mandate value = 0 } set_variable = { name = bfl_strategy_mode value = 0 } }\n' + start
     # Instant native construction still queues a level-zero building. These
     # fixtures intend completed debug grants; actual AI completion is tested
     # separately with normal cost/time and no level grant.
@@ -347,6 +362,8 @@ def prepare(directory, token=None):
     overlay = directory / 'mod/bfi_campaign_checks'
     meta = overlay / '.metadata/metadata.json'
     write_script(overlay / 'in_game/common/biases/bfi_test_opinion.txt', 'bfi_deposit_test_opinion = { value = 100 yearly_decay = 0 }\nbfi_deposit_test_bad_opinion = { value = -400 yearly_decay = 0 }')
+    write_script(overlay / 'main_menu/common/static_modifiers/bfi_takeover_cost_control.txt',
+                 'bfi_takeover_cost_control = { bank_interest = -0.075 }')
     meta.parent.mkdir(parents=True, exist_ok=True)
     meta.write_text(json.dumps({'name': 'BFI campaign checks (DISPOSABLE)', 'id': 'bfi_campaign_checks',
         'version': '0.0.1', 'game_id': 'eu5', 'supported_game_version': '1.4.1',
@@ -377,9 +394,14 @@ bfi_campaign_poll = { effect = {
     }
 } }
 ''')
+    fixture_digest = hashlib.sha256()
+    for path in sorted(overlay.rglob('*')):
+        if path.is_file():
+            fixture_digest.update(path.relative_to(overlay).as_posix().encode() + b'\0' + path.read_bytes())
     manifest = {'token': token, 'runtime_sha256': fingerprint, 'instant_cases': instant,
                 'cases': cases + reload_cases, 'reload_cases': reload_cases,
-                'fixture_sha256': hashlib.sha256((start + finish + reload_body).encode()).hexdigest()}
+                'fixture_sha256': fixture_digest.hexdigest(),
+                'fixture_hash_scope': 'All staged overlay files, including native-cost controls and callback definitions.'}
     (directory / 'bfi_campaign_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     return manifest
 

@@ -22,6 +22,10 @@ def generate(common, effect, loc, write):
     '''
     for i in range(1, 33):
         n = f'bfl_bnd_{i:02}'
+        guis += f'''bfl_bond_row_owned_{i:02} = {{ scope = country is_shown = {{
+            OR = {{ var:{n}_holder ?= scope:actor var:{n}_holder ?= scope:actor.var:bfl_bank }} }} }}\n'''
+        loc(f'bfl_list_selected_bond_{i:02}_tip', 'Offer this bond for sale at 98% of its principal. Requires a Stock Exchange, ownership and no unpaid interest. The buyer pays the current holder.')
+        loc(f'bfl_redeem_selected_bond_{i:02}_tip', 'Repay this bond and its unpaid interest to its current holder. Requires enough state cash. The bond is then retired.')
         guis += f'''bfl_redeem_selected_bond_{i:02} = {{ scope = country
             is_shown = {{ var:bfl_bond_selected_issuer ?= this var:{n}_active ?= 1 }}
             is_valid = {{ var:bfl_bond_selected_issuer ?= this var:{n}_active ?= 1
@@ -40,6 +44,7 @@ def generate(common, effect, loc, write):
                 var:bfl_bond_selected_issuer = {{ set_variable = {{ name = bfl_bond_requested_slot value = {i} }}
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }}
             }} }} }}\n'''
+    guis += 'bfl_bond_issuer_selected = { scope = country is_shown = { exists = var:bfl_bond_selected_issuer country_exists = var:bfl_bond_selected_issuer } }\n'
     common('scripted_guis', 'bond_panel', guis)
     common('scripted_triggers', 'bond_panel', '''bfl_resolved_bond_seller_valid = {
         OR = { bfl_can_trade_sovereign_bonds = yes
@@ -127,150 +132,8 @@ def generate(common, effect, loc, write):
     for key, title in labels.items():
         loc(key, title)
 
-    def shown(key):
-        return f"GetScriptedGui('{key}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)"
-
-    def button(key, label=None, height=42, selected=None):
-        # Custom cards rather than generic buttons. Text, art, padding and policy
-        # state are part of the design; disabled actions keep their reason tooltip.
-        down = f'down = "[{selected}]"' if selected else ''
-        marker = f'''icon = {{ parentanchor = bottom|left size = {{ 100% 3 }}
-            texture = "gfx/interface/colors/white.dds" color = {{ 0.82 0.68 0.36 1 }} visible = "[{selected}]" }}''' if selected else ''
-        return f'''button = {{ name = "{key}_panel_button" size = {{ 100% {height} }}
-            layoutpolicy_horizontal = expanding using = bg_card_header_01 {down}
-            enabled = "[GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            onclick = "[GetScriptedGui('{key}').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-            tooltip = "{key}_tip"
-            text_single = {{ parentanchor = center text = "{label or key}" autoresize = yes fontsize = 15 }} {marker}
-            icon = {{ size = {{ 100% 100% }} texture = "gfx/interface/colors/white.dds"
-                color = {{ 0 0 0 0.55 }} alwaystransparent = yes
-                visible = "[Not(GetScriptedGui('{key}').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }} }}'''
-
-    def at(x, y, width, height, body, background=''):
-        return f'''widget = {{ position = {{ {x} {y} }} size = {{ {width} {height} }}
-            {background} {body} }}'''
-
-    def caption(key, x, y, width=464, height=24, font=16):
-        return f'''text_multi = {{ position = {{ {x} {y} }} size = {{ {width} {height} }}
-            text = "{key}" fontsize = {font} }}'''
-
-    def card(height, body):
-        return f'''widget = {{ size = {{ -1 {height} }} layoutpolicy_horizontal = expanding
-            layoutpolicy_vertical = fixed using = bg_text_mask_container_dark_brown {body} }}'''
-
-    def browse(x=16, y=120):
-        return f'''button_regular = {{ position = {{ {x} {y} }} size = {{ 464 42 }}
-            datacontext = "[GetGenericAction('bfl_browse_bond_issuers')]" enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_browse_bond_issuers_tip"
-            scripted_action_tooltip = {{ click_type = left click_mode = single action_name = "bfl_browse_bond_issuers"
-                actor = "[GetPlayer]" }}
-            text = "bfl_browse_bond_issuers" fontsize = 16 }}'''
-
-    header = '''background = { texture = "gfx/interface/illustrations/institutions/banking.dds" fittype = centercrop alpha = 0.22 }
-        icon = { position = { 16 16 } size = { 38 38 } texture = "[GetConceptTexture('government_bond')]" }
-    ''' + caption('bfl_bond_panel_title', 66, 16, 414, 32, 24)
-    for index, (title, script) in enumerate([
-        ('bfl_bond_principal', 'debt'), ('bfl_bond_coupon', 'monthly_coupon'),
-        ('bfl_bond_unpaid', 'arrears'), ('bfl_bond_capacity_label', 'capacity')]):
-        x, y = 16 + index % 2 * 244, 70 + index // 2 * 68
-        header += at(x, y, 230, 60, caption(title, 0, 0, 230, 22, 14) + f'''text_single = {{ position = {{ 0 26 }}
-            raw_text = "[GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_{script}')|2]@gold!"
-            autoresize = yes fontsize = 22 }}''')
-    issue = caption('bfl_bond_issue_title', 16, 16, height=26, font=19)
-    issue += caption('bfl_bond_issue_detail', 16, 58, height=60, font=16)
-    issue += caption('bfl_bond_rate_caption', 16, 130)
-    for index, rate in enumerate((1, 3, 6)):
-        issue += at(16 + index * 158, 166, 148, 42, button(f'bfl_bond_rate_{rate}', selected=f"EqualTo_CFixedPoint(GetPlayer.MakeScope.GetVariable('bfl_bond_rate').GetValue, '(CFixedPoint){rate / 100}')"))
-    issue += caption('bfl_bond_rate_note', 16, 226, font=14)
-    issue += at(16, 268, 464, 46, button('bfl_draw_bond', height=46))
-    mandate = caption('bfl_bond_mandate_title', 16, 16, height=26, font=19)
-    mandate += caption('bfl_bond_mandate_detail', 16, 58, height=74)
-    for index in range(3):
-        mandate += at(16 + index * 158, 154, 148, 42, button(f'bfl_facility_{index}', f'bfl_facility_{index}_short', selected=f"EqualTo_CFixedPoint(GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_bond_facility_display'), '(CFixedPoint){index}')"))
-    finance = card(334, issue) + card(216, mandate)
-
-    # Each card has its own action row. Absolute wrappers keep buttons out of
-    # hbox/vbox percentage sizing, which the native GUI engine rejects.
-    rows = ''
-    for i in range(1, 33):
-        n = f'bfl_bnd_{i:02}'
-        loc(f'bfl_bond_card_{i:02}', f"#bold [Country.MakeScope.GetVariable('{n}_face').GetValue|2]@gold!#!  |  [Country.MakeScope.GetVariable('{n}_rate').GetValue|%1] annual")
-        loc(f'bfl_bond_holder_{i:02}', f"Holder: [Country.MakeScope.GetVariable('{n}_holder').GetCountry.GetName]")
-        loc(f'bfl_bond_arrears_{i:02}', f"Unpaid coupons: [Country.MakeScope.GetVariable('{n}_due').GetValue|2]@gold!")
-        loc(f'bfl_list_selected_bond_{i:02}_tip', 'Offer this exact claim at 98% of face for three months. Its current holder retains coupons until funded acceptance. Both parties must still have an exchange when the sale executes.')
-        loc(f'bfl_redeem_selected_bond_{i:02}_tip', 'Pay face and accrued coupons to the current holder and close this exact obligation. Insufficient funds leave it outstanding.')
-        body = f'''icon = {{ position = {{ 16 16 }} size = {{ 28 28 }} texture = "[GetConceptTexture('government_bond')]" }}
-            text_single = {{ position = {{ 416 20 }} raw_text = "No. {i:02}" autoresize = yes fontsize = 13 }}'''
-        body += caption(f'bfl_bond_card_{i:02}', 56, 16, 350, 28, 18)
-        body += caption(f'bfl_bond_holder_{i:02}', 16, 58, height=42)
-        body += caption(f'bfl_bond_arrears_{i:02}', 16, 104, font=14)
-        body += f'''widget = {{ position = {{ 16 146 }} size = {{ 224 38 }} visible = "[{shown(f'bfl_list_selected_bond_{i:02}')}]"
-            {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 38)} }}
-            widget = {{ position = {{ 256 146 }} size = {{ 224 38 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]"
-            {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 38)} }}'''
-        body += f'''widget = {{ position = {{ 16 196 }} size = {{ 464 38 }} visible = "[{shown(f'bfl_offer_bond_workout_{i:02}')}]"
-            {button(f'bfl_offer_bond_workout_{i:02}', f'bfl_offer_bond_workout_{i:02}', 38)} }}'''
-        rows += card(250, f'''visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue, '(CFixedPoint)0')]" {body}''')
-    loc('bfl_bond_selected_name', '[Country.GetName]')
-    loc('bfl_bond_market_quote', "Ask: [Country.MakeScope.GetVariable('bfl_bond_offer_price').GetValue|2]@gold! | Seller: [Country.MakeScope.GetVariable('bfl_bond_offer_seller').GetCountry.GetName]")
-    loc('bfl_bond_financing_tab', 'Financing')
-    loc('bfl_bond_holdings_tab', 'Holdings & market')
-    selected = '''text_single = { position = { 16 50 } text = "bfl_bond_selected_name" autoresize = yes fontsize = 22 }'''
-    selected += caption('bfl_bond_register_title', 16, 16, font=15)
-    selected += caption('bfl_bond_register_note', 16, 90, height=56, font=15)
-    selected += browse(y=162)
-    quote = caption('bfl_bond_market_title', 16, 16, font=19)
-    quote += caption('bfl_bond_exchange_note', 16, 56, height=78, font=15)
-    quote += '''text_multi = { position = { 16 148 } size = { 464 50 } text = "bfl_bond_market_empty" fontsize = 16
-        visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_bond_offer_slot').GetValue, '(CFixedPoint)0')]" }
-        text_multi = { position = { 16 148 } size = { 464 50 } text = "bfl_bond_market_quote" fontsize = 16
-        visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bond_offer_slot').GetValue, '(CFixedPoint)0')]" }
-    '''
-    quote += at(16, 216, 224, 42, button('bfl_buy_selected_bond')) + at(256, 216, 224, 42, button('bfl_cancel_selected_bond_offer'))
-    holdings = card(222, selected) + card(278, quote) + rows
-    holdings += card(100, caption('bfl_bond_empty', 16, 16, height=68) + '''visible = "[EqualTo_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bond_count'), '(CFixedPoint)0')]"''')
-    nav = ''
-    for title, value in [('bfl_bond_financing_tab', 'finance'), ('bfl_bond_holdings_tab', 'holdings')]:
-        test = "CreditLateralView.Vars.HasValue('bond_section','holdings')"
-        if value == 'finance': test = f'Not({test})'
-        nav += f'''button_secondary_tab_alt = {{ layoutpolicy_horizontal = expanding tooltip_enabled = no
-            blockoverride "tab_text" {{ text = "{title}" fontsize = 17 }}
-            onclick = "[CreditLateralView.Vars.Set('bond_section','{value}')]" down = "[{test}]" }}'''
-    # The shared bank overview stays above every Credit subtab. Scroll the entire
-    # bond section in the remaining space, including its summary and inner tabs,
-    # rather than reserving a second fixed-height header below the bank details.
-    def section(body, visible, context):
-        return f'''vbox = {{ layoutpolicy_horizontal = expanding visible = "[{visible}]"
-            datacontext = "[{context}]" ignoreinvisible = yes spacing = 16 {body} }}'''
-    compact_rows = ''
-    for i in range(1,33):
-        n=f'bfl_bnd_{i:02}'
-        compact_rows += f'''widget = {{ size = {{ -1 152 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
-            visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue,'(CFixedPoint)0')]"
-            text_single = {{ position = {{ 10 5 }} text = "bfl_bond_card_{i:02}" autoresize = yes fontsize = 16 }}
-            text_single = {{ position = {{ 10 30 }} text = "bfl_bond_holder_{i:02}" autoresize = yes fontsize = 14 }}
-            text_single = {{ position = {{ 10 53 }} text = "bfl_bond_arrears_{i:02}" autoresize = yes fontsize = 13 }}
-            widget = {{ position = {{ 10 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_list_selected_bond_{i:02}')}]" {button(f'bfl_list_selected_bond_{i:02}', 'bfl_bond_list_label', 28)} }}
-            widget = {{ position = {{ 252 78 }} size = {{ 230 28 }} visible = "[{shown(f'bfl_redeem_selected_bond_{i:02}')}]" {button(f'bfl_redeem_selected_bond_{i:02}', 'bfl_redeem_bond', 28)} }}
-            widget = {{ position = {{ 10 112 }} size = {{ 472 32 }} visible = "[{shown(f'bfl_offer_bond_workout_{i:02}')}]" {button(f'bfl_offer_bond_workout_{i:02}', height=32)} }}
-        }}'''
-    compact = '''hbox = { layoutpolicy_horizontal = expanding spacing = 8
-        icon = { size = { 28 28 } texture = "[GetConceptTexture('government_bond')]" }
-        text_single = { text = "bfl_bond_panel_title" autoresize = yes fontsize = 20 } }
-        text_multi = { text = "bfl_custom_bond_totals" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 13 }
-    '''
-    def flow_button(key, height):
-        return f'widget = {{ size = {{ -1 {height} }} layoutpolicy_horizontal = expanding {button(key,height=height)} }}'
-    compact += flow_button('bfl_draw_bond',36)
-    compact += 'hbox = { layoutpolicy_horizontal = expanding spacing = 5 ' + ''.join(flow_button(f'bfl_bond_rate_{rate}',30) for rate in (1,3,6)) + '}'
-    compact += '''text_single = { text = "bfl_bond_register_title" autoresize = yes fontsize = 16 }'''
-    compact += '''widget = { size = { -1 42 } layoutpolicy_horizontal = expanding ''' + browse(y=0) + '}'
-    compact += f'''vbox = {{ layoutpolicy_horizontal = expanding spacing = 6 datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry]"
-        text_single = {{ text = "bfl_bond_selected_name" autoresize = yes fontsize = 17 }}
-        text_multi = {{ text = "bfl_bond_market_quote" autoresize = yes layoutpolicy_horizontal = expanding fontsize = 13
-            visible = "[GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('bfl_bond_offer_slot').GetValue,'(CFixedPoint)0')]" }}
-        hbox = {{ layoutpolicy_horizontal = expanding spacing = 6 {flow_button('bfl_buy_selected_bond',32)} {flow_button('bfl_cancel_selected_bond_offer',32)} }}
-        {compact_rows}
-    }}'''
+    from generate_credit_redesign import bond_layout
+    compact = bond_layout(loc)
     gui = f'''types BFLSovereignBondTypes {{
     type bfl_bond_contents = vbox {{
         layoutpolicy_horizontal = expanding ignoreinvisible = yes spacing = 10

@@ -1,0 +1,21 @@
+﻿namespace = bfl_historical_banks
+        bfl_historical_banks.1 = {
+            type = country_event title = bfl_medici_title desc = bfl_medici_desc
+            outcome = neutral fire_only_once = yes
+            image = "gfx/interface/illustrations/bfl/banco_mediceo.dds"
+            trigger = { owns = location:milano NOT = { has_global_variable = bfl_medici_dhe_fired } }
+            immediate = { set_global_variable = bfl_medici_dhe_fired }
+            option = { name = bfl_medici_fund historical_option = yes
+                trigger = { bfl_can_fund_medici = yes }
+                bfl_found_banco_mediceo = yes
+            }
+            option = { name = bfl_medici_house_only
+                show_as_tooltip = { location:milano = { change_building_level_in_location = { building = building_type:bfl_banco_mediceo value = 1 owner = root } } }
+                hidden_effect = { location:milano = {
+                    if = { limit = { NOT = { has_building = building_type:bfl_banco_mediceo } }
+                        change_building_level_in_location = { building = building_type:bfl_banco_mediceo value = 1 owner = root } }
+                } }
+                custom_tooltip = bfl_medici_house_only_tt
+            }
+            option = { name = bfl_medici_decline }
+        }
