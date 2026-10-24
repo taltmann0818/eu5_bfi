@@ -8,6 +8,7 @@ def generate(common, effect, loc, write):
         exists = $PARTY$ country_exists = $PARTY$
         save_temporary_scope_as = bfl_branch_access_bank
         OR = {
+            modifier:bfl_global_bank_access = yes
             NOT = { bfl_is_bank = yes }
             $PARTY$ = { NOT = { country_type = location } }
             $PARTY$ = { capital = { any_buildings_in_location = {
@@ -103,12 +104,29 @@ def generate(common, effect, loc, write):
         }
     ''')
     common('on_action', 'branches', '''monthly_country_pulse = { on_actions = { bfl_branch_construction_pulse } }
-        bfl_branch_construction_pulse = { effect = { bfl_ai_build_branches = yes } }''')
+        bfl_branch_construction_pulse = { effect = { bfl_ai_build_branches = yes bfl_deliver_sovereign_branches = yes } }
+        # Native hardcoded hook: root is the completed building.
+        on_building_built = { on_actions = { bfl_deliver_completed_branch } }
+        bfl_deliver_completed_branch = { effect = { bfl_deliver_sovereign_branch = yes } }
+        ''')
+    common('scripted_effects','sovereign_branches',effect('bfl_deliver_sovereign_branch','''
+        if = { limit = { building_type = building_type:banking_office building_level > 0
+            owner = { country_type = location bfl_has_management = yes
+                var:bfl_bank = { bfl_is_chartered_bank = yes is_subject_of = prev } } }
+            owner = { var:bfl_bank = { save_scope_as = bfl_branch_deed_bank } }
+            change_building_owner = scope:bfl_branch_deed_bank
+        }
+    ''')+effect('bfl_deliver_sovereign_branches','''
+        if = { limit = { country_type = location bfl_has_management = yes }
+            every_owned_building = { limit = { building_type = building_type:banking_office building_level > 0 }
+                bfl_deliver_sovereign_branch = yes }
+        }
+    '''))
     # Narrow localization override: keep the native database key and behavior.
     write('main_menu/localization/english/replace/bfl_bank_branch_l_english.yml', '''
     l_english:
      banking_office: "Bank Branch"
-     banking_office_desc: "A local bank office. New sovereign credit, deposits and investments require a completed branch owned by the bank in the sovereign’s current capital. Existing claims remain serviceable; bank-to-bank business needs no branch."
+     banking_office_desc: "A local bank office. A sovereign with a Chartered Bank may pay for branches in foreign locations through normal construction, subject to the host’s relations and native building requirements. On completion the branch belongs to the Chartered Bank. New sovereign credit, deposits and investments require the bank’s completed branch in the sovereign’s current capital. Existing claims remain serviceable."
     ''')
     loc('bfl_branch_construction', 'Establish a capital Bank Branch')
     loc('bfl_branch_required', 'New sovereign business requires this bank’s completed Bank Branch in the current capital. Bank-to-bank business is exempt; existing claims remain owed.')

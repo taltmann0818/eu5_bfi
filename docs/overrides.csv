@@ -4,7 +4,31 @@ in_game/common/country_interactions/siphon_income.txt,Exclude chartered bank at 
 in_game/gui/credit.gui,Redesign bank Credit; remove native loan lists; retain native repayment/bankruptcy actors and confirmations,9e53368c3fda0e0d3a37654565d7acf24f3c770361029988199fea0daaa010a6,1.4.4
 in_game/gui/technology_lateralview.gui,Use the chartered-bank badge for BFI advances; retain other native badges,266056e24bc159e77de1e37408b97dff834548debb99429449325b4ff419ece8,1.4.4
 in_game/common/advances/bfl_banking_unlocks.txt,INJECT two permissions into banking_advance; preserve its native effects and institution gate,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.4
-in_game/common/advances/1_building_unlocks.txt,Move only Stock Exchange to Reformation after Banking; preserve every other native unlock and bond-slot bonus,1b59388d9ba9ae87acbadb1dc35e71e25055b807e8a8d0d36d7a11d2c779cb16,1.4.4
+in_game/common/advances/1_building_unlocks.txt,Move Stock Exchange to Reformation after Global Trade; preserve other native effects,1b59388d9ba9ae87acbadb1dc35e71e25055b807e8a8d0d36d7a11d2c779cb16,1.4.4
+in_game/common/advances/0_age_of_absolutism.txt,Move Central Banking to Reformation after Stock Exchange; preserve other native effects,e0de656e1dc3699dd75faad5ce2984047f22cdc75fa62fe0c7955c71eef641f9,1.4.4
+in_game/common/building_types/unique_buildings.txt,Allow sovereign-funded Bank Branch construction and prevent duplicate bank branches,d557493e68f2539a069efa9dae562299c14fd4102b623484f5550fd7ddc42f0d,1.4.4
 in_game/common/advances/bfl_exchange_ai_priorities.txt,Inject bank-only Banking AI priority; preserve native effects,b2cae08afb4aa380bfc0275c9ac46550a0fcc7e6c5db2857f27a3eaca938b705,1.4.4
 in_game/common/country_interactions/request_loan.txt,Require the owned completed capital branch; preserve native cash effects,49c960f1f055ed0739128fdd99706ff0dd25bc72c3c230bfa03bfa7253bdefb2,1.4.4
 in_game/common/country_interactions/take_over_loan.txt,Require the owned completed capital branch; preserve native cash effects,710176339e75cde1b0caecee499b28b6435c29997889707c0153da08e4f3b6fe,1.4.4
+in_game/events/DHE/flavor_ENG.txt,Create the chartered Bank of England and use custom artwork; preserve other events,07d94a6ed704a8103688958e0c5b8580f823c7924bebb17814329f9f1df61f16,1.4.4
+in_game/events/economy/banking.txt,Add Fuggerhauser and Welserhaus to their native founding options; preserve other effects,ed65c8c2aa62204db81e9d5c750aaf440391c08caf92157924c6a9e55208c290,1.4.4
+in_game/events/DHE/flavor_hol.txt,"Create Wisselbank, add NED eligibility and original art; preserve other events",1619cbaf8028af0912297e6a9d8d8c54de3844c5f4ce077f187bf3fe401941e5,1.4.4
+in_game/events/DHE/flavor_SWE.txt,Create Sveriges Riksbank with original art; preserve other events,0f5ba41f8f6ca945fe1d371990bffb2b12a59bd685ca4b87103eaa85c6442bce,1.4.4
+in_game/events/DHE/flavor_flo.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,f861a9b7b27045a143b17d8dd3065390cae718817ad1b20ab723ea1094cf0462,1.4.4
+in_game/events/DHE/flavor_por.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,d2791d9372ef0ad6268bb9cf5c710595f38e43252e9a778832a5298710ccb099,1.4.4
+in_game/events/DHE/flavor_HAM.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,50d49abc35d322a4747a2e67bd3cc67866bdc130292c3aa529256a1308a176ad,1.4.4
+in_game/events/DHE/flavor_VEN.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,34290c2a98866058c79a8ceb4fbcb74137cc12ccec98d340b81bc5571fc285bb,1.4.4
+in_game/events/DHE/flavor_ARA.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,0e7358c76e0a01d2205eac6ad62dbf81ad7fe084931216a9aff24d7e0e3421d7,1.4.4
+in_game/events/DHE/flavor_SIE.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,41d80431c916c6978d0c1b7871f645e03f536f1694ee6b66a866a8ff21beca96,1.4.4
+in_game/events/DHE/flavor_GEN.txt,Integrate native historical bank charters and exclusive choices; preserve unrelated events,d69e2e898cd26a5cf1892cc2e6846a1a70d389a6bde70145b1083287d0623c63,1.4.4
+in_game/common/building_types/capital_buildings.txt,Expose and apply Central Bank administration reduction through a native building modifier,a6fe064fb3179eae5afa62ab6eb5227feda06302388295a1533450054ffc8b69,1.4.4
+in_game/common/building_types/event_only_buildings.txt,Expose and apply native unique bank headquarters administration reductions,ea54b8209de862bfce11d7223722bc8c49576b66550cdda6f573a52ae0feea1c,1.4.4
+in_game/common/customizable_localization/country_name_construction.txt,Use the complete Bank of England name without adding a second Bank of prefix,8422ddcc65f3e5c7064df8cb388271b13c2ded76a437766da63f53a9692e89a9,1.4.4
+in_game/common/advances/0_age_of_traditions.txt,Accept Banking Company alongside Banking Family in native bank checks,aa5ee03d86e3f791d9c67711efcafce6554c2d4438129990fbe45750d6993204,1.4.4
+in_game/common/customizable_localization/ru_EU5_custom_suffix.txt,Accept Banking Company alongside Banking Family in native bank checks,8683cfb2ea580c13a03614ec14c654e4071fae5547b34158ccecc2bc940b1138,1.4.4
+in_game/common/customizable_localization/parliaments.txt,Accept Banking Company alongside Banking Family in native bank checks,3a3dedd0935be8655c382d4f606ec2a09560b699db8153d2d6fa5a9b8a18fdda,1.4.4
+in_game/common/customizable_localization/country_ranks_spanish_article.txt,Accept Banking Company alongside Banking Family in native bank checks,7d9330daa70f68e6aebf79aa8e0493dd5940c65666de231a7c5e6fad30cabee3,1.4.4
+in_game/common/customizable_localization/country_ranks.txt,Accept Banking Company alongside Banking Family in native bank checks,907dcc3e7ee3b6fc1695550315e5974a00eddb868459b25ef32c0cc402312b1d,1.4.4
+in_game/common/heir_selections/republic.txt,Accept Banking Company alongside Banking Family in native bank checks,32e3df8a1b6de07db58508b759fa16735cfbf15fcbcdc6a1a2bc7e8080b3cb8e,1.4.4
+in_game/common/subject_types/state_bank.txt,Accept Banking Company alongside Banking Family in native bank checks,b01beacfa1f78abdd61b35eb2c6a81087f260df6e839900ca30616149992c83f,1.4.4
+in_game/common/country_interactions/renegotiate_loan.txt,Accept Banking Company alongside Banking Family in native bank checks,80b6f8d64ece1890d99539e9d2054b46e0ab9ceb91bc5c76b7990d36128a5ec0,1.4.4

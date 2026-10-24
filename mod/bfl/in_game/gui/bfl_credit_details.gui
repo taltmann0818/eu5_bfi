@@ -1571,6 +1571,9 @@
         blockoverride "scrollarea_content" { TooltipContentSection = {
             size = { 420 0 } minimumsize = { 420 0 } layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height spacing = 0 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_1ce5cd50fe5cb288" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_loss_opening').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { text = "bfl_ui_9dc8863de7b583ed" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_deposit_cost').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
@@ -1586,8 +1589,23 @@
              text_single = { text = "bfl_ui_0f94f39fd951e189" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_impairment').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_f818827882a957e4" autoresize = yes } expand = { }
-            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_losses').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } } } } } } }
+             text_single = { text = "bfl_ui_0fdde11507aaceea" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Subtract_CFixedPoint(Country.MakeScope.GetVariable('bfl_statement_loss_costs').GetValue,Add_CFixedPoint(Add_CFixedPoint(Country.MakeScope.GetVariable('bfl_statement_deposit_cost').GetValue,Country.MakeScope.GetVariable('bfl_statement_operating_cost').GetValue),Add_CFixedPoint(Country.MakeScope.GetVariable('bfl_statement_native_cost').GetValue,Add_CFixedPoint(Country.MakeScope.GetVariable('bfl_statement_recovery_loss').GetValue,Country.MakeScope.GetVariable('bfl_statement_impairment').GetValue))))|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_9088ad266eac7fa7" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_loss_costs').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_401669d997a106cc" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_loss_adjustments').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_2723e3a0abdcf037" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_losses').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_51cf7b4d66590225" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_loss_offset').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_26d40611d954dfd9" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_statement_loss_closing').GetValue|2]@gold!" autoresize = yes align = right|nobaseline } } } } } } } }
     }type bfl_report_dividend_paid_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/accounts.dds" } }
@@ -2004,111 +2022,83 @@
             texture = "gfx/interface/icons/bfl/liquidity.dds" } }
         blockoverride "title_text" { text = "bfl_cash_detail_title" }
         blockoverride "concept_link" { text = "bfl_balance_sheet_subtitle" }
-        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_e2da108f63008e44" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_0')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_c40bb0d2a3da07c4" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_1')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_1cde32952d521ed8" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_2')|2]@gold!" autoresize = yes align = right|nobaseline } } } } }
+        blockoverride "tooltip_content" { vbox = { size = { 500 0 }
+            layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height ignoreinvisible = yes spacing = 6 widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_e2da108f63008e44" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_0')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_c40bb0d2a3da07c4" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_1')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_1cde32952d521ed8" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_cash_2')|2]@gold!" align = right|vcenter } } } }
     }type bfl_assets_detail_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/accounts.dds" } }
         blockoverride "title_text" { text = "bfl_assets_detail_title" }
         blockoverride "concept_link" { text = "bfl_balance_sheet_subtitle" }
-        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_e2da108f63008e44" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_0')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_b9eef5f4bcd6dea0" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_1')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_ff0e1d45fa76ee58" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_2')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_36574fcce3922cde" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_3')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_3a62725216bf064a" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_4')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_806d527e8cce074d" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_5')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_a214735f9042d60a" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_6')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_46b73a3dc2cb3f22" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_7')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_e176cb239100e96c" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_8')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_d6d81e37462aa855" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_9')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_3c154a4103eb1a87" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_10')|2]@gold!" autoresize = yes align = right|nobaseline } } } } }
+        blockoverride "tooltip_content" { vbox = { size = { 500 0 }
+            layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height ignoreinvisible = yes spacing = 6 widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_e2da108f63008e44" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_0')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_b9eef5f4bcd6dea0" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_1')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_ff0e1d45fa76ee58" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_2')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_36574fcce3922cde" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_3')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_3a62725216bf064a" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_4')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_806d527e8cce074d" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_5')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_a214735f9042d60a" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_6')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_46b73a3dc2cb3f22" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_7')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_e176cb239100e96c" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_8')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_d6d81e37462aa855" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_9')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_3c154a4103eb1a87" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_assets_10')|2]@gold!" align = right|vcenter } } } }
     }type bfl_liabilities_detail_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/debt.dds" } }
         blockoverride "title_text" { text = "bfl_liabilities_detail_title" }
         blockoverride "concept_link" { text = "bfl_balance_sheet_subtitle" }
-        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_939ecfcecc6ede68" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_0')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_8a7525b1492fb848" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_1')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_98a9c0241b53a650" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_2')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_c3d33e86e772d19e" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_3')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_47d958e9ad21eefc" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_4')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_962f479db5a13275" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_5')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_3ef0953e9b77be5c" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_6')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_57de88f52e2d52c7" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_7')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_a40e243b110c1119" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_8')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_a3a587cb3bb28eb8" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_9')|2]@gold!" autoresize = yes align = right|nobaseline } } } } }
+        blockoverride "tooltip_content" { vbox = { size = { 500 0 }
+            layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height ignoreinvisible = yes spacing = 6 widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_939ecfcecc6ede68" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_0')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_8a7525b1492fb848" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_1')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_98a9c0241b53a650" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_2')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_c3d33e86e772d19e" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_3')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_47d958e9ad21eefc" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_4')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_962f479db5a13275" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_5')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_3ef0953e9b77be5c" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_6')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_57de88f52e2d52c7" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_7')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_a40e243b110c1119" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_8')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_a3a587cb3bb28eb8" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_liabilities_9')|2]@gold!" align = right|vcenter } } } }
     }type bfl_equity_detail_tooltip = ContextualTooltipType {
         blockoverride "title_icon" { icon = { using = tooltip_title_icon_size
             texture = "gfx/interface/icons/bfl/subscribe.dds" } }
         blockoverride "title_text" { text = "bfl_equity_detail_title" }
         blockoverride "concept_link" { text = "bfl_balance_sheet_subtitle" }
-        blockoverride "tooltip_content" { vbox = { size = { 420 0 }
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_bd12731d7bc9b843" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_0')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_b9baf9cea02a93d9" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_1')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_f439f15d9d98b584" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_2')|2]@gold!" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
-         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
-             text_single = { text = "bfl_ui_30d10870178da5f2" autoresize = yes } expand = { }
-            text_single = { raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_3')|2]@gold!" autoresize = yes align = right|nobaseline } } } } }
+        blockoverride "tooltip_content" { vbox = { size = { 500 0 }
+            layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height ignoreinvisible = yes spacing = 6 widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_bd12731d7bc9b843" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_0')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_b9baf9cea02a93d9" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_1')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed background = { using = tooltip_table_field_texture }
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_f439f15d9d98b584" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_2')|2]@gold!" align = right|vcenter } }widget = { size = { 500 30 } layoutpolicy_horizontal = fixed
+                text_single = { position = { 10 2 } size = { 320 26 } text = "bfl_ui_30d10870178da5f2" align = left|vcenter elide = right }
+                text_single = { position = { 338 2 } size = { 152 26 } raw_text = "[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_stock_equity_3')|2]@gold!" align = right|vcenter } } } }
     } }

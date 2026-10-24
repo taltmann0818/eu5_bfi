@@ -91,6 +91,11 @@ def generate(common, effect, loc):
     '''
     for bucket in ('services', 'credit', 'controller', 'trading', 'goods', 'ventures', 'company', 'native'):
         statement += f'set_variable = {{ name = bfl_statement_{bucket} value = var:bfl_profit_{bucket} }}\n'
+    statement += '''set_variable = { name = bfl_statement_loss_opening value = var:bfl_loss_opening }
+        set_variable = { name = bfl_statement_loss_costs value = bfl_report_gross_expenses }
+        set_variable = { name = bfl_statement_loss_adjustments value = {
+            value = var:bfl_statement_losses subtract = var:bfl_statement_loss_opening subtract = var:bfl_statement_loss_costs } }
+    '''
     for field in ('native_interest', 'native_principal', 'native_recovery_gain', 'native_recovery_loss'):
         statement += f'set_variable = {{ name = bfl_{field} value = 0 }}\n'
     statement += 'set_variable = { name = bfl_receipt_period value = bfl_period }\n'

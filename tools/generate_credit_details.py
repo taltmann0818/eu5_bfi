@@ -17,7 +17,7 @@ LINES = {
     'recovery_loss': ('Credit losses', 'Acquisition cost lost on repaid loans. Returned principal is excluded from income.'),
     'impairment': ('Defaults and write-downs', 'New reductions in the recorded value of bank loans this month. Earlier losses are excluded.'),
     'principal': ('Principal returned', 'Loan principal returned to the bank. This converts a claim into cash and is excluded from income.'),
-    'losses': ('Costs and carried losses', 'The loss balance used to calculate distributable profit. This may include previous months and is not the gross-expenses series.'),
+    'losses': ('Costs and carried losses', 'Earlier losses plus this settlement’s costs and adjustments give the balance before income is applied. Income used to cover these losses is then deducted to show the balance carried forward. Adjustments include recoveries and records predating this breakdown. This total is separate from this month’s gross expenses.'),
     'dividend_paid': ('Dividends paid', 'Funded profit distributed to all shareholders after costs, losses and bank reserves.'),
     'retained_profit': ('Retained profit', 'Eligible profit less the amount actually paid to shareholders.'),
 }
@@ -56,7 +56,8 @@ def history_graph(series, name='income', width=330):
 def generate(common, effect, loc, write):
     initial = 'if = { limit = { NOT = { has_variable = bfl_native_monthly_net } } set_variable = { name = bfl_native_monthly_net value = 0 } }\n'
     initial += 'if = { limit = { NOT = { has_variable = bfl_dividend_eligible } } set_variable = { name = bfl_dividend_eligible value = 0 } }\n'
-    for field in list(LINES)+['native_interest','native_total','native_balance','cost_base','cost_accounts','cost_contracts','cost_branches','cost_asset_types','cost_reduction']:
+    initial += 'if = { limit = { NOT = { has_variable = bfl_loss_opening } } set_variable = { name = bfl_loss_opening value = 0 } }\n'
+    for field in list(LINES)+['native_interest','native_total','native_balance','cost_base','cost_accounts','cost_contracts','cost_branches','cost_asset_types','cost_reduction','loss_opening','loss_costs','loss_adjustments','loss_offset','loss_closing']:
         initial += f'if = {{ limit = {{ NOT = {{ has_variable = bfl_statement_{field} }} }} set_variable = {{ name = bfl_statement_{field} value = 0 }} }}\n'
     fields = list(LINES) + ['gross_income', 'gross_expenses', 'period']
     init = 'if = { limit = { NOT = { has_variable = bfl_report_count } } set_variable = { name = bfl_report_count value = 0 } set_variable = { name = bfl_report_period value = 0 }\n'
@@ -148,8 +149,13 @@ def generate(common, effect, loc, write):
             values_expr=effect(key,'value = '+expr)
             # Each display value is the same production accounting input.
             common('script_values',f'stock_{kind}_{i}',values_expr)
-            block += row(label,f"[{sv(f'stock_{kind}_{i}')}|2]@gold!",i)
-        tips += tooltip_type(f'bfl_{kind}_detail_tooltip',f'bfl_{kind}_detail_title','bfl_balance_sheet_subtitle',art,block)
+            # Explicit columns avoid nested expanding hboxes shifting the entire
+            # table right and pushing values beyond the tooltip's paper edge.
+            background = 'background = { using = tooltip_table_field_texture }' if i % 2 == 0 else ''
+            block += f'''widget = {{ size = {{ 500 30 }} layoutpolicy_horizontal = fixed {background}
+                text_single = {{ position = {{ 10 2 }} size = {{ 320 26 }} raw_text = "{label}" align = left|vcenter elide = right }}
+                text_single = {{ position = {{ 338 2 }} size = {{ 152 26 }} raw_text = "[{sv(f'stock_{kind}_{i}')}|2]@gold!" align = right|vcenter }} }}'''
+        tips += tooltip_type(f'bfl_{kind}_detail_tooltip',f'bfl_{kind}_detail_title','bfl_balance_sheet_subtitle',art,block,width=500,fixed_width=True)
     write('in_game/gui/bfl_credit_details.gui','types BFLCreditDetails { '+tips+' }')
 
 
@@ -175,9 +181,15 @@ def source_details(field,loc):
         rows += row('Recognized surplus',f"[{v('statement_native_gross')}|2]@gold!")
         rows += row('Recognized budget loss',f"[{v('statement_native_cost')}|2]@gold!",1)
     elif field == 'losses':
+        rows += row('Losses carried from last settlement',f"[{v('statement_loss_opening')}|2]@gold!")
         for i,(label,key) in enumerate([('Deposit interest','deposit_cost'),('Administration','operating_cost'),('Native expenses','native_cost'),('Credit losses','recovery_loss'),('Defaults and write-downs','impairment')]):
             rows += row(label,f"[{v('statement_'+key)}|2]@gold!",i)
-        rows += row('Total costs and carried losses',f"[{v('statement_losses')}|2]@gold!",1)
+        rows += row('Other current expenses',f"[Subtract_CFixedPoint({v('statement_loss_costs')},Add_CFixedPoint(Add_CFixedPoint({v('statement_deposit_cost')},{v('statement_operating_cost')}),Add_CFixedPoint({v('statement_native_cost')},Add_CFixedPoint({v('statement_recovery_loss')},{v('statement_impairment')}))))|2]@gold!",1)
+        for i,(label,key) in enumerate([('Current expenses subtotal','costs'),('Recoveries / earlier record adjustments','adjustments')]):
+            rows += row(label,f"[{v('statement_loss_'+key)}|2]@gold!",i)
+        rows += row('Balance before income offset',f"[{v('statement_losses')}|2]@gold!",1)
+        rows += row('Less income used to cover losses',f"[{v('statement_loss_offset')}|2]@gold!")
+        rows += row('Losses carried to next settlement',f"[{v('statement_loss_closing')}|2]@gold!",1)
     elif field == 'retained_profit':
         rows += row('Eligible profit',f"[{v('dividend_eligible')}|2]@gold!")
         rows += row('Less dividends paid',f"[{v('dividend_paid')}|2]@gold!",1)

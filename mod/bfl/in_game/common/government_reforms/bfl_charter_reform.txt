@@ -3,5 +3,5 @@
     potential = { country_type = location any_subject = { is_subject_type = bfl_chartered_bank } }
     allow = { has_reform = government_reform:bfl_state_chartered_bank }
     locked = { always = yes }
-    country_modifier = { bank_interest = -0.005 max_bonds_modifier = 0.33 }
+    country_modifier = { government_reform_slots = 1 bank_interest = -0.005 max_bonds_modifier = 0.33 }
 }

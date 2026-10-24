@@ -6,11 +6,36 @@
 *.json text eol=lf
 *.dds binary
 *.png binary
+mod/bfl/in_game/events/DHE/flavor_ENG.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/customizable_localization/country_name_construction.txt whitespace=-trailing-space,-space-before-tab
 # Retain pinned native whitespace to keep source reconstruction exact.
-mod/bfl/in_game/gui/economy_lateralview.gui whitespace=-trailing-space
-mod/bfl/in_game/gui/vanilla/bfl_economy_vanilla_types.gui whitespace=-trailing-space
-mod/bfl/in_game/common/country_interactions/siphon_income.txt whitespace=-trailing-space
-mod/bfl/in_game/common/subject_types/bfl_chartered_bank.txt whitespace=-trailing-space
+mod/bfl/in_game/gui/economy_lateralview.gui whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/gui/vanilla/bfl_economy_vanilla_types.gui whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/country_interactions/siphon_income.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/subject_types/bfl_chartered_bank.txt whitespace=-trailing-space,-space-before-tab
 
-mod/bfl/in_game/common/country_interactions/take_over_loan.txt whitespace=-trailing-space
-mod/bfl/in_game/common/country_interactions/request_loan.txt whitespace=-trailing-space
+mod/bfl/in_game/common/country_interactions/take_over_loan.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/country_interactions/request_loan.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_hol.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_SWE.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/building_types/unique_buildings.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/advances/0_age_of_absolutism.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/economy/banking.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_flo.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_por.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_HAM.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_VEN.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_ARA.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_SIE.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/events/DHE/flavor_GEN.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/building_types/capital_buildings.txt whitespace=-trailing-space,-space-before-tab
+mod/bfl/in_game/common/building_types/event_only_buildings.txt whitespace=-trailing-space,-space-before-tab
+
+mod/bfl/in_game/common/advances/0_age_of_traditions.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/customizable_localization/ru_EU5_custom_suffix.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/customizable_localization/parliaments.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/customizable_localization/country_ranks_spanish_article.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/customizable_localization/country_ranks.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/heir_selections/republic.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/subject_types/state_bank.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab
+mod/bfl/in_game/common/country_interactions/renegotiate_loan.txt whitespace=-trailing-space,-blank-at-eof,-space-before-tab

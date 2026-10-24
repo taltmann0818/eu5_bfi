@@ -1,0 +1,9 @@
+﻿bfl_sync_banking_company = {
+if = { limit = { country_type = building
+    OR = { tag = SAGEO tag = TAUBL tag = BERBE tag = HBURG tag = BRIKS tag = BWISS tag = BOENG }
+    OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+    NOT = { has_reform = government_reform:bfl_banking_company } }
+    add_reform = government_reform:bfl_banking_company
+    remove_reform = government_reform:banking_country
+}
+}

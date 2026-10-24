@@ -1,0 +1,16 @@
+﻿bfl_bank_expense_factor = {
+value = 1 add = modifier:bfl_bank_operating_expenses_modifier min = 0.10
+}
+bfl_new_loan_yield_factor = {
+value = 1 add = modifier:bfl_loan_profitability_modifier min = 0 max = 2
+}
+bfl_venture_offered_profit_fraction = {
+value = 0.75
+            if = { limit = { var:bfl_venture_offer_preset = 1 } value = 0.5 }
+            if = { limit = { has_variable = bfl_venture_offer_profit_fraction } value = var:bfl_venture_offer_profit_fraction } min = 0 max = 0.95
+}
+bfl_venture_ai_margin_multiplier = {
+value = 0.10
+            divide = { value = 1 if = { limit = { has_variable = bfl_venture_offer_expertise } add = var:bfl_venture_offer_expertise } min = 1 }
+            add = 1 min = 1.05 max = 1.10
+}

@@ -111,15 +111,21 @@ def generate(common, effect, loc, write, tune):
     reductions = [('charter', 0.05, 'bfl_has_valid_controller = yes'),
                   ('banking', 0.10, 'OR = { has_advance = banking_advance overlord ?= { has_advance = banking_advance } }'),
                   ('clearing', 0.15, 'OR = { has_advance = bfl_advanced_clearing overlord ?= { has_advance = bfl_advanced_clearing } }'),
-                  ('administration', 0.10, 'var:bfl_cost_program = 1')]
+                  ('administration', 0.10, 'var:bfl_cost_program = 1'),
+                  ('central_bank', 0.15, 'bfl_monetary_building = { BUILDING = central_bank }'),
+                  ('family_palace', 0, 'always = yes')]
     reduction = 'value = 1\n'
     for name, amount, condition in reductions:
-        operations += effect(f'bfl_operating_reduction_{name}', f'value = 0 if = {{ limit = {{ {condition} }} add = {amount} }}')
+        body=('value = bfl_building_admin_reduction' if name=='family_palace' else
+              'value = bfl_building_headquarters_reduction' if name=='central_bank' else
+              f'value = 0 if = {{ limit = {{ {condition} }} add = {amount} }}')
+        operations += effect(f'bfl_operating_reduction_{name}',body)
         reduction += f'subtract = bfl_operating_reduction_{name}\n'
     reduction += 'min = 0.25'
     common('script_values', 'bank_operations', operations + effect('bfl_operating_complexity', complexity)
-           + effect('bfl_operating_multiplier', reduction)
-           + effect('bfl_operating_total_reduction', 'value = 1 subtract = bfl_operating_multiplier')
+           + effect('bfl_operating_standard_multiplier', reduction)
+           + effect('bfl_operating_multiplier', 'value = bfl_operating_standard_multiplier multiply = bfl_bank_expense_factor')
+           + effect('bfl_operating_total_reduction', 'value = 1 subtract = bfl_operating_standard_multiplier')
            + effect('bfl_operating_expense', 'value = bfl_operating_complexity multiply = bfl_operating_multiplier multiply = 100 round = yes divide = 100')
            + effect('bfl_deposit_income_display', 'value = 0 if = { limit = { has_variable = bfl_interest_period var:bfl_interest_period = bfl_period } value = var:bfl_deposit_income }')
            + effect('bfl_share_income_display', 'value = 0 if = { limit = { has_variable = bfl_share_income_period var:bfl_share_income_period = bfl_period } value = var:bfl_share_income }'))
@@ -223,7 +229,7 @@ def generate(common, effect, loc, write, tune):
     loc('bfl_streamline_bank', 'Streamline administration · 100 gold')
     loc('bfl_streamline_bank_tip', 'Pay 100 state gold once to reduce fixed bank operating expenses by 10%. The charter reform, Banking and Advanced Clearing provide additional reductions. This decision does not create bank profit.')
     loc('bfl_operating_costs', 'Monthly operating expenses')
-    loc('bfl_operating_costs_tip', 'Fixed monthly costs scale with active deposit accounts, contracts, branches and asset classes. The State Chartered Bank reform reduces costs by 5%, Banking by 10%, Advanced Clearing by 15%, and streamlined administration by 10%. Unpaid costs remain liabilities and block dividends.')
+    loc('bfl_operating_costs_tip', 'Fixed monthly costs scale with active deposit accounts, contracts, branches and asset classes. The State Chartered Bank reform reduces costs by 5%, Banking by 10%, Advanced Clearing by 15%, streamlined administration by 10%, a completed bank headquarters by 15%, and an owned Florentine banking palace by 10%. The total reduction remains capped at 75%. Unpaid costs remain liabilities and block dividends.')
     generate_operating_tooltip(loc, write, tune)
 
 
@@ -253,18 +259,22 @@ def generate_operating_tooltip(loc, write, tune):
     for index, (name, title, art) in enumerate([('charter', 'State Chartered Bank', 'accounts'),
                                                ('banking', 'Banking', 'deposit'),
                                                ('clearing', 'Advanced Clearing', 'accounts'),
-                                               ('administration', 'Streamlined administration', 'accounts')]):
+                                               ('administration', 'Streamlined administration', 'accounts'),
+                                                ('central_bank', 'Central Bank', 'accounts'),
+                                                ('family_palace', 'Florentine banking palace', 'accounts')]):
         visible = f'''visible = "[GreaterThan_CFixedPoint({value('reduction_' + name)}, '(CFixedPoint)0')]"'''
         reductions += cost_row(f'bfl_cost_reduction_{name}', title, f'#G −[{value("reduction_" + name)}|%0]#!', index, visible, art)
     loc('bfl_cost_reductions', f'Base cost {amount("complexity")} is reduced by #G −[{value("total_reduction")}|%0]#! due to:')
     content += list_block('bfl_cost_reductions', reductions,
                           f'''visible = "[GreaterThan_CFixedPoint({value('total_reduction')}, '(CFixedPoint)0')]"''')
+    loc('bfl_cost_constitution','Banking constitution')
+    content += list_block('bfl_cost_constitution',cost_row('bfl_cost_constitution_factor','Administration multiplier',"×[GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_bank_expense_factor')|2]",art='accounts'))
     settlement = ''
     for index, (name, title) in enumerate([('due', 'Expense assessed'), ('paid', 'Cash paid (including arrears)'), ('arrears', 'Unpaid expenses')]):
         settlement += cost_row(f'bfl_cost_settlement_{name}', title, f"[Country.MakeScope.GetVariable('bfl_expense_{name}').GetValue|2]@gold!", index)
     loc('bfl_cost_settlement_title', 'Last monthly settlement')
     content += list_block('bfl_cost_settlement_title', settlement)
-    loc('bfl_cost_payment_detail', 'Costs scale with complexity, not asset value. Charged once monthly above protected reserves; unpaid expenses restrict dividends. Deposit interest and native expenses are separate. Reductions add together; the total is rounded to cents.')
+    loc('bfl_cost_payment_detail', 'Costs scale with complexity, not asset value. Charged once monthly above protected reserves; unpaid expenses restrict dividends. Deposit interest and native expenses are separate. Ordinary reductions add together, then the banking constitution’s expense multiplier applies. The total is rounded to cents.')
     content += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_cost_payment_detail" } }'
     content += expense_graph()
     loc('bfl_cost_title', "Operating expenses of [Country.GetName]")

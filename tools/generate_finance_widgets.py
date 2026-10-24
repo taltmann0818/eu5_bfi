@@ -53,12 +53,13 @@ def scroll_rows(content, width=420, height=270, fixed_width=False):
             {dimensions} set_parent_dimension_to_minimum = height spacing = 0 {content} }} }} }}'''
 
 
-def tooltip_type(name, title, subtitle, art, content, width=420):
+def tooltip_type(name, title, subtitle, art, content, width=420, fixed_width=False):
+    sizing = 'layoutpolicy_horizontal = fixed set_parent_dimension_to_minimum = height' if fixed_width else 'set_parent_size_to_minimum = yes'
     return f'''type {name} = ContextualTooltipType {{
         blockoverride "title_icon" {{ icon = {{ using = tooltip_title_icon_size
             texture = "{icon_texture(art)}" }} }}
         blockoverride "title_text" {{ text = "{title}" }}
         blockoverride "concept_link" {{ text = "{subtitle}" }}
         blockoverride "tooltip_content" {{ vbox = {{ size = {{ {width} 0 }}
-            set_parent_size_to_minimum = yes ignoreinvisible = yes spacing = 6 {content} }} }}
+            {sizing} ignoreinvisible = yes spacing = 6 {content} }} }}
     }}'''

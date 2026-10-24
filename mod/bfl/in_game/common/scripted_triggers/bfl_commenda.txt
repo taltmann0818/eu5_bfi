@@ -62,7 +62,7 @@ country_exists = this at_war = no
         var:bfl_venture_offer_from = { save_temporary_scope_as = bfl_ai_from }
         var:bfl_venture_offer_to = { save_temporary_scope_as = bfl_ai_to }
         var:bfl_venture_offer_good = { save_temporary_scope_as = bfl_ai_good }
-        "scope:bfl_ai_to.market_price(scope:bfl_ai_good)" >= { value = "scope:bfl_ai_from.market_price(scope:bfl_ai_good)" multiply = 1.10 }
+        "scope:bfl_ai_to.market_price(scope:bfl_ai_good)" >= { value = "scope:bfl_ai_from.market_price(scope:bfl_ai_good)" multiply = bfl_venture_ai_margin_multiplier }
         OR = { var:bfl_venture_offer_preset = 0
             bfl_venture_operator_cash >= { value = var:bfl_venture_offer_ticket divide = 2 add = 100 } }
         monthly_balance >= 0

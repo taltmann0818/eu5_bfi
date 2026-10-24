@@ -56,11 +56,13 @@ def main():
         raise SystemExit('BC3 export requires Pillow 11 or newer; use the bundled workspace Python runtime.')
     manifest=json.loads((ROOT/'assets_source/painted/manifest.json').read_text())
     for row in manifest['exports']:
-        if '/advance/bfl_' in row['export']:
+        if '/advance/bfl_' in row['export'] and not row.get('prefer_painted'):
             continue  # All sixteen advances use their distinct editable glyph.
         source=ROOT/row['master']
         im=Image.open(source).convert('RGBA')
-        if row.get('fit'):
+        if row.get('stretch'):
+            im=im.resize(tuple(row['size']),Image.Resampling.LANCZOS)
+        elif row.get('fit'):
             im=ImageOps.fit(im,tuple(row['size']),Image.Resampling.LANCZOS)
         else:
             im=ImageOps.contain(im,tuple(row['size']),Image.Resampling.LANCZOS)
@@ -69,6 +71,8 @@ def main():
     advances=json.loads((ROOT/'design/advances.json').read_text())
     for advance in advances:
         if advance.get('integrated_into'):
+            continue
+        if any(row['export']==f'main_menu/gfx/interface/advance/bfl_{advance["id"]}.dds' and row.get('prefer_painted') for row in manifest['exports']):
             continue
         master=f'assets_source/icons/bfl_{advance["id"]}.svg'
         export(render_svg(ROOT/master),GFX/f'advance/bfl_{advance["id"]}.dds',

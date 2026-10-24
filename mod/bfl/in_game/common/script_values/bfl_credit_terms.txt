@@ -6,5 +6,7 @@
     if = { limit = { scope:bfl_party = { at_war = yes } } add = 0.02 }
     if = { limit = { scope:bfl_party = { total_debt > { value = monthly_income_total multiply = 12 } } } add = 0.02 }
     add = { value = 1 subtract = scope:bfl_party.creditworthiness multiply = 0.04 }
+    add = bfl_building_loan_yield_bonus
+    multiply = bfl_new_loan_yield_factor
     max = 0.20
 }

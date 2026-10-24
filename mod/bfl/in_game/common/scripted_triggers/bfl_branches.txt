@@ -3,6 +3,7 @@ bfl_branch_access = {
     exists = $PARTY$ country_exists = $PARTY$
     save_temporary_scope_as = bfl_branch_access_bank
     OR = {
+        modifier:bfl_global_bank_access = yes
         NOT = { bfl_is_bank = yes }
         $PARTY$ = { NOT = { country_type = location } }
         $PARTY$ = { capital = { any_buildings_in_location = {

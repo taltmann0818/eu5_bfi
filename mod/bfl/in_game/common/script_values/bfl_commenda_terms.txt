@@ -2,47 +2,47 @@
 value = 0 if = { limit = { var:bfl_v_01_state = 1 } value = var:bfl_v_01_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_01 = {
-value = 0.75 if = { limit = { var:bfl_v_01_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_01_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_01_profit_fraction } value = var:bfl_v_01_profit_fraction }
 }
 bfl_venture_months_02 = {
 value = 0 if = { limit = { var:bfl_v_02_state = 1 } value = var:bfl_v_02_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_02 = {
-value = 0.75 if = { limit = { var:bfl_v_02_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_02_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_02_profit_fraction } value = var:bfl_v_02_profit_fraction }
 }
 bfl_venture_months_03 = {
 value = 0 if = { limit = { var:bfl_v_03_state = 1 } value = var:bfl_v_03_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_03 = {
-value = 0.75 if = { limit = { var:bfl_v_03_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_03_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_03_profit_fraction } value = var:bfl_v_03_profit_fraction }
 }
 bfl_venture_months_04 = {
 value = 0 if = { limit = { var:bfl_v_04_state = 1 } value = var:bfl_v_04_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_04 = {
-value = 0.75 if = { limit = { var:bfl_v_04_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_04_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_04_profit_fraction } value = var:bfl_v_04_profit_fraction }
 }
 bfl_venture_months_05 = {
 value = 0 if = { limit = { var:bfl_v_05_state = 1 } value = var:bfl_v_05_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_05 = {
-value = 0.75 if = { limit = { var:bfl_v_05_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_05_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_05_profit_fraction } value = var:bfl_v_05_profit_fraction }
 }
 bfl_venture_months_06 = {
 value = 0 if = { limit = { var:bfl_v_06_state = 1 } value = var:bfl_v_06_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_06 = {
-value = 0.75 if = { limit = { var:bfl_v_06_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_06_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_06_profit_fraction } value = var:bfl_v_06_profit_fraction }
 }
 bfl_venture_months_07 = {
 value = 0 if = { limit = { var:bfl_v_07_state = 1 } value = var:bfl_v_07_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_07 = {
-value = 0.75 if = { limit = { var:bfl_v_07_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_07_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_07_profit_fraction } value = var:bfl_v_07_profit_fraction }
 }
 bfl_venture_months_08 = {
 value = 0 if = { limit = { var:bfl_v_08_state = 1 } value = var:bfl_v_08_maturity subtract = bfl_period min = 0 }
 }
 bfl_venture_share_08 = {
-value = 0.75 if = { limit = { var:bfl_v_08_preset ?= 1 } value = 0.5 }
+value = 0.75 if = { limit = { var:bfl_v_08_preset ?= 1 } value = 0.5 } if = { limit = { has_variable = bfl_v_08_profit_fraction } value = var:bfl_v_08_profit_fraction }
 }

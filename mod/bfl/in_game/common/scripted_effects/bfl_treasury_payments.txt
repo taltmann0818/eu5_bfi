@@ -12,6 +12,9 @@ if = { limit = { bfl_is_bank = yes bfl_period > var:bfl_last_dividend_period }
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_record_activity_statement = yes
         bfl_offset_losses = yes
+        set_variable = { name = bfl_statement_loss_offset value = { value = var:bfl_statement_losses subtract = var:bfl_loss_carryforward } }
+        set_variable = { name = bfl_statement_loss_closing value = var:bfl_loss_carryforward }
+        set_variable = { name = bfl_loss_opening value = var:bfl_loss_carryforward }
         set_variable = { name = bfl_dividend_eligible value = { value = var:bfl_monthly_net_income min = 0 } }
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 bfl_registered_units <= var:bfl_total_units }
         set_variable = { name = bfl_funded_dividend value = {

@@ -1,0 +1,67 @@
+﻿# Country scope: called only by the founding option of flavor_eng.28.
+bfl_found_riksbank = {
+    if = {
+        limit = {
+            country_type = location
+            owns = location:stockholm
+            NOT = { country_exists = c:BRIKS }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            NOT = { has_variable = bfl_operation_guard }
+        }
+        custom_tooltip = bfl_riksbank_founding_tt
+        show_as_tooltip = {
+            add_gold = { value = bfl_bank_of_england_capital multiply = -1 }
+            location:stockholm = {
+                create_building_country_in_location = {
+                    name = { name = bfl_riksbank_name }
+                    reforms = { banking_country }
+                }
+            }
+            add_reform = government_reform:bfl_state_chartered_bank
+        }
+        hidden_effect = {
+            save_scope_as = bfl_controller
+            set_variable = bfl_operation_guard
+            # Historical founding bypasses the decision's market/wealth requirements.
+            # Transfer only available cash; never create gold or force a new loan.
+            set_variable = { name = bfl_payment value = bfl_bank_of_england_capital }
+            location:stockholm = {
+                create_building_country_in_location = {
+                    name = { name = bfl_riksbank_name }
+                    reforms = { banking_country }
+                    save_scope_as = bfl_bank
+                    hidden_effect = {
+                        change_country_flag = bfl_riksbank_flag
+                        define_unique_country_tag = BRIKS
+                        change_government_type = government_type:republic
+                        change_heir_selection = heir_selection:bank_selection
+                    }
+                }
+                change_building_level_in_location = {
+                    building = building_type:banking_office
+                    value = 1
+                    owner = scope:bfl_bank
+                }
+            }
+            scope:bfl_bank = {
+                make_subject_of = {
+                    target = scope:bfl_controller
+                    type = subject_type:bfl_chartered_bank
+                }
+                bfl_initialize_bank = yes
+                set_variable = { name = bfl_opening_equity value = bfl_equity }
+                bfl_assign_charter_ownership = yes
+                add_gold = scope:bfl_controller.var:bfl_payment
+                change_variable = { name = bfl_paid_in_capital add = scope:bfl_controller.var:bfl_payment }
+                set_variable = { name = bfl_controller value = scope:bfl_controller }
+            }
+            add_gold = bfl_negative_payment
+            set_variable = { name = bfl_bank value = scope:bfl_bank }
+            add_reform = government_reform:bfl_state_chartered_bank
+            bfl_grant_charter_traditions = yes
+            remove_variable = bfl_operation_guard
+            cmf_log_decimal_value = { action = bfl_log_charter value = var:bfl_payment }
+            scope:bfl_bank = { bfl_initialize_ai_charter_policy = yes bfl_offer_profile = yes }
+        }
+    }
+}

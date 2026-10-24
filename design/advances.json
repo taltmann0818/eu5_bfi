@@ -4,7 +4,7 @@
   {"id":"debt_restructuring","age":2,"profile":0,"native_requires":["banking_advance"],"requires":[]},
   {"id":"commercial_bills","age":2,"profile":0,"native_requires":["banking_advance"],"requires":[]},
   {"id":"commodity_investments","age":3,"profile":1,"requires":[]},
-  {"id":"commenda","age":3,"profile":2,"requires":[]},
+  {"id":"commenda","age":3,"profile":2,"native_requires":["basic_financial_instruments"],"requires":[]},
   {"id":"corporate_credit","age":4,"profile":1,"requires":["debt_restructuring"]},
   {"id":"company_equity","age":4,"profile":2,"requires":["commenda"]},
   {"id":"bank_share_dealing","age":4,"profile":0,"native_requires":["banking_advance"],"requires":[]},

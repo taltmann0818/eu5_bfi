@@ -1,0 +1,7 @@
+﻿bfl_bank_of_england_capital = { value = gold min = 0 max = bfl_charter_investment }
+# Loan scope; both selection and execution quote the actual paying bank.
+bfl_takeover_loan_price = { value = loan_amount add = {
+    value = loan_amount multiply = scope:bfl_takeover_buyer.modifier:bank_interest
+    multiply = months_left divide = 12 } }
+bfl_controller_takeover_rate = { value = 0.03
+    min = { value = bfl_takeover_funding_rate add = 0.01 } max = 0.15 }

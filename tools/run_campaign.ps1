@@ -5,7 +5,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
+    [ValidateSet('investmentcommenda', 'reforms', 'catalogue', 'family', 'historical', 'boe', 'accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -24,6 +24,12 @@ try {
     $userDir = Join-Path $runRoot 'user'
     New-Item -ItemType Directory -Path $userDir -Force | Out-Null
     $suiteScript = switch ($Suite) {
+        'investmentcommenda' { 'tools/investment_commenda_suite.py' }
+        'reforms' { 'tools/bank_reforms_suite.py' }
+        'catalogue' { 'tools/bank_catalogue_suite.py' }
+        'family' { 'tools/family_banks_suite.py' }
+        'historical' { 'tools/historical_banks_suite.py' }
+        'boe' { 'tools/boe_suite.py' }
         'm10takeover' { 'tools/m10_takeover_suite.py' }
         'm10finance' { 'tools/m10_finance_suite.py' }
         'm10' { 'tools/m10_strategy_suite.py' }
@@ -79,7 +85,7 @@ try {
     if ($Suite -eq 'm7company') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=240', "-userdir=`"$userDir`"") }
     # Activity assertions finish after three months, followed by a full annual
     # autosave interval. Native timed handsoff counts months, not years.
-    if ($Suite -in @('m7', 'm7traditions', 'm7later')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
+    if ($Suite -in @('m7', 'm7traditions', 'm7later', 'investmentcommenda')) { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5market') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=30', "-userdir=`"$userDir`"") }
     if ($Suite -eq 'm5pricing') { $arguments = @('-debug_mode', '-play=FLO', '-handsoff', '-timed_handsoff=90', "-userdir=`"$userDir`"") }
     if (-not $Graphics) { $arguments += '-nographics' }
@@ -107,7 +113,12 @@ try {
                 if (Test-Path -LiteralPath $debugPath) {
                     # An autosave can append hundreds of lines between polls;
                     # the completed fixture marker must not fall out of a tail.
-                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) { break }
+                    if (Select-String -LiteralPath $debugPath -Pattern $StopMarker -SimpleMatch -Quiet -ErrorAction SilentlyContinue) {
+                        # Buffered logs can expose END during the annual save's
+                        # write. Do not kill our process before its reload file exists.
+                        $hasReloadSave = Get-ChildItem -LiteralPath (Join-Path $userDir 'save games') -Filter '*.eu5' -File -ErrorAction SilentlyContinue | Where-Object Length -GT 0 | Select-Object -First 1
+                        if ($StopMarker.Contains('|RELOAD_END|') -or $hasReloadSave) { break }
+                    }
                 }
                 Start-Sleep -Seconds 5
                 $proc.Refresh()

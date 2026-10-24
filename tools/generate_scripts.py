@@ -191,7 +191,7 @@ def initialize():
                     body += f'set_variable = {{ name = bfl_{prefix}_{i:02}_{fld} value = 0 }}\n'
     body += '}\nbfl_migrate_profile = yes\nbfl_migrate_accounts = yes\nbfl_initialize_deposits = yes\nbfl_initialize_activity_sources = yes\nbfl_initialize_report = yes\nbfl_initialize_history = yes\nbfl_initialize_expense_history = yes\nbfl_reconcile_native_assets = yes\nbfl_initialize_ownership = yes\nbfl_initialize_commenda = yes\n'
     body += 'bfl_initialize_goods = yes\nbfl_initialize_monetary = yes\nbfl_initialize_resolution = yes\nbfl_register_resolution_institution = yes\nbfl_initialize_strategy = yes\n'
-    common('scripted_effects','bootstrap',effect('bfl_initialize_bank',body)+'''
+    common('scripted_effects','bootstrap',effect('bfl_initialize_bank','bfl_sync_banking_company = yes\n'+body)+'''
     bfl_discover_institutions = {
         every_country = { limit = { country_type = location } bfl_reconcile_controller = yes }
         every_country = {
@@ -275,6 +275,7 @@ def permissions():
         for req in a['requires']:
             definitions += f'requires = bfl_{req}\n'
         native_gate = ''.join(f' has_advance = {req}' for req in a.get('native_requires', []))
+        if a['id']=='commenda':native_gate='' # Same-age native parent is expressed by requires.
         # Comparable to native economic priorities (typically 1–20). A large
         # forced share-dealing weight hid release-wide research competition.
         priority = 'add = 12' if a['profile'] else 'add = 8'
@@ -309,7 +310,7 @@ def charter():
         potential = { country_type = location any_subject = { is_subject_type = bfl_chartered_bank } }
         allow = { has_reform = government_reform:bfl_state_chartered_bank }
         locked = { always = yes }
-        country_modifier = { bank_interest = -0.005 max_bonds_modifier = 0.33 }
+        country_modifier = { government_reform_slots = 1 bank_interest = -0.005 max_bonds_modifier = 0.33 }
     }
     ''')
     common('decisions','charter_decisions','''
@@ -705,6 +706,9 @@ def treasury_and_resolution():
         set_variable = { name = bfl_monthly_net_income value = { value = var:bfl_profit_services add = var:bfl_profit_credit add = var:bfl_profit_controller add = var:bfl_profit_trading add = var:bfl_profit_goods add = var:bfl_profit_ventures add = var:bfl_profit_company add = var:bfl_profit_native subtract = var:bfl_loss_carryforward } }
         bfl_record_activity_statement = yes
         bfl_offset_losses = yes
+        set_variable = { name = bfl_statement_loss_offset value = { value = var:bfl_statement_losses subtract = var:bfl_loss_carryforward } }
+        set_variable = { name = bfl_statement_loss_closing value = var:bfl_loss_carryforward }
+        set_variable = { name = bfl_loss_opening value = var:bfl_loss_carryforward }
         set_variable = { name = bfl_dividend_eligible value = { value = var:bfl_monthly_net_income min = 0 } }
     if = { limit = { var:bfl_state < 2 var:bfl_total_units > 0 bfl_registered_units <= var:bfl_total_units }
         set_variable = { name = bfl_funded_dividend value = {
@@ -814,6 +818,7 @@ def treasury_and_resolution():
             if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
                 bfl_run_controller_bond_facility = yes
             }
+            bfl_take_over_controller_estate_loan = yes
             bfl_manage_credit = yes
             bfl_record_history = yes
             bfl_record_exchange_history = yes
@@ -1156,6 +1161,16 @@ def main():
     generate_credit_details(common,effect,loc,write)
     from generate_activity_sources import generate as generate_activity_sources
     generate_activity_sources(common,effect)
+    from generate_bank_of_england import generate as generate_bank_of_england
+    generate_bank_of_england(common,effect,loc,write)
+    from generate_historical_banks import generate as generate_historical_banks
+    generate_historical_banks(common,effect,loc,write)
+    from generate_family_banks import generate as generate_family_banks
+    generate_family_banks(common,effect,loc,write)
+    from generate_bank_catalogue import generate as generate_bank_catalogue
+    generate_bank_catalogue(common,effect,loc,write)
+    from generate_bank_reforms import generate as generate_bank_reforms
+    generate_bank_reforms(common,effect,loc,write)
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

@@ -1,6 +1,7 @@
 ﻿bfl_initialize_report = {
 if = { limit = { NOT = { has_variable = bfl_native_monthly_net } } set_variable = { name = bfl_native_monthly_net value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_dividend_eligible } } set_variable = { name = bfl_dividend_eligible value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_loss_opening } } set_variable = { name = bfl_loss_opening value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_statement_credit } } set_variable = { name = bfl_statement_credit value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_statement_services } } set_variable = { name = bfl_statement_services value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_statement_company } } set_variable = { name = bfl_statement_company value = 0 } }
@@ -27,6 +28,11 @@ if = { limit = { NOT = { has_variable = bfl_statement_cost_contracts } } set_var
 if = { limit = { NOT = { has_variable = bfl_statement_cost_branches } } set_variable = { name = bfl_statement_cost_branches value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_statement_cost_asset_types } } set_variable = { name = bfl_statement_cost_asset_types value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_statement_cost_reduction } } set_variable = { name = bfl_statement_cost_reduction value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_loss_opening } } set_variable = { name = bfl_statement_loss_opening value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_loss_costs } } set_variable = { name = bfl_statement_loss_costs value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_loss_adjustments } } set_variable = { name = bfl_statement_loss_adjustments value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_loss_offset } } set_variable = { name = bfl_statement_loss_offset value = 0 } }
+if = { limit = { NOT = { has_variable = bfl_statement_loss_closing } } set_variable = { name = bfl_statement_loss_closing value = 0 } }
 if = { limit = { NOT = { has_variable = bfl_report_count } } set_variable = { name = bfl_report_count value = 0 } set_variable = { name = bfl_report_period value = 0 }
 set_variable = { name = bfl_report_credit_01 value = 0 }
 set_variable = { name = bfl_report_credit_02 value = 0 }

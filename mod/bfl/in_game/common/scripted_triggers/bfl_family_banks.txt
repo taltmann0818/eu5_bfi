@@ -1,0 +1,51 @@
+﻿bfl_owns_palazzo_acciaiuoli = {
+any_owned_building = { building_type = building_type:bfl_palazzo_acciaiuoli building_level > 0 }
+}
+bfl_owns_fuggerhauser = {
+any_owned_building = { building_type = building_type:bfl_fuggerhauser building_level > 0 }
+}
+bfl_owns_welserhaus = {
+any_owned_building = { building_type = building_type:bfl_welserhaus building_level > 0 }
+}
+bfl_owns_palazzo_busini_bardi = {
+any_owned_building = { building_type = building_type:bfl_palazzo_busini_bardi building_level > 0 }
+}
+bfl_owns_palazzo_peruzzi = {
+any_owned_building = { building_type = building_type:bfl_palazzo_peruzzi building_level > 0 }
+}
+bfl_can_choose_bardi = {
+country_type = location owns = location:florence
+            NOT = { has_variable = bfl_florentine_choice_resolved }
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            country_exists = c:BRD
+            c:BRD = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank }
+                OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+                NOT = { has_variable = bfl_operation_guard } }
+            location:florence = { any_buildings_in_location = { building_type = building_type:banking_office building_level > 0 owner = c:BRD } }
+}
+bfl_can_choose_peruzzi = {
+country_type = location owns = location:florence
+            NOT = { has_variable = bfl_florentine_choice_resolved }
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            country_exists = c:PRZ
+            c:PRZ = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank }
+                OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+                NOT = { has_variable = bfl_operation_guard } }
+            location:florence = { any_buildings_in_location = { building_type = building_type:banking_office building_level > 0 owner = c:PRZ } }
+}
+bfl_can_choose_acciaioli = {
+country_type = location owns = location:florence
+            NOT = { has_variable = bfl_florentine_choice_resolved }
+            NOT = { has_variable = bfl_operation_guard }
+            NOT = { any_subject = { is_subject_type = bfl_chartered_bank } }
+            country_exists = c:ACC
+            c:ACC = { OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
+                OR = { is_subject = no is_subject_type = state_bank }
+                OR = { NOT = { has_variable = bfl_schema } var:bfl_state < 3 }
+                NOT = { has_variable = bfl_operation_guard } }
+            location:florence = { any_buildings_in_location = { building_type = building_type:banking_office building_level > 0 owner = c:ACC } }
+}

@@ -1249,7 +1249,7 @@ customs_house_advance = {
 stock_exchange_advance = {
 	age = age_4_reformation
 
-	requires = banking_advance
+	requires = global_trade_advance
 
 	ai_weight = {
         if = { limit = { bfl_has_management = yes NOT = { bfl_owns_stock_exchange = yes } } add = 20000 } 

@@ -1,4 +1,5 @@
 ﻿bfl_initialize_bank = {
+bfl_sync_banking_company = yes
 if = { limit = { NOT = { has_variable = bfl_schema } }
 set_variable = { name = bfl_schema value = 1 }
 set_variable = { name = bfl_profile value = 0 }

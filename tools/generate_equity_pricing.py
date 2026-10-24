@@ -25,6 +25,7 @@ def generate(common, effect, loc):
     values+=effect('bfl_equity_quote',f'''value = bfl_nav_quote
         if = {{ limit = {{ bfl_price_model = 1 }} multiply = bfl_price_factor
             if = {{ limit = {{ bfl_price_distress = 1 }} multiply = {p.distress_multiplier} }} }}
+        multiply = {{ value = 1 add = bfl_building_share_price_bonus add = modifier:bfl_base_share_value_modifier }}
         multiply = 1000 floor = yes divide = 1000''')
     values+=effect('bfl_price_premium','value = 0 if = { limit = { bfl_nav_quote > 0 } value = bfl_equity_quote divide = bfl_nav_quote subtract = 1 }')
     values+=effect('bfl_price_flow',f'''value = 0 if = {{ limit = {{ var:bfl_total_units > 0 has_variable = bfl_price_schema }}

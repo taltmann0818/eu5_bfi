@@ -1,0 +1,24 @@
+﻿# Loan scope. The buyer is bound by the picker or by the execution effect.
+bfl_native_takeover_loan_eligible = {
+    is_bond = no NOT = { exists = owner } months_left > 40
+    loan_interest > scope:bfl_takeover_buyer.modifier:bank_interest
+    scope:bfl_takeover_buyer.gold > remaining_debt
+    scope:bfl_takeover_buyer.bfl_free_cash >= bfl_takeover_loan_price
+    scope:bfl_takeover_buyer.bfl_capital_headroom >= bfl_takeover_loan_price
+    scope:bfl_takeover_buyer = { bfl_can_originate_native_takeover = yes bfl_credit_capacity = yes }
+}
+# Country picker scope; temporary scopes are supported by native triggers.
+bfl_managed_takeover_target = {
+    country_exists = this country_type = location num_loans > 0
+    save_temporary_scope_as = bfl_takeover_target
+    OR = {
+        AND = { scope:actor = { bfl_is_independent_bank = yes
+            save_temporary_scope_as = bfl_takeover_buyer
+            bfl_branch_access = { PARTY = scope:bfl_takeover_target } }
+            any_loan = { bfl_native_takeover_loan_eligible = yes } }
+        AND = { scope:actor = { country_type = location bfl_has_management = yes
+            var:bfl_bank = { save_temporary_scope_as = bfl_takeover_buyer
+                bfl_branch_access = { PARTY = scope:bfl_takeover_target } } }
+            any_loan = { bfl_native_takeover_loan_eligible = yes } }
+    }
+}

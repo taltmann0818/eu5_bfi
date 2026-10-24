@@ -179,6 +179,75 @@ def main():
     check(types.count('template economy_main_tabs')==1,'Shared native economy tab template must have one owner')
     check('types EconomyLateralviewTypes' not in economy,'Native types duplicated in replacement')
     joined='\n'.join(text for _,text in all_text)
+    # Verify that the historical overrides preserve all unrelated native data.
+    from build_bank_of_england import EVENT, NAMES, CALL, IMAGE, NAME_RULE
+    from generate_bank_reforms import collapse_company_checks, NATIVE_CHECK_FILES
+    pins=json.loads((ROOT/'docs/baseline.json').read_text())['game_sources']
+    for relative, additions in [(EVENT,(CALL,IMAGE)),(NAMES,(NAME_RULE,))]:
+        original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
+        for addition in additions:
+            check(original.count(addition)==1,f'{relative}: expected one historical insertion')
+            original=original.replace(addition,'',1)
+        data=('\ufeff'+original).encode('utf-8')
+        check(pins[relative] in {hashlib.sha256(data).hexdigest(),
+                               hashlib.sha256(data.replace(b'\n',b'\r\n')).hexdigest()},
+              f'{relative}: unrelated native content changed')
+    from build_bank_of_england import HISTORICAL_EVENTS
+    for relative,(event_id,bank,tag) in HISTORICAL_EVENTS.items():
+        original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
+        start=original.index(event_id+' = {')
+        end=balanced_block(original,original.index('{',start))
+        event=original[start:end]
+        additions=[f'\t\tbfl_found_{bank} = yes\n',f'\timage = "gfx/interface/illustrations/bfl/{bank}.dds"\n']
+        if tag=='HOL': additions+=['\t\ttag = NED\n','\t\tNOT = { country_exists = c:BWISS }\n']
+        for addition in additions:
+            check(event.count(addition)==1,f'{relative}: expected one historical insertion')
+            event=event.replace(addition,'',1)
+        original=original[:start]+event+original[end:]
+        data=('\ufeff'+original).encode('utf-8')
+        check(pins[relative] in {hashlib.sha256(data).hexdigest(),hashlib.sha256(data.replace(b'\n',b'\r\n')).hexdigest()},f'{relative}: unrelated native content changed')
+    from generate_bank_catalogue import EVENTS as BANK_EVENTS
+    for name in {spec['file'] for spec in BANK_EVENTS.values()} | {'flavor_flo.txt'}:
+        relative='in_game/events/DHE/'+name
+        original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
+        for event_id,spec in BANK_EVENTS.items():
+            if spec['file']!=name:continue
+            start=original.index(event_id+' = {');end=balanced_block(original,original.index('{',start))
+            event=original[start:end]
+            for addition in [f'\n        bfl_charter_{spec["key"]} = yes\n',f'        trigger = {{ bfl_can_charter_{spec["key"]} = yes }}\n','\n option = { name = bfl_historical_bank_independent }\n']:
+                check(event.count(addition)==1,f'{event_id}: expected one catalogue insertion')
+                event=event.replace(addition,'',1)
+            if event_id=='flavor_ara.220':event=event.replace('\t\ttag = SPA\n','',1)
+            if event_id=='flavor_ham.1':
+                event=event.replace('change_country_flag = bfl_berenberg_flag','change_country_flag = BERENBERG',1)
+                event=event.replace(' image = "gfx/interface/illustrations/bfl/mortzenhaus_event.dds"\n','',1)
+            original=original[:start]+event+original[end:]
+        if name=='flavor_flo.txt':
+            original=original.replace('\n        NOT = { has_global_variable = bfl_medici_dhe_fired }','',1)
+            original=original.replace('\n        set_global_variable = bfl_medici_dhe_fired','',1)
+        data=('\ufeff'+original).encode('utf-8')
+        check(pins[relative] in {hashlib.sha256(data).hexdigest(),hashlib.sha256(data.replace(b'\n',b'\r\n')).hexdigest()},f'{relative}: unrelated native catalogue content changed')
+    for relative,count in [('in_game/common/building_types/capital_buildings.txt',1),('in_game/common/building_types/event_only_buildings.txt',2)]:
+        original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
+        addition='raw_modifier = { bfl_bank_headquarters_cost_reduction = 0.15 }\n    '
+        check(original.count(addition)==count,f'{relative}: incorrect headquarters modifier count')
+        original=original.replace(addition,'')
+        data=('\ufeff'+original).encode('utf-8')
+        check(pins[relative] in {hashlib.sha256(data).hexdigest(),hashlib.sha256(data.replace(b'\n',b'\r\n')).hexdigest()},f'{relative}: unrelated native building content changed')
+    for relative in NATIVE_CHECK_FILES:
+        if relative.endswith(('unique_buildings.txt','request_loan.txt')):continue
+        original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
+        data=('\ufeff'+original).encode('utf-8')
+        check(pins[relative] in {hashlib.sha256(data).hexdigest(),hashlib.sha256(data.replace(b'\n',b'\r\n')).hexdigest()},f'{relative}: unrelated native banking compatibility content changed')
+    modifier_keys=set()
+    native_localization_keys=set(re.findall(r'^\s*([\w.]+):',localization,re.M))
+    for path in (MOD/'main_menu/common/modifier_type_definitions').glob('*.txt'):
+        modifier_keys.update(re.findall(r'^\s*(bfl_\w+)\s*=\s*\{',path.read_text(encoding='utf-8-sig'),re.M))
+    icon_definitions='\n'.join(p.read_text(encoding='utf-8-sig') for p in (MOD/'main_menu/common/modifier_icons').glob('*.txt'))
+    for key in modifier_keys:
+        for prefix in ['MODIFIER_TYPE_NAME_','MODIFIER_TYPE_DESC_']:
+            check(prefix+key in native_localization_keys,f'Custom modifier missing native localization alias: {prefix+key}')
+        check(re.search(r'\b'+re.escape(key)+r'\s*=\s*\{',icon_definitions),f'Custom modifier missing native icon mapping: {key}')
     check('cmf_add_action_bar_element' not in joined,'Finance action-bar entry prohibited')
     check(not (MOD/'descriptor.mod').exists(),'EUV does not use the EU4 descriptor assumption')
     if ERRORS:

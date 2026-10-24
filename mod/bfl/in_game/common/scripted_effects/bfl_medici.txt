@@ -1,0 +1,61 @@
+﻿bfl_found_banco_mediceo = {
+if = { limit = { bfl_can_fund_medici = yes }
+    custom_tooltip = bfl_medici_funding_tt
+    show_as_tooltip = {
+        add_gold = -2000
+        add_reform = government_reform:bfl_state_chartered_bank
+        location:milano = { change_building_level_in_location = { building = building_type:bfl_banco_mediceo value = 1 owner = root } }
+    }
+    hidden_effect = {
+        save_scope_as = bfl_controller
+        set_variable = bfl_operation_guard
+        set_variable = { name = bfl_payment value = 2000 }
+        if = { limit = { NOT = { exists = c:MEDIC } }
+            # The native foundation may never have happened. Use the
+            # native MEDIC identity, flag and banking constitution.
+            location:milano = { create_building_country_in_location = {
+                name = { name = MEDICI } reforms = { banking_country }
+                save_scope_as = bfl_bank
+                hidden_effect = { change_country_flag = MEDICI
+                    define_unique_country_tag = MEDIC
+                    change_government_type = government_type:republic
+                    change_heir_selection = heir_selection:bank_selection }
+            } }
+            set_global_variable = { name = medici_tag value = scope:bfl_bank }
+        }
+        else = { c:MEDIC = { save_scope_as = bfl_bank } }
+        # A native building-country must have a real office before
+        # subject conversion. This also revives its existing identity
+        # if its last branch was lost; never reuse a reserved tag.
+        location:milano = {
+            if = { limit = { NOT = { any_buildings_in_location = { building_type = building_type:banking_office owner = scope:bfl_bank } } }
+                change_building_level_in_location = { building = building_type:banking_office value = 1 owner = scope:bfl_bank } }
+        }
+        scope:bfl_bank = {
+            make_subject_of = { target = scope:bfl_controller type = subject_type:bfl_chartered_bank }
+            bfl_initialize_bank = yes
+            set_variable = { name = bfl_opening_equity value = bfl_equity }
+            bfl_assign_charter_ownership = yes
+            add_gold = 2000
+            change_variable = { name = bfl_paid_in_capital add = 2000 }
+            set_variable = { name = bfl_controller value = scope:bfl_controller }
+            remove_variable = bfl_legacy_servicing
+        }
+        add_gold = -2000
+        set_variable = { name = bfl_bank value = scope:bfl_bank }
+        add_reform = government_reform:bfl_state_chartered_bank
+        bfl_grant_charter_traditions = yes
+        location:milano = {
+            if = { limit = { NOT = { has_building = building_type:bfl_banco_mediceo } }
+                change_building_level_in_location = { building = building_type:bfl_banco_mediceo value = 1 owner = scope:bfl_controller } }
+            if = { limit = { NOT = { any_buildings_in_location = { building_type = building_type:banking_office owner = scope:bfl_bank } } }
+                change_building_level_in_location = { building = building_type:banking_office value = 1 owner = scope:bfl_bank } }
+        }
+        # The controller's current capital remains the service endpoint.
+        capital = { if = { limit = { NOT = { any_buildings_in_location = { building_type = building_type:banking_office owner = scope:bfl_bank } } }
+            change_building_level_in_location = { building = building_type:banking_office value = 1 owner = scope:bfl_bank } } }
+        remove_variable = bfl_operation_guard
+        scope:bfl_bank = { bfl_initialize_ai_charter_policy = yes bfl_offer_profile = yes }
+    }
+}
+}

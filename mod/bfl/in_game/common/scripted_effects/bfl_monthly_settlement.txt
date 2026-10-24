@@ -20,6 +20,7 @@
         if = { limit = { var:bfl_facility_mode > 0 bfl_has_valid_controller = yes }
             bfl_run_controller_bond_facility = yes
         }
+        bfl_take_over_controller_estate_loan = yes
         bfl_manage_credit = yes
         bfl_record_history = yes
         bfl_record_exchange_history = yes

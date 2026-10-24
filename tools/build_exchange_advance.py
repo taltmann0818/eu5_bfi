@@ -17,13 +17,25 @@ def build(game=DEFAULT_GAME):
     original=text[start:end]
     assert original.count('age = age_5_absolutism')==1
     assert original.count('requires = absolutist_court')==1
-    replacement=original.replace('age = age_5_absolutism','age = age_4_reformation').replace('requires = absolutist_court','requires = banking_advance')
+    replacement=original.replace('age = age_5_absolutism','age = age_4_reformation').replace('requires = absolutist_court','requires = global_trade_advance')
     replacement=replacement.replace('ai_weight = {', '''ai_weight = {
         if = { limit = { bfl_has_management = yes NOT = { bfl_owns_stock_exchange = yes } } add = 20000 }''',1)
     updated=text[:start]+replacement+text[end:]
     assert updated.replace(replacement,original,1)==text
     write(MOD/relative,updated)
-    print('Stock Exchange: native definition preserved; Reformation after Banking.')
+    relative='in_game/common/advances/0_age_of_absolutism.txt'
+    source=game/relative
+    if hashlib.sha256(source.read_bytes()).hexdigest()!=baseline['game_sources'][relative]:
+        raise ValueError('Central banking source changed; review the pinned native file first')
+    text=source.read_text(encoding='utf-8-sig')
+    start=text.index('central_bank_advance = {')
+    end=balanced_block(text,text.index('{',start))
+    original=text[start:end]
+    replacement=original.replace('age = age_5_absolutism','age = age_4_reformation').replace('requires = manufactories_advance','requires = stock_exchange_advance')
+    updated=text[:start]+replacement+text[end:]
+    assert updated.replace(replacement,original,1)==text
+    write(MOD/relative,updated)
+    print('Global Trade > Stock Exchange > Central Banking, all in Reformation; other native effects preserved.')
 
 
 if __name__=='__main__': build()

@@ -29,7 +29,11 @@ set_variable = { name = bfl_statement_goods value = var:bfl_profit_goods }
 set_variable = { name = bfl_statement_ventures value = var:bfl_profit_ventures }
 set_variable = { name = bfl_statement_company value = var:bfl_profit_company }
 set_variable = { name = bfl_statement_native value = var:bfl_profit_native }
-set_variable = { name = bfl_native_interest value = 0 }
+set_variable = { name = bfl_statement_loss_opening value = var:bfl_loss_opening }
+        set_variable = { name = bfl_statement_loss_costs value = bfl_report_gross_expenses }
+        set_variable = { name = bfl_statement_loss_adjustments value = {
+            value = var:bfl_statement_losses subtract = var:bfl_statement_loss_opening subtract = var:bfl_statement_loss_costs } }
+    set_variable = { name = bfl_native_interest value = 0 }
 set_variable = { name = bfl_native_principal value = 0 }
 set_variable = { name = bfl_native_recovery_gain value = 0 }
 set_variable = { name = bfl_native_recovery_loss value = 0 }

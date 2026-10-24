@@ -31,7 +31,7 @@
 			exists = capital
 			capital = { is_discovered_by = scope:actor }
 			within_diplomatic_range = scope:actor
-			has_reform = government_reform:banking_country
+			OR = { has_reform = government_reform:banking_country has_reform = government_reform:bfl_banking_company }
 		}
         enabled = {
             bfl_branch_access = { PARTY = scope:actor } bfl_native_request_funded = yes

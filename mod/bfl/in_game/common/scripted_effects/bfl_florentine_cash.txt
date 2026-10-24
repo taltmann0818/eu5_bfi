@@ -1,0 +1,4 @@
+﻿bfl_choose_florentine_cash = {
+if = { limit = { country_type = location NOT = { has_variable = bfl_florentine_choice_resolved } }
+    set_variable = bfl_florentine_choice_resolved add_gold = 250 }
+}
