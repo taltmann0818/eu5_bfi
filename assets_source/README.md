@@ -1,5 +1,6 @@
 # Painted artwork — 0.0.2_dev
 
+
 Investment banking adds four original built-in ImageGen masters and sibling
 final-prompt records: `painted/investment_bank_reform.png` (Bank of England
 Bank Parlour), `painted/banking_company_reform.png` (Amsterdam town hall),
@@ -27,7 +28,7 @@ All eight were created with the built-in ImageGen tool. Each sibling
 are in `tools/fetch_expanded_bank_references.py`. `flags/berenberg.png` retains
 the supplied orange-and-white coat of arms, centered on a matching native
 orange flag field. `tools/register_expanded_bank_assets.py` registers the nine
-exports: six 128×128 building icons, a native 64×90 reform portrait, 1080×720
+exports: six 128×128 building icons, a native 64×90 reform portrait, 1920×1080
 event art and a 512×512 textured emblem. The architectural silhouettes and
 event scene were reviewed in `dist/expanded-banks-art-review.png`.
 
@@ -78,3 +79,7 @@ Final prompts (all requested no readable text, watermark or interface border):
 - Branch: a compact Renaissance Italian stone counting house with arched
   doorway, brass scales and red-sealed ledger at its counter; warm stone,
   dark teal shadows and burgundy accents, readable at 48 pixels.
+
+## Widescreen event illustrations
+
+All 31 full-scene illustrations use new built-in ImageGen masters in `painted/widescreen/`, with full prompts and provenance in `painted/widescreen_generation.json`. Architecture, labor, crowds, construction, civic ceremonies and sacred painting vary the scenes. `tools/register_widescreen_illustrations.py` registers them as 1920x1080 BC3/DXT5 DDS textures. `tools/export_assets.py` requires 16:9 source masters and forbids stretching. The native event window uses center cropping to preserve proportions in its shallow frame. DDS files have binary headers; only game text files carry UTF-8 BOM encoding. Icons, flags and reform portraits keep their own native shapes.

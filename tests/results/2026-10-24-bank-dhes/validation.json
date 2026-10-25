@@ -1,0 +1,43 @@
+{
+  "recorded": "2026-10-24",
+  "runtime_sha256": "65f9a96ce19e9a2a90f99f07392798bc5a64e334e5c89e452c5fd4e889dd0ea3",
+  "engine": {
+    "passed": true,
+    "assertions": 59,
+    "game_version": "1.4.4",
+    "cmf_version": "2.5.0",
+    "fixture": "tools/bank_dhe_suite.py",
+    "report": "campaign.json",
+    "manifest": "manifest.json",
+    "scope": "Unchanged authored DHE option bodies and the two native South Sea options; actual funded transactions, native art creation, Grimaldi reform, NAV buyback, monthly hook and separate-process reload. Native calendars are bypassed by the disposable fixture. Existing pinned native diagnostics are classified separately in the report."
+  },
+  "offline": {
+    "unit_tests": 150,
+    "source_files": 479,
+    "registered_graphics": 114,
+    "full_scene_illustrations": 31,
+    "illustration_dimensions": [
+      1920,
+      1080
+    ],
+    "runtime_format": "Binary BC3/DXT5 DDS; no text BOM",
+    "game_text_encoding": "UTF-8 BOM",
+    "generator": "tools/generate_scripts.py",
+    "source_validator": "tools/validate_sources.py",
+    "pinned_native_and_cmf_sources": "match"
+  },
+  "visual": {
+    "verified_by": "User",
+    "evidence": "User message, 24 October 2026: I verified myself. Everything looks good. Push to a new PR.",
+    "assistant_inspection": "All 31 newly generated paintings inspected together in the contact sheet. Final native event-window acceptance is user-reported.",
+    "contact_sheet": "docs/screenshots/bank-events/widescreen-contact-sheet.jpg"
+  },
+  "remaining": [
+    "Long-run event balance",
+    "Natural historical calendar firing and alternate formation paths",
+    "War-only Venetian alternative in a wartime fixture",
+    "Additional resolutions and UI scales",
+    "Human semantic review of machine-assisted translations"
+  ],
+  "milestones": "Focused feature acceptance; no entire M0-M10 milestone is newly declared complete."
+}

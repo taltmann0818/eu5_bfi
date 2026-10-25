@@ -1,0 +1,35 @@
+[
+  {
+    "country": "generic",
+    "id": 1,
+    "key": "generic_issuance",
+    "action": "issue",
+    "trigger": "bfl_resolved_equity_access = yes var:bfl_bank = { bfl_primary_price_safe = yes bfl_tangible_equity > 0 }",
+    "title": "A New Subscription",
+    "desc": "The opening of the exchange has given our chartered bankâ€™s shares a life beyond the first subscribers. Its directors now ask leave to raise fresh capital, and the leading burghers stand ready to take a portion of the new stock. They promise that a wider body of proprietors will bring coin and connections to the bank. Our treasurer is less enthusiastic: each new share will diminish the sovereignâ€™s portion of future dividends, unless we subscribe alongside the merchants.",
+    "accept": "Admit the burghersâ€™ subscription and open the books.",
+    "refuse": "We will not dilute the public stake."
+  },
+  {
+    "country": "generic",
+    "id": 2,
+    "key": "generic_buyback",
+    "action": "buyback",
+    "trigger": "bfl_resolved_equity_access = yes var:bfl_bank = { bfl_dhe_buyback_available = yes }",
+    "title": "The Sovereignâ€™s Shares",
+    "desc": "The directors of our chartered bank have offered to purchase a portion of the shares held by the treasury. The certificates would be canceled, leaving the remaining proprietors with a greater part of the bankâ€™s future earnings. The burghers welcome the proposal, while our treasurer sees a ready payment in exchange for income yet to come. Yet shares surrendered today cannot be offered again tomorrow without a new subscription. The directors await our answer.",
+    "accept": "Accept a fair payment for this portion of our shares.",
+    "refuse": "The public stake shall remain intact."
+  },
+  {
+    "country": "generic",
+    "id": 3,
+    "key": "generic_dividends",
+    "action": "retain",
+    "trigger": "var:bfl_bank = { var:bfl_payout_ratio > 0 NOT = { has_variable = bfl_dhe_retention_until } }",
+    "title": "The Dividend Must Wait",
+    "desc": "The bankâ€™s directors have laid their books before the treasury and asked for patience. Rather than distribute the coming profits, they would keep them in the bank until its reserves are stronger. The merchant proprietors have agreed to wait if the sovereign will do likewise. Our officers protest that expected dividends already have their place in the public accounts. To refuse would preserve our income, but convince the directors that we value the next payment above the bankâ€™s future.",
+    "accept": "Keep the earnings within the bank for two years.",
+    "refuse": "The treasury requires its accustomed income."
+  }
+]

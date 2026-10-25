@@ -17,6 +17,7 @@ bfl_is_independent_bank = {
 bfl_is_bank = { OR = { bfl_is_chartered_bank = yes bfl_is_independent_bank = yes } }
 bfl_has_accounts = { has_variable = bfl_schema }
 bfl_can_conduct_business = {
+    NOT = { has_variable = bfl_giro_closing }
     bfl_is_bank = yes
     OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes }
     NOT = { has_variable = bfl_legacy_servicing }

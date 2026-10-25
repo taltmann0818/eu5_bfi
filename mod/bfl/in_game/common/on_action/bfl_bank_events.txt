@@ -1,0 +1,18 @@
+﻿monthly_country_pulse = { on_actions = { bfl_dhe_monthly } }
+        bfl_dhe_monthly = { effect = {
+            if = { limit = { has_variable = bfl_dhe_retention_until } bfl_dhe_expire_retention = yes }
+            if = { limit = { bfl_dhe_controller = yes NOT = { has_variable = bfl_dhe_open }
+                OR = { NOT = { has_variable = bfl_dhe_next_period } bfl_period >= var:bfl_dhe_next_period } }
+                random = { chance = 2 random_list = {
+                    40 = { trigger = { bfl_resolved_equity_access = yes
+                        "estate(estate_type:burghers_estate)" = { estate_gold >= 125 } }
+                        trigger_event_non_silently = bfl_bank_petitions.1 }
+                    30 = { trigger = { bfl_resolved_equity_access = yes
+                        var:bfl_bank = { bfl_dhe_buyback_available = yes } }
+                        trigger_event_non_silently = bfl_bank_petitions.2 }
+                    30 = { trigger = { var:bfl_bank = { var:bfl_payout_ratio > 0
+                        NOT = { has_variable = bfl_dhe_retention_until } } }
+                        trigger_event_non_silently = bfl_bank_petitions.3 }
+                } }
+            }
+        } }

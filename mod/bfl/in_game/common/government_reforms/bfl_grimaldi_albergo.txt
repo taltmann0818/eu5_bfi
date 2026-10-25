@@ -1,0 +1,6 @@
+﻿bfl_grimaldi_albergo = {
+        major = no potential = { tag = GRIML bfl_is_bank = yes }
+        allow = { has_variable = bfl_albergo_authorized }
+        country_modifier = { bfl_bank_operating_expenses_modifier = -0.10
+            bfl_base_share_value_modifier = 0.05 global_merchant_capacity_modifier = 0.05 }
+    }

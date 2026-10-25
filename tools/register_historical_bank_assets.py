@@ -12,7 +12,7 @@ def main():
     original = 'Original BFI art; generated with the built-in image tool from user-supplied architectural references'
     for name in ('wisselbank','riksbank','banco_mediceo'):
         key=f'main_menu/gfx/interface/illustrations/bfl/{name}.dds'
-        exports[key]=dict(export=key,master=f'assets_source/painted/{name}.png',size=[1080,720],fit=True,rights=original)
+        exports[key]=dict(export=key,master=f'assets_source/painted/widescreen/{name}.png',size=[1920,1080],fit=True,rights=original)
     key='main_menu/gfx/interface/icons/buildings/bfl_banco_mediceo.dds'
     exports[key]=dict(export=key,master='assets_source/painted/banco_mediceo_icon.png',size=[128,128],rights=original)
     for name in ('wisselbank','riksbank'):

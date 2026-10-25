@@ -158,6 +158,26 @@ def main():
             h,w=struct.unpack_from('<II',data,12)
             check((w,h)==(int(row['width']),int(row['height'])),f'Asset dimension mismatch: {path}')
             check(data[84:88]==b'DXT5',f'Expected BC3/DXT5 texture: {path}')
+            if '/interface/illustrations/bfl/' in path.as_posix():
+                check((w,h)==(1920,1080),f'Event illustration must be 16:9: {path}')
+                master=ROOT/row['master']
+                check(master.is_file(),f'Missing illustration master: {master}')
+                if master.is_file():
+                    png=master.read_bytes()
+                    check(png[:8]==b'\x89PNG\r\n\x1a\n',f'Expected PNG master: {master}')
+                    mw,mh=struct.unpack_from('>II',png,16)
+                    check(mw*9==mh*16,f'Illustration master must be 16:9: {master}')
+    scene_files={p.relative_to(ROOT).as_posix() for p in (MOD/'main_menu/gfx/interface/illustrations/bfl').rglob('*.dds')}
+    scene_rows={row['export'] for row in rows if '/interface/illustrations/bfl/' in row['export']}
+    check(scene_files==scene_rows,'Illustration files and asset register differ; remove obsolete scene textures')
+    from build_event_images import SOURCE as EVENT_GUI, ADDITION as EVENT_CROP
+    event_gui=(MOD/EVENT_GUI).read_text(encoding='utf-8-sig')
+    check(event_gui.count(EVENT_CROP)==2,'Custom event images must preserve aspect ratio in both native windows')
+    restored=event_gui.replace(EVENT_CROP,'')
+    pins_event=json.loads((ROOT/'docs/baseline.json').read_text(encoding='utf-8'))['game_sources']
+    check(hashlib.sha256(('\ufeff'+restored).encode('utf-8')).hexdigest()==pins_event[EVENT_GUI]
+        or hashlib.sha256(('\ufeff'+restored).replace('\n','\r\n').encode('utf-8')).hexdigest()==pins_event[EVENT_GUI],
+        'Unrelated native event-window content changed')
     economy=(MOD/'in_game/gui/economy_lateralview.gui').read_text(encoding='utf-8-sig')
     types=(MOD/'in_game/gui/vanilla/bfl_economy_vanilla_types.gui').read_text(encoding='utf-8-sig')
     for kind in ('dividends','interest','bond_coupons'):
@@ -180,10 +200,10 @@ def main():
     check('types EconomyLateralviewTypes' not in economy,'Native types duplicated in replacement')
     joined='\n'.join(text for _,text in all_text)
     # Verify that the historical overrides preserve all unrelated native data.
-    from build_bank_of_england import EVENT, NAMES, CALL, IMAGE, NAME_RULE
+    from build_bank_of_england import EVENT, NAMES, CALL, IMAGE, NAME_RULE, SOUTH_SEA_ADDITIONS
     from generate_bank_reforms import collapse_company_checks, NATIVE_CHECK_FILES
     pins=json.loads((ROOT/'docs/baseline.json').read_text())['game_sources']
-    for relative, additions in [(EVENT,(CALL,IMAGE)),(NAMES,(NAME_RULE,))]:
+    for relative, additions in [(EVENT,(CALL,IMAGE,*SOUTH_SEA_ADDITIONS.values())),(NAMES,(NAME_RULE,))]:
         original=collapse_company_checks((MOD/relative).read_text(encoding='utf-8-sig'))
         for addition in additions:
             check(original.count(addition)==1,f'{relative}: expected one historical insertion')

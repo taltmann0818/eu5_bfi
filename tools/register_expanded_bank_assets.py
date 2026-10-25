@@ -13,7 +13,7 @@ def main():
         entries.append((f'main_menu/gfx/interface/icons/buildings/bfl_{name}.dds',f'assets_source/painted/{master}.png',[128,128],False))
     entries += [
         ('main_menu/gfx/interface/icons/government_reforms/illustrations/bfl_mendes_spice_house.dds','assets_source/painted/mendes_reform.png',[64,90],True),
-        ('main_menu/gfx/interface/illustrations/bfl/mortzenhaus_event.dds','assets_source/painted/mortzenhaus_event.png',[1080,720],True),
+        ('main_menu/gfx/interface/illustrations/bfl/mortzenhaus_event.dds','assets_source/painted/widescreen/mortzenhaus_event.png',[1920,1080],True),
         ('main_menu/gfx/coat_of_arms/textured_emblems/te_bfl_berenberg.dds','assets_source/flags/berenberg.png',[512,512],False),
     ]
     for target,master,size,fit in entries:

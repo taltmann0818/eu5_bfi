@@ -60,6 +60,10 @@ def main():
             continue  # All sixteen advances use their distinct editable glyph.
         source=ROOT/row['master']
         im=Image.open(source).convert('RGBA')
+        if '/interface/illustrations/bfl/' in row['export']:
+            assert row['size'] == [1920,1080], f'Illustration must be 16:9: {source}'
+            assert im.width * 9 == im.height * 16, f'Master must be 16:9: {source}'
+            assert not row.get('stretch'), f'Illustration stretching prohibited: {source}'
         if row.get('stretch'):
             im=im.resize(tuple(row['size']),Image.Resampling.LANCZOS)
         elif row.get('fit'):
@@ -78,7 +82,6 @@ def main():
         export(render_svg(ROOT/master),GFX/f'advance/bfl_{advance["id"]}.dds',
                'BC3 vector glyph',master,'Original BFI code-authored SVG')
     art=Image.open(ART).convert('RGB')
-    export(ImageOps.fit(art,(1080,440)),GFX/'illustrations/bfl/charter.dds','BC3 painting',ART.relative_to(ROOT).as_posix())
     thumb=ImageOps.fit(art,(1024,1024))
     draw=ImageDraw.Draw(thumb);draw.rectangle((0,730,1024,1024),fill=(17,29,39))
     fp=Path('C:/Windows/Fonts/georgia.ttf')

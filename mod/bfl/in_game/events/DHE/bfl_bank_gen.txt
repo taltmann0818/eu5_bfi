@@ -1,0 +1,191 @@
+﻿namespace = bfl_bank_gen
+bfl_bank_gen.1 = { type = country_event title = bfl_bank_gen.1.title desc = bfl_bank_gen.1.desc
+            image = "gfx/interface/illustrations/bfl/events/gen_imperial_credit.dds" outcome = neutral
+            fire_only_once = yes dynamic_historical_event = { tag = GEN from = 1520.1.1 to = 1558.12.31 monthly_chance = 5 }
+            trigger = { bfl_dhe_gen = yes NOT = { has_variable = bfl_dhe_open } var:bfl_bank = { tag = SAGEO } country_exists = c:HAB }
+            immediate = { bfl_dhe_begin = yes  }
+        option = { name = bfl_bank_gen.1.a ai_chance = { base = 40 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = {
+c:HAB ?= { add_opinion = { target = root modifier = bfl_dhe_royal_friend } }
+
+c:FRA ?= { add_opinion = { target = root modifier = bfl_dhe_royal_rival } }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_imperial_accounts months = 240 mode = replace } }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = 0.05 }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+
+c:HAB ?= { add_opinion = { target = root modifier = bfl_dhe_royal_friend } }
+
+c:FRA ?= { add_opinion = { target = root modifier = bfl_dhe_royal_rival } }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_imperial_accounts months = 240 mode = replace } }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = 0.05 }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.1.b ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes scope:bfl_event_bank = { bfl_free_cash >= 200 bfl_capital_headroom >= 200 } }
+                show_as_tooltip = {
+scope:bfl_event_bank = { add_gold = -200 }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_european_factors months = 240 mode = replace } }
+add_prestige = 5  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes scope:bfl_event_bank = { bfl_free_cash >= 200 bfl_capital_headroom >= 200 } }
+                    scope:bfl_event_bank = { change_variable = { name = bfl_loss_carryforward add = 200 } }
+scope:bfl_event_bank = { add_gold = -200 }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_european_factors months = 240 mode = replace } }
+add_prestige = 5
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.1.c ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = {
+add_country_modifier = { modifier = bfl_dhe_republic_first months = 240 mode = replace }
+
+c:HAB ?= { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+
+add_country_modifier = { modifier = bfl_dhe_republic_first months = 240 mode = replace }
+
+c:HAB ?= { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_dhe_stale ai_chance = { base = 100 }
+            trigger = { NOT = { bfl_dhe_context = yes } }
+            hidden_effect = { remove_variable = bfl_dhe_open } }
+        }
+bfl_bank_gen.2 = { type = country_event title = bfl_bank_gen.2.title desc = bfl_bank_gen.2.desc
+            image = "gfx/interface/illustrations/bfl/events/gen_grimaldi_albergo.dds" outcome = neutral
+            fire_only_once = yes dynamic_historical_event = { tag = GEN from = 1400.1.1 to = 1650.12.31 monthly_chance = 5 }
+            trigger = { bfl_dhe_gen = yes NOT = { has_variable = bfl_dhe_open } var:bfl_bank = { tag = GRIML NOT = { has_reform = government_reform:bfl_grimaldi_albergo } } }
+            immediate = { bfl_dhe_begin = yes  }
+        option = { name = bfl_bank_gen.2.a ai_chance = { base = 45 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = { scope:bfl_event_bank = { add_reform = government_reform:bfl_grimaldi_albergo }
+add_country_modifier = { modifier = bfl_dhe_grimaldi_concessions months = 240 mode = replace }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+                    scope:bfl_event_bank = { set_variable = bfl_albergo_authorized } scope:bfl_event_bank = { add_reform = government_reform:bfl_grimaldi_albergo }
+add_country_modifier = { modifier = bfl_dhe_grimaldi_concessions months = 240 mode = replace }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.2.b ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes gold >= 200 }
+                show_as_tooltip = {
+add_gold = -200
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_notarial_albergo months = 240 mode = replace } }
+
+add_country_modifier = { modifier = bfl_dhe_civic_notaries months = 240 mode = replace }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes gold >= 200 }
+
+add_gold = -200
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_notarial_albergo months = 240 mode = replace } }
+
+add_country_modifier = { modifier = bfl_dhe_civic_notaries months = 240 mode = replace }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.2.c ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = {
+add_estate_satisfaction = { type = estate_type:nobles_estate value = -0.1 }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = 0.05 }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+add_stability = -3  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+
+add_estate_satisfaction = { type = estate_type:nobles_estate value = -0.1 }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = 0.05 }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+add_stability = -3
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_dhe_stale ai_chance = { base = 100 }
+            trigger = { NOT = { bfl_dhe_context = yes } }
+            hidden_effect = { remove_variable = bfl_dhe_open } }
+        }
+bfl_bank_gen.3 = { type = country_event title = bfl_bank_gen.3.title desc = bfl_bank_gen.3.desc
+            image = "gfx/interface/illustrations/bfl/events/gen_spinola_captains.dds" outcome = neutral
+            fire_only_once = yes dynamic_historical_event = { tag = GEN from = 1400.1.1 to = 1650.12.31 monthly_chance = 5 }
+            trigger = { bfl_dhe_gen = yes NOT = { has_variable = bfl_dhe_open } var:bfl_bank = { tag = SPINL } }
+            immediate = { bfl_dhe_begin = yes  }
+        option = { name = bfl_bank_gen.3.a ai_chance = { base = 35 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = {
+add_country_modifier = { modifier = bfl_dhe_banker_captains months = 240 mode = replace }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = -0.05 }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_favored } }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+
+add_country_modifier = { modifier = bfl_dhe_banker_captains months = 240 mode = replace }
+
+add_estate_satisfaction = { type = estate_type:burghers_estate value = -0.05 }
+
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_favored } }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.3.b ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes gold >= 150 }
+                show_as_tooltip = {
+add_gold = -150
+
+add_country_modifier = { modifier = bfl_dhe_balanced_captains months = 240 mode = replace }
+
+add_estate_satisfaction = { type = estate_type:nobles_estate value = -0.05 }
+add_stability = 3  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes gold >= 150 }
+
+add_gold = -150
+
+add_country_modifier = { modifier = bfl_dhe_balanced_captains months = 240 mode = replace }
+
+add_estate_satisfaction = { type = estate_type:nobles_estate value = -0.05 }
+add_stability = 3
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_bank_gen.3.c ai_chance = { base = 30 }
+                trigger = { bfl_dhe_context = yes  }
+                show_as_tooltip = { add_stability = 5
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_separate_offices months = 180 mode = replace } }
+  }
+                hidden_effect = { if = { limit = { bfl_dhe_context = yes  }
+                     add_stability = 5
+scope:bfl_event_bank = { add_opinion = { target = root modifier = bfl_dhe_rebuffed } }
+
+scope:bfl_event_bank = { add_country_modifier = { modifier = bfl_dhe_separate_offices months = 180 mode = replace } }
+
+                    remove_variable = bfl_dhe_open
+                } }
+            }option = { name = bfl_dhe_stale ai_chance = { base = 100 }
+            trigger = { NOT = { bfl_dhe_context = yes } }
+            hidden_effect = { remove_variable = bfl_dhe_open } }
+        }

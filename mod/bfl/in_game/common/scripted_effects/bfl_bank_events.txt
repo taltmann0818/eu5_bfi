@@ -1,0 +1,96 @@
+﻿bfl_dhe_begin = {
+var:bfl_bank = { save_scope_as = bfl_event_bank }
+        set_variable = bfl_dhe_open
+        set_variable = { name = bfl_dhe_next_period value = { value = bfl_period add = 60 } }
+}
+bfl_dhe_approve = {
+scope:bfl_event_bank = {
+        add_opinion = { target = prev modifier = bfl_dhe_petition_granted } }
+        add_estate_satisfaction = { type = estate_type:burghers_estate value = 0.05 }
+        remove_variable = bfl_dhe_open
+}
+bfl_dhe_refuse = {
+if = { limit = { bfl_dhe_context = yes }
+        scope:bfl_event_bank = { add_opinion = { target = prev modifier = bfl_dhe_petition_refused } }
+        add_estate_satisfaction = { type = estate_type:burghers_estate value = -0.05 }
+        remove_variable = bfl_dhe_open }
+}
+bfl_dhe_fund = {
+if = { limit = { bfl_dhe_can_fund = yes }
+        save_scope_as = bfl_party scope:bfl_event_bank = {
+            set_variable = { name = bfl_dhe_paid_before value = var:bfl_paid_in_capital }
+            set_variable = { name = bfl_equity_pool value = 0 } bfl_subscribe_bank_capital = yes
+            if = { limit = { var:bfl_paid_in_capital > var:bfl_dhe_paid_before }
+                overlord = { bfl_dhe_approve = yes } } } }
+}
+bfl_dhe_audit = {
+if = { limit = { bfl_dhe_can_audit = yes }
+        add_gold = -100 scope:bfl_event_bank = {
+            add_country_modifier = { modifier = bfl_dhe_ordered_books months = 120 mode = replace } }
+        bfl_dhe_approve = yes }
+}
+bfl_dhe_retain = {
+if = { limit = { bfl_dhe_can_retain = yes }
+        scope:bfl_event_bank = {
+            set_variable = { name = bfl_dhe_old_payout value = var:bfl_payout_ratio }
+            set_variable = { name = bfl_dhe_retention_until value = { value = bfl_period add = 24 } }
+            set_variable = { name = bfl_payout_ratio value = 0 }
+            add_country_modifier = { modifier = bfl_dhe_retained_earnings months = 24 mode = replace } }
+        bfl_dhe_approve = yes }
+}
+bfl_dhe_expire_retention = {
+if = { limit = {
+        has_variable = bfl_dhe_retention_until
+        OR = { bfl_period >= var:bfl_dhe_retention_until var:bfl_payout_ratio > 0 } }
+        # Respect a later manual payout decision. This is never an unpaid cash dividend.
+        if = { limit = { var:bfl_payout_ratio = 0 }
+            set_variable = { name = bfl_payout_ratio value = var:bfl_dhe_old_payout } }
+        remove_country_modifier = bfl_dhe_retained_earnings
+        remove_variable = bfl_dhe_old_payout remove_variable = bfl_dhe_retention_until }
+}
+bfl_dhe_issue = {
+if = { limit = { bfl_dhe_can_issue = yes }
+        save_scope_as = bfl_party scope:bfl_event_bank = {
+            set_variable = { name = bfl_dhe_paid_before value = var:bfl_paid_in_capital }
+            set_variable = { name = bfl_equity_pool value = 1 }
+            # Existing primary service enforces cash, registry, NAV and dilution.
+            bfl_subscribe_bank_capital = yes
+            if = { limit = { var:bfl_paid_in_capital > var:bfl_dhe_paid_before }
+                set_variable = { name = bfl_accept_equity value = 1 }
+                set_variable = { name = bfl_equity_listed value = 1 }
+                bfl_record_exchange_history = yes overlord = { bfl_dhe_approve = yes } }
+            set_variable = { name = bfl_equity_pool value = 0 } } }
+}
+bfl_dhe_quote_buyback = {
+if = { limit = { bfl_dhe_controller = yes }
+        var:bfl_bank = {
+            set_variable = { name = bfl_dhe_buy_units value = bfl_dhe_buyback_units }
+            set_variable = { name = bfl_dhe_buy_nav value = bfl_nav_quote }
+            set_variable = { name = bfl_dhe_buy_price value = bfl_dhe_buyback_price }
+            set_variable = { name = bfl_dhe_buy_revision value = var:bfl_equity_revision } } }
+}
+bfl_dhe_buyback = {
+if = { limit = { bfl_dhe_can_buyback = yes }
+        scope:bfl_event_bank = {
+            set_variable = bfl_operation_guard
+            set_variable = { name = bfl_dhe_released_basis value = { value = var:bfl_state_basis
+                multiply = var:bfl_dhe_buy_units divide = var:bfl_state_units } }
+            add_gold = { value = var:bfl_dhe_buy_price multiply = -1 }
+            overlord = {
+                add_gold = scope:bfl_event_bank.var:bfl_dhe_buy_price
+                if = { limit = { NOT = { has_variable = bfl_treasury_equity_realized } }
+                    set_variable = { name = bfl_treasury_equity_realized value = 0 } }
+                change_variable = { name = bfl_treasury_equity_realized add = {
+                    value = scope:bfl_event_bank.var:bfl_dhe_buy_price
+                    subtract = scope:bfl_event_bank.var:bfl_dhe_released_basis } } }
+            change_variable = { name = bfl_state_units subtract = var:bfl_dhe_buy_units }
+            change_variable = { name = bfl_total_units subtract = var:bfl_dhe_buy_units }
+            change_variable = { name = bfl_state_basis subtract = var:bfl_dhe_released_basis }
+            # Paid-in capital is a historical funding counter, not current NAV.
+            change_variable = { name = bfl_equity_revision add = 1 }
+            set_variable = { name = bfl_equity_offer_active value = 0 }
+            change_variable = { name = bfl_equity_offer_revision add = 1 }
+            add_cooldown = { type = bfl_share_trade months = 1 }
+            bfl_refresh_asset_statement = yes remove_variable = bfl_operation_guard }
+        bfl_dhe_approve = yes }
+}
