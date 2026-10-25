@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "results": {
+    "original_bank_is_trapped_with_funded_fractional_claims": "PASS",
+    "original_claims_are_paid_without_rounding_or_forgiveness": "PASS",
+    "original_bank_resumes_new_lending": "PASS",
+    "research_gate_is_preserved": "PASS",
+    "saved_recovery_does_not_pay_twice": "PASS"
+  },
+  "tested_production_files": {
+    "in_game/common/scripted_effects/bfl_resolution_services.txt": "499fd3366c2cb4fa205f10c8c811992a82cfa419643a2ae9f6bdfc0efa5c4477",
+    "in_game/common/scripted_effects/bfl_generated_deposit_settlement.txt": "28ac52aa3b0ad7fe7684ee52904ae85d27d8b13ab0a8da357cef6d0b6026efca",
+    "in_game/common/scripted_effects/bfl_monthly_settlement.txt": "bed3021d31ba499866208c24ec0581b696c73867a304d533d0ef45b6952e2ea6",
+    "in_game/common/scripted_effects/bfl_automatic_resolution.txt": "925333035b7c59451b178e2da1937a25906fa4a82ba9e8a4c055d367b30fecc6"
+  },
+  "scope": "Copy of GBR 3 April 1647 with original enabled playset. Calls production distribution and resume services from the monthly path; no original save changes, research grant or automation setting change.",
+  "runtime_boundary": "Staged recovery files match the final runtime byte for byte; the full staged runtime predates the final company-name layout adjustment. This is targeted recovery evidence, not whole-playset acceptance."
+}

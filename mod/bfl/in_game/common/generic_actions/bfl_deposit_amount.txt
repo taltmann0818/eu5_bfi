@@ -3,7 +3,9 @@
             select_trigger = { looking_for_a = country target_flag = bfl_deposit_target name = choose_country
                 column = { data = country_diplomacy_info_loan }
                 visible = { bfl_is_bank = yes NOT = { this = scope:actor } }
-                enabled = { bfl_can_originate_demand_deposit = yes var:bfl_accept_deposits = 1
+                enabled = { custom_tooltip = { text = bfl_deposit_business_reason bfl_can_originate_demand_deposit = yes }
+                    custom_tooltip = { text = bfl_deposit_closed_reason var:bfl_accept_deposits = 1 }
+                    bfl_branch_access = { PARTY = scope:actor }
                     OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
                         AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } } } } }
             select_trigger = { looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label
@@ -20,7 +22,9 @@ bfl_term_amount = { type = owncountry ai_tick = never show_message = no
             select_trigger = { looking_for_a = country target_flag = bfl_deposit_target name = choose_country
                 column = { data = country_diplomacy_info_loan }
                 visible = { bfl_is_bank = yes NOT = { this = scope:actor } }
-                enabled = { bfl_can_originate_term_deposit = yes var:bfl_accept_deposits = 1
+                enabled = { custom_tooltip = { text = bfl_deposit_business_reason bfl_can_originate_term_deposit = yes }
+                    custom_tooltip = { text = bfl_deposit_closed_reason var:bfl_accept_deposits = 1 }
+                    bfl_branch_access = { PARTY = scope:actor }
                     OR = { AND = { bfl_has_valid_controller = yes overlord = scope:actor }
                         AND = { bfl_is_independent_bank = yes opinion = { target = scope:actor value >= 50 } } } } }
             select_trigger = { looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label

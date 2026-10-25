@@ -19,6 +19,12 @@
              text_single = { text = "bfl_ui_42f18978dccf0068" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_verified_profit').GetValue|2]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_720687431a46f0c9" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_loss').GetValue|2]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+        background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
+             text_single = { text = "bfl_ui_89ed114760e90c1f" autoresize = yes } expand = { }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_payout_ratio').GetValue|%0]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
+         hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { text = "bfl_ui_db66b604827f4b9d" autoresize = yes } expand = { }
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_dividend').GetValue|2]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
         background = { using = tooltip_table_field_texture } hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
@@ -32,24 +38,54 @@
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_facility_count').GetValue|2]" autoresize = yes align = right|nobaseline } } }widget = {  size = { -1 30 } layoutpolicy_horizontal = expanding
          hbox = { size = { 100% 100% } margin = { 10 2 } spacing = 8
              text_single = { text = "bfl_ui_9a4fa1a068af9c47" autoresize = yes } expand = { }
-            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_route_count').GetValue|2]" autoresize = yes align = right|nobaseline } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_company_overview_note" } } } }
+            text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_company_route_count').GetValue|2]" autoresize = yes align = right|nobaseline } } }TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_company_overview_note" } }text_multi = { text = "bfl_company_dividend_loss_reason" autoresize = yes layoutpolicy_horizontal = expanding
+            visible = "[GetScriptedGui('bfl_reason_company_losses').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }text_multi = { text = "bfl_company_dividend_profit_reason" autoresize = yes layoutpolicy_horizontal = expanding
+            visible = "[GetScriptedGui('bfl_reason_company_no_profit').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" } } }
     }type bfl_company_controls = vbox { ignoreinvisible = yes
         layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 4
         hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
         text_single = { text = "bfl_company_panel" autoresize = yes } expand = { } button_regular = { name = "bfl_company_fund_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
-        datacontext = "[GetGenericAction('bfl_company_fund')]" tooltip = "bfl_company_fund_tip"
+        datacontext = "[GetGenericAction('bfl_company_fund')]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_company_fund" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_company_fund" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/subscribe.dds" } }button_regular = { name = "bfl_company_list_equity_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
-        datacontext = "[GetGenericAction('bfl_company_list_equity')]" tooltip = "bfl_company_list_equity_tip"
+        datacontext = "[GetGenericAction('bfl_company_list_equity')]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_company_list_equity" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_company_list_equity" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/share_transfer.dds" } } }
+        vbox = { ignoreinvisible = yes spacing = 4 layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        visible = "[GetScriptedGui('bfl_company_selected_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_selected_company').GetCountry]"
+        tooltipwidget = { bfl_company_overview_tooltip = { } }
+        hbox = { spacing = 6 country_flag_small = { } text_single = { raw_text = "[Country.GetName]" size = { 220 30 } elide = right fontsize = 14 }
+            expand = { } button_regular = { name = "bfl_selected_company_pause_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_company_mandate').GetValue,'(CFixedPoint)0')]"
+        tooltip = "bfl_selected_company_pause_tip"
+        enabled = "[GetScriptedGui('bfl_selected_company_pause').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_selected_company_pause').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/lock.dds" } }button_regular = { name = "bfl_selected_company_trade_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_company_mandate').GetValue,'(CFixedPoint)1')]"
+        tooltip = "bfl_selected_company_trade_tip"
+        enabled = "[GetScriptedGui('bfl_selected_company_trade').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_selected_company_trade').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/merchant_finance.dds" } }button_regular = { name = "bfl_selected_company_explore_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed down = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_company_mandate').GetValue,'(CFixedPoint)2')]"
+        tooltip = "bfl_selected_company_explore_tip"
+        enabled = "[GetScriptedGui('bfl_selected_company_explore').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_selected_company_explore').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/commenda.dds" } }button_regular = { name = "bfl_selected_company_fund_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        tooltip = "bfl_selected_company_fund_tip"
+        enabled = "[GetScriptedGui('bfl_selected_company_fund').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_selected_company_fund').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/subscribe.dds" } }button_regular = { name = "bfl_selected_company_crew_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        tooltip = "bfl_selected_company_crew_tip"
+        enabled = "[GetScriptedGui('bfl_selected_company_crew').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_selected_company_crew').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/companies.dds" } } } }
         text_multi = { text = "bfl_companies_empty" autoresize = yes layoutpolicy_horizontal = expanding
             visible = "[Not(GetScriptedGui('bfl_company_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }
         flowcontainer = { wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding
             datamodel = "[GetPlayer.GetDiplomacy.GetSubjects]"
-            item = { widget = { size = { 510 64 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+            item = { button_regular = { size = { 510 64 } layoutpolicy_horizontal = expanding using = bg_card_header_01
+                onclick = "[GetScriptedGui('bfl_inspect_company').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('company',Country.MakeScope).End)]"
                 visible = "[GetScriptedGui('bfl_company_row').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
                 tooltipwidget = { bfl_company_overview_tooltip = { } }
                 country_flag_small = { position = { 8 10 } }
@@ -2044,13 +2080,19 @@
             onclick = "[CreditLateralView.Vars.Set('funding_section','monetary')]" } }vbox = { ignoreinvisible = yes layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding visible = "[Not(Or(CreditLateralView.Vars.HasValue('funding_section','deposits'),CreditLateralView.Vars.HasValue('funding_section','monetary')))]" bfl_bond_contents = { } }vbox = { layoutpolicy_vertical = fixed layoutpolicy_horizontal = expanding spacing = 6
         visible = "[CreditLateralView.Vars.HasValue('funding_section','deposits')]" hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
         text_single = { text = "bfl_deposit_accounts_heading" autoresize = yes } expand = { } button_regular = { name = "bfl_deposit_amount_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
-        datacontext = "[GetGenericAction('bfl_deposit_amount')]" tooltip = "bfl_deposit_amount_tip"
+        datacontext = "[GetGenericAction('bfl_deposit_amount')]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_deposit_amount" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_deposit_amount" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/deposit.dds" } }button_regular = { name = "bfl_term_amount_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
-        datacontext = "[GetGenericAction('bfl_term_amount')]" tooltip = "bfl_term_amount_tip"
+        datacontext = "[GetGenericAction('bfl_term_amount')]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single action_name = "bfl_term_amount" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_term_amount" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/note.dds" } }button_regular = { name = "bfl_withdraw_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
         tooltip = "bfl_withdraw_tip"
         enabled = "[GetScriptedGui('bfl_withdraw').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2064,7 +2106,13 @@
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_demand_rate').GetValue|%0]" autoresize = yes } button_regular = { name = "bfl_cycle_deposit_rate_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
         tooltip = "bfl_cycle_deposit_rate_tip"
         enabled = "[GetScriptedGui('bfl_cycle_deposit_rate').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        onclick = "[GetScriptedGui('bfl_cycle_deposit_rate').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/deposit.dds" } } }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
+        onclick = "[GetScriptedGui('bfl_cycle_deposit_rate').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/deposit.dds" } } }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 38 } spacing = 6 text_single = { text = "bfl_deposit_admission" autoresize = yes } expand = { }
+                text_single = { text = "bfl_offering_open" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_deposits').GetValue,'(CFixedPoint)1')]" }
+                text_single = { text = "bfl_offering_closed" autoresize = yes visible = "[Not(EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_deposits').GetValue,'(CFixedPoint)1'))]" }button_regular = { name = "bfl_toggle_deposit_admission_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
+        tooltip = "bfl_toggle_deposit_admission_tip"
+        enabled = "[GetScriptedGui('bfl_toggle_deposit_admission').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        onclick = "[GetScriptedGui('bfl_toggle_deposit_admission').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/deposit.dds" } } }text_multi = { text = "bfl_deposit_closed_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_deposits').GetValue,'(CFixedPoint)0')]" }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
         text_single = { text = "bfl_capital_heading" autoresize = yes } expand = { } button_regular = { name = "bfl_invite_equity_capital_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
         tooltip = "bfl_invite_equity_capital_tip"
         enabled = "[GetScriptedGui('bfl_invite_equity_capital').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -2077,7 +2125,15 @@
             text_single = { raw_text = "[Country.MakeScope.GetVariable('bfl_payout_ratio').GetValue|%0]" autoresize = yes } button_regular = { name = "bfl_cycle_payout_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
         tooltip = "bfl_cycle_payout_tip"
         enabled = "[GetScriptedGui('bfl_cycle_payout').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
-        onclick = "[GetScriptedGui('bfl_cycle_payout').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/dividend.dds" } } }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 38 } spacing = 6 text_single = { text = "bfl_share_offering" autoresize = yes } expand = { }
+        onclick = "[GetScriptedGui('bfl_cycle_payout').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/dividend.dds" } } }text_multi = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+                    text = "bfl_dividend_loss_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                    visible = "[GetScriptedGui('bfl_reason_dividend_losses').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }text_multi = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+                    text = "bfl_dividend_retained_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                    visible = "[GetScriptedGui('bfl_reason_dividend_retained').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }text_multi = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+                    text = "bfl_dividend_cash_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                    visible = "[GetScriptedGui('bfl_reason_dividend_cash').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }text_multi = { datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+                    text = "bfl_dividend_capital_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                    visible = "[GetScriptedGui('bfl_reason_dividend_capital').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 38 } spacing = 6 text_single = { text = "bfl_share_offering" autoresize = yes } expand = { }
         text_single = { text = "bfl_offering_open" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_equity').GetValue,'(CFixedPoint)1')]" }
         text_single = { text = "bfl_offering_closed" autoresize = yes visible = "[Not(EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_equity').GetValue,'(CFixedPoint)1'))]" }button_regular = { name = "bfl_cycle_share_offering_icon" size = { 36 36 } layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
         tooltip = "bfl_cycle_share_offering_tip"
@@ -2110,21 +2166,30 @@
         visible = "[Not(Or(Or(Or(CreditLateralView.Vars.HasValue('investment_section','shares'),CreditLateralView.Vars.HasValue('investment_section','companies')),CreditLateralView.Vars.HasValue('investment_section','goods')),CreditLateralView.Vars.HasValue('investment_section','trade')))]" hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed size = { -1 40 } using = bg_card_header_01 spacing = 6
         text_single = { text = "bfl_investment_title" autoresize = yes } expand = { } button_regular = { name = "bfl_offer_credit_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_offer_credit_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_offer_credit" action_direction = "offer" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_offer_credit" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/loan.dds" }
         }button_regular = { name = "bfl_purchase_native_loan_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_purchase_native_loan_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_purchase_native_loan" action_direction = "offer" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_purchase_native_loan" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/takeover.dds" }
         }button_regular = { name = "bfl_offer_restructuring_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "bfl_offer_restructuring_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_offer_restructuring" action_direction = "offer" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_offer_restructuring" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/debt.dds" }
         } }hbox = { layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 6 size = { -1 30 } tooltip = "bfl_native_credit_label_tip"
         text_single = { text = "bfl_native_credit_label" autoresize = yes tooltip = "bfl_native_credit_label_tip" } expand = { }

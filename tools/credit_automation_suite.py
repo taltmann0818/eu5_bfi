@@ -82,13 +82,14 @@ def fixture(token, fingerprint):
     start += check('missing_diplomat_blocks_automatic_purchase',
                    'c:ACC = { gold = 5000 var:bfl_pos_01_units = 0 num_of_diplomats = 0 } '
                    'c:PRZ = { var:bfl_dealer_units = 100 NOT = { has_cooldown = bfl_share_trade } }')
-    # BRD's controller is deliberately not granted Share Dealing in prepare().
+    # The player's native Credit Management remains off. A completed exchange
+    # permits dealing without the retired research, but does not opt in to AI.
     start += '''c:FLO = { add_diplomats = 10 }
     c:BRD = { set_variable = { name = bfi_credit_cash value = gold } bfl_manage_credit = yes }
     '''
-    start += check('unresearched_charter_does_not_invest',
+    start += check('player_automation_off_does_not_invest',
                    'c:FLO = { NOT = { has_advance = bfl_bank_share_dealing } } '
-                   'c:BRD = { bfl_equity_exchange_access = no gold = var:bfi_credit_cash var:bfl_pos_01_units = 100 } '
+                   'c:BRD = { bfl_equity_exchange_access = yes bfl_credit_management_enabled = no gold = var:bfi_credit_cash var:bfl_pos_01_units = 100 } '
                    'c:PRZ = { var:bfl_dealer_units = 100 NOT = { has_cooldown = bfl_share_trade } }')
     start += 'c:ACC = { add_diplomats = 10 save_scope_as = actor\n'
     for i in range(1, 17):
@@ -317,7 +318,7 @@ def prepare(directory, token=None):
             digest.update(path.relative_to(overlay).as_posix().encode() + b'\0' + path.read_bytes())
     manifest.update(suite='Focused Credit Management automation', fixture_sha256=digest.hexdigest(),
                     scope='Real production service effects with granted Reformation research, buildings and wallets. '
-                          'AI enabled, protected cash, missing research/diplomat, funded existing-stock settlement, '
+                          'AI enabled, protected cash, player automation off/missing diplomat, funded existing-stock settlement, '
                           'native cooldown, invalid charter disabled state, and automatic native company policy. '
                           'Company payout assertions seed earned profit and execute the production post-verification '
                           'payout step; they are controlled arithmetic, not observed native trade income. '

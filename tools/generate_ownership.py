@@ -262,7 +262,8 @@ def generate(common, effect, loc, write):
     common('scripted_effects', 'equity', effect('bfl_subscribe_bank_capital', primary)
            + effect('bfl_subscribe_company_equity', 'if = { limit = { bfl_is_company = yes } bfl_subscribe_bank_capital = yes }')
            + effect('bfl_allocate_subscription', 'bfl_subscribe_bank_capital = yes'))
-    # Completed building and product permission apply independently to BOTH sides.
+    # Both ordinary counterparties need completed exchange access. The shared
+    # bank-share permission has no research or age prerequisite.
     triggers += effect('bfl_equity_exchange_access', '''bfl_can_originate_bank_share_transfer = yes
         bfl_can_trade_sovereign_bonds = yes
     ''')
@@ -525,7 +526,7 @@ def generate_ai(common,effect,loc):
     loc('bfl_ai_equity_purchase','Consider funded exchange investment')
     loc('bfl_ai_equity_purchase_desc','AI purchase uses the same live research, building, authority, capacity and exact-quote confirmation checks as the player. Monthly opportunity review, with at least 500 gold of cash and capital surplus. No above-market asks.')
     loc('bfl_ai_equity_offering','Admit bank and open paid capital offering')
-    loc('bfl_ai_equity_offering_desc','AI management may admit its actual bank and authorize paid primary subscriptions after Share Dealing and a completed exchange. No cash or shares are created by admission.')
+    loc('bfl_ai_equity_offering_desc','AI management may admit its actual bank and authorize paid primary subscriptions with a completed Stock Exchange. No cash or shares are created by admission.')
     from generate_exchange_ai import generate as generate_exchange_ai
     generate_exchange_ai(common, effect, loc)
 
@@ -686,7 +687,7 @@ def generate_commands(common, effect, loc, write):
         'bfl_exchange_browse':'Browse listed banks & companies',
         'bfl_exchange_title':'Stock Exchange',
         'bfl_exchange_rules':'SECONDARY EQUITY · Existing shares, funded settlement',
-        'bfl_exchange_locked':'LOCKED · Both banks need Share Dealing research and a completed owned Stock Exchange. Chartered banks use their live controller. Company shares additionally require Overseas Investment and Company Equity.',
+        'bfl_exchange_locked':'LOCKED · Both banks need a completed owned Stock Exchange. Chartered banks use their live controller. Company shares additionally require Overseas Investment and Company Equity.',
         'bfl_exchange_unlocked':'ACCESS OPEN · Research and completed exchange verified. Each order rechecks seller access, concentration, cash and capital at acceptance.',
         'bfl_exchange_primary':'PRIMARY CAPITAL · New units at tangible NAV',
         'bfl_exchange_portfolio':'PORTFOLIO · No unrealized profit is distributable',
@@ -700,7 +701,7 @@ def generate_commands(common, effect, loc, write):
     for key, text in labels.items():
         loc(key, text)
         if key in ('bfl_exchange_open','bfl_exchange_close','bfl_exchange_list','bfl_exchange_sell','bfl_exchange_buy','bfl_exchange_cancel','bfl_exchange_browse'):
-            loc(key+'_tip', {'bfl_exchange_buy':'Review exact units, total price and seller before acceptance. Concentration caps: 25% for banks, 60% for companies. Issuer receives zero proceeds. Stale, expired, unfunded or replayed orders reject.', 'bfl_exchange_sell':'List your selected owned units and NAV limit for three months. Requires research and a completed exchange; no self-purchases or founder/estate secondary selling.', 'bfl_exchange_list':'Admit your bank without changing cash, units or its price. Requires bank-share dealing research and a completed Stock Exchange.'}.get(key,'Browse the funded equity exchange. Holdings and entitled dividends survive loss of market access.'))
+            loc(key+'_tip', {'bfl_exchange_buy':'Review exact units, total price and seller before acceptance. Concentration caps: 25% for banks, 60% for companies. Issuer receives zero proceeds. Stale, expired, unfunded or replayed orders reject.', 'bfl_exchange_sell':'List your selected owned units and NAV limit for three months. Requires a completed Stock Exchange; no self-purchases or founder/estate secondary selling.', 'bfl_exchange_list':'Admit your bank without changing cash, units or its price. Requires a completed Stock Exchange.'}.get(key,'Browse the funded equity exchange. Holdings and entitled dividends survive loss of market access.'))
     loc('bfl_exchange_browse_desc', labels['bfl_exchange_browse_tip'] if 'bfl_exchange_browse_tip' in labels else 'Select a real institution. Selection never moves cash.')
     loc('bfl_company_list_equity','Authorize company equity listing')
     loc('bfl_company_list_equity_desc','Authorize paid NAV primary subscriptions and secondary trading. Bank acquisitions require Overseas Investment, Company Equity research and the completed exchange for secondary trades. Political overlordship stays unchanged.')

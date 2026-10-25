@@ -1,0 +1,44 @@
+﻿bfl_inspect_company = { scope = country saved_scopes = { company }
+        is_shown = { exists = scope:company scope:company = { country_exists = this
+        bfl_is_company = yes is_subject_of = root } } is_valid = { exists = scope:company scope:company = { country_exists = this
+        bfl_is_company = yes is_subject_of = root } }
+        effect = { if = { limit = { exists = scope:company scope:company = { country_exists = this
+        bfl_is_company = yes is_subject_of = root } }
+            set_variable = { name = bfl_selected_company value = scope:company } } } }
+bfl_selected_company_pause = { scope = country is_shown = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } }
+            is_valid = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  } effect = { if = { limit = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  }
+                save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 0 }
+                var:bfl_selected_company = { bfl_company_set_mandate = yes } } } }
+bfl_selected_company_trade = { scope = country is_shown = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } }
+            is_valid = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  } effect = { if = { limit = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  }
+                save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 1 }
+                var:bfl_selected_company = { bfl_company_set_mandate = yes } } } }
+bfl_selected_company_explore = { scope = country is_shown = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } }
+            is_valid = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  } effect = { if = { limit = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }  }
+                save_scope_as = bfl_company_actor set_variable = { name = bfl_company_requested_mandate value = 2 }
+                var:bfl_selected_company = { bfl_company_set_mandate = yes } } } }
+bfl_selected_company_fund = { scope = country is_shown = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } }
+            is_valid = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } gold >= 100 } effect = { if = { limit = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } gold >= 100 }
+                save_scope_as = bfl_company_actor
+                var:bfl_selected_company = { bfl_company_capitalize = yes } } } }
+bfl_selected_company_crew = { scope = country is_shown = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } }
+            is_valid = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } sailors >= 0.25 var:bfl_selected_company = {
+            var:bfl_company_mandate = 2 max_sailors >= 0.25 sailors <= { value = max_sailors subtract = 0.25 } } } effect = { if = { limit = { exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev } sailors >= 0.25 var:bfl_selected_company = {
+            var:bfl_company_mandate = 2 max_sailors >= 0.25 sailors <= { value = max_sailors subtract = 0.25 } } }
+                save_scope_as = bfl_company_actor
+                var:bfl_selected_company = { bfl_company_provide_crew = yes } } } }

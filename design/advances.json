@@ -7,7 +7,7 @@
   {"id":"commenda","age":3,"profile":2,"native_requires":["basic_financial_instruments"],"requires":[]},
   {"id":"corporate_credit","age":4,"profile":1,"requires":["debt_restructuring"]},
   {"id":"company_equity","age":4,"profile":2,"requires":["commenda"]},
-  {"id":"bank_share_dealing","age":4,"profile":0,"native_requires":["banking_advance"],"requires":[]},
+  {"id":"bank_share_dealing","age":4,"profile":0,"native_requires":["banking_advance"],"requires":[],"retired":true},
   {"id":"collateralization","age":5,"profile":0,"requires":["debt_restructuring"]},
   {"id":"warehouse_receipts","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},
   {"id":"commodity_forwards","age":5,"profile":1,"requires":["commodity_investments","collateralization"]},

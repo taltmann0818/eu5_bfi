@@ -454,9 +454,15 @@ bfl_initialize_resolution = yes
 }
 bfl_resolution_pay_01 = {
 if = { limit = { var:bfl_dep_01_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_01_recovery_held add = { value = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_01_recovery_held value = { value = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_01_recovery_held add = { value = var:bfl_dep_01_principal add = var:bfl_dep_01_interest_due
         subtract = var:bfl_dep_01_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_01_active = 1 exists = var:bfl_dep_01_party var:bfl_dep_01_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_01_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_01_pool } }
@@ -482,9 +488,15 @@ if = { limit = { var:bfl_dep_01_active = 1 exists = var:bfl_dep_01_party var:bfl
 }
 bfl_resolution_pay_02 = {
 if = { limit = { var:bfl_dep_02_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_02_recovery_held add = { value = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_02_recovery_held value = { value = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_02_recovery_held add = { value = var:bfl_dep_02_principal add = var:bfl_dep_02_interest_due
         subtract = var:bfl_dep_02_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_02_active = 1 exists = var:bfl_dep_02_party var:bfl_dep_02_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_02_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_02_pool } }
@@ -510,9 +522,15 @@ if = { limit = { var:bfl_dep_02_active = 1 exists = var:bfl_dep_02_party var:bfl
 }
 bfl_resolution_pay_03 = {
 if = { limit = { var:bfl_dep_03_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_03_recovery_held add = { value = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_03_recovery_held value = { value = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_03_recovery_held add = { value = var:bfl_dep_03_principal add = var:bfl_dep_03_interest_due
         subtract = var:bfl_dep_03_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_03_active = 1 exists = var:bfl_dep_03_party var:bfl_dep_03_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_03_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_03_pool } }
@@ -538,9 +556,15 @@ if = { limit = { var:bfl_dep_03_active = 1 exists = var:bfl_dep_03_party var:bfl
 }
 bfl_resolution_pay_04 = {
 if = { limit = { var:bfl_dep_04_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_04_recovery_held add = { value = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_04_recovery_held value = { value = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_04_recovery_held add = { value = var:bfl_dep_04_principal add = var:bfl_dep_04_interest_due
         subtract = var:bfl_dep_04_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_04_active = 1 exists = var:bfl_dep_04_party var:bfl_dep_04_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_04_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_04_pool } }
@@ -566,9 +590,15 @@ if = { limit = { var:bfl_dep_04_active = 1 exists = var:bfl_dep_04_party var:bfl
 }
 bfl_resolution_pay_05 = {
 if = { limit = { var:bfl_dep_05_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_05_recovery_held add = { value = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_05_recovery_held value = { value = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_05_recovery_held add = { value = var:bfl_dep_05_principal add = var:bfl_dep_05_interest_due
         subtract = var:bfl_dep_05_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_05_active = 1 exists = var:bfl_dep_05_party var:bfl_dep_05_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_05_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_05_pool } }
@@ -594,9 +624,15 @@ if = { limit = { var:bfl_dep_05_active = 1 exists = var:bfl_dep_05_party var:bfl
 }
 bfl_resolution_pay_06 = {
 if = { limit = { var:bfl_dep_06_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_06_recovery_held add = { value = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_06_recovery_held value = { value = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_06_recovery_held add = { value = var:bfl_dep_06_principal add = var:bfl_dep_06_interest_due
         subtract = var:bfl_dep_06_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_06_active = 1 exists = var:bfl_dep_06_party var:bfl_dep_06_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_06_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_06_pool } }
@@ -622,9 +658,15 @@ if = { limit = { var:bfl_dep_06_active = 1 exists = var:bfl_dep_06_party var:bfl
 }
 bfl_resolution_pay_07 = {
 if = { limit = { var:bfl_dep_07_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_07_recovery_held add = { value = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_07_recovery_held value = { value = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_07_recovery_held add = { value = var:bfl_dep_07_principal add = var:bfl_dep_07_interest_due
         subtract = var:bfl_dep_07_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_07_active = 1 exists = var:bfl_dep_07_party var:bfl_dep_07_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_07_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_07_pool } }
@@ -650,9 +692,15 @@ if = { limit = { var:bfl_dep_07_active = 1 exists = var:bfl_dep_07_party var:bfl
 }
 bfl_resolution_pay_08 = {
 if = { limit = { var:bfl_dep_08_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_08_recovery_held add = { value = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_08_recovery_held value = { value = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_08_recovery_held add = { value = var:bfl_dep_08_principal add = var:bfl_dep_08_interest_due
         subtract = var:bfl_dep_08_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_08_active = 1 exists = var:bfl_dep_08_party var:bfl_dep_08_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_08_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_08_pool } }
@@ -678,9 +726,15 @@ if = { limit = { var:bfl_dep_08_active = 1 exists = var:bfl_dep_08_party var:bfl
 }
 bfl_resolution_pay_09 = {
 if = { limit = { var:bfl_dep_09_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_09_recovery_held add = { value = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_09_recovery_held value = { value = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_09_recovery_held add = { value = var:bfl_dep_09_principal add = var:bfl_dep_09_interest_due
         subtract = var:bfl_dep_09_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_09_active = 1 exists = var:bfl_dep_09_party var:bfl_dep_09_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_09_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_09_pool } }
@@ -706,9 +760,15 @@ if = { limit = { var:bfl_dep_09_active = 1 exists = var:bfl_dep_09_party var:bfl
 }
 bfl_resolution_pay_10 = {
 if = { limit = { var:bfl_dep_10_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_10_recovery_held add = { value = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_10_recovery_held value = { value = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_10_recovery_held add = { value = var:bfl_dep_10_principal add = var:bfl_dep_10_interest_due
         subtract = var:bfl_dep_10_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_10_active = 1 exists = var:bfl_dep_10_party var:bfl_dep_10_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_10_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_10_pool } }
@@ -734,9 +794,15 @@ if = { limit = { var:bfl_dep_10_active = 1 exists = var:bfl_dep_10_party var:bfl
 }
 bfl_resolution_pay_11 = {
 if = { limit = { var:bfl_dep_11_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_11_recovery_held add = { value = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_11_recovery_held value = { value = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_11_recovery_held add = { value = var:bfl_dep_11_principal add = var:bfl_dep_11_interest_due
         subtract = var:bfl_dep_11_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_11_active = 1 exists = var:bfl_dep_11_party var:bfl_dep_11_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_11_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_11_pool } }
@@ -762,9 +828,15 @@ if = { limit = { var:bfl_dep_11_active = 1 exists = var:bfl_dep_11_party var:bfl
 }
 bfl_resolution_pay_12 = {
 if = { limit = { var:bfl_dep_12_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_12_recovery_held add = { value = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_12_recovery_held value = { value = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_12_recovery_held add = { value = var:bfl_dep_12_principal add = var:bfl_dep_12_interest_due
         subtract = var:bfl_dep_12_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_12_active = 1 exists = var:bfl_dep_12_party var:bfl_dep_12_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_12_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_12_pool } }
@@ -790,9 +862,15 @@ if = { limit = { var:bfl_dep_12_active = 1 exists = var:bfl_dep_12_party var:bfl
 }
 bfl_resolution_pay_13 = {
 if = { limit = { var:bfl_dep_13_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_13_recovery_held add = { value = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_13_recovery_held value = { value = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_13_recovery_held add = { value = var:bfl_dep_13_principal add = var:bfl_dep_13_interest_due
         subtract = var:bfl_dep_13_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_13_active = 1 exists = var:bfl_dep_13_party var:bfl_dep_13_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_13_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_13_pool } }
@@ -818,9 +896,15 @@ if = { limit = { var:bfl_dep_13_active = 1 exists = var:bfl_dep_13_party var:bfl
 }
 bfl_resolution_pay_14 = {
 if = { limit = { var:bfl_dep_14_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_14_recovery_held add = { value = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_14_recovery_held value = { value = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_14_recovery_held add = { value = var:bfl_dep_14_principal add = var:bfl_dep_14_interest_due
         subtract = var:bfl_dep_14_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_14_active = 1 exists = var:bfl_dep_14_party var:bfl_dep_14_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_14_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_14_pool } }
@@ -846,9 +930,15 @@ if = { limit = { var:bfl_dep_14_active = 1 exists = var:bfl_dep_14_party var:bfl
 }
 bfl_resolution_pay_15 = {
 if = { limit = { var:bfl_dep_15_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_15_recovery_held add = { value = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_15_recovery_held value = { value = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_15_recovery_held add = { value = var:bfl_dep_15_principal add = var:bfl_dep_15_interest_due
         subtract = var:bfl_dep_15_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_15_active = 1 exists = var:bfl_dep_15_party var:bfl_dep_15_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_15_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_15_pool } }
@@ -874,9 +964,15 @@ if = { limit = { var:bfl_dep_15_active = 1 exists = var:bfl_dep_15_party var:bfl
 }
 bfl_resolution_pay_16 = {
 if = { limit = { var:bfl_dep_16_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_16_recovery_held add = { value = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_16_recovery_held value = { value = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_16_recovery_held add = { value = var:bfl_dep_16_principal add = var:bfl_dep_16_interest_due
         subtract = var:bfl_dep_16_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_16_active = 1 exists = var:bfl_dep_16_party var:bfl_dep_16_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_16_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_16_pool } }
@@ -902,9 +998,15 @@ if = { limit = { var:bfl_dep_16_active = 1 exists = var:bfl_dep_16_party var:bfl
 }
 bfl_resolution_pay_17 = {
 if = { limit = { var:bfl_dep_17_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_17_recovery_held add = { value = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_17_recovery_held value = { value = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_17_recovery_held add = { value = var:bfl_dep_17_principal add = var:bfl_dep_17_interest_due
         subtract = var:bfl_dep_17_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_17_active = 1 exists = var:bfl_dep_17_party var:bfl_dep_17_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_17_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_17_pool } }
@@ -930,9 +1032,15 @@ if = { limit = { var:bfl_dep_17_active = 1 exists = var:bfl_dep_17_party var:bfl
 }
 bfl_resolution_pay_18 = {
 if = { limit = { var:bfl_dep_18_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_18_recovery_held add = { value = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_18_recovery_held value = { value = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_18_recovery_held add = { value = var:bfl_dep_18_principal add = var:bfl_dep_18_interest_due
         subtract = var:bfl_dep_18_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_18_active = 1 exists = var:bfl_dep_18_party var:bfl_dep_18_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_18_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_18_pool } }
@@ -958,9 +1066,15 @@ if = { limit = { var:bfl_dep_18_active = 1 exists = var:bfl_dep_18_party var:bfl
 }
 bfl_resolution_pay_19 = {
 if = { limit = { var:bfl_dep_19_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_19_recovery_held add = { value = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_19_recovery_held value = { value = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_19_recovery_held add = { value = var:bfl_dep_19_principal add = var:bfl_dep_19_interest_due
         subtract = var:bfl_dep_19_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_19_active = 1 exists = var:bfl_dep_19_party var:bfl_dep_19_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_19_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_19_pool } }
@@ -986,9 +1100,15 @@ if = { limit = { var:bfl_dep_19_active = 1 exists = var:bfl_dep_19_party var:bfl
 }
 bfl_resolution_pay_20 = {
 if = { limit = { var:bfl_dep_20_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_20_recovery_held add = { value = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_20_recovery_held value = { value = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_20_recovery_held add = { value = var:bfl_dep_20_principal add = var:bfl_dep_20_interest_due
         subtract = var:bfl_dep_20_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_20_active = 1 exists = var:bfl_dep_20_party var:bfl_dep_20_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_20_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_20_pool } }
@@ -1014,9 +1134,15 @@ if = { limit = { var:bfl_dep_20_active = 1 exists = var:bfl_dep_20_party var:bfl
 }
 bfl_resolution_pay_21 = {
 if = { limit = { var:bfl_dep_21_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_21_recovery_held add = { value = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_21_recovery_held value = { value = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_21_recovery_held add = { value = var:bfl_dep_21_principal add = var:bfl_dep_21_interest_due
         subtract = var:bfl_dep_21_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_21_active = 1 exists = var:bfl_dep_21_party var:bfl_dep_21_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_21_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_21_pool } }
@@ -1042,9 +1168,15 @@ if = { limit = { var:bfl_dep_21_active = 1 exists = var:bfl_dep_21_party var:bfl
 }
 bfl_resolution_pay_22 = {
 if = { limit = { var:bfl_dep_22_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_22_recovery_held add = { value = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_22_recovery_held value = { value = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_22_recovery_held add = { value = var:bfl_dep_22_principal add = var:bfl_dep_22_interest_due
         subtract = var:bfl_dep_22_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_22_active = 1 exists = var:bfl_dep_22_party var:bfl_dep_22_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_22_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_22_pool } }
@@ -1070,9 +1202,15 @@ if = { limit = { var:bfl_dep_22_active = 1 exists = var:bfl_dep_22_party var:bfl
 }
 bfl_resolution_pay_23 = {
 if = { limit = { var:bfl_dep_23_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_23_recovery_held add = { value = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_23_recovery_held value = { value = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_23_recovery_held add = { value = var:bfl_dep_23_principal add = var:bfl_dep_23_interest_due
         subtract = var:bfl_dep_23_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_23_active = 1 exists = var:bfl_dep_23_party var:bfl_dep_23_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_23_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_23_pool } }
@@ -1098,9 +1236,15 @@ if = { limit = { var:bfl_dep_23_active = 1 exists = var:bfl_dep_23_party var:bfl
 }
 bfl_resolution_pay_24 = {
 if = { limit = { var:bfl_dep_24_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_24_recovery_held add = { value = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_24_recovery_held value = { value = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_24_recovery_held add = { value = var:bfl_dep_24_principal add = var:bfl_dep_24_interest_due
         subtract = var:bfl_dep_24_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_24_active = 1 exists = var:bfl_dep_24_party var:bfl_dep_24_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_24_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_24_pool } }
@@ -1126,9 +1270,15 @@ if = { limit = { var:bfl_dep_24_active = 1 exists = var:bfl_dep_24_party var:bfl
 }
 bfl_resolution_pay_25 = {
 if = { limit = { var:bfl_dep_25_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_25_recovery_held add = { value = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_25_recovery_held value = { value = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_25_recovery_held add = { value = var:bfl_dep_25_principal add = var:bfl_dep_25_interest_due
         subtract = var:bfl_dep_25_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_25_active = 1 exists = var:bfl_dep_25_party var:bfl_dep_25_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_25_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_25_pool } }
@@ -1154,9 +1304,15 @@ if = { limit = { var:bfl_dep_25_active = 1 exists = var:bfl_dep_25_party var:bfl
 }
 bfl_resolution_pay_26 = {
 if = { limit = { var:bfl_dep_26_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_26_recovery_held add = { value = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_26_recovery_held value = { value = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_26_recovery_held add = { value = var:bfl_dep_26_principal add = var:bfl_dep_26_interest_due
         subtract = var:bfl_dep_26_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_26_active = 1 exists = var:bfl_dep_26_party var:bfl_dep_26_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_26_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_26_pool } }
@@ -1182,9 +1338,15 @@ if = { limit = { var:bfl_dep_26_active = 1 exists = var:bfl_dep_26_party var:bfl
 }
 bfl_resolution_pay_27 = {
 if = { limit = { var:bfl_dep_27_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_27_recovery_held add = { value = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_27_recovery_held value = { value = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_27_recovery_held add = { value = var:bfl_dep_27_principal add = var:bfl_dep_27_interest_due
         subtract = var:bfl_dep_27_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_27_active = 1 exists = var:bfl_dep_27_party var:bfl_dep_27_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_27_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_27_pool } }
@@ -1210,9 +1372,15 @@ if = { limit = { var:bfl_dep_27_active = 1 exists = var:bfl_dep_27_party var:bfl
 }
 bfl_resolution_pay_28 = {
 if = { limit = { var:bfl_dep_28_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_28_recovery_held add = { value = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_28_recovery_held value = { value = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_28_recovery_held add = { value = var:bfl_dep_28_principal add = var:bfl_dep_28_interest_due
         subtract = var:bfl_dep_28_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_28_active = 1 exists = var:bfl_dep_28_party var:bfl_dep_28_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_28_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_28_pool } }
@@ -1238,9 +1406,15 @@ if = { limit = { var:bfl_dep_28_active = 1 exists = var:bfl_dep_28_party var:bfl
 }
 bfl_resolution_pay_29 = {
 if = { limit = { var:bfl_dep_29_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_29_recovery_held add = { value = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_29_recovery_held value = { value = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_29_recovery_held add = { value = var:bfl_dep_29_principal add = var:bfl_dep_29_interest_due
         subtract = var:bfl_dep_29_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_29_active = 1 exists = var:bfl_dep_29_party var:bfl_dep_29_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_29_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_29_pool } }
@@ -1266,9 +1440,15 @@ if = { limit = { var:bfl_dep_29_active = 1 exists = var:bfl_dep_29_party var:bfl
 }
 bfl_resolution_pay_30 = {
 if = { limit = { var:bfl_dep_30_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_30_recovery_held add = { value = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_30_recovery_held value = { value = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_30_recovery_held add = { value = var:bfl_dep_30_principal add = var:bfl_dep_30_interest_due
         subtract = var:bfl_dep_30_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_30_active = 1 exists = var:bfl_dep_30_party var:bfl_dep_30_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_30_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_30_pool } }
@@ -1294,9 +1474,15 @@ if = { limit = { var:bfl_dep_30_active = 1 exists = var:bfl_dep_30_party var:bfl
 }
 bfl_resolution_pay_31 = {
 if = { limit = { var:bfl_dep_31_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_31_recovery_held add = { value = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_31_recovery_held value = { value = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_31_recovery_held add = { value = var:bfl_dep_31_principal add = var:bfl_dep_31_interest_due
         subtract = var:bfl_dep_31_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_31_active = 1 exists = var:bfl_dep_31_party var:bfl_dep_31_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_31_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_31_pool } }
@@ -1322,9 +1508,15 @@ if = { limit = { var:bfl_dep_31_active = 1 exists = var:bfl_dep_31_party var:bfl
 }
 bfl_resolution_pay_32 = {
 if = { limit = { var:bfl_dep_32_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_dep_32_recovery_held add = { value = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due
+    # Full funding pays the exact native fixed-point claim. Cent
+    # rounding applies only to a partial, proportional recovery.
+    # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_dep_32_recovery_held value = { value = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due } }
+    }
+    else = { change_variable = { name = bfl_dep_32_recovery_held add = { value = var:bfl_dep_32_principal add = var:bfl_dep_32_interest_due
         subtract = var:bfl_dep_32_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_dep_32_active = 1 exists = var:bfl_dep_32_party var:bfl_dep_32_party = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
     var:bfl_dep_32_party = { set_variable = { name = bfl_pool value = scope:bfl_resolution_bank.var:bfl_dep_32_pool } }
@@ -1350,9 +1542,12 @@ if = { limit = { var:bfl_dep_32_active = 1 exists = var:bfl_dep_32_party var:bfl
 }
 bfl_resolution_pay_bond_01 = {
 if = { limit = { var:bfl_bnd_01_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_01_recovery_held add = { value = var:bfl_bnd_01_face add = var:bfl_bnd_01_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_01_recovery_held value = { value = var:bfl_bnd_01_face add = var:bfl_bnd_01_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_01_recovery_held add = { value = var:bfl_bnd_01_face add = var:bfl_bnd_01_due
         subtract = var:bfl_bnd_01_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_01_active ?= 1 var:bfl_bnd_01_recovery_held > 0 exists = var:bfl_bnd_01_holder
     var:bfl_bnd_01_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1379,9 +1574,12 @@ if = { limit = { var:bfl_bnd_01_active ?= 1 var:bfl_bnd_01_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_02 = {
 if = { limit = { var:bfl_bnd_02_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_02_recovery_held add = { value = var:bfl_bnd_02_face add = var:bfl_bnd_02_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_02_recovery_held value = { value = var:bfl_bnd_02_face add = var:bfl_bnd_02_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_02_recovery_held add = { value = var:bfl_bnd_02_face add = var:bfl_bnd_02_due
         subtract = var:bfl_bnd_02_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_02_active ?= 1 var:bfl_bnd_02_recovery_held > 0 exists = var:bfl_bnd_02_holder
     var:bfl_bnd_02_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1408,9 +1606,12 @@ if = { limit = { var:bfl_bnd_02_active ?= 1 var:bfl_bnd_02_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_03 = {
 if = { limit = { var:bfl_bnd_03_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_03_recovery_held add = { value = var:bfl_bnd_03_face add = var:bfl_bnd_03_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_03_recovery_held value = { value = var:bfl_bnd_03_face add = var:bfl_bnd_03_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_03_recovery_held add = { value = var:bfl_bnd_03_face add = var:bfl_bnd_03_due
         subtract = var:bfl_bnd_03_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_03_active ?= 1 var:bfl_bnd_03_recovery_held > 0 exists = var:bfl_bnd_03_holder
     var:bfl_bnd_03_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1437,9 +1638,12 @@ if = { limit = { var:bfl_bnd_03_active ?= 1 var:bfl_bnd_03_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_04 = {
 if = { limit = { var:bfl_bnd_04_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_04_recovery_held add = { value = var:bfl_bnd_04_face add = var:bfl_bnd_04_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_04_recovery_held value = { value = var:bfl_bnd_04_face add = var:bfl_bnd_04_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_04_recovery_held add = { value = var:bfl_bnd_04_face add = var:bfl_bnd_04_due
         subtract = var:bfl_bnd_04_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_04_active ?= 1 var:bfl_bnd_04_recovery_held > 0 exists = var:bfl_bnd_04_holder
     var:bfl_bnd_04_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1466,9 +1670,12 @@ if = { limit = { var:bfl_bnd_04_active ?= 1 var:bfl_bnd_04_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_05 = {
 if = { limit = { var:bfl_bnd_05_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_05_recovery_held add = { value = var:bfl_bnd_05_face add = var:bfl_bnd_05_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_05_recovery_held value = { value = var:bfl_bnd_05_face add = var:bfl_bnd_05_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_05_recovery_held add = { value = var:bfl_bnd_05_face add = var:bfl_bnd_05_due
         subtract = var:bfl_bnd_05_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_05_active ?= 1 var:bfl_bnd_05_recovery_held > 0 exists = var:bfl_bnd_05_holder
     var:bfl_bnd_05_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1495,9 +1702,12 @@ if = { limit = { var:bfl_bnd_05_active ?= 1 var:bfl_bnd_05_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_06 = {
 if = { limit = { var:bfl_bnd_06_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_06_recovery_held add = { value = var:bfl_bnd_06_face add = var:bfl_bnd_06_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_06_recovery_held value = { value = var:bfl_bnd_06_face add = var:bfl_bnd_06_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_06_recovery_held add = { value = var:bfl_bnd_06_face add = var:bfl_bnd_06_due
         subtract = var:bfl_bnd_06_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_06_active ?= 1 var:bfl_bnd_06_recovery_held > 0 exists = var:bfl_bnd_06_holder
     var:bfl_bnd_06_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1524,9 +1734,12 @@ if = { limit = { var:bfl_bnd_06_active ?= 1 var:bfl_bnd_06_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_07 = {
 if = { limit = { var:bfl_bnd_07_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_07_recovery_held add = { value = var:bfl_bnd_07_face add = var:bfl_bnd_07_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_07_recovery_held value = { value = var:bfl_bnd_07_face add = var:bfl_bnd_07_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_07_recovery_held add = { value = var:bfl_bnd_07_face add = var:bfl_bnd_07_due
         subtract = var:bfl_bnd_07_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_07_active ?= 1 var:bfl_bnd_07_recovery_held > 0 exists = var:bfl_bnd_07_holder
     var:bfl_bnd_07_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1553,9 +1766,12 @@ if = { limit = { var:bfl_bnd_07_active ?= 1 var:bfl_bnd_07_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_08 = {
 if = { limit = { var:bfl_bnd_08_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_08_recovery_held add = { value = var:bfl_bnd_08_face add = var:bfl_bnd_08_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_08_recovery_held value = { value = var:bfl_bnd_08_face add = var:bfl_bnd_08_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_08_recovery_held add = { value = var:bfl_bnd_08_face add = var:bfl_bnd_08_due
         subtract = var:bfl_bnd_08_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_08_active ?= 1 var:bfl_bnd_08_recovery_held > 0 exists = var:bfl_bnd_08_holder
     var:bfl_bnd_08_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1582,9 +1798,12 @@ if = { limit = { var:bfl_bnd_08_active ?= 1 var:bfl_bnd_08_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_09 = {
 if = { limit = { var:bfl_bnd_09_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_09_recovery_held add = { value = var:bfl_bnd_09_face add = var:bfl_bnd_09_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_09_recovery_held value = { value = var:bfl_bnd_09_face add = var:bfl_bnd_09_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_09_recovery_held add = { value = var:bfl_bnd_09_face add = var:bfl_bnd_09_due
         subtract = var:bfl_bnd_09_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_09_active ?= 1 var:bfl_bnd_09_recovery_held > 0 exists = var:bfl_bnd_09_holder
     var:bfl_bnd_09_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1611,9 +1830,12 @@ if = { limit = { var:bfl_bnd_09_active ?= 1 var:bfl_bnd_09_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_10 = {
 if = { limit = { var:bfl_bnd_10_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_10_recovery_held add = { value = var:bfl_bnd_10_face add = var:bfl_bnd_10_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_10_recovery_held value = { value = var:bfl_bnd_10_face add = var:bfl_bnd_10_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_10_recovery_held add = { value = var:bfl_bnd_10_face add = var:bfl_bnd_10_due
         subtract = var:bfl_bnd_10_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_10_active ?= 1 var:bfl_bnd_10_recovery_held > 0 exists = var:bfl_bnd_10_holder
     var:bfl_bnd_10_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1640,9 +1862,12 @@ if = { limit = { var:bfl_bnd_10_active ?= 1 var:bfl_bnd_10_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_11 = {
 if = { limit = { var:bfl_bnd_11_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_11_recovery_held add = { value = var:bfl_bnd_11_face add = var:bfl_bnd_11_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_11_recovery_held value = { value = var:bfl_bnd_11_face add = var:bfl_bnd_11_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_11_recovery_held add = { value = var:bfl_bnd_11_face add = var:bfl_bnd_11_due
         subtract = var:bfl_bnd_11_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_11_active ?= 1 var:bfl_bnd_11_recovery_held > 0 exists = var:bfl_bnd_11_holder
     var:bfl_bnd_11_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1669,9 +1894,12 @@ if = { limit = { var:bfl_bnd_11_active ?= 1 var:bfl_bnd_11_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_12 = {
 if = { limit = { var:bfl_bnd_12_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_12_recovery_held add = { value = var:bfl_bnd_12_face add = var:bfl_bnd_12_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_12_recovery_held value = { value = var:bfl_bnd_12_face add = var:bfl_bnd_12_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_12_recovery_held add = { value = var:bfl_bnd_12_face add = var:bfl_bnd_12_due
         subtract = var:bfl_bnd_12_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_12_active ?= 1 var:bfl_bnd_12_recovery_held > 0 exists = var:bfl_bnd_12_holder
     var:bfl_bnd_12_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1698,9 +1926,12 @@ if = { limit = { var:bfl_bnd_12_active ?= 1 var:bfl_bnd_12_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_13 = {
 if = { limit = { var:bfl_bnd_13_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_13_recovery_held add = { value = var:bfl_bnd_13_face add = var:bfl_bnd_13_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_13_recovery_held value = { value = var:bfl_bnd_13_face add = var:bfl_bnd_13_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_13_recovery_held add = { value = var:bfl_bnd_13_face add = var:bfl_bnd_13_due
         subtract = var:bfl_bnd_13_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_13_active ?= 1 var:bfl_bnd_13_recovery_held > 0 exists = var:bfl_bnd_13_holder
     var:bfl_bnd_13_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1727,9 +1958,12 @@ if = { limit = { var:bfl_bnd_13_active ?= 1 var:bfl_bnd_13_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_14 = {
 if = { limit = { var:bfl_bnd_14_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_14_recovery_held add = { value = var:bfl_bnd_14_face add = var:bfl_bnd_14_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_14_recovery_held value = { value = var:bfl_bnd_14_face add = var:bfl_bnd_14_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_14_recovery_held add = { value = var:bfl_bnd_14_face add = var:bfl_bnd_14_due
         subtract = var:bfl_bnd_14_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_14_active ?= 1 var:bfl_bnd_14_recovery_held > 0 exists = var:bfl_bnd_14_holder
     var:bfl_bnd_14_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1756,9 +1990,12 @@ if = { limit = { var:bfl_bnd_14_active ?= 1 var:bfl_bnd_14_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_15 = {
 if = { limit = { var:bfl_bnd_15_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_15_recovery_held add = { value = var:bfl_bnd_15_face add = var:bfl_bnd_15_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_15_recovery_held value = { value = var:bfl_bnd_15_face add = var:bfl_bnd_15_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_15_recovery_held add = { value = var:bfl_bnd_15_face add = var:bfl_bnd_15_due
         subtract = var:bfl_bnd_15_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_15_active ?= 1 var:bfl_bnd_15_recovery_held > 0 exists = var:bfl_bnd_15_holder
     var:bfl_bnd_15_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1785,9 +2022,12 @@ if = { limit = { var:bfl_bnd_15_active ?= 1 var:bfl_bnd_15_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_16 = {
 if = { limit = { var:bfl_bnd_16_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_16_recovery_held add = { value = var:bfl_bnd_16_face add = var:bfl_bnd_16_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_16_recovery_held value = { value = var:bfl_bnd_16_face add = var:bfl_bnd_16_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_16_recovery_held add = { value = var:bfl_bnd_16_face add = var:bfl_bnd_16_due
         subtract = var:bfl_bnd_16_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_16_active ?= 1 var:bfl_bnd_16_recovery_held > 0 exists = var:bfl_bnd_16_holder
     var:bfl_bnd_16_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1814,9 +2054,12 @@ if = { limit = { var:bfl_bnd_16_active ?= 1 var:bfl_bnd_16_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_17 = {
 if = { limit = { var:bfl_bnd_17_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_17_recovery_held add = { value = var:bfl_bnd_17_face add = var:bfl_bnd_17_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_17_recovery_held value = { value = var:bfl_bnd_17_face add = var:bfl_bnd_17_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_17_recovery_held add = { value = var:bfl_bnd_17_face add = var:bfl_bnd_17_due
         subtract = var:bfl_bnd_17_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_17_active ?= 1 var:bfl_bnd_17_recovery_held > 0 exists = var:bfl_bnd_17_holder
     var:bfl_bnd_17_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1843,9 +2086,12 @@ if = { limit = { var:bfl_bnd_17_active ?= 1 var:bfl_bnd_17_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_18 = {
 if = { limit = { var:bfl_bnd_18_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_18_recovery_held add = { value = var:bfl_bnd_18_face add = var:bfl_bnd_18_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_18_recovery_held value = { value = var:bfl_bnd_18_face add = var:bfl_bnd_18_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_18_recovery_held add = { value = var:bfl_bnd_18_face add = var:bfl_bnd_18_due
         subtract = var:bfl_bnd_18_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_18_active ?= 1 var:bfl_bnd_18_recovery_held > 0 exists = var:bfl_bnd_18_holder
     var:bfl_bnd_18_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1872,9 +2118,12 @@ if = { limit = { var:bfl_bnd_18_active ?= 1 var:bfl_bnd_18_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_19 = {
 if = { limit = { var:bfl_bnd_19_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_19_recovery_held add = { value = var:bfl_bnd_19_face add = var:bfl_bnd_19_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_19_recovery_held value = { value = var:bfl_bnd_19_face add = var:bfl_bnd_19_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_19_recovery_held add = { value = var:bfl_bnd_19_face add = var:bfl_bnd_19_due
         subtract = var:bfl_bnd_19_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_19_active ?= 1 var:bfl_bnd_19_recovery_held > 0 exists = var:bfl_bnd_19_holder
     var:bfl_bnd_19_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1901,9 +2150,12 @@ if = { limit = { var:bfl_bnd_19_active ?= 1 var:bfl_bnd_19_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_20 = {
 if = { limit = { var:bfl_bnd_20_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_20_recovery_held add = { value = var:bfl_bnd_20_face add = var:bfl_bnd_20_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_20_recovery_held value = { value = var:bfl_bnd_20_face add = var:bfl_bnd_20_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_20_recovery_held add = { value = var:bfl_bnd_20_face add = var:bfl_bnd_20_due
         subtract = var:bfl_bnd_20_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_20_active ?= 1 var:bfl_bnd_20_recovery_held > 0 exists = var:bfl_bnd_20_holder
     var:bfl_bnd_20_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1930,9 +2182,12 @@ if = { limit = { var:bfl_bnd_20_active ?= 1 var:bfl_bnd_20_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_21 = {
 if = { limit = { var:bfl_bnd_21_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_21_recovery_held add = { value = var:bfl_bnd_21_face add = var:bfl_bnd_21_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_21_recovery_held value = { value = var:bfl_bnd_21_face add = var:bfl_bnd_21_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_21_recovery_held add = { value = var:bfl_bnd_21_face add = var:bfl_bnd_21_due
         subtract = var:bfl_bnd_21_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_21_active ?= 1 var:bfl_bnd_21_recovery_held > 0 exists = var:bfl_bnd_21_holder
     var:bfl_bnd_21_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1959,9 +2214,12 @@ if = { limit = { var:bfl_bnd_21_active ?= 1 var:bfl_bnd_21_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_22 = {
 if = { limit = { var:bfl_bnd_22_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_22_recovery_held add = { value = var:bfl_bnd_22_face add = var:bfl_bnd_22_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_22_recovery_held value = { value = var:bfl_bnd_22_face add = var:bfl_bnd_22_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_22_recovery_held add = { value = var:bfl_bnd_22_face add = var:bfl_bnd_22_due
         subtract = var:bfl_bnd_22_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_22_active ?= 1 var:bfl_bnd_22_recovery_held > 0 exists = var:bfl_bnd_22_holder
     var:bfl_bnd_22_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -1988,9 +2246,12 @@ if = { limit = { var:bfl_bnd_22_active ?= 1 var:bfl_bnd_22_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_23 = {
 if = { limit = { var:bfl_bnd_23_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_23_recovery_held add = { value = var:bfl_bnd_23_face add = var:bfl_bnd_23_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_23_recovery_held value = { value = var:bfl_bnd_23_face add = var:bfl_bnd_23_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_23_recovery_held add = { value = var:bfl_bnd_23_face add = var:bfl_bnd_23_due
         subtract = var:bfl_bnd_23_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_23_active ?= 1 var:bfl_bnd_23_recovery_held > 0 exists = var:bfl_bnd_23_holder
     var:bfl_bnd_23_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2017,9 +2278,12 @@ if = { limit = { var:bfl_bnd_23_active ?= 1 var:bfl_bnd_23_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_24 = {
 if = { limit = { var:bfl_bnd_24_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_24_recovery_held add = { value = var:bfl_bnd_24_face add = var:bfl_bnd_24_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_24_recovery_held value = { value = var:bfl_bnd_24_face add = var:bfl_bnd_24_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_24_recovery_held add = { value = var:bfl_bnd_24_face add = var:bfl_bnd_24_due
         subtract = var:bfl_bnd_24_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_24_active ?= 1 var:bfl_bnd_24_recovery_held > 0 exists = var:bfl_bnd_24_holder
     var:bfl_bnd_24_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2046,9 +2310,12 @@ if = { limit = { var:bfl_bnd_24_active ?= 1 var:bfl_bnd_24_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_25 = {
 if = { limit = { var:bfl_bnd_25_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_25_recovery_held add = { value = var:bfl_bnd_25_face add = var:bfl_bnd_25_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_25_recovery_held value = { value = var:bfl_bnd_25_face add = var:bfl_bnd_25_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_25_recovery_held add = { value = var:bfl_bnd_25_face add = var:bfl_bnd_25_due
         subtract = var:bfl_bnd_25_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_25_active ?= 1 var:bfl_bnd_25_recovery_held > 0 exists = var:bfl_bnd_25_holder
     var:bfl_bnd_25_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2075,9 +2342,12 @@ if = { limit = { var:bfl_bnd_25_active ?= 1 var:bfl_bnd_25_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_26 = {
 if = { limit = { var:bfl_bnd_26_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_26_recovery_held add = { value = var:bfl_bnd_26_face add = var:bfl_bnd_26_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_26_recovery_held value = { value = var:bfl_bnd_26_face add = var:bfl_bnd_26_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_26_recovery_held add = { value = var:bfl_bnd_26_face add = var:bfl_bnd_26_due
         subtract = var:bfl_bnd_26_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_26_active ?= 1 var:bfl_bnd_26_recovery_held > 0 exists = var:bfl_bnd_26_holder
     var:bfl_bnd_26_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2104,9 +2374,12 @@ if = { limit = { var:bfl_bnd_26_active ?= 1 var:bfl_bnd_26_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_27 = {
 if = { limit = { var:bfl_bnd_27_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_27_recovery_held add = { value = var:bfl_bnd_27_face add = var:bfl_bnd_27_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_27_recovery_held value = { value = var:bfl_bnd_27_face add = var:bfl_bnd_27_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_27_recovery_held add = { value = var:bfl_bnd_27_face add = var:bfl_bnd_27_due
         subtract = var:bfl_bnd_27_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_27_active ?= 1 var:bfl_bnd_27_recovery_held > 0 exists = var:bfl_bnd_27_holder
     var:bfl_bnd_27_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2133,9 +2406,12 @@ if = { limit = { var:bfl_bnd_27_active ?= 1 var:bfl_bnd_27_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_28 = {
 if = { limit = { var:bfl_bnd_28_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_28_recovery_held add = { value = var:bfl_bnd_28_face add = var:bfl_bnd_28_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_28_recovery_held value = { value = var:bfl_bnd_28_face add = var:bfl_bnd_28_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_28_recovery_held add = { value = var:bfl_bnd_28_face add = var:bfl_bnd_28_due
         subtract = var:bfl_bnd_28_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_28_active ?= 1 var:bfl_bnd_28_recovery_held > 0 exists = var:bfl_bnd_28_holder
     var:bfl_bnd_28_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2162,9 +2438,12 @@ if = { limit = { var:bfl_bnd_28_active ?= 1 var:bfl_bnd_28_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_29 = {
 if = { limit = { var:bfl_bnd_29_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_29_recovery_held add = { value = var:bfl_bnd_29_face add = var:bfl_bnd_29_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_29_recovery_held value = { value = var:bfl_bnd_29_face add = var:bfl_bnd_29_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_29_recovery_held add = { value = var:bfl_bnd_29_face add = var:bfl_bnd_29_due
         subtract = var:bfl_bnd_29_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_29_active ?= 1 var:bfl_bnd_29_recovery_held > 0 exists = var:bfl_bnd_29_holder
     var:bfl_bnd_29_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2191,9 +2470,12 @@ if = { limit = { var:bfl_bnd_29_active ?= 1 var:bfl_bnd_29_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_30 = {
 if = { limit = { var:bfl_bnd_30_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_30_recovery_held add = { value = var:bfl_bnd_30_face add = var:bfl_bnd_30_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_30_recovery_held value = { value = var:bfl_bnd_30_face add = var:bfl_bnd_30_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_30_recovery_held add = { value = var:bfl_bnd_30_face add = var:bfl_bnd_30_due
         subtract = var:bfl_bnd_30_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_30_active ?= 1 var:bfl_bnd_30_recovery_held > 0 exists = var:bfl_bnd_30_holder
     var:bfl_bnd_30_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2220,9 +2502,12 @@ if = { limit = { var:bfl_bnd_30_active ?= 1 var:bfl_bnd_30_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_31 = {
 if = { limit = { var:bfl_bnd_31_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_31_recovery_held add = { value = var:bfl_bnd_31_face add = var:bfl_bnd_31_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_31_recovery_held value = { value = var:bfl_bnd_31_face add = var:bfl_bnd_31_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_31_recovery_held add = { value = var:bfl_bnd_31_face add = var:bfl_bnd_31_due
         subtract = var:bfl_bnd_31_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_31_active ?= 1 var:bfl_bnd_31_recovery_held > 0 exists = var:bfl_bnd_31_holder
     var:bfl_bnd_31_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }
@@ -2249,9 +2534,12 @@ if = { limit = { var:bfl_bnd_31_active ?= 1 var:bfl_bnd_31_recovery_held > 0 exi
 }
 bfl_resolution_pay_bond_32 = {
 if = { limit = { var:bfl_bnd_32_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }
-    change_variable = { name = bfl_bnd_32_recovery_held add = { value = var:bfl_bnd_32_face add = var:bfl_bnd_32_due
+    if = { limit = { var:bfl_resolution_budget >= var:bfl_resolution_pool }
+        set_variable = { name = bfl_bnd_32_recovery_held value = { value = var:bfl_bnd_32_face add = var:bfl_bnd_32_due } }
+    }
+    else = { change_variable = { name = bfl_bnd_32_recovery_held add = { value = var:bfl_bnd_32_face add = var:bfl_bnd_32_due
         subtract = var:bfl_bnd_32_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-        multiply = 100 floor = yes divide = 100 } } }
+        multiply = 100 floor = yes divide = 100 } } } }
 if = { limit = { var:bfl_bnd_32_active ?= 1 var:bfl_bnd_32_recovery_held > 0 exists = var:bfl_bnd_32_holder
     var:bfl_bnd_32_holder = { bfl_financial_recipient = yes }
     gold >= { value = bfl_resolution_other_reserves add = bfl_resolution_held } }

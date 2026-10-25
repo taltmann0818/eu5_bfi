@@ -12,7 +12,9 @@ def generate(common, effect, loc, write):
             select_trigger = {{ looking_for_a = country target_flag = bfl_deposit_target name = choose_country
                 column = {{ data = country_diplomacy_info_loan }}
                 visible = {{ bfl_is_bank = yes NOT = {{ this = scope:actor }} }}
-                enabled = {{ bfl_can_originate_{gate} = yes var:bfl_accept_deposits = 1
+                enabled = {{ custom_tooltip = {{ text = bfl_deposit_business_reason bfl_can_originate_{gate} = yes }}
+                    custom_tooltip = {{ text = bfl_deposit_closed_reason var:bfl_accept_deposits = 1 }}
+                    bfl_branch_access = {{ PARTY = scope:actor }}
                     OR = {{ AND = {{ bfl_has_valid_controller = yes overlord = scope:actor }}
                         AND = {{ bfl_is_independent_bank = yes opinion = {{ target = scope:actor value >= 50 }} }} }} }} }}
             select_trigger = {{ looking_for_a = value target_flag = deposit_amount name = bfl_deposit_amount_label
@@ -55,6 +57,7 @@ def generate(common, effect, loc, write):
         AND = { bfl_has_valid_controller = yes overlord = { OR = { is_ai = yes is_system_automated = credit } } }
     }'''))
     common('scripted_effects','credit_management',effect('bfl_manage_credit','''if = { limit = { bfl_credit_management_enabled = yes }
+        bfl_supply_ai_equity_float = yes
         bfl_autonomous_takeover = yes
         bfl_autonomous_credit_offer = yes
         if = { limit = { bfl_equity_exchange_access = yes bfl_free_cash > 500 bfl_capital_headroom > 500
@@ -115,7 +118,7 @@ def generate(common, effect, loc, write):
     # Override only these native labels; the native automation entry/toggle remains its owner.
     write('main_menu/localization/english/replace/bfl_credit_automation_l_english.yml', '''l_english:
  AUTOMATED_SYSTEM_CREDIT: "Credit Management"
- AUTOMATED_SYSTEM_CREDIT_DESC: "Manage state loans and bonds. Your bank also reviews loan takeovers, offers funded loans to borrowers that need cash, and invests spare cash in researched shares. Companies manage trade and exploration. The bank keeps reserves and checks debt capacity; borrowers must accept new loans."
+ AUTOMATED_SYSTEM_CREDIT_DESC: "Manage state loans and bonds. Your bank also reviews loan takeovers, offers funded loans to borrowers that need cash, and invests spare cash in available shares. Companies manage trade and exploration. The bank keeps reserves and checks debt capacity; borrowers must accept new loans."
  AUTOMATE_SYSTEM_TOOLTIP_CREDIT: "Enable Credit Management in Automation: state debt, bank lending, investments and company operations."
  DEAUTOMATE_SYSTEM_TOOLTIP_CREDIT: "Disable Credit Management. Existing loans, deposits and promised payments continue to be serviced."
 ''')

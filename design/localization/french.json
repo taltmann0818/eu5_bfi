@@ -92,9 +92,9 @@
       "source": "gold into a bank. New ownership units are priced at current net asset value. Subscription proceeds increase paid-in capital rather than realized profit and buy a proportional claim on subsequent distributions.",
       "text": "de l'or dans une banque. Les nouvelles unités de propriété sont évaluées à la valeur liquidative actuelle. Le produit de la souscription augmente le capital libéré plutôt que le bénéfice réalisé et achète une créance proportionnelle sur les distributions ultérieures."
     },
-    "e59bf0abf771c51cdacdf10ee31acf50bf18e655a1bc87442d5eda74594d1b5d": {
-      "source": "Permits the bank-share transfer service to move existing registered units between identified holders. A transfer changes ownership without issuing new units or creating bank profit. The registry must have capacity and preserve each holder's entitlement.",
-      "text": "Permet au service de transfert d'actions bancaires de déplacer des parts nominatives existantes entre des détenteurs identifiés. Un transfert change de propriétaire sans émettre de nouvelles parts ni créer de profit bancaire. Le registre doit avoir la capacité et préserver les droits de chaque titulaire."
+    "5e988000baba9d7278dd0b73c0fdd8ac94882be28d2b95551b0b71cbccffd071": {
+      "source": "Legacy permission. Bank shares require a completed Stock Exchange, without research.",
+      "text": "Autorisation héritée. Les actions bancaires nécessitent une bourse complétée, sans recherche."
     },
     "a95e14106a6c79f055f65cf669b1c836cf77d815db2b762ec6db3762c443ec65": {
       "source": "Unlocks recorded collateral pledges and their eligibility checks. Encumbered assets cannot secure a second claim, and recovery must preserve the original debt relationship. Native collateral execution remains unavailable.",
@@ -232,9 +232,9 @@
       "source": "Bank Capital Subscriptions",
       "text": "Souscriptions au capital bancaire"
     },
-    "e7567ff4e314e19d8566f2eb40c0fab58c10fdf97fd22d49db21bb03d839c020": {
-      "source": "Bank Share Transfer",
-      "text": "Transfert d'actions bancaires"
+    "811d690b87f626baa8b2fa2f9608cf6635c487c21cac99f657f5deb4b47be8ab": {
+      "source": "Bank Share Dealing",
+      "text": "Négociation d'actions bancaires"
     },
     "d02c96637d47f764df53b136f2f647a78605bacef1040119cb7bff2b01bd8ea2": {
       "source": "Collateral",
@@ -772,9 +772,9 @@
       "source": "Admit bank and open paid capital offering",
       "text": "Admettre la banque et ouvrir l’offre de capital versé"
     },
-    "32db57e5ca3c038bd90110b2ab374627e90000048648a4561c3c7e465e415b0f": {
-      "source": "AI management may admit its actual bank and authorize paid primary subscriptions after Share Dealing and a completed exchange. No cash or shares are created by admission.",
-      "text": "La direction d'AI peut admettre sa banque réelle et autoriser les souscriptions primaires payantes après la négociation d'actions et un échange terminé. Aucune trésorerie ni action n'est créée par admission."
+    "07c56532e574772a1eacba78c9fa1662c3ad9a2a50454885b4063ba3112849d9": {
+      "source": "AI management may admit its actual bank and authorize paid primary subscriptions with a completed Stock Exchange. No cash or shares are created by admission.",
+      "text": "La direction d'IA peut admettre sa banque actuelle et autoriser les souscriptions primaires payantes auprès d'une Bourse complétée. Aucune trésorerie ni action n'est créée par admission."
     },
     "e15158d4193aa04fbdcda29c9aceca67b01f623a3ecb5562d33960abc0a1f9c8": {
       "source": "Consider funded exchange investment",
@@ -1283,21 +1283,21 @@
       "source": "The Dividend Must Wait",
       "text": "Le dividende doit attendre"
     },
-    "811d690b87f626baa8b2fa2f9608cf6635c487c21cac99f657f5deb4b47be8ab": {
-      "source": "Bank Share Dealing",
-      "text": "Négociation d'actions bancaires"
-    },
     "fce1ca00753fa34a7ff5646232c9c1808c8886fbcdcc17673ccd8e304f512bcf": {
       "source": "A partner's fortune need not remain tied to the same banking house forever. Recognized transfers of ownership let investors sell their interests to others while the institution continues its business without withdrawing its capital.",
       "text": "A partner's fortune need not remain tied to the same banking house forever. Les transferts de propriété reconnus permettent aux investisseurs de vendre leurs intérêts à des tiers pendant que l'institution poursuit ses activités sans retirer son capital."
+    },
+    "e7567ff4e314e19d8566f2eb40c0fab58c10fdf97fd22d49db21bb03d839c020": {
+      "source": "Bank Share Transfer",
+      "text": "Transfert d'actions bancaires"
     },
     "1ce0b2345add54aaed0ba632d5268c052126915c72c0e67392e2d7a9b525fbe8": {
       "source": "Bank share transfer",
       "text": "Transfert d'actions bancaire"
     },
-    "1b378ddf94b6ade63b8b0c686344f8e066d9d258a82719652e58787e3cd2149d": {
-      "source": "Transfer recorded bank ownership units between funded parties. Requires Bank Share Dealing research and the Reformation age or later. This row reports permission; it does not itself execute a secondary share trade.",
-      "text": "Transfer recorded bank ownership units between funded parties. Requires Bank Share Dealing research and the Reformation age or later. Cette ligne indique l'autorisation ; it does not itself execute a secondary share trade."
+    "fddb4df68c5664ef67d092bdfba6b41794b4c2967d2c362e75e72aea4391cb73": {
+      "source": "Transfer recorded bank ownership units between funded parties. Requires a completed Stock Exchange. This row reports permission; it does not itself execute a secondary share trade.",
+      "text": "Transférer les unités de propriété bancaires enregistrées entre les parties financées. Nécessite une Bourse complétée. Cette ligne indique l'autorisation ; elle n'exécute pas elle-même une opération secondaire sur des actions."
     },
     "417fa81c9cdb629a6f26ae83758ff889a6af75e56ec750fd318c7c354def7f68": {
       "source": "Operating: new business is permitted when its other requirements are met. Cash under pressure: available cash is exhausted. Withdrawals queued: unpaid withdrawal requests suspend new business. Insolvent: liabilities exceed assets. In resolution or Closed: ordinary business is restricted. Existing claims remain recorded.",
@@ -1434,6 +1434,10 @@
     "a091b9d349561370f7b4349381618fd58e022cf6df47934a4f24611e5abc5d65": {
       "source": "Accept the quoted principal/coupon reduction and annual rate cut after rechecking the current holder, claim and authority. No new security or cash payment.",
       "text": "Acceptez la réduction du principal/coupon proposée et la réduction du taux annuel après avoir revérifié le titulaire actuel, la réclamation et l'autorité. Pas de nouvelle garantie ni de paiement en espèces."
+    },
+    "28b2e6e95190083e92b0c587a600b648c34e7a018cf1ad00912274ce27e821e1": {
+      "source": "Buy this offered bond through your bank. The bank pays the quoted price to the current holder; the issuer receives no new money. Both exchanges, branch access, available cash, capital, the current holder and expiry are rechecked.",
+      "text": "Achetez cette obligation offerte via votre banque. La banque paie le prix indiqué au titulaire actuel ; l'émetteur ne reçoit aucun nouvel argent. Les deux échanges, l'accès aux succursales, les liquidités disponibles, le capital, le détenteur actuel et l'expiration sont revérifiés."
     },
     "c9ad30e6629102081fa19e04d6c873d6fa5a5fa396362bb17bd115d8d8e8e903": {
       "source": "Available credit",
@@ -1603,6 +1607,10 @@
       "source": "Holder:",
       "text": "Titulaire :"
     },
+    "ba22218c5031ef373f1d1672cb59fbee5dc889f7408991763ce786d35649292f": {
+      "source": "Principal:",
+      "text": "Principal :"
+    },
     "092b840efbdebf18fdbfe0fe8323f7a84052a1bf8dc8941d36eec99ac93bf2dc": {
       "source": "Annual interest:",
       "text": "Intérêt annuel :"
@@ -1610,6 +1618,18 @@
     "9c6ce2918e2aafa27c0d6ff38ecf6731a9e6c07de79c11ad70ef4e14f2d8999f": {
       "source": "Unpaid interest:",
       "text": "Intérêts impayés :"
+    },
+    "15568e62043383b7ac6c47ac55b0391308f89565e470d10ef242bdb2ba2a4dbc": {
+      "source": "Issuer's listed price:",
+      "text": "Prix coté de l'émetteur :"
+    },
+    "4504b723c2167216be69b2c7109aaea2e66f9449ec61a43e17b6432c4c27c791": {
+      "source": "Your bank's available cash:",
+      "text": "La trésorerie disponible de votre banque :"
+    },
+    "7a339c9fc18f7c0d8f5104153e83c7e84b66fe065f3a1cf29d9bf71c845b86cb": {
+      "source": "Your bank's available capital:",
+      "text": "Le capital disponible de votre banque :"
     },
     "0bb652c986c94dc1ba6bea6e569edfba168ca39ff3117640ece8209051b433da": {
       "source": "Accept the quoted reduction together with the exclusive two-year revenue pledge and trade-protection concession. Actual enforcement remains limited by available issuer cash.",
@@ -1787,6 +1807,10 @@
       "source": "Buy existing claim",
       "text": "Acheter une créance existante"
     },
+    "0a932b4eaf157946d5aa365e99c5b73b4a8be25c7295b7f18f7ec0bf7f7c73f6": {
+      "source": "Buy this listed bond. Your bank pays its current holder at the offered price. Hover the bond for the price and buyer funds. Exchanges, branches, funds, capital, ownership and expiry are checked again.",
+      "text": "Achetez cette obligation cotée. Votre banque rémunère son titulaire actuel au prix proposé. Survolez l'obligation pour connaître le prix et les fonds de l'acheteur. Les échanges, succursales, fonds, capital, propriété et expiration sont à nouveau vérifiés."
+    },
     "6916b235176ec5608fb9cebd195a4f7711a78d4bc71279bcb93b66ec61314d4c": {
       "source": "Pay the quoted price to the current seller. The issuer receives no new money. Execution rechecks ownership, expiry, generation, both exchanges, arrears and cash.",
       "text": "Payez le prix indiqué au vendeur actuel. L'émetteur ne reçoit aucun nouvel argent. L'exécution revérifie la propriété, l'expiration, la génération, les échanges, les arriérés et la trésorerie."
@@ -1799,9 +1823,9 @@
       "source": "Choose a bank or company, set a share quantity, then review the total. Buy transfers existing shares from a sell offer or market-maker inventory. Use the separate capital-subscription action to fund new issuance.",
       "text": "Choisissez une banque ou une entreprise, définissez une quantité de parts, puis vérifiez le total. L'achat transfère des actions existantes à partir d'une offre de vente ou d'un inventaire de teneur de marché. Utilisez l’action distincte de souscription de capital pour financer de nouvelles émissions."
     },
-    "5d5111d7a43a4cbd694a72da0c44959a39662721239edec1ae4d4f5e0ab0a8dc": {
-      "source": "Requires a completed exchange, Share Dealing and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats:",
-      "text": "Nécessite un échange terminé, un Share Dealing et au moins un diplomate. Chaque transaction réussie consomme un diplomate et démarre un temps de recharge d'un mois pour cet émetteur. Diplomates disponibles :"
+    "1de0c74d9fb357bb2179078e327d50dd8c9df45aa0ef36988332a2ad55856971": {
+      "source": "Requires a completed Stock Exchange and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats:",
+      "text": "Nécessite une Bourse complétée et au moins un diplomate. Chaque transaction réussie consomme un diplomate et démarre un temps de recharge d'un mois pour cet émetteur. Diplomates disponibles :"
     },
     "573efe8684dff022ee72baf5f24b6c32f10e8f161a97eaff911840b63e92b08b": {
       "source": ". Orders must have a cash value of at least",
@@ -1834,6 +1858,18 @@
     "2e1993a3e65b2a3165ca8e7286c4563a14a805a293a5dcda0e45bf21de9e8e43": {
       "source": ", paid from your country treasury. These shares return to your treasury stake. The bank receives no financing and issued shares do not change. Available dealer stock, current market quote, live charter authority and treasury cash are checked again. Settlement consumes one diplomat and starts this bank’s one-month buy/sell cooldown.",
       "text": ", payé par le trésor de votre pays. Ces actions reviennent à votre participation en trésorerie. La banque ne reçoit aucun financement et les actions émises ne changent pas. Les stocks disponibles du concessionnaire, la cotation actuelle du marché, l'autorisation d'affrètement en direct et la trésorerie sont à nouveau vérifiés. La colonisation consomme un diplomate et démarre le temps de recharge d'achat/vente d'un mois de cette banque."
+    },
+    "4f6fc592d1c3f516e342d36a5531dda4954042eee473452db09d0c76fb64b955": {
+      "source": "existing company shares from your treasury for",
+      "text": "actions existantes de l'entreprise de votre trésorerie pour"
+    },
+    "290381117767626bf228f223ad519db22b6952db4b111921db192c5cad6c7280": {
+      "source": ". Your bank pays and receives the shares; your treasury receives the money. The company receives no new capital. Issued shares remain unchanged. Cash, capital, live company control and the",
+      "text": ". Votre banque paie et reçoit les actions ; votre trésor reçoit l'argent. La société ne reçoit aucun nouveau capital. Les actions émises restent inchangées. Trésorerie, capital, contrôle réel de l'entreprise et"
+    },
+    "d39a0f5193c10aac1cf73e6a56cb3cf2bffdd7d775b920cb57a67c6ac51fc8f9": {
+      "source": "bank holding limit are checked again.",
+      "text": "la limite de détention bancaire est à nouveau vérifiée."
     },
     "19766ed6ccb2f4a32778eed80d1928d2c87a18d7c275ccb163ec6709d3eb2e27": {
       "source": "Cancel",
@@ -2078,6 +2114,18 @@
     "28cfadaeb1f18d3212a0ed89b03cbca9507c79fdf7ba334d280e5e37d8fded9d": {
       "source": "Manage a native company you currently control. Capital contributions are financing. Company distributions use retained trade earnings after native costs, carried losses, debt reserves and cash buffers. The political overlord and financial owner are separate.",
       "text": "Gérez une entreprise native que vous contrôlez actuellement. Les apports en capital sont un financement. Les distributions des sociétés utilisent les bénéfices commerciaux non distribués après les coûts natifs, les pertes reportées, les réserves de dette et les réserves de trésorerie. Le suzerain politique et le propriétaire financier sont distincts."
+    },
+    "7c3fe84f3ed4c571c888ca65638dab4d91ad83a28fa86bffbdbc4f76b07fc24f": {
+      "source": "Company income must first cover",
+      "text": "Les revenus de l'entreprise doivent d'abord couvrir"
+    },
+    "d80d78fbbb05e396e77560fab85650fa75f86ac12306143b3174e839ccefba46": {
+      "source": "of carried losses.",
+      "text": "des pertes reportées."
+    },
+    "3f39f5515d53a4b8f4daec50eaac68f19ef8358332f6ca24b238af7a48e246bb": {
+      "source": "The company has no verified earned profit available for distribution.",
+      "text": "La société n’a aucun bénéfice gagné vérifié disponible pour la distribution."
     },
     "abe72f8081deaac5b814b4fcb3cfa97beaf3572149b69a9fa816999aeab03f10": {
       "source": "Large trading enterprises require fortunes that few merchants can supply alone. Dividing ownership among investors allows a company to assemble lasting capital while distributing the risks and rewards of its undertakings.",
@@ -2536,6 +2584,10 @@
       "source": "Deposit accounts",
       "text": "Comptes de dépôt"
     },
+    "3408010501cb83c774f09d228e52895ec8ff5bcf2e6aafb6135b864f1cd71e23": {
+      "source": "New deposits",
+      "text": "Nouveaux dépôts"
+    },
     "0393899e0ed430d6f782265bc5c8567fab343d0f103ab1152fc6736db9a611db": {
       "source": "Choose how much to deposit. Term deposits run for twelve months.",
       "text": "Choisissez le montant à déposer. Les dépôts à terme durent douze mois."
@@ -2547,6 +2599,14 @@
     "c9d533d9ff0d6a44f19c52481eff63c381b5ab65c31249d7032fcf6f81072a6e": {
       "source": "Choose a bank and an amount. Move treasury cash into an account. Interest and withdrawals belong to the depositor. The bank checks funds and terms again when you confirm.",
       "text": "Choisissez une banque et un montant. Déplacez les liquidités du Trésor sur un compte. Les intérêts et les retraits appartiennent au déposant. La banque vérifie à nouveau les fonds et les conditions lorsque vous confirmez."
+    },
+    "a43c5a4648f81c0317fdab736a8568aa660c6499ca996b07ede0886f3c30eaf2": {
+      "source": "The bank cannot open new business while suspended, insolvent or in resolution.",
+      "text": "La banque ne peut pas ouvrir de nouvelles affaires lorsqu'elle est suspendue, insolvable ou en résolution."
+    },
+    "8d90876e5053aa7738044f39aa2370456838858ab0dc24b7b496c643f53eaf8b": {
+      "source": "New deposits are closed. Reopen New deposits below to accept them.",
+      "text": "Les nouveaux dépôts sont fermés. Rouvrez les nouveaux dépôts ci-dessous pour les accepter."
     },
     "045a363ec9b25ddd2e240b0c823091967ef7d39686a64c570ec9994f67d9596e": {
       "source": "Retain the full deposit claim. No cash moves and no shares are issued.",
@@ -2784,13 +2844,33 @@
       "source": "Monthly dividend calculation",
       "text": "Calcul du dividende mensuel"
     },
+    "bddc2e8ba9ca2363d689fa659ba259dfc872e01841966c9d09d056d512d090f1": {
+      "source": "There is no capital available for a dividend.",
+      "text": "Il n'y a pas de capital disponible pour un dividende."
+    },
+    "f11e9b10d8c8d5c89bc27039803c03ebc5e4fe247fed88acf95c62db40fd0406": {
+      "source": "Cash is reserved for creditors and operating obligations.",
+      "text": "La trésorerie est réservée aux créanciers et aux obligations d'exploitation."
+    },
     "475b79df7a0bad55b5e3816247f8b23534c39921a216a9975db92156eb4ae397": {
       "source": "Monthly net income after deposit interest, operating expenses and carried losses funds dividends. Each owner receives owned shares multiplied by the funded payout per outstanding share. Retained earnings are not distributed again next month.",
       "text": "Bénéfice net mensuel après intérêts sur les dépôts, charges d'exploitation et dividendes des fonds de pertes reportées. Chaque propriétaire reçoit les actions détenues multipliées par le paiement financé par action en circulation. Les bénéfices non distribués ne seront pas redistribués le mois prochain."
     },
+    "b169c020c52b15cb9d93e9f55aad9ca0440676c973430339710e3c98f413505b": {
+      "source": "No dividend: earned income is covering",
+      "text": "Pas de dividende : les revenus du travail couvrent"
+    },
+    "b91cc5701de8f92d67b99e915fbb16809c16015c94efa45b8a4632a83085f108": {
+      "source": "There is no distributable earned profit after costs and carried losses.",
+      "text": "Il n’y a pas de bénéfice distribuable après coûts et pertes reportées."
+    },
     "cb639a84d225d4a200fa66e761743d5d0cb1c457a8ff5331dd463ede339f2af2": {
       "source": "The annual rate is last monthly receipts multiplied by twelve, not a promise. Bank costs include deposit interest, operating costs and carried losses. Each owner receives their share of the funded payout, rounded down to ducats and cents.",
       "text": "Le taux annuel correspond aux dernières recettes mensuelles multipliées par douze, et non à une promesse. Les frais bancaires comprennent les intérêts sur les dépôts, les frais de fonctionnement et les pertes reportées. Chaque propriétaire reçoit sa part du paiement financé, arrondie aux ducats et aux centimes inférieurs."
+    },
+    "2a7d5e2495a8399a5562f04fdc4e9051bc65c18c58e2de5986b852d0821c878a": {
+      "source": "Dividends are set to retain all profit.",
+      "text": "Les dividendes sont fixés pour conserver tous les bénéfices."
     },
     "2edfb168b38b627242288f3f88f59bc8c18815de4d11f864a3f489b590ce3eb3": {
       "source": "Borrow",
@@ -3196,13 +3276,13 @@
       "source": "Admit managed bank to exchange",
       "text": "Admettre la banque gérée pour échanger"
     },
-    "cd351ebfcc2676007d447a1d23587835629196eeae63da6d6f0091e01429def0": {
-      "source": "Admit your bank without changing cash, units or its price. Requires bank-share dealing research and a completed Stock Exchange.",
-      "text": "Admettez votre banque sans changer d'espèces, d'unités ou son prix. Nécessite une recherche sur les transactions bancaires et une bourse de valeurs complétée."
+    "a8a3e38f350884c5ee3ba4c0af2c3c89003beab06e707ff4e973243bd7408234": {
+      "source": "Admit your bank without changing cash, units or its price. Requires a completed Stock Exchange.",
+      "text": "Admettez votre banque sans changer d'espèces, d'unités ou son prix. Nécessite une Bourse complétée."
     },
-    "d951f97e6c6859ea064c4f5abd26ee4d2cdee446ab29841a05352c196836c43a": {
-      "source": "LOCKED · Both banks need Share Dealing research and a completed owned Stock Exchange. Chartered banks use their live controller. Company shares additionally require Overseas Investment and Company Equity.",
-      "text": "VERROUILLÉ · Les deux banques ont besoin de recherches sur les transactions d'actions et d'une bourse de valeurs entièrement détenue. Les banques à charte utilisent leur contrôleur en direct. Les actions de l’entreprise nécessitent en outre des investissements à l’étranger et des capitaux propres de l’entreprise."
+    "68a3a6e7c9dd9962f44f0f8c1adf3872c040958e7bae72a28c42599341168607": {
+      "source": "LOCKED · Both banks need a completed owned Stock Exchange. Chartered banks use their live controller. Company shares additionally require Overseas Investment and Company Equity.",
+      "text": "VERROUILLÉ · Les deux banques ont besoin d'une bourse de valeurs entièrement possédée. Les banques à charte utilisent leur contrôleur en direct. Les actions de l’entreprise nécessitent en outre des investissements à l’étranger et des capitaux propres de l’entreprise."
     },
     "c981a30c0e7b420b0ba50ce7d1d4174a511fdf20567b852ab02c774cb9a3591e": {
       "source": "units",
@@ -3276,9 +3356,9 @@
       "source": "List selected units & limit",
       "text": "Liste des unités sélectionnées et limite"
     },
-    "6de3a1f5938fae50769ed37e60160b30fb2e01ba993d72e32f1a3033b41fea66": {
-      "source": "List your selected owned units and NAV limit for three months. Requires research and a completed exchange; no self-purchases or founder/estate secondary selling.",
-      "text": "Répertoriez vos unités détenues sélectionnées et votre limite de valeur liquidative pour trois mois. Nécessite une recherche et un échange complété ; pas d'auto-achat ni de vente secondaire du fondateur/du domaine."
+    "0a37172e6cf77d5a1502125eba412357295f488c5417b6d7849198833c7b9c14": {
+      "source": "List your selected owned units and NAV limit for three months. Requires a completed Stock Exchange; no self-purchases or founder/estate secondary selling.",
+      "text": "Répertoriez vos unités détenues sélectionnées et votre limite de valeur liquidative pour trois mois. Nécessite une Bourse complétée ; pas d'auto-achat ni de vente secondaire du fondateur/du domaine."
     },
     "cb8d295f1603859ad0226452e9d2a5e6b772cba0cc8a94632fe9c4e73e18c09d": {
       "source": "Basis",
@@ -4040,10 +4120,6 @@
       "source": "Acquisition cost:",
       "text": "Coût d'acquisition :"
     },
-    "ba22218c5031ef373f1d1672cb59fbee5dc889f7408991763ce786d35649292f": {
-      "source": "Principal:",
-      "text": "Principal :"
-    },
     "57e1023d7667001b8a02395dec03ebf700dccd868d0822f00c3c4ed5232b9d13": {
       "source": "Months at last review:",
       "text": "Mois au dernier examen :"
@@ -4096,9 +4172,9 @@
       "source": "Require collateral and variation margin against changing commodity exposure. Requires Margining and Risk Management research, Merchant Finance and the Revolutions age. Goods-backed margin execution is unavailable in this build.",
       "text": "Exiger des garanties et une marge de variation contre l’évolution de l’exposition aux matières premières. Nécessite des recherches sur les marges et la gestion des risques, la finance marchande et l’ère des révolutions. L’exécution de marge adossée à des marchandises n’est pas disponible dans cette version."
     },
-    "ca6abe3d14342c30a055f6614ef7a4d39831ce583a76b05712b59fcc4edef60d": {
-      "source": "Company shares require Overseas Investment and Company Equity research. Bank shares use Share Dealing.",
-      "text": "Les actions de la société nécessitent une recherche sur les investissements à l’étranger et les actions de la société. Les actions bancaires utilisent le Share Dealing."
+    "bbf2a46c20b2da75a13b0f222bb08fb1e9dee53a2d80ff1a1c3478ec19562544": {
+      "source": "Your bank can buy shares from the treasury of your own operating company. Other company investments require Overseas Investment and Company Equity research. Bank shares require a completed Stock Exchange.",
+      "text": "Votre banque peut acheter des actions auprès de la trésorerie de votre propre société opérationnelle. D’autres investissements d’entreprise nécessitent une recherche sur les investissements à l’étranger et les actions des entreprises. Les actions bancaires nécessitent une bourse complétée."
     },
     "f559141b9811e4a73a2e9ce158cb8045e655907d74ef26ff0cfb114b268fde36": {
       "source": "Your bank can afford shares within its cash, capital and ownership limits.",
@@ -5306,6 +5382,41 @@
       "source": "Sell shares you own",
       "text": "Vendez les actions que vous possédez"
     },
+    "265c22644d3ad6bbaff8621d5f311bc51496cb4348af09d50a1eb3a735700825": {
+      "source": "Provide company crew: transfer",
+      "text": "Fournir un équipage : Transférer",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "2b2f0ad539dbaa5da0b018704c1084329de329042fd597f913b1107b6a4d81fa": {
+      "source": "sailors to the company. Requires an exploration mandate and room for the crew.",
+      "text": "marins à la compagnie. Nécessite un mandat d’exploration et une capacité d’équipage suffisante.",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "b3e8db56e62d200d849dbec4c317868a0b67f4b15ef0ab2541c2f8eb615acf23": {
+      "source": "Authorize company trading and exploration. Native research, crew and explorer requirements apply.",
+      "text": "Autoriser le commerce et les explorations de la compagnie. Les conditions habituelles de recherche, de personnel et d’explorateur s’appliquent.",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "9008b1ceb83c2e3f964d2cc0d4e6bee020a05df4235ab4d44a329f93ce9302f3": {
+      "source": "Fund company: transfer",
+      "text": "Financer la compagnie : Transférer",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "75cb3e9d9f3e8130a95b3c5e0a5e8111bf47f5280a50f6d447fdd4ca3762d8c1": {
+      "source": "ducats from your treasury to the company as capital.",
+      "text": "ducats du Trésor à la compagnie comme capital.",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "63ceb3d8d780530ae2c3bd37df6319e53f4ff770c7e68ce0c293c982bdcdf627": {
+      "source": "Pause new operations. Existing obligations continue.",
+      "text": "Suspendre les nouvelles opérations. Les obligations existantes demeurent.",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
+    "5bc04748c4a88480d667a23c4d12749d7d9c371ff89a8c3cb0ea64d74a31e27e": {
+      "source": "Authorize company trading with its own cash and reserves.",
+      "text": "Autoriser le commerce de la compagnie avec ses propres fonds et réserves.",
+      "provenance": "Model-assisted finance fix; semantic review pending."
+    },
     "e72c719224aaa36fa9fd3c43e581ce99fc09c765a6c5ea1b2f8f920fcce45f16": {
       "source": "Next banks",
       "text": "Banques suivantes"
@@ -5341,6 +5452,14 @@
     "38349b12d7e0627ed451d70fa54dd9b05a49fc72fc88d3cb08487d7ab1b55f42": {
       "source": ", paid to your country treasury. The bank receives no financing and issued shares do not change. The hidden dealer guarantees the displayed quote, including the quoted dealer spread. Settlement consumes one diplomat and starts a one-month buy/sell cooldown for this issuer. Your charter’s monetary authority stays with you.",
       "text": ", versé au trésor de votre pays. La banque ne reçoit aucun financement et les actions émises ne changent pas. Le dealer caché garantit la cotation affichée, y compris le spread du dealer coté. Le règlement consomme un diplomate et démarre un temps de recharge d'achat/vente d'un mois pour cet émetteur. L’autorité monétaire de votre charte reste avec vous."
+    },
+    "4526d716d2c380ffcb8e83537d3b196888e87806a6e6a9247858d915cbb49092": {
+      "source": "company shares held by your treasury for",
+      "text": "actions de la société détenues par votre trésorerie depuis"
+    },
+    "f5e58e9f66a5ff04e62db792c30eb9a978dce13ffe18e35f46a2d34e988e075f": {
+      "source": ". The clearing dealer receives the existing shares and pays your treasury. The company receives no new capital. AI banks can buy the dealer stock when eligible.",
+      "text": ". Le courtier compensateur reçoit les actions existantes et paie votre trésorerie. La société ne reçoit aucun nouveau capital. Les banques IA peuvent acheter les actions du concessionnaire lorsqu’elles sont éligibles."
     },
     "2415525a29cd8a8c15cf67d658c0211a39e2cc6e6e371728f8381954a677be03": {
       "source": "Shares:",
@@ -5806,6 +5925,10 @@
       "source": "Request early term withdrawal",
       "text": "Demander un retrait anticipé"
     },
+    "d45e41965cf4f6428c95c64c566dbb7ae89bef11ab59d393a6fc162f907f6451": {
+      "source": "Open or close new deposits at your bank. Closing admission preserves existing accounts, interest and withdrawals. The bank must be operating to reopen.",
+      "text": "Ouvrez ou fermez de nouveaux dépôts dans votre banque. L'admission de clôture préserve les comptes existants, les intérêts et les retraits. La banque doit être opérationnelle pour rouvrir."
+    },
     "f4723151640edbb484bed2c3e97c4e1c64daefc5d78c7866be95c4d528a4f8f9": {
       "source": "Sell a bank-held bill at par",
       "text": "Vendre au pair une facture détenue en banque"
@@ -6099,6 +6222,10 @@
     "6fbfeb499b79921bfd060f3e4087a484eed2ee077dd63f32fdaf4c2d69b6423b": {
       "source": "Final administration charge",
       "text": "Frais d'administration finaux"
+    },
+    "720687431a46f0c9e340735e8a6b9bb3fba588722bdfb5b893c07ff72b9e6f93": {
+      "source": "Carried losses",
+      "text": "Pertes reportées"
     },
     "742fac336626c9b8b713e858aaa998b345948ba304f639d98f00e109a5824f01": {
       "source": "Native expedition progress",
@@ -6736,9 +6863,9 @@
       "source": "less in administration costs and gains access to monetary services as the necessary advances are researched. Notes remain backed obligations; their issue does not create bank profit.",
       "text": "moins de frais d’administration et accède aux services monétaires à mesure que les avancées nécessaires sont recherchées. Les billets restent des obligations garanties ; leur émission ne crée pas de profit bancaire."
     },
-    "ff5eaaf43adf1051a8e53a80d52742fb1348301b0566de100f6904ae092f7088": {
-      "source": "Manage state loans and bonds. Your bank also reviews loan takeovers, offers funded loans to borrowers that need cash, and invests spare cash in researched shares. Companies manage trade and exploration. The bank keeps reserves and checks debt capacity; borrowers must accept new loans.",
-      "text": "Gérer les prêts et obligations de l'État. Votre banque examine également les rachats de prêts, propose des prêts financés aux emprunteurs qui ont besoin de liquidités et investit les liquidités disponibles dans des actions recherchées. Les entreprises gèrent le commerce et l’exploration. La banque conserve des réserves et vérifie la capacité d'endettement ; les emprunteurs doivent accepter de nouveaux prêts."
+    "bdd9eab93616ddf5ba7e78d9b13f894acf9363c783952d254e181d674ed601c6": {
+      "source": "Manage state loans and bonds. Your bank also reviews loan takeovers, offers funded loans to borrowers that need cash, and invests spare cash in available shares. Companies manage trade and exploration. The bank keeps reserves and checks debt capacity; borrowers must accept new loans.",
+      "text": "Gérer les prêts et obligations de l'État. Votre banque examine également les rachats de prêts, propose des prêts financés aux emprunteurs qui ont besoin de liquidités et investit les liquidités disponibles dans les actions disponibles. Les entreprises gèrent le commerce et l’exploration. La banque conserve des réserves et vérifie la capacité d'endettement ; les emprunteurs doivent accepter de nouveaux prêts."
     },
     "5ec68a875d3ede83376ef62a521c8523fadfb3364b09d85b46cae4a6fbc29c4d": {
       "source": "Enable Credit Management in Automation: state debt, bank lending, investments and company operations.",

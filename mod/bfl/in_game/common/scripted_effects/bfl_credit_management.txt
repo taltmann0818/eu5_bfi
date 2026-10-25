@@ -1,5 +1,6 @@
 ﻿bfl_manage_credit = {
 if = { limit = { bfl_credit_management_enabled = yes }
+        bfl_supply_ai_equity_float = yes
         bfl_autonomous_takeover = yes
         bfl_autonomous_credit_offer = yes
         if = { limit = { bfl_equity_exchange_access = yes bfl_free_cash > 500 bfl_capital_headroom > 500

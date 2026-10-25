@@ -66,14 +66,17 @@ if = { limit = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 0
         add = var:bfl_shr_16_units }
 }
 bfl_market_state_owned_units = {
-value = 0 if = { limit = { var:bfl_state_owner ?= scope:actor } value = var:bfl_state_units }
+value = 0
+        if = { limit = { var:bfl_state_owner ?= scope:actor } value = var:bfl_state_units }
+        else_if = { limit = { bfl_is_company = yes } value = bfl_market_treasury_company_units }
 }
 bfl_market_sell_units = {
 value = bfl_market_owned_units if = { limit = { bfl_market_state_owned_units > 0 } value = bfl_market_state_owned_units }
 }
 bfl_market_buy_price = {
 value = bfl_dealer_ask
-        if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
+        if = { limit = { bfl_market_treasury_company_buy = yes } value = bfl_equity_quote }
+        else_if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
             value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units }
 }
 bfl_market_buy_max = {
@@ -85,7 +88,8 @@ value = 0
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
             divide = bfl_market_buy_price
             max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
-            if = { limit = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }
+            if = { limit = { bfl_market_treasury_company_buy = yes } max = bfl_market_treasury_company_units }
+            else_if = { limit = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }
                 max = var:bfl_equity_offer_units }
             else = { max = bfl_dealer_units }
             min = 0 multiply = 1000 floor = yes divide = 1000 }
@@ -96,7 +100,7 @@ value = 0
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
             multiply = 100 floor = yes divide = 100 divide = bfl_dealer_ask
             max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
-            max = bfl_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
+            max = bfl_ai_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
 }
 bfl_market_chart_max = {
 value = 0.001

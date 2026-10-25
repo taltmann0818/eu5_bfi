@@ -64,6 +64,7 @@ def generate(common, effect, loc, write):
             potential = { scope:actor = { bfl_has_management = yes } }
             allow = { scope:actor = { bfl_has_management = yes } }
             select_trigger = { looking_for_a = country target_flag = recipient name = choose_country default_sort = will
+                allow_self = yes
                 column = { data = country_diplomacy_info_loan }
                 visible = { country_type = location num_loans > 0 }
                 enabled = { bfl_managed_takeover_target = yes }

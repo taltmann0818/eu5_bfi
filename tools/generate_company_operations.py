@@ -360,10 +360,42 @@ def generate(common, effect, loc, write):
             var:bfl_selected_company ?= { bfl_is_company = yes is_subject_of = prev }
         } }
     ''')
+    # Resolve a clicked row through the live player/controller relationship.
+    # Never trust a previously selected company after transfer of overlordship.
+    valid = '''exists = scope:company scope:company = { country_exists = this
+        bfl_is_company = yes is_subject_of = root }'''
+    commands = f'''bfl_inspect_company = {{ scope = country saved_scopes = {{ company }}
+        is_shown = {{ {valid} }} is_valid = {{ {valid} }}
+        effect = {{ if = {{ limit = {{ {valid} }}
+            set_variable = {{ name = bfl_selected_company value = scope:company }} }} }} }}\n'''
+    selected = '''exists = var:bfl_selected_company
+        var:bfl_selected_company = { country_exists = this bfl_is_company = yes is_subject_of = prev }'''
+    for name, mandate, service, requirement in [
+        ('pause', 0, 'bfl_company_set_mandate', ''),
+        ('trade', 1, 'bfl_company_set_mandate', ''),
+        ('explore', 2, 'bfl_company_set_mandate', ''),
+        ('fund', None, 'bfl_company_capitalize', 'gold >= 100'),
+        ('crew', None, 'bfl_company_provide_crew', '''sailors >= 0.25 var:bfl_selected_company = {
+            var:bfl_company_mandate = 2 max_sailors >= 0.25 sailors <= { value = max_sailors subtract = 0.25 } }'''),
+    ]:
+        key = 'bfl_selected_company_' + name
+        terms = f'set_variable = {{ name = bfl_company_requested_mandate value = {mandate} }}' if mandate is not None else ''
+        commands += f'''{key} = {{ scope = country is_shown = {{ {selected} }}
+            is_valid = {{ {selected} {requirement} }} effect = {{ if = {{ limit = {{ {selected} {requirement} }}
+                save_scope_as = bfl_company_actor {terms}
+                var:bfl_selected_company = {{ {service} = yes }} }} }} }}\n'''
+        loc(key + '_tip', {
+            'pause': 'Pause new operations. Existing obligations continue.',
+            'trade': 'Authorize company trading with its own cash and reserves.',
+            'explore': 'Authorize company trading and exploration. Native research, crew and explorer requirements apply.',
+            'fund': 'Fund company: transfer 100 ducats from your treasury to the company as capital.',
+            'crew': 'Provide company crew: transfer 250 sailors to the company. Requires an exploration mandate and room for the crew.',
+        }[name])
+    common('scripted_guis', 'company_selection', commands)
 
 
 def company_panel(loc):
-    from generate_credit_redesign import heading, generic
+    from generate_credit_redesign import heading, generic, command
     from generate_finance_widgets import row, tooltip_type
     loc('bfl_company_panel', 'Operating companies')
     loc('bfl_companies_empty', 'No operating companies under your control.')
@@ -372,18 +404,33 @@ def company_panel(loc):
     loc('bfl_company_overview_note', 'Company cash belongs to the company. Credit Management runs its trade and exploration. Owner dividends use funded earnings after reserves; new capital and discoveries are excluded.')
     loc('bfl_company_select_tip', 'Inspect a company under your control.')
     body = row('Cash', "[Country.GetFixedPointCurrencyValue('gold')|2]@gold!")
-    for i, (label, field) in enumerate([('Trade receipts','trade_receipts'),('Native net budget','native_net'),('Earned profit','verified_profit'),('Owner dividend','dividend'),('Cash buffer','buffer'),('Reinvestment reserve','reinvestment'),('Facilities','facility_count'),('Trade routes','route_count')]):
-        body += row(label, f"[Country.MakeScope.GetVariable('bfl_company_{field}').GetValue|2]", i)
+    for i, (label, field) in enumerate([('Trade receipts','trade_receipts'),('Native net budget','native_net'),('Earned profit','verified_profit'),('Carried losses','loss'),('Dividend payout','payout_ratio'),('Owner dividend','dividend'),('Cash buffer','buffer'),('Reinvestment reserve','reinvestment'),('Facilities','facility_count'),('Trade routes','route_count')]):
+        formatting='%0' if field=='payout_ratio' else '2'
+        body += row(label, f"[Country.MakeScope.GetVariable('bfl_company_{field}').GetValue|{formatting}]", i)
     body += 'TooltipFlavorTextBlock = { blockoverride "text" { text = "bfl_company_overview_note" } }'
+    for reason,label in [('company_losses','bfl_company_dividend_loss_reason'),('company_no_profit','bfl_company_dividend_profit_reason')]:
+        body += f'''text_multi = {{ text = "{label}" autoresize = yes layoutpolicy_horizontal = expanding
+            visible = "[GetScriptedGui('bfl_reason_{reason}').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }}'''
     tip = tooltip_type('bfl_company_overview_tooltip','bfl_company_overview_title','bfl_company_overview_subtitle','companies',body)
+    selected_actions = ''.join(command('bfl_selected_company_' + name, art,
+        f"EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_company_mandate').GetValue,'(CFixedPoint){mandate}')" if mandate is not None else None)
+        for name, art, mandate in [('pause','lock',0),('trade','merchant_finance',1),('explore','commenda',2),('fund','subscribe',None),('crew','companies',None)])
+    selected_detail = f'''vbox = {{ ignoreinvisible = yes spacing = 4 layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed
+        visible = "[GetScriptedGui('bfl_company_selected_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
+        datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_selected_company').GetCountry]"
+        tooltipwidget = {{ bfl_company_overview_tooltip = {{ }} }}
+        hbox = {{ spacing = 6 country_flag_small = {{ }} text_single = {{ raw_text = "[Country.GetName]" size = {{ 220 30 }} elide = right fontsize = 14 }}
+            expand = {{ }} {selected_actions} }} }}'''
     return tip + f'''type bfl_company_controls = vbox {{ ignoreinvisible = yes
         layoutpolicy_horizontal = expanding layoutpolicy_vertical = fixed spacing = 4
         {heading('bfl_company_panel', generic('bfl_company_fund','subscribe') + generic('bfl_company_list_equity','share_transfer'))}
+        {selected_detail}
         text_multi = {{ text = "bfl_companies_empty" autoresize = yes layoutpolicy_horizontal = expanding
             visible = "[Not(GetScriptedGui('bfl_company_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]" }}
         flowcontainer = {{ wrap_count = 1 ignoreinvisible = yes layoutpolicy_horizontal = expanding
             datamodel = "[GetPlayer.GetDiplomacy.GetSubjects]"
-            item = {{ widget = {{ size = {{ 510 64 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+            item = {{ button_regular = {{ size = {{ 510 64 }} layoutpolicy_horizontal = expanding using = bg_card_header_01
+                onclick = "[GetScriptedGui('bfl_inspect_company').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).AddScope('company',Country.MakeScope).End)]"
                 visible = "[GetScriptedGui('bfl_company_row').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]"
                 tooltipwidget = {{ bfl_company_overview_tooltip = {{ }} }}
                 country_flag_small = {{ position = {{ 8 10 }} }}

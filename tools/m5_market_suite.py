@@ -185,8 +185,12 @@ def fixture(token, fingerprint):
 
 
 def reload_fixture(token, fingerprint):
-    key='dealer_units_and_completed_buildings_survive_reload'
-    condition='c:BRD = { var:bfl_pos_01_units = 84.333 var:bfl_state_units = 4900 var:bfl_state_basis = var:bfi_saved_state_basis var:bfl_dealer_units = 100 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 } c:ACC = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 }'
+    key='registered_equity_and_completed_buildings_survive_reload'
+    # Active AI banks can now buy the dealer's shares during the 24-month run.
+    # Its AI treasury can also supply a real float. Verify that political
+    # control, the held position and the complete registered ledger survive;
+    # the instantaneous assertions above test exact basis/cash settlement.
+    condition='c:BRD = { var:bfl_pos_01_units = 84.333 bfl_has_valid_controller = yes overlord = c:VEN var:bfl_state_units > 0 var:bfl_state_basis >= 0 bfl_dealer_units >= 0 bfl_registered_units = var:bfl_total_units } c:PRZ = { bfl_registered_units = var:bfl_total_units } c:VEN = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 } c:ACC = { bfl_owns_stock_exchange = yes var:bfl_portfolio_history_count = 12 }'
     return f'''debug_log = "BFI_TEST|{token}|RELOAD_BEGIN|{fingerprint}"
         if = {{ limit = {{ {condition} }} debug_log = "BFI_TEST|{token}|PASS|{key}" }} else = {{ debug_log = "BFI_TEST|{token}|FAIL|{key}" }}
         debug_log = "BFI_TEST|{token}|RELOAD_END|{fingerprint}"''',[key]

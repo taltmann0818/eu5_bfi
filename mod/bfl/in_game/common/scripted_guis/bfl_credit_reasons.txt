@@ -1,0 +1,10 @@
+﻿bfl_reason_deposit_closed = { scope = country is_shown = { var:bfl_accept_deposits = 0 } }
+bfl_reason_deposit_open = { scope = country is_shown = { var:bfl_accept_deposits = 1 } }
+bfl_reason_business_blocked = { scope = country is_shown = { NOT = { bfl_can_conduct_business = yes } } }
+bfl_reason_dividend_losses = { scope = country is_shown = { var:bfl_loss_carryforward > 0 } }
+bfl_reason_dividend_retained = { scope = country is_shown = { var:bfl_payout_ratio = 0 } }
+bfl_reason_dividend_no_profit = { scope = country is_shown = { var:bfl_dividend_eligible <= 0 } }
+bfl_reason_dividend_cash = { scope = country is_shown = { bfl_free_cash <= 0 } }
+bfl_reason_dividend_capital = { scope = country is_shown = { bfl_capital_headroom <= 0 } }
+bfl_reason_company_losses = { scope = country is_shown = { var:bfl_company_loss > 0 } }
+bfl_reason_company_no_profit = { scope = country is_shown = { var:bfl_company_verified_profit <= 0 } }

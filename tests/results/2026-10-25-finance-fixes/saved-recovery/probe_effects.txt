@@ -1,0 +1,11 @@
+﻿bfi_probe_recovery = { if = { limit = { c:GBR.var:bfl_bank = { var:bfl_state = 4 gold > 3200 bfl_withdrawals_due = 0.02824 } } debug_log = "BFI_RECOVERY|PASS|original_bank_is_trapped_with_funded_fractional_claims" } else = { debug_log = "BFI_RECOVERY|FAIL|original_bank_is_trapped_with_funded_fractional_claims" }
+c:GBR = { set_variable = { name = bfi_probe_state_cash value = gold }
+    var:bfl_bank = { set_variable = { name = bfi_probe_bank_cash value = gold }
+        bfl_distribute_resolution_cash = yes bfl_resume_after_resolution = yes } }
+if = { limit = { c:GBR = { gold = { value = var:bfi_probe_state_cash add = 0.02824 } var:bfl_bank = { gold = { value = var:bfi_probe_bank_cash subtract = 0.02824 } bfl_withdrawals_due = 0 bfl_deposit_liabilities = 0 } } } debug_log = "BFI_RECOVERY|PASS|original_claims_are_paid_without_rounding_or_forgiveness" } else = { debug_log = "BFI_RECOVERY|FAIL|original_claims_are_paid_without_rounding_or_forgiveness" }
+if = { limit = { c:GBR.var:bfl_bank = { var:bfl_state = 0 bfl_can_originate_sovereign_credit = yes bfl_can_originate_native_takeover = yes bfl_can_originate_bond_underwriting = yes } } debug_log = "BFI_RECOVERY|PASS|original_bank_resumes_new_lending" } else = { debug_log = "BFI_RECOVERY|FAIL|original_bank_resumes_new_lending" }
+if = { limit = { c:GBR = { NOT = { has_advance = bfl_bank_share_dealing } bfl_resolved_equity_access = no } } debug_log = "BFI_RECOVERY|PASS|research_gate_is_preserved" } else = { debug_log = "BFI_RECOVERY|FAIL|research_gate_is_preserved" }
+c:GBR.var:bfl_bank = { bfl_distribute_resolution_cash = yes bfl_resume_after_resolution = yes }
+if = { limit = { c:GBR = { gold = { value = var:bfi_probe_state_cash add = 0.02824 } var:bfl_bank = { gold = { value = var:bfi_probe_bank_cash subtract = 0.02824 } var:bfl_state = 0 } } } debug_log = "BFI_RECOVERY|PASS|saved_recovery_does_not_pay_twice" } else = { debug_log = "BFI_RECOVERY|FAIL|saved_recovery_does_not_pay_twice" }
+debug_log = "BFI_RECOVERY|END"
+ }

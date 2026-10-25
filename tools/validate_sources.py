@@ -128,9 +128,17 @@ def main():
         seen.add(advance['id'])
         icon=MOD/f'main_menu/gfx/interface/advance/bfl_{advance["id"]}.dds'
         check(icon.exists(),f'Missing advance icon {icon}')
-    check(len(seen-integrated)==16,'Expected 16 separate financial advances')
+    retired={a['id'] for a in advances if a.get('retired')}
+    check(len(seen-integrated-retired)==15,'Expected 15 active financial advances')
+    check(retired=={'bank_share_dealing'},'Only obsolete bank-share research is retired')
     check(integrated=={'term_deposits','bank_capital_subscriptions'},'Expected term deposits and bank capital in native Banking')
     financial=(MOD/'in_game/common/advances/bfl_financial_advances.txt').read_text(encoding='utf-8-sig')
+    from audit_native import balanced_block
+    opening=financial.index('{',financial.index('bfl_bank_share_dealing ='))
+    legacy=financial[opening:balanced_block(financial,opening)]
+    check('potential = { always = no }' in legacy and 'allow = { always = no }' in legacy,'Legacy share advance must be hidden and unresearchable')
+    instruments=json.loads((ROOT/'design/instruments.json').read_text())
+    check(instruments['bank_share_transfer']=={'age':1,'profile':0,'stock_exchange':True},'Bank shares require the completed exchange without an age/research gate')
     for key in integrated:
         check(not re.search(r'^bfl_'+key+r'\s*=\s*\{',financial,re.M),f'Integrated feature still has a standalone research node: {key}')
     injection=(MOD/'in_game/common/advances/bfl_banking_unlocks.txt').read_text(encoding='utf-8-sig')
@@ -272,7 +280,7 @@ def main():
     check(not (MOD/'descriptor.mod').exists(),'EUV does not use the EU4 descriptor assumption')
     if ERRORS:
         print('\n'.join(sorted(set(ERRORS))));return 1
-    print(f'PASS: {len(all_text)} script/GUI/localization files; 16 separate advances and 2 native Banking unlocks; {len(rows)} graphics; metadata, scopes, references and Economy ownership checks.')
+    print(f'PASS: {len(all_text)} script/GUI/localization files; 15 active advances, 1 legacy advance and 2 native Banking unlocks; {len(rows)} graphics; metadata, scopes, references and Economy ownership checks.')
     return 0
 
 

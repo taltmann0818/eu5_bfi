@@ -52,7 +52,47 @@ def fixture(token, fingerprint):
             add_opinion = { target = c:FLO modifier = bfi_deposit_test_opinion }
             add_opinion = { target = c:ACC modifier = bfi_deposit_test_opinion }
             research_advance = advance_type:bfl_debt_restructuring research_advance = advance_type:banking_advance }
-    ''' + grant('banking_office', 'BRD') + bank_reset() + deposits()
+    ''' + grant('banking_office', 'BRD') + bank_reset()
+    # Regression from the reported late GBR campaign: a solvent bank retained
+    # 0.00856, 0.00968 and 0.01 in deposit claims after proportional recoveries.
+    # Fully funded native fixed-point claims must settle without being forgiven.
+    start += '''c:BRD = { bfl_initialize_bonds = yes
+        set_variable = { name = bfl_state value = 4 } }
+    '''
+    for i, amount in enumerate(('0.00856', '0.00968', '0.01'), 1):
+        start += f'''c:BRD = {{
+            set_variable = {{ name = bfl_dep_{i:02}_active value = 1 }}
+            set_variable = {{ name = bfl_dep_{i:02}_party value = c:FLO }}
+            set_variable = {{ name = bfl_dep_{i:02}_pool value = 0 }}
+            set_variable = {{ name = bfl_dep_{i:02}_principal value = {amount} }}
+            set_variable = {{ name = bfl_dep_{i:02}_withdrawal_requested value = {amount} }} }}\n'''
+    start += '''c:BRD = {
+        set_variable = { name = bfl_bnd_01_active value = 1 }
+        set_variable = { name = bfl_bnd_01_holder value = c:FLO }
+        set_variable = { name = bfl_bnd_01_face value = 0.00713 }
+        set_variable = { name = bfl_bnd_01_basis value = 0.00713 }
+        set_variable = { name = bfl_bnd_01_due value = 0 }
+        bfl_distribute_resolution_cash = yes bfl_resume_after_resolution = yes }
+    '''
+    start += check('fully_funded_fractional_claims_pay_exactly_and_resume',
+        'c:BRD = { gold = 999.96463 var:bfl_state = 0 bfl_deposit_liabilities = 0 '
+        'bfl_bond_debt = 0 bfl_resolution_held = 0 bfl_withdrawals_due = 0 '
+        'var:bfl_resolution_paid = 0.02824 } c:FLO.gold = 1000.03537')
+    start += '''c:BRD = { bfl_distribute_resolution_cash = yes bfl_resume_after_resolution = yes }'''
+    start += check('fractional_full_settlement_cannot_replay',
+        'c:BRD.gold = 999.96463 c:FLO.gold = 1000.03537')
+    start += bank_reset() + '''c:BRD = {
+        set_variable = { name = bfl_dep_01_active value = 1 }
+        set_variable = { name = bfl_dep_01_party value = c:FLO }
+        set_variable = { name = bfl_dep_01_pool value = 0 }
+        set_variable = { name = bfl_dep_01_principal value = 0.00856 }
+        set_variable = { name = bfl_dep_01_withdrawal_requested value = 0.00856 }
+        bfl_pay_deposit_01 = yes }
+    '''
+    start += check('ordinary_full_withdrawal_clears_fractional_claim',
+        'c:BRD = { gold = 999.99144 var:bfl_dep_01_active = 0 bfl_deposit_liabilities = 0 '
+        'bfl_withdrawals_due = 0 } c:FLO.gold = 1000.00856')
+    start += bank_reset() + deposits()
     start += check('real_deposits_fund_the_failed_bank', 'c:BRD = { gold = 1200 bfl_deposit_liabilities = 200 } c:FLO.gold = 900 c:ACC.gold = 900')
     start += '''c:BRD = { set_gold = 100 set_variable = { name = bfl_expense_arrears value = 20 }
         bfl_begin_resolution = yes bfl_evaluate_distress = yes }'''

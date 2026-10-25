@@ -1,0 +1,8 @@
+﻿bfl_market_owned_company = {
+    exists = scope:actor scope:actor = { country_type = location bfl_has_management = yes }
+    bfl_company_equity_eligible = yes is_subject_of = scope:actor
+}
+bfl_market_treasury_company_buy = {
+    bfl_market_owned_company = yes bfl_market_state_owned_units > 0 var:bfl_equity_listed = 1
+    scope:actor.var:bfl_bank = { bfl_can_conduct_business = yes }
+}

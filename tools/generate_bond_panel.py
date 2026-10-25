@@ -22,6 +22,20 @@ def generate(common, effect, loc, write):
     '''
     for i in range(1, 33):
         n = f'bfl_bnd_{i:02}'
+        guis += f'''bfl_bond_offered_row_{i:02} = {{ scope = country is_shown = {{
+            var:bfl_bond_offer_slot = {i} bfl_period <= var:bfl_bond_offer_expiry
+            var:{n}_active = 1 var:{n}_due = 0 var:{n}_generation = var:bfl_bond_offer_generation
+            var:{n}_holder ?= var:bfl_bond_offer_seller }} }}\n'''
+        offered=f'''exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = {{ var:bfl_bond_offer_slot = {i} bfl_period <= var:bfl_bond_offer_expiry }}'''
+        guis += f'''bfl_buy_selected_bond_{i:02} = {{ scope = country
+            is_shown = {{ {offered} }} is_valid = {{ {offered} bfl_selected_bond_offer_ready = yes }}
+            effect = {{ if = {{ limit = {{ {offered} bfl_selected_bond_offer_ready = yes }}
+                save_scope_as = bfl_bond_buyer
+                if = {{ limit = {{ bfl_has_management = yes country_type = location }}
+                    var:bfl_bank = {{ save_scope_as = bfl_bond_buyer }} }}
+                var:bfl_bond_selected_issuer = {{ bfl_accept_sovereign_bond_offer = yes }} }} }} }}\n'''
+        loc(f'bfl_buy_selected_bond_{i:02}_tip', 'Buy this listed bond. Your bank pays its current holder at the offered price. Hover the bond for the price and buyer funds. Exchanges, branches, funds, capital, ownership and expiry are checked again.')
         guis += f'''bfl_bond_row_owned_{i:02} = {{ scope = country is_shown = {{
             OR = {{ var:{n}_holder ?= scope:actor var:{n}_holder ?= scope:actor.var:bfl_bank }} }} }}\n'''
         loc(f'bfl_list_selected_bond_{i:02}_tip', 'Offer this bond for sale at 98% of its principal. Requires a Stock Exchange, ownership and no unpaid interest. The buyer pays the current holder.')
@@ -59,24 +73,10 @@ def generate(common, effect, loc, write):
     }
     bfl_selected_bond_offer_ready = {
         exists = var:bfl_bond_selected_issuer country_exists = var:bfl_bond_selected_issuer
-        bfl_resolved_bond_seller_valid = yes
-        var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot > 0 bfl_period <= var:bfl_bond_offer_expiry
-            exists = var:bfl_bond_offer_seller country_exists = var:bfl_bond_offer_seller
-            var:bfl_bond_offer_seller = { bfl_can_trade_sovereign_bonds = yes } }
-        OR = {
-            AND = { bfl_has_management = yes country_type = location
-                var:bfl_bank = { bfl_can_conduct_business = yes
-                    NOT = { this = prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller }
-                    bfl_free_cash >= prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
-                    bfl_capital_headroom >= prev.var:bfl_bond_selected_issuer.var:bfl_bond_offer_price } }
-            AND = { NOT = { AND = { bfl_has_management = yes country_type = location } }
-                NOT = { this = var:bfl_bond_selected_issuer }
-                NOT = { this = var:bfl_bond_selected_issuer.var:bfl_bond_offer_seller }
-                gold >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
-                OR = { NOT = { bfl_has_accounts = yes } AND = { bfl_can_conduct_business = yes
-                    bfl_free_cash >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price
-                    bfl_capital_headroom >= var:bfl_bond_selected_issuer.var:bfl_bond_offer_price } } }
-        }
+        save_temporary_scope_as = bfl_bond_buyer
+        trigger_if = { limit = { bfl_has_management = yes country_type = location }
+            var:bfl_bank = { save_temporary_scope_as = bfl_bond_buyer } }
+        var:bfl_bond_selected_issuer = { bfl_valid_bond_offer = yes }
     }''')
     common('script_values', 'bond_panel', '''bfl_bond_facility_display = {
         value = 0
@@ -97,7 +97,7 @@ def generate(common, effect, loc, write):
             enabled = { country_exists = this bfl_bond_count > 0 } }
         effect = { scope:actor = {
             set_variable = { name = bfl_bond_selected_issuer value = scope:bond_issuer }
-            } }
+            } scope:bond_issuer = { bfl_refresh_bond_listing = yes } }
         ai_will_do = { value = 0 }
     }''')
     labels = {

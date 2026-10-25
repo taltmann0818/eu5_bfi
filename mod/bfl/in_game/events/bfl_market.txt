@@ -31,14 +31,17 @@ bfl_market.15 = { type = country_event hidden = yes title = bfl_new_capital_subs
                 set_variable = { name = bfl_market_unit_price value = scope:security.bfl_market_buy_price }
                 set_variable = { name = bfl_market_total value = { value = var:bfl_market_unit_price multiply = var:bfl_market_quantity
                      multiply = 100 ceiling = yes divide = 100 } }
-                if = { limit = { var:bfl_market_wallet = 1 always = yes }
+                if = { limit = { scope:security = { bfl_market_treasury_company_buy = yes } always = yes }
+                    set_variable = { name = bfl_market_secondary value = 3 }
+                    set_variable = { name = bfl_market_company_revision value = scope:security.var:bfl_equity_revision } }
+                else_if = { limit = { var:bfl_market_wallet = 1 always = yes }
                     set_variable = { name = bfl_market_secondary value = 2 } }
                 else_if = { limit = { scope:security = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }
                     set_variable = { name = bfl_market_secondary value = 1 } }
                 else_if = { limit = { scope:security = { bfl_dealer_units > 0 } }
                     set_variable = { name = bfl_market_secondary value = 2 } }
                 save_scope_value_as = { name = bfl_market_confirmation value = var:bfl_market_revision }
-                if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.18 } else_if = { limit = { var:bfl_market_secondary = 1 } set_variable = { name = bfl_market_seller value = scope:security.var:bfl_equity_offer_seller } trigger_event_non_silently = bfl_market.10 } else = { trigger_event_non_silently = bfl_market.1 }
+                if = { limit = { var:bfl_market_secondary = 3 } trigger_event_non_silently = bfl_market.19 } else_if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.18 } else_if = { limit = { var:bfl_market_secondary = 1 } set_variable = { name = bfl_market_seller value = scope:security.var:bfl_equity_offer_seller } trigger_event_non_silently = bfl_market.10 } else = { trigger_event_non_silently = bfl_market.1 }
         } }
 bfl_market.12 = { type = country_event hidden = yes title = bfl_sell_confirm_title immediate = {
                 if = { limit = { NOT = { has_variable = bfl_market_revision } } set_variable = { name = bfl_market_revision value = 0 } }
@@ -48,20 +51,23 @@ bfl_market.12 = { type = country_event hidden = yes title = bfl_sell_confirm_tit
                 set_variable = { name = bfl_market_quantity value = scope:share_quantity }
                 set_variable = { name = bfl_market_secondary value = 0 }
                 set_variable = { name = bfl_market_wallet value = 0 }
-                if = { limit = { scope:security.var:bfl_state_owner ?= this scope:security.var:bfl_state_units > 0 } set_variable = { name = bfl_market_wallet value = 1 } }
+                if = { limit = { scope:security.bfl_market_state_owned_units > 0 } set_variable = { name = bfl_market_wallet value = 1 } }
 
                 set_variable = { name = bfl_market_offer_revision value = scope:security.var:bfl_equity_offer_revision }
                 set_variable = { name = bfl_market_unit_price value = scope:security.bfl_equity_quote }
                 set_variable = { name = bfl_market_total value = { value = var:bfl_market_unit_price multiply = var:bfl_market_quantity
                     multiply = scope:security.bfl_price_bid_factor multiply = 100 round = yes divide = 100 } }
-                if = { limit = { var:bfl_market_wallet = 1 always = no }
+                if = { limit = { scope:security = { bfl_market_treasury_company_buy = yes } always = no }
+                    set_variable = { name = bfl_market_secondary value = 3 }
+                    set_variable = { name = bfl_market_company_revision value = scope:security.var:bfl_equity_revision } }
+                else_if = { limit = { var:bfl_market_wallet = 1 always = no }
                     set_variable = { name = bfl_market_secondary value = 2 } }
                 else_if = { limit = { scope:security = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }
                     set_variable = { name = bfl_market_secondary value = 1 } }
                 else_if = { limit = { scope:security = { bfl_dealer_units > 0 } }
                     set_variable = { name = bfl_market_secondary value = 2 } }
                 save_scope_value_as = { name = bfl_market_confirmation value = var:bfl_market_revision }
-                if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.14 } else = { trigger_event_non_silently = bfl_market.3 }
+                if = { limit = { scope:security = { bfl_is_company = yes } var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.20 } else_if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.14 } else = { trigger_event_non_silently = bfl_market.3 }
         } }
 bfl_market.1 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_confirm_desc outcome = neutral
             image = "gfx/interface/illustrations/bfl/charter.dds"
@@ -75,7 +81,15 @@ bfl_market.3 = { type = country_event title = bfl_sell_confirm_title desc = bfl_
             option = { name = bfl_cancel ai_chance = { base = 0 } } }
             bfl_market.4 = { type = country_event hidden = yes title = bfl_sell_confirm_title immediate = { bfl_market_sell_shares = yes
                 if = { limit = { var:bfl_market_result = 0 } trigger_event_non_silently = bfl_market.5 } } }
-bfl_market.18 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_state_confirm_desc outcome = neutral
+bfl_market.19 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_treasury_company_desc outcome = neutral
+        image = "gfx/interface/illustrations/bfl/charter.dds"
+        option = { name = bfl_buy_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.2 } }
+        option = { name = bfl_cancel ai_chance = { base = 0 } } }
+        bfl_market.20 = { type = country_event title = bfl_sell_confirm_title desc = bfl_sell_treasury_company_desc outcome = neutral
+        image = "gfx/interface/illustrations/bfl/charter.dds"
+        option = { name = bfl_sell_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.4 } }
+        option = { name = bfl_cancel ai_chance = { base = 0 } } }
+        bfl_market.18 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_state_confirm_desc outcome = neutral
         image = "gfx/interface/illustrations/bfl/charter.dds"
         option = { name = bfl_buy_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.2 } }
         option = { name = bfl_cancel ai_chance = { base = 0 } } }

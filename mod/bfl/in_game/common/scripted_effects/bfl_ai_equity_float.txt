@@ -1,0 +1,33 @@
+﻿bfl_supply_ai_equity_float = {
+if = { limit = { bfl_equity_issuer = yes bfl_equity_exchange_access = yes
+        OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled = 1 }
+        OR = { AND = { bfl_is_independent_bank = yes is_ai = yes }
+            AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes } } }
+        OR = { NOT = { has_variable = bfl_ai_float_period } bfl_period >= { value = var:bfl_ai_float_period add = 6 } }
+        bfl_dealer_units < { value = var:bfl_total_units multiply = 0.01 }
+        OR = { var:bfl_founder_units >= { value = var:bfl_total_units multiply = 0.8 }
+            AND = { exists = var:bfl_state_owner var:bfl_state_owner = { is_ai = yes }
+                var:bfl_state_units >= { value = var:bfl_total_units multiply = 0.8 } } }
+        bfl_equity_quote > 0 NOT = { has_variable = bfl_operation_guard }
+    }
+        bfl_initialize_market_maker = yes save_scope_as = bfl_float_issuer
+        set_variable = { name = bfl_float_units value = { value = var:bfl_total_units multiply = 0.05 multiply = 1000 floor = yes divide = 1000 } }
+        set_variable = { name = bfl_float_cash value = { value = var:bfl_float_units multiply = bfl_dealer_bid multiply = 100 floor = yes divide = 100 } }
+        if = { limit = { var:bfl_float_units > 0 var:bfl_float_cash >= 0.01 }
+            set_variable = { name = bfl_ai_float_period value = bfl_period }
+            set_variable = { name = bfl_equity_listed value = 1 }
+            if = { limit = { var:bfl_founder_units >= var:bfl_float_units }
+                change_variable = { name = bfl_founder_units subtract = var:bfl_float_units }
+                "estate(estate_type:burghers_estate)" = { estate_add_gold = { value = scope:bfl_float_issuer.var:bfl_float_cash } }
+            }
+            else = { set_variable = { name = bfl_float_basis value = { value = var:bfl_state_basis multiply = var:bfl_float_units divide = var:bfl_state_units } }
+                change_variable = { name = bfl_state_units subtract = var:bfl_float_units }
+                change_variable = { name = bfl_state_basis subtract = var:bfl_float_basis }
+                var:bfl_state_owner = { add_gold = scope:bfl_float_issuer.var:bfl_float_cash } }
+            change_variable = { name = bfl_dealer_units add = var:bfl_float_units }
+            change_variable = { name = bfl_dealer_basis add = var:bfl_float_cash }
+            change_variable = { name = bfl_dealer_cash subtract = var:bfl_float_cash }
+            change_variable = { name = bfl_equity_revision add = 1 }
+        }
+    }
+}

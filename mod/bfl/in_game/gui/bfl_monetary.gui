@@ -77,9 +77,12 @@
             enabled = "[GetScriptedGui('bfl_money_clear_open').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_money_clear_open').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_money_clear_open_tip" } button_regular = { name = "bfl_join_clearing_group_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[GetScriptedGui('bfl_join_clearing_group_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_join_clearing_group_tip"
+        enabled = "[GetScriptedGui('bfl_join_clearing_group_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_join_clearing_group_command" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_join_clearing_group" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
         } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 button_regular = { size = { -1 28 } layoutpolicy_horizontal = expanding text = "bfl_money_clear"
             enabled = "[GetScriptedGui('bfl_money_clear').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
@@ -89,27 +92,39 @@
             enabled = "[GetScriptedGui('bfl_money_repay').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
             onclick = "[GetScriptedGui('bfl_money_repay').Execute(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_money_repay_tip" } button_regular = { name = "bfl_request_discount_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[GetScriptedGui('bfl_request_discount_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_request_discount_tip"
+        enabled = "[GetScriptedGui('bfl_request_discount_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_request_discount_command" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_request_discount" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
         } }hbox = { layoutpolicy_horizontal = expanding spacing = 5 button_regular = { name = "bfl_transfer_bank_bill_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[GetScriptedGui('bfl_transfer_bank_bill_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_transfer_bank_bill_tip"
+        enabled = "[GetScriptedGui('bfl_transfer_bank_bill_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_transfer_bank_bill_command" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_transfer_bank_bill" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
         } button_regular = { name = "bfl_transfer_bank_note_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[GetScriptedGui('bfl_transfer_bank_note_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_transfer_bank_note_tip"
+        enabled = "[GetScriptedGui('bfl_transfer_bank_note_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_transfer_bank_note_command" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_transfer_bank_note" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
         } }button_regular = { name = "bfl_request_public_support_button" size = { 36 36 }
         datacontext = "[GetPlayer]"
-        enabled = "[GetScriptedGui('bfl_request_public_support_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]" tooltip = "bfl_request_public_support_tip"
+        enabled = "[GetScriptedGui('bfl_request_public_support_button').IsValid(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         scripted_action_tooltip = { click_type = left click_mode = single
             action_name = "bfl_request_public_support_command" actor = "[GetPlayer]" }
+        tooltipwidget = { ContextualTooltipType = {
+            blockoverride "title_text" { text = "bfl_request_public_support" }
+            blockoverride "tooltip_content" { using = action_tooltip_inner_content } } }
         icon = { parentanchor = center size = { 26 26 } texture = "gfx/interface/icons/bfl/monetary_clearing.dds" }
         }
             hbox = { layoutpolicy_horizontal = expanding spacing = 5

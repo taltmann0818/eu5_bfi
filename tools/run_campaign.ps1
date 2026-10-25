@@ -5,7 +5,7 @@ param(
     [string]$Output = 'tests/results/local',
     [int]$TimeoutSeconds = 1200,
     [switch]$Graphics,
-    [ValidateSet('bankevents', 'investmentcommenda', 'reforms', 'catalogue', 'family', 'historical', 'boe', 'accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
+    [ValidateSet('bankevents', 'investmentcommenda', 'reforms', 'catalogue', 'family', 'historical', 'boe', 'accounts', 'm0', 'm1', 'm2', 'm3', 'm4', 'm5', 'm5market', 'shareaccess', 'm5pricing', 'm6', 'm6traditions', 'm6discovery', 'm6absolutism', 'm6policy', 'm7', 'm7traditions', 'm7later', 'm7company', 'm7authority', 'm8', 'm8traditions', 'm8renaissance', 'm8absolutism', 'm9', 'm9estate', 'm9workouts', 'm9assets', 'm9default', 'm9overseas', 'm9receiver', 'm9custody', 'm9projects', 'm10', 'm10takeover', 'm10finance')][string]$Suite = 'accounts'
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
@@ -41,6 +41,7 @@ try {
         'm4' { 'tools/m4_treasury_suite.py' }
         'm5' { 'tools/m5_ownership_suite.py' }
         'm5market' { 'tools/m5_market_suite.py' }
+        'shareaccess' { 'tools/share_exchange_suite.py' }
         'm5pricing' { 'tools/m5_pricing_suite.py' }
         'm6' { 'tools/m6_goods_suite.py' }
         'm6policy' { 'tools/m6_policy_suite.py' }

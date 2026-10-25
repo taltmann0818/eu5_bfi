@@ -75,6 +75,10 @@ def build(game, pin=False):
     build_exchange_advance(game)
     from generate_branches import build_native
     build_native(game)
+    # Branch regeneration must retain the professional bank constitution in
+    # native loan eligibility, just as the full script generator does.
+    from generate_bank_reforms import build_native as build_bank_reforms
+    build_bank_reforms(game)
     print('Economy generated: Balance income rows and Credit homepage; native templates owned once.')
 
 

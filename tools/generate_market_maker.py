@@ -51,7 +51,7 @@ def generate(effect):
             NOT = { this = scope:bfl_issuer } bfl_portfolio_capacity = yes
             bfl_free_cash >= scope:bfl_issuer.var:bfl_market_price bfl_capital_headroom >= scope:bfl_issuer.var:bfl_market_price }
         bfl_equity_buyer_units <= { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = var:bfl_market_units }
-        OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+        OR = { bfl_is_bank = yes bfl_market_owned_company = yes AND = { bfl_company_equity_eligible = yes
             scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
     }
         set_variable = bfl_operation_guard
@@ -79,7 +79,7 @@ def generate(effect):
         scope:bfl_market_actor = { set_variable = { name = bfl_market_result value = 1 } }
         remove_variable = bfl_operation_guard
     }''')
-    sell = '''save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
+    sell = '''save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor save_scope_as = actor
         set_variable = { name = bfl_market_result value = 0 }
         if = { limit = { bfl_market_trade_ready = yes
             exists = var:bfl_market_issuer var:bfl_market_quantity > 0 var:bfl_market_total >= 0.01
@@ -96,9 +96,8 @@ def generate(effect):
                             bfl_equity_seller_units >= scope:bfl_market_actor.var:bfl_market_quantity
                             scope:bfl_equity_seller = { bfl_equity_actor_authority = yes } }
                         AND = { scope:bfl_market_actor.var:bfl_market_wallet = 1
-                            var:bfl_state_owner ?= scope:bfl_market_actor
-                            var:bfl_state_units >= scope:bfl_market_actor.var:bfl_market_quantity } }
-                    OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+                            bfl_market_state_owned_units >= scope:bfl_market_actor.var:bfl_market_quantity } }
+                    OR = { bfl_is_bank = yes bfl_market_owned_company = yes AND = { bfl_company_equity_eligible = yes
                         scope:bfl_equity_seller = { bfl_can_originate_company_equity = yes } } } }
                     # A short-lived accepted quote is guaranteed by the dealer.
                     # NAV changes do not silently cancel an otherwise valid sale.
@@ -112,7 +111,10 @@ def generate(effect):
     sell += '''if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 0 scope:bfl_market_actor.var:bfl_market_quantity = bfl_equity_seller_units }
         set_variable = { name = bfl_dealer_released_basis value = bfl_equity_seller_basis } }
 '''
-    sell += '''if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 }
+    from generate_market_repairs import treasury_debit
+    sell += '''if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 bfl_is_company = yes }
+    '''+treasury_debit('scope:bfl_market_actor.var:bfl_market_quantity')+''' }
+    else_if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 }
         set_variable = { name = bfl_dealer_released_basis value = { value = var:bfl_state_basis
             multiply = scope:bfl_market_actor.var:bfl_market_quantity divide = var:bfl_state_units } }
         if = { limit = { scope:bfl_market_actor.var:bfl_market_quantity = var:bfl_state_units }
@@ -180,15 +182,16 @@ def generate(effect):
                             OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 } }
                         AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes
                             OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 } } } } }
-                    save_scope_as = bfl_equity_buyer save_scope_as = bfl_party
+                    save_scope_as = bfl_equity_buyer save_scope_as = bfl_party save_scope_as = actor
+                    if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = actor } }
                     scope:bfl_issuer = { set_variable = { name = bfl_equity_pool value = 0 }
                         if = { limit = { var:bfl_dealer_units > 0 bfl_has_shareholder_capacity = yes
                             scope:bfl_equity_buyer = { bfl_portfolio_capacity = yes bfl_free_cash > 0.01 bfl_capital_headroom > 0.01 }
-                            OR = { bfl_is_bank = yes scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
+                            OR = { bfl_is_bank = yes bfl_market_owned_company = yes scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
                             set_variable = { name = bfl_new_units value = { value = scope:bfl_equity_buyer.bfl_free_cash
                                 max = scope:bfl_equity_buyer.bfl_capital_headroom divide = bfl_dealer_ask
                                 max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_equity_buyer_units }
-                                max = var:bfl_dealer_units max = { value = var:bfl_total_units multiply = 0.05 }
+                                max = bfl_ai_dealer_units max = { value = var:bfl_total_units multiply = 0.05 }
                                 min = 0 multiply = 1000 floor = yes divide = 1000 } }
                             set_variable = { name = bfl_equity_amount value = { value = var:bfl_new_units multiply = bfl_dealer_ask
                                 multiply = 100 round = yes divide = 100 } }

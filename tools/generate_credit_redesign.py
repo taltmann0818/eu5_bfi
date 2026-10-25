@@ -16,9 +16,12 @@ def command(key, art, selected=None):
 
 def generic(key, art):
     return f'''button_regular = {{ name = "{key}_icon" size = {{ 36 36 }} layoutpolicy_horizontal = fixed layoutpolicy_vertical = fixed
-        datacontext = "[GetGenericAction('{key}')]" tooltip = "{key}_tip"
+        datacontext = "[GetGenericAction('{key}')]"
         enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = {{ click_type = left click_mode = single action_name = "{key}" actor = "[GetPlayer]" }}
+        tooltipwidget = {{ ContextualTooltipType = {{
+            blockoverride "title_text" {{ text = "{key}" }}
+            blockoverride "tooltip_content" {{ using = action_tooltip_inner_content }} }} }}
         {glyph(art)} }}'''
 
 
@@ -105,6 +108,18 @@ def layout(loc, ledger, statement):
             deposits += stat('bfl_equity_label',value('equity'),'bfl_equity_detail_tooltip')
         deposits += toolbar(f'''text_single = {{ text = "{title}" autoresize = yes tooltip = "{title}_tip" }} expand = {{ }}
             text_single = {{ raw_text = "[{var(field)}|%0]" autoresize = yes }} {command(command_key,art)}''')
+        if field=='demand_rate':
+            deposits += toolbar('''text_single = { text = "bfl_deposit_admission" autoresize = yes } expand = { }
+                text_single = { text = "bfl_offering_open" autoresize = yes visible = "[EqualTo_CFixedPoint('''+var('accept_deposits')+''','(CFixedPoint)1')]" }
+                text_single = { text = "bfl_offering_closed" autoresize = yes visible = "[Not(EqualTo_CFixedPoint('''+var('accept_deposits')+''','(CFixedPoint)1'))]" }'''
+                +command('bfl_toggle_deposit_admission','deposit'))
+            deposits += '''text_multi = { text = "bfl_deposit_closed_reason" autoresize = yes layoutpolicy_horizontal = expanding
+                visible = "[EqualTo_CFixedPoint('''+var('accept_deposits')+''','(CFixedPoint)0')]" }'''
+        else:
+            for reason,label in [('dividend_losses','bfl_dividend_loss_reason'),('dividend_retained','bfl_dividend_retained_reason'),('dividend_cash','bfl_dividend_cash_reason'),('dividend_capital','bfl_dividend_capital_reason')]:
+                deposits += f'''text_multi = {{ datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry]"
+                    text = "{label}" autoresize = yes layoutpolicy_horizontal = expanding
+                    visible = "[GetScriptedGui('bfl_reason_{reason}').IsShown(GuiScope.SetRoot(Country.MakeScope).End)]" }}'''
     loc('bfl_share_offering','New share subscriptions')
     deposits += toolbar('''text_single = { text = "bfl_share_offering" autoresize = yes } expand = { }
         text_single = { text = "bfl_offering_open" autoresize = yes visible = "[EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_accept_equity').GetValue,'(CFixedPoint)1')]" }
@@ -220,13 +235,16 @@ def bond_layout(loc):
         n=f'bfl_bnd_{i:02}'
         active = f"GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_active').GetValue,'(CFixedPoint)0')"
         owned = f"GetScriptedGui('bfl_bond_row_owned_{i:02}').IsShown(GuiScope.SetRoot(Country.MakeScope).AddScope('actor',GetPlayer.MakeScope).End)"
-        filter_visible = f"And(Or(Not(CreditLateralView.Vars.HasValue('bond_filter','owned')),{owned}),And(Or(Not(CreditLateralView.Vars.HasValue('bond_filter','arrears')),GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_due').GetValue,'(CFixedPoint)0')),Or(Not(CreditLateralView.Vars.HasValue('bond_filter','offered')),EqualTo_CFixedPoint(Country.MakeScope.GetVariable('bfl_bond_offer_slot').GetValue,'(CFixedPoint){i}'))))"
-        loc(f'bfl_bond_row_{i:02}_tip',f"Holder: [Country.MakeScope.GetVariable('{n}_holder').GetCountry.GetName]\\nAnnual interest: [Country.MakeScope.GetVariable('{n}_rate').GetValue|%1]\\nUnpaid interest: [Country.MakeScope.GetVariable('{n}_due').GetValue|2]@gold!")
+        offered=f"GetScriptedGui('bfl_bond_offered_row_{i:02}').IsShown(GuiScope.SetRoot(Country.MakeScope).End)"
+        filter_visible = f"And(Or(Not(CreditLateralView.Vars.HasValue('bond_filter','owned')),{owned}),And(Or(Not(CreditLateralView.Vars.HasValue('bond_filter','arrears')),GreaterThan_CFixedPoint(Country.MakeScope.GetVariable('{n}_due').GetValue,'(CFixedPoint)0')),Or(Not(CreditLateralView.Vars.HasValue('bond_filter','offered')),{offered})))"
+        loc(f'bfl_bond_row_{i:02}_tip',f"Holder: [Country.MakeScope.GetVariable('{n}_holder').GetCountry.GetName]\\nPrincipal: [Country.MakeScope.GetVariable('{n}_face').GetValue|2]@gold!\\nAnnual interest: [Country.MakeScope.GetVariable('{n}_rate').GetValue|%1]\\nUnpaid interest: [Country.MakeScope.GetVariable('{n}_due').GetValue|2]@gold!\\nIssuer's listed price: [Country.MakeScope.GetVariable('bfl_bond_offer_price').GetValue|2]@gold!\\nYour bank's available cash: [GuiScope.SetRoot(GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope).ScriptValue('bfl_free_cash')|2]@gold!\\nYour bank's available capital: [GuiScope.SetRoot(GetPlayer.MakeScope.GetVariable('bfl_bank').GetCountry.MakeScope).ScriptValue('bfl_capital_headroom')|2]@gold!")
         party = f"GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry.MakeScope.GetVariable('{n}_holder').GetCountry"
         columns = f'''text_single = {{ raw_text = "[Country.MakeScope.GetVariable('{n}_face').GetValue|2]@gold!" size = {{ 75 30 }} align = right|vcenter fontsize = 13 }}
             text_single = {{ raw_text = "[Country.MakeScope.GetVariable('{n}_rate').GetValue|%1]" size = {{ 45 30 }} align = right|vcenter fontsize = 13 }}'''
+        buy=command(f'bfl_buy_selected_bond_{i:02}','buy_shares').replace('size = { 36 36 }',
+            f'''size = {{ 36 36 }} visible = "[GetScriptedGui('bfl_buy_selected_bond_{i:02}').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"''',1)
         rows += asset_row(party,f'[{party}.GetName]',columns,f'visible = "[And({active},{filter_visible})]"',
-                          f'tooltip = "bfl_bond_row_{i:02}_tip"',command(f'bfl_list_selected_bond_{i:02}','resale')+command(f'bfl_redeem_selected_bond_{i:02}','redeem'))
+                          f'tooltip = "bfl_bond_row_{i:02}_tip"',buy+command(f'bfl_list_selected_bond_{i:02}','resale')+command(f'bfl_redeem_selected_bond_{i:02}','redeem'))
     body += f'''vbox = {{ spacing = 3 layoutpolicy_horizontal = expanding
         visible = "[GetScriptedGui('bfl_bond_issuer_selected').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End)]"
         datacontext = "[GetPlayer.MakeScope.GetVariable('bfl_bond_selected_issuer').GetCountry]"

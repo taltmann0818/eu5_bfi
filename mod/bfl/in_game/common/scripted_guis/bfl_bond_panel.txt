@@ -15,7 +15,21 @@
                 if = { limit = { bfl_has_management = yes country_type = location }
                     var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
                 var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
-    bfl_bond_row_owned_01 = { scope = country is_shown = {
+    bfl_bond_offered_row_01 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 1 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_01_active = 1 var:bfl_bnd_01_due = 0 var:bfl_bnd_01_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_01_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_01 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 1 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 1 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 1 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
+bfl_bond_row_owned_01 = { scope = country is_shown = {
             OR = { var:bfl_bnd_01_holder ?= scope:actor var:bfl_bnd_01_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_01 = { scope = country
             is_shown = { var:bfl_bond_selected_issuer ?= this var:bfl_bnd_01_active ?= 1 }
@@ -38,6 +52,20 @@ bfl_list_selected_bond_01 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 1 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_02 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 2 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_02_active = 1 var:bfl_bnd_02_due = 0 var:bfl_bnd_02_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_02_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_02 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 2 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 2 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 2 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_02 = { scope = country is_shown = {
             OR = { var:bfl_bnd_02_holder ?= scope:actor var:bfl_bnd_02_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_02 = { scope = country
@@ -61,6 +89,20 @@ bfl_list_selected_bond_02 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 2 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_03 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 3 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_03_active = 1 var:bfl_bnd_03_due = 0 var:bfl_bnd_03_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_03_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_03 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 3 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 3 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 3 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_03 = { scope = country is_shown = {
             OR = { var:bfl_bnd_03_holder ?= scope:actor var:bfl_bnd_03_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_03 = { scope = country
@@ -84,6 +126,20 @@ bfl_list_selected_bond_03 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 3 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_04 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 4 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_04_active = 1 var:bfl_bnd_04_due = 0 var:bfl_bnd_04_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_04_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_04 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 4 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 4 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 4 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_04 = { scope = country is_shown = {
             OR = { var:bfl_bnd_04_holder ?= scope:actor var:bfl_bnd_04_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_04 = { scope = country
@@ -107,6 +163,20 @@ bfl_list_selected_bond_04 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 4 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_05 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 5 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_05_active = 1 var:bfl_bnd_05_due = 0 var:bfl_bnd_05_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_05_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_05 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 5 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 5 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 5 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_05 = { scope = country is_shown = {
             OR = { var:bfl_bnd_05_holder ?= scope:actor var:bfl_bnd_05_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_05 = { scope = country
@@ -130,6 +200,20 @@ bfl_list_selected_bond_05 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 5 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_06 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 6 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_06_active = 1 var:bfl_bnd_06_due = 0 var:bfl_bnd_06_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_06_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_06 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 6 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 6 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 6 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_06 = { scope = country is_shown = {
             OR = { var:bfl_bnd_06_holder ?= scope:actor var:bfl_bnd_06_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_06 = { scope = country
@@ -153,6 +237,20 @@ bfl_list_selected_bond_06 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 6 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_07 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 7 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_07_active = 1 var:bfl_bnd_07_due = 0 var:bfl_bnd_07_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_07_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_07 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 7 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 7 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 7 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_07 = { scope = country is_shown = {
             OR = { var:bfl_bnd_07_holder ?= scope:actor var:bfl_bnd_07_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_07 = { scope = country
@@ -176,6 +274,20 @@ bfl_list_selected_bond_07 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 7 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_08 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 8 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_08_active = 1 var:bfl_bnd_08_due = 0 var:bfl_bnd_08_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_08_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_08 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 8 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 8 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 8 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_08 = { scope = country is_shown = {
             OR = { var:bfl_bnd_08_holder ?= scope:actor var:bfl_bnd_08_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_08 = { scope = country
@@ -199,6 +311,20 @@ bfl_list_selected_bond_08 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 8 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_09 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 9 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_09_active = 1 var:bfl_bnd_09_due = 0 var:bfl_bnd_09_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_09_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_09 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 9 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 9 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 9 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_09 = { scope = country is_shown = {
             OR = { var:bfl_bnd_09_holder ?= scope:actor var:bfl_bnd_09_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_09 = { scope = country
@@ -222,6 +348,20 @@ bfl_list_selected_bond_09 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 9 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_10 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 10 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_10_active = 1 var:bfl_bnd_10_due = 0 var:bfl_bnd_10_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_10_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_10 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 10 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 10 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 10 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_10 = { scope = country is_shown = {
             OR = { var:bfl_bnd_10_holder ?= scope:actor var:bfl_bnd_10_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_10 = { scope = country
@@ -245,6 +385,20 @@ bfl_list_selected_bond_10 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 10 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_11 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 11 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_11_active = 1 var:bfl_bnd_11_due = 0 var:bfl_bnd_11_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_11_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_11 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 11 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 11 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 11 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_11 = { scope = country is_shown = {
             OR = { var:bfl_bnd_11_holder ?= scope:actor var:bfl_bnd_11_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_11 = { scope = country
@@ -268,6 +422,20 @@ bfl_list_selected_bond_11 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 11 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_12 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 12 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_12_active = 1 var:bfl_bnd_12_due = 0 var:bfl_bnd_12_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_12_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_12 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 12 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 12 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 12 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_12 = { scope = country is_shown = {
             OR = { var:bfl_bnd_12_holder ?= scope:actor var:bfl_bnd_12_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_12 = { scope = country
@@ -291,6 +459,20 @@ bfl_list_selected_bond_12 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 12 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_13 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 13 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_13_active = 1 var:bfl_bnd_13_due = 0 var:bfl_bnd_13_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_13_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_13 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 13 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 13 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 13 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_13 = { scope = country is_shown = {
             OR = { var:bfl_bnd_13_holder ?= scope:actor var:bfl_bnd_13_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_13 = { scope = country
@@ -314,6 +496,20 @@ bfl_list_selected_bond_13 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 13 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_14 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 14 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_14_active = 1 var:bfl_bnd_14_due = 0 var:bfl_bnd_14_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_14_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_14 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 14 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 14 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 14 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_14 = { scope = country is_shown = {
             OR = { var:bfl_bnd_14_holder ?= scope:actor var:bfl_bnd_14_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_14 = { scope = country
@@ -337,6 +533,20 @@ bfl_list_selected_bond_14 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 14 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_15 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 15 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_15_active = 1 var:bfl_bnd_15_due = 0 var:bfl_bnd_15_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_15_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_15 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 15 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 15 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 15 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_15 = { scope = country is_shown = {
             OR = { var:bfl_bnd_15_holder ?= scope:actor var:bfl_bnd_15_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_15 = { scope = country
@@ -360,6 +570,20 @@ bfl_list_selected_bond_15 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 15 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_16 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 16 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_16_active = 1 var:bfl_bnd_16_due = 0 var:bfl_bnd_16_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_16_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_16 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 16 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 16 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 16 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_16 = { scope = country is_shown = {
             OR = { var:bfl_bnd_16_holder ?= scope:actor var:bfl_bnd_16_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_16 = { scope = country
@@ -383,6 +607,20 @@ bfl_list_selected_bond_16 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 16 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_17 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 17 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_17_active = 1 var:bfl_bnd_17_due = 0 var:bfl_bnd_17_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_17_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_17 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 17 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 17 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 17 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_17 = { scope = country is_shown = {
             OR = { var:bfl_bnd_17_holder ?= scope:actor var:bfl_bnd_17_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_17 = { scope = country
@@ -406,6 +644,20 @@ bfl_list_selected_bond_17 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 17 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_18 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 18 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_18_active = 1 var:bfl_bnd_18_due = 0 var:bfl_bnd_18_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_18_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_18 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 18 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 18 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 18 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_18 = { scope = country is_shown = {
             OR = { var:bfl_bnd_18_holder ?= scope:actor var:bfl_bnd_18_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_18 = { scope = country
@@ -429,6 +681,20 @@ bfl_list_selected_bond_18 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 18 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_19 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 19 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_19_active = 1 var:bfl_bnd_19_due = 0 var:bfl_bnd_19_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_19_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_19 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 19 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 19 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 19 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_19 = { scope = country is_shown = {
             OR = { var:bfl_bnd_19_holder ?= scope:actor var:bfl_bnd_19_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_19 = { scope = country
@@ -452,6 +718,20 @@ bfl_list_selected_bond_19 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 19 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_20 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 20 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_20_active = 1 var:bfl_bnd_20_due = 0 var:bfl_bnd_20_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_20_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_20 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 20 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 20 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 20 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_20 = { scope = country is_shown = {
             OR = { var:bfl_bnd_20_holder ?= scope:actor var:bfl_bnd_20_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_20 = { scope = country
@@ -475,6 +755,20 @@ bfl_list_selected_bond_20 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 20 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_21 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 21 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_21_active = 1 var:bfl_bnd_21_due = 0 var:bfl_bnd_21_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_21_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_21 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 21 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 21 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 21 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_21 = { scope = country is_shown = {
             OR = { var:bfl_bnd_21_holder ?= scope:actor var:bfl_bnd_21_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_21 = { scope = country
@@ -498,6 +792,20 @@ bfl_list_selected_bond_21 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 21 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_22 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 22 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_22_active = 1 var:bfl_bnd_22_due = 0 var:bfl_bnd_22_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_22_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_22 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 22 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 22 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 22 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_22 = { scope = country is_shown = {
             OR = { var:bfl_bnd_22_holder ?= scope:actor var:bfl_bnd_22_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_22 = { scope = country
@@ -521,6 +829,20 @@ bfl_list_selected_bond_22 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 22 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_23 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 23 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_23_active = 1 var:bfl_bnd_23_due = 0 var:bfl_bnd_23_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_23_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_23 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 23 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 23 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 23 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_23 = { scope = country is_shown = {
             OR = { var:bfl_bnd_23_holder ?= scope:actor var:bfl_bnd_23_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_23 = { scope = country
@@ -544,6 +866,20 @@ bfl_list_selected_bond_23 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 23 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_24 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 24 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_24_active = 1 var:bfl_bnd_24_due = 0 var:bfl_bnd_24_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_24_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_24 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 24 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 24 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 24 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_24 = { scope = country is_shown = {
             OR = { var:bfl_bnd_24_holder ?= scope:actor var:bfl_bnd_24_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_24 = { scope = country
@@ -567,6 +903,20 @@ bfl_list_selected_bond_24 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 24 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_25 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 25 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_25_active = 1 var:bfl_bnd_25_due = 0 var:bfl_bnd_25_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_25_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_25 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 25 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 25 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 25 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_25 = { scope = country is_shown = {
             OR = { var:bfl_bnd_25_holder ?= scope:actor var:bfl_bnd_25_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_25 = { scope = country
@@ -590,6 +940,20 @@ bfl_list_selected_bond_25 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 25 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_26 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 26 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_26_active = 1 var:bfl_bnd_26_due = 0 var:bfl_bnd_26_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_26_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_26 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 26 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 26 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 26 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_26 = { scope = country is_shown = {
             OR = { var:bfl_bnd_26_holder ?= scope:actor var:bfl_bnd_26_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_26 = { scope = country
@@ -613,6 +977,20 @@ bfl_list_selected_bond_26 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 26 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_27 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 27 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_27_active = 1 var:bfl_bnd_27_due = 0 var:bfl_bnd_27_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_27_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_27 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 27 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 27 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 27 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_27 = { scope = country is_shown = {
             OR = { var:bfl_bnd_27_holder ?= scope:actor var:bfl_bnd_27_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_27 = { scope = country
@@ -636,6 +1014,20 @@ bfl_list_selected_bond_27 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 27 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_28 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 28 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_28_active = 1 var:bfl_bnd_28_due = 0 var:bfl_bnd_28_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_28_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_28 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 28 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 28 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 28 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_28 = { scope = country is_shown = {
             OR = { var:bfl_bnd_28_holder ?= scope:actor var:bfl_bnd_28_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_28 = { scope = country
@@ -659,6 +1051,20 @@ bfl_list_selected_bond_28 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 28 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_29 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 29 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_29_active = 1 var:bfl_bnd_29_due = 0 var:bfl_bnd_29_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_29_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_29 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 29 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 29 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 29 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_29 = { scope = country is_shown = {
             OR = { var:bfl_bnd_29_holder ?= scope:actor var:bfl_bnd_29_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_29 = { scope = country
@@ -682,6 +1088,20 @@ bfl_list_selected_bond_29 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 29 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_30 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 30 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_30_active = 1 var:bfl_bnd_30_due = 0 var:bfl_bnd_30_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_30_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_30 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 30 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 30 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 30 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_30 = { scope = country is_shown = {
             OR = { var:bfl_bnd_30_holder ?= scope:actor var:bfl_bnd_30_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_30 = { scope = country
@@ -705,6 +1125,20 @@ bfl_list_selected_bond_30 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 30 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_31 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 31 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_31_active = 1 var:bfl_bnd_31_due = 0 var:bfl_bnd_31_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_31_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_31 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 31 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 31 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 31 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_31 = { scope = country is_shown = {
             OR = { var:bfl_bnd_31_holder ?= scope:actor var:bfl_bnd_31_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_31 = { scope = country
@@ -728,6 +1162,20 @@ bfl_list_selected_bond_31 = { scope = country
                 var:bfl_bond_selected_issuer = { set_variable = { name = bfl_bond_requested_slot value = 31 }
                     bfl_list_owned_sovereign_bond = yes remove_variable = bfl_bond_requested_slot }
             } } }
+bfl_bond_offered_row_32 = { scope = country is_shown = {
+            var:bfl_bond_offer_slot = 32 bfl_period <= var:bfl_bond_offer_expiry
+            var:bfl_bnd_32_active = 1 var:bfl_bnd_32_due = 0 var:bfl_bnd_32_generation = var:bfl_bond_offer_generation
+            var:bfl_bnd_32_holder ?= var:bfl_bond_offer_seller } }
+bfl_buy_selected_bond_32 = { scope = country
+            is_shown = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 32 bfl_period <= var:bfl_bond_offer_expiry } } is_valid = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 32 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+            effect = { if = { limit = { exists = var:bfl_bond_selected_issuer
+            var:bfl_bond_selected_issuer = { var:bfl_bond_offer_slot = 32 bfl_period <= var:bfl_bond_offer_expiry } bfl_selected_bond_offer_ready = yes }
+                save_scope_as = bfl_bond_buyer
+                if = { limit = { bfl_has_management = yes country_type = location }
+                    var:bfl_bank = { save_scope_as = bfl_bond_buyer } }
+                var:bfl_bond_selected_issuer = { bfl_accept_sovereign_bond_offer = yes } } } }
 bfl_bond_row_owned_32 = { scope = country is_shown = {
             OR = { var:bfl_bnd_32_holder ?= scope:actor var:bfl_bnd_32_holder ?= scope:actor.var:bfl_bank } } }
 bfl_redeem_selected_bond_32 = { scope = country

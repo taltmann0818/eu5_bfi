@@ -143,8 +143,8 @@ bfl_has_accounts = yes var:bfl_state < 5
 }
 bfl_can_originate_bank_share_transfer = {
 bfl_can_conduct_business = yes
-OR = { current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
-OR = { AND = { bfl_is_independent_bank = yes has_advance = bfl_bank_share_dealing } AND = { bfl_has_valid_controller = yes overlord ?= { has_advance = bfl_bank_share_dealing } } }
+OR = { current_age = age_1_traditions current_age = age_2_renaissance current_age = age_3_discovery current_age = age_4_reformation current_age = age_5_absolutism current_age = age_6_revolutions }
+bfl_can_trade_sovereign_bonds = yes
 }
 bfl_can_service_bank_share_transfer = {
 bfl_has_accounts = yes var:bfl_state < 5

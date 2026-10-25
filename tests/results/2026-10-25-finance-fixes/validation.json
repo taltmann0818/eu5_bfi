@@ -1,0 +1,92 @@
+{
+  "recorded": "2026-10-25",
+  "runtime_sha256": "7288e89b83bbc282eb64384606ae664737de7baed6295be26a81398c194cd07a",
+  "game_version": "1.4.4",
+  "cmf_version": "2.5.0",
+  "engine": {
+    "recovery": {
+      "passed": true,
+      "assertions": 61,
+      "passed_assertions": 61,
+      "errors": [],
+      "report": "recovery/campaign.json",
+      "manifest": "recovery/manifest.json"
+    },
+    "credit": {
+      "passed": true,
+      "assertions": 46,
+      "passed_assertions": 46,
+      "errors": [],
+      "report": "credit/campaign.json",
+      "manifest": "credit/manifest.json"
+    },
+    "accounts": {
+      "passed": false,
+      "assertions": 120,
+      "passed_assertions": 118,
+      "errors": [
+        "Failed: bank_autonomous_takeover_funded",
+        "Failed: history_twelve_settlements"
+      ],
+      "report": "accounts/campaign.json",
+      "manifest": "accounts/manifest.json"
+    },
+    "charter": {
+      "passed": false,
+      "assertions": 24,
+      "passed_assertions": 24,
+      "errors": [
+        "Missing/unexpected cases: reform_adds_own_slot"
+      ],
+      "report": "charter/campaign.json",
+      "manifest": "charter/manifest.json"
+    },
+    "automation": {
+      "passed": false,
+      "assertions": 36,
+      "passed_assertions": 35,
+      "errors": [
+        "Failed: expenses_facility_funds_two_natural_months_above_old_cash_ceiling"
+      ],
+      "report": "automation/campaign.json",
+      "manifest": "automation/manifest.json"
+    }
+  },
+  "saved_campaign": "saved-recovery/campaign.json",
+  "offline": {
+    "unit_tests": 150,
+    "passed": true,
+    "source_files": 480,
+    "registered_graphics": 114,
+    "pinned_sources": "match",
+    "deterministic_generation": true
+  },
+  "visual": {
+    "verified_by": "Assistant live inspection using the computer-use skill",
+    "resolution": [
+      2560,
+      1440
+    ],
+    "observations": [
+      "Company selection, mandate highlight and 100-ducat capital transfer: 10 to 110.",
+      "Share selection through price area, one-share purchase: bank 4800 to 4798.80; holding 100 to 101.",
+      "One-share charter-stake sale confirmed; native diplomat cost and cooldown observed."
+    ],
+    "limits": [
+      "No captured screenshot artifact; observations are a written inspection record.",
+      "Additional UI scales, crew transfer and exploration execution remain separate checks."
+    ]
+  },
+  "rejected_or_incomplete": {
+    "accounts": "Not a full pass. Legacy fixture sets the retired strategy-mode variable without enabling native Credit Management; its automatic-takeover assertion fails. Its history_twelve_settlements assertion also fails and remains unaccepted.",
+    "charter": "All 24 observed assertions pass, including funded manual and automatic takeover, but the collector rejects the absent reform_adds_own_slot result. No full-suite pass claimed.",
+    "automation": "35 of 36 assertions pass, including funded automatic loan offers, consented native lending, existing-stock investment and company policy. The natural-month expenses-facility assertion fails; it records only one draw as native budgets change. No full-suite pass claimed.",
+    "earlier_recovery": "Earlier recovery assertions passed but source changed during staging. Superseded by the unchanged-runtime recovery report."
+  },
+  "remaining": [
+    "Investigate/update accounts, charter and expenses-facility acceptance failures; do not waive their results.",
+    "Human semantic review of ten model-assisted tooltip translations.",
+    "Broad third-party playset compatibility and long-run balance."
+  ],
+  "milestones": "Focused regression evidence; no entire milestone newly complete."
+}

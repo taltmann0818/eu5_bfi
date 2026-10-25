@@ -291,7 +291,7 @@ def generate(common, effect, loc, tune):
                 bfl_allocate_asset_row = yes }} }}\n'''
         held += f'if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_holder var:{n}_holder = {{ bfl_financial_recipient = yes }} var:{n}_holder = scope:bfl_bond_processing_holder }} bfl_service_bond_{i:02} = yes }}\n'
     common('scripted_effects', 'bond_settlement', settlement
-           + effect('bfl_service_sovereign_bonds', '\n'.join(f'bfl_service_bond_{i:02} = yes' for i in range(1, COUNT + 1)))
+           + effect('bfl_service_sovereign_bonds', '\n'.join(f'bfl_service_bond_{i:02} = yes' for i in range(1, COUNT + 1))+'\nbfl_refresh_bond_listing = yes')
            + effect('bfl_settle_held_sovereign_bonds', held + '}'))
     common('scripted_effects', 'bond_asset_statement', effect('bfl_add_sovereign_bond_assets', assets + '}'))
     common('scripted_triggers', 'bond_offers', '''

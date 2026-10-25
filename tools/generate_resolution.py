@@ -132,9 +132,15 @@ def generate(common, effect, loc, write):
         n = f'bfl_dep_{i:02}'
         pay += effect(f'bfl_resolution_pay_{i:02}', f'''
             if = {{ limit = {{ var:{n}_active = 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }}
-                change_variable = {{ name = {n}_recovery_held add = {{ value = var:{n}_principal add = var:{n}_interest_due
+                # Full funding pays the exact native fixed-point claim. Cent
+                # rounding applies only to a partial, proportional recovery.
+                # Otherwise sub-cent claims can keep a solvent bank in resolution forever.
+                if = {{ limit = {{ var:bfl_resolution_budget >= var:bfl_resolution_pool }}
+                    set_variable = {{ name = {n}_recovery_held value = {{ value = var:{n}_principal add = var:{n}_interest_due }} }}
+                }}
+                else = {{ change_variable = {{ name = {n}_recovery_held add = {{ value = var:{n}_principal add = var:{n}_interest_due
                     subtract = var:{n}_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-                    multiply = 100 floor = yes divide = 100 }} }} }}
+                    multiply = 100 floor = yes divide = 100 }} }} }} }}
             if = {{ limit = {{ var:{n}_active = 1 exists = var:{n}_party var:{n}_party = {{ bfl_financial_recipient = yes }}
                 gold >= {{ value = bfl_resolution_other_reserves add = bfl_resolution_held }} }}
                 var:{n}_party = {{ set_variable = {{ name = bfl_pool value = scope:bfl_resolution_bank.var:{n}_pool }} }}
@@ -165,9 +171,12 @@ def generate(common, effect, loc, write):
         n = f'bfl_bnd_{i:02}'
         pay += effect(f'bfl_resolution_pay_bond_{i:02}', f'''
             if = {{ limit = {{ var:{n}_active ?= 1 var:bfl_resolution_pool > 0 var:bfl_resolution_budget > 0 }}
-                change_variable = {{ name = {n}_recovery_held add = {{ value = var:{n}_face add = var:{n}_due
+                if = {{ limit = {{ var:bfl_resolution_budget >= var:bfl_resolution_pool }}
+                    set_variable = {{ name = {n}_recovery_held value = {{ value = var:{n}_face add = var:{n}_due }} }}
+                }}
+                else = {{ change_variable = {{ name = {n}_recovery_held add = {{ value = var:{n}_face add = var:{n}_due
                     subtract = var:{n}_recovery_held multiply = var:bfl_resolution_budget divide = var:bfl_resolution_pool
-                    multiply = 100 floor = yes divide = 100 }} }} }}
+                    multiply = 100 floor = yes divide = 100 }} }} }} }}
             if = {{ limit = {{ var:{n}_active ?= 1 var:{n}_recovery_held > 0 exists = var:{n}_holder
                 var:{n}_holder = {{ bfl_financial_recipient = yes }}
                 gold >= {{ value = bfl_resolution_other_reserves add = bfl_resolution_held }} }}

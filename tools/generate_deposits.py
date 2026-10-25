@@ -118,6 +118,8 @@ def generate(common, effect, loc):
                 var:{n}_party = {{ save_scope_as = bfl_deposit_recipient }}
                 set_variable = {{ name = bfl_payment value = {{ value = gold subtract = 25 subtract = var:bfl_cash_committed
                     min = 0 max = var:{n}_withdrawal_requested multiply = 100 floor = yes divide = 100 }} }}
+                if = {{ limit = {{ gold >= {{ value = var:{n}_withdrawal_requested add = 25 add = var:bfl_cash_committed }} }}
+                    set_variable = {{ name = bfl_payment value = var:{n}_withdrawal_requested }} }}
                 add_gold = bfl_negative_payment
                 var:{n}_party = {{ bfl_credit_depositor = yes }}
                 if = {{ limit = {{ var:bfl_payment > 0 }}

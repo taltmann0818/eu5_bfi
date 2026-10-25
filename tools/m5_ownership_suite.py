@@ -91,8 +91,9 @@ def fixture(token, fingerprint):
         set_variable = { name = bfl_requested_units value = 10 } set_variable = { name = bfl_requested_multiplier value = 1 }
         bfl_list_equity_offer = yes
     '''
-    start += check('seller_missing_research_rejects', 'var:bfl_equity_offer_active = 0 c:PRZ = { bfl_owns_stock_exchange = yes }')
-    start += '''c:VEN.capital = { destroy_all_buildings_of_type = building_type:stock_exchange }
+    start += check('seller_completed_exchange_without_research_lists', 'var:bfl_equity_offer_active = 1 c:PRZ = { bfl_owns_stock_exchange = yes NOT = { has_advance = bfl_bank_share_dealing } }')
+    start += '''set_variable = { name = bfl_equity_offer_active value = 0 }
+        c:VEN.capital = { destroy_all_buildings_of_type = building_type:stock_exchange }
         c:PRZ = { research_advance = advance_type:bfl_bank_share_dealing } bfl_list_equity_offer = yes
     '''
     start += check('seller_missing_building_rejects', 'var:bfl_equity_offer_active = 0')
@@ -107,11 +108,12 @@ def fixture(token, fingerprint):
     start += '''c:GEN.capital = { construct_building = { building_type = building_type:stock_exchange owner = c:ACC instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_custom_bonds_title } }
         c:ACC = { save_scope_as = bfl_equity_actor save_scope_as = bfl_equity_buyer } bfl_prepare_equity_order = yes
     '''
-    start += check('buyer_missing_research_with_completed_building_rejects', 'c:ACC = { bfl_owns_stock_exchange = yes NOT = { exists = var:bfl_order_issuer } }')
-    start += '''c:GEN.capital = { destroy_all_buildings_of_type = building_type:stock_exchange }
+    start += check('buyer_completed_exchange_without_research_quotes', 'c:ACC = { bfl_owns_stock_exchange = yes NOT = { has_advance = bfl_bank_share_dealing } var:bfl_order_issuer = c:BRD var:bfl_order_price = 10 }')
+    start += '''c:ACC = { remove_variable = bfl_order_issuer }
+        c:GEN.capital = { destroy_all_buildings_of_type = building_type:stock_exchange }
         c:ACC = { research_advance = advance_type:bfl_bank_share_dealing } bfl_prepare_equity_order = yes
     '''
-    start += check('buyer_research_without_building_rejects', 'c:ACC = { NOT = { exists = var:bfl_order_issuer } }')
+    start += check('legacy_research_without_building_rejects', 'c:ACC = { NOT = { exists = var:bfl_order_issuer } }')
     start += '''c:GEN.capital = { construct_building = { building_type = building_type:stock_exchange owner = c:ACC instant = yes cost_multiplier = 0 cost_multiplier_reason = bfl_custom_bonds_title } }
         bfl_prepare_equity_order = yes
     '''
@@ -252,7 +254,9 @@ def fixture(token, fingerprint):
     '''
     start += check('majority_financial_votes_control_independent_payout_without_political_transfer','c:PRZ = { var:bfl_payout_ratio = 0.5 bfl_is_independent_bank = yes }')
     start += '''set_variable = { name = bfl_payout_ratio value = 0.25 }
-        c:FLO = { set_variable = { name = bfl_exchange_selected value = c:BRD } bfl_apply_equity_vote_payout_0 = yes }
+        # Test an outside shareholder. FLO is the live controller and is
+        # entitled to change its own charter's payout policy.
+        c:VEN = { set_variable = { name = bfl_exchange_selected value = c:BRD } bfl_apply_equity_vote_payout_0 = yes }
     '''
     start += check('chartered_policy_remains_reserved_to_live_controller','var:bfl_payout_ratio = 0.25 c:FLO = { bfl_has_payout_authority = yes }')
     for pool, estate in [(2,'nobles_estate'),(3,'clergy_estate'),(4,'peasants_estate')]:

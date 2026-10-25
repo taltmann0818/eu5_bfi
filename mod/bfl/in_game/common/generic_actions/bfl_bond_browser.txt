@@ -11,6 +11,6 @@
             enabled = { country_exists = this bfl_bond_count > 0 } }
         effect = { scope:actor = {
             set_variable = { name = bfl_bond_selected_issuer value = scope:bond_issuer }
-            } }
+            } scope:bond_issuer = { bfl_refresh_bond_listing = yes } }
         ai_will_do = { value = 0 }
     }

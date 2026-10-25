@@ -11,6 +11,8 @@ save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor save_scope_as 
                 set_variable = { name = bfl_market_price value = scope:bfl_market_actor.var:bfl_market_total }
                 if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet ?= 1 }
                     bfl_buy_charter_dealer_inventory = yes }
+                else_if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 3 }
+                    bfl_buy_treasury_company_shares = yes }
                 else_if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 1
                     var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry
                     var:bfl_equity_offer_revision = scope:bfl_market_actor.var:bfl_market_offer_revision
@@ -131,7 +133,7 @@ if = { limit = {
             NOT = { this = scope:bfl_issuer } bfl_portfolio_capacity = yes
             bfl_free_cash >= scope:bfl_issuer.var:bfl_market_price bfl_capital_headroom >= scope:bfl_issuer.var:bfl_market_price }
         bfl_equity_buyer_units <= { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = var:bfl_market_units }
-        OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+        OR = { bfl_is_bank = yes bfl_market_owned_company = yes AND = { bfl_company_equity_eligible = yes
             scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
     }
         set_variable = bfl_operation_guard
@@ -161,7 +163,7 @@ if = { limit = {
     }
 }
 bfl_market_sell_shares = {
-save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
+save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor save_scope_as = actor
         set_variable = { name = bfl_market_result value = 0 }
         if = { limit = { bfl_market_trade_ready = yes
             exists = var:bfl_market_issuer var:bfl_market_quantity > 0 var:bfl_market_total >= 0.01
@@ -178,9 +180,8 @@ save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
                             bfl_equity_seller_units >= scope:bfl_market_actor.var:bfl_market_quantity
                             scope:bfl_equity_seller = { bfl_equity_actor_authority = yes } }
                         AND = { scope:bfl_market_actor.var:bfl_market_wallet = 1
-                            var:bfl_state_owner ?= scope:bfl_market_actor
-                            var:bfl_state_units >= scope:bfl_market_actor.var:bfl_market_quantity } }
-                    OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+                            bfl_market_state_owned_units >= scope:bfl_market_actor.var:bfl_market_quantity } }
+                    OR = { bfl_is_bank = yes bfl_market_owned_company = yes AND = { bfl_company_equity_eligible = yes
                         scope:bfl_equity_seller = { bfl_can_originate_company_equity = yes } } } }
                     # A short-lived accepted quote is guaranteed by the dealer.
                     # NAV changes do not silently cancel an otherwise valid sale.
@@ -192,7 +193,203 @@ save_scope_as = bfl_market_actor save_scope_as = bfl_equity_actor
                             multiply = scope:bfl_market_actor.var:bfl_market_quantity divide = bfl_equity_seller_units } } }
     if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 0 scope:bfl_market_actor.var:bfl_market_quantity = bfl_equity_seller_units }
         set_variable = { name = bfl_dealer_released_basis value = bfl_equity_seller_basis } }
-if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 }
+if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 bfl_is_company = yes }
+    set_variable = { name = bfl_treasury_remaining value = scope:bfl_market_actor.var:bfl_market_quantity }
+        set_variable = { name = bfl_dealer_released_basis value = 0 }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_01_active = 1
+            var:bfl_shr_01_pool = 0 var:bfl_shr_01_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_01_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_01_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_01_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_01_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_01_basis } }
+            change_variable = { name = bfl_shr_01_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_01_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_01_units <= 0 } set_variable = { name = bfl_shr_01_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_02_active = 1
+            var:bfl_shr_02_pool = 0 var:bfl_shr_02_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_02_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_02_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_02_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_02_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_02_basis } }
+            change_variable = { name = bfl_shr_02_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_02_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_02_units <= 0 } set_variable = { name = bfl_shr_02_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_03_active = 1
+            var:bfl_shr_03_pool = 0 var:bfl_shr_03_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_03_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_03_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_03_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_03_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_03_basis } }
+            change_variable = { name = bfl_shr_03_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_03_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_03_units <= 0 } set_variable = { name = bfl_shr_03_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_04_active = 1
+            var:bfl_shr_04_pool = 0 var:bfl_shr_04_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_04_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_04_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_04_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_04_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_04_basis } }
+            change_variable = { name = bfl_shr_04_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_04_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_04_units <= 0 } set_variable = { name = bfl_shr_04_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_05_active = 1
+            var:bfl_shr_05_pool = 0 var:bfl_shr_05_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_05_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_05_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_05_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_05_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_05_basis } }
+            change_variable = { name = bfl_shr_05_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_05_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_05_units <= 0 } set_variable = { name = bfl_shr_05_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_06_active = 1
+            var:bfl_shr_06_pool = 0 var:bfl_shr_06_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_06_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_06_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_06_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_06_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_06_basis } }
+            change_variable = { name = bfl_shr_06_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_06_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_06_units <= 0 } set_variable = { name = bfl_shr_06_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_07_active = 1
+            var:bfl_shr_07_pool = 0 var:bfl_shr_07_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_07_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_07_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_07_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_07_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_07_basis } }
+            change_variable = { name = bfl_shr_07_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_07_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_07_units <= 0 } set_variable = { name = bfl_shr_07_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_08_active = 1
+            var:bfl_shr_08_pool = 0 var:bfl_shr_08_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_08_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_08_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_08_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_08_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_08_basis } }
+            change_variable = { name = bfl_shr_08_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_08_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_08_units <= 0 } set_variable = { name = bfl_shr_08_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_09_active = 1
+            var:bfl_shr_09_pool = 0 var:bfl_shr_09_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_09_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_09_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_09_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_09_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_09_basis } }
+            change_variable = { name = bfl_shr_09_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_09_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_09_units <= 0 } set_variable = { name = bfl_shr_09_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_10_active = 1
+            var:bfl_shr_10_pool = 0 var:bfl_shr_10_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_10_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_10_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_10_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_10_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_10_basis } }
+            change_variable = { name = bfl_shr_10_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_10_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_10_units <= 0 } set_variable = { name = bfl_shr_10_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_11_active = 1
+            var:bfl_shr_11_pool = 0 var:bfl_shr_11_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_11_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_11_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_11_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_11_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_11_basis } }
+            change_variable = { name = bfl_shr_11_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_11_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_11_units <= 0 } set_variable = { name = bfl_shr_11_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_12_active = 1
+            var:bfl_shr_12_pool = 0 var:bfl_shr_12_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_12_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_12_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_12_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_12_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_12_basis } }
+            change_variable = { name = bfl_shr_12_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_12_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_12_units <= 0 } set_variable = { name = bfl_shr_12_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_13_active = 1
+            var:bfl_shr_13_pool = 0 var:bfl_shr_13_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_13_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_13_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_13_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_13_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_13_basis } }
+            change_variable = { name = bfl_shr_13_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_13_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_13_units <= 0 } set_variable = { name = bfl_shr_13_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_14_active = 1
+            var:bfl_shr_14_pool = 0 var:bfl_shr_14_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_14_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_14_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_14_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_14_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_14_basis } }
+            change_variable = { name = bfl_shr_14_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_14_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_14_units <= 0 } set_variable = { name = bfl_shr_14_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_15_active = 1
+            var:bfl_shr_15_pool = 0 var:bfl_shr_15_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_15_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_15_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_15_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_15_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_15_basis } }
+            change_variable = { name = bfl_shr_15_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_15_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_15_units <= 0 } set_variable = { name = bfl_shr_15_active value = 0 } } }
+if = { limit = { var:bfl_treasury_remaining > 0 var:bfl_shr_16_active = 1
+            var:bfl_shr_16_pool = 0 var:bfl_shr_16_party = scope:bfl_market_actor }
+            set_variable = { name = bfl_treasury_lot_units value = { value = var:bfl_treasury_remaining max = var:bfl_shr_16_units } }
+            set_variable = { name = bfl_treasury_lot_basis value = { value = var:bfl_shr_16_basis
+                multiply = var:bfl_treasury_lot_units divide = var:bfl_shr_16_units } }
+            if = { limit = { var:bfl_treasury_lot_units = var:bfl_shr_16_units }
+                set_variable = { name = bfl_treasury_lot_basis value = var:bfl_shr_16_basis } }
+            change_variable = { name = bfl_shr_16_units subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_shr_16_basis subtract = var:bfl_treasury_lot_basis }
+            change_variable = { name = bfl_treasury_remaining subtract = var:bfl_treasury_lot_units }
+            change_variable = { name = bfl_dealer_released_basis add = var:bfl_treasury_lot_basis }
+            if = { limit = { var:bfl_shr_16_units <= 0 } set_variable = { name = bfl_shr_16_active value = 0 } } }
+ }
+    else_if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet = 1 }
         set_variable = { name = bfl_dealer_released_basis value = { value = var:bfl_state_basis
             multiply = scope:bfl_market_actor.var:bfl_market_quantity divide = var:bfl_state_units } }
         if = { limit = { scope:bfl_market_actor.var:bfl_market_quantity = var:bfl_state_units }
@@ -316,15 +513,16 @@ if = { limit = { has_variable = bfl_ownership_schema }
                     OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 } }
                 AND = { bfl_has_valid_controller = yes overlord = { is_ai = yes
                     OR = { NOT = { has_variable = bfl_ai_equity_enabled } var:bfl_ai_equity_enabled ?= 1 } } } } }
-            save_scope_as = bfl_equity_buyer save_scope_as = bfl_party
+            save_scope_as = bfl_equity_buyer save_scope_as = bfl_party save_scope_as = actor
+            if = { limit = { bfl_has_valid_controller = yes } overlord = { save_scope_as = actor } }
             scope:bfl_issuer = { set_variable = { name = bfl_equity_pool value = 0 }
                 if = { limit = { var:bfl_dealer_units > 0 bfl_has_shareholder_capacity = yes
                     scope:bfl_equity_buyer = { bfl_portfolio_capacity = yes bfl_free_cash > 0.01 bfl_capital_headroom > 0.01 }
-                    OR = { bfl_is_bank = yes scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
+                    OR = { bfl_is_bank = yes bfl_market_owned_company = yes scope:bfl_equity_buyer = { bfl_can_originate_company_equity = yes } } }
                     set_variable = { name = bfl_new_units value = { value = scope:bfl_equity_buyer.bfl_free_cash
                         max = scope:bfl_equity_buyer.bfl_capital_headroom divide = bfl_dealer_ask
                         max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_equity_buyer_units }
-                        max = var:bfl_dealer_units max = { value = var:bfl_total_units multiply = 0.05 }
+                        max = bfl_ai_dealer_units max = { value = var:bfl_total_units multiply = 0.05 }
                         min = 0 multiply = 1000 floor = yes divide = 1000 } }
                     set_variable = { name = bfl_equity_amount value = { value = var:bfl_new_units multiply = bfl_dealer_ask
                         multiply = 100 round = yes divide = 100 } }

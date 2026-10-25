@@ -11,10 +11,13 @@ def generate(common, effect, loc, write):
         OR = {{ AND = {{ scope:actor = {{ bfl_is_independent_bank = yes }} var:bfl_shr_{i:02}_party = scope:actor }}
             AND = {{ scope:actor = {{ country_type = location bfl_has_management = yes }} var:bfl_shr_{i:02}_party ?= scope:actor.var:bfl_bank }} }} }}
         add = var:bfl_shr_{i:02}_units }}''' for i in range(1, 17)))
-    values += effect('bfl_market_state_owned_units','value = 0 if = { limit = { var:bfl_state_owner ?= scope:actor } value = var:bfl_state_units }')
+    values += effect('bfl_market_state_owned_units','''value = 0
+        if = { limit = { var:bfl_state_owner ?= scope:actor } value = var:bfl_state_units }
+        else_if = { limit = { bfl_is_company = yes } value = bfl_market_treasury_company_units }''')
     values += effect('bfl_market_sell_units','value = bfl_market_owned_units if = { limit = { bfl_market_state_owned_units > 0 } value = bfl_market_state_owned_units }')
     values += effect('bfl_market_buy_price', '''value = bfl_dealer_ask
-        if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
+        if = { limit = { bfl_market_treasury_company_buy = yes } value = bfl_equity_quote }
+        else_if = { limit = { bfl_market_charter_buyback = no var:bfl_equity_offer_active = 1 var:bfl_equity_offer_units > 0 bfl_period <= var:bfl_equity_offer_expiry }
             value = var:bfl_equity_offer_price divide = var:bfl_equity_offer_units }
     ''')
     values += effect('bfl_market_buy_max', '''value = 0
@@ -25,7 +28,8 @@ def generate(common, effect, loc, write):
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
             divide = bfl_market_buy_price
             max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
-            if = { limit = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }
+            if = { limit = { bfl_market_treasury_company_buy = yes } max = bfl_market_treasury_company_units }
+            else_if = { limit = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }
                 max = var:bfl_equity_offer_units }
             else = { max = bfl_dealer_units }
             min = 0 multiply = 1000 floor = yes divide = 1000 }
@@ -38,7 +42,7 @@ def generate(common, effect, loc, write):
             value = scope:actor.bfl_exchange_cash max = scope:actor.bfl_exchange_capital
             multiply = 100 floor = yes divide = 100 divide = bfl_dealer_ask
             max = { value = var:bfl_total_units multiply = bfl_equity_concentration_limit subtract = bfl_market_owned_units }
-            max = bfl_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
+            max = bfl_ai_dealer_units min = 0 multiply = 1000 floor = yes divide = 1000 }
     ''')
     # Honest per-security sparklines. Samples are actual monthly market-price observations;
     # there is no synthetic history before an institution is listed.
@@ -95,6 +99,8 @@ def generate(common, effect, loc, write):
                 set_variable = { name = bfl_market_price value = scope:bfl_market_actor.var:bfl_market_total }
                 if = { limit = { scope:bfl_market_actor.var:bfl_market_wallet ?= 1 }
                     bfl_buy_charter_dealer_inventory = yes }
+                else_if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 3 }
+                    bfl_buy_treasury_company_shares = yes }
                 else_if = { limit = { scope:bfl_market_actor.var:bfl_market_secondary = 1
                     var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry
                     var:bfl_equity_offer_revision = scope:bfl_market_actor.var:bfl_market_offer_revision
@@ -165,7 +171,7 @@ def generate(common, effect, loc, write):
             NOT = { this = scope:actor }
             trigger_if = { limit = { exists = scope:actor.var:bfl_bank }
                 OR = { NOT = { this = scope:actor.var:bfl_bank } AND = { bfl_market_charter_buyback = yes bfl_dealer_units > 0 } } }
-            OR = { bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }''' if side == 'buy' else 'bfl_equity_issuer = yes bfl_market_sell_units > 0'
+            OR = { bfl_market_treasury_company_buy = yes bfl_dealer_units > 0 AND = { var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry } }''' if side == 'buy' else 'bfl_equity_issuer = yes bfl_market_sell_units > 0'
         visibility_triggers += effect(f'bfl_market_{side}_visible', f'''trigger_if = {{ limit = {{ has_variable = bfl_ownership_schema }} {visible} }}
             trigger_else = {{ always = no }}''')
         visible = f'bfl_market_{side}_visible = yes'
@@ -200,7 +206,7 @@ def generate(common, effect, loc, write):
         portfolio_branches.append(f'AND = {{ {authority} {buyer} = {{ OR = {{ {positions} }} }} }}')
     visibility_triggers += effect('bfl_market_holder_capacity', 'OR = { bfl_market_charter_buyback = yes ' + ' '.join(holder_branches) + ' }')
     visibility_triggers += effect('bfl_market_portfolio_capacity', 'OR = { bfl_market_charter_buyback = yes ' + ' '.join(portfolio_branches) + ' }')
-    visibility_triggers += effect('bfl_market_company_access', """OR = { bfl_is_bank = yes AND = { bfl_company_equity_eligible = yes
+    visibility_triggers += effect('bfl_market_company_access', """OR = { bfl_is_bank = yes bfl_market_owned_company = yes AND = { bfl_company_equity_eligible = yes
             OR = { AND = { scope:actor = { bfl_is_independent_bank = yes bfl_can_originate_company_equity = yes } }
                 AND = { scope:actor = { bfl_has_management = yes country_type = location
                     var:bfl_bank = { bfl_can_originate_company_equity = yes } } } } } }
@@ -273,20 +279,23 @@ def generate(common, effect, loc, write):
                 set_variable = {{ name = bfl_market_quantity value = scope:share_quantity }}
                 set_variable = {{ name = bfl_market_secondary value = 0 }}
                 set_variable = {{ name = bfl_market_wallet value = 0 }}
-                {"if = { limit = { scope:security.var:bfl_state_owner ?= this scope:security.var:bfl_state_units > 0 } set_variable = { name = bfl_market_wallet value = 1 } }" if side == 'sell' else ''}
+                {"if = { limit = { scope:security.bfl_market_state_owned_units > 0 } set_variable = { name = bfl_market_wallet value = 1 } }" if side == 'sell' else ''}
                 {"if = { limit = { scope:security = { bfl_market_charter_buyback = yes } } set_variable = { name = bfl_market_wallet value = 1 } }" if side == 'buy' else ''}
                 set_variable = {{ name = bfl_market_offer_revision value = scope:security.var:bfl_equity_offer_revision }}
                 set_variable = {{ name = bfl_market_unit_price value = scope:security.{'bfl_market_buy_price' if side == 'buy' else 'bfl_equity_quote'} }}
                 set_variable = {{ name = bfl_market_total value = {{ value = var:bfl_market_unit_price multiply = var:bfl_market_quantity
                     {'multiply = scope:security.bfl_price_bid_factor' if side == 'sell' else ''} multiply = 100 {'ceiling' if side == 'buy' else 'round'} = yes divide = 100 }} }}
-                if = {{ limit = {{ var:bfl_market_wallet = 1 {"always = yes" if side == 'buy' else 'always = no'} }}
+                if = {{ limit = {{ scope:security = {{ bfl_market_treasury_company_buy = yes }} {"always = yes" if side == 'buy' else 'always = no'} }}
+                    set_variable = {{ name = bfl_market_secondary value = 3 }}
+                    set_variable = {{ name = bfl_market_company_revision value = scope:security.var:bfl_equity_revision }} }}
+                else_if = {{ limit = {{ var:bfl_market_wallet = 1 {"always = yes" if side == 'buy' else 'always = no'} }}
                     set_variable = {{ name = bfl_market_secondary value = 2 }} }}
                 else_if = {{ limit = {{ scope:security = {{ var:bfl_equity_offer_active = 1 bfl_period <= var:bfl_equity_offer_expiry }} }}
                     set_variable = {{ name = bfl_market_secondary value = 1 }} }}
                 else_if = {{ limit = {{ scope:security = {{ bfl_dealer_units > 0 }} }}
                     set_variable = {{ name = bfl_market_secondary value = 2 }} }}
                 save_scope_value_as = {{ name = bfl_market_confirmation value = var:bfl_market_revision }}
-                {"if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.18 } else_if = { limit = { var:bfl_market_secondary = 1 } set_variable = { name = bfl_market_seller value = scope:security.var:bfl_equity_offer_seller } trigger_event_non_silently = bfl_market.10 } else = { trigger_event_non_silently = bfl_market.1 }" if side == 'buy' else 'if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.14 } else = { trigger_event_non_silently = bfl_market.3 }'}
+                {"if = { limit = { var:bfl_market_secondary = 3 } trigger_event_non_silently = bfl_market.19 } else_if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.18 } else_if = { limit = { var:bfl_market_secondary = 1 } set_variable = { name = bfl_market_seller value = scope:security.var:bfl_equity_offer_seller } trigger_event_non_silently = bfl_market.10 } else = { trigger_event_non_silently = bfl_market.1 }" if side == 'buy' else 'if = { limit = { scope:security = { bfl_is_company = yes } var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.20 } else_if = { limit = { var:bfl_market_wallet = 1 } trigger_event_non_silently = bfl_market.14 } else = { trigger_event_non_silently = bfl_market.3 }'}
         }} }}\n'''
     for side, number in [('buy', 1), ('sell', 3)]:
         events += f'''bfl_market.{number} = {{ type = country_event title = bfl_{side}_confirm_title desc = bfl_{side}_confirm_desc outcome = neutral
@@ -295,7 +304,15 @@ def generate(common, effect, loc, write):
             option = {{ name = bfl_cancel ai_chance = {{ base = 0 }} }} }}
             bfl_market.{number+1} = {{ type = country_event hidden = yes title = bfl_{side}_confirm_title immediate = {{ bfl_market_{side}_shares = yes
                 if = {{ limit = {{ var:bfl_market_result = 0 }} trigger_event_non_silently = bfl_market.5 }} }} }}\n'''
-    events+='''bfl_market.18 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_state_confirm_desc outcome = neutral
+    events+='''bfl_market.19 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_treasury_company_desc outcome = neutral
+        image = "gfx/interface/illustrations/bfl/charter.dds"
+        option = { name = bfl_buy_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.2 } }
+        option = { name = bfl_cancel ai_chance = { base = 0 } } }
+        bfl_market.20 = { type = country_event title = bfl_sell_confirm_title desc = bfl_sell_treasury_company_desc outcome = neutral
+        image = "gfx/interface/illustrations/bfl/charter.dds"
+        option = { name = bfl_sell_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.4 } }
+        option = { name = bfl_cancel ai_chance = { base = 0 } } }
+        bfl_market.18 = { type = country_event title = bfl_buy_confirm_title desc = bfl_buy_state_confirm_desc outcome = neutral
         image = "gfx/interface/illustrations/bfl/charter.dds"
         option = { name = bfl_buy_shares ai_chance = { base = 100 } hidden_effect = { trigger_event_silently = bfl_market.2 } }
         option = { name = bfl_cancel ai_chance = { base = 0 } } }
@@ -390,9 +407,9 @@ def generate(common, effect, loc, write):
     loc('bfl_market_funds_requirement', 'Your bank can afford shares within its cash, capital and ownership limits.')
     loc('bfl_market_holder_requirement', 'The issuer has a free shareholder slot or already records your buying bank as a shareholder.')
     loc('bfl_market_portfolio_requirement', 'Your buying bank has a free portfolio slot or already holds this security.')
-    loc('bfl_market_company_requirement', 'Company shares require Overseas Investment and Company Equity research. Bank shares use Share Dealing.')
+    loc('bfl_market_company_requirement', 'Your bank can buy shares from the treasury of your own operating company. Other company investments require Overseas Investment and Company Equity research. Bank shares require a completed Stock Exchange.')
     for side in ('buy','sell'):
-        loc(f'bfl_{side}_shares_tip', labels[f'bfl_{side}_shares_desc'] + "\nRequires a completed exchange, Share Dealing and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_available_trade_diplomats')|2]. Orders must have a cash value of at least 0.01 gold.")
+        loc(f'bfl_{side}_shares_tip', labels[f'bfl_{side}_shares_desc'] + "\nRequires a completed Stock Exchange and at least one diplomat. Each successful trade consumes one diplomat and starts a one-month cooldown for that issuer. Available diplomats: [GuiScope.SetRoot(GetPlayer.MakeScope).ScriptValue('bfl_available_trade_diplomats')|2]. Orders must have a cash value of at least 0.01 gold.")
     from generate_portfolio import generate as generate_portfolio
     generate_portfolio(common, effect, loc, write)
     gui(loc, write)
@@ -450,10 +467,13 @@ def gui(loc, write):
                 onclick = "[SelectInteractionTargetView.Confirm]" icon = {{ parentanchor = center size = {{ 26 26 }} texture = "gfx/interface/icons/bfl/share_transfer.dds" }} }}
         }}
 '''
-    from generate_credit_redesign import heading, generic
+    from generate_credit_redesign import heading, generic, command
     loc('bfl_shares_heading', 'Shares')
-    investments = heading('bfl_shares_heading', generic('bfl_buy_shares','buy_shares') + generic('bfl_sell_shares','sell_shares')
+    investments = heading('bfl_shares_heading', command('bfl_exchange_list','companies') + generic('bfl_buy_shares','buy_shares') + generic('bfl_sell_shares','sell_shares')
                           + generic('bfl_new_capital_subscription','subscribe') + generic('bfl_manage_shareholdings','accounts')) + portfolio
+    investments += '''text_multi = { text = "bfl_exchange_locked" autoresize = yes layoutpolicy_horizontal = expanding
+        visible = "[Not(GetScriptedGui('bfl_exchange_access_view').IsShown(GuiScope.SetRoot(GetPlayer.MakeScope).End))]"
+        tooltip = "bfl_bank_status_tip" }'''
     loc('bfl_bank_holdings','Bank investments')
     loc('bfl_no_bank_holdings','No shares held by the bank.')
     investments += heading('bfl_bank_holdings')
@@ -475,16 +495,15 @@ def gui(loc, write):
                 visible = "[EqualTo_CFixedPoint(GuiScope.SetRoot(Country.MakeScope).ScriptValue('bfl_security_carrying'),'(CFixedPoint)0')]" }} }}'''
     write('in_game/gui/bfl_exchange.gui', f'''types BFLShareMarketTypes {{
         {tooltip}
-        type bfl_equity_market_row = widget {{ size = {{ 530 92 }} allow_outside = yes
-            clickable_header_card = {{ position = {{ 3 3 }} size = {{ 524 84 }}
-                datacontext = "[InteractionTarget.GetCountry]"
-                blockoverride "header_bg" {{ using = bg_card_header_01_diplomacy }}
-                blockoverride "header_size" {{ size = {{ -1 32 }} }}
-                blockoverride "header_content" {{ using = select_interaction_target_action_provider
+        type bfl_equity_market_row = button_regular {{ size = {{ 530 92 }} allow_outside = yes
+            datacontext = "[InteractionTarget.GetCountry]"
+            using = bg_paper_card using = select_interaction_target_action_provider
+            widget = {{ position = {{ 3 3 }} size = {{ 524 84 }}
+                widget = {{ size = {{ 524 32 }} using = bg_card_header_01_diplomacy
                     text_single = {{ position = {{ 100 0 }} size = {{ 410 32 }} text = "[Country.GetName]"
                         using = Font_Type_Headers default_format = "#yellow_titles" fontsize = 18 align = left|vcenter }}
                 }}
-                blockoverride "bottom_content" {{
+                widget = {{ position = {{ 0 32 }} size = {{ 524 52 }}
                     text_single = {{ position = {{ 100 4 }} text = "bfl_share_row_detail" autoresize = yes fontsize = 15 }}
                     widget = {{ position = {{ 410 0 }} size = {{ 100 44 }} {chart} }}
                     text_single = {{ position = {{ 100 27 }} text = "bfl_share_row_owned" autoresize = yes fontsize = 11 }}

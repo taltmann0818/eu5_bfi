@@ -1,0 +1,5 @@
+﻿bfl_toggle_deposit_admission = { scope = country
+        is_shown = { bfl_has_management = yes country_type = location } is_valid = { bfl_has_management = yes bfl_has_accounts = no country_type = location var:bfl_bank = { bfl_can_conduct_business = yes } }
+        effect = { if = { limit = { bfl_has_management = yes bfl_has_accounts = no country_type = location var:bfl_bank = { bfl_can_conduct_business = yes } } var:bfl_bank = {
+            if = { limit = { var:bfl_accept_deposits = 1 } set_variable = { name = bfl_accept_deposits value = 0 } }
+            else = { set_variable = { name = bfl_accept_deposits value = 1 } } } } } }

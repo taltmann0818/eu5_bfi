@@ -1,0 +1,50 @@
+{
+  "recorded": "2026-10-25",
+  "runtime_sha256": "998eebf3a5344c666cb7e0ca15d75a710f773ca0676d1958a48da5a170d1d235",
+  "game_version": "1.4.4",
+  "cmf_version": "2.5.0",
+  "engine": {
+    "early": {
+      "passed": true,
+      "assertions": 10,
+      "report": "early/campaign.json",
+      "manifest": "early/manifest.json",
+      "errors": []
+    },
+    "ownership": {
+      "passed": true,
+      "assertions": 54,
+      "report": "ownership/campaign.json",
+      "manifest": "ownership/manifest.json",
+      "errors": []
+    },
+    "rejected-first-ownership": {
+      "passed": false,
+      "assertions": 54,
+      "report": "rejected-first-ownership/campaign.json",
+      "manifest": "rejected-first-ownership/manifest.json",
+      "errors": [
+        "Failed: chartered_policy_remains_reserved_to_live_controller"
+      ]
+    }
+  },
+  "offline": {
+    "passed": true,
+    "unit_tests": 150,
+    "source_files": 480,
+    "registered_graphics": 114,
+    "active_advances": 15,
+    "legacy_advances": 1,
+    "banking_unlocks": 2,
+    "pinned_sources": "match",
+    "deterministic_generation": true
+  },
+  "scope": "Bank shares use completed exchange ownership without share-dealing research or Reformation age. Both roles/profiles, missing building, legacy research, resolution, natural months and reload; funded secondary transactions and existing accounting guards.",
+  "fixture_correction": "First ownership run failed a stale assertion which attempted to reject the live controller. Corrected fixture attempts payout change as outside VEN; production governance is unchanged.",
+  "limits": [
+    "Explicit debug building grants establish early exchange access; no natural early construction claim.",
+    "No new visual/layout acceptance; cached machine translations await human semantic review.",
+    "Older finance-action report failures are historical and are not waived by this scoped change.",
+    "No full milestone completion or release-wide balance acceptance."
+  ]
+}

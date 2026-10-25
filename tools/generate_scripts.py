@@ -269,6 +269,10 @@ def permissions():
         potential = {0:'bfl_is_research_owner',1:'bfl_research_merchant',2:'bfl_research_overseas'}[a['profile']]+' = yes'
         if a.get('charter'):
             potential += ' country_type = location has_reform = government_reform:bfl_state_chartered_bank'
+        if a.get('retired'):
+            # Preserve the native ID for existing saves without offering an
+            # obsolete research choice. No instrument consumes this permission.
+            potential = 'always = no'
         definitions += f'{key} = {{\nage = {AGES[a["age"]-1]}\nicon = {key}\n'
         definitions += f'bfl_enable_{a["id"]} = yes\n'
         for req in a.get('native_requires', []):
@@ -280,7 +284,9 @@ def permissions():
         # Comparable to native economic priorities (typically 1–20). A large
         # forced share-dealing weight hid release-wide research competition.
         priority = 'add = 12' if a['profile'] else 'add = 8'
-        definitions += f'potential = {{ {potential} }}\nallow = {{ {age_gate(a["age"])}{native_gate} }}\nai_weight = {{ {priority} }}\n}}\n'
+        allowance = 'always = no' if a.get('retired') else age_gate(a['age']) + native_gate
+        if a.get('retired'): priority = 'add = 0'
+        definitions += f'potential = {{ {potential} }}\nallow = {{ {allowance} }}\nai_weight = {{ {priority} }}\n}}\n'
         loc(key,a['id'].replace('_',' ').title())
         loc(key+'_desc', f"Unlocks {a['id'].replace('_',' ')} from the {AGES[a['age']-1].split('_',2)[2].title()} age. The bank's specialization and operating permissions still apply. Native integrations retain their development gates until measured.")
     common('advances','financial_advances',definitions)
@@ -1158,6 +1164,8 @@ def main():
     generate_feedback(common,effect,loc,write)
     from generate_credit_controls import generate as generate_credit_controls
     generate_credit_controls(common,effect,loc,write)
+    from generate_market_repairs import generate as generate_market_repairs
+    generate_market_repairs(common,effect,loc,write)
     from generate_credit_details import generate as generate_credit_details
     generate_credit_details(common,effect,loc,write)
     from generate_activity_sources import generate as generate_activity_sources
@@ -1179,8 +1187,9 @@ def main():
     from build_event_images import build as build_event_images
     build_event_images()
     gui_and_localization()
-    standalone = sum(not a.get('integrated_into') for a in ADV)
-    print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')
+    standalone = sum(not a.get('integrated_into') and not a.get('retired') for a in ADV)
+    retired = sum(bool(a.get('retired')) for a in ADV)
+    print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} active advances, {retired} legacy advance, {len(ADV)-standalone-retired} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')
 
 
 if __name__ == '__main__':

@@ -45,9 +45,12 @@ def action(key, art, title=None, height=32, selected=None):
 def interaction(key, art, title):
     return f'''button_regular = {{ name = "{key}_button" size = {{ 36 36 }}
         datacontext = "[GetPlayer]"
-        enabled = "[PdxGuiWidget.IsUberButtonEnabled]" tooltip = "{key}_tip"
+        enabled = "[PdxGuiWidget.IsUberButtonEnabled]"
         scripted_action_tooltip = {{ click_type = left click_mode = single
             action_name = "{key}" action_direction = "offer" actor = "[GetPlayer]" }}
+        tooltipwidget = {{ ContextualTooltipType = {{
+            blockoverride "title_text" {{ text = "{key}" }}
+            blockoverride "tooltip_content" {{ using = action_tooltip_inner_content }} }} }}
         icon = {{ parentanchor = center size = {{ 26 26 }} texture = "{icon_texture(art)}" }}
         }}'''
 
@@ -137,7 +140,8 @@ def generate(common, effect, loc, write, tune, advances, instruments):
     for k,v in tooltip_texts.items(): loc(k,v.replace('\n', '\\n'))
     advance_texts=json.loads((ROOT/'design/advance_texts.json').read_text(encoding='utf-8'))
     # All advance cards get native boolean modifier rows and their own painted icon.
-    # The corresponding service permission still enforces has_advance on the research owner.
+    # Research-backed services enforce has_advance on the research owner.
+    # Retired bank-share research remains a compatibility modifier only.
     definitions = ''; icons = ''
     for a in advances:
         key='bfl_enable_'+a['id']

@@ -1,0 +1,5 @@
+﻿on_game_load_after_lobby = { on_actions = { bfi_probe_load } }
+bfi_probe_load = { effect = { bfi_probe_recovery = yes } }
+monthly_country_pulse = { on_actions = { bfi_probe_month } }
+bfi_probe_month = { effect = { if = { limit = { tag = GBR NOT = { has_variable = bfi_probe_started } }
+    set_variable = bfi_probe_started bfi_probe_recovery = yes } } }
