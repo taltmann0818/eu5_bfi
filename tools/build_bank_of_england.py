@@ -10,6 +10,24 @@ EVENT = 'in_game/events/DHE/flavor_ENG.txt'
 NAMES = 'in_game/common/customizable_localization/country_name_construction.txt'
 CALL = '\t\tbfl_found_bank_of_england = yes\n'
 IMAGE = '\timage = "gfx/interface/illustrations/bfl/bank_of_england.dds"\n'
+SOUTH_SEA_ADDITIONS = {
+    'a': '''
+        # BFI: the native decision leaves the failed subscriptions with their owners.
+        if = {
+            limit = { bfl_has_management = yes var:bfl_bank = { tag = BOENG bfl_is_chartered_bank = yes is_subject_of = root } }
+            add_country_modifier = { modifier = bfl_dhe_south_sea_failures months = 60 mode = replace }
+            var:bfl_bank = { add_country_modifier = { modifier = bfl_dhe_bubble_contagion months = 60 mode = replace } }
+        }
+''',
+    'b': '''
+        # BFI: the native six-month-income rescue carries the continuing public cost.
+        if = {
+            limit = { bfl_has_management = yes var:bfl_bank = { tag = BOENG bfl_is_chartered_bank = yes is_subject_of = root } }
+            add_country_modifier = { modifier = bfl_dhe_public_bubble_relief months = 60 mode = replace }
+            var:bfl_bank = { add_country_modifier = { modifier = bfl_dhe_bubble_restructuring months = 60 mode = replace } }
+        }
+''',
+}
 NAME_RULE = '''
     # Historical institutions already have complete names.
     text = {
@@ -27,6 +45,14 @@ def event_override(text):
     assert event.count(anchor) == 1
     event = event.replace(anchor, anchor + CALL, 1)
     event = event.replace('\toutcome = neutral\n', '\toutcome = neutral\n' + IMAGE, 1)
+    text = text[:start] + event + text[end:]
+    start = text.index('flavor_eng.215 = {')
+    end = balanced_block(text, text.index('{', start))
+    event = text[start:end]
+    for choice, addition in SOUTH_SEA_ADDITIONS.items():
+        anchor = f'\t\tname = flavor_eng.215.{choice}\n'
+        assert event.count(anchor) == 1
+        event = event.replace(anchor, anchor + addition, 1)
     return text[:start] + event + text[end:]
 
 

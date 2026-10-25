@@ -1,0 +1,8 @@
+﻿monthly_country_pulse = { on_actions = { bfl_giro_anniversary } }
+        bfl_giro_anniversary = { effect = { if = { limit = { bfl_dhe_ven = yes }
+            if = { limit = { NOT = { has_variable = bfl_giro_first_period } }
+                set_variable = { name = bfl_giro_first_period value = bfl_period } }
+            if = { limit = { has_variable = bfl_giro_review_due bfl_period >= var:bfl_giro_review_due
+                NOT = { has_variable = bfl_giro_permanent } NOT = { has_variable = bfl_dhe_open } }
+                trigger_event_non_silently = bfl_bank_ven.4 }
+        } } }

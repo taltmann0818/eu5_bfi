@@ -20839,6 +20839,13 @@ flavor_eng.215 = {
 
 	option = {
 		name = flavor_eng.215.a
+
+        # BFI: the native decision leaves the failed subscriptions with their owners.
+        if = {
+            limit = { bfl_has_management = yes var:bfl_bank = { tag = BOENG bfl_is_chartered_bank = yes is_subject_of = root } }
+            add_country_modifier = { modifier = bfl_dhe_south_sea_failures months = 60 mode = replace }
+            var:bfl_bank = { add_country_modifier = { modifier = bfl_dhe_bubble_contagion months = 60 mode = replace } }
+        }
 		historical_option = yes
 
 		capital = {
@@ -20879,6 +20886,13 @@ flavor_eng.215 = {
 
 	option = {
 		name = flavor_eng.215.b
+
+        # BFI: the native six-month-income rescue carries the continuing public cost.
+        if = {
+            limit = { bfl_has_management = yes var:bfl_bank = { tag = BOENG bfl_is_chartered_bank = yes is_subject_of = root } }
+            add_country_modifier = { modifier = bfl_dhe_public_bubble_relief months = 60 mode = replace }
+            var:bfl_bank = { add_country_modifier = { modifier = bfl_dhe_bubble_restructuring months = 60 mode = replace } }
+        }
 
 		change_societal_value = {
 			type = capital_economy_vs_traditional_economy

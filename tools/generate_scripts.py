@@ -86,6 +86,7 @@ def initialize():
     bfl_is_bank = { OR = { bfl_is_chartered_bank = yes bfl_is_independent_bank = yes } }
     bfl_has_accounts = { has_variable = bfl_schema }
     bfl_can_conduct_business = {
+        NOT = { has_variable = bfl_giro_closing }
         bfl_is_bank = yes
         OR = { bfl_is_independent_bank = yes bfl_has_valid_controller = yes }
         NOT = { has_variable = bfl_legacy_servicing }
@@ -1171,6 +1172,12 @@ def main():
     generate_bank_catalogue(common,effect,loc,write)
     from generate_bank_reforms import generate as generate_bank_reforms
     generate_bank_reforms(common,effect,loc,write)
+    from generate_bank_events import generate as generate_bank_events
+    generate_bank_events(common,effect,loc,write)
+    from generate_historical_bank_events import generate as generate_historical_bank_events
+    generate_historical_bank_events(common,effect,loc,write)
+    from build_event_images import build as build_event_images
+    build_event_images()
     gui_and_localization()
     standalone = sum(not a.get('integrated_into') for a in ADV)
     print(f'Generated {len(list(MOD.rglob("*.txt")))} script files, {standalone} separate advances, {len(ADV)-standalone} native Banking unlocks, {len(INST)} instrument gates, {len(LOC)} localization keys.')

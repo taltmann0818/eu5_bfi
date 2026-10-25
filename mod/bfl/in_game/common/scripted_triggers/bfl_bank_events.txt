@@ -1,0 +1,87 @@
+﻿bfl_dhe_controller = {
+country_type = location
+        bfl_has_management = yes exists = var:bfl_bank
+        NOT = { has_variable = bfl_operation_guard }
+        var:bfl_bank = { bfl_has_valid_controller = yes bfl_can_conduct_business = yes
+            has_variable = bfl_ownership_schema bfl_equity_issuer = yes }
+}
+bfl_dhe_context = {
+bfl_dhe_controller = yes has_variable = bfl_dhe_open
+        exists = scope:bfl_event_bank var:bfl_bank = scope:bfl_event_bank
+        scope:bfl_event_bank = { overlord = prev }
+}
+bfl_dhe_eng = {
+bfl_dhe_controller = yes
+var:bfl_bank = { tag = BOENG }
+}
+bfl_dhe_flo = {
+bfl_dhe_controller = yes
+has_variable = bfl_florentine_choice_resolved owns = location:florence
+            var:bfl_bank = { OR = { tag = BRD tag = PRZ tag = ACC } }
+}
+bfl_dhe_gen = {
+bfl_dhe_controller = yes
+has_variable = bfl_genoan_historical_charter owns = location:genoa
+            var:bfl_bank = { OR = { tag = SAGEO tag = GRIML tag = SPINL tag = PALLV } }
+}
+bfl_dhe_ven = {
+bfl_dhe_controller = yes
+owns = location:venice var:bfl_bank = { tag = BGIRO }
+}
+bfl_dhe_buyback_available = {
+var:bfl_state_owner = prev
+        bfl_dhe_buyback_units > 0 bfl_dhe_buyback_price >= 0.01
+        var:bfl_total_units > bfl_dhe_buyback_units
+        bfl_free_cash >= bfl_dhe_buyback_price bfl_capital_headroom >= bfl_dhe_buyback_price
+        NOT = { has_cooldown = bfl_share_trade }
+}
+bfl_dhe_can_fund = {
+bfl_dhe_context = yes gold >= 100
+        scope:bfl_event_bank = { bfl_can_originate_bank_subscription = yes
+            bfl_tangible_equity > 0 bfl_primary_price_safe = yes
+            bfl_branch_access = { PARTY = prev } }
+}
+bfl_dhe_can_audit = {
+bfl_dhe_context = yes gold >= 100
+        scope:bfl_event_bank = { NOT = { has_country_modifier = bfl_dhe_ordered_books } }
+}
+bfl_dhe_can_retain = {
+bfl_dhe_context = yes
+        scope:bfl_event_bank = { var:bfl_payout_ratio > 0
+            NOT = { has_variable = bfl_dhe_retention_until } }
+}
+bfl_dhe_can_issue = {
+bfl_dhe_context = yes bfl_resolved_equity_access = yes
+        scope:bfl_event_bank = { bfl_can_originate_bank_subscription = yes
+            bfl_tangible_equity > 0 bfl_primary_price_safe = yes
+            bfl_branch_access = { PARTY = prev }
+            OR = { var:bfl_shr_01_active = 0
+        AND = { var:bfl_shr_01_active = 1 var:bfl_shr_01_pool = 1 var:bfl_shr_01_party = prev } var:bfl_shr_02_active = 0
+        AND = { var:bfl_shr_02_active = 1 var:bfl_shr_02_pool = 1 var:bfl_shr_02_party = prev } var:bfl_shr_03_active = 0
+        AND = { var:bfl_shr_03_active = 1 var:bfl_shr_03_pool = 1 var:bfl_shr_03_party = prev } var:bfl_shr_04_active = 0
+        AND = { var:bfl_shr_04_active = 1 var:bfl_shr_04_pool = 1 var:bfl_shr_04_party = prev } var:bfl_shr_05_active = 0
+        AND = { var:bfl_shr_05_active = 1 var:bfl_shr_05_pool = 1 var:bfl_shr_05_party = prev } var:bfl_shr_06_active = 0
+        AND = { var:bfl_shr_06_active = 1 var:bfl_shr_06_pool = 1 var:bfl_shr_06_party = prev } var:bfl_shr_07_active = 0
+        AND = { var:bfl_shr_07_active = 1 var:bfl_shr_07_pool = 1 var:bfl_shr_07_party = prev } var:bfl_shr_08_active = 0
+        AND = { var:bfl_shr_08_active = 1 var:bfl_shr_08_pool = 1 var:bfl_shr_08_party = prev } var:bfl_shr_09_active = 0
+        AND = { var:bfl_shr_09_active = 1 var:bfl_shr_09_pool = 1 var:bfl_shr_09_party = prev } var:bfl_shr_10_active = 0
+        AND = { var:bfl_shr_10_active = 1 var:bfl_shr_10_pool = 1 var:bfl_shr_10_party = prev } var:bfl_shr_11_active = 0
+        AND = { var:bfl_shr_11_active = 1 var:bfl_shr_11_pool = 1 var:bfl_shr_11_party = prev } var:bfl_shr_12_active = 0
+        AND = { var:bfl_shr_12_active = 1 var:bfl_shr_12_pool = 1 var:bfl_shr_12_party = prev } var:bfl_shr_13_active = 0
+        AND = { var:bfl_shr_13_active = 1 var:bfl_shr_13_pool = 1 var:bfl_shr_13_party = prev } var:bfl_shr_14_active = 0
+        AND = { var:bfl_shr_14_active = 1 var:bfl_shr_14_pool = 1 var:bfl_shr_14_party = prev } var:bfl_shr_15_active = 0
+        AND = { var:bfl_shr_15_active = 1 var:bfl_shr_15_pool = 1 var:bfl_shr_15_party = prev } var:bfl_shr_16_active = 0
+        AND = { var:bfl_shr_16_active = 1 var:bfl_shr_16_pool = 1 var:bfl_shr_16_party = prev } } }
+        "estate(estate_type:burghers_estate)" = { estate_gold >= 125 }
+}
+bfl_dhe_can_buyback = {
+bfl_dhe_context = yes bfl_resolved_equity_access = yes
+        scope:bfl_event_bank = { var:bfl_state_owner = prev
+            var:bfl_dhe_buy_units > 0 var:bfl_dhe_buy_price >= 0.01
+            var:bfl_state_units >= var:bfl_dhe_buy_units
+            var:bfl_total_units > var:bfl_dhe_buy_units
+            var:bfl_equity_revision = var:bfl_dhe_buy_revision
+            bfl_nav_quote = var:bfl_dhe_buy_nav
+            bfl_free_cash >= var:bfl_dhe_buy_price bfl_capital_headroom >= var:bfl_dhe_buy_price
+            NOT = { has_cooldown = bfl_share_trade } }
+}

@@ -1,0 +1,8 @@
+﻿bfl_dhe_buyback_units = {
+value = var:bfl_total_units multiply = 0.05
+        max = var:bfl_state_units multiply = 1000 floor = yes divide = 1000
+}
+bfl_dhe_buyback_price = {
+value = bfl_dhe_buyback_units
+        multiply = bfl_nav_quote multiply = 100 ceiling = yes divide = 100
+}
