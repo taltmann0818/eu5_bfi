@@ -1,8 +1,6 @@
 # Feature Ideas
 ## Core Functions
-- banks that are better capitalised should drive AI to be more likely to invest in that bank either by depositing their money there, getting loans from there, or buying its available equity
-- the ai should be able to see a bank’s performance represented as its creditworthiness score for wanting to invest with the bank
-- Bank buildings and AI behavior to build bank branches in country capitals that it thinks are best capitalized to receive credit; bank branch buildings in at least the capital required for credit/deposit interactions w/ bank
+- Secured lending (advance locked): bank has ability to make secured loans to countries; if the country defaults, it is given a decision: option a: accept liens on its buildings (which causes the most profitable buildings in the country to become foreign owned by the bank with a reversion until the loan's balance is paid), option b: suffer severe creditworthiness and stability consequences, option c: if the bank is state owned --> go to war with the sovereign and suffer no credit consequences
 ## Future Content
 - Laws affecting the bank: usury, ...
 - Catholic Church (international org) laws on usury
